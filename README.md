@@ -1,0 +1,37 @@
+
+# NSW HSC Software Engineering Textbook
+
+!!! info "Project Overview"
+    This project is a digital textbook for the NSW HSC Software Engineering 11–12 Syllabus (2022+), presented as a static website using MkDocs with the Material theme.
+
+## Structure
+
+- All content is written in Markdown and organized by year and topic.
+- Images and assets are stored in the `assets/` folder.
+
+## How to Edit
+
+- Edit or add Markdown files in the `Year11` and `Year12` folders.
+- Update `mkdocs.yml` to add new chapters to the navigation.
+
+## How to Build and View Locally
+
+1. Ensure Python 3.7+ is installed.
+2. Install dependencies (already set up in the virtual environment):
+    ```sh
+    .venv\Scripts\activate
+    pip install mkdocs-material
+    ```
+3. Serve the site locally:
+    ```sh
+    mkdocs serve
+    ```
+4. Open the provided local URL in your browser.
+
+## Deployment
+
+- The site can be deployed to GitHub Pages or any static hosting provider.
+
+---
+
+*For more information, see the [MkDocs Material documentation](https://squidfunk.github.io/mkdocs-material/).*
