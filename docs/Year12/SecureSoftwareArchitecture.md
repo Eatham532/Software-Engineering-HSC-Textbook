@@ -34,17 +34,21 @@ Implementing security from the ground up provides multiple layers of protection 
 - **Better Performance:** Well-architected security often improves system performance
 - **Team Productivity:** Developers spend less time fixing security issues and more time building features
 
-!!! example "Case Study: Slack's Security Investment"
-    Slack invested heavily in security from early stages:
-    
-    **Investment:** $50M+ in security infrastructure and team
-    **Results:**
-    - SOC 2 Type II and ISO 27001 certifications
-    - 156% increase in enterprise customer growth
-    - $1.2B+ in enterprise annual recurring revenue
-    - Industry-leading security reputation enabling Fortune 500 adoption
-    
-    **ROI:** Every $1 invested in security generated $24 in enterprise revenue growth
+/// details | Case Study: Slack's Security Investment
+    type: example
+
+Slack invested heavily in security from early stages:
+
+**Investment:** $50M+ in security infrastructure and team
+**Results:**
+- SOC 2 Type II and ISO 27001 certifications
+- 156% increase in enterprise customer growth
+- $1.2B+ in enterprise annual recurring revenue
+- Industry-leading security reputation enabling Fortune 500 adoption
+
+**ROI:** Every $1 invested in security generated $24 in enterprise revenue growth
+
+///
 
 ### Secure Software Development Lifecycle (SDLC)
 
@@ -59,35 +63,39 @@ Each SDLC phase includes a key security activity:
 7. **Installation:** Configure permissions and access controls for deployment.
 8. **Maintenance:** Patch management and regular updates to address new threats.
 
-??? info "Secure SDLC Workflow Diagram"
-    The Secure Software Development Lifecycle integrates security considerations into every phase of development, creating a continuous feedback loop that strengthens the overall security posture.
+/// details | Secure SDLC Workflow Diagram
+    type: info
 
-    ```mermaid
-    flowchart TD
-        A["📋 Requirements<br/>Security Needs Analysis<br/>• Compliance requirements<br/>• Risk assessment<br/>• Security objectives"] --> B["📐 Specifications<br/>Define Security Criteria<br/>• Authentication standards<br/>• Encryption requirements<br/>• Access control policies"]
-        B --> C["🏗️ Design<br/>Threat Modeling & Architecture<br/>• Attack surface analysis<br/>• Security controls design<br/>• Data flow security"]
-        C --> D["💻 Development<br/>Secure Coding Practices<br/>• Input validation<br/>• Secure libraries<br/>• Code reviews"]
-        D --> E["🔗 Integration<br/>Secure Component Testing<br/>• API security testing<br/>• Third-party validation<br/>• Communication protocols"]
-        E --> F["🧪 Testing & Debugging<br/>Penetration Testing & Code Review<br/>• Vulnerability scanning<br/>• Security test cases<br/>• Static analysis"]
-        F --> G["🚀 Installation<br/>Secure Deployment Configuration<br/>• Environment hardening<br/>• Access permissions<br/>• Security monitoring"]
-        G --> H["🔧 Maintenance<br/>Patch Management & Updates<br/>• CVE monitoring<br/>• Security updates<br/>• Incident response"]
-        H --> A
-        
-        style A fill:#e3f2fd
-        style B fill:#f3e5f5
-        style C fill:#e8f5e8
-        style D fill:#fff3e0
-        style E fill:#fce4ec
-        style F fill:#e0f2f1
-        style G fill:#f1f8e9
-        style H fill:#fff8e1
-    ```
+The Secure Software Development Lifecycle integrates security considerations into every phase of development, creating a continuous feedback loop that strengthens the overall security posture.
+
+```mermaid
+flowchart TD
+    A["📋 Requirements<br/>Security Needs Analysis<br/>• Compliance requirements<br/>• Risk assessment<br/>• Security objectives"] --> B["📐 Specifications<br/>Define Security Criteria<br/>• Authentication standards<br/>• Encryption requirements<br/>• Access control policies"]
+    B --> C["🏗️ Design<br/>Threat Modeling & Architecture<br/>• Attack surface analysis<br/>• Security controls design<br/>• Data flow security"]
+    C --> D["💻 Development<br/>Secure Coding Practices<br/>• Input validation<br/>• Secure libraries<br/>• Code reviews"]
+    D --> E["🔗 Integration<br/>Secure Component Testing<br/>• API security testing<br/>• Third-party validation<br/>• Communication protocols"]
+    E --> F["🧪 Testing & Debugging<br/>Penetration Testing & Code Review<br/>• Vulnerability scanning<br/>• Security test cases<br/>• Static analysis"]
+    F --> G["🚀 Installation<br/>Secure Deployment Configuration<br/>• Environment hardening<br/>• Access permissions<br/>• Security monitoring"]
+    G --> H["🔧 Maintenance<br/>Patch Management & Updates<br/>• CVE monitoring<br/>• Security updates<br/>• Incident response"]
+    H --> A
     
-    **Key Success Metrics:**
-    - **Time to Detection:** Average time to identify security vulnerabilities
-    - **Remediation Speed:** How quickly security issues are resolved
-    - **Security Debt:** Accumulated security technical debt over time
-    - **Compliance Score:** Adherence to security standards and regulations
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#e8f5e8
+    style D fill:#fff3e0
+    style E fill:#fce4ec
+    style F fill:#e0f2f1
+    style G fill:#f1f8e9
+    style H fill:#fff8e1
+```
+///
+
+**Key Success Metrics:**
+
+- **Time to Detection:** Average time to identify security vulnerabilities
+- **Remediation Speed:** How quickly security issues are resolved
+- **Security Debt:** Accumulated security technical debt over time
+- **Compliance Score:** Adherence to security standards and regulations
 
 **Security Activities by Phase:**
 
@@ -106,8 +114,12 @@ Each SDLC phase includes a key security activity:
 
 End-user skills and expectations shape secure features. Different user types require different approaches to security.
 
-!!! tip "Design Principle"
-    **Security should be usable** - If security features are too complex, users will find ways to bypass them, making your system less secure overall.
+/// admonition | Design Principle
+    type: tip
+
+**Security should be usable** - If security features are too complex, users will find ways to bypass them, making your system less secure overall.
+
+///
 
 #### Novice User Security Design
 
@@ -248,69 +260,76 @@ class AdminSecurityPanel:
 - ✅ Customizable security policies
 - ✅ API access with rate limiting
 
-??? info "Security Design Comparison: Novice vs Advanced Users"
+/// details | Security Design Comparison: Novice vs Advanced Users
+    type: info
     Different user types require tailored security approaches that balance usability with protection levels.
 
-    ```mermaid
-    flowchart TB
-        subgraph "🎓 Novice Users (Students, General Users)"
-            A1["👤 Simple Login<br/>• Email/username<br/>• Password with hints<br/>• Clear instructions"] --> B1["🔒 Automatic Security<br/>• Session timeouts<br/>• Two-factor via SMS<br/>• Security reminders"]
-            B1 --> C1["📊 Clear Feedback<br/>• Password strength meter<br/>• Success/error messages<br/>• Visual indicators"]
-            C1 --> D1["🎯 Guided Actions<br/>• Step-by-step wizards<br/>• Default secure settings<br/>• Help tooltips"]
-        end
-        
-        subgraph "👨‍💻 Advanced Users (Developers, IT Admins)"
-            A2["🔧 Flexible Login<br/>• Multiple auth methods<br/>• API tokens<br/>• Custom configurations"] --> B2["⚙️ Custom Security<br/>• Granular permissions<br/>• Advanced 2FA options<br/>• Security policies"]
-            B2 --> C2["📈 Detailed Logs<br/>• Comprehensive auditing<br/>• Security analytics<br/>• Real-time monitoring"]
-            C2 --> D2["🎛️ Full Control<br/>• Admin interfaces<br/>• Configuration options<br/>• Advanced settings"]
-        end
-        
-        A1 -.->|"Security Education"| A2
-        D2 -.->|"Support & Training"| A1
-        
-        style A1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-        style B1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-        style C1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-        style D1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-        
-        style A2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-        style B2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-        style C2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-        style D2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-    ```
+```mermaid
+flowchart TB
+    subgraph "🎓 Novice Users (Students, General Users)"
+        A1["👤 Simple Login<br/>• Email/username<br/>• Password with hints<br/>• Clear instructions"] --> B1["🔒 Automatic Security<br/>• Session timeouts<br/>• Two-factor via SMS<br/>• Security reminders"]
+        B1 --> C1["📊 Clear Feedback<br/>• Password strength meter<br/>• Success/error messages<br/>• Visual indicators"]
+        C1 --> D1["🎯 Guided Actions<br/>• Step-by-step wizards<br/>• Default secure settings<br/>• Help tooltips"]
+    end
     
-    **Design Principles by User Type:**
+    subgraph "👨‍💻 Advanced Users (Developers, IT Admins)"
+        A2["🔧 Flexible Login<br/>• Multiple auth methods<br/>• API tokens<br/>• Custom configurations"] --> B2["⚙️ Custom Security<br/>• Granular permissions<br/>• Advanced 2FA options<br/>• Security policies"]
+        B2 --> C2["📈 Detailed Logs<br/>• Comprehensive auditing<br/>• Security analytics<br/>• Real-time monitoring"]
+        C2 --> D2["🎛️ Full Control<br/>• Admin interfaces<br/>• Configuration options<br/>• Advanced settings"]
+    end
     
-    | Aspect | Novice Users | Advanced Users |
-    |--------|-------------|----------------|
-    | **Interface** | Simple, clean, minimal choices | Rich, detailed, many options |
-    | **Defaults** | Secure by default, automatic | Configurable, manual control |
-    | **Feedback** | Clear messages, visual cues | Detailed logs, metrics |
-    | **Help** | Contextual tips, guided flows | Documentation, APIs |
-    | **Security** | Transparent, background | Visible, controllable |
+    A1 -.->|"Security Education"| A2
+    D2 -.->|"Support & Training"| A1
+    
+    style A1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    style B1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    style C1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    style D1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
+    
+    style A2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style B2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style C2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style D2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+```
 
-!!! example "Real-World Example: Google Account Security"
-    Google provides different security interfaces tailored to user expertise levels:
-    
-    **For Novice Users:**
-    - Simple 2-step verification with SMS codes
-    - Security checkup wizard with plain language explanations
-    - Automatic suspicious activity detection and alerts
-    - One-click security fixes for common issues
-    
-    **For Advanced Users:**
-    - Hardware security keys (FIDO U2F/WebAuthn)
-    - App-specific passwords for legacy applications
-    - Detailed activity logs with IP addresses and device information
-    - Advanced Protection Program for high-risk users
-    
-    **For Developers:**
-    - OAuth 2.0 scopes with granular permissions
-    - API security monitoring and rate limiting
-    - Advanced threat detection with machine learning
-    - Security audit logs and compliance reporting
-    
-    **Key Insight:** Google's layered approach allows basic users to be secure without complexity, while providing power users with the control they need.
+**Design Principles by User Type:**
+
+| Aspect | Novice Users | Advanced Users |
+|--------|-------------|----------------|
+| **Interface** | Simple, clean, minimal choices | Rich, detailed, many options |
+| **Defaults** | Secure by default, automatic | Configurable, manual control |
+| **Feedback** | Clear messages, visual cues | Detailed logs, metrics |
+| **Help** | Contextual tips, guided flows | Documentation, APIs |
+| **Security** | Transparent, background | Visible, controllable |
+
+///
+
+/// details | Real-World Example: Google Account Security
+    type: example
+
+Google provides different security interfaces tailored to user expertise levels:
+
+**For Novice Users:**
+- Simple 2-step verification with SMS codes
+- Security checkup wizard with plain language explanations
+- Automatic suspicious activity detection and alerts
+- One-click security fixes for common issues
+
+**For Advanced Users:**
+- Hardware security keys (FIDO U2F/WebAuthn)
+- App-specific passwords for legacy applications
+- Detailed activity logs with IP addresses and device information
+- Advanced Protection Program for high-risk users
+
+**For Developers:**
+- OAuth 2.0 scopes with granular permissions
+- API security monitoring and rate limiting
+- Advanced threat detection with machine learning
+- Security audit logs and compliance reporting
+
+**Key Insight:** Google's layered approach allows basic users to be secure without complexity, while providing power users with the control they need.
+
+///
 
 
 ## Developing Secure Code
@@ -323,584 +342,608 @@ Embedding security principles—confidentiality, integrity, availability, authen
 
 The CIA-A³ model forms the foundation of secure software development. Each principle must be implemented at the code level to create truly secure systems.
 
-??? info "🔐 Confidentiality: Protecting Sensitive Data"
-    Ensures sensitive information remains private and accessible only to authorized users.
-    
-    **Implementation Examples:**
-    ```python
-    # Example 1: Encrypting user data before storage
-    from cryptography.fernet import Fernet
-    import os
-    
-    class DataEncryption:
-        def __init__(self):
-            # Generate or load encryption key securely
-            self.key = os.environ.get('ENCRYPTION_KEY', Fernet.generate_key())
-            self.cipher = Fernet(self.key)
-        
-        def encrypt_sensitive_data(self, data):
-            """Encrypt personal information before database storage"""
-            if isinstance(data, str):
-                data = data.encode('utf-8')
-            return self.cipher.encrypt(data)
-        
-        def decrypt_sensitive_data(self, encrypted_data):
-            """Decrypt data for authorized access"""
-            decrypted_bytes = self.cipher.decrypt(encrypted_data)
-            return decrypted_bytes.decode('utf-8')
-    
-    # Example 2: Database field-level encryption
-    class User:
-        def __init__(self, username, email, phone):
-            self.username = username
-            self.encrypted_email = self.encrypt_pii(email)
-            self.encrypted_phone = self.encrypt_pii(phone)
-        
-        def encrypt_pii(self, data):
-            """Encrypt personally identifiable information"""
-            encryption = DataEncryption()
-            return encryption.encrypt_sensitive_data(data)
-        
-        def get_email(self, authorized=False):
-            """Only return decrypted email if authorized"""
-            if not authorized:
-                return "***@***.com"  # Masked version
-            encryption = DataEncryption()
-            return encryption.decrypt_sensitive_data(self.encrypted_email)
-    ```
-    
-    **Real-World Application:** Signal messenger encrypts messages end-to-end, ensuring even Signal's servers cannot read user conversations.
+/// details | 🔐 Confidentiality: Protecting Sensitive Data
+    type: info
 
-??? info "🛡️ Integrity: Ensuring Data Accuracy"
-    Guarantees data hasn't been tampered with or corrupted during storage or transmission.
-    
-    **Implementation Examples:**
-    ```python
-    # Example 1: File integrity checking with checksums
-    import hashlib
-    import hmac
-    
-    class IntegrityChecker:
-        def __init__(self, secret_key):
-            self.secret_key = secret_key
-        
-        def generate_checksum(self, data):
-            """Generate SHA-256 checksum for data"""
-            if isinstance(data, str):
-                data = data.encode('utf-8')
-            return hashlib.sha256(data).hexdigest()
-        
-        def generate_hmac(self, data):
-            """Generate HMAC for authenticated integrity"""
-            if isinstance(data, str):
-                data = data.encode('utf-8')
-            return hmac.new(
-                self.secret_key.encode(),
-                data,
-                hashlib.sha256
-            ).hexdigest()
-        
-        def verify_integrity(self, data, expected_checksum):
-            """Verify data hasn't been modified"""
-            actual_checksum = self.generate_checksum(data)
-            return hmac.compare_digest(actual_checksum, expected_checksum)
-    
-    # Example 2: Database transaction integrity
-    class BankTransaction:
-        def transfer_funds(self, from_account, to_account, amount):
-            """Ensure atomic money transfer (all or nothing)"""
-            try:
-                # Start database transaction
-                with database.transaction():
-                    # Verify sufficient funds
-                    if from_account.balance < amount:
-                        raise InsufficientFundsError()
-                    
-                    # Perform transfer atomically
-                    from_account.balance -= amount
-                    to_account.balance += amount
-                    
-                    # Log transaction for audit trail
-                    self.log_transaction(from_account, to_account, amount)
-                    
-                    # Commit only if all operations succeed
-                    return {"success": True, "transaction_id": "TX123456"}
-                    
-            except Exception as e:
-                # Rollback on any error to maintain integrity
-                database.rollback()
-                return {"success": False, "error": str(e)}
-    ```
-    
-    **Real-World Application:** Git uses SHA-1 hashes to ensure code repository integrity - any change to files is immediately detectable.
+Ensures sensitive information remains private and accessible only to authorized users.
 
-??? info "⚡ Availability: Maintaining System Access"
-    Ensures systems and data remain accessible to authorized users when needed.
+**Implementation Examples:**
+```python
+# Example 1: Encrypting user data before storage
+from cryptography.fernet import Fernet
+import os
+
+class DataEncryption:
+    def __init__(self):
+        # Generate or load encryption key securely
+        self.key = os.environ.get('ENCRYPTION_KEY', Fernet.generate_key())
+        self.cipher = Fernet(self.key)
     
-    **Implementation Examples:**
-    ```python
-    # Example 1: Load balancing and redundancy
-    import random
-    import time
-    import threading
+    def encrypt_sensitive_data(self, data):
+        """Encrypt personal information before database storage"""
+        if isinstance(data, str):
+            data = data.encode('utf-8')
+        return self.cipher.encrypt(data)
     
-    class HighAvailabilityService:
-        def __init__(self):
-            self.servers = [
-                {"id": "server1", "url": "https://api1.example.com", "healthy": True},
-                {"id": "server2", "url": "https://api2.example.com", "healthy": True},
-                {"id": "server3", "url": "https://api3.example.com", "healthy": True}
-            ]
-            self.health_check_interval = 30  # seconds
-            self.start_health_monitoring()
-        
-        def get_healthy_server(self):
-            """Return a healthy server using round-robin"""
-            healthy_servers = [s for s in self.servers if s['healthy']]
-            
-            if not healthy_servers:
-                raise ServiceUnavailableError("No healthy servers available")
-            
-            return random.choice(healthy_servers)
-        
-        def make_request(self, endpoint, data):
-            """Make request with automatic failover"""
-            max_retries = 3
-            
-            for attempt in range(max_retries):
-                try:
-                    server = self.get_healthy_server()
-                    response = self.send_request(server['url'] + endpoint, data)
-                    return response
+    def decrypt_sensitive_data(self, encrypted_data):
+        """Decrypt data for authorized access"""
+        decrypted_bytes = self.cipher.decrypt(encrypted_data)
+        return decrypted_bytes.decode('utf-8')
+
+# Example 2: Database field-level encryption
+class User:
+    def __init__(self, username, email, phone):
+        self.username = username
+        self.encrypted_email = self.encrypt_pii(email)
+        self.encrypted_phone = self.encrypt_pii(phone)
+    
+    def encrypt_pii(self, data):
+        """Encrypt personally identifiable information"""
+        encryption = DataEncryption()
+        return encryption.encrypt_sensitive_data(data)
+    
+    def get_email(self, authorized=False):
+        """Only return decrypted email if authorized"""
+        if not authorized:
+            return "***@***.com"  # Masked version
+        encryption = DataEncryption()
+        return encryption.decrypt_sensitive_data(self.encrypted_email)
+```
+
+**Real-World Application:** Signal messenger encrypts messages end-to-end, ensuring even Signal's servers cannot read user conversations.
+
+///
+
+/// details | 🛡️ Integrity: Ensuring Data Accuracy
+    type: info
+
+Guarantees data hasn't been tampered with or corrupted during storage or transmission.
+
+**Implementation Examples:**
+```python
+# Example 1: File integrity checking with checksums
+import hashlib
+import hmac
+
+class IntegrityChecker:
+    def __init__(self, secret_key):
+        self.secret_key = secret_key
+    
+    def generate_checksum(self, data):
+        """Generate SHA-256 checksum for data"""
+        if isinstance(data, str):
+            data = data.encode('utf-8')
+        return hashlib.sha256(data).hexdigest()
+    
+    def generate_hmac(self, data):
+        """Generate HMAC for authenticated integrity"""
+        if isinstance(data, str):
+            data = data.encode('utf-8')
+        return hmac.new(
+            self.secret_key.encode(),
+            data,
+            hashlib.sha256
+        ).hexdigest()
+    
+    def verify_integrity(self, data, expected_checksum):
+        """Verify data hasn't been modified"""
+        actual_checksum = self.generate_checksum(data)
+        return hmac.compare_digest(actual_checksum, expected_checksum)
+
+# Example 2: Database transaction integrity
+class BankTransaction:
+    def transfer_funds(self, from_account, to_account, amount):
+        """Ensure atomic money transfer (all or nothing)"""
+        try:
+            # Start database transaction
+            with database.transaction():
+                # Verify sufficient funds
+                if from_account.balance < amount:
+                    raise InsufficientFundsError()
                 
-                except (ConnectionError, TimeoutError) as e:
-                    if attempt == max_retries - 1:
-                        raise ServiceUnavailableError("All servers failed")
-                    time.sleep(2 ** attempt)  # Exponential backoff
-        
-        def start_health_monitoring(self):
-            """Monitor server health in background"""
-            def health_check():
-                while True:
-                    for server in self.servers:
-                        try:
-                            # Simple health check
-                            response = self.ping_server(server['url'])
-                            server['healthy'] = response.status_code == 200
-                        except:
-                            server['healthy'] = False
-                    
-                    time.sleep(self.health_check_interval)
-            
-            thread = threading.Thread(target=health_check, daemon=True)
-            thread.start()
+                # Perform transfer atomically
+                from_account.balance -= amount
+                to_account.balance += amount
+                
+                # Log transaction for audit trail
+                self.log_transaction(from_account, to_account, amount)
+                
+                # Commit only if all operations succeed
+                return {"success": True, "transaction_id": "TX123456"}
+                
+        except Exception as e:
+            # Rollback on any error to maintain integrity
+            database.rollback()
+            return {"success": False, "error": str(e)}
+```
+
+**Real-World Application:** Git uses SHA-1 hashes to ensure code repository integrity - any change to files is immediately detectable.
+
+///
+
+/// details | ⚡ Availability: Maintaining System Access
+    type: info
+
+Ensures systems and data remain accessible to authorized users when needed.
+
+**Implementation Examples:**
+```python
+# Example 1: Load balancing and redundancy
+import random
+import time
+import threading
+
+class HighAvailabilityService:
+    def __init__(self):
+        self.servers = [
+            {"id": "server1", "url": "https://api1.example.com", "healthy": True},
+            {"id": "server2", "url": "https://api2.example.com", "healthy": True},
+            {"id": "server3", "url": "https://api3.example.com", "healthy": True}
+        ]
+        self.health_check_interval = 30  # seconds
+        self.start_health_monitoring()
     
-    # Example 2: Circuit breaker pattern
-    class CircuitBreaker:
-        def __init__(self, failure_threshold=5, recovery_timeout=60):
-            self.failure_threshold = failure_threshold
-            self.recovery_timeout = recovery_timeout
-            self.failure_count = 0
-            self.last_failure_time = None
-            self.state = "CLOSED"  # CLOSED, OPEN, HALF_OPEN
+    def get_healthy_server(self):
+        """Return a healthy server using round-robin"""
+        healthy_servers = [s for s in self.servers if s['healthy']]
         
-        def call(self, func, *args, **kwargs):
-            """Execute function with circuit breaker protection"""
-            if self.state == "OPEN":
-                if time.time() - self.last_failure_time > self.recovery_timeout:
-                    self.state = "HALF_OPEN"
-                else:
-                    raise ServiceUnavailableError("Circuit breaker is OPEN")
-            
+        if not healthy_servers:
+            raise ServiceUnavailableError("No healthy servers available")
+        
+        return random.choice(healthy_servers)
+    
+    def make_request(self, endpoint, data):
+        """Make request with automatic failover"""
+        max_retries = 3
+        
+        for attempt in range(max_retries):
             try:
-                result = func(*args, **kwargs)
-                self.on_success()
-                return result
+                server = self.get_healthy_server()
+                response = self.send_request(server['url'] + endpoint, data)
+                return response
             
-            except Exception as e:
-                self.on_failure()
-                raise
-        
-        def on_success(self):
-            """Reset circuit breaker on successful call"""
-            self.failure_count = 0
-            self.state = "CLOSED"
-        
-        def on_failure(self):
-            """Handle failure and potentially open circuit"""
-            self.failure_count += 1
-            self.last_failure_time = time.time()
-            
-            if self.failure_count >= self.failure_threshold:
-                self.state = "OPEN"
-    ```
+            except (ConnectionError, TimeoutError) as e:
+                if attempt == max_retries - 1:
+                    raise ServiceUnavailableError("All servers failed")
+                time.sleep(2 ** attempt)  # Exponential backoff
     
-    **Real-World Application:** Netflix's microservices architecture uses circuit breakers and redundancy to maintain 99.99% uptime despite individual service failures.
+    def start_health_monitoring(self):
+        """Monitor server health in background"""
+        def health_check():
+            while True:
+                for server in self.servers:
+                    try:
+                        # Simple health check
+                        response = self.ping_server(server['url'])
+                        server['healthy'] = response.status_code == 200
+                    except:
+                        server['healthy'] = False
+                
+                time.sleep(self.health_check_interval)
+        
+        thread = threading.Thread(target=health_check, daemon=True)
+        thread.start()
 
-??? info "🔑 Authentication: Verifying User Identity"
-    Confirms that users are who they claim to be before granting access to systems.
+# Example 2: Circuit breaker pattern
+class CircuitBreaker:
+    def __init__(self, failure_threshold=5, recovery_timeout=60):
+        self.failure_threshold = failure_threshold
+        self.recovery_timeout = recovery_timeout
+        self.failure_count = 0
+        self.last_failure_time = None
+        self.state = "CLOSED"  # CLOSED, OPEN, HALF_OPEN
     
-    **Implementation Examples:**
-    ```python
-    # Multi-factor authentication implementation
-    import secrets
-    import time
-    import qrcode
-    import pyotp
-    from werkzeug.security import generate_password_hash, check_password_hash
-    
-    class MultiFactorAuth:
-        def __init__(self):
-            self.users = {}
-            self.login_attempts = {}
-            self.max_attempts = 3
-            self.lockout_duration = 900  # 15 minutes
-        
-        def register_user(self, username, password, email):
-            """Register user with password and TOTP setup"""
-            # Generate secure password hash
-            password_hash = generate_password_hash(password, method='pbkdf2:sha256')
-            
-            # Generate TOTP secret for 2FA
-            totp_secret = pyotp.random_base32()
-            
-            user_data = {
-                'username': username,
-                'password_hash': password_hash,
-                'email': email,
-                'totp_secret': totp_secret,
-                'totp_enabled': False,
-                'backup_codes': self.generate_backup_codes(),
-                'created_at': time.time()
-            }
-            
-            self.users[username] = user_data
-            return {
-                'success': True,
-                'totp_qr_code': self.generate_totp_qr_code(username, totp_secret)
-            }
-        
-        def authenticate_password(self, username, password):
-            """First factor: password authentication"""
-            # Check for account lockout
-            if self.is_locked_out(username):
-                return {
-                    'success': False,
-                    'message': 'Account temporarily locked due to failed attempts'
-                }
-            
-            user = self.users.get(username)
-            if not user:
-                self.record_failed_attempt(username)
-                return {'success': False, 'message': 'Invalid credentials'}
-            
-            if check_password_hash(user['password_hash'], password):
-                self.clear_failed_attempts(username)
-                return {'success': True, 'requires_2fa': user['totp_enabled']}
+    def call(self, func, *args, **kwargs):
+        """Execute function with circuit breaker protection"""
+        if self.state == "OPEN":
+            if time.time() - self.last_failure_time > self.recovery_timeout:
+                self.state = "HALF_OPEN"
             else:
-                self.record_failed_attempt(username)
-                return {'success': False, 'message': 'Invalid credentials'}
+                raise ServiceUnavailableError("Circuit breaker is OPEN")
         
-        def authenticate_totp(self, username, totp_code):
-            """Second factor: TOTP authentication"""
-            user = self.users.get(username)
-            if not user or not user['totp_enabled']:
-                return {'success': False, 'message': 'TOTP not configured'}
-            
-            # Verify TOTP code
-            totp = pyotp.TOTP(user['totp_secret'])
-            if totp.verify(totp_code, valid_window=1):
-                return {'success': True, 'authenticated': True}
-            
-            # Check backup codes as fallback
-            for i, backup_code in enumerate(user['backup_codes']):
-                if backup_code and secrets.compare_digest(backup_code, totp_code):
-                    # Use backup code (one-time use only)
-                    user['backup_codes'][i] = None
-                    return {'success': True, 'authenticated': True, 'backup_used': True}
-            
-            return {'success': False, 'message': 'Invalid TOTP code'}
+        try:
+            result = func(*args, **kwargs)
+            self.on_success()
+            return result
         
-        def generate_backup_codes(self, count=10):
-            """Generate one-time backup codes"""
-            return [secrets.token_hex(4).upper() for _ in range(count)]
+        except Exception as e:
+            self.on_failure()
+            raise
+    
+    def on_success(self):
+        """Reset circuit breaker on successful call"""
+        self.failure_count = 0
+        self.state = "CLOSED"
+    
+    def on_failure(self):
+        """Handle failure and potentially open circuit"""
+        self.failure_count += 1
+        self.last_failure_time = time.time()
         
-        def generate_totp_qr_code(self, username, secret):
-            """Generate QR code for TOTP setup"""
-            totp_uri = pyotp.totp.TOTP(secret).provisioning_uri(
-                name=username,
-                issuer_name="Secure App"
-            )
-            
-            qr = qrcode.QRCode(version=1, box_size=10, border=5)
-            qr.add_data(totp_uri)
-            qr.make(fit=True)
-            return qr
+        if self.failure_count >= self.failure_threshold:
+            self.state = "OPEN"
+```
+
+**Real-World Application:** Netflix's microservices architecture uses circuit breakers and redundancy to maintain 99.99% uptime despite individual service failures.
+
+///
+
+/// details | 🔑 Authentication: Verifying User Identity
+    type: info
+
+Confirms that users are who they claim to be before granting access to systems.
+
+**Implementation Examples:**
+```python
+# Multi-factor authentication implementation
+import secrets
+import time
+import qrcode
+import pyotp
+from werkzeug.security import generate_password_hash, check_password_hash
+
+class MultiFactorAuth:
+    def __init__(self):
+        self.users = {}
+        self.login_attempts = {}
+        self.max_attempts = 3
+        self.lockout_duration = 900  # 15 minutes
+    
+    def register_user(self, username, password, email):
+        """Register user with password and TOTP setup"""
+        # Generate secure password hash
+        password_hash = generate_password_hash(password, method='pbkdf2:sha256')
         
-        def is_locked_out(self, username):
-            """Check if account is locked due to failed attempts"""
-            if username not in self.login_attempts:
-                return False
-            
-            attempts = self.login_attempts[username]
-            if attempts['count'] >= self.max_attempts:
-                time_since_lockout = time.time() - attempts['last_attempt']
-                return time_since_lockout < self.lockout_duration
-            
+        # Generate TOTP secret for 2FA
+        totp_secret = pyotp.random_base32()
+        
+        user_data = {
+            'username': username,
+            'password_hash': password_hash,
+            'email': email,
+            'totp_secret': totp_secret,
+            'totp_enabled': False,
+            'backup_codes': self.generate_backup_codes(),
+            'created_at': time.time()
+        }
+        
+        self.users[username] = user_data
+        return {
+            'success': True,
+            'totp_qr_code': self.generate_totp_qr_code(username, totp_secret)
+        }
+    
+    def authenticate_password(self, username, password):
+        """First factor: password authentication"""
+        # Check for account lockout
+        if self.is_locked_out(username):
+            return {
+                'success': False,
+                'message': 'Account temporarily locked due to failed attempts'
+            }
+        
+        user = self.users.get(username)
+        if not user:
+            self.record_failed_attempt(username)
+            return {'success': False, 'message': 'Invalid credentials'}
+        
+        if check_password_hash(user['password_hash'], password):
+            self.clear_failed_attempts(username)
+            return {'success': True, 'requires_2fa': user['totp_enabled']}
+        else:
+            self.record_failed_attempt(username)
+            return {'success': False, 'message': 'Invalid credentials'}
+    
+    def authenticate_totp(self, username, totp_code):
+        """Second factor: TOTP authentication"""
+        user = self.users.get(username)
+        if not user or not user['totp_enabled']:
+            return {'success': False, 'message': 'TOTP not configured'}
+        
+        # Verify TOTP code
+        totp = pyotp.TOTP(user['totp_secret'])
+        if totp.verify(totp_code, valid_window=1):
+            return {'success': True, 'authenticated': True}
+        
+        # Check backup codes as fallback
+        for i, backup_code in enumerate(user['backup_codes']):
+            if backup_code and secrets.compare_digest(backup_code, totp_code):
+                # Use backup code (one-time use only)
+                user['backup_codes'][i] = None
+                return {'success': True, 'authenticated': True, 'backup_used': True}
+        
+        return {'success': False, 'message': 'Invalid TOTP code'}
+    
+    def generate_backup_codes(self, count=10):
+        """Generate one-time backup codes"""
+        return [secrets.token_hex(4).upper() for _ in range(count)]
+    
+    def generate_totp_qr_code(self, username, secret):
+        """Generate QR code for TOTP setup"""
+        totp_uri = pyotp.totp.TOTP(secret).provisioning_uri(
+            name=username,
+            issuer_name="Secure App"
+        )
+        
+        qr = qrcode.QRCode(version=1, box_size=10, border=5)
+        qr.add_data(totp_uri)
+        qr.make(fit=True)
+        return qr
+    
+    def is_locked_out(self, username):
+        """Check if account is locked due to failed attempts"""
+        if username not in self.login_attempts:
             return False
-    ```
-    
-    **Real-World Application:** Banks use multi-factor authentication combining something you know (password), something you have (phone), and something you are (biometrics).
+        
+        attempts = self.login_attempts[username]
+        if attempts['count'] >= self.max_attempts:
+            time_since_lockout = time.time() - attempts['last_attempt']
+            return time_since_lockout < self.lockout_duration
+        
+        return False
+```
 
-??? info "🚪 Authorization: Controlling Access Rights"
-    Determines what authenticated users are allowed to do within the system.
-    
-    **Implementation Examples:**
-    ```python
-    # Role-Based Access Control (RBAC) implementation
-    from enum import Enum
-    from functools import wraps
-    
-    class Role(Enum):
-        STUDENT = "student"
-        TEACHER = "teacher"
-        ADMIN = "admin"
-        SUPER_ADMIN = "super_admin"
-    
-    class Permission(Enum):
-        READ_GRADES = "read_grades"
-        WRITE_GRADES = "write_grades"
-        MANAGE_USERS = "manage_users"
-        SYSTEM_CONFIG = "system_config"
-        VIEW_REPORTS = "view_reports"
-    
-    class AuthorizationManager:
-        def __init__(self):
-            # Define role-permission mappings
-            self.role_permissions = {
-                Role.STUDENT: [Permission.READ_GRADES],
-                Role.TEACHER: [
-                    Permission.READ_GRADES,
-                    Permission.WRITE_GRADES,
-                    Permission.VIEW_REPORTS
-                ],
-                Role.ADMIN: [
-                    Permission.READ_GRADES,
-                    Permission.WRITE_GRADES,
-                    Permission.MANAGE_USERS,
-                    Permission.VIEW_REPORTS
-                ],
-                Role.SUPER_ADMIN: list(Permission)  # All permissions
-            }
-        
-        def has_permission(self, user_role, required_permission):
-            """Check if user role has required permission"""
-            if user_role not in self.role_permissions:
-                return False
-            
-            return required_permission in self.role_permissions[user_role]
-        
-        def require_permission(self, permission):
-            """Decorator to enforce permission requirements"""
-            def decorator(func):
-                @wraps(func)
-                def wrapper(*args, **kwargs):
-                    # Get current user from session/context
-                    current_user = self.get_current_user()
-                    
-                    if not current_user:
-                        raise UnauthorizedError("Authentication required")
-                    
-                    if not self.has_permission(current_user.role, permission):
-                        raise ForbiddenError(f"Permission {permission.value} required")
-                    
-                    return func(*args, **kwargs)
-                return wrapper
-            return decorator
-        
-        def get_current_user(self):
-            """Get current user from session (mock implementation)"""
-            # In real implementation, extract from JWT token or session
-            return MockUser(role=Role.TEACHER)
-    
-    # Usage example
-    auth_manager = AuthorizationManager()
-    
-    class GradeService:
-        @auth_manager.require_permission(Permission.READ_GRADES)
-        def get_student_grades(self, student_id):
-            """Students and teachers can read grades"""
-            return {"student_id": student_id, "grades": [85, 92, 78]}
-        
-        @auth_manager.require_permission(Permission.WRITE_GRADES)
-        def update_grade(self, student_id, subject, grade):
-            """Only teachers and admins can update grades"""
-            return {"success": True, "updated": f"{subject}: {grade}"}
-        
-        @auth_manager.require_permission(Permission.MANAGE_USERS)
-        def create_user_account(self, user_data):
-            """Only admins can create new user accounts"""
-            return {"success": True, "user_id": "new_user_123"}
-    ```
-    
-    **Real-World Application:** GitHub uses fine-grained permissions where users can have read, write, or admin access to specific repositories, with organization-level role inheritance.
+**Real-World Application:** Banks use multi-factor authentication combining something you know (password), something you have (phone), and something you are (biometrics).
 
-??? info "📋 Accountability: Tracking User Actions"
-    Maintains detailed logs of user activities for audit, compliance, and forensic purposes.
+///
+
+/// details | 🚪 Authorization: Controlling Access Rights
+    type: info
+
+Determines what authenticated users are allowed to do within the system.
+
+**Implementation Examples:**
+```python
+# Role-Based Access Control (RBAC) implementation
+from enum import Enum
+from functools import wraps
+
+class Role(Enum):
+    STUDENT = "student"
+    TEACHER = "teacher"
+    ADMIN = "admin"
+    SUPER_ADMIN = "super_admin"
+
+class Permission(Enum):
+    READ_GRADES = "read_grades"
+    WRITE_GRADES = "write_grades"
+    MANAGE_USERS = "manage_users"
+    SYSTEM_CONFIG = "system_config"
+    VIEW_REPORTS = "view_reports"
+
+class AuthorizationManager:
+    def __init__(self):
+        # Define role-permission mappings
+        self.role_permissions = {
+            Role.STUDENT: [Permission.READ_GRADES],
+            Role.TEACHER: [
+                Permission.READ_GRADES,
+                Permission.WRITE_GRADES,
+                Permission.VIEW_REPORTS
+            ],
+            Role.ADMIN: [
+                Permission.READ_GRADES,
+                Permission.WRITE_GRADES,
+                Permission.MANAGE_USERS,
+                Permission.VIEW_REPORTS
+            ],
+            Role.SUPER_ADMIN: list(Permission)  # All permissions
+        }
     
-    **Implementation Examples:**
-    ```python
-    # Comprehensive audit logging system
-    import json
-    import time
-    from datetime import datetime
-    from enum import Enum
+    def has_permission(self, user_role, required_permission):
+        """Check if user role has required permission"""
+        if user_role not in self.role_permissions:
+            return False
+        
+        return required_permission in self.role_permissions[user_role]
     
-    class AuditEventType(Enum):
-        LOGIN_SUCCESS = "login_success"
-        LOGIN_FAILED = "login_failed"
-        DATA_ACCESS = "data_access"
-        DATA_MODIFICATION = "data_modification"
-        PERMISSION_CHANGE = "permission_change"
-        SYSTEM_CONFIG = "system_configuration"
-        SECURITY_VIOLATION = "security_violation"
-    
-    class AuditLogger:
-        def __init__(self, log_file="audit.log"):
-            self.log_file = log_file
-            self.sensitive_fields = {'password', 'ssn', 'credit_card'}
-        
-        def log_event(self, event_type, user_id, details, ip_address=None, 
-                     user_agent=None, resource=None, success=True):
-            """Log security-relevant events with comprehensive context"""
-            
-            # Sanitize sensitive data
-            sanitized_details = self.sanitize_sensitive_data(details)
-            
-            audit_entry = {
-                'timestamp': datetime.utcnow().isoformat(),
-                'event_type': event_type.value,
-                'user_id': user_id,
-                'ip_address': ip_address,
-                'user_agent': user_agent,
-                'resource': resource,
-                'success': success,
-                'details': sanitized_details,
-                'session_id': self.get_session_id(),
-                'risk_score': self.calculate_risk_score(event_type, ip_address)
-            }
-            
-            # Write to secure log file
-            with open(self.log_file, 'a', encoding='utf-8') as f:
-                f.write(json.dumps(audit_entry) + '\n')
-            
-            # Send high-risk events to security team
-            if audit_entry['risk_score'] >= 7:
-                self.alert_security_team(audit_entry)
-        
-        def sanitize_sensitive_data(self, data):
-            """Remove or mask sensitive information from logs"""
-            if isinstance(data, dict):
-                sanitized = {}
-                for key, value in data.items():
-                    if key.lower() in self.sensitive_fields:
-                        sanitized[key] = "***REDACTED***"
-                    elif isinstance(value, dict):
-                        sanitized[key] = self.sanitize_sensitive_data(value)
-                    else:
-                        sanitized[key] = value
-                return sanitized
-            return data
-        
-        def calculate_risk_score(self, event_type, ip_address):
-            """Calculate risk score for event (1-10 scale)"""
-            base_scores = {
-                AuditEventType.LOGIN_SUCCESS: 2,
-                AuditEventType.LOGIN_FAILED: 4,
-                AuditEventType.DATA_ACCESS: 3,
-                AuditEventType.DATA_MODIFICATION: 5,
-                AuditEventType.PERMISSION_CHANGE: 7,
-                AuditEventType.SYSTEM_CONFIG: 8,
-                AuditEventType.SECURITY_VIOLATION: 10
-            }
-            
-            risk_score = base_scores.get(event_type, 3)
-            
-            # Increase risk for unusual IP addresses
-            if ip_address and self.is_unusual_ip(ip_address):
-                risk_score += 2
-            
-            return min(risk_score, 10)
-        
-        def is_unusual_ip(self, ip_address):
-            """Check if IP address is from unusual location/known threat"""
-            # Simplified implementation - in reality, use threat intelligence
-            known_safe_ranges = ['192.168.', '10.0.', '172.16.']
-            return not any(ip_address.startswith(range_) for range_ in known_safe_ranges)
-        
-        def get_session_id(self):
-            """Get current session ID (mock implementation)"""
-            return "session_123456"
-        
-        def alert_security_team(self, audit_entry):
-            """Send high-risk events to security team"""
-            print(f"🚨 HIGH RISK EVENT: {audit_entry['event_type']} by user {audit_entry['user_id']}")
-    
-    # Usage example with decorators
-    audit_logger = AuditLogger()
-    
-    def audit_action(event_type, resource=None):
-        """Decorator to automatically log function calls"""
+    def require_permission(self, permission):
+        """Decorator to enforce permission requirements"""
         def decorator(func):
             @wraps(func)
             def wrapper(*args, **kwargs):
-                user_id = get_current_user_id()  # Get from session
-                ip_address = get_client_ip()     # Get from request context
+                # Get current user from session/context
+                current_user = self.get_current_user()
                 
-                try:
-                    result = func(*args, **kwargs)
-                    
-                    # Log successful operation
-                    audit_logger.log_event(
-                        event_type=event_type,
-                        user_id=user_id,
-                        details={'function': func.__name__, 'args': str(args)},
-                        ip_address=ip_address,
-                        resource=resource,
-                        success=True
-                    )
-                    
-                    return result
-                    
-                except Exception as e:
-                    # Log failed operation
-                    audit_logger.log_event(
-                        event_type=event_type,
-                        user_id=user_id,
-                        details={'function': func.__name__, 'error': str(e)},
-                        ip_address=ip_address,
-                        resource=resource,
-                        success=False
-                    )
-                    raise
-                    
+                if not current_user:
+                    raise UnauthorizedError("Authentication required")
+                
+                if not self.has_permission(current_user.role, permission):
+                    raise ForbiddenError(f"Permission {permission.value} required")
+                
+                return func(*args, **kwargs)
             return wrapper
         return decorator
     
-    # Example usage
-    class StudentService:
-        @audit_action(AuditEventType.DATA_ACCESS, resource="student_grades")
-        def get_student_transcript(self, student_id):
-            """Get student transcript with automatic audit logging"""
-            return {"student_id": student_id, "gpa": 3.7, "credits": 120}
-        
-        @audit_action(AuditEventType.DATA_MODIFICATION, resource="student_grades")
-        def update_grade(self, student_id, course, grade):
-            """Update grade with audit trail"""
-            return {"success": True, "old_grade": "B+", "new_grade": grade}
-    ```
+    def get_current_user(self):
+        """Get current user from session (mock implementation)"""
+        # In real implementation, extract from JWT token or session
+        return MockUser(role=Role.TEACHER)
+
+# Usage example
+auth_manager = AuthorizationManager()
+
+class GradeService:
+    @auth_manager.require_permission(Permission.READ_GRADES)
+    def get_student_grades(self, student_id):
+        """Students and teachers can read grades"""
+        return {"student_id": student_id, "grades": [85, 92, 78]}
     
-    **Real-World Application:** Financial institutions are required by law (SOX, PCI DSS) to maintain detailed audit trails of all access to customer financial data for regulatory compliance.
+    @auth_manager.require_permission(Permission.WRITE_GRADES)
+    def update_grade(self, student_id, subject, grade):
+        """Only teachers and admins can update grades"""
+        return {"success": True, "updated": f"{subject}: {grade}"}
+    
+    @auth_manager.require_permission(Permission.MANAGE_USERS)
+    def create_user_account(self, user_data):
+        """Only admins can create new user accounts"""
+        return {"success": True, "user_id": "new_user_123"}
+```
+
+**Real-World Application:** GitHub uses fine-grained permissions where users can have read, write, or admin access to specific repositories, with organization-level role inheritance.
+
+///
+
+/// details | 📋 Accountability: Tracking User Actions
+    type: info
+
+Maintains detailed logs of user activities for audit, compliance, and forensic purposes.
+
+**Implementation Examples:**
+```python
+# Comprehensive audit logging system
+import json
+import time
+from datetime import datetime
+from enum import Enum
+
+class AuditEventType(Enum):
+    LOGIN_SUCCESS = "login_success"
+    LOGIN_FAILED = "login_failed"
+    DATA_ACCESS = "data_access"
+    DATA_MODIFICATION = "data_modification"
+    PERMISSION_CHANGE = "permission_change"
+    SYSTEM_CONFIG = "system_configuration"
+    SECURITY_VIOLATION = "security_violation"
+
+class AuditLogger:
+    def __init__(self, log_file="audit.log"):
+        self.log_file = log_file
+        self.sensitive_fields = {'password', 'ssn', 'credit_card'}
+    
+    def log_event(self, event_type, user_id, details, ip_address=None, 
+                    user_agent=None, resource=None, success=True):
+        """Log security-relevant events with comprehensive context"""
+        
+        # Sanitize sensitive data
+        sanitized_details = self.sanitize_sensitive_data(details)
+        
+        audit_entry = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'event_type': event_type.value,
+            'user_id': user_id,
+            'ip_address': ip_address,
+            'user_agent': user_agent,
+            'resource': resource,
+            'success': success,
+            'details': sanitized_details,
+            'session_id': self.get_session_id(),
+            'risk_score': self.calculate_risk_score(event_type, ip_address)
+        }
+        
+        # Write to secure log file
+        with open(self.log_file, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(audit_entry) + '\n')
+        
+        # Send high-risk events to security team
+        if audit_entry['risk_score'] >= 7:
+            self.alert_security_team(audit_entry)
+    
+    def sanitize_sensitive_data(self, data):
+        """Remove or mask sensitive information from logs"""
+        if isinstance(data, dict):
+            sanitized = {}
+            for key, value in data.items():
+                if key.lower() in self.sensitive_fields:
+                    sanitized[key] = "***REDACTED***"
+                elif isinstance(value, dict):
+                    sanitized[key] = self.sanitize_sensitive_data(value)
+                else:
+                    sanitized[key] = value
+            return sanitized
+        return data
+    
+    def calculate_risk_score(self, event_type, ip_address):
+        """Calculate risk score for event (1-10 scale)"""
+        base_scores = {
+            AuditEventType.LOGIN_SUCCESS: 2,
+            AuditEventType.LOGIN_FAILED: 4,
+            AuditEventType.DATA_ACCESS: 3,
+            AuditEventType.DATA_MODIFICATION: 5,
+            AuditEventType.PERMISSION_CHANGE: 7,
+            AuditEventType.SYSTEM_CONFIG: 8,
+            AuditEventType.SECURITY_VIOLATION: 10
+        }
+        
+        risk_score = base_scores.get(event_type, 3)
+        
+        # Increase risk for unusual IP addresses
+        if ip_address and self.is_unusual_ip(ip_address):
+            risk_score += 2
+        
+        return min(risk_score, 10)
+    
+    def is_unusual_ip(self, ip_address):
+        """Check if IP address is from unusual location/known threat"""
+        # Simplified implementation - in reality, use threat intelligence
+        known_safe_ranges = ['192.168.', '10.0.', '172.16.']
+        return not any(ip_address.startswith(range_) for range_ in known_safe_ranges)
+    
+    def get_session_id(self):
+        """Get current session ID (mock implementation)"""
+        return "session_123456"
+    
+    def alert_security_team(self, audit_entry):
+        """Send high-risk events to security team"""
+        print(f"🚨 HIGH RISK EVENT: {audit_entry['event_type']} by user {audit_entry['user_id']}")
+
+# Usage example with decorators
+audit_logger = AuditLogger()
+
+def audit_action(event_type, resource=None):
+    """Decorator to automatically log function calls"""
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            user_id = get_current_user_id()  # Get from session
+            ip_address = get_client_ip()     # Get from request context
+            
+            try:
+                result = func(*args, **kwargs)
+                
+                # Log successful operation
+                audit_logger.log_event(
+                    event_type=event_type,
+                    user_id=user_id,
+                    details={'function': func.__name__, 'args': str(args)},
+                    ip_address=ip_address,
+                    resource=resource,
+                    success=True
+                )
+                
+                return result
+                
+            except Exception as e:
+                # Log failed operation
+                audit_logger.log_event(
+                    event_type=event_type,
+                    user_id=user_id,
+                    details={'function': func.__name__, 'error': str(e)},
+                    ip_address=ip_address,
+                    resource=resource,
+                    success=False
+                )
+                raise
+                
+        return wrapper
+    return decorator
+
+# Example usage
+class StudentService:
+    @audit_action(AuditEventType.DATA_ACCESS, resource="student_grades")
+    def get_student_transcript(self, student_id):
+        """Get student transcript with automatic audit logging"""
+        return {"student_id": student_id, "gpa": 3.7, "credits": 120}
+    
+    @audit_action(AuditEventType.DATA_MODIFICATION, resource="student_grades")
+    def update_grade(self, student_id, course, grade):
+        """Update grade with audit trail"""
+        return {"success": True, "old_grade": "B+", "new_grade": grade}
+```
+
+**Real-World Application:** Financial institutions are required by law (SOX, PCI DSS) to maintain detailed audit trails of all access to customer financial data for regulatory compliance.
+
+///
 
 ### Security-by-Design & Privacy-by-Design
 
@@ -929,8 +972,12 @@ The CIA-A³ model forms the foundation of secure software development. Each prin
 
 ### Defensive Coding Techniques
 
-!!! tip "Real-World Impact"
-    In 2017, Equifax suffered a massive data breach affecting 147 million people because they failed to patch a known vulnerability in their web application. Defensive coding practices could have prevented this $4 billion disaster.
+/// details | Real-World Impact
+    type: tip
+
+In 2017, Equifax suffered a massive data breach affecting 147 million people because they failed to patch a known vulnerability in their web application. Defensive coding practices could have prevented this $4 billion disaster.
+
+///
 
 #### Input Handling & Validation
 
@@ -1053,8 +1100,12 @@ def get_user_by_id_secure(user_id):
         return None
 ```
 
-!!! example "Real Example: Netflix's Security"
-    Netflix processes over 1 billion hours of content monthly. They use parameterized queries and input validation to protect user data and prevent unauthorized access to their recommendation algorithms.
+/// details | Real Example: Netflix's Security
+    type: example
+
+Netflix processes over 1 billion hours of content monthly. They use parameterized queries and input validation to protect user data and prevent unauthorized access to their recommendation algorithms.
+
+///
 
 #### Error Handling & Information Disclosure
 
@@ -1164,120 +1215,131 @@ def user_login(username, password):
         return False
 ```
 
-??? success "Security Issues Found"
-    **Vulnerabilities Identified:**
-    
-    1. **SQL Injection** - String concatenation in query
-    2. **Plain Text Passwords** - No password hashing
-    3. **Information Disclosure** - Logging sensitive data
-    4. **No Rate Limiting** - Vulnerable to brute force
-    5. **Weak Session Management** - No session security
-    
-    **Secure Implementation:**
-    ```python
-    import hashlib
-    import secrets
-    import time
-    from functools import wraps
-    
-    class SecureAuth:
-        def __init__(self):
-            self.failed_attempts = {}
-            self.max_attempts = 3
-            self.lockout_duration = 300  # 5 minutes
-        
-        def hash_password(self, password, salt=None):
-            """Hash password with salt"""
-            if salt is None:
-                salt = secrets.token_hex(16)
-            
-            pwd_hash = hashlib.pbkdf2_hmac('sha256',
-                                         password.encode('utf-8'),
-                                         salt.encode('utf-8'),
-                                         100000)
-            return pwd_hash.hex(), salt
-        
-        def verify_password(self, password, stored_hash, salt):
-            """Verify password against stored hash"""
-            computed_hash, _ = self.hash_password(password, salt)
-            return secrets.compare_digest(computed_hash, stored_hash)
-        
-        def is_locked_out(self, username):
-            """Check if account is temporarily locked"""
-            if username in self.failed_attempts:
-                attempts, last_attempt = self.failed_attempts[username]
-                if attempts >= self.max_attempts:
-                    if time.time() - last_attempt < self.lockout_duration:
-                        return True
-                    else:
-                        # Reset after lockout period
-                        del self.failed_attempts[username]
-            return False
-        
-        def record_failed_attempt(self, username):
-            """Record failed login attempt"""
-            now = time.time()
-            if username in self.failed_attempts:
-                attempts, _ = self.failed_attempts[username]
-                self.failed_attempts[username] = (attempts + 1, now)
-            else:
-                self.failed_attempts[username] = (1, now)
-        
-        def secure_login(self, username, password):
-            """Secure login implementation"""
-            try:
-                # Check for account lockout
-                if self.is_locked_out(username):
-                    logging.warning(f"Login attempt on locked account: {username}")
-                    return {"success": False, "message": "Account temporarily locked"}
-                
-                # Use parameterized query
-                query = "SELECT id, username, password_hash, salt FROM users WHERE username = ?"
-                cursor = db.cursor()
-                cursor.execute(query, (username,))
-                user = cursor.fetchone()
-                
-                if not user:
-                    self.record_failed_attempt(username)
-                    logging.info(f"Login attempt with non-existent username")
-                    return {"success": False, "message": "Invalid credentials"}
-                
-                # Verify password
-                if self.verify_password(password, user['password_hash'], user['salt']):
-                    # Success - clear failed attempts
-                    if username in self.failed_attempts:
-                        del self.failed_attempts[username]
-                    
-                    # Create secure session
-                    session_token = secrets.token_urlsafe(32)
-                    session['user_id'] = user['id']
-                    session['token'] = session_token
-                    
-                    logging.info(f"Successful login for user ID: {user['id']}")
-                    return {"success": True, "user_id": user['id']}
-                else:
-                    self.record_failed_attempt(username)
-                    logging.info(f"Failed login attempt")
-                    return {"success": False, "message": "Invalid credentials"}
-                    
-            except Exception as e:
-                logging.error(f"Login system error: {e}")
-                return {"success": False, "message": "Login service unavailable"}
-    ```
+/// details | Security Issues Found
+    type: success
 
-!!! question "Knowledge Check"
-    **Question 1:** Why should you never log passwords or display them in error messages?
+**Vulnerabilities Identified:**
+
+1. **SQL Injection** - String concatenation in query
+2. **Plain Text Passwords** - No password hashing
+3. **Information Disclosure** - Logging sensitive data
+4. **No Rate Limiting** - Vulnerable to brute force
+5. **Weak Session Management** - No session security
+
+**Secure Implementation:**
+```python
+import hashlib
+import secrets
+import time
+from functools import wraps
+
+class SecureAuth:
+    def __init__(self):
+        self.failed_attempts = {}
+        self.max_attempts = 3
+        self.lockout_duration = 300  # 5 minutes
     
-    **Question 2:** What's the difference between parameterized queries and string concatenation in SQL?
-    
-    **Question 3:** How does rate limiting help prevent brute force attacks?
-    
-    ??? success "Answers"
-        **Answer 1:** Passwords in logs can be accessed by administrators, stored in plaintext files, or exposed if logs are compromised. Error messages displaying passwords can be seen by users or attackers.
+    def hash_password(self, password, salt=None):
+        """Hash password with salt"""
+        if salt is None:
+            salt = secrets.token_hex(16)
         
-        **Answer 2:** Parameterized queries separate SQL code from data, preventing injection attacks. String concatenation directly embeds user input into SQL, allowing attackers to modify the query structure.
-        
-        **Answer 3:** Rate limiting restricts the number of login attempts per time period, making brute force attacks impractical by slowing down automated password guessing.
+        pwd_hash = hashlib.pbkdf2_hmac('sha256',
+                                        password.encode('utf-8'),
+                                        salt.encode('utf-8'),
+                                        100000)
+        return pwd_hash.hex(), salt
+    
+    def verify_password(self, password, stored_hash, salt):
+        """Verify password against stored hash"""
+        computed_hash, _ = self.hash_password(password, salt)
+        return secrets.compare_digest(computed_hash, stored_hash)
+    
+    def is_locked_out(self, username):
+        """Check if account is temporarily locked"""
+        if username in self.failed_attempts:
+            attempts, last_attempt = self.failed_attempts[username]
+            if attempts >= self.max_attempts:
+                if time.time() - last_attempt < self.lockout_duration:
+                    return True
+                else:
+                    # Reset after lockout period
+                    del self.failed_attempts[username]
+        return False
+    
+    def record_failed_attempt(self, username):
+        """Record failed login attempt"""
+        now = time.time()
+        if username in self.failed_attempts:
+            attempts, _ = self.failed_attempts[username]
+            self.failed_attempts[username] = (attempts + 1, now)
+        else:
+            self.failed_attempts[username] = (1, now)
+    
+    def secure_login(self, username, password):
+        """Secure login implementation"""
+        try:
+            # Check for account lockout
+            if self.is_locked_out(username):
+                logging.warning(f"Login attempt on locked account: {username}")
+                return {"success": False, "message": "Account temporarily locked"}
+            
+            # Use parameterized query
+            query = "SELECT id, username, password_hash, salt FROM users WHERE username = ?"
+            cursor = db.cursor()
+            cursor.execute(query, (username,))
+            user = cursor.fetchone()
+            
+            if not user:
+                self.record_failed_attempt(username)
+                logging.info(f"Login attempt with non-existent username")
+                return {"success": False, "message": "Invalid credentials"}
+            
+            # Verify password
+            if self.verify_password(password, user['password_hash'], user['salt']):
+                # Success - clear failed attempts
+                if username in self.failed_attempts:
+                    del self.failed_attempts[username]
+                
+                # Create secure session
+                session_token = secrets.token_urlsafe(32)
+                session['user_id'] = user['id']
+                session['token'] = session_token
+                
+                logging.info(f"Successful login for user ID: {user['id']}")
+                return {"success": True, "user_id": user['id']}
+            else:
+                self.record_failed_attempt(username)
+                logging.info(f"Failed login attempt")
+                return {"success": False, "message": "Invalid credentials"}
+                
+        except Exception as e:
+            logging.error(f"Login system error: {e}")
+            return {"success": False, "message": "Login service unavailable"}
+```
+///
+
+/// details | Knowledge Check
+    type: question
+    open: false
+
+**Question 1:** Why should you never log passwords or display them in error messages?
+
+**Question 2:** What's the difference between parameterized queries and string concatenation in SQL?
+
+**Question 3:** How does rate limiting help prevent brute force attacks?
+
+/// details | Answers
+    type: success
+    open: false
+
+**Answer 1:** Passwords in logs can be accessed by administrators, stored in plaintext files, or exposed if logs are compromised. Error messages displaying passwords can be seen by users or attackers.
+
+**Answer 2:** Parameterized queries separate SQL code from data, preventing injection attacks. String concatenation directly embeds user input into SQL, allowing attackers to modify the query structure.
+
+**Answer 3:** Rate limiting restricts the number of login attempts per time period, making brute force attacks impractical by slowing down automated password guessing.
+///
+///
 
 ### Secure API Development
 
@@ -1744,10 +1806,14 @@ class SecureFileHandler:
         return self.timing_safe_compare(computed_hash, stored_hash)
 ```
 
-!!! example "Real-World Case Study: Race Condition Attack"
-    In 2019, a major banking app had a race condition vulnerability in their transfer system. Users could submit multiple transfer requests simultaneously, causing the system to process duplicate transactions before account balances were updated. This resulted in unauthorized overdrafts and financial losses.
-    
-    **Prevention:** Use database transactions with proper locking mechanisms to ensure atomic operations.
+/// details | Real-World Case Study: Race Condition Attack
+    type: example
+
+In 2019, a major banking app had a race condition vulnerability in their transfer system. Users could submit multiple transfer requests simultaneously, causing the system to process duplicate transactions before account balances were updated. This resulted in unauthorized overdrafts and financial losses.
+
+**Prevention:** Use database transactions with proper locking mechanisms to ensure atomic operations.
+
+///
 
 ### Regulatory Compliance & Data Protection
 
@@ -1843,8 +1909,12 @@ class GDPRCompliantDataHandler:
 
 Modern software development requires collaboration between diverse teams to build truly secure systems. Different perspectives and expertise areas contribute to more robust security implementations.
 
-!!! tip "Collaboration Principle"
-    **"Security is everyone's responsibility"** - While security specialists lead the effort, developers, designers, testers, and business stakeholders all contribute to creating secure software.
+/// details | Collaboration Principle
+    type: tip
+
+**"Security is everyone's responsibility"** - While security specialists lead the effort, developers, designers, testers, and business stakeholders all contribute to creating secure software.
+
+///
 
 #### Collaborative Security Approach
 
@@ -2000,52 +2070,64 @@ mindmap
 
 Organizations investing in secure development practices see measurable returns across financial, operational, and strategic dimensions.
 
-??? example "Case Study: Microsoft's Security Development Lifecycle (SDL) Transformation"
-    **Background:** In 2002, Microsoft faced a security crisis with widespread vulnerabilities in Windows and Office products. CEO Bill Gates issued the famous "Trustworthy Computing" memo, launching a company-wide security transformation.
-    
-    **Implementation:**
-    - **Training Investment:** $200M+ in security training for 70,000+ developers
-    - **Process Changes:** Mandatory security reviews, threat modeling for all products
-    - **Tool Development:** Custom static analysis tools, automated security testing
-    - **Cultural Shift:** Security became a performance metric for all engineering teams
-    
-    **Results (2004-2010):**
-    - **74% reduction** in security bulletins for Windows
-    - **90% decrease** in critical vulnerabilities
-    - **$2.4 billion saved** in patch development and customer support costs
-    - **300% increase** in enterprise customer satisfaction scores
+/// details | Case Study: Microsoft's Security Development Lifecycle (SDL) Transformation
+    type: example
+
+**Background:** In 2002, Microsoft faced a security crisis with widespread vulnerabilities in Windows and Office products. CEO Bill Gates issued the famous "Trustworthy Computing" memo, launching a company-wide security transformation.
+
+**Implementation:**
+- **Training Investment:** $200M+ in security training for 70,000+ developers
+- **Process Changes:** Mandatory security reviews, threat modeling for all products
+- **Tool Development:** Custom static analysis tools, automated security testing
+- **Cultural Shift:** Security became a performance metric for all engineering teams
+
+**Results (2004-2010):**
+- **74% reduction** in security bulletins for Windows
+- **90% decrease** in critical vulnerabilities
+- **$2.4 billion saved** in patch development and customer support costs
+- **300% increase** in enterprise customer satisfaction scores
+
+///
     - **Market Leadership:** Regained trust in enterprise and government sectors
     
     **Key Lesson:** Upfront security investment of $500M generated $5B+ in value through reduced costs and increased revenue.
 
-??? example "Case Study: Shopify's Security-First E-commerce Platform"
-    **Challenge:** As a payment processor handling millions of transactions, Shopify needed bulletproof security to compete with established players like PayPal and Square.
-    
-    **Security Strategy:**
-    - **PCI DSS Compliance:** Level 1 certification from day one
-    - **Bug Bounty Program:** $1M+ paid to security researchers annually
-    - **Zero-Trust Architecture:** Every API call authenticated and authorized
-    - **Automated Security:** Continuous scanning and vulnerability management
-    
-    **Business Impact:**
-    - **$7.06 billion** in gross merchandise volume (2023)
-    - **Trust Advantage:** 20% higher conversion rates than competitors
+/// details | Case Study: Shopify's Security-First E-commerce Platform
+    type: example
+
+**Challenge:** As a payment processor handling millions of transactions, Shopify needed bulletproof security to compete with established players like PayPal and Square.
+
+**Security Strategy:**
+- **PCI DSS Compliance:** Level 1 certification from day one
+- **Bug Bounty Program:** $1M+ paid to security researchers annually
+- **Zero-Trust Architecture:** Every API call authenticated and authorized
+- **Automated Security:** Continuous scanning and vulnerability management
+
+**Business Impact:**
+- **$7.06 billion** in gross merchandise volume (2023)
+- **Trust Advantage:** 20% higher conversion rates than competitors
+
+///
     - **Enterprise Growth:** 41% of Fortune 500 companies as customers
     - **Cost Efficiency:** 60% lower fraud rates than industry average
     
     **ROI Analysis:** Every $1 invested in security generated $15 in additional revenue
 
-??? example "Case Study: Zoom's Security Crisis and Recovery (2020)"
-    **The Crisis:** During COVID-19, Zoom's rapid growth exposed security weaknesses:
-    - "Zoombombing" incidents disrupted meetings
-    - End-to-end encryption was not actually end-to-end
-    - Privacy concerns led to government and enterprise bans
-    
-    **Response Strategy (90-Day Security Plan):**
-    - **Leadership:** Hired former Facebook CISO as Chief Security Officer
-    - **Engineering:** Froze feature development to focus on security
-    - **Encryption:** Implemented true end-to-end encryption
-    - **Transparency:** Published detailed security reports and architecture
+/// details | Case Study: Zoom's Security Crisis and Recovery (2020)
+    type: example
+
+**The Crisis:** During COVID-19, Zoom's rapid growth exposed security weaknesses:
+- "Zoombombing" incidents disrupted meetings
+- End-to-end encryption was not actually end-to-end
+- Privacy concerns led to government and enterprise bans
+
+**Response Strategy (90-Day Security Plan):**
+- **Leadership:** Hired former Facebook CISO as Chief Security Officer
+- **Engineering:** Froze feature development to focus on security
+- **Encryption:** Implemented true end-to-end encryption
+- **Transparency:** Published detailed security reports and architecture
+
+///
     
     **Investment and Results:**
     - **$100M security investment** in engineering and audits
@@ -2201,40 +2283,64 @@ print(f"Payback Period: {results['payback_period_months']:.1f} months")
 
 **Economic Impact Metrics:**
 
-??? info "Direct Financial Benefits"
-    **Cost Avoidance:**
-    - **Breach Prevention:** Average data breach costs $4.45M (IBM 2023)
-    - **Regulatory Fines:** GDPR fines average $2.7M per violation
-    - **Litigation Costs:** Class-action settlements average $8.2M
-    - **Reputation Recovery:** Brand recovery campaigns cost $10M+
-    
-    **Revenue Generation:**
-    - **Premium Pricing:** Secure products command 15-25% price premium
-    - **Enterprise Sales:** Security certifications unlock Fortune 500 accounts
-    - **Market Expansion:** Compliance enables international expansion
-    - **Partnership Opportunities:** Security enables B2B integrations
+/// details | Direct Financial Benefits
+    type: info
 
-??? info "Operational Efficiency Gains"
-    **Development Productivity:**
-    - **Reduced Rework:** 60% fewer security-related bugs in production
-    - **Faster Releases:** Automated security testing accelerates deployment
-    - **Technical Debt:** Proactive security reduces accumulated technical debt
-    
-    **Customer Support:**
-    - **Fewer Incidents:** 75% reduction in security-related support tickets
-    - **Higher Satisfaction:** Secure products have 40% higher NPS scores
-    - **Retention Rates:** Security-focused companies have 20% lower churn
+**Cost Avoidance:**
+### Direct Financial Benefits
 
-??? info "Strategic Competitive Advantages"
-    **Market Position:**
-    - **Trust Leadership:** Security becomes key differentiator
-    - **Regulatory Readiness:** First-mover advantage in regulated markets
-    - **Partnership Ecosystem:** Security enables platform strategies
-    
-    **Talent Acquisition:**
-    - **Developer Attraction:** Security-focused companies attract top talent
-    - **Retention:** Engineers prefer working on secure, well-architected systems
-    - **Skills Development:** Security training improves overall engineering quality
+**Breach Prevention**
+- Preventing breaches saves an average of **$4.45M per incident** (IBM 2023).
+- Reduces risk of class-action settlements (avg. **$8.2M**).
+- Minimizes brand recovery expenses (up to **$10M+**).
+
+**Regulatory & Litigation**
+- Avoid GDPR fines, which average **$2.7M per violation**.
+- Reduces exposure to costly legal actions and settlements.
+
+---
+
+### Revenue Generation
+
+**Premium Pricing**
+- Secure products can command **15–25% higher prices**.
+
+**Enterprise Sales**
+- Security certifications unlock **Fortune 500 accounts**.
+
+**Market Expansion**
+- Compliance enables entry into **new international markets**.
+
+**Partnership Opportunities**
+- Strong security enables **B2B integrations** and platform growth.
+
+---
+
+### Operational Efficiency Gains
+
+**Development Productivity**
+- **60% fewer security bugs** in production.
+- Automated security testing speeds up deployment.
+- Proactive security reduces long-term maintenance costs.
+
+**Customer Support**
+- **75% reduction** in security-related support tickets.
+- Secure products achieve **40% higher Net Promoter Scores**.
+- Security-focused companies experience **20% lower customer churn**.
+
+---
+
+### Strategic Competitive Advantages
+
+**Market Position**
+- Security is a key **market differentiator**.
+- First-mover advantage in regulated industries.
+- Robust security enables platform and integration strategies.
+
+**Talent Acquisition**
+- Security-focused companies attract **top engineering talent**.
+- Engineers prefer working on secure, well-architected systems.
+- Security training improves overall engineering quality.
 
 #### Business Impact Analysis
 
@@ -2345,19 +2451,23 @@ print(f"Payback period: {roi_analysis['payback_period_months']:.1f} months")
 
 **Real-World Enterprise Benefits:**
 
-!!! example "Case Study: Microsoft's Security Development Lifecycle (SDL)"
-    Microsoft implemented SDL in 2004 after facing numerous security issues. Results after 5 years:
-    
-    - **74% reduction** in security vulnerabilities
-    - **$2.4 billion saved** in avoided breach costs and patches
-    - **Enhanced enterprise sales** due to improved security reputation
-    - **Faster development cycles** due to fewer security-related delays
-    
-    **Key Success Factors:**
-    - Executive commitment to security investment
-    - Integration of security into development processes
-    - Continuous security training for all developers
-    - Automated security testing tools
+/// details | Case Study: Microsoft's Security Development Lifecycle (SDL)
+    type: example
+
+Microsoft implemented SDL in 2004 after facing numerous security issues. Results after 5 years:
+
+- **74% reduction** in security vulnerabilities
+- **$2.4 billion saved** in avoided breach costs and patches
+- **Enhanced enterprise sales** due to improved security reputation
+- **Faster development cycles** due to fewer security-related delays
+
+**Key Success Factors:**
+- Executive commitment to security investment
+- Integration of security into development processes
+- Continuous security training for all developers
+- Automated security testing tools
+
+///
 
 ### Social, Ethical, and Legal Implications
 
@@ -2367,79 +2477,88 @@ Secure software development creates ripple effects throughout society, raising c
 
 The tension between protecting users and enabling security monitoring presents complex ethical dilemmas.
 
-??? example "Case Study: Apple vs FBI - iPhone Encryption Debate (2016)"
-    **The Situation:** After the San Bernardino shooting, the FBI requested Apple create a backdoor to unlock the shooter's iPhone, arguing national security needs.
+/// details | Case Study: Apple vs FBI - iPhone Encryption Debate (2016)
+    type: example
+
+**The Situation:** After the San Bernardino shooting, the FBI requested Apple create a backdoor to unlock the shooter's iPhone, arguing national security needs.
+
+**Apple's Position:**
+- Creating backdoors would weaken security for all users
+- Government access tools inevitably get misused or leaked
+- Privacy is a fundamental human right that shouldn't be compromised
+
+**FBI's Position:**
+- Law enforcement needs access to evidence in criminal investigations
+- Targeted access tools can be limited to specific cases
+- Public safety outweighs individual privacy concerns
+
+**Technical Reality:**
+```python
+class EncryptionDilemma:
+    def __init__(self):
+        self.security_principle = "No backdoors - any weakness can be exploited"
+        self.legal_pressures = ["Law enforcement access", "National security", "Child protection"]
+        self.privacy_rights = ["Personal autonomy", "Protection from surveillance", "Freedom of expression"]
     
-    **Apple's Position:**
-    - Creating backdoors would weaken security for all users
-    - Government access tools inevitably get misused or leaked
-    - Privacy is a fundamental human right that shouldn't be compromised
-    
-    **FBI's Position:**
-    - Law enforcement needs access to evidence in criminal investigations
-    - Targeted access tools can be limited to specific cases
-    - Public safety outweighs individual privacy concerns
-    
-    **Technical Reality:**
-    ```python
-    class EncryptionDilemma:
-        def __init__(self):
-            self.security_principle = "No backdoors - any weakness can be exploited"
-            self.legal_pressures = ["Law enforcement access", "National security", "Child protection"]
-            self.privacy_rights = ["Personal autonomy", "Protection from surveillance", "Freedom of expression"]
+    def analyze_backdoor_request(self, justification, scope, oversight):
+        """Analyze the technical and ethical implications of encryption backdoors"""
+        risks = []
         
-        def analyze_backdoor_request(self, justification, scope, oversight):
-            """Analyze the technical and ethical implications of encryption backdoors"""
-            risks = []
-            
-            # Technical risks are universal regardless of justification
-            if scope == "targeted":
-                risks.append("Targeted tools often become general surveillance tools")
-            
-            if oversight == "limited":
-                risks.append("Limited oversight enables abuse")
-            
-            # Backdoors create systemic vulnerabilities
-            risks.extend([
-                "Criminals and foreign governments will exploit the same backdoors",
-                "Creates precedent for authoritarian governments to demand access",
-                "Weakens cybersecurity for critical infrastructure",
-                "Undermines public trust in digital security"
-            ])
-            
-            return {
-                'justification': justification,
-                'technical_feasibility': 'Possible but creates universal vulnerability',
-                'security_impact': 'Significant degradation for all users',
-                'precedent_risk': 'High - authoritarian governments will demand same access',
-                'recommendation': 'Strengthen security through other means'
-            }
-    ```
-    
-    **Outcome:** Apple refused to create the backdoor. The FBI eventually accessed the phone through a third-party exploit, highlighting that security vulnerabilities inevitably exist but shouldn't be deliberately created.
-    
-    **Key Lesson:** Technical decisions about security architecture have profound implications for civil liberties and democratic society.
+        # Technical risks are universal regardless of justification
+        if scope == "targeted":
+            risks.append("Targeted tools often become general surveillance tools")
+        
+        if oversight == "limited":
+            risks.append("Limited oversight enables abuse")
+        
+        # Backdoors create systemic vulnerabilities
+        risks.extend([
+            "Criminals and foreign governments will exploit the same backdoors",
+            "Creates precedent for authoritarian governments to demand access",
+            "Weakens cybersecurity for critical infrastructure",
+            "Undermines public trust in digital security"
+        ])
+        
+        return {
+            'justification': justification,
+            'technical_feasibility': 'Possible but creates universal vulnerability',
+            'security_impact': 'Significant degradation for all users',
+            'precedent_risk': 'High - authoritarian governments will demand same access',
+            'recommendation': 'Strengthen security through other means'
+        }
+```
+
+**Outcome:** Apple refused to create the backdoor. The FBI eventually accessed the phone through a third-party exploit, highlighting that security vulnerabilities inevitably exist but shouldn't be deliberately created.
+
+**Key Lesson:** Technical decisions about security architecture have profound implications for civil liberties and democratic society.
+
+///
 
 #### Employment and Economic Transformation
 
 Security-focused development is reshaping the job market and requiring new skills across the technology sector.
 
-??? info "Job Market Evolution Analysis"
-    **New Job Categories Created:**
-    
-    | Role | Growth Rate | Average Salary | Key Skills |
-    |------|-------------|----------------|------------|
-    | **Security Engineers** | 35% annually | $140,000 | Threat modeling, secure architecture |
-    | **Privacy Engineers** | 42% annually | $135,000 | GDPR compliance, data minimization |
-    | **DevSecOps Engineers** | 38% annually | $145,000 | Security automation, CI/CD security |
-    | **Compliance Specialists** | 28% annually | $95,000 | Regulatory frameworks, audit management |
-    | **Security Consultants** | 33% annually | $160,000 | Risk assessment, security strategy |
-    
-    **Traditional Roles Evolving:**
-    - **Software Developers:** Now need security training (20% salary premium for security skills)
-    - **System Administrators:** Transitioning to security-focused infrastructure roles
-    - **Quality Assurance:** Expanding to include security testing methodologies
-    - **Project Managers:** Incorporating security requirements and compliance timelines
+/// details | Job Market Evolution Analysis
+    type: info
+
+**New Job Categories Created**
+
+| Role                   | Growth Rate      | Average Salary | Key Skills                          |
+|------------------------|------------------|----------------|-------------------------------------|
+| Security Engineer      | 35% annually     | $140,000       | Threat modeling, secure architecture|
+| Privacy Engineer       | 42% annually     | $135,000       | GDPR compliance, data minimization  |
+| DevSecOps Engineer     | 38% annually     | $145,000       | Security automation, CI/CD security |
+| Compliance Specialist  | 28% annually     | $95,000        | Regulatory frameworks, audit management |
+| Security Consultant    | 33% annually     | $160,000       | Risk assessment, security strategy  |
+
+**Traditional Roles Evolving**
+
+- **Software Developers:** Require security training (20% salary premium for security skills)
+- **System Administrators:** Shifting to security-focused infrastructure roles
+- **Quality Assurance:** Expanding to include security testing methodologies
+- **Project Managers:** Integrating security requirements and compliance timelines
+
+///
 
 ```python
 class WorkforceTransformation:
@@ -2515,184 +2634,201 @@ for skill, impact in regional_impact.items():
 #### Digital Divide and Security Accessibility
 
 Security measures can inadvertently create barriers for different user groups.
+/// warning | Accessibility Challenges in Security
+    type: info
 
-??? warning "Accessibility Challenges in Security"
-    **The Problem:** Security features often assume users have:
-    - High-speed internet for software updates
-    - Modern devices capable of running security software
-    - Technical literacy to understand security prompts
-    - Financial resources for premium security tools
-    
-    **Impact on Different Groups:**
-    
-    ```python
-    class SecurityAccessibilityAnalyzer:
-        def __init__(self):
-            self.user_groups = {
-                'elderly_users': {
-                    'challenges': ['Complex interfaces', 'Frequent password changes', 'Multi-factor setup'],
-                    'security_risks': 'High - often targeted by scams',
-                    'support_needs': 'High - need simplified, guided security'
-                },
-                'low_income_users': {
-                    'challenges': ['Older devices', 'Limited data plans', 'Free security tools only'],
-                    'security_risks': 'High - using outdated, vulnerable software',
-                    'support_needs': 'Medium - need affordable security options'
-                },
-                'users_with_disabilities': {
-                    'challenges': ['Screen readers with security prompts', 'Motor impairments with multi-factor'],
-                    'security_risks': 'Medium - may disable security that conflicts with assistive tech',
-                    'support_needs': 'High - need accessible security interfaces'
-                },
-                'developing_countries': {
-                    'challenges': ['Slow internet for updates', 'Feature phones only', 'Limited security awareness'],
-                    'security_risks': 'Very High - often excluded from security protections',
-                    'support_needs': 'Very High - need infrastructure and education'
-                }
-            }
-        
-        def design_inclusive_security(self, target_group):
-            """Design security approaches for specific user groups"""
-            group_data = self.user_groups.get(target_group, {})
-            challenges = group_data.get('challenges', [])
-            
-            solutions = []
-            
-            if 'Complex interfaces' in challenges:
-                solutions.append({
-                    'approach': 'Simplified Security Wizard',
-                    'implementation': 'Step-by-step guided setup with plain language explanations',
-                    'example': 'One-click security setup that configures optimal settings automatically'
-                })
-            
-            if 'Older devices' in challenges:
-                solutions.append({
-                    'approach': 'Lightweight Security Options',
-                    'implementation': 'Security tools optimized for limited resources',
-                    'example': 'Basic antivirus that runs efficiently on 3-year-old smartphones'
-                })
-            
-            if 'Screen readers with security prompts' in challenges:
-                solutions.append({
-                    'approach': 'Accessible Security Interfaces',
-                    'implementation': 'ARIA labels, keyboard navigation, clear audio prompts',
-                    'example': 'Security alerts that work seamlessly with screen reading software'
-                })
-            
-            return {
-                'target_group': target_group,
-                'challenges_addressed': challenges,
-                'solutions': solutions,
-                'success_metrics': ['Adoption rate', 'Security incident reduction', 'User satisfaction']
-            }
-    
-    # Example: Design security for elderly users
-    accessibility = SecurityAccessibilityAnalyzer()
-    elderly_security = accessibility.design_inclusive_security('elderly_users')
-    
-    print("Inclusive Security Design for Elderly Users:")
-    for solution in elderly_security['solutions']:
-        print(f"- {solution['approach']}: {solution['implementation']}")
-    ```
+**The Problem:** Security features often assume users have:
+- High-speed internet for software updates
+- Modern devices capable of running security software
+- Technical literacy to understand security prompts
+- Financial resources for premium security tools
+
+**Impact on Different Groups:**
+
+```python
+class SecurityAccessibilityAnalyzer:
+    user_groups = {
+        "elderly_users": {
+            "challenges": [
+                "Complex interfaces",
+                "Frequent password changes",
+                "Multi-factor setup"
+            ],
+            "security_risks": "High - often targeted by scams",
+            "support_needs": "High - need simplified, guided security"
+        },
+        "low_income_users": {
+            "challenges": [
+                "Older devices",
+                "Limited data plans",
+                "Free security tools only"
+            ],
+            "security_risks": "High - using outdated, vulnerable software",
+            "support_needs": "Medium - need affordable security options"
+        },
+        "users_with_disabilities": {
+            "challenges": [
+                "Screen readers with security prompts",
+                "Motor impairments with multi-factor"
+            ],
+            "security_risks": "Medium - may disable security that conflicts with assistive tech",
+            "support_needs": "High - need accessible security interfaces"
+        },
+        "developing_countries": {
+            "challenges": [
+                "Slow internet for updates",
+                "Feature phones only",
+                "Limited security awareness"
+            ],
+            "security_risks": "Very High - often excluded from security protections",
+            "support_needs": "Very High - need infrastructure and education"
+        }
+    }
+
+    @staticmethod
+    def design_inclusive_security(target_group):
+        """Suggest security approaches for specific user groups"""
+        group_data = SecurityAccessibilityAnalyzer.user_groups.get(target_group, {})
+        challenges = group_data.get("challenges", [])
+        solutions = []
+
+        if "Complex interfaces" in challenges:
+            solutions.append({
+                "approach": "Simplified Security Wizard",
+                "implementation": "Step-by-step guided setup with plain language explanations",
+                "example": "One-click security setup that configures optimal settings automatically"
+            })
+        if "Older devices" in challenges:
+            solutions.append({
+                "approach": "Lightweight Security Options",
+                "implementation": "Security tools optimized for limited resources",
+                "example": "Basic antivirus that runs efficiently on older smartphones"
+            })
+        if "Screen readers with security prompts" in challenges:
+            solutions.append({
+                "approach": "Accessible Security Interfaces",
+                "implementation": "ARIA labels, keyboard navigation, clear audio prompts",
+                "example": "Security alerts compatible with screen readers"
+            })
+
+        return {
+            "target_group": target_group,
+            "challenges_addressed": challenges,
+            "solutions": solutions,
+            "success_metrics": [
+                "Adoption rate",
+                "Security incident reduction",
+                "User satisfaction"
+            ]
+        }
+
+# Example: Design security for elderly users
+elderly_security = SecurityAccessibilityAnalyzer.design_inclusive_security("elderly_users")
+print("Inclusive Security Design for Elderly Users:")
+for solution in elderly_security["solutions"]:
+    print(f"- {solution['approach']}: {solution['implementation']}")
+```
+///
 
 #### Regulatory Compliance and Global Variations
 
 Different countries have varying approaches to privacy, security, and data protection.
+/// info | Global Regulatory Landscape
 
-??? info "Global Regulatory Landscape"
-    **Major Privacy Frameworks:**
+**Major Privacy Frameworks:**
+
+| Region            | Framework         | Key Requirements                                 | Fines                        |
+|-------------------|------------------|--------------------------------------------------|------------------------------|
+| **European Union**| GDPR             | Explicit consent, data minimization, right to deletion | Up to 4% of global revenue   |
+| **California, USA**| CCPA/CPRA       | Consumer data rights, transparency requirements   | Up to $7,500 per violation   |
+| **Australia**     | Privacy Act      | Notifiable data breaches, privacy principles      | Individual: $2.22M, Corporate: $11.1M |
+| **Singapore**     | PDPA             | Data protection obligations, breach notification  | Up to S$1M                   |
+| **Brazil**        | LGPD             | Similar to GDPR, data subject rights             | Up to 2% of revenue in Brazil|
+
+**Implementation Challenges:**
+```python
+class GlobalComplianceManager:
+    def __init__(self):
+        self.frameworks = {
+            'GDPR': {
+                'consent_requirements': 'Explicit, freely given, specific, informed',
+                'data_subject_rights': ['Access', 'Rectification', 'Erasure', 'Portability'],
+                'legal_basis_required': True,
+                'dpo_required': 'For high-risk processing',
+                'territorial_scope': 'Global if processing EU data'
+            },
+            'CCPA': {
+                'consumer_rights': ['Know', 'Delete', 'Opt-out of sale', 'Non-discrimination'],
+                'revenue_threshold': '$25M annually',
+                'data_volume_threshold': '50,000+ consumers annually',
+                'territorial_scope': 'California residents'
+            },
+            'Privacy_Act_Australia': {
+                'privacy_principles': 13,
+                'breach_notification': 'Within 72 hours if likely harm',
+                'cross_border_restrictions': 'Yes, with accountability',
+                'territorial_scope': 'Australian individuals'
+            }
+        }
     
-    | Region | Framework | Key Requirements | Fines |
-    |--------|-----------|------------------|-------|
-    | **European Union** | GDPR | Explicit consent, data minimization, right to deletion | Up to 4% of global revenue |
-    | **California, USA** | CCPA/CPRA | Consumer data rights, transparency requirements | Up to $7,500 per violation |
-    | **Australia** | Privacy Act | Notifiable data breaches, privacy principles | Individual: $2.22M, Corporate: $11.1M |
-    | **Singapore** | PDPA | Data protection obligations, breach notification | Up to S$1M |
-    | **Brazil** | LGPD | Similar to GDPR, data subject rights | Up to 2% of revenue in Brazil |
-    
-    **Implementation Challenges:**
-    ```python
-    class GlobalComplianceManager:
-        def __init__(self):
-            self.frameworks = {
-                'GDPR': {
-                    'consent_requirements': 'Explicit, freely given, specific, informed',
-                    'data_subject_rights': ['Access', 'Rectification', 'Erasure', 'Portability'],
-                    'legal_basis_required': True,
-                    'dpo_required': 'For high-risk processing',
-                    'territorial_scope': 'Global if processing EU data'
-                },
-                'CCPA': {
-                    'consumer_rights': ['Know', 'Delete', 'Opt-out of sale', 'Non-discrimination'],
-                    'revenue_threshold': '$25M annually',
-                    'data_volume_threshold': '50,000+ consumers annually',
-                    'territorial_scope': 'California residents'
-                },
-                'Privacy_Act_Australia': {
-                    'privacy_principles': 13,
-                    'breach_notification': 'Within 72 hours if likely harm',
-                    'cross_border_restrictions': 'Yes, with accountability',
-                    'territorial_scope': 'Australian individuals'
-                }
+    def assess_compliance_requirements(self, business_profile):
+        """Determine which frameworks apply to a business"""
+        applicable_frameworks = []
+        
+        # Check territorial applicability
+        if 'EU' in business_profile.get('markets', []):
+            applicable_frameworks.append('GDPR')
+        
+        if 'California' in business_profile.get('markets', []):
+            revenue = business_profile.get('annual_revenue', 0)
+            if revenue >= 25000000:  # $25M threshold
+                applicable_frameworks.append('CCPA')
+        
+        if 'Australia' in business_profile.get('markets', []):
+            applicable_frameworks.append('Privacy_Act_Australia')
+        
+        # Generate compliance checklist
+        compliance_requirements = {}
+        for framework in applicable_frameworks:
+            framework_data = self.frameworks[framework]
+            compliance_requirements[framework] = {
+                'requirements': list(framework_data.keys()),
+                'implementation_complexity': 'High' if framework == 'GDPR' else 'Medium',
+                'estimated_cost': self.estimate_compliance_cost(framework, business_profile)
             }
         
-        def assess_compliance_requirements(self, business_profile):
-            """Determine which frameworks apply to a business"""
-            applicable_frameworks = []
-            
-            # Check territorial applicability
-            if 'EU' in business_profile.get('markets', []):
-                applicable_frameworks.append('GDPR')
-            
-            if 'California' in business_profile.get('markets', []):
-                revenue = business_profile.get('annual_revenue', 0)
-                if revenue >= 25000000:  # $25M threshold
-                    applicable_frameworks.append('CCPA')
-            
-            if 'Australia' in business_profile.get('markets', []):
-                applicable_frameworks.append('Privacy_Act_Australia')
-            
-            # Generate compliance checklist
-            compliance_requirements = {}
-            for framework in applicable_frameworks:
-                framework_data = self.frameworks[framework]
-                compliance_requirements[framework] = {
-                    'requirements': list(framework_data.keys()),
-                    'implementation_complexity': 'High' if framework == 'GDPR' else 'Medium',
-                    'estimated_cost': self.estimate_compliance_cost(framework, business_profile)
-                }
-            
-            return compliance_requirements
+        return compliance_requirements
+    
+    def estimate_compliance_cost(self, framework, business_profile):
+        """Estimate compliance implementation costs"""
+        base_costs = {
+            'GDPR': 250000,      # High due to comprehensive requirements
+            'CCPA': 150000,      # Medium complexity
+            'Privacy_Act_Australia': 100000  # Simpler requirements
+        }
         
-        def estimate_compliance_cost(self, framework, business_profile):
-            """Estimate compliance implementation costs"""
-            base_costs = {
-                'GDPR': 250000,      # High due to comprehensive requirements
-                'CCPA': 150000,      # Medium complexity
-                'Privacy_Act_Australia': 100000  # Simpler requirements
-            }
-            
-            company_size = business_profile.get('employee_count', 100)
-            size_multiplier = min(company_size / 100, 5.0)  # Cap at 5x for large companies
-            
-            return base_costs.get(framework, 100000) * size_multiplier
-    
-    # Example compliance assessment
-    compliance_manager = GlobalComplianceManager()
-    
-    company_profile = {
-        'markets': ['EU', 'California', 'Australia'],
-        'annual_revenue': 50000000,  # $50M
-        'employee_count': 200,
-        'data_processing': 'Customer analytics, marketing automation'
-    }
-    
-    requirements = compliance_manager.assess_compliance_requirements(company_profile)
-    
-    print("Compliance Requirements Analysis:")
-    for framework, details in requirements.items():
-        print(f"{framework}: ${details['estimated_cost']:,.0f} implementation cost")
-    ```
+        company_size = business_profile.get('employee_count', 100)
+        size_multiplier = min(company_size / 100, 5.0)  # Cap at 5x for large companies
+        
+        return base_costs.get(framework, 100000) * size_multiplier
+
+# Example compliance assessment
+compliance_manager = GlobalComplianceManager()
+
+company_profile = {
+    'markets': ['EU', 'California', 'Australia'],
+    'annual_revenue': 50000000,  # $50M
+    'employee_count': 200,
+    'data_processing': 'Customer analytics, marketing automation'
+}
+
+requirements = compliance_manager.assess_compliance_requirements(company_profile)
+
+print("Compliance Requirements Analysis:")
+for framework, details in requirements.items():
+    print(f"{framework}: ${details['estimated_cost']:,.0f} implementation cost")
+```
+///
 
 #### Ethical Decision-Making Framework
 
@@ -3096,17 +3232,17 @@ for tech in technologies:
 
 **Legal and Compliance Implications:**
 
-!!! warning "Legal Considerations"
-    **Copyright and Intellectual Property:**
-    - Open source security libraries may have licensing restrictions
-    - Security implementations may be subject to software patents
-    - Data protection algorithms may have intellectual property constraints
-    
-    **Regulatory Compliance:**
-    - GDPR (General Data Protection Regulation) - EU privacy law
-    - CCPA (California Consumer Privacy Act) - US state privacy law
-    - SOX (Sarbanes-Oxley) - Financial reporting requirements
-    - HIPAA (Health Insurance Portability and Accountability Act) - Healthcare data protection
+**Copyright and Intellectual Property:**
+- Open source security libraries may have licensing restrictions
+- Security implementations may be subject to software patents
+- Data protection algorithms may have intellectual property constraints
+
+**Regulatory Compliance:**
+- GDPR (General Data Protection Regulation) - EU privacy law
+- CCPA (California Consumer Privacy Act) - US state privacy law
+- SOX (Sarbanes-Oxley) - Financial reporting requirements
+- HIPAA (Health Insurance Portability and Accountability Act) - Healthcare data protection
+
 
 **Key Legal Requirements for Secure Development:**
 
@@ -3132,7 +3268,9 @@ By completing this chapter on Secure Software Architecture, students should be a
 
 ### Reflection Questions
 
-!!! question "Critical Thinking"
+/// details | Critical Thinking
+    type: question
+
     **1. Design Challenge:** You're developing a student information system for your school. How would you implement privacy-by-design principles while still allowing teachers to access necessary academic information?
     
     **2. Risk Assessment:** A startup wants to launch quickly with basic security, then "add security later." What arguments would you present for implementing security from the beginning?
@@ -3140,6 +3278,8 @@ By completing this chapter on Secure Software Architecture, students should be a
     **3. Ethical Dilemma:** Your company's analytics system could prevent cyber attacks by monitoring all employee communications. How do you balance security benefits with privacy concerns?
     
     **4. Future Impact:** As AI becomes more prevalent in software development, how might this change the security landscape? What new challenges and opportunities do you foresee?
+
+///
 
 ### Practical Exercises
 

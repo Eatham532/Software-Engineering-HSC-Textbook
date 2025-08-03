@@ -1,14 +1,18 @@
 # Programming Fundamentals
 
-!!! example "Ever Wonder How Your Favorite Apps Work? 🤔"
-    **Every app you love started with the fundamentals you're about to learn:**
+/// details | Ever Wonder How Your Favorite Apps Work? 🤔
+    type: example
+
+**Every app you love started with the fundamentals you're about to learn:**
+
+- 📱 **TikTok's** infinite scroll? Built using loops and data structures
+- 🎮 **Fortnite's** matchmaking? Uses algorithms to pair players fairly  
+- 🎵 **Spotify's** recommendations? Powered by pattern recognition and data analysis
+- 💬 **Discord's** real-time chat? Uses network programming and databases
+
+///
     
-    - 📱 **TikTok's** infinite scroll? Built using loops and data structures
-    - 🎮 **Fortnite's** matchmaking? Uses algorithms to pair players fairly  
-    - 🎵 **Spotify's** recommendations? Powered by pattern recognition and data analysis
-    - 💬 **Discord's** real-time chat? Uses network programming and databases
-    
-    By the end of this chapter, you'll understand the building blocks behind every piece of software you use!
+By the end of this chapter, you'll understand the building blocks behind every piece of software you use!
 
 ## Software Development
 
@@ -16,15 +20,19 @@
 
 Computational thinking and algorithmic design are the foundation of effective problem-solving in programming. By breaking down complex problems into logical steps, programmers can create solutions that are efficient, reliable, and easy to maintain. Computational thinking involves analyzing problems, recognizing patterns, abstracting details, and designing algorithms that guide the coding process.
 
-!!! tip "Real-World Success Story 🚀"
-    **Netflix's Billion-Dollar Algorithm:** Netflix uses computational thinking to solve the massive problem of "What should 230 million people watch next?" They break it down into smaller problems:
-    
-    1. **Decomposition:** Split into user preferences, viewing history, and content analysis
-    2. **Pattern Recognition:** Find similarities between users and content
-    3. **Abstraction:** Focus on key factors (genre, actor, rating) while ignoring irrelevant details
-    4. **Algorithms:** Create step-by-step processes to generate recommendations
-    
-    This systematic approach drives 80% of what people watch on Netflix!
+/// details | Real-World Success Story 🚀
+    type: tip
+
+**Netflix's Billion-Dollar Algorithm:** Netflix uses computational thinking to solve the massive problem of "What should 230 million people watch next?" They break it down into smaller problems:
+
+1. **Decomposition:** Split into user preferences, viewing history, and content analysis
+2. **Pattern Recognition:** Find similarities between users and content
+3. **Abstraction:** Focus on key factors (genre, actor, rating) while ignoring irrelevant details
+4. **Algorithms:** Create step-by-step processes to generate recommendations
+
+This systematic approach drives 80% of what people watch on Netflix!
+
+///
 
 ### Fundamental Software Development Steps
 
@@ -72,8 +80,12 @@ Let's follow the development of "StudyBuddy," an app that helps students organiz
 - Work offline (for students with limited data)
 - Sync across phone and laptop
 
-!!! example "Pro Tip 💡"
-    **Instagram's Early Requirements (2010):** Originally just "share square photos with filters." The simple, clear requirement led to focused development and massive success!
+/// details | Pro Tip 💡
+    type: example
+
+**Instagram's Early Requirements (2010):** Originally just "share square photos with filters." The simple, clear requirement led to focused development and massive success!
+
+///
 
 #### 2. Determining Specifications 📐
 **Turn requirements into measurable, technical details**
@@ -359,12 +371,15 @@ Sketch or describe:
 
 Ever wondered how thousands of developers work together on massive projects like **Minecraft mods**, **Discord bots**, or **TikTok's algorithm**? The secret is collaboration tools that let programmers share code, review each other's work, and build amazing things together.
 
-!!! example "Mind-Blowing Collaboration Facts 🤯"
+/// details | Mind-Blowing Collaboration Facts 🤯
+    type: example
 
-    - **Linux:** Over 15,000 developers from 1,400+ companies contribute to the Linux kernel
-    - **VS Code:** Microsoft's code editor has 19,000+ contributors from around the world
-    - **React:** Facebook's web framework has contributions from Google, Netflix, and thousands of individual developers
-    - **Minecraft Forge:** The modding platform has 500+ contributors creating tools for millions of players
+- **Linux:** Over 15,000 developers from 1,400+ companies contribute to the Linux kernel
+- **VS Code:** Microsoft's code editor has 19,000+ contributors from around the world
+- **React:** Facebook's web framework has contributions from Google, Netflix, and thousands of individual developers
+- **Minecraft Forge:** The modding platform has 500+ contributors creating tools for millions of players
+
+///
 
 ### The Collaboration Ecosystem
 
@@ -559,13 +574,17 @@ sequenceDiagram
     GitHub->>GitHub: Merge to main branch
 ```
 
-!!! example "Real-World Case Study: Open Source Success"
-    **Linux Operating System:** Started by Linus Torvalds in 1991, Linux now powers everything from smartphones (Android) to supercomputers. The collaborative development model using Git (also created by Torvalds) allows thousands of developers worldwide to contribute. Key success factors:
-    
-    - Clear contribution guidelines
-    - Rigorous code review process
-    - Modular architecture allowing parallel development
-    - Strong project leadership and vision
+/// details | Real-World Case Study: Open Source Success
+    type: example
+
+**Linux Operating System:** Started by Linus Torvalds in 1991, Linux now powers everything from smartphones (Android) to supercomputers. The collaborative development model using Git (also created by Torvalds) allows thousands of developers worldwide to contribute. Key success factors:
+
+- Clear contribution guidelines
+- Rigorous code review process
+- Modular architecture allowing parallel development
+- Strong project leadership and vision
+
+///
 
 ### Key Learning Outcomes
 
@@ -574,25 +593,35 @@ sequenceDiagram
 - Apply a structured approach to planning and building software projects
 - Evaluate the prevalence and benefits of online code collaboration tools
 - Understand how collaborative development improves software quality
+/// details | Knowledge Check
+    type: question
 
-!!! question "Knowledge Check"
-    **Question 1:** Why is it important to define clear requirements before starting development?
-    
-    **Question 2:** How do collaboration tools like GitHub improve the software development process?
-    
-    **Question 3:** What might happen if the testing phase is skipped or rushed?
-    
-    ??? success "Answers"
-        **Answer 1:** Clear requirements prevent scope creep, ensure all stakeholders have aligned expectations, reduce development time, and minimize costly changes later. Without clear requirements, projects often fail or exceed budgets.
-        
-        **Answer 2:** GitHub enables version control, facilitates code review, tracks issues, enables parallel development, and provides documentation tools. This leads to higher code quality, better collaboration, and more maintainable software.
-        
-        **Answer 3:** Skipping testing can lead to bugs reaching users, security vulnerabilities, poor user experience, higher maintenance costs, and potential system failures. Testing ensures reliability and user trust.
-    - Installation is the process of deploying the software to its intended environment, such as a user’s device or a web server. This step ensures users can access and use the software.
-    - *Example: Installing a new version of a school management system on all classroom computers.*
-8. **Maintenance**
-    - Maintenance involves updating, improving, and fixing the software after it has been released. This ensures the software remains secure, efficient, and relevant over time.
-    - *Example: Releasing updates for a fitness tracking app to add new features and fix bugs reported by users.*
+### Questions
+
+1. **Why is it important to define clear requirements before starting development?**
+2. **How do collaboration tools like GitHub improve the software development process?**
+3. **What might happen if the testing phase is skipped or rushed?**
+
+/// details | Sample Answers
+    type: success
+
+1. **Defining clear requirements prevents scope creep, aligns stakeholder expectations, reduces development time, and minimizes costly changes. Without clear requirements, projects may fail or exceed budgets.**
+2. **GitHub provides version control, code review, issue tracking, parallel development, and documentation tools. These features improve code quality, collaboration, and maintainability.**
+3. **Skipping or rushing testing can result in bugs reaching users, security vulnerabilities, poor user experience, higher maintenance costs, and system failures. Testing ensures reliability and user trust.**
+///
+///
+
+---
+
+### SDLC Steps: Installation & Maintenance
+
+**7. Installation**
+- Installation is deploying the software to its intended environment (user device, web server, etc.), making it accessible to users.
+- *Example: Installing a new version of a school management system on all classroom computers.*
+
+**8. Maintenance**
+- Maintenance means updating, improving, and fixing the software after release to keep it secure, efficient, and relevant.
+- *Example: Releasing updates for a fitness tracking app to add new features and fix bugs reported by users.*
 
 ### Key Learning Outcomes
 

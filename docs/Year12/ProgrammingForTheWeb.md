@@ -22,13 +22,9 @@ Just like how a letter needs an address and stamp, data packets need headers and
 
 **Real-World Packet Analysis: What Happens When You Visit GitHub**
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Live Packet Journey Visualization</span>
-<button class="expand-btn" onclick="toggleDiagram('packet-journey')">🚀 Expand Full Journey</button>
-</div>
-<div id="packet-journey" class="diagram expandable">
-
+/// details | 🚀 Web Request Analyzer - Real-time Packet Journey
+    type: example
+    open: false
 ```python
 import socket
 import struct
@@ -251,9 +247,10 @@ for header, value in packet['http_data']['headers'].items():
 # Demonstrate reliability
 analyzer.simulate_packet_loss_recovery()
 ```
+///
 
-**🎮 Interactive Packet Inspector Tool**
-
+/// details | **🎮 Interactive Packet Inspector Tool**
+    type: example
 ```javascript
 // Real-time packet monitoring in browser dev tools
 class PacketInspector {
@@ -343,15 +340,17 @@ setTimeout(() => {
     inspector.analyzeTraffic();
 }, 10000);
 ```
-
-</div>
-</div>
+///
 
 #### **DNS Resolution: The Internet's Phone Book 📞**
 
 Every time you type a URL, your device embarks on a DNS treasure hunt to find the actual IP address. This process is so fast you barely notice it, but it involves multiple servers working together!
 
 **Real DNS Lookup Simulation:**
+
+/// details | 🔍 DNS Explorer - Interactive Resolution System
+    type: example
+    open: false
 
 ```python
 import dns.resolver
@@ -494,7 +493,13 @@ print("3. Consider DNS prefetching for known domains")
 print("4. Monitor DNS resolution times in production")
 ```
 
+///
+
 **DNS Security Deep Dive:**
+
+/// details | 🔒 DNS Security Analyzer - Attack Detection & Prevention
+    type: example
+    open: false
 
 ```python
 class DNSSecurityAnalyzer:
@@ -603,12 +608,11 @@ for domain in ['google.com', 'github.com', 'cloudflare.com']:
 security_analyzer.demonstrate_dns_attacks()
 ```
 
+///
+
 
 **DNS Lookup Sequence Diagram:**
 
-<div class="diagram-container">
-<button class="diagram-expand-btn">🔍 View Larger</button>
-<div class="diagram-content">
 ```mermaid
 sequenceDiagram
     participant User
@@ -626,8 +630,6 @@ sequenceDiagram
     LocalDNS-->>Browser: Return IP
     Browser-->>User: Load website
 ```
-</div>
-</div>
 
 ### Web Protocols & Ports: The Universal Language of the Internet 🌐🚪
 
@@ -635,12 +637,6 @@ Think of protocols as universal languages that allow different computers to comm
 
 #### **Complete Protocol Reference with Real-World Examples**
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Interactive Protocol Explorer</span>
-<button class="expand-btn" onclick="toggleDiagram('protocol-explorer')">🔧 Expand Interactive Tools</button>
-</div>
-<div id="protocol-explorer" class="diagram expandable">
 
 | Protocol   | Purpose                        | Default Port | Security Level | Real-World Example |
 |------------|-------------------------------|--------------|----------------|-------------------|
@@ -660,6 +656,9 @@ Think of protocols as universal languages that allow different computers to comm
 | **Telnet** | Remote terminal access         | 23           | ⚠️ Unencrypted | Legacy (DON'T USE!) |
 
 **🛠️ Interactive Protocol Testing Tools:**
+
+/// details | 🌐 Protocol Tester - Multi-Protocol Connection Tools
+    type: example
 
 ```python
 import socket
@@ -937,8 +936,13 @@ open_ports = tester.port_scan_demo("httpbin.org", common_ports)
 
 print(f"\nOpen ports found: {open_ports}")
 ```
+///
 
 **🔐 Protocol Security Analysis:**
+
+/// details | 🔒 Protocol Security Analyzer - Security Assessment Tools
+    type: example
+    open: false
 
 ```python
 class ProtocolSecurityAnalyzer:
@@ -1057,41 +1061,45 @@ for protocol in protocols_to_analyze:
 print("="*60)
 analyzer.protocol_comparison(protocols_to_analyze)
 ```
-
-</div>
-</div>
+///
 
 #### **Protocol Selection Guide for Different Use Cases**
 
 **🌐 Web Development:**
+
 - **Development:** HTTP (local only)
 - **Production:** HTTPS (always!)
 - **APIs:** HTTPS with proper authentication
 - **Real-time features:** WebSocket over WSS
 
 **📁 File Transfer:**
+
 - **Legacy systems:** FTP (if absolutely necessary)
 - **Secure transfer:** SFTP or SCP
 - **Web uploads:** HTTPS with multipart forms
 - **Large files:** Consider resumable upload protocols
 
 **📧 Email Systems:**
+
 - **Sending:** SMTP with STARTTLS (port 587)
 - **Receiving:** IMAP with SSL (port 993) 
 - **Mobile apps:** IMAP with OAuth2
 - **Avoid:** POP3 (unless specific requirements)
 
 **🔧 Remote Administration:**
+
 - **Unix/Linux:** SSH (port 22)
 - **Windows:** RDP with NLA (port 3389)
 - **Never use:** Telnet, unencrypted protocols
 - **VPN:** Always when accessing over internet
 
 **🏠 IoT and Embedded:**
+
 - **Lightweight messaging:** MQTT over TLS
 - **Web interfaces:** HTTPS even on local network
 - **Device updates:** HTTPS with certificate pinning
 - **Sensor data:** Consider CoAP for resource-constrained devices
+
 
 ### Securing Web Traffic: Your Digital Fortress 🔐🛡️
 
@@ -1101,14 +1109,11 @@ In a world where cyber attacks happen every 39 seconds, securing web traffic isn
 
 SSL (Secure Sockets Layer) and its successor TLS (Transport Layer Security) are like having a team of bodyguards for your data. They create an encrypted tunnel between your browser and the server, ensuring that even if someone intercepts your data, they can't read it.
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Complete SSL/TLS Implementation Guide</span>
-<button class="expand-btn" onclick="toggleDiagram('ssl-implementation')">🔒 Expand Security Tools</button>
-</div>
-<div id="ssl-implementation" class="diagram expandable">
-
 **Real SSL/TLS Handshake Demonstration:**
+
+/// details | 🔐 SSL/TLS Handshake Analyzer - Security Protocol Deep Dive
+    type: example
+    open: false
 
 ```python
 import ssl
@@ -1374,7 +1379,13 @@ analyzer.demonstrate_encryption_decryption()
 analyzer.web_security_best_practices()
 ```
 
+///
+
 **Authentication & Authorization Deep Dive:**
+
+/// details | 🔑 Web Authentication System - Complete Identity Management
+    type: example
+    open: false
 
 ```python
 import hashlib
@@ -1641,14 +1652,17 @@ print("✅ Role-based authorization")
 print("✅ Input validation and sanitization")
 ```
 
-</div>
-</div>
+///
 
 #### **Digital Signatures & Hash Functions: Ensuring Data Integrity**
 
 Digital signatures are like wax seals on medieval letters—they prove authenticity and detect tampering.
 
 **Hash Functions in Action:**
+
+/// details | 🔍 Data Integrity Demo - Hash Functions & Digital Signatures
+    type: example
+    open: false
 
 ```python
 import hashlib
@@ -1746,31 +1760,39 @@ integrity_demo.demonstrate_integrity_check(
 integrity_demo.hmac_authentication("API request: GET /user/profile")
 ```
 
+///
+
 #### **Common Web Security Vulnerabilities and Prevention**
 
 **The OWASP Top 10 (2021) with Prevention Strategies:**
 
-1. **🔓 Broken Access Control**
-   - **Risk:** Users can access unauthorized data/functions
-   - **Prevention:** Implement proper authorization checks, deny by default
+**OWASP Top 10 (2021) with Prevention Strategies:**
 
-2. **💉 Cryptographic Failures** 
-   - **Risk:** Sensitive data exposed due to weak encryption
-   - **Prevention:** Use strong encryption, proper key management
+- **🔓 Broken Access Control**  
+    *Risk:* Users can access unauthorized data/functions  
+    *Prevention:* Implement proper authorization checks, deny by default
 
-3. **🦠 Injection Attacks**
-   - **Risk:** Malicious code executed via user input
-   - **Prevention:** Input validation, parameterized queries, sanitization
+- **💉 Cryptographic Failures**  
+    *Risk:* Sensitive data exposed due to weak encryption  
+    *Prevention:* Use strong encryption, proper key management
 
-4. **🏗️ Insecure Design**
-   - **Risk:** Fundamental security flaws in application architecture
-   - **Prevention:** Security by design, threat modeling, secure coding practices
+- **🦠 Injection Attacks**  
+    *Risk:* Malicious code executed via user input  
+    *Prevention:* Input validation, parameterized queries, sanitization
 
-5. **⚙️ Security Misconfiguration**
-   - **Risk:** Default/weak configurations expose vulnerabilities  
-   - **Prevention:** Security hardening, regular updates, configuration reviews
+- **🏗️ Insecure Design**  
+    *Risk:* Fundamental security flaws in application architecture  
+    *Prevention:* Security by design, threat modeling, secure coding practices
+
+- **⚙️ Security Misconfiguration**  
+    *Risk:* Default/weak configurations expose vulnerabilities  
+    *Prevention:* Security hardening, regular updates, configuration reviews
 
 **Practical Security Implementation:**
+
+/// details | 🛡️ Web Security Guard - Client-side Security Implementation
+    type: example
+    open: false
 
 ```javascript
 // Client-side security best practices
@@ -1829,24 +1851,24 @@ console.log("Original:", userInput);
 console.log("Sanitized:", sanitized);
 ```
 
+///
+
 ### Big Data & Web Architecture: Building Systems That Scale 📊🏗️
 
 Modern web applications handle mind-boggling amounts of data—YouTube processes over 500 hours of video uploads every minute, Google handles 8.5 billion searches daily, and Netflix streams petabytes of content. Understanding how to architect systems that can handle this scale is crucial for any serious web developer.
 
 #### **The Data Deluge: Understanding Modern Scale**
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Scalable Web Architecture Implementation</span>
-<button class="expand-btn" onclick="toggleDiagram('scalable-architecture')">🚀 Expand Architecture Guide</button>
-</div>
-<div id="scalable-architecture" class="diagram expandable">
-
 **Real-World Scale Examples:**
+
 - **Facebook:** 2.9 billion monthly active users, 350 million photos per day
 - **Twitter:** 500 million tweets per day, 1.5 billion search queries daily  
 - **Amazon:** 300 million active customers, 13 billion searches per month
 - **Netflix:** 230 million subscribers, 1 billion hours watched weekly
+
+/// details | 🏗️ Scalable Web Architecture - Distributed Systems Design
+    type: example
+    open: false
 
 ```python
 import time
@@ -2233,8 +2255,11 @@ print(f"   Hit rate: {cache_server.get_hit_rate():.1f}%")
 print(f"   Hits: {cache_server.hit_count}")
 print(f"   Misses: {cache_server.miss_count}")
 ```
+///
 
-**Content Delivery Network (CDN) Implementation:**
+/// details | Content Delivery Network (CDN) Implementation
+    type: example
+    open: false
 
 ```python
 import math
@@ -2273,7 +2298,7 @@ class GlobalCDN:
                 nearest_edge = edge_name
         
         return nearest_edge, min_distance
-    
+
     def deliver_content(self, user_lat, user_lon, content_id):
         """Deliver content from the nearest edge location"""
         
@@ -2354,7 +2379,13 @@ cdn = GlobalCDN()
 cdn.analyze_global_performance()
 ```
 
+///
+
 **Big Data Processing Pipeline:**
+
+/// details | 📊 Big Data Processor - Real-time Analytics Pipeline
+    type: example
+    open: false
 
 ```python
 import json
@@ -2514,15 +2545,14 @@ if final_dashboard:
     print(f"Conversion rate: {final_dashboard['conversion_rate']:.2f}%")
     print(f"Total revenue: ${final_dashboard['revenue_last_hour']:,.2f}")
 ```
-
-</div>
-</div>
-
+///
 #### **Data Mining & Metadata: Extracting Intelligence from Chaos**
 
 Modern web applications generate enormous amounts of metadata—information about information. Understanding how to mine this data for insights is crucial for business intelligence, user experience optimization, and predictive analytics.
 
-**Practical Data Mining Example:**
+/// details | Practical Data Mining Example
+    type: example
+    open: false
 
 ```python
 import pandas as pd
@@ -2732,6 +2762,8 @@ print(f"   Peak traffic hour: {predictions['peak_hour'][0]}:00")
 print(f"   Traffic trend: {'+' if predictions['trend'] > 0 else ''}{predictions['trend']:.1f} requests/day")
 ```
 
+///
+
 #### **Streaming Services: Real-Time Data at Global Scale**
 
 Modern streaming services like Netflix, YouTube, and Spotify handle millions of concurrent users streaming petabytes of content. The architecture challenges are immense:
@@ -2781,14 +2813,9 @@ Web development has evolved dramatically from static HTML pages to dynamic, inte
 - **Web 3.0 (2010s):** Mobile-first, real-time, cloud-native applications
 - **Web 4.0 (2020s):** AI-powered, voice interfaces, immersive experiences
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Complete Web Application Development Guide</span>
-<button class="expand-btn" onclick="toggleDiagram('web-dev-guide')">🚀 Expand Development Tools</button>
-</div>
-<div id="web-dev-guide" class="diagram expandable">
-
-**Real-World Web Application Architecture:**
+/// details | Real-World Web Application Architecture
+    type: example
+    open: false
 
 ```python
 import os
@@ -3373,8 +3400,11 @@ if __name__ == '__main__':
     print("   • Input validation & sanitization")
     print("\n💡 This demonstrates enterprise-grade web application architecture!")
 ```
+///
 
-**Frontend JavaScript Integration:**
+/// details | Frontend JavaScript Integration
+    type: example
+    open: false
 
 ```javascript
 // Modern frontend JavaScript for the web application
@@ -3765,24 +3795,19 @@ const pwaManager = new PWAManager();
 console.log('🌐 Modern Web Application Client Loaded');
 console.log('Features: Authentication, PWA, Offline Support, Real-time Updates');
 ```
-
-</div>
-</div>
+///
 
 ### Standards & Governance: The Guardians of the Web 🏛️⚖️
 
 The web wouldn't exist without standards—imagine trying to browse the internet if every browser spoke a different language! Standards organizations are the unsung heroes that ensure your website works whether someone visits it from Chrome on a Windows laptop or Safari on an iPhone.
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Web Standards Ecosystem & Governance Tools</span>
-<button class="expand-btn" onclick="toggleDiagram('web-standards')">🏛️ Expand Standards Tools</button>
-</div>
-<div id="web-standards" class="diagram expandable">
-
 **🌐 W3C (World Wide Web Consortium): The Web's Supreme Court**
 
 The W3C is like the UN for the internet—they bring together companies like Google, Microsoft, Apple, and Mozilla to agree on how the web should work. Without them, we'd have chaos!
+
+/// details | Web Standards Checker
+    type: example
+    open: false
 
 ```python
 import requests
@@ -4166,6 +4191,7 @@ print("5. Implement security headers and use HTTPS")
 print("6. Add structured data for better search engine understanding")
 print("7. Test with real W3C validators and accessibility tools")
 ```
+///
 
 **🌍 Key Standards Organizations & Their Impact:**
 
@@ -4178,21 +4204,13 @@ print("7. Test with real W3C validators and accessibility tools")
 | **IEEE** | Networking standards | Wi-Fi, Ethernet | Wireless and wired connectivity |
 | **ISO** | International standards | ISO 27001, ISO 9001 | Security and quality management |
 
-</div>
-</div>
-
 ### System Architecture: Building the Digital Backbone 🏗️⚡
 
 Modern web applications are like digital cities—they need solid infrastructure, efficient transportation systems, and reliable utilities to support millions of users. Understanding system architecture is crucial because it determines whether your app can handle 10 users or 10 million users.
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Complete System Architecture & DevTools</span>
-<button class="expand-btn" onclick="toggleDiagram('system-architecture')">🏗️ Expand Architecture Tools</button>
-</div>
-<div id="system-architecture" class="diagram expandable">
-
-**🎯 Multi-Tier Architecture: The Foundation of Scalable Systems**
+/// details | 🎯 Multi-Tier Architecture example
+    type: example
+    open: false
 
 ```python
 import sqlite3
@@ -4806,10 +4824,15 @@ def demonstrate_system_architecture():
 # Run the demonstration
 demonstrate_system_architecture()
 ```
+///
 
 **🔧 Browser Developer Tools: Your Web Development X-Ray Vision**
 
 Modern browsers come with incredibly powerful developer tools that are essential for debugging, optimizing, and understanding web applications:
+
+/// details | Browser DevTools Example
+    type: example
+    open: false
 
 ```javascript
 // Browser DevTools JavaScript Helper Functions
@@ -4932,22 +4955,15 @@ class BrowserDevToolsHelper {
 // Initialize DevTools helper
 const devTools = new BrowserDevToolsHelper();
 ```
-
-</div>
-</div>
+///
 
 ### Styling & Consistency: The Art and Science of Beautiful Web Design 🎨✨
 
 Consistency in web design isn't just about making things look pretty—it's about creating a language that users can understand instantly, reducing cognitive load, and building trust through professional presentation. Great styling systems are like a well-orchestrated symphony where every element harmonizes perfectly.
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Advanced CSS Systems & Styling Tools</span>
-<button class="expand-btn" onclick="toggleDiagram('styling-systems')">🎭 Expand Styling Tools</button>
-</div>
-<div id="styling-systems" class="diagram expandable">
-
-**🎨 CSS Architecture: From Chaos to Harmony**
+/// details | Modern CSS Architecture Example
+    type: example
+    open: false
 
 ```css
 /* Modern CSS Architecture Example - Design System Approach */
@@ -5495,8 +5511,11 @@ p, h1, h2, h3, h4, h5, h6 {
     }
 }
 ```
+///
 
-**🔧 CSS Preprocessing with Sass/SCSS:**
+/// details | **🖌️ SCSS implementation example**
+    type: example
+    open: false
 
 ```scss
 // Advanced SCSS Features for Maintainable CSS
@@ -5627,9 +5646,7 @@ $spacing-scale: (
     }
 }
 ```
-
-</div>
-</div>
+///
 
 **🛠️ CSS Frameworks Comparison:**
 
@@ -5645,14 +5662,9 @@ $spacing-scale: (
 
 Version control isn't just about backing up your code—it's about collaboration, experimentation, and maintaining a professional development workflow. Think of it as time travel for your codebase, allowing you to explore different possibilities while always having a safe path back.
 
-<div class="diagram-container">
-<div class="diagram-header">
-<span class="diagram-title">Advanced Git Workflows & Library Management</span>
-<button class="expand-btn" onclick="toggleDiagram('version-control')">🔀 Expand Git Tools</button>
-</div>
-<div id="version-control" class="diagram expandable">
-
-**🌳 Professional Git Workflows:**
+/// details | Setting up a git workflow
+    type: example
+    open: false
 
 ```bash
 # === SETTING UP A PROFESSIONAL GIT WORKFLOW ===
@@ -5795,11 +5807,14 @@ git commit -m "perf: improve page load speed"
 git commit -m "ci: add automated testing pipeline"
 git commit -m "build: update webpack configuration"
 ```
+///
 
-**📦 Modern JavaScript Library Management:**
+
+/// details | **Modern javascript project configuration with package.json**
+    type: example
+    open: false
 
 ```json
-// package.json - Modern project configuration
 {
   "name": "modern-web-app",
   "version": "1.0.0",
@@ -5850,6 +5865,11 @@ git commit -m "build: update webpack configuration"
   }
 }
 ```
+///
+
+/// details | Modern ES6+ Module System
+    type: example
+    open: false
 
 ```javascript
 // Modern ES6+ Module System
@@ -5971,8 +5991,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     router.init();
 });
 ```
+///
 
-**🔄 Automated Workflow with GitHub Actions:**
+/// details | **GitHub Actions CI/CD Pipeline**
+    type: example
+    open: false
 
 ```yaml
 # .github/workflows/ci.yml
@@ -6040,53 +6063,2512 @@ jobs:
         echo "Deploying to production server..."
         # Add your deployment commands here
 ```
+///
 
-</div>
-</div>
+### Open-Source & CMS: Building on the Shoulders of Giants 🌟📚
 
-### Open-Source & CMS
+Open-source software is like having access to the world's largest library where not only can you read every book for free, but you can also contribute your own chapters and improve existing ones. Content Management Systems (CMS) are the productivity powerhouses that let you focus on content and business logic rather than rebuilding basic functionality from scratch.
 
-- **Open-Source Software:** Drives innovation, reduces costs, and fosters community support.
-- **Common Web CMS Platforms:**
-    - *WordPress:* Blogging, e-commerce, and custom sites.
-    - *Drupal:* Complex, scalable content management.
-    - *Joomla!:* Flexible, extensible web portals.
-    - *Use Cases:* Blogs, news sites, online stores, community forums.
+/// details | 🏗️ Content Management System Architecture & Implementation:
+    type: example
+    open: false
 
-### Performance & Load Management
+```javascript
+// Modern Headless CMS Implementation with Node.js
+class ModernCMS {
+    constructor() {
+        this.content = new Map();
+        this.users = new Map();
+        this.plugins = new Map();
+        this.themes = new Map();
+        
+        // Initialize with sample data
+        this.initializeSampleContent();
+        
+        console.log('🌟 Modern CMS Initialized');
+        console.log('Features: Headless API, Plugin System, Multi-tenancy');
+    }
+    
+    initializeSampleContent() {
+        // Sample content types
+        this.registerContentType('article', {
+            fields: {
+                title: { type: 'string', required: true },
+                content: { type: 'richtext', required: true },
+                author: { type: 'reference', required: true },
+                publishedAt: { type: 'datetime' },
+                status: { type: 'select', options: ['draft', 'published', 'archived'] },
+                tags: { type: 'array', itemType: 'string' },
+                featuredImage: { type: 'media' },
+                seoTitle: { type: 'string', maxLength: 60 },
+                seoDescription: { type: 'string', maxLength: 160 }
+            }
+        });
+        
+        this.registerContentType('page', {
+            fields: {
+                title: { type: 'string', required: true },
+                slug: { type: 'string', required: true, unique: true },
+                content: { type: 'richtext', required: true },
+                template: { type: 'select', options: ['default', 'landing', 'contact'] },
+                isPublished: { type: 'boolean', default: false },
+                parentPage: { type: 'reference', contentType: 'page' }
+            }
+        });
+        
+        this.registerContentType('product', {
+            fields: {
+                name: { type: 'string', required: true },
+                description: { type: 'richtext' },
+                price: { type: 'number', required: true },
+                currency: { type: 'string', default: 'USD' },
+                images: { type: 'array', itemType: 'media' },
+                category: { type: 'reference', contentType: 'category' },
+                stock: { type: 'number', default: 0 },
+                isActive: { type: 'boolean', default: true }
+            }
+        });
+        
+        // Sample content
+        this.createContent('article', {
+            id: 'art1',
+            title: 'Modern Web Development Trends',
+            content: '<p>The web development landscape is constantly evolving...</p>',
+            author: 'user1',
+            status: 'published',
+            tags: ['web-dev', 'trends', 'javascript'],
+            publishedAt: new Date().toISOString()
+        });
+        
+        this.createContent('page', {
+            id: 'home',
+            title: 'Welcome to Our Website',
+            slug: 'home',
+            content: '<h1>Welcome!</h1><p>This is our homepage content.</p>',
+            template: 'landing',
+            isPublished: true
+        });
+        
+        console.log('✅ Sample content initialized');
+    }
+    
+    registerContentType(typeName, schema) {
+        this.contentTypes = this.contentTypes || new Map();
+        this.contentTypes.set(typeName, {
+            name: typeName,
+            schema: schema,
+            createdAt: new Date().toISOString()
+        });
+        
+        console.log(`📝 Content type registered: ${typeName}`);
+    }
+    
+    createContent(contentType, data) {
+        // Validate against schema
+        const validation = this.validateContent(contentType, data);
+        if (!validation.isValid) {
+            throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
+        }
+        
+        const content = {
+            id: data.id || this.generateId(),
+            contentType: contentType,
+            ...data,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            version: 1
+        };
+        
+        this.content.set(content.id, content);
+        
+        // Trigger hooks
+        this.triggerHook('content.created', content);
+        
+        console.log(`📄 Content created: ${contentType}/${content.id}`);
+        return content;
+    }
+    
+    updateContent(id, updates) {
+        const existingContent = this.content.get(id);
+        if (!existingContent) {
+            throw new Error(`Content not found: ${id}`);
+        }
+        
+        // Validate updates
+        const validation = this.validateContent(existingContent.contentType, { ...existingContent, ...updates });
+        if (!validation.isValid) {
+            throw new Error(`Validation failed: ${validation.errors.join(', ')}`);
+        }
+        
+        const updatedContent = {
+            ...existingContent,
+            ...updates,
+            updatedAt: new Date().toISOString(),
+            version: existingContent.version + 1
+        };
+        
+        this.content.set(id, updatedContent);
+        
+        // Trigger hooks
+        this.triggerHook('content.updated', updatedContent);
+        
+        console.log(`✏️ Content updated: ${id}`);
+        return updatedContent;
+    }
+    
+    validateContent(contentType, data) {
+        const contentTypeSchema = this.contentTypes.get(contentType);
+        if (!contentTypeSchema) {
+            return { isValid: false, errors: [`Unknown content type: ${contentType}`] };
+        }
+        
+        const errors = [];
+        const schema = contentTypeSchema.schema;
+        
+        // Check required fields
+        for (const [fieldName, fieldConfig] of Object.entries(schema.fields)) {
+            if (fieldConfig.required && !data[fieldName]) {
+                errors.push(`Required field missing: ${fieldName}`);
+            }
+            
+            // Type validation
+            if (data[fieldName] !== undefined) {
+                const isValidType = this.validateFieldType(data[fieldName], fieldConfig);
+                if (!isValidType) {
+                    errors.push(`Invalid type for field ${fieldName}: expected ${fieldConfig.type}`);
+                }
+            }
+        }
+        
+        return {
+            isValid: errors.length === 0,
+            errors: errors
+        };
+    }
+    
+    validateFieldType(value, fieldConfig) {
+        switch (fieldConfig.type) {
+            case 'string':
+                return typeof value === 'string';
+            case 'number':
+                return typeof value === 'number';
+            case 'boolean':
+                return typeof value === 'boolean';
+            case 'array':
+                return Array.isArray(value);
+            case 'datetime':
+                return !isNaN(Date.parse(value));
+            case 'richtext':
+                return typeof value === 'string';
+            case 'reference':
+                return typeof value === 'string'; // Simplified - would check if reference exists
+            case 'media':
+                return typeof value === 'string'; // Simplified - would validate media URL/ID
+            case 'select':
+                return fieldConfig.options.includes(value);
+            default:
+                return true;
+        }
+    }
+    
+    getContent(id) {
+        return this.content.get(id);
+    }
+    
+    listContent(contentType, filters = {}) {
+        const allContent = Array.from(this.content.values());
+        let filtered = allContent.filter(item => item.contentType === contentType);
+        
+        // Apply filters
+        if (filters.status) {
+            filtered = filtered.filter(item => item.status === filters.status);
+        }
+        
+        if (filters.author) {
+            filtered = filtered.filter(item => item.author === filters.author);
+        }
+        
+        if (filters.published !== undefined) {
+            filtered = filtered.filter(item => item.isPublished === filters.published);
+        }
+        
+        // Sorting
+        if (filters.sortBy) {
+            filtered.sort((a, b) => {
+                const aVal = a[filters.sortBy];
+                const bVal = b[filters.sortBy];
+                
+                if (filters.sortOrder === 'desc') {
+                    return bVal > aVal ? 1 : -1;
+                }
+                return aVal > bVal ? 1 : -1;
+            });
+        }
+        
+        // Pagination
+        const page = filters.page || 1;
+        const limit = filters.limit || 10;
+        const startIndex = (page - 1) * limit;
+        const endIndex = startIndex + limit;
+        
+        return {
+            data: filtered.slice(startIndex, endIndex),
+            pagination: {
+                page: page,
+                limit: limit,
+                total: filtered.length,
+                totalPages: Math.ceil(filtered.length / limit)
+            }
+        };
+    }
+    
+    // Plugin system
+    installPlugin(pluginName, pluginCode) {
+        try {
+            // In a real implementation, this would be more secure
+            const plugin = eval(`(${pluginCode})`);
+            
+            this.plugins.set(pluginName, plugin);
+            
+            // Initialize plugin
+            if (plugin.init) {
+                plugin.init(this);
+            }
+            
+            console.log(`🔌 Plugin installed: ${pluginName}`);
+        } catch (error) {
+            console.error(`Failed to install plugin ${pluginName}:`, error);
+        }
+    }
+    
+    triggerHook(hookName, data) {
+        // Notify all plugins about the hook
+        for (const [name, plugin] of this.plugins) {
+            if (plugin.hooks && plugin.hooks[hookName]) {
+                try {
+                    plugin.hooks[hookName](data);
+                } catch (error) {
+                    console.error(`Plugin ${name} hook ${hookName} failed:`, error);
+                }
+            }
+        }
+    }
+    
+    // REST API endpoints
+    createAPIEndpoints() {
+        const api = {
+            // GET /api/content/:type
+            getContentList: (contentType, query = {}) => {
+                try {
+                    const result = this.listContent(contentType, query);
+                    return {
+                        success: true,
+                        data: result.data,
+                        pagination: result.pagination
+                    };
+                } catch (error) {
+                    return {
+                        success: false,
+                        error: error.message
+                    };
+                }
+            },
+            
+            // GET /api/content/:type/:id
+            getContentItem: (contentType, id) => {
+                try {
+                    const content = this.getContent(id);
+                    if (!content || content.contentType !== contentType) {
+                        return {
+                            success: false,
+                            error: 'Content not found'
+                        };
+                    }
+                    
+                    return {
+                        success: true,
+                        data: content
+                    };
+                } catch (error) {
+                    return {
+                        success: false,
+                        error: error.message
+                    };
+                }
+            },
+            
+            // POST /api/content/:type
+            createContentItem: (contentType, data) => {
+                try {
+                    const content = this.createContent(contentType, data);
+                    return {
+                        success: true,
+                        data: content
+                    };
+                } catch (error) {
+                    return {
+                        success: false,
+                        error: error.message
+                    };
+                }
+            },
+            
+            // PUT /api/content/:type/:id
+            updateContentItem: (contentType, id, data) => {
+                try {
+                    const content = this.updateContent(id, data);
+                    return {
+                        success: true,
+                        data: content
+                    };
+                } catch (error) {
+                    return {
+                        success: false,
+                        error: error.message
+                    };
+                }
+            },
+            
+            // DELETE /api/content/:type/:id
+            deleteContentItem: (contentType, id) => {
+                try {
+                    const deleted = this.content.delete(id);
+                    if (!deleted) {
+                        return {
+                            success: false,
+                            error: 'Content not found'
+                        };
+                    }
+                    
+                    this.triggerHook('content.deleted', { id, contentType });
+                    
+                    return {
+                        success: true,
+                        message: 'Content deleted successfully'
+                    };
+                } catch (error) {
+                    return {
+                        success: false,
+                        error: error.message
+                    };
+                }
+            }
+        };
+        
+        console.log('🌐 API endpoints created');
+        return api;
+    }
+    
+    generateId() {
+        return 'content_' + Math.random().toString(36).substr(2, 9);
+    }
+    
+    // Search functionality
+    searchContent(query, filters = {}) {
+        const allContent = Array.from(this.content.values());
+        
+        // Full-text search (simplified)
+        const searchResults = allContent.filter(item => {
+            const searchableText = `${item.title || ''} ${item.content || ''} ${(item.tags || []).join(' ')}`.toLowerCase();
+            return searchableText.includes(query.toLowerCase());
+        });
+        
+        // Apply additional filters
+        let filtered = searchResults;
+        
+        if (filters.contentType) {
+            filtered = filtered.filter(item => item.contentType === filters.contentType);
+        }
+        
+        if (filters.dateRange) {
+            const { start, end } = filters.dateRange;
+            filtered = filtered.filter(item => {
+                const itemDate = new Date(item.createdAt);
+                return itemDate >= new Date(start) && itemDate <= new Date(end);
+            });
+        }
+        
+        return {
+            query: query,
+            results: filtered,
+            total: filtered.length
+        };
+    }
+}
 
-- **Optimisation Techniques:**
-    - *Bundling:* Combines files to reduce requests.
-    - *Lazy Loading:* Loads resources as needed.
-    - *CDN Usage:* Delivers content from servers close to users.
-    - *Minification & Compression:* Reduces file size for faster loads.
+// Example CMS Plugin: SEO Analyzer
+const seoPlugin = `
+{
+    name: 'SEO Analyzer',
+    version: '1.0.0',
+    
+    init: function(cms) {
+        console.log('🔍 SEO Plugin initialized');
+        this.cms = cms;
+    },
+    
+    hooks: {
+        'content.created': function(content) {
+            if (content.contentType === 'article' || content.contentType === 'page') {
+                this.analyzeSEO(content);
+            }
+        },
+        
+        'content.updated': function(content) {
+            if (content.contentType === 'article' || content.contentType === 'page') {
+                this.analyzeSEO(content);
+            }
+        }
+    },
+    
+    analyzeSEO: function(content) {
+        const analysis = {
+            contentId: content.id,
+            score: 0,
+            issues: [],
+            suggestions: []
+        };
+        
+        // Title length check
+        if (!content.title || content.title.length < 30) {
+            analysis.issues.push('Title is too short (recommended: 30-60 characters)');
+        } else if (content.title.length > 60) {
+            analysis.issues.push('Title is too long (recommended: 30-60 characters)');
+        } else {
+            analysis.score += 20;
+        }
+        
+        // Meta description check
+        if (!content.seoDescription) {
+            analysis.issues.push('Missing meta description');
+        } else if (content.seoDescription.length < 120) {
+            analysis.issues.push('Meta description is too short (recommended: 120-160 characters)');
+        } else if (content.seoDescription.length > 160) {
+            analysis.issues.push('Meta description is too long (recommended: 120-160 characters)');
+        } else {
+            analysis.score += 20;
+        }
+        
+        // Content length check
+        if (content.content && content.content.length > 300) {
+            analysis.score += 20;
+        } else {
+            analysis.issues.push('Content is too short for good SEO (recommended: 300+ words)');
+        }
+        
+        // Heading structure check (simplified)
+        if (content.content && content.content.includes('<h1>')) {
+            analysis.score += 10;
+        } else {
+            analysis.suggestions.push('Add H1 heading to improve structure');
+        }
+        
+        // Images with alt text (simplified check)
+        if (content.content && content.content.includes('alt=')) {
+            analysis.score += 10;
+        } else if (content.content && content.content.includes('<img')) {
+            analysis.issues.push('Images missing alt text');
+        }
+        
+        // Keywords in title (simplified)
+        if (content.tags && content.tags.length > 0) {
+            const titleWords = content.title.toLowerCase().split(' ');
+            const hasKeywords = content.tags.some(tag => 
+                titleWords.some(word => word.includes(tag.toLowerCase()))
+            );
+            if (hasKeywords) {
+                analysis.score += 20;
+            } else {
+                analysis.suggestions.push('Include target keywords in title');
+            }
+        }
+        
+        console.log(\`📊 SEO Analysis for \${content.id}: Score \${analysis.score}/100\`);
+        if (analysis.issues.length > 0) {
+            console.log('⚠️ Issues:', analysis.issues);
+        }
+        if (analysis.suggestions.length > 0) {
+            console.log('💡 Suggestions:', analysis.suggestions);
+        }
+        
+        return analysis;
+    }
+}
+`;
 
-### Back-End Processes
+// WordPress-style hooks system
+class WordPressLikeHooks {
+    constructor() {
+        this.actions = new Map();
+        this.filters = new Map();
+    }
+    
+    addAction(hookName, callback, priority = 10) {
+        if (!this.actions.has(hookName)) {
+            this.actions.set(hookName, []);
+        }
+        
+        this.actions.get(hookName).push({ callback, priority });
+        
+        // Sort by priority
+        this.actions.get(hookName).sort((a, b) => a.priority - b.priority);
+    }
+    
+    doAction(hookName, ...args) {
+        if (this.actions.has(hookName)) {
+            this.actions.get(hookName).forEach(({ callback }) => {
+                callback(...args);
+            });
+        }
+    }
+    
+    addFilter(hookName, callback, priority = 10) {
+        if (!this.filters.has(hookName)) {
+            this.filters.set(hookName, []);
+        }
+        
+        this.filters.get(hookName).push({ callback, priority });
+        this.filters.get(hookName).sort((a, b) => a.priority - b.priority);
+    }
+    
+    applyFilters(hookName, value, ...args) {
+        if (this.filters.has(hookName)) {
+            return this.filters.get(hookName).reduce((acc, { callback }) => {
+                return callback(acc, ...args);
+            }, value);
+        }
+        return value;
+    }
+}
 
-- **Web Server Software:** Apache, Nginx, Node.js handle requests and serve content.
-- **Frameworks & Libraries:** Express (Node.js), Django (Python), Spring (Java) streamline development.
-- **Object Management & Databases:** ORM tools (e.g., SQLAlchemy, Sequelize) simplify data access.
+// Demonstration of the CMS system
+function demonstrateCMS() {
+    console.log('🚀 MODERN CMS DEMONSTRATION');
+    console.log('=' * 50);
+    
+    // Initialize CMS
+    const cms = new ModernCMS();
+    
+    // Install SEO plugin
+    cms.installPlugin('seo-analyzer', seoPlugin);
+    
+    // Create API endpoints
+    const api = cms.createAPIEndpoints();
+    
+    // Test API endpoints
+    console.log('\\n1️⃣ Testing Content Creation');
+    console.log('-' * 30);
+    
+    const newArticle = api.createContentItem('article', {
+        title: 'Advanced JavaScript Techniques',
+        content: '<h1>Advanced JavaScript</h1><p>Learn modern JavaScript patterns and best practices...</p>',
+        author: 'user2',
+        status: 'published',
+        tags: ['javascript', 'advanced', 'programming'],
+        seoTitle: 'Advanced JavaScript Techniques - Complete Guide',
+        seoDescription: 'Master advanced JavaScript techniques including closures, promises, async/await, and modern ES6+ features.'
+    });
+    
+    console.log('✅ Article created:', newArticle.success);
+    
+    // Test content listing
+    console.log('\\n2️⃣ Testing Content Listing');
+    console.log('-' * 30);
+    
+    const articles = api.getContentList('article', {
+        status: 'published',
+        sortBy: 'createdAt',
+        sortOrder: 'desc',
+        limit: 5
+    });
+    
+    console.log(\`📄 Found \${articles.data.length} published articles\`);
+    articles.data.forEach(article => {
+        console.log(\`   • \${article.title} (\${article.tags.join(', ')})\`);
+    });
+    
+    // Test search
+    console.log('\\n3️⃣ Testing Content Search');
+    console.log('-' * 30);
+    
+    const searchResults = cms.searchContent('javascript', {
+        contentType: 'article'
+    });
+    
+    console.log(\`🔍 Search for "javascript" found \${searchResults.total} results\`);
+    
+    // Test content update
+    console.log('\\n4️⃣ Testing Content Update');
+    console.log('-' * 30);
+    
+    if (newArticle.success) {
+        const updated = api.updateContentItem('article', newArticle.data.id, {
+            content: newArticle.data.content + '<p>Updated with additional information...</p>',
+            tags: [...newArticle.data.tags, 'updated']
+        });
+        
+        console.log('✏️ Article updated:', updated.success);
+    }
+    
+    console.log('\\n✅ CMS Demonstration Complete!');
+    console.log('\\n💡 CMS FEATURES DEMONSTRATED:');
+    console.log('1. Flexible content type system');
+    console.log('2. RESTful API endpoints');
+    console.log('3. Plugin architecture with hooks');
+    console.log('4. Content validation and versioning');
+    console.log('5. Search and filtering capabilities');
+    console.log('6. SEO analysis and optimization');
+    console.log('7. Headless architecture for modern frontends');
+}
+
+// Run the demonstration
+demonstrateCMS();
+```
+///
+
+**🌍 Open-Source License Comparison:**
+
+| License | Commercial Use | Modification | Distribution | Patent Grant | Attribution Required |
+|---------|---------------|--------------|--------------|--------------|---------------------|
+| **MIT** | ✅ Yes | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes |
+| **Apache 2.0** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
+| **GPL v3** | ✅ Yes | ✅ Yes | ✅ Yes (copyleft) | ✅ Yes | ✅ Yes |
+| **BSD 3-Clause** | ✅ Yes | ✅ Yes | ✅ Yes | ❌ No | ✅ Yes |
+| **Creative Commons** | Varies | Varies | Varies | ❌ No | ✅ Yes |
+
+**📊 Popular CMS Platform Analysis:**
+
+| Platform | Language | Market Share | Best For | Learning Curve |
+|----------|----------|-------------|----------|----------------|
+| **WordPress** | PHP | 43% | Blogs, small business sites | Easy |
+| **Shopify** | Ruby/Liquid | 10% | E-commerce | Easy |
+| **Drupal** | PHP | 4% | Enterprise, complex sites | Hard |
+| **Joomla** | PHP | 3% | Community sites | Medium |
+| **Ghost** | Node.js | 1% | Publishing, blogs | Easy |
+| **Strapi** | Node.js | Growing | Headless CMS | Medium |
+
+
+### Performance & Load Management: Speed is Everything ⚡🎯
+
+In the web world, every millisecond counts. Users expect pages to load in under 3 seconds, and search engines heavily favor fast websites. Performance optimization isn't just about making things faster—it's about creating better user experiences, improving search rankings, and reducing server costs.
+
+/// details | Web Performance Optimization Example
+    type: example
+    open: false
+
+```javascript
+// Advanced Performance Monitoring and Optimization System
+class WebPerformanceOptimizer {
+    constructor() {
+        this.metrics = new Map();
+        this.observers = new Map();
+        this.optimizations = new Map();
+        
+        // Initialize performance monitoring
+        this.initializeMonitoring();
+        
+        console.log('⚡ Web Performance Optimizer initialized');
+        console.log('Features: Real-time monitoring, Automatic optimization, Detailed analytics');
+    }
+    
+    initializeMonitoring() {
+        // Core Web Vitals monitoring
+        this.observeWebVitals();
+        
+        // Resource loading monitoring
+        this.observeResourceLoading();
+        
+        // User interaction monitoring
+        this.observeUserInteractions();
+        
+        // Network conditions monitoring
+        this.observeNetworkConditions();
+    }
+    
+    observeWebVitals() {
+        // Largest Contentful Paint (LCP)
+        const lcpObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                this.recordMetric('LCP', entry.startTime, {
+                    element: entry.element?.tagName,
+                    url: entry.url
+                });
+            }
+        });
+        
+        try {
+            lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+            this.observers.set('lcp', lcpObserver);
+        } catch (e) {
+            console.log('LCP observer not supported');
+        }
+        
+        // First Input Delay (FID)
+        const fidObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                this.recordMetric('FID', entry.processingStart - entry.startTime, {
+                    eventType: entry.name
+                });
+            }
+        });
+        
+        try {
+            fidObserver.observe({ type: 'first-input', buffered: true });
+            this.observers.set('fid', fidObserver);
+        } catch (e) {
+            console.log('FID observer not supported');
+        }
+        
+        // Cumulative Layout Shift (CLS)
+        let clsValue = 0;
+        const clsObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    clsValue += entry.value;
+                    this.recordMetric('CLS', clsValue);
+                }
+            }
+        });
+        
+        try {
+            clsObserver.observe({ type: 'layout-shift', buffered: true });
+            this.observers.set('cls', clsObserver);
+        } catch (e) {
+            console.log('CLS observer not supported');
+        }
+    }
+    
+    observeResourceLoading() {
+        // Monitor all resource loading
+        const resourceObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                this.analyzeResourcePerformance(entry);
+            }
+        });
+        
+        try {
+            resourceObserver.observe({ entryTypes: ['resource'] });
+            this.observers.set('resource', resourceObserver);
+        } catch (e) {
+            console.log('Resource observer not supported');
+        }
+        
+        // Monitor navigation timing
+        const navigationObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                this.analyzeNavigationPerformance(entry);
+            }
+        });
+        
+        try {
+            navigationObserver.observe({ entryTypes: ['navigation'] });
+            this.observers.set('navigation', navigationObserver);
+        } catch (e) {
+            console.log('Navigation observer not supported');
+        }
+    }
+    
+    analyzeResourcePerformance(entry) {
+        const resourceType = this.getResourceType(entry.name);
+        const loadTime = entry.responseEnd - entry.startTime;
+        
+        this.recordMetric(`resource_${resourceType}_load_time`, loadTime, {
+            url: entry.name,
+            size: entry.transferSize,
+            cached: entry.transferSize === 0 && entry.decodedBodySize > 0
+        });
+        
+        // Check for optimization opportunities
+        if (resourceType === 'image' && entry.transferSize > 500000) { // 500KB
+            this.suggestOptimization('large_image', {
+                url: entry.name,
+                size: entry.transferSize,
+                suggestion: 'Consider compressing or using WebP format'
+            });
+        }
+        
+        if (resourceType === 'script' && loadTime > 1000) { // 1 second
+            this.suggestOptimization('slow_script', {
+                url: entry.name,
+                loadTime: loadTime,
+                suggestion: 'Consider code splitting or async loading'
+            });
+        }
+    }
+    
+    analyzeNavigationPerformance(entry) {
+        const metrics = {
+            dns_lookup: entry.domainLookupEnd - entry.domainLookupStart,
+            tcp_connect: entry.connectEnd - entry.connectStart,
+            ssl_handshake: entry.connectEnd - entry.secureConnectionStart,
+            request_response: entry.responseEnd - entry.requestStart,
+            dom_parse: entry.domContentLoadedEventEnd - entry.responseEnd,
+            resource_load: entry.loadEventEnd - entry.domContentLoadedEventEnd,
+            total_load: entry.loadEventEnd - entry.navigationStart
+        };
+        
+        Object.entries(metrics).forEach(([key, value]) => {
+            if (value > 0) {
+                this.recordMetric(`navigation_${key}`, value);
+            }
+        });
+        
+        // Performance analysis
+        if (metrics.total_load > 3000) { // 3 seconds
+            this.suggestOptimization('slow_page_load', {
+                totalTime: metrics.total_load,
+                suggestion: 'Page load time exceeds 3 seconds. Consider optimization strategies.'
+            });
+        }
+    }
+    
+    observeUserInteractions() {
+        // Monitor long tasks that block the main thread
+        const longTaskObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                this.recordMetric('long_task', entry.duration, {
+                    attribution: entry.attribution
+                });
+                
+                if (entry.duration > 100) { // 100ms threshold
+                    this.suggestOptimization('long_task', {
+                        duration: entry.duration,
+                        suggestion: 'Break up long-running tasks to improve responsiveness'
+                    });
+                }
+            }
+        });
+        
+        try {
+            longTaskObserver.observe({ entryTypes: ['longtask'] });
+            this.observers.set('longtask', longTaskObserver);
+        } catch (e) {
+            console.log('Long task observer not supported');
+        }
+    }
+    
+    observeNetworkConditions() {
+        // Monitor network connection
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            
+            this.recordMetric('network_type', connection.effectiveType, {
+                downlink: connection.downlink,
+                rtt: connection.rtt,
+                saveData: connection.saveData
+            });
+            
+            // Adapt to network conditions
+            if (connection.saveData || connection.effectiveType === 'slow-2g') {
+                this.enableDataSavingMode();
+            }
+            
+            connection.addEventListener('change', () => {
+                this.recordMetric('network_change', connection.effectiveType, {
+                    downlink: connection.downlink,
+                    rtt: connection.rtt
+                });
+            });
+        }
+    }
+    
+    getResourceType(url) {
+        const extension = url.split('.').pop().toLowerCase();
+        
+        if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(extension)) {
+            return 'image';
+        } else if (['js', 'mjs'].includes(extension)) {
+            return 'script';
+        } else if (extension === 'css') {
+            return 'stylesheet';
+        } else if (['woff', 'woff2', 'ttf', 'eot'].includes(extension)) {
+            return 'font';
+        } else if (['mp4', 'webm', 'ogg'].includes(extension)) {
+            return 'video';
+        } else {
+            return 'other';
+        }
+    }
+    
+    recordMetric(name, value, metadata = {}) {
+        const timestamp = Date.now();
+        
+        if (!this.metrics.has(name)) {
+            this.metrics.set(name, []);
+        }
+        
+        this.metrics.get(name).push({
+            value: value,
+            timestamp: timestamp,
+            metadata: metadata
+        });
+        
+        // Keep only last 100 measurements per metric
+        const measurements = this.metrics.get(name);
+        if (measurements.length > 100) {
+            measurements.shift();
+        }
+        
+        console.log(`📊 Metric recorded: ${name} = ${typeof value === 'number' ? value.toFixed(2) : value}`);
+    }
+    
+    suggestOptimization(type, details) {
+        if (!this.optimizations.has(type)) {
+            this.optimizations.set(type, []);
+        }
+        
+        this.optimizations.get(type).push({
+            timestamp: Date.now(),
+            details: details
+        });
+        
+        console.log(`💡 Optimization suggestion: ${type}`, details);
+    }
+    
+    enableDataSavingMode() {
+        console.log('📱 Data saving mode enabled');
+        
+        // Reduce image quality
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            if (img.dataset.lowRes) {
+                img.src = img.dataset.lowRes;
+            }
+        });
+        
+        // Defer non-critical resources
+        const scripts = document.querySelectorAll('script[data-defer-on-slow]');
+        scripts.forEach(script => {
+            script.defer = true;
+        });
+    }
+    
+    generatePerformanceReport() {
+        const report = {
+            timestamp: new Date().toISOString(),
+            coreWebVitals: this.getCoreWebVitals(),
+            resourcePerformance: this.getResourcePerformanceSummary(),
+            navigationMetrics: this.getNavigationMetrics(),
+            optimizationSuggestions: this.getOptimizationSuggestions(),
+            overallScore: this.calculatePerformanceScore()
+        };
+        
+        console.log('📈 PERFORMANCE REPORT GENERATED');
+        console.log('================================');
+        console.log(`Overall Score: ${report.overallScore}/100`);
+        console.log(`LCP: ${report.coreWebVitals.lcp?.toFixed(2) || 'N/A'}ms`);
+        console.log(`FID: ${report.coreWebVitals.fid?.toFixed(2) || 'N/A'}ms`);
+        console.log(`CLS: ${report.coreWebVitals.cls?.toFixed(3) || 'N/A'}`);
+        console.log(`Total Load Time: ${report.navigationMetrics.totalLoad?.toFixed(2) || 'N/A'}ms`);
+        console.log(`Optimization Suggestions: ${report.optimizationSuggestions.length}`);
+        
+        return report;
+    }
+    
+    getCoreWebVitals() {
+        const lcp = this.getLatestMetric('LCP');
+        const fid = this.getLatestMetric('FID');
+        const cls = this.getLatestMetric('CLS');
+        
+        return {
+            lcp: lcp?.value,
+            fid: fid?.value,
+            cls: cls?.value,
+            assessment: {
+                lcp: lcp?.value < 2500 ? 'good' : lcp?.value < 4000 ? 'needs-improvement' : 'poor',
+                fid: fid?.value < 100 ? 'good' : fid?.value < 300 ? 'needs-improvement' : 'poor',
+                cls: cls?.value < 0.1 ? 'good' : cls?.value < 0.25 ? 'needs-improvement' : 'poor'
+            }
+        };
+    }
+    
+    getResourcePerformanceSummary() {
+        const summary = {
+            totalResources: 0,
+            totalSize: 0,
+            averageLoadTime: 0,
+            resourceTypes: {}
+        };
+        
+        for (const [metricName, measurements] of this.metrics) {
+            if (metricName.startsWith('resource_') && metricName.endsWith('_load_time')) {
+                const resourceType = metricName.split('_')[1];
+                
+                if (!summary.resourceTypes[resourceType]) {
+                    summary.resourceTypes[resourceType] = {
+                        count: 0,
+                        totalLoadTime: 0,
+                        totalSize: 0
+                    };
+                }
+                
+                measurements.forEach(measurement => {
+                    summary.totalResources++;
+                    summary.totalSize += measurement.metadata.size || 0;
+                    summary.averageLoadTime += measurement.value;
+                    
+                    summary.resourceTypes[resourceType].count++;
+                    summary.resourceTypes[resourceType].totalLoadTime += measurement.value;
+                    summary.resourceTypes[resourceType].totalSize += measurement.metadata.size || 0;
+                });
+            }
+        }
+        
+        if (summary.totalResources > 0) {
+            summary.averageLoadTime /= summary.totalResources;
+        }
+        
+        return summary;
+    }
+    
+    getNavigationMetrics() {
+        return {
+            dnsLookup: this.getLatestMetric('navigation_dns_lookup')?.value,
+            tcpConnect: this.getLatestMetric('navigation_tcp_connect')?.value,
+            sslHandshake: this.getLatestMetric('navigation_ssl_handshake')?.value,
+            requestResponse: this.getLatestMetric('navigation_request_response')?.value,
+            domParse: this.getLatestMetric('navigation_dom_parse')?.value,
+            resourceLoad: this.getLatestMetric('navigation_resource_load')?.value,
+            totalLoad: this.getLatestMetric('navigation_total_load')?.value
+        };
+    }
+    
+    getOptimizationSuggestions() {
+        const suggestions = [];
+        
+        for (const [type, optimizations] of this.optimizations) {
+            suggestions.push({
+                type: type,
+                count: optimizations.length,
+                latestSuggestion: optimizations[optimizations.length - 1]
+            });
+        }
+        
+        return suggestions;
+    }
+    
+    calculatePerformanceScore() {
+        const vitals = this.getCoreWebVitals();
+        let score = 100;
+        
+        // LCP scoring (25 points)
+        if (vitals.assessment.lcp === 'poor') score -= 25;
+        else if (vitals.assessment.lcp === 'needs-improvement') score -= 12;
+        
+        // FID scoring (25 points)
+        if (vitals.assessment.fid === 'poor') score -= 25;
+        else if (vitals.assessment.fid === 'needs-improvement') score -= 12;
+        
+        // CLS scoring (25 points)
+        if (vitals.assessment.cls === 'poor') score -= 25;
+        else if (vitals.assessment.cls === 'needs-improvement') score -= 12;
+        
+        // Optimization suggestions penalty (25 points)
+        const suggestionCount = this.getOptimizationSuggestions().length;
+        if (suggestionCount > 10) score -= 25;
+        else if (suggestionCount > 5) score -= 15;
+        else if (suggestionCount > 2) score -= 8;
+        
+        return Math.max(0, score);
+    }
+    
+    getLatestMetric(name) {
+        const measurements = this.metrics.get(name);
+        return measurements && measurements.length > 0 ? measurements[measurements.length - 1] : null;
+    }
+    
+    // Performance optimization techniques
+    optimizeImages() {
+        console.log('🖼️ Optimizing images...');
+        
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+            // Add lazy loading
+            if (!img.loading) {
+                img.loading = 'lazy';
+            }
+            
+            // Add responsive images if not present
+            if (!img.srcset && img.dataset.sizes) {
+                const sizes = JSON.parse(img.dataset.sizes);
+                const srcset = sizes.map(size => `${size.url} ${size.width}w`).join(', ');
+                img.srcset = srcset;
+                img.sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw';
+            }
+            
+            // Add WebP support detection
+            this.addWebPSupport(img);
+        });
+    }
+    
+    addWebPSupport(img) {
+        if (!img.dataset.webp) return;
+        
+        // Feature detection for WebP
+        const webpTest = new Image();
+        webpTest.onload = webpTest.onerror = function() {
+            if (webpTest.height === 2) {
+                // WebP is supported
+                img.src = img.dataset.webp;
+            }
+        };
+        webpTest.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+    }
+    
+    optimizeScripts() {
+        console.log('⚡ Optimizing scripts...');
+        
+        // Add async/defer to non-critical scripts
+        const scripts = document.querySelectorAll('script[src]');
+        scripts.forEach(script => {
+            if (!script.async && !script.defer && !script.dataset.critical) {
+                script.defer = true;
+            }
+        });
+        
+        // Implement script loading prioritization
+        this.prioritizeScriptLoading();
+    }
+    
+    prioritizeScriptLoading() {
+        // Load critical scripts first
+        const criticalScripts = document.querySelectorAll('script[data-critical="true"]');
+        const nonCriticalScripts = document.querySelectorAll('script[data-critical="false"]');
+        
+        // Wait for critical scripts to load before loading non-critical ones
+        Promise.all(Array.from(criticalScripts).map(script => this.loadScript(script.src)))
+            .then(() => {
+                nonCriticalScripts.forEach(script => {
+                    this.loadScript(script.src);
+                });
+            });
+    }
+    
+    loadScript(src) {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    
+    optimizeCSS() {
+        console.log('🎨 Optimizing CSS...');
+        
+        // Identify and inline critical CSS
+        this.inlineCriticalCSS();
+        
+        // Defer non-critical CSS
+        this.deferNonCriticalCSS();
+    }
+    
+    inlineCriticalCSS() {
+        // This would typically be done at build time
+        // For demonstration, we'll simulate identifying critical styles
+        const criticalSelectors = [
+            'body', 'h1', 'h2', '.header', '.navigation', '.hero',
+            '.container', '.main-content', '.footer'
+        ];
+        
+        console.log('🔥 Critical CSS selectors identified:', criticalSelectors.join(', '));
+    }
+    
+    deferNonCriticalCSS() {
+        const stylesheets = document.querySelectorAll('link[rel="stylesheet"]:not([data-critical])');
+        
+        stylesheets.forEach(link => {
+            // Load CSS asynchronously
+            const newLink = document.createElement('link');
+            newLink.rel = 'preload';
+            newLink.as = 'style';
+            newLink.href = link.href;
+            newLink.onload = function() {
+                this.rel = 'stylesheet';
+            };
+            
+            document.head.appendChild(newLink);
+            link.remove();
+        });
+    }
+    
+    // Caching strategies
+    implementCaching() {
+        console.log('💾 Implementing caching strategies...');
+        
+        // Service Worker for caching
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('✅ Service Worker registered');
+                })
+                .catch(error => {
+                    console.log('❌ Service Worker registration failed:', error);
+                });
+        }
+        
+        // Browser caching headers simulation
+        this.optimizeCacheHeaders();
+    }
+    
+    optimizeCacheHeaders() {
+        console.log('📋 Cache optimization recommendations:');
+        console.log('   • Static assets: Cache-Control: public, max-age=31536000 (1 year)');
+        console.log('   • HTML pages: Cache-Control: public, max-age=3600 (1 hour)');
+        console.log('   • API responses: Cache-Control: private, max-age=300 (5 minutes)');
+        console.log('   • Images: Cache-Control: public, max-age=2592000 (30 days)');
+    }
+}
+
+// Service Worker template for advanced caching
+const serviceWorkerTemplate = `
+// sw.js - Service Worker for performance optimization
+const CACHE_NAME = 'perf-optimizer-v1';
+const CRITICAL_RESOURCES = [
+    '/',
+    '/css/critical.css',
+    '/js/critical.js',
+    '/images/hero-image.webp'
+];
+
+const NON_CRITICAL_RESOURCES = [
+    '/css/non-critical.css',
+    '/js/non-critical.js',
+    '/fonts/main-font.woff2'
+];
+
+// Install event - cache critical resources
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(cache => cache.addAll(CRITICAL_RESOURCES))
+            .then(() => self.skipWaiting())
+    );
+});
+
+// Activate event - clean up old caches
+self.addEventListener('activate', event => {
+    event.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if (cacheName !== CACHE_NAME) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        }).then(() => self.clients.claim())
+    );
+});
+
+// Fetch event - implement caching strategies
+self.addEventListener('fetch', event => {
+    const { request } = event;
+    const url = new URL(request.url);
+    
+    // Different strategies for different resource types
+    if (request.destination === 'image') {
+        // Cache-first strategy for images
+        event.respondWith(cacheFirst(request));
+    } else if (url.pathname.startsWith('/api/')) {
+        // Network-first strategy for API calls
+        event.respondWith(networkFirst(request));
+    } else if (request.destination === 'document') {
+        // Stale-while-revalidate for HTML pages
+        event.respondWith(staleWhileRevalidate(request));
+    } else {
+        // Default cache-first strategy
+        event.respondWith(cacheFirst(request));
+    }
+});
+
+// Cache-first strategy
+async function cacheFirst(request) {
+    const cachedResponse = await caches.match(request);
+    if (cachedResponse) {
+        return cachedResponse;
+    }
+    
+    try {
+        const networkResponse = await fetch(request);
+        const cache = await caches.open(CACHE_NAME);
+        cache.put(request, networkResponse.clone());
+        return networkResponse;
+    } catch (error) {
+        // Return offline fallback if available
+        return caches.match('/offline.html');
+    }
+}
+
+// Network-first strategy
+async function networkFirst(request) {
+    try {
+        const networkResponse = await fetch(request);
+        const cache = await caches.open(CACHE_NAME);
+        cache.put(request, networkResponse.clone());
+        return networkResponse;
+    } catch (error) {
+        const cachedResponse = await caches.match(request);
+        return cachedResponse || new Response('Offline', { status: 503 });
+    }
+}
+
+// Stale-while-revalidate strategy
+async function staleWhileRevalidate(request) {
+    const cachedResponse = await caches.match(request);
+    
+    const fetchPromise = fetch(request).then(networkResponse => {
+        const cache = caches.open(CACHE_NAME);
+        cache.then(c => c.put(request, networkResponse.clone()));
+        return networkResponse;
+    });
+    
+    return cachedResponse || fetchPromise;
+}
+`;
+
+// Demonstration function
+function demonstratePerformanceOptimization() {
+    console.log('🚀 PERFORMANCE OPTIMIZATION DEMONSTRATION');
+    console.log('=' * 50);
+    
+    // Initialize performance optimizer
+    const optimizer = new WebPerformanceOptimizer();
+    
+    // Simulate some performance data
+    setTimeout(() => {
+        console.log('\\n📊 Generating Performance Report...');
+        const report = optimizer.generatePerformanceReport();
+        
+        console.log('\\n🔧 Running Optimizations...');
+        optimizer.optimizeImages();
+        optimizer.optimizeScripts();
+        optimizer.optimizeCSS();
+        optimizer.implementCaching();
+        
+        console.log('\\n✅ Performance Optimization Complete!');
+        console.log('\\n💡 KEY OPTIMIZATION STRATEGIES:');
+        console.log('1. Core Web Vitals monitoring (LCP, FID, CLS)');
+        console.log('2. Resource loading optimization');
+        console.log('3. Image lazy loading and WebP support');
+        console.log('4. Script prioritization and async loading');
+        console.log('5. Critical CSS extraction and inlining');
+        console.log('6. Service Worker caching strategies');
+        console.log('7. Network condition adaptation');
+        console.log('8. Real-time performance monitoring');
+        
+    }, 1000);
+}
+
+// Run the demonstration
+demonstratePerformanceOptimization();
+```
+///
+
+**⚡ Performance Optimization Checklist:**
+
+**Images & Media:**
+
+- ✅ Use WebP format with fallbacks
+- ✅ Implement lazy loading
+- ✅ Add responsive images with srcset
+- ✅ Compress images (aim for <100KB)
+- ✅ Use CDN for media delivery
+
+**JavaScript:**
+
+- ✅ Code splitting and tree shaking
+- ✅ Async/defer for non-critical scripts
+- ✅ Minify and compress JS files
+- ✅ Remove unused dependencies
+- ✅ Use modern ES modules
+
+**CSS:**
+
+- ✅ Extract and inline critical CSS
+- ✅ Defer non-critical stylesheets
+- ✅ Minify CSS files
+- ✅ Remove unused CSS
+- ✅ Use CSS containment
+
+**Caching:**
+
+- ✅ Implement service workers
+- ✅ Set appropriate cache headers
+- ✅ Use browser caching strategies
+- ✅ Implement CDN caching
+- ✅ Database query caching
+
+**Network:**
+
+- ✅ Enable GZIP/Brotli compression
+- ✅ Use HTTP/2 or HTTP/3
+- ✅ Minimize HTTP requests
+- ✅ Implement resource hints
+- ✅ Use CDN for global delivery
+
+
+### Back-End Processes: The Engine Room of the Web 🔧⚙️
+
+While users see the beautiful frontend, the real magic happens behind the scenes in the backend. Think of it as the engine room of a cruise ship—passengers don't see it, but without it, nothing works. Backend processes handle data storage, business logic, security, and all the complex operations that make modern web applications possible.
+
+/// details | Complete Backend System with Flask and Advanced Features
+    type: example
+    open: false
+    
+```python
+# Complete Backend System with Flask and Advanced Features
+import sqlite3
+import json
+import hashlib
+import jwt
+import functools
+import threading
+import time
+from datetime import datetime, timedelta
+from typing import Dict, List, Any, Optional
+from dataclasses import dataclass, asdict
+from contextlib import contextmanager
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@dataclass
+class User:
+    id: int
+    username: str
+    email: str
+    password_hash: str
+    role: str = 'user'
+    created_at: str = None
+    last_login: str = None
+    is_active: bool = True
+
+@dataclass
+class Product:
+    id: int
+    name: str
+    description: str
+    price: float
+    category_id: int
+    stock_quantity: int
+    created_at: str = None
+    is_active: bool = True
+
+@dataclass
+class Order:
+    id: int
+    user_id: int
+    total_amount: float
+    status: str = 'pending'
+    created_at: str = None
+    items: List[Dict] = None
+
+class DatabaseManager:
+    """Advanced database management with connection pooling and transactions"""
+    
+    def __init__(self, db_path: str = 'advanced_app.db', pool_size: int = 5):
+        self.db_path = db_path
+        self.pool_size = pool_size
+        self.connection_pool = []
+        self.pool_lock = threading.Lock()
+        
+        # Initialize database and connection pool
+        self.init_database()
+        self.init_connection_pool()
+        
+        logger.info(f"✅ Database manager initialized with pool size: {pool_size}")
+    
+    def init_database(self):
+        """Initialize database with complete schema"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            
+            # Users table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    password_hash TEXT NOT NULL,
+                    role TEXT DEFAULT 'user',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    last_login TIMESTAMP,
+                    is_active BOOLEAN DEFAULT 1
+                )
+            ''')
+            
+            # Categories table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS categories (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    description TEXT,
+                    parent_id INTEGER,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (parent_id) REFERENCES categories (id)
+                )
+            ''')
+            
+            # Products table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS products (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    description TEXT,
+                    price DECIMAL(10, 2) NOT NULL,
+                    category_id INTEGER,
+                    stock_quantity INTEGER DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    is_active BOOLEAN DEFAULT 1,
+                    FOREIGN KEY (category_id) REFERENCES categories (id)
+                )
+            ''')
+            
+            # Orders table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS orders (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    total_amount DECIMAL(10, 2) NOT NULL,
+                    status TEXT DEFAULT 'pending',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                )
+            ''')
+            
+            # Order items table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS order_items (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    order_id INTEGER NOT NULL,
+                    product_id INTEGER NOT NULL,
+                    quantity INTEGER NOT NULL,
+                    price DECIMAL(10, 2) NOT NULL,
+                    FOREIGN KEY (order_id) REFERENCES orders (id),
+                    FOREIGN KEY (product_id) REFERENCES products (id)
+                )
+            ''')
+            
+            # Sessions table for user sessions
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS sessions (
+                    id TEXT PRIMARY KEY,
+                    user_id INTEGER NOT NULL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    expires_at TIMESTAMP NOT NULL,
+                    is_active BOOLEAN DEFAULT 1,
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                )
+            ''')
+            
+            # API logs table
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS api_logs (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    endpoint TEXT NOT NULL,
+                    method TEXT NOT NULL,
+                    user_id INTEGER,
+                    ip_address TEXT,
+                    response_code INTEGER,
+                    response_time REAL,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                )
+            ''')
+            
+            # Insert sample data
+            self.insert_sample_data(cursor)
+            
+            conn.commit()
+            logger.info("📊 Database schema created and sample data inserted")
+    
+    def insert_sample_data(self, cursor):
+        """Insert sample data for demonstration"""
+        
+        # Sample categories
+        categories = [
+            ('Electronics', 'Electronic devices and accessories'),
+            ('Books', 'Books and educational materials'),
+            ('Clothing', 'Apparel and fashion items'),
+            ('Home & Garden', 'Home improvement and gardening supplies')
+        ]
+        
+        cursor.executemany(
+            'INSERT OR IGNORE INTO categories (name, description) VALUES (?, ?)',
+            categories
+        )
+        
+        # Sample products
+        products = [
+            ('Laptop Pro 15"', 'High-performance laptop for professionals', 1299.99, 1, 50),
+            ('Wireless Headphones', 'Premium noise-canceling headphones', 299.99, 1, 100),
+            ('Python Programming Guide', 'Complete guide to Python development', 49.99, 2, 200),
+            ('JavaScript Essentials', 'Modern JavaScript for web developers', 39.99, 2, 150),
+            ('Designer T-Shirt', 'Premium cotton designer t-shirt', 29.99, 3, 75),
+            ('Smart Home Hub', 'Connect and control your smart devices', 199.99, 4, 30)
+        ]
+        
+        cursor.executemany(
+            'INSERT OR IGNORE INTO products (name, description, price, category_id, stock_quantity) VALUES (?, ?, ?, ?, ?)',
+            products
+        )
+        
+        # Sample admin user
+        admin_password = self.hash_password('admin123')
+        cursor.execute(
+            'INSERT OR IGNORE INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)',
+            ('admin', 'admin@example.com', admin_password, 'admin')
+        )
+        
+        # Sample regular user
+        user_password = self.hash_password('user123')
+        cursor.execute(
+            'INSERT OR IGNORE INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)',
+            ('john_doe', 'john@example.com', user_password, 'user')
+        )
+    
+    def hash_password(self, password: str) -> str:
+        """Hash password using SHA-256 (in production, use bcrypt)"""
+        return hashlib.sha256(password.encode()).hexdigest()
+    
+    def init_connection_pool(self):
+        """Initialize connection pool"""
+        with self.pool_lock:
+            for _ in range(self.pool_size):
+                conn = sqlite3.connect(self.db_path, check_same_thread=False)
+                conn.row_factory = sqlite3.Row  # Enable dict-like access
+                self.connection_pool.append(conn)
+    
+    @contextmanager
+    def get_connection(self):
+        """Get connection from pool with context manager"""
+        with self.pool_lock:
+            if self.connection_pool:
+                conn = self.connection_pool.pop()
+            else:
+                # Create new connection if pool is empty
+                conn = sqlite3.connect(self.db_path, check_same_thread=False)
+                conn.row_factory = sqlite3.Row
+        
+        try:
+            yield conn
+        finally:
+            with self.pool_lock:
+                if len(self.connection_pool) < self.pool_size:
+                    self.connection_pool.append(conn)
+                else:
+                    conn.close()
+    
+    def execute_query(self, query: str, params: tuple = (), fetch_all: bool = False, fetch_one: bool = False):
+        """Execute database query with error handling"""
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(query, params)
+                
+                if fetch_all:
+                    return [dict(row) for row in cursor.fetchall()]
+                elif fetch_one:
+                    row = cursor.fetchone()
+                    return dict(row) if row else None
+                else:
+                    conn.commit()
+                    return cursor.lastrowid
+                    
+        except Exception as e:
+            logger.error(f"Database query failed: {e}")
+            raise
+    
+    def execute_transaction(self, operations: List[tuple]):
+        """Execute multiple operations in a transaction"""
+        try:
+            with self.get_connection() as conn:
+                cursor = conn.cursor()
+                
+                for operation in operations:
+                    query, params = operation
+                    cursor.execute(query, params)
+                
+                conn.commit()
+                logger.info(f"✅ Transaction completed: {len(operations)} operations")
+                return True
+                
+        except Exception as e:
+            logger.error(f"Transaction failed: {e}")
+            raise
+
+class AuthenticationManager:
+    """Advanced authentication and authorization system"""
+    
+    def __init__(self, db_manager: DatabaseManager, jwt_secret: str = 'your-secret-key'):
+        self.db = db_manager
+        self.jwt_secret = jwt_secret
+        self.token_blacklist = set()  # In production, use Redis
+        
+        logger.info("🔐 Authentication manager initialized")
+    
+    def register_user(self, username: str, email: str, password: str, role: str = 'user') -> Dict:
+        """Register a new user"""
+        try:
+            # Check if user already exists
+            existing_user = self.db.execute_query(
+                'SELECT id FROM users WHERE username = ? OR email = ?',
+                (username, email),
+                fetch_one=True
+            )
+            
+            if existing_user:
+                return {'success': False, 'error': 'User already exists'}
+            
+            # Hash password and create user
+            password_hash = self.db.hash_password(password)
+            user_id = self.db.execute_query(
+                'INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)',
+                (username, email, password_hash, role)
+            )
+            
+            logger.info(f"👤 User registered: {username}")
+            return {
+                'success': True,
+                'user_id': user_id,
+                'message': 'User registered successfully'
+            }
+            
+        except Exception as e:
+            logger.error(f"Registration failed: {e}")
+            return {'success': False, 'error': 'Registration failed'}
+    
+    def authenticate_user(self, username: str, password: str) -> Dict:
+        """Authenticate user and return JWT token"""
+        try:
+            # Get user from database
+            user = self.db.execute_query(
+                'SELECT * FROM users WHERE username = ? AND is_active = 1',
+                (username,),
+                fetch_one=True
+            )
+            
+            if not user:
+                return {'success': False, 'error': 'User not found'}
+            
+            # Verify password
+            password_hash = self.db.hash_password(password)
+            if user['password_hash'] != password_hash:
+                return {'success': False, 'error': 'Invalid password'}
+            
+            # Update last login
+            self.db.execute_query(
+                'UPDATE users SET last_login = CURRENT_TIMESTAMP WHERE id = ?',
+                (user['id'],)
+            )
+            
+            # Generate JWT token
+            token = self.generate_jwt_token(user)
+            
+            logger.info(f"✅ User authenticated: {username}")
+            return {
+                'success': True,
+                'token': token,
+                'user': {
+                    'id': user['id'],
+                    'username': user['username'],
+                    'email': user['email'],
+                    'role': user['role']
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Authentication failed: {e}")
+            return {'success': False, 'error': 'Authentication failed'}
+    
+    def generate_jwt_token(self, user: Dict) -> str:
+        """Generate JWT token for authenticated user"""
+        payload = {
+            'user_id': user['id'],
+            'username': user['username'],
+            'role': user['role'],
+            'exp': datetime.utcnow() + timedelta(hours=24),  # 24 hour expiration
+            'iat': datetime.utcnow()
+        }
+        
+        return jwt.encode(payload, self.jwt_secret, algorithm='HS256')
+    
+    def verify_jwt_token(self, token: str) -> Dict:
+        """Verify JWT token and return user data"""
+        try:
+            if token in self.token_blacklist:
+                return {'success': False, 'error': 'Token has been revoked'}
+            
+            payload = jwt.decode(token, self.jwt_secret, algorithms=['HS256'])
+            
+            # Check if user still exists and is active
+            user = self.db.execute_query(
+                'SELECT * FROM users WHERE id = ? AND is_active = 1',
+                (payload['user_id'],),
+                fetch_one=True
+            )
+            
+            if not user:
+                return {'success': False, 'error': 'User no longer exists'}
+            
+            return {
+                'success': True,
+                'user': payload
+            }
+            
+        except jwt.ExpiredSignatureError:
+            return {'success': False, 'error': 'Token has expired'}
+        except jwt.InvalidTokenError:
+            return {'success': False, 'error': 'Invalid token'}
+        except Exception as e:
+            logger.error(f"Token verification failed: {e}")
+            return {'success': False, 'error': 'Token verification failed'}
+    
+    def logout_user(self, token: str) -> Dict:
+        """Logout user by blacklisting token"""
+        try:
+            self.token_blacklist.add(token)
+            logger.info("👋 User logged out")
+            return {'success': True, 'message': 'Logged out successfully'}
+        except Exception as e:
+            logger.error(f"Logout failed: {e}")
+            return {'success': False, 'error': 'Logout failed'}
+    
+    def require_auth(self, required_role: str = None):
+        """Decorator for requiring authentication"""
+        def decorator(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                # In a real Flask app, this would get the token from request headers
+                token = kwargs.get('auth_token')
+                if not token:
+                    return {'success': False, 'error': 'Authentication required'}
+                
+                auth_result = self.verify_jwt_token(token)
+                if not auth_result['success']:
+                    return auth_result
+                
+                user = auth_result['user']
+                
+                # Check role if required
+                if required_role and user['role'] != required_role and user['role'] != 'admin':
+                    return {'success': False, 'error': 'Insufficient permissions'}
+                
+                # Add user to kwargs
+                kwargs['current_user'] = user
+                return func(*args, **kwargs)
+            
+            return wrapper
+        return decorator
+
+class BusinessLogicManager:
+    """Advanced business logic and data management"""
+    
+    def __init__(self, db_manager: DatabaseManager, auth_manager: AuthenticationManager):
+        self.db = db_manager
+        self.auth = auth_manager
+        self.cache = {}  # In production, use Redis
+        self.cache_ttl = 300  # 5 minutes
+        
+        logger.info("🧠 Business logic manager initialized")
+    
+    @AuthenticationManager.require_auth(required_role='user')
+    def get_user_profile(self, user_id: int, **kwargs) -> Dict:
+        """Get user profile with caching"""
+        cache_key = f"user_profile_{user_id}"
+        
+        # Check cache first
+        if cache_key in self.cache:
+            cache_entry = self.cache[cache_key]
+            if time.time() - cache_entry['timestamp'] < self.cache_ttl:
+                logger.info(f"📋 User profile served from cache: {user_id}")
+                return {'success': True, 'data': cache_entry['data']}
+        
+        try:
+            user = self.db.execute_query(
+                '''SELECT u.*, COUNT(o.id) as order_count, COALESCE(SUM(o.total_amount), 0) as total_spent
+                   FROM users u 
+                   LEFT JOIN orders o ON u.id = o.user_id 
+                   WHERE u.id = ? AND u.is_active = 1
+                   GROUP BY u.id''',
+                (user_id,),
+                fetch_one=True
+            )
+            
+            if not user:
+                return {'success': False, 'error': 'User not found'}
+            
+            # Remove sensitive data
+            user_data = dict(user)
+            del user_data['password_hash']
+            
+            # Cache the result
+            self.cache[cache_key] = {
+                'data': user_data,
+                'timestamp': time.time()
+            }
+            
+            return {'success': True, 'data': user_data}
+            
+        except Exception as e:
+            logger.error(f"Failed to get user profile: {e}")
+            return {'success': False, 'error': 'Failed to retrieve user profile'}
+    
+    def search_products(self, query: str = '', category_id: int = None, 
+                       min_price: float = None, max_price: float = None,
+                       sort_by: str = 'name', sort_order: str = 'asc',
+                       page: int = 1, per_page: int = 20) -> Dict:
+        """Advanced product search with filtering and pagination"""
+        try:
+            # Build dynamic query
+            base_query = '''
+                SELECT p.*, c.name as category_name 
+                FROM products p 
+                LEFT JOIN categories c ON p.category_id = c.id 
+                WHERE p.is_active = 1
+            '''
+            
+            conditions = []
+            params = []
+            
+            if query:
+                conditions.append('(p.name LIKE ? OR p.description LIKE ?)')
+                params.extend([f'%{query}%', f'%{query}%'])
+            
+            if category_id:
+                conditions.append('p.category_id = ?')
+                params.append(category_id)
+            
+            if min_price is not None:
+                conditions.append('p.price >= ?')
+                params.append(min_price)
+            
+            if max_price is not None:
+                conditions.append('p.price <= ?')
+                params.append(max_price)
+            
+            if conditions:
+                base_query += ' AND ' + ' AND '.join(conditions)
+            
+            # Add sorting
+            valid_sort_fields = ['name', 'price', 'created_at', 'stock_quantity']
+            if sort_by in valid_sort_fields:
+                sort_direction = 'DESC' if sort_order.lower() == 'desc' else 'ASC'
+                base_query += f' ORDER BY p.{sort_by} {sort_direction}'
+            
+            # Add pagination
+            offset = (page - 1) * per_page
+            base_query += ' LIMIT ? OFFSET ?'
+            params.extend([per_page, offset])
+            
+            products = self.db.execute_query(base_query, tuple(params), fetch_all=True)
+            
+            # Get total count for pagination
+            count_query = '''
+                SELECT COUNT(*) as total 
+                FROM products p 
+                WHERE p.is_active = 1
+            '''
+            
+            if conditions:
+                count_query += ' AND ' + ' AND '.join(conditions)
+            
+            total_count = self.db.execute_query(
+                count_query, 
+                tuple(params[:-2]),  # Exclude LIMIT and OFFSET params
+                fetch_one=True
+            )['total']
+            
+            return {
+                'success': True,
+                'data': {
+                    'products': products,
+                    'pagination': {
+                        'page': page,
+                        'per_page': per_page,
+                        'total': total_count,
+                        'pages': (total_count + per_page - 1) // per_page
+                    }
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Product search failed: {e}")
+            return {'success': False, 'error': 'Product search failed'}
+    
+    @AuthenticationManager.require_auth(required_role='user')
+    def create_order(self, user_id: int, items: List[Dict], **kwargs) -> Dict:
+        """Create order with inventory management"""
+        try:
+            # Validate items and calculate total
+            total_amount = 0
+            validated_items = []
+            
+            for item in items:
+                product_id = item.get('product_id')
+                quantity = item.get('quantity', 1)
+                
+                # Get product details
+                product = self.db.execute_query(
+                    'SELECT * FROM products WHERE id = ? AND is_active = 1',
+                    (product_id,),
+                    fetch_one=True
+                )
+                
+                if not product:
+                    return {'success': False, 'error': f'Product {product_id} not found'}
+                
+                if product['stock_quantity'] < quantity:
+                    return {'success': False, 'error': f'Insufficient stock for {product["name"]}'}
+                
+                item_total = product['price'] * quantity
+                total_amount += item_total
+                
+                validated_items.append({
+                    'product_id': product_id,
+                    'quantity': quantity,
+                    'price': product['price'],
+                    'total': item_total
+                })
+            
+            # Create order and order items in a transaction
+            operations = []
+            
+            # Insert order
+            operations.append((
+                'INSERT INTO orders (user_id, total_amount, status) VALUES (?, ?, ?)',
+                (user_id, total_amount, 'pending')
+            ))
+            
+            # For simplicity, we'll execute the order creation separately to get the ID
+            order_id = self.db.execute_query(
+                'INSERT INTO orders (user_id, total_amount, status) VALUES (?, ?, ?)',
+                (user_id, total_amount, 'pending')
+            )
+            
+            # Insert order items and update stock
+            transaction_ops = []
+            for item in validated_items:
+                # Insert order item
+                transaction_ops.append((
+                    'INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)',
+                    (order_id, item['product_id'], item['quantity'], item['price'])
+                ))
+                
+                # Update stock
+                transaction_ops.append((
+                    'UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = ?',
+                    (item['quantity'], item['product_id'])
+                ))
+            
+            # Execute transaction
+            self.db.execute_transaction(transaction_ops)
+            
+            logger.info(f"📦 Order created: {order_id} for user {user_id}")
+            return {
+                'success': True,
+                'data': {
+                    'order_id': order_id,
+                    'total_amount': total_amount,
+                    'status': 'pending',
+                    'items': validated_items
+                }
+            }
+            
+        except Exception as e:
+            logger.error(f"Order creation failed: {e}")
+            return {'success': False, 'error': 'Order creation failed'}
+    
+    @AuthenticationManager.require_auth(required_role='admin')
+    def get_analytics_dashboard(self, **kwargs) -> Dict:
+        """Get business analytics dashboard data"""
+        try:
+            analytics = {}
+            
+            # User statistics
+            user_stats = self.db.execute_query(
+                '''SELECT 
+                    COUNT(*) as total_users,
+                    COUNT(CASE WHEN created_at >= datetime('now', '-30 days') THEN 1 END) as new_users_30d,
+                    COUNT(CASE WHEN last_login >= datetime('now', '-7 days') THEN 1 END) as active_users_7d
+                   FROM users WHERE is_active = 1''',
+                fetch_one=True
+            )
+            analytics['users'] = user_stats
+            
+            # Order statistics
+            order_stats = self.db.execute_query(
+                '''SELECT 
+                    COUNT(*) as total_orders,
+                    COUNT(CASE WHEN created_at >= datetime('now', '-30 days') THEN 1 END) as orders_30d,
+                    COALESCE(SUM(total_amount), 0) as total_revenue,
+                    COALESCE(SUM(CASE WHEN created_at >= datetime('now', '-30 days') THEN total_amount END), 0) as revenue_30d
+                   FROM orders''',
+                fetch_one=True
+            )
+            analytics['orders'] = order_stats
+            
+            # Product statistics
+            product_stats = self.db.execute_query(
+                '''SELECT 
+                    COUNT(*) as total_products,
+                    COUNT(CASE WHEN stock_quantity > 0 THEN 1 END) as in_stock,
+                    COUNT(CASE WHEN stock_quantity = 0 THEN 1 END) as out_of_stock
+                   FROM products WHERE is_active = 1''',
+                fetch_one=True
+            )
+            analytics['products'] = product_stats
+            
+            # Top selling products
+            top_products = self.db.execute_query(
+                '''SELECT p.name, SUM(oi.quantity) as total_sold, SUM(oi.quantity * oi.price) as revenue
+                   FROM products p
+                   JOIN order_items oi ON p.id = oi.product_id
+                   JOIN orders o ON oi.order_id = o.id
+                   WHERE o.created_at >= datetime('now', '-30 days')
+                   GROUP BY p.id, p.name
+                   ORDER BY total_sold DESC
+                   LIMIT 10''',
+                fetch_all=True
+            )
+            analytics['top_products'] = top_products
+            
+            return {'success': True, 'data': analytics}
+            
+        except Exception as e:
+            logger.error(f"Analytics dashboard failed: {e}")
+            return {'success': False, 'error': 'Failed to generate analytics'}
+
+class APIManager:
+    """RESTful API endpoint manager with logging and rate limiting"""
+    
+    def __init__(self, db_manager: DatabaseManager, auth_manager: AuthenticationManager, 
+                 business_manager: BusinessLogicManager):
+        self.db = db_manager
+        self.auth = auth_manager
+        self.business = business_manager
+        self.rate_limits = {}  # In production, use Redis
+        
+        logger.info("🌐 API manager initialized")
+    
+    def log_api_request(self, endpoint: str, method: str, user_id: int = None, 
+                       ip_address: str = None, response_code: int = 200, 
+                       response_time: float = 0):
+        """Log API request for monitoring and analytics"""
+        try:
+            self.db.execute_query(
+                '''INSERT INTO api_logs (endpoint, method, user_id, ip_address, response_code, response_time)
+                   VALUES (?, ?, ?, ?, ?, ?)''',
+                (endpoint, method, user_id, ip_address, response_code, response_time)
+            )
+        except Exception as e:
+            logger.error(f"Failed to log API request: {e}")
+    
+    def check_rate_limit(self, user_id: int, endpoint: str, limit: int = 100, window: int = 3600) -> bool:
+        """Check if user has exceeded rate limit"""
+        key = f"{user_id}:{endpoint}"
+        current_time = time.time()
+        
+        if key not in self.rate_limits:
+            self.rate_limits[key] = []
+        
+        # Remove old requests outside the window
+        self.rate_limits[key] = [
+            timestamp for timestamp in self.rate_limits[key]
+            if current_time - timestamp < window
+        ]
+        
+        # Check if limit exceeded
+        if len(self.rate_limits[key]) >= limit:
+            return False
+        
+        # Add current request
+        self.rate_limits[key].append(current_time)
+        return True
+    
+    def handle_request(self, endpoint: str, method: str, data: Dict = None, 
+                      auth_token: str = None, ip_address: str = '127.0.0.1') -> Dict:
+        """Handle API request with logging and rate limiting"""
+        start_time = time.time()
+        user_id = None
+        
+        try:
+            # Authenticate if token provided
+            if auth_token:
+                auth_result = self.auth.verify_jwt_token(auth_token)
+                if auth_result['success']:
+                    user_id = auth_result['user']['user_id']
+                    
+                    # Check rate limit
+                    if not self.check_rate_limit(user_id, endpoint):
+                        response = {'success': False, 'error': 'Rate limit exceeded'}
+                        self.log_api_request(endpoint, method, user_id, ip_address, 429, 
+                                           time.time() - start_time)
+                        return response
+            
+            # Route request to appropriate handler
+            response = self.route_request(endpoint, method, data or {}, auth_token)
+            
+            # Log successful request
+            response_code = 200 if response.get('success') else 400
+            self.log_api_request(endpoint, method, user_id, ip_address, response_code,
+                               time.time() - start_time)
+            
+            return response
+            
+        except Exception as e:
+            logger.error(f"API request failed: {e}")
+            response = {'success': False, 'error': 'Internal server error'}
+            self.log_api_request(endpoint, method, user_id, ip_address, 500,
+                               time.time() - start_time)
+            return response
+    
+    def route_request(self, endpoint: str, method: str, data: Dict, auth_token: str = None) -> Dict:
+        """Route API request to appropriate handler"""
+        
+        # Authentication endpoints
+        if endpoint == '/api/auth/register' and method == 'POST':
+            return self.auth.register_user(
+                data.get('username'), data.get('email'), data.get('password')
+            )
+        
+        if endpoint == '/api/auth/login' and method == 'POST':
+            return self.auth.authenticate_user(data.get('username'), data.get('password'))
+        
+        if endpoint == '/api/auth/logout' and method == 'POST':
+            return self.auth.logout_user(auth_token or '')
+        
+        # User endpoints
+        if endpoint.startswith('/api/user/') and method == 'GET':
+            user_id = int(endpoint.split('/')[-1])
+            return self.business.get_user_profile(user_id, auth_token=auth_token)
+        
+        # Product endpoints
+        if endpoint == '/api/products' and method == 'GET':
+            return self.business.search_products(**data)
+        
+        # Order endpoints
+        if endpoint == '/api/orders' and method == 'POST':
+            user_id = data.get('user_id')
+            items = data.get('items', [])
+            return self.business.create_order(user_id, items, auth_token=auth_token)
+        
+        # Analytics endpoints
+        if endpoint == '/api/analytics/dashboard' and method == 'GET':
+            return self.business.get_analytics_dashboard(auth_token=auth_token)
+        
+        return {'success': False, 'error': 'Endpoint not found'}
+
+# Demonstration of the complete backend system
+def demonstrate_backend_system():
+    """Demonstrate the complete backend system"""
+    
+    logger.info('🚀 COMPLETE BACKEND SYSTEM DEMONSTRATION')
+    logger.info('=' * 50)
+    
+    # Initialize all components
+    db_manager = DatabaseManager()
+    auth_manager = AuthenticationManager(db_manager)
+    business_manager = BusinessLogicManager(db_manager, auth_manager)
+    api_manager = APIManager(db_manager, auth_manager, business_manager)
+    
+    # Test user registration
+    logger.info('\\n1️⃣ Testing User Registration')
+    logger.info('-' * 30)
+    
+    registration_response = api_manager.handle_request(
+        '/api/auth/register', 'POST',
+        {
+            'username': 'test_user',
+            'email': 'test@example.com',
+            'password': 'secure123'
+        }
+    )
+    logger.info(f"Registration: {registration_response['success']}")
+    
+    # Test user login
+    logger.info('\\n2️⃣ Testing User Authentication')
+    logger.info('-' * 30)
+    
+    login_response = api_manager.handle_request(
+        '/api/auth/login', 'POST',
+        {
+            'username': 'john_doe',
+            'password': 'user123'
+        }
+    )
+    
+    if login_response['success']:
+        auth_token = login_response['token']
+        user_data = login_response['user']
+        logger.info(f"✅ Authenticated: {user_data['username']} ({user_data['role']})")
+    
+    # Test product search
+    logger.info('\\n3️⃣ Testing Product Search')
+    logger.info('-' * 30)
+    
+    product_search = api_manager.handle_request(
+        '/api/products', 'GET',
+        {
+            'query': 'laptop',
+            'min_price': 100,
+            'max_price': 2000,
+            'sort_by': 'price',
+            'sort_order': 'asc'
+        }
+    )
+    
+    if product_search['success']:
+        products = product_search['data']['products']
+        logger.info(f"🔍 Found {len(products)} products matching criteria")
+        for product in products[:3]:  # Show first 3
+            logger.info(f"   • {product['name']}: ${product['price']}")
+    
+    # Test order creation
+    logger.info('\\n4️⃣ Testing Order Creation')
+    logger.info('-' * 30)
+    
+    if login_response['success']:
+        order_response = api_manager.handle_request(
+            '/api/orders', 'POST',
+            {
+                'user_id': user_data['id'],
+                'items': [
+                    {'product_id': 1, 'quantity': 1},
+                    {'product_id': 2, 'quantity': 2}
+                ]
+            },
+            auth_token=auth_token
+        )
+        
+        if order_response['success']:
+            order = order_response['data']
+            logger.info(f"📦 Order created: #{order['order_id']}")
+            logger.info(f"   Total: ${order['total_amount']:.2f}")
+            logger.info(f"   Items: {len(order['items'])}")
+    
+    # Test admin analytics (using admin token)
+    logger.info('\\n5️⃣ Testing Admin Analytics')
+    logger.info('-' * 30)
+    
+    admin_login = api_manager.handle_request(
+        '/api/auth/login', 'POST',
+        {
+            'username': 'admin',
+            'password': 'admin123'
+        }
+    )
+    
+    if admin_login['success']:
+        admin_token = admin_login['token']
+        
+        analytics_response = api_manager.handle_request(
+            '/api/analytics/dashboard', 'GET',
+            {},
+            auth_token=admin_token
+        )
+        
+        if analytics_response['success']:
+            analytics = analytics_response['data']
+            logger.info(f"📊 Analytics Dashboard:")
+            logger.info(f"   Total Users: {analytics['users']['total_users']}")
+            logger.info(f"   Total Orders: {analytics['orders']['total_orders']}")
+            logger.info(f"   Total Revenue: ${analytics['orders']['total_revenue']:.2f}")
+            logger.info(f"   Products in Stock: {analytics['products']['in_stock']}")
+    
+    logger.info('\\n✅ Backend System Demonstration Complete!')
+    logger.info('\\n💡 BACKEND FEATURES DEMONSTRATED:')
+    logger.info('1. Database connection pooling and transactions')
+    logger.info('2. JWT-based authentication and authorization')
+    logger.info('3. Role-based access control')
+    logger.info('4. Advanced business logic with caching')
+    logger.info('5. RESTful API with rate limiting')
+    logger.info('6. Comprehensive logging and monitoring')
+    logger.info('7. Error handling and data validation')
+    logger.info('8. Analytics and reporting capabilities')
+
+# Run the demonstration
+demonstrate_backend_system()
+```
+///
+
+**🔧 Popular Backend Framework Comparison:**
+
+| Framework | Language | Strengths | Best For | Learning Curve |
+|-----------|----------|-----------|----------|----------------|
+| **Flask** | Python | Lightweight, flexible | APIs, microservices | Easy |
+| **Django** | Python | Full-featured, batteries included | Full web apps | Medium |
+| **Express.js** | Node.js | Fast, minimalist | Real-time apps | Easy |
+| **Spring Boot** | Java | Enterprise-grade, robust | Large applications | Hard |
+| **Ruby on Rails** | Ruby | Convention over configuration | Rapid development | Medium |
+| **ASP.NET Core** | C# | High performance, Microsoft ecosystem | Enterprise apps | Medium |
+
+**⚡ Backend Performance Best Practices:**
+
+**Database Optimization:**
+- ✅ Use connection pooling
+- ✅ Implement proper indexing
+- ✅ Use prepared statements
+- ✅ Implement query caching
+- ✅ Database connection limits
+
+**API Design:**
+- ✅ RESTful endpoint design
+- ✅ Proper HTTP status codes
+- ✅ API versioning strategy
+- ✅ Rate limiting implementation
+- ✅ Request/response logging
+
+**Security Measures:**
+- ✅ JWT token authentication
+- ✅ Role-based access control
+- ✅ Input validation and sanitization
+- ✅ SQL injection prevention
+- ✅ CORS configuration
+
+**Scalability Features:**
+- ✅ Horizontal scaling support
+- ✅ Caching strategies (Redis/Memcached)
+- ✅ Load balancing compatibility
+- ✅ Microservices architecture
+- ✅ Message queue integration
 
 **Back-End Request Lifecycle Diagram:**
 
-<div class="diagram-container">
-<button class="diagram-expand-btn">🔍 View Larger</button>
-<div class="diagram-content">
 ```mermaid
 sequenceDiagram
     participant Client
+    participant LoadBalancer
     participant WebServer
     participant AppFramework
+    participant Cache
     participant Database
-    Client->>WebServer: HTTP Request
-    WebServer->>AppFramework: Route Request
-    AppFramework->>Database: Query/Update
-    Database-->>AppFramework: Data/Result
-    AppFramework-->>WebServer: Response
-    WebServer-->>Client: HTTP Response
+    participant MessageQueue
+    
+    Client->>LoadBalancer: HTTPS Request
+    LoadBalancer->>WebServer: Route to Server
+    WebServer->>AppFramework: Process Request
+    AppFramework->>Cache: Check Cache
+    
+    alt Cache Hit
+        Cache-->>AppFramework: Return Cached Data
+    else Cache Miss
+        AppFramework->>Database: Query Database
+        Database-->>AppFramework: Return Data
+        AppFramework->>Cache: Store in Cache
+    end
+    
+    AppFramework->>MessageQueue: Queue Background Tasks
+    AppFramework-->>WebServer: Return Response
+    WebServer-->>LoadBalancer: HTTP Response
+    LoadBalancer-->>Client: Response to Client
+    
+    MessageQueue->>AppFramework: Process Background Task
 ```
-</div>
-</div>
 
 ### Full-Stack Implementation
 

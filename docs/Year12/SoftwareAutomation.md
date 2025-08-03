@@ -40,16 +40,20 @@ Machine learning (ML) algorithms are at the heart of modern software automation,
 
 *Real-World Example:* Tesla's Autopilot uses neural networks to recognize objects on the road. The network processes camera images through multiple layers, first detecting edges, then shapes, then identifying cars, pedestrians, and traffic signs.
 
-!!! tip "Choosing the Right Model"
-    **Decision Trees are great for:**
+/// admonition | Choosing the Right Model
+    type: tip
 
-    - Problems where you need to explain decisions
-    - Medical diagnosis, loan approval, rule-based systems
-    
-    **Neural Networks excel at:**
-    
-    - Image recognition, speech processing, complex pattern detection
-    - Problems with lots of data and unclear rules
+**Decision Trees are great for:**
+
+- Problems where you need to explain decisions
+- Medical diagnosis, loan approval, rule-based systems
+
+**Neural Networks excel at:**
+
+- Image recognition, speech processing, complex pattern detection
+- Problems with lots of data and unclear rules
+
+///
 
 ### Key ML Algorithm Types
 
@@ -106,18 +110,22 @@ def recommend_song(user_preferences):
     return most_popular_from(recommended_songs)
 ```
 
-!!! example "Algorithm Selection Guide"
-    **Use Linear Regression when:**
-    - Predicting prices, temperatures, sales figures
-    - You need to understand which factors matter most
-    
-    **Use Logistic Regression when:**
-    - Making yes/no decisions (spam detection, fraud detection)
-    - You need probability estimates, not just classifications
-    
-    **Use KNN when:**
-    - Making recommendations based on similarity
-    - You have good examples but unclear rules
+/// details | Algorithm Selection Guide
+    type: example
+
+**Use Linear Regression when:**
+- Predicting prices, temperatures, sales figures
+- You need to understand which factors matter most
+
+**Use Logistic Regression when:**
+- Making yes/no decisions (spam detection, fraud detection)
+- You need probability estimates, not just classifications
+
+**Use KNN when:**
+- Making recommendations based on similarity
+- You have good examples but unclear rules
+
+///
 
 <div class="diagram-container">
 <button class="diagram-expand-btn">🔍 View Larger</button>
@@ -250,16 +258,20 @@ poly_model = PolynomialRegression(degree=2)
 poly_model.fit(speeds, mpg)
 ```
 
-!!! tip "When to Use Each Model"
-    **Linear Regression:**
-    - Simple relationships (price vs. size)
-    - When you need interpretable results
-    - Starting point for most problems
-    
-    **Polynomial Regression:**
-    - Curved relationships (fuel efficiency vs. speed)
-    - When linear isn't capturing the pattern
-    - Be careful of overfitting with high degrees!
+/// details | When to Use Each Model
+    type: tip
+
+**Linear Regression:**
+- Simple relationships (price vs. size)
+- When you need interpretable results
+- Starting point for most problems
+
+**Polynomial Regression:**
+- Curved relationships (fuel efficiency vs. speed)
+- When linear isn't capturing the pattern
+- Be careful of overfitting with high degrees!
+
+///
 - **Logistic Regression Example:**
     ```python
     import math
@@ -403,15 +415,17 @@ is_fair = fairness_checker.evaluate_fairness(
 4. **Transparency:** Make AI decision processes explainable and auditable
 5. **Continuous Monitoring:** Track AI performance across groups after deployment
 
-!!! warning "Ethical Responsibility"
-    **As future software developers, you have a responsibility to:**
-    - Question whether your data and algorithms are fair
-    - Test your systems across diverse populations
-    - Consider the broader impact of your technology
-    - Advocate for ethical practices in your workplace
-    
-    **Remember:** Just because an algorithm is mathematically "optimal" doesn't mean it's ethically right.
+/// admonition | Ethical Responsibility
+    type: warning
 
+**As future software developers, you have a responsibility to:**
+- Question whether your data and algorithms are fair
+- Test your systems across diverse populations
+- Consider the broader impact of your technology
+- Advocate for ethical practices in your workplace
+
+**Remember:** Just because an algorithm is mathematically "optimal" doesn't mean it's ethically right.
+///
 ---
 
 ## 🎯 Hands-On Learning Activity: Build Your First ML Automation System
@@ -523,13 +537,3 @@ for book in collab_recommender.recommend_books("Alice"):
 - **Implement bias detection** to ensure recommendations work fairly across different student groups
 - **Create a simple web interface** for students to get recommendations
 - **Add machine learning** to automatically learn book similarities from borrowing patterns
-
-!!! success "Learning Outcomes"
-    By completing this activity, you'll understand:
-    - How to translate real-world problems into ML solutions
-    - The trade-offs between different recommendation approaches
-    - How bias can affect automated systems
-    - The importance of testing and evaluation in ML systems
-
----
-*Key learning outcomes and reflection questions for the entire Software Automation topic will be added in the final Review & Reflection section.*

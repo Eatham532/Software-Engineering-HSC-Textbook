@@ -12,13 +12,17 @@ Object-oriented programming (OOP) marks a significant evolution from procedural 
 
 Understanding each OOP feature with comprehensive examples helps students apply these concepts effectively in their own programs.
 
-!!! example "Think Like a Gamer! 🎮"
-    **Object-Oriented Programming is everywhere around you:**
+/// admonition | Think Like a Gamer! 🎮
+    type: example
 
-    - **Minecraft:** Every block, tool, and mob is an object with properties and behaviors
-    - **Fortnite:** Your character, weapons, and vehicles are all objects
-    - **Discord:** Messages, servers, and users are objects with specific attributes and actions
-    - **Spotify:** Songs, playlists, and artists are objects that interact with each other
+**Object-Oriented Programming is everywhere around you:**
+
+- **Minecraft:** Every block, tool, and mob is an object with properties and behaviors
+- **Fortnite:** Your character, weapons, and vehicles are all objects
+- **Discord:** Messages, servers, and users are objects with specific attributes and actions
+- **Spotify:** Songs, playlists, and artists are objects that interact with each other
+
+///
 
 #### **Objects**
 Objects are instances of classes that combine data (attributes) and behavior (methods). Each object maintains its own state and exposes methods to interact with that state.
@@ -194,6 +198,9 @@ print(my_phone.get_status())
 
 **Create a `GameCharacter` class for an RPG game:**
 
+/// details | Template
+	type: info
+	
 ```python
 class GameCharacter:
     def __init__(self, name, character_class="Warrior"):
@@ -216,7 +223,7 @@ class GameCharacter:
 hero = GameCharacter("Link", "Hero")
 enemy = GameCharacter("Goblin", "Monster")
 ```
-
+///
 ### Challenge 3: Real-World Application
 
 **Choose Your Own Adventure:**
@@ -233,21 +240,23 @@ Pick something you use daily and create a class for it:
 2. What methods (actions) should your object be able to perform?
 3. How does creating objects make your code more organized?
 
-??? success "Sample Solutions"
-    **Smartphone Solution:**
-    ```python
-    def install_app(self, app_name, app_size_gb):
-        if self.storage_used + app_size_gb <= self.storage_gb:
-            self.apps_installed.append(app_name)
-            self.storage_used += app_size_gb
-            print(f"✅ Installed {app_name} ({app_size_gb}GB)")
-        else:
-            print(f"❌ Not enough storage for {app_name}")
-    
-    def charge_battery(self, amount):
-        self.battery_percentage = min(100, self.battery_percentage + amount)
-        print(f"🔋 Battery charged to {self.battery_percentage}%")
-    ```
+/// details | Sample Smartphone Solution
+    type: example
+
+```python
+def install_app(self, app_name, app_size_gb):
+	if self.storage_used + app_size_gb <= self.storage_gb:
+		self.apps_installed.append(app_name)
+		self.storage_used += app_size_gb
+		print(f"✅ Installed {app_name} ({app_size_gb}GB)")
+	else:
+		print(f"❌ Not enough storage for {app_name}")
+
+def charge_battery(self, amount):
+	self.battery_percentage = min(100, self.battery_percentage + amount)
+	print(f"🔋 Battery charged to {self.battery_percentage}%")
+```
+///
 
 ---
 ### Procedural vs. OOP: A Comprehensive Comparison
@@ -263,7 +272,9 @@ Understanding the fundamental differences between procedural and object-oriented
 - **Global State**: Data shared through global variables or parameter passing
 - **Data and Functions Separate**: Data structures and functions that operate on them are independent
 
-**Example: Library Management System (Procedural)**
+/// details | Library Management System (Procedural)
+	type: example
+	
 ```python
 # Global data structures
 books = []
@@ -340,17 +351,19 @@ register_member("Alice Johnson", "M001")
 borrow_book("M001", "978-0-452-28423-4")
 generate_report()
 ```
-
+///
 #### **Object-Oriented Programming Characteristics**
 
 **Structure and Organization:**
 
--**Object-Centric**: Program organized around objects representing real-world entities
+- **Object-Centric**: Program organized around objects representing real-world entities
 - **Encapsulation**: Data and methods bundled together within classes
 - **Inheritance**: Code reuse through class hierarchies
 - **Polymorphism**: Same interface, different implementations
 
-**Example: Library Management System (OOP)**
+/// details | Library Management System (OOP)
+	type: example
+	
 ```python
 from datetime import datetime
 
@@ -515,7 +528,7 @@ library.process_borrowing("M001", "978-0-452-28423-4")
 # Generate report
 library.generate_report()
 ```
-
+///
 #### **Key Differences Comparison**
 
 | Aspect | Procedural Programming | Object-Oriented Programming |
@@ -541,7 +554,7 @@ library.generate_report()
 
 **Object-Oriented Programming is Better For:**
 
--Large, complex applications
+- Large, complex applications
 - GUI applications and user interfaces
 - Web applications and services
 - Games and simulations
@@ -549,19 +562,18 @@ library.generate_report()
 - Team-based development projects
 - Applications requiring frequent updates and maintenance
 
-!!! tip "Best Practice"
-    **Hybrid Approach:** Modern applications often combine both paradigms. Use OOP for overall architecture and system design, while employing procedural techniques for specific algorithms or performance-critical sections. Python itself demonstrates this - it's object-oriented but allows procedural programming when appropriate.
+/// admonition | Best Practice
+	type: tip
 
-```python
-# Example of hybrid approach
-print("Living Room Status:", living_room_light.get_status())
-print("Bedroom Status:", bedroom_light.get_status())
-```
+**Hybrid Approach:** Modern applications often combine both paradigms. Use OOP for overall architecture and system design, while employing procedural techniques for specific algorithms or performance-critical sections. Python itself demonstrates this - it's object-oriented but allows procedural programming when appropriate.
+///
 
 #### **Classes**
 Classes define the blueprint for objects, specifying their attributes and behaviors. They enable code organization and reuse.
 
-**Advanced Example: Student Management System**
+/// details | Advanced Example: Student Management System
+	type: example
+	
 ```python
 from datetime import datetime
 
@@ -662,7 +674,7 @@ print(f"Average: {student1.calculate_average()}%")
 print(f"Total students: {Student.get_total_students()}")
 print(f"Grade letter: {Student.grade_to_letter(85)}")
 ```
-
+///
 ### System Modeling: From Analysis to Design
 
 System modeling is a crucial step in software development that helps developers understand, communicate, and design complex systems before implementation. Different modeling techniques serve different purposes in the development process.
@@ -687,6 +699,7 @@ A Data Flow Diagram (DFD) shows how information moves through a system and what 
 <div class="diagram-container">
 <button class="diagram-expand-btn">🔍 View Larger</button>
 <div class="diagram-content">
+
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"background": "transparent", "primaryColor": "#4f46e5", "primaryTextColor": "#1e293b", "primaryBorderColor": "#e2e8f0", "lineColor": "#64748b"}} }%%
 flowchart TD
@@ -729,8 +742,12 @@ Let's trace through a student submitting an assignment:
 7. **👨‍🎓 Student** can request progress updates from **📊 Progress Tracker**
 8. **📊 Progress Tracker** retrieves **Grade Data** from the database and sends a **Progress Report** back to the student
 
-!!! example "Real-World Connection"
-    **Canvas Learning Management System** - This DFD resembles how Canvas works! When you submit an assignment, it goes through similar data flows: authentication, submission handling, storage, grading, and progress tracking.
+/// admonition | Real-World Connection
+	type: example
+	
+**Canvas Learning Management System** - This DFD resembles how Canvas works! When you submit an assignment, it goes through similar data flows: authentication, submission handling, storage, grading, and progress tracking.
+
+///
 
 **DFD Components Explained:**
 
@@ -794,11 +811,11 @@ Structure charts work like an organizational chart for your software! They show 
 
 **Top Level (Main System):**
 
--🏪 **E-commerce Main System** is the "boss" - it controls everything
+- 🏪 **E-commerce Main System** is the "boss" - it controls everything
 
 **Second Level (Major Modules):**
 
--🔐 **User Authentication** - handles all login-related tasks
+- 🔐 **User Authentication** - handles all login-related tasks
 - 📦 **Product Catalog** - manages all product-related features  
 - 🛒 **Shopping Cart** - handles cart operations
 - 💳 **Payment Processing** - manages all payment tasks
@@ -817,17 +834,20 @@ Each major module breaks down into specific tasks:
   - Remove Items (take products out)
   - Calculate Totals (add up prices + tax)
 
-!!! tip "Development Team Benefits"
-    **Team Assignment Made Easy:** With this structure chart, you could assign:
-    - **Team A:** Work on User Authentication module
-    - **Team B:** Build the Product Catalog  
-    - **Team C:** Handle Shopping Cart functionality
-    
-    Each team knows exactly what they need to build and how it connects to other parts!
+/// details | Development Team Benefits
+	type: tip
+	
+**Team Assignment Made Easy:** With this structure chart, you could assign:
+- **Team A:** Work on User Authentication module
+- **Team B:** Build the Product Catalog  
+- **Team C:** Handle Shopping Cart functionality
+
+Each team knows exactly what they need to build and how it connects to other parts!~
+///
 
 **Structure Chart Benefits:**
 
--**Hierarchical Decomposition**: Break complex systems into manageable modules
+- **Hierarchical Decomposition**: Break complex systems into manageable modules
 - **Clear Dependencies**: Show which modules depend on others
 - **Team Organization**: Help assign development tasks to different team members
 
@@ -934,11 +954,14 @@ Class diagrams are like blueprints for your objects! They show what data each cl
 
 **Class Structure:**
 Each box represents a class and contains three sections:
+
 1. **Class Name** (top): What the class is called
 2. **Attributes** (middle): Data it stores (marked with - for private, + for public)
 3. **Methods** (bottom): Actions it can perform
 
-**Example - Student Class:**
+/// details | Example Class Structure
+	type: tip
+	
 ```
 Student
 -studentId: String          (private data - student's ID number)
@@ -946,37 +969,41 @@ Student
 +enrollInSubject(): void   (public method - can sign up for classes)
 +calculateGPA(): double    (public method - works out grade average)
 ```
+///
 
 **Relationship Types Explained:**
 
 🔼 **Inheritance (Triangle Arrow):**
 
--`Person <|-- Student` means "Student IS-A Person"
+- Person `<|-- Student` means "Student IS-A Person"
 - Student inherits all attributes from Person (firstName, lastName, email, etc.)
 - Like saying "A student is a type of person"
 
 ↔️ **Association (Simple Line):**
 
--Shows classes that work together
+- Shows classes that work together
 - `Student "many" --> "many" Subject` means students can take multiple subjects, and subjects can have multiple students
 
 **Multiplicity Numbers:**
 
--**"1"** = exactly one
+- **"1"** = exactly one
 - **"many"** = zero or more  
 - **"1..3"** = between 1 and 3
 
-!!! example "Real-World Example"
-    **Your School Right Now:** 
-    - You (Student) inherit basic person info like name and email
-    - You're enrolled in many subjects (Math, English, Science)
-    - Each subject has many students
-    - Teachers can teach multiple subjects
-    - The school contains all students, teachers, and subjects
+/// admonition | Real-World Example
+	type: example
+	
+**Your School Right Now:** 
+- You (Student) inherit basic person info like name and email
+- You're enrolled in many subjects (Math, English, Science)
+- Each subject has many students
+- Teachers can teach multiple subjects
+- The school contains all students, teachers, and subjects
+///
 
 **Class Diagram Relationships:**
 
--**Inheritance** (arrow with triangle): "is-a" relationship
+- **Inheritance** (arrow with triangle): "is-a" relationship
 - **Association** (simple line): Objects are related
 - **Composition** (filled diamond): "part-of" relationship, strong ownership
 - **Aggregation** (empty diamond): "has-a" relationship, weak ownership
@@ -1092,16 +1119,19 @@ graph TB
 | **Sequence Diagram** | Dynamic behavior and object interactions | Time-based view of method calls |
 | **Use Case Diagram** | Requirements gathering and user interactions | User-centered view of system functionality |
 
-!!! note "Modeling Best Practices"
-    **Start Simple, Then Elaborate:**
-    
-    1. Begin with high-level use cases to understand requirements
-    2. Create class diagrams to identify main entities
-    3. Use sequence diagrams for complex interactions
-    4. Add structure charts for implementation planning
-    5. Iterate and refine models as understanding grows
-    
-    **Remember:** Models are communication tools - they should clarify, not complicate understanding.
+/// details | Modeling Best Practices
+	type: note
+	
+**Start Simple, Then Elaborate:**
+
+1. Begin with high-level use cases to understand requirements
+2. Create class diagrams to identify main entities
+3. Use sequence diagrams for complex interactions
+4. Add structure charts for implementation planning
+5. Iterate and refine models as understanding grows
+
+**Remember:** Models are communication tools - they should clarify, not complicate understanding.
+///
 
 ---
 
@@ -1125,12 +1155,13 @@ graph TB
 - 👩‍🍳 Kitchen Staff → Prepared Food Status → ???
 - 💰 Payment System → Transaction Record → ???
 
-??? success "Sample Solution"
-    Your DFD should include:
-    - **External Entities:** Student, Kitchen Staff, Cashier
-    - **Processes:** Order Processing, Payment Processing, Food Preparation Tracking
-    - **Data Stores:** Menu Database, Order Database, Student Account Database
-    - **Data Flows:** Order details, payment info, preparation status, pickup notifications
+
+Your DFD should include:
+
+- **External Entities:** Student, Kitchen Staff, Cashier
+- **Processes:** Order Processing, Payment Processing, Food Preparation Tracking
+- **Data Stores:** Menu Database, Order Database, Student Account Database
+- **Data Flows:** Order details, payment info, preparation status, pickup notifications
 
 ### Activity 2: Design Class Relationships
 
@@ -1150,6 +1181,9 @@ graph TB
 3. What methods does each class need?
 
 **Start Here:**
+/// details | Example Class Structure
+	type: example
+
 ```
 Student
 - studentId: String
@@ -1165,13 +1199,16 @@ MenuItem
 - available: boolean
 + ???
 ```
+///
 
-??? success "Sample Solution"
-    ```
+/// details | Sample Solution
+	type: success
+    
     Student "1" --> "many" Order : places
     Order "1" --> "many" MenuItem : contains  
     Order "1" --> "1" Payment : has
-    ```
+
+///
 
 ### Activity 3: Real-World Application
 
@@ -1208,7 +1245,9 @@ Effective object-oriented design follows a systematic process that transforms re
 
 Before writing any code, clearly define what the system needs to accomplish.
 
-**Example: Digital Pet Game Requirements**
+/// details | Example: Digital Pet Game Requirements
+	type: example
+	
 ```
 User Story: "As a player, I want to take care of a virtual pet so that I can experience the responsibility of pet ownership without real-world commitment."
 
@@ -1226,7 +1265,7 @@ Non-functional Requirements:
 - Game should run on both desktop and mobile
 - Response time should be under 1 second
 ```
-
+///
 #### **2. Top-down and Bottom-up Design Strategies**
 
 **Top-down Design:** Start with the big picture and break it down into smaller components.
@@ -1235,6 +1274,7 @@ Non-functional Requirements:
 <button class="diagram-expand-btn" onclick="openDiagramModal('topdown-diagram')">🔍 View Larger</button>
 <div id="topdown-diagram" class="diagram-content">
 ```mermaid
+
 %%{init: {"themeVariables": {"primaryColor": "#1565c0", "background": "#ffffff", "primaryTextColor": "#000000", "lineColor": "#333333", "primaryBorderColor": "#1565c0"}} }%%
 flowchart TD
     Game["🎮 Digital Pet Game"] --> Player["👤 Player Management"]
@@ -1265,6 +1305,9 @@ flowchart TD
 </div>
 
 **Bottom-up Design:** Start with basic components and build up to complex systems.
+
+/// details | Example: Code Design
+    type: example
 
 ```python
 # Bottom-up approach: Start with basic building blocks
@@ -1333,12 +1376,14 @@ class Pet:
             "train": TrainAction()
         }
 ```
+///
 
 #### **3. Facade Pattern: Simplifying Complex Systems**
 
 The Facade pattern provides a simplified interface to complex subsystems, making them easier to use and understand.
 
-**Example: Game Management Facade**
+/// details | Example: Game Management Facade
+	type: example
 
 ```python
 class GameFacade:
@@ -1428,14 +1473,16 @@ result = game.perform_pet_action(game_data["game_id"], "feed")
 # Get status (aggregates information from multiple sources)
 summary = game.get_game_summary(game_data["game_id"])
 ```
-
+///
 #### **4. Agile Iterations: Continuous Design Refinement**
 
 Agile development emphasizes iterative design refinement based on feedback and changing requirements.
 
-**Iteration Example: Pet Game Evolution**
+**Iteration Example:** Pet Game Evolution
 
-**Sprint 1: Minimum Viable Product (MVP)**
+/// details | Sprint 1: Minimum Viable Product (MVP)
+	type: example
+	
 ```python
 class SimplePet:
     """Basic pet with minimal functionality"""
@@ -1451,8 +1498,11 @@ class SimplePet:
         self.happiness = min(100, self.happiness + 15)
         self.hunger = max(0, self.hunger - 5)
 ```
+///
 
-**Sprint 2: Enhanced Needs System**
+/// details | Sprint 2: Enhanced Needs System
+	type: example
+	
 ```python
 class ImprovedPet:
     """Pet with more sophisticated needs"""
@@ -1476,8 +1526,12 @@ class ImprovedPet:
         
         self.last_update = current_time
 ```
+///
 
-**Sprint 3: Complex Interactions and AI**
+/// details | Sprint 3: Complex Interactions and AI
+	type: example
+
+****
 ```python
 class AdvancedPet:
     """Pet with personality and learning"""
@@ -1507,12 +1561,14 @@ class AdvancedPet:
         self._update_relationship(action_type, player_mood)
         self._learn_from_interaction(action_type)
 ```
-
+///
 #### **5. Design Principles Integration**
 
 **SOLID Principles in Pet Game Design:**
 
-1. **Single Responsibility Principle (SRP)**
+/// details | 1. Single Responsibility Principle (SRP)
+	type: example
+	
 ```python
 class PetRenderer:
     """Only responsible for rendering pet graphics"""
@@ -1529,8 +1585,11 @@ class ActionValidator:
     def can_perform_action(self, pet, action):
         pass
 ```
+///
 
-2. **Open/Closed Principle (OCP)**
+/// details | 2. Open/Closed Principle (OCP)
+	type: example
+	
 ```python
 class Action(ABC):
     """Base class open for extension, closed for modification"""
@@ -1553,19 +1612,22 @@ class TrainAction(Action):
         pet.skills.add_experience(5)
         pet.energy.decrease(15)
 ```
+///
 
-!!! tip "Design Process Best Practices"
-    **Effective OOP Design Strategy:**
-    
-    1. **Start with Requirements**: Understand what the system needs to do
-    2. **Identify Core Objects**: Find the main entities and their responsibilities  
-    3. **Define Relationships**: Determine how objects interact
-    4. **Apply Design Patterns**: Use proven solutions for common problems
-    5. **Iterate and Refine**: Continuously improve design based on feedback
-    6. **Keep It Simple**: Don't over-engineer - solve current problems, not imaginary ones
-    
-    **Remember**: Good design emerges through iteration, not perfect initial planning.
+/// admonition | Design Process Best Practices
+	type: tip
 
+**Effective OOP Design Strategy:**
+
+1. **Start with Requirements**: Understand what the system needs to do
+2. **Identify Core Objects**: Find the main entities and their responsibilities  
+3. **Define Relationships**: Determine how objects interact
+4. **Apply Design Patterns**: Use proven solutions for common problems
+5. **Iterate and Refine**: Continuously improve design based on feedback
+6. **Keep It Simple**: Don't over-engineer - solve current problems, not imaginary ones
+
+**Remember**: Good design emerges through iteration, not perfect initial planning.
+///
 ### Evaluating OOP Code
 
 - **Readability**: Code should be clear and easy to follow.
@@ -1583,21 +1645,23 @@ for n in numbers:
         max_value = n
 print(max_value)
 ```
-
 ## Programming in OOP: From Design to Implementation
 
 ### Introduction to OOP Development
 
 Object-oriented programming languages empower developers to build modular, maintainable applications by organizing code into reusable classes and methods. Through sophisticated control structures, encapsulated logic, and well-designed class hierarchies, OOP enables clear separation of concerns and supports scalable development. By modeling systems as interacting objects, programmers can easily extend functionality, manage complexity, and ensure that code remains robust as requirements evolve.
 
-!!! tip "Modern OOP Languages"
-    **Popular OOP Languages and Their Strengths:**
-    - **Python**: Excellent for beginners, great libraries, clean syntax
-    - **Java**: Strong typing, enterprise-ready, extensive ecosystem
-    - **C#**: Microsoft ecosystem, powerful IDE support, good performance
-    - **JavaScript**: Web development, flexible objects, functional features
-    - **C++**: High performance, system programming, extensive control
+/// admonition | Modern OOP Languages
+	type: tip
+	
+**Popular OOP Languages and Their Strengths:**
 
+- **Python**: Excellent for beginners, great libraries, clean syntax
+- **Java**: Strong typing, enterprise-ready, extensive ecosystem
+- **C#**: Microsoft ecosystem, powerful IDE support, good performance
+- **JavaScript**: Web development, flexible objects, functional features
+- **C++**: High performance, system programming, extensive control
+///
 ### Design & Implementation: Complete Development Lifecycle
 
 #### **Phase 1: Requirements to Object Model**
@@ -2497,23 +2561,26 @@ class WellDocumentedCourse:
         return hash(self.course_code)
 ```
 
-!!! note "Professional Development Practices"
-    **Code Quality Essentials:**
-    
-    1. **Write Self-Documenting Code**: Use descriptive names, clear structure
-    2. **Add Comprehensive Documentation**: Docstrings, type hints, examples
-    3. **Implement Error Handling**: Validate inputs, handle edge cases gracefully
-    4. **Test Thoroughly**: Unit tests, integration tests, edge case testing
-    5. **Follow Conventions**: PEP 8 for Python, consistent naming patterns
-    6. **Use Version Control**: Git for tracking changes, collaborative development
-    
-    **Remember**: Code is read more often than it's written - optimize for readability and maintainability.
+/// details | Professional Development Practices
+	type: note
+	
+**Code Quality Essentials:**
+
+1. **Write Self-Documenting Code**: Use descriptive names, clear structure
+2. **Add Comprehensive Documentation**: Docstrings, type hints, examples
+3. **Implement Error Handling**: Validate inputs, handle edge cases gracefully
+4. **Test Thoroughly**: Unit tests, integration tests, edge case testing
+5. **Follow Conventions**: PEP 8 for Python, consistent naming patterns
+6. **Use Version Control**: Git for tracking changes, collaborative development
+
+**Remember**: Code is read more often than it's written - optimize for readability and maintainability.
+///
 
 ### Modifying OOP Code
 
 **Extending a Class Hierarchy:**
 
-*Before:*
+	*Before:*
 ```python
 class Book:
     def __init__(self, title):
@@ -2757,33 +2824,33 @@ Choose one of these projects and create a detailed plan:
 3. Write pseudo-code for 2 key methods
 4. Explain how you'll use each OOP concept (inheritance, encapsulation, polymorphism, abstraction)
 
-### Answer Guidelines
+/// details | Sample Answers & Rubric
+    type: success
 
-??? success "Sample Answers & Rubric"
-    **Question 1**: **Answer: b)** Encapsulation protects object data. If the weapon's private attributes (like durability or damage) get corrupted, the object becomes unreliable.
-    
-    **Question 4c - Sample Mage Class:**
-    ```python
-    class Mage(GameCharacter):
-        def __init__(self, name):
-            super().__init__(name, health=80)  # Less health than warrior
-            self.mana = 100
-            self.spells = ["Fireball", "Heal", "Lightning"]
-        
-        def cast_spell(self, spell_name, target=None):
-            if self.mana >= 20:
-                self.mana -= 20
-                print(f"{self._name} casts {spell_name}!")
-            else:
-                print("Not enough mana!")
-    ```
-    
-    **Assessment Criteria:**
-    - **Excellent (A)**: Shows deep understanding, creative solutions, clear explanations
-    - **Good (B)**: Solid grasp of concepts, minor gaps in explanation
-    - **Satisfactory (C)**: Basic understanding, some confusion on relationships
-    - **Needs Work (D/F)**: Major misunderstandings, incomplete responses
+**Question 1**: **Answer: b)** Encapsulation protects object data. If the weapon's private attributes (like durability or damage) get corrupted, the object becomes unreliable.
 
+**Question 4c - Sample Mage Class:**
+```python
+class Mage(GameCharacter):
+    def __init__(self, name):
+        super().__init__(name, health=80)  # Less health than warrior
+        self.mana = 100
+        self.spells = ["Fireball", "Heal", "Lightning"]
+    
+    def cast_spell(self, spell_name, target=None):
+        if self.mana >= 20:
+            self.mana -= 20
+            print(f"{self._name} casts {spell_name}!")
+        else:
+            print("Not enough mana!")
+```
+
+**Assessment Criteria:**
+- **Excellent (A)**: Shows deep understanding, creative solutions, clear explanations
+- **Good (B)**: Solid grasp of concepts, minor gaps in explanation
+- **Satisfactory (C)**: Basic understanding, some confusion on relationships
+- **Needs Work (D/F)**: Major misunderstandings, incomplete responses
+///
 ---
 
 ## 📚 **Additional Resources & Next Steps**

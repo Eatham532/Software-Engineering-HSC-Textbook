@@ -976,35 +976,39 @@ Simulation tools (e.g., VEXcode VR, Tinkercad Circuits) allow you to test contro
 
 Ever wonder why your car doesn't overshoot when you set cruise control to 100 km/h? Or how a robot arm can pick up an egg without crushing it? The magic is **closed-loop control** - where systems constantly adjust their behavior based on feedback, just like how you adjust your hand when reaching for a glass of water!
 
-??? info "Control System Architecture"
-    Closed-loop control systems create a continuous feedback loop that enables precise, adaptive behavior in mechatronic systems.
+/// details | Control System Architecture
+    type: info
 
-    ```mermaid
-    flowchart LR
-        R[🎯 Reference<br/>Desired Value] --> E[➖ Error<br/>Calculator]
-        E --> C[🧠 Controller<br/>PID Algorithm]
-        C --> A[⚙️ Actuator<br/>Motor/Servo]
-        A --> P[🏭 Plant<br/>Physical System]
-        P --> S[📊 Sensor<br/>Feedback]
-        S --> E
-        
-        P --> O[📈 Output<br/>Actual Value]
-        
-        style R fill:#e3f2fd
-        style E fill:#ffebee
-        style C fill:#e8f5e8
-        style A fill:#fff3e0
-        style P fill:#f3e5f5
-        style S fill:#e0f2f1
-        style O fill:#fce4ec
-    ```
+Closed-loop control systems create a continuous feedback loop that enables precise, adaptive behavior in mechatronic systems.
+
+```mermaid
+flowchart LR
+    R[🎯 Reference<br/>Desired Value] --> E[➖ Error<br/>Calculator]
+    E --> C[🧠 Controller<br/>PID Algorithm]
+    C --> A[⚙️ Actuator<br/>Motor/Servo]
+    A --> P[🏭 Plant<br/>Physical System]
+    P --> S[📊 Sensor<br/>Feedback]
+    S --> E
     
-    **The Control Loop in Action:**
-    1. **Set Target:** "I want the robot arm at 45 degrees"
-    2. **Measure Reality:** "The arm is currently at 30 degrees"
-    3. **Calculate Error:** "15 degrees off target"
-    4. **Adjust Output:** "Speed up the motor to close the gap"
-    5. **Repeat Continuously:** Monitor and adjust 50+ times per second!
+    P --> O[📈 Output<br/>Actual Value]
+    
+    style R fill:#e3f2fd
+    style E fill:#ffebee
+    style C fill:#e8f5e8
+    style A fill:#fff3e0
+    style P fill:#f3e5f5
+    style S fill:#e0f2f1
+    style O fill:#fce4ec
+```
+
+**The Control Loop in Action:**
+1. **Set Target:** "I want the robot arm at 45 degrees"
+2. **Measure Reality:** "The arm is currently at 30 degrees"
+3. **Calculate Error:** "15 degrees off target"
+4. **Adjust Output:** "Speed up the motor to close the gap"
+5. **Repeat Continuously:** Monitor and adjust 50+ times per second!
+
+///
 
 #### 🎯 **PID Control: The Industry Standard Algorithm**
 

@@ -11,6 +11,7 @@ nav:
       - Programming for the Web: Year12/ProgrammingForTheWeb.md
       - Software Automation: Year12/SoftwareAutomation.md
       - Software Engineering Project: Year12/SoftwareEngineeringProject.md
+
 theme:
   name: material
   language: en
@@ -30,34 +31,45 @@ theme:
   features:
     - navigation.tabs
     - navigation.top
+    - navigation.instant
+    - navigation.instant.prefetch
     - search.highlight
     - search.suggest
     - content.code.annotate
+    - content.code.copy
+    - content.code.select
     - content.tabs.link
     - toc.follow
 
+
 markdown_extensions:
   - admonition
-  - codehilite
-  - toc:
-      permalink: true
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:mermaid2.fence_mermaid_custom
   - pymdownx.tabbed
-  - pymdownx.details
+  - pymdownx.blocks.details
+  - pymdownx.blocks.admonition
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.emoji
   - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tasklist
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
+  - toc:
+      permalink: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
 
 plugins:
-- search
-- mermaid2
+  - search
+  # - mermaid2:
+  #     arguments:
+  #       securityLevel: 'loose'
 
 extra_css:
   - assets/diagram-modal.css
