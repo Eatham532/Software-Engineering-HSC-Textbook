@@ -262,7 +262,8 @@ class AdminSecurityPanel:
 
 /// details | Security Design Comparison: Novice vs Advanced Users
     type: info
-    Different user types require tailored security approaches that balance usability with protection levels.
+
+Different user types require tailored security approaches that balance usability with protection levels.
 
 ```mermaid
 flowchart TB
@@ -280,16 +281,6 @@ flowchart TB
     
     A1 -.->|"Security Education"| A2
     D2 -.->|"Support & Training"| A1
-    
-    style A1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-    style B1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-    style C1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-    style D1 fill:#e8f5e8,stroke:#4caf50,stroke-width:2px
-    
-    style A2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-    style B2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-    style C2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
-    style D2 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
 ```
 
 **Design Principles by User Type:**
