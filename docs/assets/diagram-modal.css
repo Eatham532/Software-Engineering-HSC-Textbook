@@ -1,60 +1,47 @@
-/* Theme-aware CSS custom properties for MkDocs Material */
-:root {
-    --md-overlay-color: rgba(0, 0, 0, 0.8);
-    --md-shadow-z1-color: rgba(0, 0, 0, 0.1);
-    --md-shadow-z2-color: rgba(0, 0, 0, 0.2);
-    --md-shadow-z3-color: rgba(0, 0, 0, 0.4);
-}
-
-/* Dark theme overrides */
-[data-md-color-scheme="slate"] {
-    --md-overlay-color: rgba(0, 0, 0, 0.9);
-    --md-shadow-z1-color: rgba(0, 0, 0, 0.3);
-    --md-shadow-z2-color: rgba(0, 0, 0, 0.5);
-    --md-shadow-z3-color: rgba(0, 0, 0, 0.7);
-}
-
-/* Diagram Container Styling */
+/* Clean Textbook Diagram Container Styling */
 .diagram-container {
     position: relative;
-    margin: 1em 0;
+    margin: 1.5em 0;
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 0.2rem;
+    border-radius: 8px;
     overflow: hidden;
+    background: var(--md-default-bg-color);
+    transition: border-color 0.2s ease;
 }
 
 .diagram-expand-btn {
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 8px;
+    right: 8px;
     background: var(--md-primary-fg-color);
-    color: var(--md-primary-bg-color);
+    color: var(--md-primary-bg-color, white);
     border: none;
-    border-radius: 0.2rem;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.8rem;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
     font-weight: 500;
     cursor: pointer;
-    z-index: 2; /* Lower than navbar (navbar uses 10) */
+    z-index: 10;
     transition: all 0.2s ease;
-    box-shadow: 0 2px 4px var(--md-shadow-z1-color, rgba(0,0,0,0.1));
+    opacity: 0.9;
 }
 
 .diagram-expand-btn:hover {
     background: var(--md-accent-fg-color);
+    opacity: 1;
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px var(--md-shadow-z1-color, rgba(0,0,0,0.15));
 }
 
 .diagram-content {
     position: relative;
     max-height: 400px;
     overflow: hidden;
-    padding: 1rem;
-    padding-top: 3rem; /* Add space for the button */
+    padding: 16px;
+    padding-top: 40px;
+    background: var(--md-default-bg-color);
 }
 
-/* Modal Styling */
+/* Clean Modal Styles */
 .diagram-modal {
     display: none;
     position: fixed;
@@ -63,9 +50,8 @@
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--md-overlay-color, rgba(0, 0, 0, 0.8));
-    backdrop-filter: blur(2px);
-    animation: fadeIn 0.3s ease;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
 }
 
 .diagram-modal.active {
@@ -76,274 +62,194 @@
 }
 
 .diagram-modal-content {
-    position: relative;
     background: var(--md-default-bg-color);
-    border-radius: 12px;
-    box-shadow: 0 20px 60px var(--md-shadow-z3-color, rgba(0,0,0,0.4));
-    width: min(95vw, 1400px);
-    height: min(90vh, 900px);
+    border-radius: 8px;
+    width: min(95vw, 1200px);
+    height: min(90vh, 800px);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    animation: slideIn 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Fullscreen mode adjustments */
+.diagram-modal:fullscreen .diagram-modal-content,
+.diagram-modal:-webkit-full-screen .diagram-modal-content,
+.diagram-modal:-moz-full-screen .diagram-modal-content {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+}
+
+.diagram-modal:fullscreen,
+.diagram-modal:-webkit-full-screen,
+.diagram-modal:-moz-full-screen {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--md-default-bg-color);
 }
 
 .diagram-modal-header {
-    padding: 1.2rem 1.8rem;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(135deg, var(--md-primary-fg-color--light), var(--md-primary-fg-color));
-    color: white;
-    position: relative;
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color, white);
 }
 
-.diagram-modal-title {
-    font-size: 1.3rem;
-    font-weight: 600;
+.diagram-modal-header h3 {
     margin: 0;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .diagram-modal-close {
-    background: var(--md-default-bg-color--light, rgba(255, 255, 255, 0.2));
-    border: none;
-    font-size: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--md-primary-bg-color, white);
+    font-size: 1.2rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
     cursor: pointer;
-    color: var(--md-typeset-color);
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
 }
 
 .diagram-modal-close:hover {
-    background: var(--md-default-bg-color--lighter, rgba(255, 255, 255, 0.3));
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .diagram-modal-body {
     flex: 1;
-    overflow: hidden;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(45deg, 
-        var(--md-default-bg-color--light, #f8f9fa) 0%, 
-        var(--md-default-bg-color, #ffffff) 100%);
-    min-height: 0; /* Important for flexbox */
+    background: var(--md-default-bg-color);
+    overflow: hidden;
 }
 
-.diagram-modal-viewport {
+.diagram-viewport {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    position: relative;
     cursor: grab;
-    display: block; /* Changed from flex to block for absolute positioning */
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.diagram-modal-viewport:active {
-    cursor: grabbing;
-}
-
-.diagram-modal-svg {
-    display: block;
-    margin: 0 auto;
-    transition: transform 0.15s ease;
-    transform-origin: center center;
-    max-width: none;
-    max-height: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px var(--md-shadow-z2-color, rgba(0,0,0,0.1));
+    position: relative;
     background: var(--md-default-bg-color);
 }
 
-/* Zoom Controls */
-.diagram-zoom-controls {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    z-index: 10;
+.diagram-viewport:active {
+    cursor: grabbing;
 }
 
-.diagram-zoom-btn {
-    background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
-    color: white;
+.diagram-viewport svg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 0 0;
+    transition: transform 0.15s ease;
+}
+
+.diagram-controls {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 10;
+    background: var(--md-default-bg-color);
+    border-radius: 6px;
+    padding: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.zoom-btn {
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color, white);
     border: none;
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.3rem;
+    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px var(--md-shadow-z1-color, rgba(0,0,0,0.2));
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
 }
 
-.diagram-zoom-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 16px var(--md-shadow-z2-color, rgba(0,0,0,0.3));
+.zoom-btn:hover {
+    background: var(--md-accent-fg-color);
+    transform: scale(1.05);
 }
 
-.diagram-zoom-btn:active {
-    transform: scale(0.95);
-}
-
-.diagram-zoom-btn:disabled {
-    background: var(--md-default-fg-color--light);
-    cursor: not-allowed;
-    transform: none;
-    opacity: 0.5;
-}
-
-/* Info Panel */
-.diagram-info-panel {
+.diagram-info {
     position: absolute;
-    top: 1.5rem;
-    left: 1.5rem;
-    background: var(--md-overlay-color), rgba(0, 0, 0, 0.05);
-    color: var(--md-typeset-color);
-    padding: 0.8rem 1.2rem;
-    border-radius: 8px;
+    top: 16px;
+    left: 16px;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    padding: 8px 12px;
+    border-radius: 4px;
     font-size: 0.85rem;
     z-index: 10;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px var(--md-shadow-z1-color, rgba(0,0,0,0.2));
+    border: 1px solid var(--md-default-fg-color--lightest);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-help {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    z-index: 10;
+    max-width: 250px;
     line-height: 1.4;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-#zoom-level {
-    font-weight: 600;
-    color: var(--md-accent-fg-color--light);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .diagram-modal.active {
-        padding: 10px;
-    }
-    
-    .diagram-modal-content {
-        width: 100vw;
-        height: 100vh;
-        border-radius: 0;
-        max-width: none;
-        max-height: none;
-    }
-    
-    .diagram-modal-header {
-        padding: 1rem;
-    }
-    
-    .diagram-modal-title {
-        font-size: 1.1rem;
-    }
-    
-    .diagram-modal-viewport {
-        padding: 15px;
-    }
-    
-    .diagram-zoom-controls {
-        bottom: 1rem;
-        right: 1rem;
-        gap: 0.5rem;
-    }
-    
-    .diagram-zoom-btn {
-        width: 2.5rem;
-        height: 2.5rem;
-        font-size: 1.1rem;
-    }
-    
-    .diagram-info-panel {
-        top: 1rem;
-        left: 1rem;
-        right: 1rem;
-        font-size: 0.8rem;
-        padding: 0.6rem 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .diagram-modal-viewport {
-        padding: 10px;
-    }
-    
-    .diagram-zoom-controls {
-        bottom: 0.5rem;
-        right: 0.5rem;
-    }
-    
-    .diagram-zoom-btn {
-        width: 2.2rem;
-        height: 2.2rem;
-        font-size: 1rem;
-    }
-    
-    .diagram-info-panel {
-        position: relative;
-        top: auto;
-        left: auto;
-        right: auto;
-        margin: 0.5rem;
-        font-size: 0.75rem;
-    }
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-.diagram-modal.active .diagram-modal-content {
-    animation: slideIn 0.4s ease;
-}
-
-/* Loading state */
 .diagram-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    padding: 16px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 300px;
-    font-size: 1.1rem;
-    color: var(--md-default-fg-color--light);
-    gap: 1rem;
+    gap: 12px;
+    font-weight: 500;
+    border: 1px solid var(--md-default-fg-color--lightest);
 }
 
 .diagram-loading::before {
-    content: '';
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--md-default-fg-color--lightest);
-    border-top: 3px solid var(--md-primary-fg-color);
+    content: "";
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--md-default-fg-color--lightest);
+    border-top: 2px solid var(--md-primary-fg-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -353,5 +259,70 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Theme adaptation - handled by CSS custom properties above */
-/* The following rules are now redundant as we use theme-aware variables */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .diagram-modal-content {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    
+    .diagram-controls {
+        bottom: 12px;
+        right: 12px;
+        padding: 6px;
+    }
+    
+    .zoom-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    .diagram-info {
+        top: 12px;
+        left: 12px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .diagram-help {
+        bottom: 12px;
+        left: 12px;
+        padding: 8px;
+        font-size: 0.75rem;
+        max-width: 200px;
+    }
+    
+    .diagram-expand-btn {
+        top: 6px;
+        right: 6px;
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .diagram-content {
+        padding: 12px;
+        padding-top: 32px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .diagram-expand-btn {
+        display: none;
+    }
+    
+    .diagram-container {
+        border: 1px solid #ccc;
+        box-shadow: none;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .diagram-content {
+        max-height: none;
+        background: white;
+        padding: 12px;
+    }
+}

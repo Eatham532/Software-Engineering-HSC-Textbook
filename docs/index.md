@@ -1,30 +1,14 @@
 # NSW HSC Software Engineering Textbook
 
+## Interactive Diagram Example
+
 Welcome to the interactive digital textbook for the NSW HSC Software Engineering 11–12 Syllabus!  
 
 Explore modern software engineering concepts, hands-on coding, and real-world case studies—all in one place.
 
----
-
 ## 📚 Quick Navigation
 
-- [Programming Fundamentals](Year11/ProgrammingFundamentals.md)
-- [The Object-Oriented Paradigm](Year11/ObjectOrientedParadigm.md)
-- [Programming Mechatronics](Year11/ProgrammingMechatronics.md)
-- [Secure Software Architecture](Year12/SecureSoftwareArchitecture.md)
-- [Programming for the Web](Year12/ProgrammingForTheWeb.md)
-- [Software Automation](Year12/SoftwareAutomation.md)
-- [Software Engineering Project](Year12/SoftwareEngineeringProject.md)
-
----
-
 ## 🎯 How to Use This Textbook
-
-- Use the sidebar to jump between topics and years.
-- Try the interactive diagrams and code samples.
-- Check out the outcome table below to track your syllabus progress.
-
----
 
 ## 🏆 Table of Outcomes
 
@@ -39,7 +23,5 @@ Explore modern software engineering concepts, hands-on coding, and real-world ca
 | **SE-11-07**<br>Implements safe and secure programming solutions | **SE-12-07**<br>Designs, develops and implements safe and secure programming solutions |
 | **SE-11-08**<br>Applies language structures to refine code | **SE-12-08**<br>Tests and evaluates language structures to refine code |
 | **SE-11-09**<br>Manages and documents the development of a software project | **SE-12-09**<br>Applies methods to manage and document the development of a software project |
-
----
 
 > Tip: Use the search bar above to quickly find topics,
