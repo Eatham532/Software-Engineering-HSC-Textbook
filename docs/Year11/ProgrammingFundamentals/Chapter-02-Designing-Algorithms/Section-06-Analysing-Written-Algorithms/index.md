@@ -613,9 +613,21 @@ Allow library users to reserve available books and cancel existing reservations 
 
 When algorithms have deep nesting, create a simplified flow diagram first:
 
-```text
-Main → Get Input → Validate → If Valid: Process → Success
-                           → If Invalid: Get Reason → Error
+```kroki-plantuml
+@startuml
+start
+:Main;
+:Get Input;
+:Validate;
+if (Is Valid?) then (yes)
+    :Process;
+    :Success;
+else (no)
+    :Get Reason;
+    :Error;
+endif
+stop
+@enduml
 ```
 
 ### Challenge 2: Many Subprograms
