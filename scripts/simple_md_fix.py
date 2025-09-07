@@ -32,6 +32,41 @@ def fix_file(p: Path):
             out.append(line)
             i += 1
             continue
+        # admonition block: normalize following indented lines to 4-space base indent
+        if stripped.startswith('!!!'):
+            out.append(line)  # keep admonition marker as-is
+            i += 1
+            # collect consecutive lines that belong to the admonition (blank or indented)
+            block_lines = []
+            while i < len(lines):
+                nxt = lines[i]
+                if nxt.strip() == '' or (len(nxt) > 0 and nxt[0].isspace()):
+                    block_lines.append(nxt)
+                    i += 1
+                    continue
+                break
+            # determine original base indent from first non-empty block line
+            orig_base = None
+            for bl in block_lines:
+                if bl.strip() != '':
+                    bl_exp = bl.expandtabs(4)
+                    leading = len(bl_exp) - len(bl_exp.lstrip(' '))
+                    orig_base = leading
+                    break
+            # normalize: map orig_base -> 4 spaces, preserve relative deeper indents
+            for bl in block_lines:
+                if bl.strip() == '':
+                    out.append('')
+                    continue
+                bl_exp = bl.expandtabs(4)
+                leading = len(bl_exp) - len(bl_exp.lstrip(' '))
+                rel = leading - orig_base if orig_base is not None else leading
+                if rel < 0:
+                    rel = 0
+                new_lead = 4 + rel
+                content = bl_exp.lstrip(' ')
+                out.append(' ' * new_lead + content)
+            continue
         # H1 handling
         if re.match(r'^#\s', stripped):
             if not first_h1_seen:

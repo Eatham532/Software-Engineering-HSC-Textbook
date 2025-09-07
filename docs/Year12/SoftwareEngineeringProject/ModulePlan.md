@@ -249,4 +249,3 @@ Exit: students evaluate their solution and present findings.
   - `index.md`
 
   - `quiz.md`
-

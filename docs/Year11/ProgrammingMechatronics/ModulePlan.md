@@ -144,7 +144,7 @@ Exit: students can prototype a small control system in Python with tests.
 
 - index.md: explanation, Python example(s), PlantUML diagram(s), practice tasks, recap.
 
-- quiz.md: 6–10 questions (mix of multiple-choice and short-answer) with an answer key.
+- quiz.md: 3–8 questions using the Markdown-only quiz pattern.
 
 ## Folder naming (mapping to numbered sections)
 

@@ -89,7 +89,7 @@ class DiagramModal {
                         <div class="diagram-controls">
                             <button class="zoom-btn" data-action="in" title="Zoom In">+</button>
                             <button class="zoom-btn" data-action="out" title="Zoom Out">−</button>
-                            <button class="zoom-btn" data-action="reset" title="Fit to Screen">⌂</button>
+                            <button class="zoom-btn" data-action="reset" title="Fit to Screen">⟳</button>
                             <button class="zoom-btn" data-action="fullscreen" title="Fullscreen">⛶</button>
                         </div>
                         <div class="diagram-info">
@@ -97,8 +97,10 @@ class DiagramModal {
                         </div>
                         <div class="diagram-help">
                             <strong>Controls:</strong><br>
-                            Mouse wheel: Zoom • Drag: Pan<br>
-                            Double-click: Reset • ESC: Close
+                            Mouse wheel: Zoom <br>
+                            Drag: Pan <br>
+                            Double-click: Reset <br>
+                            ESC: Close
                         </div>
                         <div class="diagram-loading" id="diagram-loading" style="display: none;">
                             Loading diagram...
@@ -225,18 +227,18 @@ class DiagramModal {
     }
     
     getDiagramType(svg) {
-        const dataType = svg.getAttribute('data-diagram-type');
-        if (dataType) {
-            return dataType.charAt(0).toUpperCase() + dataType.slice(1).toLowerCase() + ' Diagram';
-        }
+        // const dataType = svg.getAttribute('data-diagram-type');
+        // if (dataType) {
+        //     return dataType.charAt(0).toUpperCase() + dataType.slice(1).toLowerCase() + ' Diagram';
+        // }
         
-        if (svg.id?.startsWith('__mermaid_')) {
-            return 'Mermaid Diagram';
-        }
+        // if (svg.id?.startsWith('__mermaid_')) {
+        //     return 'Mermaid Diagram';
+        // }
         
-        if (svg.id === 'Kroki') {
-            return 'PlantUML Diagram';
-        }
+        // if (svg.id === 'Kroki') {
+        //     return 'PlantUML Diagram';
+        // }
         
         return 'Diagram Viewer';
     }

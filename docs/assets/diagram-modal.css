@@ -1,4 +1,4 @@
-/* Clean Textbook Diagram Container Styling */
+/* Enhanced Clean Textbook Diagram Container Styling */
 .diagram-container {
     position: relative;
     margin: 1.5em 0;
@@ -6,7 +6,13 @@
     border-radius: 8px;
     overflow: hidden;
     background: var(--md-default-bg-color);
-    transition: border-color 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.diagram-container:hover {
+    border-color: var(--md-accent-fg-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
 .diagram-expand-btn {
@@ -16,20 +22,22 @@
     background: var(--md-primary-fg-color);
     color: var(--md-primary-bg-color, white);
     border: none;
-    border-radius: 4px;
-    padding: 6px 10px;
-    font-size: 0.75rem;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     z-index: 10;
     transition: all 0.2s ease;
     opacity: 0.9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .diagram-expand-btn:hover {
     background: var(--md-accent-fg-color);
     opacity: 1;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .diagram-content {
@@ -37,8 +45,9 @@
     max-height: 400px;
     overflow: hidden;
     padding: 16px;
-    padding-top: 40px;
+    padding-top: 44px;
     background: var(--md-default-bg-color);
+    border-radius: 6px;
 }
 
 /* Clean Modal Styles */
@@ -105,12 +114,14 @@
     align-items: center;
     background: var(--md-primary-fg-color);
     color: var(--md-primary-bg-color, white);
+    border-radius: 8px 8px 0 0;
 }
 
 .diagram-modal-header h3 {
     margin: 0;
     font-size: 1.1rem;
     font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .diagram-modal-close {
@@ -120,16 +131,18 @@
     font-size: 1.2rem;
     width: 32px;
     height: 32px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
 }
 
 .diagram-modal-close:hover {
     background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 
 .diagram-modal-body {
@@ -146,6 +159,8 @@
     cursor: grab;
     position: relative;
     background: var(--md-default-bg-color);
+    border-radius: 4px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
 }
 
 .diagram-viewport:active {
@@ -159,6 +174,7 @@
     left: 0;
     transform-origin: 0 0;
     transition: transform 0.15s ease;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
 }
 
 .diagram-controls {
@@ -170,17 +186,18 @@
     gap: 8px;
     z-index: 10;
     background: var(--md-default-bg-color);
-    border-radius: 6px;
+    border-radius: 8px;
     padding: 8px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     border: 1px solid var(--md-default-fg-color--lightest);
+    backdrop-filter: blur(8px);
 }
 
 .zoom-btn {
     background: var(--md-primary-fg-color);
     color: var(--md-primary-bg-color, white);
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     width: 36px;
     height: 36px;
     font-size: 1.1rem;
@@ -190,11 +207,17 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .zoom-btn:hover {
     background: var(--md-accent-fg-color);
     transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-btn:active {
+    transform: scale(0.95);
 }
 
 .diagram-info {

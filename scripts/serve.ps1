@@ -2,16 +2,9 @@
 # Restart this script after editing python extension files so changes are picked up.
 
 .venv/Scripts/Activate.ps1
-$env:PYTHONPATH = (Resolve-Path "..\" ).Path
-# If you created a combined CA bundle at C:\cert\combined_ca.pem, use it for this session
-# $combined = 'C:\cert\combined_ca.pem'
-# if (Test-Path $combined) {
-# 	Write-Host "Using combined CA bundle: $combined"
-# 	$env:REQUESTS_CA_BUNDLE = $combined
-# 	$env:SSL_CERT_FILE = $combined
-# } else {
-# 	Write-Host "No combined CA bundle found at $combined; using system/OpenSSL defaults"
-# }
-
+# Ensure PYTHONPATH points to repo root regardless of current directory
+$repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$env:PYTHONPATH = $repoRoot
+Write-Host "PYTHONPATH set to: $env:PYTHONPATH"
 mkdocs serve
 

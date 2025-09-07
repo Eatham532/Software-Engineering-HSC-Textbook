@@ -5,14 +5,14 @@ plugins:
   - search
   - macros
   - include-markdown
-  - git-revision-date-localized
   - kroki:
-      ServerURL: https://kroki.io
+      EnableMermaid: true
+      HttpMethod: POST
       TagFormat: svg
-      FileTypes:
-        - svg
+      ServerURL: http://localhost:8000/
   - awesome-nav:
-      filename: ".nav.yml"
+      filename: ".nav.yml" 
+#  - git-revision-date-localized
 
 theme:
   name: material
@@ -51,8 +51,6 @@ markdown_extensions:
   - footnotes
   - smarty
   - kroki_wrapper
-  - mermaid_wrapper
-  - pymdownx.tabbed
   - pymdownx.blocks.details
   - pymdownx.blocks.admonition
   - pymdownx.inlinehilite
@@ -68,18 +66,21 @@ markdown_extensions:
       anchor_linenums: true
       line_spans: "__span"
       pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
 
 extra_css:
   - assets/diagram-modal.css
-  - assets/diagram-theme-adapt.css
+  - assets/quiz.css
+  - assets/common.css
+  - assets/diagram-fix.css
 
 extra_javascript:
   - assets/diagram-modal.js
-  - assets/diagram-theme-adapt.js
+  - assets/quiz.js
 
 extra:
   generator: false
-
-# Note: awesome-nav will generate the site navigation. If you prefer to manually
-# control navigation, re-add a top-level `nav:` mapping here. Leaving it out
-# prevents the plugin from warning when it replaces `nav` at build time.

@@ -33,9 +33,11 @@ Covers: SDLC steps, collaboration tools, documentation. Outcomes: SE-11-01, SE-1
 
 - Learn: IDE basics (files, run, terminal), Git init/add/commit, safe commit messages.
 
-- Activity: create README.md; make two commits.
+- Activity: Set up a new Git repository for the Grade Calculator project, create a README.md file, make an initial commit with the message "Initial project setup", then add the basic calculator code and commit with "Add basic grade calculation function".
 
 - Diagram: PlantUML component diagram (Student ↔ Repo ↔ IDE).
+
+- Cross-reference: Uses the Grade Calculator from 1.1 as the project example.
 
 ### 1.3 Documentation and code style
 
@@ -43,7 +45,9 @@ Covers: SDLC steps, collaboration tools, documentation. Outcomes: SE-11-01, SE-1
 
 - Learn: README essentials, docstrings, inline comments, simple naming/PEP 8.
 
-- Activity: add docstrings to a trivial Python function.
+- Activity: Write a complete README.md for the Grade Calculator from 1.1, then add docstrings to the `calculate_average()` function.
+
+- Cross-reference: Builds on the Grade Calculator example from 1.1.
 
 ### 1.4 Project management models (Waterfall vs Agile)
 
@@ -74,6 +78,8 @@ Covers: control structures, I/O, analysis, pseudocode and flow/structure charts,
 - Learn: determining inputs and outputs; determining the purpose of the algorithm; desk checking and peer checking.
 
 - Activity: desk-check two branches and record expected outputs.
+
+- Cross-reference: Builds on control structures from 2.1.
 
 ### 2.3 Pseudocode and flowcharts
 
@@ -145,7 +151,9 @@ Covers: number systems, two’s complement, standard data types, data dictionari
 
 - Learn: fields, types, constraints, relationships; units and ranges.
 
-- Activity: draft a Contact List data dictionary.
+- Activity: Create a data dictionary for a Student record with fields for name (string, max 50 chars), age (integer, 16-25), grade_average (float, 0.0-100.0), and enrollment_status (boolean).
+
+- Cross-reference: Uses data types from 3.2.
 
 ### 3.4 Data structures overview
 
@@ -203,6 +211,10 @@ Covers: implementing algorithms in Python; explicit control structures and requi
 
 - Learn (explicit): breakpoints; single line stepping; watches; interfaces between functions; debugging output statements; IDE debugger tooling.
 
+- Activity: Use print statements to debug a simple function that calculates factorial but returns wrong results for input 0.
+
+- Cross-reference: Uses functions from 4.3 and control structures from 4.1.
+
 ### 4.6 Designing suitable test data
 
 - Outcomes: SE-11-06, SE-11-08
@@ -229,7 +241,7 @@ Exit: students ship a small Python solution with clear control/data structures, 
 
 - index.md: beginner-friendly explanation, small Python example(s), PlantUML diagram(s), practice tasks, recap.
 
-- quiz.md: 6–10 questions (mix of multiple-choice and short-answer) with an answer key.
+- quiz.md: 3–8 questions using the Markdown-only quiz pattern.
 
 - Assets: any images/SVGs stored alongside the section’s topic.
 
