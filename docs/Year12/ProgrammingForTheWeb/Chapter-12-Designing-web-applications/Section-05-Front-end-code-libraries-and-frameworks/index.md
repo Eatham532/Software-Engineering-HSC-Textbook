@@ -1,7 +1,5 @@
 # 12.5 Front-end code libraries and frameworks
 
-- Outcomes: SE-12-06
-
 ## Why it matters
 
 Front-end libraries and frameworks provide pre-built solutions for common web development challenges, enabling developers to build complex applications more efficiently. Understanding when and how to use these tools - versus building custom solutions - is crucial for making informed architectural decisions that balance development speed, maintainability, and project requirements.

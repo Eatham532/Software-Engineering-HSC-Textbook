@@ -1,7 +1,5 @@
 # 12.4 CSS, UI and UX principles
 
-- Outcomes: SE-12-06
-
 ## Why it matters
 
 CSS and design principles form the foundation of user experience on the web. Understanding how to separate content from presentation, create consistent designs, and build accessible interfaces ensures that web applications are both visually appealing and usable by everyone. Good UI/UX design directly impacts user satisfaction and application success.

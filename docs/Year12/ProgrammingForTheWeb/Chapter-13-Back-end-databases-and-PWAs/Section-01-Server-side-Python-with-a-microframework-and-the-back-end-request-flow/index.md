@@ -1,7 +1,5 @@
 # 13.1 Server-side Python with a microframework and the back-end request flow
 
-- Outcomes: SE-12-02
-
 ## Why it matters
 
 Understanding how web servers and frameworks process requests is fundamental to backend development. The request-response cycle forms the backbone of web applications, involving multiple layers from web server software to application frameworks, databases, and external services. Mastering this flow enables developers to build efficient, secure, and scalable web applications while understanding where potential bottlenecks and security vulnerabilities may occur.

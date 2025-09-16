@@ -539,7 +539,9 @@ find_target_in_list(numbers, 99)  # Not found
 
 ## Practice Exercises
 
-### Exercise 1: Temperature Converter
+/// details | Exercise 1: Temperature Converter
+    type: question
+    open: false
 
 Write a program that:
 
@@ -551,7 +553,79 @@ Write a program that:
 
 4. Validates input temperature ranges
 
-### Exercise 2: Simple ATM
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+def celsius_to_fahrenheit(celsius):
+    """Convert Celsius to Fahrenheit."""
+    return (celsius * 9/5) + 32
+
+def fahrenheit_to_celsius(fahrenheit):
+    """Convert Fahrenheit to Celsius."""
+    return (fahrenheit - 32) * 5/9
+
+def main():
+    while True:
+        print("\nTemperature Converter Menu:")
+        print("1. Celsius to Fahrenheit")
+        print("2. Fahrenheit to Celsius")
+        print("3. Exit")
+        
+        choice = input("Enter your choice (1-3): ").strip()
+        
+        if choice == "1":
+            try:
+                celsius = float(input("Enter temperature in Celsius (-273.15 to 1000): "))
+                if celsius < -273.15:
+                    print("Error: Temperature cannot be below absolute zero!")
+                else:
+                    fahrenheit = celsius_to_fahrenheit(celsius)
+                    print(f"{celsius}°C = {fahrenheit:.2f}°F")
+            except ValueError:
+                print("Error: Please enter a valid number!")
+                
+        elif choice == "2":
+            try:
+                fahrenheit = float(input("Enter temperature in Fahrenheit (-459.67 to 1832): "))
+                if fahrenheit < -459.67:
+                    print("Error: Temperature cannot be below absolute zero!")
+                else:
+                    celsius = fahrenheit_to_celsius(fahrenheit)
+                    print(f"{fahrenheit}°F = {celsius:.2f}°C")
+            except ValueError:
+                print("Error: Please enter a valid number!")
+                
+        elif choice == "3":
+            print("Goodbye!")
+            break
+        else:
+            print("Error: Invalid choice. Please select 1, 2, or 3.")
+
+if __name__ == "__main__":
+    main()
+```
+
+This program demonstrates:
+
+- **While loop** for the main menu
+
+- **If/elif/else** for menu choices and input validation
+
+- **Try/except** for error handling
+
+- **Function definitions** for the conversion logic
+
+- **Input validation** for temperature ranges
+///
+///
+
+///
+
+/// details | Exercise 2: Simple ATM
+    type: question
+    open: false
 
 Create an ATM simulation with:
 
@@ -563,7 +637,103 @@ Create an ATM simulation with:
 
 4. Loop until user chooses to exit
 
-### Exercise 3: Grade Book Manager
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+def main():
+    # Initialize account
+    correct_pin = "1234"
+    balance = 1000.00
+    max_attempts = 3
+    
+    # PIN validation
+    for attempt in range(max_attempts):
+        pin = input("Enter your PIN: ").strip()
+        if pin == correct_pin:
+            print("PIN accepted. Welcome!")
+            break
+        else:
+            remaining = max_attempts - attempt - 1
+            if remaining > 0:
+                print(f"Incorrect PIN. {remaining} attempts remaining.")
+            else:
+                print("Too many incorrect attempts. Card blocked.")
+                return
+    else:
+        return  # Exit if PIN validation failed
+    
+    # Main ATM menu
+    while True:
+        print(f"\nCurrent Balance: ${balance:.2f}")
+        print("\nATM Menu:")
+        print("1. Check Balance")
+        print("2. Withdraw")
+        print("3. Deposit")
+        print("4. Exit")
+        
+        choice = input("Enter your choice (1-4): ").strip()
+        
+        if choice == "1":
+            print(f"Your current balance is: ${balance:.2f}")
+            
+        elif choice == "2":
+            try:
+                amount = float(input("Enter withdrawal amount: $"))
+                if amount <= 0:
+                    print("Error: Withdrawal amount must be positive!")
+                elif amount > balance:
+                    print("Error: Insufficient funds!")
+                else:
+                    balance -= amount
+                    print(f"Withdrawal successful. New balance: ${balance:.2f}")
+            except ValueError:
+                print("Error: Please enter a valid amount!")
+                
+        elif choice == "3":
+            try:
+                amount = float(input("Enter deposit amount: $"))
+                if amount <= 0:
+                    print("Error: Deposit amount must be positive!")
+                else:
+                    balance += amount
+                    print(f"Deposit successful. New balance: ${balance:.2f}")
+            except ValueError:
+                print("Error: Please enter a valid amount!")
+                
+        elif choice == "4":
+            print("Thank you for using our ATM. Goodbye!")
+            break
+            
+        else:
+            print("Error: Invalid choice. Please select 1, 2, 3, or 4.")
+
+if __name__ == "__main__":
+    main()
+```
+
+This program demonstrates:
+
+- **For loop** with range for PIN attempts
+
+- **While loop** for the main menu
+
+- **If/elif/else** for menu choices and validation
+
+- **Try/except** for input validation
+
+- **Break** and **return** for flow control
+
+- **String formatting** for currency display
+///
+///
+
+///
+
+/// details | Exercise 3: Grade Book Manager
+    type: question
+    open: false
 
 Build a grade management system:
 
@@ -575,44 +745,158 @@ Build a grade management system:
 
 4. Display grade distribution (A, B, C, D, F counts)
 
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+def get_letter_grade(score):
+    """Convert numeric score to letter grade."""
+    if score >= 90:
+        return 'A'
+    elif score >= 80:
+        return 'B'
+    elif score >= 70:
+        return 'C'
+    elif score >= 60:
+        return 'D'
+    else:
+        return 'F'
+
+def main():
+    students = {}  # Dictionary to store student grades
+    
+    while True:
+        print("\nGrade Book Manager")
+        print("1. Add student and grade")
+        print("2. View all students")
+        print("3. Calculate class statistics")
+        print("4. Exit")
+        
+        choice = input("Enter your choice (1-4): ").strip()
+        
+        if choice == "1":
+            name = input("Enter student name: ").strip()
+            if not name:
+                print("Error: Name cannot be empty!")
+                continue
+                
+            try:
+                score = float(input("Enter grade (0-100): "))
+                if score < 0 or score > 100:
+                    print("Error: Grade must be between 0 and 100!")
+                else:
+                    students[name] = score
+                    print(f"Added {name} with grade {score}")
+            except ValueError:
+                print("Error: Please enter a valid numeric grade!")
+                
+        elif choice == "2":
+            if not students:
+                print("No students in the grade book yet.")
+            else:
+                print("\nStudent Grades:")
+                for name, score in students.items():
+                    letter = get_letter_grade(score)
+                    print(f"{name}: {score} ({letter})")
+                    
+        elif choice == "3":
+            if not students:
+                print("No students in the grade book yet.")
+            else:
+                # Calculate statistics
+                scores = list(students.values())
+                class_average = sum(scores) / len(scores)
+                highest = max(scores)
+                lowest = min(scores)
+                
+                # Grade distribution
+                distribution = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'F': 0}
+                for score in scores:
+                    letter = get_letter_grade(score)
+                    distribution[letter] += 1
+                
+                print("
+Class Statistics:")
+                print(f"Number of students: {len(students)}")
+                print(f"Class average: {class_average:.2f}")
+                print(f"Highest score: {highest}")
+                print(f"Lowest score: {lowest}")
+                print("\nGrade Distribution:")
+                for grade, count in distribution.items():
+                    print(f"{grade}: {count} students")
+                    
+        elif choice == "4":
+            print("Goodbye!")
+            break
+            
+        else:
+            print("Error: Invalid choice. Please select 1, 2, 3, or 4.")
+
+if __name__ == "__main__":
+    main()
+```
+
+This program demonstrates:
+
+- **Dictionary** for storing student data
+
+- **While loop** for the main menu
+
+- **If/elif/else** for menu choices and grade validation
+
+- **For loops** for iterating through students and calculating statistics
+
+- **List comprehensions** and built-in functions (sum, max, min)
+
+- **String formatting** for output display
+
+- **Input validation** for names and scores
+///
+///
+///
+
 ## Common Mistakes to Avoid
 
 1. **Infinite loops**: Always ensure loop conditions can become false
-```python
-# BAD - infinite loop
-count = 1
-while count <= 5:
-    print(count)
-    # Forgot to increment count!
 
-# GOOD - proper increment
-count = 1
-while count <= 5:
-    print(count)
-    count += 1
-```
+   ```python
+   # BAD - infinite loop
+   count = 1
+   while count <= 5:
+       print(count)
+       # Forgot to increment count!
+
+   # GOOD - proper increment
+   count = 1
+   while count <= 5:
+       print(count)
+       count += 1
+   ```
 
 2. **Off-by-one errors**: Be careful with range boundaries
-```python
-# BAD - misses last element
-for i in range(len(my_list) - 1):
-    print(my_list[i])
 
-# GOOD - includes all elements
-for i in range(len(my_list)):
-    print(my_list[i])
-```
+   ```python
+   # BAD - misses last element
+   for i in range(len(my_list) - 1):
+       print(my_list[i])
+
+   # GOOD - includes all elements
+   for i in range(len(my_list)):
+       print(my_list[i])
+   ```
 
 3. **Indentation errors**: Python relies on proper indentation
-```python
-# BAD - incorrect indentation
-if score >= 90:
-print("Excellent!")  # Should be indented
 
-# GOOD - proper indentation
-if score >= 90:
-    print("Excellent!")
-```
+   ```python
+   # BAD - incorrect indentation
+   if score >= 90:
+   print("Excellent!")  # Should be indented
+
+   # GOOD - proper indentation
+   if score >= 90:
+       print("Excellent!")
+   ```
 
 ## Summary
 

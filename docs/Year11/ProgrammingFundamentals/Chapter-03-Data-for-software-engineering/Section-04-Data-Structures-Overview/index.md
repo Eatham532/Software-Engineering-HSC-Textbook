@@ -413,19 +413,255 @@ with open("students_dict.csv", "r") as file:
 
 ## Practice Exercises
 
-### Exercise 1: Grade Book System
+/// details | Exercise 1: Grade Book System
+    type: question
+    open: false
 
 Create a 2D list representing a grade book for 4 students and 3 subjects. Calculate the average grade for each student and each subject.
 
-### Exercise 2: Inventory Management
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+# Create a 2D list for 4 students and 3 subjects
+# Format: [[student1_grades], [student2_grades], ...]
+grade_book = [
+    [85, 92, 78],  # Student 1: Math, Science, English
+    [91, 88, 95],  # Student 2
+    [76, 84, 89],  # Student 3
+    [93, 79, 87]   # Student 4
+]
+
+# Calculate average for each student
+print("Student Averages:")
+for i, grades in enumerate(grade_book):
+    student_avg = sum(grades) / len(grades)
+    print(f"Student {i+1}: {student_avg:.1f}")
+
+# Calculate average for each subject
+print("\nSubject Averages:")
+num_subjects = len(grade_book[0])
+for subject in range(num_subjects):
+    subject_grades = [student[subject] for student in grade_book]
+    subject_avg = sum(subject_grades) / len(subject_grades)
+    subject_names = ["Math", "Science", "English"]
+    print(f"{subject_names[subject]}: {subject_avg:.1f}")
+
+# Find highest and lowest grades
+all_grades = [grade for student in grade_book for grade in student]
+print(f"\nOverall Statistics:")
+print(f"Highest grade: {max(all_grades)}")
+print(f"Lowest grade: {min(all_grades)}")
+print(f"Class average: {sum(all_grades)/len(all_grades):.1f}")
+```
+
+This demonstrates:
+
+- **2D list creation** and access
+
+- **List comprehensions** for extracting columns
+
+- **Nested loops** for processing 2D data
+
+- **Mathematical operations** on collections
+
+- **Formatted output** for readability
+///
+///
+///
+
+/// details | Exercise 2: Inventory Management
+    type: question
+    open: false
 
 Use a dictionary to track inventory items with their quantities. Implement functions to add items, remove items, and check if an item is in stock.
 
-### Exercise 3: Browser History
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+def add_item(inventory, item_name, quantity):
+    """Add quantity to existing item or create new item."""
+    if item_name in inventory:
+        inventory[item_name] += quantity
+    else:
+        inventory[item_name] = quantity
+    print(f"Added {quantity} {item_name}(s). New total: {inventory[item_name]}")
+
+def remove_item(inventory, item_name, quantity):
+    """Remove quantity from item if available."""
+    if item_name not in inventory:
+        print(f"Error: {item_name} not found in inventory")
+        return False
+    
+    if inventory[item_name] < quantity:
+        print(f"Error: Only {inventory[item_name]} {item_name}(s) available")
+        return False
+    
+    inventory[item_name] -= quantity
+    print(f"Removed {quantity} {item_name}(s). Remaining: {inventory[item_name]}")
+    return True
+
+def is_in_stock(inventory, item_name, required_quantity=1):
+    """Check if item is available in sufficient quantity."""
+    return item_name in inventory and inventory[item_name] >= required_quantity
+
+def display_inventory(inventory):
+    """Display all items and their quantities."""
+    if not inventory:
+        print("Inventory is empty")
+        return
+    
+    print("Current Inventory:")
+    for item, quantity in inventory.items():
+        status = "IN STOCK" if quantity > 0 else "OUT OF STOCK"
+        print(f"  {item}: {quantity} ({status})")
+
+# Example usage
+inventory = {}
+
+# Add some items
+add_item(inventory, "laptop", 5)
+add_item(inventory, "mouse", 10)
+add_item(inventory, "keyboard", 3)
+
+# Check stock
+print(f"\nMouse in stock (5 needed): {is_in_stock(inventory, 'mouse', 5)}")
+print(f"Monitor in stock: {is_in_stock(inventory, 'monitor')}")
+
+# Remove items
+remove_item(inventory, "mouse", 3)
+remove_item(inventory, "monitor", 1)  # Should fail
+
+# Display final inventory
+print("\nFinal inventory:")
+display_inventory(inventory)
+```
+
+This demonstrates:
+
+- **Dictionary operations** (add, access, modify)
+
+- **Function definitions** with parameters and return values
+
+- **Conditional logic** for validation
+
+- **Error handling** for invalid operations
+
+- **Iteration** over dictionary items
+
+- **Modular design** with separate functions
+///
+///
+///
+
+/// details | Exercise 3: Browser History
+    type: question
+    open: false
 
 Implement a simple browser history using a stack. Add functions to visit a new page, go back, and display current history.
 
-### Exercise 4: Student Database
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+class BrowserHistory:
+    def __init__(self):
+        self.history = []  # Stack to store visited pages
+        self.current_page = None
+    
+    def visit_page(self, url):
+        """Visit a new page, adding it to history."""
+        if self.current_page is not None:
+            self.history.append(self.current_page)
+        self.current_page = url
+        print(f"Visited: {url}")
+    
+    def go_back(self):
+        """Go back to the previous page."""
+        if not self.history:
+            print("Error: No previous page to go back to")
+            return False
+        
+        previous_page = self.history.pop()
+        print(f"Went back to: {previous_page}")
+        self.current_page = previous_page
+        return True
+    
+    def get_current_page(self):
+        """Get the current page URL."""
+        return self.current_page
+    
+    def display_history(self):
+        """Display the browsing history."""
+        if not self.history and self.current_page is None:
+            print("No browsing history")
+            return
+        
+        print("Browsing History (most recent first):")
+        if self.current_page:
+            print(f"  CURRENT: {self.current_page}")
+        
+        # Show history in reverse order (most recent first)
+        for i, page in enumerate(reversed(self.history), 1):
+            print(f"  {i}: {page}")
+    
+    def clear_history(self):
+        """Clear all browsing history."""
+        self.history = []
+        self.current_page = None
+        print("History cleared")
+
+# Example usage
+browser = BrowserHistory()
+
+# Visit some pages
+browser.visit_page("https://www.google.com")
+browser.visit_page("https://www.github.com")
+browser.visit_page("https://www.python.org")
+
+# Display history
+browser.display_history()
+
+# Go back
+print("\nGoing back...")
+browser.go_back()
+browser.display_history()
+
+# Go back again
+print("\nGoing back again...")
+browser.go_back()
+browser.display_history()
+
+# Try to go back too far
+print("\nTrying to go back when at beginning...")
+browser.go_back()
+browser.go_back()  # Should fail
+```
+
+This demonstrates:
+
+- **Stack implementation** using a list
+
+- **Class design** with methods and attributes
+
+- **Error handling** for invalid operations
+
+- **List operations** (append, pop)
+
+- **Iteration** and display formatting
+
+- **State management** for current position
+///
+///
+///
+
+/// details | Exercise 4: Student Database
+    type: question
+    open: false
 
 Create a CSV file with student records and write functions to:
 
@@ -436,6 +672,129 @@ Create a CSV file with student records and write functions to:
 - Add new students
 
 - Calculate class average
+
+/// details | Sample Solution
+    type: success
+    open: false
+
+```python
+import csv
+import os
+
+def create_sample_data(filename):
+    """Create a sample CSV file with student data."""
+    students = [
+        ["ID", "Name", "Grade"],
+        ["1", "Alice Johnson", "85.5"],
+        ["2", "Bob Smith", "92.0"],
+        ["3", "Carol Davis", "78.3"],
+        ["4", "David Wilson", "88.7"],
+        ["5", "Eva Brown", "91.2"]
+    ]
+    
+    with open(filename, 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(students)
+    print(f"Created sample data file: {filename}")
+
+def read_all_students(filename):
+    """Read and return all students from CSV file."""
+    students = []
+    try:
+        with open(filename, 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                # Convert grade to float
+                row['Grade'] = float(row['Grade'])
+                students.append(row)
+    except FileNotFoundError:
+        print(f"Error: File {filename} not found")
+    return students
+
+def find_students_by_grade_range(filename, min_grade, max_grade):
+    """Find students within a grade range."""
+    students = read_all_students(filename)
+    matching_students = []
+    
+    for student in students:
+        if min_grade <= student['Grade'] <= max_grade:
+            matching_students.append(student)
+    
+    return matching_students
+
+def add_student(filename, student_id, name, grade):
+    """Add a new student to the CSV file."""
+    # Check if student ID already exists
+    students = read_all_students(filename)
+    existing_ids = [s['ID'] for s in students]
+    
+    if student_id in existing_ids:
+        print(f"Error: Student ID {student_id} already exists")
+        return False
+    
+    # Add new student
+    with open(filename, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([student_id, name, str(grade)])
+    
+    print(f"Added student: {name} (ID: {student_id}, Grade: {grade})")
+    return True
+
+def calculate_class_average(filename):
+    """Calculate and return the class average grade."""
+    students = read_all_students(filename)
+    if not students:
+        return 0.0
+    
+    total_grades = sum(student['Grade'] for student in students)
+    return total_grades / len(students)
+
+# Example usage
+filename = "students.csv"
+
+# Create sample data
+create_sample_data(filename)
+
+# Read all students
+print("\nAll students:")
+students = read_all_students(filename)
+for student in students:
+    print(f"  {student['ID']}: {student['Name']} - {student['Grade']}")
+
+# Find students in grade range
+print("\nStudents with grades 80-90:")
+high_performers = find_students_by_grade_range(filename, 80, 90)
+for student in high_performers:
+    print(f"  {student['Name']}: {student['Grade']}")
+
+# Add new student
+add_student(filename, "6", "Frank Miller", 87.5)
+
+# Calculate class average
+average = calculate_class_average(filename)
+print(f"\nClass average: {average:.2f}")
+
+# Clean up
+if os.path.exists(filename):
+    os.remove(filename)
+```
+
+This demonstrates:
+
+- **CSV file operations** (read, write, append)
+
+- **Dictionary usage** for structured data
+
+- **File error handling** and validation
+
+- **List comprehensions** and filtering
+
+- **Mathematical operations** on data collections
+
+- **Modular function design** for data operations
+///
+///
+///
 
 ## Common Mistakes to Avoid
 

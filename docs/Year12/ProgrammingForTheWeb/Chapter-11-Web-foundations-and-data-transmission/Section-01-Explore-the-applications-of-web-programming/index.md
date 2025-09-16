@@ -1368,7 +1368,9 @@ When choosing the appropriate web application type, consider these factors:
 
 ## Practice Exercises
 
-### Exercise 1: Application Type Selection
+/// details | Exercise 1: Application Type Selection
+    type: question
+    open: false
 
 Given these scenarios, recommend the most appropriate web application type and justify your choice:
 
@@ -1378,11 +1380,64 @@ Given these scenarios, recommend the most appropriate web application type and j
 
 3. **Field Data Collection App**: Scientists collecting data in remote locations with limited connectivity
 
-### Exercise 2: Trade-off Analysis
+/// details | Sample Solution
+    type: success
+    open: false
+
+1. **Local News Website - Interactive Website**: Requires dynamic content updates, user comments, and community engagement. Interactive websites excel at content management and user interaction without the complexity of e-commerce or offline requirements.
+
+2. **Online Banking Platform - E-commerce Platform**: Needs secure transaction processing, complex business logic for financial operations, and high security standards. E-commerce platforms provide the necessary infrastructure for secure financial transactions and account management.
+
+3. **Field Data Collection App - Progressive Web App**: Must work offline in remote locations, sync data when connectivity returns, and provide app-like experience on mobile devices. PWAs offer offline functionality and native app features while maintaining web accessibility.
+///
+
+/// details | Exercise 2: Trade-off Analysis
+    type: question
+    open: false
 
 For each web application type, identify three major trade-offs and propose mitigation strategies.
 
-### Exercise 3: Architecture Design
+/// details | Sample Solution
+    type: success
+    open: false
+
+**Interactive Websites:**
+
+- *Trade-off 1*: Rich client-side functionality vs. initial load time
+  *Mitigation*: Code splitting, lazy loading, and CDN optimization
+
+- *Trade-off 2*: Dynamic content vs. SEO challenges
+  *Mitigation*: Server-side rendering (SSR) or static generation for key pages
+
+- *Trade-off 3*: User engagement features vs. development complexity
+  *Mitigation*: Use established frameworks and component libraries
+
+**E-commerce Platforms:**
+
+- *Trade-off 1*: Security requirements vs. user experience
+  *Mitigation*: Multi-factor authentication with streamlined UX flows
+
+- *Trade-off 2*: Complex business logic vs. performance
+  *Mitigation*: Microservices architecture and caching strategies
+
+- *Trade-off 3*: Scalability needs vs. development cost
+  *Mitigation*: Cloud-native architecture with auto-scaling
+
+**Progressive Web Apps:**
+
+- *Trade-off 1*: Offline functionality vs. storage limitations
+  *Mitigation*: Intelligent caching and data synchronization strategies
+
+- *Trade-off 2*: Native app features vs. platform compatibility
+  *Mitigation*: Progressive enhancement and feature detection
+
+- *Trade-off 3*: App-like experience vs. web deployment simplicity
+  *Mitigation*: Service workers and web app manifests with careful feature scoping
+///
+
+/// details | Exercise 3: Architecture Design
+    type: question
+    open: false
 
 Design a high-level architecture for a collaborative document editing platform that supports:
 
@@ -1393,6 +1448,70 @@ Design a high-level architecture for a collaborative document editing platform t
 - Version history
 
 - Mobile and desktop access
+
+/// details | Sample Solution
+    type: success
+    open: false
+
+**High-Level Architecture:**
+
+```text
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Web Client    │    │   PWA Client   │    │ Mobile Native   │
+│                 │    │                 │    │                 │
+│ - Real-time     │    │ - Offline       │    │ - Native UI     │
+│   editing       │    │   editing       │    │ - Push          │
+│ - WebSocket     │    │ - Service       │    │   notifications │
+│   connection    │    │   workers       │    │ - App store     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+         │                       │                       │
+         └───────────────────────┼───────────────────────┘
+                                 │
+                    ┌─────────────────┐
+                    │  Collaboration │
+                    │    Service     │
+                    │                 │
+                    │ - WebSocket     │
+                    │   server        │
+                    │ - Conflict      │
+                    │   resolution    │
+                    │ - Real-time     │
+                    │   sync          │
+                    └─────────────────┘
+                             │
+                    ┌─────────────────┐
+                    │   Data Layer    │
+                    │                 │
+                    │ - Document      │
+                    │   storage       │
+                    │ - Version       │
+                    │   control       │
+                    │ - User          │
+                    │   management    │
+                    └─────────────────┘
+```
+
+**Key Components:**
+
+- Client Layer: Multi-platform support (web, PWA, native mobile)
+
+- Collaboration Service: Real-time synchronization using WebSockets and operational transformation
+
+- Data Layer: Document storage with version history and conflict resolution
+
+- Offline Support: Service workers for PWA clients, local storage for native apps
+
+**Technical Considerations:**
+
+- Operational transformation for conflict-free replicated data types
+
+- CRDTs (Conflict-free Replicated Data Types) for offline collaboration
+
+- WebRTC for peer-to-peer synchronization when possible
+
+- Event sourcing for reliable version history
+///
+
 
 ## Section Recap
 

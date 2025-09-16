@@ -1,7 +1,5 @@
 # 11.2 How data moves on the internet (packets, IP, DNS, protocols)
 
-Outcomes: SE-12-03
-
 In this section, you will trace a web request end-to-end: from typing a URL to receiving a web page. You'll see how DNS resolves names, how TCP establishes a connection, how TLS secures it, and how HTTP delivers content. We'll also map core protocols to their typical ports and show how to inspect and reason about all this with developer tools.
 
 ## Learning objectives
@@ -175,7 +173,9 @@ end note
 
 These examples simulate or interrogate network concepts without requiring external services.
 
-#### 1) Resolve a hostname and show records
+/// details | Resolve a hostname and show records
+    type: example
+    open: false
 
 ```python
 import socket
@@ -198,7 +198,11 @@ except Exception as e:
     print("IPv6 lookup failed:", e)
 ```
 
-#### 2) Measure a simple TCP connect time (no data)
+///
+
+/// details | Measure a simple TCP connect time (no data)
+    type: example
+    open: false
 
 ```python
 import socket, time
@@ -224,7 +228,11 @@ for host, port in [("example.com", 80), ("example.com", 443)]:
         print(f"Connect to {host}:{port} failed:", e)
 ```
 
-#### 3) Minimal HTTP GET over TLS using stdlib
+///
+
+/// details | Minimal HTTP GET over TLS using stdlib
+    type: example
+    open: false
 
 ```python
 import ssl, socket
@@ -246,17 +254,117 @@ with socket.create_connection((host, 443), timeout=5) as sock:
         print("Response head:\n", data.decode("latin1", errors="ignore").split("\r\n\r\n")[0])
 ```
 
+///
+
 Note: The examples target `example.com` which is a reserved domain for documentation and should be safe to query.
 
-## Practice tasks
+## Try it
 
-1. Draw a sequence diagram that shows Browser → DNS → Server for a first-time visit vs a cached visit (label where caching occurs and TTL applies).
+/// details | Exercise 1: DNS Resolution Sequence Diagram
+    type: question
+    open: false
 
-2. Capture a page load in your browser and annotate the Network waterfall: DNS, TCP, TLS, TTFB, content download. Explain which step took the longest and why.
+Draw a sequence diagram that shows Browser → DNS → Server for a first-time visit vs a cached visit (label where caching occurs and TTL applies).
 
-3. Using the tables above, list which protocols/ports are involved when: sending an email from a client, downloading mail to a phone, and viewing a website securely.
+/// details | Sample Solution
+    type: success
+    open: false
 
-4. Explain when DNS would use TCP instead of UDP. Give two real reasons.
+```kroki-plantuml
+@startuml
+!theme aws-orange
+title First-time DNS Resolution
+
+Browser -> DNS: Resolve example.com
+DNS -> Root: Query .com
+Root --> DNS: Refer to .com TLD
+DNS -> TLD: Query example.com
+TLD --> DNS: Refer to authoritative NS
+DNS -> Auth: Query A record
+Auth --> DNS: Return IP + TTL
+DNS --> Browser: IP address
+note right: Caching occurs at DNS resolver level
+@enduml
+```
+
+```kroki-plantuml
+@startuml
+!theme aws-orange
+title Cached DNS Resolution
+
+Browser -> DNS: Resolve example.com
+DNS --> Browser: Cached IP (TTL not expired)
+note right: No network queries needed
+@enduml
+```
+
+///
+///
+
+/// details | Exercise 2: Network Waterfall Analysis
+    type: question
+    open: false
+
+Capture a page load in your browser and annotate the Network waterfall: DNS, TCP, TLS, TTFB, content download. Explain which step took the longest and why.
+
+/// details | Sample Solution
+    type: success
+    open: false
+
+A typical network waterfall for loading a web page shows these phases:
+
+1. **DNS Lookup**: Resolves domain to IP (20-100ms)
+
+2. **TCP Handshake**: 3-way SYN/SYN-ACK/ACK (20-50ms)  
+
+3. **TLS Negotiation**: ClientHello/ServerHello + certificate exchange (50-200ms)
+
+4. **TTFB (Time to First Byte)**: Server processing + initial response (100-500ms)
+
+5. **Content Download**: HTML, CSS, JS, images, etc. (varies widely)
+
+The longest step is usually content download (especially for large assets) or TTFB (if the server is slow). DNS and TCP/TLS are typically fast due to caching and optimization.
+
+///
+///
+
+/// details | Exercise 3: Protocol and Port Mapping
+    type: question
+    open: false
+
+Using the tables above, list which protocols/ports are involved when: sending an email from a client, downloading mail to a phone, and viewing a website securely.
+
+/// details | Sample Solution
+    type: success
+    open: false
+
+- **Sending an email from a client**: SMTP (port 25) or SMTPS (port 465/587 with TLS)
+
+- **Downloading mail to a phone**: IMAPS (port 993) or POP3S (port 995) for secure retrieval
+
+- **Viewing a website securely**: HTTPS (port 443) which runs HTTP over TLS
+
+///
+///
+
+/// details | Exercise 4: DNS Transport Protocol Decision
+    type: question
+    open: false
+
+Explain when DNS would use TCP instead of UDP. Give two real reasons.
+
+/// details | Sample Solution
+    type: success
+    open: false
+
+DNS uses TCP instead of UDP in these cases:
+
+1. **Large responses**: When the DNS response exceeds 512 bytes (UDP's limit), TCP is used to handle larger payloads like multiple records or DNSSEC signatures.
+
+2. **Zone transfers**: For transferring entire DNS zones between servers (AXFR/IXFR operations), TCP ensures reliable, ordered delivery of the complete zone data.
+
+///
+///
 
 ## Recap and outcomes
 

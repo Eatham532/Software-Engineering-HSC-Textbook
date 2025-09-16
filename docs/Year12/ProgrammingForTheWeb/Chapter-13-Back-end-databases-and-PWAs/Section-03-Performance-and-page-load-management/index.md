@@ -1,7 +1,5 @@
 # 13.3 Performance and page-load management
 
-- Outcomes: SE-12-06
-
 ## Why it matters
 
 Web performance directly impacts user experience, search engine rankings, and business outcomes. Studies show that even a 100ms delay in page load time can reduce conversion rates significantly. Understanding performance optimization techniques like caching, compression, asset bundling, and lazy loading enables developers to build fast, responsive web applications that provide excellent user experiences across different devices and network conditions.

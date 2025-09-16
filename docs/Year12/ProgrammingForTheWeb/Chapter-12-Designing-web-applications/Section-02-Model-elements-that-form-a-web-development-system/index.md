@@ -1,7 +1,5 @@
 # 12.2 Model elements that form a web development system
 
-- Outcomes: SE-12-02
-
 ## Why it matters
 
 Modern web applications are complex systems with multiple interconnected components. Understanding how client-side code, server-side logic, databases, and APIs work together helps developers design scalable, maintainable web solutions. This knowledge forms the foundation for building real-world web applications.

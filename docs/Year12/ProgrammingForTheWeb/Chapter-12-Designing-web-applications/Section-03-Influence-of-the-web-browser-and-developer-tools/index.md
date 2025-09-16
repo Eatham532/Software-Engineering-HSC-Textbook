@@ -1,7 +1,5 @@
 # 12.3 Influence of the web browser and developer tools
 
-- Outcomes: SE-12-02
-
 ## Why it matters
 
 Web browsers are the runtime environment for front-end code, and their behavior directly impacts how developers build, test, and debug web applications. Understanding browser differences and mastering developer tools is essential for creating reliable, performant web applications that work consistently across different environments.

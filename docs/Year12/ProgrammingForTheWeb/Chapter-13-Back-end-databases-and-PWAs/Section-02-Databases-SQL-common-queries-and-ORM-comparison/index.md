@@ -1,7 +1,5 @@
 # 13.2 Databases: SQL, common queries and ORM comparison
 
-- Outcomes: SE-12-02
-
 ## Why it matters
 
 Databases are the persistent storage layer of web applications, and SQL (Structured Query Language) is the standard way to interact with relational databases. Understanding how to construct safe, efficient SQL queries and when to use Object-Relational Mapping (ORM) tools is essential for building robust web applications. These skills enable developers to store, retrieve, and manipulate data while maintaining data integrity and security.
