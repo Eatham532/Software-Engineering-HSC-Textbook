@@ -225,7 +225,9 @@ Most real projects use **both approaches**:
 | Diamond | Selection | Choose based on condition |
 | Curved arrow | Loop/Iteration | Repeat for each student |
 
-### Structure Chart Example: Grade Management System
+/// details | Structure Chart Example: Grade Management System
+    type: info
+    open: false
 
 ```kroki-plantuml
 @startuml
@@ -269,6 +271,8 @@ note right of calcGrade : Uses average to determine letter
 @enduml
 ```
 
+///
+
 ### Data Flow in Structure Charts
 
 ```text
@@ -284,7 +288,9 @@ Main Program
 
 **Stepwise refinement** is the process of gradually adding detail to a solution, starting with a high-level description and refining it step by step.
 
-### Example: Library Book Management System
+/// details | Example: Library Book Management System
+    type: example
+    open: false
 
 **Step 1: High-Level Solution**
 
@@ -356,6 +362,8 @@ BEGIN
     END IF
 END
 ```
+
+///
 
 ### Structure Chart for Refined Solution
 

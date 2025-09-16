@@ -1,293 +1,528 @@
 # Year 12 — Secure Software Architecture: Module Plan
 
-Keep code examples small and Python-only; demonstrate vulnerabilities and fixes. Use PlantUML for threat models and sequence diagrams.
+**Focus**: Practical security implementation with Python examples. Students learn to build secure systems from the ground up.
+
+**Key Principles**:
+
+- Code examples: Small, Python-only, showing vulnerabilities and fixes
+
+- Diagrams: PlantUML for threat models and secure system architectures
+
+- Approach: Security-by-design with hands-on implementation
 
 ---
 
-## Chapter 1 — Designing secure software
+## 📋 **Module Overview & Learning Progression**
 
-Covers: value of security, secure SDLC, and user/context design. Outcomes: SE-12-01, SE-12-03.
+### **Why This Order?**
 
-### 1.1 Why secure software matters
+1. **Chapter 1**: Establish security mindset and design principles
 
-- Outcomes: SE-12-01
+2. **Chapter 2**: Master core security principles and cryptography
 
-- Learn: business/user value; common failure modes; risk and impact.
+3. **Chapter 3**: Secure input handling and data protection
 
-### 1.2 Secure development steps in the SDLC
+4. **Chapter 4**: Build secure systems and APIs
 
-- Outcomes: SE-12-01
+5. **Chapter 5**: Test and manage vulnerabilities
 
-- Learn: integrate security into requirements, design, implementation, testing, deployment, maintenance.
+6. **Chapter 6**: Evaluate impact and broader implications
 
-### 1.3 Designing for users and contexts
+### **Practical Focus Areas**
 
-## Author deliverables per section
+- 🔐 **Authentication & Access Control**
 
-- Outcomes: SE-12-03
+- 🛡️ **Input Validation & Data Protection**
 
-- Learn: usability–security trade-offs; personas; abuse/misuse cases.
+- 🔒 **Cryptography & Secure Communication**
 
-Exit: students can articulate why security matters and where it fits in the SDLC.
+- 🧪 **Security Testing & Vulnerability Assessment**
 
----
-
-Covers: core principles, privacy, secure inputs/APIs, safe execution, and security testing. Outcomes: SE-12-07, SE-12-04, SE-12-06.
-
-- Outcomes: SE-12-07
-
-- Learn: confidentiality, integrity, availability; authentication, authorisation, accountability.
-
-- Outcomes: SE-12-07
-
-- Learn: hashing and encryption basics; key management at a high level; isolation/sandboxing.
-
-- Outcomes: SE-12-04
-
-- Learn: data minimisation, consent, purpose limitation; handling personal data safely.
-
-- Outcomes: SE-12-07
-
-- Learn: prevent injection; whitelist vs blacklist; safe exception messages.
-
-- Outcomes: SE-12-07
-
-- Learn: keys/tokens, least privilege, rate limiting, simple Python examples.
-
-- Outcomes: SE-12-07
-
-- Learn: resource management, timeouts, retries; session handling basics.
-
-## Chapter 2 additions: explicit secure-development topics
-
-## Year 12 — Secure Software Architecture: Module Plan
-
-Keep code examples small and Python-only; demonstrate vulnerabilities and fixes. Use PlantUML for threat models and sequence diagrams.
+- ⚖️ **Privacy & Ethical Considerations**
 
 ---
 
-## Chapter 1 — Designing secure software
+## Chapter 14 — Security Foundations & Design Principles
 
-Covers: value of security, secure SDLC, and user/context design. Outcomes: SE-12-01, SE-12-03.
+**Goal**: Understand why security matters and how to integrate it into software design.
 
-### 1.1 Why secure software matters
+### 14.1 The Business Case for Security
 
-- Outcomes: SE-12-01
+**Outcomes**: SE-12-01
 
-- Learn: business/user value; common failure modes; risk and impact.
+**Why it matters**: Security isn't just technical—it's a business imperative.
 
-### 1.2 Secure development steps in the SDLC
+**Learning Objectives**:
 
-- Outcomes: SE-12-01
+- Explain security's impact on business value and user trust
 
-- Learn: integrate security into requirements, design, implementation, testing, deployment, maintenance.
+- Identify common security failure modes and their consequences
 
-### 1.3 Designing for users and contexts
+- Assess and communicate security risks to stakeholders
 
-- Outcomes: SE-12-03
+- Understand the cost-benefit analysis of security investments
 
-- Learn: usability–security trade-offs; personas; abuse/misuse cases.
+**Activities**:
 
-Exit: students can articulate why security matters and where it fits in the SDLC.
+- Case study: Real-world security breaches and their impacts
+
+- Risk assessment exercise for a simple application
+
+### 14.2 Integrating Security into the SDLC
+
+**Outcomes**: SE-12-01
+
+**Why it matters**: Security must be built-in, not bolted-on.
+
+**Learning Objectives**:
+
+- Map security activities to each SDLC phase
+
+- Apply threat modeling in requirements gathering
+
+- Design security controls during architecture phase
+
+- Implement secure coding practices in development
+
+- Conduct security testing throughout development
+
+**Activities**:
+
+- SDLC security checklist creation
+
+- Threat modeling workshop for a sample application
+
+### 14.3 User-Centered Security Design
+
+**Outcomes**: SE-12-03
+
+**Why it matters**: Security that frustrates users will be bypassed.
+
+**Learning Objectives**:
+
+- Balance security requirements with usability needs
+
+- Create user personas and abuse cases
+
+- Design security controls that enhance rather than hinder UX
+
+- Communicate security decisions to non-technical stakeholders
+
+**Activities**:
+
+- Usability-security trade-off analysis
+
+- Security feature user testing simulation
+
+**Chapter Exit**: Students can explain security's business value and design security-aware systems.
 
 ---
 
-## Chapter 2 — Developing secure code
+## Chapter 15 — Core Security Principles
 
-Covers: core principles, privacy, secure inputs/APIs, safe execution, and security testing. Outcomes: SE-12-07, SE-12-04, SE-12-06.
+**Goal**: Master the fundamental concepts that underpin all security practices.
 
-### 2.1 Security principles: CIA and AAA
+### 15.1 Security Fundamentals (CIA Triad & AAA)
 
-- Outcomes: SE-12-07
+**Outcomes**: SE-12-07
 
-- Learn: confidentiality, integrity, availability; authentication, authorisation, accountability.
+**Focus**: The foundational concepts that underpin all security.
 
-### 2.2 Security by design: cryptography and sandboxing
+**Learning Objectives**:
 
-- Outcomes: SE-12-07
+- **Confidentiality**: Prevent unauthorized data access
 
-- Learn: hashing and encryption basics; key management at a high level; isolation/sandboxing.
+- **Integrity**: Ensure data accuracy and trustworthiness
 
-### 2.3 Privacy by design principles
+- **Availability**: Maintain system accessibility
 
-- Outcomes: SE-12-04
+- **Authentication**: Verify user identities
 
-- Learn: data minimisation, consent, purpose limitation; handling personal data safely.
+- **Authorization**: Control access to resources
 
-### 2.4 Securing inputs: validation, sanitisation, errors
+- **Accountability**: Track and audit system activities
 
-- Outcomes: SE-12-07
+**Practical**: Python examples of access control and logging
 
-- Learn: prevent injection; whitelist vs blacklist; safe exception messages.
+### 15.2 Cryptography & Data Protection
 
-### 2.5 Secure APIs: design and implementation
+**Outcomes**: SE-12-07
 
-- Outcomes: SE-12-07
+**Focus**: Protecting data at rest and in transit.
 
-- Learn: keys/tokens, least privilege, rate limiting, simple Python examples.
+**Learning Objectives**:
 
-### 2.6 Efficient and safe execution
+- Hashing vs encryption: When to use each
 
-- Outcomes: SE-12-07
+- Key management fundamentals
 
-- Learn: resource management, timeouts, retries; session handling basics.
+- Secure password storage (hashing + salting)
 
-### 2.7 Security testing: SAST, DAST, vulnerability assessment, pentest
+- Basic encryption/decryption with Python
 
-- Outcomes: SE-12-06
+- Certificate and TLS basics
 
-- Learn: when and how to apply each; lightweight tooling; interpreting results.
+**Practical**: Build a secure password manager and encrypted file storage
 
-Exit: students can implement and review small secure Python snippets and explain trade-offs.
-
----
-
-## Chapter 3 — Impact of secure development
-
-Covers: collaboration, enterprise benefits, and social/ethical/legal aspects. Outcomes: SE-12-06, SE-12-05.
-
-### 3.1 Collaboration for security
-
-- Outcomes: SE-12-06
-
-- Learn: team practices, security reviews, documentation of risks/mitigations.
-
-### 3.2 Enterprise benefits of secure practices
-
-- Outcomes: SE-12-06
-
-- Learn: cost of defects, compliance, reliability and trust.
-
-### 3.3 Social, ethical, and legal issues
-
-- Outcomes: SE-12-05
-
-- Learn: privacy rights, responsible disclosure, accessibility, equity.
-
-Exit: students can discuss impacts and advocate for secure practices.
-
-### 3.4 Enterprise benefits and evaluation
-
-- Outcomes: SE-12-06
-
-- Learn: investigate and explain the benefits to an enterprise of implementing safe and secure development practices, including:
-
-  - improved products or services
-
-  - influence on future software development
-
-  - improved work practices
-
-  - productivity gains
-
-  - enhanced business interactivity with customers and partners
-
-### 3.5 Social, ethical and legal ramifications (detailed)
-
-- Outcomes: SE-12-05
-
-- Learn: evaluate the social, ethical and legal issues and ramifications affecting people and enterprises resulting from safe and secure software, including:
-
-  - employment and workforce impacts
-
-  - data security and privacy concerns
-
-  - copyright and intellectual property
-
-  - digital disruption and its economic/social consequences
-
-Exit: students can critically evaluate trade-offs and advocate policy/practice improvements.
+**Chapter Exit**: Students understand core security principles and can implement basic cryptographic protections.
 
 ---
 
-## Author deliverables per section
+## Chapter 16 — Input Security & Data Protection
 
-- index.md: explanation, small Python example(s), PlantUML diagram(s), practice tasks, recap.
+**Goal**: Learn to handle user input safely and protect sensitive data.
 
-- quiz.md: 6–10 questions (mix of multiple-choice and short-answer) with an answer key.
+### 16.1 Input Validation & Sanitization
 
-## Chapter 2 additions: explicit secure-development topics
+**Outcomes**: SE-12-07
 
-The following topics should be included under Chapter 2 (Developing secure code) as specific learning outcomes and subsections.
+**Focus**: Preventing injection attacks and data corruption.
 
-### 2.8 Data protection and privacy-by-design
+**Learning Objectives**:
 
-- Outcomes: SE-12-04, SE-12-07
+- SQL injection prevention
 
-- Learn: principles of data protection and privacy-by-design with explicit practices:
+- XSS (Cross-Site Scripting) mitigation
 
-  - proactive (not reactive) approach to privacy
+- Input validation strategies (whitelist vs blacklist)
 
-  - embed privacy into design and architecture
+- Safe error message design
 
-  - respect for user privacy and minimisation of collected data
+- File upload security
 
-### 2.9 Security testing, hardening and resilience
+**Practical**: Secure user registration system with input validation
 
-- Outcomes: SE-12-06
+### 16.2 Privacy by Design
 
-- Learn: test and evaluate security and resilience by determining vulnerabilities, hardening systems, handling breaches, maintaining business continuity, and conducting disaster recovery.
+**Outcomes**: SE-12-04
 
-- Methods to cover explicitly:
+**Focus**: Building privacy into system architecture.
 
-  - code review
+**Learning Objectives**:
 
-  - static application security testing (SAST)
+- Data minimization principles
 
-  - dynamic application security testing (DAST)
+- Consent management
 
-  - vulnerability assessment
+- Purpose limitation and data retention
 
-  - penetration testing
+- Privacy impact assessments
 
-### 2.10 Defensive coding and efficient execution
+- GDPR and privacy law fundamentals
 
-- Outcomes: SE-12-07
+**Practical**: Privacy-compliant user data collection system
 
-- Learn: design, develop and implement code using defensive data input handling practices and efficient execution considerations, including:
+**Chapter Exit**: Students can implement secure input handling and privacy controls in their applications.
 
-  - input validation, sanitisation and safe error handling
+---
 
-  - memory management strategies
+## Chapter 17 — System Security & APIs
 
-  - session management (secure creation, storage, expiry)
+**Goal**: Build secure systems and protect application interfaces.
 
-  - exception management and logging policies
+### 17.1 Secure API Design
 
-### 2.11 Specific vulnerability classes and mitigations
+**Outcomes**: SE-12-07
 
-- Outcomes: SE-12-07
+**Focus**: Protecting application interfaces and communications.
 
-- Learn: design, develop and implement secure code to minimise vulnerabilities in user action controls and file/hardware exposures, including discussion and mitigation of:
+**Learning Objectives**:
 
-  - broken authentication and insecure session management
+- API authentication methods (API keys, OAuth, JWT)
 
-  - cross-site scripting (XSS) and cross-site request forgery (CSRF)
+- Rate limiting and DoS protection
 
-  - invalid forwarding and redirecting
+- Secure session management
 
-  - race conditions and concurrency issues
+- CORS and cross-origin security
 
-  - file-related attacks and side-channel attacks; protecting user file and hardware interfaces
+- API security testing
 
-### 2.12 Collaboration and secure development
+**Practical**: Build a secure REST API with authentication
 
-- Outcomes: SE-12-06
+### 17.2 Secure Execution & Resource Management
 
-- Learn: apply and describe the benefits of collaboration to develop safe and secure software, including:
+**Outcomes**: SE-12-07
 
-  - considering various points of view during design and review
+**Focus**: Protecting system resources and preventing abuse.
 
-  - delegating tasks based on expertise
+**Learning Objectives**:
 
-  - improving the quality of the solution through shared ownership and reviews
+- Memory management and buffer overflow prevention
 
-## Folder naming (mapping to numbered sections)
+- Resource exhaustion attacks (DoS)
 
-- Display: numbered titles (e.g., "2.4 Securing inputs: validation, sanitisation, errors").
+- Secure file operations
 
-- Folders: `docs/Year12/SecureSoftwareArchitecture/Chapter-0X-Name/Section-0Y-Name/`
+- Timeout and retry strategies
 
-  - `index.md`
+- Exception handling security
 
-  - `quiz.md`
+**Practical**: Secure file upload system with resource limits
+
+**Chapter Exit**: Students can design and implement secure APIs and manage system resources safely.
+
+---
+
+## Chapter 18 — Security Testing & Vulnerabilities
+
+**Goal**: Find and fix security weaknesses in applications.
+
+### 18.1 Security Testing Fundamentals
+
+**Outcomes**: SE-12-06
+
+**Focus**: Finding and fixing security weaknesses.
+
+**Learning Objectives**:
+
+- Static Application Security Testing (SAST)
+
+- Dynamic Application Security Testing (DAST)
+
+- Manual code review techniques
+
+- Common vulnerability scanning
+
+- Security regression testing
+
+**Practical**: Security testing of the chapter's example applications
+
+### 18.2 Web Application Vulnerabilities
+
+**Outcomes**: SE-12-07
+
+**Focus**: Protecting against common web attacks.
+
+**Learning Objectives**:
+
+- Cross-Site Request Forgery (CSRF) prevention
+
+- Broken authentication patterns
+
+- Security misconfigurations
+
+- Race conditions and concurrency issues
+
+- Side-channel attacks
+
+**Practical**: Secure web application with vulnerability fixes
+
+**Chapter Exit**: Students can identify vulnerabilities and implement comprehensive security testing.
+
+---
+
+## Chapter 19 — Security in Context
+
+**Goal**: Understand security's broader impact on business, society, and development practices.
+
+### 19.1 Security in Development Teams
+
+**Outcomes**: SE-12-06
+
+**Focus**: How security affects software development culture.
+
+**Learning Objectives**:
+
+- Security code reviews and pair programming
+
+- Security requirements in agile development
+
+- Threat modeling in team settings
+
+- Security documentation and knowledge sharing
+
+- Balancing security with development velocity
+
+**Activities**: Team security review simulation
+
+### 19.2 Enterprise Security Benefits
+
+**Outcomes**: SE-12-06
+
+**Focus**: Security's business value and ROI.
+
+**Learning Objectives**:
+
+- Cost-benefit analysis of security investments
+
+- Compliance and regulatory advantages
+
+- Building customer trust and market differentiation
+
+- Risk management and insurance implications
+
+- Security as a competitive advantage
+
+**Activities**: Security ROI case study analysis
+
+### 19.3 Security Ethics & Legal Considerations
+
+**Outcomes**: SE-12-05
+
+**Focus**: Security's societal and legal implications.
+
+**Learning Objectives**:
+
+- Privacy rights and data protection laws
+
+- Responsible disclosure and ethical hacking
+
+- Accessibility and inclusive security design
+
+- Security's impact on employment and workforce
+
+- Copyright, IP protection, and open source security
+
+**Activities**: Ethical security dilemma discussions
+
+### 19.4 Evaluating Security Programs
+
+**Outcomes**: SE-12-06
+
+**Focus**: Measuring security effectiveness.
+
+**Learning Objectives**:
+
+- Security metrics and KPIs
+
+- Risk assessment frameworks
+
+- Security audit processes
+
+- Continuous improvement methodologies
+
+- Communicating security value to executives
+
+**Activities**: Security program evaluation framework development
+
+**Chapter Exit**: Students can evaluate security programs and advocate for security best practices.
+
+---
+
+## 📁 **Content Structure & Deliverables**
+
+### **Per Section Files**
+
+- `index.md`: Clear explanation, practical Python examples, security diagrams
+
+- `quiz.md`: 6-10 questions testing conceptual understanding and practical application
+
+### **Example Section Structure**
+
+```markdown
+# 2.3 Input Validation & Sanitization
+
+## Why It Matters
+
+Injection attacks are #1 in OWASP Top 10...
+
+## Core Concepts
+
+- Input validation strategies
+- Sanitization techniques
+- Safe error handling
+
+## Python Implementation
+
+```python
+
+## Secure input validation
+
+def validate_email(email):
+
+    ## Implementation with security considerations
+
+```
+
+## Common Vulnerabilities
+
+- SQL injection examples
+- XSS prevention
+
+## Practice Tasks
+
+1. Fix vulnerable input handling
+2. Implement secure form validation
+
+## Security Testing
+
+- Test cases for injection attempts
+- Boundary value testing
+
+## Recap
+
+Key takeaways and best practices
+```
+
+### **Folder Organization**
+
+```bash
+docs/Year12/SecureSoftwareArchitecture/
+├── Chapter-14-Security-Foundations/
+│   ├── Section-14-Business-Case/
+│   │   ├── index.md
+│   │   └── quiz.md
+│   └── Section-14-SDLC-Integration/
+│       ├── index.md
+│       └── quiz.md
+├── Chapter-15-Core-Principles/
+│   ├── Section-15-CIA-AAA/
+│   └── Section-15-Cryptography/
+├── Chapter-16-Input-Security/
+│   ├── Section-16-Validation/
+│   └── Section-16-Privacy/
+├── Chapter-17-System-Security/
+│   ├── Section-17-APIs/
+│   └── Section-17-Execution/
+├── Chapter-18-Testing-Vulnerabilities/
+│   ├── Section-18-Security-Testing/
+│   └── Section-18-Web-Vulnerabilities/
+└── Chapter-19-Security-Context/
+    ├── Section-19-Teams/
+    ├── Section-19-Enterprise/
+    ├── Section-19-Ethics/
+    └── Section-19-Evaluation/
+```
+
+---
+
+## 🎯 **Assessment & Practical Focus**
+
+### **Progressive Skill Building**
+
+- **Chapter 1**: Conceptual understanding and design thinking
+
+- **Chapter 2**: Core security principles and cryptography
+
+- **Chapter 3**: Input handling and data protection
+
+- **Chapter 4**: System design and API security
+
+- **Chapter 5**: Testing and vulnerability management
+
+- **Chapter 6**: Evaluation, ethics, and broader impact
+
+### **Key Practical Outcomes**
+
+By module end, students will have built:
+
+- Secure user authentication system
+
+- Protected API with proper authorization
+
+- Input-validated web application
+
+- Encrypted data storage solution
+
+- Security testing framework
+
+### **Real-World Application**
+
+- Industry case studies throughout
+
+- OWASP Top 10 integration
+
+- Security audit simulation
+
+- Incident response planning

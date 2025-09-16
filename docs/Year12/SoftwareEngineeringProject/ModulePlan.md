@@ -4,11 +4,19 @@ Define clear artefacts, checkpoints, and rubrics. Emphasise process, documentati
 
 ---
 
-## Chapter 1 — Identifying and defining
+## Chapter 23 — Identifying and defining
 
-Covers: problem framing, ideation/modelling, and implementation methods. Outcomes: SE-12-01, SE-12-06.
+Covers: problem framing, ideation/## Folder naming (mapping to numbered sections)
 
-### 1.1 Requirements and feasibility
+- Display: numbered titles (e.g., "24.4 Project management tools and Gantt").
+
+- Folders: `docs/Year12/SoftwareEngineeringProject/Chapter-0X-Name/Section-0Y-Name/`
+
+  - `index.md`
+
+  - `quiz.md`, and implementation methods. Outcomes: SE-12-01, SE-12-06.
+
+### 23.1 Requirements and feasibility
 
 - Outcomes: SE-12-01
 
@@ -26,7 +34,7 @@ Covers: problem framing, ideation/modelling, and implementation methods. Outcome
 
   - defining boundaries (in-scope vs out-of-scope features and interfaces)
 
-### 1.2 Ideation and modelling tools
+### 23.2 Ideation and modelling tools
 
 - Outcomes: SE-12-06
 
@@ -46,7 +54,7 @@ Covers: problem framing, ideation/modelling, and implementation methods. Outcome
 
   - installation and maintenance considerations (packaging, deployment, update paths)
 
-### 1.3 Implementation methods: direct, phased, parallel, pilot
+### 23.3 Implementation methods: direct, phased, parallel, pilot
 
 - Outcomes: SE-12-06
 
@@ -64,35 +72,35 @@ Exit: students can frame a project and propose a delivery strategy.
 
 ---
 
-## Chapter 2 — Research and planning
+## Chapter 24 — Research and planning
 
 Covers: development approaches, PM tools, ethics/communication, and QA. Outcomes: SE-12-06, SE-12-05, SE-12-09.
 
-### 2.1 Waterfall approach
+### 24.1 Waterfall approach
 
 - Outcomes: SE-12-06
 
 - Learn: phases, artefacts, risks and benefits.
 
-### 2.2 Agile approach
+### 24.2 Agile approach
 
 - Outcomes: SE-12-06
 
 - Learn: iterations, ceremonies, user stories.
 
-### 2.3 WAgile hybrid approach
+### 24.3 WAgile hybrid approach
 
 - Outcomes: SE-12-06
 
 - Learn: combining stage gates with iterative delivery.
 
-### 2.4 Project management tools and Gantt
+### 24.4 Project management tools and Gantt
 
 - Outcomes: SE-12-09
 
 - Learn: planning, dependencies, tracking.
 
-### 2.5 Social/ethical and communication issues
+### 24.5 Social/ethical and communication issues
 
 - Outcomes: SE-12-05
 
@@ -106,7 +114,7 @@ Covers: development approaches, PM tools, ethics/communication, and QA. Outcomes
 
   - negotiating scope, priorities and acceptance criteria with stakeholders
 
-### 2.6 Quality assurance
+### 24.6 Quality assurance
 
 - Outcomes: SE-12-06
 
@@ -124,23 +132,23 @@ Exit: students can plan a project and communicate it effectively.
 
 ---
 
-## Chapter 3 — Producing and implementing
+## Chapter 25 — Producing and implementing
 
 Covers: building, presenting, documentation, versioning, troubleshooting, prototyping/UI. Outcomes: SE-12-02, SE-12-06, SE-12-09.
 
-### 3.1 Building the solution
+### 25.1 Building the solution
 
 - Outcomes: SE-12-02
 
 - Learn: implement incrementally; maintain quality.
 
-### 3.2 Presenting the solution
+### 25.2 Presenting the solution
 
 - Outcomes: SE-12-09
 
 - Learn: audience, narrative, demonstrations.
 
-### 3.3 Algorithms, documentation, and resources
+### 25.3 Algorithms, documentation, and resources
 
 - Outcomes: SE-12-06
 
@@ -156,13 +164,13 @@ Covers: building, presenting, documentation, versioning, troubleshooting, protot
 
   - security engineering concerns (input validation, encryption, secure storage, secrets management)
 
-### 3.4 Data backup and version control
+### 25.4 Data backup and version control
 
 - Outcomes: SE-12-06
 
 - Learn: branching, tags, backups; release hygiene.
 
-### 3.5 Overcoming development difficulties
+### 25.5 Overcoming development difficulties
 
 - Outcomes: SE-12-06
 
@@ -176,7 +184,7 @@ Covers: building, presenting, documentation, versioning, troubleshooting, protot
 
   - outsourcing or escalation routes (engaging specialists, vendors, or external contractors)
 
-### 3.6 Prototype and UI design
+### 25.6 Prototype and UI design
 
 - Outcomes: SE-12-06
 
@@ -186,11 +194,11 @@ Exit: students produce a working increment with supporting artefacts.
 
 ---
 
-## Chapter 4 — Testing and evaluating
+## Chapter 26 — Testing and evaluating
 
 Covers: testing, feedback, evaluation. Outcomes: SE-12-08, SE-12-09, SE-12-06.
 
-### 4.1 Testing methodologies and optimisation
+### 26.1 Testing methodologies and optimisation
 
 - Outcomes: SE-12-08
 
@@ -206,13 +214,13 @@ Covers: testing, feedback, evaluation. Outcomes: SE-12-08, SE-12-09, SE-12-06.
 
   - using automated tests where practical and manual exploratory testing where required
 
-### 4.2 Feedback analysis
+### 26.2 Feedback analysis
 
 - Outcomes: SE-12-09
 
 - Learn: collect, synthesise, decide next steps.
 
-### 4.3 Evaluating the software solution
+### 26.3 Evaluating the software solution
 
 - Outcomes: SE-12-06
 
@@ -234,7 +242,7 @@ Exit: students evaluate their solution and present findings.
 
 ---
 
--## Author deliverables per section
+## Author deliverables per section
 
 - index.md: explanation, artefacts, PlantUML diagram(s) where relevant, practice tasks, recap.
 

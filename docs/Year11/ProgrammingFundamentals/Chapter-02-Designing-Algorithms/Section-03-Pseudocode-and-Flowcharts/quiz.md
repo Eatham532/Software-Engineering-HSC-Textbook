@@ -103,7 +103,7 @@
 
     1. Complete this PlantUML activity diagram for a simple login system:
 
-        ```plantuml
+        ```kroki-plantuml
         start
         :INPUT username;
         :INPUT password;

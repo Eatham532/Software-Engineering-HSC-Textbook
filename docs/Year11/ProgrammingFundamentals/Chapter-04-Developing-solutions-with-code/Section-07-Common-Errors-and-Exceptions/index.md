@@ -10,7 +10,9 @@ Programming errors are inevitable - even experienced programmers make them! The 
 
 **Syntax errors** occur when your code doesn't follow Python's grammar rules. Python can't even try to run code with syntax errors.
 
-#### Common Syntax Errors and Fixes
+/// details | Common Syntax Errors and Fixes
+    type: note
+    open: false
 
 ```python
 # Error 1: Missing parentheses
@@ -51,51 +53,72 @@ message = "Hello World"
 # or:
 message = 'Hello World'
 ```
+///
 
-#### Reading Syntax Error Messages
+```
+/// details | Reading Syntax Error Messages
+    type: note
+    open: false
 
 ```python
-# Example of syntax error message interpretation
+
+## Example of syntax error message interpretation
+
 def broken_function():
     if x > 5
         print("Greater than 5")
 
-# Error message:
-# File "example.py", line 2
-#     if x > 5
-#            ^
-# SyntaxError: invalid syntax
+## Error message:
 
-# How to read this:
-# 1. File name and line number (line 2)
-# 2. The problematic line is shown
-# 3. ^ points to where Python got confused
-# 4. Error type: SyntaxError
-# 5. Description: invalid syntax
+## File "example.py", line 2
 
-# The fix: add missing colon
+##     if x > 5
+
+##            ^
+
+## SyntaxError: invalid syntax
+
+## How to read this:
+
+## 1. File name and line number (line 2)
+
+## 2. The problematic line is shown
+
+## 3. ^ points to where Python got confused
+
+## 4. Error type: SyntaxError
+
+## 5. Description: invalid syntax
+
+## The fix: add missing colon
+
 def fixed_function():
     if x > 5:
         print("Greater than 5")
 ```
+///
 
 ### Runtime Errors (Exceptions)
 
 **Runtime errors** occur when Python tries to execute code that looks correct but can't be completed for some reason.
 
-#### Division by Zero
+/// details | Division by Zero
+    type: note
+    open: false
 
 ```python
 def safe_division_example():
     """Examples of division by zero errors and fixes."""
     
-    # Problem: Division by zero
+    ## Problem: Division by zero
+
     def calculate_average_broken(numbers):
         total = sum(numbers)
         count = len(numbers)
         return total / count  # ZeroDivisionError if numbers is empty
     
-    # Demonstration of the error
+    ## Demonstration of the error
+
     print("=== Division by Zero Examples ===")
     
     try:
@@ -104,7 +127,8 @@ def safe_division_example():
         print(f"Error caught: {e}")
         print("Problem: Empty list causes division by zero")
     
-    # Fix 1: Check before dividing
+    ## Fix 1: Check before dividing
+
     def calculate_average_fixed_v1(numbers):
         if len(numbers) == 0:
             return None  # or 0, or raise a meaningful error
@@ -112,7 +136,8 @@ def safe_division_example():
         count = len(numbers)
         return total / count
     
-    # Fix 2: Use try-except
+    ## Fix 2: Use try-except
+
     def calculate_average_fixed_v2(numbers):
         try:
             total = sum(numbers)
@@ -121,7 +146,8 @@ def safe_division_example():
         except ZeroDivisionError:
             return None  # Handle the error gracefully
     
-    # Test the fixes
+    ## Test the fixes
+
     test_cases = [[], [5], [1, 2, 3, 4, 5]]
     
     for numbers in test_cases:
@@ -131,8 +157,12 @@ def safe_division_example():
 
 safe_division_example()
 ```
+///
 
-#### Index Out of Range
+```
+/// details | Index Out of Range
+    type: note
+    open: false
 
 ```python
 def index_error_examples():
@@ -184,8 +214,12 @@ def index_error_examples():
 
 index_error_examples()
 ```
+///
 
-#### Key Errors with Dictionaries
+```
+/// details | Key Errors with Dictionaries
+    type: note
+    open: false
 
 ```python
 def key_error_examples():
@@ -201,7 +235,8 @@ def key_error_examples():
     
     print(f"Student grades: {student_grades}")
     
-    # Problem: Accessing key that doesn't exist
+    ## Problem: Accessing key that doesn't exist
+
     try:
         grade = student_grades["David"]  # KeyError
         print(f"David's grade: {grade}")
@@ -209,25 +244,29 @@ def key_error_examples():
         print(f"Error: {e}")
         print("Problem: 'David' is not in the dictionary")
     
-    # Fix 1: Check if key exists first
+    ## Fix 1: Check if key exists first
+
     def get_grade_safe_v1(grades_dict, student_name):
         if student_name in grades_dict:
             return grades_dict[student_name]
         else:
             return None  # or "Not found", or 0
     
-    # Fix 2: Use .get() method with default
+    ## Fix 2: Use .get() method with default
+
     def get_grade_safe_v2(grades_dict, student_name, default=None):
         return grades_dict.get(student_name, default)
     
-    # Fix 3: Use try-except
+    ## Fix 3: Use try-except
+
     def get_grade_safe_v3(grades_dict, student_name):
         try:
             return grades_dict[student_name]
         except KeyError:
             return None
     
-    # Test the fixes
+    ## Test the fixes
+
     test_students = ["Alice", "Bob", "David", "Eve"]
     print(f"\nTesting safe dictionary access:")
     
@@ -239,8 +278,12 @@ def key_error_examples():
 
 key_error_examples()
 ```
+///
 
-#### Type Errors
+```
+/// details | Type Errors
+    type: note
+    open: false
 
 ```python
 def type_error_examples():
@@ -307,12 +350,15 @@ def type_error_examples():
 
 type_error_examples()
 ```
+///
 
 ### Logic Errors
 
 **Logic errors** are the trickiest - your code runs without crashing but produces wrong results.
 
-#### Off-by-One Errors
+/// details | Off-by-One Errors
+    type: note
+    open: false
 
 ```python
 def off_by_one_examples():
@@ -378,8 +424,12 @@ def off_by_one_examples():
 
 off_by_one_examples()
 ```
+///
 
-#### Logic Errors in Conditions
+```
+/// details | Logic Errors in Conditions
+    type: note
+    open: false
 
 ```python
 def logic_condition_examples():
@@ -387,27 +437,34 @@ def logic_condition_examples():
     
     print("=== Logic Condition Examples ===")
     
-    # Problem 1: Wrong boolean logic
+    ## Problem 1: Wrong boolean logic
+
     def check_valid_age_buggy(age):
         """Check if age is valid (13-65) - with logic error."""
-        # Bug: using OR instead of AND
+
+        ## Bug: using OR instead of AND
+
         if age >= 13 or age <= 65:  # This is always True!
             return True
         return False
     
     def check_valid_age_fixed(age):
         """Check if age is valid (13-65) - corrected."""
-        # Fix: use AND
+
+        ## Fix: use AND
+
         if age >= 13 and age <= 65:
             return True
         return False
     
-    # Even better: more Pythonic
+    ## Even better: more Pythonic
+
     def check_valid_age_pythonic(age):
         """Check if age is valid (13-65) - Pythonic way."""
         return 13 <= age <= 65
     
-    # Test all versions
+    ## Test all versions
+
     test_ages = [5, 13, 25, 65, 70]
     print("Testing age validation (should be valid for 13-65):")
     
@@ -417,10 +474,13 @@ def logic_condition_examples():
         pythonic = check_valid_age_pythonic(age)
         print(f"  Age {age}: Buggy={buggy}, Fixed={fixed}, Pythonic={pythonic}")
     
-    # Problem 2: Incorrect comparison
+    ## Problem 2: Incorrect comparison
+
     def grade_letter_buggy(score):
         """Convert score to letter grade - with logic errors."""
-        # Bug: wrong comparison operators and order
+
+        ## Bug: wrong comparison operators and order
+
         if score > 90:
             return "A"
         elif score > 80:
@@ -431,11 +491,14 @@ def logic_condition_examples():
             return "D"
         else:
             return "F"
-        # Problem: score of exactly 90 gets "B" instead of "A"
+
+        ## Problem: score of exactly 90 gets "B" instead of "A"
     
     def grade_letter_fixed(score):
         """Convert score to letter grade - corrected."""
-        # Fix: use >= for inclusive boundaries
+
+        ## Fix: use >= for inclusive boundaries
+
         if score >= 90:
             return "A"
         elif score >= 80:
@@ -447,7 +510,8 @@ def logic_condition_examples():
         else:
             return "F"
     
-    # Test both versions
+    ## Test both versions
+
     test_scores = [85, 90, 95, 79, 80]
     print(f"\nTesting grade conversion:")
     
@@ -458,8 +522,12 @@ def logic_condition_examples():
 
 logic_condition_examples()
 ```
+///
 
-#### Infinite Loops
+```
+/// details | Infinite Loops
+    type: note
+    open: false
 
 ```python
 def infinite_loop_examples():
@@ -561,6 +629,7 @@ def infinite_loop_examples():
 # Note: We don't actually run the infinite loop examples to avoid hanging
 print("Infinite loop examples defined (safe to demonstrate concepts)")
 ```
+///
 
 ## Common Error Patterns and Prevention
 

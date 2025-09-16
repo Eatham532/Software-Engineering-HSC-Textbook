@@ -54,7 +54,9 @@ Key file operations in the IDE:
 
 Multiple execution methods exist, each with specific use cases:
 
-#### IDE run button method
+/// details | IDE run button method
+    type: note
+    open: false
 
 - Advantages: Built-in debugging, variable inspection, integrated output
 
@@ -64,7 +66,11 @@ Multiple execution methods exist, each with specific use cases:
 
 - Automatically activates the correct Python interpreter
 
-#### Integrated terminal method
+///
+
+/// details | Integrated terminal method
+    type: note
+    open: false
 
 ```bash
 # Navigate to project directory first
@@ -79,6 +85,7 @@ python3 main.py
 # Run with module syntax (useful for packages)
 python -m src.main
 ```
+///
 
 #### External terminal method
 
@@ -587,7 +594,9 @@ Thumbs.db
 
 - **Character classes**: Use `[abc]` to match any of a, b, or c
 
-#### Advanced gitignore examples
+/// details | Advanced gitignore examples
+    type: info
+    open: false
 
 ```gitignore
 # Ignore all .txt files except important.txt
@@ -609,6 +618,8 @@ docs/**/*.pdf
 [Tt]humbs.db
 [Dd]esktop.ini
 ```
+
+///
 
 #### Managing gitignore effectively
 

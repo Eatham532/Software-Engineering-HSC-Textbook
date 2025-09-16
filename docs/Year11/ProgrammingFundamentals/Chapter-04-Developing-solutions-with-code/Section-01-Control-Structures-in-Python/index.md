@@ -29,6 +29,10 @@ print("Program finished.")
 
 ### Grade Calculator Example
 
+/// details | Grade Calculator Example
+    type: example
+    open: false
+
 ```python
 # Grade calculator using sequence
 print("=== Grade Calculator ===")
@@ -54,6 +58,8 @@ print(f"Assignment 2: {assignment2}")
 print(f"Test Score: {test_score}")
 print(f"Average: {average:.1f}")
 ```
+
+///
 
 ## Selection (Conditional Statements)
 
@@ -272,6 +278,10 @@ while choice != "4":
 
 ### Example 1: Number Guessing Game
 
+/// details | Number Guessing Game
+    type: example
+    open: false
+
 **Pseudocode:**
 ```
 BEGIN NumberGuessingGame
@@ -318,7 +328,13 @@ while guess != secret_number:
 print(f"You won in {attempts} attempts!")
 ```
 
+///
+
 ### Example 2: Grade Classifier
+
+/// details | Grade Classifier
+    type: example
+    open: false
 
 **Pseudocode:**
 ```
@@ -367,6 +383,8 @@ for i in range(len(students)):
     
     print(f"{student_name}: {grade}")
 ```
+
+///
 
 ## Combining Control Structures
 

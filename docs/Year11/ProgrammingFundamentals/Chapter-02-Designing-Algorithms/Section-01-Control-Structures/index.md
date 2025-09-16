@@ -29,10 +29,10 @@ Sequence is the simplest control structure - it's just doing things in order, on
 ### How sequence works
 
 ```kroki-mermaid
-    flowchart TD
-        A[Step 1: Get ingredients] --> B[Step 2: Mix ingredients]
-        B --> C[Step 3: Bake for 30 minutes]
-        C --> D[Step 4: Cool and serve]
+flowchart TD
+    A[Step 1: Get ingredients] --> B[Step 2: Mix ingredients]
+    B --> C[Step 3: Bake for 30 minutes]
+    C --> D[Step 4: Cool and serve]
 ```
 
 **Key characteristics:**
@@ -45,7 +45,9 @@ Sequence is the simplest control structure - it's just doing things in order, on
 
 - **No repetition** - Each step is done once and then you move on
 
-### Example: Making a sandwich
+/// details | Example: Making a sandwich
+    type: example
+    open: false
 
 ```text
 ALGORITHM MakeSandwich
@@ -74,6 +76,8 @@ END
 
 Every time you follow this algorithm, you'll get the same result because the steps always happen in the same order.
 
+///
+
 ## Selection (decision making)
 
 Selection lets your algorithm make decisions based on conditions. It's like coming to a fork in the road - you check a condition and then choose which path to take.
@@ -84,101 +88,51 @@ Selection lets your algorithm make decisions based on conditions. It's like comi
     Do something only if a condition is true, otherwise skip it.
 
     ```kroki-mermaid
-        flowchart TD
-            A[Start] --> B{Is it raining?}
-            B -->|Yes| C[Take umbrella]
-            B -->|No| D[Continue without umbrella]
-            C --> E[Go outside]
-            D --> E
+    flowchart TD
+        A[Start] --> B{Is it raining?}
+        B -->|Yes| C[Take umbrella]
+        B -->|No| D[Continue without umbrella]
+        C --> E[Go outside]
+        D --> E
     ```
-
-    /// details | Python Preview
-        type: info
-        open: false
-
-    ```python
-    # Simple selection example
-    is_raining = input("Is it raining? (yes/no): ").lower()
-
-    if is_raining == "yes":
-        print("Take your umbrella!")
-    
-    print("Go outside")
-    ```
-    ///
 
 === "Binary Selection (IF-THEN-ELSE)"
     Choose between two different actions based on a condition.
 
     ```kroki-mermaid
-        flowchart TD
-            A[Enter age] --> B{Age >= 18?}
-            B -->|Yes| C[Show adult menu]
-            B -->|No| D[Show kids menu]
-            C --> E[End]
-            D --> E
+    flowchart TD
+    A[Start] --> B{score >= 50?}
+    B -->|Yes| C[Pass]
+    B -->|No| D[Fail]
+    C --> E[End]
+    D --> E
     ```
 
-    /// details | Python Preview
-        type: info
-        open: false
-
-    ```python
-    # Binary selection example
-    age = int(input("Enter your age: "))
-
-    if age >= 18:
-        print("Welcome! Here's the adult menu.")
-    else:
-        print("Welcome! Here's the kids menu.")
-    
-    print("Enjoy your meal!")
-    ```
-    ///
-
-=== "Multiple Selection (CASE/SWITCH)"
-    Choose from several options based on different values.
+=== "Multiple Selection (IF-THEN-ELSE-IF)"
+    Choose from several different actions based on multiple conditions.
 
     ```kroki-mermaid
         flowchart TD
-            A[Enter grade] --> B{Grade value?}
-            B -->|90-100| C[Display 'A']
-            B -->|80-89| D[Display 'B']
-            B -->|70-79| E[Display 'C']
-            B -->|60-69| F[Display 'D']
-            B -->|0-59| G[Display 'F']
+            A[Start] --> B{score >= 90?}
+            B -->|Yes| C[Grade: A]
+            B -->|No| D{score >= 80?}
+            D -->|Yes| E[Grade: B]
+            D -->|No| F{score >= 70?}
+            F -->|Yes| G[Grade: C]
+            F -->|No| H{score >= 50?}
+            H -->|Yes| I[Grade: D]
+            H -->|No| J[Grade: F]
+            C --> K[End]
+            E --> K
+            G --> K
+            I --> K
+            J --> K
 
-            C --> H[End]
-            D --> H
-            E --> H
-            F --> H
-            G --> H
     ```
 
-    /// details | Python Preview
-        type: info
-        open: false
-
-    ```python
-    # Multiple selection example (using if-elif-else)
-    score = int(input("Enter your score (0-100): "))
-
-    if score >= 90:
-        grade = "A"
-    elif score >= 80:
-        grade = "B"
-    elif score >= 70:
-        grade = "C"
-    elif score >= 60:
-        grade = "D"
-    else:
-        grade = "F"
-    
-    print(f"Your grade is: {grade}")
-    ```
-    ///
-
-### Example: Grade assignment algorithm
+/// details | Grade assignment algorithm
+    type: example
+    open: false
 
 ```text
 ALGORITHM AssignGrade
@@ -191,13 +145,14 @@ BEGIN
         OUTPUT "Grade: B"
     ELSE IF score >= 70 THEN
         OUTPUT "Grade: C"
-    ELSE IF score >= 60 THEN
+    ELSE IF score >= 50 THEN
         OUTPUT "Grade: D"
     ELSE
         OUTPUT "Grade: F"
     END IF
 END
 ```
+///
 
 **Tracing with score = 85:**
 
@@ -221,67 +176,66 @@ Iteration lets your algorithm repeat actions multiple times. It's like doing jum
     Repeat a specific number of times when you know exactly how many iterations you need.
 
     ```kroki-mermaid
-        flowchart TD
-            A[Start] --> B[Set counter = 1]
-            B --> C{Counter <= 10?}
-            C -->|Yes| D[Do jumping jack]
-            D --> E[Increment counter]
-            E --> C
-            C -->|No| F[End]
+    flowchart TD
+        A[Start] --> B[Set counter = 1]
+        B --> C{Counter <= 10?}
+        C -->|Yes| D[Do jumping jack]
+        D --> E[Increment counter]
+        E --> C
+        C -->|No| F[End]
     ```
 
-=== "Conditional Loops (WHILE loops)"
-    Repeat while a condition is true when you don't know exactly how many times to repeat.
-
-    ```kroki-mermaid
-        flowchart TD
-            A[Start] --> B[Get user input]
-            B --> C{Input = 'quit'?}
-            C -->|No| D[Process input]
-            D --> E[Get user input]
-            E --> C
-            C -->|Yes| F[End program]
-    ```
-
-### Example: Counting algorithm
+/// details | Counting algorithm
+    type: example
+    open: false
 
 ```text
 ALGORITHM CountToTen
 BEGIN
-    SET counter = 1
-    
-    WHILE counter <= 10 DO
-        OUTPUT counter
-        SET counter = counter + 1
-    END WHILE
-    
-    OUTPUT "Counting complete!"
+    FOR counter = 1 TO 10 DO
+        OUTPUT "Jumping jack " + counter
+    END FOR
+    OUTPUT "Exercise complete!"
 END
 ```
 
-**Tracing the loop:**
+**Tracing the FOR loop:**
 
 1. **Initialize:** counter = 1
 
 2. **Check:** counter <= 10? → 1 <= 10? → True
 
-3. **Execute:** OUTPUT 1, counter = 2
+3. **Execute:** Do jumping jack, OUTPUT "Jumping jack 1"
 
-4. **Check:** counter <= 10? → 2 <= 10? → True
+4. **Increment:** counter = 2
 
-5. **Execute:** OUTPUT 2, counter = 3
+5. **Check:** counter <= 10? → 2 <= 10? → True
 
-6. **Continue...** until counter = 11
+6. **Execute:** Do jumping jack, OUTPUT "Jumping jack 2"
 
-7. **Check:** counter <= 10? → 11 <= 10? → False
+...continues until...
 
-8. **Exit loop:** OUTPUT "Counting complete!"
+11. **Check:** counter <= 10? → 11 <= 10? → False
+
+12. **Exit loop:** OUTPUT "Exercise complete!"
+///
+
+=== "Conditional Loops (WHILE loops)"
+    Repeat while a condition is true. Use when you don't know exactly how many times to repeat.
+
+    ```kroki-mermaid
+    flowchart TD
+        A[Start] --> B[Ask for password]
+        B --> C{Password correct?}
+        C -->|No| D[Show error message]
+        D --> B
+        C -->|Yes| E[Grant access]
+        E --> F[End]
+    ```
 
 ## Combining control structures
 
 Real algorithms combine sequence, selection, and iteration to solve complex problems. Think of them as LEGO blocks - you can stack and connect them in many ways.
-
-### Example: Student grade processor
 
 === "Pseudocode"
     ```text
@@ -315,55 +269,46 @@ Real algorithms combine sequence, selection, and iteration to solve complex prob
             SET average = total / count
             OUTPUT "Class average: " + average
         ELSE
-            OUTPUT "No valid grades entered."
+            OUTPUT "No valid grades were entered"
         END IF
     END
     ```
 
-=== "Python"
+=== "Python Implementation"
     ```python
-    # Student grade processor - combining control structures
-    total = 0
-    count = 0
-
-    while True:  # Equivalent to REPEAT-UNTIL
-        try:
-            grade = float(input("Enter a grade (0-100) or 'no' to stop: "))
+    def process_student_grades():
+        total = 0
+        count = 0
+        
+        while True:
+            try:
+                grade = float(input("Enter a grade (0-100): "))
+                
+                if 0 <= grade <= 100:
+                    total += grade
+                    count += 1
+                    
+                    if grade >= 90:
+                        print("Excellent work!")
+                    elif grade >= 70:
+                        print("Good job!")
+                    else:
+                        print("Keep trying!")
+                else:
+                    print("Invalid grade. Please enter a number between 0 and 100.")
+                
+            except ValueError:
+                print("Invalid input. Please enter a number.")
             
-            if grade < 0 or grade > 100:
-                print("Invalid grade. Please try again.")
-                continue
-            
-            # Valid grade processing
-            total += grade
-            count += 1
-            
-            if grade >= 90:
-                print("Excellent work!")
-            elif grade >= 70:
-                print("Good job!")
-            else:
-                print("Keep trying!")
-            
-            # Check if user wants to continue
             continue_choice = input("Continue? (yes/no): ").lower()
             if continue_choice == "no":
                 break
-                
-        except ValueError:
-            # Handle non-numeric input
-            user_input = input("Enter a grade (0-100) or 'no' to stop: ")
-            if user_input.lower() == "no":
-                break
-            else:
-                print("Invalid input. Please enter a number or 'no' to stop.")
-    
-    # Calculate and display average
-    if count > 0:
-        average = total / count
-        print(f"Class average: {average:.2f}")
-    else:
-        print("No valid grades were entered.")
+        
+        if count > 0:
+            average = total / count
+            print(f"Class average: {average:.2f}")
+        else:
+            print("No valid grades were entered.")
     ```
 
 This algorithm combines:
@@ -379,17 +324,17 @@ This algorithm combines:
 You can put control structures inside other control structures:
 
 ```kroki-mermaid
-    flowchart TD
-        A[Start] --> B[FOR each student]
-        B --> C[Get student grade]
-        C --> D{Grade valid?}
-        D -->|Yes| E[Add to total]
-        D -->|No| F[Show error message]
-        E --> G{More students?}
-        F --> G
-        G -->|Yes| B
-        G -->|No| H[Calculate average]
-        H --> I[End]
+flowchart TD
+    A[Start] --> B[FOR each student]
+    B --> C[Get student grade]
+    C --> D{Grade valid?}
+    D -->|Yes| E[Add to total]
+    D -->|No| F[Show error message]
+    E --> G{More students?}
+    F --> G
+    G -->|Yes| B
+    G -->|No| H[Calculate average]
+    H --> I[End]
 ```
 
 ## Tracing algorithms

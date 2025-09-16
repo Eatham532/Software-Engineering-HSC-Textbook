@@ -1,26 +1,34 @@
 # Year 11 — Programming Mechatronics: Module Plan
 
-Begin with concepts, data, and simulations. Postpone hardware-specific coding until a platform is confirmed. Use PlantUML for wiring and subsystem diagrams.
+Begin with concepts, data, and simulations. Postpone hardware-specific coding until a platform ## Folder naming (mapping to numbered sections)
+
+- Display: numbered titles (e.g., "8.2 Wiring diagrams and power requirements").
+
+- Folders: `docs/Year11/ProgrammingMechatronics/Chapter-0X-Name/Section-0Y-Name/`
+
+  - `index.md`
+
+  - `quiz.md`med. Use PlantUML for wiring and subsystem diagrams.
 
 ---
 
-## Chapter 1 — Mechatronics foundations
+## Chapter 7 — Mechatronics foundations
 
 Covers: applications, computing hardware, and I/O devices. Outcomes: SE-11-03.
 
-### 1.1 Applications of mechatronic systems
+### 7.1 Applications of mechatronic systems
 
 - Outcomes: SE-11-03
 
 - Learn: domains, use-cases, constraints (cost, safety, environment).
 
-### 1.2 Computing hardware: CPU, instruction sets, registers
+### 7.2 Computing hardware: CPU, instruction sets, registers
 
 - Outcomes: SE-11-03
 
 - Learn: microcontrollers vs CPUs, high-level opcodes, simple fetch–decode–execute.
 
-### 1.3 Sensors, actuators, and end effectors
+### 7.3 Sensors, actuators, and end effectors
 
 - Outcomes: SE-11-03
 
@@ -40,17 +48,17 @@ Exit: students can identify components and describe capabilities/limitations.
 
 ---
 
-## Chapter 2 — Data and integration
+## Chapter 8 — Data and integration
 
 Covers: device data, wiring/power, accessible design. Outcomes: SE-11-04, SE-11-03, SE-11-05.
 
-### 2.1 Working with device data and diagnostics
+### 8.1 Working with device data and diagnostics
 
 - Outcomes: SE-11-04
 
 - Learn: logs, telemetry, units, safe storage; simple CSV logging and reading.
 
-### 2.2 Wiring diagrams and power requirements
+### 8.2 Wiring diagrams and power requirements
 
 - Outcomes: SE-11-03
 
@@ -58,7 +66,7 @@ Covers: device data, wiring/power, accessible design. Outcomes: SE-11-04, SE-11-
 
 - Determine power, battery and material requirements for typical components (sensors, actuators, controllers) and estimate run-times and safety margins.
 
-### 2.3 Designing accessible mechatronic systems
+### 8.3 Designing accessible mechatronic systems
 
 - Outcomes: SE-11-05
 
@@ -70,29 +78,29 @@ Exit: students can interpret device data and draft safe wiring sketches.
 
 ---
 
-## Chapter 3 — Control algorithms
+## Chapter 9 — Control algorithms
 
 Covers: open/closed loop, autonomy, common patterns. Outcomes: SE-11-02.
 
-### 3.1 Open vs closed loop systems
+### 9.1 Open vs closed loop systems
 
 - Outcomes: SE-11-02
 
 - Learn: behaviour differences; feedback concepts; stability at a high level.
 
-### 3.2 Autonomous control features
+### 9.2 Autonomous control features
 
 - Outcomes: SE-11-02
 
 - Learn: autonomy levels; safety interlocks and fallbacks.
 
-### 3.3 Algorithmic patterns for control
+### 9.3 Algorithmic patterns for control
 
 - Outcomes: SE-11-02
 
 - Learn: state machines, conceptual PID, basic scheduling.
 
-### 3.4 Mechanical constraints and subsystem composition
+### 9.4 Mechanical constraints and subsystem composition
 
 - Outcomes: SE-11-02
 
@@ -102,35 +110,35 @@ Exit: students can explain feedback and outline control strategies.
 
 ---
 
-## Chapter 4 — Programming and building
+## Chapter 10 — Programming and building
 
 Covers: Python simulations, control implementation, integration, UI, and testing. Outcomes: SE-11-06, SE-11-02, SE-11-07.
 
-### 4.1 Simulations and prototypes for testing
+### 10.1 Simulations and prototypes for testing
 
 - Outcomes: SE-11-06
 
 - Learn: simulate sensor inputs and actuator outputs in Python.
 
-### 4.2 Implementing closed loop control
+### 10.2 Implementing closed loop control
 
 - Outcomes: SE-11-02, SE-11-07
 
 - Learn: simple control loop in Python; structured functions and parameters.
 
-### 4.3 Integrating sensors and actuators
+### 10.3 Integrating sensors and actuators
 
 - Outcomes: SE-11-02
 
 - Learn: interface abstractions in Python; test harnesses.
 
-### 4.4 User interfaces for control
+### 10.4 User interfaces for control
 
 - Outcomes: SE-11-06
 
 - Learn: simple CLI/dashboard mock-ups; clear status and error messaging.
 
-### 4.5 Unit tests for subsystems
+### 10.5 Unit tests for subsystems
 
 - Outcomes: SE-11-06
 

@@ -6,6 +6,35 @@ Before running Python code, contributors should activate the project virtual env
 
 The repository uses `uv` for environment and dependency management where applicable.
 
+Links are used across the textbook to reduce duplic## Diagrams (PlantUML)
+
+- Each Section includes `index.md` and `quiz.md`. Place images/code alongside or in `assets/`.
+
+## Section template (index.md)
+
+- **Important**: In class diagrams, escape double underscores in method names (e.g., `\_\_init\_\_` instead of `__init__`) as underscores interfere with Markdown formatting.
+
+Example:
+
+```kroki-plantuml
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+class Student {
+    - name: string
+    - student_id: string
+    + \_\_init\_\_(name, student_id)
+    + get_average(): float
+}
+
+actor Student
+participant "Textbook Site" as Site
+Student -> Site: Open Section
+Site --> Student: Rendered page
+@enduml
+```
+
 Links are used across the textbook to reduce duplication and maintain a single source of truth for terms and concepts.
 
 ## Additional contributor suggestions
@@ -41,6 +70,8 @@ Quizzes belong in a separate `quiz.md` adjacent to each section’s `index.md`. 
 - Extended examples or explanations
 
 - Any content that benefits from being collapsible
+
+**H4 headings (####) are not allowed** - use details blocks with `///` syntax instead for collapsible content sections.
 
 **Exercise and solution pattern**:
 
@@ -328,7 +359,7 @@ Diagrams: include the PlantUML source fence above any generated SVG. Prefer one 
 
 File hygiene: build artefacts should not be committed (for example, `site/`, `__pycache__/`, `.obsidian/`, `.vscode/`).
 
-Navigation: `.nav.yml` is the single source of truth for navigation; avoid adding `nav:` to `mkdocs.yml`.
+Navigation: `docs/.nav.yml` is the single source of truth for navigation; avoid adding `nav:` to `mkdocs.yml`.
 
 Navigation conventions: module overviews should live at `docs/YearYY/ModuleName/index.md`. Do not use bracketed labels such as "(Overview)" in titles or nav labels.
 
@@ -427,7 +458,7 @@ Conventions:
 
 Example:
 
-```plantuml
+```kroki-plantuml
 @startuml
 skinparam monochrome true
 skinparam shadowing false
@@ -456,7 +487,39 @@ Site --> Student: Rendered page
 
 - Recap and glossary (if needed).
 
-Quiz (`quiz.md`): 3–8 questions (mix of multiple-choice and short-answer). Mark correct choices with `{ data-correct }` and use grade/reset buttons with `data-quiz-action`. See `docs/demo/quiz-demo.md`.
+Quiz (`quiz.md`): 3–8 questions (mix of multiple-choice and short-answer). Mark correct choices with `{ data-correct }` and use grade/reset buttons with `data-quiz-action`.
+
+### Quiz Format Structure
+
+Use a single admonition block for the entire quiz:
+
+```markdown
+# Section Title - Quiz
+
+!!! quiz "Check your understanding"
+
+    1. Question text here?
+
+        - Option A
+        - Option B { data-correct }
+        - Option C
+
+    2. Another question?
+
+        - First choice
+        - Second choice { data-correct }
+        - Third choice
+```
+
+**Indentation Rules:**
+
+- Question numbers (1., 2., etc.) start at the beginning of the line
+
+- Options are indented with 4 spaces (each starts with `-`)
+
+- Code blocks within questions must be indented to align with the question content
+
+- Correct answers are marked with `{ data-correct }` at the end of the option line
 
 ## Navigation
 

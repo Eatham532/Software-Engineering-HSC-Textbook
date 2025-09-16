@@ -45,7 +45,9 @@ Every project needs a README.md file that answers these key questions:
 
 **How do I use it?** - Basic usage examples with expected inputs/outputs
 
-#### Example README structure
+/// details | Example README structure
+    type: example
+    open: false
 
 ```markdown
 # Grade Calculator
@@ -72,6 +74,7 @@ Your average: 85.0 (Grade: B)
 - main.py - Main program
 - grade_calculator.py - Grade calculation functions
 ```
+///
 
 ### Docstrings for functions
 

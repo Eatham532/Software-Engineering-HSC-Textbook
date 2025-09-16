@@ -1,14 +1,22 @@
 # Year 12 — Software Automation: Module Plan
 
-Build intuition for ML and automation with simple, reproducible Python examples. Prefer from-scratch implementations where practical; introduce libraries with care.
+Build intuition for ML and automation with simple, reproducible Python examples. Prefer from-scratch## Folder naming (mapping to numbered sections)
+
+- Display: numbered titles (e.g., "21.1 Regression models in Python: linear, polynomial, logistic").
+
+- Folders: `docs/Year12/SoftwareAutomation/Chapter-0X-Name/Section-0Y-Name/`
+
+  - `index.md`
+
+  - `quiz.md`tations where practical; introduce libraries with care.
 
 ---
 
-## Chapter 1 — ML and automation basics
+## Chapter 20 — ML and automation basics
 
 Covers: definitions, learning models, applications, and simple model design. Outcomes: SE-12-03, SE-12-02.
 
-### 1.1 What is AI vs ML (and where RPA/BPA fit)
+### 20.1 What is AI vs ML (and where RPA/BPA fit)
 
 - Outcomes: SE-12-03
 
@@ -22,19 +30,19 @@ Covers: definitions, learning models, applications, and simple model design. Out
 
   - How ML augments RPA/BPA: intelligent decision points, document classification, anomaly detection.
 
-### 1.2 ML training models: supervised, unsupervised, semi, reinforcement
+### 20.2 ML training models: supervised, unsupervised, semi, reinforcement
 
 - Outcomes: SE-12-03
 
 - Learn: when to use each; data needs; brief evaluation notions.
 
-### 1.3 Common ML applications
+### 20.3 Common ML applications
 
 - Outcomes: SE-12-03
 
 - Learn: data analysis, forecasting, assistants, image recognition; where Python shines.
 
-### 1.4 Design models: decision trees and neural networks
+### 20.4 Design models: decision trees and neural networks
 
 - Outcomes: SE-12-02
 
@@ -44,7 +52,7 @@ Exit: students can categorise ML problems and outline simple models.
 
 ---
 
-### 1.5 RPA and BPA: practical considerations
+### 20.5 RPA and BPA: practical considerations
 
 - Outcomes: SE-12-02, SE-12-05
 
@@ -58,11 +66,11 @@ Exit: students can categorise ML problems and outline simple models.
 
   - ethical, security and maintainability considerations when automating workflows
 
-## Chapter 2 — Programming for automation
+## Chapter 21 — Programming for automation
 
 Covers: regression models and a tiny neural network. Outcomes: SE-12-02.
 
-### 2.1 Regression models and core algorithm types in Python
+### 21.1 Regression models and core algorithm types in Python
 
 - Outcomes: SE-12-02
 
@@ -78,7 +86,7 @@ Covers: regression models and a tiny neural network. Outcomes: SE-12-02.
 
   - (briefly) polynomial regression as an extension to linear models when required
 
-### 2.2 Neural networks: concepts and implementation
+### 21.2 Neural networks: concepts and implementation
 
 - Outcomes: SE-12-02
 
@@ -88,11 +96,11 @@ Exit: students can implement toy models and reason about their behaviour.
 
 ---
 
-## Chapter 3 — Significance and impact
+## Chapter 22 — Significance and impact
 
 Covers: impact, human behaviour, and bias. Outcomes: SE-12-05.
 
-### 3.1 Assessing the impact of automation
+### 22.1 Assessing the impact of automation
 
 - Outcomes: SE-12-05
 
@@ -108,7 +116,7 @@ Covers: impact, human behaviour, and bias. Outcomes: SE-12-05.
 
   - the economy and distribution of wealth (automation's effect on labour markets and wealth concentration)
 
-### 3.2 Human behaviour patterns and their influence on ML/AI development
+### 22.2 Human behaviour patterns and their influence on ML/AI development
 
 - Outcomes: SE-12-05
 
@@ -122,7 +130,7 @@ Covers: impact, human behaviour, and bias. Outcomes: SE-12-05.
 
   - belief systems (how underlying beliefs shape user interaction and acceptance)
 
-### 3.3 Bias in datasets and models (expanded)
+### 22.3 Bias in datasets and models (expanded)
 
 - Outcomes: SE-12-05
 
@@ -137,20 +145,6 @@ Covers: impact, human behaviour, and bias. Outcomes: SE-12-05.
   - transparency and accountability (documentation, model cards, reproducibility checks)
 
 Exit: students can discuss impacts, evaluate ethical considerations, and propose mitigation strategies for bias in ML systems.
-
-### 3.2 Human behaviour patterns and ML/AI
-
-- Outcomes: SE-12-05
-
-- Learn: feedback loops, incentives, and unintended consequences.
-
-### 3.3 Bias in datasets and models
-
-- Outcomes: SE-12-05
-
-- Learn: sources of bias; mitigation strategies; transparency.
-
-Exit: students can discuss impacts and evaluate ethical considerations.
 
 ---
 

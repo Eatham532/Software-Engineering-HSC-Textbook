@@ -53,7 +53,9 @@ This analysis helps catch errors early and ensures the algorithm solves the inte
 
 - Changes made to stored data
 
-### Example: Grade Calculator Algorithm
+/// details | Example: Grade Calculator Algorithm
+    type: example
+    open: false
 
 ```kroki-plantuml
 @startuml
@@ -123,6 +125,8 @@ END
 | Student name and grade | String | Screen display |
 | Average score | Number | Screen display |
 
+///
+
 ## Determining Algorithm Purpose
 
 The **purpose** is the problem the algorithm is designed to solve. To identify it:
@@ -162,7 +166,9 @@ The **purpose** is the problem the algorithm is designed to solve. To identify i
 
 6. **Verify outputs match expectations**
 
-### Desk Check Example: Grade Calculator
+/// details | Desk Check Example: Grade Calculator
+    type: example
+    open: false
 
 Let's trace through with inputs: studentName="Alice", assignment1=85, assignment2=92, finalExam=78
 
@@ -184,6 +190,8 @@ Let's trace through with inputs: studentName="Alice", assignment1=85, assignment
 - "Alice earned grade: B"
 
 - "Average score: 85.0"
+
+///
 
 ### Testing Different Branches
 
@@ -229,7 +237,9 @@ It's important to test different paths through selection structures:
 
 ### How to Conduct Peer Checking:
 
-#### As the Author:
+/// details | As the Author:
+    type: note
+    open: false
 
 1. **Explain the purpose** of your algorithm
 
@@ -241,7 +251,12 @@ It's important to test different paths through selection structures:
 
 5. **Listen to feedback** without being defensive
 
-#### As the Reviewer:
+///
+///
+
+/// details | As the Reviewer:
+    type: note
+    open: false
 
 1. **Ask about the purpose** - is it clear?
 
@@ -252,6 +267,8 @@ It's important to test different paths through selection structures:
 4. **Verify the desk check** - do you get the same results?
 
 5. **Suggest improvements** constructively
+
+///
 
 ### Peer Checking Checklist:
 

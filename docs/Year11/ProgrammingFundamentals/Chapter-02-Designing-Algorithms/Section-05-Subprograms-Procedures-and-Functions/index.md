@@ -112,7 +112,9 @@ package "Grade Processing System" {
 
 ### Parameter Types
 
-#### Input Parameters
+/// details | Input Parameters
+    type: note
+    open: false
 
 Data passed into the subprogram that it reads but doesn't change.
 
@@ -123,8 +125,11 @@ BEGIN
     RETURN area
 END
 ```
+///
 
-#### Output Parameters
+/// details | Output Parameters
+    type: note
+    open: false
 
 Variables that the subprogram modifies to send results back.
 
@@ -139,8 +144,11 @@ BEGIN
     INPUT age
 END
 ```
+///
 
-#### Input/Output Parameters
+/// details | Input/Output Parameters
+    type: note
+    open: false
 
 Data that comes in, gets modified, and goes back out.
 
@@ -152,6 +160,7 @@ BEGIN
     SET student.average = student.totalPoints / student.numAssignments
 END
 ```
+///
 
 ### Parameter Examples
 
@@ -246,7 +255,9 @@ OUTPUT "File size: " + GetFileSize("data.txt") + " bytes"
 
 ### Types of Cohesion (from best to worst)
 
-#### Functional Cohesion (Best)
+/// details | Functional Cohesion (Best)
+    type: note
+    open: false
 
 Everything contributes to a single, well-defined task.
 
@@ -255,8 +266,11 @@ Everything contributes to a single, well-defined task.
 ✓ PROCEDURE SaveStudentRecord(student)
 ✓ FUNCTION ValidateEmailAddress(email)
 ```
+///
 
-#### Sequential Cohesion
+/// details | Sequential Cohesion
+    type: note
+    open: false
 
 Elements are related because the output of one becomes the input of the next.
 
@@ -269,8 +283,11 @@ BEGIN
     ArrangeShipping(order)        // Step 4 (uses charged order)
 END
 ```
+///
 
-#### Communicational Cohesion
+/// details | Communicational Cohesion
+    type: note
+    open: false
 
 Elements work on the same data.
 
@@ -282,8 +299,11 @@ BEGIN
     FormatStudentReport(student)
 END
 ```
+///
 
-#### Poor Cohesion Examples
+/// details | Poor Cohesion Examples
+    type: note
+    open: false
 
 **Temporal Cohesion (Poor)** - grouped only because they happen at the same time:
 
@@ -312,6 +332,7 @@ BEGIN
     END IF
 END
 ```
+///
 
 ### Improving Cohesion
 

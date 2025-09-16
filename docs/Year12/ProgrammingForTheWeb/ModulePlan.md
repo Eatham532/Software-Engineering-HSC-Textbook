@@ -4,11 +4,19 @@ Focus on back-end Python examples and standards-based front-end. Keep security a
 
 ---
 
-## Chapter 1 — Web foundations and data transmission
+## Chapter 11 — Web foundations and data transmission
 
-Covers: applications, how data moves, protocols/ports, web security, certificates and encryption, and basic architectures for large-scale web systems. Outcomes: SE-12-03, SE-12-04.
+Covers: applicat## Folder naming (mapping to numbered sections)
 
-### 1.1 Explore the applications of web programming
+- Display: numbered titles (e.g., "12.2 Model elements that form a web development system").
+
+- Folders: `docs/Year12/ProgrammingForTheWeb/Chapter-0X-Name/Section-0Y-Name/`
+
+  - `index.md`
+
+  - `quiz.md` data moves, protocols/ports, web security, certificates and encryption, and basic architectures for large-scale web systems. Outcomes: SE-12-03, SE-12-04.
+
+### 11.1 Explore the applications of web programming
 
 - Outcomes: SE-12-03
 
@@ -22,7 +30,7 @@ Covers: applications, how data moves, protocols/ports, web security, certificate
 
   - progressive web apps (PWAs) (offline support, installability, service workers)
 
-### 1.2 How data moves on the internet (packets, IP, DNS, protocols)
+### 11.2 How data moves on the internet (packets, IP, DNS, protocols)
 
 - Outcomes: SE-12-03
 
@@ -42,7 +50,7 @@ Covers: applications, how data moves, protocols/ports, web security, certificate
 
   - SMTP, POP3, IMAP (email protocols and their role in web systems)
 
-### 1.3 Web protocols, ports and secure transport concepts
+### 11.3 Web protocols, ports and secure transport concepts
 
 - Outcomes: SE-12-04
 
@@ -64,7 +72,7 @@ Covers: applications, how data moves, protocols/ports, web security, certificate
 
   - digital signatures (non-repudiation and verification)
 
-### 1.4 Big data and web architectures
+### 11.4 Big data and web architectures
 
 - Outcomes: SE-12-03
 
@@ -74,11 +82,11 @@ Exit: students can trace a request from client to server, list the relevant prot
 
 ---
 
-## Chapter 2 — Designing web applications
+## Chapter 12 — Designing web applications
 
 Covers: standards and accessibility, client/server models, developer tools, CSS/design systems, version control and libraries. Outcomes: SE-12-06, SE-12-02.
 
-### 2.1 The role of the W3C and web standards
+### 12.1 The role of the W3C and web standards
 
 - Outcomes: SE-12-06
 
@@ -96,7 +104,7 @@ Covers: standards and accessibility, client/server models, developer tools, CSS/
 
   - machine-readable data standards (e.g., ARIA, microdata, JSON-LD)
 
-### 2.2 Model elements that form a web development system
+### 12.2 Model elements that form a web development system
 
 - Outcomes: SE-12-02
 
@@ -112,7 +120,7 @@ Covers: standards and accessibility, client/server models, developer tools, CSS/
 
   - middleware, APIs, and third-party services
 
-### 2.3 Influence of the web browser and developer tools
+### 12.3 Influence of the web browser and developer tools
 
 - Outcomes: SE-12-02
 
@@ -124,7 +132,7 @@ Covers: standards and accessibility, client/server models, developer tools, CSS/
 
   - using Developer (Dev) Tools: DOM inspection, network tracing, performance profiling, storage inspection, and debugging JavaScript/Python served responses
 
-### 2.4 CSS, UI and UX principles
+### 12.4 CSS, UI and UX principles
 
 - Outcomes: SE-12-06
 
@@ -142,7 +150,7 @@ Covers: standards and accessibility, client/server models, developer tools, CSS/
 
   - building UIs that consider accessibility and inclusivity (contrast, keyboard navigation, captions, semantics)
 
-### 2.5 Front-end code libraries and frameworks
+### 12.5 Front-end code libraries and frameworks
 
 - Outcomes: SE-12-06
 
@@ -158,7 +166,7 @@ Covers: standards and accessibility, client/server models, developer tools, CSS/
 
   - when to adopt libraries versus building minimal bespoke code
 
-### 2.6 Open-source and content management systems (CMS)
+### 12.6 Open-source and content management systems (CMS)
 
 - Outcomes: SE-12-06
 
@@ -172,11 +180,11 @@ Exit: students can design accessible, standards-compliant front-ends and reason 
 
 ---
 
-## Chapter 3 — Back-end, databases, and PWAs
+## Chapter 13 — Back-end, databases, and PWAs
 
 Covers: back-end Python, the backend request lifecycle, databases (SQL and NoSQL), performance, and PWA basics. Outcomes: SE-12-02, SE-12-06.
 
-### 3.1 Server-side Python with a microframework and the back-end request flow
+### 13.1 Server-side Python with a microframework and the back-end request flow
 
 - Outcomes: SE-12-02
 
@@ -192,7 +200,7 @@ Covers: back-end Python, the backend request lifecycle, databases (SQL and NoSQL
 
   - interfacing with databases and external services during a request
 
-### 3.2 Databases: SQL, common queries and ORM comparison
+### 13.2 Databases: SQL, common queries and ORM comparison
 
 - Outcomes: SE-12-02
 
@@ -218,13 +226,13 @@ Covers: back-end Python, the backend request lifecycle, databases (SQL and NoSQL
 
   - trade-offs: productivity and abstraction vs explicit control and performance
 
-### 3.3 Performance and page-load management
+### 13.3 Performance and page-load management
 
 - Outcomes: SE-12-06
 
 - Learn: caching strategies (CDNs, server-side caching), compression, asset bundling and lazy loading; basic profiling tools and hotspots.
 
-### 3.4 Designing and implementing a PWA
+### 13.4 Designing and implementing a PWA
 
 - Outcomes: SE-12-02
 

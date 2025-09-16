@@ -1,97 +1,87 @@
 # Section 3.3 Quiz: Data Dictionaries
 
-!!! quiz "Question 1"
-    What is the primary purpose of a data dictionary?
+!!! quiz "Check your understanding"
 
-    - Document API endpoints for web services
-    - Define the structure, format, and constraints of data used in a software system { data-correct }
-    - Store actual data values for the application
-    - Generate user interface layouts
+    1. What is the primary purpose of a data dictionary?
 
-!!! quiz "Question 2"
-    Which of the following is NOT typically included in a data dictionary entry?
+        - Document API endpoints for web services
+        - Define the structure, format, and constraints of data used in a software system { data-correct }
+        - Store actual data values for the application
+        - Generate user interface layouts
 
-    - Field names and data types
-    - Constraints and validation rules
-    - Sample data values
-    - Source code implementation details { data-correct }
+    2. Which of the following is NOT typically included in a data dictionary entry?
 
-!!! quiz "Question 3"
-    For a student record with a name field that must be between 2 and 50 characters, what type of constraint is this?
+        - Field names and data types
+        - Constraints and validation rules
+        - Sample data values
+        - Source code implementation details { data-correct }
 
-    - Range constraint
-    - Length constraint { data-correct }
-    - Format constraint
-    - Relationship constraint
+    3. For a student record with a name field that must be between 2 and 50 characters, what type of constraint is this?
 
-!!! quiz "Question 4"
-    What does a "one-to-many" relationship mean in a data dictionary?
+        - Range constraint
+        - Length constraint { data-correct }
+        - Format constraint
+        - Relationship constraint
 
-    - One field can contain many different data types
-    - One record can be linked to multiple records in another table { data-correct }
-    - One table can have many fields
-    - One constraint can apply to many fields
+    4. What does a "one-to-many" relationship mean in a data dictionary?
 
-!!! quiz "Question 5"
-    Given the constraint "Range: 0.0-100.0" for a grade_average field, which value would be INVALID?
+        - One field can contain many different data types
+        - One record can be linked to multiple records in another table { data-correct }
+        - One table can have many fields
+        - One constraint can apply to many fields
 
-    - 85.5
-    - 0.0
-    - 100.0
-    - 105.2 { data-correct }
+    5. Given the constraint "Range: 0.0-100.0" for a grade_average field, which value would be INVALID?
 
-!!! quiz "Question 6"
-    What Python function could you use to check if a product_id follows the format "PRD" + 5 digits?
+        - 85.5
+        - 0.0
+        - 100.0
+        - 105.2 { data-correct }
 
-    - `isinstance()`
-    - `len()`
-    - `re.match()` { data-correct }
-    - `str.format()`
+    6. What Python function could you use to check if a product_id follows the format "PRD" + 5 digits?
 
-!!! quiz "Question 7"
-    In the student data dictionary example, what happens if you try to store an age of 30?
+        - `isinstance()`
+        - `len()`
+        - `re.match()` { data-correct }
+        - `str.format()`
 
-    - It gets automatically converted to 25
-    - It should be rejected because it violates the range constraint (16-25) { data-correct }
-    - It gets stored as a string instead of an integer
-    - It triggers a format error
+    7. In the student data dictionary example, what happens if you try to store an age of 30?
 
-!!! quiz "Question 8"
-    Which field constraint would ensure a product_id field is always exactly 8 characters long?
+        - It gets automatically converted to 25
+        - It should be rejected because it violates the range constraint (16-25) { data-correct }
+        - It gets stored as a string instead of an integer
+        - It triggers a format error
 
-    - Range: 8-8
-    - Length: exactly 8 characters { data-correct }
-    - Format: must contain 8 digits
-    - Type: string with 8 bytes
+    8. Which field constraint would ensure a product_id field is always exactly 8 characters long?
 
-!!! quiz "Question 9"
-    What is a "conditional constraint" in a data dictionary?
+        - Range: 8-8
+        - Length: exactly 8 characters { data-correct }
+        - Format: must contain 8 digits
+        - Type: string with 8 bytes
 
-    - A constraint that only applies during certain times
-    - A constraint that depends on the values of other fields { data-correct }
-    - A constraint that can be optionally enforced
-    - A constraint that applies to multiple data types
+    9. What is a "conditional constraint" in a data dictionary?
 
-!!! quiz "Question 10"
-    For an e-commerce system, if a product has `in_stock = True`, what constraint should apply to `stock_quantity`?
+        - A constraint that only applies during certain times
+        - A constraint that depends on the values of other fields { data-correct }
+        - A constraint that can be optionally enforced
+        - A constraint that applies to multiple data types
 
-    - It must be exactly 1
-    - It must be greater than 0 { data-correct }
-    - It must be a string value
-    - It can be any integer
+    10. For an e-commerce system, if a product has `in_stock = True`, what constraint should apply to `stock_quantity`?
 
-!!! quiz "Question 11"
-    When creating a data dictionary for a library book system, which constraint would be most appropriate for an ISBN field?
+        - It must be exactly 1
+        - It must be greater than 0 { data-correct }
+        - It must be a string value
+        - It can be any integer
 
-    - Must be exactly 13 digits { data-correct }
-    - Must be between 1-100 characters
-    - Must be a floating-point number
-    - Must contain only letters
+    11. When creating a data dictionary for a library book system, which constraint would be most appropriate for an ISBN field?
 
-!!! quiz "Question 12"
-    What is the main difference between a data dictionary and a database schema?
+        - Must be exactly 13 digits { data-correct }
+        - Must be between 1-100 characters
+        - Must be a floating-point number
+        - Must contain only letters
 
-    - Data dictionaries are for web applications, schemas are for desktop applications
-    - Data dictionaries are human-readable documentation, schemas are machine-readable database structure { data-correct }
-    - Data dictionaries store actual data, schemas store metadata
-    - Data dictionaries are optional, schemas are required
+    12. What is the main difference between a data dictionary and a database schema?
+
+        - Data dictionaries are for web applications, schemas are for desktop applications
+        - Data dictionaries are human-readable documentation, schemas are machine-readable database structure { data-correct }
+        - Data dictionaries store actual data, schemas store metadata
+        - Data dictionaries are optional, schemas are required

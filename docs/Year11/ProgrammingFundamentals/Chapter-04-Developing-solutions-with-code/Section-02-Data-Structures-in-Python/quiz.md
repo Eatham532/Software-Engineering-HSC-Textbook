@@ -1,100 +1,91 @@
 # Section 4.2 Quiz: Data Structures in Python
 
-!!! quiz "Question 1"
-    How do you access the element in the second row, third column of a 2D list called `matrix`?
+!!! quiz "Check your understanding"
 
-    - `matrix[1][2]` { data-correct }
-    - `matrix[2][3]`
-    - `matrix[2][1]`
-    - `matrix[3][2]`
+    1. How do you access the element in the second row, third column of a 2D list called `matrix`?
 
-!!! quiz "Question 2"
-    Which Python operation is used to add an element to the end of a list?
+        - `matrix[1][2]` { data-correct }
+        - `matrix[2][3]`
+        - `matrix[2][1]`
+        - `matrix[3][2]`
 
-    - `insert()`
-    - `add()`
-    - `append()` { data-correct }
-    - `push()`
+    2. Which Python operation is used to add an element to the end of a list?
 
-!!! quiz "Question 3"
-    In a stack implemented using a Python list, which operation removes the top element?
+        - `insert()`
+        - `add()`
+        - `append()` { data-correct }
+        - `push()`
 
-    - `remove()`
-    - `pop()` { data-correct }
-    - `delete()`
-    - `pull()`
+    3. In a stack implemented using a Python list, which operation removes the top element?
 
-!!! quiz "Question 4"
-    How do you safely access a dictionary value that might not exist?
+        - `remove()`
+        - `pop()` { data-correct }
+        - `delete()`
+        - `pull()`
 
-    - Use try/except with KeyError
-    - Use the `get()` method { data-correct }
-    - Check with `if key in dict` first
-    - All of the above
+    4. How do you safely access a dictionary value that might not exist?
 
-!!! quiz "Question 5"
-    Which data structure would be most efficient for implementing a simple undo feature?
+        - Use try/except with KeyError
+        - Use the `get()` method { data-correct }
+        - Check with `if key in dict` first
+        - All of the above
 
-    - Dictionary
-    - 2D List
-    - Stack { data-correct }
-    - Tree
+    5. Which data structure would be most efficient for implementing a simple undo feature?
 
-!!! quiz "Question 6"
-    What does this code do?
-    ```python
-    tree = {"name": "root", "children": [{"name": "child1", "children": []}]}
-    ```
+        - Dictionary
+        - 2D List
+        - Stack { data-correct }
+        - Tree
 
-    - Creates a 2D array
-    - Creates a simple tree structure using nested dictionaries { data-correct }
-    - Creates a stack
-    - Creates a hash table
+    6. What does this code do?
 
-!!! quiz "Question 7"
-    When reading CSV files in Python, which module should you import?
+        ```python
+        tree = {"name": "root", "children": [{"name": "child1", "children": []}]}
+        ```
 
-    - `file`
-    - `csv` { data-correct }
-    - `io`
-    - `data`
+        - Creates a 2D array
+        - Creates a simple tree structure using nested dictionaries { data-correct }
+        - Creates a stack
+        - Creates a hash table
 
-!!! quiz "Question 8"
-    What is the result of `my_list.pop(1)` on the list `[10, 20, 30, 40]`?
+    7. When reading CSV files in Python, which module should you import?
 
-    - Returns 10, list becomes `[20, 30, 40]`
-    - Returns 20, list becomes `[10, 30, 40]` { data-correct }
-    - Returns 30, list becomes `[10, 20, 40]`
-    - Causes an error
+        - `file`
+        - `csv` { data-correct }
+        - `io`
+        - `data`
 
-!!! quiz "Question 9"
-    Which Python data type is used to implement hash tables?
+    8. What is the result of `my_list.pop(1)` on the list `[10, 20, 30, 40]`?
 
-    - List
-    - Tuple
-    - Dictionary { data-correct }
-    - Set
+        - Returns 10, list becomes `[20, 30, 40]`
+        - Returns 20, list becomes `[10, 30, 40]` { data-correct }
+        - Returns 30, list becomes `[10, 20, 40]`
+        - Causes an error
 
-!!! quiz "Question 10"
-    In a 2D list representing a grade book, how would you calculate the average grade for the first student?
+    9. Which Python data type is used to implement hash tables?
 
-    - `sum(grades[0]) / len(grades[0])` { data-correct }
-    - `sum(grades) / len(grades)`
-    - `average(grades[0])`
-    - `grades[0].average()`
+        - List
+        - Tuple
+        - Dictionary { data-correct }
+        - Set
 
-!!! quiz "Question 11"
-    What does `csv.DictReader()` do compared to `csv.reader()`?
+    10. In a 2D list representing a grade book, how would you calculate the average grade for the first student?
 
-    - Reads files faster
-    - Returns each row as a dictionary with column headers as keys { data-correct }
-    - Reads only the headers
-    - Automatically sorts the data
+        - `sum(grades[0]) / len(grades[0])` { data-correct }
+        - `sum(grades) / len(grades)`
+        - `average(grades[0])`
+        - `grades[0].average()`
 
-!!! quiz "Question 12"
-    Which operation is used to add an element at a specific position in a Python list?
+    11. What does `csv.DictReader()` do compared to `csv.reader()`?
 
-    - `append()`
-    - `add()`
-    - `insert()` { data-correct }
-    - `place()`
+        - Reads files faster
+        - Returns each row as a dictionary with column headers as keys { data-correct }
+        - Reads only the headers
+        - Automatically sorts the data
+
+    12. Which operation is used to add an element at a specific position in a Python list?
+
+        - `append()`
+        - `add()`
+        - `insert()` { data-correct }
+        - `place()`

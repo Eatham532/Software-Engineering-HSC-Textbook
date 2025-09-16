@@ -84,15 +84,20 @@ SET isValid = (age >= 18) AND (hasLicense = true)
 
 ### Selection Patterns
 
-#### Simple IF
+/// details | Simple IF
+    type: note
+    open: false
 
 ```text
 IF condition THEN
     statements
 END IF
 ```
+///
 
-#### IF-ELSE
+/// details | IF-ELSE
+    type: note
+    open: false
 
 ```text
 IF condition THEN
@@ -101,8 +106,11 @@ ELSE
     statements for false
 END IF
 ```
+///
 
-#### IF-ELSE IF-ELSE
+/// details | IF-ELSE IF-ELSE
+    type: note
+    open: false
 
 ```text
 IF condition1 THEN
@@ -136,26 +144,35 @@ BEGIN
     OUTPUT "Your grade is: " + grade
 END
 ```
+///
 
 ### Iteration Patterns
 
-#### WHILE Loop
+/// details | WHILE Loop
+    type: note
+    open: false
 
 ```text
 WHILE condition DO
     statements
 END WHILE
 ```
+///
 
-#### FOR Loop
+/// details | FOR Loop
+    type: note
+    open: false
 
 ```text
 FOR variable = start TO end DO
     statements
 END FOR
 ```
+///
 
-#### FOR EACH Loop
+/// details | FOR EACH Loop
+    type: note
+    open: false
 
 ```text
 FOR EACH item IN collection DO
@@ -180,6 +197,7 @@ BEGIN
     OUTPUT "The maximum is: " + maximum
 END
 ```
+///
 
 ## Flowcharts with PlantUML Activity Diagrams
 
@@ -248,7 +266,9 @@ stop
 
 ### Loops in Flowcharts
 
-#### WHILE Loop
+/// details | WHILE Loop
+    type: note
+    open: false
 
 ```kroki-plantuml
 @startuml
@@ -261,8 +281,11 @@ endwhile (no)
 stop
 @enduml
 ```
+///
 
-#### FOR Loop
+/// details | FOR Loop
+    type: note
+    open: false
 
 ```kroki-plantuml
 @startuml
@@ -280,6 +303,7 @@ endwhile (no)
 stop
 @enduml
 ```
+///
 
 ## Complete Example: Password Strength Checker
 

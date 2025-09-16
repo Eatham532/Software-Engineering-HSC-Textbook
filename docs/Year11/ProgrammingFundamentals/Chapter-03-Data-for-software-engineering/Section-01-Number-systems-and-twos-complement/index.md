@@ -1,10 +1,16 @@
-s# 3.1 Number systems and two's complement
+# 3.1 Number systems and two's complement
 
-!!! abstract "Learning objectives"
-    By the end of this section, you will be able to:
-    - Convert between decimal, binary, and hexadecimal number systems
-    - Represent negative integers using two's complement
-    - Verify conversions using Python's built-in functions
+/// admonition | Learning objectives
+    type: tip
+
+By the end of this section, you will be able to:
+
+- Convert between decimal, binary, and hexadecimal number systems
+
+- Represent negative integers using two's complement
+
+- Verify conversions using Python's built-in functions
+///
 
 ## Why this matters
 

@@ -54,7 +54,9 @@ Modern software development isn't always a straight line. Think of it more like 
 
 Before you start coding, you need to clearly understand the problem you're solving. This is like a detective investigating a case - you need to gather all the facts and understand everyone's perspective.
 
-#### Stakeholder analysis
+/// details | Stakeholder analysis
+    type: note
+    open: false
 
 **Stakeholders** are all the people who care about or are affected by your software. Think of them like characters in a story:
 
@@ -81,8 +83,11 @@ Before you start coding, you need to clearly understand the problem you're solvi
 - Competitors who might lose business
 
 - Groups concerned about privacy or security
+///
 
-#### Problem definition techniques
+/// details | Problem definition techniques
+    type: note
+    open: false
 
 **Problem statement structure** - A clear way to describe the problem:
 ```text
@@ -115,8 +120,11 @@ Our solution [unique advantage]
 - Measure the cost of the current problem
 
 - Check if solving it aligns with goals
+///
 
-#### Example: Grade Calculator Problem Analysis
+/// details | Example: Grade Calculator Problem Analysis
+    type: example
+    open: false
 
 **Context**: High school teachers spend excessive time calculating student averages manually
 
@@ -128,7 +136,9 @@ Our solution [unique advantage]
 
 - Negative: None significant for this simple tool
 
-**Problem statement**: "For high school teachers who teach multiple classes with 20-30 students each, manual grade calculation is time-consuming and error-prone. The Grade Calculator is a simple utility that automatically computes weighted averages for different assignment types. Unlike generic spreadsheet solutions, our calculator provides education-specific features like grade scales and missing assignment handling."
+**Problem statement**:  
+"For high school teachers who teach multiple classes with 20-30 students each, manual grade calculation is time-consuming and error-prone. The Grade Calculator is a simple utility that automatically computes weighted averages for different assignment types. Unlike generic spreadsheet solutions, our calculator provides education-specific features like grade scales and missing assignment handling."
+///
 
 ### Requirements specification (detailed process)
 
@@ -136,7 +146,9 @@ Once you understand the problem, you need to write down exactly what your soluti
 
 Good requirements are SMART: **Specific**, **Measurable**, **Achievable**, **Relevant**, and **Time-bound**.
 
-#### Types of requirements
+/// details | Types of requirements
+    type: note
+    open: false
 
 **Functional requirements** - What the system must DO:
 
@@ -175,8 +187,11 @@ Good requirements are SMART: **Specific**, **Measurable**, **Achievable**, **Rel
 - Existing systems you must work with
 
 - Available resources (people, servers, etc.)
+///
 
-#### Requirements gathering techniques
+/// details | Requirements gathering techniques
+    type: note
+    open: false
 
 **Interviews and surveys**: Direct stakeholder input
 ```text
@@ -208,8 +223,11 @@ Sample interview questions:
 - Use mockups to validate understanding with stakeholders
 
 - Iterate based on feedback before development begins
+///
 
-#### Requirements documentation standards
+/// details | Requirements documentation standards
+    type: note
+    open: false
 
 **User stories format**: Requirements from user perspective
 ```text
@@ -236,8 +254,11 @@ Details:
 - The system shall highlight invalid fields in red
 Test criteria: Enter grade of -5, verify error message appears
 ```
+///
 
-#### Example: Grade Calculator Requirements
+/// details | Example: Grade Calculator Requirements
+    type: example
+    open: false
 
 **Functional requirements**:
 
@@ -268,12 +289,15 @@ Test criteria: Enter grade of -5, verify error message appears
 - REQ-C002: Code must follow PEP 8 style guidelines
 
 - REQ-C003: Must complete development within 2 weeks
+///
 
 ### Solution design (architectural thinking)
 
 Solution design bridges the gap between requirements and implementation by creating a blueprint for the system architecture, data structures, and component interactions.
 
-#### Design levels and artifacts
+/// details | Design levels and artifacts
+    type: note
+    open: false
 
 **System architecture**: High-level structure and component relationships
 
@@ -314,8 +338,11 @@ Solution design bridges the gap between requirements and implementation by creat
 - Algorithm selection and pseudocode development
 
 - Performance optimization strategies
+///
 
-#### Design principles and patterns
+/// details | Design principles and patterns
+    type: note
+    open: false
 
 Good software design is like organizing a kitchen - everything should have its place and be easy to find and use.
 
@@ -345,8 +372,11 @@ Example: Grade Calculator separation
 - Plan for edge cases and error conditions
 
 - Make it possible for different people to work on different parts
+///
 
-#### Design documentation and communication
+/// details | Design documentation and communication
+    type: note
+    open: false
 
 **Architecture diagrams**: Visual representation of system structure
 
@@ -367,8 +397,11 @@ Example: Grade Calculator separation
 - Assumptions and constraints that influenced design
 
 - Future extensibility and maintenance considerations
+///
 
-#### Example: Grade Calculator Design
+/// details | Example: Grade Calculator Design
+    type: example
+    open: false
 
 **System architecture overview**:
 
@@ -410,6 +443,7 @@ blockdiag {
 - Separate calculation logic from input/output handling
 
 - Include comprehensive error messages for debugging
+///
 
 ### Development and implementation
 

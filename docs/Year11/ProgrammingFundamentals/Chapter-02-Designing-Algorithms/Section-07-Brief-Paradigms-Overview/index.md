@@ -279,6 +279,3 @@ Many modern applications combine paradigms:
 
 !!! tip "Cross-reference"
     This overview provides context for the algorithm design techniques learned in this chapter. You'll apply these concepts when implementing solutions in Python in Chapter 4.
-
-!!! tip "Chapter Summary"
-    Chapter 2 covered the complete algorithm design process: from basic control structures through analysis techniques to different paradigm approaches. These skills prepare you for implementing actual code solutions.

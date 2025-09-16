@@ -1,97 +1,87 @@
 # Quiz: Common Errors and Exceptions
 
-!!! quiz "Question 1"
-    What type of error prevents Python from running your code at all?
+!!! quiz "Check your understanding"
 
-    - Runtime errors
-    - Logic errors
-    - Syntax errors { data-correct }
-    - Type errors
+    1. What type of error prevents Python from running your code at all?
 
-!!! quiz "Question 2"
-    Which error occurs when you try to access list[5] in a list with only 3 elements?
+        - Runtime errors
+        - Logic errors
+        - Syntax errors { data-correct }
+        - Type errors
 
-    - IndexError { data-correct }
-    - KeyError
-    - ValueError
-    - TypeError
+    2. Which error occurs when you try to access list[5] in a list with only 3 elements?
 
-!!! quiz "Question 3"
-    What causes a ZeroDivisionError?
+        - IndexError { data-correct }
+        - KeyError
+        - ValueError
+        - TypeError
 
-    - Dividing a number by zero { data-correct }
-    - Multiplying by zero
-    - Adding zero to a number
-    - Subtracting zero from a number
+    3. What causes a ZeroDivisionError?
 
-!!! quiz "Question 4"
-    In the condition `if age >= 13 or age <= 65:`, what's the logic error?
+        - Dividing a number by zero { data-correct }
+        - Multiplying by zero
+        - Adding zero to a number
+        - Subtracting zero from a number
 
-    - Should use 'and' instead of 'or' { data-correct }
-    - Should use > instead of >=
-    - Should use < instead of <=
-    - Nothing is wrong with this condition
+    4. In the condition `if age >= 13 or age <= 65:`, what's the logic error?
 
-!!! quiz "Question 5"
-    What's an off-by-one error?
+        - Should use 'and' instead of 'or' { data-correct }
+        - Should use > instead of >=
+        - Should use < instead of <=
+        - Nothing is wrong with this condition
 
-    - Using the wrong variable name
-    - Accessing an index that's one position off from intended { data-correct }
-    - Forgetting to import a module
-    - Using the wrong data type
+    5. What's an off-by-one error?
 
-!!! quiz "Question 6"
-    Which would cause a NameError?
+        - Using the wrong variable name
+        - Accessing an index that's one position off from intended { data-correct }
+        - Forgetting to import a module
+        - Using the wrong data type
 
-    - print(totall) when variable is named 'total' { data-correct }
-    - print(5 + "hello")
-    - print(my_list[100]) on a short list
-    - print(my_dict["missing_key"])
+    6. Which would cause a NameError?
 
-!!! quiz "Question 7"
-    What makes a loop infinite?
+        - print(totall) when variable is named 'total' { data-correct }
+        - print(5 + "hello")
+        - print(my_list[100]) on a short list
+        - print(my_dict["missing_key"])
 
-    - The loop condition never becomes False { data-correct }
-    - Using a while loop instead of for loop
-    - Not using a break statement
-    - Having too many iterations
+    7. What makes a loop infinite?
 
-!!! quiz "Question 8"
-    Which is the best way to handle division by zero?
+        - The loop condition never becomes False { data-correct }
+        - Using a while loop instead of for loop
+        - Not using a break statement
+        - Having too many iterations
 
-    - Ignore it and hope it doesn't happen
-    - Check if denominator is zero before dividing { data-correct }
-    - Use only whole numbers
-    - Avoid division operations
+    8. Which is the best way to handle division by zero?
 
-!!! quiz "Question 9"
-    What type of error is it when your code runs but calculates the wrong answer?
+        - Ignore it and hope it doesn't happen
+        - Check if denominator is zero before dividing { data-correct }
+        - Use only whole numbers
+        - Avoid division operations
 
-    - Syntax error
-    - Runtime error
-    - Logic error { data-correct }
-    - Import error
+    9. What type of error is it when your code runs but calculates the wrong answer?
 
-!!! quiz "Question 10"
-    In `range(n)` where n=5, what values does the range include?
+        - Syntax error
+        - Runtime error
+        - Logic error { data-correct }
+        - Import error
 
-    - 1, 2, 3, 4, 5
-    - 0, 1, 2, 3, 4 { data-correct }
-    - 0, 1, 2, 3, 4, 5
-    - 1, 2, 3, 4
+    10. In `range(n)` where n=5, what values does the range include?
 
-!!! quiz "Question 11"
-    Which is an example of defensive programming?
+        - 1, 2, 3, 4, 5
+        - 0, 1, 2, 3, 4 { data-correct }
+        - 0, 1, 2, 3, 4, 5
+        - 1, 2, 3, 4
 
-    - Writing code as fast as possible
-    - Validating inputs before using them { data-correct }
-    - Using only simple data types
-    - Avoiding functions entirely
+    11. Which is an example of defensive programming?
 
-!!! quiz "Question 12"
-    What should you do when you get an error message?
+        - Writing code as fast as possible
+        - Validating inputs before using them { data-correct }
+        - Using only simple data types
+        - Avoiding functions entirely
 
-    - Immediately ask for help
-    - Read the message carefully to understand what went wrong { data-correct }
-    - Delete the problematic code
-    - Restart the program
+    12. What should you do when you get an error message?
+
+        - Immediately ask for help
+        - Read the message carefully to understand what went wrong { data-correct }
+        - Delete the problematic code
+        - Restart the program

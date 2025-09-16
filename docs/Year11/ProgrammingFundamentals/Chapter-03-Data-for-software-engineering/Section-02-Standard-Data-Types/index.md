@@ -16,39 +16,38 @@ Understanding data types helps you:
 
 ## Core data types
 
-Programming languages provide several fundamental data types to represent different kinds of information. Python implements these core types in intuitive ways.
+Programming languages provide several fundamental data types to represent different kinds of information. These concepts are universal across programming languages, though the exact syntax varies.
 
 ### Strings (text data)
 
 **Strings** store text - sequences of characters like words, sentences, or any textual information.
 
-=== "Python"
-    ```python
-    # Creating strings
+=== "Conceptual Example"
+    ```text
+    // Creating strings
     student_name = "Alice Johnson"
     course_code = "SE-11-02"
-    message = 'Welcome to Software Engineering!'
+    message = "Welcome to Software Engineering!"
     
-    # String operations
-    full_message = "Hello, " + student_name  # Concatenation
-    name_length = len(student_name)          # Length: 13
-    uppercase_name = student_name.upper()    # "ALICE JOHNSON"
+    // String operations
+    full_message = "Hello, " + student_name  // Concatenation
+    name_length = LENGTH(student_name)       // Length: 13
+    uppercase_name = TO_UPPER(student_name)  // "ALICE JOHNSON"
     
-    print(f"Student: {student_name}")
-    print(f"Course: {course_code}")
-    print(f"Name has {name_length} characters")
+    DISPLAY "Student: " + student_name
+    DISPLAY "Course: " + course_code
+    DISPLAY "Name has " + name_length + " characters"
     ```
 
 === "Key Characteristics"
     ```text
     Purpose: Store text and characters
     Examples: Names, addresses, messages, identifiers
-    Python type: str
     Common operations:
-    - Concatenation (+)
-    - Length (len())
-    - Case conversion (.upper(), .lower())
-    - Substring extraction ([start:end])
+    - Concatenation (joining strings together)
+    - Length calculation
+    - Case conversion (upper/lower)
+    - Substring extraction
     ```
 
 **When to use strings:**
@@ -65,34 +64,33 @@ Programming languages provide several fundamental data types to represent differ
 
 **Integers** store whole numbers - positive, negative, or zero, without decimal points.
 
-=== "Python"
-    ```python
-    # Creating integers
+=== "Conceptual Example"
+    ```text
+    // Creating integers
     student_age = 17
     num_students = 25
     temperature = -5
     score_difference = 0
     
-    # Integer operations
-    total_points = 85 + 92 + 78        # Addition: 255
-    average_estimate = total_points // 3  # Integer division: 85
-    remainder = total_points % 3       # Modulus: 0
+    // Integer operations
+    total_points = 85 + 92 + 78        // Addition: 255
+    average_estimate = total_points / 3  // Division: 85 (may be float in some languages)
+    remainder = total_points MOD 3      // Modulus: 0
     
-    print(f"Student age: {student_age}")
-    print(f"Class size: {num_students}")
-    print(f"Average (rounded down): {average_estimate}")
+    DISPLAY "Student age: " + student_age
+    DISPLAY "Class size: " + num_students
+    DISPLAY "Average (estimated): " + average_estimate
     ```
 
 === "Key Characteristics"
     ```text
     Purpose: Store whole numbers
     Examples: Ages, counts, IDs, years
-    Python type: int
-    Range: Unlimited (Python handles big integers automatically)
+    Range: Varies by programming language
     Common operations:
-    - Arithmetic (+, -, *, //, %)
+    - Arithmetic (+, -, *, /, MOD)
     - Comparison (==, !=, <, >, <=, >=)
-    - Conversion (int(), str())
+    - Type conversion
     ```
 
 **When to use integers:**
@@ -109,34 +107,33 @@ Programming languages provide several fundamental data types to represent differ
 
 **Floats** store numbers with decimal points - for precise measurements and calculations.
 
-=== "Python"
-    ```python
-    # Creating floats
+=== "Conceptual Example"
+    ```text
+    // Creating floats
     grade_average = 87.5
     price = 19.99
     pi_approximation = 3.14159
     temperature = 36.7
     
-    # Float operations
-    total_cost = price * 1.1             # Apply 10% tax: 21.989
-    rounded_cost = round(total_cost, 2)  # Round to 2 decimals: 21.99
-    percentage = (grade_average / 100)   # Convert to decimal: 0.875
+    // Float operations
+    total_cost = price * 1.1             // Apply 10% tax: 21.989
+    rounded_cost = ROUND(total_cost, 2)  // Round to 2 decimals: 21.99
+    percentage = grade_average / 100     // Convert to decimal: 0.875
     
-    print(f"Grade average: {grade_average}%")
-    print(f"Price with tax: ${rounded_cost}")
-    print(f"Temperature: {temperature}°C")
+    DISPLAY "Grade average: " + grade_average + "%"
+    DISPLAY "Price with tax: $" + rounded_cost
+    DISPLAY "Temperature: " + temperature + "°C"
     ```
 
 === "Key Characteristics"
     ```text
     Purpose: Store decimal numbers
     Examples: Prices, measurements, percentages, scientific data
-    Python type: float
-    Precision: ~15-17 decimal digits
+    Precision: Limited (typically 6-15 decimal digits)
     Common operations:
     - Arithmetic (+, -, *, /)
-    - Rounding (round())
-    - Math functions (abs(), pow())
+    - Rounding functions
+    - Mathematical functions (absolute value, power)
     ```
 
 **When to use floats:**
@@ -153,33 +150,32 @@ Programming languages provide several fundamental data types to represent differ
 
 **Booleans** store logical values - either `True` or `False`. They're essential for decision-making in programs.
 
-=== "Python"
-    ```python
-    # Creating booleans
-    is_student = True
-    has_permission = False
-    is_passing = grade_average >= 50  # Evaluates to True if grade_average >= 50
+=== "Conceptual Example"
+    ```text
+    // Creating booleans
+    is_student = TRUE
+    has_permission = FALSE
+    is_passing = grade_average >= 50  // Evaluates to TRUE if grade_average >= 50
     
-    # Boolean operations
-    can_enroll = is_student and has_permission    # Logical AND
-    needs_help = not is_passing                   # Logical NOT
-    eligible = is_student or has_permission       # Logical OR
+    // Boolean operations
+    can_enroll = is_student AND has_permission    // Logical AND
+    needs_help = NOT is_passing                   // Logical NOT
+    eligible = is_student OR has_permission       // Logical OR
     
-    print(f"Is student: {is_student}")
-    print(f"Can enroll: {can_enroll}")
-    print(f"Needs help: {needs_help}")
+    DISPLAY "Is student: " + is_student
+    DISPLAY "Can enroll: " + can_enroll
+    DISPLAY "Needs help: " + needs_help
     ```
 
 === "Key Characteristics"
     ```text
     Purpose: Store true/false values
     Examples: Status flags, conditions, yes/no answers
-    Python type: bool
-    Values: True, False (case-sensitive)
+    Values: True, False (or YES/NO in some languages)
     Common operations:
-    - Logical AND (and)
-    - Logical OR (or)
-    - Logical NOT (not)
+    - Logical AND
+    - Logical OR
+    - Logical NOT
     - Comparison operations return booleans
     ```
 
@@ -197,35 +193,32 @@ Programming languages provide several fundamental data types to represent differ
 
 **Date and time** types store temporal information - specific moments, dates, or time periods.
 
-=== "Python"
-    ```python
-    from datetime import datetime, date, time
+=== "Conceptual Example"
+    ```text
+    // Creating date/time values
+    today = CURRENT_DATE()                    // Current date
+    now = CURRENT_DATETIME()                  // Current date and time
+    birth_date = DATE(2006, 3, 15)           // Specific date: March 15, 2006
+    class_time = TIME(9, 30, 0)              // 9:30:00 AM
     
-    # Creating date/time objects
-    today = date.today()                    # Current date
-    now = datetime.now()                    # Current date and time
-    birth_date = date(2006, 3, 15)         # Specific date: March 15, 2006
-    class_time = time(9, 30, 0)            # 9:30:00 AM
+    // Date/time operations
+    age_days = DAYS_BETWEEN(today, birth_date)   // Days since birth
+    age_years = age_days / 365                   // Approximate age in years
     
-    # Date/time operations
-    age_days = (today - birth_date).days   # Days since birth
-    age_years = age_days // 365            # Approximate age in years
-    
-    print(f"Today: {today}")
-    print(f"Born: {birth_date}")
-    print(f"Age: approximately {age_years} years")
-    print(f"Class time: {class_time}")
+    DISPLAY "Today: " + FORMAT_DATE(today)
+    DISPLAY "Born: " + FORMAT_DATE(birth_date)
+    DISPLAY "Age: approximately " + age_years + " years"
+    DISPLAY "Class time: " + FORMAT_TIME(class_time)
     ```
 
 === "Key Characteristics"
     ```text
     Purpose: Store dates, times, and timestamps
     Examples: Birthdays, deadlines, log timestamps
-    Python types: date, time, datetime
     Common operations:
-    - Date arithmetic (adding/subtracting days)
-    - Formatting (strftime())
-    - Parsing (strptime())
+    - Date arithmetic (adding/subtracting time periods)
+    - Formatting dates and times for display
+    - Parsing dates from text input
     - Comparisons (before/after)
     ```
 
@@ -245,86 +238,87 @@ Sometimes you need to convert between data types or check what type a piece of d
 
 ### Converting between types
 
-=== "Python"
-    ```python
-    # Converting to different types
+=== "Conceptual Examples"
+    ```text
+    // Converting to different types
     score_text = "85"
-    score_number = int(score_text)      # String to integer: 85
-    score_float = float(score_text)     # String to float: 85.0
-    score_back = str(score_number)      # Integer to string: "85"
+    score_number = TO_INTEGER(score_text)      // String to integer: 85
+    score_float = TO_FLOAT(score_text)         // String to float: 85.0
+    score_back = TO_STRING(score_number)       // Integer to string: "85"
     
-    # Converting floats and integers
+    // Converting floats and integers
     price = 19.99
-    price_rounded = int(price)          # Float to integer: 19 (truncated)
+    price_rounded = TO_INTEGER(price)          // Float to integer: 19 (truncated)
     count = 5
-    count_decimal = float(count)        # Integer to float: 5.0
+    count_decimal = TO_FLOAT(count)            // Integer to float: 5.0
     
-    # Converting to boolean
-    bool_from_number = bool(42)         # Non-zero number: True
-    bool_from_zero = bool(0)            # Zero: False
-    bool_from_text = bool("hello")      # Non-empty string: True
-    bool_from_empty = bool("")          # Empty string: False
+    // Converting to boolean
+    bool_from_number = TO_BOOLEAN(42)          // Non-zero number: TRUE
+    bool_from_zero = TO_BOOLEAN(0)             // Zero: FALSE
+    bool_from_text = TO_BOOLEAN("hello")       // Non-empty string: TRUE
+    bool_from_empty = TO_BOOLEAN("")           // Empty string: FALSE
     
-    print(f"Score as number: {score_number}")
-    print(f"Price rounded: {price_rounded}")
-    print(f"Boolean from 42: {bool_from_number}")
+    DISPLAY "Score as number: " + score_number
+    DISPLAY "Price rounded: " + price_rounded
+    DISPLAY "Boolean from 42: " + bool_from_number
     ```
 
 === "Conversion Rules"
     ```text
     String to number:
     - Must contain valid number format
-    - int("3.14") causes error - use float() first
+    - Converting "3.14" to integer usually causes error
     
     Number to string:
-    - Always works: str(42) → "42"
+    - Always works: 42 becomes "42"
     
     To boolean:
-    - False: 0, 0.0, "", False, None
-    - True: Everything else
+    - FALSE: 0, 0.0, empty string, null/empty values
+    - TRUE: Everything else
     
     Float to integer:
-    - Decimal part is truncated (not rounded)
-    - int(3.9) → 3, not 4
+    - Decimal part is usually truncated (not rounded)
+    - 3.9 becomes 3, not 4
     ```
 
 ### Checking data types
 
-=== "Python"
-    ```python
-    # Checking types
+=== "Conceptual Examples"
+    ```text
+    // Checking types (varies by programming language)
     student_name = "Alice"
     student_age = 17
     grade_average = 85.5
-    is_enrolled = True
+    is_enrolled = TRUE
     
-    print(f"Name type: {type(student_name)}")      # <class 'str'>
-    print(f"Age type: {type(student_age)}")        # <class 'int'>
-    print(f"Average type: {type(grade_average)}")  # <class 'float'>
-    print(f"Enrolled type: {type(is_enrolled)}")   # <class 'bool'>
+    DISPLAY "Name type: " + TYPE_OF(student_name)      // "STRING"
+    DISPLAY "Age type: " + TYPE_OF(student_age)        // "INTEGER"
+    DISPLAY "Average type: " + TYPE_OF(grade_average)  // "FLOAT"
+    DISPLAY "Enrolled type: " + TYPE_OF(is_enrolled)   // "BOOLEAN"
     
-    # Using isinstance() for type checking
-    if isinstance(student_age, int):
-        print("Age is an integer")
+    // Type checking functions (varies by language)
+    IF IS_INTEGER(student_age) THEN
+        DISPLAY "Age is an integer"
+    END IF
     
-    if isinstance(grade_average, (int, float)):
-        print("Grade average is a number")
+    IF IS_NUMBER(grade_average) THEN
+        DISPLAY "Grade average is a number"
+    END IF
     ```
 
 === "Type Checking Methods"
     ```text
-    type(variable):
-    - Returns exact type
-    - type(True) returns <class 'bool'>
+    TYPE_OF(variable):
+    - Returns the exact data type
+    - Useful when you need to know the precise type
     
-    isinstance(variable, type):
+    IS_TYPE(variable, type):
     - Checks if variable is of specified type
-    - isinstance(5, int) returns True
-    - Can check multiple types: isinstance(x, (int, float))
+    - Often accepts related types (e.g., IS_NUMBER accepts both integers and floats)
     
     When to use each:
-    - type(): When you need exact type
-    - isinstance(): When you want to accept related types
+    - TYPE_OF: When you need exact type information
+    - IS_TYPE: When you want to accept compatible types
     ```
 
 ## Choosing the right data type
@@ -340,15 +334,15 @@ flowchart TD
     A --> D{True/False?}
     A --> E{Dates/Times?}
     
-    B -->|Yes| F[Use String<br/>str]
+    B -->|Yes| F[Use String<br/>STRING]
     
     C -->|Yes| G{Whole numbers only?}
-    G -->|Yes| H[Use Integer<br/>int]
-    G -->|No| I[Use Float<br/>float]
+    G -->|Yes| H[Use Integer<br/>INTEGER]
+    G -->|No| I[Use Float<br/>FLOAT]
     
-    D -->|Yes| J[Use Boolean<br/>bool]
+    D -->|Yes| J[Use Boolean<br/>BOOLEAN]
     
-    E -->|Yes| K[Use datetime<br/>date, time, datetime]
+    E -->|Yes| K[Use Date/Time<br/>DATE, TIME, DATETIME]
     
     F --> L[Examples:<br/>Names, addresses,<br/>messages, IDs]
     H --> M[Examples:<br/>Ages, counts,<br/>years, quantities]
@@ -369,49 +363,47 @@ flowchart TD
 ### Practical examples
 
 === "Student Record System"
-    ```python
-    from datetime import date
+    ```text
+    // Good data type choices for a student record
+    student_id = 12345              // INTEGER - for unique identification
+    first_name = "Emma"             // STRING - textual data
+    last_name = "Wilson"            // STRING - textual data
+    birth_date = DATE(2006, 8, 22)  // DATE - for age calculations
+    grade_average = 87.3            // FLOAT - precise grade calculation
+    is_enrolled = TRUE              // BOOLEAN - enrollment status
+    subjects = ["Math", "English"]  // ARRAY of STRING - multiple text items
     
-    # Good data type choices for a student record
-    student_id = 12345              # int - for unique identification
-    first_name = "Emma"             # str - textual data
-    last_name = "Wilson"            # str - textual data
-    birth_date = date(2006, 8, 22)  # date - for age calculations
-    grade_average = 87.3            # float - precise grade calculation
-    is_enrolled = True              # bool - enrollment status
-    subjects = ["Math", "English"]  # list of str - multiple text items
+    // Calculate age from birth date
+    today = CURRENT_DATE()
+    age = DAYS_BETWEEN(today, birth_date) / 365
     
-    # Calculate age from birth date
-    today = date.today()
-    age = (today - birth_date).days // 365
-    
-    print(f"Student: {first_name} {last_name}")
-    print(f"ID: {student_id}")
-    print(f"Age: {age} years")
-    print(f"Average: {grade_average}%")
-    print(f"Enrolled: {is_enrolled}")
-    print(f"Subjects: {', '.join(subjects)}")
+    DISPLAY "Student: " + first_name + " " + last_name
+    DISPLAY "ID: " + student_id
+    DISPLAY "Age: " + age + " years"
+    DISPLAY "Average: " + grade_average + "%"
+    DISPLAY "Enrolled: " + is_enrolled
+    DISPLAY "Subjects: " + JOIN(subjects, ", ")
     ```
 
 === "E-commerce Product"
-    ```python
-    # Product information with appropriate types
-    product_id = "LAPTOP-001"       # str - alphanumeric identifier
-    product_name = "Student Laptop" # str - descriptive text
-    price = 899.99                  # float - monetary value with decimals
-    quantity_in_stock = 15          # int - countable items
-    is_available = quantity_in_stock > 0  # bool - derived from stock
-    weight_kg = 2.1                 # float - physical measurement
-    is_on_sale = False              # bool - status flag
+    ```text
+    // Product information with appropriate types
+    product_id = "LAPTOP-001"       // STRING - alphanumeric identifier
+    product_name = "Student Laptop" // STRING - descriptive text
+    price = 899.99                  // FLOAT - monetary value with decimals
+    quantity_in_stock = 15          // INTEGER - countable items
+    is_available = quantity_in_stock > 0  // BOOLEAN - derived from stock
+    weight_kg = 2.1                 // FLOAT - physical measurement
+    is_on_sale = FALSE              // BOOLEAN - status flag
     
-    # Calculate total value of inventory
+    // Calculate total value of inventory
     total_inventory_value = price * quantity_in_stock
     
-    print(f"Product: {product_name} ({product_id})")
-    print(f"Price: ${price}")
-    print(f"Stock: {quantity_in_stock} units")
-    print(f"Available: {is_available}")
-    print(f"Total inventory value: ${total_inventory_value}")
+    DISPLAY "Product: " + product_name + " (" + product_id + ")"
+    DISPLAY "Price: $" + price
+    DISPLAY "Stock: " + quantity_in_stock + " units"
+    DISPLAY "Available: " + is_available
+    DISPLAY "Total inventory value: $" + total_inventory_value
     ```
 
 ## Practice exercises
@@ -420,7 +412,7 @@ flowchart TD
     type: question
     open: false
 
-For each piece of information below, choose the most appropriate Python data type and explain why:
+For each piece of information below, choose the most appropriate data type and explain why:
 
 1. A student's email address
 
@@ -440,19 +432,19 @@ For each piece of information below, choose the most appropriate Python data typ
     type: success
     open: false
 
-1. **Email address**: `str` - Text data, needs to store characters and symbols
+1. **Email address**: STRING - Text data, needs to store characters and symbols
 
-2. **Number of students**: `int` - Counting whole people, no decimals needed
+2. **Number of students**: INTEGER - Counting whole people, no decimals needed
 
-3. **Product price**: `float` - Monetary values often have cents (decimals)
+3. **Product price**: FLOAT - Monetary values often have cents (decimals)
 
-4. **User logged in**: `bool` - Simple true/false status
+4. **User logged in**: BOOLEAN - Simple true/false status
 
-5. **Person's birthday**: `date` - Temporal data, enables age calculations
+5. **Person's birthday**: DATE - Temporal data, enables age calculations
 
-6. **Test score (0-100%)**: `float` - May have decimal places (87.5%)
+6. **Test score (0-100%)**: FLOAT - May have decimal places (87.5%)
 
-7. **Postal code**: `str` - May contain letters and leading zeros ("2000", "SW1A 1AA")
+7. **Postal code**: STRING - May contain letters and leading zeros ("2000", "SW1A 1AA")
 ///
 ///
 
@@ -460,7 +452,7 @@ For each piece of information below, choose the most appropriate Python data typ
     type: question
     open: false
 
-Write Python code to solve these conversion challenges:
+Write pseudocode to solve these conversion challenges:
 
 1. Convert the string "42" to an integer and add 8
 
@@ -476,33 +468,33 @@ Write Python code to solve these conversion challenges:
     type: success
     open: false
 
-```python
-# 1. Convert string to integer and add 8
+```text
+// 1. Convert string to integer and add 8
 number_str = "42"
-number_int = int(number_str)
+number_int = TO_INTEGER(number_str)
 result = number_int + 8
-print(f"42 + 8 = {result}")  # Output: 42 + 8 = 50
+DISPLAY "42 + 8 = " + result  // Output: 42 + 8 = 50
 
-# 2. Convert float to string
+// 2. Convert float to string
 pi = 3.14159
-pi_str = str(pi)
-print(f"Pi as string: '{pi_str}'")  # Output: Pi as string: '3.14159'
+pi_str = TO_STRING(pi)
+DISPLAY "Pi as string: '" + pi_str + "'"  // Output: Pi as string: '3.14159'
 
-# 3. Convert integer 0 to boolean
+// 3. Convert integer 0 to boolean
 zero = 0
-zero_bool = bool(zero)
-print(f"bool(0) = {zero_bool}")  # Output: bool(0) = False
+zero_bool = TO_BOOLEAN(zero)
+DISPLAY "TO_BOOLEAN(0) = " + zero_bool  // Output: TO_BOOLEAN(0) = FALSE
 
-# 4. Convert string to float, then to integer
+// 4. Convert string to float, then to integer
 score_str = "95.5"
-score_float = float(score_str)
-score_int = int(score_float)
-print(f"'95.5' → {score_float} → {score_int}")  # Output: '95.5' → 95.5 → 95
+score_float = TO_FLOAT(score_str)
+score_int = TO_INTEGER(score_float)
+DISPLAY "'95.5' → " + score_float + " → " + score_int  // Output: '95.5' → 95.5 → 95
 
-# 5. Check if age is integer
+// 5. Check if age is integer
 age = 17
-is_integer = isinstance(age, int)
-print(f"Is age an integer? {is_integer}")  # Output: Is age an integer? True
+is_integer = IS_INTEGER(age)
+DISPLAY "Is age an integer? " + is_integer  // Output: Is age an integer? TRUE
 ```
 ///
 ///
@@ -511,7 +503,7 @@ print(f"Is age an integer? {is_integer}")  # Output: Is age an integer? True
     type: question
     open: false
 
-Create a Python program that manages student information:
+Create a pseudocode program that manages student information:
 
 1. Store information for one student using appropriate data types:
 
@@ -537,42 +529,41 @@ Create a Python program that manages student information:
     type: success
     open: false
 
-```python
-from datetime import date
+```text
+// 1. Store student information with appropriate data types
+student_id = 10234                    // INTEGER - unique identifier
+full_name = "Sarah Chen"              // STRING - person's name
+email = "sarah.chen@school.edu"       // STRING - email address
+birth_date = DATE(2006, 11, 15)       // DATE - for age calculations
+grade_average = 78.5                  // FLOAT - precise grade
+is_enrolled = TRUE                    // BOOLEAN - enrollment status
 
-# 1. Store student information with appropriate data types
-student_id = 10234                    # int - unique identifier
-full_name = "Sarah Chen"              # str - person's name
-email = "sarah.chen@school.edu"       # str - email address
-birth_date = date(2006, 11, 15)       # date - for age calculations
-grade_average = 78.5                  # float - precise grade
-is_enrolled = True                    # bool - enrollment status
+// 2. Calculate age in years
+today = CURRENT_DATE()
+age_days = DAYS_BETWEEN(birth_date, today)
+age_years = age_days / 365
 
-# 2. Calculate age in years
-today = date.today()
-age_days = (today - birth_date).days
-age_years = age_days // 365
-
-# 3. Determine if passing
+// 3. Determine if passing
 is_passing = grade_average >= 50
 
-# 4. Display formatted information
-print("=== STUDENT INFORMATION ===")
-print(f"ID: {student_id}")
-print(f"Name: {full_name}")
-print(f"Email: {email}")
-print(f"Age: {age_years} years")
-print(f"Grade Average: {grade_average}%")
-print(f"Enrolled: {is_enrolled}")
-print(f"Passing: {is_passing}")
+// 4. Display formatted information
+DISPLAY "=== STUDENT INFORMATION ==="
+DISPLAY "ID: " + student_id
+DISPLAY "Name: " + full_name
+DISPLAY "Email: " + email
+DISPLAY "Age: " + age_years + " years"
+DISPLAY "Grade Average: " + grade_average + "%"
+DISPLAY "Enrolled: " + is_enrolled
+DISPLAY "Passing: " + is_passing
 
-# Verify data types
-print("\n=== DATA TYPES ===")
-print(f"ID type: {type(student_id)}")
-print(f"Name type: {type(full_name)}")
-print(f"Birth date type: {type(birth_date)}")
-print(f"Average type: {type(grade_average)}")
-print(f"Enrolled type: {type(is_enrolled)}")
+// Verify data types
+DISPLAY ""
+DISPLAY "=== DATA TYPES ==="
+DISPLAY "ID type: " + TYPE_OF(student_id)
+DISPLAY "Name type: " + TYPE_OF(full_name)
+DISPLAY "Birth date type: " + TYPE_OF(birth_date)
+DISPLAY "Average type: " + TYPE_OF(grade_average)
+DISPLAY "Enrolled type: " + TYPE_OF(is_enrolled)
 ```
 
 **Output:**
@@ -583,15 +574,15 @@ Name: Sarah Chen
 Email: sarah.chen@school.edu
 Age: 18 years
 Grade Average: 78.5%
-Enrolled: True
-Passing: True
+Enrolled: TRUE
+Passing: TRUE
 
 === DATA TYPES ===
-ID type: <class 'int'>
-Name type: <class 'str'>
-Birth date type: <class 'datetime.date'>
-Average type: <class 'float'>
-Enrolled type: <class 'bool'>
+ID type: INTEGER
+Name type: STRING
+Birth date type: DATE
+Average type: FLOAT
+Enrolled type: BOOLEAN
 ```
 ///
 ///
@@ -600,7 +591,7 @@ Enrolled type: <class 'bool'>
 
 **Standard data types are the building blocks of all programs:**
 
-**String (`str`)** - for text data:
+**String** - for text data:
 
 - Names, addresses, messages, identifiers
 
@@ -608,15 +599,15 @@ Enrolled type: <class 'bool'>
 
 - Operations: concatenation, length, case conversion
 
-**Integer (`int`)** - for whole numbers:
+**Integer** - for whole numbers:
 
 - Ages, counts, years, IDs
 
 - No decimal point: `42`, `-5`, `0`
 
-- Unlimited size in Python
+- Unlimited size in most programming languages
 
-**Float (`float`)** - for decimal numbers:
+**Float** - for decimal numbers:
 
 - Prices, measurements, percentages
 
@@ -624,19 +615,17 @@ Enrolled type: <class 'bool'>
 
 - ~15-17 digits precision
 
-**Boolean (`bool`)** - for true/false values:
+**Boolean** - for true/false values:
 
 - Status flags, conditions, yes/no answers
 
-- Only two values: `True`, `False`
+- Only two values: `TRUE`, `FALSE`
 
 - Used in decision-making
 
 **Date/Time** - for temporal data:
 
 - Birthdays, deadlines, timestamps
-
-- Import from `datetime` module
 
 - Enables date arithmetic and formatting
 

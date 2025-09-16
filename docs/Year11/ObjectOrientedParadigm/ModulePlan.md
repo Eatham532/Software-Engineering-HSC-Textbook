@@ -1,16 +1,24 @@
 # Year 11 — The Object-Oriented Paradigm: Module Plan
 
-Audience: beginners. Language: Python only. Diagrams: PlantUML. Keep examples tiny; focus on reasoning with objects.
+Audience: beginners. Language: Python only. Diagrams: PlantUML.## Folder naming (mapping to numbered sections)
+
+- Display: numbered titles (e.g., "5.5 Modelling with class diagrams").
+
+- Folders: `docs/Year11/ObjectOrientedParadigm/Chapter-0X-Name/Section-0Y-Name/`
+
+  - `index.md`
+
+  - `quiz.md`mples tiny; focus on reasoning with objects.
 
 Structure: Module → Chapters → Sections → Subsections. Sections are numbered (e.g., 1.3) with short titles. Folder slugs remain hyphenated; display titles avoid dashes and “Part” prefixes.
 
 ---
 
-## Chapter 1 — OOP foundations
+## Chapter 5 — OOP foundations
 
 Covers: core OOP ideas, modelling, and design process. Outcomes: SE-11-01, SE-11-02, SE-11-06.
 
-### 1.1 Objects and classes
+### 5.1 Objects and classes
 
 - Outcomes: SE-11-02
 
@@ -18,37 +26,37 @@ Covers: core OOP ideas, modelling, and design process. Outcomes: SE-11-01, SE-11
 
 - Investigate: how OOP languages handle message-passing between objects (calls, references, parameter passing, and method dispatch).
 
-### 1.2 Encapsulation and state
+### 5.2 Encapsulation and state
 
 - Outcomes: SE-11-02
 
 - Learn: public interface vs internal state; invariants; simple getters/setters where appropriate.
 
-### 1.3 Abstraction, generalisation, inheritance, polymorphism
+### 5.3 Abstraction, generalisation, inheritance, polymorphism
 
 - Outcomes: SE-11-02
 
 - Learn: purpose of abstraction; generalisation as a modelling tool; inheritance for reuse; polymorphism by interface/duck typing (conceptual).
 
-### 1.4 Comparing procedural and OOP
+### 5.4 Comparing procedural and OOP
 
 - Outcomes: SE-11-02
 
 - Learn: when and why to choose OOP; trade-offs; mapping from functions to methods.
 
-### 1.5 Modelling with class diagrams, structure charts and DFDs
+### 5.5 Modelling with class diagrams, structure charts and DFDs
 
 - Outcomes: SE-11-01
 
 - Learn: represent a system with class diagrams, structure charts and data-flow diagrams (DFDs); map responsibilities and data paths. Use PlantUML for class diagrams and show how structure charts and simple DFDs complement class models.
 
-### 1.6 Design process: task definition and decomposition
+### 5.6 Design process: task definition and decomposition
 
 - Outcomes: SE-11-01
 
 - Learn: requirements → responsibilities → collaborations; top-down and bottom-up design.
 
-### 1.7 Collaboration practices and version control
+### 5.7 Collaboration practices and version control
 
 - Outcomes: SE-11-06
 
@@ -60,29 +68,29 @@ Exit: students can explain OOP concepts and sketch a small class model from requ
 
 ---
 
-## Chapter 2 — Programming in OOP
+## Chapter 6 — Programming in OOP
 
 Covers: implementing small class designs in Python, code quality, and testing. Outcomes: SE-11-02, SE-11-06, SE-11-08.
 
-### 2.1 Building classes and composition
+### 6.1 Building classes and composition
 
 - Outcomes: SE-11-02
 
 - Learn: defining classes, constructors, methods; composition over inheritance for simple reuse.
 
-### 2.2 Control structures within methods
+### 6.2 Control structures within methods
 
 - Outcomes: SE-11-02
 
 - Learn: using selection and iteration inside methods; keeping methods short and cohesive.
 
-### 2.3 Designing subroutines and stubs
+### 6.3 Designing subroutines and stubs
 
 - Outcomes: SE-11-02, SE-11-08
 
 - Learn: designing method signatures; stubs for incremental development and testing.
 
-### 2.4 Code quality and maintainability
+### 6.4 Code quality and maintainability
 
 - Outcomes: SE-11-08
 
@@ -90,19 +98,19 @@ Covers: implementing small class designs in Python, code quality, and testing. O
 
 - Practical checklist: aim for a clear and uncluttered mainline; one logical task per subroutine; use stubs for incremental development; use appropriate control structures and data structures; design for ease of maintenance; use version control and regular backups.
 
-### 2.5 Testing: unit, subsystem, system and quality assurance
+### 6.5 Testing: unit, subsystem, system and quality assurance
 
 - Outcomes: SE-11-06, SE-11-08
 
 - Learn: test levels and purposes; basic unit tests for class methods; subsystem integration checks; QA practices (review checklists, continuous testing mindset, acceptance criteria).
 
-### 2.6 Test strategies: black/white/grey box
+### 6.6 Test strategies: black/white/grey box
 
 - Outcomes: SE-11-06, SE-11-08
 
 - Learn: designing tests by specification vs by code; choosing inputs and expected outcomes.
 
-### 2.7 Code optimisation and assessing effectiveness
+### 6.7 Code optimisation and assessing effectiveness
 
 - Outcomes: SE-11-08
 

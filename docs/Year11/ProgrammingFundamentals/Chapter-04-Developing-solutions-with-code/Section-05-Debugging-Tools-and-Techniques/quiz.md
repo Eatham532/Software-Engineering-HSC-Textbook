@@ -1,97 +1,87 @@
 # Quiz: Debugging Tools and Techniques
 
-!!! quiz "Question 1"
-    What is debugging?
+!!! quiz "Check your understanding"
 
-    - Removing comments from code
-    - Optimizing code for better performance
-    - Finding and fixing errors in code { data-correct }
-    - Compiling code to machine language
+    1. What is debugging?
 
-!!! quiz "Question 2"
-    Which type of bug prevents code from running at all?
+        - Removing comments from code
+        - Optimizing code for better performance
+        - Finding and fixing errors in code { data-correct }
+        - Compiling code to machine language
 
-    - Logic errors
-    - Runtime errors
-    - Syntax errors { data-correct }
-    - Performance errors
+    2. Which type of bug prevents code from running at all?
 
-!!! quiz "Question 3"
-    What happens when a runtime error occurs?
+        - Logic errors
+        - Runtime errors
+        - Syntax errors { data-correct }
+        - Performance errors
 
-    - The code won't compile
-    - The code runs but crashes during execution { data-correct }
-    - The code produces incorrect results
-    - The code runs slowly
+    3. What happens when a runtime error occurs?
 
-!!! quiz "Question 4"
-    In the factorial debugging activity, what was wrong with `range(n)`?
+        - The code won't compile
+        - The code runs but crashes during execution { data-correct }
+        - The code produces incorrect results
+        - The code runs slowly
 
-    - It included zero in the multiplication { data-correct }
-    - It was too slow
-    - It used too much memory
-    - It caused a syntax error
+    4. In the factorial debugging activity, what was wrong with `range(n)`?
 
-!!! quiz "Question 5"
-    What is the simplest debugging technique?
+        - It included zero in the multiplication { data-correct }
+        - It was too slow
+        - It used too much memory
+        - It caused a syntax error
 
-    - Using breakpoints
-    - Adding print statements { data-correct }
-    - Single line stepping
-    - Using watches
+    5. What is the simplest debugging technique?
 
-!!! quiz "Question 6"
-    What is a breakpoint?
+        - Using breakpoints
+        - Adding print statements { data-correct }
+        - Single line stepping
+        - Using watches
 
-    - A syntax error in code
-    - A marker that pauses program execution { data-correct }
-    - A type of loop
-    - A function parameter
+    6. What is a breakpoint?
 
-!!! quiz "Question 7"
-    When debugging the factorial function, what should factorial(0) return?
+        - A syntax error in code
+        - A marker that pauses program execution { data-correct }
+        - A type of loop
+        - A function parameter
 
-    - 0
-    - 1 { data-correct }
-    - undefined
-    - an error
+    7. When debugging the factorial function, what should factorial(0) return?
 
-!!! quiz "Question 8"
-    What debugging technique lets you monitor specific variables during execution?
+        - 0
+        - 1 { data-correct }
+        - undefined
+        - an error
 
-    - Breakpoints
-    - Watches { data-correct }
-    - Print statements
-    - Single stepping
+    8. What debugging technique lets you monitor specific variables during execution?
 
-!!! quiz "Question 9"
-    Which statement is used to check preconditions and postconditions in Python?
+        - Breakpoints
+        - Watches { data-correct }
+        - Print statements
+        - Single stepping
 
-    - print()
-    - if
-    - assert { data-correct }
-    - try
+    9. Which statement is used to check preconditions and postconditions in Python?
 
-!!! quiz "Question 10"
-    What is "single line stepping"?
+        - print()
+        - if
+        - assert { data-correct }
+        - try
 
-    - Writing code one line at a time
-    - Executing code one line at a time { data-correct }
-    - Deleting code one line at a time
-    - Commenting code one line at a time
+    10. What is "single line stepping"?
 
-!!! quiz "Question 11"
-    In the buggy factorial function, why did factorial(1) return 0?
+        - Writing code one line at a time
+        - Executing code one line at a time { data-correct }
+        - Deleting code one line at a time
+        - Commenting code one line at a time
 
-    - The function was called incorrectly
-    - range(1) produces [0], so 1 × 0 = 0 { data-correct }
-    - There was a division by zero
-    - The variable wasn't initialized
+    11. In the buggy factorial function, why did factorial(1) return 0?
 
-!!! quiz "Question 12"
-    What should you do FIRST when debugging?
+        - The function was called incorrectly
+        - range(1) produces [0], so 1 × 0 = 0 { data-correct }
+        - There was a division by zero
+        - The variable wasn't initialized
 
-    - Fix the code immediately
-    - Ask someone else for help
-    - Reproduce the bug consistently { data-correct }
-    - Rewrite the entire function
+    12. What should you do FIRST when debugging?
+
+        - Fix the code immediately
+        - Ask someone else for help
+        - Reproduce the bug consistently { data-correct }
+        - Rewrite the entire function
