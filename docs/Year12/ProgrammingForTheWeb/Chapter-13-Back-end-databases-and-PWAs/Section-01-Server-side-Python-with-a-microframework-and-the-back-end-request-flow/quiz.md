@@ -1,84 +1,73 @@
-# 13.1 Quiz: Server-side Python with a microframework and the back-end request flow
+# Section 13.1 Quiz: Server-side Python with a microframework and the back-end request flow
 
 !!! quiz "Check your understanding"
 
     1. In a typical web request flow, what is the primary role of the web server (like nginx or Apache)?
 
-        - a) Execute Python application code
-        - b) Handle socket connections and serve static files { data-correct }
-        - c) Process database queries
-        - d) Render HTML templates
+        - Execute Python application code
+        - Handle socket connections and serve static files { data-correct }
+        - Process database queries
+        - Render HTML templates
 
     2. Which Flask decorator is used to define a route that handles both GET and POST requests?
 
-        - a) `@app.route('/path')`
-        - b) `@app.route('/path', methods=['GET', 'POST'])` { data-correct }
-        - c) `@app.get_post('/path')`
-        - d) `@app.method('/path', 'GET,POST')`
+        - `@app.route('/path')`
+        - `@app.route('/path', methods=['GET', 'POST'])` { data-correct }
+        - `@app.get_post('/path')`
+        - `@app.method('/path', 'GET,POST')`
 
     3. What is the most important security practice when inserting user input into database queries?
 
-        - a) Validating input length
-        - b) Using parameterized queries { data-correct }
-        - c) Checking input type
-        - d) Escaping special characters
+        - Validating input length
+        - Using parameterized queries { data-correct }
+        - Checking input type
+        - Escaping special characters
 
-    4. **Short Answer**: Explain the difference between client-side and server-side input validation, and why both are important.
+    4. What is the primary difference between client-side and server-side input validation?
 
-       **Sample Answer**: Client-side validation provides immediate user feedback and improves user experience, but can be bypassed by malicious users. Server-side validation is the security layer that cannot be bypassed and ensures data integrity. Client-side is for usability, server-side is for security - both serve different but complementary purposes.
+        - Client-side validation is faster and more secure
+        - Server-side validation can be bypassed while client-side cannot
+        - Client-side validation improves user experience while server-side ensures security { data-correct }
+        - There is no difference between the two approaches
 
     5. In Flask, what is the purpose of the `g` object?
 
-        - a) Global configuration settings
-        - b) Application context storage for the current request { data-correct }
-        - c) User session data
-        - d) Database connection pool
+        - Global configuration settings
+        - Application context storage for the current request { data-correct }
+        - User session data
+        - Database connection pool
 
     6. Which component in the web stack is responsible for converting between HTTP and Python application interfaces?
 
-        - a) Web server
-        - b) WSGI server { data-correct }
-        - c) Database connector
-        - d) Template engine
+        - Web server
+        - WSGI server { data-correct }
+        - Database connector
+        - Template engine
 
-    7. **Short Answer**: List three potential problems that can occur when a web application's database becomes temporarily unavailable, and suggest one solution for each.
+    7. What is the most likely consequence when a web application's database becomes temporarily unavailable?
 
-       **Sample Answer**:
-
-       1. **Request failures** - Solution: Implement circuit breaker pattern to fail fast
-
-       2. **User confusion** - Solution: Display meaningful error messages
-
-       3. **System overload** - Solution: Use connection pooling with retry logic and exponential backoff
+        - The web server will automatically restart
+        - Users will receive HTTP 500 errors for database-dependent requests { data-correct }
+        - Static files will stop being served
+        - The application will switch to a backup database automatically
 
     8. What is the primary purpose of middleware in web frameworks?
 
-        - a) Handle database connections
-        - b) Process requests before they reach route handlers { data-correct }
-        - c) Render HTML templates
-        - d) Manage static file serving
+        - Handle database connections
+        - Process requests before they reach route handlers { data-correct }
+        - Render HTML templates
+        - Manage static file serving
 
     9. Which Flask function should be used to securely hash passwords?
 
-        - a) `hash()`
-        - b) `hashlib.md5()`
-        - c) `generate_password_hash()` { data-correct }
-        - d) `base64.encode()`
+        - `hash()`
+        - `hashlib.md5()`
+        - `generate_password_hash()` { data-correct }
+        - `base64.encode()`
 
-    10. **Short Answer**: Describe the complete path of a web request from browser to database and back. Include at least 5 major components.
+    10. In the complete path of a web request from browser to database, which component typically comes between the web server and the Flask application?
 
-        **Sample Answer**:
-
-        1. **Browser** sends HTTP request
-
-        2. **Web server** (nginx/Apache) receives connection and parses HTTP
-
-        3. **WSGI server** (Gunicorn) receives proxied request
-
-        4. **Flask application** matches route and processes request
-
-        5. **Database** executes SQL query and returns data
-
-        6. **Template engine** renders HTML response
-
-        7. **Response travels back** through WSGI → Web server → Browser
+        - Template engine
+        - Database connector
+        - WSGI server { data-correct }
+        - Load balancer

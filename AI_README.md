@@ -2,6 +2,30 @@
 
 This guide documents conventions and the active plan so contributors can add content safely and consistently to this MkDocs textbook.
 
+**CRITICAL: Length Management for AI Contributors**
+
+Before writing any substantial content, AI contributors MUST:
+
+1. **Estimate content length** based on learning objectives and code examples required
+
+2. **Check if content will exceed reasonable response limits** (typically ~8000-10000 lines for comprehensive sections)
+
+3. **If content will be large, inform the user BEFORE starting** and propose breaking into multiple manageable chunks
+
+4. **Plan chunk boundaries** logically (e.g., by major topics, not arbitrary cuts)
+
+5. **Update todo lists** to reflect multi-part approach
+
+Example planning approach:
+
+- Section covering 5 major topics with extensive code examples = likely needs 3-4 parts
+
+- Simple section with 2-3 concepts = can likely be done in one response
+
+- Always err on the side of caution and ask user to confirm multi-part approach
+
+This prevents hitting length limits mid-creation and ensures consistent, complete content delivery.
+
 Before running Python code, contributors should activate the project virtual environment with `.venv\Scripts\activate`.
 
 The repository uses `uv` for environment and dependency management where applicable.
