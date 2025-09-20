@@ -935,4 +935,4 @@ These modules provide the foundation for scientific computing, game development,
 
 ---
 
-**Cross-reference**: This section builds on the functions from [Section 4.3](../Section-03-From-Pseudocode-to-Python-Functions/index.md) and uses control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn debugging techniques in [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md).
+**Cross-reference**: This section builds on the subprogram concepts from [Chapter 2 Section 5](../../Chapter-02-Designing-Algorithms/Section-05-Subprograms-Procedures-and-Functions/index.md) and uses control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn debugging techniques in [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md).

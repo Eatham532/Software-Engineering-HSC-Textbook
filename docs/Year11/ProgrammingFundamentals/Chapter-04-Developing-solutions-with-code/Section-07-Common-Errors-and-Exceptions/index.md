@@ -53,9 +53,9 @@ message = "Hello World"
 # or:
 message = 'Hello World'
 ```
+
 ///
 
-```
 /// details | Reading Syntax Error Messages
     type: note
     open: false
@@ -96,6 +96,7 @@ def fixed_function():
     if x > 5:
         print("Greater than 5")
 ```
+
 ///
 
 ### Runtime Errors (Exceptions)
@@ -157,9 +158,9 @@ def safe_division_example():
 
 safe_division_example()
 ```
+
 ///
 
-```
 /// details | Index Out of Range
     type: note
     open: false
@@ -214,9 +215,9 @@ def index_error_examples():
 
 index_error_examples()
 ```
+
 ///
 
-```
 /// details | Key Errors with Dictionaries
     type: note
     open: false
@@ -278,9 +279,9 @@ def key_error_examples():
 
 key_error_examples()
 ```
+
 ///
 
-```
 /// details | Type Errors
     type: note
     open: false
@@ -350,6 +351,7 @@ def type_error_examples():
 
 type_error_examples()
 ```
+
 ///
 
 ### Logic Errors
@@ -426,7 +428,6 @@ off_by_one_examples()
 ```
 ///
 
-```
 /// details | Logic Errors in Conditions
     type: note
     open: false
@@ -524,7 +525,6 @@ logic_condition_examples()
 ```
 ///
 
-```
 /// details | Infinite Loops
     type: note
     open: false
@@ -1049,4 +1049,4 @@ Remember: Learning to recognize and fix common errors quickly is a superpower th
 
 ---
 
-**Cross-reference**: This section builds on debugging techniques from [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md) and test data design from [Section 4.6](../Section-06-Designing-Suitable-Test-Data/index.md). The error handling concepts prepare for solution evaluation in [Section 4.8](../Section-08-Evaluating-Solutions/index.md).
+**Cross-reference**: This section builds on debugging techniques from [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md) and test data design from [Section 4.6](../Section-06-Designing-Suitable-Test-Data/index.md). These error handling concepts are essential for robust software development.

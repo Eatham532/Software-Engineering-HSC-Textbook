@@ -772,4 +772,4 @@ Remember: debugging is a skill that improves with practice. Every bug you fix ma
 
 ---
 
-**Cross-reference**: This section uses functions from [Section 4.3](../Section-03-From-Pseudocode-to-Python-Functions/index.md) and control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn about designing test data in [Section 4.6](../Section-06-Designing-Suitable-Test-Data/index.md) to prevent bugs before they happen.
+**Cross-reference**: This section uses subprogram concepts from [Chapter 2 Section 5](../../Chapter-02-Designing-Algorithms/Section-05-Subprograms-Procedures-and-Functions/index.md) and control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn about designing test data in [Section 4.6](../Section-06-Designing-Suitable-Test-Data/index.md) to prevent bugs before they happen.

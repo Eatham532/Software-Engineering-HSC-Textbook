@@ -88,53 +88,14 @@ Selection lets your algorithm make decisions based on conditions. It's like comi
     Do something only if a condition is true, otherwise skip it.
 
     ```kroki-mermaid
-    flowchart TD
+```kroki-mermaid
+flowchart TD
         A[Start] --> B{Is it raining?}
         B -->|Yes| C[Take umbrella]
         B -->|No| D[Continue without umbrella]
         C --> E[Go outside]
         D --> E
-    ```
-
-=== "Binary Selection (IF-THEN-ELSE)"
-    Choose between two different actions based on a condition.
-
-    ```kroki-mermaid
-    flowchart TD
-    A[Start] --> B{score >= 50?}
-    B -->|Yes| C[Pass]
-    B -->|No| D[Fail]
-    C --> E[End]
-    D --> E
-    ```
-
-=== "Multiple Selection (IF-THEN-ELSE-IF)"
-    Choose from several different actions based on multiple conditions.
-
-    ```kroki-mermaid
-        flowchart TD
-            A[Start] --> B{score >= 90?}
-            B -->|Yes| C[Grade: A]
-            B -->|No| D{score >= 80?}
-            D -->|Yes| E[Grade: B]
-            D -->|No| F{score >= 70?}
-            F -->|Yes| G[Grade: C]
-            F -->|No| H{score >= 50?}
-            H -->|Yes| I[Grade: D]
-            H -->|No| J[Grade: F]
-            C --> K[End]
-            E --> K
-            G --> K
-            I --> K
-            J --> K
-
-    ```
-
-/// details | Grade assignment algorithm
-    type: example
-    open: false
-
-```text
+```
 ALGORITHM AssignGrade
 BEGIN
     INPUT score
@@ -215,20 +176,15 @@ END
 
 ...continues until...
 
-11. **Check:** counter <= 10? → 11 <= 10? → False
-
-12. **Exit loop:** OUTPUT "Exercise complete!"
-///
-
-=== "Conditional Loops (WHILE loops)"
-    Repeat while a condition is true. Use when you don't know exactly how many times to repeat.
-
-    ```kroki-mermaid
-    flowchart TD
-        A[Start] --> B[Ask for password]
-        B --> C{Password correct?}
-        C -->|No| D[Show error message]
-        D --> B
+```kroki-mermaid
+flowchart TD
+        A[Start] --> B[Set counter = 1]
+        B --> C{Counter <= 10?}
+        C -->|Yes| D[Do jumping jack]
+        D --> E[Increment counter]
+        E --> C
+        C -->|No| F[End]
+```
         C -->|Yes| E[Grant access]
         E --> F[End]
     ```
@@ -268,106 +224,15 @@ Real algorithms combine sequence, selection, and iteration to solve complex prob
         IF count > 0 THEN
             SET average = total / count
             OUTPUT "Class average: " + average
-        ELSE
-            OUTPUT "No valid grades were entered"
-        END IF
-    END
-    ```
-
-=== "Python Implementation"
-    ```python
-    def process_student_grades():
-        total = 0
-        count = 0
-        
-        while True:
-            try:
-                grade = float(input("Enter a grade (0-100): "))
-                
-                if 0 <= grade <= 100:
-                    total += grade
-                    count += 1
-                    
-                    if grade >= 90:
-                        print("Excellent work!")
-                    elif grade >= 70:
-                        print("Good job!")
-                    else:
-                        print("Keep trying!")
-                else:
-                    print("Invalid grade. Please enter a number between 0 and 100.")
-                
-            except ValueError:
-                print("Invalid input. Please enter a number.")
-            
-            continue_choice = input("Continue? (yes/no): ").lower()
-            if continue_choice == "no":
-                break
-        
-        if count > 0:
-            average = total / count
-            print(f"Class average: {average:.2f}")
-        else:
-            print("No valid grades were entered.")
-    ```
-
-This algorithm combines:
-
-- **Sequence:** Initialize variables, calculate average
-
-- **Selection:** Validate grades, assign feedback, check if grades were entered
-
-- **Iteration:** Repeat until user chooses to stop
-
-### Nested structures
-
-You can put control structures inside other control structures:
-
 ```kroki-mermaid
 flowchart TD
-    A[Start] --> B[FOR each student]
-    B --> C[Get student grade]
-    C --> D{Grade valid?}
-    D -->|Yes| E[Add to total]
-    D -->|No| F[Show error message]
-    E --> G{More students?}
-    F --> G
-    G -->|Yes| B
-    G -->|No| H[Calculate average]
-    H --> I[End]
+        A[Start] --> B[Ask for password]
+        B --> C{Password correct?}
+        C -->|No| D[Show error message]
+        D --> B
+        C -->|Yes| E[Grant access]
+        E --> F[End]
 ```
-
-## Tracing algorithms
-
-Tracing means following through an algorithm step-by-step to see what happens with specific inputs. It's like being a detective - you track every change to variables and every decision made.
-
-### Tracing table method
-
-Create a table to track variable values as they change:
-
-**Algorithm:**
-```text
-ALGORITHM FindMaximum
-BEGIN
-    INPUT num1, num2, num3
-    SET maximum = num1
-    
-    IF num2 > maximum THEN
-        SET maximum = num2
-    END IF
-    
-    IF num3 > maximum THEN
-        SET maximum = num3
-    END IF
-    
-    OUTPUT maximum
-END
-```
-
-**Tracing with inputs: num1=15, num2=8, num3=22**
-
-| Step | Action | num1 | num2 | num3 | maximum | Condition | Output |
-|------|--------|------|------|------|---------|-----------|---------|
 | 1 | INPUT values | 15 | 8 | 22 | - | - | - |
 | 2 | SET maximum = num1 | 15 | 8 | 22 | 15 | - | - |
 | 3 | CHECK num2 > maximum | 15 | 8 | 22 | 15 | 8 > 15 = False | - |

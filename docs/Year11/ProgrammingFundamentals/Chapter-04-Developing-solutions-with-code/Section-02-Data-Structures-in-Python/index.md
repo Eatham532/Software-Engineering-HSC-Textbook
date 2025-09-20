@@ -1204,4 +1204,4 @@ Key takeaways:
 
 ---
 
-**Cross-reference**: This section implements the data structures from [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) using the control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn how to organize code into functions in [Section 4.3](../Section-03-From-Pseudocode-to-Python-Functions/index.md).
+**Cross-reference**: This section implements the data structures from [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) using the control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). For more on functions and subprograms, see [Chapter 2 Section 5](../../Chapter-02-Designing-Algorithms/Section-05-Subprograms-Procedures-and-Functions/index.md).
