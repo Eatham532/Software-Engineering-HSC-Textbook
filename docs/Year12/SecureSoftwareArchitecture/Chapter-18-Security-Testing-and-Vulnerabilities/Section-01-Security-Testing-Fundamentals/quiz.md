@@ -1,121 +1,101 @@
-# 18.1 Security Testing Fundamentals — Quiz
+# Section 18.1 Quiz: Security Testing Fundamentals
 
-## Question 1
+!!! quiz "Section 18.1 Quiz: Security Testing Fundamentals"
 
-What is the primary advantage of Static Application Security Testing (SAST) over Dynamic Application Security Testing (DAST)?
+    Test your understanding of security testing fundamentals, methodologies, and best practices.
 
-- SAST can find all possible vulnerabilities
+    **Time Limit**: 25 minutes  
+    **Total Marks**: 15 marks  
+    **Question Types**: Multiple choice
 
-- SAST analyzes code without executing the application
+    ---
 
-- SAST is faster than DAST
+    1. What is the primary difference between security testing and functional testing?
+        - Security testing only focuses on performance
+        - { data-correct } Security testing focuses on identifying vulnerabilities and weaknesses that could be exploited
+        - Security testing is only done after deployment
+        - Security testing doesn't require test cases
 
-- SAST produces fewer false positives
+    2. Which type of security testing involves testing without any knowledge of the system's internal structure?
+        - White box testing
+        - { data-correct } Black box testing
+        - Gray box testing
+        - Unit testing
 
-## Question 2
+    3. What is penetration testing primarily designed to accomplish?
+        - Test system performance under load
+        - { data-correct } Simulate real-world attacks to identify exploitable vulnerabilities
+        - Verify functional requirements
+        - Test user interface design
 
-Which of the following vulnerability types would DAST be MOST effective at detecting?
+    4. Which security testing approach provides the most comprehensive coverage?
+        - Black box testing only
+        - White box testing only
+        - { data-correct } Combination of black box, white box, and gray box testing
+        - Automated testing only
 
-- Hardcoded passwords in source code
+    5. What is the purpose of vulnerability scanning in security testing?
+        - To improve system performance
+        - To test user acceptance
+        - { data-correct } To automatically identify known security vulnerabilities and misconfigurations
+        - To optimize database queries
 
-- SQL injection in a running web application
+    6. Which principle should guide the timing of security testing in the development lifecycle?
+        - Only test after complete development
+        - Only test during deployment
+        - { data-correct } Integrate security testing throughout the entire development lifecycle
+        - Only test when security incidents occur
 
-- Unused import statements
+    7. What is static application security testing (SAST) primarily used for?
+        - Testing runtime behavior
+        - { data-correct } Analyzing source code for security vulnerabilities without executing the program
+        - Load testing applications
+        - User interface testing
 
-- Code complexity issues
+    8. Which type of testing is dynamic application security testing (DAST)?
+        - Source code analysis
+        - { data-correct } Testing running applications by simulating attacks from the outside
+        - Database schema validation
+        - API documentation review
 
-## Question 3
+    9. What is the main advantage of automated security testing tools?
+        - They replace the need for security expertise
+        - { data-correct } They can quickly scan for known vulnerabilities and provide consistent testing
+        - They can test everything without human oversight
+        - They are always more accurate than manual testing
 
-In manual code review for security, what should be the PRIMARY focus when reviewing authentication code?
+    10. Which factor is most critical when prioritizing security test cases?
+        - Development team preferences
+        - Testing tool availability
+        - { data-correct } Risk assessment based on potential impact and likelihood of exploitation
+        - Alphabetical order of features
 
-- Code formatting and style
+    11. Which of the following vulnerability types would DAST be MOST effective at detecting?
+        - Hardcoded passwords in source code
+        - { data-correct } SQL injection in a running web application
+        - Unused import statements
+        - Code complexity issues
 
-- Performance optimization
+    12. What should be the PRIMARY focus when reviewing authentication code during manual security review?
+        - Code formatting and style
+        - Performance optimization
+        - { data-correct } Password hashing algorithms and session management
+        - Variable naming conventions
 
-- Password hashing algorithms and session management
+    13. Which OWASP Top 10 category would include SQL injection vulnerabilities?
+        - A01: Broken Access Control
+        - A02: Cryptographic Failures
+        - { data-correct } A03: Injection
+        - A04: Insecure Design
 
-- Variable naming conventions
+    14. In a security testing pipeline, when should SAST tools typically be run?
+        - Only in production environments
+        - { data-correct } During code commit and build processes
+        - After manual penetration testing
+        - Only when security incidents occur
 
-## Question 4
-
-Which OWASP Top 10 category would include SQL injection vulnerabilities?
-
-- A01: Broken Access Control
-
-- A02: Cryptographic Failures
-
-- A03: Injection
-
-- A04: Insecure Design
-
-## Question 5
-
-What is the main purpose of security regression testing?
-
-- To find new vulnerabilities in the application
-
-- To ensure that security fixes don't break existing functionality
-
-- To test application performance under load
-
-- To verify user interface design
-
-## Question 6
-
-Which of the following is a limitation of automated vulnerability scanners?
-
-- They cannot scan large codebases
-
-- They may produce false positives and miss context-dependent issues
-
-- They are too expensive to implement
-
-- They only work with specific programming languages
-
-## Question 7
-
-In a security testing pipeline, when should SAST tools typically be run?
-
-- Only in production environments
-
-- During code commit and build processes
-
-- After manual penetration testing
-
-- Only when security incidents occur
-
-## Question 8
-
-What type of security testing would be MOST effective for finding Cross-Site Scripting (XSS) vulnerabilities?
-
-- Static code analysis only
-
-- Dynamic testing with payload injection
-
-- Dependency vulnerability scanning
-
-- Code coverage analysis
-
-## Question 9
-
-Which security header should be checked during DAST to prevent clickjacking attacks?
-
-- Content-Security-Policy
-
-- X-Frame-Options
-
-- X-XSS-Protection
-
-- Strict-Transport-Security
-
-## Question 10
-
-In a CI/CD pipeline, what should happen if critical security vulnerabilities are detected during automated testing?
-
-- Log the issues for later review
-
-- Continue deployment with warnings
-
-- Fail the build and prevent deployment
-
-- Reduce the severity rating automatically
+    15. What type of security testing would be MOST effective for finding Cross-Site Scripting (XSS) vulnerabilities?
+        - Static code analysis only
+        - { data-correct } Dynamic testing with payload injection
+        - Dependency vulnerability scanning
+        - Code coverage analysis

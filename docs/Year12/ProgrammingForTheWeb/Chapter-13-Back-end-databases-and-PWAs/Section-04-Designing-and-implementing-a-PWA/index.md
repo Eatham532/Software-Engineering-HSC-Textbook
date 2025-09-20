@@ -1,7 +1,5 @@
 # 13.4 Designing and implementing a PWA
 
-- Outcomes: SE-12-02
-
 ## Why it matters
 
 Progressive Web Apps (PWAs) bridge the gap between web and native mobile applications, providing users with app-like experiences through web browsers. PWAs offer offline functionality, push notifications, and installation capabilities while maintaining the reach and accessibility of web applications. Understanding PWA development enables developers to create engaging, performant applications that work across all devices and network conditions, making them essential for modern web development.

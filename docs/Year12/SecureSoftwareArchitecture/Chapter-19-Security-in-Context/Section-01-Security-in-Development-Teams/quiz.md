@@ -1,104 +1,204 @@
-# 19.1 Security in Development Teams - Quiz
+# Section 19.1 Quiz: Security in Development Teams# 19.1 Security in Development Teams - Quiz
 
-**Instructions**: Choose the best answer for each question. Each question is worth 2 points.
 
----
 
-## Question 1
+!!! quiz "Section 19.1 Quiz: Security in Development Teams"**Instructions**: Choose the best answer for each question. Each question is worth 2 points.
 
-Which of the following BEST describes the primary goal of security-focused code reviews?
 
-A) To find all bugs in the code before deployment
-B) To identify security vulnerabilities, design flaws, and strengthen security posture
-C) To ensure code follows company coding standards
-D) To improve code performance and efficiency
+
+    This quiz assesses your understanding of secure development practices, team collaboration, and security integration in software development workflows.---
+
+
+
+    **Time Limit**: 30 minutes  ## Question 1
+
+    **Total Marks**: 30 marks  
+
+    **Question Types**: Multiple choice and short answerWhich of the following BEST describes the primary goal of security-focused code reviews?
+
+
+
+    1. What is the primary goal of implementing security in development teams?A) To find all bugs in the code before deployment
+
+        - To slow down development processesB) To identify security vulnerabilities, design flaws, and strengthen security posture
+
+        - To increase project costsC) To ensure code follows company coding standards
+
+        - { data-correct } To integrate security considerations throughout the development lifecycleD) To improve code performance and efficiency
+
+        - To replace functional testing
 
 **Answer**: B) To identify security vulnerabilities, design flaws, and strengthen security posture
 
-**Explanation**: Security-focused code reviews specifically target security concerns, going beyond general bug finding to identify vulnerabilities and opportunities to improve the system's security.
+    2. Which practice is most important for maintaining security in collaborative development?
 
----
+        - Using only senior developers**Explanation**: Security-focused code reviews specifically target security concerns, going beyond general bug finding to identify vulnerabilities and opportunities to improve the system's security.
+
+        - Working in isolation
+
+        - { data-correct } Regular security training and awareness programs---
+
+        - Avoiding code reviews
 
 ## Question 2
 
-In security-focused pair programming, what is the primary responsibility of the "security navigator"?
+    3. What is the "shift-left" approach in security?
 
-A) Write the main functional code
-B) Test the code for performance issues
+        - Moving security team to the left side of the officeIn security-focused pair programming, what is the primary responsibility of the "security navigator"?
+
+        - { data-correct } Incorporating security testing and reviews earlier in the development process
+
+        - Shifting development timelines to the leftA) Write the main functional code
+
+        - Moving security to after deploymentB) Test the code for performance issues
+
 C) Watch for security anti-patterns and suggest secure alternatives
-D) Document the code changes
 
-**Answer**: C) Watch for security anti-patterns and suggest secure alternatives
+    4. Which tool category is most essential for secure code collaboration?D) Document the code changes
 
-**Explanation**: The security navigator specifically focuses on security considerations while the functional driver implements the primary functionality, creating a collaborative approach to secure coding.
+        - Graphics editors
 
----
+        - { data-correct } Version control systems with security features**Answer**: C) Watch for security anti-patterns and suggest secure alternatives
 
-## Question 3
+        - Music players
 
-Which of the following is NOT typically included in security user stories for agile development?
+        - Social media tools**Explanation**: The security navigator specifically focuses on security considerations while the functional driver implements the primary functionality, creating a collaborative approach to secure coding.
 
-A) "As a user, I want my password to be securely stored"
-B) "As a system, I want to detect brute force attacks"
-C) "As a developer, I want the fastest possible development time"
-D) "As an admin, I want to see failed login attempts"
+
+
+    5. What is the main purpose of security code reviews?---
+
+        - To find functional bugs
+
+        - { data-correct } To identify security vulnerabilities and ensure secure coding practices## Question 3
+
+        - To improve code performance
+
+        - To check coding styleWhich of the following is NOT typically included in security user stories for agile development?
+
+
+
+    6. Which approach best describes DevSecOps?A) "As a user, I want my password to be securely stored"
+
+        - Security as a separate final phaseB) "As a system, I want to detect brute force attacks"
+
+        - { data-correct } Integration of security practices throughout development and operationsC) "As a developer, I want the fastest possible development time"
+
+        - Development without security considerationsD) "As an admin, I want to see failed login attempts"
+
+        - Security only during testing
 
 **Answer**: C) "As a developer, I want the fastest possible development time"
 
-**Explanation**: Security user stories focus on security requirements from the perspective of users, systems, and security stakeholders, not on development efficiency goals.
+    7. What is the most effective way to handle security issues found during development?
 
----
+        - Ignore them until production**Explanation**: Security user stories focus on security requirements from the perspective of users, systems, and security stakeholders, not on development efficiency goals.
+
+        - Document them for later
+
+        - { data-correct } Address them immediately as part of the development process---
+
+        - Assign them to a separate security team
 
 ## Question 4
 
-What is the main benefit of involving the entire development team in threat modeling sessions?
+    8. Which factor is most important when establishing security responsibilities in teams?
 
-A) It reduces the workload for security specialists
-B) It brings diverse perspectives to identify threats and builds shared security understanding
+        - Individual preferencesWhat is the main benefit of involving the entire development team in threat modeling sessions?
+
+        - { data-correct } Clear role definitions and shared security responsibility
+
+        - Random assignmentA) It reduces the workload for security specialists
+
+        - Avoiding responsibility assignmentB) It brings diverse perspectives to identify threats and builds shared security understanding
+
 C) It eliminates the need for security testing
-D) It speeds up the development process
 
-**Answer**: B) It brings diverse perspectives to identify threats and builds shared security understanding
+    9. What is the benefit of automated security testing in development workflows?D) It speeds up the development process
 
-**Explanation**: Collaborative threat modeling leverages different team members' expertise and builds security awareness across the entire team.
+        - Replaces the need for developers
 
----
+        - { data-correct } Provides consistent and early detection of common security issues**Answer**: B) It brings diverse perspectives to identify threats and builds shared security understanding
 
-## Question 5
+        - Eliminates all security vulnerabilities
 
-Which STRIDE category would "Database records modified without authorization" fall under?
+        - Reduces development costs to zero**Explanation**: Collaborative threat modeling leverages different team members' expertise and builds security awareness across the entire team.
 
-A) Spoofing
+
+
+    10. Which communication practice is most important for security in development teams?---
+
+        - Avoiding security discussions
+
+        - { data-correct } Regular security-focused stand-ups and retrospectives## Question 5
+
+        - Only communicating through email
+
+        - Limiting communication to managersWhich STRIDE category would "Database records modified without authorization" fall under?
+
+
+
+## Short Answer QuestionsA) Spoofing
+
 B) Tampering
-C) Information Disclosure
+
+**Question 11** (5 marks): Describe three key components of a security-focused development culture and explain how each contributes to overall software security.C) Information Disclosure
+
 D) Denial of Service
+
+**Question 12** (5 marks): Explain how pair programming can enhance security in development teams. What are the specific security benefits and potential challenges?
 
 **Answer**: B) Tampering
 
+**Question 13** (5 marks): Describe the role of threat modeling in team-based development. How should threat modeling activities be integrated into team workflows?
+
 **Explanation**: Tampering refers to modifying data or code without authorization, which includes unauthorized database modifications.
 
+**Question 14** (5 marks): Explain the concept of "security champions" in development teams. What responsibilities do they have and how do they contribute to team security?
+
 ---
+
+## Answer Key
 
 ## Question 6
 
+**Multiple Choice**: 1-C, 2-C, 3-B, 4-B, 5-B, 6-B, 7-C, 8-B, 9-B, 10-B
+
 What is the primary purpose of security runbooks in team documentation?
 
+**Short Answer Guidelines**:
+
 A) To record all security incidents that have occurred
-B) To provide step-by-step procedures for responding to security incidents
+
+**Question 11**: Should cover security training and awareness, secure coding standards, security testing integration, incident response procedures, and collaborative security practices.B) To provide step-by-step procedures for responding to security incidents
+
 C) To list all security tools used by the team
-D) To document the team's security training history
 
-**Answer**: B) To provide step-by-step procedures for responding to security incidents
+**Question 12**: Should explain knowledge sharing benefits, real-time security review, reduction of security debt, challenges like time investment and skill balance.D) To document the team's security training history
 
-**Explanation**: Security runbooks are procedural documents that guide teams through specific responses to security incidents, ensuring consistent and effective incident handling.
 
----
 
-## Question 7
+**Question 13**: Should cover threat identification as a team activity, integration with sprint planning, documentation sharing, and ongoing threat model updates.**Answer**: B) To provide step-by-step procedures for responding to security incidents
 
-In the context of security Definition of Done, which statement is most accurate?
 
-A) Security criteria should be added only for security-critical features
+
+**Question 14**: Should explain security champions as security advocates within teams, responsibilities for security guidance, training coordination, and bridging security and development teams.**Explanation**: Security runbooks are procedural documents that guide teams through specific responses to security incidents, ensuring consistent and effective incident handling.
+
+
+
+## Extension Activities---
+
+
+
+1. **Team Security Assessment**: Evaluate your current development team's security practices and create an improvement plan.## Question 7
+
+
+
+2. **Security Integration Design**: Design a workflow that integrates security checkpoints into an existing development process without significantly impacting velocity.In the context of security Definition of Done, which statement is most accurate?
+
+
+
+3. **Security Training Program**: Develop a security training program tailored for developers, including hands-on exercises and real-world scenarios.A) Security criteria should be added only for security-critical features
 B) Security criteria should be included in the Definition of Done for all user stories
 C) Security criteria slow down development and should be minimized
 D) Security criteria are only needed for production deployments
