@@ -1,0 +1,71 @@
+name: Deploy Docs
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    
+    services:
+      kroki:
+        image: yuzutech/kroki
+        env:
+          KROKI_MERMAID_HOST: mermaid
+          KROKI_BPMN_HOST: bpmn
+          KROKI_EXCALIDRAW_HOST: excalidraw
+        ports:
+          - 8000:8000
+      mermaid:
+        image: yuzutech/kroki-mermaid
+      bpmn:
+        image: yuzutech/kroki-bpmn
+      excalidraw:
+        image: yuzutech/kroki-excalidraw
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.3'
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v1
+
+      - name: Cache uv dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/uv
+          key: uv-cache-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+          restore-keys: |
+            uv-cache-
+
+      - name: Install dependencies with uv
+        run: uv sync
+
+      - name: Wait for Kroki to be ready
+        run: |
+          for i in {1..10}; do
+            if curl -s http://kroki:8000/health | grep -q "UP"; then
+              echo "Kroki is ready!"
+              exit 0
+            fi
+            echo "Waiting for Kroki..."
+            sleep 3
+          done
+          echo "Kroki did not start in time"
+          exit 1
+
+      - name: Deploy MkDocs site
+        env:
+          KROKI_SERVER_URL: http://kroki:8000
+        run: mkdocs gh-deploy --force
