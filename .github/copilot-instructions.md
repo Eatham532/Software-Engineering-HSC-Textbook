@@ -196,10 +196,12 @@ class Student {
 - PYTHONPATH injection for local module imports
 
 ### Linting & Quality
+- **CURRENT POLICY**: Ignore markdown linting errors until the end of the module development
 - Markdown headings should be sequential
 - Lines should be ~100 characters max
-- Run `scripts/simple_md_lint.py` before commits
+- Run `scripts/simple_md_lint.py` before commits (but don't fix linting issues during active development)
 - Build artifacts should not be committed (`site/`, `__pycache__/`)
+- Focus on content creation and educational quality over strict markdown formatting during development phase
 
 ## Common Tasks
 
