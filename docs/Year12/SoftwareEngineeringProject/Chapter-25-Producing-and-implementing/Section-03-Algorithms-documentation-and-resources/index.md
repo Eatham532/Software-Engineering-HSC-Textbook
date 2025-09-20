@@ -13,8 +13,11 @@ Development artefacts are the documents, diagrams, and resources created through
 Key types of development artefacts:
 
 - **Requirements documentation**: User stories, acceptance criteria, functional specifications
+
 - **Design documents**: System architecture, database schemas, API specifications
+
 - **Code documentation**: Comments, README files, API documentation
+
 - **Testing artefacts**: Test plans, test cases, bug reports, test results
 
 ```tabbed
@@ -72,7 +75,8 @@ class DevelopmentArtefact:
         """Update artefact with new information"""
         self.last_updated = date.today()
         
-        # Increment version number
+        ## Increment version number
+
         major, minor = map(int, self.version.split('.'))
         self.version = f"{major}.{minor + 1}"
         
@@ -135,11 +139,14 @@ class ArtefactManager:
         by_status = {}
         
         for artefact in self.artefacts:
-            # Count by type
+
+            ## Count by type
+
             artefact_type = artefact.artefact_type.value
             by_type[artefact_type] = by_type.get(artefact_type, 0) + 1
             
-            # Count by status
+            ## Count by status
+
             status = artefact.status.value
             by_status[status] = by_status.get(status, 0) + 1
         
@@ -155,10 +162,12 @@ class ArtefactManager:
         
         return report
 
-# Example artefact management
+## Example artefact management
+
 manager = ArtefactManager()
 
-# Create sample artefacts
+## Create sample artefacts
+
 requirements_doc = DevelopmentArtefact(
     "User Authentication Requirements",
     ArtefactType.REQUIREMENTS,
@@ -173,17 +182,20 @@ api_spec = DevelopmentArtefact(
     "/docs/api/student-portal-api.yaml"
 )
 
-# Add to manager
+## Add to manager
+
 manager.add_artefact(requirements_doc)
 manager.add_artefact(api_spec)
 
-# Update an artefact
+## Update an artefact
+
 update_log = requirements_doc.update_artefact(
     "Sarah Johnson", 
     "Added multi-factor authentication requirements"
 )
 
-# Generate report
+## Generate report
+
 report = manager.generate_documentation_report()
 print(f"Documentation Report: {report}")
 ```
@@ -196,8 +208,11 @@ Proper attribution of external resources, libraries, and references is essential
 Citation best practices:
 
 - **Library dependencies**: Document all external libraries with versions and licenses
+
 - **Code attribution**: Credit original authors when adapting existing code
+
 - **Reference sources**: Cite technical articles, documentation, and research used
+
 - **License compliance**: Ensure all dependencies meet project license requirements
 
 ```tabbed
@@ -269,7 +284,8 @@ class Dependency:
         }
         self.vulnerabilities.append(vulnerability)
         
-        # Update security risk based on severity
+        ## Update security risk based on severity
+
         if severity == "critical":
             self.security_risk = SecurityRisk.CRITICAL
         elif severity == "high" and self.security_risk != SecurityRisk.CRITICAL:
@@ -283,7 +299,9 @@ class Dependency:
         self.version = new_version
         self.last_updated = date.today()
         self.update_available = False
-        # Reset vulnerabilities after update
+
+        ## Reset vulnerabilities after update
+
         self.vulnerabilities = []
         self.security_risk = SecurityRisk.LOW
     
@@ -311,7 +329,8 @@ class DependencyManager:
         self.dependencies.append(dependency)
         self.dependency_index[dependency.name] = dependency
         
-        # Check license compatibility
+        ## Check license compatibility
+
         if not dependency.get_license_compatibility(self.project_license):
             print(f"Warning: {dependency.name} license may not be compatible with project")
     
@@ -359,10 +378,12 @@ class DependencyManager:
             "project_license": self.project_license.value
         }
 
-# Example dependency management
+## Example dependency management
+
 dep_manager = DependencyManager(LicenseType.MIT)
 
-# Add dependencies
+## Add dependencies
+
 react_dep = Dependency("React", "18.2.0", LicenseType.MIT, "Frontend UI framework")
 express_dep = Dependency("Express", "4.18.0", LicenseType.MIT, "Backend web server")
 mysql_dep = Dependency("MySQL", "8.0.33", LicenseType.GPL, "Database system")
@@ -371,14 +392,16 @@ dep_manager.add_dependency(react_dep)
 dep_manager.add_dependency(express_dep)
 dep_manager.add_dependency(mysql_dep)
 
-# Add vulnerability to a dependency
+## Add vulnerability to a dependency
+
 express_dep.add_vulnerability(
     "CVE-2023-1234",
     "medium",
     "Potential denial of service in request parsing"
 )
 
-# Generate reports
+## Generate reports
+
 report = dep_manager.generate_dependency_report()
 print(f"Dependency Report: {report}")
 
@@ -395,9 +418,13 @@ Back-end engineering provides the foundation that enables front-end applications
 Key back-end contributions to software success:
 
 - **Data management**: Efficient storage, retrieval, and processing of application data
+
 - **Business logic**: Core functionality and rules that drive application behaviour
+
 - **Security**: Authentication, authorisation, and data protection mechanisms
+
 - **Performance**: Optimisation for scalability, speed, and reliability
+
 - **Integration**: APIs and services that connect different system components
 
 ```kroki-plantuml
@@ -596,11 +623,14 @@ class APIGateway:
         service.start_service()
     
     def route_request(self, client_ip, endpoint, method="GET"):
-        # Check rate limiting
+
+        ## Check rate limiting
+
         if not self.check_rate_limit(client_ip):
             return {"status": "error", "message": "Rate limit exceeded"}
         
-        # Route to appropriate service
+        ## Route to appropriate service
+
         service_name = endpoint.split('/')[1] if '/' in endpoint else "default"
         
         if service_name in self.services:
@@ -609,7 +639,8 @@ class APIGateway:
         else:
             response = {"status": "error", "message": "Service not found"}
         
-        # Log request
+        ## Log request
+
         self.request_log.append({
             "timestamp": datetime.now().isoformat(),
             "client_ip": client_ip,
@@ -624,7 +655,8 @@ class APIGateway:
         current_time = datetime.now()
         window_start = current_time - timedelta(minutes=window_minutes)
         
-        # Count recent requests from this IP
+        ## Count recent requests from this IP
+
         recent_requests = [
             req for req in self.request_log 
             if req["client_ip"] == client_ip and 
@@ -652,35 +684,42 @@ class APIGateway:
             "active_services": len([s for s in self.services.values() if s.status == ServerStatus.RUNNING])
         }
 
-# Example back-end system simulation
+## Example back-end system simulation
+
 gateway = APIGateway()
 
-# Create services
+## Create services
+
 auth_service = BackendService("auth", "authentication", 3001)
 user_service = BackendService("users", "user_management", 3002)
 api_service = BackendService("api", "main_api", 3000)
 
-# Create database
+## Create database
+
 user_db = Database("user_database", DatabaseType.POSTGRESQL, "postgresql://localhost:5432/users")
 user_db.status = ServerStatus.RUNNING
 user_db.data_size_mb = 150
 
-# Register services
+## Register services
+
 gateway.register_service(auth_service)
 gateway.register_service(user_service)
 gateway.register_service(api_service)
 
-# Simulate API requests
+## Simulate API requests
+
 responses = []
 responses.append(gateway.route_request("192.168.1.10", "/auth/login", "POST"))
 responses.append(gateway.route_request("192.168.1.10", "/users/profile", "GET"))
 responses.append(gateway.route_request("192.168.1.11", "/api/data", "GET"))
 
-# Generate metrics
+## Generate metrics
+
 metrics = gateway.generate_api_metrics()
 print(f"API Gateway Metrics: {metrics}")
 
-# Database operations
+## Database operations
+
 db_connection = user_db.connect()
 query_result = user_db.execute_query("SELECT", "users")
 backup_result = user_db.backup_database()
@@ -707,28 +746,45 @@ print(f"Backup Result: {backup_result}")
 **Documentation Audit Plan**:
 
 1. **Inventory existing documentation**:
+
    - Requirements and specifications
+
    - API documentation
+
    - Database schema documentation
+
    - Setup and deployment guides
+
    - User manuals
 
 2. **Assess documentation quality**:
+
    - Currency (how up-to-date)
+
    - Completeness (covers all features)
+
    - Accuracy (matches current implementation)
+
    - Accessibility (easy to find and understand)
 
 3. **Identify critical gaps**:
+
    - Missing API endpoints
+
    - Undocumented configuration options
+
    - Absent troubleshooting guides
+
    - Unclear setup instructions
 
 4. **Create improvement plan**:
+
    - Prioritise most critical documentation needs
+
    - Assign responsibility for updates
+
    - Establish documentation standards
+
    - Set up regular review process
 
 **Tools for audit**:
@@ -756,23 +812,35 @@ report = audit_manager.generate_documentation_report()
 **Dependency Security Review Process**:
 
 1. **Inventory all dependencies**:
+
    - Direct dependencies (listed in package.json, requirements.txt)
+
    - Transitive dependencies (dependencies of dependencies)
+
    - Development vs. production dependencies
 
 2. **Security vulnerability scanning**:
+
    - Use automated tools (npm audit, safety, snyk)
+
    - Check CVE databases for known vulnerabilities
+
    - Assess severity and impact of vulnerabilities
 
 3. **License compatibility review**:
+
    - Document license for each dependency
+
    - Check compatibility with project license
+
    - Identify potential legal issues
 
 4. **Create action plan**:
+
    - Update vulnerable dependencies
+
    - Replace incompatible licenses
+
    - Document exceptions and risks
 
 **Implementation example**:
@@ -790,8 +858,11 @@ outdated_deps = dep_manager.find_outdated_dependencies()
 Understanding algorithms, documentation, and back-end resources is essential for professional software development. Key takeaways include:
 
 - **Documentation maintenance**: Keep development artefacts current and accessible to support team collaboration and knowledge transfer
+
 - **Source attribution**: Properly cite external libraries and resources to ensure legal compliance and give appropriate credit
+
 - **Back-end awareness**: Understand how server infrastructure, databases, and APIs contribute to overall application success
+
 - **Security considerations**: Regularly review dependencies for vulnerabilities and maintain secure coding practices
 
 These practices ensure your software projects are maintainable, legally compliant, and built on solid technical foundations that can scale with growing requirements.

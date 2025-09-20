@@ -7,10 +7,15 @@
 By the end of this section, you will be able to:
 
 - Define and analyse the requirements of a software engineering problem
+
 - Demonstrate stakeholder needs and market opportunities through research
+
 - Assess scheduling and financial feasibility with realistic constraints
+
 - Generate functional and non-functional requirements specifications
+
 - Define appropriate data structures and data types for solutions
+
 - Establish clear project boundaries and scope definitions
 
 ---
@@ -22,8 +27,11 @@ Requirements analysis is the foundation of successful software engineering proje
 **Key principles of requirements analysis:**
 
 - **Stakeholder-centered approach**: Understanding who will use, benefit from, or be affected by the solution
+
 - **Evidence-based decisions**: Using research and data to validate assumptions about needs
+
 - **Constraint awareness**: Recognising limitations in time, budget, skills, and technology
+
 - **Clear documentation**: Recording requirements in specific, measurable, achievable terms
 
 ### Stakeholder identification and needs analysis
@@ -33,8 +41,11 @@ Effective requirements analysis begins with identifying all stakeholders and und
 **Primary stakeholder categories:**
 
 1. **End users**: People who will directly interact with the software
+
 2. **Business stakeholders**: Decision-makers, product owners, and budget holders
+
 3. **Technical stakeholders**: Developers, system administrators, and maintainers
+
 4. **Regulatory stakeholders**: Compliance officers, legal teams, and auditors
 
 **Methods for gathering stakeholder needs:**
@@ -282,8 +293,11 @@ Validating stakeholder needs requires systematic research to understand the broa
 **Research approaches:**
 
 1. **User surveys and questionnaires**: Quantitative data on user preferences and pain points
+
 2. **Market analysis**: Understanding existing solutions, competition, and market gaps  
+
 3. **User observation**: Watching how people currently perform tasks and identify inefficiencies
+
 4. **Competitive analysis**: Evaluating what similar solutions exist and their strengths/weaknesses
 
 ```kroki-plantuml
@@ -336,8 +350,11 @@ Financial feasibility examines whether the project can be completed within budge
 **Key financial considerations:**
 
 - **Development costs**: Personnel, tools, infrastructure, and third-party services
+
 - **Operational costs**: Hosting, maintenance, support, and licensing fees
+
 - **Opportunity costs**: What alternatives are foregone by pursuing this project
+
 - **Return on investment**: Expected benefits compared to total investment
 
 ```python
@@ -623,8 +640,11 @@ Scheduling feasibility evaluates whether the project can be completed within req
 **Key scheduling considerations:**
 
 - **Resource availability**: When team members and tools will be available
+
 - **Task dependencies**: What work must be completed before other work can begin
+
 - **Risk buffers**: Time allocated for handling unexpected delays or complications
+
 - **Milestone alignment**: Ensuring delivery dates align with stakeholder expectations
 
 ---
@@ -640,9 +660,13 @@ Functional requirements describe what the system must do - the specific behaviou
 **Characteristics of good functional requirements:**
 
 - **Specific**: Clearly defined behaviour with no ambiguity
+
 - **Measurable**: Can be verified through testing or demonstration
+
 - **Achievable**: Technically possible within project constraints
+
 - **Relevant**: Directly supports stakeholder needs
+
 - **Time-bound**: Clear expectations for when functionality will be available
 
 **Examples of functional requirements:**
@@ -796,10 +820,15 @@ Non-functional requirements specify how the system should perform - the quality 
 **Common categories of non-functional requirements:**
 
 1. **Performance**: Response times, throughput, and resource usage
+
 2. **Reliability**: System availability and error recovery capabilities  
+
 3. **Security**: Data protection and access control measures
+
 4. **Usability**: User interface design and accessibility standards
+
 5. **Scalability**: Ability to handle increased load and user growth
+
 6. **Maintainability**: Ease of updates, bug fixes, and system changes
 
 ```python
@@ -993,8 +1022,11 @@ Choosing the right data structures requires understanding the operations your sy
 **Key considerations:**
 
 - **Access patterns**: How data will be read, written, and updated
+
 - **Volume**: Expected size of datasets and growth over time
+
 - **Performance requirements**: Speed vs. memory usage trade-offs
+
 - **Relationships**: How different pieces of data connect to each other
 
 ```python
@@ -1227,9 +1259,13 @@ Project boundaries specify what is included in the current project and what is e
 **Boundary categories:**
 
 1. **Functional boundaries**: Which features and capabilities are included
+
 2. **System boundaries**: Which systems and integrations are in scope
+
 3. **User boundaries**: Which user groups and use cases are supported
+
 4. **Data boundaries**: Which data sources and types are included
+
 5. **Platform boundaries**: Which devices, browsers, or operating systems are supported
 
 ```kroki-plantuml
@@ -1615,8 +1651,11 @@ if __name__ == "__main__":
 Choose a software project idea relevant to your school or community (e.g., library management system, sports club management, tutoring platform). Complete a stakeholder analysis:
 
 1. **Identify stakeholders**: List at least 6 different stakeholder groups who would be affected by or interested in your project
+
 2. **Assess influence and interest**: Create a stakeholder priority matrix categorizing each group
+
 3. **Conduct mock interviews**: Write 5 interview questions and provide realistic responses for your highest priority stakeholder group
+
 4. **Document needs**: Use the `StakeholderAnalysis` class to record and organize stakeholder requirements
 
 **Expected outcome**: A structured stakeholder analysis with clear requirements traceability.
@@ -1626,9 +1665,13 @@ Choose a software project idea relevant to your school or community (e.g., libra
 Using the same project idea from Task 1, perform a comprehensive financial feasibility analysis:
 
 1. **Estimate development costs**: Include personnel, tools, infrastructure, and any third-party services
+
 2. **Project operational costs**: Calculate ongoing hosting, maintenance, and support costs
+
 3. **Quantify benefits**: Identify specific financial benefits (cost savings, efficiency gains, revenue increases)
+
 4. **Calculate ROI**: Use the `FinancialFeasibilityAnalysis` class to determine project viability
+
 5. **Risk assessment**: Identify financial risks and how they might impact the analysis
 
 **Expected outcome**: A complete financial feasibility report with ROI calculation and risk assessment.
@@ -1638,8 +1681,11 @@ Using the same project idea from Task 1, perform a comprehensive financial feasi
 For your chosen project, create detailed functional and non-functional requirements:
 
 1. **Functional requirements**: Document at least 5 functional requirements with clear acceptance criteria and test scenarios
+
 2. **Non-functional requirements**: Specify measurable performance, security, and usability requirements
+
 3. **Data model**: Define the main entities, their attributes, and relationships using the data structure analysis framework
+
 4. **Scope definition**: Create a comprehensive scope document clearly defining what is in scope, out of scope, and planned for future phases
 
 **Expected outcome**: A complete requirements specification document ready for development planning.
@@ -1697,22 +1743,31 @@ This section introduced systematic approaches to requirements analysis and feasi
 **Requirements Analysis Process:**
 
 - **Stakeholder-centered approach**: Understanding who will be affected by and benefit from the solution
+
 - **Evidence-based validation**: Using research and data to confirm assumptions about needs and problems
+
 - **Structured documentation**: Recording requirements in specific, measurable, achievable terms
+
 - **Traceability**: Linking requirements back to stakeholder needs and forward to design decisions
 
 **Feasibility Assessment Framework:**
 
 - **Financial viability**: Comprehensive cost-benefit analysis with ROI calculations
+
 - **Scheduling realism**: Honest assessment of timeline constraints and resource availability  
+
 - **Technical feasibility**: Evaluation of whether required capabilities can be implemented
+
 - **Risk awareness**: Identifying and planning for potential obstacles and complications
 
 **Requirements Classification:**
 
 - **Functional requirements**: What the system must do, with clear acceptance criteria and test scenarios
+
 - **Non-functional requirements**: How the system should perform, with measurable quality attributes
+
 - **Data requirements**: Appropriate structures and types based on usage patterns and volume
+
 - **Scope boundaries**: Clear definition of what is included, excluded, and planned for future phases
 
 **Next Steps**: In Section 23.2, we'll explore ideation and modeling tools that help transform these requirements into concrete solution designs and implementation plans.

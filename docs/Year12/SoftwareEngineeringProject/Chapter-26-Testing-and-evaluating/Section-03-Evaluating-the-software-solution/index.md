@@ -7,10 +7,15 @@
 By the end of this section, you will be able to:
 
 - Develop comprehensive evaluation criteria for judging software solution effectiveness
+
 - Synthesize feedback and evidence from multiple stakeholders into coherent evaluation reports
+
 - Create and execute test plans that inform solution evaluation through systematic testing
+
 - Analyze discrepancies between expected and actual outputs to identify improvement areas
+
 - Reflect on maintainability, deployment readiness, and lessons learned throughout development
+
 - Use evaluation results to make informed decisions about solution refinement and future development
 
 ---
@@ -26,9 +31,13 @@ Effective software solution evaluation requires clear criteria, systematic evide
 **Key categories for evaluation criteria:**
 
 - **Functional criteria**: Does the solution perform required functions correctly?
+
 - **Non-functional criteria**: Does the solution meet performance, usability, and quality requirements?
+
 - **Stakeholder satisfaction**: Do stakeholders find the solution valuable and usable?
+
 - **Technical quality**: Is the solution well-designed, maintainable, and scalable?
+
 - **Business impact**: Does the solution achieve intended business outcomes?
 
 ```kroki-plantuml
@@ -1074,9 +1083,13 @@ Effective evaluation requires systematic testing that produces reliable evidence
 **Key components of evaluation-focused test plans:**
 
 - **Requirement traceability**: Link test cases directly to evaluation criteria
+
 - **Evidence collection**: Design tests to produce measurable evidence
+
 - **Stakeholder scenarios**: Include real-world usage patterns from different user types
+
 - **Boundary and edge cases**: Test limits and exceptional conditions
+
 - **Performance baselines**: Establish metrics for non-functional requirements
 
 ```python

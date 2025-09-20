@@ -252,19 +252,27 @@ compliance_requirements = {
     open: false
 
 **Correctness**:
+
 - Grade calculations follow school's weighted average formula accurately
+
 - Attendance records update automatically and reflect actual student presence
 
 **Usability**:
+
 - Teachers can enter grades for a class of 30 students in under 5 minutes
+
 - Parents can view their child's progress in 3 clicks or fewer
 
 **Performance**:
+
 - Grade reports generate within 10 seconds
+
 - System handles 100 concurrent users during peak times (report card period)
 
 **Security**:
+
 - Only assigned teachers can modify grades for their classes
+
 - All grade changes are logged with timestamp and user identification
 ///
 ///
@@ -282,15 +290,21 @@ compliance_requirements = {
     open: false
 
 **Privacy Compliance**:
+
 - Patient health information must be encrypted and access-controlled according to health privacy laws
+
 - Patients must consent to data collection and processing
 
 **Accessibility Compliance**:
+
 - System must support screen readers for visually impaired users
+
 - Booking interface must be navigable using only keyboard controls
 
 **Healthcare Industry Compliance**:
+
 - Audit trails must track all access to patient records
+
 - Data backup and recovery procedures must meet healthcare standards for continuity of care
 ///
 ///
@@ -308,19 +322,27 @@ compliance_requirements = {
     open: false
 
 **Requirements Review**:
+
 - Participants: Academic staff, IT support, student representatives, accessibility coordinator
+
 - Focus: Validate learning objectives, technical feasibility, user needs
 
 **Design Review**:
+
 - Participants: UX designer, senior developer, accessibility specialist
+
 - Focus: User interface design, system architecture, accessibility compliance
 
 **Code Review**:
+
 - Participants: Peer developers, security specialist, QA tester
+
 - Focus: Code quality, security vulnerabilities, testing coverage
 
 **User Acceptance Review**:
+
 - Participants: End users (students and instructors), QA team, product manager
+
 - Focus: Functionality validation, usability testing, acceptance criteria verification
 ///
 ///
@@ -330,7 +352,9 @@ compliance_requirements = {
 Quality assurance is a comprehensive approach to ensuring software engineering solutions meet defined standards and requirements. Key components include:
 
 - **Quality criteria**: Establishing clear, measurable standards for correctness, usability, performance, and security
+
 - **Continual checking**: Implementing ongoing review processes, testing alignment, and acceptance criteria validation
+
 - **Compliance management**: Addressing privacy, accessibility, and industry-specific regulatory requirements
 
 Effective QA processes reduce project risks, improve user satisfaction, and ensure legal compliance. They require coordination between development teams, stakeholders, and end users throughout the software development lifecycle.

@@ -11,21 +11,33 @@ Software development inevitably encounters obstacles, technical challenges, and 
 Development blockers are obstacles that prevent progress on software projects. Understanding different types of blockers helps teams choose appropriate resolution strategies:
 
 **Technical blockers**:
+
 - **Knowledge gaps**: Lack of expertise with specific technologies or frameworks
+
 - **Integration issues**: Problems connecting different systems or components
+
 - **Performance bottlenecks**: Code that doesn't meet speed or efficiency requirements
+
 - **Dependency conflicts**: Version incompatibilities between libraries or services
 
 **Resource blockers**:
+
 - **Access limitations**: Missing permissions, accounts, or system access
+
 - **Tool unavailability**: Required software, hardware, or development tools not available
+
 - **Environmental issues**: Development, testing, or production environment problems
+
 - **Budget constraints**: Insufficient funds for necessary resources or services
 
 **Process blockers**:
+
 - **Approval delays**: Waiting for stakeholder decisions or sign-offs
+
 - **Communication breakdowns**: Unclear requirements or conflicting expectations
+
 - **Skill mismatches**: Team members lacking required expertise
+
 - **Timeline conflicts**: Competing priorities or unrealistic deadlines
 
 ```python
@@ -130,21 +142,33 @@ print(f"Critical blockers requiring immediate attention: {len(critical_blockers)
 Modern software development benefits from vast online resources and communities. Effective research skills accelerate problem resolution:
 
 **Documentation sources**:
+
 - **Official documentation**: Language references, framework guides, API documentation
+
 - **Community wikis**: Collaborative knowledge bases and tutorials
+
 - **Code repositories**: Example implementations and best practices
+
 - **Academic papers**: Research on algorithms, architectures, and methodologies
 
 **Interactive help channels**:
+
 - **Stack Overflow**: Question and answer platform for programming issues
+
 - **GitHub discussions**: Project-specific help and feature requests
+
 - **Developer forums**: Technology-specific communities and support
+
 - **Professional networks**: LinkedIn, Discord, Slack communities
 
 **Search strategies**:
+
 - **Specific error messages**: Copy exact error text for precise matches
+
 - **Technology combinations**: Include framework, language, and version numbers
+
 - **Alternative terminology**: Try different ways to describe the problem
+
 - **Date filtering**: Focus on recent solutions for current technology versions
 
 ```python
@@ -243,18 +267,27 @@ print(f"Source credibility: {source_evaluation}")
 Team collaboration multiplies problem-solving capabilities and reduces individual knowledge gaps:
 
 **Pair programming**:
+
 - **Driver-navigator model**: One person codes while the other reviews and guides
+
 - **Benefits**: Real-time code review, knowledge sharing, reduced errors
+
 - **Best practices**: Regular role switching, clear communication, shared understanding
 
 **Code reviews**:
+
 - **Systematic examination**: Structured review of code changes before integration
+
 - **Focus areas**: Logic correctness, performance, security, maintainability
+
 - **Feedback delivery**: Constructive, specific, actionable suggestions
 
 **Mentoring relationships**:
+
 - **Knowledge transfer**: Experienced developers guide junior team members
+
 - **Skill development**: Structured learning and professional growth
+
 - **Problem escalation**: Clear path from junior to senior expertise
 
 ```python
@@ -374,21 +407,33 @@ print(f"Code review requested: {review_request}")
 When internal resources are insufficient, structured escalation ensures problems receive appropriate attention:
 
 **Internal escalation levels**:
+
 1. **Peer consultation**: Fellow team members with similar expertise
+
 2. **Senior developer**: Team leads or architects with broader experience
+
 3. **Technical lead**: Department heads or principal engineers
+
 4. **Management**: Project managers and executives for resource decisions
 
 **External assistance options**:
+
 - **Vendor support**: Official support channels for purchased software or services
+
 - **Consulting services**: Specialized experts for specific technical domains
+
 - **Community experts**: Recognized contributors to open-source projects
+
 - **Academic collaboration**: University researchers for cutting-edge problems
 
 **Contractor and vendor evaluation**:
+
 - **Expertise verification**: Portfolio review, references, certifications
+
 - **Cost-benefit analysis**: Budget impact versus internal development time
+
 - **Integration planning**: How external work fits with existing systems
+
 - **Knowledge transfer**: Ensuring internal team learns from external assistance
 
 ```kroki-plantuml
@@ -602,26 +647,41 @@ escalation_strategy = {
     open: false
 
 **Blocker Categorization**:
+
 - Category: Technical
+
 - Severity: High (affects core functionality)
+
 - Type: Performance/Integration issue
 
 **Potential Causes**:
+
 - Server overload during peak times
+
 - Database connection timeout
+
 - Inefficient data synchronization algorithm
+
 - Network connectivity issues
 
 **Resolution Plan**:
+
 1. Research: Review server logs, check database performance metrics
+
 2. Peer consultation: Discuss with backend developer and database admin
+
 3. Testing: Simulate peak load conditions in development environment
+
 4. Implementation: Optimize sync algorithm, implement retry logic
 
 **Escalation Steps**:
+
 - Level 1: Senior developer review of sync architecture
+
 - Level 2: Infrastructure team consultation for server scaling
+
 - Level 3: Vendor support for database optimization
+
 - Level 4: Management decision on infrastructure investment
 ///
 ///
@@ -639,27 +699,43 @@ escalation_strategy = {
     open: false
 
 **Documentation Sources**:
+
 - WebSocket API official documentation
+
 - Socket.IO library documentation
+
 - Python Flask-SocketIO guides
+
 - Real-time communication architectural patterns
 
 **Search Queries**:
+
 - "WebSocket chat application Python tutorial"
+
 - "real-time messaging Flask implementation"
+
 - "WebSocket vs Server-Sent Events comparison"
+
 - "scalable chat application architecture"
 
 **Community Resources**:
+
 - Stack Overflow WebSocket tag
+
 - GitHub repositories with chat implementations
+
 - Reddit r/webdev community
+
 - Dev.to WebSocket tutorials
 
 **Learning Progression**:
+
 1. Basic WebSocket concepts and protocols
+
 2. Simple chat application tutorial
+
 3. Production considerations (scaling, security)
+
 4. Integration with existing authentication system
 ///
 ///
@@ -677,27 +753,43 @@ escalation_strategy = {
     open: false
 
 **Internal Collaboration Strategy**:
+
 - Pair programming: Algorithm developer + senior developer
+
 - Code review: Mathematics teacher for logic validation
+
 - Research session: Team meeting to explore alternative algorithms
+
 - Prototype development: Build simplified version for testing
 
 **Team Resource Allocation**:
+
 - Primary developer: Focus on optimization of current algorithm
+
 - Secondary developer: Research constraint satisfaction algorithms
+
 - QA specialist: Create comprehensive test cases
+
 - Subject matter expert: Validate scheduling business rules
 
 **Escalation Plan**:
+
 - Week 1: Internal team collaboration and research
+
 - Day 10: Escalate to technical lead for architecture review
+
 - Day 12: Consider external algorithm expert consultation
+
 - Day 14: Management decision on simplified requirements or deadline extension
 
 **External Assistance Options**:
+
 - University computer science department collaboration
+
 - Scheduling software vendor consultation
+
 - Algorithm optimization consulting firm
+
 - Open-source scheduling library evaluation
 ///
 ///
@@ -707,8 +799,11 @@ escalation_strategy = {
 Overcoming development difficulties requires systematic approaches to problem identification, resolution, and escalation:
 
 - **Blocker identification**: Categorizing problems as technical, resource, or process issues to choose appropriate resolution strategies
+
 - **Research strategies**: Using documentation, community resources, and search techniques to find solutions efficiently
+
 - **Collaborative approaches**: Leveraging team expertise through pair programming, code reviews, and mentoring relationships
+
 - **Escalation planning**: Structured progression from peer consultation to external assistance when needed
 
 Effective problem-solving in software development combines individual research skills with team collaboration and systematic escalation. Teams that master these approaches deliver projects more reliably, learn from challenges, and build resilience for future difficulties.

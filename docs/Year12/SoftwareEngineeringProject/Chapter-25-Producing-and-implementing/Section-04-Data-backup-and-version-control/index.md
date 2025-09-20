@@ -11,10 +11,15 @@ Data backup and version control are critical safeguards that protect software pr
 Version control systems track changes to files over time, allowing multiple developers to work on the same project while maintaining a complete history of modifications. Git is the most widely used version control system in modern software development.
 
 **Core version control concepts**:
+
 - **Repository**: A storage location containing the complete project history and all versions
+
 - **Commit**: A saved snapshot of changes with a descriptive message
+
 - **Branch**: A parallel version of the code for developing features or fixes independently
+
 - **Merge**: Combining changes from different branches back together
+
 - **Tag**: A marker for specific versions, typically used for releases
 
 **Basic Git workflow**:
@@ -96,16 +101,25 @@ print(f"Tags: {list(project_vc.tags.keys())}")
 Effective branching strategies help teams organize development work, isolate features, and maintain stable code:
 
 **Git Flow model**:
+
 - **Main branch**: Contains production-ready code
+
 - **Develop branch**: Integration branch for features
+
 - **Feature branches**: Individual feature development
+
 - **Release branches**: Preparation for production releases
+
 - **Hotfix branches**: Quick fixes for production issues
 
 **Branch naming conventions**:
+
 - `feature/user-authentication`
+
 - `bugfix/login-validation`
+
 - `hotfix/security-patch`
+
 - `release/v2.1.0`
 
 ```python
@@ -198,16 +212,25 @@ print(f"Merge request: {merge_request}")
 Tags mark specific points in repository history, typically used to identify releases and stable versions:
 
 **Semantic versioning (SemVer)**:
+
 - **Major version** (X.0.0): Breaking changes
+
 - **Minor version** (X.Y.0): New features, backward compatible
+
 - **Patch version** (X.Y.Z): Bug fixes, backward compatible
 
 **Release process**:
+
 1. Create release branch from develop
+
 2. Finalize features and fix bugs
+
 3. Update version numbers and documentation
+
 4. Tag the release
+
 5. Merge to main and deploy
+
 6. Merge back to develop
 
 ```python
@@ -293,15 +316,23 @@ print(f"Release tag created: {tag_info}")
 Comprehensive backup strategies protect against data loss and ensure business continuity:
 
 **Backup types**:
+
 - **Full backup**: Complete copy of all data
+
 - **Incremental backup**: Only changes since last backup
+
 - **Differential backup**: Changes since last full backup
+
 - **Continuous backup**: Real-time data protection
 
 **Backup locations**:
+
 - **Local backups**: On-site storage for quick recovery
+
 - **Remote backups**: Off-site storage for disaster recovery
+
 - **Cloud backups**: Third-party managed backup services
+
 - **Repository mirroring**: Multiple Git repository copies
 
 ```kroki-plantuml
@@ -343,18 +374,29 @@ tags --> backup
 Release hygiene ensures consistent, reliable software deployments:
 
 **Pre-release checklist**:
+
 - All tests passing
+
 - Code review completed
+
 - Documentation updated
+
 - Version numbers incremented
+
 - Changelog updated
+
 - Security scan completed
 
 **Release artifacts**:
+
 - Source code archives
+
 - Compiled binaries
+
 - Installation packages
+
 - Documentation
+
 - Release notes
 
 ```python
@@ -535,24 +577,37 @@ def create_backup_strategy():
     open: false
 
 **Main Branches**:
+
 - `main`: Production code, protected, requires pull request + approval
+
 - `develop`: Integration branch, requires passing tests
 
 **Feature Branches**:
+
 - Naming: `feature/catalog-search`, `feature/user-registration`
+
 - Base: `develop`
+
 - Merge target: `develop` via pull request
 
 **Release Process**:
+
 - Create `release/v1.2.0` from `develop`
+
 - Final testing and bug fixes
+
 - Merge to `main` and tag `v1.2.0`
+
 - Merge back to `develop`
 
 **Merge Rules**:
+
 - No direct commits to `main` or `develop`
+
 - All changes via pull requests
+
 - Automated tests must pass
+
 - Code review required for `main` merges
 ///
 ///
@@ -570,24 +625,37 @@ def create_backup_strategy():
     open: false
 
 **Backup Types and Schedule**:
+
 - Real-time: Database transaction logs
+
 - Hourly: Incremental backups of active data
+
 - Daily: Full database backup
+
 - Weekly: Complete system backup including code and configurations
 
 **Storage Locations**:
+
 - Primary: On-site secure server
+
 - Secondary: Off-site school district data center
+
 - Tertiary: Encrypted cloud storage
 
 **Recovery Procedures**:
+
 - Point-in-time recovery using transaction logs
+
 - Database restore from daily backups
+
 - Full system restore from weekly backups
+
 - Disaster recovery plan with 4-hour RTO (Recovery Time Objective)
 
 **Testing**:
+
 - Monthly backup restoration tests
+
 - Annual disaster recovery drill
 ///
 ///
@@ -607,23 +675,37 @@ def create_backup_strategy():
 **Version**: 2.0.0 (major version due to breaking changes)
 
 **Release Notes**:
+
 - New features: Advanced grade analytics, parent portal
+
 - Breaking changes: API endpoint restructuring, database schema updates
+
 - Bug fixes: Grade calculation accuracy, export format issues
 
 **Pre-Release Checklist**:
+
 - All automated tests passing (unit, integration, security)
+
 - Code review completed by senior developer
+
 - Documentation updated (API docs, user guide)
+
 - Migration scripts tested for database changes
+
 - Backward compatibility impact documented
 
 **Deployment Process**:
+
 - Create release branch `release/v2.0.0`
+
 - Final testing in staging environment
+
 - Tag release `v2.0.0` in main branch
+
 - Generate deployment artifacts
+
 - Schedule maintenance window for production deployment
+
 - Post-deployment monitoring and rollback plan ready
 ///
 ///
@@ -633,9 +715,13 @@ def create_backup_strategy():
 Data backup and version control form the foundation of reliable software development through:
 
 - **Version control**: Using Git for tracking changes, coordinating collaboration, and maintaining complete project history
+
 - **Branching strategies**: Implementing organized workflows with feature branches, protection rules, and merge processes
+
 - **Tagging and releases**: Using semantic versioning and systematic release management for stable deployments
+
 - **Backup strategies**: Implementing comprehensive data protection with multiple backup types, locations, and recovery procedures
+
 - **Release hygiene**: Following systematic checklists and quality gates to ensure reliable software releases
 
 These practices protect against data loss, enable effective team collaboration, and ensure that software releases are consistent, traceable, and reliable. Proper implementation of these systems is essential for professional software development and project success.

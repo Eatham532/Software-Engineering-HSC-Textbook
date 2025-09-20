@@ -11,21 +11,33 @@ Feedback analysis transforms raw user input into actionable insights that guide 
 Successful feedback analysis begins with comprehensive collection from diverse sources and stakeholders:
 
 **User feedback channels**:
+
 - **Surveys and questionnaires**: Structured feedback collection with specific metrics
+
 - **User interviews**: In-depth qualitative insights about user experience and needs
+
 - **Usage analytics**: Behavioral data showing how users actually interact with software
+
 - **Support tickets**: Issues and problems users encounter during normal use
 
 **Stakeholder feedback sources**:
+
 - **Client reviews**: Formal feedback sessions with project sponsors and decision-makers
+
 - **Beta testing groups**: Limited releases to gather feedback before full deployment
+
 - **Peer reviews**: Technical feedback from other developers and architects
+
 - **Subject matter experts**: Domain-specific feedback on functionality and compliance
 
 **Automated feedback mechanisms**:
+
 - **Error logging**: Automatic capture of crashes, exceptions, and performance issues
+
 - **A/B testing results**: Comparative data on different feature implementations
+
 - **Performance monitoring**: System metrics indicating bottlenecks and optimization opportunities
+
 - **User journey tracking**: Data on how users navigate through the application
 
 ```python
@@ -179,21 +191,33 @@ print(f"Interview feedback collected for {interview_feedback['participant_id']}"
 Raw feedback requires systematic analysis to identify meaningful patterns and actionable insights:
 
 **Quantitative analysis techniques**:
+
 - **Sentiment analysis**: Automated classification of feedback as positive, negative, or neutral
+
 - **Frequency analysis**: Identifying most commonly mentioned issues or requests
+
 - **Correlation analysis**: Finding relationships between user characteristics and feedback patterns
+
 - **Trend analysis**: Tracking changes in feedback over time and across releases
 
 **Qualitative synthesis methods**:
+
 - **Thematic analysis**: Grouping similar feedback into themes and categories
+
 - **User journey mapping**: Understanding feedback in context of user workflows
+
 - **Pain point prioritization**: Ranking issues by impact and frequency
+
 - **Feature request evaluation**: Assessing new feature suggestions against project goals
 
 **Cross-source validation**:
+
 - **Triangulation**: Confirming findings across multiple feedback sources
+
 - **Stakeholder alignment**: Ensuring feedback interpretation matches stakeholder expectations
+
 - **Data quality assessment**: Identifying and filtering biased or unreliable feedback
+
 - **Representative sampling**: Ensuring feedback represents the full user base
 
 ```python
@@ -379,21 +403,33 @@ for issue in priority_analysis[:3]:
 Effective feedback analysis culminates in clear decisions about what actions to take:
 
 **Action categorization**:
+
 - **Immediate fixes**: Critical bugs and usability issues requiring urgent attention
+
 - **Short-term improvements**: Features and enhancements for the next development cycle
+
 - **Long-term roadmap**: Major features and architectural changes for future releases
+
 - **No action**: Feedback that doesn't align with project goals or represents minority opinions
 
 **Decision criteria frameworks**:
+
 - **Impact vs effort matrix**: Plotting feedback-driven changes by user impact and development effort
+
 - **User segment analysis**: Prioritizing feedback from key user groups and stakeholders
+
 - **Business value assessment**: Evaluating feedback against project objectives and success metrics
+
 - **Technical feasibility review**: Assessing implementation complexity and resource requirements
 
 **Stakeholder communication**:
+
 - **Feedback summaries**: Digestible reports showing key findings and recommended actions
+
 - **Decision rationale**: Clear explanations of why certain feedback led to specific decisions
+
 - **Roadmap updates**: Revised project timelines and priorities based on feedback analysis
+
 - **User communication**: Transparent updates to users about how their feedback influenced development
 
 ```kroki-plantuml
@@ -684,32 +720,51 @@ for item in matrix_analysis:
 **Multi-Source Collection Strategy**:
 
 **Librarians (Primary Users)**:
+
 - Weekly structured interviews (30 minutes each)
+
 - Daily usage logs with efficiency metrics
+
 - End-of-pilot satisfaction survey (10 questions)
+
 - Direct feature request submission form
 
 **Students (End Users)**:
+
 - Anonymous feedback kiosk in library
+
 - Focus group sessions (groups of 6-8 students)
+
 - Usage analytics tracking (book searches, checkouts)
+
 - Simple emoji-based feedback on key interactions
 
 **Teachers (Secondary Users)**:
+
 - Email survey about integration with curriculum
+
 - Feedback on student research capabilities
+
 - Suggestions for educational features
 
 **Technical Feedback**:
+
 - System performance monitoring
+
 - Error logs and crash reports
+
 - Database performance metrics
+
 - Integration testing results
 
 **Timing Strategy**:
+
 - Week 1: Focus on usability and immediate issues
+
 - Week 2: Feature requests and workflow improvements
+
 - Post-pilot: Comprehensive satisfaction assessment
+
 - 30 days later: Follow-up on implemented changes
 ///
 ///
@@ -719,10 +774,15 @@ for item in matrix_analysis:
     open: false
 
 **Scenario**: You've collected the following feedback about a student assignment submission system:
+
 - 15 teachers report "grading workflow is too complex"
+
 - 8 students mention "unclear submission status"
+
 - 3 administrators want "better reporting capabilities"
+
 - Support logs show 25 tickets about "file upload failures"
+
 - Analytics show 60% of users abandon the submission process
 
 **Task**: Synthesize this feedback into themes, prioritize issues, and recommend next steps.
@@ -732,26 +792,41 @@ for item in matrix_analysis:
     open: false
 
 **Theme Identification**:
+
 1. **Usability Issues** (Teachers + Students): Complex workflows and unclear status
+
 2. **Technical Reliability** (Support logs): File upload failures
+
 3. **User Experience** (Analytics): High abandonment rate indicates fundamental problems
+
 4. **Administrative Efficiency** (Admins): Reporting and oversight needs
 
 **Priority Ranking**:
+
 1. **Critical**: File upload failures (affects core functionality)
+
 2. **High**: User abandonment/usability (60% abandonment rate)
+
 3. **Medium**: Teacher workflow complexity (affects daily operations)
+
 4. **Low**: Administrative reporting (nice-to-have enhancement)
 
 **Recommended Next Steps**:
+
 - **Immediate**: Fix file upload reliability issues
+
 - **Sprint 1**: Simplify submission workflow and improve status visibility
+
 - **Sprint 2**: Streamline teacher grading interface
+
 - **Sprint 3**: Enhanced administrative reporting features
 
 **Success Metrics**:
+
 - Reduce abandonment rate to <20%
+
 - Decrease support tickets by 75%
+
 - Improve teacher satisfaction scores to >4/5
 ///
 ///
@@ -761,10 +836,15 @@ for item in matrix_analysis:
     open: false
 
 **Scenario**: Your team has received conflicting feedback about a school communication app:
+
 - Parents love the push notifications but want more customization
+
 - Teachers find notifications distracting during class time
+
 - Administrators want all communications logged for compliance
+
 - Students prefer email over push notifications
+
 - Technical team warns that more features will slow down the app
 
 **Task**: Apply a decision framework to resolve these conflicts and determine the next development priorities.
@@ -776,22 +856,35 @@ for item in matrix_analysis:
 **Decision Framework Application**:
 
 **Impact vs Effort Matrix**:
+
 - **High Impact, Low Effort**: Notification scheduling (do not disturb during class)
+
 - **High Impact, High Effort**: Full customization system for parents
+
 - **Medium Impact, Low Effort**: Communication logging for compliance
+
 - **Low Impact, Variable Effort**: Multiple notification channels per user preference
 
 **Stakeholder Priority Analysis**:
+
 1. **Teachers**: Primary users during school hours, productivity concerns valid
+
 2. **Parents**: Key stakeholders for engagement, but secondary during school time
+
 3. **Compliance**: Regulatory requirement, must address
+
 4. **Students**: End beneficiaries, but preferences vary
 
 **Recommended Decision**:
+
 1. **Implement notification scheduling** (solve teacher distraction immediately)
+
 2. **Add compliance logging** (meet regulatory requirements)
+
 3. **Provide basic parent customization** (notification types, frequency)
+
 4. **Research student preferences** more before major changes
+
 5. **Monitor performance impact** of any new features
 
 **Rationale**: Addresses immediate pain points for primary users while maintaining core functionality and meeting compliance needs.
@@ -803,8 +896,11 @@ for item in matrix_analysis:
 Effective feedback analysis transforms user input into actionable development decisions through systematic collection, synthesis, and decision-making:
 
 - **Comprehensive collection**: Gathering feedback from multiple sources including surveys, interviews, analytics, and support data to get complete picture
+
 - **Pattern identification**: Using sentiment analysis, theme recognition, and frequency counting to find meaningful insights in feedback data
+
 - **Systematic prioritization**: Applying frameworks like impact vs effort analysis to make data-driven decisions about next steps
+
 - **Clear communication**: Translating feedback analysis into actionable plans that stakeholders and development teams can understand and implement
 
 The goal of feedback analysis is not just to collect opinions, but to understand user needs deeply enough to make informed decisions about product direction. Teams that master feedback analysis deliver software that truly serves its users while maintaining technical feasibility and business viability.

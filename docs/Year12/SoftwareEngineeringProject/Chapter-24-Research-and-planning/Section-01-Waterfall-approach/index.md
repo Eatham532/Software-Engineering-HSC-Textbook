@@ -7,9 +7,13 @@
 By the end of this section, you will be able to:
 
 - Identify the distinct phases of the Waterfall software development methodology
+
 - Describe the key artefacts produced in each Waterfall phase
+
 - Analyse the risks and benefits of using Waterfall for different project types
+
 - Evaluate when Waterfall is most appropriate versus other development approaches
+
 - Create phase-gate documentation and review processes for Waterfall projects
 
 ---
@@ -21,9 +25,13 @@ The Waterfall model is a sequential software development approach where progress
 **Core principles of Waterfall:**
 
 - **Sequential progression**: Phases follow a linear order with minimal overlap
+
 - **Phase completion**: Each phase must be fully completed before proceeding
+
 - **Documentation emphasis**: Comprehensive documentation at each phase
+
 - **Change control**: Formal processes for managing changes once phases are complete
+
 - **Predictable timeline**: Clear milestones and deliverables for project planning
 
 ### The Waterfall phases
@@ -75,15 +83,23 @@ note bottom : Each phase has formal review\nand approval before progression
 **Objective**: Gather, document, and validate all functional and non-functional requirements for the system.
 
 **Key activities:**
+
 - Stakeholder interviews and workshops
+
 - Business process analysis
+
 - Requirements documentation
+
 - Requirements validation and sign-off
 
 **Artefacts produced:**
+
 - Requirements Specification Document (RSD)
+
 - User acceptance criteria
+
 - System constraints and assumptions
+
 - Requirements traceability matrix
 
 ```python
@@ -321,16 +337,25 @@ if __name__ == "__main__":
 **Objective**: Transform requirements into detailed technical specifications and system architecture.
 
 **Key activities:**
+
 - System architecture design
+
 - Database design and data modeling
+
 - User interface design and wireframes
+
 - Technical specification documentation
 
 **Artefacts produced:**
+
 - System Architecture Document (SAD)
+
 - Database design specifications
+
 - User interface mockups and wireframes
+
 - Technical design specifications
+
 - Design review reports
 
 #### Phase 3: Implementation (Development)
@@ -338,16 +363,25 @@ if __name__ == "__main__":
 **Objective**: Code the system according to design specifications with minimal deviation from approved plans.
 
 **Key activities:**
+
 - Code development following design specifications
+
 - Unit testing during development
+
 - Code reviews and quality assurance
+
 - Documentation of code and modules
 
 **Artefacts produced:**
+
 - Source code with comprehensive comments
+
 - Unit test results and coverage reports
+
 - Code review documentation
+
 - Technical documentation for modules
+
 - Build and deployment scripts
 
 ---
@@ -359,43 +393,67 @@ Waterfall methodology emphasizes comprehensive documentation at each phase. Thes
 ### Requirements phase artefacts
 
 **Requirements Specification Document (RSD)**
+
 - Comprehensive listing of all functional and non-functional requirements
+
 - Acceptance criteria for each requirement
+
 - Requirements priority and traceability matrix
+
 - Stakeholder approval signatures
 
 **Business Analysis Document**
+
 - Current state analysis and gap identification
+
 - Business process maps and workflows
+
 - Cost-benefit analysis and ROI projections
+
 - Risk assessment and mitigation strategies
 
 ### Design phase artefacts
 
 **System Architecture Document (SAD)**
+
 - High-level system architecture and component relationships
+
 - Technology stack and platform decisions
+
 - Integration points and external dependencies
+
 - Performance and scalability considerations
 
 **Database Design Specification**
+
 - Entity-relationship diagrams (ERDs)
+
 - Table structures with field definitions
+
 - Index strategy and performance optimization
+
 - Data migration and backup procedures
 
 ### Implementation phase artefacts
 
 **Source Code Documentation**
+
 - Well-commented code following coding standards
+
 - API documentation and interface specifications
+
 - Module and component documentation
+
 - Build configuration and deployment guides
 
 **Testing Documentation**
+
 - Unit test cases and test results
+
 - Integration test plans and results
+
 - Test coverage reports and analysis
+
 - Defect tracking and resolution logs
 
 ---
@@ -407,21 +465,33 @@ Understanding when Waterfall is appropriate requires careful analysis of project
 ### Benefits of Waterfall methodology
 
 **Clear structure and predictability**
+
 - Well-defined phases with specific deliverables and milestones
+
 - Predictable timelines and resource requirements for project planning
+
 - Clear roles and responsibilities at each phase
+
 - Comprehensive documentation provides project transparency
 
 **Comprehensive documentation**
+
 - Detailed requirements capture reduces ambiguity and misunderstandings
+
 - Design specifications provide clear implementation guidance
+
 - Documentation serves as knowledge base for maintenance and future enhancements
+
 - Audit trail for compliance and regulatory requirements
 
 **Quality through formal reviews**
+
 - Phase-gate reviews ensure quality before progression
+
 - Formal approval processes reduce risk of scope creep
+
 - Systematic testing approach verifies all requirements are met
+
 - Early defect detection through structured review processes
 
 ```python
@@ -642,21 +712,33 @@ if __name__ == "__main__":
 ### Risks and challenges of Waterfall
 
 **Limited flexibility for changes**
+
 - Requirements changes late in the process are expensive and disruptive
+
 - Sequential nature makes it difficult to incorporate new insights
+
 - Client feedback is limited until late in the development cycle
+
 - Market conditions may change during long development cycles
 
 **Late integration and testing**
+
 - Problems are often discovered late in the process when they're expensive to fix
+
 - Integration issues may not surface until system testing phase
+
 - User acceptance testing happens at the end, risking major rework
+
 - Limited opportunity for early validation of assumptions
 
 **Resource and timeline risks**
+
 - Phase delays have cascading effects on the entire project timeline
+
 - Resource planning becomes difficult if earlier phases overrun
+
 - All-or-nothing delivery approach increases project failure risk
+
 - Long feedback cycles can lead to solutions that don't meet current needs
 
 ### When to use Waterfall
@@ -666,18 +748,27 @@ Waterfall methodology is most appropriate for projects with specific characteris
 **Ideal Waterfall project characteristics:**
 
 1. **Stable, well-understood requirements**: Requirements are unlikely to change significantly during development
+
 2. **Regulatory or compliance requirements**: Need for comprehensive documentation and audit trails
+
 3. **Experienced team**: Team has strong experience with the technology and domain
+
 4. **Clear project scope**: Project boundaries and deliverables are well-defined
+
 5. **Predictable technology**: Using mature, stable technologies with known capabilities
+
 6. **Risk-averse environment**: Organization values predictability over speed
 
 **Projects where Waterfall may not be suitable:**
 
 1. **Innovative or experimental projects**: High uncertainty about requirements or technical approach
+
 2. **Rapidly changing market conditions**: Requirements likely to evolve based on market feedback
+
 3. **User-facing applications**: Need for early and frequent user feedback
+
 4. **Tight deadlines**: Need for quick delivery or early value realization
+
 5. **Small teams or projects**: Overhead of documentation may outweigh benefits
 
 ---
@@ -689,8 +780,11 @@ Waterfall methodology is most appropriate for projects with specific characteris
 Choose a software project idea (different from Section 23.1 if possible) and create a detailed Waterfall project plan:
 
 1. **Phase breakdown**: Define the six Waterfall phases for your project with specific durations and milestones
+
 2. **Artefact identification**: List the key artefacts that will be produced in each phase
+
 3. **Review and approval process**: Design the review checkpoints and approval criteria for each phase gate
+
 4. **Risk assessment**: Identify potential risks in each phase and mitigation strategies
 
 **Expected outcome**: A comprehensive Waterfall project plan with clear phase gates and deliverables.
@@ -700,8 +794,11 @@ Choose a software project idea (different from Section 23.1 if possible) and cre
 Using the `WaterfallRequirementsPhase` class, complete a full requirements analysis:
 
 1. **Requirements gathering**: Document at least 8 requirements (functional and non-functional) for your chosen project
+
 2. **Acceptance criteria**: Define specific, testable acceptance criteria for each requirement
+
 3. **Stakeholder approval**: Simulate the review and approval process with multiple stakeholder roles
+
 4. **Phase completion verification**: Use the completion check to ensure readiness for the design phase
 
 **Expected outcome**: A completed Requirements Specification Document with stakeholder approvals.
@@ -711,13 +808,19 @@ Using the `WaterfallRequirementsPhase` class, complete a full requirements analy
 Evaluate Waterfall methodology for three different project scenarios:
 
 1. **Traditional enterprise system**: Large-scale system with well-defined requirements
+
 2. **Innovative startup product**: New product with uncertain market requirements
+
 3. **Government infrastructure project**: High-security system with strict compliance requirements
 
 For each project, use the `WaterfallBenefitsAnalysis` class to:
+
 - Assess project characteristics and organizational factors
+
 - Calculate suitability scores and recommendations
+
 - Identify key benefits and risks for each scenario
+
 - Justify your methodology recommendation
 
 **Expected outcome**: Three detailed suitability analyses with clear recommendations and justifications.
@@ -769,21 +872,29 @@ This section explored the Waterfall methodology as a sequential software develop
 **Waterfall Structure:**
 
 - **Sequential phases**: Requirements → Design → Implementation → Testing → Deployment → Maintenance
+
 - **Phase gates**: Formal reviews and approvals required before progression to next phase
+
 - **Comprehensive documentation**: Detailed artefacts produced at each phase for traceability
+
 - **Change control**: Formal processes for managing changes once phases are approved
 
 **Key Artefacts:**
 
 - **Requirements Specification Document (RSD)**: Comprehensive requirements with acceptance criteria
+
 - **System Architecture Document (SAD)**: Technical design and system specifications
+
 - **Source code documentation**: Well-commented code with comprehensive technical documentation
+
 - **Test documentation**: Complete test plans, results, and defect tracking
 
 **Suitability Assessment:**
 
 - **Ideal for**: Stable requirements, regulatory compliance, experienced teams, predictable technology
+
 - **Challenges with**: Changing requirements, tight deadlines, innovative projects, user-facing applications
+
 - **Risk management**: Early planning reduces later risks but limits flexibility for changes
 
 **Next Steps**: In Section 24.2, we'll explore the Agile methodology and how it addresses some of Waterfall's limitations through iterative development and continuous feedback.

@@ -7,10 +7,15 @@
 By the end of this section, you will be able to:
 
 - Create project plans using Gantt charts and other project management tools
+
 - Identify and manage task dependencies in software development projects
+
 - Track project progress and identify potential delays or bottlenecks
+
 - Use project management software to coordinate team activities and resources
+
 - Apply critical path analysis to optimize project timelines
+
 - Communicate project status effectively to stakeholders using visual tools
 
 ---
@@ -22,9 +27,13 @@ Project management tools are essential for coordinating complex software develop
 **Core project management concepts:**
 
 - **Work breakdown structure (WBS)**: Breaking large projects into manageable tasks
+
 - **Task dependencies**: Understanding how tasks relate to and depend on each other
+
 - **Resource allocation**: Assigning people, time, and tools to specific tasks
+
 - **Critical path**: The sequence of tasks that determines the minimum project duration
+
 - **Progress tracking**: Monitoring actual progress against planned timelines
 
 ### Work breakdown structure fundamentals
@@ -34,8 +43,11 @@ The work breakdown structure forms the foundation of effective project planning 
 **WBS principles:**
 
 1. **Hierarchical decomposition**: Break projects into phases, then into tasks, then into subtasks
+
 2. **100% rule**: The sum of all child tasks must equal 100% of the parent task
+
 3. **Mutually exclusive**: Each task should be distinct with no overlap
+
 4. **Deliverable-oriented**: Focus on what will be produced, not how it will be done
 
 ```python
@@ -371,10 +383,15 @@ Gantt charts provide visual representation of project schedules, showing tasks, 
 **Key components of Gantt charts:**
 
 - **Task bars**: Horizontal bars representing task duration and timing
+
 - **Timeline**: Time scale showing project duration (days, weeks, months)
+
 - **Dependencies**: Lines or arrows showing relationships between tasks
+
 - **Milestones**: Important project checkpoints or deliverables
+
 - **Progress indicators**: Visual representation of task completion status
+
 - **Resource assignments**: Information about who is responsible for each task
 
 ### Creating effective Gantt charts
@@ -757,15 +774,21 @@ Effective project tracking involves regularly monitoring progress against planne
 **Schedule performance indicators:**
 
 - **Schedule variance (SV)**: Difference between planned and actual progress
+
 - **Schedule performance index (SPI)**: Ratio of work completed to work planned
+
 - **Critical path analysis**: Monitoring tasks that directly impact project completion
+
 - **Milestone tracking**: Progress toward key project deliverables
 
 **Resource utilization metrics:**
 
 - **Resource allocation**: How team members' time is distributed across tasks
+
 - **Workload balancing**: Ensuring no team member is over or under-utilized
+
 - **Skill gap identification**: Identifying areas where additional expertise is needed
+
 - **Capacity planning**: Forecasting future resource needs
 
 ```python
@@ -1142,19 +1165,25 @@ Various software tools are available to support project management activities, e
 **Traditional project management software:**
 
 - **Microsoft Project**: Comprehensive project planning with advanced Gantt charts and resource management
+
 - **Primavera P6**: Enterprise-level project management for large, complex projects
+
 - **ProjectLibre**: Open-source alternative to Microsoft Project
 
 **Agile and collaborative tools:**
 
 - **Jira**: Issue tracking and agile project management, especially popular for software development
+
 - **Trello**: Kanban-style boards for visual task management
+
 - **Asana**: Task and project management with team collaboration features
 
 **Cloud-based project management platforms:**
 
 - **Monday.com**: Visual project management with customizable workflows
+
 - **Smartsheet**: Spreadsheet-like interface with project management capabilities
+
 - **Basecamp**: Simple project management focused on communication and collaboration
 
 ### Tool selection criteria
@@ -1162,10 +1191,15 @@ Various software tools are available to support project management activities, e
 **Project characteristics to consider:**
 
 1. **Project size and complexity**: Simple tools for small projects, comprehensive tools for complex ones
+
 2. **Team size and distribution**: Consider whether team is co-located or distributed
+
 3. **Methodology alignment**: Ensure tool supports your chosen development methodology (Waterfall, Agile, etc.)
+
 4. **Integration needs**: Compatibility with existing tools and systems
+
 5. **Budget constraints**: Consider both initial and ongoing costs
+
 6. **Learning curve**: How quickly can team members become productive with the tool
 
 **Evaluation framework for tool selection:**
@@ -1378,9 +1412,13 @@ if __name__ == "__main__":
 Choose a software development project and create a detailed project plan:
 
 1. **Work breakdown structure**: Break the project into phases, tasks, and subtasks using the `WorkBreakdownStructure` class
+
 2. **Dependency mapping**: Identify and document task dependencies
+
 3. **Resource allocation**: Assign team members or roles to each task
+
 4. **Timeline estimation**: Estimate durations and create a realistic project timeline
+
 5. **Critical path analysis**: Identify the critical path and potential bottlenecks
 
 **Expected outcome**: A complete WBS with critical path analysis and resource assignments.
@@ -1390,9 +1428,13 @@ Choose a software development project and create a detailed project plan:
 Using the project from Task 1, create a comprehensive Gantt chart:
 
 1. **Task scheduling**: Use the `GanttChart` class to schedule all project tasks
+
 2. **Milestone identification**: Add key project milestones and deliverables
+
 3. **Resource management**: Add project resources and track utilization
+
 4. **Progress simulation**: Simulate project progress and update task completions
+
 5. **Report generation**: Generate progress reports and identify potential issues
 
 **Expected outcome**: A functional Gantt chart with progress tracking and reporting capabilities.
@@ -1402,9 +1444,13 @@ Using the project from Task 1, create a comprehensive Gantt chart:
 Implement project monitoring and evaluate appropriate tools:
 
 1. **Tracking system**: Use the `ProjectTracker` class to monitor project progress over several simulated weeks
+
 2. **Alert management**: Configure alerts for schedule delays, resource issues, and quality problems
+
 3. **Performance metrics**: Calculate project velocity and schedule adherence
+
 4. **Tool evaluation**: Use the `ProjectManagementToolEvaluator` to select appropriate tools for your project context
+
 5. **Weekly reporting**: Generate comprehensive weekly progress reports
 
 **Expected outcome**: A complete project monitoring system with tool recommendations and regular reporting.
@@ -1455,28 +1501,39 @@ This section explored project management tools and techniques essential for soft
 **Project Planning Fundamentals:**
 
 - **Work breakdown structure**: Systematic decomposition of projects into manageable tasks
+
 - **Task dependencies**: Understanding and managing relationships between project activities
+
 - **Resource allocation**: Assigning appropriate people and tools to project tasks
+
 - **Critical path analysis**: Identifying the sequence of tasks that determines project duration
 
 **Gantt Charts and Visualization:**
 
 - **Visual project representation**: Clear timeline views showing task durations and dependencies
+
 - **Progress tracking**: Visual indicators of task completion and project status
+
 - **Resource management**: Tracking team member assignments and workload distribution
+
 - **Milestone management**: Key project checkpoints and deliverable tracking
 
 **Project Monitoring and Control:**
 
 - **Performance metrics**: Schedule variance, resource utilization, and quality indicators
+
 - **Alert systems**: Early warning systems for potential project issues
+
 - **Velocity tracking**: Measuring team productivity and project momentum
+
 - **Regular reporting**: Systematic communication of project status to stakeholders
 
 **Tool Selection and Management:**
 
 - **Tool evaluation criteria**: Factors to consider when selecting project management software
+
 - **Context-appropriate selection**: Matching tools to project size, methodology, and team needs
+
 - **Integration considerations**: Ensuring tools work well with existing systems and processes
 
 **Next Steps**: In Section 24.5, we'll explore social, ethical, and communication issues that are crucial for successful stakeholder engagement and project governance.

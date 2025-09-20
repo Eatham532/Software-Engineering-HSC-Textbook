@@ -7,10 +7,15 @@
 By the end of this section, you will be able to:
 
 - Analyse different audience types and tailor presentations to their specific needs and interests
+
 - Develop compelling narratives that effectively communicate the value and impact of software solutions
+
 - Create and deliver engaging demonstrations that showcase software functionality
+
 - Structure presentations to guide audiences from problem understanding to solution acceptance
+
 - Use visual aids, storytelling techniques, and interactive elements to enhance presentation effectiveness
+
 - Handle questions, objections, and feedback during solution presentations
 
 ---
@@ -22,8 +27,11 @@ Effective solution presentations begin with deep understanding of who you're pre
 **Primary audience categories:**
 
 - **Technical stakeholders**: Developers, system administrators, IT managers who focus on implementation details
+
 - **Business stakeholders**: Executives, product managers, department heads who focus on business value and ROI
+
 - **End users**: People who will directly interact with the solution and care about usability and functionality
+
 - **Decision makers**: Those with authority to approve, fund, or reject the solution
 
 ### Audience analysis framework
@@ -355,9 +363,13 @@ A strong narrative transforms a technical presentation into a compelling story t
 **Classic narrative arc adapted for software solutions:**
 
 1. **Setting the scene**: Current state and stakeholder challenges
+
 2. **Introducing the conflict**: Problems that need to be solved
+
 3. **The journey**: Development and implementation process
+
 4. **The resolution**: How the solution addresses the problems
+
 5. **The transformation**: Future state and ongoing benefits
 
 ```kroki-plantuml
@@ -1261,10 +1273,15 @@ if __name__ == "__main__":
     open: false
 
 You're preparing to present a new student information system to a mixed audience that includes:
+
 - Principal and vice principal
+
 - IT manager and support staff  
+
 - Department heads from English, Math, Science
+
 - Parent representatives
+
 - School board members
 
 Create an audience analysis using the framework provided. Consider their different perspectives, concerns, and influence levels. Plan how you would structure a 45-minute presentation to address all stakeholder groups effectively.
@@ -1327,18 +1344,29 @@ analysis.add_audience_segment(
 ```
 
 **45-Minute Presentation Structure:**
+
 1. Opening (4 min): Current challenges affecting all stakeholders
+
 2. Problem Context (7 min): Quantified impacts on efficiency and outcomes  
+
 3. Solution Overview (11 min): High-level capabilities with technical architecture summary
+
 4. Live Demonstration (14 min): Key workflows for each stakeholder group
+
 5. Benefits Analysis (7 min): ROI, efficiency gains, and risk mitigation
+
 6. Q&A and Next Steps (2 min): Address concerns and outline implementation plan
 
 **Key Messages by Audience:**
+
 - Executive Leadership: "20% reduction in administrative overhead, improved student outcomes"
+
 - IT Department: "Seamless integration, enhanced security, reduced support burden"  
+
 - Department Heads: "Teachers save 5+ hours weekly, better student progress tracking"
+
 - Parent Representatives: "Real-time access to student information, improved communication"
+
 - School Board: "3-year ROI of 300%, compliance benefits, scalable solution"
 ///
 ///
@@ -1352,8 +1380,11 @@ analysis.add_audience_segment(
 Develop a compelling narrative for presenting a library management system to library staff and city council members. Your narrative should follow the story structure framework and include:
 
 1. Current state challenges that create emotional connection
+
 2. Solution development journey that builds credibility
+
 3. Solution capabilities with concrete examples
+
 4. Future vision that motivates action
 
 Use the `PresentationNarrative` class to structure your story and generate a presentation script.
@@ -1448,10 +1479,15 @@ narrative.set_future_vision(
 ```
 
 **Key Narrative Elements:**
+
 - **Opening Hook**: "Imagine if every patron interaction could be completed in 30 seconds instead of 5 minutes"
+
 - **Emotional Connection**: Frustration with unreliable systems during busy periods
+
 - **Credibility Builder**: Real library collaboration in development process
+
 - **Concrete Evidence**: Specific time savings and efficiency improvements
+
 - **Motivating Vision**: Library as exemplar of modern, efficient public service
 ///
 ///
@@ -1465,8 +1501,11 @@ narrative.set_future_vision(
 Plan a 20-minute demonstration of a restaurant point-of-sale system for restaurant owners and staff. Your demonstration should include:
 
 1. Three distinct user scenarios showing different workflows
+
 2. Technical setup requirements and risk mitigation
+
 3. Audience engagement opportunities throughout
+
 4. Fallback plans for potential technical issues
 
 Use the `DemonstrationPlanner` class to create a comprehensive demo plan.
@@ -1601,18 +1640,29 @@ demo.plan_audience_engagement(
 ```
 
 **Engagement Schedule:**
+
 - **0-2 min**: "Who has waited too long for their order to reach the kitchen?"
+
 - **3-5 min**: Ask audience member to suggest a complex order with modifications
+
 - **8-10 min**: "What payment methods do your customers prefer?"
+
 - **12-15 min**: Have audience member experience customer payment flow
+
 - **16-18 min**: "What's the first report you'd check each morning?"
+
 - **18-20 min**: Open discussion about specific operational challenges
 
 **Risk Mitigation Summary:**
+
 - Multiple backup plans for each technical component
+
 - Offline demo capabilities for connectivity issues
+
 - Pre-recorded segments for critical workflow demonstrations
+
 - Technical support person available during presentation
+
 - Comprehensive pre-demo testing checklist
 ///
 ///
@@ -1632,10 +1682,15 @@ In this section, you learned how to create compelling presentations for software
 **Key principles for effective solution presentations:**
 
 - Match technical depth to audience expertise and decision-making needs
+
 - Use storytelling techniques to make technical content memorable and persuasive  
+
 - Plan demonstrations carefully with fallback options for technical issues
+
 - Engage audiences actively through questions, interactions, and relevant scenarios
+
 - Focus on business value and stakeholder benefits rather than just technical features
+
 - Prepare for different types of questions and objections from various stakeholder groups
 
 Effective solution presentations combine thorough preparation, audience-centered content, and engaging delivery to transform technical solutions into compelling business cases that stakeholders can understand, evaluate, and act upon confidently.

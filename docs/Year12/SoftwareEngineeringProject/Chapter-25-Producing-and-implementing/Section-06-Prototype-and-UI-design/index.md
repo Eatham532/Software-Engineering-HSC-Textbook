@@ -7,10 +7,15 @@
 By the end of this section, you will be able to:
 
 - Create wireframes and prototypes to communicate design concepts and user flows
+
 - Apply usability principles to design intuitive and effective user interfaces
+
 - Implement accessibility guidelines to ensure software solutions are inclusive and compliant
+
 - Evaluate UI designs through user testing and iterative improvement processes
+
 - Use prototyping tools and techniques to validate design decisions before implementation
+
 - Design responsive interfaces that work across different devices and screen sizes
 
 ---
@@ -26,8 +31,11 @@ Wireframes and prototypes are essential tools in software design that help teams
 **Key characteristics of effective wireframes:**
 
 - **Simple and clear**: Use basic shapes, lines, and placeholder text
+
 - **Functional focus**: Show what elements exist and where they're positioned
+
 - **Hierarchy emphasis**: Demonstrate information importance and user flow
+
 - **Annotation ready**: Include space for notes and explanations
 
 ```kroki-plantuml
@@ -523,14 +531,23 @@ Usability determines how effectively and efficiently users can accomplish their 
 **Jakob Nielsen's 10 Usability Heuristics** provide foundational guidelines for creating usable interfaces:
 
 1. **Visibility of system status**: Keep users informed about what's happening
+
 2. **Match between system and real world**: Use familiar concepts and language
+
 3. **User control and freedom**: Provide clear ways to undo and escape
+
 4. **Consistency and standards**: Follow platform conventions and internal consistency
+
 5. **Error prevention**: Design to prevent problems before they occur
+
 6. **Recognition rather than recall**: Make information and options visible
+
 7. **Flexibility and efficiency**: Support both novice and expert users
+
 8. **Aesthetic and minimalist design**: Remove irrelevant information
+
 9. **Help users recognize and recover from errors**: Provide clear error messages
+
 10. **Help and documentation**: Offer easily searchable assistance
 
 ```python
@@ -1006,8 +1023,11 @@ Accessibility ensures that software interfaces can be used by people with divers
 **WCAG 2.1** provides comprehensive guidelines organized around four principles (POUR):
 
 1. **Perceivable**: Information must be presentable in ways users can perceive
+
 2. **Operable**: Interface components must be operable by all users
+
 3. **Understandable**: Information and UI operation must be understandable
+
 4. **Robust**: Content must be robust enough for various assistive technologies
 
 ```python
@@ -1605,9 +1625,13 @@ if __name__ == "__main__":
     open: false
 
 Create wireframes for a student information system mobile app that allows students to:
+
 - View current grades and progress
+
 - Check upcoming assignments and due dates
+
 - Access class schedules and room information
+
 - Communicate with teachers
 
 Design wireframes for three key screens using the `WireframeDesigner` class. Consider responsive design, user flows, and platform-specific guidelines for mobile interfaces.
@@ -1701,11 +1725,17 @@ designer.create_wireframe(
 ```
 
 **Key Design Decisions:**
+
 - **Single Column Layout**: Optimized for mobile viewing and scrolling
+
 - **Card-Based Interface**: Information is grouped logically and scannable
+
 - **Color-Coded Urgency**: Red/yellow/green system for assignment status
+
 - **Bottom Navigation**: Thumb-friendly navigation following mobile conventions
+
 - **Pull-to-Refresh**: Standard mobile interaction for data updates
+
 - **Accessibility Focus**: High contrast, large touch targets, screen reader support
 ///
 ///
@@ -1719,8 +1749,11 @@ designer.create_wireframe(
 Conduct a comprehensive usability evaluation of a digital library system interface using Nielsen's heuristics. The system allows users to search for books, place holds, renew items, and access digital resources.
 
 Focus on three key heuristics:
+
 1. Visibility of system status
+
 2. Error prevention  
+
 3. Recognition rather than recall
 
 Use the `UsabilityEvaluator` class to structure your evaluation and provide specific recommendations for improvement.
@@ -1810,10 +1843,15 @@ usability_test = evaluator.conduct_usability_test(
 ```
 
 **Key Recommendations:**
+
 1. **Improve Status Visibility**: Add progress indicators for search operations, provide session timeout warnings
+
 2. **Enhance Error Prevention**: Add confirmations for destructive actions, show password requirements upfront
+
 3. **Better Recognition Support**: Make advanced search options more discoverable, provide contextual help
+
 4. **Streamline Workflows**: Reduce steps in common tasks like renewals and holds
+
 5. **Accessibility Improvements**: Ensure all status changes are announced to screen readers
 ///
 ///
@@ -1827,9 +1865,13 @@ usability_test = evaluator.conduct_usability_test(
 Create an accessibility implementation plan for an e-commerce website's checkout process. The process includes product selection, cart management, shipping information, payment details, and order confirmation.
 
 Use the `AccessibilityAuditor` class to:
+
 1. Audit the checkout flow for WCAG 2.1 AA compliance
+
 2. Identify critical accessibility violations
+
 3. Plan implementation of accessibility features
+
 4. Create a prioritized implementation checklist
 
 Focus on ensuring the checkout process is usable by people with visual, motor, and cognitive disabilities.
@@ -1959,15 +2001,23 @@ checklist = auditor.create_implementation_checklist(priority_features)
 ```
 
 **Implementation Timeline:**
+
 - **Phase 1 (Weeks 1-2)**: Enhanced Form Accessibility and Color Contrast Compliance
+
 - **Phase 2 (Weeks 3-4)**: Dynamic Content Management and Focus Management 
+
 - **Phase 3 (Weeks 5-6)**: Motor Accessibility Enhancements and Alternative Text
+
 - **Phase 4 (Week 7)**: Testing and validation with assistive technology users
 
 **Success Metrics:**
+
 - 100% keyboard accessibility for checkout process
+
 - WCAG 2.1 AA compliance across all checkout steps
+
 - User testing shows 90%+ task completion for users with disabilities
+
 - Zero critical accessibility violations in automated testing
 ///
 ///
@@ -1987,11 +2037,17 @@ In this section, you learned how to create effective prototypes and user interfa
 **Key principles for effective UI design:**
 
 - Start with user needs and business goals, not visual aesthetics
+
 - Use wireframes to establish information architecture before detailed design
+
 - Apply usability heuristics systematically to identify and fix interface problems
+
 - Implement accessibility features from the beginning, not as an afterthought
+
 - Test designs with real users, including those who use assistive technologies
+
 - Iterate based on feedback and usability testing results
+
 - Maintain consistency in design patterns and interaction behaviors
 
 **Integration with software engineering process:**

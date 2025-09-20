@@ -13,9 +13,13 @@ A comprehensive testing strategy defines how, when, and what to test throughout 
 Key components of a testing strategy:
 
 - **Test objectives**: What the testing aims to achieve
+
 - **Test scope**: What will and won't be tested
+
 - **Test approaches**: Methods and techniques to be used
+
 - **Test environments**: Hardware, software, and data requirements
+
 - **Test schedule**: Timeline and milestones for testing activities
 
 ```kroki-plantuml
@@ -151,7 +155,8 @@ class TestCase:
         self.actual_result = actual_result
         self.execution_date = date.today()
         
-        # Simple pass/fail logic
+        ## Simple pass/fail logic
+
         if "pass" in actual_result.lower() or "success" in actual_result.lower():
             self.status = TestStatus.PASSED
         elif "fail" in actual_result.lower() or "error" in actual_result.lower():
@@ -225,15 +230,19 @@ class TestPlan:
         by_priority = {}
         
         for test_case in self.test_cases:
-            # Count by type
+
+            ## Count by type
+
             test_type = test_case.test_type.value
             by_type[test_type] = by_type.get(test_type, 0) + 1
             
-            # Count by status
+            ## Count by status
+
             status = test_case.status.value
             by_status[status] = by_status.get(status, 0) + 1
             
-            # Count by priority
+            ## Count by priority
+
             priority = test_case.priority.value
             by_priority[priority] = by_priority.get(priority, 0) + 1
         
@@ -250,20 +259,24 @@ class TestPlan:
             "completion_percentage": round((by_status.get("passed", 0) / max(total_tests, 1)) * 100, 1)
         }
 
-# Example test plan creation
+## Example test plan creation
+
 test_plan = TestPlan("Student Portal", "v2.0", "Sarah Johnson")
 
-# Add entry criteria
+## Add entry criteria
+
 test_plan.add_entry_criteria("All development features completed")
 test_plan.add_entry_criteria("Test environment setup completed")
 test_plan.add_entry_criteria("Test data prepared and validated")
 
-# Add exit criteria
+## Add exit criteria
+
 test_plan.add_exit_criteria("All high priority test cases passed")
 test_plan.add_exit_criteria("No critical or high severity bugs remaining")
 test_plan.add_exit_criteria("Performance benchmarks met")
 
-# Create sample test cases
+## Create sample test cases
+
 login_test = TestCase("TC001", "User Login Functionality", TestType.FUNCTIONAL, TestPriority.HIGH)
 login_test.add_test_step(1, "Navigate to login page", "Login form displays")
 login_test.add_test_step(2, "Enter valid credentials", "User successfully logged in")
@@ -281,18 +294,21 @@ performance_test.add_test_step(1, "Load homepage", "Page loads within 2 seconds"
 performance_test.add_test_step(2, "Navigate to student dashboard", "Dashboard loads within 3 seconds")
 performance_test.estimated_duration = 45
 
-# Add test cases to plan
+## Add test cases to plan
+
 test_plan.add_test_case(login_test)
 test_plan.add_test_case(integration_test)
 test_plan.add_test_case(performance_test)
 
-# Add risk
+## Add risk
+
 test_plan.add_risk(
     "Test environment may be unstable",
     "Backup test environment prepared and monitoring implemented"
 )
 
-# Generate summary
+## Generate summary
+
 summary = test_plan.generate_test_summary()
 print(f"Test Plan Summary: {summary}")
 ```
@@ -398,19 +414,24 @@ class IntegrationTest(BaseTest):
         self.integration_function = integration_function
     
     def execute(self):
-        # Verify all components are available
+
+        ## Verify all components are available
+
         for component in self.components:
             if not self.check_component_availability(component):
                 self.result.error_message = f"Component {component} not available"
                 return False
         
-        # Execute integration test
+        ## Execute integration test
+
         result = self.integration_function()
         self.result.add_metric("components_tested", len(self.components))
         return result
     
     def check_component_availability(self, component):
-        # Simulate component availability check
+
+        ## Simulate component availability check
+
         return random.choice([True, True, True, False])  # 75% availability
 
 class NonFunctionalTest(BaseTest):
@@ -429,7 +450,8 @@ class NonFunctionalTest(BaseTest):
         self.result.add_metric(self.metric_name, duration)
         self.result.add_metric("threshold", self.threshold)
         
-        # Check if performance meets threshold
+        ## Check if performance meets threshold
+
         if self.metric_name == "response_time":
             return duration <= self.threshold
         elif self.metric_name == "memory_usage":
@@ -477,38 +499,50 @@ class TestSuite:
             "failed_tests": [r.test_name for r in self.results if r.status == "failed"]
         }
 
-# Example test implementations
+## Example test implementations
+
 def login_function():
-    # Simulate login process
+
+    ## Simulate login process
+
     time.sleep(0.1)  # Simulate processing time
     return "login_success"
 
 def database_integration():
-    # Simulate database operation
+
+    ## Simulate database operation
+
     time.sleep(0.2)
     return random.choice([True, True, False])  # 67% success rate
 
 def performance_function():
-    # Simulate performance test
+
+    ## Simulate performance test
+
     time.sleep(random.uniform(0.1, 0.3))
     return True
 
-# Create test suite
+## Create test suite
+
 suite = TestSuite("Student Portal Test Suite")
 
-# Add functional test
+## Add functional test
+
 login_test = FunctionalTest("User Login", login_function, "login_success")
 suite.add_test(login_test)
 
-# Add integration test
+## Add integration test
+
 db_test = IntegrationTest("Database Integration", ["database", "auth_service"], database_integration)
 suite.add_test(db_test)
 
-# Add non-functional test
+## Add non-functional test
+
 perf_test = NonFunctionalTest("Response Time", performance_function, 0.25, "response_time")
 suite.add_test(perf_test)
 
-# Run tests and generate report
+## Run tests and generate report
+
 report = suite.run_all_tests()
 print(f"Test Suite Report: {report}")
 ```
@@ -521,8 +555,11 @@ Effective test data selection ensures comprehensive coverage of code paths and e
 Key principles for test data selection:
 
 - **Equivalence partitioning**: Group inputs into classes that should behave similarly
+
 - **Boundary value analysis**: Test values at the edges of input domains
+
 - **Path coverage**: Ensure all code branches are executed during testing
+
 - **Edge cases**: Test unusual or extreme conditions that might cause failures
 
 ```tabbed
@@ -596,7 +633,8 @@ class TestDataGenerator:
         """Generate boundary test values for string inputs"""
         boundary_strings = []
         
-        # Generate strings of various lengths
+        ## Generate strings of various lengths
+
         test_lengths = [0, 1, min_length - 1, min_length, min_length + 1, 
                        max_length - 1, max_length, max_length + 1]
         
@@ -624,7 +662,8 @@ class TestDataGenerator:
                 "valid": valid
             })
         
-        # Add special characters and edge cases
+        ## Add special characters and edge cases
+
         special_cases = [
             {"value": "", "length": 0, "type": BoundaryType.BELOW_MIN, "valid": min_length == 0},
             {"value": "   ", "length": 3, "type": BoundaryType.TYPICAL, "valid": min_length <= 3 <= max_length},
@@ -665,7 +704,8 @@ class PathTestGenerator:
         """Generate test data to cover different decision paths"""
         paths = []
         
-        # Generate all combinations of true/false for conditions
+        ## Generate all combinations of true/false for conditions
+
         num_conditions = len(conditions)
         for i in range(2 ** num_conditions):
             path = {}
@@ -691,25 +731,29 @@ class PathTestGenerator:
         
         return loop_tests
 
-# Example usage for student grade system
+## Example usage for student grade system
+
 def test_grade_validation():
     generator = TestDataGenerator()
     
-    # Generate numeric boundaries for grades (0-100)
+    ## Generate numeric boundaries for grades (0-100)
+
     grade_boundaries = generator.generate_numeric_boundaries(0, 100, "integer")
     
     print("Grade Boundary Test Data:")
     for data in grade_boundaries:
         print(f"  Grade: {data['value']}, Type: {data['type'].value}, Valid: {data['valid']}")
     
-    # Generate string boundaries for student names (2-50 characters)
+    ## Generate string boundaries for student names (2-50 characters)
+
     name_boundaries = generator.generate_string_boundaries(2, 50)
     
     print("\\nName Boundary Test Data:")
     for data in name_boundaries[:5]:  # Show first 5 examples
         print(f"  Name: '{data['value']}', Length: {data['length']}, Valid: {data['valid']}")
     
-    # Generate path tests for grade calculation logic
+    ## Generate path tests for grade calculation logic
+
     path_generator = PathTestGenerator()
     grade_conditions = ["is_numeric", "in_range", "is_passing"]
     decision_paths = path_generator.generate_decision_paths(grade_conditions)
@@ -718,7 +762,8 @@ def test_grade_validation():
     for i, path in enumerate(decision_paths[:4]):  # Show first 4 paths
         print(f"  Path {i+1}: {path}")
 
-# Run example
+## Run example
+
 test_grade_validation()
 ```
 ```
@@ -730,10 +775,15 @@ Test cases provide detailed instructions for verifying specific functionality, w
 Components of effective test cases:
 
 - **Test case ID**: Unique identifier for tracking and reference
+
 - **Test objective**: Clear description of what is being tested
+
 - **Prerequisites**: Conditions that must be met before test execution
+
 - **Test steps**: Detailed actions to perform during testing
+
 - **Expected results**: Anticipated outcomes for each test step
+
 - **Test data**: Specific inputs required for test execution
 
 ```tabbed
@@ -747,8 +797,11 @@ Test Objective: [What this test aims to verify]
 Prerequisites: [Setup requirements and preconditions]
 Test Data: [Specific inputs needed for the test]
 Test Steps:
+
   1. [Action] → Expected: [Result]
+
   2. [Action] → Expected: [Result]
+
   3. [Action] → Expected: [Result]
 Pass Criteria: [Conditions for test success]
 Fail Criteria: [Conditions indicating test failure]
@@ -863,12 +916,16 @@ class DetailedTestCase:
         total_steps = len(self.test_steps)
         
         for step in self.test_steps:
-            # Simulate step execution
+
+            ## Simulate step execution
+
             if step.step_type == TestStepType.SETUP:
                 step.execute_step(step.expected_result, "Setup completed")
                 passed_steps += 1
             elif step.step_type == TestStepType.ACTION:
-                # Simulate action with some chance of failure
+
+                ## Simulate action with some chance of failure
+
                 import random
                 success = random.choice([True, True, True, False])  # 75% success rate
                 result = step.expected_result if success else "Unexpected result"
@@ -879,7 +936,8 @@ class DetailedTestCase:
                 step.execute_step(step.expected_result, "Verification completed")
                 passed_steps += 1
         
-        # Determine overall test result
+        ## Determine overall test result
+
         if passed_steps == total_steps:
             self.execution_status = "passed"
         else:
@@ -916,7 +974,8 @@ class DetailedTestCase:
             "criteria_met": self.check_acceptance_criteria()
         }
 
-# Example: Student login test case
+## Example: Student login test case
+
 login_test = DetailedTestCase(
     "TC_AUTH_LOGIN_001",
     "Student Login with Valid Credentials",
@@ -925,16 +984,19 @@ login_test = DetailedTestCase(
     "Login"
 )
 
-# Add prerequisites
+## Add prerequisites
+
 login_test.add_prerequisite("Student account exists in the system")
 login_test.add_prerequisite("Login page is accessible")
 login_test.add_prerequisite("Test database is available")
 
-# Add test data
+## Add test data
+
 login_test.add_test_data("username", "student@school.edu", "Valid student email")
 login_test.add_test_data("password", "SecurePass123!", "Valid password meeting requirements")
 
-# Add test steps
+## Add test steps
+
 login_test.add_test_step(TestStepType.SETUP, "Navigate to login page", "Login form displays correctly")
 login_test.add_test_step(TestStepType.ACTION, "Enter valid username", "Username accepted in field")
 login_test.add_test_step(TestStepType.ACTION, "Enter valid password", "Password masked in field")
@@ -942,7 +1004,8 @@ login_test.add_test_step(TestStepType.ACTION, "Click login button", "Login proce
 login_test.add_test_step(TestStepType.VERIFICATION, "Check redirect to dashboard", "Student dashboard loads")
 login_test.add_test_step(TestStepType.VERIFICATION, "Verify user session", "User session established")
 
-# Add acceptance criteria
+## Add acceptance criteria
+
 criteria1 = AcceptanceCriteria("AC_001", "User can login with valid credentials", "Successful redirect to dashboard")
 criteria2 = AcceptanceCriteria("AC_002", "Session is maintained after login", "User remains logged in for 30 minutes")
 criteria3 = AcceptanceCriteria("AC_003", "Appropriate error handling", "Clear error messages for invalid attempts")
@@ -951,7 +1014,8 @@ login_test.add_acceptance_criteria(criteria1)
 login_test.add_acceptance_criteria(criteria2)
 login_test.add_acceptance_criteria(criteria3)
 
-# Execute test and generate report
+## Execute test and generate report
+
 result = login_test.execute_test_case()
 report = login_test.generate_test_report()
 
@@ -1010,7 +1074,9 @@ class AutomatedTestSuite:
     def setup_driver(self, browser="chrome"):
         """Initialize web driver for automated testing"""
         if browser == "chrome":
-            # In practice, you'd configure ChromeDriver properly
+
+            ## In practice, you'd configure ChromeDriver properly
+
             self.driver = None  # Placeholder for actual driver
         self.log_action("Driver setup completed")
     
@@ -1037,7 +1103,9 @@ class AutomatedTestSuite:
         self.log_action(f"Starting {test_name}")
         
         try:
-            # Simulate automated actions
+
+            ## Simulate automated actions
+
             self.log_action("Navigate to login page")
             time.sleep(0.1)  # Simulate page load
             
@@ -1050,7 +1118,8 @@ class AutomatedTestSuite:
             self.log_action("Click login button")
             time.sleep(0.1)
             
-            # Simulate success/failure
+            ## Simulate success/failure
+
             if username == "valid@user.com" and password == "correctpass":
                 self.log_action("Login successful - redirected to dashboard")
                 return True
@@ -1093,7 +1162,8 @@ class ManualTestManager:
             "screenshot": f"screenshot_{int(time.time())}.png"
         }
         
-        # Find session and add finding
+        ## Find session and add finding
+
         for session in self.manual_tests:
             if session["session_id"] == session_id:
                 if finding_type == "bug":
@@ -1142,7 +1212,8 @@ class TestStrategy:
         score_automated = 0
         score_manual = 0
         
-        # Frequency scoring
+        ## Frequency scoring
+
         if frequency in ["daily", "every_build"]:
             score_automated += 3
         elif frequency == "weekly":
@@ -1150,19 +1221,22 @@ class TestStrategy:
         else:
             score_manual += 1
         
-        # Complexity scoring
+        ## Complexity scoring
+
         if complexity == "simple":
             score_automated += 2
         elif complexity == "complex":
             score_manual += 2
         
-        # User interaction scoring
+        ## User interaction scoring
+
         if user_interaction:
             score_manual += 2
         else:
             score_automated += 1
         
-        # Generate recommendation
+        ## Generate recommendation
+
         if score_automated > score_manual:
             recommendation = "automated"
             reason = "High frequency, suitable complexity for automation"
@@ -1181,13 +1255,17 @@ class TestStrategy:
             "manual_score": score_manual
         }
 
-# Example usage
+## Example usage
+
 def demonstrate_testing_approaches():
-    # Automated testing example
+
+    ## Automated testing example
+
     automated_suite = AutomatedTestSuite("http://localhost:3000")
     automated_suite.setup_driver()
     
-    # Run automated login tests
+    ## Run automated login tests
+
     test_cases = [
         ("valid@user.com", "correctpass"),
         ("invalid@user.com", "wrongpass"),
@@ -1202,7 +1280,8 @@ def demonstrate_testing_approaches():
     
     automated_suite.teardown_driver()
     
-    # Manual testing example
+    ## Manual testing example
+
     print("\\n=== Manual Test Session ===")
     manual_manager = ManualTestManager()
     
@@ -1212,7 +1291,8 @@ def demonstrate_testing_approaches():
         "Sarah Johnson"
     )
     
-    # Add findings from manual testing
+    ## Add findings from manual testing
+
     manual_manager.add_finding(
         session["session_id"],
         "usability",
@@ -1230,7 +1310,8 @@ def demonstrate_testing_approaches():
     report = manual_manager.generate_session_report(session["session_id"])
     print(f"Manual testing session report: {report}")
     
-    # Strategy recommendation
+    ## Strategy recommendation
+
     print("\\n=== Test Strategy Recommendations ===")
     strategy = TestStrategy()
     
@@ -1246,7 +1327,8 @@ def demonstrate_testing_approaches():
         print(f"  Recommendation: {recommendation['recommendation']}")
         print(f"  Reason: {recommendation['reason']}")
 
-# Run demonstration
+## Run demonstration
+
 demonstrate_testing_approaches()
 ```
 ```
@@ -1268,33 +1350,53 @@ demonstrate_testing_approaches()
 **Test Plan for Assignment Submission Feature**:
 
 1. **Functional Tests**:
+
    - File upload validation (supported formats, size limits)
+
    - Submission confirmation and receipt generation
+
    - Assignment deadline validation
+
    - User authentication and authorisation
 
 2. **Integration Tests**:
+
    - Database storage of submission records
+
    - Email notification system integration
+
    - File storage system integration
+
    - Grade book system updates
 
 3. **Non-functional Tests**:
+
    - Performance: Upload time for various file sizes
+
    - Security: File type validation, virus scanning
+
    - Usability: User interface flow and feedback
+
    - Reliability: System behaviour under concurrent uploads
 
 4. **Test Data Requirements**:
+
    - Valid file types: PDF, DOC, TXT (within size limits)
+
    - Invalid file types: EXE, ZIP, oversized files
+
    - Edge cases: Zero-byte files, special characters in names
+
    - Boundary conditions: Files at exact size limits
 
 5. **Acceptance Criteria**:
+
    - Students can upload files up to 10MB
+
    - System confirms successful submission
+
    - Teachers receive notification of submissions
+
    - Submission history is maintained for students
 ///
 ///
@@ -1308,12 +1410,19 @@ demonstrate_testing_approaches()
 **Task**: Categorise the following test scenarios as automated, manual, or hybrid approaches with justification.
 
 **Test Scenarios**:
+
 1. User login functionality
+
 2. Grade calculation algorithms
+
 3. User interface design and layout
+
 4. Database backup and recovery
+
 5. Student data import from CSV files
+
 6. Mobile app responsiveness
+
 7. Performance under 1000 concurrent users
 
 /// details | Sample Solution
@@ -1323,38 +1432,59 @@ demonstrate_testing_approaches()
 **Testing Approach Recommendations**:
 
 1. **User login functionality - Automated**
+
    - High frequency testing (every build)
+
    - Simple, repetitive test steps
+
    - Critical functionality requiring frequent validation
 
 2. **Grade calculation algorithms - Automated**
+
    - Mathematical logic suitable for automated verification
+
    - Large datasets for comprehensive testing
+
    - Regression testing after algorithm changes
 
 3. **User interface design and layout - Manual**
+
    - Requires human judgment for visual assessment
+
    - Usability and aesthetic evaluation needed
+
    - Exploratory testing for user experience
 
 4. **Database backup and recovery - Automated**
+
    - Technical process with measurable outcomes
+
    - Needs frequent validation
+
    - Can be integrated into CI/CD pipeline
 
 5. **Student data import from CSV - Hybrid**
+
    - Automated: Data validation and processing logic
+
    - Manual: File format variations and edge cases
+
    - Automated for volume testing, manual for exploratory
 
 6. **Mobile app responsiveness - Manual**
+
    - Multiple device and screen size combinations
+
    - Visual and interactive assessment required
+
    - User experience evaluation
 
 7. **Performance under 1000 users - Automated**
+
    - Load testing requires automated tools
+
    - Consistent, repeatable test conditions
+
    - Metrics-based evaluation suitable for automation
 ///
 ///
@@ -1364,8 +1494,11 @@ demonstrate_testing_approaches()
 Effective testing methodologies and optimisation require strategic planning, appropriate tool selection, and comprehensive coverage. Key principles include:
 
 - **Test strategy development**: Create comprehensive plans covering functional, integration, and non-functional testing requirements
+
 - **Smart test data selection**: Use boundary value analysis and path testing to maximise defect detection with efficient test coverage
+
 - **Detailed test cases**: Develop clear, executable test cases tied directly to requirements and acceptance criteria
+
 - **Balanced automation**: Use automated testing for repetitive, high-frequency tests and manual testing for exploratory and usability scenarios
 
 These testing approaches ensure software quality while optimising resource allocation and maintaining cost-effective testing practices throughout the development lifecycle.

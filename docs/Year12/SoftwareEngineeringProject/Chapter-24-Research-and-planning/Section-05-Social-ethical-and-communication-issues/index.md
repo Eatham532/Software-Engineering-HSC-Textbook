@@ -13,8 +13,11 @@ Client involvement goes beyond gathering initial requirements - it means creatin
 Effective client involvement strategies:
 
 - **Requirements workshops**: Collaborative sessions to understand needs and constraints
+
 - **Regular demonstrations**: Showing working software to gather feedback early and often
+
 - **Co-design activities**: Including clients in design decisions and solution exploration
+
 - **Transparent communication**: Keeping clients informed about progress, challenges, and decisions
 
 ```tabbed
@@ -109,21 +112,25 @@ class RequirementsWorkshop:
         summary += f"Action items: {len(self.action_items)}\\n"
         return summary
 
-# Example workshop setup
+## Example workshop setup
+
 workshop = RequirementsWorkshop("Library System Requirements", date(2025, 10, 15))
 
-# Add stakeholders
+## Add stakeholders
+
 librarian = Stakeholder("Sarah Johnson", StakeholderRole.END_USER, "s.johnson@library.gov", "high")
 it_manager = Stakeholder("Mike Chen", StakeholderRole.TECHNICAL_CONTACT, "m.chen@library.gov", "medium")
 workshop.add_participant(librarian)
 workshop.add_participant(it_manager)
 
-# Add agenda items
+## Add agenda items
+
 workshop.add_agenda_item("Current system challenges", 30)
 workshop.add_agenda_item("User journey mapping", 45)
 workshop.add_agenda_item("Priority feature discussion", 60)
 
-# Record decisions
+## Record decisions
+
 workshop.record_decision(
     "Mobile access is top priority",
     "80% of users access system outside library hours",
@@ -141,8 +148,11 @@ Structured feedback collection ensures that stakeholder input is captured system
 Key components of effective feedback systems:
 
 - **Multiple feedback channels**: Surveys, interviews, usability sessions, and informal conversations
+
 - **Regular feedback cycles**: Scheduled collection points aligned with development iterations
+
 - **Feedback categorisation**: Organising input by type, priority, and feasibility
+
 - **Response tracking**: Documenting how feedback influenced project decisions
 
 ```kroki-plantuml
@@ -260,7 +270,8 @@ class FeedbackManager:
     def collect_feedback(self, feedback_item):
         self.feedback_items.append(feedback_item)
         
-        # Track feedback by stakeholder
+        ## Track feedback by stakeholder
+
         stakeholder = feedback_item.source_stakeholder
         if stakeholder not in self.feedback_by_stakeholder:
             self.feedback_by_stakeholder[stakeholder] = []
@@ -279,16 +290,20 @@ class FeedbackManager:
         by_status = {}
         
         for feedback in self.feedback_items:
-            # Count by type
+
+            ## Count by type
+
             feedback_type = feedback.feedback_type.value
             by_type[feedback_type] = by_type.get(feedback_type, 0) + 1
             
-            # Count by priority
+            ## Count by priority
+
             if feedback.priority:
                 priority = feedback.priority.value
                 by_priority[priority] = by_priority.get(priority, 0) + 1
             
-            # Count by status
+            ## Count by status
+
             status = feedback.status
             by_status[status] = by_status.get(status, 0) + 1
         
@@ -298,10 +313,12 @@ class FeedbackManager:
         report += f"By Status: {by_status}\\n"
         return report
 
-# Example feedback management
+## Example feedback management
+
 feedback_manager = FeedbackManager()
 
-# Collect feedback
+## Collect feedback
+
 bug_feedback = FeedbackItem(
     "Login button not working on mobile",
     "When I try to log in on my phone, the button doesn't respond",
@@ -319,7 +336,8 @@ usability_feedback = FeedbackItem(
 feedback_manager.collect_feedback(bug_feedback)
 feedback_manager.collect_feedback(usability_feedback)
 
-# Categorise feedback
+## Categorise feedback
+
 feedback_manager.categorise_feedback(bug_feedback, FeedbackPriority.HIGH)
 feedback_manager.categorise_feedback(usability_feedback, FeedbackPriority.MEDIUM)
 
@@ -334,8 +352,11 @@ Scope negotiation involves balancing stakeholder needs, technical constraints, a
 Effective negotiation strategies:
 
 - **Transparent constraint communication**: Clearly explaining technical and resource limitations
+
 - **Alternative solution exploration**: Proposing different approaches to meet core needs
+
 - **Priority-based decision making**: Using agreed criteria to evaluate feature importance
+
 - **Incremental delivery planning**: Breaking large requests into smaller, manageable pieces
 
 ```tabbed
@@ -433,7 +454,8 @@ class ScopeNegotiator:
                 value_score = request.calculate_value_score()
                 evaluated_requests.append((request, value_score))
         
-        # Sort by value score (highest first)
+        ## Sort by value score (highest first)
+
         evaluated_requests.sort(key=lambda x: x[1], reverse=True)
         return evaluated_requests
     
@@ -468,10 +490,12 @@ class ScopeNegotiator:
         
         return alternative
 
-# Example scope negotiation
+## Example scope negotiation
+
 negotiator = ScopeNegotiator(400)  # 400 hours project capacity
 
-# Add scope requests
+## Add scope requests
+
 mobile_app = ScopeRequest("Mobile app for students", "Student Council", 9, 8)
 mobile_app.set_effort_estimate(160)
 
@@ -481,16 +505,19 @@ advanced_search.set_effort_estimate(80)
 reporting_dashboard = ScopeRequest("Administrative reporting dashboard", "Management", 6, 6)
 reporting_dashboard.set_effort_estimate(120)
 
-# Add to negotiator
+## Add to negotiator
+
 for request in [mobile_app, advanced_search, reporting_dashboard]:
     negotiator.add_scope_request(request)
 
-# Get recommendations
+## Get recommendations
+
 recommendations = negotiator.recommend_scope_decisions()
 for request, decision, rationale in recommendations:
     print(f"{request.title}: {decision} - {rationale}")
 
-# Negotiate alternative for mobile app if needed
+## Negotiate alternative for mobile app if needed
+
 if mobile_app.effort_estimate_hours > 100:
     alternative = negotiator.negotiate_alternative(
         mobile_app,
@@ -508,8 +535,11 @@ Software engineering decisions have ethical implications that affect users, comm
 Key ethical considerations:
 
 - **Privacy and data protection**: Handling personal information responsibly
+
 - **Accessibility and inclusion**: Ensuring software works for people with disabilities
+
 - **Bias and fairness**: Avoiding discriminatory algorithms or interface designs
+
 - **Transparency and consent**: Being clear about how software works and what data is collected
 
 ```tabbed
@@ -638,10 +668,12 @@ class EthicalAssessment:
         
         return report
 
-# Example ethical assessment
+## Example ethical assessment
+
 assessment = EthicalAssessment("Student Recommendation System")
 
-# Assess different risk areas
+## Assess different risk areas
+
 assessment.assess_privacy_risk(
     collects_personal_data=True,
     data_sharing=False,
@@ -665,7 +697,8 @@ assessment.assess_transparency_risk(
     clear_policies=True
 )
 
-# Add mitigation strategies
+## Add mitigation strategies
+
 assessment.add_mitigation_strategy("Implement comprehensive accessibility testing")
 assessment.add_mitigation_strategy("Audit training data for demographic representation")
 assessment.add_mitigation_strategy("Add explanation features for recommendations")
@@ -685,18 +718,27 @@ print(assessment.generate_ethics_report())
 **Scenario**: A hospital is developing a new patient portal system. The project involves multiple stakeholder groups with different needs and technical comfort levels.
 
 **Stakeholder Groups**:
+
 - **Patients**: Ages 20-80, varying tech comfort, primary users of portal
+
 - **Medical Staff**: Doctors and nurses who need to view patient interactions
+
 - **Administrative Staff**: Manage appointments and billing through portal
+
 - **IT Security Team**: Ensure patient data protection and compliance
+
 - **Hospital Executives**: Need progress reports and budget oversight
 
 **Project Timeline**: 12 months with quarterly milestone reviews
 
 **Tasks**:
+
 1. Design a stakeholder engagement plan for the entire project
+
 2. Plan specific workshop activities for requirements gathering
+
 3. Create a feedback collection strategy for each stakeholder group
+
 4. Identify potential communication challenges and mitigation strategies
 
 /// details | Sample Solution
@@ -708,88 +750,139 @@ print(assessment.generate_ethics_report())
 **Overall Engagement Strategy**:
 
 **Phase 1: Requirements Gathering (Months 1-3)**
+
 - Monthly workshops with each stakeholder group
+
 - Cross-functional sessions to identify integration needs
+
 - Individual interviews with key representatives
 
 **Phase 2: Design and Development (Months 4-9)**
+
 - Bi-weekly demos with patient focus groups
+
 - Monthly progress reviews with medical and admin staff
+
 - Quarterly security reviews with IT team
+
 - Monthly executive briefings
 
 **Phase 3: Testing and Deployment (Months 10-12)**
+
 - Weekly user testing sessions with patients
+
 - Training workshops for staff
+
 - Security validation with IT team
+
 - Final approval process with executives
 
 **Workshop Activities by Stakeholder Group**:
 
 **Patient Workshops**:
+
 - User journey mapping for common tasks (appointments, test results)
+
 - Accessibility testing with diverse age and ability groups
+
 - Mobile vs desktop preference discussions
+
 - Privacy concern identification and addressing
 
 **Medical Staff Workshops**:
+
 - Clinical workflow integration sessions
+
 - Alert and notification preference setting
+
 - Integration with existing medical records systems
+
 - Time-saving feature prioritisation
 
 **Administrative Staff Workshops**:
+
 - Billing and insurance workflow mapping
+
 - Appointment scheduling optimization
+
 - Report generation requirements
+
 - Customer service integration needs
 
 **Feedback Collection Strategy**:
 
 **Patients**:
+
 - Simple surveys after each demo (5 questions max)
+
 - Focus groups with representative demographics
+
 - Usability testing sessions with think-aloud protocol
+
 - Beta testing program with volunteer patients
 
 **Medical Staff**:
+
 - Integration with existing workflow observations
+
 - Quick feedback forms during shift changes
+
 - Monthly feedback sessions during lunch breaks
+
 - Anonymous suggestion system for sensitive issues
 
 **Administrative Staff**:
+
 - Weekly check-ins during development
+
 - Process efficiency measurements (time to complete tasks)
+
 - Training effectiveness feedback
+
 - Error reporting and resolution tracking
 
 **Communication Challenges and Mitigation**:
 
 **Challenge 1: Technical Language Barriers**
+
 - **Mitigation**: Use visual demos instead of technical specifications
+
 - Create patient-friendly language versions of all communications
+
 - Use analogies and real-world examples to explain technical concepts
 
 **Challenge 2: Competing Priorities**
+
 - **Mitigation**: Establish clear priority framework based on patient safety first
+
 - Document trade-off decisions with rationale
+
 - Regular priority review sessions with stakeholder representatives
 
 **Challenge 3: Privacy and Security Concerns**
+
 - **Mitigation**: Early and frequent communication about security measures
+
 - Involve patients in privacy preference setting
+
 - Transparent communication about data usage and protection
 
 **Challenge 4: Change Resistance**
+
 - **Mitigation**: Emphasise benefits for each stakeholder group
+
 - Provide comprehensive training and support
+
 - Implement gradual rollout with feedback incorporation
 
 **Success Metrics**:
+
 - 90%+ stakeholder satisfaction in post-project survey
+
 - Less than 5% of requirements changed after approval
+
 - Zero security incidents during development
+
 - On-time delivery within budget constraints
 ///
 ///
@@ -805,21 +898,33 @@ print(assessment.generate_ethics_report())
 **Ethical Dilemma**: The school district wants to include predictive analytics that could identify students "at risk" of dropping out or having disciplinary problems. This could help provide early intervention, but it also raises concerns about bias, labeling, and privacy.
 
 **Competing Interests**:
+
 - **School Administration**: Wants comprehensive data to improve student outcomes
+
 - **Teachers**: Want useful information but concerned about bias affecting their perceptions
+
 - **Parents**: Want privacy protection but also want help for struggling students
+
 - **Students**: Concerned about being labeled or tracked unfairly
+
 - **Data Protection Advocates**: Worried about long-term impact of predictive labeling
 
 **Technical Considerations**:
+
 - Historical data shows correlation between certain factors and student outcomes
+
 - Algorithms might perpetuate existing biases in disciplinary actions
+
 - Data could be valuable for research but sensitive for individual students
 
 **Tasks**:
+
 1. Identify the key ethical issues in this scenario
+
 2. Propose a framework for making ethical decisions about the analytics features
+
 3. Design safeguards to protect student interests while enabling beneficial uses
+
 4. Create a communication plan to address stakeholder concerns transparently
 
 /// details | Sample Solution
@@ -831,104 +936,165 @@ print(assessment.generate_ethics_report())
 **Key Ethical Issues Identified**:
 
 1. **Algorithmic Bias and Fairness**:
+
    - Historical data may reflect systemic biases in discipline and grading
+
    - Predictive models could perpetuate discrimination against certain demographic groups
+
    - Risk of creating self-fulfilling prophecies through labeling
 
 2. **Privacy and Consent**:
+
    - Students (minors) cannot provide meaningful consent for data use
+
    - Long-term implications of data collection unknown
+
    - Potential for data misuse by future administrators
 
 3. **Transparency and Explainability**:
+
    - Teachers and families need to understand how predictions are made
+
    - Students have right to know what data is collected and how it's used
+
    - Decision-making processes should be auditable
 
 4. **Beneficence vs Harm**:
+
    - Potential benefits of early intervention for struggling students
+
    - Risk of stigmatizing students with "at-risk" labels
+
    - Balance between helping individuals and protecting privacy
 
 **Ethical Decision Framework**:
 
 **Step 1: Stakeholder Impact Assessment**
+
 - Map all affected parties and potential impacts (positive and negative)
+
 - Prioritise student welfare as primary consideration
+
 - Consider both immediate and long-term consequences
 
 **Step 2: Bias and Fairness Evaluation**
+
 - Audit historical data for demographic disparities
+
 - Test algorithms for differential impact across student groups
+
 - Establish fairness metrics and acceptable thresholds
 
 **Step 3: Transparency Requirements**
+
 - Define what information must be explainable to different stakeholders
+
 - Create student-accessible explanations of data use
+
 - Establish audit trail requirements for all automated decisions
 
 **Step 4: Proportionality Assessment**
+
 - Ensure data collection is proportional to educational benefit
+
 - Limit predictions to actionable interventions only
+
 - Regular review of necessity and effectiveness
 
 **Proposed Safeguards**:
 
 **Technical Safeguards**:
+
 - Bias testing across demographic groups before deployment
+
 - Regular algorithm audits with external review
+
 - Explainable AI features for all automated recommendations
+
 - Data minimisation (collect only what's necessary for stated purposes)
 
 **Procedural Safeguards**:
+
 - Student and parent notification about data use (age-appropriate language)
+
 - Opt-out mechanisms where legally permissible
+
 - Regular review of data use policies by ethics committee
+
 - Staff training on bias awareness and ethical data use
 
 **Governance Safeguards**:
+
 - Student and parent representation on oversight committee
+
 - Annual ethics review of system impact and effectiveness
+
 - Clear policies on data retention and deletion
+
 - Incident reporting system for potential misuse
 
 **Use Restrictions**:
+
 - Predictions used only for positive interventions, never for punitive actions
+
 - No automated decisions about student placement or opportunities
+
 - Aggregate reporting only (no individual student identification in research)
+
 - Clear separation between support services and disciplinary systems
 
 **Communication Plan**:
 
 **For Students (Age-Appropriate)**:
+
 - "How Our School Uses Data to Help Students Succeed"
+
 - Visual explanations of data protection measures
+
 - Student advisory group for ongoing feedback
+
 - Regular updates on how data insights have helped students
 
 **For Parents**:
+
 - Comprehensive information sessions about system capabilities
+
 - Clear explanation of opt-out procedures and implications
+
 - Regular reporting on aggregate outcomes (no individual identification)
+
 - Parent advisory committee participation in policy development
 
 **For Teachers**:
+
 - Training on interpreting system recommendations without bias
+
 - Guidelines for using insights to inform (not replace) professional judgment
+
 - Regular workshops on recognizing and addressing algorithmic bias
+
 - Anonymous feedback system for reporting concerns
 
 **For Administration**:
+
 - Quarterly ethics reviews with documented decisions
+
 - Annual impact assessment comparing intended vs actual outcomes
+
 - Transparency reports for school board and community
+
 - Policy updates based on evidence and stakeholder feedback
 
 **Success Metrics for Ethical Implementation**:
+
 - Zero incidents of discriminatory use of system data
+
 - Documented positive outcomes for students identified by system
+
 - High stakeholder satisfaction with transparency and communication
+
 - Regular independent audits confirming bias-free operation
+
 - Evidence of improved educational outcomes without increased inequality
 ///
 ///
@@ -942,37 +1108,57 @@ print(assessment.generate_ethics_report())
 **Scenario**: You're managing development of a community sports club management system. Three months into the six-month project, stakeholders are requesting significant scope changes.
 
 **Original Scope** (Approved and budgeted):
+
 - Member registration and renewal
+
 - Event scheduling and bookings
+
 - Basic financial reporting
+
 - Member communication (email notifications)
 
 **New Requests**:
+
 1. **Mobile App** (Requested by Members): "We need a mobile app for bookings"
+
    - Estimated effort: 120 hours
+
    - Business value: High (mobile usage is 70% of web traffic)
 
 2. **Advanced Analytics** (Requested by Board): "We need detailed analytics on member engagement and revenue trends"
+
    - Estimated effort: 80 hours
+
    - Business value: Medium (helps strategic planning)
 
 3. **Online Payment Integration** (Requested by Treasurer): "Members should be able to pay fees online immediately"
+
    - Estimated effort: 60 hours
+
    - Business value: High (reduces administrative work)
 
 4. **Social Media Integration** (Requested by Marketing): "We want to automatically post events to Facebook and Instagram"
+
    - Estimated effort: 40 hours
+
    - Business value: Low (nice to have for promotion)
 
 **Project Constraints**:
+
 - Remaining budget: 150 hours of development time
+
 - Fixed deadline: Cannot extend beyond 6 months
+
 - Technical debt: 30 hours needed for testing and bug fixes
 
 **Tasks**:
+
 1. Analyse each request using value vs effort considerations
+
 2. Prepare alternative proposals that could meet core needs with less effort
+
 3. Design a negotiation strategy that maintains stakeholder relationships
+
 4. Create a communication plan for explaining decisions and trade-offs
 
 /// details | Sample Solution
@@ -984,117 +1170,187 @@ print(assessment.generate_ethics_report())
 **Request Analysis (Value vs Effort)**:
 
 **1. Mobile App (120 hours)**
+
 - **Value Score**: High business value ÷ High effort = Medium priority
+
 - **Core Need**: Mobile access for bookings
+
 - **Alternative**: Mobile-responsive web design (40 hours)
+
 - **Trade-off**: Native app features vs faster delivery and lower cost
 
 **2. Advanced Analytics (80 hours)**
+
 - **Value Score**: Medium business value ÷ Medium effort = Medium priority
+
 - **Core Need**: Understanding member engagement and revenue
+
 - **Alternative**: Basic reporting dashboard with key metrics (35 hours)
+
 - **Trade-off**: Detailed insights vs essential information only
 
 **3. Online Payment Integration (60 hours)**
+
 - **Value Score**: High business value ÷ Medium effort = High priority
+
 - **Core Need**: Reduce administrative burden and improve member experience
+
 - **Alternative**: Single payment provider integration vs multiple options (45 hours)
+
 - **Trade-off**: Payment options vs implementation complexity
 
 **4. Social Media Integration (40 hours)**
+
 - **Value Score**: Low business value ÷ Low effort = Low priority
+
 - **Core Need**: Event promotion and member engagement
+
 - **Alternative**: Manual posting workflow with templates (8 hours)
+
 - **Trade-off**: Automation vs manual process
 
 **Capacity Analysis**:
+
 - **Available capacity**: 150 hours
+
 - **Required for completion**: 30 hours (testing/fixes)
+
 - **Net available**: 120 hours
 
 **Negotiation Strategy**:
 
 **Phase 1: Acknowledge and Validate Requests**
+
 - Thank stakeholders for their engagement and additional ideas
+
 - Acknowledge that all requests have merit and would add value
+
 - Explain the constraint situation transparently
 
 **Phase 2: Present Alternative Solutions**
 
 **Package A: Essential Mobile + Payments (90 hours)**
+
 - Mobile-responsive design (40 hours)
+
 - Single payment provider integration (45 hours)
+
 - Remaining 30 hours for testing and optimization
+
 - **Benefits**: Addresses top user needs within budget
+
 - **Trade-offs**: No native app, limited payment options
 
 **Package B: Balanced Approach (115 hours)**
+
 - Mobile-responsive design (40 hours)
+
 - Basic payment integration (45 hours)
+
 - Basic analytics dashboard (35 hours)
+
 - **Benefits**: Covers most stakeholder groups
+
 - **Trade-offs**: Minimal testing buffer
 
 **Package C: Future-Focused (120 hours)**
+
 - Full payment integration (60 hours)
+
 - Basic analytics (35 hours)
+
 - Social media workflow templates (8 hours)
+
 - Testing and optimization (17 hours)
+
 - **Benefits**: Strong foundation for future mobile development
+
 - **Trade-offs**: No mobile solution in current phase
 
 **Phase 3: Negotiation Tactics**
 
 **For Mobile App Request**:
+
 - **Position**: "Mobile access is clearly important to members"
+
 - **Proposal**: "Let's implement responsive design now and plan native app for Phase 2"
+
 - **Benefit**: "Members get mobile access immediately, plus we gather usage data to inform app features"
 
 **For Analytics Request**:
+
 - **Position**: "Strategic insights are valuable for board decision-making"
+
 - **Proposal**: "Essential analytics now, with plan for advanced features post-launch"
+
 - **Benefit**: "Immediate visibility into key metrics, plus time to identify what advanced analytics are most useful"
 
 **For Payment Integration**:
+
 - **Position**: "Online payments will significantly reduce administrative work"
+
 - **Proposal**: "Start with one reliable payment provider, add others in Phase 2"
+
 - **Benefit**: "Immediate efficiency gains with proven solution"
 
 **For Social Media Integration**:
+
 - **Position**: "Event promotion is important for member engagement"
+
 - **Proposal**: "Streamlined manual process with templates and posting schedule"
+
 - **Benefit**: "Better event promotion immediately, plus insight into which posts work best"
 
 **Communication Plan**:
 
 **Before Negotiation Meeting**:
+
 - Send analysis document showing effort estimates and alternatives
+
 - Schedule individual pre-meetings with key stakeholders
+
 - Prepare visual aids showing capacity constraints and trade-offs
 
 **During Negotiation Meeting**:
+
 - Use collaborative language ("How can we solve this together?")
+
 - Focus on underlying needs rather than specific solutions
+
 - Present alternatives as opportunities rather than limitations
+
 - Document all agreements and defer-decisions clearly
 
 **After Negotiation Meeting**:
+
 - Send written summary of decisions and rationale
+
 - Update project timeline and scope documentation
+
 - Plan Phase 2 roadmap showing deferred features
+
 - Schedule regular check-ins to assess Phase 1 success
 
 **Success Metrics for Negotiation**:
+
 - All stakeholders understand and accept final scope decisions
+
 - Maintain positive relationships with all stakeholder groups
+
 - Deliver Phase 1 on time and within budget
+
 - Clear plan for Phase 2 features based on Phase 1 learnings
+
 - No scope creep during remaining development time
 
 **Risk Mitigation**:
+
 - Get written approval for scope changes from all stakeholder groups
+
 - Clearly communicate what is NOT included in current phase
+
 - Set expectations for Phase 2 planning and approval process
+
 - Document assumptions and dependencies for future phases
 ///
 ///
