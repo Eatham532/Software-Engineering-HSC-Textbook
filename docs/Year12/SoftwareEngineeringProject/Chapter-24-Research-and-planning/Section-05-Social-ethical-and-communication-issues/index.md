@@ -160,42 +160,28 @@ Key components of effective feedback systems:
 skinparam monochrome true
 skinparam shadowing false
 
-!define ACTIVITY rectangle
-!define DECISION diamond
+start
+:Collect Feedback;
+note right: Stakeholder demos\nUser testing\nSurveys & interviews
 
-ACTIVITY "Collect Feedback" as COLLECT
-DECISION "Categorise by Type" as CATEGORISE
-ACTIVITY "Functional Requirements" as FUNC
-ACTIVITY "Usability Issues" as USABILITY
-ACTIVITY "Technical Concerns" as TECH
-ACTIVITY "Business Rules" as BUSINESS
+if (Categorise by Type) then
+  :Functional Requirements;
+  :Usability Issues;
+  :Technical Concerns;
+  :Business Rules;
+endif
 
-DECISION "Assess Impact & Feasibility" as ASSESS
-ACTIVITY "High Impact + Feasible" as HIGH
-ACTIVITY "Low Impact or Complex" as LOW
-ACTIVITY "Implement in Current Sprint" as CURRENT
-ACTIVITY "Add to Product Backlog" as BACKLOG
-ACTIVITY "Document as Future Consideration" as FUTURE
+if (Assess Impact & Feasibility) then
+  note right: Consider development\ncost, timeline impact,\nand business value
+  if (High Impact + Feasible) then
+    :Implement in Current Sprint;
+  else (Low Impact or Complex)
+    :Add to Product Backlog;
+    :Document as Future Consideration;
+  endif
+endif
 
-COLLECT --> CATEGORISE
-CATEGORISE --> FUNC
-CATEGORISE --> USABILITY
-CATEGORISE --> TECH
-CATEGORISE --> BUSINESS
-
-FUNC --> ASSESS
-USABILITY --> ASSESS
-TECH --> ASSESS
-BUSINESS --> ASSESS
-
-ASSESS --> HIGH
-ASSESS --> LOW
-HIGH --> CURRENT
-LOW --> BACKLOG
-LOW --> FUTURE
-
-note right of COLLECT : Stakeholder demos\nUser testing\nSurveys & interviews
-note right of ASSESS : Consider development\ncost, timeline impact,\nand business value
+stop
 @enduml
 ```
 

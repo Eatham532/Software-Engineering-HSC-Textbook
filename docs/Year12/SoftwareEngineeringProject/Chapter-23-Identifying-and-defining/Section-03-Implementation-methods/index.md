@@ -322,28 +322,22 @@ Key components of WAgile:
 skinparam monochrome true
 skinparam shadowing false
 
-!define STAGE rectangle
-!define GATE diamond
-
-STAGE "Requirements\nStage" as REQ
-GATE "Gate 1\nApproval" as G1
-STAGE "Design\nStage" as DES
-GATE "Gate 2\nApproval" as G2
-STAGE "Development\nStage" as DEV
-GATE "Gate 3\nApproval" as G3
-STAGE "Testing\nStage" as TEST
-
-REQ --> G1
-G1 --> DES : Approved
-DES --> G2
-G2 --> DEV : Approved
-DEV --> G3
-G3 --> TEST : Approved
-
-note bottom of REQ : Agile iterations\nfor requirements\nrefinement
-note bottom of DES : Agile iterations\nfor design\nprototyping
-note bottom of DEV : Agile sprints\nfor feature\ndevelopment
-note bottom of TEST : Agile iterations\nfor testing\nand fixes
+start
+:Requirements Stage;
+note right: Agile iterations\nfor requirements\nrefinement
+if (Gate 1 Approval?) then (Approved)
+:Design Stage;
+note right: Agile iterations\nfor design\nprototyping
+if (Gate 2 Approval?) then (Approved)
+:Development Stage;
+note right: Agile sprints\nfor feature\ndevelopment
+if (Gate 3 Approval?) then (Approved)
+:Testing Stage;
+note right: Agile iterations\nfor testing\nand fixes
+endif
+endif
+endif
+stop
 @enduml
 ```
 

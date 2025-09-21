@@ -17,7 +17,6 @@ Neural networks form the foundation of modern AI systems by mimicking how biolog
 - **Reason** about neural network behavior and decision-making
 
 ```kroki-plantuml
-```kroki-plantuml
 @startuml
 !theme plain
 

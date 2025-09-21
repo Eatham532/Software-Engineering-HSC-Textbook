@@ -379,21 +379,17 @@ skinparam monochrome true
 skinparam shadowing false
 
 package "Solution Presentation Narrative" {
-    rectangle "Problem Introduction" as prob {
-        note right : Current challenges\nStakeholder pain points\nBusiness impact
-    }
+    rectangle "Problem Introduction" as prob
+    note right : Current challenges\nStakeholder pain points\nBusiness impact
     
-    rectangle "Solution Journey" as journey {
-        note right : Development process\nKey decisions\nOvercoming obstacles
-    }
+    rectangle "Solution Journey" as journey
+    note right : Development process\nKey decisions\nOvercoming obstacles
     
-    rectangle "Demonstration" as demo {
-        note right : Live functionality\nUser scenarios\nBenefit realization
-    }
+    rectangle "Demonstration" as demo
+    note right : Live functionality\nUser scenarios\nBenefit realization
     
-    rectangle "Future Vision" as future {
-        note right : Ongoing benefits\nExpansion possibilities\nLong-term value
-    }
+    rectangle "Future Vision" as future
+    note right : Ongoing benefits\nExpansion possibilities\nLong-term value
     
     prob --> journey
     journey --> demo
