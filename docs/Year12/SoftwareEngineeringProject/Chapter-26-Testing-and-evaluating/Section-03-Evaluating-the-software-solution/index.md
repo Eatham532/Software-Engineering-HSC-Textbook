@@ -47,25 +47,20 @@ skinparam monochrome true
 skinparam shadowing false
 
 package "Software Solution Evaluation Process" {
-    rectangle "Criteria Development" as criteria {
-        note right : Functional requirements\nNon-functional requirements\nStakeholder expectations\nBusiness objectives
-    }
+    rectangle "Criteria Development" as criteria
+    note right of criteria : Functional requirements\nNon-functional requirements\nStakeholder expectations\nBusiness objectives
     
-    rectangle "Evidence Collection" as evidence {
-        note right : Test results\nUser feedback\nPerformance metrics\nStakeholder interviews
-    }
+    rectangle "Evidence Collection" as evidence
+    note right of evidence : Test results\nUser feedback\nPerformance metrics\nStakeholder interviews
     
-    rectangle "Analysis & Synthesis" as analysis {
-        note right : Gap analysis\nTrend identification\nRoot cause analysis\nImpact assessment
-    }
+    rectangle "Analysis & Synthesis" as analysis
+    note right of analysis : Gap analysis\nTrend identification\nRoot cause analysis\nImpact assessment
     
-    rectangle "Reporting & Recommendations" as reporting {
-        note right : Executive summary\nDetailed findings\nRecommendations\nNext steps
-    }
+    rectangle "Reporting & Recommendations" as reporting
+    note right of reporting : Executive summary\nDetailed findings\nRecommendations\nNext steps
     
-    rectangle "Reflection & Learning" as reflection {
-        note right : Lessons learned\nProcess improvements\nBest practices\nFuture considerations
-    }
+    rectangle "Reflection & Learning" as reflection
+    note right of reflection : Lessons learned\nProcess improvements\nBest practices\nFuture considerations
     
     criteria --> evidence
     evidence --> analysis

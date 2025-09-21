@@ -397,34 +397,30 @@ Gantt charts provide visual representation of project schedules, showing tasks, 
 ### Creating effective Gantt charts
 
 ```kroki-plantuml
-@startuml
-!theme plain
-skinparam monochrome true
-skinparam shadowing false
+@startgantt
+project starts 2025-01-06
+printscale weekly
 
-gantt
-project starts the 2025-01-06
+-- Requirements Phase --
+[Stakeholder Interviews] starts 2025-01-06 and requires 2 weeks
+[Requirements Documentation] starts at [Stakeholder Interviews]'s start and requires 3 weeks
+[Requirements Review] starts at [Requirements Documentation]'s end and requires 1 week
 
-[Requirements Phase] lasts 3 weeks
-[Stakeholder Interviews] lasts 2 weeks
-[Requirements Documentation] lasts 3 weeks and starts at [Stakeholder Interviews]'s start
-[Requirements Review] lasts 1 week and starts at [Requirements Documentation]'s end
+-- Design Phase --
+[Database Design] starts at [Requirements Review]'s end and requires 4 weeks
+[UI Design] starts at [Requirements Review]'s end and requires 5 weeks
+[System Architecture] starts at [Requirements Review]'s end and requires 3 weeks
 
-[Design Phase] starts at [Requirements Phase]'s end
-[Database Design] lasts 4 weeks and starts at [Design Phase]'s start
-[UI Design] lasts 5 weeks and starts at [Design Phase]'s start
-[System Architecture] lasts 3 weeks and starts at [Design Phase]'s start
+-- Development Phase --
+[Authentication Module] starts at [System Architecture]'s end and requires 6 weeks
+[Grade Management] starts at [Authentication Module]'s end and requires 8 weeks
+[Reporting Module] starts at [Authentication Module]'s end and requires 5 weeks
 
-[Development Phase] starts at [Design Phase]'s end
-[Authentication Module] lasts 6 weeks and starts at [Development Phase]'s start
-[Grade Management] lasts 8 weeks and starts at [Authentication Module]'s end
-[Reporting Module] lasts 5 weeks and starts at [Authentication Module]'s end
-
-[Testing Phase] starts at [Development Phase]'s end
-[Unit Testing] lasts 2 weeks and starts at [Testing Phase]'s start
-[Integration Testing] lasts 3 weeks and starts at [Unit Testing]'s end
-[User Acceptance Testing] lasts 2 weeks and starts at [Integration Testing]'s end
-@enduml
+-- Testing Phase --
+[Unit Testing] starts at [Grade Management]'s end and requires 2 weeks
+[Integration Testing] starts at [Unit Testing]'s end and requires 3 weeks
+[User Acceptance Testing] starts at [Integration Testing]'s end and requires 2 weeks
+@endgantt
 ```
 
 ```python

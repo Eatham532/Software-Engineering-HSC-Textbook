@@ -44,29 +44,23 @@ The traditional Waterfall model consists of six distinct phases, each with speci
 skinparam monochrome true
 skinparam shadowing false
 
-rectangle "Requirements Analysis" as req {
-    note right : Gather and document\nall system requirements
-}
+rectangle "Requirements Analysis" as req
+note right of req : Gather and document\nall system requirements
 
-rectangle "System Design" as design {
-    note right : Create system architecture\nand detailed design
-}
+rectangle "System Design" as design
+note right of design : Create system architecture\nand detailed design
 
-rectangle "Implementation" as impl {
-    note right : Write code based on\ndesign specifications
-}
+rectangle "Implementation" as impl
+note right of impl : Write code based on\ndesign specifications
 
-rectangle "Testing" as test {
-    note right : Verify system meets\nall requirements
-}
+rectangle "Testing" as test
+note right of test : Verify system meets\nall requirements
 
-rectangle "Deployment" as deploy {
-    note right : Install system in\nproduction environment
-}
+rectangle "Deployment" as deploy
+note right of deploy : Install system in\nproduction environment
 
-rectangle "Maintenance" as maint {
-    note right : Ongoing support\nand enhancements
-}
+rectangle "Maintenance" as maint
+note right of maint : Ongoing support\nand enhancements
 
 req --> design
 design --> impl

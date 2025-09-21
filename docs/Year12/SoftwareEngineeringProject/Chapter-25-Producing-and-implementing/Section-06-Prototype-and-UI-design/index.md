@@ -44,34 +44,27 @@ Wireframes and prototypes are essential tools in software design that help teams
 skinparam monochrome true
 skinparam shadowing false
 
-package "Wireframe Design Process" {
-    rectangle "Requirements Analysis" as req {
-        note right : User needs\nBusiness goals\nTechnical constraints
-    }
-    
-    rectangle "Information Architecture" as ia {
-        note right : Content organization\nNavigation structure\nUser flow mapping
-    }
-    
-    rectangle "Low-Fidelity Wireframes" as lowfi {
-        note right : Basic layout\nElement placement\nContent hierarchy
-    }
-    
-    rectangle "Interactive Prototypes" as proto {
-        note right : User testing\nFlow validation\nStakeholder feedback
-    }
-    
-    rectangle "High-Fidelity Designs" as hifi {
-        note right : Visual design\nBrand integration\nDevelopment-ready specs
-    }
-    
-    req --> ia
-    ia --> lowfi
-    lowfi --> proto
-    proto --> hifi
-    
-    hifi --> req : Iterate based on feedback
-}
+rectangle "Requirements Analysis" as req
+note right of req : User needs\nBusiness goals\nTechnical constraints
+
+rectangle "Information Architecture" as ia
+note right of ia : Content organization\nNavigation structure\nUser flow mapping
+
+rectangle "Low-Fidelity Wireframes" as lowfi
+note right of lowfi : Basic layout\nElement placement\nContent hierarchy
+
+rectangle "Interactive Prototypes" as proto
+note right of proto : User testing\nFlow validation\nStakeholder feedback
+
+rectangle "High-Fidelity Designs" as hifi
+note right of hifi : Visual design\nBrand integration\nDevelopment-ready specs
+
+req --> ia
+ia --> lowfi
+lowfi --> proto
+proto --> hifi
+
+hifi --> req : Iterate based on feedback
 
 note bottom : Wireframing is an iterative process\nthat refines through user feedback
 @enduml
