@@ -15,6 +15,15 @@ from pathlib import Path
 from typing import List, Dict, Tuple, Optional
 import argparse
 
+import os
+import re
+import sys
+import json
+import requests
+from pathlib import Path
+from typing import List, Dict, Tuple, Optional
+import argparse
+
 # Supported Kroki diagram types
 KROKI_TYPES = {
     'plantuml', 'mermaid', 'graphviz', 'blockdiag', 'seqdiag', 'actdiag', 
@@ -144,13 +153,15 @@ class KrokiDebugger:
         content = diagram.content.strip()
         has_issues = False
         
-        # Check for @startuml/@enduml tags
+        # Check for @start/@end tags (can be @startuml/@enduml, @startgannt/@endgannt, etc.)
         if not content.startswith('@start'):
-            diagram.issues.append("PlantUML diagram should start with @startuml")
+            diagram.issues.append("PlantUML diagram should start with @start")
             has_issues = True
         
-        if not content.endswith('@enduml'):
-            diagram.issues.append("PlantUML diagram should end with @enduml")
+        # Check if the last non-empty line ends with @end
+        lines = [line.strip() for line in content.split('\n') if line.strip()]
+        if lines and not lines[-1].startswith('@end'):
+            diagram.issues.append("PlantUML diagram should end with @end")
             has_issues = True
         
         # Check for common syntax issues
@@ -370,8 +381,12 @@ class KrokiDebugger:
         if diagram.diagram_type == 'plantuml':
             if not content.startswith('@start'):
                 content = f"@startuml\n{content}"
-            if not content.endswith('@enduml'):
+            
+            # Check if the last non-empty line ends with @end
+            lines = [line.strip() for line in content.split('\n') if line.strip()]
+            if lines and not lines[-1].endswith('@end'):
                 content = f"{content}\n@enduml"
+            
             return content
         
         # Fix Mermaid issues
