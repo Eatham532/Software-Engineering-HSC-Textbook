@@ -326,11 +326,14 @@ BEGIN
     FOR EACH character IN password DO
         IF character is uppercase letter THEN
             SET hasUpper = true
-        ELSE IF character is lowercase letter THEN
+        END IF
+        IF character is lowercase letter THEN
             SET hasLower = true
-        ELSE IF character is digit THEN
+        END IF
+        IF character is digit THEN
             SET hasDigit = true
-        ELSE IF character is special symbol THEN
+        END IF
+        IF character is special symbol THEN
             SET hasSpecial = true
         END IF
     END FOR

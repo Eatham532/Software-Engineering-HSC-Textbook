@@ -185,7 +185,7 @@ class TestPasswordValidatorBlackBox(unittest.TestCase):
         
         # No digits - should fail
         with self.assertRaises(ValueError):
-            self.validator.validate("Abcdef!@"))
+            self.validator.validate("Abcdef!@")
         
         # Exactly one digit - should pass
         self.assertTrue(self.validator.validate("Abcdef1!"))
