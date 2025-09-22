@@ -1390,6 +1390,7 @@ Given these scenarios, recommend the most appropriate web application type and j
 
 3. **Field Data Collection App - Progressive Web App**: Must work offline in remote locations, sync data when connectivity returns, and provide app-like experience on mobile devices. PWAs offer offline functionality and native app features while maintaining web accessibility.
 ///
+///
 
 /// details | Exercise 2: Trade-off Analysis
     type: question
@@ -1433,6 +1434,7 @@ For each web application type, identify three major trade-offs and propose mitig
 
 - *Trade-off 3*: App-like experience vs. web deployment simplicity
   *Mitigation*: Service workers and web app manifests with careful feature scoping
+///
 ///
 
 /// details | Exercise 3: Architecture Design
@@ -1490,6 +1492,8 @@ Design a high-level architecture for a collaborative document editing platform t
                     │   management    │
                     └─────────────────┘
 ```
+///
+///
 
 **Key Components:**
 

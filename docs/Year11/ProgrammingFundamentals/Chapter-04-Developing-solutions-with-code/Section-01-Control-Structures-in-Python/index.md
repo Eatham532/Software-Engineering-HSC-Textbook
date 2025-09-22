@@ -282,8 +282,9 @@ while choice != "4":
     type: example
     open: false
 
-**Pseudocode:**
-```
+/// tab | Pseudocode
+
+```text
 BEGIN NumberGuessingGame
     SET secret_number = 7
     SET guess = 0
@@ -307,7 +308,10 @@ BEGIN NumberGuessingGame
 END
 ```
 
-**Python Implementation:**
+///
+
+/// tab | Python Implementation
+
 ```python
 # Number guessing game
 secret_number = 7
@@ -329,6 +333,7 @@ print(f"You won in {attempts} attempts!")
 ```
 
 ///
+///
 
 ### Example 2: Grade Classifier
 
@@ -336,8 +341,9 @@ print(f"You won in {attempts} attempts!")
     type: example
     open: false
 
-**Pseudocode:**
-```
+/// tab | Pseudocode
+
+```text
 BEGIN GradeClassifier
     FOR each student in class DO
         READ student_name
@@ -359,8 +365,10 @@ BEGIN GradeClassifier
     END FOR
 END
 ```
+///
 
-**Python Implementation:**
+/// tab | Python Implementation
+
 ```python
 # Grade classifier for multiple students
 students = ["Alice", "Bob", "Charlie"]
@@ -384,6 +392,7 @@ for i in range(len(students)):
     print(f"{student_name}: {grade}")
 ```
 
+///
 ///
 
 ## Combining Control Structures
@@ -621,8 +630,6 @@ This program demonstrates:
 ///
 ///
 
-///
-
 /// details | Exercise 2: Simple ATM
     type: question
     open: false
@@ -729,7 +736,6 @@ This program demonstrates:
 ///
 ///
 
-///
 
 /// details | Exercise 3: Grade Book Manager
     type: question
@@ -852,7 +858,6 @@ This program demonstrates:
 - **String formatting** for output display
 
 - **Input validation** for names and scores
-///
 ///
 ///
 

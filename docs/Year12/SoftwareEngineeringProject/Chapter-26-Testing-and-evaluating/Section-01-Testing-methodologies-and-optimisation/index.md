@@ -65,32 +65,43 @@ package "Test Techniques" {
 @enduml
 ```
 
-```tabbed
-=== "Test Plan Structure"
-
+/// tab | Test Plan Structure
 **Test Plan Components**:
 
 1. **Introduction and Scope**
+
    - Project overview and testing objectives
+
    - Features to be tested and excluded
+
    - Test environment requirements
 
 2. **Test Strategy**
+
    - Testing approach and methodologies
+
    - Entry and exit criteria for testing phases
+
    - Risk assessment and mitigation strategies
 
 3. **Test Cases and Procedures**
+
    - Detailed test cases with expected results
+
    - Test data requirements and setup procedures
+
    - Manual and automated test procedures
 
 4. **Resources and Schedule**
-   - Testing team roles and responsibilities
-   - Testing timeline and milestones
-   - Tools and infrastructure requirements
 
-=== "Python Test Plan Generator"
+   - Testing team roles and responsibilities
+
+   - Testing timeline and milestones
+
+   - Tools and infrastructure requirements
+///
+
+/// tab | Python Test Plan Generator
 
 ```py
 from datetime import date, timedelta
@@ -312,34 +323,45 @@ test_plan.add_risk(
 summary = test_plan.generate_test_summary()
 print(f"Test Plan Summary: {summary}")
 ```
-```
+///
 
 ### Functional, integration, and non-functional tests
 
 Different types of tests serve different purposes in ensuring software quality. Understanding when and how to apply each type is crucial for comprehensive testing coverage.
 
-```tabbed
-=== "Test Types Overview"
-
+/// tab | Test Types Overview
 **Functional Tests**:
+
 - Test what the system does (business logic and features)
+
 - Verify user requirements and acceptance criteria
+
 - Include unit tests, component tests, and end-to-end tests
+
 - Focus on correctness of functionality
 
 **Integration Tests**:
+
 - Test how different components work together
+
 - Verify data flow between modules and systems
+
 - Include API testing, database integration, third-party service integration
+
 - Focus on interface and communication correctness
 
 **Non-functional Tests**:
-- Test how the system performs (quality attributes)
-- Include performance, security, usability, reliability testing
-- Verify system meets quality standards and constraints
-- Focus on system behaviour under various conditions
 
-=== "Python Test Framework"
+- Test how the system performs (quality attributes)
+
+- Include performance, security, usability, reliability testing
+
+- Verify system meets quality standards and constraints
+
+- Focus on system behaviour under various conditions
+///
+
+/// tab | Python Test Framework
 
 ```py
 import time
@@ -546,7 +568,7 @@ suite.add_test(perf_test)
 report = suite.run_all_tests()
 print(f"Test Suite Report: {report}")
 ```
-```
+///
 
 ### Test data selection for path and boundary testing
 
@@ -562,27 +584,37 @@ Key principles for test data selection:
 
 - **Edge cases**: Test unusual or extreme conditions that might cause failures
 
-```tabbed
-=== "Test Data Strategies"
-
+/// tab | Test Data Strategies
 **Path Testing Data**:
+
 - **Decision points**: Data that exercises different conditional branches
+
 - **Loop boundaries**: Zero iterations, one iteration, maximum iterations
+
 - **Error conditions**: Data that triggers exception handling
+
 - **Normal flow**: Data that follows expected user workflows
 
 **Boundary Testing Data**:
+
 - **Minimum values**: Smallest acceptable inputs
+
 - **Maximum values**: Largest acceptable inputs
+
 - **Just outside bounds**: Invalid inputs that exceed limits
+
 - **Edge transitions**: Values that change system behaviour
 
 **Example boundaries for student grade system**:
-- Valid grades: 0-100
-- Test values: -1, 0, 1, 49, 50, 51, 99, 100, 101
-- Special cases: non-numeric inputs, null values
 
-=== "Python Test Data Generator"
+- Valid grades: 0-100
+
+- Test values: -1, 0, 1, 49, 50, 51, 99, 100, 101
+
+- Special cases: non-numeric inputs, null values
+///
+
+/// tab | Python Test Data Generator
 
 ```py
 import random
@@ -766,7 +798,7 @@ def test_grade_validation():
 
 test_grade_validation()
 ```
-```
+///
 
 ### Developing test cases and acceptance tests
 
@@ -786,11 +818,9 @@ Components of effective test cases:
 
 - **Test data**: Specific inputs required for test execution
 
-```tabbed
-=== "Test Case Structure"
-
+/// tab | Test Case Structure
 **Test Case Template**:
-```
+///
 Test Case ID: TC_[Module]_[Feature]_[Number]
 Test Title: [Descriptive title of functionality being tested]
 Test Objective: [What this test aims to verify]
@@ -813,8 +843,8 @@ Fail Criteria: [Conditions indicating test failure]
 - Testable and measurable outcomes
 - Clear pass/fail criteria
 
-=== "Python Test Case Builder"
-
+/// tab | Python Test Case Builder
+///
 ```py
 from datetime import date
 from enum import Enum
@@ -1025,15 +1055,13 @@ print(f"  Steps executed: {len(report['steps'])}")
 print(f"  Execution status: {report['execution_status']}")
 print(f"  Criteria assessment: {report['criteria_met']}")
 ```
-```
+///
 
 ### Automated vs manual testing approaches
 
 Both automated and manual testing serve important roles in a comprehensive testing strategy. Understanding when to use each approach optimises testing efficiency and effectiveness.
 
-```tabbed
-=== "Testing Approach Selection"
-
+/// tab | Testing Approach Selection
 **Automated Testing - Best For**:
 - **Regression testing**: Re-running tests after code changes
 - **Performance testing**: Load and stress testing scenarios
@@ -1054,8 +1082,9 @@ Both automated and manual testing serve important roles in a comprehensive testi
 - Available resources and timeline
 - Return on investment for automation
 - Type of functionality being tested
+///
 
-=== "Python Test Automation Framework"
+/// tab | Python Test Automation Framework
 
 ```py
 import time
@@ -1331,7 +1360,7 @@ def demonstrate_testing_approaches():
 
 demonstrate_testing_approaches()
 ```
-```
+///
 
 ## Practice
 

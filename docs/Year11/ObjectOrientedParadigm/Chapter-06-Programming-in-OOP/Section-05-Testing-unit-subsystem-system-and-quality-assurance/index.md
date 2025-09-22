@@ -621,7 +621,9 @@ class TestStudentManagementAcceptance(unittest.TestCase):
 
 ## Practice Exercises
 
-### Exercise 1: Write Unit Tests for a Shopping Cart
+/// details | Exercise 1: Write Unit Tests for a Shopping Cart
+    type: question
+    open: false
 
 Create unit tests for this shopping cart class:
 
@@ -677,7 +679,11 @@ class ShoppingCart:
         return subtotal * (1 - self.discount_rate)
 ```
 
-### Exercise 2: Create Integration Tests
+///
+
+/// details | Exercise 2: Create Integration Tests
+    type: question
+    open: false
 
 Write integration tests for a simple order processing system with these classes:
 
@@ -731,7 +737,11 @@ class OrderProcessor:
         pass
 ```
 
-### Exercise 3: Design Acceptance Criteria
+///
+
+/// details | Exercise 3: Design Acceptance Criteria
+    type: question
+    open: false
 
 For a simple gradebook application, write acceptance criteria and corresponding tests for these user stories:
 
@@ -740,6 +750,7 @@ For a simple gradebook application, write acceptance criteria and corresponding 
 2. **User Story**: "As a teacher, I want to calculate class averages so that I can assess overall performance."
 
 3. **User Story**: "As a student, I want to view my current grades so that I can monitor my academic performance."
+///
 
 ## Section Recap
 

@@ -128,25 +128,28 @@ A curated set of `pymdownx` extensions is enabled in `mkdocs.yml` to improve rea
 
 Guidelines and common patterns:
 
-- Tabs: `pymdownx.tabbed` supports alternate views (for example, pseudocode, Python, or a worked example). Each tab uses the `===` separator and contains a fenced block for its content. Language labels on fences are pref
+- Tabs: Use the `/// tab | Title` syntax for alternate views (for example, pseudocode, Python, or a worked example). Each tab is a separate collapsible block that can be expanded independently.
 
   Example (correct syntax):
 
-  ````markdown
-  ```tabbed
-  === "Python"
+  ```markdown
+  /// tab | Python
 
   ```py
   print('hello')
   ```
 
-  === "Pseudocode"
+  ///
+
+  /// tab | Pseudocode
 
   ```text
   OUTPUT "hello"
   ```
+
+  ///
   ```
-  ````
+  ```
 
   Notes:
 
@@ -231,7 +234,7 @@ When a new `pymdownx`-powered pattern is added, a one-line example and rationale
 
 - Content organisation should leverage `pymdownx` patterns where appropriate:
 
-  - `tabbed` for alternate views such as code vs pseudocode
+  - `/// tab | Title` for alternate views such as code vs pseudocode
 
   - `details` for optional deep dives and worked solutions
 
@@ -245,7 +248,8 @@ When a new `pymdownx`-powered pattern is added, a one-line example and rationale
 Formatting example (in `index.md`):
 
 ````markdown
-# 1.1 Software development steps
+
+## 1.1 Software development steps
 
 ## Why it matters
 
@@ -259,25 +263,26 @@ Content here.
 
 ### Guided example
 
-```text
-~~~tabbed
-=== "Python"
+/// tab | Python
 
-~~~py
+```py
 print('tiny example')
-~~~
-
-=== "Pseudocode"
-
-~~~text
-OUTPUT "tiny example"
-~~~
-~~~
 ```
+
+///
+
+/// tab | Pseudocode
+
+```text
+OUTPUT "tiny example"
+```
+
+///
 
 ## Try it
 
 - [ ] Small task 1
+
 - [ ] Small task 2
 
 ## Recap
@@ -518,7 +523,8 @@ Quiz (`quiz.md`): 3–8 questions (mix of multiple-choice and short-answer). Mar
 Use a single admonition block for the entire quiz:
 
 ```markdown
-# Section Title - Quiz
+
+## Section Title - Quiz
 
 !!! quiz "Check your understanding"
 

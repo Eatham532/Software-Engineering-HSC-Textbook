@@ -597,7 +597,9 @@ class MockGreenhouseEnvironment:
 
 ## Try it
 
-### Exercise 1: sensor validation testing
+/// details | Exercise 1: sensor validation testing
+    type: question
+    open: false
 
 Create unit tests for a pressure sensor that must validate readings are within expected ranges and handle sensor failures gracefully.
 
@@ -677,9 +679,12 @@ class TestPressureSensor(unittest.TestCase):
         # Should return last valid reading
         self.assertEqual(self.sensor.get_safe_reading(), 300)
 ```
+
 ///
 
-### Exercise 2: actuator control testing
+/// details | Exercise 2: actuator control testing
+    type: question
+    open: false
 
 Design tests for a servo motor controller that must handle position commands, speed limits, and safety boundaries.
 
@@ -755,9 +760,12 @@ class TestServoController(unittest.TestCase):
         self.assertFalse(self.servo.is_moving)
         self.assertFalse(self.servo.move_to(45))  # Commands rejected
 ```
+
 ///
 
-### Exercise 3: system integration test
+/// details | Exercise 3: system integration test
+    type: question
+    open: false
 
 Create an integration test for a conveyor belt system with multiple sensors and actuators working together.
 
@@ -850,6 +858,7 @@ class TestConveyorIntegration(unittest.TestCase):
         self.assertEqual(self.motor.current_speed, 0)
         self.assertFalse(self.conveyor.enabled)
 ```
+
 ///
 
 ## Recap

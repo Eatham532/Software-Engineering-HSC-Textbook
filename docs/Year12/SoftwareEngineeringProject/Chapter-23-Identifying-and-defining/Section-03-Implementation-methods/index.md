@@ -20,25 +20,30 @@ Characteristics of direct implementation:
 
 - **Resource intensive**: Requires significant preparation and testing
 
-```tabbed
-=== "Advantages"
+/// tab | Advantages
 
 - **Speed**: Fastest way to realise benefits
-- **Cost efficiency**: No need to run parallel systems
-- **Clear transition**: No confusion about which system to use
-- **Immediate feedback**: Issues surface quickly and must be resolved
 
-=== "Disadvantages"
+- **Cost efficiency**: No need to run parallel systems
+
+- **Clear transition**: No confusion about which system to use
+
+- **Immediate feedback**: Issues surface quickly and must be resolved
+///
+
+/// tab | Disadvantages
 
 - **High risk**: If new system fails, no immediate backup
+
 - **User disruption**: Everyone must adapt at once
+
 - **Pressure**: All problems must be solved immediately
+
 - **Training challenges**: All users need training simultaneously
+///
 
-=== "Example Scenario"
-
+/// tab | Example Scenario
 **School Email System Upgrade**
-
 ```py
 class DirectImplementation:
     def \_\_init\_\_(self, old_system, new_system):
@@ -67,7 +72,7 @@ email_upgrade.plan_cutover("2025-10-01")
 result = email_upgrade.execute_cutover()
 print(result)
 ```
-```
+///
 
 ### Phased implementation
 
@@ -106,17 +111,19 @@ note right of P4 : Dashboard reports\nPerformance analytics
 @enduml
 ```
 
-```tabbed
-=== "Implementation Strategy"
-
+/// tab | Implementation Strategy
 **Phase Planning Process**:
 
 1. **Identify dependencies**: Which features must come first?
-2. **Define user groups**: Who gets access in each phase?
-3. **Set success criteria**: How will each phase be evaluated?
-4. **Plan transitions**: How do users move between phases?
 
-=== "Python Example"
+2. **Define user groups**: Who gets access in each phase?
+
+3. **Set success criteria**: How will each phase be evaluated?
+
+4. **Plan transitions**: How do users move between phases?
+///
+
+/// tab | Python Example
 
 ```py
 from datetime import date, timedelta
@@ -155,7 +162,7 @@ for phase in phases:
     print(f"{phase.name}: {phase.start_date} to {phase.end_date}")
     current_date = phase.end_date
 ```
-```
+///
 
 ### Parallel implementation
 
@@ -171,18 +178,21 @@ Benefits of parallel implementation:
 
 - **Confidence building**: Proven reliability before full commitment
 
-```tabbed
-=== "Parallel Process"
-
+/// tab | Parallel Process
 **Typical Parallel Implementation Steps**:
 
 1. **Setup**: Configure new system alongside existing one
-2. **Dual processing**: Run both systems with same data
-3. **Comparison**: Verify new system produces correct results
-4. **Transition**: Gradually move users to new system
-5. **Decommission**: Shut down old system when transition complete
 
-=== "Code Example"
+2. **Dual processing**: Run both systems with same data
+
+3. **Comparison**: Verify new system produces correct results
+
+4. **Transition**: Gradually move users to new system
+
+5. **Decommission**: Shut down old system when transition complete
+///
+
+/// tab | Code Example
 
 ```py
 class ParallelImplementation:
@@ -219,7 +229,7 @@ class ParallelImplementation:
         percentage = (migrated / total_users) * 100
         return f"{percentage:.1f}% of users migrated"
 ```
-```
+///
 
 ### Pilot implementation
 
@@ -235,17 +245,19 @@ Characteristics of pilot implementation:
 
 - **Risk mitigation**: Problems affect only the pilot group initially
 
-```tabbed
-=== "Pilot Planning"
-
+/// tab | Pilot Planning
 **Key Considerations for Pilot Selection**:
 
 - **Representative users**: Cover different use cases and skill levels
-- **Manageable size**: Large enough for meaningful data, small enough to support
-- **Willing participants**: Users who can provide constructive feedback
-- **Critical but not risky**: Important enough to matter, safe enough to experiment
 
-=== "Python Implementation"
+- **Manageable size**: Large enough for meaningful data, small enough to support
+
+- **Willing participants**: Users who can provide constructive feedback
+
+- **Critical but not risky**: Important enough to matter, safe enough to experiment
+///
+
+/// tab | Python Implementation
 
 ```py
 from datetime import date
@@ -301,7 +313,7 @@ pilot.report_issue("Login timeout too short", "medium")
 summary = pilot.get_pilot_summary()
 print(f"Pilot Summary: {summary}")
 ```
-```
+///
 
 ### WAgile approach
 

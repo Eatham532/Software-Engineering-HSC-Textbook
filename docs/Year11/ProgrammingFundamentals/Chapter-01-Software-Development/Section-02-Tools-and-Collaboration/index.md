@@ -800,22 +800,24 @@ git branch --no-merged main
 
 ## Worked example
 
-=== "Python"
-    ```py
-    # hello.py — run this from the terminal or IDE run button
-    print("Hello, repo!")
-    ```
+/// tab | Python
+```py
+# hello.py — run this from the terminal or IDE run button
+print("Hello, repo!")
+```
+///
 
-=== "Terminal"
-    ```text
-    # initialising a repository and making two commits (illustrative)
-    git init
-    git add hello.py
-    git commit -m "Add hello.py"
-    echo "# Project" > README.md
-    git add README.md
-    git commit -m "Add README"
-    ```
+/// tab | Terminal
+```text
+# initialising a repository and making two commits (illustrative)
+git init
+git add hello.py
+git commit -m "Add hello.py"
+echo "# Project" > README.md
+git add README.md
+git commit -m "Add README"
+```
+///
 
 ### What the example does
 

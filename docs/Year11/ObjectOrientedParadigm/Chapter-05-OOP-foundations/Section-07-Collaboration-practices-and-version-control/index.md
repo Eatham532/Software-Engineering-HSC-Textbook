@@ -614,6 +614,9 @@ class Order:
 
 - Mock implementations allow testing before integration
 
+///
+///
+
 /// details | Exercise 2: Git workflow practice
     type: question
     open: false
@@ -635,6 +638,7 @@ You're working on a team project and need to add a new feature. Write the Git co
     open: false
 
 **1. Creating feature branch:**
+
 ```bash
 git checkout main                    # Switch to main branch
 git pull origin main                # Get latest changes
@@ -642,6 +646,7 @@ git checkout -b feature/user-profile-editing  # Create and switch to feature bra
 ```
 
 **2. Making commits during development:**
+
 ```bash
 # After creating User class
 git add src/models/user.py
@@ -657,12 +662,14 @@ git commit -m "Add comprehensive tests for profile editing"
 ```
 
 **3. Pushing and creating pull request:**
+
 ```bash
 git push origin feature/user-profile-editing
 # Then create pull request through GitHub/GitLab interface
 ```
 
 **4. Handling merge conflict:**
+
 ```bash
 git checkout main
 git pull origin main                 # Get latest main
@@ -724,22 +731,26 @@ class UserManager:
 **Areas for improvement:**
 
 1. **Parameter naming** (line 6): Use descriptive parameter names instead of single letters:
+
    ```python
    def add_user(self, name, email, password):  # Instead of n, e, p
    ```
 
 2. **Variable naming** (lines 7, 11): Use full names instead of abbreviations:
+
    ```python
    user = {"name": name, ...}  # Instead of u = {"name": n, ...}
    ```
 
 3. **Security concern** (line 7): Passwords should be hashed, never stored in plain text:
+
    ```python
    import hashlib
    hashed_password = hashlib.sha256(password.encode()).hexdigest()
    ```
 
 4. **Data structure** (line 7): Consider using a User class instead of dictionaries for type safety:
+
    ```python
    class User:
        def __init__(self, user_id, name, email, password_hash):
@@ -756,6 +767,7 @@ class UserManager:
 7. **Documentation**: Add docstrings explaining what each method does.
 
 **Suggested refactor:**
+
 ```python
 class UserManager:
     """Manages user accounts and authentication"""

@@ -20,20 +20,25 @@ Key principles for effective brainstorming:
 
 - **Stay focused**: Keep the session directed toward the specific problem
 
-```tabbed
-=== "Example Session"
-
+/// tab | Example Session
 **Problem**: Students struggle to track assignment deadlines
 
 **Brainstormed solutions**:
-- Calendar integration app
-- Email reminder system
-- Physical notice board with QR codes
-- Peer reminder network
-- AI chatbot that nags students
-- Gamified deadline tracker with rewards
 
-=== "Python Tool"
+- Calendar integration app
+
+- Email reminder system
+
+- Physical notice board with QR codes
+
+- Peer reminder network
+
+- AI chatbot that nags students
+
+- Gamified deadline tracker with rewards
+///
+
+/// tab | Python Tool
 
 ```py
 
@@ -55,7 +60,7 @@ add_idea("Mobile app with push notifications", "Sarah")
 add_idea("Integration with existing school systems", "Mike")
 show_all_ideas()
 ```
-```
+///
 
 ### Mind-mapping for visual thinking
 
@@ -126,26 +131,31 @@ A typical storyboard includes:
 
 - **Pain points**: Where problems might occur
 
-```tabbed
-=== "Storyboard Example"
-
+/// tab | Storyboard Example
 **User**: High school student with multiple assignments
 
 **Scenario**: Using assignment tracker app
 
 1. **Morning**: Student wakes up, checks phone
+
    - App shows: "History essay due in 2 days!"
+
    - Feeling: Slight anxiety but prepared
 
 2. **During lunch**: Student updates progress
+
    - App input: "Completed research phase"
+
    - Feeling: Accomplished, on track
 
 3. **Evening**: Student plans tomorrow
-   - App shows: "2 hours needed to finish essay"
-   - Feeling: Confident, organised
 
-=== "Python Simulation"
+   - App shows: "2 hours needed to finish essay"
+
+   - Feeling: Confident, organised
+///
+
+/// tab | Python Simulation
 
 ```py
 class StoryboardStep:
@@ -170,7 +180,7 @@ for step in steps:
     step.display()
     print()
 ```
-```
+///
 
 ### Data dictionaries and type selection
 
@@ -186,9 +196,7 @@ Essential elements of a data dictionary:
 
 - **Relationships**: How data connects between different parts of the system
 
-```tabbed
-=== "Assignment Tracker Data"
-
+/// tab | Assignment Tracker Data
 | Field Name | Data Type | Required | Description |
 |------------|-----------|----------|-------------|
 | assignment_id | Integer | Yes | Unique identifier |
@@ -198,8 +206,9 @@ Essential elements of a data dictionary:
 | priority | Integer(1-5) | No | Importance level |
 | completed | Boolean | Yes | Completion status |
 | progress_notes | Text | No | Student comments |
+///
 
-=== "Python Implementation"
+/// tab | Python Implementation
 
 ```py
 from datetime import date
@@ -234,7 +243,7 @@ math_assignment = Assignment(
 
 print(f"Days until due: {math_assignment.days_until_due()}")
 ```
-```
+///
 
 ## Practice
 

@@ -584,13 +584,19 @@ Different scenarios call for different testing strategies:
 
 ## Practice Exercises
 
-### Exercise 1: Black Box Test Design
+/// details | Exercise 1: Black Box Test Design
+    type: question
+    open: false
 
 Design black box tests for a library fine calculator with this specification:
 
 **Specification**: "Calculate library fines based on days overdue. No fine for 0-7 days. $0.50/day for 8-14 days. $1.00/day for 15-30 days. $2.00/day for 31+ days. Maximum fine is $50.00."
+///
+///
 
-### Exercise 2: White Box Test Design
+/// details | Exercise 2: White Box Test Design
+    type: question
+    open: false
 
 Analyze this code and design white box tests to achieve 100% statement and branch coverage:
 
@@ -624,7 +630,12 @@ def calculate_shipping_cost(weight, distance, priority):
     return round(base_cost, 2)
 ```
 
-### Exercise 3: Grey Box Test Strategy
+///
+///
+
+/// details | Exercise 3: Grey Box Test Strategy
+    type: question
+    open: false
 
 You know that a student grading system uses the following internal mechanisms:
 
@@ -637,6 +648,7 @@ You know that a student grading system uses the following internal mechanisms:
 - Grade validation rules in a separate module
 
 Design grey box tests that leverage this internal knowledge to test critical scenarios.
+///
 
 ## Section Recap
 

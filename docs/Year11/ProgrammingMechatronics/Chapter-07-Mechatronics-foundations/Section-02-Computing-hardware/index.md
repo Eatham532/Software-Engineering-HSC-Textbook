@@ -258,11 +258,23 @@ This shows how even a simple calculation like adding sensor readings involves mu
 
 ## Try it
 
-Now let's explore how different instruction sets might work for mechatronic applications:
+/// details | Exercise 1: Motor control sequence
+    type: question
+    open: false
 
-### Exercise 1: Motor control sequence
+Create a program that controls a motor based on sensor input. Extend the `SimpleProcessor` class to include:
 
-Create a program that controls a motor based on sensor input:
+- A `READ_SENSOR` instruction that reads from a sensor by ID
+
+- A `SET_MOTOR` instruction that sets motor speed
+
+- A `JUMP_IF_ZERO` instruction for conditional branching
+
+Test your program with different sensor readings to see how the motor control changes.
+
+/// details | Sample Solution
+    type: success
+    open: false
 
 ```python
 # Extend our processor to handle motor control
@@ -323,11 +335,34 @@ mechatronic_processor.load_program(motor_program)
 mechatronic_processor.run_program()
 ```
 
-Try modifying the sensor readings and see how the program flow changes.
+Try modifying the sensor readings in the `test_values` dictionary and see how the program flow changes.
+///
 
-### Exercise 2: Instruction timing analysis
+/// details | Exercise 2: Instruction timing analysis
+    type: question
+    open: false
 
-Different instructions take different amounts of time to execute. Let's simulate this:
+Different instructions take different amounts of time to execute. Create a `TimedProcessor` class that tracks clock cycles for each instruction:
+
+- `LOAD`: 1 cycle
+
+- `ADD`: 1 cycle  
+
+- `STORE`: 2 cycles (memory access is slower)
+
+- `COMPARE`: 1 cycle
+
+- `MULTIPLY`: 4 cycles (multiplication is complex)
+
+Compare the timing of two approaches to calculate `5 * 4`:
+
+1. Adding 5 four times
+
+2. Using multiplication directly
+
+/// details | Sample Solution
+    type: success
+    open: false
 
 ```python
 class TimedProcessor(SimpleProcessor):
@@ -388,6 +423,7 @@ print(f"Difference: {abs(time1 - time2)} clock cycles")
 ```
 
 This demonstrates why understanding instruction timing is important for real-time mechatronic systems.
+///
 
 ## Recap
 

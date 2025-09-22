@@ -908,9 +908,15 @@ print("\n🎯 Interface demo complete!")
 
 ## Try it
 
-### Exercise 1: Design a CLI for different mechatronic systems
+/// details | Exercise 1: Design a CLI for different mechatronic systems
+    type: question
+    open: false
 
-Create CLI interfaces for various mechatronic applications:
+Create CLI interfaces for various mechatronic applications. Design commands for drone control, 3D printing, and security systems that include safety-critical commands and example usage sequences.
+
+/// details | Sample Solution
+    type: success
+    open: false
 
 ```python
 def design_cli_commands(system_type):
@@ -1004,9 +1010,19 @@ for system in ["drone", "3d_printer", "security_system"]:
     design_cli_commands(system)
 ```
 
-### Exercise 2: Create status indicators for different conditions
+///
 
-Build visual status indicators for various system states:
+///
+
+/// details | Exercise 2: Create status indicators for different conditions
+    type: question
+    open: false
+
+Build visual status indicators for various system states. Create a status dashboard that shows battery level, connectivity, sensor status, motor status, and safety conditions with appropriate icons and color coding.
+
+/// details | Sample Solution
+    type: success
+    open: false
 
 ```python
 class StatusIndicators:
@@ -1159,6 +1175,8 @@ class StatusIndicators:
 status_system = StatusIndicators()
 status_system.simulate_status_changes()
 ```
+
+///
 
 ## Recap
 

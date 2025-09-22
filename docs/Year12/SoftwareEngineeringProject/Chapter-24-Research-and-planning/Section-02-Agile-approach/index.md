@@ -20,23 +20,29 @@ Key characteristics of Agile iterations:
 
 - **Reviewable**: Produces demonstrable results for stakeholder feedback
 
-```tabbed
-=== "Sprint Structure"
-
+/// tab | Sprint Structure
 **Typical 2-week sprint timeline**:
 
 - **Day 1**: Sprint planning (define goals and tasks)
+
 - **Days 2-9**: Development work with daily standups
+
 - **Day 10**: Sprint review (demonstrate completed work)
+
 - **Day 10**: Sprint retrospective (process improvement)
 
 **Sprint Planning Process**:
-1. Review product backlog priorities
-2. Estimate effort for proposed features
-3. Commit to achievable sprint goals
-4. Break down features into development tasks
 
-=== "Python Sprint Tracker"
+1. Review product backlog priorities
+
+2. Estimate effort for proposed features
+
+3. Commit to achievable sprint goals
+
+4. Break down features into development tasks
+///
+
+/// tab | Python Sprint Tracker
 
 ```py
 from datetime import date, timedelta
@@ -94,7 +100,7 @@ sprint.add_user_story({"title": "User sees personal dashboard", "points": 8})
 sprint.complete_story({"title": "User can log in", "points": 5})
 print(sprint.sprint_summary())
 ```
-```
+///
 
 ### Agile ceremonies
 
@@ -139,26 +145,33 @@ Sprint Planning is a collaborative meeting where the team selects work for the u
 
 - **Task breakdown**: Decompose stories into specific development tasks
 
-```tabbed
-=== "Planning Process"
-
+/// tab | Planning Process
 **Planning Meeting Agenda** (4 hours for 2-week sprint):
 
 1. **Review sprint goal** (30 minutes)
+
    - Product Owner explains priorities
+
    - Team discusses overall objective
 
 2. **Select user stories** (2 hours)
+
    - Estimate effort using story points
+
    - Choose stories that fit team capacity
+
    - Clarify acceptance criteria
 
 3. **Create sprint backlog** (1.5 hours)
-   - Break stories into technical tasks
-   - Assign initial ownership
-   - Identify dependencies and risks
 
-=== "Python Planning Tool"
+   - Break stories into technical tasks
+
+   - Assign initial ownership
+
+   - Identify dependencies and risks
+///
+
+/// tab | Python Planning Tool
 
 ```py
 class UserStory:
@@ -219,7 +232,7 @@ login_story.add_task("Add session management", 6)
 planning.add_story_to_sprint(login_story)
 print(planning.planning_summary())
 ```
-```
+///
 
 #### Daily Standup
 
@@ -233,24 +246,31 @@ Daily Standup is a brief (15-minute) meeting where team members synchronise thei
 
 3. **Are there any blockers or impediments?**
 
-```tabbed
-=== "Standup Best Practices"
-
+/// tab | Standup Best Practices
 **Effective Daily Standups**:
 
 - **Time-boxed**: Strictly 15 minutes maximum
+
 - **Standing up**: Physical standing keeps meeting brief
+
 - **Focus on work**: Discuss tasks, not detailed solutions
+
 - **Identify blockers**: Highlight issues that need resolution
+
 - **Follow up separately**: Detailed discussions happen after standup
 
 **Common Anti-patterns to avoid**:
-- Turning into status reporting session
-- Solving problems during the meeting
-- Only talking to the Scrum Master
-- Skipping team members or irregular attendance
 
-=== "Python Standup Tracker"
+- Turning into status reporting session
+
+- Solving problems during the meeting
+
+- Only talking to the Scrum Master
+
+- Skipping team members or irregular attendance
+///
+
+/// tab | Python Standup Tracker
 
 ```py
 from datetime import date
@@ -312,7 +332,7 @@ standup.add_update(StandupUpdate(
 ))
 print(standup.generate_summary())
 ```
-```
+///
 
 #### Sprint Review
 
@@ -365,13 +385,11 @@ Essential components of good User Stories:
 
 - **Testable**: Clear criteria for determining completion
 
-```tabbed
-=== "Story Examples"
-
+/// tab | Story Examples
 **Well-written User Stories**:
 
 **Student Portal Login**:
-```
+///
 As a high school student,
 I want to log into the school portal with my student ID,
 So that I can access my grades and assignment information securely.
@@ -391,8 +409,8 @@ I want to receive email notifications when my child's grades are updated,
 So that I can stay informed about their academic progress.
 ```
 
-=== "Python Story Management"
-
+/// tab | Python Story Management
+///
 ```py
 class AcceptanceCriteria:
     def \_\_init\_\_(self, description, test_method="manual"):
@@ -460,7 +478,7 @@ login_story.estimate_points(5)
 print(login_story.format_story())
 print(f"Ready for development: {login_story.is_ready_for_development()}")
 ```
-```
+///
 
 ## Practice
 

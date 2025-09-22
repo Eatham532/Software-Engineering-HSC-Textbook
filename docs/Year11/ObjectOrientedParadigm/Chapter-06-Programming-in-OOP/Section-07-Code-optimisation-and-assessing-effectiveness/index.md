@@ -57,10 +57,12 @@ class BankAccount:
             self.balance -= amount
             self.transaction_history.append(f"Withdrawal: ${amount}")
             return self.balance
-        return False  # Issue: inconsistent return types
+        return False
+```
 
 
-# Improved version with better correctness
+## Improved version with better correctness
+
 class ImprovedBankAccount:
     """Bank account with improved correctness."""
     
@@ -113,14 +115,18 @@ class ImprovedBankAccount:
 **Example: Improving Code Clarity**
 
 ```python
-# Poor clarity
+
+## Poor clarity
+
 class C:
     def __init__(self, d):
         self.d = d
         self.r = []
     
     def p(self, x, y):
-        # Calculate something
+
+        ## Calculate something
+
         z = 0
         for i in self.d:
             if i['t'] == x:
@@ -129,7 +135,8 @@ class C:
         return z
 
 
-# Improved clarity
+## Improved clarity
+
 class OrderCalculator:
     """Calculates order totals based on product catalog and quantities."""
     
@@ -156,12 +163,14 @@ class OrderCalculator:
         """
         total_cost = 0
         
-        # Find all products matching the specified type
+        ## Find all products matching the specified type
+
         for product in self.product_catalog:
             if product['type'] == product_type:
                 total_cost += product['amount'] * quantity
         
-        # Store calculation for audit trail
+        ## Store calculation for audit trail
+
         self.calculation_history.append({
             'product_type': product_type,
             'quantity': quantity,
@@ -220,7 +229,9 @@ class StudentManager:
         
         for student in self.students:
             if student['grades']:
-                # Recalculate GPA every time (inefficient)
+
+                ## Recalculate GPA every time (inefficient)
+
                 total = sum(student['grades'])
                 avg = total / len(student['grades'])
                 if avg >= min_gpa:
@@ -269,7 +280,9 @@ class OptimizedStudentManager:
         """Add grade and invalidate GPA cache."""
         if student_id in self.students:
             self.students[student_id]['grades'].append(grade)
-            # Invalidate cached GPA since grades changed
+
+            ## Invalidate cached GPA since grades changed
+
             self._gpa_cache.pop(student_id, None)
     
     def get_students_with_high_gpa(self, min_gpa: float):
@@ -289,31 +302,37 @@ def performance_comparison():
     """Demonstrate performance difference between implementations."""
     import random
     
-    # Create test data
+    ## Create test data
+
     slow_manager = StudentManager()
     fast_manager = OptimizedStudentManager()
     
-    # Add 10,000 students
+    ## Add 10,000 students
+
     for i in range(10000):
         student_id = f"S{i:05d}"
         slow_manager.add_student(student_id, f"Student {i}", f"student{i}@uni.edu")
         fast_manager.add_student(student_id, f"Student {i}", f"student{i}@uni.edu")
         
-        # Add random grades
+        ## Add random grades
+
         for _ in range(5):
             grade = random.uniform(60, 100)
             fast_manager.add_grade(student_id, grade)
     
-    # Test lookup performance
+    ## Test lookup performance
+
     search_id = "S05000"
     
-    # Time the slow version
+    ## Time the slow version
+
     start_time = time.time()
     for _ in range(1000):
         slow_manager.find_student_slow(search_id)
     slow_time = time.time() - start_time
     
-    # Time the fast version
+    ## Time the fast version
+
     start_time = time.time()
     for _ in range(1000):
         fast_manager.find_student(search_id)
@@ -343,36 +362,48 @@ def performance_comparison():
 **Example: Maintainability Assessment**
 
 ```python
-# Poor maintainability - tightly coupled, hard to modify
+
+## Poor maintainability - tightly coupled, hard to modify
+
 class OrderProcessor:
     """Order processor with maintainability issues."""
     
     def process_order(self, order_data):
-        # Validation logic mixed with business logic
+
+        ## Validation logic mixed with business logic
+
         if not order_data.get('customer_id'):
             print("Error: Missing customer ID")
             return False
         
-        # Database access mixed with calculation
+        ## Database access mixed with calculation
+
         total = 0
         for item in order_data['items']:
-            # Hard-coded tax rate makes changes difficult
+
+            ## Hard-coded tax rate makes changes difficult
+
             item_total = item['price'] * item['quantity'] * 1.1  # 10% tax
             total += item_total
         
-        # Payment processing mixed with order logic
+        ## Payment processing mixed with order logic
+
         if total > 1000:
-            # Hard-coded discount logic
+
+            ## Hard-coded discount logic
+
             total *= 0.9  # 10% discount
         
-        # Email logic mixed with order processing
+        ## Email logic mixed with order processing
+
         print(f"Sending email to customer {order_data['customer_id']}")
         print(f"Order total: ${total:.2f}")
         
         return True
 
 
-# Improved maintainability - modular, configurable, testable
+## Improved maintainability - modular, configurable, testable
+
 class TaxCalculator:
     """Handles tax calculations with configurable rates."""
     
@@ -431,7 +462,9 @@ class NotificationService:
     
     def send_order_confirmation(self, customer_id, order_total):
         """Send order confirmation to customer."""
-        # This could be extended to support different notification types
+
+        ## This could be extended to support different notification types
+
         print(f"Sending email to customer {customer_id}")
         print(f"Order total: ${order_total:.2f}")
 
@@ -457,18 +490,22 @@ class ImprovedOrderProcessor:
         Returns:
             tuple: (success, total_amount, error_messages)
         """
-        # Step 1: Validate order
+
+        ## Step 1: Validate order
+
         is_valid, errors = self.validator.validate_order(order_data)
         if not is_valid:
             return False, 0, errors
         
-        # Step 2: Calculate totals
+        ## Step 2: Calculate totals
+
         subtotal = self._calculate_subtotal(order_data['items'])
         tax_amount = self.tax_calculator.calculate_tax(subtotal)
         discount_amount = self.discount_calculator.calculate_discount(subtotal)
         total = subtotal + tax_amount - discount_amount
         
-        # Step 3: Send notification
+        ## Step 3: Send notification
+
         self.notification_service.send_order_confirmation(
             order_data['customer_id'], total
         )
@@ -506,13 +543,16 @@ class ProductCatalog:
             'price': price
         }
         
-        # Store in list (for iteration)
+        ## Store in list (for iteration)
+
         self.products.append(product)
         
-        # Store in hash table (for fast ID lookup)
+        ## Store in hash table (for fast ID lookup)
+
         self._products_by_id[product_id] = product
         
-        # Store in category index (for fast category searches)
+        ## Store in category index (for fast category searches)
+
         if category not in self._products_by_category:
             self._products_by_category[category] = []
         self._products_by_category[category].append(product)
@@ -548,7 +588,9 @@ class TaskManager:
     """Task manager demonstrating data structure choices."""
     
     def __init__(self):
-        # Different data structures for different use cases
+
+        ## Different data structures for different use cases
+
         self.tasks_list = []  # For ordered iteration
         self.tasks_dict = {}  # For fast lookup by ID
         self.tasks_by_priority = {  # For priority-based access
@@ -567,7 +609,8 @@ class TaskManager:
             'created_at': time.time()
         }
         
-        # Add to different structures for different access patterns
+        ## Add to different structures for different access patterns
+
         self.tasks_list.append(task)  # Ordered access
         self.tasks_dict[task_id] = task  # Fast lookup
         self.tasks_by_priority[priority].append(task)  # Priority access
@@ -590,26 +633,31 @@ class TaskManager:
                 if task['id'] not in self.completed_tasks]
 
 
-# Demonstration of why data structure choice matters
+## Demonstration of why data structure choice matters
+
 def demonstrate_data_structure_performance():
     """Show performance difference between list and set for membership testing."""
     import random
     import time
     
-    # Create large datasets
+    ## Create large datasets
+
     large_list = list(range(100000))
     large_set = set(range(100000))
     
-    # Test values to search for
+    ## Test values to search for
+
     search_values = [random.randint(0, 99999) for _ in range(1000)]
     
-    # Time list searches (O(n) for each search)
+    ## Time list searches (O(n) for each search)
+
     start_time = time.time()
     for value in search_values:
         result = value in large_list
     list_time = time.time() - start_time
     
-    # Time set searches (O(1) for each search)
+    ## Time set searches (O(1) for each search)
+
     start_time = time.time()
     for value in search_values:
         result = value in large_set
@@ -627,23 +675,31 @@ def demonstrate_data_structure_performance():
 **Example: Premature vs. Appropriate Optimization**
 
 ```python
-# Example of premature optimization (don't do this initially)
+
+## Example of premature optimization (don't do this initially)
+
 class PrematurelyOptimizedTextProcessor:
     """Text processor with premature micro-optimizations."""
     
     def __init__(self):
-        # Pre-allocating lists "for performance" - premature!
+
+        ## Pre-allocating lists "for performance" - premature!
+
         self._word_cache = [None] * 10000
         self._cache_index = 0
     
     def process_text(self, text):
         """Process text with unnecessary optimizations."""
-        # Using list comprehension instead of loops "for speed"
-        # But this sacrifices readability for minimal gain
+
+        ## Using list comprehension instead of loops "for speed"
+
+        ## But this sacrifices readability for minimal gain
+
         words = [w.strip().lower() for w in text.split() 
                 if len(w.strip()) > 0 and w.strip().isalpha()]
         
-        # Complex caching logic that probably isn't needed
+        ## Complex caching logic that probably isn't needed
+
         for word in words:
             if self._cache_index < len(self._word_cache):
                 self._word_cache[self._cache_index] = word
@@ -652,7 +708,8 @@ class PrematurelyOptimizedTextProcessor:
         return words
 
 
-# Better approach: Write clear code first, optimize if needed
+## Better approach: Write clear code first, optimize if needed
+
 class ClearTextProcessor:
     """Text processor focused on clarity and correctness first."""
     
@@ -671,31 +728,38 @@ class ClearTextProcessor:
         """
         words = []
         
-        # Clear, readable logic
+        ## Clear, readable logic
+
         for word in text.split():
             cleaned_word = word.strip().lower()
             
-            # Only keep alphabetic words
+            ## Only keep alphabetic words
+
             if cleaned_word and cleaned_word.isalpha():
                 words.append(cleaned_word)
         
-        # Store for potential analysis
+        ## Store for potential analysis
+
         self.processed_words.extend(words)
         
         return words
 
 
-# If profiling shows this is a bottleneck, then optimize:
+## If profiling shows this is a bottleneck, then optimize:
+
 class OptimizedTextProcessor:
     """Text processor optimized after profiling identified bottlenecks."""
     
     def __init__(self):
         self.processed_words = []
-        # Only add caching if profiling shows it helps
+
+        ## Only add caching if profiling shows it helps
     
     def process_text(self, text):
         """Optimized version based on actual performance data."""
-        # Use list comprehension only if it's actually faster for your use case
+
+        ## Use list comprehension only if it's actually faster for your use case
+
         words = [word.strip().lower() for word in text.split()
                 if word.strip() and word.strip().isalpha()]
         
@@ -731,24 +795,32 @@ class ProfiledDataProcessor:
     @time_function
     def load_data(self, filename):
         """Load data from file - timed for profiling."""
-        # Simulate file loading
+
+        ## Simulate file loading
+
         time.sleep(0.1)
         return ["data"] * 1000
     
     @time_function
     def process_data(self, data):
         """Process data - timed for profiling."""
-        # Simulate data processing
+
+        ## Simulate data processing
+
         processed = []
         for item in data:
-            # Some processing work
+
+            ## Some processing work
+
             processed.append(item.upper())
         return processed
     
     @time_function
     def save_results(self, processed_data):
         """Save results - timed for profiling."""
-        # Simulate saving
+
+        ## Simulate saving
+
         time.sleep(0.05)
         return True
 
@@ -761,7 +833,7 @@ def profile_data_processing():
     processed = processor.process_data(data)
     processor.save_results(processed)
     
-    # Output will show which methods take the most time
+    ## Output will show which methods take the most time
 
 
 class DetailedProfiler:
@@ -808,21 +880,30 @@ def demonstrate_detailed_profiling():
     """Show detailed profiling of a complex operation."""
     profiler = DetailedProfiler()
     
-    # Profile different parts of an operation
+    ## Profile different parts of an operation
+
     with profiler.time_operation("Data Loading"):
-        # Simulate loading
+
+        ## Simulate loading
+
         data = list(range(10000))
     
     with profiler.time_operation("Data Transformation"):
-        # Simulate transformation
+
+        ## Simulate transformation
+
         transformed = [x * 2 for x in data]
     
     with profiler.time_operation("Data Filtering"):
-        # Simulate filtering
+
+        ## Simulate filtering
+
         filtered = [x for x in transformed if x % 3 == 0]
     
     with profiler.time_operation("Data Aggregation"):
-        # Simulate aggregation
+
+        ## Simulate aggregation
+
         total = sum(filtered)
         average = total / len(filtered) if filtered else 0
     
@@ -842,12 +923,16 @@ class MemoryProfiler:
     
     def take_snapshot(self, label):
         """Take a memory usage snapshot."""
-        # Note: This is a simplified example
-        # In practice, you'd use tools like memory_profiler or tracemalloc
+
+        ## Note: This is a simplified example
+
+        ## In practice, you'd use tools like memory_profiler or tracemalloc
+
         import gc
         gc.collect()  # Force garbage collection for more accurate reading
         
-        # This gives a rough estimate (not precise)
+        ## This gives a rough estimate (not precise)
+
         memory_usage = sys.getsizeof(gc.get_objects())
         self.memory_snapshots[label] = memory_usage
         print(f"Memory snapshot '{label}': ~{memory_usage:,} bytes")
@@ -865,14 +950,16 @@ def demonstrate_memory_profiling():
     
     profiler.take_snapshot("Start")
     
-    # Create some data structures
+    ## Create some data structures
+
     large_list = list(range(100000))
     profiler.take_snapshot("After creating large list")
     
     large_dict = {i: f"value_{i}" for i in range(50000)}
     profiler.take_snapshot("After creating large dict")
     
-    # Clean up
+    ## Clean up
+
     del large_list
     del large_dict
     profiler.take_snapshot("After cleanup")
@@ -948,7 +1035,9 @@ class PerformanceOptimizedGradeCalculator:
     """Grade calculator optimized for performance-critical scenarios."""
     
     def __init__(self):
-        # Pre-calculate grade boundaries for faster lookup
+
+        ## Pre-calculate grade boundaries for faster lookup
+
         self.grade_thresholds = [
             (90, 'A'),
             (80, 'B'),
@@ -977,7 +1066,9 @@ class PerformanceOptimizedGradeCalculator:
         Uses list comprehension and built-in functions for better performance
         when processing large datasets.
         """
-        # Filter out students with no grades and calculate averages in one pass
+
+        ## Filter out students with no grades and calculate averages in one pass
+
         student_averages = [
             sum(grades) / len(grades)
             for grades in student_grades.values()
@@ -992,23 +1083,27 @@ def compare_readability_vs_performance():
     import random
     import time
     
-    # Create test data
+    ## Create test data
+
     test_scores = [random.uniform(0, 100) for _ in range(10000)]
     
     readable_calc = ReadableGradeCalculator()
     optimized_calc = PerformanceOptimizedGradeCalculator()
     
-    # Time the readable version
+    ## Time the readable version
+
     start_time = time.time()
     readable_results = [readable_calc.calculate_letter_grade(score) for score in test_scores]
     readable_time = time.time() - start_time
     
-    # Time the optimized version
+    ## Time the optimized version
+
     start_time = time.time()
     optimized_results = [optimized_calc.calculate_letter_grade(score) for score in test_scores]
     optimized_time = time.time() - start_time
     
-    # Verify results are the same
+    ## Verify results are the same
+
     assert readable_results == optimized_results
     
     print(f"Readable version: {readable_time:.4f} seconds")
@@ -1018,7 +1113,8 @@ def compare_readability_vs_performance():
         speedup = readable_time / optimized_time
         print(f"Performance improvement: {speedup:.2f}x")
         
-        # Show the trade-off
+        ## Show the trade-off
+
         if speedup < 2.0:
             print("Recommendation: Stick with readable version - minimal performance gain")
         else:
@@ -1033,7 +1129,8 @@ def compare_readability_vs_performance():
 def optimization_workflow_example():
     """Demonstrate proper optimization workflow."""
     
-    # Step 1: Write clear, correct code
+    ## Step 1: Write clear, correct code
+
     def initial_implementation(data):
         """Initial clear implementation."""
         results = []
@@ -1043,7 +1140,8 @@ def optimization_workflow_example():
                 results.append(processed)
         return results
     
-    # Step 2: Profile to identify bottlenecks
+    ## Step 2: Profile to identify bottlenecks
+
     import time
     test_data = list(range(-5000, 5000))
     
@@ -1053,7 +1151,8 @@ def optimization_workflow_example():
     
     print(f"Initial implementation: {initial_time:.4f} seconds")
     
-    # Step 3: Optimize only if necessary and beneficial
+    ## Step 3: Optimize only if necessary and beneficial
+
     def optimized_implementation(data):
         """Optimized version using list comprehension."""
         return [item * 2 + 1 for item in data if item > 0]
@@ -1064,10 +1163,12 @@ def optimization_workflow_example():
     
     print(f"Optimized implementation: {optimized_time:.4f} seconds")
     
-    # Verify correctness
+    ## Verify correctness
+
     assert result1 == result2
     
-    # Evaluate trade-offs
+    ## Evaluate trade-offs
+
     if optimized_time > 0:
         speedup = initial_time / optimized_time
         print(f"Speedup: {speedup:.2f}x")
@@ -1084,7 +1185,8 @@ def optimization_workflow_example():
 def algorithmic_optimization_example():
     """Show how algorithm choice has bigger impact than micro-optimizations."""
     
-    # Poor algorithm: O(n²) for finding duplicates
+    ## Poor algorithm: O(n²) for finding duplicates
+
     def find_duplicates_slow(items):
         """Find duplicates using nested loops - O(n²)."""
         duplicates = []
@@ -1094,7 +1196,8 @@ def algorithmic_optimization_example():
                     duplicates.append(item)
         return duplicates
     
-    # Better algorithm: O(n) using hash table
+    ## Better algorithm: O(n) using hash table
+
     def find_duplicates_fast(items):
         """Find duplicates using hash table - O(n)."""
         seen = set()
@@ -1108,18 +1211,21 @@ def algorithmic_optimization_example():
         
         return list(duplicates)
     
-    # Test with large dataset
+    ## Test with large dataset
+
     import random
     test_data = [random.randint(1, 1000) for _ in range(5000)]
     
     import time
     
-    # Time slow version
+    ## Time slow version
+
     start_time = time.time()
     slow_result = find_duplicates_slow(test_data)
     slow_time = time.time() - start_time
     
-    # Time fast version
+    ## Time fast version
+
     start_time = time.time()
     fast_result = find_duplicates_fast(test_data)
     fast_time = time.time() - start_time
@@ -1133,7 +1239,9 @@ def algorithmic_optimization_example():
 
 ## Practice Exercises
 
-### Exercise 1: Code Effectiveness Assessment
+/// details | Exercise 1: Code Effectiveness Assessment
+    type: question
+    open: false
 
 Evaluate this code across all four dimensions (correctness, clarity, performance, maintainability) and identify improvements:
 
@@ -1163,8 +1271,12 @@ class ShoppingCart:
                 return True
         return False
 ```
+///
 
-### Exercise 2: Performance Optimization
+
+/// details | Exercise 2: Performance Optimization
+    type: question
+    open: false
 
 Profile and optimize this data processing function:
 
@@ -1182,12 +1294,14 @@ def process_sales_data(sales_records):
         else:
             product_revenues[product_id] = revenue
     
-    # Sort products by revenue
+    ## Sort products by revenue
+
     sorted_products = []
     for product_id, revenue in product_revenues.items():
         sorted_products.append((product_id, revenue))
     
-    # Bubble sort (intentionally inefficient)
+    ## Bubble sort (intentionally inefficient)
+
     for i in range(len(sorted_products)):
         for j in range(0, len(sorted_products) - i - 1):
             if sorted_products[j][1] < sorted_products[j + 1][1]:
@@ -1196,7 +1310,12 @@ def process_sales_data(sales_records):
     return sorted_products[:10]  # Top 10 products
 ```
 
-### Exercise 3: Readability vs Performance Trade-offs
+///
+
+
+/// details | Exercise 3: Readability vs Performance Trade-offs
+    type: question
+    open: false
 
 Design two versions of a text analysis function:
 
@@ -1205,6 +1324,7 @@ Design two versions of a text analysis function:
 2. An optimized version for processing large documents
 
 Consider when each version would be appropriate.
+///
 
 ## Section Recap
 

@@ -22,6 +22,11 @@ Neural networks form the foundation of modern AI systems by mimicking how biolog
 
 package "Neural Network Architecture" {
     
+    component [Input Layer]
+    component [Hidden Layer 1]
+    component [Hidden Layer 2]
+    component [Output Layer]
+    
     [Input Layer] --> [Hidden Layer 1]
     [Hidden Layer 1] --> [Hidden Layer 2]
     [Hidden Layer 2] --> [Output Layer]
@@ -31,29 +36,51 @@ package "Neural Network Architecture" {
     note right of [Hidden Layer 2] : Complex Patterns
     note right of [Output Layer] : Predictions
     
+    component [Perceptron]
+    component [Binary Classification]
     [Perceptron] --> [Binary Classification]
-    [Perceptron] : Single layer
-    [Perceptron] : Linear decision boundary
-    [Perceptron] : Simple learning rule
+    note right of [Perceptron]
+        Single layer
+        Linear decision boundary
+        Simple learning rule
+    end note
     
+    component [Multi-Layer Perceptron]
+    component [Non-linear Problems]
     [Multi-Layer Perceptron] --> [Non-linear Problems]
-    [Multi-Layer Perceptron] : Multiple hidden layers
-    [Multi-Layer Perceptron] : Backpropagation training
-    [Multi-Layer Perceptron] : Universal approximator
+    note right of [Multi-Layer Perceptron]
+        Multiple hidden layers
+        Backpropagation training
+        Universal approximator
+    end note
     
+    component [Activation Functions]
+    component [Non-linearity]
     [Activation Functions] --> [Non-linearity]
-    [Activation Functions] : Sigmoid: σ(x) = 1/(1+e^-x)
-    [Activation Functions] : ReLU: max(0, x)
-    [Activation Functions] : Tanh: (e^x - e^-x)/(e^x + e^-x)
+    note right of [Activation Functions]
+        Sigmoid: σ(x) = 1/(1+e^-x)
+        ReLU: max(0, x)
+        Tanh: (e^x - e^-x)/(e^x + e^-x)
+    end note
     
+    component [Training Process]
+    component [Weight Updates]
     [Training Process] --> [Weight Updates]
-    [Training Process] : Forward pass
-    [Training Process] : Loss calculation
-    [Training Process] : Backward pass
-    [Training Process] : Gradient descent
+    note right of [Training Process]
+        Forward pass
+        Loss calculation
+        Backward pass
+        Gradient descent
+    end note
 }
 
 package "Training Loop Components" {
+    component [Data Batch]
+    component [Forward Pass]
+    component [Loss Calculation]
+    component [Backward Pass]
+    component [Weight Update]
+    
     [Data Batch] --> [Forward Pass]
     [Forward Pass] --> [Loss Calculation]
     [Loss Calculation] --> [Backward Pass]

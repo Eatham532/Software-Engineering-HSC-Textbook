@@ -80,31 +80,45 @@ Typical stage gate components:
 
 - **Risk assessment**: Evaluation of project risks and mitigation strategies
 
-```tabbed
-=== "Gate Criteria Examples"
-
+/// tab | Gate Criteria Examples
 **Gate 1: Requirements Approval**
+
 - ✓ Stakeholder needs documented and validated
+
 - ✓ Functional and non-functional requirements defined
+
 - ✓ Success criteria and acceptance tests specified
+
 - ✓ Project scope and boundaries agreed
+
 - ✓ Initial architecture and technology approach approved
 
 **Gate 2: Design Approval**
+
 - ✓ System architecture documented and reviewed
+
 - ✓ User interface designs validated with stakeholders
+
 - ✓ Data model and integration points defined
+
 - ✓ Development approach and tooling selected
+
 - ✓ Testing strategy and environment plan approved
 
 **Gate 3: Implementation Approval**
-- ✓ Core functionality demonstrated and tested
-- ✓ Performance requirements validated
-- ✓ Security review completed
-- ✓ Deployment plan documented and approved
-- ✓ User training materials prepared
 
-=== "Python Gate Tracker"
+- ✓ Core functionality demonstrated and tested
+
+- ✓ Performance requirements validated
+
+- ✓ Security review completed
+
+- ✓ Deployment plan documented and approved
+
+- ✓ User training materials prepared
+///
+
+/// tab | Python Gate Tracker
 
 ```py
 from datetime import date
@@ -184,7 +198,7 @@ req_gate.criteria[1].mark_complete("Functional requirements document v1.2", "Com
 print(req_gate.gate_summary())
 print(f"Ready for review: {req_gate.is_ready_for_review()}")
 ```
-```
+///
 
 ### Iterative delivery within stages
 
@@ -200,25 +214,33 @@ Benefits of iterative delivery in WAgile:
 
 - **Quality improvement**: Multiple review cycles enhance deliverable quality
 
-```tabbed
-=== "Requirements Stage Iterations"
-
+/// tab | Requirements Stage Iterations
 **Sprint 1: Initial Requirements Gathering**
+
 - Stakeholder interviews and workshops
+
 - High-level user stories and epic creation
+
 - Initial scope definition and boundaries
 
 **Sprint 2: Requirements Refinement**
+
 - Detailed user story breakdown
+
 - Acceptance criteria definition
+
 - Non-functional requirements specification
 
 **Sprint 3: Requirements Validation**
-- Stakeholder review and feedback incorporation
-- Requirements traceability matrix creation
-- Final requirements document preparation
 
-=== "Python Iteration Tracker"
+- Stakeholder review and feedback incorporation
+
+- Requirements traceability matrix creation
+
+- Final requirements document preparation
+///
+
+/// tab | Python Iteration Tracker
 
 ```py
 from datetime import date, timedelta
@@ -288,7 +310,7 @@ req_iteration_1.complete_iteration()
 
 print(req_iteration_1.iteration_summary())
 ```
-```
+///
 
 ### When and how to apply WAgile interventions
 
@@ -304,30 +326,43 @@ Decision factors for WAgile interventions:
 
 - **Team experience**: Less experienced teams may benefit from structured phases
 
-```tabbed
-=== "Intervention Guidelines"
-
+/// tab | Intervention Guidelines
 **Apply Waterfall Elements When**:
+
 - Regulatory compliance requires formal documentation
+
 - Budget approval processes need predictable milestones
+
 - Integration with legacy systems requires detailed planning
+
 - Stakeholders need formal progress reporting
+
 - Risk of scope creep is high
 
 **Apply Agile Elements When**:
+
 - Requirements are likely to change during development
+
 - User feedback is essential for success
+
 - Technology choices may evolve during project
+
 - Team needs flexibility to respond to blockers
+
 - Innovation and experimentation are valued
 
 **Hybrid Approaches Work Best When**:
-- Organisation values both governance and agility
-- Projects have mixed requirements (some stable, some evolving)
-- Multiple stakeholder groups with different expectations
-- Need to balance innovation with risk management
 
-=== "Python Decision Framework"
+- Organisation values both governance and agility
+
+- Projects have mixed requirements (some stable, some evolving)
+
+- Multiple stakeholder groups with different expectations
+
+- Need to balance innovation with risk management
+///
+
+/// tab | Python Decision Framework
 
 ```py
 class ProjectCharacteristics:
@@ -388,7 +423,7 @@ project.risk_tolerance = "low"
 recommendation = project.recommend_approach()
 print(f"Methodology recommendation: {recommendation}")
 ```
-```
+///
 
 ### Scale and development type considerations
 
@@ -404,27 +439,37 @@ Scaling considerations:
 
 - **Enterprise scale**: Multiple projects, portfolio-level governance, standardised processes
 
-```tabbed
-=== "Scale Adaptations"
-
+/// tab | Scale Adaptations
 **Small Team WAgile**:
+
 - 2-3 stage gates maximum
+
 - Sprint reviews serve as mini-gates
+
 - Lightweight documentation focused on decisions
+
 - Single product owner and scrum master
 
 **Enterprise WAgile**:
+
 - 4-6 formal stage gates with executive review
+
 - Program-level coordination across multiple teams
+
 - Extensive documentation for compliance and handoffs
+
 - Multiple product owners with coordination mechanisms
 
 **Risk Profile Adaptations**:
-- **Low risk**: Fewer gates, longer iterations, informal reviews
-- **Medium risk**: Standard gates, 2-week iterations, structured reviews
-- **High risk**: Additional gates, shorter iterations, extensive validation
 
-=== "Python Scale Calculator"
+- **Low risk**: Fewer gates, longer iterations, informal reviews
+
+- **Medium risk**: Standard gates, 2-week iterations, structured reviews
+
+- **High risk**: Additional gates, shorter iterations, extensive validation
+///
+
+/// tab | Python Scale Calculator
 
 ```py
 class ProjectScale:
@@ -511,7 +556,7 @@ print(f"Recommended WAgile structure:")
 for key, value in structure.items():
     print(f"  {key}: {value}")
 ```
-```
+///
 
 ## Practice
 

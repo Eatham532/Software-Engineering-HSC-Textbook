@@ -20,24 +20,31 @@ Key types of development artefacts:
 
 - **Testing artefacts**: Test plans, test cases, bug reports, test results
 
-```tabbed
-=== "Documentation Strategy"
-
+/// tab | Documentation Strategy
 **Artefact Maintenance Principles**:
 
 1. **Living documentation**: Keep documents current with code changes
+
 2. **Version control**: Track changes and maintain document history
+
 3. **Accessibility**: Ensure team members can find and understand documents
+
 4. **Standardisation**: Use consistent formats and templates
+
 5. **Automation**: Generate documentation from code where possible
 
 **Documentation Lifecycle**:
-- **Creation**: Initial documentation during planning and design
-- **Updates**: Regular updates as requirements and implementation evolve
-- **Review**: Periodic review for accuracy and completeness
-- **Archive**: Preserve historical versions for reference
 
-=== "Python Documentation Tools"
+- **Creation**: Initial documentation during planning and design
+
+- **Updates**: Regular updates as requirements and implementation evolve
+
+- **Review**: Periodic review for accuracy and completeness
+
+- **Archive**: Preserve historical versions for reference
+///
+
+/// tab | Python Documentation Tools
 
 ```py
 from datetime import date
@@ -199,7 +206,7 @@ update_log = requirements_doc.update_artefact(
 report = manager.generate_documentation_report()
 print(f"Documentation Report: {report}")
 ```
-```
+///
 
 ### Citing sources and libraries
 
@@ -215,20 +222,23 @@ Citation best practices:
 
 - **License compliance**: Ensure all dependencies meet project license requirements
 
-```tabbed
-=== "Dependency Management"
-
+/// tab | Dependency Management
 **Library Documentation Format**:
 
 For each external library, document:
+
 - Library name and version
+
 - Purpose and functionality used
+
 - License type and restrictions
+
 - Installation and configuration notes
+
 - Security considerations and update schedule
 
 **Sample dependency documentation**:
-```
+///
 React v18.2.0
 Purpose: Frontend user interface framework
 License: MIT License
@@ -237,8 +247,8 @@ Used for: Component-based UI development
 Installation: npm install react@18.2.0
 ```
 
-=== "Python Dependency Tracker"
-
+/// tab | Python Dependency Tracker
+///
 ```py
 from datetime import date
 from enum import Enum
@@ -409,7 +419,7 @@ attribution = dep_manager.generate_attribution_text()
 print("Generated attribution text:")
 print(attribution[:200] + "...")  # Show first 200 characters
 ```
-```
+///
 
 ### Back-end engineering contributions
 
@@ -463,9 +473,7 @@ package "Infrastructure" {
 @enduml
 ```
 
-```tabbed
-=== "Technology Stack"
-
+/// tab | Technology Stack
 **Web Servers**:
 - **Purpose**: Handle HTTP requests and serve responses
 - **Examples**: Apache, Nginx, Express.js, Django
@@ -485,8 +493,9 @@ package "Infrastructure" {
 - **Version control**: Git, GitHub, GitLab
 - **Build automation**: Jenkins, GitHub Actions, GitLab CI
 - **Deployment**: Docker, Kubernetes, cloud platforms
+///
 
-=== "Python Back-end Simulator"
+/// tab | Python Back-end Simulator
 
 ```py
 from datetime import datetime, timedelta
@@ -727,7 +736,7 @@ backup_result = user_db.backup_database()
 print(f"Database Query Result: {query_result}")
 print(f"Backup Result: {backup_result}")
 ```
-```
+///
 
 ## Practice
 
@@ -790,8 +799,11 @@ print(f"Backup Result: {backup_result}")
 **Tools for audit**:
 ```py
 audit_manager = ArtefactManager()
-# Add existing documentation
-# Generate report to identify gaps
+
+## Add existing documentation
+
+## Generate report to identify gaps
+
 report = audit_manager.generate_documentation_report()
 ```
 ///
@@ -846,7 +858,9 @@ report = audit_manager.generate_documentation_report()
 **Implementation example**:
 ```py
 dep_manager = DependencyManager(LicenseType.MIT)
-# Add all project dependencies
+
+## Add all project dependencies
+
 security_risks = dep_manager.find_security_risks()
 outdated_deps = dep_manager.find_outdated_dependencies()
 ```

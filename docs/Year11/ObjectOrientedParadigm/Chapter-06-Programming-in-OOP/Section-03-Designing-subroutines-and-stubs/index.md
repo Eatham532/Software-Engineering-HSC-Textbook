@@ -295,6 +295,7 @@ class Library:
         print(f"TODO: Process checkout for member {member_id}, book {isbn}")
         return False
 ```
+
 ///
 ///
 
@@ -376,6 +377,7 @@ class TaskList:
         print(f"TODO: Mark '{task_title}' as complete")
         return False
 ```
+
 ///
 ///
 

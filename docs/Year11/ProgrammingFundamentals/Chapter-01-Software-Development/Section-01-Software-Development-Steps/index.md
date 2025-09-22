@@ -467,91 +467,93 @@ blockdiag {
 
 ## Worked example
 
-=== "Python"
-    ```py
-    # Grade Calculator: Complete implementation with validation
-    def validate_grade(grade):
-        """Validate a single grade input."""
-        if not isinstance(grade, (int, float)):
-            raise TypeError(f"Grade must be numeric, got {type(grade).__name__}")
-        if grade < 0 or grade > 100:
-            raise ValueError(f"Grade must be between 0-100, got {grade}")
-        return float(grade)
+/// tab | Python
+```py
+# Grade Calculator: Complete implementation with validation
+def validate_grade(grade):
+    """Validate a single grade input."""
+    if not isinstance(grade, (int, float)):
+        raise TypeError(f"Grade must be numeric, got {type(grade).__name__}")
+    if grade < 0 or grade > 100:
+        raise ValueError(f"Grade must be between 0-100, got {grade}")
+    return float(grade)
 
-    def calculate_average(grade1, grade2, grade3):
-        """Calculate average of three grades with validation."""
-        # Validate all inputs before processing
-        validated_grades = [
-            validate_grade(grade1),
-            validate_grade(grade2), 
-            validate_grade(grade3)
-        ]
-        
-        # Calculate arithmetic mean
-        total = sum(validated_grades)
-        average = total / len(validated_grades)
-        
-        # Round to one decimal place
-        return round(average, 1)
+def calculate_average(grade1, grade2, grade3):
+    """Calculate average of three grades with validation."""
+    # Validate all inputs before processing
+    validated_grades = [
+        validate_grade(grade1),
+        validate_grade(grade2), 
+        validate_grade(grade3)
+    ]
 
-    def format_result(average_value):
-        """Format the average for display."""
-        return f"Average: {average_value}"
+    # Calculate arithmetic mean
+    total = sum(validated_grades)
+    average = total / len(validated_grades)
 
-    # Main execution with error handling
-    if __name__ == '__main__':
-        try:
-            # Test with valid inputs
-            result = calculate_average(80, 72, 90)
-            print(format_result(result))  # Average: 80.7
-            
-            # Test edge cases
-            print(format_result(calculate_average(100, 0, 50)))  # Average: 50.0
-            
-        except (TypeError, ValueError) as e:
-            print(f"Error: {e}")
-    ```
+    # Round to one decimal place
+    return round(average, 1)
 
-=== "Pseudocode"
-    ```text
-    ALGORITHM GradeCalculator
-    
-    FUNCTION validate_grade(grade)
-        IF grade is not numeric THEN
-            RAISE TypeError("Grade must be numeric")
-        END IF
-        
-        IF grade < 0 OR grade > 100 THEN
-            RAISE ValueError("Grade must be between 0-100")
-        END IF
-        
-        RETURN grade as float
-    END FUNCTION
-    
-    FUNCTION calculate_average(grade1, grade2, grade3)
-        validated_grade1 ← validate_grade(grade1)
-        validated_grade2 ← validate_grade(grade2)
-        validated_grade3 ← validate_grade(grade3)
-        
-        total ← validated_grade1 + validated_grade2 + validated_grade3
-        average ← total / 3
-        
-        RETURN ROUND(average, 1)
-    END FUNCTION
-    
-    FUNCTION format_result(average_value)
-        RETURN "Average: " + average_value
-    END FUNCTION
-    
-    MAIN
-        TRY
-            result ← calculate_average(80, 72, 90)
-            OUTPUT format_result(result)
-        CATCH error
-            OUTPUT "Error: " + error.message
-        END TRY
-    END MAIN
-    ```
+def format_result(average_value):
+    """Format the average for display."""
+    return f"Average: {average_value}"
+
+# Main execution with error handling
+if __name__ == '__main__':
+    try:
+        # Test with valid inputs
+        result = calculate_average(80, 72, 90)
+        print(format_result(result))  # Average: 80.7
+
+        # Test edge cases
+        print(format_result(calculate_average(100, 0, 50)))  # Average: 50.0
+
+    except (TypeError, ValueError) as e:
+        print(f"Error: {e}")
+```
+///
+
+/// tab | Pseudocode
+```text
+ALGORITHM GradeCalculator
+
+FUNCTION validate_grade(grade)
+    IF grade is not numeric THEN
+        RAISE TypeError("Grade must be numeric")
+    END IF
+
+    IF grade < 0 OR grade > 100 THEN
+        RAISE ValueError("Grade must be between 0-100")
+    END IF
+
+    RETURN grade as float
+END FUNCTION
+
+FUNCTION calculate_average(grade1, grade2, grade3)
+    validated_grade1 ← validate_grade(grade1)
+    validated_grade2 ← validate_grade(grade2)
+    validated_grade3 ← validate_grade(grade3)
+
+    total ← validated_grade1 + validated_grade2 + validated_grade3
+    average ← total / 3
+
+    RETURN ROUND(average, 1)
+END FUNCTION
+
+FUNCTION format_result(average_value)
+    RETURN "Average: " + average_value
+END FUNCTION
+
+MAIN
+    TRY
+        result ← calculate_average(80, 72, 90)
+        OUTPUT format_result(result)
+    CATCH error
+        OUTPUT "Error: " + error.message
+    END TRY
+END MAIN
+```
+///
 
 ### What the example demonstrates
 

@@ -570,7 +570,9 @@ Use this checklist to assess and improve your code quality:
 
 ## Practice Exercises
 
-### Exercise 1: Improve Naming and Documentation
+/// details | Exercise 1: Improve Naming and Documentation
+    type: question
+    open: false
 
 Refactor this poorly named and documented class:
 
@@ -588,7 +590,11 @@ class C:
         return amt <= self.calc(5)
 ```
 
-### Exercise 2: Extract Methods
+///
+
+/// details | Exercise 2: Extract Methods
+    type: question
+    open: false
 
 Break down this long method into focused, single-purpose methods:
 
@@ -637,9 +643,14 @@ def analyze_exam_results(self, exam_scores):
     return report
 ```
 
-### Exercise 3: Apply the Quality Checklist
+///
+
+/// details | Exercise 3: Apply the Quality Checklist
+    type: question
+    open: false
 
 Review your solution to Exercise 2 using the practical code quality checklist. Identify any remaining improvements needed.
+///
 
 ## Section Recap
 

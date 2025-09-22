@@ -20,28 +20,37 @@ Effective client involvement strategies:
 
 - **Transparent communication**: Keeping clients informed about progress, challenges, and decisions
 
-```tabbed
-=== "Requirements Workshop Planning"
-
+/// tab | Requirements Workshop Planning
 **Workshop Structure for Client Engagement**:
 
 1. **Pre-workshop preparation**:
+
    - Send agenda and background materials
+
    - Identify key stakeholders and decision-makers
+
    - Prepare sample scenarios and use cases
 
 2. **Workshop activities**:
+
    - Stakeholder mapping and needs analysis
+
    - User journey mapping
+
    - Priority setting and trade-off discussions
+
    - Acceptance criteria definition
 
 3. **Post-workshop follow-up**:
-   - Document decisions and assumptions
-   - Circulate summary for validation
-   - Plan regular check-ins and updates
 
-=== "Python Workshop Tracker"
+   - Document decisions and assumptions
+
+   - Circulate summary for validation
+
+   - Plan regular check-ins and updates
+///
+
+/// tab | Python Workshop Tracker
 
 ```py
 from datetime import date, timedelta
@@ -139,7 +148,7 @@ workshop.record_decision(
 
 print(workshop.generate_workshop_summary())
 ```
-```
+///
 
 ### Enabling structured feedback
 
@@ -185,27 +194,35 @@ stop
 @enduml
 ```
 
-```tabbed
-=== "Feedback Collection Strategy"
-
+/// tab | Feedback Collection Strategy
 **Multi-Channel Feedback Approach**:
 
 1. **Formal feedback sessions**:
+
    - Scheduled demo reviews with stakeholders
+
    - Structured usability testing with target users
+
    - Survey collection at project milestones
 
 2. **Informal feedback opportunities**:
+
    - Drop-in sessions during development
+
    - Slack/email feedback channels
+
    - Observation of actual system usage
 
 3. **Feedback analysis process**:
-   - Weekly feedback review sessions
-   - Impact assessment and prioritisation
-   - Decision communication back to stakeholders
 
-=== "Python Feedback System"
+   - Weekly feedback review sessions
+
+   - Impact assessment and prioritisation
+
+   - Decision communication back to stakeholders
+///
+
+/// tab | Python Feedback System
 
 ```py
 from datetime import date
@@ -329,7 +346,7 @@ feedback_manager.categorise_feedback(usability_feedback, FeedbackPriority.MEDIUM
 
 print(feedback_manager.generate_feedback_report())
 ```
-```
+
 
 ### Negotiating scope and priorities
 
@@ -345,33 +362,45 @@ Effective negotiation strategies:
 
 - **Incremental delivery planning**: Breaking large requests into smaller, manageable pieces
 
-```tabbed
-=== "Scope Negotiation Process"
-
+/// tab | Scope Negotiation Process
 **Structured Approach to Scope Discussions**:
 
 1. **Clarify the underlying need**:
+
    - What problem is the stakeholder trying to solve?
+
    - What would success look like from their perspective?
+
    - Are there alternative ways to meet this need?
 
 2. **Assess impact and feasibility**:
+
    - Development effort required
+
    - Dependencies on other features or systems
+
    - Risk factors and technical challenges
 
 3. **Explore options**:
+
    - Full implementation in current phase
+
    - Simplified version with future enhancement
+
    - Alternative approach with different trade-offs
+
    - Defer to future release
 
 4. **Document agreements**:
-   - What was decided and why
-   - What was deferred and under what conditions
-   - Success criteria and acceptance tests
 
-=== "Python Negotiation Tracker"
+   - What was decided and why
+
+   - What was deferred and under what conditions
+
+   - Success criteria and acceptance tests
+///
+
+/// tab | Python Negotiation Tracker
 
 ```py
 from datetime import date
@@ -512,7 +541,7 @@ if mobile_app.effort_estimate_hours > 100:
     )
     print(f"Alternative for {mobile_app.title}: {alternative['alternative_description']}")
 ```
-```
+///
 
 ### Ethical considerations in software projects
 
@@ -528,32 +557,43 @@ Key ethical considerations:
 
 - **Transparency and consent**: Being clear about how software works and what data is collected
 
-```tabbed
-=== "Ethical Decision Framework"
-
+/// tab | Ethical Decision Framework
 **Questions for Ethical Assessment**:
 
 1. **Privacy Impact**:
+
    - What personal data does the system collect?
+
    - How is this data stored, processed, and shared?
+
    - Do users understand and consent to data usage?
 
 2. **Accessibility Considerations**:
+
    - Can people with visual, auditory, or motor impairments use the system?
+
    - Does the interface work with assistive technologies?
+
    - Are instructions clear for users with different literacy levels?
 
 3. **Fairness and Bias**:
+
    - Could the system discriminate against particular groups?
+
    - Are algorithms trained on representative data?
+
    - Do user interface choices favour certain cultural backgrounds?
 
 4. **Transparency and Control**:
-   - Can users understand how the system makes decisions?
-   - Do users have control over their data and preferences?
-   - Is it clear when automated decisions are being made?
 
-=== "Python Ethics Checker"
+   - Can users understand how the system makes decisions?
+
+   - Do users have control over their data and preferences?
+
+   - Is it clear when automated decisions are being made?
+///
+
+/// tab | Python Ethics Checker
 
 ```py
 from enum import Enum
@@ -691,7 +731,7 @@ assessment.add_mitigation_strategy("Add explanation features for recommendations
 
 print(assessment.generate_ethics_report())
 ```
-```
+///
 
 ## Practice
 
