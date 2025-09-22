@@ -697,6 +697,10 @@ package "Data Access Layer" {
 ✗ ProcessUserInputAndCalculateResultsAndDisplayOutput() - too long, too coupled
 ```
 
+
+!!! next-up "Coming Up"
+    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
+
 ## Summary
 
 **Structure charts and refinement help manage complexity through systematic decomposition:**

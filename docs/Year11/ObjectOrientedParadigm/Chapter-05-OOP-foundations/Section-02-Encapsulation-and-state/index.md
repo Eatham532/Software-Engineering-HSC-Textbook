@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [5.1 Objects and classes](../Section-01-Objects-and-classes/index.md).
+
+
 Encapsulation is one of the core principles of object-oriented programming. It allows objects to protect their internal data and control how it's accessed or modified. This prevents errors, maintains data integrity, and makes code more reliable and easier to maintain.
 
 ## Concepts

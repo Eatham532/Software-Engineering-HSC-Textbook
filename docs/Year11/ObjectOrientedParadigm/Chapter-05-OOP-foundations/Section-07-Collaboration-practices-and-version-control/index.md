@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [5.6 Design process: task definition and decomposition](../Section-06-Design-process-task-definition-and-decomposition/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Understand how object-oriented programming supports team collaboration

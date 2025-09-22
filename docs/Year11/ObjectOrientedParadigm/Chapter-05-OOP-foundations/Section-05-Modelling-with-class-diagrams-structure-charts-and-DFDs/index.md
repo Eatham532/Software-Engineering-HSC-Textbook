@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [5.4 Comparing procedural and OOP](../Section-04-Comparing-procedural-and-OOP/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Create class diagrams using PlantUML to represent object-oriented systems

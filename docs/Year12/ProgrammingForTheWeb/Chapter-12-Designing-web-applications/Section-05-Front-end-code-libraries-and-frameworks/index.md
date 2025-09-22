@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [12.4 CSS, UI and UX principles](../Section-04-CSS-UI-and-UX-principles/index.md).
+
+
 Front-end libraries and frameworks provide pre-built solutions for common web development challenges, enabling developers to build complex applications more efficiently. Understanding when and how to use these tools - versus building custom solutions - is crucial for making informed architectural decisions that balance development speed, maintainability, and project requirements.
 
 ## Concepts

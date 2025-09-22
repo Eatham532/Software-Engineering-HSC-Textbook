@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [10.4 User interfaces for control](../Section-04-User-interfaces-for-control/index.md).
+
+
 Testing mechatronic subsystems presents unique challenges: hardware components are expensive, potentially dangerous, and may not be available during development. Unit testing with simulated devices allows developers to verify control logic, validate safety features, and ensure system reliability without requiring physical hardware.
 
 Testability patterns and fixtures enable systematic verification of subsystem behaviour, making it possible to catch bugs early, document expected behaviour, and maintain confidence when making changes to complex control systems.

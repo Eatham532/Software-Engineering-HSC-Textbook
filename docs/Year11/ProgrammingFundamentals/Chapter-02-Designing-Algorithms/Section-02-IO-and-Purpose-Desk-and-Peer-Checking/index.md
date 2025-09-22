@@ -407,6 +407,10 @@ Complete trace tables for both test cases and record the expected outputs:
 
 - **Very large or small numbers** cause overflow
 
+
+!!! next-up "Coming Up"
+    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
+
 ## Summary
 
 **Analyzing algorithms before coding prevents errors and ensures correct solutions:**

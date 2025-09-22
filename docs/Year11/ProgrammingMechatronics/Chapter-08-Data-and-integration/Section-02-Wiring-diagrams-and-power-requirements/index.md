@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [8.1 Working with device data and diagnostics](../Section-01-Working-with-device-data-and-diagnostics/index.md).
+
+
 Mechatronic systems combine electrical, mechanical, and software components. Poor wiring design can lead to system failure, component damage, or safety hazards. Understanding power requirements ensures your system operates reliably within safe limits and helps you select appropriate batteries and components.
 
 In real-world applications, inadequate power planning can cause brownouts, overheating, or shortened battery life. Safe wiring practices prevent short circuits, electrical fires, and equipment damage.

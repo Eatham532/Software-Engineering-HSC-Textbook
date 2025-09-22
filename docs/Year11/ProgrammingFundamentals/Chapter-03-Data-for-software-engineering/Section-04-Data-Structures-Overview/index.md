@@ -2,6 +2,10 @@
 
 ## What Are Data Structures?
 
+!!! builds-on "Builds on"
+    This section builds on [3.2 Standard data types](../Section-02-Standard-Data-Types/index.md). Make sure you understand basic data types.
+
+
 A **data structure** is a way of organizing and storing data so that it can be accessed and modified efficiently. Just like different containers in your kitchen (bowls, drawers, spice racks) are designed for different types of items, different data structures are designed for different types of data and operations.
 
 Think of data structures as the "containers" that hold your program's information, each with its own strengths and best use cases.
@@ -805,6 +809,10 @@ This demonstrates:
 3. **Forgetting CSV file modes**: Use "w" for writing, "r" for reading
 
 4. **Not handling empty data structures**: Check if lists/dictionaries are empty before accessing
+
+
+!!! next-up "Coming Up"
+    Coming up: In [4.2 Data Structures in Python (Required Set)](../../Chapter-04-Developing-solutions-with-code/Section-02-Data-Structures-in-Python/index.md), We'll implement these structures in Python.
 
 ## Summary
 

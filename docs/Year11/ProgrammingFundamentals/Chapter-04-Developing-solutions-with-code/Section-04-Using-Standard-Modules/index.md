@@ -2,6 +2,10 @@
 
 ## What Are Standard Modules?
 
+!!! builds-on "Builds on"
+    This section builds on [4.2 Data Structures in Python (Required Set)](../Section-02-Data-Structures-in-Python/index.md).
+
+
 Python comes with a rich collection of **standard modules** (also called the "standard library") - pre-written code that provides useful functionality without you having to write it from scratch. Think of modules as toolboxes containing specialized tools for specific tasks.
 
 Instead of reinventing the wheel, you can import these modules and use their functions to:

@@ -11,6 +11,10 @@
 
 ## Introduction
 
+!!! builds-on "Builds on"
+    This section builds on [17.1 Secure API Design](../Section-01-Secure-API-Design/index.md).
+
+
 **Secure execution** means protecting your application's runtime environment from attacks that could compromise system resources, crash your application, or expose sensitive information. This involves managing memory safely, preventing resource exhaustion, securing file operations, and handling errors gracefully.
 
 Think of it like running a restaurant kitchen:

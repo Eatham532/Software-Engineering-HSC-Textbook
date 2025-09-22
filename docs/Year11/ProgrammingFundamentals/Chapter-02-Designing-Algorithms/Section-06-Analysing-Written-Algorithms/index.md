@@ -652,6 +652,10 @@ Trace one piece of data through the entire system:
 
 - Where does it go?
 
+
+!!! next-up "Coming Up"
+    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
+
 ## Summary
 
 **Systematic algorithm analysis reveals structure and behavior:**

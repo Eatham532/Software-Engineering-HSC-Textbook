@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [24.5 Social/ethical and communication issues](../Section-05-Social-ethical-and-communication-issues/index.md).
+
+
 Quality assurance (QA) is the systematic process of ensuring software engineering solutions meet defined standards and requirements. It prevents defects, reduces costs, and builds stakeholder confidence. Without proper QA processes, projects face increased risks of failure, security vulnerabilities, and user dissatisfaction.
 
 ## Concepts

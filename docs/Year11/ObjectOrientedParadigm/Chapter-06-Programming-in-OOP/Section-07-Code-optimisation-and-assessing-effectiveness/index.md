@@ -1326,6 +1326,10 @@ Design two versions of a text analysis function:
 Consider when each version would be appropriate.
 ///
 
+
+!!! next-up "Coming Up"
+    Next: [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md) will build on these concepts.
+
 ## Section Recap
 
 In this section, you learned to assess and improve code effectiveness:

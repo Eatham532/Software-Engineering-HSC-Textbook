@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [5.3 Abstraction, generalisation, inheritance, polymorphism](../Section-03-Abstraction-generalisation-inheritance-polymorphism/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Compare and contrast procedural and object-oriented programming approaches

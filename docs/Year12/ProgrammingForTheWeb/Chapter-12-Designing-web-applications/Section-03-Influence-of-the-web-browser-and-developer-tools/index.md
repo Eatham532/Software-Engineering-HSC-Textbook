@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [12.2 Model elements that form a web development system](../Section-02-Model-elements-that-form-a-web-development-system/index.md).
+
+
 Web browsers are the runtime environment for front-end code, and their behavior directly impacts how developers build, test, and debug web applications. Understanding browser differences and mastering developer tools is essential for creating reliable, performant web applications that work consistently across different environments.
 
 ## Concepts
@@ -515,6 +519,10 @@ HTML template for testing (`templates/debug_demo.html`):
 - Remove or optimize slow-running JavaScript functions
 ///
 ///
+
+
+!!! next-up "Coming Up"
+    Next: [12.4 CSS, UI and UX principles](../Section-04-CSS-UI-and-UX-principles/index.md) will build on these concepts.
 
 ## Recap
 

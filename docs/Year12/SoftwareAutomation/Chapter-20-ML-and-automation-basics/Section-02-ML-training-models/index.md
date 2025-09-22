@@ -2,6 +2,10 @@
 
 ## Understanding ML Training Paradigms
 
+!!! builds-on "Builds on"
+    This section builds on [20.1 What is AI vs ML (and where RPA/BPA fit)](../Section-01-What-is-AI-vs-ML/index.md).
+
+
 Machine Learning is fundamentally about learning patterns from data, but the way this learning happens depends on the type of data available and the problem we're trying to solve. Understanding the four main training paradigms is crucial for:
 
 - **Problem Classification**: Determining which approach fits your data and goals

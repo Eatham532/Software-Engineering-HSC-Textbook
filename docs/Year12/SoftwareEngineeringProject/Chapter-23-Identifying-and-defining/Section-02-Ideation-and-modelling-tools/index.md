@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [23.1 Requirements and feasibility](../Section-01-Requirements-and-feasibility/index.md).
+
+
 Before writing a single line of code, software engineers need to explore ideas, understand data requirements, and model solutions. Ideation and modelling tools help transform abstract problems into concrete, implementable designs. These tools bridge the gap between initial requirements and technical implementation, ensuring that development efforts are focused and well-planned.
 
 ## Concepts

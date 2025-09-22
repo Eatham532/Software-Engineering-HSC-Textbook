@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [7.2 Computing hardware: CPU, instruction sets, registers](../Section-02-Computing-hardware/index.md).
+
+
 Mechatronic systems interact with the physical world through three key types of components: sensors that gather information about the environment, actuators that create movement or force, and end effectors that perform the final task. Understanding their characteristics and trade-offs is essential for designing effective systems.
 
 Each component has specific capabilities and limitations that affect system performance. Response time, accuracy, operating range, and cost all influence which components to select for a particular application.

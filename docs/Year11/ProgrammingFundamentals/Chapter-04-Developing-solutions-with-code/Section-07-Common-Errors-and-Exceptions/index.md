@@ -2,6 +2,10 @@
 
 ## Understanding Programming Errors
 
+!!! builds-on "Builds on"
+    This section builds on [4.6 Designing Suitable Test Data](../Section-06-Designing-Suitable-Test-Data/index.md).
+
+
 Programming errors are inevitable - even experienced programmers make them! The key is learning to recognize common error patterns, understand their causes, and know how to fix them quickly. This knowledge will make you a more efficient programmer and help you write better code from the start.
 
 ## Types of Programming Errors

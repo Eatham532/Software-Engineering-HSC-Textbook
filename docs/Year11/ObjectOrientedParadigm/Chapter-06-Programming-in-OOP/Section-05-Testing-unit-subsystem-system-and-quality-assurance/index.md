@@ -752,6 +752,10 @@ For a simple gradebook application, write acceptance criteria and corresponding 
 3. **User Story**: "As a student, I want to view my current grades so that I can monitor my academic performance."
 ///
 
+
+!!! next-up "Coming Up"
+    Next: [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md) will build on these concepts.
+
 ## Section Recap
 
 In this section, you learned about comprehensive testing strategies for object-oriented programs:

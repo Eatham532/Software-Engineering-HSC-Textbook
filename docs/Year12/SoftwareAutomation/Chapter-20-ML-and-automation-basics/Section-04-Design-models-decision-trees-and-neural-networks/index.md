@@ -2,6 +2,10 @@
 
 ## Introduction to Model Design
 
+!!! builds-on "Builds on"
+    This section builds on [20.3 Common ML applications](../Section-03-Common-ML-applications/index.md).
+
+
 Machine learning models are the core components that enable computers to make predictions and decisions based on data. Understanding how to design, build, and trace through these models is essential for creating effective automation solutions.
 
 This section focuses on two fundamental model types that are both powerful and interpretable:

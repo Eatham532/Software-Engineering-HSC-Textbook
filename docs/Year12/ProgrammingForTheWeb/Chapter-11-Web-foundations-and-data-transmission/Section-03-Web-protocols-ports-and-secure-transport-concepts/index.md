@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [11.2 How data moves on the internet (packets, IP, DNS, protocols)](../Section-02-How-data-moves-on-the-internet-packets-IP-DNS-protocols/index.md).
+
+
 When you build web applications, understanding security protocols helps you protect user data and build trustworthy systems. SSL/TLS encryption, certificates, and authentication form the foundation of web security that users rely on every day.
 
 ## Concepts
@@ -542,6 +546,10 @@ auth_system.verify_login("alice", "StrongPass123!")  # Should succeed
 ```
 ///
 ///
+
+
+!!! next-up "Coming Up"
+    Next: [11.4 Big data and web architectures](../Section-04-Big-data-and-web-architectures/index.md) will build on these concepts.
 
 ## Recap
 

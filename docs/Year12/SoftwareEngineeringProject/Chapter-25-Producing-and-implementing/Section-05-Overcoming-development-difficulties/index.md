@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [25.4 Data backup and version control](../Section-04-Data-backup-and-version-control/index.md).
+
+
 Software development inevitably encounters obstacles, technical challenges, and unexpected problems. The ability to systematically identify, analyze, and resolve these difficulties separates successful projects from failed ones. Effective problem-solving strategies reduce project delays, minimize costs, and ensure solutions meet requirements while maintaining team morale and stakeholder confidence.
 
 ## Concepts

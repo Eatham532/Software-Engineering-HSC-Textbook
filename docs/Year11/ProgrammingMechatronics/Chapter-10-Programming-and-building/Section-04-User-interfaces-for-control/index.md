@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [10.3 Integrating sensors and actuators](../Section-03-Integrating-sensors-and-actuators/index.md).
+
+
 When you build a mechatronic system, the user interface is how people interact with and understand your device. A well-designed interface can make the difference between a system that's easy to use and one that's confusing or even dangerous.
 
 Good control interfaces provide clear information about what the system is doing, allow users to give commands easily, and most importantly, communicate problems clearly when something goes wrong. Whether it's a simple LED status light or a comprehensive dashboard, the interface is your system's voice.

@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [5.1 Objects and classes](../../Chapter-05-OOP-foundations/Section-01-Objects-and-classes/index.md). Review that material first for better understanding.
+
+
 By the end of this section, you will be able to:
 
 - Define classes with proper constructors and methods in Python

@@ -4,6 +4,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [25.1 Building the solution](../Section-01-Building-the-solution/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Analyse different audience types and tailor presentations to their specific needs and interests

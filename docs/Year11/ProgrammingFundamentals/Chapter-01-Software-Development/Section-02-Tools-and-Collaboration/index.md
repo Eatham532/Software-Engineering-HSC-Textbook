@@ -988,6 +988,10 @@ Complete the tasks below to reinforce Git and IDE concepts.
 
 This activity demonstrates the complete Git workflow: initialization, staging, committing, and history tracking for a real project.
 
+
+!!! next-up "Coming Up"
+    Coming up: In [1.3 Documentation and code style]../Section-03-Documentation-and-Code-Style/index.md), We'll learn about code documentation practices.
+
 ## Recap
 
 Modern software development relies on integrated development environments and version control systems to manage complexity and enable collaboration.

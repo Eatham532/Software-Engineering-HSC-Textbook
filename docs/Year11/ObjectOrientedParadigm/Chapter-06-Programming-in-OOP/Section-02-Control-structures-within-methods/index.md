@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Use selection (if/elif/else) effectively within class methods

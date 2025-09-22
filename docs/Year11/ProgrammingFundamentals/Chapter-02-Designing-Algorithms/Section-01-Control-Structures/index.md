@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [1.1 Software development steps]../../Chapter-01-Software-Development/Section-01-Software-development-steps/index.md). Make sure you understand the design phase of the SDLC.
+
+
 Think of algorithms like recipes. A recipe has steps you follow in order (sequence), decisions you make based on conditions (selection), and actions you repeat multiple times (iteration). These three patterns - sequence, selection, and iteration - are the building blocks of every algorithm you'll ever write.
 
 Understanding control structures is like learning the grammar of programming. Once you master these patterns, you can express any logical process as a clear, step-by-step algorithm.
@@ -591,6 +595,10 @@ The algorithm continues until the entire array is sorted: [11, 12, 22, 25, 34, 6
 ///
 ///
 ///
+
+
+!!! next-up "Coming Up"
+    Coming up: In [4.1 Control Structures in Python](../../Chapter-04-Developing-solutions-with-code/Section-01-Control-Structures-in-Python/index.md), We'll implement these concepts in Python.
 
 ## Recap
 

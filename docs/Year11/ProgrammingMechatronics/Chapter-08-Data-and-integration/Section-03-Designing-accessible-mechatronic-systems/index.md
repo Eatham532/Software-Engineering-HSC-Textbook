@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [8.2 Wiring diagrams and power requirements](../Section-02-Wiring-diagrams-and-power-requirements/index.md).
+
+
 Accessible design ensures that mechatronic systems can be used safely and effectively by people with diverse abilities and needs. When we design systems that work for people with disabilities, we often create solutions that benefit everyone. This approach, called universal design, leads to more robust, flexible, and user-friendly systems.
 
 In mechatronics, accessibility considerations directly impact hardware selection, interface design, control algorithms, and safety systems. Understanding these requirements early in the design process prevents costly redesigns and ensures compliance with accessibility standards.

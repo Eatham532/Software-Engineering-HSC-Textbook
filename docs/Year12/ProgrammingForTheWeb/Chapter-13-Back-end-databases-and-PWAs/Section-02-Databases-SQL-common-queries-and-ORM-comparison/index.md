@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [13.1 Server-side Python with a microframework and the back-end request flow](../Section-01-Server-side-Python-with-a-microframework-and-the-back-end-request-flow/index.md).
+
+
 Databases are the persistent storage layer of web applications, and SQL (Structured Query Language) is the standard way to interact with relational databases. Understanding how to construct safe, efficient SQL queries and when to use Object-Relational Mapping (ORM) tools is essential for building robust web applications. These skills enable developers to store, retrieve, and manipulate data while maintaining data integrity and security.
 
 ## Concepts

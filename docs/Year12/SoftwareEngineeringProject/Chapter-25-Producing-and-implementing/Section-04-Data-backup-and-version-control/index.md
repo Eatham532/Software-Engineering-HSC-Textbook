@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [25.3 Algorithms, documentation, and resources](../Section-03-Algorithms-documentation-and-resources/index.md).
+
+
 Data backup and version control are critical safeguards that protect software projects from data loss, enable collaboration, and maintain a complete history of changes. Without proper version control and backup strategies, teams risk losing work, struggle to coordinate changes, and cannot reliably reproduce previous versions of their software. These practices form the foundation of professional software development.
 
 ## Concepts

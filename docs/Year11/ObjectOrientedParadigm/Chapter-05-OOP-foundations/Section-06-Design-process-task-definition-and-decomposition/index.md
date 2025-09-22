@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [5.5 Modelling with class diagrams, structure charts and DFDs](../Section-05-Modelling-with-class-diagrams-structure-charts-and-DFDs/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Follow a systematic design process from requirements to implementation
@@ -677,6 +681,10 @@ class ChatSystem:
 
 ///
 ///
+
+
+!!! next-up "Coming Up"
+    Next: [5.7 Collaboration practices and version control](../Section-07-Collaboration-practices-and-version-control/index.md) will build on these concepts.
 
 ## Recap
 

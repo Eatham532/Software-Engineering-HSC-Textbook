@@ -2,6 +2,10 @@
 
 ## Why Security Ethics and Legal Considerations Matter
 
+!!! builds-on "Builds on"
+    This section builds on [19.2 Enterprise Security Benefits](../Section-02-Enterprise-Security-Benefits/index.md).
+
+
 Security exists within a complex web of ethical obligations, legal requirements, and societal expectations. Every security decision has implications beyond technical effectiveness—it affects privacy, equality, employment, and fundamental rights. As security practitioners, we must understand these broader implications and design systems that not only protect against threats but also respect human dignity and legal frameworks.
 
 The tension between security and other values—privacy, accessibility, transparency, innovation—requires careful navigation. Understanding the ethical and legal landscape helps us make decisions that are not only technically sound but also socially responsible and legally compliant.
@@ -2323,3 +2327,7 @@ if __name__ == "__main__":
 6. **Ethical Framework**: Every security decision has broader implications that extend beyond technical effectiveness to societal impact.
 
 Security practitioners have a responsibility to consider the broader implications of their work, ensuring that security enhancements serve all members of society while respecting fundamental rights and promoting inclusive access to digital services.
+
+
+!!! next-up "Coming Up"
+    Next: [19.4 Evaluating Security Programs](../Section-04-Evaluating-Security-Programs/index.md) will build on these concepts.

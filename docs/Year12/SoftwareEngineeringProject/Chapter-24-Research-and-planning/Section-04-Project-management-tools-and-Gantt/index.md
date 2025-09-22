@@ -4,6 +4,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [24.3 WAgile hybrid approach](../Section-03-WAgile-hybrid-approach/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Create project plans using Gantt charts and other project management tools

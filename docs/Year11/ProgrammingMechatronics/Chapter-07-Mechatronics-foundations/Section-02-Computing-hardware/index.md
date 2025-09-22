@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [7.1 Applications of mechatronic systems](../Section-01-Applications-of-mechatronic-systems/index.md).
+
+
 When building mechatronic systems, you need to understand how the "brain" of your system works. Whether you're using a simple microcontroller or a more powerful CPU, knowing how these computing components process instructions helps you write better code and choose the right hardware for your project.
 
 Understanding the basics of how processors work—from fetching instructions to executing them—gives you insight into why some operations are fast while others take more time. This knowledge becomes crucial when designing real-time control systems where timing matters.

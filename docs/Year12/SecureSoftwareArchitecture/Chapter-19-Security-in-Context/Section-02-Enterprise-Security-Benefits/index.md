@@ -2,6 +2,10 @@
 
 ## Why Enterprise Security Benefits Matter
 
+!!! builds-on "Builds on"
+    This section builds on [19.1 Security in Development Teams](../Section-01-Security-in-Development-Teams/index.md).
+
+
 Security is often perceived as a cost center—an expense that slows down business operations without delivering tangible value. However, this perspective fails to recognize security's significant contributions to business success. Well-implemented security programs don't just prevent losses; they create competitive advantages, enable new business opportunities, and deliver measurable returns on investment.
 
 Modern enterprises that understand security's business value consistently outperform their peers in customer trust, regulatory compliance, operational efficiency, and market positioning. Security has evolved from a necessary evil to a strategic business enabler.

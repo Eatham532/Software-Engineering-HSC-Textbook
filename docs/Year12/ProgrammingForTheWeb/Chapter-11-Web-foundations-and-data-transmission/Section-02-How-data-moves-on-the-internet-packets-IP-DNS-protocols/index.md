@@ -4,6 +4,10 @@ In this section, you will trace a web request end-to-end: from typing a URL to r
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [Section 11.1: Explore the Applications of Web Programming](../Section-01-Explore-the-applications-of-web-programming/index.md).
+
+
 By the end, you can:
 
 - Explain the steps of a browser request/response path

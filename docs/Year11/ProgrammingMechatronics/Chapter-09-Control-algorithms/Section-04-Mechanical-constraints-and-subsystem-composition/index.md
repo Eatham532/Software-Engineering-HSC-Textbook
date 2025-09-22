@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [9.3 Algorithmic patterns for control](../Section-03-Algorithmic-patterns-control/index.md).
+
+
 Mechatronic systems consist of multiple mechanical, electrical, and software components working together. Understanding how mechanical constraints limit movement and how to effectively combine subsystems is crucial for designing reliable, coordinated systems.
 
 Poor subsystem design can lead to mechanical interference, reduced precision, or system failure. Proper composition strategies ensure that individual components work harmoniously to achieve complex system goals.

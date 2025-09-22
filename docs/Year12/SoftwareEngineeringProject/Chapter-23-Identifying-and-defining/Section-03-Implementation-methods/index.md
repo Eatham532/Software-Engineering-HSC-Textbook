@@ -2,6 +2,10 @@
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [23.2 Ideation and modelling tools](../Section-02-Ideation-and-modelling-tools/index.md).
+
+
 Choosing the right implementation method can make the difference between project success and failure. Different approaches suit different project types, organisational contexts, and risk profiles. Understanding when to use direct, phased, parallel, or pilot implementations helps software engineers deliver solutions that meet user needs while managing complexity and minimising disruption.
 
 ## Concepts

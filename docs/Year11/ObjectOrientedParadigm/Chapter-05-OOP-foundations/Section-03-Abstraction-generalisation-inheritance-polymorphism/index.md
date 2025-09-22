@@ -2,6 +2,10 @@
 
 ## Learning objectives
 
+!!! builds-on "Builds on"
+    This section builds on [5.2 Encapsulation and state](../Section-02-Encapsulation-and-state/index.md).
+
+
 By the end of this section, you will be able to:
 
 - Explain the purpose of abstraction in object-oriented programming
@@ -534,6 +538,10 @@ for appliance in appliances:
 
 ///
 ///
+
+
+!!! next-up "Coming Up"
+    Next: [5.4 Comparing procedural and OOP](../Section-04-Comparing-procedural-and-OOP/index.md) will build on these concepts.
 
 ## Recap
 

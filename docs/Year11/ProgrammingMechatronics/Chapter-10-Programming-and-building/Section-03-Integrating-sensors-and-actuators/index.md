@@ -4,6 +4,10 @@ Real mechatronic systems combine multiple sensors and actuators that must work t
 
 ## Why it matters
 
+!!! builds-on "Builds on"
+    This section builds on [10.2 Implementing closed loop control](../Section-02-Implementing-closed-loop-control/index.md).
+
+
 Building mechatronic systems device by device leads to tangled, hard-to-debug code. Each sensor and actuator has different connection methods, data formats, and timing requirements. Without proper abstractions, your control logic becomes mixed with device-specific details, making it difficult to test, maintain, or upgrade components.
 
 Interface abstractions solve these problems by providing a standard way to interact with all devices. This makes your system modular, testable, and adaptable to different hardware configurations.
@@ -1143,6 +1147,10 @@ test_enhanced_safety()
 ```
 ///
 ///
+
+
+!!! next-up "Coming Up"
+    Next: [10.4 User interfaces for control](../Section-04-User-interfaces-for-control/index.md) will build on these concepts.
 
 ## Recap
 

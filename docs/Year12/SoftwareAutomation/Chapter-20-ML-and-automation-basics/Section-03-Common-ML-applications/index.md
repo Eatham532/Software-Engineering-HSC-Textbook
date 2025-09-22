@@ -2,6 +2,10 @@
 
 ## Why Understanding ML Applications Matters
 
+!!! builds-on "Builds on"
+    This section builds on [20.2 ML training models: supervised, unsupervised, semi, reinforcement](../Section-02-ML-training-models/index.md).
+
+
 Machine Learning has transformed numerous industries and continues to create new possibilities for automation and intelligent systems. Understanding common ML applications helps you:
 
 - **Recognize Opportunities**: Identify where ML can solve real-world problems
@@ -1932,6 +1936,10 @@ if __name__ == "__main__":
 - Large-scale distributed systems (Java, Go)
 
 ---
+
+
+!!! next-up "Coming Up"
+    Next: [20.4 Design models: decision trees and neural networks](../Section-04-Design-models-decision-trees-and-neural-networks/index.md) will build on these concepts.
 
 ## Practice Tasks
 

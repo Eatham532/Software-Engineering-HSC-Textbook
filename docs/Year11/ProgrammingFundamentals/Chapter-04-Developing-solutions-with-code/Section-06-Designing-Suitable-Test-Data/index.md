@@ -2,6 +2,10 @@
 
 ## What is Test Data?
 
+!!! builds-on "Builds on"
+    This section builds on [1.1 Software development steps]../../Chapter-01-Software-Development/Section-01-Software-development-steps/index.md). Make sure you understand the testing phase.
+
+
 **Test data** is the input you use to check whether your program works correctly. Good test data helps you find bugs before your users do and ensures your program handles all possible situations properly.
 
 Think of test data like quality control in manufacturing - you wouldn't sell a product without testing it first. The same principle applies to software: you need to test your code with carefully chosen inputs to make sure it works correctly.
@@ -600,6 +604,10 @@ def run_test_suite(test_cases, function_to_test):
 # Run the documented test suite
 run_test_suite(test_cases, calculate_letter_grade)
 ```
+
+
+!!! see-also "See Also"
+    For related concepts, see [4.5 Debugging Tools and Techniques](../Section-05-Debugging-Tools-and-Techniques/index.md).
 
 ## Summary
 

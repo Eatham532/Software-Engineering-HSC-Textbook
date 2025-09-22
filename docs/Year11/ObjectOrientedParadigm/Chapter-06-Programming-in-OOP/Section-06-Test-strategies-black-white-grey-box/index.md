@@ -650,6 +650,10 @@ You know that a student grading system uses the following internal mechanisms:
 Design grey box tests that leverage this internal knowledge to test critical scenarios.
 ///
 
+
+!!! next-up "Coming Up"
+    Next: [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md) will build on these concepts.
+
 ## Section Recap
 
 In this section, you learned about three fundamental testing strategies:

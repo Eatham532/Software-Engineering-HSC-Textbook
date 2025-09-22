@@ -11,6 +11,10 @@
 
 ## Introduction
 
+!!! builds-on "Builds on"
+    This section builds on [18.1 Security Testing Fundamentals](../Section-01-Security-Testing-Fundamentals/index.md).
+
+
 **Web application vulnerabilities** are security weaknesses that can be exploited by attackers to compromise web applications and their users. These vulnerabilities often arise from common coding mistakes, misconfigurations, or design flaws that create opportunities for unauthorized access, data theft, or system compromise.
 
 Understanding these vulnerabilities is crucial because:
