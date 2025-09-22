@@ -22,18 +22,6 @@ Students will develop the ability to:
 
 ## Chapters
 
-### [Chapter 20: ML and Automation Basics](Chapter-20-ML-and-automation-basics/)
-
-Introduction to machine learning fundamentals, definitions, applications, and simple model design. Covers the distinction between AI and ML, training processes, common applications, and practical implementation of decision trees and neural networks.
-
-### [Chapter 21: Programming for Automation](Chapter-21-Programming-for-automation/)
-
-Hands-on implementation of core machine learning algorithms including regression models (linear, logistic, polynomial, K-nearest neighbors) and neural networks, with emphasis on mathematical foundations and practical coding skills.
-
-### [Chapter 22: Significance and Impact](Chapter-22-Significance-and-impact/)
-
-Assessment of automation's impact on society, human behavior patterns, and bias in ML systems. Explores safety, accessibility, employment effects, and ethical considerations in automated system development.
-
 ## Implementation Philosophy
 
 This module emphasizes **practical understanding through implementation**:

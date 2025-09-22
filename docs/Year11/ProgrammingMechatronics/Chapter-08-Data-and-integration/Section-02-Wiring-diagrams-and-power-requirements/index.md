@@ -308,4 +308,4 @@ Understanding electrical fundamentals and safe wiring practices is essential for
 
 Proper power planning and wiring design prevent system failures and ensure safe operation. Always test your calculations with real components and measure actual power consumption to validate your estimates.
 
-See also [7.3 Sensors, actuators, and end effectors](../../Chapter-07-Mechatronics-foundations/Section-03-Sensors-actuators-and-end-effectors/index.md) for component specifications and [8.1 Working with device data and diagnostics](../Section-01-Working-with-device-data-and-diagnostics/index.md) for monitoring power consumption.
+See also [7.3 Sensors, actuators, and end effectors](../../Chapter-07-Mechatronics-foundations/Section-03-Sensors-actuators-end-effectors/index.md) for component specifications and [8.1 Working with device data and diagnostics](../Section-01-Working-with-device-data-and-diagnostics/index.md) for monitoring power consumption.

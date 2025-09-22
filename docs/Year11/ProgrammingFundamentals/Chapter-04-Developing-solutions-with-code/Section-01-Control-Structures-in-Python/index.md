@@ -927,4 +927,4 @@ Key points to remember:
 
 ---
 
-**Cross-reference**: This section implements the algorithmic concepts from [Chapter 2 Designing Algorithms](../../Chapter-02-Designing-Algorithms/index.md) and uses the data types from [Section 3.2](../../Chapter-03-Data-for-software-engineering/Section-02-Standard-Data-Types/index.md). Next, we'll explore implementing the data structures from [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) in [Section 4.2](../Section-02-Data-Structures-in-Python/index.md).
+**Cross-reference**: This section implements the algorithmic concepts from [Chapter 2: Designing Algorithms](../../Chapter-02-Designing-Algorithms/Section-01-Control-Structures/index.md) and uses the data types from [Section 3.2](../../Chapter-03-Data-for-software-engineering/Section-02-Standard-Data-Types/index.md). Next, we'll explore implementing the data structures from [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) in [Section 4.2](../Section-02-Data-Structures-in-Python/index.md).

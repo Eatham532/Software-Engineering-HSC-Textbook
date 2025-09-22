@@ -428,7 +428,12 @@ git checkout -- filename.py
 git checkout .
 ```
 
-⚠️ **Warning**: These commands permanently delete uncommitted changes. Use with extreme caution.
+/// admonition | Watch out when discarding changes!
+    type: warning
+
+These commands permanently delete uncommitted changes. Use with extreme caution.
+///
+
 
 #### Modifying commits
 
@@ -475,7 +480,11 @@ git reset --hard HEAD~1    # DESTRUCTIVE: discard everything
 git reset --hard abc123f
 ```
 
-**Warning**: Hard reset permanently destroys uncommitted changes and commits.
+/// admonition | Warning
+    type: warning
+
+These commands permanently delete uncommitted changes. Use with extreme caution.
+///
 
 #### Recovery techniques
 

@@ -548,4 +548,4 @@ Understanding mechanical constraints and subsystem composition is essential for 
 
 Effective subsystem composition requires understanding both the capabilities and limitations of individual components, then designing coordination strategies that enable complex system behaviors while maintaining safety and reliability.
 
-See also [7.3 Sensors, actuators, and end effectors](../../Chapter-07-Mechatronics-foundations/Section-03-Sensors-actuators-and-end-effectors/index.md) for component selection and [9.3 Algorithmic patterns for control](../Section-03-Algorithmic-patterns-control/index.md) for control strategies.
+See also [7.3 Sensors, actuators, and end effectors](../../Chapter-07-Mechatronics-foundations/Section-03-Sensors-actuators-end-effectors/index.md) for component selection and [9.3 Algorithmic patterns for control](../Section-03-Algorithmic-patterns-control/index.md) for control strategies.

@@ -852,4 +852,4 @@ Key concepts:
 
 The choice between open and closed loop control depends on the application requirements for accuracy, cost, complexity, and environmental conditions. Most real mechatronic systems use a combination of both approaches.
 
-See also [9.2 Autonomous control features](../Section-02-Autonomous-control-features/) for advanced control concepts and [10.2 Implementing closed loop control](../../Chapter-10-Programming-and-building/Section-02-Implementing-closed-loop-control/) for practical implementation techniques.
+See also [9.2 Autonomous control features](../Section-02-Autonomous-control-features/index.md) for advanced control concepts and [10.2 Implementing closed loop control](../../Chapter-10-Programming-and-building/Section-02-Implementing-closed-loop-control/index.md) for practical implementation techniques.

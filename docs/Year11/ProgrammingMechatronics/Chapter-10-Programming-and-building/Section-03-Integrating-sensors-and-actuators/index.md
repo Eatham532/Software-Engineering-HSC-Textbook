@@ -1162,4 +1162,4 @@ Key principles:
 
 These patterns make mechatronic systems more reliable, maintainable, and testable. They separate hardware concerns from control logic, making it easier to develop complex systems incrementally.
 
-See also [10.5 Unit tests for subsystems](../Section-05-Unit-tests-for-subsystems/) for comprehensive testing strategies and [9.4 Mechanical constraints and subsystem composition](../../Chapter-09-Control-algorithms/Section-04-Mechanical-constraints-and-subsystem-composition/) for understanding how to compose multiple subsystems effectively.
+See also [10.5 Unit tests for subsystems](../Section-05-Unit-tests-subsystems/index.md) for comprehensive testing strategies and [9.4 Mechanical constraints and subsystem composition](../../Chapter-09-Control-algorithms/Section-04-Mechanical-constraints-and-subsystem-composition/index.md) for understanding how to compose multiple subsystems effectively.

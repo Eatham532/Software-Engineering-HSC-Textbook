@@ -828,4 +828,4 @@ Understanding when and how to use each data structure will make your programs mo
 
 ---
 
-**Cross-reference**: This section builds on the data types from [Section 3.2](../Section-02-Standard-Data-Types/index.md) and data dictionaries from [Section 3.3](../Section-03-Data-Dictionaries/index.md). These concepts prepare you for implementing these structures in Python in [Chapter 4](../../Chapter-04-Developing-solutions-with-code/index.md).
+**Cross-reference**: This section builds on the data types from [Section 3.2](../Section-02-Standard-Data-Types/index.md) and data dictionaries from [Section 3.3](../Section-03-Data-Dictionaries/index.md). These concepts prepare you for implementing these structures in Python in [Chapter 4: Developing Solutions with Code](../../Chapter-04-Developing-solutions-with-code/Section-01-Control-Structures-in-Python/index.md).
