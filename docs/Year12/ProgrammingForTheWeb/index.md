@@ -9,8 +9,11 @@ Web programming powers much of modern software, from simple websites to complex 
 **Key focus areas:**
 
 - Web protocols, security, and data transmission fundamentals
+
 - Standards-compliant and accessible web design
+
 - Full-stack Python development with databases
+
 - Progressive Web Apps and modern web architectures
 
 ## Learning Outcomes
@@ -42,15 +45,21 @@ Server-side Python development, database design (SQL and NoSQL), ORM patterns, p
 This module emphasizes **standards-first web development**:
 
 - Python-only approach for consistency across full-stack development
+
 - Security and accessibility integrated throughout all topics
+
 - Progressive enhancement from simple websites to complex applications
+
 - Emphasis on web standards and best practices
+
 - Real-world considerations for scalability and performance
 
 ## Prerequisites
 
 - Solid Python programming skills (functions, classes, data structures)
+
 - Basic understanding of HTML/CSS concepts (helpful but taught)
+
 - Familiarity with software development processes
 
 ## Getting Started

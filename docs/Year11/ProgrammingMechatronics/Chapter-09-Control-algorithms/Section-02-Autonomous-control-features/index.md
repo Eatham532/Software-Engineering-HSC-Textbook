@@ -125,6 +125,7 @@ class AutonomousSystem:
 # Demonstrate different autonomy levels
 system = AutonomousSystem(autonomy_level=2)
 system.demonstrate_autonomy_levels()
+
 ```
 
 ### Safety interlocks and fallbacks
@@ -267,6 +268,7 @@ print("\n=== After Safety Reset ===")
 safe_system.safety_interlocks["temperature"]["current"] = 25  # Back to safe temperature
 safe_system.emergency_stop_active = False  # Reset emergency stop
 safe_system.safe_operation_cycle("navigate_to_target")
+
 ```
 
 ### Guided example
@@ -511,6 +513,7 @@ for level in [1, 2, 4]:
     
     robot = AutonomousCleaningRobot(autonomy_level=level)
     robot.run_cleaning_cycle(steps=3)
+
 ```
 
 ## Try it
@@ -568,6 +571,7 @@ def design_autonomy_system(system_type):
 design_autonomy_system("smart_thermostat")
 design_autonomy_system("automated_greenhouse") 
 design_autonomy_system("delivery_drone")
+
 ```
 
 ### Exercise 2: Build a safety interlock system
@@ -704,6 +708,7 @@ safety_system.safety_sensors["emergency_button"]["status"] = "pressed"
 safety_system.current_state["speed"] = 150  # Exceed speed limit
 result = safety_system.comprehensive_safety_check({"area_A": "red_zone"})
 print(f"Result: {result}")
+
 ```
 
 ## Recap

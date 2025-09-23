@@ -27,6 +27,7 @@ Programming languages provide several fundamental data types to represent differ
 **Strings** store text - sequences of characters like words, sentences, or any textual information.
 
 /// tab | Conceptual Example
+
 ```text
 // Creating strings
 student_name = "Alice Johnson"
@@ -41,10 +42,13 @@ uppercase_name = TO_UPPER(student_name)  // "ALICE JOHNSON"
 DISPLAY "Student: " + student_name
 DISPLAY "Course: " + course_code
 DISPLAY "Name has " + name_length + " characters"
+
 ```
+
 ///
 
 /// tab | Key Characteristics
+
 ```text
 Purpose: Store text and characters
 Examples: Names, addresses, messages, identifiers
@@ -53,7 +57,9 @@ Common operations:
 - Length calculation
 - Case conversion (upper/lower)
 - Substring extraction
+
 ```
+
 ///
 **When to use strings:**
 
@@ -70,6 +76,7 @@ Common operations:
 **Integers** store whole numbers - positive, negative, or zero, without decimal points.
 
 /// tab | Conceptual Example
+
 ```text
 // Creating integers
 student_age = 17
@@ -85,10 +92,13 @@ remainder = total_points MOD 3      // Modulus: 0
 DISPLAY "Student age: " + student_age
 DISPLAY "Class size: " + num_students
 DISPLAY "Average (estimated): " + average_estimate
+
 ```
+
 ///
 
 /// tab | Key Characteristics
+
 ```text
 Purpose: Store whole numbers
 Examples: Ages, counts, IDs, years
@@ -97,7 +107,9 @@ Common operations:
 - Arithmetic (+, -, *, /, MOD)
 - Comparison (==, !=, <, >, <=, >=)
 - Type conversion
+
 ```
+
 ///
 **When to use integers:**
 
@@ -114,6 +126,7 @@ Common operations:
 **Floats** store numbers with decimal points - for precise measurements and calculations.
 
 /// tab | Conceptual Example
+
 ```text
 // Creating floats
 grade_average = 87.5
@@ -129,10 +142,13 @@ percentage = grade_average / 100     // Convert to decimal: 0.875
 DISPLAY "Grade average: " + grade_average + "%"
 DISPLAY "Price with tax: $" + rounded_cost
 DISPLAY "Temperature: " + temperature + "°C"
+
 ```
+
 ///
 
 /// tab | Key Characteristics
+
 ```text
 Purpose: Store decimal numbers
 Examples: Prices, measurements, percentages, scientific data
@@ -141,7 +157,9 @@ Common operations:
 - Arithmetic (+, -, *, /)
 - Rounding functions
 - Mathematical functions (absolute value, power)
+
 ```
+
 ///
 **When to use floats:**
 
@@ -158,6 +176,7 @@ Common operations:
 **Booleans** store logical values - either `True` or `False`. They're essential for decision-making in programs.
 
 /// tab | Conceptual Example
+
 ```text
 // Creating booleans
 is_student = TRUE
@@ -172,10 +191,13 @@ eligible = is_student OR has_permission       // Logical OR
 DISPLAY "Is student: " + is_student
 DISPLAY "Can enroll: " + can_enroll
 DISPLAY "Needs help: " + needs_help
+
 ```
+
 ///
 
 /// tab | Key Characteristics
+
 ```text
 Purpose: Store true/false values
 Examples: Status flags, conditions, yes/no answers
@@ -185,7 +207,9 @@ Common operations:
 - Logical OR
 - Logical NOT
 - Comparison operations return booleans
+
 ```
+
 ///
 **When to use booleans:**
 
@@ -202,6 +226,7 @@ Common operations:
 **Date and time** types store temporal information - specific moments, dates, or time periods.
 
 /// tab | Conceptual Example
+
 ```text
 // Creating date/time values
 today = CURRENT_DATE()                    // Current date
@@ -217,10 +242,13 @@ DISPLAY "Today: " + FORMAT_DATE(today)
 DISPLAY "Born: " + FORMAT_DATE(birth_date)
 DISPLAY "Age: approximately " + age_years + " years"
 DISPLAY "Class time: " + FORMAT_TIME(class_time)
+
 ```
+
 ///
 
 /// tab | Key Characteristics
+
 ```text
 Purpose: Store dates, times, and timestamps
 Examples: Birthdays, deadlines, log timestamps
@@ -229,7 +257,9 @@ Common operations:
 - Formatting dates and times for display
 - Parsing dates from text input
 - Comparisons (before/after)
+
 ```
+
 ///
 **When to use date/time:**
 
@@ -248,6 +278,7 @@ Sometimes you need to convert between data types or check what type a piece of d
 ### Converting between types
 
 /// tab | Conceptual Examples
+
 ```text
 // Converting to different types
 score_text = "85"
@@ -270,10 +301,13 @@ bool_from_empty = TO_BOOLEAN("")           // Empty string: FALSE
 DISPLAY "Score as number: " + score_number
 DISPLAY "Price rounded: " + price_rounded
 DISPLAY "Boolean from 42: " + bool_from_number
+
 ```
+
 ///
 
 /// tab | Conversion Rules
+
 ```text
 String to number:
 - Must contain valid number format
@@ -289,12 +323,15 @@ To boolean:
 Float to integer:
 - Decimal part is usually truncated (not rounded)
 - 3.9 becomes 3, not 4
+
 ```
+
 ///
 
 ### Checking data types
 
 /// tab | Conceptual Examples
+
 ```text
 // Checking types (varies by programming language)
 student_name = "Alice"
@@ -315,10 +352,13 @@ END IF
 IF IS_NUMBER(grade_average) THEN
     DISPLAY "Grade average is a number"
 END IF
+
 ```
+
 ///
 
 /// tab | Type Checking Methods
+
 ```text
 TYPE_OF(variable):
 - Returns the exact data type
@@ -331,7 +371,9 @@ IS_TYPE(variable, type):
 When to use each:
 - TYPE_OF: When you need exact type information
 - IS_TYPE: When you want to accept compatible types
+
 ```
+
 ///
 
 ## Choosing the right data type
@@ -362,6 +404,7 @@ flowchart TD
     I --> N[Examples:<br/>Prices, measurements,<br/>percentages, averages]
     J --> O[Examples:<br/>Status flags,<br/>yes/no answers,<br/>conditions]
     K --> P[Examples:<br/>Birthdays, deadlines,<br/>timestamps, schedules]
+
 ```
 
 ### Common mistakes and solutions
@@ -376,6 +419,7 @@ flowchart TD
 ### Practical examples
 
 /// tab | Student Record System
+
 ```text
 // Good data type choices for a student record
 student_id = 12345              // INTEGER - for unique identification
@@ -396,10 +440,13 @@ DISPLAY "Age: " + age + " years"
 DISPLAY "Average: " + grade_average + "%"
 DISPLAY "Enrolled: " + is_enrolled
 DISPLAY "Subjects: " + JOIN(subjects, ", ")
+
 ```
+
 ///
 
 /// tab | E-commerce Product
+
 ```text
 // Product information with appropriate types
 product_id = "LAPTOP-001"       // STRING - alphanumeric identifier
@@ -418,7 +465,9 @@ DISPLAY "Price: $" + price
 DISPLAY "Stock: " + quantity_in_stock + " units"
 DISPLAY "Available: " + is_available
 DISPLAY "Total inventory value: $" + total_inventory_value
+
 ```
+
 ///
 
 ## Practice exercises
@@ -510,7 +559,9 @@ DISPLAY "'95.5' → " + score_float + " → " + score_int  // Output: '95.5' →
 age = 17
 is_integer = IS_INTEGER(age)
 DISPLAY "Is age an integer? " + is_integer  // Output: Is age an integer? TRUE
+
 ```
+
 ///
 ///
 
@@ -579,9 +630,11 @@ DISPLAY "Name type: " + TYPE_OF(full_name)
 DISPLAY "Birth date type: " + TYPE_OF(birth_date)
 DISPLAY "Average type: " + TYPE_OF(grade_average)
 DISPLAY "Enrolled type: " + TYPE_OF(is_enrolled)
+
 ```
 
 **Output:**
+
 ```
 === STUDENT INFORMATION ===
 ID: 10234
@@ -598,7 +651,9 @@ Name type: STRING
 Birth date type: DATE
 Average type: FLOAT
 Enrolled type: BOOLEAN
+
 ```
+
 ///
 ///
 

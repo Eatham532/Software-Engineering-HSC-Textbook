@@ -9,9 +9,13 @@ Security is not an afterthought—it's a fundamental requirement of modern softw
 **Key focus areas:**
 
 - Security foundations and threat modeling
+
 - Core security principles and cryptography
+
 - Input validation and data protection
+
 - Secure system design and API security
+
 - Security testing and vulnerability management
 
 ## Learning Outcomes
@@ -59,15 +63,21 @@ Security in development teams, enterprise security benefits, ethical and legal c
 This module emphasizes **security-by-design thinking**:
 
 - Python-only examples showing vulnerabilities and secure implementations
+
 - Progressive security integration from design to deployment
+
 - Practical focus on OWASP Top 10 and real-world attack patterns
+
 - Balance between security, usability, and performance
+
 - Ethical considerations and responsible security practices
 
 ## Prerequisites
 
 - Solid Python programming skills
+
 - Understanding of web development concepts
+
 - Basic knowledge of software development processes
 
 ## Getting Started

@@ -51,6 +51,7 @@ class Student {
     + get_info(): string
 }
 @enduml
+
 ```
 
 ### Showing relationships between classes
@@ -96,6 +97,7 @@ School ||--o{ Course : "offers"
 Course }o--|| Teacher : "taught by"
 Course }o--o{ Student : "enrolled in"
 @enduml
+
 ```
 
 This diagram shows:
@@ -144,6 +146,7 @@ class ElectricCar extends Car {
     + get_range(): float
 }
 @enduml
+
 ```
 
 ## Structure charts
@@ -168,6 +171,7 @@ Library Management System
     ├── Borrow Book
     ├── Return Book
     └── Calculate Fines
+
 ```
 
 ### Structure chart with data flow
@@ -188,6 +192,7 @@ prereq --> main : "eligibility status"
 main --> update : "student record"
 main --> confirm : "enrollment details"
 @enduml
+
 ```
 
 ### When to use structure charts
@@ -241,6 +246,7 @@ process3 --> db1 : "updated enrollment"
 process3 --> student : "confirmation"
 teacher --> process3 : "approval"
 @enduml
+
 ```
 
 ### DFD levels
@@ -262,6 +268,7 @@ system --> teacher : "availability status"
 admin --> system : "new book details"
 system --> admin : "inventory report"
 @enduml
+
 ```
 
 **Level 1**: Breaks down the main system into major processes
@@ -287,6 +294,7 @@ p2 --> db1 : "new book"
 p3 --> db1 : "book data"
 p3 --> db2 : "user data"
 @enduml
+
 ```
 
 ## How the three techniques complement each other
@@ -337,6 +345,7 @@ Customer ||--|| ShoppingCart : "has"
 ShoppingCart }o--o{ Product : "contains"
 Order }o--o{ Product : "includes"
 @enduml
+
 ```
 
 **2. Structure Chart** - Shows functional decomposition:
@@ -359,6 +368,7 @@ Online Shopping System
     ├── Process Payment
     ├── Update Inventory
     └── Generate Invoice
+
 ```
 
 **3. Data Flow Diagram** - Shows data movement:
@@ -386,6 +396,7 @@ p3 --> customer : "invoice"
 p1 --> payment : "payment request"
 payment --> p1 : "payment confirmation"
 @enduml
+
 ```
 
 ### When to use each diagram
@@ -465,6 +476,7 @@ User ||--o{ Comment : "writes"
 Post ||--o{ Comment : "has"
 Category ||--o{ Post : "contains"
 @enduml
+
 ```
 
 ///
@@ -512,6 +524,7 @@ Student Grade Management System
     ├── Compose Message
     ├── Send Email to Parents
     └── Log Notification Sent
+
 ```
 
 ///
@@ -576,6 +589,7 @@ p4 --> customer : "balance display"
 p5 --> db2 : "transaction record"
 db2 --> bank : "audit trail"
 @enduml
+
 ```
 
 ///

@@ -301,6 +301,7 @@ class ProgressiveAuth:
             'unusual_activity': self.check_for_anomalies(user_session),
             'security_tips': self.get_contextual_tips(user_session)
         }
+
 ```
 
 ### User Testing Results and Iterations

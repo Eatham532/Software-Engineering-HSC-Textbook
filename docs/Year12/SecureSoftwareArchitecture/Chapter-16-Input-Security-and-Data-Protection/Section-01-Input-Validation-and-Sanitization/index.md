@@ -62,6 +62,7 @@ def get_user_vulnerable(username, password):
 # username: admin' OR '1'='1' --
 # This creates the query: SELECT * FROM users WHERE username = 'admin' OR '1'='1' --' AND password = '...'
 # The -- comments out the password check, bypassing authentication
+
 ```
 
 ### Secure Implementation with Parameterized Queries
@@ -407,6 +408,7 @@ def demonstrate_sql_injection_protection():
     malicious_search = "'; DROP TABLE users; --"
     search_results = db_manager.search_users(malicious_search, "username")
     print(f"Malicious search results: {len(search_results)} users found (should be 0)")
+
 ```
 
 ## Cross-Site Scripting (XSS) Prevention
@@ -722,6 +724,7 @@ def demonstrate_xss_protection():
     for field, value in validation_result['data'].items():
         if field != 'password':  # Don't display password
             print(f"  {field}: {value}")
+
 ```
 
 ## Input Validation Strategies: Whitelist vs Blacklist
@@ -992,6 +995,7 @@ def demonstrate_whitelist_validation():
     for field, invalid_value in invalid_inputs.items():
         result = validator.validate_field(field, invalid_value)
         print(f"{field}: '{invalid_value}' -> {result['error'].value if result['error'] else 'VALID'}")
+
 ```
 
 ### Blacklist Approach (Use with Caution)
@@ -1119,6 +1123,7 @@ def demonstrate_blacklist_limitations():
             for threat in result['threats_found']:
                 print(f"  Detected: {threat['type']} - {threat.get('pattern', threat.get('word'))}")
         print()
+
 ```
 
 ## Safe Error Message Design
@@ -1217,6 +1222,7 @@ class SafeErrorHandler:
         )
         
         return "Too many requests. Please wait before trying again."
+
 ```
 
 ## File Upload Security

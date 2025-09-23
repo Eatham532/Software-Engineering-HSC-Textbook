@@ -36,6 +36,7 @@ state --> components : provides data
 components --> data : triggers updates
 data --> state : updates state
 @enduml
+
 ```
 
 ```python
@@ -108,6 +109,7 @@ def handle_state_update():
 def framework_app():
     """Serve single-page application for framework"""
     return render_template('framework_app.html')
+
 ```
 
 Example HTML template for framework integration (`templates/framework_app.html`):
@@ -221,6 +223,7 @@ Example HTML template for framework integration (`templates/framework_app.html`)
     </script>
 </body>
 </html>
+
 ```
 
 ### Template engines for server-side rendering
@@ -332,6 +335,7 @@ def get_template_data(user_role):
     """API endpoint for template data"""
     data = template_engine.prepare_template_data(user_role)
     return jsonify(data)
+
 ```
 
 ### CSS and UI component libraries
@@ -523,6 +527,7 @@ def get_component_html(component_type, variant):
 def component_demo():
     """Demonstrate component library usage"""
     return render_template('component_demo.html')
+
 ```
 
 ### When to adopt libraries versus building bespoke code
@@ -731,6 +736,7 @@ def get_library_suggestions(category):
 def decision_tool():
     """Serve decision-making tool interface"""
     return render_template('decision_tool.html')
+
 ```
 
 /// details | Choosing the right approach for a student portal
@@ -785,6 +791,7 @@ def student_portal_analysis():
     """Get analysis for student portal project"""
     analysis = analyze_student_portal_requirements()
     return jsonify(analysis)
+
 ```
 
 ///
@@ -892,6 +899,7 @@ component_library = {
         'user-profile': 'Standard user information display'
     }
 }
+
 ```
 
 **Component creation guidelines**:

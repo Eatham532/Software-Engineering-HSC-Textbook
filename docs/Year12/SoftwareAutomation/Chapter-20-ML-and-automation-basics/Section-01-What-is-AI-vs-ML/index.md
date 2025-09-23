@@ -314,6 +314,7 @@ def demonstrate_ai_vs_ml():
 # Demonstrate the key difference: AI uses rules, ML learns patterns
 if __name__ == "__main__":
     ai_sys, ml_sys = demonstrate_ai_vs_ml()
+
 ```
 
 ### Key Differences Summary
@@ -570,6 +571,7 @@ def demonstrate_rpa():
 
 if __name__ == "__main__":
     rpa_demo = demonstrate_rpa()
+
 ```
 
 ---
@@ -968,6 +970,7 @@ def demonstrate_bpa():
 
 if __name__ == "__main__":
     bpa_demo = demonstrate_bpa()
+
 ```
 
 ---
@@ -1338,6 +1341,7 @@ def demonstrate_ml_enhanced_automation():
 
 if __name__ == "__main__":
     ml_automation = demonstrate_ml_enhanced_automation()
+
 ```
 
 ### Benefits of ML-Enhanced Automation
@@ -1369,6 +1373,7 @@ def recommend_approach(scenario_description):
     # - Rule clarity
     # - Need for adaptation
     pass
+
 ```
 
 ### Task 2: RPA Workflow Design

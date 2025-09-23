@@ -7,6 +7,7 @@ This page shows a simple PlantUML diagram rendered via Kroki/PlantUML.
 Alice -> Bob: Hello Bob, how are you?
 Bob --> Alice: I am good thanks!
 @enduml
+
 ```
 
 <!-- kroki-plantuml fence will be recognized by the kroki plugin and sent to the Kroki server -->

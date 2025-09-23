@@ -49,6 +49,7 @@ def check_certificate(hostname, port=443):
 
 # Check a real certificate
 check_certificate('github.com')
+
 ```
 
 ### Encryption algorithms: symmetric vs asymmetric
@@ -107,6 +108,7 @@ asym = AsymmetricEncryption()
 encrypted_asym = asym.encrypt_with_public("Hello")
 decrypted_asym = asym.decrypt_with_private(encrypted_asym)
 print(f"Asymmetric: Hello → {encrypted_asym} → {decrypted_asym}")
+
 ```
 
 ### Plain text vs cipher text
@@ -145,6 +147,7 @@ def demonstrate_encryption_need():
     print("- Maintains user privacy and trust")
 
 demonstrate_encryption_need()
+
 ```
 
 ### Authentication and authorisation
@@ -206,6 +209,7 @@ security.authenticate("eve", "anypassword")   # Unknown user
 security.authorize("alice", "delete")      # Admin can delete
 security.authorize("bob", "delete")        # User cannot delete
 security.authorize("bob", "read")          # User can read
+
 ```
 
 ### Hash values for integrity and passwords
@@ -252,6 +256,7 @@ def demonstrate_hashing():
     print("Notice: tiny change = completely different hash")
 
 demonstrate_hashing()
+
 ```
 
 ### Digital signatures
@@ -318,6 +323,7 @@ alice.verify_signature(signed_contract)
 signed_contract["content"] = "Agreement to develop web application for $1,000"
 print(f"\nAfter tampering:")
 alice.verify_signature(signed_contract)
+
 ```
 
 ### Guided example: HTTPS connection flow
@@ -354,6 +360,7 @@ note left of S
   - CA endorsement
 end note
 @enduml
+
 ```
 
 ## Try it
@@ -422,7 +429,9 @@ def analyze_certificate(hostname):
 sites = ['github.com', 'google.com', 'stackoverflow.com']
 for site in sites:
     analyze_certificate(site)
+
 ```
+
 ///
 ///
 
@@ -543,7 +552,9 @@ auth_system.register_user("alice", "StrongPass123!")  # Should succeed
 print("\n=== Testing Login ===")
 auth_system.verify_login("alice", "wrongpassword")  # Should fail
 auth_system.verify_login("alice", "StrongPass123!")  # Should succeed
+
 ```
+
 ///
 ///
 

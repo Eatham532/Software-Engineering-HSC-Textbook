@@ -60,6 +60,7 @@ def assess_quality(system, criteria):
                 "status": test_result
             })
     return results
+
 ```
 
 ### Continual checking processes
@@ -118,6 +119,7 @@ qa_system.track_acceptance_criteria("login_feature", [
     "Invalid credentials show appropriate error message",
     "Account lockout after 3 failed attempts"
 ])
+
 ```
 
 ### Compliance and legislative requirements
@@ -178,6 +180,7 @@ RECTANGLE "Testing Integration" {
 "QA Framework" --> "Testing Integration"
 
 @enduml
+
 ```
 
 ### Guided example: Implementing QA for a school library system
@@ -185,6 +188,7 @@ RECTANGLE "Testing Integration" {
 Let's walk through implementing quality assurance for a digital library management system:
 
 **Step 1: Define quality criteria**
+
 ```python
 library_qa_criteria = {
     "correctness": {
@@ -208,9 +212,11 @@ library_qa_criteria = {
         "System logs all access attempts"
     }
 }
+
 ```
 
 **Step 2: Establish review checkpoints**
+
 ```python
 review_schedule = [
     {"phase": "Requirements", "reviewers": ["librarian", "IT_admin", "student_rep"]},
@@ -218,9 +224,11 @@ review_schedule = [
     {"phase": "Implementation", "reviewers": ["peer_developer", "security_specialist"]},
     {"phase": "Testing", "reviewers": ["QA_tester", "end_users"]}
 ]
+
 ```
 
 **Step 3: Compliance checklist**
+
 ```python
 compliance_requirements = {
     "privacy": [
@@ -239,6 +247,7 @@ compliance_requirements = {
         "Audit logs maintained for administrative access"
     ]
 }
+
 ```
 
 ## Practice

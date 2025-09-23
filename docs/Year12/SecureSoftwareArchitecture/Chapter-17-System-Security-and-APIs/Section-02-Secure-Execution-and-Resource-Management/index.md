@@ -56,6 +56,7 @@ def safe_string_handling():
     
     result = user_input * min(1000, 10000 // len(user_input))
     return result
+
 ```
 
 ### Memory-Safe Coding Practices
@@ -106,6 +107,7 @@ def create_safe_data_structure(user_requested_size):
     except (ValueError, MemoryError) as e:
         print(f"Error creating data structure: {e}")
         return None
+
 ```
 
 ## Resource Exhaustion Attacks (DoS Prevention)
@@ -210,6 +212,7 @@ def process_file_with_timeout(file_data, timeout_seconds):
         # Clear timeout
         signal.alarm(0)
         signal.signal(signal.SIGALRM, old_handler)
+
 ```
 
 ### CPU and Memory Protection
@@ -276,6 +279,7 @@ def secure_computation(data):
     except (SystemError, MemoryError) as e:
         print(f"Computation aborted due to resource limits: {e}")
         return None
+
 ```
 
 ## Secure File Operations
@@ -417,6 +421,7 @@ def handle_user_upload(filename, file_data):
     except Exception as e:
         print(f"Upload failed: {e}")
         return None
+
 ```
 
 ## Timeout and Retry Strategies
@@ -534,6 +539,7 @@ def safe_database_call(query):
     except Exception as e:
         print(f"Database call failed: {e}")
         return None
+
 ```
 
 ## Exception Handling Security
@@ -654,6 +660,7 @@ def validate_user_input(data):
         error_response = error_handler.handle_error(e, "Input validation")
         # Don't reveal which specific validation failed
         return {"valid": False, "message": "Invalid input provided"}
+
 ```
 
 ## Practical Example: Secure File Upload System
@@ -803,6 +810,7 @@ def demo_secure_upload():
 
 if __name__ == "__main__":
     demo_secure_upload()
+
 ```
 
 ## Security Best Practices Summary

@@ -43,6 +43,7 @@ skinparam shadowing false
 note right of [Controller] : Error calculation\nControl algorithm\nOutput limiting
 note bottom of [Process] : The physical system\nbeing controlled
 @enduml
+
 ```
 
 ### Proportional control
@@ -86,6 +87,7 @@ for step in range(5):
     current_temp += temp_increase
     
     print(f"Step {step+1}: Temp={current_temp:.1f}°C, Error={setpoint-current_temp:.1f}, Power={heater_power:.1f}%")
+
 ```
 
 ### PID control
@@ -187,6 +189,7 @@ for step in range(10):
     print(f"{step+1:4d} | {current_position:8.1f} | {error:5.1f} | {p_term:6.1f} | {i_term:6.1f} | {d_term:6.1f} | {output:6.1f}")
     
     time.sleep(0.1)  # Simulate time step
+
 ```
 
 ### Guided example
@@ -235,6 +238,7 @@ RobotArmController --> AngleSensor
 RobotArmController --> ServoMotor
 RobotArmController ..> Disturbance : affected by
 @enduml
+
 ```
 
 ```python
@@ -400,6 +404,7 @@ if __name__ == "__main__":
     print(f"Steady-state error: {metrics['steady_state_error']:.2f}°")
     print(f"Maximum overshoot: {metrics['max_overshoot']:.2f}°")
     print(f"Settling time: {metrics['settling_time']:.2f}s" if metrics['settling_time'] else "Did not settle")
+
 ```
 
 ### Structured parameter management
@@ -536,6 +541,7 @@ adaptive_controller.run_control_loop(duration_seconds=2)
 
 # Optimize based on performance
 adaptive_controller.optimize_performance()
+
 ```
 
 ## Try it
@@ -586,6 +592,7 @@ for kp in [0.5, 2.0, 5.0]:
         if abs(error) < 0.1:
             print(f"Target reached in {step+1} steps")
             break
+
 ```
 
 **Analysis**: Lower Kp (0.5) responds slowly but stably. Higher Kp (5.0) responds quickly but may overshoot. Kp=2.0 provides a good balance.
@@ -631,6 +638,7 @@ controller = PIDController(
     output_min=-100,
     output_max=100
 )
+
 ```
 
 **Reasoning**:
@@ -682,6 +690,7 @@ Identify potential problems and suggest debugging steps.
    - Sensor noise affecting derivative term
 
 **Debugging code:**
+
 ```python
 def debug_pid_output(self, setpoint, measured_value):
     output, p, i, d = self.calculate_output(setpoint, measured_value)
@@ -697,7 +706,9 @@ def debug_pid_output(self, setpoint, measured_value):
         print("INFO: Low proportional term - consider increasing Kp")
         
     return output
+
 ```
+
 ///
 ///
 

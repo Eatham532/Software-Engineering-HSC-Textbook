@@ -9,8 +9,11 @@ Mechatronics combines mechanical engineering, electronics, and software to creat
 **Key focus areas:**
 
 - Mechatronic system components and applications
+
 - Data handling and electrical integration
+
 - Control algorithms and autonomous systems
+
 - Python simulations and testing approaches
 
 ## Learning Outcomes
@@ -50,15 +53,21 @@ Python simulations, closed-loop control implementation, sensor/actuator integrat
 This module emphasizes **simulation-first learning**:
 
 - Python-based simulations before hardware implementation
+
 - Conceptual understanding of electrical and mechanical principles
+
 - Progressive complexity from components to integrated systems
+
 - Safety and accessibility considerations throughout
+
 - Testing and validation through software simulation
 
 ## Prerequisites
 
 - Completion of Programming Fundamentals module
+
 - Basic Python programming skills
+
 - Understanding of basic electronics concepts (helpful but not required)
 
 ## Getting Started

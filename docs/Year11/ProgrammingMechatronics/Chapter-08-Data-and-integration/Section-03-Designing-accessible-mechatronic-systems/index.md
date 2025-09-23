@@ -49,6 +49,7 @@ package "Accessible Mechatronic System" {
     note left of [Safety Systems] : Emergency stops\nForce limits\nTimeout protection
 }
 @enduml
+
 ```
 
 ### Physical accessibility requirements
@@ -94,6 +95,7 @@ heavy_pressure = 15  # Newtons
 
 print(f"Light pressure activates: {control.check_activation(light_pressure, current_time)}")
 print(f"Heavy pressure activates: {control.check_activation(heavy_pressure, current_time)}")
+
 ```
 
 ### Alternative interface methods
@@ -150,6 +152,7 @@ input_system.register_voice_command("move forward", 0.85)  # High confidence
 input_system.register_eye_gaze(320, 240, 1.2)  # Gaze at center for 1.2 seconds
 
 print(f"Command history: {input_system.command_history}")
+
 ```
 
 ### Guided example
@@ -208,6 +211,7 @@ class MultimodalFeedback {
 AccessibleRobotController --> SafetyMonitor
 AccessibleRobotController --> MultimodalFeedback
 @enduml
+
 ```
 
 ```python
@@ -299,6 +303,7 @@ controller.set_force_sensitivity(user_max_force)
 # Attempt to move the arm
 controller.move_arm("forward", 4.5)  # Within safe force limit
 controller.move_arm("up", 60)  # Exceeds safe force limit
+
 ```
 
 ### Safety systems and emergency stops
@@ -370,6 +375,7 @@ current_time = time.time()
 safety_system.check_voice_stop("emergency stop now")
 safety_system.last_user_input = current_time - 35  # Simulate 35 seconds of inactivity
 safety_system.check_timeout(current_time)
+
 ```
 
 ### Maintainability considerations
@@ -515,7 +521,9 @@ for i in range(15):
     intentional = i > 3 and (i % 4 != 0)  # Accidents on multiples of 4, after initial learning
     control.record_activation(intentional)
     print(f"Activation {i+1}: {'Intentional' if intentional else 'Accidental'}")
+
 ```
+
 ///
 ///
 

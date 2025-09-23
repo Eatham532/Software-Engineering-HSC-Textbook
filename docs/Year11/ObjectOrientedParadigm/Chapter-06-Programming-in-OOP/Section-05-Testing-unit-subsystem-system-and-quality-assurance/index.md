@@ -200,6 +200,7 @@ class TestBankAccount(unittest.TestCase):
 # Running the tests
 if __name__ == '__main__':
     unittest.main()
+
 ```
 
 ### Subsystem Testing
@@ -372,6 +373,7 @@ class TestLibrarySubsystem(unittest.TestCase):
             self.library.return_book(isbn, "Bob")
         
         self.assertIn("not checked out to Bob", str(context.exception))
+
 ```
 
 ### System Testing
@@ -434,6 +436,7 @@ class TestLibrarySystem(unittest.TestCase):
         # Verify specific book locations
         self.assertEqual(charlie_books[0], "978-0-134-494162")
         self.assertEqual(diana_books[0], "978-0-13-110362-7")
+
 ```
 
 ## Quality Assurance Practices
@@ -526,6 +529,7 @@ class Calculator:
         if b == 0:
             raise ZeroDivisionError("Cannot divide by zero")
         return a / b
+
 ```
 
 **2. Regular Test Execution**
@@ -548,6 +552,7 @@ if __name__ == '__main__':
     else:
         print(f"\n❌ {len(result.failures)} test(s) failed")
         print(f"❌ {len(result.errors)} test(s) had errors")
+
 ```
 
 ### Acceptance Criteria
@@ -617,6 +622,7 @@ class TestStudentManagementAcceptance(unittest.TestCase):
         # And: Original student data is unchanged
         original_student = self.student_mgr.find_student(original_id)
         self.assertEqual(original_student.name, "Alice")
+
 ```
 
 ## Practice Exercises
@@ -677,6 +683,7 @@ class ShoppingCart:
         subtotal = sum(item['price'] * item['quantity'] 
                       for item in self.items.values())
         return subtotal * (1 - self.discount_rate)
+
 ```
 
 ///
@@ -735,6 +742,7 @@ class OrderProcessor:
     def process_order(self, order):
         # Check availability, reserve items, update order status
         pass
+
 ```
 
 ///

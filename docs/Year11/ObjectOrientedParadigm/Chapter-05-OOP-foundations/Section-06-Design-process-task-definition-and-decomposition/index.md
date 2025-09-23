@@ -29,9 +29,12 @@ Requirements → Responsibilities → Collaborations → Implementation
 ```kroki-plantuml
 @startuml
 @enduml
+
 ```
+
 @startuml
 @enduml
+
 ```
 @startuml
 rectangle "1. Requirements" as req {
@@ -52,6 +55,7 @@ resp --> collab : Assign to objects
 collab --> impl : Design interactions
 impl --> req : Validate against requirements
 @enduml
+
 ```
 
 Let's work through this process with a practical example.
@@ -97,6 +101,7 @@ Break down requirements into specific, testable statements:
 # - Books have due dates
 
 # This analysis reveals what our system needs to track and validate
+
 ```
 
 ## Step 2: Identifying responsibilities
@@ -189,7 +194,9 @@ class Library:
         member.add_borrowed_book(book)
         
         return True, "Book borrowed successfully"
+
 ```
+
 ///
 
 ## Step 3: Designing collaborations
@@ -203,6 +210,7 @@ class Library:
 ```python
 # Member requests library to borrow a book
 success, message = library.borrow_book(member.member_id, book.isbn)
+
 ```
 
 **2. Chain of responsibility:** Objects pass requests along until one handles it
@@ -214,6 +222,7 @@ class NotificationService:
         if not self._send_email(member):
             if not self._send_sms(member):
                 self._send_postal_mail(member)
+
 ```
 
 **3. Observer pattern:** Objects notify others when their state changes
@@ -235,6 +244,7 @@ class WaitingList:
     def book_status_changed(self, book):
         if book.is_available and self.has_waiting_members(book):
             self.notify_next_member(book)
+
 ```
 
 ### Collaboration diagram
@@ -256,6 +266,7 @@ Library -> Member : add_borrowed_book(book)
 Library -> NotificationService : schedule_due_reminder(member, book)
 Library --> Member : success message
 @enduml
+
 ```
 
 ## Top-down design approach
@@ -292,6 +303,7 @@ Level 3: Payment Processing
 ├── Credit Card Processing
 ├── Invoice Generation
 └── Payment Confirmation
+
 ```
 
 ### Top-down implementation
@@ -336,6 +348,7 @@ class PaymentProcessor:
     def process_payment(self, user, amount):
         # Implement specific payment logic
         return self._validate_payment(user, amount)
+
 ```
 
 ### Advantages of top-down design:
@@ -444,6 +457,7 @@ class Game:
             delta_time = self.calculate_delta_time()
             self.world.update(delta_time)
             self.render()
+
 ```
 
 ### Advantages of bottom-up design:
@@ -569,6 +583,7 @@ class TaskManager:
         """Responsibility: identify overdue tasks"""
         user = self.users.get(user_id)
         return [task for task in user.tasks if task.is_overdue()]
+
 ```
 
 ///
@@ -677,6 +692,7 @@ class ChatSystem:
 # 2. ChatSystem creates Message object
 # 3. ChatSystem asks ChatRoom to broadcast
 # 4. ChatRoom adds to history and notifies all members
+
 ```
 
 ///

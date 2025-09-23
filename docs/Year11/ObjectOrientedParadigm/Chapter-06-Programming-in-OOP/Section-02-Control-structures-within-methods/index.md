@@ -86,6 +86,7 @@ account = BankAccount("ACC001", 150)
 print(account.withdraw(200))        # (False, 'Insufficient funds')
 print(account.get_account_status()) # LOW_BALANCE
 print(account.apply_fees())         # Applied low balance fee: $5
+
 ```
 
 ### Complex selection with multiple conditions
@@ -176,6 +177,7 @@ student.total_assignments = 20
 print(student.calculate_letter_grade())    # A
 print(student.get_academic_standing())     # DEAN'S LIST
 print(student.can_graduate())              # (True, 'Eligible for graduation')
+
 ```
 
 ## Iteration structures in methods
@@ -260,6 +262,7 @@ inventory.add_item("Keyboard", 8, 79.99)
 print(f"Total value: ${inventory.calculate_total_value():.2f}")
 print("Low stock items:", inventory.find_low_stock_items())
 print(inventory.generate_report())
+
 ```
 
 ### While loops in methods
@@ -360,6 +363,7 @@ print(processor.processed_numbers)  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 # Find first multiple of 7 starting from 20
 first_multiple = processor.find_first_multiple(20, 7)
 print(first_multiple)  # 21
+
 ```
 
 ## Keeping methods short and cohesive
@@ -501,6 +505,7 @@ class OrderProcessor:
         # Simplified - in real system this might query a database
         prices = {'laptop': 999, 'mouse': 25, 'keyboard': 75}
         return prices.get(item_name, 0)
+
 ```
 
 ### Guidelines for method design
@@ -551,6 +556,7 @@ class TextAnalyzer:
         frequency = self.get_word_frequency()
         sorted_words = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
         return sorted_words[:n]
+
 ```
 
 **2. Keep methods short (generally under 20 lines):**
@@ -602,6 +608,7 @@ class Calculator:
             real_part = -b / (2*a)
             imaginary_part = (abs(discriminant) ** 0.5) / (2*a)
             return (complex(real_part, imaginary_part), complex(real_part, -imaginary_part))
+
 ```
 
 ### Method extraction techniques
@@ -714,6 +721,7 @@ class ReportGenerator:
         """Helper method for date formatting"""
         from datetime import datetime
         return datetime.now().strftime("%Y-%m-%d %H:%M")
+
 ```
 
 ## Practice
@@ -827,6 +835,7 @@ calc.add_grade(45)  # Low grade
 
 print(calc.get_summary())
 # {'average': 75.0, 'letter_grade': 'C', 'status': 'PASSING', 'needs_improvement': True, 'grade_count': 4}
+
 ```
 
 ///
@@ -979,6 +988,7 @@ print("Long words:", processor.find_words_longer_than(4))
 print("Statistics:", processor.get_statistics())
 print("Most common:", processor.find_most_common_words(3))
 print("Removed 'the':", processor.remove_words_containing("the"))
+
 ```
 
 ///
@@ -1027,6 +1037,7 @@ class StudentManager:
         report += f"Can Graduate: {'Yes' if can_graduate else 'No'}\n"
         
         return True, report
+
 ```
 
 **Task**: Break this into focused methods with single responsibilities.
@@ -1118,6 +1129,7 @@ class StudentManager:
 # 3. Easy to test individual components
 # 4. Easy to modify specific functionality
 # 5. Reusable methods can be called from other places
+
 ```
 
 ///

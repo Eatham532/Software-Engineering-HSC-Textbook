@@ -40,6 +40,7 @@ print(f"Value of e: {math.e}")
 radius = 5
 area = math.pi * math.pow(radius, 2)
 print(f"Area of circle with radius {radius}: {area:.2f}")
+
 ```
 
 ### Essential Math Functions
@@ -86,6 +87,7 @@ def demonstrate_math_functions():
     print(f"Tau (2π): {math.tau}")
 
 demonstrate_math_functions()
+
 ```
 
 ### Practical Math Applications
@@ -166,6 +168,7 @@ print(f"\nProjectile motion (v₀={velocity} m/s, θ={angle}°):")
 print(f"Maximum height: {height:.2f} meters")
 print(f"Flight time: {time_flight:.2f} seconds")
 print(f"Range: {range_dist:.2f} meters")
+
 ```
 
 ## The Random Module
@@ -211,6 +214,7 @@ def demonstrate_random_basics():
     print(f"Random sample (without replacement): {unique_colors}")
 
 demonstrate_random_basics()
+
 ```
 
 ### Random Module Functions
@@ -258,6 +262,7 @@ def demonstrate_random_functions():
         print(f"  {random.randint(1, 100)}")
 
 demonstrate_random_functions()
+
 ```
 
 ### Practical Random Applications
@@ -418,6 +423,7 @@ print()
 
 # Interactive quiz (uncomment to run)
 # create_quiz_generator()
+
 ```
 
 ## Combining Math and Random Modules
@@ -528,6 +534,7 @@ print()
 
 # Create histogram
 create_histogram(test_scores, 12)
+
 ```
 
 ### Game Development Examples
@@ -671,6 +678,7 @@ print("Number Guessing Game:")
 
 print("\nRPG Battle Demo:")
 # create_simple_rpg_battle()  # Uncomment to play
+
 ```
 
 ## Pure Functions and Best Practices
@@ -741,6 +749,7 @@ def demonstrate_pure_functions():
     print(f"Results are identical: {result3 == result4}")
 
 demonstrate_pure_functions()
+
 ```
 
 ### Module Import Best Practices
@@ -784,6 +793,7 @@ def demonstrate_import_styles():
     print(f"Colors chosen: {color1}, {color2}")
 
 demonstrate_import_styles()
+
 ```
 
 ## Common Patterns and Applications
@@ -897,6 +907,7 @@ def create_data_analysis_toolkit():
     print(f"95% Confidence Interval: ({ci[0]:.4f}, {ci[1]:.4f})")
 
 create_data_analysis_toolkit()
+
 ```
 
 ## Summary

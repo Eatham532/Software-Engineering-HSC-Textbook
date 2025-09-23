@@ -34,6 +34,7 @@ ALGORITHM AlgorithmName
 BEGIN
     // Algorithm steps go here
 END
+
 ```
 
 ### Sequence Pattern
@@ -50,6 +51,7 @@ BEGIN
     Remove tea bag
     Add milk if desired
 END
+
 ```
 
 ### Input/Output Patterns
@@ -59,6 +61,7 @@ INPUT variableName
 OUTPUT message
 OUTPUT variableName
 OUTPUT "literal text"
+
 ```
 
 **Example:**
@@ -70,12 +73,14 @@ BEGIN
     INPUT userName
     OUTPUT "Hello, " + userName + "!"
 END
+
 ```
 
 ### Variable Assignment Pattern
 
 ```text
 SET variableName = expression
+
 ```
 
 **Examples:**
@@ -84,6 +89,7 @@ SET variableName = expression
 SET total = price + tax
 SET average = (num1 + num2 + num3) / 3
 SET isValid = (age >= 18) AND (hasLicense = true)
+
 ```
 
 ### Selection Patterns
@@ -96,7 +102,9 @@ SET isValid = (age >= 18) AND (hasLicense = true)
 IF condition THEN
     statements
 END IF
+
 ```
+
 ///
 
 /// details | IF-ELSE
@@ -109,7 +117,9 @@ IF condition THEN
 ELSE
     statements for false
 END IF
+
 ```
+
 ///
 
 /// details | IF-ELSE IF-ELSE
@@ -124,6 +134,7 @@ ELSE IF condition2 THEN
 ELSE
     statements for all other cases
 END IF
+
 ```
 
 **Example: Grade Calculator**
@@ -147,7 +158,9 @@ BEGIN
     
     OUTPUT "Your grade is: " + grade
 END
+
 ```
+
 ///
 
 ### Iteration Patterns
@@ -160,7 +173,9 @@ END
 WHILE condition DO
     statements
 END WHILE
+
 ```
+
 ///
 
 /// details | FOR Loop
@@ -171,7 +186,9 @@ END WHILE
 FOR variable = start TO end DO
     statements
 END FOR
+
 ```
+
 ///
 
 /// details | FOR EACH Loop
@@ -182,6 +199,7 @@ END FOR
 FOR EACH item IN collection DO
     statements
 END FOR
+
 ```
 
 **Example: Find Maximum**
@@ -200,7 +218,9 @@ BEGIN
     
     OUTPUT "The maximum is: " + maximum
 END
+
 ```
+
 ///
 
 ## Flowcharts with PlantUML Activity Diagrams
@@ -217,6 +237,7 @@ start
 :Step 3;
 stop
 @enduml
+
 ```
 
 ### Input/Output Shapes
@@ -229,6 +250,7 @@ start
 :OUTPUT result;
 stop
 @enduml
+
 ```
 
 ### Decision (Selection) Shapes
@@ -244,6 +266,7 @@ else (no)
 endif
 stop
 @enduml
+
 ```
 
 ### Multiple Conditions
@@ -266,6 +289,7 @@ endif
 :OUTPUT grade;
 stop
 @enduml
+
 ```
 
 ### Loops in Flowcharts
@@ -284,7 +308,9 @@ while (count <= 5?) is (yes)
 endwhile (no)
 stop
 @enduml
+
 ```
+
 ///
 
 /// details | FOR Loop
@@ -306,7 +332,9 @@ endwhile (no)
 :OUTPUT maximum;
 stop
 @enduml
+
 ```
+
 ///
 
 ## Complete Example: Password Strength Checker
@@ -372,6 +400,7 @@ BEGIN
         OUTPUT "Weak password"
     END IF
 END
+
 ```
 
 ### Flowchart Version
@@ -434,6 +463,7 @@ endif
 
 stop
 @enduml
+
 ```
 
 ## Pseudocode Style Guidelines
@@ -441,20 +471,25 @@ stop
 ### 1. Use Clear, Descriptive Names
 
 **Good:**
+
 ```text
 SET totalPrice = itemPrice + tax + shipping
 SET isEligibleForDiscount = (age >= 65) OR (isStudent = true)
+
 ```
 
 **Avoid:**
+
 ```text
 SET x = a + b + c
 SET flag = (n >= 65) OR (s = true)
+
 ```
 
 ### 2. Indent Consistently
 
 **Good:**
+
 ```text
 IF weather = "sunny" THEN
     IF temperature > 20 THEN
@@ -465,9 +500,11 @@ IF weather = "sunny" THEN
 ELSE
     OUTPUT "Not ideal weather"
 END IF
+
 ```
 
 **Avoid:**
+
 ```text
 IF weather = "sunny" THEN
 IF temperature > 20 THEN
@@ -478,21 +515,26 @@ END IF
 ELSE
 OUTPUT "Not ideal weather"
 END IF
+
 ```
 
 ### 3. One Action Per Line
 
 **Good:**
+
 ```text
 INPUT firstName
 INPUT lastName
 SET fullName = firstName + " " + lastName
 OUTPUT fullName
+
 ```
 
 **Avoid:**
+
 ```text
 INPUT firstName, INPUT lastName, SET fullName = firstName + " " + lastName, OUTPUT fullName
+
 ```
 
 ### 4. Use Comments for Complex Logic
@@ -500,6 +542,7 @@ INPUT firstName, INPUT lastName, SET fullName = firstName + " " + lastName, OUTP
 ```text
 // Calculate compound interest: A = P(1 + r/n)^(nt)
 SET amount = principal * (1 + rate/compoundFrequency)^(compoundFrequency * years)
+
 ```
 
 ## Converting Between Representations
@@ -510,6 +553,7 @@ SET amount = principal * (1 + rate/compoundFrequency)^(compoundFrequency * years
 "Ask the user for three numbers. Find the largest number and display it."
 
 **Pseudocode:**
+
 ```text
 ALGORITHM FindLargestOfThree
 BEGIN
@@ -530,6 +574,7 @@ BEGIN
     
     OUTPUT "The largest number is: " + largest
 END
+
 ```
 
 ### From Pseudocode to Flowchart
@@ -553,6 +598,7 @@ endif
 :OUTPUT "The largest number is: " + largest;
 stop
 @enduml
+
 ```
 
 ## Practice Activity: Library Book System
@@ -603,6 +649,7 @@ BEGIN
     // 4. Both problems - deny with both messages
     
 END
+
 ```
 
 ### Solution
@@ -638,6 +685,7 @@ BEGIN
         OUTPUT "Cannot borrow: Book is currently checked out"
     END IF
 END
+
 ```
 
 ### Flowchart Version
@@ -668,6 +716,7 @@ endif
 
 stop
 @enduml
+
 ```
 
 ## Common Pseudocode Patterns Summary

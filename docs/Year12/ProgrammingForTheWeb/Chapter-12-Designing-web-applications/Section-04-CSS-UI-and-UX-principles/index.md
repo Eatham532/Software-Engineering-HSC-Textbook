@@ -41,6 +41,7 @@ note bottom of js : User interactions\nDynamic updates
 html ..> css : styled by
 html ..> js : enhanced by
 @enduml
+
 ```
 
 This separation provides several benefits:
@@ -96,7 +97,9 @@ def serve_css():
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     """, 200, {'Content-Type': 'text/css'}
+
 ```
+
 ///
 
 ### Consistency of appearance: design tokens and variables
@@ -167,6 +170,7 @@ def generate_css():
     
     css_vars.append('}')
     return '\n'.join(css_vars), 200, {'Content-Type': 'text/css'}
+
 ```
 
 ### Responsive design: flexibility across browsers and devices
@@ -236,6 +240,7 @@ RESPONSIVE_CSS = """
     object-fit: cover;
 }
 """
+
 ```
 
 ### CSS maintenance tools and approaches
@@ -338,6 +343,7 @@ def build_styles():
         'lint_results': lint_results,
         'file_size': len(compiled_css)
     }
+
 ```
 
 ### UI/UX design principles
@@ -365,6 +371,7 @@ visual --> consistency : supports
 consistency --> feedback : enables
 feedback --> accessibility : includes
 @enduml
+
 ```
 
 ```python
@@ -453,6 +460,7 @@ def process_data():
 def ui_demo():
     """Serve UI demonstrating design principles"""
     return render_template('ui_principles_demo.html')
+
 ```
 
 ### Accessibility and inclusivity
@@ -549,6 +557,7 @@ def get_accessible_form():
     accessible_form = helper.create_accessible_form_structure(form_fields)
     
     return jsonify(accessible_form)
+
 ```
 
 
@@ -739,6 +748,7 @@ def get_design_tokens():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 ```
 
 ///
@@ -792,6 +802,7 @@ design_tokens = {
         }
     }
 }
+
 ```
 
 **Responsive CSS**:
@@ -828,6 +839,7 @@ design_tokens = {
         padding: 2rem;
     }
 }
+
 ```
 
 **Accessibility features**:
@@ -864,7 +876,9 @@ design_tokens = {
     white-space: nowrap;
     border: 0;
 }
+
 ```
+
 ///
 ///
 
@@ -914,6 +928,7 @@ feedback_system = {
         'action': 'Try again'
     }
 }
+
 ```
 
 **Color-independent information**:

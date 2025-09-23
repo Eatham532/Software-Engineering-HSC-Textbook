@@ -145,6 +145,7 @@ def internal_error(error):
 
 if __name__ == '__main__':
     app.run(debug=True, host='127.0.0.1', port=5000)
+
 ```
 
 ### Safe input handling patterns
@@ -337,6 +338,7 @@ def create_post():
         return redirect(url_for('index'))
     
     return render_template('create_post.html')
+
 ```
 
 ### The complete back-end request flow
@@ -401,6 +403,7 @@ webserver -> client : HTTP Response\n(200 OK + HTML)
 note right : Complete response\nwith headers
 
 @enduml
+
 ```
 
 #### Role of web server software
@@ -520,6 +523,7 @@ def connection_info():
             'remote_addr': request.remote_addr
         }
     })
+
 ```
 
 #### Web framework request handling
@@ -720,6 +724,7 @@ def after_request(response):
     response.headers['X-XSS-Protection'] = '1; mode=block'
     
     return response
+
 ```
 
 ### Objects and libraries used in request processing
@@ -982,6 +987,7 @@ def get_profile():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 ```
 
 ### Interfacing with databases and external services
@@ -1338,6 +1344,7 @@ def create_order():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 ```
 
 ## Try it
@@ -1448,6 +1455,7 @@ def validate_registration_input(data):
         errors.append('Password must contain a number')
     
     return errors
+
 ```
 
 **Password security measures**:

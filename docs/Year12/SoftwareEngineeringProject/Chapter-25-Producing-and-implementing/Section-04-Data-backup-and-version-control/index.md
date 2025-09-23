@@ -27,6 +27,7 @@ Version control systems track changes to files over time, allowing multiple deve
 - **Tag**: A marker for specific versions, typically used for releases
 
 **Basic Git workflow**:
+
 ```python
 # Example: Simulating version control operations in Python
 class VersionControl:
@@ -98,6 +99,7 @@ print(f"Project: {project_vc.project_name}")
 print(f"Total commits: {len(project_vc.commits)}")
 print(f"Branches: {list(project_vc.branches.keys())}")
 print(f"Tags: {list(project_vc.tags.keys())}")
+
 ```
 
 ### Branching strategies
@@ -209,6 +211,7 @@ print(f"Feature branch result: {feature_result}")
 # Prepare merge request
 merge_request = branch_mgr.prepare_merge_request("feature/user-dashboard", "develop")
 print(f"Merge request: {merge_request}")
+
 ```
 
 ### Tagging and release management
@@ -313,6 +316,7 @@ print(f"Release plan: {release_plan}")
 # Create release tag
 tag_info = release_mgr.create_release_tag("1.1.0", "xyz789", "Added user profiles and grade export")
 print(f"Release tag created: {tag_info}")
+
 ```
 
 ### Data backup strategies
@@ -371,6 +375,7 @@ release --> tags
 tags --> backup
 
 @enduml
+
 ```
 
 ### Release hygiene practices
@@ -477,6 +482,7 @@ if readiness["ready_for_release"]:
     artifacts = ["app-v1.1.0.zip", "docs-v1.1.0.pdf", "installer-v1.1.0.exe"]
     report = hygiene_checker.generate_release_report("1.1.0", artifacts)
     print(f"Release report generated for version {report['version']}")
+
 ```
 
 ### Guided example: Setting up version control for a school project
@@ -484,6 +490,7 @@ if readiness["ready_for_release"]:
 Let's walk through establishing version control and backup procedures for a school management system:
 
 **Step 1: Repository setup**
+
 ```python
 # Initialize project repository structure
 project_structure = {
@@ -512,9 +519,11 @@ def setup_git_repository(project_name):
         "initial_commit": "Initial project structure"
     }
     return repo_config
+
 ```
 
 **Step 2: Branching strategy implementation**
+
 ```python
 # Define branching workflow
 branching_workflow = {
@@ -541,9 +550,11 @@ branching_workflow = {
         "lifetime": "Until fix deployed"
     }
 }
+
 ```
 
 **Step 3: Backup and release process**
+
 ```python
 # Automated backup and release process
 def create_backup_strategy():
@@ -564,6 +575,7 @@ def create_backup_strategy():
             "release_archives": "Indefinite"
         }
     }
+
 ```
 
 ## Practice

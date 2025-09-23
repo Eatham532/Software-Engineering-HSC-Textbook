@@ -10,6 +10,7 @@ This is an **educational MkDocs site** for NSW HSC Software Engineering, structu
 docs/Year{11|12}/{ModuleName}/Chapter-{XX}-{Name}/Section-{YY}-{Name}/
 ├── index.md    # Main content with PlantUML diagrams, code examples
 └── quiz.md     # Interactive assessments (6-10 questions each)
+
 ```
 
 **Critical**: All navigation is controlled by `docs/.nav.yml` via mkdocs-awesome-nav. **Never** add manual `nav:` sections to `mkdocs.yml`.
@@ -57,7 +58,9 @@ Before writing substantial content, AI contributors MUST:
 ```powershell
 # Primary development command (use this, not raw mkdocs serve)
 .\scripts\serve.ps1
+
 ```
+
 This script sets `PYTHONPATH` to repo root for custom Python extensions and activates the venv.
 
 **Before running Python code**: Always activate the project virtual environment with `.venv\Scripts\activate`
@@ -68,6 +71,7 @@ This script sets `PYTHONPATH` to repo root for custom Python extensions and acti
 python scripts/smoke_test.py  # Validates build + diagram integration
 python scripts/fix_quiz_format.py  # Standardizes quiz formatting across Year12
 python scripts/simple_md_lint.py  # Basic Markdown linting and formatting
+
 ```
 
 ### Python Environment
@@ -120,6 +124,7 @@ python scripts/simple_md_lint.py  # Basic Markdown linting and formatting
         - Option B {data-correct}
         - Option C
         - Option D
+
 ```
 
 **Quiz Debugging**: If answers show "Try again" when correct:
@@ -186,6 +191,7 @@ class Student {
     + get_average(): float
 }
 @enduml
+
 ```
 
 ### PyMdownX Extensions Usage
@@ -197,6 +203,7 @@ class Student {
 - **H4 headings (####) are NOT ALLOWED** - use details blocks instead
 
 **Exercise/Solution Pattern**:
+
 ```markdown
 /// details | Exercise 1: Problem Analysis
     type: question
@@ -211,6 +218,7 @@ class Student {
 **Solution**: The coffee shop lacks...
 ///
 ///
+
 ```
 
 ## Key Technical Patterns

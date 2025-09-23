@@ -68,6 +68,7 @@ note right of REQ : Agile refinement of\nrequirements within\nwaterfall structur
 note right of DES : Iterative prototyping\nand design validation
 note right of DEV : Agile development\nsprints with regular\ndeliverables
 @enduml
+
 ```
 
 ### Stage gates and governance
@@ -201,7 +202,9 @@ req_gate.criteria[1].mark_complete("Functional requirements document v1.2", "Com
 
 print(req_gate.gate_summary())
 print(f"Ready for review: {req_gate.is_ready_for_review()}")
+
 ```
+
 ///
 
 ### Iterative delivery within stages
@@ -313,7 +316,9 @@ req_iteration_1.collect_feedback("Need more detail on user roles", "Product Owne
 req_iteration_1.complete_iteration()
 
 print(req_iteration_1.iteration_summary())
+
 ```
+
 ///
 
 ### When and how to apply WAgile interventions
@@ -426,7 +431,9 @@ project.risk_tolerance = "low"
 
 recommendation = project.recommend_approach()
 print(f"Methodology recommendation: {recommendation}")
+
 ```
+
 ///
 
 ### Scale and development type considerations
@@ -559,7 +566,9 @@ print(f"Project scale: {scale}")
 print(f"Recommended WAgile structure:")
 for key, value in structure.items():
     print(f"  {key}: {value}")
+
 ```
+
 ///
 
 ## Practice

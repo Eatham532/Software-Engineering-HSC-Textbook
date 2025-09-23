@@ -268,6 +268,7 @@ def check_admin(user):
 
 if __name__ == "__main__":
     demo_sast_analysis()
+
 ```
 
 ### Secure Code Example
@@ -316,6 +317,7 @@ def check_admin_secure(user):
     if not hasattr(user, 'is_admin') or not user.is_admin:
         raise PermissionError("Admin access required")
     return True
+
 ```
 
 ## Dynamic Application Security Testing (DAST)
@@ -585,6 +587,7 @@ def demo_dast_scan():
 
 if __name__ == "__main__":
     demo_dast_scan()
+
 ```
 
 ## Manual Code Review Techniques
@@ -717,6 +720,7 @@ def login(username, password):
 '''
 
 print(reviewer.review_function(example_code, "login"))
+
 ```
 
 ## Common Vulnerability Scanning
@@ -948,6 +952,7 @@ def load_data(data):
 
 if __name__ == "__main__":
     demo_vulnerability_scan()
+
 ```
 
 ## Security Regression Testing
@@ -1217,6 +1222,7 @@ if __name__ == "__main__":
     results = runner.run_security_tests()
     report = runner.generate_report(results)
     print(report)
+
 ```
 
 ## Integrating Security Testing into CI/CD
@@ -1368,6 +1374,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 ```
 
 ## Key Takeaways

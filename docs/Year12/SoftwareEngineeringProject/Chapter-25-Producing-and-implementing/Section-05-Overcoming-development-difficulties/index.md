@@ -139,6 +139,7 @@ process_blocker = blocker_mgr.log_blocker(
 print(f"Logged {len(blocker_mgr.blockers)} blockers")
 critical_blockers = blocker_mgr.get_active_blockers("critical")
 print(f"Critical blockers requiring immediate attention: {len(critical_blockers)}")
+
 ```
 
 ### Research and information gathering strategies
@@ -264,6 +265,7 @@ source_evaluation = research_helper.evaluate_source_credibility(
     {"reputation": 15000, "badges": ["gold", "silver"]}
 )
 print(f"Source credibility: {source_evaluation}")
+
 ```
 
 ### Collaborative problem-solving approaches
@@ -404,6 +406,7 @@ print(f"Pair programming session scheduled: {session['participants']}")
 # Request code review
 review_request = collab_mgr.request_code_review("Bob", "Login form validation", "Security")
 print(f"Code review requested: {review_request}")
+
 ```
 
 ### Escalation and external assistance strategies
@@ -484,6 +487,7 @@ experts --> vendor
 external --> consult
 
 @enduml
+
 ```
 
 ### Guided example: Resolving a complex integration problem
@@ -493,6 +497,7 @@ Let's walk through resolving a challenging integration between a student informa
 **Problem**: The school's new gradebook API returns data in a format that doesn't match our student system's database schema, causing import failures.
 
 **Step 1: Problem analysis and categorization**
+
 ```python
 # Analyze the integration problem
 integration_problem = {
@@ -536,9 +541,11 @@ def analyze_api_mismatch():
         "conversion_needed": True,
         "estimated_effort": "2-3 days"
     }
+
 ```
 
 **Step 2: Research and information gathering**
+
 ```python
 # Research potential solutions
 research_strategy = {
@@ -575,9 +582,11 @@ def research_solutions():
             "api_changes": "2-8 weeks (vendor dependent)"
         }
     }
+
 ```
 
 **Step 3: Collaborative problem-solving**
+
 ```python
 # Engage team collaboration
 collaboration_plan = {
@@ -606,9 +615,11 @@ def implement_solution_collaboratively():
         "knowledge_sharing": "Document solution for future reference",
         "risk_mitigation": "Parallel development of backup solution"
     }
+
 ```
 
 **Step 4: Escalation if needed**
+
 ```python
 # Escalation plan if initial approaches fail
 escalation_strategy = {
@@ -634,6 +645,7 @@ escalation_strategy = {
         "timeline": "2-4 weeks"
     }
 }
+
 ```
 
 ## Practice

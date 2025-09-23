@@ -9,8 +9,11 @@ The Object-Oriented Paradigm shifts programming thinking from procedures to obje
 **Key focus areas:**
 
 - Core OOP concepts (objects, classes, encapsulation, inheritance)
+
 - System modeling with diagrams and design processes
+
 - Python implementation of class designs
+
 - Code quality, testing, and optimization techniques
 
 ## Learning Outcomes
@@ -40,15 +43,21 @@ Practical implementation of OOP designs in Python, including building classes, c
 This module emphasizes **design-first thinking with objects**:
 
 - Python implementation of OOP concepts with practical examples
+
 - Progressive complexity from concepts to implementation
+
 - Visual modeling with PlantUML diagrams
+
 - Emphasis on code maintainability and collaboration
+
 - Systematic testing and quality assurance practices
 
 ## Prerequisites
 
 - Completion of Programming Fundamentals module
+
 - Basic Python programming skills (variables, functions, control structures)
+
 - Understanding of basic data structures
 
 ## Getting Started

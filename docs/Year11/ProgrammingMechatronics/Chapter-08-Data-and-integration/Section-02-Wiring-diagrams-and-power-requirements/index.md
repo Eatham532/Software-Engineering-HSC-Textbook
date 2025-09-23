@@ -27,6 +27,7 @@ The relationship between these is given by **Ohm's Law** and the **Power equatio
 ```
 V = I × R    (Ohm's Law, where R is resistance in ohms)
 P = V × I    (Power equation)
+
 ```
 
 ```python
@@ -44,6 +45,7 @@ voltage = 12  # volts
 power = 24    # watts
 current = calculate_current(power, voltage)
 print(f"Current draw: {current:.2f} amps")  # Output: Current draw: 2.00 amps
+
 ```
 
 ### Guided example
@@ -66,6 +68,7 @@ for component, specs in components.items():
     print(f"{component}: {power:.3f}W")
 
 print(f"\nTotal system power: {total_power:.3f}W")
+
 ```
 
 ### Safe wiring practices
@@ -103,6 +106,7 @@ note right of Battery
 end note
 
 @enduml
+
 ```
 
 Key wiring safety principles:
@@ -155,6 +159,7 @@ requirements = calculate_battery_requirements(components)
 print(f"Component power: {requirements['component_power']:.2f}W")
 print(f"Actual power needed: {requirements['actual_power']:.2f}W")
 print(f"Battery current draw: {requirements['current_draw']:.2f}A")
+
 ```
 
 ### Runtime estimation
@@ -180,6 +185,7 @@ battery_capacity = 2.0  # amp-hours
 current_draw = 1.5      # amps
 runtime = estimate_runtime(battery_capacity, current_draw)
 print(f"Estimated runtime: {runtime:.1f} hours")
+
 ```
 
 ## Try it
@@ -213,13 +219,16 @@ requirements = calculate_battery_requirements(mobile_robot)
 print(f"Total component power: {requirements['component_power']:.2f}W")
 print(f"With safety margin and efficiency: {requirements['actual_power']:.2f}W")
 print(f"12V battery current draw: {requirements['current_draw']:.2f}A")
+
 ```
 
 Output:
+
 ```
 Total component power: 40.00W
 With safety margin and efficiency: 56.47W
 12V battery current draw: 4.71A
+
 ```
 
 For this system, you'd need a 12V battery rated for at least 5A continuous current.
@@ -246,12 +255,15 @@ print(f"Minimum battery capacity: {min_capacity:.1f}Ah")
 # Check with actual runtime calculation
 actual_runtime = estimate_runtime(min_capacity, current_draw)
 print(f"Actual runtime with {min_capacity:.1f}Ah battery: {actual_runtime:.1f} hours")
+
 ```
 
 Output:
+
 ```
 Minimum battery capacity: 11.8Ah
 Actual runtime with 11.8Ah battery: 2.0 hours
+
 ```
 
 You would need at least a 12Ah battery to achieve 2 hours of runtime safely.

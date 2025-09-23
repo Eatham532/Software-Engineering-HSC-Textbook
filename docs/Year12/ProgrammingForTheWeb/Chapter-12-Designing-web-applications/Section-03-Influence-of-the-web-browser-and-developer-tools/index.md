@@ -45,6 +45,7 @@ note bottom of chrome : May look different
 note bottom of firefox : May behave differently
 note bottom of safari : May have compatibility issues
 @enduml
+
 ```
 
 #### Cross-browser testing strategies
@@ -74,6 +75,7 @@ def home():
 
 # Template can then provide different experiences
 # or polyfills based on browser capabilities
+
 ```
 
 ### Developer Tools: Essential debugging and analysis features
@@ -130,6 +132,7 @@ def debug_page():
     </body>
     </html>
     '''
+
 ```
 
 #### Network tracing
@@ -169,6 +172,7 @@ browser -> devtools : Log resource timing
 
 note right of devtools : Shows all requests,\ntiming, and response sizes
 @enduml
+
 ```
 
 #### Performance profiling
@@ -221,6 +225,7 @@ def slow_operation():
 @measure_performance
 def fast_operation():
     return jsonify({'message': 'Quick response', 'timestamp': time.time()})
+
 ```
 
 #### Storage inspection
@@ -282,6 +287,7 @@ def error_example():
             'debug_info': str(e),
             'stack_trace': 'Available in server logs'
         }), 500
+
 ```
 
 /// details | Using developer tools to debug a web application
@@ -329,6 +335,7 @@ def get_large_data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 ```
 
 HTML template for testing (`templates/debug_demo.html`):
@@ -418,6 +425,7 @@ HTML template for testing (`templates/debug_demo.html`):
     </script>
 </body>
 </html>
+
 ```
 
 ///

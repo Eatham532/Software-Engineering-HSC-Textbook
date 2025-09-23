@@ -63,7 +63,9 @@ def show_all_ideas():
 add_idea("Mobile app with push notifications", "Sarah")
 add_idea("Integration with existing school systems", "Mike")
 show_all_ideas()
+
 ```
+
 ///
 
 ### Mind-mapping for visual thinking
@@ -119,6 +121,7 @@ RECTANGLE "Features" {
 "Student Assignment Tracker" --> "Integration"
 "Student Assignment Tracker" --> "Features"
 @enduml
+
 ```
 
 ### Storyboards for user experience
@@ -183,7 +186,9 @@ steps = [
 for step in steps:
     step.display()
     print()
+
 ```
+
 ///
 
 ### Data dictionaries and type selection
@@ -246,7 +251,9 @@ math_assignment = Assignment(
 )
 
 print(f"Days until due: {math_assignment.days_until_due()}")
+
 ```
+
 ///
 
 ## Practice

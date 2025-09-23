@@ -58,6 +58,7 @@ class BankAccount:
             self.transaction_history.append(f"Withdrawal: ${amount}")
             return self.balance
         return False
+
 ```
 
 
@@ -96,6 +97,7 @@ class ImprovedBankAccount:
         self.balance -= amount
         self.transaction_history.append(f"Withdrawal: ${amount:.2f}")
         return self.balance
+
 ```
 
 ### 2. Clarity
@@ -178,6 +180,7 @@ class OrderCalculator:
         })
         
         return total_cost
+
 ```
 
 ### 3. Performance
@@ -197,6 +200,7 @@ class OrderCalculator:
 **Example: Performance Assessment and Improvement**
 
 ```python
+
 import time
 from typing import List
 
@@ -341,6 +345,7 @@ def performance_comparison():
     print(f"Slow lookup (linear search): {slow_time:.4f} seconds")
     print(f"Fast lookup (hash table): {fast_time:.4f} seconds")
     print(f"Speed improvement: {slow_time/fast_time:.1f}x faster")
+
 ```
 
 ### 4. Maintainability
@@ -515,6 +520,7 @@ class ImprovedOrderProcessor:
     def _calculate_subtotal(self, items):
         """Calculate subtotal for order items."""
         return sum(item['price'] * item['quantity'] for item in items)
+
 ```
 
 ## Basic Optimization Techniques
@@ -526,6 +532,7 @@ Choose algorithms with better time complexity for your specific use case.
 **Example: Search Algorithm Optimization**
 
 ```python
+
 class ProductCatalog:
     """Product catalog with different search implementations."""
     
@@ -575,6 +582,7 @@ class ProductCatalog:
     def find_products_by_category_optimized(self, category):
         """Index-based category search - O(1) to find category, O(k) to return results."""
         return self._products_by_category.get(category, [])
+
 ```
 
 ### 2. Data Structure Selection
@@ -584,6 +592,7 @@ Choose the right data structure for your access patterns.
 **Example: Data Structure Optimization**
 
 ```python
+
 class TaskManager:
     """Task manager demonstrating data structure choices."""
     
@@ -666,6 +675,7 @@ def demonstrate_data_structure_performance():
     print(f"List membership testing: {list_time:.4f} seconds")
     print(f"Set membership testing: {set_time:.4f} seconds")
     print(f"Set is {list_time/set_time:.1f}x faster")
+
 ```
 
 ### 3. Avoiding Premature Optimization
@@ -765,6 +775,7 @@ class OptimizedTextProcessor:
         
         self.processed_words.extend(words)
         return words
+
 ```
 
 ## Simple Profiling Techniques
@@ -774,6 +785,7 @@ Understanding where your code spends time is essential for effective optimizatio
 ### Time-Based Profiling
 
 ```python
+
 import time
 import functools
 
@@ -908,11 +920,13 @@ def demonstrate_detailed_profiling():
         average = total / len(filtered) if filtered else 0
     
     profiler.print_profile_summary()
+
 ```
 
 ### Memory Profiling
 
 ```python
+
 import sys
 
 class MemoryProfiler:
@@ -966,6 +980,7 @@ def demonstrate_memory_profiling():
     
     profiler.compare_snapshots("Start", "After creating large list")
     profiler.compare_snapshots("After creating large dict", "After cleanup")
+
 ```
 
 ## Trade-offs Between Readability and Performance
@@ -975,6 +990,7 @@ Understanding when to prioritize readability versus performance is crucial for m
 ### Readability-First Approach
 
 ```python
+
 class ReadableGradeCalculator:
     """Grade calculator prioritizing clarity and maintainability."""
     
@@ -1119,6 +1135,7 @@ def compare_readability_vs_performance():
             print("Recommendation: Stick with readable version - minimal performance gain")
         else:
             print("Recommendation: Consider optimized version if this is a bottleneck")
+
 ```
 
 ## Guidelines for Effective Optimization
@@ -1126,6 +1143,7 @@ def compare_readability_vs_performance():
 ### 1. Measure First, Optimize Second
 
 ```python
+
 def optimization_workflow_example():
     """Demonstrate proper optimization workflow."""
     
@@ -1177,11 +1195,13 @@ def optimization_workflow_example():
             print("Optimization worthwhile: significant speed improvement")
         else:
             print("Optimization marginal: consider keeping readable version")
+
 ```
 
 ### 2. Focus on Algorithmic Improvements
 
 ```python
+
 def algorithmic_optimization_example():
     """Show how algorithm choice has bigger impact than micro-optimizations."""
     
@@ -1235,6 +1255,7 @@ def algorithmic_optimization_example():
     
     if fast_time > 0:
         print(f"Algorithmic improvement: {slow_time/fast_time:.1f}x faster")
+
 ```
 
 ## Practice Exercises
@@ -1246,6 +1267,7 @@ def algorithmic_optimization_example():
 Evaluate this code across all four dimensions (correctness, clarity, performance, maintainability) and identify improvements:
 
 ```python
+
 class ShoppingCart:
     def __init__(self):
         self.i = []
@@ -1270,6 +1292,7 @@ class ShoppingCart:
                 del self.i[j]
                 return True
         return False
+
 ```
 ///
 
@@ -1281,6 +1304,7 @@ class ShoppingCart:
 Profile and optimize this data processing function:
 
 ```python
+
 def process_sales_data(sales_records):
     """Process sales data to find top products by revenue."""
     product_revenues = {}
@@ -1308,6 +1332,7 @@ def process_sales_data(sales_records):
                 sorted_products[j], sorted_products[j + 1] = sorted_products[j + 1], sorted_products[j]
     
     return sorted_products[:10]  # Top 10 products
+
 ```
 
 ///

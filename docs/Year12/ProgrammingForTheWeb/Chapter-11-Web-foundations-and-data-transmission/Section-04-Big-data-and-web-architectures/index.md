@@ -85,6 +85,7 @@ analytics = WebAnalytics()
 analytics.find_popular_pages()
 analytics.analyze_user_behavior()
 analytics.detect_browser_trends()
+
 ```
 
 ### Metadata: data about data
@@ -216,6 +217,7 @@ print("Quick reads (≤10 min):", len(quick_reads))
 print("Security content:", len(security_content))
 
 content_system.generate_content_report()
+
 ```
 
 ### Streaming challenges
@@ -328,6 +330,7 @@ class DataStream:
 stream = DataStream(buffer_size=20)
 stream.start_data_stream()
 stream.process_stream(duration=3)
+
 ```
 
 ### Web architecture patterns
@@ -445,6 +448,7 @@ patterns.serverless_architecture()
 
 scaling = ScalingChallenges()
 scaling.demonstrate_scaling_decisions()
+
 ```
 
 ### Architecture visualization
@@ -507,6 +511,7 @@ package "Serverless Architecture" {
     [Process Function] --> [Managed Database]
 }
 @enduml
+
 ```
 
 ## Try it
@@ -641,7 +646,9 @@ analytics = EcommerceAnalytics()
 analytics.find_popular_products()
 analytics.analyze_purchase_behavior()
 analytics.create_simple_recommendations("user_1")
+
 ```
+
 ///
 ///
 
@@ -808,7 +815,9 @@ class ArchitectureAdvisor:
 demo_advisor = ArchitectureAdvisor()
 demo_advisor.scoring_weights = {"monolithic": 8, "microservices": 5, "serverless": 3}
 demo_advisor.make_recommendation()
+
 ```
+
 ///
 ///
 

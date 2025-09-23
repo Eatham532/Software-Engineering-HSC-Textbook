@@ -418,6 +418,7 @@ def offline_page():
     </body>
     </html>
     '''
+
 ```
 
 ### Installable app characteristics
@@ -738,6 +739,7 @@ def track_installation():
     conn.close()
     
     return jsonify({'status': 'tracked'})
+
 ```
 
 ### Syncing strategies and background sync
@@ -783,6 +785,7 @@ rectangle "PWA Sync Architecture" {
   }
 }
 @enduml
+
 ```
 
 ```python
@@ -1205,6 +1208,7 @@ def accessibility_status():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
 ```
 
 ## Try it
@@ -1267,6 +1271,7 @@ if (url.pathname.startsWith('/api/notes')) {
     );
 }
 '''
+
 ```
 
 ///

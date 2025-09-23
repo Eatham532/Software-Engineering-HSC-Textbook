@@ -54,6 +54,7 @@ b -> app: Fetch assets (CSS/JS/images)
 app --> b: Responses
 
 @enduml
+
 ```
 
 Notes:
@@ -94,6 +95,7 @@ package "DNS Resolution" {
   OR --> B : IP cached locally
 }
 @enduml
+
 ```
 
 Key ideas:
@@ -157,6 +159,7 @@ note over Client,Server
   Now the HTTP session is encrypted
 end note
 @enduml
+
 ```
 
 ## Developer tooling: trace and verify
@@ -200,6 +203,7 @@ try:
     print("IPv6:", sorted({rec[4][0] for rec in ipv6}))
 except Exception as e:
     print("IPv6 lookup failed:", e)
+
 ```
 
 ///
@@ -230,6 +234,7 @@ for host, port in [("example.com", 80), ("example.com", 443)]:
         print(f"TCP connect to {host}:{port} took ~{ms:.1f} ms")
     except Exception as e:
         print(f"Connect to {host}:{port} failed:", e)
+
 ```
 
 ///
@@ -256,6 +261,7 @@ with socket.create_connection((host, 443), timeout=5) as sock:
         ssock.sendall(req.encode("ascii"))
         data = ssock.recv(4096)
         print("Response head:\n", data.decode("latin1", errors="ignore").split("\r\n\r\n")[0])
+
 ```
 
 ///
@@ -289,6 +295,7 @@ Auth --> DNS: Return IP + TTL
 DNS --> Browser: IP address
 note right: Caching occurs at DNS resolver level
 @enduml
+
 ```
 
 ```kroki-plantuml
@@ -300,6 +307,7 @@ Browser -> DNS: Resolve example.com
 DNS --> Browser: Cached IP (TTL not expired)
 note right: No network queries needed
 @enduml
+
 ```
 
 ///

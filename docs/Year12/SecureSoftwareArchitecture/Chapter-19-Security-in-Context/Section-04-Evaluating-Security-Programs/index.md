@@ -312,6 +312,7 @@ if __name__ == "__main__":
         print(f"- {indicator['metric']}: {indicator['status'].upper()}")
         print(f"  Current: {indicator['current_value']}, Target: {indicator['target']}")
         print(f"  Recommendation: {indicator['recommendation']}\n")
+
 ```
 
 ### Key Performance Indicators (KPIs)
@@ -784,6 +785,7 @@ if __name__ == "__main__":
         print(f"- {rec['risk_scenario']} ({rec['priority']} Priority)")
         for action in rec['recommended_actions'][:2]:
             print(f"  • {action}")
+
 ```
 
 ### Key Performance Indicators (KPIs)
@@ -1204,6 +1206,7 @@ class SecurityAuditManager:
             })
         
         return recommendations
+
 ```
 
 ---
@@ -1678,6 +1681,7 @@ if __name__ == "__main__":
     for slide in presentation['slides']:
         print(f"\nSlide {slide['slide_number']}: {slide['title']}")
         print(f"Content: {slide['content']}")
+
 ```
 
 ---

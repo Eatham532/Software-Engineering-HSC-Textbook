@@ -453,6 +453,7 @@ def validate_email(email):
 ## Recap
 
 Key takeaways and best practices
+
 ```
 
 ### **Folder Organization**
@@ -483,6 +484,7 @@ docs/Year12/SecureSoftwareArchitecture/
     ├── Section-19-Enterprise/
     ├── Section-19-Ethics/
     └── Section-19-Evaluation/
+
 ```
 
 ---

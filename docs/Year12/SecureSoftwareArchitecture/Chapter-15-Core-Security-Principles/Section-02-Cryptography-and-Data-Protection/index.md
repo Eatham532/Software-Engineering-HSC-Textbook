@@ -188,6 +188,7 @@ def demonstrate_secure_password_hashing():
         print(f"Input: {result['input']}")
         print(f"Hash:  {result['hash']}")
         print()
+
 ```
 
 ### Encryption: Reversible Data Protection
@@ -403,6 +404,7 @@ def demonstrate_encryption_scenarios():
         
     except ValueError as e:
         print(f"Encryption error: {e}")
+
 ```
 
 ## Key Management Fundamentals
@@ -616,6 +618,7 @@ def demonstrate_key_management():
     for key_info in keys:
         status_indicator = "🔑" if key_info['status'] == 'active' else "⚠️"
         print(f"{status_indicator} {key_info['key_id']} ({key_info['status']})")
+
 ```
 
 ## Guided Example: Secure Password Manager
@@ -860,6 +863,7 @@ def demonstrate_password_manager():
     if unlock_result[0]:
         retrieved_entries = pm2.list_entries()
         print(f"Retrieved {len(retrieved_entries)} entries after unlock")
+
 ```
 
 ## Summary

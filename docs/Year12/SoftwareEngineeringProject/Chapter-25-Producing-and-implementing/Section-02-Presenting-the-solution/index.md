@@ -354,6 +354,7 @@ def demonstrate_audience_analysis():
 # Run demonstration
 if __name__ == "__main__":
     audience_demo = demonstrate_audience_analysis()
+
 ```
 
 ---
@@ -402,6 +403,7 @@ package "Solution Presentation Narrative" {
 
 note bottom : Narrative follows problem-solution-benefit flow\nwith concrete demonstrations
 @enduml
+
 ```
 
 ```python
@@ -788,6 +790,7 @@ def demonstrate_narrative_development():
 # Run demonstration
 if __name__ == "__main__":
     narrative_demo = demonstrate_narrative_development()
+
 ```
 
 ---
@@ -1260,6 +1263,7 @@ def demonstrate_demo_planning():
 # Run demonstration
 if __name__ == "__main__":
     demo_example = demonstrate_demo_planning()
+
 ```
 
 ---
@@ -1341,6 +1345,7 @@ analysis.add_audience_segment(
     "High",
     "Need financial and strategic justification"
 )
+
 ```
 
 **45-Minute Presentation Structure:**
@@ -1476,6 +1481,7 @@ narrative.set_future_vision(
         "Analytics for optimizing collection and services"
     ]
 )
+
 ```
 
 **Key Narrative Elements:**
@@ -1637,6 +1643,7 @@ demo.plan_audience_engagement(
         "Request suggestions for special order modifications"
     ]
 )
+
 ```
 
 **Engagement Schedule:**

@@ -57,6 +57,7 @@ participant "Textbook Site" as Site
 Student -> Site: Open Section
 Site --> Student: Rendered page
 @enduml
+
 ```
 
 Links are used across the textbook to reduce duplication and maintain a single source of truth for terms and concepts.
@@ -120,6 +121,7 @@ Quizzes belong in a separate `quiz.md` adjacent to each section’s `index.md`. 
 **Problem statement**: The coffee shop lacks an automated system...
 ///
 ///
+
 ```
 
 ## Using pymdownx extensions
@@ -136,7 +138,9 @@ Guidelines and common patterns:
   /// tab | Python
 
   ```py
+
   print('hello')
+
   ```
 
   ///
@@ -144,11 +148,15 @@ Guidelines and common patterns:
   /// tab | Pseudocode
 
   ```text
+
   OUTPUT "hello"
+
   ```
 
   ///
+
   ```
+
   ```
 
   Notes:
@@ -164,6 +172,7 @@ Guidelines and common patterns:
 - Collapsible/Details: `pymdownx.blocks.details` is appropriate for optional deeper reading or extended worked solutions. Use the new details syntax instead of traditional admonitions for collapsible content:
 
   ```markdown
+
   /// details | Summary title
       type: note
       open: false
@@ -171,6 +180,7 @@ Guidelines and common patterns:
 
   Content goes here
   ///
+
   ```
 
   Available types: `note`, `warning`, `info`, `success`, `question`, `failure`, `danger`, `bug`, `example`, `quote`, `tip`
@@ -267,6 +277,7 @@ Content here.
 
 ```py
 print('tiny example')
+
 ```
 
 ///
@@ -275,6 +286,7 @@ print('tiny example')
 
 ```text
 OUTPUT "tiny example"
+
 ```
 
 ///
@@ -288,6 +300,7 @@ OUTPUT "tiny example"
 ## Recap
 
 Short summary.
+
 ````
 
 ### Quiz authoring — Markdown-only interactive quizzes
@@ -359,6 +372,7 @@ If answers appear as "Try again" even when highlighted:
 3. After selecting answers, paste the following snippet into the Console and send the output when asking for help (it shows which `li` has the `data-correct` attribute and whether it is selected):
 
 ```javascript
+
 const container = document.querySelector('.admonition.quiz');
 const qs = container.querySelectorAll('[data-question]');
 qs.forEach((q, qi) => {
@@ -372,13 +386,16 @@ qs.forEach((q, qi) => {
     classList: Array.from(li.classList)
   }));
 });
+
 ```
 
 To temporarily enable verbose logs in the page Console:
 
 ```javascript
+
 window.__quiz_debug = true; // or false to silence
 location.reload();
+
 ```
 
 If you need me to debug, paste the Console output showing `quiz:marker`, `quiz:toggle`, `quiz:question state` and `quiz:grade result` lines.
@@ -451,6 +468,7 @@ Following this pattern keeps content consistent with teaching goals and assessme
 ## Repository structure (example)
 
 ```text
+
 docs/
   Year11/
     ProgrammingFundamentals/
@@ -471,6 +489,7 @@ docs/
       Chapter-02-Designing-Algorithms/
       Chapter-03-Data-for-Software-Engineering/
       Chapter-04-Developing-Solutions-with-Code/
+
 ```
 
 Conventions:
@@ -488,6 +507,7 @@ Conventions:
 Example:
 
 ```kroki-plantuml
+
 @startuml
 skinparam monochrome true
 skinparam shadowing false
@@ -496,6 +516,7 @@ participant "Textbook Site" as Site
 Student -> Site: Open Section
 Site --> Student: Rendered page
 @enduml
+
 ```
 
 ## Section template (index.md)
@@ -539,6 +560,7 @@ Use a single admonition block for the entire quiz:
         - First choice
         - Second choice { data-correct }
         - Third choice
+
 ```
 
 **Indentation Rules:**

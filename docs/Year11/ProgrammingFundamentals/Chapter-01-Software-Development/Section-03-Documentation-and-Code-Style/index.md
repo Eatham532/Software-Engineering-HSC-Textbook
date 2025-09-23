@@ -77,7 +77,9 @@ Your average: 85.0 (Grade: B)
 ## Files
 - main.py - Main program
 - grade_calculator.py - Grade calculation functions
+
 ```
+
 ///
 
 ### Docstrings for functions
@@ -111,6 +113,7 @@ def get_letter_grade(average):
         return "D"
     else:
         return "F"
+
 ```
 
 ### Strategic inline comments
@@ -130,6 +133,7 @@ if not grades:
 # Grade boundaries follow university standard (90+ = A)
 if average >= 90:
     return "A"
+
 ```
 
 **Avoid obvious comments**:
@@ -144,6 +148,7 @@ for grade in grades:  # Loop through each grade
 total = 0
 for grade in grades:
     total += grade
+
 ```
 
 ## Python naming conventions (PEP 8 basics)
@@ -166,6 +171,7 @@ max_attempts = 3
 sc = 25  # What does 'sc' mean?
 fg = calc_avg(m, f, h)  # Cryptic abbreviations
 ma = 3
+
 ```
 
 ### Constants and imports
@@ -186,6 +192,7 @@ PASSING_THRESHOLD = 70
 def validate_grade(grade):
     """Ensure grade falls within acceptable range."""
     return MIN_GRADE <= grade <= MAX_GRADE
+
 ```
 
 ### Whitespace and formatting
@@ -213,6 +220,7 @@ def process_student_grades():
     # Output section
     print(f"Average: {average}")
     print(f"Letter grade: {letter_grade}")
+
 ```
 
 ## Worked example
@@ -294,6 +302,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 ```
 
 ### What this example demonstrates
@@ -367,7 +376,9 @@ Enter temperature in Celsius: 25
 
 ## Files
 - temp_converter.py - Main program with conversion functions
+
 ```
+
 ///
 ///
 
@@ -381,6 +392,7 @@ Add appropriate docstrings to this function:
 def calculate_compound_interest(principal, rate, time, compounds_per_year):
     amount = principal * (1 + rate/compounds_per_year) ** (compounds_per_year * time)
     return round(amount - principal, 2)
+
 ```
 
 /// details | Sample Solution
@@ -405,7 +417,9 @@ def calculate_compound_interest(principal, rate, time, compounds_per_year):
     """
     amount = principal * (1 + rate/compounds_per_year) ** (compounds_per_year * time)
     return round(amount - principal, 2)
+
 ```
+
 ///
 ///
 
@@ -426,6 +440,7 @@ def calc(x,y,z):
     else:
         g="F"
     return r,g
+
 ```
 
 /// details | Sample Solution
@@ -447,7 +462,9 @@ def calculate_grade_average(test1_score, test2_score, test3_score):
         letter_grade = "F"
         
     return average, letter_grade
+
 ```
+
 ///
 ///
 

@@ -35,32 +35,40 @@ Before contributing, ensure you have:
 ### Development Environment Setup
 
 1. **Fork and clone the repository**:
+
    ```bash
    git clone https://github.com/your-username/NSW-HSC-Software-Engineering-Textbook.git
    cd NSW-HSC-Software-Engineering-Textbook
+
    ```
 
 2. **Install dependencies**:
+
    ```powershell
    uv sync
+
    ```
 
 3. **Activate the virtual environment**:
+
    ```powershell
    # Windows PowerShell
    .\.venv\Scripts\activate
    
    # macOS/Linux
    source .venv/bin/activate
+
    ```
 
 4. **Start the development server**:
+
    ```powershell
    # Use our custom script (recommended)
    .\scripts\serve.ps1
    
    # Or use MkDocs directly
    mkdocs serve
+
    ```
 
 5. **Open your browser** to `http://127.0.0.1:8000` to view the site
@@ -70,8 +78,10 @@ Before contributing, ensure you have:
 The server used to generate diagrams at runtime is a local setup. Due to the amount of diagrams in this documentation the public server rate limits really quickly. Comment out the kroki plugin in `mkdocs.yml` if you cannot run the kroki server or if you want faster development speeds.
 
 When using the kroki server I reccomend to run the docs with:
+
 ```powershell 
 mkdocs serve --no-livereload
+
 ```
 
 ## 📋 Content Guidelines
@@ -79,10 +89,12 @@ mkdocs serve --no-livereload
 ### Structure and Organization
 
 **File Organization**:
+
 ```
 docs/Year{11|12}/{ModuleName}/Chapter-{XX}-{Name}/Section-{YY}-{Name}/
 ├── index.md    # Main educational content
 └── quiz.md     # Interactive assessment questions
+
 ```
 
 **Naming Conventions**:
@@ -132,6 +144,7 @@ docs/Year{11|12}/{ModuleName}/Chapter-{XX}-{Name}/Section-{YY}-{Name}/
 4. Test thoroughly before submitting pull requests
 
 **Testing and Validation**:
+
 ```powershell
 # Run smoke tests to validate build
 python scripts/smoke_test.py
@@ -141,6 +154,7 @@ python scripts/simple_md_lint.py
 
 # Fix quiz formatting issues
 python scripts/fix_quiz_format.py
+
 ```
 
 ### MkDocs Configuration

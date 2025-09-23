@@ -171,6 +171,7 @@ def popular_posts():
     response.headers['Cache-Control'] = 'public, max-age=1800'
     
     return response
+
 ```
 
 ### CDN integration and static asset caching
@@ -291,6 +292,7 @@ def inject_asset_helpers():
         'css_bundle': lambda name: asset_manager.generate_bundle_html('css', name),
         'js_bundle': lambda name: asset_manager.generate_bundle_html('js', name)
     }
+
 ```
 
 ### Compression techniques
@@ -477,6 +479,7 @@ def performance_demo():
             'Optimized database queries'
         ]
     })
+
 ```
 
 ### Lazy loading and asset bundling
@@ -522,6 +525,7 @@ rectangle "Performance Optimization Flow" {
   }
 }
 @enduml
+
 ```
 
 ```python
@@ -707,6 +711,7 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 ```
 
 ## Try it
@@ -762,6 +767,7 @@ def get_popular_posts():
 def invalidate_post_cache():
     """Invalidate post-related caches when posts change"""
     cache_manager.invalidate_group('posts')
+
 ```
 
 ///

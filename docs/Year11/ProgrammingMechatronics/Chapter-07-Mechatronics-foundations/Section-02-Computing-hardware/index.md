@@ -73,6 +73,7 @@ if x > 10:           # COMPARE opcode followed by BRANCH opcode
 # Logical operations
 flag = True and False  # AND opcode
 result = not flag      # NOT opcode
+
 ```
 
 Different processor families have different instruction sets:
@@ -111,6 +112,7 @@ start
 :Update program counter to next instruction;
 stop
 @enduml
+
 ```
 
 Let's trace through a simple example:
@@ -130,6 +132,7 @@ Let's trace through a simple example:
 # 7. FETCH: Get "STORE x" instruction from memory
 # 8. DECODE: Understand this means "save accumulator to variable x"
 # 9. EXECUTE: Copy 8 from accumulator to memory location for x
+
 ```
 
 This cycle repeats millions or billions of times per second, depending on the processor's speed (measured in MHz or GHz).
@@ -230,6 +233,7 @@ processor.run_program()
 
 # Check what we stored in memory
 print(f"Total sensor reading stored in memory: {processor.memory[10]}")
+
 ```
 
 When you run this simulation, you'll see exactly how the processor moves through each instruction:
@@ -256,6 +260,7 @@ COMPARE 70: Zero=True, Negative=False
 Program completed!
 Final accumulator value: 70
 Total sensor reading stored in memory: 70
+
 ```
 
 This shows how even a simple calculation like adding sensor readings involves multiple fetch-decode-execute cycles.
@@ -337,6 +342,7 @@ motor_program = [
 
 mechatronic_processor.load_program(motor_program)
 mechatronic_processor.run_program()
+
 ```
 
 Try modifying the sensor readings in the `test_values` dictionary and see how the program flow changes.
@@ -424,6 +430,7 @@ time2 = timed_processor.clock_cycles
 
 print(f"\nApproach 2 took {time2} clock cycles")
 print(f"Difference: {abs(time1 - time2)} clock cycles")
+
 ```
 
 This demonstrates why understanding instruction timing is important for real-time mechatronic systems.

@@ -43,6 +43,7 @@ print(f"First student: {student_names[0]} with grade {student_grades[0]}")
 print(f"Total students: {len(student_names)}")
 print(f"Highest grade: {max(student_grades)}")
 print(f"Average grade: {sum(student_grades) / len(student_grades):.1f}")
+
 ```
 
 ### Array Processing Patterns
@@ -90,6 +91,7 @@ def process_exam_scores(scores):
 exam_scores = [95, 87, 76, 92, 58, 83]
 grades = process_exam_scores(exam_scores)
 print("Letter grades:", grades)
+
 ```
 
 ### Multidimensional Arrays (2D Lists)
@@ -115,6 +117,7 @@ bob_english = grade_book[1][2]       # Row 1, Column 2
 
 print(f"Alice's Math grade: {alice_math}")
 print(f"Bob's English grade: {bob_english}")
+
 ```
 
 ### 2D Array Operations
@@ -156,6 +159,7 @@ def analyze_grade_book(grades, students, subjects):
 
 # Analyze our grade book
 analyze_grade_book(grade_book, student_names, subject_names)
+
 ```
 
 ### Dynamic 2D Array Creation
@@ -219,6 +223,7 @@ book_seat(theater, 0, 2)  # Try to book same seat again
 
 print("\nUpdated seating chart:")
 display_seating_chart(theater)
+
 ```
 
 ## Lists (Python List Operations)
@@ -254,6 +259,7 @@ if "apple" in fruits:
 
 count_a = fruits.count("apple")
 print(f"Number of apples: {count_a}")
+
 ```
 
 ### List Manipulation Techniques
@@ -323,6 +329,7 @@ def manage_shopping_list():
 
 # Run the shopping list manager (uncomment to test)
 # manage_shopping_list()
+
 ```
 
 ### List Sorting and Searching
@@ -372,6 +379,7 @@ def demonstrate_list_algorithms():
         print(f"Score {target} not found")
 
 demonstrate_list_algorithms()
+
 ```
 
 ## Trees (Simple Nested Dict/List Representation)
@@ -443,6 +451,7 @@ if person:
     print(f"Found: {person['name']}")
 else:
     print(f"{search_name} not found in family tree")
+
 ```
 
 ### File System Tree Structure
@@ -507,6 +516,7 @@ print("File System Structure:")
 display_file_system(file_system)
 
 print(f"\nTotal size: {calculate_folder_size(file_system)} bytes")
+
 ```
 
 ## Stacks (Implemented via Python List append/pop)
@@ -579,6 +589,7 @@ stack.pop()
 stack.display()
 
 print(f"Stack size: {stack.size()}")
+
 ```
 
 ### Practical Stack Applications
@@ -670,6 +681,7 @@ for expr in test_expressions:
 
 # Run undo/redo demo
 undo_redo_system()
+
 ```
 
 ## Hash Tables (Python Dict)
@@ -702,6 +714,7 @@ print(f"Alice: {alice_grade}, Frank: {frank_grade}")
 print("All students:", list(student_grades.keys()))
 print("All grades:", list(student_grades.values()))
 print("Student-grade pairs:", list(student_grades.items()))
+
 ```
 
 ### Advanced Dictionary Applications
@@ -814,6 +827,7 @@ create_word_frequency_counter()
 
 print("\n=== Student Database ===")
 create_simple_database()
+
 ```
 
 ## Sequential Files (CSV Read/Write)
@@ -974,6 +988,7 @@ advanced_csv_operations()
 
 print("\n=== CSV Analysis Tools ===")
 csv_analysis_tools()
+
 ```
 
 ## Integrating Multiple Data Structures
@@ -1176,6 +1191,7 @@ sms.save_to_csv("school_data.csv")
 print("\n=== Undo Demo ===")
 sms.undo_last_operation()
 sms.generate_report_card("S002")
+
 ```
 
 

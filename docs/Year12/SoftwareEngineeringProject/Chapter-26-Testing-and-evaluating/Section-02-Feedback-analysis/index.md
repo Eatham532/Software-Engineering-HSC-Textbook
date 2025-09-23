@@ -188,6 +188,7 @@ interview_data = {
 
 interview_feedback = feedback_collector.collect_interview_feedback(interview_data)
 print(f"Interview feedback collected for {interview_feedback['participant_id']}")
+
 ```
 
 ### Feedback synthesis and pattern identification
@@ -400,6 +401,7 @@ priority_analysis = analyzer.prioritize_issues(sample_feedback)
 print(f"\nTop priority issues:")
 for issue in priority_analysis[:3]:
     print(f"  {issue['issue']} (Score: {issue['priority_score']:.1f})")
+
 ```
 
 ### Decision-making frameworks for next steps
@@ -487,6 +489,7 @@ planning --> longterm
 communication --> process
 
 @enduml
+
 ```
 
 ### Guided example: Analyzing feedback for a student gradebook system
@@ -494,6 +497,7 @@ communication --> process
 Let's walk through a complete feedback analysis process for a school gradebook application:
 
 **Step 1: Feedback collection summary**
+
 ```python
 # Gradebook feedback analysis example
 class GradebookFeedbackAnalysis:
@@ -649,9 +653,11 @@ print(f"  Areas to Monitor: {len(action_plan['monitoring_areas'])}")
 print("\nImmediate Actions Required:")
 for action in action_plan["immediate_actions"]:
     print(f"  - {action['issue']} ({action['feature_area']})")
+
 ```
 
 **Step 2: Impact vs effort analysis**
+
 ```python
 def create_impact_effort_matrix(feedback_items):
     """Plot feedback-driven improvements on impact vs effort matrix"""
@@ -705,6 +711,7 @@ matrix_analysis = create_impact_effort_matrix(gradebook_analysis.raw_feedback_da
 print("\nImpact vs Effort Analysis:")
 for item in matrix_analysis:
     print(f"  {item['feature']}: {item['priority_quadrant']} (Impact: {item['impact_score']}, Effort: {item['effort_score']})")
+
 ```
 
 ## Practice

@@ -9,8 +9,11 @@ Programming Fundamentals creates a solid foundation by teaching software enginee
 **Key focus areas:**
 
 - Software development methodologies and collaboration tools
+
 - Algorithm design and analysis techniques
+
 - Data representation and structures
+
 - Python implementation with testing and debugging
 
 ## Learning Outcomes
@@ -50,15 +53,21 @@ Python implementation of algorithms with focus on control structures, data struc
 This module emphasizes **practical understanding through implementation**:
 
 - Python-only approach for consistency and accessibility
+
 - Progressive complexity from concepts to code
+
 - Real-world examples with immediate applicability
+
 - Systematic testing and debugging practices
+
 - Documentation and code quality from day one
 
 ## Prerequisites
 
 - No prior programming experience required
+
 - Basic computer literacy (file management, web browsing)
+
 - Willingness to learn through hands-on practice
 
 ## Getting Started

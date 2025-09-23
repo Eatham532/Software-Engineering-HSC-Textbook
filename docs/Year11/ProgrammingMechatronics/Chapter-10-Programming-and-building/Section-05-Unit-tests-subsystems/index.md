@@ -65,6 +65,7 @@ package "Test Environment" {
 note right of [Test Framework] : Controls simulated\nenvironment and device\nbehaviour for testing
 note left of [Control Logic] : Same logic tested\nin both environments
 @enduml
+
 ```
 
 ### Guided example: temperature control system testing
@@ -131,6 +132,7 @@ class TemperatureController:
 class SafetyException(Exception):
     """Raised when safety limits are exceeded"""
     pass
+
 ```
 
 Now let's create test fixtures for the sensor and heater:
@@ -203,6 +205,7 @@ class MockHeater:
     def clear_failure(self):
         """Clear simulated failures"""
         self._failure_mode = None
+
 ```
 
 ### Comprehensive unit tests
@@ -380,6 +383,7 @@ class TestTemperatureControllerWithFailures(unittest.TestCase):
 if __name__ == '__main__':
     # Run all tests
     unittest.main(verbosity=2)
+
 ```
 
 ### Testability patterns
@@ -479,6 +483,7 @@ def test_robot_arm_movement():
         assert False, "Should have raised SafetyException"
     except SafetyException:
         pass  # Expected
+
 ```
 
 ### Integration testing with fixture orchestration
@@ -597,6 +602,7 @@ class MockGreenhouseEnvironment:
         
         # Update sensors with new conditions
         self.set_conditions(self.temperature, self.humidity)
+
 ```
 
 ## Try it
@@ -682,6 +688,7 @@ class TestPressureSensor(unittest.TestCase):
         self.sensor.disconnect()
         # Should return last valid reading
         self.assertEqual(self.sensor.get_safe_reading(), 300)
+
 ```
 
 ///
@@ -763,6 +770,7 @@ class TestServoController(unittest.TestCase):
         self.servo.emergency_stop_activate()
         self.assertFalse(self.servo.is_moving)
         self.assertFalse(self.servo.move_to(45))  # Commands rejected
+
 ```
 
 ///
@@ -861,6 +869,7 @@ class TestConveyorIntegration(unittest.TestCase):
         self.conveyor.update()
         self.assertEqual(self.motor.current_speed, 0)
         self.assertFalse(self.conveyor.enabled)
+
 ```
 
 ///

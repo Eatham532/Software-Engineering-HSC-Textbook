@@ -90,6 +90,7 @@ for interaction_type, success in interactions:
     print(f"After {interaction_type} ({'success' if success else 'failure'}): "
           f"Trust={user.trust_level}, Control={user.perceived_control}, "
           f"Acceptance={user.get_acceptance_likelihood():.1f}%")
+
 ```
 
 ### Key Psychological Factors
@@ -192,6 +193,7 @@ print("-" * 50)
 for stress, metrics in stress_analysis.items():
     print(f"{stress:5d} | {metrics['accuracy']:8.3f} | {metrics['response_time']:11.1f}s | "
           f"{metrics['data_quality_score']:10.3f}")
+
 ```
 
 ### Implications for ML Systems
@@ -336,6 +338,7 @@ for culture_name, culture_data in cultures.items():
     
     print(f"{culture_name:12} | {scores['authoritative']:11.1f}% | "
           f"{scores['collaborative']:11.1f}% | {scores['balanced']:6.1f}%")
+
 ```
 
 ---
@@ -478,6 +481,7 @@ for profile_name, beliefs in belief_profiles.items():
     
     print(f"{profile_name:15} | {predictions['auto_decision_making']:12.1f}% | "
           f"{predictions['recommendation_system']:13.1f}% | {predictions['transparent_assistant']:15.1f}%")
+
 ```
 
 ---
@@ -595,6 +599,7 @@ for principle, score in eval_results.items():
 print("\nRecommended Improvements:")
 for i, recommendation in enumerate(improvements, 1):
     print(f"{i}. {recommendation}")
+
 ```
 
 ---
@@ -662,6 +667,7 @@ note bottom of adaptation
 end note
 
 @enduml
+
 ```
 
 ---

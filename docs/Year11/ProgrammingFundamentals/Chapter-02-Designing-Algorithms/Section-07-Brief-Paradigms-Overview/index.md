@@ -39,6 +39,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 - Explicit control flow (loops, conditionals)
 
 **Example thinking pattern:**
+
 ```text
 "To make tea:
 1. Fill kettle with water
@@ -46,6 +47,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 3. Wait for water to boil
 4. Put tea bag in cup
 5. Pour hot water into cup"
+
 ```
 
 **Best for:** Tasks with clear sequential steps, system programming, when you need precise control.
@@ -65,6 +67,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 - Emphasis on modeling real-world entities
 
 **Example thinking pattern:**
+
 ```text
 "A Student object has:
 - Properties: name, age, grades
@@ -73,6 +76,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 A Course object has:
 - Properties: course_code, instructor, enrolled_students
 - Abilities: add_student(), remove_student(), assign_grade()"
+
 ```
 
 **Best for:** Complex systems, user interfaces, modeling real-world scenarios.
@@ -92,6 +96,7 @@ A Course object has:
 - Query-based interaction
 
 **Example thinking pattern:**
+
 ```text
 "Facts:
 - Socrates is a man
@@ -102,6 +107,7 @@ Rule:
 
 Query: Is Socrates mortal?
 Answer: Yes (computer deduces this)"
+
 ```
 
 **Best for:** Expert systems, artificial intelligence, complex rule-based problems.
@@ -121,11 +127,13 @@ Answer: Yes (computer deduces this)"
 - Functions can be combined and passed around
 
 **Example thinking pattern:**
+
 ```text
 "To process student grades:
 - map(convert_to_percentage, raw_scores)
 - filter(above_passing_grade, percentage_scores)  
 - reduce(calculate_average, passing_scores)"
+
 ```
 
 **Best for:** Mathematical computations, data processing, parallel processing.
@@ -166,6 +174,7 @@ note right of "Object-Oriented" : Model the world
 note right of "Logic" : What is true
 note right of "Functional" : Transform data
 @enduml
+
 ```
 
 | Paradigm | Focus | Strengths | Example Use |
@@ -184,27 +193,33 @@ The same problem can be solved using different paradigms:
 **Problem:** Calculate the total price for a shopping cart
 
 **Imperative approach:**
+
 ```text
 "Start with total = 0
 For each item in cart:
   Add item price to total
 Add tax to total
 Return total"
+
 ```
 
 **Object-oriented approach:**
+
 ```text
 "ShoppingCart object:
   - Has list of Item objects
   - Has calculate_total() method
   - Item objects know their own prices"
+
 ```
 
 **Functional approach:**
+
 ```text
 "Apply 'get_price' function to all items
 Apply 'sum' function to all prices  
 Apply 'add_tax' function to result"
+
 ```
 
 ### Choosing the Right Tool

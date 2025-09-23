@@ -69,6 +69,7 @@ API -> Gateway: Response
 Gateway -> Client: API Response
 
 @enduml
+
 ```
 
 ### 1. API Keys
@@ -241,6 +242,7 @@ def api_key_authentication_example():
 
 if __name__ == "__main__":
     api_key_authentication_example()
+
 ```
 
 #### API Key Security Best Practices
@@ -313,6 +315,7 @@ class SecureAPIKeyValidator:
         """Block an IP address"""
         self.blocked_ips.add(client_ip)
         print(f"Blocked IP {client_ip} due to suspicious activity")
+
 ```
 
 ### 2. JSON Web Tokens (JWT)
@@ -482,6 +485,7 @@ def jwt_authentication_example():
 
 if __name__ == "__main__":
     jwt_authentication_example()
+
 ```
 
 ### 3. OAuth 2.0 Flow Implementation
@@ -654,6 +658,7 @@ def oauth_authentication_example():
 
 if __name__ == "__main__":
     oauth_authentication_example()
+
 ```
 
 ## Rate Limiting and DoS Protection
@@ -942,6 +947,7 @@ def rate_limiting_example():
 
 if __name__ == "__main__":
     rate_limiting_example()
+
 ```
 
 ## Secure Session Management
@@ -979,6 +985,7 @@ note over Gateway, Session: Session Security Features
 note over Gateway: - CSRF Protection\n- Secure Cookies\n- Session Rotation\n- Timeout Management
 
 @enduml
+
 ```
 
 ### Comprehensive Session Manager Implementation
@@ -1375,6 +1382,7 @@ def session_management_example():
 
 if __name__ == "__main__":
     session_management_example()
+
 ```
 
 ## CORS and Cross-Origin Security
@@ -1415,6 +1423,7 @@ else CORS Denied
 end
 
 @enduml
+
 ```
 
 ### Comprehensive CORS Implementation
@@ -1764,6 +1773,7 @@ def cors_security_example():
 
 if __name__ == "__main__":
     cors_security_example()
+
 ```
 
 ## API Security Testing
@@ -1809,6 +1819,7 @@ note right: Automated security\ntest suite
 stop
 
 @enduml
+
 ```
 
 ### Automated Security Testing Framework
@@ -2614,6 +2625,7 @@ def security_testing_example():
 
 if __name__ == "__main__":
     security_testing_example()
+
 ```
 
 ## Building a Complete Secure REST API
@@ -2670,6 +2682,7 @@ Validator --> [File Controller]
 [File Controller] --> [Content Database]
 
 @enduml
+
 ```
 
 ### Complete Secure API Implementation
@@ -3486,6 +3499,7 @@ def api_demonstration():
 
 if __name__ == "__main__":
     api_demonstration()
+
 ```
 
 ## Summary and Best Practices
@@ -3709,12 +3723,14 @@ Implement a user registration system that includes:
 - Input sanitization for all fields
 
 **Requirements:**
+
 ```python
 class SecureRegistration:
     def validate_password(self, password: str) -> tuple[bool, List[str]]
     def generate_verification_token(self, email: str) -> str
     def verify_email_token(self, token: str) -> bool
     def register_user(self, user_data: dict) -> dict
+
 ```
 
 ### Exercise 2: API Rate Limiter
@@ -3730,12 +3746,14 @@ Create a configurable rate limiting system with:
 - Automatic rate limit adjustment based on server load
 
 **Requirements:**
+
 ```python
 class AdvancedRateLimiter:
     def set_rate_limit(self, identifier: str, limit: int, window: int)
     def check_rate_limit(self, identifier: str) -> tuple[bool, dict]
     def reset_rate_limit(self, identifier: str)
     def get_rate_limit_status(self, identifier: str) -> dict
+
 ```
 
 ### Exercise 3: CORS Security Manager
@@ -3751,12 +3769,14 @@ Build a comprehensive CORS management system with:
 - Real-time policy updates without service restart
 
 **Requirements:**
+
 ```python
 class EnhancedCORSManager:
     def create_policy(self, name: str, config: dict) -> bool
     def validate_origin(self, origin: str, policy: str) -> bool
     def handle_preflight(self, request_data: dict) -> dict
     def update_policy(self, name: str, updates: dict) -> bool
+
 ```
 
 ### Exercise 4: Security Testing Suite
@@ -3774,13 +3794,16 @@ Develop an automated security testing framework for:
 - Session security validation
 
 **Requirements:**
+
 ```python
 class SecurityTestSuite:
     def test_authentication(self, api_endpoint: str) -> dict
     def test_authorization(self, user_roles: List[str]) -> dict
     def test_input_validation(self, endpoints: List[str]) -> dict
     def generate_security_report(self) -> dict
+
 ```
+
 ///
 
 /// details | Case Study Analysis

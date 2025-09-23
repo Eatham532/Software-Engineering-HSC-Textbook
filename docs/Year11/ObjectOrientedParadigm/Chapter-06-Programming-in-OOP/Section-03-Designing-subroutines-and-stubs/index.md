@@ -46,6 +46,7 @@ class BankAccount:
     def get_balance(self):
         """Return current account balance."""
         return self.balance
+
 ```
 
 ### Designing with stubs
@@ -88,6 +89,7 @@ class ShoppingCart:
         total = self.calculate_total()
         print(f"Processing checkout for ${total}")
         return True
+
 ```
 
 /// details | Guided example: Student gradebook
@@ -169,6 +171,7 @@ gradebook.record_grade("12345", "Math", 85)
 gradebook.record_grade("12345", "Science", 92)
 
 print(gradebook.generate_report("12345"))
+
 ```
 
 ///
@@ -203,6 +206,7 @@ class Gradebook {
 
 Gradebook --> "*" Student : manages
 @enduml
+
 ```
 
 ## Try it
@@ -298,6 +302,7 @@ class Library:
         # Stub implementation
         print(f"TODO: Process checkout for member {member_id}, book {isbn}")
         return False
+
 ```
 
 ///
@@ -380,6 +385,7 @@ class TaskList:
         # Stub implementation
         print(f"TODO: Mark '{task_title}' as complete")
         return False
+
 ```
 
 ///

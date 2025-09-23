@@ -49,6 +49,7 @@ class BankAccount:
     
     def get_transaction_count(self):
         return self._transaction_count
+
 ```
 
 ### Public interface vs internal state
@@ -66,6 +67,7 @@ print(account.get_balance())          # ✅ Good - using public method
 # Direct access to internal state - avoid this!
 print(account._balance)               # ❌ Bad - accessing internal state directly
 account._balance = 999999             # ❌ Very bad - bypassing all controls!
+
 ```
 
 **Why keep internal state private?**
@@ -120,6 +122,7 @@ Note on double underscores:
 - This is not true privacy but helps avoid accidental access/overrides in subclasses.
 - Most idiomatic Python code uses a single underscore for "internal" members and relies on conventions.
 """
+
 ```
 
 ### Invariants
@@ -165,6 +168,7 @@ try:
     rect.set_width(-2)  # This will raise an error
 except ValueError as e:
     print(f"Error: {e}")  # Error: Width must be positive
+
 ```
 
 ### Simple getters and setters
@@ -203,6 +207,7 @@ print(f"Temperature: {temp.get_fahrenheit()}°F")     # 77°F
 
 temp.set_fahrenheit(86)
 print(f"Temperature: {temp.get_celsius()}°C")        # 30°C
+
 ```
 
 ### When to use getters and setters
@@ -253,6 +258,7 @@ print(circle.area)    # 78.53975
 
 circle.radius = 3     # Uses the setter with validation
 print(circle.area)    # 28.27431
+
 ```
 
 ## Practice
@@ -273,6 +279,7 @@ class Car:
 car = Car(50)
 car.fuel_level = -10        # Problem 1: What's wrong here?
 car.engine_running = True   # Problem 2: What could go wrong?
+
 ```
 
 **Task**: Identify the encapsulation violations and explain why they're problematic.
@@ -349,6 +356,7 @@ class DigitalClock:
             return f"12:{self._minutes:02d} PM"
         else:
             return f"{self._hours - 12}:{self._minutes:02d} PM"
+
 ```
 
 ///
@@ -366,6 +374,7 @@ class GameScore:
         self.score = 0
         self.lives = 3
         self.level = 1
+
 ```
 
 **Task**: Add proper encapsulation with:
@@ -423,6 +432,7 @@ class GameScore:
     def is_game_over(self):
         """Check if game is over"""
         return self._lives <= 0
+
 ```
 
 ///

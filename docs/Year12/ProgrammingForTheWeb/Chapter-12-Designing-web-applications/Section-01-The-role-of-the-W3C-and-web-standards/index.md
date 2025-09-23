@@ -72,6 +72,7 @@ class WebStandardsDemo:
 standards_demo = WebStandardsDemo()
 standards_demo.demonstrate_standards_impact()
 standards_demo.show_standards_evolution()
+
 ```
 
 ### Web Accessibility Initiative (WAI) and accessibility guidelines
@@ -228,6 +229,7 @@ sample_images = [
 accessibility.check_image_accessibility(sample_images)
 accessibility.generate_accessible_form()
 accessibility.check_color_contrast("#767676", "#ffffff")
+
 ```
 
 ### Internationalisation (i18n) and localisation (l10n)
@@ -376,6 +378,7 @@ for locale in locales:
     i18n_demo.translate_interface(locale)
 
 i18n_demo.demonstrate_text_direction()
+
 ```
 
 ### Web security standards and recommended patterns
@@ -506,6 +509,7 @@ security.demonstrate_csp_policy()
 security.implement_secure_headers()
 security.demonstrate_secure_authentication()
 security.show_input_validation_patterns()
+
 ```
 
 ### Privacy and privacy-by-design principles
@@ -653,6 +657,7 @@ privacy.implement_data_minimization()
 privacy.demonstrate_consent_management()
 privacy.implement_data_retention_policy()
 privacy.create_privacy_dashboard()
+
 ```
 
 ### Machine-readable data standards
@@ -874,6 +879,7 @@ machine_data.demonstrate_aria_attributes()
 machine_data.create_microdata_example()
 machine_data.create_json_ld_example()
 machine_data.demonstrate_semantic_html()
+
 ```
 
 ## Try it
@@ -1042,7 +1048,9 @@ report = auditor.audit_page_structure(sample_page)
 print(f"Accessibility Issues Found: {report['total_issues']}")
 for issue in report['issues']:
     print(f"- {issue['type']}: {issue['element']} (WCAG {issue['wcag']})")
+
 ```
+
 ///
 ///
 
@@ -1324,7 +1332,9 @@ print("\nPrivacy dashboard generated successfully")
 # Export data
 export_data = consent_manager.export_consent_data('user123')
 print("\nData export available in JSON format")
+
 ```
+
 ///
 ///
 

@@ -95,6 +95,7 @@ package "Training Loop Components" {
 }
 
 @enduml
+
 ```
 
 ---
@@ -520,6 +521,7 @@ Multi-layer perceptrons extend single perceptrons by adding hidden layers, enabl
 ### From-Scratch Implementation
 
 ```python
+
 class TinyMLP:
     """
     Tiny Multi-Layer Perceptron implementation from scratch.
@@ -1312,6 +1314,7 @@ To effectively use neural networks in automation systems, we must understand how
 ### Behavior Analysis Tools
 
 ```python
+
 class NetworkBehaviorAnalyzer:
     """
     Tools for understanding and interpreting neural network behavior.

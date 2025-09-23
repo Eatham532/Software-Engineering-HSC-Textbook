@@ -90,6 +90,7 @@ Before you start coding, you need to clearly understand the problem you're solvi
     open: false
 
 **Problem statement structure** - A clear way to describe the problem:
+
 ```text
 For [who has the problem]
 Who [their situation and challenges]
@@ -97,6 +98,7 @@ The [your solution name] is a [type of solution]
 That [main benefit it provides]
 Unlike [current alternatives]
 Our solution [unique advantage]
+
 ```
 
 **Root cause analysis** - Ask "why" five times to find the real problem:
@@ -194,6 +196,7 @@ Good requirements are SMART: **Specific**, **Measurable**, **Achievable**, **Rel
     open: false
 
 **Interviews and surveys**: Direct stakeholder input
+
 ```text
 Sample interview questions:
 
@@ -202,6 +205,7 @@ Sample interview questions:
 - What would success look like?
 - What are your biggest frustrations?
 - How do you measure productivity?
+
 ```
 
 **Observation and job shadowing**: Understanding actual workflows
@@ -230,6 +234,7 @@ Sample interview questions:
     open: false
 
 **User stories format**: Requirements from user perspective
+
 ```text
 As a [user type]
 I want [functionality]
@@ -239,9 +244,11 @@ Acceptance criteria:
 - Given [context]
 - When [action]
 - Then [expected result]
+
 ```
 
 **Traditional specification format**:
+
 ```text
 REQ-001: Grade Input Validation
 Description: The system shall validate grade inputs to ensure data quality
@@ -253,7 +260,9 @@ Details:
 - Empty inputs are permitted for missing assignments
 - The system shall highlight invalid fields in red
 Test criteria: Enter grade of -5, verify error message appears
+
 ```
+
 ///
 
 /// details | Example: Grade Calculator Requirements
@@ -347,12 +356,14 @@ Solution design bridges the gap between requirements and implementation by creat
 Good software design is like organizing a kitchen - everything should have its place and be easy to find and use.
 
 **Separation of concerns** - Like a restaurant kitchen where different chefs handle different tasks:
+
 ```text
 Example: Grade Calculator separation
 - Input chef: Handles user input and checks if it's valid
 - Math chef: Performs the calculations
 - Presentation chef: Formats the results for display
 - Head chef: Coordinates between all the specialists
+
 ```
 
 **Single responsibility principle** - Each part should have just one job:
@@ -414,6 +425,7 @@ blockdiag {
     Business [label = "Business Logic"];
     Output [label = "Output Layer"];
 }
+
 ```
 
 **Component design specification**:
@@ -468,6 +480,7 @@ blockdiag {
 ## Worked example
 
 /// tab | Python
+
 ```py
 # Grade Calculator: Complete implementation with validation
 def validate_grade(grade):
@@ -510,10 +523,13 @@ if __name__ == '__main__':
 
     except (TypeError, ValueError) as e:
         print(f"Error: {e}")
+
 ```
+
 ///
 
 /// tab | Pseudocode
+
 ```text
 ALGORITHM GradeCalculator
 
@@ -552,7 +568,9 @@ MAIN
         OUTPUT "Error: " + error.message
     END TRY
 END MAIN
+
 ```
+
 ///
 
 ### What the example demonstrates
@@ -712,11 +730,13 @@ Design a solution for the coffee shop revenue calculator.
 - Error Handler: Centralized validation and error messaging
 
 **Function Interface Design**:
+
 ```
 validate_amount(amount, category) → validated_float
 calculate_total_revenue(coffee, pastries, merchandise) → total
 calculate_percentages(coffee, pastries, merchandise, total) → dict
 format_report(totals, percentages) → formatted_string
+
 ```
 
 **Error handling plan**:
@@ -867,6 +887,7 @@ blockdiag {
   Calculator -> Output;
   Config -> Calculator;
 }
+
 ```
 
 *Key algorithms*:

@@ -63,6 +63,7 @@ package "Test Techniques" {
 [Test Execution] --> [Boundary Testing] : Edge Cases
 
 @enduml
+
 ```
 
 /// tab | Test Plan Structure
@@ -322,7 +323,9 @@ test_plan.add_risk(
 
 summary = test_plan.generate_test_summary()
 print(f"Test Plan Summary: {summary}")
+
 ```
+
 ///
 
 ### Functional, integration, and non-functional tests
@@ -567,7 +570,9 @@ suite.add_test(perf_test)
 
 report = suite.run_all_tests()
 print(f"Test Suite Report: {report}")
+
 ```
+
 ///
 
 ### Test data selection for path and boundary testing
@@ -797,7 +802,9 @@ def test_grade_validation():
 ## Run example
 
 test_grade_validation()
+
 ```
+
 ///
 
 ### Developing test cases and acceptance tests
@@ -835,6 +842,7 @@ Test Steps:
   3. [Action] → Expected: [Result]
 Pass Criteria: [Conditions for test success]
 Fail Criteria: [Conditions indicating test failure]
+
 ```
 
 **Acceptance Test Criteria**:
@@ -845,7 +853,9 @@ Fail Criteria: [Conditions indicating test failure]
 
 /// tab | Python Test Case Builder
 ///
+
 ```py
+
 from datetime import date
 from enum import Enum
 
@@ -1054,6 +1064,7 @@ print(f"Test Report Summary:")
 print(f"  Steps executed: {len(report['steps'])}")
 print(f"  Execution status: {report['execution_status']}")
 print(f"  Criteria assessment: {report['criteria_met']}")
+
 ```
 ///
 
@@ -1087,6 +1098,7 @@ Both automated and manual testing serve important roles in a comprehensive testi
 /// tab | Python Test Automation Framework
 
 ```py
+
 import time
 import unittest
 from selenium import webdriver
@@ -1359,6 +1371,7 @@ def demonstrate_testing_approaches():
 ## Run demonstration
 
 demonstrate_testing_approaches()
+
 ```
 ///
 

@@ -1,6 +1,7 @@
 """Simple, safe markdown fixer:
 - converts duplicate H1s (# ) to H2s (## ) after the first
 - ensures blank line before and after headings (not inside code fences)
+- ensures blank line before and after code blocks
 - ensures blank line before list items
 
 This is conservative: it preserves code fences and won't touch lines inside them.
@@ -24,9 +25,17 @@ def fix_file(p: Path):
         stripped = line.lstrip()
         # detect fence
         if stripped.startswith('```'):
+            # ensure blank line before fence if not already blank and not at start
+            if out and out[-1].strip() != '':
+                out.append('')
+                changed = True
             out.append(line)
             in_fence = not in_fence
             i += 1
+            # ensure blank line after fence if next line exists and isn't blank
+            if not in_fence and i < len(lines) and lines[i].strip() != '':
+                out.append('')
+                changed = True
             continue
         if in_fence:
             out.append(line)

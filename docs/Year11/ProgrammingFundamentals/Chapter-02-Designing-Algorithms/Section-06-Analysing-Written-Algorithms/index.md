@@ -158,6 +158,7 @@ BEGIN
         RETURN "Unknown reason"
     END IF
 END
+
 ```
 
 ## Step 1: Identify Inputs and Outputs
@@ -277,6 +278,7 @@ main --> [ProcessEnrollment()]
 [ProcessEnrollment()] --> [UpdateCourseCapacity()]
 [ProcessEnrollment()] --> [SendEnrollmentNotification()]
 @enduml
+
 ```
 
 ### Functions vs Procedures Classification
@@ -418,6 +420,7 @@ else (choice = "exit")
 endif
 stop
 @enduml
+
 ```
 
 ## Step 6: Identify Design Patterns
@@ -435,6 +438,7 @@ BEGIN
     END WHILE
     RETURN id
 END
+
 ```
 
 **Pattern:** Keep asking until valid input is received
@@ -452,6 +456,7 @@ BEGIN
     
     RETURN hasPrerequisites AND hasCapacity AND noConflicts AND notAlreadyEnrolled
 END
+
 ```
 
 **Pattern:** Break complex conditions into readable boolean variables
@@ -468,6 +473,7 @@ BEGIN
         RETURN "Course is full"
     // ... more specific checks
 END
+
 ```
 
 **Pattern:** Provide specific error messages for different failure conditions
@@ -526,6 +532,7 @@ BEGIN
     SendReservationEmail(userID, reservationID)
     RETURN reservationID
 END
+
 ```
 
 ### Your Analysis Tasks:
@@ -628,6 +635,7 @@ else (no)
 endif
 stop
 @enduml
+
 ```
 
 ### Challenge 2: Many Subprograms

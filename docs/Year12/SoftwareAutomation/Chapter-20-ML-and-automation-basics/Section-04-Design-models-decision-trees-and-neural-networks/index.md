@@ -82,6 +82,7 @@ rectangle "Email Classification Decision Tree" {
 }
 
 @enduml
+
 ```
 
 ### Python Implementation: Building a Decision Tree from Scratch
@@ -408,6 +409,7 @@ def demonstrate_decision_tree():
 # Example usage
 if __name__ == "__main__":
     demo_tree = demonstrate_decision_tree()
+
 ```
 
 ### Tracing Through Decision Tree Decisions
@@ -471,6 +473,7 @@ This transparency makes decision trees excellent for:
 ### Real-World Applications
 
 **1. Medical Diagnosis**
+
 ```
 Patient Age > 65?
 ├─ Yes: Cholesterol > 240?
@@ -479,9 +482,11 @@ Patient Age > 65?
 └─ No: Exercise < 2hrs/week?
    ├─ Yes: Medium Risk
    └─ No: Low Risk
+
 ```
 
 **2. Credit Approval**
+
 ```
 Income > $50,000?
 ├─ Yes: Credit Score > 700?
@@ -490,18 +495,22 @@ Income > $50,000?
 └─ No: Debt Ratio < 0.3?
    ├─ Yes: Manual Review
    └─ No: Reject
+
 ```
 
 **3. Quality Control**
+
 ```
 Temperature > 150°C?
 ├─ Yes: Pressure > 5 PSI?
 │  ├─ Yes: Product OK
 │  └─ No: Check Pressure System
 └─ No: Check Heating System
+
 ```
 
    └─ No: Check Heating System
+
 ```
 
 ---
@@ -539,6 +548,7 @@ Neural networks mimic how biological neurons work:
 ### The Perceptron: Simplest Neural Network
 
 ```kroki-plantuml
+
 @startuml
 !theme plain
 skinparam backgroundColor #FEFEFE
@@ -571,11 +581,13 @@ note bottom
 end note
 
 @enduml
+
 ```
 
 ### Python Implementation: Perceptron from Scratch
 
 ```python
+
 import random
 import math
 from typing import List, Tuple, Callable
@@ -951,6 +963,7 @@ def demonstrate_mlp():
 if __name__ == "__main__":
     demo_perceptron = demonstrate_perceptron()
     demo_mlp = demonstrate_mlp()
+
 ```
 
 ### Understanding Neural Network Learning
@@ -1006,23 +1019,35 @@ Neural networks learn through a process called **backpropagation**:
 ### Real-World Neural Network Applications
 
 **1. Image Recognition**
+
 ```
+
 Input: Pixel values → Hidden Layers: Feature detection → Output: Object classes
+
 ```
 
 **2. Language Translation**
+
 ```
+
 Input: Source text → Hidden Layers: Meaning representation → Output: Target text
+
 ```
 
 **3. Medical Diagnosis**
+
 ```
+
 Input: Symptoms/tests → Hidden Layers: Pattern recognition → Output: Diagnosis probability
+
 ```
 
 **4. Recommendation Systems**
+
 ```
+
 Input: User preferences → Hidden Layers: Similarity analysis → Output: Recommended items
+
 ```
 
 ---

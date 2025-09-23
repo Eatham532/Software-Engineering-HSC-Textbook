@@ -124,6 +124,7 @@ def is_authorized(user, student_id):
     return user.role in authorized_roles and (
         user.role != 'student_self' or user.student_id == student_id
     )
+
 ```
 
 ### Integrity: Ensuring Data Accuracy and Trustworthiness
@@ -270,6 +271,7 @@ def demonstrate_tampering_detection():
         grade_data, message = retrieve_verified_grade("S001", "Mathematics")
     except ValueError as e:
         print(f"Tampering detected: {e}")
+
 ```
 
 ### Availability: Maintaining System Accessibility
@@ -445,6 +447,7 @@ def demonstrate_availability_protection():
     print("\n=== Health Check ===")
     health = protector.health_check()
     print(f"System health: {health}")
+
 ```
 
 ## Guided Example: Implementing CIA Triad for Student Records
@@ -493,6 +496,7 @@ class SecureStudentRecordSystem:
             """)
     
     # [Content continues but truncated for length...]
+
 ```
 
 ## Summary
@@ -751,6 +755,7 @@ def demonstrate_authentication():
     for i in range(6):
         success, message = auth_system.authenticate_user("student123", "wrong_password")
         print(f"Failed attempt {i+1}: {message}")
+
 ```
 
 ### Authorization: Controlling Access to Resources
@@ -952,6 +957,7 @@ def demonstrate_authorization():
         )
         print(f"{user_id} ({role.value}) {action} {resource_type} {resource_id}: "
               f"{'ALLOWED' if can_access else 'DENIED'} - {message}")
+
 ```
 
 ### Accountability: Tracking and Auditing System Activities
@@ -1237,6 +1243,7 @@ def demonstrate_complete_aaa_system():
         # Check audit log integrity
         integrity_report = system.auditor.verify_log_integrity()
         print(f"Audit log integrity: {integrity_report}")
+
 ```
 
 ## Practice Exercises
@@ -1427,7 +1434,9 @@ doc_manager.store_document(
 document = doc_manager.retrieve_document("STUDENT_RECORD_001", "authorized_user")
 print(f"Retrieved: {document['content'][:50]}...")
 print(f"Classification: {document['metadata']['classification']}")
+
 ```
+
 ///
 ///
 
@@ -1758,7 +1767,9 @@ if admin_auth[0]:
     admin_token = admin_auth[1]['session_token']
     audit_report, message = library_system.get_audit_report(admin_token)
     print(f"Audit report entries: {len(audit_report)}")
+
 ```
+
 ///
 ///
 

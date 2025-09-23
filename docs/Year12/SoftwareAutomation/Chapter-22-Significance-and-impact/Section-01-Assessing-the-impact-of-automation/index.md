@@ -87,6 +87,7 @@ note right of framework
 end note
 
 @enduml
+
 ```
 
 ---
@@ -396,6 +397,7 @@ def demonstrate_safety_assessment():
 # Run demonstration
 if __name__ == "__main__":
     safety_results = demonstrate_safety_assessment()
+
 ```
 
 ---
@@ -842,6 +844,7 @@ def demonstrate_accessibility_assessment():
 # Run demonstration
 if __name__ == "__main__":
     accessibility_results = demonstrate_accessibility_assessment()
+
 ```
 
 ---
@@ -1096,6 +1099,7 @@ def demonstrate_employment_assessment():
 # Run demonstration
 if __name__ == "__main__":
     employment_results = demonstrate_employment_assessment()
+
 ```
 
 ---
@@ -1511,6 +1515,7 @@ def demonstrate_environmental_assessment():
 # Run demonstration
 if __name__ == "__main__":
     environmental_results = demonstrate_environmental_assessment()
+
 ```
 
 ---
@@ -1899,6 +1904,7 @@ def demonstrate_comprehensive_economic_assessment():
 # Run demonstration
 if __name__ == "__main__":
     comprehensive_results = demonstrate_comprehensive_economic_assessment()
+
 ```
 
 ---

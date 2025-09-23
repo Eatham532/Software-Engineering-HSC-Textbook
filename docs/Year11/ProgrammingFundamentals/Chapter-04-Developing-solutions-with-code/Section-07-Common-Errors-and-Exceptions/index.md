@@ -56,6 +56,7 @@ message = "Hello World'  # SyntaxError: unterminated string literal
 message = "Hello World"
 # or:
 message = 'Hello World'
+
 ```
 
 ///
@@ -99,6 +100,7 @@ def broken_function():
 def fixed_function():
     if x > 5:
         print("Greater than 5")
+
 ```
 
 ///
@@ -161,6 +163,7 @@ def safe_division_example():
         print(f"  Fixed v2: {calculate_average_fixed_v2(numbers)}")
 
 safe_division_example()
+
 ```
 
 ///
@@ -218,6 +221,7 @@ def index_error_examples():
         print(f"  Index {index}: {safe_result} | {safe_result_v2}")
 
 index_error_examples()
+
 ```
 
 ///
@@ -282,6 +286,7 @@ def key_error_examples():
         print(f"  {student}: {v1_result} | {v2_result} | {v3_result}")
 
 key_error_examples()
+
 ```
 
 ///
@@ -354,6 +359,7 @@ def type_error_examples():
         print(f"Fixed: {area}")
 
 type_error_examples()
+
 ```
 
 ///
@@ -429,7 +435,9 @@ def off_by_one_examples():
     print(f"Pythonic version: {pythonic_result}")
 
 off_by_one_examples()
+
 ```
+
 ///
 
 /// details | Logic Errors in Conditions
@@ -526,7 +534,9 @@ def logic_condition_examples():
         print(f"  Score {score}: Buggy='{buggy}', Fixed='{fixed}'")
 
 logic_condition_examples()
+
 ```
+
 ///
 
 /// details | Infinite Loops
@@ -632,7 +642,9 @@ def infinite_loop_examples():
 
 # Note: We don't actually run the infinite loop examples to avoid hanging
 print("Infinite loop examples defined (safe to demonstrate concepts)")
+
 ```
+
 ///
 
 ## Common Error Patterns and Prevention
@@ -688,6 +700,7 @@ def variable_name_errors():
     use_before_define_fixed()
 
 variable_name_errors()
+
 ```
 
 ### Function Definition and Call Errors
@@ -750,6 +763,7 @@ def function_errors():
     indentation_demo()
 
 function_errors()
+
 ```
 
 ## Debugging Strategies for Common Errors
@@ -885,6 +899,7 @@ def debugging_strategies():
         print(f"Result: {result}")
 
 debugging_strategies()
+
 ```
 
 ## Error Prevention Best Practices
@@ -995,6 +1010,7 @@ def defensive_programming():
         print(f"  {student} -> {result}")
 
 defensive_programming()
+
 ```
 
 ## Summary

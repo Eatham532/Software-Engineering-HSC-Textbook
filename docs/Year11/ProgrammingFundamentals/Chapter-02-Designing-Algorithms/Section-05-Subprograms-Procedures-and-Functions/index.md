@@ -104,6 +104,7 @@ package "Grade Processing System" {
   [DetermineLetterGrade(average)] --> [CalculateGPA(letterGrade)]
 }
 @enduml
+
 ```
 
 ## Parameters
@@ -124,7 +125,9 @@ BEGIN
     SET area = 3.14159 * radius * radius
     RETURN area
 END
+
 ```
+
 ///
 
 /// details | Output Parameters
@@ -143,7 +146,9 @@ BEGIN
     OUTPUT "Enter age:"
     INPUT age
 END
+
 ```
+
 ///
 
 /// details | Input/Output Parameters
@@ -159,7 +164,9 @@ BEGIN
     SET student.numAssignments = student.numAssignments + 1
     SET student.average = student.totalPoints / student.numAssignments
 END
+
 ```
+
 ///
 
 ### Parameter Examples
@@ -172,6 +179,7 @@ BEGIN
     SET amount = principal * (1 + rate/compoundFrequency)^(compoundFrequency * time)
     RETURN amount
 END
+
 ```
 
 **Procedure with Mixed Parameters:**
@@ -192,6 +200,7 @@ BEGIN
     
     SET classAverage = totalGrades / studentCount
 END
+
 ```
 
 ## Return Values
@@ -219,6 +228,7 @@ BEGIN
     CLOSE file
     RETURN size
 END
+
 ```
 
 ### Using Return Values
@@ -226,27 +236,35 @@ END
 Return values can be used in several ways:
 
 **Assignment:**
+
 ```text
 SET average = CalculateAverage(scores)
 SET isValid = ValidateEmail(emailAddress)
+
 ```
 
 **Expressions:**
+
 ```text
 SET finalGrade = CalculateAverage(scores) * 0.8 + examScore * 0.2
 IF ValidateInput(userInput) AND userInput > 0 THEN
+
 ```
 
 **Nested Function Calls:**
+
 ```text
 SET letterGrade = DetermineLetterGrade(CalculateAverage(scores))
 SET formatted = FormatCurrency(CalculateTotal(prices))
+
 ```
 
 **Direct Output:**
+
 ```text
 OUTPUT "Your GPA is: " + CalculateGPA(grades)
 OUTPUT "File size: " + GetFileSize("data.txt") + " bytes"
+
 ```
 
 ## Cohesion in Subprograms
@@ -265,7 +283,9 @@ Everything contributes to a single, well-defined task.
 ✓ FUNCTION CalculateCircleArea(radius)
 ✓ PROCEDURE SaveStudentRecord(student)
 ✓ FUNCTION ValidateEmailAddress(email)
+
 ```
+
 ///
 
 /// details | Sequential Cohesion
@@ -282,7 +302,9 @@ BEGIN
     ChargePayment(order.total)    // Step 3 (uses calculated total)
     ArrangeShipping(order)        // Step 4 (uses charged order)
 END
+
 ```
+
 ///
 
 /// details | Communicational Cohesion
@@ -298,7 +320,9 @@ BEGIN
     CalculateStudentGPA(student)
     FormatStudentReport(student)
 END
+
 ```
+
 ///
 
 /// details | Poor Cohesion Examples
@@ -316,6 +340,7 @@ BEGIN
     LoadUserPreferences()
     StartBackgroundMusic()
 END
+
 ```
 
 **Logical Cohesion (Poor)** - grouped because they're similar but do different things:
@@ -331,7 +356,9 @@ BEGIN
         ProcessFileInput(data)
     END IF
 END
+
 ```
+
 ///
 
 ### Improving Cohesion
@@ -349,6 +376,7 @@ BEGIN
     // Generate receipt (15 lines)
     // Send confirmation email (10 lines)
 END
+
 ```
 
 **Create focused subprograms:**
@@ -361,6 +389,7 @@ END
 ✓ PROCEDURE UpdateInventory(items)
 ✓ PROCEDURE GenerateReceipt(order)
 ✓ PROCEDURE SendConfirmationEmail(customer, order)
+
 ```
 
 ## Identifying Subprograms in Algorithms
@@ -438,6 +467,7 @@ BEGIN
         END IF
     END WHILE
 END
+
 ```
 
 ### Structure Chart with Subprograms
@@ -492,6 +522,7 @@ main --> [ProcessBookBorrowing()]
 [ProcessBookReturn()] --> [UpdateBorrowRecord()]
 [ProcessBookReturn()] --> [UpdateBookStatus()]
 @enduml
+
 ```
 
 ## Design Guidelines for Subprograms
@@ -515,6 +546,7 @@ main --> [ProcessBookBorrowing()]
 ✓ FUNCTION IsValidEmail(emailString) → boolean
 ✓ FUNCTION ConvertCelsiusToFahrenheit(celsius) → real
 ✓ FUNCTION CountWordsInText(text) → integer
+
 ```
 
 ### Procedure Design Guidelines
@@ -536,6 +568,7 @@ main --> [ProcessBookBorrowing()]
 ✓ PROCEDURE DisplayWelcomeMessage(userName)
 ✓ PROCEDURE BackupDatabase(sourceDB, backupLocation)
 ✓ PROCEDURE SendEmailNotification(recipient, subject, message)
+
 ```
 
 ## Practice Activity: Student Grade Calculator
@@ -575,6 +608,7 @@ BEGIN
     _______________  // Procedure call to display class summary
     _______________  // Procedure call to save results
 END
+
 ```
 
 **Identify the missing subprograms:**
@@ -691,6 +725,7 @@ BEGIN
     END FOR
     CLOSE file
 END
+
 ```
 
 ## Common Subprogram Patterns
@@ -712,6 +747,7 @@ FUNCTION IsInRange(value, minimum, maximum)
 BEGIN
     RETURN (value >= minimum) AND (value <= maximum)
 END
+
 ```
 
 ### Data Transformation Functions
@@ -733,6 +769,7 @@ BEGIN
     END FOR
     RETURN JoinWords(words)
 END
+
 ```
 
 ### Calculation Functions
@@ -750,6 +787,7 @@ BEGIN
     SET amount = principal * (1 + rate/compoundTimes) ^ (compoundTimes * years)
     RETURN amount - principal
 END
+
 ```
 
 

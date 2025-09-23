@@ -209,7 +209,9 @@ update_log = requirements_doc.update_artefact(
 
 report = manager.generate_documentation_report()
 print(f"Documentation Report: {report}")
+
 ```
+
 ///
 
 ### Citing sources and libraries
@@ -249,11 +251,14 @@ License: MIT License
 Security: Regular updates for security patches
 Used for: Component-based UI development
 Installation: npm install react@18.2.0
+
 ```
 
 /// tab | Python Dependency Tracker
 ///
+
 ```py
+
 from datetime import date
 from enum import Enum
 import json
@@ -422,6 +427,7 @@ print(f"Dependency Report: {report}")
 attribution = dep_manager.generate_attribution_text()
 print("Generated attribution text:")
 print(attribution[:200] + "...")  # Show first 200 characters
+
 ```
 ///
 
@@ -442,6 +448,7 @@ Key back-end contributions to software success:
 - **Integration**: APIs and services that connect different system components
 
 ```kroki-plantuml
+
 @startuml
 skinparam monochrome true
 skinparam shadowing false
@@ -475,6 +482,7 @@ package "Infrastructure" {
 [Business Logic] --> [Message Queue] : Async Tasks
 
 @enduml
+
 ```
 
 /// tab | Technology Stack
@@ -502,6 +510,7 @@ package "Infrastructure" {
 /// tab | Python Back-end Simulator
 
 ```py
+
 from datetime import datetime, timedelta
 from enum import Enum
 import hashlib
@@ -739,6 +748,7 @@ backup_result = user_db.backup_database()
 
 print(f"Database Query Result: {query_result}")
 print(f"Backup Result: {backup_result}")
+
 ```
 ///
 
@@ -801,7 +811,9 @@ print(f"Backup Result: {backup_result}")
    - Set up regular review process
 
 **Tools for audit**:
+
 ```py
+
 audit_manager = ArtefactManager()
 
 ## Add existing documentation
@@ -809,6 +821,7 @@ audit_manager = ArtefactManager()
 ## Generate report to identify gaps
 
 report = audit_manager.generate_documentation_report()
+
 ```
 ///
 ///
@@ -860,13 +873,16 @@ report = audit_manager.generate_documentation_report()
    - Document exceptions and risks
 
 **Implementation example**:
+
 ```py
+
 dep_manager = DependencyManager(LicenseType.MIT)
 
 ## Add all project dependencies
 
 security_risks = dep_manager.find_security_risks()
 outdated_deps = dep_manager.find_outdated_dependencies()
+
 ```
 ///
 ///

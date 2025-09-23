@@ -59,6 +59,7 @@ print("Temperature readings over time:")
 for i in range(5):
     temp = temp_sensor.read_temperature()
     print(f"Reading {i+1}: {temp}°C")
+
 ```
 
 Key aspects of realistic sensor simulation:
@@ -142,6 +143,7 @@ for step in range(10):
     if not servo.is_moving():
         break
     time.sleep(0.1)
+
 ```
 
 Essential features of actuator simulation:
@@ -209,6 +211,7 @@ HeatingElement ..|> ActuatorInterface
 
 note right of SystemSimulation : Coordinates all components\nand runs control loops
 @enduml
+
 ```
 
 Here's a practical example - a temperature control system:
@@ -317,6 +320,7 @@ control_system.set_target_temperature(30.0)
 time.sleep(10)
 
 control_system.stop_control_loop()
+
 ```
 
 ### Guided example: robotic arm simulation
@@ -482,6 +486,7 @@ for target_x, target_y in test_positions:
     
     # Uncomment to show arm position plot
     # arm.plot_arm()
+
 ```
 
 ## Try it
@@ -743,7 +748,9 @@ for hour in range(48):  # Run for 48 hours
           f"Soil: {readings['soil_moisture'][0]:5.1f}%")
     
     time.sleep(0.1)  # Brief pause for readability
+
 ```
+
 ///
 ///
 
@@ -1070,7 +1077,9 @@ place_positions = [(100, -150), (120, -150), (140, -150)]
 
 # Run demonstration
 robot.run_pick_and_place_cycle(pick_positions, place_positions)
+
 ```
+
 ///
 ///
 
@@ -1374,6 +1383,7 @@ finally:
     sim.stop_simulation()
 
 print("Simulation complete!")
+
 ```
 
 Note: This example requires matplotlib for visualization. For the basic curriculum, you could create a simpler text-based version that prints periodic status updates instead of live plotting.

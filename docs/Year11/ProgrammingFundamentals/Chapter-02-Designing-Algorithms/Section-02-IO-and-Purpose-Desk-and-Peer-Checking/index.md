@@ -80,6 +80,7 @@ endif
 :OUTPUT "Average score: " + average;
 stop
 @enduml
+
 ```
 
 **Algorithm:**
@@ -109,6 +110,7 @@ BEGIN
     OUTPUT studentName + " earned grade: " + grade    // Output: formatted result (string)
     OUTPUT "Average score: " + average               // Output: numerical average
 END
+
 ```
 
 **Analysis:**
@@ -310,6 +312,7 @@ else (no)
 endif
 stop
 @enduml
+
 ```
 
 **Algorithm:**
@@ -337,6 +340,7 @@ BEGIN
         OUTPUT "Weak password"
     END IF
 END
+
 ```
 
 ### Your Task: Desk Check Two Branches

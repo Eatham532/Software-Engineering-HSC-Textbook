@@ -37,6 +37,7 @@ flowchart TD
     A[Step 1: Get ingredients] --> B[Step 2: Mix ingredients]
     B --> C[Step 3: Bake for 30 minutes]
     C --> D[Step 4: Cool and serve]
+
 ```
 
 **Key characteristics:**
@@ -62,6 +63,7 @@ BEGIN
     Place second slice on top
     Cut sandwich in half
 END
+
 ```
 
 **Tracing through the sequence:**
@@ -91,6 +93,7 @@ Selection lets your algorithm make decisions based on conditions. It's like comi
 /// tab | Simple Selection (IF-THEN)
 Do something only if a condition is true, otherwise skip it.
 ///
+
 ```kroki-mermaid
 flowchart TD
     A[Start] --> B{Is it raining?}
@@ -98,6 +101,7 @@ flowchart TD
     B -->|No| D[Continue without umbrella]
     C --> E[Go outside]
     D --> E
+
 ```
 
 ```
@@ -118,6 +122,7 @@ BEGIN
         OUTPUT "Grade: F"
     END IF
 END
+
 ```
 
 ///
@@ -143,6 +148,7 @@ Iteration lets your algorithm repeat actions multiple times. It's like doing jum
 /// tab | Counted Loops (FOR loops)
 Repeat a specific number of times when you know exactly how many iterations you need.
 ///
+
 ```kroki-mermaid
 flowchart TD
     A[Start] --> B[Set counter = 1]
@@ -151,6 +157,7 @@ flowchart TD
     D --> E[Increment counter]
     E --> C
     C -->|No| F[End]
+
 ```
 
 /// details | Counting algorithm
@@ -165,6 +172,7 @@ BEGIN
     END FOR
     OUTPUT "Exercise complete!"
 END
+
 ```
 
 **Tracing the FOR loop:**
@@ -190,6 +198,7 @@ END
 Real algorithms combine sequence, selection, and iteration to solve complex problems. Think of them as LEGO blocks - you can stack and connect them in many ways.
 
 /// tab | Pseudocode
+
 ```text
 ALGORITHM ProcessStudentGrades
 BEGIN
@@ -224,10 +233,13 @@ BEGIN
         OUTPUT "No valid grades were entered"
     END IF
 END
+
 ```
+
 ///
 
 /// tab | Python Implementation
+
 ```python
 def process_student_grades():
     total = 0
@@ -262,7 +274,9 @@ def process_student_grades():
         print(f"Class average: {average:.2f}")
     else:
         print("No valid grades were entered.")
+
 ```
+
 ///
 This algorithm combines:
 
@@ -288,6 +302,7 @@ flowchart TD
     G -->|Yes| B
     G -->|No| H[Calculate average]
     H --> I[End]
+
 ```
 
 ## Tracing algorithms
@@ -299,6 +314,7 @@ Tracing means following through an algorithm step-by-step to see what happens wi
 Create a table to track variable values as they change:
 
 **Algorithm:**
+
 ```text
 ALGORITHM FindMaximum
 BEGIN
@@ -315,6 +331,7 @@ BEGIN
     
     OUTPUT maximum
 END
+
 ```
 
 **Tracing with inputs: num1=15, num2=8, num3=22**
@@ -413,6 +430,7 @@ BEGIN
 
     OUTPUT result
 END
+
 ```
 
 **Trace with inputs: x = 5, y = 3**
@@ -491,6 +509,7 @@ BEGIN
         OUTPUT "No valid numbers were entered"
     END IF
 END
+
 ```
 
 **Control structures used:**
@@ -534,6 +553,7 @@ BEGIN
 
     OUTPUT array
 END
+
 ```
 
 1. What does this algorithm accomplish?

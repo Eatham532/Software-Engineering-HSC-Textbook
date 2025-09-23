@@ -151,7 +151,9 @@ workshop.record_decision(
 )
 
 print(workshop.generate_workshop_summary())
+
 ```
+
 ///
 
 ### Enabling structured feedback
@@ -196,6 +198,7 @@ endif
 
 stop
 @enduml
+
 ```
 
 /// tab | Feedback Collection Strategy
@@ -349,6 +352,7 @@ feedback_manager.categorise_feedback(bug_feedback, FeedbackPriority.HIGH)
 feedback_manager.categorise_feedback(usability_feedback, FeedbackPriority.MEDIUM)
 
 print(feedback_manager.generate_feedback_report())
+
 ```
 
 
@@ -544,7 +548,9 @@ if mobile_app.effort_estimate_hours > 100:
         "Mobile-responsive web app instead of native mobile app"
     )
     print(f"Alternative for {mobile_app.title}: {alternative['alternative_description']}")
+
 ```
+
 ///
 
 ### Ethical considerations in software projects
@@ -734,7 +740,9 @@ assessment.add_mitigation_strategy("Audit training data for demographic represen
 assessment.add_mitigation_strategy("Add explanation features for recommendations")
 
 print(assessment.generate_ethics_report())
+
 ```
+
 ///
 
 ## Practice

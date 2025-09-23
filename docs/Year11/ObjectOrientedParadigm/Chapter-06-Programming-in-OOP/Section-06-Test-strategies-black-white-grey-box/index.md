@@ -143,6 +143,7 @@ class TestGradeCalculatorBlackBox(unittest.TestCase):
         self.assertEqual(self.calculator.calculate_grade(89.5), "B")
         self.assertEqual(self.calculator.calculate_grade(79.9), "C")
         self.assertEqual(self.calculator.calculate_grade(59.9), "F")
+
 ```
 
 ### Boundary Value Analysis
@@ -189,6 +190,7 @@ class TestPasswordValidatorBlackBox(unittest.TestCase):
         
         # Exactly one digit - should pass
         self.assertTrue(self.validator.validate("Abcdef1!"))
+
 ```
 
 ### Equivalence Partitioning
@@ -232,6 +234,7 @@ class TestEmailValidatorBlackBox(unittest.TestCase):
         
         # Invalid characters
         self.assertFalse(self.validator.is_valid("user name@domain.com"))
+
 ```
 
 ## White Box Testing
@@ -371,6 +374,7 @@ class TestDiscountCalculatorWhiteBox(unittest.TestCase):
         result = self.calculator.calculate_discount("regular", 1100, True)
         expected = 0.15  # 0.0 (regular) + 0.1 (large order) + 0.05 (holiday)
         self.assertEqual(result, expected)
+
 ```
 
 ### Statement and Branch Coverage
@@ -404,6 +408,7 @@ class TestBankAccountWhiteBox(unittest.TestCase):
         # Ensure transaction history is updated (statement coverage)
         self.assertEqual(len(account.transaction_history), 1)
         self.assertIn("Withdrawal", account.transaction_history[0])
+
 ```
 
 ## Grey Box Testing
@@ -490,6 +495,7 @@ class TestUserAuthenticationGreyBox(unittest.TestCase):
         self.auth_system._advance_time(minutes=15)  # Internal time advancement
         result = self.auth_system.authenticate(username, password)
         self.assertTrue(result)  # Should work again after cooldown
+
 ```
 
 ### Integration Testing with Grey Box Approach
@@ -546,6 +552,7 @@ class TestOrderProcessingGreyBox(unittest.TestCase):
         final_stock = self.inventory.get_stock(product_id)
         expected_stock = initial_stock - 3 - 4
         self.assertEqual(final_stock, expected_stock)
+
 ```
 
 ## Choosing the Right Testing Strategy
@@ -628,6 +635,7 @@ def calculate_shipping_cost(weight, distance, priority):
         raise ValueError("Invalid priority level")
     
     return round(base_cost, 2)
+
 ```
 
 ///

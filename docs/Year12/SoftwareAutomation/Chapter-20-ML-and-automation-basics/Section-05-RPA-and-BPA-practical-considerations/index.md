@@ -101,6 +101,7 @@ note bottom
 end note
 
 @enduml
+
 ```
 
 ### Typical RPA Use Cases
@@ -601,6 +602,7 @@ Line Items:
 **Business Challenge**: Moving data between systems during upgrades or integrations requires careful mapping, validation, and error handling.
 
 ```python
+
 import csv
 import json
 import sqlite3
@@ -1420,6 +1422,7 @@ if __name__ == "__main__":
     print("• Data migration between systems") 
     print("• Repetitive administrative tasks")
     print("=" * 60)
+
 ```
 
 This concludes Part 1 focusing on RPA Implementation and Use Cases. The examples demonstrate practical Python-based automation for common business scenarios: invoice processing, data migration, and administrative task automation.
@@ -1521,6 +1524,7 @@ bpa_workflow --> db : Direct access
 bpa_workflow --> apis : Service calls
 
 @enduml
+
 ```
 
 ### When to Apply RPA vs BPA: Decision Framework
@@ -2134,6 +2138,7 @@ async def run_bpa_demo():
 if __name__ == "__main__":
     import asyncio
     asyncio.run(run_bpa_demo())
+
 ```
 
 ### Low-Code Platforms vs Custom Scripts
@@ -2239,32 +2244,42 @@ if __name__ == "__main__":
 #### Enterprise RPA Platforms
 
 **UiPath**:
+
 ```
+
 Strengths: Comprehensive ecosystem, strong community
 Use Cases: Large enterprise deployments, complex workflows
 Licensing: Per-robot pricing, enterprise features
 Learning Curve: Moderate, good documentation
+
 ```
 
 **Automation Anywhere**:
+
 ```
+
 Strengths: Cloud-native, AI integration, scalability
 Use Cases: Cloud-first organizations, AI-enhanced automation
 Licensing: SaaS model, usage-based pricing
 Learning Curve: Low, intuitive interface
+
 ```
 
 **Blue Prism**:
+
 ```
+
 Strengths: Enterprise governance, security, audit trail
 Use Cases: Highly regulated industries, enterprise IT
 Licensing: Per-robot, enterprise focused
 Learning Curve: Higher, more technical approach
+
 ```
 
 #### Custom Development Approaches
 
 **Python + Selenium**:
+
 ```python
 
 ## Web automation example
@@ -2296,9 +2311,11 @@ def automate_web_form():
         
     finally:
         driver.quit()
+
 ```
 
 **Python + API Integration**:
+
 ```python
 
 ## API-based integration example
@@ -2336,11 +2353,13 @@ def integrate_systems():
             print(f"Failed to create customer: {customer['id']}")
     
     return len(customers)
+
 ```
 
 ### Making the Right Choice: Decision Framework
 
 ```kroki-plantuml
+
 @startuml
 !theme plain
 skinparam backgroundColor #FEFEFE
@@ -2398,9 +2417,11 @@ endif
 stop
 
 @enduml
+
 ```
 
 @enduml
+
 ```
 
 ---
@@ -2747,7 +2768,9 @@ class EthicalAutomationFramework:
 #### Authentication and Access Control
 
 **Multi-Factor Authentication (MFA)**:
+
 ```python
+
 import hashlib
 import secrets
 import time
@@ -2925,11 +2948,13 @@ class SecureRPAAuthenticator:
             return False, None
         
         return True, session_data
+
 ```
 
 #### Data Encryption and Secure Storage
 
 ```python
+
 import os
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes
@@ -3502,6 +3527,7 @@ if __name__ == "__main__":
     print("• Multi-factor authentication and secure data handling")
     print("• Bot lifecycle management and maintenance procedures")
     print("=" * 60)
+
 ```
 
 ### Key Takeaways: Sustainable Automation
@@ -3621,6 +3647,7 @@ async def execute_workflow_step(self, instance_id: str, step_name: str):
     step = instance.workflow.steps.get(step_name)
     if not step:
         raise ValueError(f"Step {step_name} not found")
+
 ```
 
 a) What design pattern is being used for error handling?
@@ -3634,6 +3661,7 @@ password_hash = hashlib.pbkdf2_hmac('sha256',
                                   password.encode('utf-8'), 
                                   salt, 
                                   100000)
+
 ```
 
 a) Why is PBKDF2 used instead of simple SHA256 hashing?

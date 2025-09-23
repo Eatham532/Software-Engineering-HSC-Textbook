@@ -58,6 +58,7 @@ package "Interactive Website Architecture" {
   server --> html : "Dynamic content"
 }
 @enduml
+
 ```
 
 **Key Features:**
@@ -277,6 +278,7 @@ INTERACTIVE_HTML_TEMPLATE = '''
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
 ```
 
 **Trade-offs and Constraints:**
@@ -355,6 +357,7 @@ package "E-commerce Platform Architecture" {
   orders --> email
 }
 @enduml
+
 ```
 
 #### Python Example: E-commerce Core Functionality
@@ -651,6 +654,7 @@ def get_orders():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
+
 ```
 
 **Key E-commerce Considerations:**
@@ -741,6 +745,7 @@ package "Progressive Web App Architecture" {
   jobs --> pushsvc : "Triggers"
 }
 @enduml
+
 ```
 
 #### Python Example: PWA Backend with Offline Support
@@ -1277,6 +1282,7 @@ PWA_SHELL_HTML = '''
 
 if __name__ == '__main__':
     app.run(debug=True, port=5002)
+
 ```
 
 **PWA Key Features and Trade-offs:**
@@ -1336,6 +1342,7 @@ package "Web Application Comparison" {
   end note
 }
 @enduml
+
 ```
 
 ## Decision Framework for Web Application Types
@@ -1491,7 +1498,9 @@ Design a high-level architecture for a collaborative document editing platform t
                     │ - User          │
                     │   management    │
                     └─────────────────┘
+
 ```
+
 ///
 ///
 

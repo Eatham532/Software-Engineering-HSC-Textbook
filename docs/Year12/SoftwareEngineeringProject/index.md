@@ -9,8 +9,11 @@ The Software Engineering Project is the culmination of the HSC course, where stu
 **Key focus areas:**
 
 - Project identification, requirements analysis, and feasibility assessment
+
 - Research and planning with development methodologies
+
 - Implementation, documentation, and quality assurance
+
 - Testing, evaluation, and project presentation
 
 ## Learning Outcomes
@@ -50,16 +53,23 @@ Testing methodologies, feedback collection and analysis, solution evaluation aga
 This module emphasizes **professional software engineering practices**:
 
 - Complete project lifecycle from concept to delivery
+
 - Emphasis on documentation, planning, and stakeholder management
+
 - Integration of all technical skills learned throughout the course
+
 - Focus on real-world project management and communication skills
+
 - Systematic testing and quality assurance throughout development
 
 ## Prerequisites
 
 - Completion of all Year 11 modules
+
 - Solid Python programming skills across multiple paradigms
+
 - Understanding of software development processes and methodologies
+
 - Experience with version control and collaborative development
 
 ## Getting Started

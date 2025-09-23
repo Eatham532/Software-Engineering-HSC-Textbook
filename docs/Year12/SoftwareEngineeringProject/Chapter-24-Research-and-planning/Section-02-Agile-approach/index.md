@@ -103,7 +103,9 @@ sprint.add_user_story({"title": "User can log in", "points": 5})
 sprint.add_user_story({"title": "User sees personal dashboard", "points": 8})
 sprint.complete_story({"title": "User can log in", "points": 5})
 print(sprint.sprint_summary())
+
 ```
+
 ///
 
 ### Agile ceremonies
@@ -133,6 +135,7 @@ note right of DAILY : Sync progress\nand remove blockers
 note right of REVIEW : Demo completed\nfeatures to stakeholders
 note right of RETRO : Reflect on process\nand identify improvements
 @enduml
+
 ```
 
 #### Sprint Planning
@@ -235,7 +238,9 @@ login_story.add_task("Add session management", 6)
 
 planning.add_story_to_sprint(login_story)
 print(planning.planning_summary())
+
 ```
+
 ///
 
 #### Daily Standup
@@ -335,7 +340,9 @@ standup.add_update(StandupUpdate(
     "Start work on dashboard layout"
 ))
 print(standup.generate_summary())
+
 ```
+
 ///
 
 #### Sprint Review
@@ -369,10 +376,12 @@ Sprint Retrospective is a team reflection meeting focused on process improvement
 User Stories are short, simple descriptions of features written from the perspective of the person who will use the feature.
 
 **User Story format**:
+
 ```
 As a [user type],
 I want [functionality],
 So that [benefit/value].
+
 ```
 
 Essential components of good User Stories:
@@ -397,25 +406,34 @@ Essential components of good User Stories:
 As a high school student,
 I want to log into the school portal with my student ID,
 So that I can access my grades and assignment information securely.
+
 ```
 
 **Teacher Grade Entry**:
+
 ```
+
 As a teacher,
 I want to enter grades for multiple students simultaneously,
 So that I can efficiently update student records after marking assignments.
+
 ```
 
 **Parent Progress Tracking**:
+
 ```
+
 As a parent,
 I want to receive email notifications when my child's grades are updated,
 So that I can stay informed about their academic progress.
+
 ```
 
 /// tab | Python Story Management
 ///
+
 ```py
+
 class AcceptanceCriteria:
     def \_\_init\_\_(self, description, test_method="manual"):
         self.description = description
@@ -481,6 +499,7 @@ login_story.add_acceptance_criteria(
 login_story.estimate_points(5)
 print(login_story.format_story())
 print(f"Ready for development: {login_story.is_ready_for_development()}")
+
 ```
 ///
 
@@ -741,10 +760,13 @@ print(f"Ready for development: {login_story.is_ready_for_development()}")
 **User Stories for Sports Day Management System**:
 
 **Story 1: Student Event Registration**
+
 ```
+
 As a student,
 I want to register for sports day events online,
 So that I can easily sign up for activities I'm interested in and avoid lost paper forms.
+
 ```
 **Acceptance Criteria**:
 
@@ -759,10 +781,13 @@ So that I can easily sign up for activities I'm interested in and avoid lost pap
 **Story Points**: 5
 
 **Story 2: Real-time Results Display**
+
 ```
+
 As a parent,
 I want to view my child's sports day results on my phone,
 So that I can celebrate their achievements and stay informed throughout the day.
+
 ```
 **Acceptance Criteria**:
 
@@ -777,10 +802,13 @@ So that I can celebrate their achievements and stay informed throughout the day.
 **Story Points**: 8
 
 **Story 3: Teacher Result Entry**
+
 ```
+
 As a teacher,
 I want to enter event results directly on a tablet,
 So that I can quickly record outcomes and make them available to parents immediately.
+
 ```
 **Acceptance Criteria**:
 
@@ -795,10 +823,13 @@ So that I can quickly record outcomes and make them available to parents immedia
 **Story Points**: 5
 
 **Story 4: Resource Conflict Management**
+
 ```
+
 As a sports coordinator,
 I want to see equipment scheduling conflicts when planning events,
 So that I can ensure all events have necessary resources available.
+
 ```
 **Acceptance Criteria**:
 
@@ -813,10 +844,13 @@ So that I can ensure all events have necessary resources available.
 **Story Points**: 8
 
 **Story 5: Participation Tracking**
+
 ```
+
 As a teacher,
 I want to see which students haven't registered for any events,
 So that I can encourage participation and ensure all students are included.
+
 ```
 **Acceptance Criteria**:
 

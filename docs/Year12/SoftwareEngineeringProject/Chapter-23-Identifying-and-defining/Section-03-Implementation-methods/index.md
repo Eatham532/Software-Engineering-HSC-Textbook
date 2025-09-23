@@ -48,6 +48,7 @@ Characteristics of direct implementation:
 
 /// tab | Example Scenario
 **School Email System Upgrade**
+
 ```py
 class DirectImplementation:
     def \_\_init\_\_(self, old_system, new_system):
@@ -75,7 +76,9 @@ email_upgrade = DirectImplementation("Old Email", "New Email")
 email_upgrade.plan_cutover("2025-10-01")
 result = email_upgrade.execute_cutover()
 print(result)
+
 ```
+
 ///
 
 ### Phased implementation
@@ -113,6 +116,7 @@ note right of P2 : Search functionality\nData validation
 note right of P3 : External API connections\nAutomated workflows
 note right of P4 : Dashboard reports\nPerformance analytics
 @enduml
+
 ```
 
 /// tab | Implementation Strategy
@@ -165,7 +169,9 @@ for phase in phases:
     phase.schedule(current_date)
     print(f"{phase.name}: {phase.start_date} to {phase.end_date}")
     current_date = phase.end_date
+
 ```
+
 ///
 
 ### Parallel implementation
@@ -232,7 +238,9 @@ class ParallelImplementation:
         migrated = len(self.users_on_new_system)
         percentage = (migrated / total_users) * 100
         return f"{percentage:.1f}% of users migrated"
+
 ```
+
 ///
 
 ### Pilot implementation
@@ -316,7 +324,9 @@ pilot.report_issue("Login timeout too short", "medium")
 
 summary = pilot.get_pilot_summary()
 print(f"Pilot Summary: {summary}")
+
 ```
+
 ///
 
 ### WAgile approach
@@ -355,6 +365,7 @@ endif
 endif
 stop
 @enduml
+
 ```
 
 ## Practice

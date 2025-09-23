@@ -80,6 +80,7 @@ class BlogApplication:
         """Main application loop"""
         # Coordinates between modules without knowing implementation details
         pass
+
 ```
 
 ### Well-defined interfaces
@@ -110,6 +111,7 @@ class PaymentProcessor:
     def refund_payment(self, transaction_id, amount):
         """Process a refund for a previous transaction"""
         pass
+
 ```
 
 This interface allows team members to:
@@ -144,6 +146,7 @@ class Post: pass           # Team member B
 class Payment: pass        # Team member C
 class EmailService: pass   # Team member D
 class ReportGenerator: pass # Team member E
+
 ```
 
 ## Version control fundamentals
@@ -171,6 +174,7 @@ git status
 
 # See what changed
 git diff
+
 ```
 
 ### Repository structure for OOP projects
@@ -186,6 +190,7 @@ project/
 ├── docs/               # Documentation
 ├── README.md           # Project overview
 └── requirements.txt    # Dependencies
+
 ```
 
 This structure allows different team members to work in different directories with minimal conflicts.
@@ -216,11 +221,13 @@ git push origin feature/user-authentication
 # When feature is complete, merge back to main
 git checkout main
 git merge feature/user-authentication
+
 ```
 
 ### Common branching strategies
 
 **Git Flow:**
+
 ```text
 main branch (production-ready code)
 ├── develop branch (integration of features)
@@ -228,14 +235,17 @@ main branch (production-ready code)
 │   ├── feature/payment-system (Team Member B)
 │   └── feature/reporting (Team Member C)
 └── hotfix/critical-bug (Emergency fixes)
+
 ```
 
 **GitHub Flow (simpler):**
+
 ```text
 main branch (production-ready code)
 ├── feature/user-authentication
 ├── feature/shopping-cart
 └── feature/email-notifications
+
 ```
 
 ### Handling merge conflicts
@@ -258,6 +268,7 @@ class UserManager:
     
     def create_user(self, username, email):
         # Rest of the method...
+
 ```
 
 To resolve:
@@ -306,6 +317,7 @@ None - this is a new feature that doesn't affect existing code.
 
 ## Screenshots
 [Include relevant UI screenshots if applicable]
+
 ```
 
 ### Code review best practices
@@ -341,6 +353,7 @@ to make it easier to change later and more self-documenting."
 
 # Less helpful review comment:
 "This is wrong, fix it."
+
 ```
 
 ## Documentation for collaboration
@@ -382,6 +395,7 @@ The system is organized into several main components:
 - Include docstrings for all public methods
 - Write unit tests for new functionality
 - Follow PEP 8 style guidelines
+
 ```
 
 ### Class documentation
@@ -438,6 +452,7 @@ class PostService:
             PermissionError: If user doesn't have posting permissions
         """
         # Implementation here...
+
 ```
 
 ### API contracts
@@ -478,6 +493,7 @@ class SMTPEmailService(EmailService):
     def send_email(self, to_address, subject, body, from_address=None):
         # Actual SMTP implementation
         pass
+
 ```
 
 ## Collaborative development workflow
@@ -499,6 +515,7 @@ class PostServiceInterface:
     def create_post(self, author_id, title, content): pass
     def get_post(self, post_id): pass
     def delete_post(self, post_id, user_id): pass
+
 ```
 
 ### 2. Parallel development
@@ -515,6 +532,7 @@ git checkout -b feature/post-management
 # Carol works on integration
 git checkout -b feature/main-application
 # Uses the interfaces to build the main app
+
 ```
 
 ### 3. Integration and testing
@@ -534,6 +552,7 @@ class TestUserPostIntegration:
         
         assert post.author_id == user.id
         assert post.title == "My Post"
+
 ```
 
 ## Practice
@@ -559,6 +578,7 @@ You're building an e-commerce system with a team of 4 developers. The system nee
     open: false
 
 **Team Member A - User Management:**
+
 ```python
 class UserService:
     def register_user(self, username, email, password): pass
@@ -568,9 +588,11 @@ class UserService:
 
 class User:
     def __init__(self, user_id, username, email): pass
+
 ```
 
 **Team Member B - Product Catalog:**
+
 ```python
 class ProductService:
     def add_product(self, name, price, description, category): pass
@@ -580,9 +602,11 @@ class ProductService:
 
 class Product:
     def __init__(self, product_id, name, price, inventory): pass
+
 ```
 
 **Team Member C - Shopping Cart:**
+
 ```python
 class CartService:
     def add_to_cart(self, user_id, product_id, quantity): pass
@@ -592,9 +616,11 @@ class CartService:
 
 class ShoppingCart:
     def __init__(self, user_id): pass
+
 ```
 
 **Team Member D - Order Processing:**
+
 ```python
 class OrderService:
     def __init__(self, user_service, product_service, cart_service):
@@ -608,6 +634,7 @@ class OrderService:
 
 class Order:
     def __init__(self, order_id, user_id, items, total): pass
+
 ```
 
 **Interfaces allow parallel development:**
@@ -647,6 +674,7 @@ You're working on a team project and need to add a new feature. Write the Git co
 git checkout main                    # Switch to main branch
 git pull origin main                # Get latest changes
 git checkout -b feature/user-profile-editing  # Create and switch to feature branch
+
 ```
 
 **2. Making commits during development:**
@@ -663,6 +691,7 @@ git commit -m "Add profile editing methods to UserService"
 # After adding tests
 git add tests/test_user_profile.py
 git commit -m "Add comprehensive tests for profile editing"
+
 ```
 
 **3. Pushing and creating pull request:**
@@ -670,6 +699,7 @@ git commit -m "Add comprehensive tests for profile editing"
 ```bash
 git push origin feature/user-profile-editing
 # Then create pull request through GitHub/GitLab interface
+
 ```
 
 **4. Handling merge conflict:**
@@ -690,6 +720,7 @@ git merge main                      # Merge main into feature branch
 git add user_service.py             # Mark conflict as resolved
 git commit -m "Resolve merge conflict in user_service.py"
 git push origin feature/user-profile-editing
+
 ```
 
 ///
@@ -716,6 +747,7 @@ class UserManager:
             if u["email"] == email and u["password"] == password:
                 return u
         return None
+
 ```
 
 **Task**: Provide specific, constructive feedback for improving this code.
@@ -738,12 +770,14 @@ class UserManager:
 
    ```python
    def add_user(self, name, email, password):  # Instead of n, e, p
+
    ```
 
 2. **Variable naming** (lines 7, 11): Use full names instead of abbreviations:
 
    ```python
    user = {"name": name, ...}  # Instead of u = {"name": n, ...}
+
    ```
 
 3. **Security concern** (line 7): Passwords should be hashed, never stored in plain text:
@@ -751,6 +785,7 @@ class UserManager:
    ```python
    import hashlib
    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
    ```
 
 4. **Data structure** (line 7): Consider using a User class instead of dictionaries for type safety:
@@ -762,6 +797,7 @@ class UserManager:
            self.name = name
            self.email = email
            self.password_hash = password_hash
+
    ```
 
 5. **ID generation** (line 7): Using `len(self.users)` for IDs can cause problems if users are deleted. Consider using a counter or UUID.
@@ -790,6 +826,7 @@ class UserManager:
         self.users.append(user)
         self.next_id += 1
         return user
+
 ```
 
 ///

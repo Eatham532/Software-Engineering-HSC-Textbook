@@ -39,6 +39,7 @@ Code quality refers to how well-written, readable, and maintainable your code is
 Good variable, method, and class names make code self-documenting. Consider these examples:
 
 **Poor naming:**
+
 ```python
 class C:
     def __init__(self, n, a, b):
@@ -52,9 +53,11 @@ class C:
 # Usage
 c = C("John", 1000, 1500)
 result = c.calc()
+
 ```
 
 **Good naming:**
+
 ```python
 class BankAccount:
     def __init__(self, account_holder, opening_balance, current_balance):
@@ -68,6 +71,7 @@ class BankAccount:
 # Usage
 account = BankAccount("John", 1000, 1500)
 net_change = account.calculate_net_change()
+
 ```
 
 ### Python Naming Conventions
@@ -83,6 +87,7 @@ Follow these standard Python naming conventions:
 - **Private attributes**: Prefix with underscore (e.g., `_internal_data`)
 
 **Example of consistent naming:**
+
 ```python
 class LibraryBook:
     MAX_LOAN_DAYS = 14  # Constant
@@ -108,6 +113,7 @@ class LibraryBook:
             days_loaned = (datetime.now() - self._loan_date).days
             return max(0, days_loaned - self.MAX_LOAN_DAYS)
         return 0
+
 ```
 
 ## Documentation with Docstrings and Comments
@@ -117,6 +123,7 @@ class LibraryBook:
 Docstrings are the primary way to document Python classes and methods. They should explain what the code does, not how it does it.
 
 **Structure of a good docstring:**
+
 ```python
 def method_name(parameter1, parameter2):
     """
@@ -132,9 +139,11 @@ def method_name(parameter1, parameter2):
     Raises:
         ExceptionType: Description of when this exception is raised
     """
+
 ```
 
 **Example with comprehensive docstrings:**
+
 ```python
 class Student:
     """
@@ -208,6 +217,7 @@ class Student:
             return 1.0
         else:
             return 0.0
+
 ```
 
 ### Strategic Use of Comments
@@ -215,6 +225,7 @@ class Student:
 Use comments to explain **why** something is done, not **what** is being done:
 
 **Poor commenting:**
+
 ```python
 # Increment i by 1
 i += 1
@@ -223,9 +234,11 @@ i += 1
 if self.balance > amount:
     # Subtract amount from balance
     self.balance -= amount
+
 ```
 
 **Good commenting:**
+
 ```python
 # Apply compound interest calculation using the standard formula
 # A = P(1 + r/n)^(nt) where P=principal, r=rate, n=compounds/year, t=time
@@ -236,6 +249,7 @@ if self.balance - amount >= 10:
     self.balance -= amount
 else:
     raise InsufficientFundsError("Transaction would violate minimum balance requirement")
+
 ```
 
 ## Managing Method Length and Complexity
@@ -253,6 +267,7 @@ Long methods are harder to:
 - Reuse in different contexts
 
 **Example of a method that's too long:**
+
 ```python
 def process_order(self, order_items, customer_info, payment_info):
     """Process a customer order - this method is too long!"""
@@ -297,6 +312,7 @@ def process_order(self, order_items, customer_info, payment_info):
     
     # Generate receipt and update inventory...
     # (even more code would go here)
+
 ```
 
 ### Refactoring to Smaller, Focused Methods
@@ -394,6 +410,7 @@ class OrderProcessor:
         if payment_info['balance'] < amount:
             raise ValueError("Insufficient funds")
         # Process debit payment logic here
+
 ```
 
 ## Simple Refactoring Patterns
@@ -403,6 +420,7 @@ class OrderProcessor:
 When you see a block of code that performs a specific task, extract it into its own method:
 
 **Before:**
+
 ```python
 def generate_report(self, students):
     # Calculate statistics
@@ -426,9 +444,11 @@ def generate_report(self, students):
         report += "\n"
     
     return report
+
 ```
 
 **After:**
+
 ```python
 def generate_report(self, students):
     """Generate a comprehensive student report."""
@@ -466,11 +486,13 @@ def _format_student_section(self, student):
         section += f"  {subject}: {grade}\n"
     section += "\n"
     return section
+
 ```
 
 ### Replace Magic Numbers with Named Constants
 
 **Before:**
+
 ```python
 def calculate_late_fee(self, days_late):
     if days_late <= 7:
@@ -479,9 +501,11 @@ def calculate_late_fee(self, days_late):
         return 7 * 0.5 + (days_late - 7) * 1.0
     else:
         return 7 * 0.5 + 23 * 1.0 + (days_late - 30) * 2.0
+
 ```
 
 **After:**
+
 ```python
 class LibraryFeeCalculator:
     # Named constants make the logic clear
@@ -510,6 +534,7 @@ class LibraryFeeCalculator:
             extended_days = days_late - self.STANDARD_PERIOD_DAYS
             extended_fee = extended_days * self.EXTENDED_FEE_PER_DAY
             return grace_fee + standard_fee + extended_fee
+
 ```
 
 ## Practical Code Quality Checklist
@@ -588,6 +613,7 @@ class C:
     
     def check(self, amt):
         return amt <= self.calc(5)
+
 ```
 
 ///
@@ -641,6 +667,7 @@ def analyze_exam_results(self, exam_scores):
     report += f"F (0-59): {f_count} students\n"
     
     return report
+
 ```
 
 ///

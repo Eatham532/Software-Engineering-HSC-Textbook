@@ -198,6 +198,7 @@ def demo_abstractions():
         print(f"{actuator.name}: Command successful = {success}")
 
 demo_abstractions()
+
 ```
 
 ```kroki-plantuml
@@ -263,6 +264,7 @@ Actuator <|-- StepperMotor
 note top of Sensor : Abstract interface ensures\nall sensors work the same way
 note top of Actuator : Abstract interface ensures\nall actuators work the same way
 @enduml
+
 ```
 
 ### Device managers
@@ -394,6 +396,7 @@ def demo_device_manager():
     print(f"System status: {'OK' if system_ok else 'ERRORS DETECTED'}")
 
 demo_device_manager()
+
 ```
 
 ### Test harnesses
@@ -629,6 +632,7 @@ def demo_test_harness():
     harness.print_test_summary()
 
 demo_test_harness()
+
 ```
 
 ```kroki-plantuml
@@ -688,6 +692,7 @@ RealActuator --|> Actuator : implements
 note top of TestHarness : Enables testing without\nphysical hardware
 note bottom of "Production Environment" : Same interfaces work\nwith real devices
 @enduml
+
 ```
 
 ### Guided example
@@ -880,6 +885,7 @@ def demo_environmental_system():
     print(f"Final system status: {'OK' if system_ok else 'ERRORS'}")
 
 demo_environmental_system()
+
 ```
 
 ## Try it
@@ -949,7 +955,9 @@ class LEDActuator(Actuator):
     
     def get_brightness(self) -> float:
         return self.brightness
+
 ```
+
 ///
 ///
 
@@ -1049,7 +1057,9 @@ def test_line_following():
     harness.print_test_summary()
 
 test_line_following()
+
 ```
+
 ///
 ///
 
@@ -1144,7 +1154,9 @@ def test_enhanced_safety():
     print("Enhanced safety test complete")
 
 test_enhanced_safety()
+
 ```
+
 ///
 ///
 

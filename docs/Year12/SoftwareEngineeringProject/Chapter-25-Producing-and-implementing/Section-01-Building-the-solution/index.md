@@ -95,6 +95,7 @@ def plan_increment(increment_number, available_weeks):
                 "suggested_action": "Reduce scope or extend timeline"
             }
     return {"status": "all_increments_planned"}
+
 ```
 
 ### Quality maintenance strategies
@@ -196,6 +197,7 @@ completed_review = quality_system.conduct_review(review, "senior_developer", fin
 # Check test coverage
 coverage_result = quality_system.check_test_coverage("user_auth", 0.92)
 print(f"Test coverage status: {coverage_result['status']}")
+
 ```
 
 ### Integration and deployment practices
@@ -265,6 +267,7 @@ test --> stage
 stage --> prod
 
 @enduml
+
 ```
 
 ### Guided example: Building a student progress tracking system
@@ -272,6 +275,7 @@ stage --> prod
 Let's walk through building a student progress tracking system using incremental development:
 
 **Increment 1: Core functionality (Week 1-2)**
+
 ```python
 # Basic student and grade tracking
 class Student:
@@ -320,9 +324,11 @@ def test_student_basic_functionality():
     print("Increment 1 tests passed - Core functionality working")
 
 test_student_basic_functionality()
+
 ```
 
 **Increment 2: Progress tracking and reporting (Week 3-4)**
+
 ```python
 # Enhanced system with progress tracking
 class ProgressTracker:
@@ -411,6 +417,7 @@ def test_progress_tracking():
     print("Increment 2 tests passed - Progress tracking working")
 
 test_progress_tracking()
+
 ```
 
 ## Practice

@@ -62,6 +62,7 @@ print(f"\nFinal model: price = {slope:.2f} * size + {intercept:.2f}")
 new_size = 130
 predicted_price = slope * new_size + intercept
 print(f"Predicted price for {new_size}m²: ${predicted_price:.0f}k")
+
 ```
 
 ### Logistic regression
@@ -120,6 +121,7 @@ print(f"\nModel: probability = sigmoid({weight:.2f} * word_count + {bias:.2f})")
 test_count = 10
 probability = sigmoid(weight * test_count + bias)
 print(f"Email with {test_count} suspicious words: {probability:.1%} spam probability")
+
 ```
 
 ### K-nearest neighbour
@@ -183,6 +185,7 @@ flower_types = ['setosa', 'setosa', 'setosa',
 new_flower = [4.5, 1.5]
 predicted_type = knn_classify(flower_features, flower_types, new_flower, k=3)
 print(f"Flower with petals {new_flower} is predicted to be: {predicted_type}")
+
 ```
 
 ### Polynomial regression
@@ -250,6 +253,7 @@ def predict_polynomial(x, weights):
 test_x = 9
 prediction = predict_polynomial(test_x, poly_weights)
 print(f"Prediction for x={test_x}: {prediction:.1f}")
+
 ```
 
 ### Guided example
@@ -289,6 +293,7 @@ end fork
 
 stop
 @enduml
+
 ```
 
 ```python
@@ -345,6 +350,7 @@ def evaluate_model_performance():
 
 # Run the comparison
 performance_results = evaluate_model_performance()
+
 ```
 
 ### Avoiding overfitting
@@ -389,6 +395,7 @@ def check_overfitting(x_data, y_data, max_degree=6):
 x_sample = list(range(1, 21))
 y_sample = [x*x + random.uniform(-10, 10) for x in x_sample]
 check_overfitting(x_sample, y_sample)
+
 ```
 
 ## Try it
@@ -426,7 +433,9 @@ prices = [house[3] for house in houses]
 
 # Implement and compare models
 # Consider normalizing features for better performance
+
 ```
+
 ///
 ///
 
