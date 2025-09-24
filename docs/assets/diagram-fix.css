@@ -1,0 +1,127 @@
+/* Fix black fills in diagram paths and markers - only target diagram containers */
+
+/* Remove black fills from SVG paths in diagram containers only */
+.diagram-container svg path,
+.diagram-viewport svg path,
+.mermaid svg path,
+.kroki svg path,
+svg[data-diagram-type] path,
+svg[id="Kroki"] path,
+[data-diagram-type] svg path {
+    fill: none !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+}
+
+/* Ensure flowchart links don't have black fills */
+.diagram-container .flowchart-link,
+.diagram-viewport .flowchart-link,
+.mermaid .flowchart-link {
+    fill: none !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+}
+
+/* Fix arrow markers to not have black fills - only in diagrams */
+.diagram-container svg marker path,
+.diagram-container svg marker polygon,
+.diagram-viewport svg marker path,
+.diagram-viewport svg marker polygon,
+.mermaid svg marker path,
+.mermaid svg marker polygon,
+svg[data-diagram-type] marker path,
+svg[data-diagram-type] marker polygon,
+svg[id="Kroki"] marker path,
+svg[id="Kroki"] marker polygon {
+    fill: var(--md-default-fg-color, #000) !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+}
+
+/* Ensure edge paths don't have fills - only in diagrams */
+.diagram-container svg path[class*="edge"],
+.diagram-container svg path[id*="L_E_"],
+.diagram-container svg path.edge-thickness-normal,
+.diagram-viewport svg path[class*="edge"],
+.diagram-viewport svg path[id*="L_E_"],
+.diagram-viewport svg path.edge-thickness-normal,
+.mermaid svg path[class*="edge"],
+.mermaid svg path[id*="L_E_"],
+.mermaid svg path.edge-thickness-normal {
+    fill: none !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+}
+
+/* Fix flowchart boxes and shapes - only in diagrams */
+.diagram-container svg rect.basic,
+.diagram-container svg rect.label-container,
+.diagram-container svg .node rect,
+.diagram-viewport svg rect.basic,
+.diagram-viewport svg rect.label-container,
+.diagram-viewport svg .node rect,
+.mermaid svg rect.basic,
+.mermaid svg rect.label-container,
+.mermaid svg .node rect {
+    fill: var(--md-default-bg-color, #fff) !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+    stroke-width: 1px !important;
+}
+
+/* Fix flowchart node styling - only in diagrams */
+.diagram-container svg .node.default rect,
+.diagram-viewport svg .node.default rect,
+.mermaid svg .node.default rect {
+    fill: var(--md-default-bg-color, #fff) !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+    stroke-width: 1px !important;
+}
+
+/* Fix any other shape fills - only in diagrams */
+.diagram-container svg ellipse,
+.diagram-container svg circle,
+.diagram-container svg polygon,
+.diagram-viewport svg ellipse,
+.diagram-viewport svg circle,
+.diagram-viewport svg polygon,
+.mermaid svg ellipse,
+.mermaid svg circle,
+.mermaid svg polygon {
+    fill: var(--md-default-bg-color, #fff) !important;
+    /* stroke: var(--md-default-fg-color, #000) !important; */
+    stroke-width: 1px !important;
+}
+
+/* PlantUML/Kroki specific fixes - make all shapes have no fill, stroke only */
+svg[data-diagram-type] rect,
+svg[data-diagram-type] polygon,
+svg[id="Kroki"] rect,
+svg[id="Kroki"] polygon {
+    fill: var(--md-default-bg-color, #fff) !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+    stroke-width: 1px !important;
+}
+
+/* Keep start/end nodes filled for visibility */
+svg[data-diagram-type] ellipse,
+svg[data-diagram-type] circle,
+svg[id="Kroki"] ellipse,
+svg[id="Kroki"] circle {
+    fill: var(--md-default-fg-color, #000) !important;
+    stroke: var(--md-default-fg-color, #000) !important;
+    stroke-width: 1px !important;
+}
+
+svg[id="Kroki"] {
+    background-color: transparent !important;
+}
+
+svg[id="Kroki"] line {
+    stroke: var(--md-default-fg-color, #000) !important;
+}
+
+svg[id="Kroki"] text,
+svg[id="Kroki"] tspan,
+svg[data-diagram-type] text,
+svg[data-diagram-type] tspan,
+.diagram-content svg text,
+.diagram-content svg tspan {
+  fill: var(--md-default-fg-color, #000) !important;
+  font-family: var(--md-text-font, system-ui) !important;
+}
