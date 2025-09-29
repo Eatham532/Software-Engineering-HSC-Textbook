@@ -2,9 +2,6 @@
 
 ## What is a Data Dictionary?
 
-!!! builds-on "Builds on"
-    This section builds on [3.2 Standard data types](../Section-02-Standard-Data-Types/index.md).
-
 
 A **data dictionary** is a formal document that describes the structure, format, and constraints of data used in a software system. Think of it as a blueprint that defines exactly what information your program will store and how it should be formatted.
 
@@ -251,9 +248,6 @@ Define a constraint where a book can only have a borrower ID if it's not availab
 5. **Inconsistent naming**: Use clear, consistent field names throughout
 
 
-!!! next-up "Coming Up"
-    Next: [3.4 Data Structures Overview](../Section-04-Data-Structures-Overview/index.md) will build on these concepts.
-
 ## Summary
 
 Data dictionaries are essential tools for:
@@ -278,6 +272,9 @@ Key takeaways:
 
 - Keep documentation updated as requirements change
 
----
 
-**Cross-reference**: This section builds on the data types covered in [Section 3.2 Standard Data Types](../Section-02-Standard-Data-Types/index.md) and prepares you for the data structures overview in [Section 3.4](../Section-04-Data-Structures-Overview/index.md).
+
+
+
+
+

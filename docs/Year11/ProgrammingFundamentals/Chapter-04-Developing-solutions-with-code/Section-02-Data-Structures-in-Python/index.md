@@ -2,9 +2,6 @@
 
 ## From Theory to Implementation
 
-!!! builds-on "Builds on"
-    This section builds on [3.4 Data Structures Overview](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) and [4.1 Control Structures in Python](../Section-01-Control-Structures-in-Python/index.md).
-
 
 In [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md), we learned about different data structures conceptually. Now it's time to implement them in Python! This section focuses on the specific data structures required for the NSW HSC syllabus, showing you how to use them effectively in your programs.
 
@@ -1195,9 +1192,6 @@ sms.generate_report_card("S002")
 ```
 
 
-!!! see-also "See Also"
-    For related concepts, see [4.4 Using Standard Modules](../Section-04-Using-Standard-Modules/index.md).
-
 ## Summary
 
 This section has shown you how to implement all the required data structures in Python:
@@ -1226,6 +1220,9 @@ Key takeaways:
 
 - Test your implementations thoroughly
 
----
 
-**Cross-reference**: This section implements the data structures from [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) using the control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). For more on functions and subprograms, see [Chapter 2 Section 5](../../Chapter-02-Designing-Algorithms/Section-05-Subprograms-Procedures-and-Functions/index.md).
+
+
+
+
+

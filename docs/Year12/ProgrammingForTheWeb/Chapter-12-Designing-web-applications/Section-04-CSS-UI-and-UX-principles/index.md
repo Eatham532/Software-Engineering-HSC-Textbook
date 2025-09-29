@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [12.3 Influence of the web browser and developer tools](../Section-03-Influence-of-the-web-browser-and-developer-tools/index.md).
-
 
 CSS and design principles form the foundation of user experience on the web. Understanding how to separate content from presentation, create consistent designs, and build accessible interfaces ensures that web applications are both visually appealing and usable by everyone. Good UI/UX design directly impacts user satisfaction and application success.
 
@@ -960,3 +957,10 @@ CSS and UI/UX principles form the foundation of effective web application design
 - **Accessibility and inclusivity** ensure web applications work for everyone, regardless of abilities or assistive technologies
 
 Understanding these principles enables developers to create web applications that are not only visually appealing but also usable, accessible, and maintainable.
+
+
+
+
+
+
+

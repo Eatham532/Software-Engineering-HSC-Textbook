@@ -2,9 +2,6 @@
 
 ## What Are Standard Modules?
 
-!!! builds-on "Builds on"
-    This section builds on [4.2 Data Structures in Python (Required Set)](../Section-02-Data-Structures-in-Python/index.md).
-
 
 Python comes with a rich collection of **standard modules** (also called the "standard library") - pre-written code that provides useful functionality without you having to write it from scratch. Think of modules as toolboxes containing specialized tools for specific tasks.
 
@@ -948,6 +945,9 @@ Standard modules extend Python's capabilities without requiring external librari
 
 These modules provide the foundation for scientific computing, game development, simulations, and data analysis in Python.
 
----
 
-**Cross-reference**: This section builds on the subprogram concepts from [Chapter 2 Section 5](../../Chapter-02-Designing-Algorithms/Section-05-Subprograms-Procedures-and-Functions/index.md) and uses control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn debugging techniques in [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md).
+
+
+
+
+

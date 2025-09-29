@@ -2,9 +2,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [5.6 Design process: task definition and decomposition](../Section-06-Design-process-task-definition-and-decomposition/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -849,3 +846,10 @@ class UserManager:
 - **Collaborative workflows** combine planning, parallel development, and integration phases
 
 Object-oriented programming's emphasis on encapsulation, clear interfaces, and modular design makes it ideal for team development. Combined with good version control practices and documentation, teams can build complex systems efficiently while maintaining code quality and minimizing conflicts.
+
+
+
+
+
+
+

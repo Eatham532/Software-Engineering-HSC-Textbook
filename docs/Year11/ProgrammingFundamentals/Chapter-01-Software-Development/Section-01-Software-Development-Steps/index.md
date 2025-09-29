@@ -927,9 +927,6 @@ blockdiag {
 This comprehensive practice progression builds from basic problem analysis through complete system development, preparing students for real-world software engineering challenges.
 
 
-!!! next-up "Coming Up"
-    Coming up: In [1.2 Tools and collaboration (IDE + Git)]../Section-02-Tools-and-Collaboration/index.md), We'll explore the tools that support each SDLC phase.
-
 ## Recap
 
 The Software Development Lifecycle is your roadmap for building successful software:

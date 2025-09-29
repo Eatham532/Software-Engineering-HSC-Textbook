@@ -791,9 +791,6 @@ END
 ```
 
 
-!!! next-up "Coming Up"
-    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
-
 ## Summary
 
 **Subprograms organize algorithms into manageable, reusable components:**
@@ -842,8 +839,4 @@ END
 
 - **Readability** makes algorithms easier to understand
 
-!!! tip "Cross-reference"
-    This section builds on the structure charts from Section 2.4, showing how to implement the modules as actual subprograms with proper interfaces.
 
-!!! tip "Next Section"
-    In Section 2.6, we'll learn how to analyze existing algorithms by identifying their subprograms, parameters, and connections.

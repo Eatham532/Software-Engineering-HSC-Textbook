@@ -2,10 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [1.2 Tools and collaboration (IDE + Git)]../Section-02-Tools-and-Collaboration/index.md). Make sure you understand collaborative development practices.
-
-
 Well-documented code is like a clear map for your future self and your teammates. Good documentation explains *why* the code exists, while clean code style makes it easy to read the *how*. Professional developers spend more time reading code than writing it, so readable code directly impacts productivity and reduces bugs.
 
 Without proper documentation and style:
@@ -19,9 +15,6 @@ Without proper documentation and style:
 - **Project handoffs fail** when new developers join
 
 Good documentation and style habits save significant time and reduce frustration throughout a project's lifecycle.
-
-!!! note "Cross-reference"
-    This section builds on the Git repository setup from Section 1.2.
 
 ## What you'll learn
 
@@ -482,9 +475,6 @@ def calculate_grade_average(test1_score, test2_score, test3_score):
 
 Good documentation and style become automatic with practice. Start with these basics and gradually develop your own preferences within Python conventions.
 
-
-!!! next-up "Coming Up"
-    Coming up: In [2.1 Control structures (sequence, selection, iteration)](../../Chapter-02-Designing-Algorithms/Section-01-Control-Structures/index.md), Now let's design the logic for our solutions.
 
 ## Recap
 

@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [24.4 Project management tools and Gantt](../Section-04-Project-management-tools-and-Gantt/index.md).
-
 
 Software engineering projects involve diverse stakeholders with different needs, perspectives, and levels of technical understanding. Effective communication, ethical consideration, and stakeholder engagement are critical for project success and ensuring that technology serves people appropriately. Poor communication can lead to failed projects, while ethical oversights can cause harm to individuals and communities. Understanding these social dimensions helps engineers build solutions that are both technically sound and socially responsible.
 
@@ -1400,3 +1397,10 @@ Effective software engineering requires strong **stakeholder engagement** throug
 **Scope negotiation** involves balancing stakeholder needs with technical constraints through transparent communication, alternative solution exploration, and priority-based decision making. **Ethical considerations** must address privacy, accessibility, bias, and transparency to ensure software serves people appropriately and responsibly.
 
 Success in these social and communication aspects depends on building trust through transparency, maintaining ongoing dialogue with diverse stakeholders, and making decisions that consider both technical excellence and human impact. These skills are as critical as technical abilities for delivering software that truly serves its intended purpose and users.
+
+
+
+
+
+
+

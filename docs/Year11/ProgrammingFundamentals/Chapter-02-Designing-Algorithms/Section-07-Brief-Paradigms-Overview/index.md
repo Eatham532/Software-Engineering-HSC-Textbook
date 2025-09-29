@@ -261,9 +261,6 @@ Many modern applications combine paradigms:
 - AI systems combine logic-based reasoning with functional data transformations
 
 
-!!! next-up "Coming Up"
-    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
-
 ## Summary
 
 **Programming paradigms provide different ways of thinking about problem-solving:**
@@ -296,5 +293,4 @@ Many modern applications combine paradigms:
 
 - Understanding these concepts now prepares you for more advanced programming
 
-!!! tip "Cross-reference"
-    This overview provides context for the algorithm design techniques learned in this chapter. You'll apply these concepts when implementing solutions in Python in Chapter 4.
+

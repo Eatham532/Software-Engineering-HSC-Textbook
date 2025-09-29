@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [13.2 Databases: SQL, common queries and ORM comparison](../Section-02-Databases-SQL-common-queries-and-ORM-comparison/index.md).
-
 
 Web performance directly impacts user experience, search engine rankings, and business outcomes. Studies show that even a 100ms delay in page load time can reduce conversion rates significantly. Understanding performance optimization techniques like caching, compression, asset bundling, and lazy loading enables developers to build fast, responsive web applications that provide excellent user experiences across different devices and network conditions.
 
@@ -774,9 +771,6 @@ def invalidate_post_cache():
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [13.4 Designing and implementing a PWA](../Section-04-Designing-and-implementing-a-PWA/index.md) will build on these concepts.
-
 ## Summary
 
 Performance and page-load management techniques optimize web application speed and user experience:
@@ -794,3 +788,10 @@ Performance and page-load management techniques optimize web application speed a
 - **Progressive enhancement** ensures core functionality loads quickly while additional features load in the background
 
 Understanding these optimization techniques enables developers to build fast, responsive web applications that provide excellent user experiences across various network conditions and devices.
+
+
+
+
+
+
+

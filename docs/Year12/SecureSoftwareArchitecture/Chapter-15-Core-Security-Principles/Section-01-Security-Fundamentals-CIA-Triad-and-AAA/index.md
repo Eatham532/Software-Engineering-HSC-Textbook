@@ -1814,9 +1814,3 @@ if admin_auth[0]:
 - **Enterprise systems**: Balance security requirements with business productivity
 
 Understanding these foundational principles enables developers to make informed security decisions and build systems that protect both technical assets and business value while maintaining user trust and regulatory compliance.
-
-!!! tip "Cross-reference"
-    These fundamental principles prepare you for implementing cryptographic protections in Section 15.2.
-
-!!! tip "Next Section"
-    In Section 15.2, we'll explore cryptography and data protection, building on these fundamentals to implement secure encryption, hashing, and key management.

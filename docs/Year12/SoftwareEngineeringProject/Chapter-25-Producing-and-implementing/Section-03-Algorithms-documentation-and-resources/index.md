@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [25.2 Presenting the solution](../Section-02-Presenting-the-solution/index.md).
-
 
 Professional software development requires maintaining comprehensive documentation, properly citing external resources, and understanding how back-end systems contribute to overall application success. Good documentation ensures knowledge transfer, facilitates maintenance, and supports team collaboration. Understanding back-end engineering helps developers build scalable, secure, and maintainable systems that can handle real-world demands.
 
@@ -888,9 +885,6 @@ outdated_deps = dep_manager.find_outdated_dependencies()
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [25.4 Data backup and version control](../Section-04-Data-backup-and-version-control/index.md) will build on these concepts.
-
 ## Recap
 
 Understanding algorithms, documentation, and back-end resources is essential for professional software development. Key takeaways include:
@@ -904,3 +898,10 @@ Understanding algorithms, documentation, and back-end resources is essential for
 - **Security considerations**: Regularly review dependencies for vulnerabilities and maintain secure coding practices
 
 These practices ensure your software projects are maintainable, legally compliant, and built on solid technical foundations that can scale with growing requirements.
+
+
+
+
+
+
+

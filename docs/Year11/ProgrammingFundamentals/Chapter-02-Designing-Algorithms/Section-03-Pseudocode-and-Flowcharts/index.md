@@ -11,9 +11,6 @@
 
 ## Introduction
 
-!!! builds-on "Builds on"
-    This section builds on [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md). Make sure you understand control structure concepts.
-
 
 Once you've analyzed an algorithm's inputs, outputs, and purpose, you need to express the logic clearly. Two main tools help communicate algorithms effectively:
 
@@ -769,9 +766,6 @@ stop
 - Peer review and collaboration
 
 
-!!! see-also "See Also"
-    For related concepts, see [1.3 Documentation and code style]../../Chapter-01-Software-Development-Steps/Section-03-Documentation-and-Code-Style/index.md), and [Structure Charts; Abstraction and Refinement]../Section-04-Structure-Charts-Abstraction-and-Refinement/index.md).
-
 ## Summary
 
 **Pseudocode provides structured English for describing algorithms:**
@@ -800,8 +794,12 @@ stop
 
 **Both methods help bridge the gap between human thinking and computer code, making algorithms easier to understand, verify, and implement.**
 
-!!! tip "Cross-reference"
-    This section builds on the control structures from Section 2.1 and the analysis techniques from Section 2.2, providing clear ways to document the algorithms you design.
 
-!!! tip "Next Section"
-    In Section 2.4, we'll learn about structure charts and how to break complex problems into smaller, manageable parts.
+
+
+
+
+
+
+
+

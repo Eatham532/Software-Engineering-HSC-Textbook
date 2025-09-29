@@ -315,8 +315,4 @@ Each message should be 2-3 sentences and appropriate for that audience.
 
 Understanding security's business context helps developers build systems that protect both technical assets and business value, making security a competitive advantage rather than just a compliance requirement.
 
-!!! tip "Cross-reference"
-    This foundation in security business value prepares you for integrating security into development processes in Section 14.2.
 
-!!! tip "Next Section"
-    In Section 14.2, we'll learn how to integrate security considerations into every phase of the software development lifecycle.

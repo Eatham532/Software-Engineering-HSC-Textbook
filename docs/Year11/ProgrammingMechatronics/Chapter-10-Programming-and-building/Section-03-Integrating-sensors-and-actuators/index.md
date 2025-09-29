@@ -4,9 +4,6 @@ Real mechatronic systems combine multiple sensors and actuators that must work t
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [10.2 Implementing closed loop control](../Section-02-Implementing-closed-loop-control/index.md).
-
 
 Building mechatronic systems device by device leads to tangled, hard-to-debug code. Each sensor and actuator has different connection methods, data formats, and timing requirements. Without proper abstractions, your control logic becomes mixed with device-specific details, making it difficult to test, maintain, or upgrade components.
 
@@ -1161,9 +1158,6 @@ test_enhanced_safety()
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [10.4 User interfaces for control](../Section-04-User-interfaces-for-control/index.md) will build on these concepts.
-
 ## Recap
 
 Successful mechatronic system integration requires three key components: interface abstractions that provide consistent ways to interact with diverse hardware, device managers that coordinate multiple components and handle errors gracefully, and test harnesses that enable development and validation without physical hardware.
@@ -1183,3 +1177,10 @@ Key principles:
 These patterns make mechatronic systems more reliable, maintainable, and testable. They separate hardware concerns from control logic, making it easier to develop complex systems incrementally.
 
 See also [10.5 Unit tests for subsystems](../Section-05-Unit-tests-subsystems/index.md) for comprehensive testing strategies and [9.4 Mechanical constraints and subsystem composition](../../Chapter-09-Control-algorithms/Section-04-Mechanical-constraints-and-subsystem-composition/index.md) for understanding how to compose multiple subsystems effectively.
+
+
+
+
+
+
+

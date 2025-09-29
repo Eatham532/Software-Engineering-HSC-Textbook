@@ -4,9 +4,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [26.2 Feedback analysis](../Section-02-Feedback-analysis/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -1780,3 +1777,10 @@ if __name__ == "__main__":
     test_planning_demo = demonstrate_evaluation_test_planning()
 
 ```
+
+
+
+
+
+
+

@@ -1680,8 +1680,4 @@ def demonstrate_complete_secure_registration():
 
 Understanding and implementing comprehensive input validation protects applications from the majority of common web vulnerabilities and provides a solid foundation for secure system design.
 
-!!! tip "Cross-reference"
-    These input validation principles build on the cryptographic foundations from Chapter 15 and prepare you for implementing privacy controls in Section 16.2.
 
-!!! tip "Next Section"
-    In Section 16.2, we'll explore Privacy by Design principles, building comprehensive data protection systems that respect user privacy while maintaining security.

@@ -2,9 +2,6 @@
 
 ## Understanding ML Training Paradigms
 
-!!! builds-on "Builds on"
-    This section builds on [20.1 What is AI vs ML (and where RPA/BPA fit)](../Section-01-What-is-AI-vs-ML/index.md).
-
 
 Machine Learning is fundamentally about learning patterns from data, but the way this learning happens depends on the type of data available and the problem we're trying to solve. Understanding the four main training paradigms is crucial for:
 
@@ -1468,3 +1465,10 @@ Design a system that combines multiple paradigms:
 - **Iterate and Improve**: ML systems benefit from continuous refinement and retraining
 
 Understanding these four training paradigms provides the foundation for tackling diverse ML challenges and choosing the right approach for specific automation and intelligence problems.
+
+
+
+
+
+
+

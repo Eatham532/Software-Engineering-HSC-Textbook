@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [10.1 Simulations and prototypes for testing](../Section-01-Simulations-and-prototypes-for-testing/index.md).
-
 
 Closed loop control is the foundation of intelligent mechatronic systems. Unlike open loop systems that blindly execute commands, closed loop systems continuously monitor their output and adjust their behaviour to achieve desired results. This feedback mechanism enables precise control, automatic error correction, and robust operation in changing conditions.
 
@@ -728,12 +725,9 @@ Implementing closed loop control in Python requires understanding both control t
 
 Well-structured code with clear separation of concerns makes control systems easier to debug, tune, and maintain. Consider using classes to encapsulate controller logic and parameter management functions.
 
-## See also
 
-- Section 9.1: Open vs closed loop systems - for fundamental control concepts
 
-- Section 9.3: Algorithmic patterns for control - for advanced control strategies
 
-- Section 10.3: Integrating sensors and actuators - for interfacing with real hardware
 
-- Section 10.5: Unit tests for subsystems - for testing control algorithms
+
+

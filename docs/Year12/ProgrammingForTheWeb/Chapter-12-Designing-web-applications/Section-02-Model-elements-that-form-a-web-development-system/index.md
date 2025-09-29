@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [12.1 The role of the W3C and web standards](../Section-01-The-role-of-the-W3C-and-web-standards/index.md).
-
 
 Modern web applications are complex systems with multiple interconnected components. Understanding how client-side code, server-side logic, databases, and APIs work together helps developers design scalable, maintainable web solutions. This knowledge forms the foundation for building real-world web applications.
 
@@ -334,3 +331,10 @@ Web development systems consist of interconnected components that each serve spe
 - **Middleware and APIs** connect components and integrate external services
 
 Understanding how these elements work together enables developers to design efficient, scalable web applications that meet user needs while maintaining good performance and security.
+
+
+
+
+
+
+

@@ -718,9 +718,6 @@ package "Data Access Layer" {
 ```
 
 
-!!! next-up "Coming Up"
-    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
-
 ## Summary
 
 **Structure charts and refinement help manage complexity through systematic decomposition:**
@@ -765,8 +762,4 @@ package "Data Access Layer" {
 
 - **Maintainability** localizes changes and simplifies updates
 
-!!! tip "Cross-reference"
-    This section builds on the pseudocode and flowchart techniques from Section 2.3, showing how to organize complex algorithms into manageable structures.
 
-!!! tip "Next Section"
-    In Section 2.5, we'll learn how to implement these modules as subprograms (procedures and functions) with proper parameters and return values.

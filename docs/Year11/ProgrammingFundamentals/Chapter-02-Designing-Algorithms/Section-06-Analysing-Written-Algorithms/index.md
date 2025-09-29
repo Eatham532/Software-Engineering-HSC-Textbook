@@ -661,9 +661,6 @@ Trace one piece of data through the entire system:
 - Where does it go?
 
 
-!!! next-up "Coming Up"
-    Next: [2.1 Control structures (sequence, selection, iteration)](../Section-01-Control-Structures/index.md) will build on these concepts.
-
 ## Summary
 
 **Systematic algorithm analysis reveals structure and behavior:**
@@ -712,8 +709,4 @@ Trace one piece of data through the entire system:
 
 - Builds on **subprogram knowledge** from Section 2.5
 
-!!! tip "Cross-reference"
-    This section synthesizes analysis techniques from Sections 2.2 (I/O and checking), 2.4 (structure charts), and 2.5 (subprograms) to provide comprehensive algorithm analysis skills.
 
-!!! tip "Next Section"
-    In Section 2.7, we'll briefly explore different programming paradigms to understand various approaches to algorithm design.

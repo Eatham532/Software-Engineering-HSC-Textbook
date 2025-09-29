@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [7.1 Applications of mechatronic systems](../Section-01-Applications-of-mechatronic-systems/index.md).
-
 
 When building mechatronic systems, you need to understand how the "brain" of your system works. Whether you're using a simple microcontroller or a more powerful CPU, knowing how these computing components process instructions helps you write better code and choose the right hardware for your project.
 
@@ -462,8 +459,9 @@ In this section, you learned about the computing hardware that powers mechatroni
 
 In the next section, we'll explore the sensors and actuators that connect your computing hardware to the physical world.
 
-**See also:**
 
-- Section 8.1: Working with device data and diagnostics
 
-- Section 10.2: Implementing closed loop control
+
+
+
+

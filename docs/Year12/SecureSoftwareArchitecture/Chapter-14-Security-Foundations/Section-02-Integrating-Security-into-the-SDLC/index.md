@@ -497,9 +497,6 @@ Apply the STRIDE framework to threat model a simple online quiz system with the 
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [14.1 The Business Case for Security](../Section-01-The-Business-Case-for-Security/index.md) will build on these concepts.
-
 ## Summary
 
 **Integrating security into the SDLC transforms security from a cost center into a competitive advantage:**
@@ -548,8 +545,4 @@ Apply the STRIDE framework to threat model a simple online quiz system with the 
 
 Security integration isn't just about preventing attacks—it's about building systems that stakeholders can trust, that meet regulatory requirements, and that provide sustainable competitive advantages in an increasingly security-conscious market.
 
-!!! tip "Cross-reference"
-    This SDLC security foundation prepares you for user-centered security design in Section 14.3.
 
-!!! tip "Next Section"
-    In Section 14.3, we'll explore how to balance security requirements with user experience to create systems that are both secure and usable.

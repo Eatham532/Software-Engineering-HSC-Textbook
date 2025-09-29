@@ -2,9 +2,6 @@
 
 ## Why Security Evaluation Matters
 
-!!! builds-on "Builds on"
-    This section builds on [19.3 Security Ethics & Legal Considerations](../Section-03-Security-Ethics-and-Legal-Considerations/index.md).
-
 
 Security programs require continuous measurement and improvement to remain effective. Without proper evaluation frameworks, organizations cannot:
 
@@ -1729,3 +1726,10 @@ Effective security program evaluation depends on:
 - **Executive Support**: Leadership engagement and commitment to acting on evaluation results
 
 Security evaluation is not a one-time activity but an ongoing process that enables organizations to demonstrate value, identify improvements, and maintain effective security postures in evolving threat landscapes.
+
+
+
+
+
+
+

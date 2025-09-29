@@ -4,9 +4,6 @@
 
 A minimal toolchain enables consistent workflows and collaboration from day one. An editor with an integrated terminal makes it easy to run code and manage files, while Git records incremental changes with meaningful messages.
 
-!!! info "Cross-reference"
-    This section uses the Grade Calculator code developed in Section 1.1.
-
 ## Development environment
 
 ### Choosing and configuring an IDE
@@ -1038,9 +1035,6 @@ Complete the tasks below to reinforce Git and IDE concepts.
 
 This activity demonstrates the complete Git workflow: initialization, staging, committing, and history tracking for a real project.
 
-
-!!! next-up "Coming Up"
-    Coming up: In [1.3 Documentation and code style]../Section-03-Documentation-and-Code-Style/index.md), We'll learn about code documentation practices.
 
 ## Recap
 

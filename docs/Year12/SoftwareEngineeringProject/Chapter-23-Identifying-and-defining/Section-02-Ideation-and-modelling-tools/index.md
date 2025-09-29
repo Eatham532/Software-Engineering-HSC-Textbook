@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [23.1 Requirements and feasibility](../Section-01-Requirements-and-feasibility/index.md).
-
 
 Before writing a single line of code, software engineers need to explore ideas, understand data requirements, and model solutions. Ideation and modelling tools help transform abstract problems into concrete, implementable designs. These tools bridge the gap between initial requirements and technical implementation, ensuring that development efforts are focused and well-planned.
 
@@ -488,3 +485,10 @@ print(f"Days until due: {math_assignment.days_until_due()}")
 Ideation and modelling tools are essential for translating problems into implementable solutions. **Brainstorming** generates creative options without premature filtering. **Mind-mapping** visualises relationships between concepts and helps explore connections. **Storyboards** capture user experiences and identify potential issues before development. **Data dictionaries** define the structure and constraints of information that systems need to handle.
 
 These tools work best when used together: brainstorming generates possibilities, mind-mapping organises them, storyboards show how they work in practice, and data dictionaries specify the technical requirements. The investment in planning with these tools reduces development time and improves the quality of the final solution.
+
+
+
+
+
+
+

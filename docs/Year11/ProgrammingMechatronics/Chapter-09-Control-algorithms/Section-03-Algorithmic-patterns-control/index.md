@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [9.2 Autonomous control features](../Section-02-Autonomous-control-features/index.md).
-
 
 Control systems require structured approaches to manage complex behaviours and respond to changing conditions. Three fundamental algorithmic patterns form the foundation of most mechatronic control systems: state machines for managing discrete behaviours, PID controllers for continuous regulation, and scheduling algorithms for coordinating multiple tasks.
 
@@ -808,9 +805,6 @@ Design a scheduling strategy that ensures all tasks meet their timing requiremen
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [9.4 Mechanical constraints and subsystem composition](../Section-04-Mechanical-constraints-and-subsystem-composition/index.md) will build on these concepts.
-
 ## Recap
 
 Three algorithmic patterns form the foundation of mechatronic control systems:
@@ -828,3 +822,10 @@ Three algorithmic patterns form the foundation of mechatronic control systems:
 Understanding these patterns enables the design of robust, predictable, and maintainable control systems that can handle complex mechatronic applications.
 
 See also [10.2 Implementing closed loop control](../../Chapter-10-Programming-and-building/Section-02-Implementing-closed-loop-control/index.md) for practical implementation techniques.
+
+
+
+
+
+
+

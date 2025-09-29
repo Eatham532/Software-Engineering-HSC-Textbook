@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [25.3 Algorithms, documentation, and resources](../Section-03-Algorithms-documentation-and-resources/index.md).
-
 
 Data backup and version control are critical safeguards that protect software projects from data loss, enable collaboration, and maintain a complete history of changes. Without proper version control and backup strategies, teams risk losing work, struggle to coordinate changes, and cannot reliably reproduce previous versions of their software. These practices form the foundation of professional software development.
 
@@ -741,3 +738,10 @@ Data backup and version control form the foundation of reliable software develop
 - **Release hygiene**: Following systematic checklists and quality gates to ensure reliable software releases
 
 These practices protect against data loss, enable effective team collaboration, and ensure that software releases are consistent, traceable, and reliable. Proper implementation of these systems is essential for professional software development and project success.
+
+
+
+
+
+
+

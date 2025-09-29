@@ -2,9 +2,6 @@
 
 ## What is Test Data?
 
-!!! builds-on "Builds on"
-    This section builds on [1.1 Software development steps]../../Chapter-01-Software-Development/Section-01-Software-development-steps/index.md). Make sure you understand the testing phase.
-
 
 **Test data** is the input you use to check whether your program works correctly. Good test data helps you find bugs before your users do and ensures your program handles all possible situations properly.
 
@@ -615,9 +612,6 @@ run_test_suite(test_cases, calculate_letter_grade)
 ```
 
 
-!!! see-also "See Also"
-    For related concepts, see [4.5 Debugging Tools and Techniques](../Section-05-Debugging-Tools-and-Techniques/index.md).
-
 ## Summary
 
 Designing suitable test data is crucial for creating reliable software:
@@ -664,6 +658,9 @@ Designing suitable test data is crucial for creating reliable software:
 
 Remember: Good test data design prevents bugs from reaching users and saves time in the long run!
 
----
 
-**Cross-reference**: This section builds on debugging techniques from [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md) and prepares for error handling in [Section 4.7](../Section-07-Common-Errors-and-Exceptions/index.md). The functions used demonstrate concepts from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md) and [Section 4.2](../Section-02-Data-Structures-in-Python/index.md).
+
+
+
+
+

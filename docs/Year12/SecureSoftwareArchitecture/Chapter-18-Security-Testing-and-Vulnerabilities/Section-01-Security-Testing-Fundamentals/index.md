@@ -1402,7 +1402,3 @@ if __name__ == "__main__":
 4. **Regular Vulnerability Scanning**: Keep up with new threats
 
 5. **Train Your Team**: Manual review skills are crucial
-
----
-
-**Cross-reference**: This section provides the foundation for identifying vulnerabilities that will be explored in detail in [Section 18.2](../Section-02-Web-Application-Vulnerabilities/index.md). The testing techniques learned here are essential for the broader security evaluation discussed in Chapter 19.

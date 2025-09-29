@@ -2086,8 +2086,4 @@ def demonstrate_gdpr_compliance():
 
 Understanding and implementing Privacy by Design principles creates software systems that respect user privacy, comply with legal requirements, and build lasting trust with users while maintaining functional excellence.
 
-!!! tip "Cross-reference"
-    These privacy principles build on the input validation techniques from Section 16.1 and prepare you for implementing secure system architectures in Chapter 17.
 
-!!! tip "Next Section"
-    In Chapter 17, we'll explore secure API design and system architecture, applying both security and privacy principles to build comprehensive, trustworthy systems.

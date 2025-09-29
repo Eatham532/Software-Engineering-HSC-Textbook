@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [9.1 Open vs closed loop systems](../Section-01-Open-vs-closed-loop-systems/index.md).
-
 
 Autonomous control is everywhere in modern mechatronic systems. From cruise control in cars to robotic vacuum cleaners, these systems can make decisions and take actions without constant human input. Understanding autonomy levels and safety systems is crucial for building reliable mechatronic devices.
 
@@ -749,10 +746,9 @@ In this section, you learned about autonomous control features in mechatronic sy
 
 In the next section, we'll explore algorithmic patterns that implement these autonomous control features.
 
-**See also:**
 
-- Section 9.1: Open vs closed loop systems
 
-- Section 9.3: Algorithmic patterns for control
 
-- Section 10.2: Implementing closed loop control
+
+
+

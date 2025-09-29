@@ -2,9 +2,6 @@
 
 ## Understanding Programming Errors
 
-!!! builds-on "Builds on"
-    This section builds on [4.6 Designing Suitable Test Data](../Section-06-Designing-Suitable-Test-Data/index.md).
-
 
 Programming errors are inevitable - even experienced programmers make them! The key is learning to recognize common error patterns, understand their causes, and know how to fix them quickly. This knowledge will make you a more efficient programmer and help you write better code from the start.
 
@@ -1067,6 +1064,9 @@ Understanding and preventing common errors is essential for effective programmin
 
 Remember: Learning to recognize and fix common errors quickly is a superpower that will make you a much more effective programmer!
 
----
 
-**Cross-reference**: This section builds on debugging techniques from [Section 4.5](../Section-05-Debugging-Tools-and-Techniques/index.md) and test data design from [Section 4.6](../Section-06-Designing-Suitable-Test-Data/index.md). These error handling concepts are essential for robust software development.
+
+
+
+
+

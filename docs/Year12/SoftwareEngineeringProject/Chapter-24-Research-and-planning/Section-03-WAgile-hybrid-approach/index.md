@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [24.2 Agile approach](../Section-02-Agile-approach/index.md).
-
 
 WAgile methodology combines the structured governance of waterfall with the adaptive flexibility of agile development. This hybrid approach addresses real-world project constraints where organisations need both predictable milestones and the ability to respond to changing requirements. Understanding WAgile helps software engineers work effectively in environments that require formal approvals while maintaining development agility.
 
@@ -1004,9 +1001,6 @@ for key, value in structure.items():
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [24.4 Project management tools and Gantt](../Section-04-Project-management-tools-and-Gantt/index.md) will build on these concepts.
-
 ## Recap
 
 WAgile methodology provides a practical hybrid approach that combines **waterfall stage gates** for governance and risk management with **agile iterations** for flexibility and rapid feedback. The approach works best when organisations need both predictable milestones and adaptive development capability.
@@ -1014,3 +1008,10 @@ WAgile methodology provides a practical hybrid approach that combines **waterfal
 **Stage gates** provide formal checkpoints for approval, quality assurance, and risk assessment, while **iterative delivery within stages** allows teams to refine work progressively and respond to stakeholder feedback. The balance between waterfall and agile elements should be determined by project scale, regulatory requirements, team experience, and organisational culture.
 
 WAgile interventions are most effective when applied thoughtfully based on specific project characteristics rather than as a one-size-fits-all approach. Success depends on clear gate criteria, appropriate governance levels, and maintaining team agility within the structured framework.
+
+
+
+
+
+
+

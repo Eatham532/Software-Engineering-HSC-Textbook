@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [12.2 Model elements that form a web development system](../Section-02-Model-elements-that-form-a-web-development-system/index.md).
-
 
 Web browsers are the runtime environment for front-end code, and their behavior directly impacts how developers build, test, and debug web applications. Understanding browser differences and mastering developer tools is essential for creating reliable, performant web applications that work consistently across different environments.
 
@@ -529,9 +526,6 @@ HTML template for testing (`templates/debug_demo.html`):
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [12.4 CSS, UI and UX principles](../Section-04-CSS-UI-and-UX-principles/index.md) will build on these concepts.
-
 ## Recap
 
 Web browsers significantly influence web development through their rendering differences and the powerful developer tools they provide:
@@ -547,3 +541,10 @@ Web browsers significantly influence web development through their rendering dif
 - **Storage inspection** reveals how applications manage client-side data
 
 Mastering these tools and understanding browser behavior enables developers to build more reliable, performant web applications that work consistently across different environments.
+
+
+
+
+
+
+

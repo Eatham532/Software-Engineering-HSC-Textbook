@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [6.2 Control structures within methods](../Section-02-Control-structures-within-methods/index.md).
-
 
 Well-designed method signatures create clear contracts between different parts of your code. Stubs allow you to build and test your program incrementally, helping you catch design problems early and make progress even when some parts aren't fully implemented yet.
 
@@ -404,3 +401,10 @@ Good method design starts with clear signatures that act as contracts. Stubs let
 - Test integration between classes before everything is complete
 
 Focus on making your method names and parameters self-explanatory, and use stubs to validate your design choices.
+
+
+
+
+
+
+

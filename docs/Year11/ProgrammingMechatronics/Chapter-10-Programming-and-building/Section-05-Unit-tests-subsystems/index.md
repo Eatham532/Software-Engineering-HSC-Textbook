@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [10.4 User interfaces for control](../Section-04-User-interfaces-for-control/index.md).
-
 
 Testing mechatronic subsystems presents unique challenges: hardware components are expensive, potentially dangerous, and may not be available during development. Unit testing with simulated devices allows developers to verify control logic, validate safety features, and ensure system reliability without requiring physical hardware.
 
@@ -891,3 +888,10 @@ Unit testing mechatronic subsystems requires specialized approaches to handle ha
 Effective testing strategies enable reliable mechatronic systems by validating control logic, safety features, and system integration before deploying to physical hardware.
 
 See also [10.1 Simulations and prototypes for testing](../Section-01-Simulations-and-prototypes-for-testing/index.md) for simulation-based testing approaches.
+
+
+
+
+
+
+

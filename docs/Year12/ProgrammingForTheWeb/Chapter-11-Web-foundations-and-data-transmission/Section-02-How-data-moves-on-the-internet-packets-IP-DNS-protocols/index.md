@@ -4,9 +4,6 @@ In this section, you will trace a web request end-to-end: from typing a URL to r
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [Section 11.1: Explore the Applications of Web Programming](../Section-01-Explore-the-applications-of-web-programming/index.md).
-
 
 By the end, you can:
 
@@ -391,3 +388,10 @@ You can now trace how data moves on the internet:
 - Developer tools let you observe each stage and validate security
 
 Outcome mapping: SE-12-03 — investigate and describe the function of web protocols and their ports, and trace request/response paths including DNS and transport layers.
+
+
+
+
+
+
+

@@ -11,9 +11,6 @@
 
 ## Introduction
 
-!!! builds-on "Builds on"
-    This section builds on [18.1 Security Testing Fundamentals](../Section-01-Security-Testing-Fundamentals/index.md).
-
 
 **Web application vulnerabilities** are security weaknesses that can be exploited by attackers to compromise web applications and their users. These vulnerabilities often arise from common coding mistakes, misconfigurations, or design flaws that create opportunities for unauthorized access, data theft, or system compromise.
 
@@ -1478,6 +1475,9 @@ if __name__ == "__main__":
 
 - **Regular Security Audits**: Continuously assess and improve security posture
 
----
 
-**Cross-reference**: This section builds on the security testing fundamentals from [Section 18.1](../Section-01-Security-Testing-Fundamentals/index.md) and provides practical examples of vulnerabilities that testing should detect. These concepts are essential for the broader security evaluation and management discussed in Chapter 19.
+
+
+
+
+

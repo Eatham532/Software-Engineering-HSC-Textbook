@@ -2,9 +2,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [5.5 Modelling with class diagrams, structure charts and DFDs](../Section-05-Modelling-with-class-diagrams-structure-charts-and-DFDs/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -699,9 +696,6 @@ class ChatSystem:
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [5.7 Collaboration practices and version control](../Section-07-Collaboration-practices-and-version-control/index.md) will build on these concepts.
-
 ## Recap
 
 - **Design process flows** from requirements → responsibilities → collaborations → implementation
@@ -721,3 +715,10 @@ class ChatSystem:
 - **Good design** results in systems that are maintainable, extensible, and meet user needs
 
 The design process is iterative - you'll often cycle back to earlier stages as you learn more about the problem domain. The key is to be systematic while remaining flexible enough to adapt as your understanding evolves.
+
+
+
+
+
+
+

@@ -2,9 +2,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [5.3 Abstraction, generalisation, inheritance, polymorphism](../Section-03-Abstraction-generalisation-inheritance-polymorphism/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -606,3 +603,10 @@ def process_payment(payment):
 - **Neither approach is always better** - the choice depends on the problem and context
 
 Understanding when to use each paradigm is crucial for making good design decisions. Start with the approach that feels natural for your problem, and be prepared to refactor if the complexity grows beyond what your chosen paradigm handles well.
+
+
+
+
+
+
+

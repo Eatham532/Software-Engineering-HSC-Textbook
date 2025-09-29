@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [26.1 Testing methodologies and optimisation](../Section-01-Testing-methodologies-and-optimisation/index.md).
-
 
 Feedback analysis transforms raw user input into actionable insights that guide software improvement and future development decisions. Without systematic feedback collection and analysis, teams risk building features users don't need, missing critical usability issues, and repeating costly mistakes. Effective feedback analysis ensures that software solutions evolve based on real user needs rather than assumptions, leading to higher user satisfaction and project success.
 
@@ -917,3 +914,10 @@ Effective feedback analysis transforms user input into actionable development de
 The goal of feedback analysis is not just to collect opinions, but to understand user needs deeply enough to make informed decisions about product direction. Teams that master feedback analysis deliver software that truly serves its users while maintaining technical feasibility and business viability.
 
 Remember that feedback analysis is an ongoing process throughout software development, not a one-time activity. Regular collection and analysis cycles ensure that software continues to evolve in response to changing user needs and emerging patterns in how people actually use the system.
+
+
+
+
+
+
+

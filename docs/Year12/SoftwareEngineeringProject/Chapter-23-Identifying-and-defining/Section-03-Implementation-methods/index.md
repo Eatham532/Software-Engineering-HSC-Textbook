@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [23.2 Ideation and modelling tools](../Section-02-Ideation-and-modelling-tools/index.md).
-
 
 Choosing the right implementation method can make the difference between project success and failure. Different approaches suit different project types, organisational contexts, and risk profiles. Understanding when to use direct, phased, parallel, or pilot implementations helps software engineers deliver solutions that meet user needs while managing complexity and minimising disruption.
 
@@ -580,3 +577,10 @@ stop
 Implementation methods must match project requirements, risk tolerance, and organisational capacity. **Direct implementation** offers speed but high risk. **Phased implementation** provides manageable complexity through incremental delivery. **Parallel implementation** offers safety through redundancy but requires additional resources. **Pilot implementation** reduces risk through controlled testing with representative users.
 
 **WAgile methodology** combines the structure of waterfall stage-gates with agile flexibility, making it suitable for projects needing both governance and adaptability. The choice of implementation method should consider user impact, technical complexity, resource availability, and the consequences of failure. Often, a combination of methods provides the best balance of risk mitigation and successful delivery.
+
+
+
+
+
+
+

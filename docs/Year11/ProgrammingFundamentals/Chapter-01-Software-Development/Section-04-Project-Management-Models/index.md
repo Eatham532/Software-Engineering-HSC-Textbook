@@ -2,16 +2,9 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [1.3 Documentation and code style](../Section-03-Documentation-and-Code-Style/index.md).
-
-
 Imagine two different ways to build a treehouse: you could plan everything perfectly upfront and build it step-by-step (Waterfall), or you could build a basic platform first, then add features bit by bit based on what works (Agile). Both approaches have their place in software development, and choosing the right one can make the difference between project success and failure.
 
 Understanding these models helps you pick the best approach for your projects and work effectively in team environments where these methodologies are used.
-
-!!! note "Cross-reference"
-    This section builds on the SDLC phases from Section 1.1.
 
 ## What you'll learn
 
@@ -471,5 +464,5 @@ Compare how the Grade Calculator project from Section 1.1 would be handled diffe
 
 **Remember:** The methodology is a tool to help you succeed, not a rigid rule. Adapt it to fit your project's specific needs and constraints.
 
-!!! tip "Cross-reference"
-    The project management concepts learned here will be applied when building solutions in Chapter 4.
+
+

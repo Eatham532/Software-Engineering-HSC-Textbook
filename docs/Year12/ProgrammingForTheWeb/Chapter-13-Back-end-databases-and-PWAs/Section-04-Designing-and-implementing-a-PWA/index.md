@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [13.3 Performance and page-load management](../Section-03-Performance-and-page-load-management/index.md).
-
 
 Progressive Web Apps (PWAs) bridge the gap between web and native mobile applications, providing users with app-like experiences through web browsers. PWAs offer offline functionality, push notifications, and installation capabilities while maintaining the reach and accessibility of web applications. Understanding PWA development enables developers to create engaging, performant applications that work across all devices and network conditions, making them essential for modern web development.
 
@@ -1294,3 +1291,10 @@ Progressive Web Apps combine the best of web and native mobile applications:
 - **Cross-platform compatibility** delivers consistent functionality across different devices, browsers, and operating systems
 
 Understanding PWA development enables developers to create engaging, performant applications that work reliably in any network condition while providing users with native app-like experiences through web technologies.
+
+
+
+
+
+
+

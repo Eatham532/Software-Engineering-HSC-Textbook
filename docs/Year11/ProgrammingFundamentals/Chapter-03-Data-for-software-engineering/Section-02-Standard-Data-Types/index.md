@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [3.1 Number systems and two's complement](../Section-01-Number-systems-and-twos-complement/index.md). Make sure you understand how computers store numbers.
-
 
 Every piece of information in a program must be stored as a specific **data type**. Think of data types like containers - you wouldn't store milk in a cardboard box or books in a bucket. Similarly, computers need the right "container" (data type) to store different kinds of information correctly and efficiently.
 
@@ -658,9 +655,6 @@ Enrolled type: BOOLEAN
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [4.1 Control Structures in Python](../../Chapter-04-Developing-solutions-with-code/Section-01-Control-Structures-in-Python/index.md) and [4.2 Data Structures in Python (Required Set)](../../Chapter-04-Developing-solutions-with-code/Section-02-Data-Structures-in-Python/index.md).
-
 ## Recap
 
 **Standard data types are the building blocks of all programs:**
@@ -714,3 +708,10 @@ Enrolled type: BOOLEAN
 - Use meaningful variable names that indicate the data type's purpose
 
 Understanding data types is essential for writing reliable programs that handle information correctly and efficiently.
+
+
+
+
+
+
+

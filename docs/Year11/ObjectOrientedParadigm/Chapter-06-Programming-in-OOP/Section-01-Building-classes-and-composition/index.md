@@ -2,9 +2,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [5.1 Objects and classes](../../Chapter-05-OOP-foundations/Section-01-Objects-and-classes/index.md). Review that material first for better understanding.
-
 
 By the end of this section, you will be able to:
 
@@ -1084,3 +1081,10 @@ print(motorcycle.get_full_description()) # Honda CBR (Motorcycle) - 600cc engine
 - **Good class design** emphasizes clear responsibilities, meaningful names, and proper encapsulation
 
 Building classes with composition creates more flexible, maintainable systems where components can be developed, tested, and modified independently while still working together to create powerful functionality.
+
+
+
+
+
+
+

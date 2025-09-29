@@ -2,9 +2,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -1154,3 +1151,10 @@ class StudentManager:
 - **Good method design** balances functionality with readability and maintainability
 
 Well-designed methods with appropriate control structures create classes that are easy to understand, test, and modify. By keeping methods focused and cohesive, you build more maintainable object-oriented systems.
+
+
+
+
+
+
+

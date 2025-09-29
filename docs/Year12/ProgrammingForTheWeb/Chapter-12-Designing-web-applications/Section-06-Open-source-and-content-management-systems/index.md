@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [12.5 Front-end code libraries and frameworks](../Section-05-Front-end-code-libraries-and-frameworks/index.md).
-
 
 Open-source software and content management systems power much of the modern web. Understanding how open-source development works, the licensing considerations, and the trade-offs between different CMS approaches is essential for making informed decisions about web development tools and platforms. These technologies enable rapid development while requiring careful consideration of security, maintenance, and long-term sustainability.
 
@@ -1000,3 +997,10 @@ Open-source software and content management systems are fundamental to modern we
 - **Decision frameworks** help evaluate the best approach based on project requirements, team capabilities, and long-term sustainability
 
 Understanding these technologies and their implications enables developers to make informed decisions about leveraging community-driven solutions while managing the associated responsibilities and risks.
+
+
+
+
+
+
+

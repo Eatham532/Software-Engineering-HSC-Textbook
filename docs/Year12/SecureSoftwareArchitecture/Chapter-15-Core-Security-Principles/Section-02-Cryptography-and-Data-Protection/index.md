@@ -912,8 +912,4 @@ def demonstrate_password_manager():
 
 Understanding cryptography enables developers to make informed decisions about data protection and implement security controls that effectively protect sensitive information throughout its lifecycle.
 
-!!! tip "Cross-reference"
-    These cryptographic foundations prepare you for implementing secure input validation and data protection in Chapter 16.
 
-!!! tip "Next Section"
-    In Chapter 16, we'll apply these cryptographic principles to secure input handling and privacy protection, building comprehensive data protection systems.

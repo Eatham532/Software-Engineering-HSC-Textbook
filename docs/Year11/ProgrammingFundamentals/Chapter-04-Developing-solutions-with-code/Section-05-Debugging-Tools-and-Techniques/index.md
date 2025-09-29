@@ -2,9 +2,6 @@
 
 ## What is Debugging?
 
-!!! builds-on "Builds on"
-    This section builds on [4.1 Control Structures in Python](../Section-01-Control-Structures-in-Python/index.md). Make sure you understand Python programming basics.
-
 
 **Debugging** is the process of finding and fixing errors (called "bugs") in your code. Even experienced programmers write code that doesn't work perfectly the first time, so debugging is an essential skill for every programmer.
 
@@ -751,9 +748,6 @@ debugging_checklist()
 ```
 
 
-!!! see-also "See Also"
-    For related concepts, see [1.2 Tools and collaboration (IDE + Git)]../../Chapter-01-Software-Development-Steps/Section-02-Tools-and-Collaboration/index.md), and [4.6 Designing Suitable Test Data](../Section-06-Designing-Suitable-Test-Data/index.md).
-
 ## Summary
 
 Debugging is a systematic process that requires patience and the right tools:
@@ -796,6 +790,9 @@ Debugging is a systematic process that requires patience and the right tools:
 
 Remember: debugging is a skill that improves with practice. Every bug you fix makes you a better programmer!
 
----
 
-**Cross-reference**: This section uses subprogram concepts from [Chapter 2 Section 5](../../Chapter-02-Designing-Algorithms/Section-05-Subprograms-Procedures-and-Functions/index.md) and control structures from [Section 4.1](../Section-01-Control-Structures-in-Python/index.md). Next, we'll learn about designing test data in [Section 4.6](../Section-06-Designing-Suitable-Test-Data/index.md) to prevent bugs before they happen.
+
+
+
+
+

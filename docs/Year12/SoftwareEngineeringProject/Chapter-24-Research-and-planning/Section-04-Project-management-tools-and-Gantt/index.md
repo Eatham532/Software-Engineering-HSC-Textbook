@@ -4,9 +4,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [24.3 WAgile hybrid approach](../Section-03-WAgile-hybrid-approach/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -1543,3 +1540,10 @@ This section explored project management tools and techniques essential for soft
 - **Integration considerations**: Ensuring tools work well with existing systems and processes
 
 **Next Steps**: In Section 24.5, we'll explore social, ethical, and communication issues that are crucial for successful stakeholder engagement and project governance.
+
+
+
+
+
+
+

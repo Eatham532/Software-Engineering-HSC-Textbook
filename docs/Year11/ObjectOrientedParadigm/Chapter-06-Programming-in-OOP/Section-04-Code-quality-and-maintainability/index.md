@@ -680,9 +680,6 @@ Review your solution to Exercise 2 using the practical code quality checklist. I
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md) will build on these concepts.
-
 ## Section Recap
 
 In this section, you learned essential code quality and maintainability principles:

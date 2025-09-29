@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [10.3 Integrating sensors and actuators](../Section-03-Integrating-sensors-and-actuators/index.md).
-
 
 When you build a mechatronic system, the user interface is how people interact with and understand your device. A well-designed interface can make the difference between a system that's easy to use and one that's confusing or even dangerous.
 
@@ -1240,10 +1237,9 @@ In this section, you learned about creating effective user interfaces for mechat
 
 In the next section, we'll explore how to test these interfaces and the systems they control.
 
-**See also:**
 
-- Section 8.1: Working with device data and diagnostics
 
-- Section 9.2: Autonomous control features
 
-- Section 10.5: Unit tests for subsystems
+
+
+

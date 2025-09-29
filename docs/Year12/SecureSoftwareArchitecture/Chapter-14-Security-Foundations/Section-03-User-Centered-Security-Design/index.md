@@ -563,9 +563,6 @@ Design a user testing protocol for a new two-factor authentication system for an
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [14.1 The Business Case for Security](../Section-01-The-Business-Case-for-Security/index.md) will build on these concepts.
-
 ## Summary
 
 **User-centered security design transforms security from a barrier into an enabler:**
@@ -614,8 +611,4 @@ Design a user testing protocol for a new two-factor authentication system for an
 
 Security that users understand, trust, and find helpful creates stronger protection than complex security that users avoid or circumvent. The most secure system is one that users actively want to use correctly.
 
-!!! tip "Cross-reference"
-    This user-centered foundation completes Chapter 14's security design principles and prepares you for implementing core security controls in Chapter 15.
 
-!!! tip "Next Section"
-    In Chapter 15, we'll dive into the fundamental security principles (CIA Triad & AAA) that form the foundation of all security implementations.

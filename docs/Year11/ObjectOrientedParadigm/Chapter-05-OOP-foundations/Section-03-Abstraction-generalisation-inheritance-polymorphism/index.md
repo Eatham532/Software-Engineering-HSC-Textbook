@@ -2,9 +2,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [5.2 Encapsulation and state](../Section-02-Encapsulation-and-state/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -548,9 +545,6 @@ for appliance in appliances:
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [5.4 Comparing procedural and OOP](../Section-04-Comparing-procedural-and-OOP/index.md) will build on these concepts.
-
 ## Recap
 
 - **Abstraction** hides complexity and exposes only essential features through simple interfaces
@@ -566,3 +560,10 @@ for appliance in appliances:
 - These concepts work together to create flexible, maintainable, and reusable code
 
 These four pillars of object-oriented programming provide powerful tools for managing complexity, promoting code reuse, and creating systems that are easy to extend and maintain. Understanding how they work together is essential for effective object-oriented design.
+
+
+
+
+
+
+

@@ -11,9 +11,6 @@
 
 ## Introduction
 
-!!! builds-on "Builds on"
-    This section builds on [17.1 Secure API Design](../Section-01-Secure-API-Design/index.md).
-
 
 **Secure execution** means protecting your application's runtime environment from attacks that could compromise system resources, crash your application, or expose sensitive information. This involves managing memory safely, preventing resource exhaustion, securing file operations, and handling errors gracefully.
 
@@ -877,6 +874,9 @@ if __name__ == "__main__":
 
 5. **User Experience**: Balance security with usability - security that's too restrictive will be bypassed
 
----
 
-**Cross-reference**: This section builds on the API security concepts from [Section 17.1](../Section-01-Secure-API-Design/index.md) and completes the system security coverage. These resource management techniques are essential for the security testing discussed in Chapter 18.
+
+
+
+
+

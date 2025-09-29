@@ -4,9 +4,6 @@
 
 ## Introduction
 
-!!! builds-on "Builds on"
-    This section builds on [21.1 Regression models and core algorithm types in Python](../Section-01-Regression-models-and-core-algorithm-types-in-Python/index.md).
-
 
 Neural networks form the foundation of modern AI systems by mimicking how biological neurons process information. This section implements neural networks from scratch, starting with the simple perceptron and progressing to multi-layer perceptrons (MLPs) with backpropagation training.
 
@@ -1722,3 +1719,10 @@ if __name__ == "__main__":
     all_results = run_all_neural_network_demonstrations()
  
  
+
+
+
+
+
+
+

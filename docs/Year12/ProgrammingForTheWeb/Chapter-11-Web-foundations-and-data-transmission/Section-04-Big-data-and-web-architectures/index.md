@@ -2,9 +2,6 @@
 
 ## Why it matters
 
-!!! builds-on "Builds on"
-    This section builds on [11.3 Web protocols, ports and secure transport concepts](../Section-03-Web-protocols-ports-and-secure-transport-concepts/index.md).
-
 
 Modern web applications handle massive amounts of data and serve millions of users. Understanding how to extract insights from data and design scalable architectures helps you build systems that can grow from handling dozens to millions of users without falling over.
 
@@ -852,3 +849,10 @@ Modern web applications must handle big data challenges and choose appropriate a
 - Development speed vs operational complexity trade-offs
 
 Understanding these concepts helps you make informed decisions about how to structure applications that can grow from serving hundreds to millions of users.
+
+
+
+
+
+
+

@@ -761,9 +761,6 @@ For a simple gradebook application, write acceptance criteria and corresponding 
 ///
 
 
-!!! next-up "Coming Up"
-    Next: [6.1 Building classes and composition](../Section-01-Building-classes-and-composition/index.md) will build on these concepts.
-
 ## Section Recap
 
 In this section, you learned about comprehensive testing strategies for object-oriented programs:

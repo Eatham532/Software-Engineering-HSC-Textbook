@@ -2,9 +2,6 @@
 
 ## Why Understanding Automation Approaches Matters
 
-!!! builds-on "Builds on"
-    This section builds on [20.4 Design models: decision trees and neural networks](../Section-04-Design-models-decision-trees-and-neural-networks/index.md).
-
 
 Robotic Process Automation (RPA) and Business Process Automation (BPA) represent different but complementary approaches to workplace automation. Understanding their practical applications, constraints, and ethical implications is crucial for:
 
@@ -3741,3 +3738,10 @@ c) How does the salt contribute to security?
 - **Training Programs**: Coursera/edX automation and digital transformation courses
 
 - **Professional Organizations**: Association for Intelligent Information Management (AIIM)
+
+
+
+
+
+
+

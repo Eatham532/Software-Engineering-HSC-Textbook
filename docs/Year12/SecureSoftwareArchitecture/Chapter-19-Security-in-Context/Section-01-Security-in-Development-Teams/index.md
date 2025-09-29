@@ -1482,7 +1482,3 @@ class DevSecOpsVelocityOptimizer:
 - **Documentation**: Maintain living security documentation that supports daily decisions
 
 - **Velocity Balance**: Use automation and good processes to make security an enabler, not a blocker
-
----
-
-**Cross-reference**: This section introduces security practices that will be further explored in enterprise contexts in [Section 19.2](../Section-02-Enterprise-Security-Benefits/index.md) and builds on the testing methodologies from [Chapter 18](../../Chapter-18-Security-Testing-and-Vulnerabilities/Section-01-Security-Testing-Fundamentals/index.md).

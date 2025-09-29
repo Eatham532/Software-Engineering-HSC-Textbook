@@ -12,9 +12,6 @@ Remember the three fundamental control structures:
 
 - **Iteration**: Repeating instructions with loops
 
-!!! builds-on "Builds on"
-    This section implements the algorithmic concepts from [Section 2.1 Control structures](../../Chapter-02-Designing-Algorithms/Section-01-Control-Structures/index.md) using Python syntax and the data types from [Section 3.2](../../Chapter-03-Data-for-software-engineering/Section-02-Standard-Data-Types/index.md).
-
 ## Sequence (Sequential Execution)
 
 ### What It Is
@@ -957,5 +954,9 @@ Key points to remember:
 
 ---
 
-!!! next-up "Coming next"
-    In [Section 4.2](../Section-02-Data-Structures-in-Python/index.md) we'll implement the data structures from [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md) using these control structures.
+
+
+
+
+
+

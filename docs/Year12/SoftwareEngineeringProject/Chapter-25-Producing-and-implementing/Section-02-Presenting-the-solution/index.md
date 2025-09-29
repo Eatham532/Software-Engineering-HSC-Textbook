@@ -4,9 +4,6 @@
 
 ## Learning objectives
 
-!!! builds-on "Builds on"
-    This section builds on [25.1 Building the solution](../Section-01-Building-the-solution/index.md).
-
 
 By the end of this section, you will be able to:
 
@@ -1701,3 +1698,10 @@ In this section, you learned how to create compelling presentations for software
 - Prepare for different types of questions and objections from various stakeholder groups
 
 Effective solution presentations combine thorough preparation, audience-centered content, and engaging delivery to transform technical solutions into compelling business cases that stakeholders can understand, evaluate, and act upon confidently.
+
+
+
+
+
+
+
