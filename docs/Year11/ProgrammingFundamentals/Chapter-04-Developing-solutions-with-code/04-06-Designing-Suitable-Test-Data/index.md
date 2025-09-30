@@ -2,7 +2,6 @@
 
 ## What is Test Data?
 
-
 **Test data** is the input you use to check whether your program works correctly. Good test data helps you find bugs before your users do and ensures your program handles all possible situations properly.
 
 Think of test data like quality control in manufacturing - you wouldn't sell a product without testing it first. The same principle applies to software: you need to test your code with carefully chosen inputs to make sure it works correctly.
