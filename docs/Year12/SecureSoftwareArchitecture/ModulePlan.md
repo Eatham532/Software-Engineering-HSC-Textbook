@@ -411,7 +411,6 @@
 ### **Example Section Structure**
 
 ```markdown
-# 2.3 Input Validation & Sanitization
 
 ## Why It Matters
 
@@ -454,7 +453,7 @@ def validate_email(email):
 
 Key takeaways and best practices
 
-```
+```text
 
 ### **Folder Organization**
 
