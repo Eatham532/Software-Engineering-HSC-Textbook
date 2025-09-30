@@ -46,7 +46,7 @@ When analyzing an algorithm, follow this systematic approach:
 
 Let's analyze this complete algorithm step by step:
 
-```text
+```
 
 ALGORITHM StudentCourseManagement
 BEGIN
@@ -160,7 +160,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ## Step 1: Identify Inputs and Outputs
 
@@ -280,7 +280,7 @@ main --> [ProcessEnrollment()]
 [ProcessEnrollment()] --> [SendEnrollmentNotification()]
 @enduml
 
-```text
+```
 
 ### Functions vs Procedures Classification
 
@@ -422,13 +422,13 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ## Step 6: Identify Design Patterns
 
 ### Input Validation Pattern
 
-```text
+```
 FUNCTION GetStudentID()
 BEGIN
     OUTPUT "Enter student ID: "
@@ -440,14 +440,14 @@ BEGIN
     RETURN id
 END
 
-```text
+```
 
 **Pattern:** Keep asking until valid input is received
 **Benefits:** Ensures data quality, prevents crashes from bad input
 
 ### Multi-Condition Validation Pattern
 
-```text
+```
 FUNCTION CheckEnrollmentEligibility(studentID, courseCode)
 BEGIN
     SET hasPrerequisites = CheckPrerequisites(studentID, courseCode)
@@ -458,14 +458,14 @@ BEGIN
     RETURN hasPrerequisites AND hasCapacity AND noConflicts AND notAlreadyEnrolled
 END
 
-```text
+```
 
 **Pattern:** Break complex conditions into readable boolean variables
 **Benefits:** Easier to understand, debug, and modify
 
 ### Error Handling with Specific Messages Pattern
 
-```text
+```
 FUNCTION GetEnrollmentBlockReason(studentID, courseCode)
 BEGIN
     IF NOT CheckPrerequisites(studentID, courseCode) THEN
@@ -475,7 +475,7 @@ BEGIN
     // ... more specific checks
 END
 
-```text
+```
 
 **Pattern:** Provide specific error messages for different failure conditions
 **Benefits:** Users understand exactly what went wrong and how to fix it
@@ -484,7 +484,7 @@ END
 
 Analyze this algorithm following the systematic approach:
 
-```text
+```
 ALGORITHM LibraryBookReservation
 BEGIN
     SET choice = GetUserChoice()
@@ -534,7 +534,7 @@ BEGIN
     RETURN reservationID
 END
 
-```text
+```
 
 ### Your Analysis Tasks:
 
@@ -637,7 +637,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ### Challenge 2: Many Subprograms
 

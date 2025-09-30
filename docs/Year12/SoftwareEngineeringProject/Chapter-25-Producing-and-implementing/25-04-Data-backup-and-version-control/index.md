@@ -96,7 +96,7 @@ print(f"Total commits: {len(project_vc.commits)}")
 print(f"Branches: {list(project_vc.branches.keys())}")
 print(f"Tags: {list(project_vc.tags.keys())}")
 
-```text
+```
 
 ### Branching strategies
 
@@ -208,7 +208,7 @@ print(f"Feature branch result: {feature_result}")
 merge_request = branch_mgr.prepare_merge_request("feature/user-dashboard", "develop")
 print(f"Merge request: {merge_request}")
 
-```text
+```
 
 ### Tagging and release management
 
@@ -313,7 +313,7 @@ print(f"Release plan: {release_plan}")
 tag_info = release_mgr.create_release_tag("1.1.0", "xyz789", "Added user profiles and grade export")
 print(f"Release tag created: {tag_info}")
 
-```text
+```
 
 ### Data backup strategies
 
@@ -372,7 +372,7 @@ tags --> backup
 
 @enduml
 
-```text
+```
 
 ### Release hygiene practices
 
@@ -479,7 +479,7 @@ if readiness["ready_for_release"]:
     report = hygiene_checker.generate_release_report("1.1.0", artifacts)
     print(f"Release report generated for version {report['version']}")
 
-```text
+```
 
 ### Guided example: Setting up version control for a school project
 
@@ -516,7 +516,7 @@ def setup_git_repository(project_name):
     }
     return repo_config
 
-```text
+```
 
 **Step 2: Branching strategy implementation**
 
@@ -547,7 +547,7 @@ branching_workflow = {
     }
 }
 
-```text
+```
 
 **Step 3: Backup and release process**
 
@@ -572,7 +572,7 @@ def create_backup_strategy():
         }
     }
 
-```text
+```
 
 ## Practice
 

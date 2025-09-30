@@ -70,7 +70,7 @@ Gateway -> Client: API Response
 
 @enduml
 
-```text
+```
 
 ### 1. API Keys
 
@@ -243,7 +243,7 @@ def api_key_authentication_example():
 if __name__ == "__main__":
     api_key_authentication_example()
 
-```text
+```
 
 #### API Key Security Best Practices
 
@@ -316,7 +316,7 @@ class SecureAPIKeyValidator:
         self.blocked_ips.add(client_ip)
         print(f"Blocked IP {client_ip} due to suspicious activity")
 
-```text
+```
 
 ### 2. JSON Web Tokens (JWT)
 
@@ -486,7 +486,7 @@ def jwt_authentication_example():
 if __name__ == "__main__":
     jwt_authentication_example()
 
-```text
+```
 
 ### 3. OAuth 2.0 Flow Implementation
 
@@ -659,7 +659,7 @@ def oauth_authentication_example():
 if __name__ == "__main__":
     oauth_authentication_example()
 
-```text
+```
 
 ## Rate Limiting and DoS Protection
 
@@ -948,7 +948,7 @@ def rate_limiting_example():
 if __name__ == "__main__":
     rate_limiting_example()
 
-```text
+```
 
 ## Secure Session Management
 
@@ -986,7 +986,7 @@ note over Gateway: - CSRF Protection\n- Secure Cookies\n- Session Rotation\n- Ti
 
 @enduml
 
-```text
+```
 
 ### Comprehensive Session Manager Implementation
 
@@ -1383,7 +1383,7 @@ def session_management_example():
 if __name__ == "__main__":
     session_management_example()
 
-```text
+```
 
 ## CORS and Cross-Origin Security
 
@@ -1424,7 +1424,7 @@ end
 
 @enduml
 
-```text
+```
 
 ### Comprehensive CORS Implementation
 
@@ -1774,7 +1774,7 @@ def cors_security_example():
 if __name__ == "__main__":
     cors_security_example()
 
-```text
+```
 
 ## API Security Testing
 
@@ -1820,7 +1820,7 @@ stop
 
 @enduml
 
-```text
+```
 
 ### Automated Security Testing Framework
 
@@ -2626,7 +2626,7 @@ def security_testing_example():
 if __name__ == "__main__":
     security_testing_example()
 
-```text
+```
 
 ## Building a Complete Secure REST API
 
@@ -2683,7 +2683,7 @@ Validator --> [File Controller]
 
 @enduml
 
-```text
+```
 
 ### Complete Secure API Implementation
 
@@ -3500,7 +3500,7 @@ def api_demonstration():
 if __name__ == "__main__":
     api_demonstration()
 
-```text
+```
 
 ## Summary and Best Practices
 
@@ -3731,7 +3731,7 @@ class SecureRegistration:
     def verify_email_token(self, token: str) -> bool
     def register_user(self, user_data: dict) -> dict
 
-```text
+```
 
 ### Exercise 2: API Rate Limiter
 
@@ -3754,7 +3754,7 @@ class AdvancedRateLimiter:
     def reset_rate_limit(self, identifier: str)
     def get_rate_limit_status(self, identifier: str) -> dict
 
-```text
+```
 
 ### Exercise 3: CORS Security Manager
 
@@ -3777,7 +3777,7 @@ class EnhancedCORSManager:
     def handle_preflight(self, request_data: dict) -> dict
     def update_policy(self, name: str, updates: dict) -> bool
 
-```text
+```
 
 ### Exercise 4: Security Testing Suite
 
@@ -3802,7 +3802,7 @@ class SecurityTestSuite:
     def test_input_validation(self, endpoints: List[str]) -> dict
     def generate_security_report(self) -> dict
 
-```text
+```
 
 ///
 

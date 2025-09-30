@@ -88,7 +88,7 @@ end note
 
 @enduml
 
-```text
+```
 
 ---
 
@@ -398,7 +398,7 @@ def demonstrate_safety_assessment():
 if __name__ == "__main__":
     safety_results = demonstrate_safety_assessment()
 
-```text
+```
 
 ---
 
@@ -845,7 +845,7 @@ def demonstrate_accessibility_assessment():
 if __name__ == "__main__":
     accessibility_results = demonstrate_accessibility_assessment()
 
-```text
+```
 
 ---
 
@@ -1100,7 +1100,7 @@ def demonstrate_employment_assessment():
 if __name__ == "__main__":
     employment_results = demonstrate_employment_assessment()
 
-```text
+```
 
 ---
 
@@ -1516,7 +1516,7 @@ def demonstrate_environmental_assessment():
 if __name__ == "__main__":
     environmental_results = demonstrate_environmental_assessment()
 
-```text
+```
 
 ---
 
@@ -1905,7 +1905,7 @@ def demonstrate_comprehensive_economic_assessment():
 if __name__ == "__main__":
     comprehensive_results = demonstrate_comprehensive_economic_assessment()
 
-```text
+```
 
 ---
 

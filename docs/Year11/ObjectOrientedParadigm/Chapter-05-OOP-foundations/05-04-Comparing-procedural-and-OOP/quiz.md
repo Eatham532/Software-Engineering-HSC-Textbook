@@ -24,7 +24,7 @@
 
         def calculate_perimeter(length, width):
             return 2 * (length + width)
-        ```text
+        ```
 
         - Object-oriented programming
         - Procedural programming { data-correct }
@@ -83,7 +83,7 @@
 
             def add_grade(self, grade):
                 self.grades.append(grade)
-        ```text
+        ```
 
         - Functions operating on separate data
         - Data and methods bundled together { data-correct }

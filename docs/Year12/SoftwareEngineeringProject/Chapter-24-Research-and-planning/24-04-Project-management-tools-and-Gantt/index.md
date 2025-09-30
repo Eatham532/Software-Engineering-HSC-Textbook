@@ -373,7 +373,7 @@ def demonstrate_wbs():
 if __name__ == "__main__":
     wbs_demo = demonstrate_wbs()
 
-```text
+```
 
 ---
 
@@ -423,7 +423,7 @@ printscale weekly
 [User Acceptance Testing] starts at [Integration Testing]'s end and requires 2 weeks
 @endgantt
 
-```text
+```
 
 ```python
 class GanttChart:
@@ -760,7 +760,7 @@ def demonstrate_gantt_chart():
 if __name__ == "__main__":
     gantt_demo = demonstrate_gantt_chart()
 
-```text
+```
 
 ---
 
@@ -1152,7 +1152,7 @@ def demonstrate_project_tracking():
 if __name__ == "__main__":
     tracking_demo = demonstrate_project_tracking()
 
-```text
+```
 
 ---
 
@@ -1402,7 +1402,7 @@ def demonstrate_tool_evaluation():
 if __name__ == "__main__":
     tool_evaluator = demonstrate_tool_evaluation()
 
-```text
+```
 
 ---
 
@@ -1489,7 +1489,7 @@ def complete_project_management_analysis(project_name):
         'tool_evaluation': evaluator
     }
 
-```text
+```
 
 Use this template to ensure comprehensive coverage of all project management aspects.
 ///

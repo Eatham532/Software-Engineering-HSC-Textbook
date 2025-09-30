@@ -79,7 +79,7 @@ heater.set_target(25)
 heater.start_heating()
 print(f"Status: {heater.get_status()}")
 
-```text
+```
 
 ```kroki-plantuml
 @startuml
@@ -103,7 +103,7 @@ rectangle "Example: Microwave" {
 }
 @enduml
 
-```text
+```
 
 ### Closed loop systems
 
@@ -210,7 +210,7 @@ class ClosedLoopHeater:
 heater = ClosedLoopHeater()
 heater.run_cycle(target=25)
 
-```text
+```
 
 ```kroki-plantuml
 @startuml
@@ -240,7 +240,7 @@ rectangle "Example: Thermostat" {
 }
 @enduml
 
-```text
+```
 
 ### Feedback concepts
 
@@ -303,7 +303,7 @@ class FeedbackDemo:
 demo = FeedbackDemo()
 demo.demonstrate_feedback_types()
 
-```text
+```
 
 #### Feedback loops in mechatronic systems
 
@@ -386,7 +386,7 @@ class RobotArmJoint:
 joint = RobotArmJoint()
 joint.move_to(45)
 
-```text
+```
 
 ### Stability concepts
 
@@ -486,7 +486,7 @@ class StabilityDemo:
 demo = StabilityDemo()
 demo.analyze_stability()
 
-```text
+```
 
 ```kroki-plantuml
 @startuml
@@ -524,7 +524,7 @@ rectangle "System Stability Factors" {
 note bottom : Balance between performance\nand stability is key
 @enduml
 
-```text
+```
 
 ### Guided example
 
@@ -666,7 +666,7 @@ car2.set_cruise_speed(80)
 print("\nClosed Loop Control:")
 car2.simulate_drive(duration=10, hill_grade=0.5)  # Same uphill
 
-```text
+```
 
 ## Try it
 
@@ -774,7 +774,7 @@ for step in range(15):
           f"Pump={tank.pump_active}, Drain={tank.drain_active}, "
           f"Status={status}")
 
-```text
+```
 
 ///
 ///
@@ -834,7 +834,7 @@ for gain in gains:
     print(f"Gain {gain}: Final={final_temp:.1f}°C, "
           f"Overshoot={overshoot:.1f}°C")
 
-```text
+```
 
 **Observations:**
 

@@ -195,7 +195,7 @@ def demo_abstractions():
 
 demo_abstractions()
 
-```text
+```
 
 ```kroki-plantuml
 @startuml
@@ -261,7 +261,7 @@ note top of Sensor : Abstract interface ensures\nall sensors work the same way
 note top of Actuator : Abstract interface ensures\nall actuators work the same way
 @enduml
 
-```text
+```
 
 ### Device managers
 
@@ -393,7 +393,7 @@ def demo_device_manager():
 
 demo_device_manager()
 
-```text
+```
 
 ### Test harnesses
 
@@ -629,7 +629,7 @@ def demo_test_harness():
 
 demo_test_harness()
 
-```text
+```
 
 ```kroki-plantuml
 @startuml
@@ -689,7 +689,7 @@ note top of TestHarness : Enables testing without\nphysical hardware
 note bottom of "Production Environment" : Same interfaces work\nwith real devices
 @enduml
 
-```text
+```
 
 ### Guided example
 
@@ -882,7 +882,7 @@ def demo_environmental_system():
 
 demo_environmental_system()
 
-```text
+```
 
 ## Try it
 
@@ -952,7 +952,7 @@ class LEDActuator(Actuator):
     def get_brightness(self) -> float:
         return self.brightness
 
-```text
+```
 
 ///
 ///
@@ -1054,7 +1054,7 @@ def test_line_following():
 
 test_line_following()
 
-```text
+```
 
 ///
 ///
@@ -1151,7 +1151,7 @@ def test_enhanced_safety():
 
 test_enhanced_safety()
 
-```text
+```
 
 ///
 ///

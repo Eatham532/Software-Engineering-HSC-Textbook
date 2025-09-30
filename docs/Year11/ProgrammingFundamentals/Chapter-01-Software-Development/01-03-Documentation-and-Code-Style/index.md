@@ -71,7 +71,7 @@ Your average: 85.0 (Grade: B)
 - main.py - Main program
 - grade_calculator.py - Grade calculation functions
 
-```text
+```
 
 ///
 
@@ -107,7 +107,7 @@ def get_letter_grade(average):
     else:
         return "F"
 
-```text
+```
 
 ### Strategic inline comments
 
@@ -127,7 +127,7 @@ if not grades:
 if average >= 90:
     return "A"
 
-```text
+```
 
 **Avoid obvious comments**:
 
@@ -142,7 +142,7 @@ total = 0
 for grade in grades:
     total += grade
 
-```text
+```
 
 ## Python naming conventions (PEP 8 basics)
 
@@ -165,7 +165,7 @@ sc = 25  # What does 'sc' mean?
 fg = calc_avg(m, f, h)  # Cryptic abbreviations
 ma = 3
 
-```text
+```
 
 ### Constants and imports
 
@@ -186,7 +186,7 @@ def validate_grade(grade):
     """Ensure grade falls within acceptable range."""
     return MIN_GRADE <= grade <= MAX_GRADE
 
-```text
+```
 
 ### Whitespace and formatting
 
@@ -214,7 +214,7 @@ def process_student_grades():
     print(f"Average: {average}")
     print(f"Letter grade: {letter_grade}")
 
-```text
+```
 
 ## Worked example
 
@@ -296,7 +296,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-```text
+```
 
 ### What this example demonstrates
 
@@ -370,7 +370,7 @@ Enter temperature in Celsius: 25
 ## Files
 - temp_converter.py - Main program with conversion functions
 
-```text
+```
 
 ///
 ///
@@ -386,7 +386,7 @@ def calculate_compound_interest(principal, rate, time, compounds_per_year):
     amount = principal * (1 + rate/compounds_per_year) ** (compounds_per_year * time)
     return round(amount - principal, 2)
 
-```text
+```
 
 /// details | Sample Solution
     type: success
@@ -411,7 +411,7 @@ def calculate_compound_interest(principal, rate, time, compounds_per_year):
     amount = principal * (1 + rate/compounds_per_year) ** (compounds_per_year * time)
     return round(amount - principal, 2)
 
-```text
+```
 
 ///
 ///
@@ -434,7 +434,7 @@ def calc(x,y,z):
         g="F"
     return r,g
 
-```text
+```
 
 /// details | Sample Solution
     type: success
@@ -456,7 +456,7 @@ def calculate_grade_average(test1_score, test2_score, test3_score):
         
     return average, letter_grade
 
-```text
+```
 
 ///
 ///

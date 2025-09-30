@@ -37,7 +37,7 @@ note right of css : Visual presentation
 note right of js : Interactive features
 @enduml
 
-```text
+```
 
 ### Server-side (back-end) web programming
 
@@ -73,7 +73,7 @@ def get_user(user_id):
 if __name__ == '__main__':
     app.run(debug=True)
 
-```text
+```
 
 ### Database interfaces
 
@@ -115,7 +115,7 @@ def get_user_orders(user_id):
     conn.close()
     return results
 
-```text
+```
 
 ### Middleware, APIs, and third-party services
 
@@ -149,7 +149,7 @@ Server -> Client : Success response
 Client -> User : Show confirmation
 @enduml
 
-```text
+```
 
 /// details | Building a simple web system
     type: info
@@ -205,7 +205,7 @@ def create_order():
     
     return jsonify({'message': 'Order created successfully', 'order_id': 12345})
 
-```text
+```
 
 The client-side JavaScript would then make requests to these endpoints:
 
@@ -225,7 +225,7 @@ async function loadBook(bookId) {
     }
 }
 
-```text
+```
 
 ///
 

@@ -48,7 +48,7 @@ class Student {
 }
 @enduml
 
-```text
+```
 
 ### Showing relationships between classes
 
@@ -94,7 +94,7 @@ Course }o--|| Teacher : "taught by"
 Course }o--o{ Student : "enrolled in"
 @enduml
 
-```text
+```
 
 This diagram shows:
 
@@ -143,7 +143,7 @@ class ElectricCar extends Car {
 }
 @enduml
 
-```text
+```
 
 ## Structure charts
 
@@ -153,7 +153,7 @@ class ElectricCar extends Car {
 
 For a simple library management system:
 
-```text
+```
 Library Management System
 ├── User Management
 │   ├── Add Member
@@ -168,7 +168,7 @@ Library Management System
     ├── Return Book
     └── Calculate Fines
 
-```text
+```
 
 ### Structure chart with data flow
 
@@ -189,7 +189,7 @@ main --> update : "student record"
 main --> confirm : "enrollment details"
 @enduml
 
-```text
+```
 
 ### When to use structure charts
 
@@ -243,7 +243,7 @@ process3 --> student : "confirmation"
 teacher --> process3 : "approval"
 @enduml
 
-```text
+```
 
 ### DFD levels
 
@@ -265,7 +265,7 @@ admin --> system : "new book details"
 system --> admin : "inventory report"
 @enduml
 
-```text
+```
 
 **Level 1**: Breaks down the main system into major processes
 
@@ -291,7 +291,7 @@ p3 --> db1 : "book data"
 p3 --> db2 : "user data"
 @enduml
 
-```text
+```
 
 ## How the three techniques complement each other
 
@@ -342,11 +342,11 @@ ShoppingCart }o--o{ Product : "contains"
 Order }o--o{ Product : "includes"
 @enduml
 
-```text
+```
 
 **2. Structure Chart** - Shows functional decomposition:
 
-```text
+```
 Online Shopping System
 ├── Customer Management
 │   ├── Register Customer
@@ -365,7 +365,7 @@ Online Shopping System
     ├── Update Inventory
     └── Generate Invoice
 
-```text
+```
 
 **3. Data Flow Diagram** - Shows data movement:
 
@@ -393,7 +393,7 @@ p1 --> payment : "payment request"
 payment --> p1 : "payment confirmation"
 @enduml
 
-```text
+```
 
 ### When to use each diagram
 
@@ -473,7 +473,7 @@ Post ||--o{ Comment : "has"
 Category ||--o{ Post : "contains"
 @enduml
 
-```text
+```
 
 ///
 ///
@@ -498,7 +498,7 @@ Create a structure chart for a student grade management system that:
     type: success
     open: false
 
-```text
+```
 Student Grade Management System
 ├── Grade Input Management
 │   ├── Validate Teacher Login
@@ -521,7 +521,7 @@ Student Grade Management System
     ├── Send Email to Parents
     └── Log Notification Sent
 
-```text
+```
 
 ///
 ///
@@ -586,7 +586,7 @@ p5 --> db2 : "transaction record"
 db2 --> bank : "audit trail"
 @enduml
 
-```text
+```
 
 ///
 ///

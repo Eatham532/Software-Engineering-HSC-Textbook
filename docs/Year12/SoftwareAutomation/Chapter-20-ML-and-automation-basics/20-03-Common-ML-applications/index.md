@@ -358,7 +358,7 @@ def demonstrate_data_analysis_ml():
 if __name__ == "__main__":
     demo_analyzer, analysis_report = demonstrate_data_analysis_ml()
 
-```text
+```
 
 ---
 
@@ -719,12 +719,12 @@ def demonstrate_forecasting_ml():
 if __name__ == "__main__":
     demo_forecaster, forecasts = demonstrate_forecasting_ml()
 
-```text
+```
 
 if __name__ == "__main__":
     demo_forecaster, forecasts = demonstrate_forecasting_ml()
 
-```text
+```
 
 ---
 
@@ -1276,7 +1276,7 @@ def demonstrate_intelligent_assistant():
 if __name__ == "__main__":
     demo_assistant = demonstrate_intelligent_assistant()
 
-```text
+```
 
 ---
 
@@ -1889,7 +1889,7 @@ def demonstrate_image_recognition():
 if __name__ == "__main__":
     demo_ocr, demo_classifier = demonstrate_image_recognition()
 
-```text
+```
 
 ---
 

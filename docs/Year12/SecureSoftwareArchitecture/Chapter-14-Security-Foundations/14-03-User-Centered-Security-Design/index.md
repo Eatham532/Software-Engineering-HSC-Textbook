@@ -302,7 +302,7 @@ class ProgressiveAuth:
             'security_tips': self.get_contextual_tips(user_session)
         }
 
-```text
+```
 
 ### User Testing Results and Iterations
 

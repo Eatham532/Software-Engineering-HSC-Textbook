@@ -146,7 +146,7 @@ print(validate_student_data("", 17, 87.5, True))
 print(validate_student_data("Sarah Johnson", 30, 87.5, True))
 # Output: (False, 'Age must be between 16 and 25')
 
-```text
+```
 
 ## Real-World Example: E-commerce Product
 
@@ -183,7 +183,7 @@ print(validate_product_id("PRD00123"))  # True
 print(validate_product_id("ABC00123"))  # False
 print(validate_product_id("PRD123"))    # False
 
-```text
+```
 
 ### Conditional Constraints
 
@@ -196,7 +196,7 @@ def validate_stock_rules(in_stock, stock_quantity):
         return False, "In-stock items must have quantity > 0"
     return True, "Stock rules valid"
 
-```text
+```
 
 ## Data Dictionary vs Database Schema
 

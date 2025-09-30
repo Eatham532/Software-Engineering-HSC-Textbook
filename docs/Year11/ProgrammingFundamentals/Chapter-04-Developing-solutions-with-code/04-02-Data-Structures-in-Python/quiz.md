@@ -41,7 +41,7 @@
 
         ```python
         tree = {"name": "root", "children": [{"name": "child1", "children": []}]}
-        ```text
+        ```
 
         - Creates a 2D array
         - Creates a simple tree structure using nested dictionaries { data-correct }

@@ -11,7 +11,7 @@
 
     1. Complete this pseudocode to calculate the area of a rectangle:
 
-        ```text
+        ```
         ALGORITHM CalculateRectangleArea
         BEGIN
             INPUT length
@@ -19,7 +19,7 @@
             _______________
             OUTPUT area
         END
-        ```text
+        ```
 
         - area = length * width
         - SET area = length * width { data-correct }
@@ -42,9 +42,9 @@
 
     1. What's wrong with this pseudocode?
 
-        ```text
+        ```
         IF score>=90 THEN grade="A" ELSE IF score>=80 THEN grade="B" END IF
-        ```text
+        ```
 
         - Missing SET keywords
         - Poor formatting and indentation
@@ -53,7 +53,7 @@
 
     1. Complete this pseudocode for counting from 1 to 10:
 
-        ```text
+        ```
         ALGORITHM CountToTen
         BEGIN
             SET count = 1
@@ -62,7 +62,7 @@
                 SET count = count + 1
             ________________
         END
-        ```text
+        ```
 
         - WHILE count <= 10 DO ... END WHILE { data-correct }
         - FOR count = 1 TO 10 DO ... END FOR
@@ -113,7 +113,7 @@
           :OUTPUT "Invalid credentials";
         endif
         stop
-        ```text
+        ```
 
         - username = "admin" AND password = "secret" { data-correct }
         - credentials valid

@@ -18,7 +18,7 @@
             B -->|No| D[Open windows]
             C --> E[End]
             D --> E
-        ```text
+        ```
 
         - Sequence
         - Selection (IF-THEN-ELSE) { data-correct }
@@ -34,7 +34,7 @@
 
     1. Trace through this algorithm with input numbers 8, 3, 12. What will be the final value of 'result'?
 
-        ```text
+        ```
         ALGORITHM Mystery
         BEGIN
             INPUT a, b, c
@@ -50,7 +50,7 @@
 
             OUTPUT result
         END
-        ```text
+        ```
 
         - 8
         - 3
@@ -59,13 +59,13 @@
 
     1. What will this loop output?
 
-        ```text
+        ```
         SET counter = 1
         WHILE counter <= 3 DO
             OUTPUT counter * 2
             SET counter = counter + 1
         END WHILE
-        ```text
+        ```
 
         - 1, 2, 3
         - 2, 4, 6 { data-correct }
@@ -82,7 +82,7 @@
             D --> E[count = count + 1]
             E --> C
             C -->|No| F[End]
-        ```text
+        ```
 
         - Sequence
         - Selection (IF-THEN-ELSE)

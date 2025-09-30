@@ -40,7 +40,7 @@ note right of [Controller] : Error calculation\nControl algorithm\nOutput limiti
 note bottom of [Process] : The physical system\nbeing controlled
 @enduml
 
-```text
+```
 
 ### Proportional control
 
@@ -84,7 +84,7 @@ for step in range(5):
     
     print(f"Step {step+1}: Temp={current_temp:.1f}°C, Error={setpoint-current_temp:.1f}, Power={heater_power:.1f}%")
 
-```text
+```
 
 ### PID control
 
@@ -186,7 +186,7 @@ for step in range(10):
     
     time.sleep(0.1)  # Simulate time step
 
-```text
+```
 
 ### Guided example
 
@@ -235,7 +235,7 @@ RobotArmController --> ServoMotor
 RobotArmController ..> Disturbance : affected by
 @enduml
 
-```text
+```
 
 ```python
 import math
@@ -401,7 +401,7 @@ if __name__ == "__main__":
     print(f"Maximum overshoot: {metrics['max_overshoot']:.2f}°")
     print(f"Settling time: {metrics['settling_time']:.2f}s" if metrics['settling_time'] else "Did not settle")
 
-```text
+```
 
 ### Structured parameter management
 
@@ -538,7 +538,7 @@ adaptive_controller.run_control_loop(duration_seconds=2)
 # Optimize based on performance
 adaptive_controller.optimize_performance()
 
-```text
+```
 
 ## Try it
 
@@ -589,7 +589,7 @@ for kp in [0.5, 2.0, 5.0]:
             print(f"Target reached in {step+1} steps")
             break
 
-```text
+```
 
 **Analysis**: Lower Kp (0.5) responds slowly but stably. Higher Kp (5.0) responds quickly but may overshoot. Kp=2.0 provides a good balance.
 ///
@@ -635,7 +635,7 @@ controller = PIDController(
     output_max=100
 )
 
-```text
+```
 
 **Reasoning**:
 
@@ -703,7 +703,7 @@ def debug_pid_output(self, setpoint, measured_value):
         
     return output
 
-```text
+```
 
 ///
 ///

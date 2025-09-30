@@ -40,7 +40,7 @@ rect_length = 5
 rect_width = 3
 display_info(rect_length, rect_width)
 
-```text
+```
 
 ### Object-oriented programming
 
@@ -68,7 +68,7 @@ class Rectangle:
 rect = Rectangle(5, 3)
 rect.display_info()
 
-```text
+```
 
 ## Key differences
 
@@ -99,7 +99,7 @@ def calculate_net_income(gross_income, tax_rate):
 # Direct and simple
 net = calculate_net_income(50000, 0.25)
 
-```text
+```
 
 ### 2. Linear data processing
 
@@ -116,7 +116,7 @@ def process_user_data(raw_emails):
     valid_emails = validate_emails(cleaned)
     return valid_emails
 
-```text
+```
 
 ### 3. Mathematical or algorithmic problems
 
@@ -132,7 +132,7 @@ def factorial(n):
         return 1
     return n * factorial(n-1)
 
-```text
+```
 
 ## When to choose object-oriented programming
 
@@ -169,7 +169,7 @@ class Course:
         total = sum(student.get_average() for student in self.students)
         return total / len(self.students)
 
-```text
+```
 
 ### 2. Complex state management
 
@@ -199,7 +199,7 @@ class GameCharacter:
         self.experience = 0
         print(f"{self.name} leveled up to {self.level}!")
 
-```text
+```
 
 ### 3. Systems with multiple interacting components
 
@@ -237,7 +237,7 @@ class Bank:
             return True
         return False
 
-```text
+```
 
 ## Mapping functions to methods
 
@@ -260,7 +260,7 @@ def get_total_spent(orders_list):
 def send_email(email, message):
     print(f"Sending to {email}: {message}")
 
-```text
+```
 
 ### Step 2: Group related data and functions into classes
 
@@ -287,7 +287,7 @@ customer.add_order({'item': 'Book', 'amount': 25})
 total = customer.get_total_spent()
 customer.send_email(f"Your total spending: ${total}")
 
-```text
+```
 
 ### Step 3: Look for opportunities to create hierarchies
 
@@ -324,7 +324,7 @@ class CheckingAccount(Account):
     def calculate_fees(self):
         return 5 if self.transactions > 10 else 0
 
-```text
+```
 
 ## Trade-offs to consider
 
@@ -366,7 +366,7 @@ def battle(p_name, p_health, p_level, e_name, e_health, e_level):
     # Complex parameter passing becomes unwieldy
     pass
 
-```text
+```
 
 **OOP can be overkill for:**
 
@@ -383,7 +383,7 @@ class Calculator:
 def add(a, b):
     return a + b
 
-```text
+```
 
 ## Practice
 
@@ -441,7 +441,7 @@ def borrow_book(member_id, isbn):
     # Find member and book, update their status
     pass
 
-```text
+```
 
 **Task**: Create classes for Book, Member, and Library that encapsulate the data and methods.
 
@@ -501,7 +501,7 @@ class Library:
     def find_member(self, member_id):
         return next((member for member in self.members if member.member_id == member_id), None)
 
-```text
+```
 
 ///
 ///
@@ -527,7 +527,7 @@ def process_payment(amount, payment_type, card_number=None, bank_account=None):
     else:
         return "Invalid payment type"
 
-```text
+```
 
 **Task**: Redesign using OOP principles and explain the benefits.
 
@@ -580,7 +580,7 @@ def process_payment(payment):
 # 3. Polymorphism allows uniform interface
 # 4. Better encapsulation of payment-specific data
 
-```text
+```
 
 ///
 ///

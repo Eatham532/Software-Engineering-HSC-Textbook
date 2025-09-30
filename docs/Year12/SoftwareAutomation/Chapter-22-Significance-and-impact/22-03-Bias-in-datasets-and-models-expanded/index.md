@@ -343,7 +343,7 @@ def demonstrate_bias_analysis():
 if __name__ == "__main__":
     demonstrate_bias_analysis()
 
-```text
+```
 
 ### 1.2 Bias Detection Workflow
 
@@ -481,7 +481,7 @@ def demonstrate_bias_detection_pipeline():
 if __name__ == "__main__":
     demonstrate_bias_detection_pipeline()
 
-```text
+```
 
 ## Part 2: Practical Bias Investigation Tools
 
@@ -962,7 +962,7 @@ def demonstrate_practical_investigation_tools():
 if __name__ == "__main__":
     demonstrate_practical_investigation_tools()
 
-```text
+```
 
 ## Part 3: Bias Mitigation Strategies
 
@@ -1512,7 +1512,7 @@ def demonstrate_bias_mitigation_strategies():
 if __name__ == "__main__":
     demonstrate_bias_mitigation_strategies()
 
-```text
+```
 
 ## Part 4: Transparency and Accountability Tools
 
@@ -2303,7 +2303,7 @@ def demonstrate_transparency_accountability_tools():
 if __name__ == "__main__":
     demonstrate_transparency_accountability_tools()
 
-```text
+```
 
 ## Practice Tasks
 

@@ -136,7 +136,7 @@ print(f"Logged {len(blocker_mgr.blockers)} blockers")
 critical_blockers = blocker_mgr.get_active_blockers("critical")
 print(f"Critical blockers requiring immediate attention: {len(critical_blockers)}")
 
-```text
+```
 
 ### Research and information gathering strategies
 
@@ -262,7 +262,7 @@ source_evaluation = research_helper.evaluate_source_credibility(
 )
 print(f"Source credibility: {source_evaluation}")
 
-```text
+```
 
 ### Collaborative problem-solving approaches
 
@@ -403,7 +403,7 @@ print(f"Pair programming session scheduled: {session['participants']}")
 review_request = collab_mgr.request_code_review("Bob", "Login form validation", "Security")
 print(f"Code review requested: {review_request}")
 
-```text
+```
 
 ### Escalation and external assistance strategies
 
@@ -484,7 +484,7 @@ external --> consult
 
 @enduml
 
-```text
+```
 
 ### Guided example: Resolving a complex integration problem
 
@@ -538,7 +538,7 @@ def analyze_api_mismatch():
         "estimated_effort": "2-3 days"
     }
 
-```text
+```
 
 **Step 2: Research and information gathering**
 
@@ -579,7 +579,7 @@ def research_solutions():
         }
     }
 
-```text
+```
 
 **Step 3: Collaborative problem-solving**
 
@@ -612,7 +612,7 @@ def implement_solution_collaboratively():
         "risk_mitigation": "Parallel development of backup solution"
     }
 
-```text
+```
 
 **Step 4: Escalation if needed**
 
@@ -642,7 +642,7 @@ escalation_strategy = {
     }
 }
 
-```text
+```
 
 ## Practice
 

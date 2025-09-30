@@ -277,7 +277,7 @@ def demonstrate_data_minimization():
     print("Extended collection fields:", list(extended_profile['user_profile'].keys()))
     print("Still rejected excessive fields like SSN, medical conditions, favorite color")
 
-```text
+```
 
 ### 2. Consent Management
 
@@ -679,7 +679,7 @@ def demonstrate_consent_management():
         updated_check = consent_manager.check_consent(user_id, ConsentType.ANALYTICS)
         print(f"Analytics processing now allowed: {updated_check['can_process']}")
 
-```text
+```
 
 ### 3. Purpose Limitation and Data Retention
 
@@ -1059,7 +1059,7 @@ def demonstrate_purpose_limitation_and_retention():
             print(f"  {item['data_type']}: Due {item['deletion_due_date'][:10]}")
             print(f"    Legal basis: {item['legal_basis']}")
 
-```text
+```
 
 ### 4. Privacy Impact Assessments
 
@@ -1571,7 +1571,7 @@ def demonstrate_privacy_impact_assessment():
     for i, step in enumerate(report['next_steps'][:3], 1):
         print(f"  {i}. {step}")
 
-```text
+```
 
 ## GDPR and Privacy Law Fundamentals
 

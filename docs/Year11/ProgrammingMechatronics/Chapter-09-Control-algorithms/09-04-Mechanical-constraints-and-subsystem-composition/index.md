@@ -35,7 +35,7 @@ systems = [
 for system in systems:
     print(system.describe_motion())
 
-```text
+```
 
 ### Guided example
 
@@ -69,7 +69,7 @@ end note
 
 @enduml
 
-```text
+```
 
 ```python
 import math
@@ -134,7 +134,7 @@ arm = RobotArmConstraints()
 result, message = arm.is_position_reachable(45, 90)
 print(f"Target position: {message}")
 
-```text
+```
 
 ### Subsystem composition strategies
 
@@ -190,7 +190,7 @@ end note
 
 @enduml
 
-```text
+```
 
 ### Coordination and communication patterns
 
@@ -308,7 +308,7 @@ print(f"Movement command: {result}")
 status = coordinator.get_system_status()
 print(f"System status: {status}")
 
-```text
+```
 
 ### Mechanical interference and collision avoidance
 
@@ -359,7 +359,7 @@ checker = CollisionChecker()
 safe, message = checker.check_arm_base_collision((300, 200), (0, 0))
 print(f"Collision check: {message}")
 
-```text
+```
 
 ## Try it
 
@@ -403,7 +403,7 @@ class CNCMachine:
 cnc = CNCMachine()
 cnc.describe_dof()
 
-```text
+```
 
 Output shows 3 DOF system with independent linear axes, enabling full 3D positioning within workspace.
 ///
@@ -483,7 +483,7 @@ coordinator.register_subsystem(GripperSubsystem())
 result = coordinator.execute_pick_and_place()
 print(f"Task result: {result}")
 
-```text
+```
 
 This demonstrates coordinated operation between subsystems with clear command flow and status tracking.
 ///
@@ -534,7 +534,7 @@ print(f"Collision check: {message}")
 zones = checker.get_safe_workspace_zones()
 print("Safe zones:", zones)
 
-```text
+```
 
 This ensures both arms can operate safely without mechanical interference.
 ///

@@ -100,7 +100,7 @@ sprint.add_user_story({"title": "User sees personal dashboard", "points": 8})
 sprint.complete_story({"title": "User can log in", "points": 5})
 print(sprint.sprint_summary())
 
-```text
+```
 
 ///
 
@@ -132,7 +132,7 @@ note right of REVIEW : Demo completed\nfeatures to stakeholders
 note right of RETRO : Reflect on process\nand identify improvements
 @enduml
 
-```text
+```
 
 #### Sprint Planning
 
@@ -235,7 +235,7 @@ login_story.add_task("Add session management", 6)
 planning.add_story_to_sprint(login_story)
 print(planning.planning_summary())
 
-```text
+```
 
 ///
 
@@ -337,7 +337,7 @@ standup.add_update(StandupUpdate(
 ))
 print(standup.generate_summary())
 
-```text
+```
 
 ///
 
@@ -373,12 +373,12 @@ User Stories are short, simple descriptions of features written from the perspec
 
 **User Story format**:
 
-```text
+```
 As a [user type],
 I want [functionality],
 So that [benefit/value].
 
-```text
+```
 
 Essential components of good User Stories:
 
@@ -403,27 +403,27 @@ As a high school student,
 I want to log into the school portal with my student ID,
 So that I can access my grades and assignment information securely.
 
-```text
+```
 
 **Teacher Grade Entry**:
 
-```text
+```
 
 As a teacher,
 I want to enter grades for multiple students simultaneously,
 So that I can efficiently update student records after marking assignments.
 
-```text
+```
 
 **Parent Progress Tracking**:
 
-```text
+```
 
 As a parent,
 I want to receive email notifications when my child's grades are updated,
 So that I can stay informed about their academic progress.
 
-```text
+```
 
 /// tab | Python Story Management
 ///
@@ -496,7 +496,7 @@ login_story.estimate_points(5)
 print(login_story.format_story())
 print(f"Ready for development: {login_story.is_ready_for_development()}")
 
-```text
+```
 ///
 
 ## Practice
@@ -757,13 +757,13 @@ print(f"Ready for development: {login_story.is_ready_for_development()}")
 
 **Story 1: Student Event Registration**
 
-```text
+```
 
 As a student,
 I want to register for sports day events online,
 So that I can easily sign up for activities I'm interested in and avoid lost paper forms.
 
-```text
+```
 **Acceptance Criteria**:
 
 - Student can view available events with descriptions and time slots
@@ -778,13 +778,13 @@ So that I can easily sign up for activities I'm interested in and avoid lost pap
 
 **Story 2: Real-time Results Display**
 
-```text
+```
 
 As a parent,
 I want to view my child's sports day results on my phone,
 So that I can celebrate their achievements and stay informed throughout the day.
 
-```text
+```
 **Acceptance Criteria**:
 
 - Parent can search for their child by name or student ID
@@ -799,13 +799,13 @@ So that I can celebrate their achievements and stay informed throughout the day.
 
 **Story 3: Teacher Result Entry**
 
-```text
+```
 
 As a teacher,
 I want to enter event results directly on a tablet,
 So that I can quickly record outcomes and make them available to parents immediately.
 
-```text
+```
 **Acceptance Criteria**:
 
 - Teacher can select event and enter participant placements
@@ -820,13 +820,13 @@ So that I can quickly record outcomes and make them available to parents immedia
 
 **Story 4: Resource Conflict Management**
 
-```text
+```
 
 As a sports coordinator,
 I want to see equipment scheduling conflicts when planning events,
 So that I can ensure all events have necessary resources available.
 
-```text
+```
 **Acceptance Criteria**:
 
 - System highlights when same equipment is needed for concurrent events
@@ -841,13 +841,13 @@ So that I can ensure all events have necessary resources available.
 
 **Story 5: Participation Tracking**
 
-```text
+```
 
 As a teacher,
 I want to see which students haven't registered for any events,
 So that I can encourage participation and ensure all students are included.
 
-```text
+```
 **Acceptance Criteria**:
 
 - Teacher can view class lists with registration status

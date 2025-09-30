@@ -58,7 +58,7 @@ alice.add_grade(85)
 alice.add_grade(92)
 print(f"{alice.name}'s average: {alice.get_average()}")  # Alice's average: 88.5
 
-```text
+```
 
 ### Key components explained
 
@@ -134,7 +134,7 @@ try:
 except ValueError as e:
     print(f"Error: {e}")
 
-```text
+```
 
 ### Constructor parameters and defaults
 
@@ -177,7 +177,7 @@ print(f"Rectangle area: {rect1.area()}")  # 15
 print(f"Square area: {rect2.area()}")     # 16
 print(f"Is rect2 a square? {rect2.is_square()}")  # True
 
-```text
+```
 
 ## Methods: defining behavior
 
@@ -233,7 +233,7 @@ counter.increment()       # value = 13 (default increment of 1)
 print(counter)            # Counter(value=13)
 print(counter.get_history())  # [10, 15, 12, 13]
 
-```text
+```
 
 ### Method design principles
 
@@ -258,7 +258,7 @@ class EmailValidator:
         domain = email.split('@')[1]
         return '.' in domain and len(domain) > 3
 
-```text
+```
 
 **2. Meaningful names:** Method names should clearly describe what they do
 
@@ -275,7 +275,7 @@ account.do_money(amount)   # Do what with money?
 list.add_thing(item)       # Vague
 validator.test(email)      # Test what?
 
-```text
+```
 
 **3. Consistent parameter patterns:** Similar methods should have similar signatures
 
@@ -297,7 +297,7 @@ class MathOperations:
             raise ValueError("Cannot divide by zero")
         return a / b
 
-```text
+```
 
 ## Composition: building with components
 
@@ -401,7 +401,7 @@ print(sports_car.start())        # Ferrari F40: 400hp gasoline engine started
 print(sports_car.accelerate(50)) # Accelerating to 50 km/h
 print(sports_car.get_specs())    # Ferrari F40 - 400hp gasoline, 4 wheels, 18 inch diameter
 
-```text
+```
 
 ///
 
@@ -456,7 +456,7 @@ cart2 = ShoppingCart(file_logger)     # Logs to file
 cart1.add_item("Book", 25.99)    # Prints: LOG: Added Book ($25.99) to cart
 cart2.add_item("Phone", 699.99)  # Writes to cart.log file
 
-```text
+```
 
 **2. Complex composition with multiple components:**
 
@@ -561,7 +561,7 @@ print(macbook.power_on())
 print(macbook.get_status())
 print(macbook.power_off())
 
-```text
+```
 
 ## Building cohesive classes
 
@@ -616,7 +616,7 @@ validator = PasswordValidator(min_length=10, require_uppercase=True, require_num
 print(validator.is_valid("MyPassword123"))  # True
 print(validator.get_requirements())         # List of requirements
 
-```text
+```
 
 ///
 
@@ -655,7 +655,7 @@ class UserAccount:
     def log_login_attempt(self, success):
         print(f"Login attempt for {self.username}: {'SUCCESS' if success else 'FAILED'}")
 
-```text
+```
 
 ///
 
@@ -695,7 +695,7 @@ class LoginLogger:
     def log_attempt(self, username, success):
         print(f"Login attempt for {username}: {'SUCCESS' if success else 'FAILED'}")
 
-```text
+```
 
 ## Practice
 
@@ -778,7 +778,7 @@ print(book2.is_long())      # True
 print(book1.matches_search("gatsby"))  # True
 print(book2.matches_search("Tolstoy")) # True
 
-```text
+```
 
 ///
 ///
@@ -910,7 +910,7 @@ print(gaming_pc.get_system_specs())
 print(gaming_pc.can_run_program("Photoshop", 2.5, 8))   # Should pass
 print(gaming_pc.can_run_program("Video Editor", 4.0, 32))  # Should fail
 
-```text
+```
 
 ///
 ///
@@ -944,7 +944,7 @@ class Motorcycle(Vehicle):
     def accelerate(self):
         self.speed += 20
 
-```text
+```
 
 **Task**: Redesign using composition with separate components for different aspects.
 
@@ -1058,7 +1058,7 @@ print(motorcycle.get_full_description()) # Honda CBR (Motorcycle) - 600cc engine
 # 3. Easier to test components separately
 # 4. More flexible than inheritance hierarchy
 
-```text
+```
 
 ///
 ///

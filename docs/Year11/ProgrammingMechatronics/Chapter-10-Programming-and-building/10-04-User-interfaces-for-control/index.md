@@ -226,7 +226,7 @@ for cmd in test_commands:
     result = arm_cli.process_command(cmd)
     print(result)
 
-```text
+```
 
 ### Dashboard interfaces
 
@@ -448,7 +448,7 @@ for i in range(3):
     greenhouse.render_dashboard()
     time.sleep(1)
 
-```text
+```
 
 ### Clear status and error messaging
 
@@ -614,7 +614,7 @@ print()
 # Show message history
 print(messaging.show_recent_messages())
 
-```text
+```
 
 ### Guided example
 
@@ -908,7 +908,7 @@ for cmd in demo_commands:
 
 print("\n🎯 Interface demo complete!")
 
-```text
+```
 
 ## Try it
 
@@ -1013,7 +1013,7 @@ def design_cli_commands(system_type):
 for system in ["drone", "3d_printer", "security_system"]:
     design_cli_commands(system)
 
-```text
+```
 
 ///
 
@@ -1180,7 +1180,7 @@ class StatusIndicators:
 status_system = StatusIndicators()
 status_system.simulate_status_changes()
 
-```text
+```
 
 ///
 

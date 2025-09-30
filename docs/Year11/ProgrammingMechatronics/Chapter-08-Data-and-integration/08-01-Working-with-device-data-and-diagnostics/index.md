@@ -29,7 +29,7 @@ log_sensor_reading("temp_greenhouse_1", 24.5, "°C")
 log_sensor_reading("humidity_greenhouse_1", 68, "%")
 log_sensor_reading("soil_moisture_bed_A", 420, "analog_value")
 
-```text
+```
 
 Key characteristics of good device logs:
 
@@ -58,7 +58,7 @@ distance_mm = 250.5
 greenhouse_temp_celsius = 22.4
 soil_moisture_percent = 67
 
-```text
+```
 
 For complex systems, consider creating unit-aware data structures:
 
@@ -77,7 +77,7 @@ class SensorReading:
 temp_reading = SensorReading(23.8, "°C", "greenhouse_temp_01")
 print(temp_reading)
 
-```text
+```
 
 ### Safe storage considerations
 
@@ -123,7 +123,7 @@ class SecureDataLogger:
         
         os.rename(temp_filepath, filepath)
 
-```text
+```
 
 ### Guided example: greenhouse monitoring system
 
@@ -164,7 +164,7 @@ GreenhouseMonitor --> SensorReading : creates
 GreenhouseMonitor --> CSVLogger : uses
 @enduml
 
-```text
+```
 
 Here's the implementation:
 
@@ -306,7 +306,7 @@ if __name__ == "__main__":
         avg_temp = sum(temp_readings) / len(temp_readings)
         print(f"Average temperature: {avg_temp:.1f}°C")
 
-```text
+```
 
 ## Try it
 
@@ -418,7 +418,7 @@ enhanced_monitor.log_readings(readings)
 for alert in alerts:
     print(alert)
 
-```text
+```
 
 ///
 ///
@@ -566,7 +566,7 @@ print(f"\nFound {len(out_of_range)} out-of-range periods")
 # Export daily summary
 analyser.export_summary_report("greenhouse_daily_summary.csv")
 
-```text
+```
 
 Note: This solution uses pandas for easier data manipulation. For the basic curriculum, you could implement similar functionality using only built-in Python CSV operations, though it would require more code.
 ///
@@ -697,7 +697,7 @@ if __name__ == "__main__":
     
     dashboard.run_continuous(update_interval=5)
 
-```text
+```
 
 ///
 ///

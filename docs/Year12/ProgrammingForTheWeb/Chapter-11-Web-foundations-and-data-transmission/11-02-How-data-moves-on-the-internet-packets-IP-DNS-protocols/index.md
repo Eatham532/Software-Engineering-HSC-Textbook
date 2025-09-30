@@ -51,7 +51,7 @@ app --> b: Responses
 
 @enduml
 
-```text
+```
 
 Notes:
 
@@ -92,7 +92,7 @@ package "DNS Resolution" {
 }
 @enduml
 
-```text
+```
 
 Key ideas:
 
@@ -156,7 +156,7 @@ note over Client,Server
 end note
 @enduml
 
-```text
+```
 
 ## Developer tooling: trace and verify
 
@@ -200,7 +200,7 @@ try:
 except Exception as e:
     print("IPv6 lookup failed:", e)
 
-```text
+```
 
 ///
 
@@ -231,7 +231,7 @@ for host, port in [("example.com", 80), ("example.com", 443)]:
     except Exception as e:
         print(f"Connect to {host}:{port} failed:", e)
 
-```text
+```
 
 ///
 
@@ -258,7 +258,7 @@ with socket.create_connection((host, 443), timeout=5) as sock:
         data = ssock.recv(4096)
         print("Response head:\n", data.decode("latin1", errors="ignore").split("\r\n\r\n")[0])
 
-```text
+```
 
 ///
 
@@ -292,7 +292,7 @@ DNS --> Browser: IP address
 note right: Caching occurs at DNS resolver level
 @enduml
 
-```text
+```
 
 ```kroki-plantuml
 @startuml
@@ -304,7 +304,7 @@ DNS --> Browser: Cached IP (TTL not expired)
 note right: No network queries needed
 @enduml
 
-```text
+```
 
 ///
 ///

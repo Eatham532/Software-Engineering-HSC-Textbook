@@ -56,7 +56,7 @@ note right of [Smart Appliances] : Cost effective\nUser friendly
 note right of [Irrigation] : Weather resistant\nRemote operation
 @enduml
 
-```text
+```
 
 ### Common use-cases
 
@@ -124,7 +124,7 @@ door.update()  # Door opens
 door.motion_detected = False
 door.update()  # Door closes
 
-```text
+```
 
 ### Design constraints
 
@@ -170,7 +170,7 @@ print(f"Medical sensor cost: ${medical_cost:.2f}")
 industrial_cost = temp_sensor.calculate_cost(0.6, 0.7)
 print(f"Industrial sensor cost: ${industrial_cost:.2f}")
 
-```text
+```
 
 #### Safety constraints
 
@@ -224,7 +224,7 @@ rectangle "Design Constraints" {
 note bottom : All constraints interact - changing one affects others
 @enduml
 
-```text
+```
 
 ### Guided example
 
@@ -336,7 +336,7 @@ print("Environmental considerations:")
 for consideration in greenhouse.environmental_considerations():
     print(f"- {consideration}")
 
-```text
+```
 
 ## Try it
 
@@ -511,7 +511,7 @@ camera.update(motion_level=0.9, light_level=0.1)
 # Motion stops
 camera.update(motion_level=0.1, light_level=0.1)
 
-```text
+```
 
 ///
 ///

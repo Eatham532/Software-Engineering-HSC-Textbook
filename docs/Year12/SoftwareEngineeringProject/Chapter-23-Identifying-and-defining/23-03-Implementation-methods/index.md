@@ -73,7 +73,7 @@ email_upgrade.plan_cutover("2025-10-01")
 result = email_upgrade.execute_cutover()
 print(result)
 
-```text
+```
 
 ///
 
@@ -113,7 +113,7 @@ note right of P3 : External API connections\nAutomated workflows
 note right of P4 : Dashboard reports\nPerformance analytics
 @enduml
 
-```text
+```
 
 /// tab | Implementation Strategy
 **Phase Planning Process**:
@@ -166,7 +166,7 @@ for phase in phases:
     print(f"{phase.name}: {phase.start_date} to {phase.end_date}")
     current_date = phase.end_date
 
-```text
+```
 
 ///
 
@@ -235,7 +235,7 @@ class ParallelImplementation:
         percentage = (migrated / total_users) * 100
         return f"{percentage:.1f}% of users migrated"
 
-```text
+```
 
 ///
 
@@ -321,7 +321,7 @@ pilot.report_issue("Login timeout too short", "medium")
 summary = pilot.get_pilot_summary()
 print(f"Pilot Summary: {summary}")
 
-```text
+```
 
 ///
 
@@ -362,7 +362,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ## Practice
 

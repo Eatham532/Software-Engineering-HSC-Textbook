@@ -83,7 +83,7 @@ print(account.withdraw(200))        # (False, 'Insufficient funds')
 print(account.get_account_status()) # LOW_BALANCE
 print(account.apply_fees())         # Applied low balance fee: $5
 
-```text
+```
 
 ### Complex selection with multiple conditions
 
@@ -174,7 +174,7 @@ print(student.calculate_letter_grade())    # A
 print(student.get_academic_standing())     # DEAN'S LIST
 print(student.can_graduate())              # (True, 'Eligible for graduation')
 
-```text
+```
 
 ## Iteration structures in methods
 
@@ -259,7 +259,7 @@ print(f"Total value: ${inventory.calculate_total_value():.2f}")
 print("Low stock items:", inventory.find_low_stock_items())
 print(inventory.generate_report())
 
-```text
+```
 
 ### While loops in methods
 
@@ -360,7 +360,7 @@ print(processor.processed_numbers)  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 first_multiple = processor.find_first_multiple(20, 7)
 print(first_multiple)  # 21
 
-```text
+```
 
 ## Keeping methods short and cohesive
 
@@ -502,7 +502,7 @@ class OrderProcessor:
         prices = {'laptop': 999, 'mouse': 25, 'keyboard': 75}
         return prices.get(item_name, 0)
 
-```text
+```
 
 ### Guidelines for method design
 
@@ -553,7 +553,7 @@ class TextAnalyzer:
         sorted_words = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
         return sorted_words[:n]
 
-```text
+```
 
 **2. Keep methods short (generally under 20 lines):**
 
@@ -605,7 +605,7 @@ class Calculator:
             imaginary_part = (abs(discriminant) ** 0.5) / (2*a)
             return (complex(real_part, imaginary_part), complex(real_part, -imaginary_part))
 
-```text
+```
 
 ### Method extraction techniques
 
@@ -718,7 +718,7 @@ class ReportGenerator:
         from datetime import datetime
         return datetime.now().strftime("%Y-%m-%d %H:%M")
 
-```text
+```
 
 ## Practice
 
@@ -832,7 +832,7 @@ calc.add_grade(45)  # Low grade
 print(calc.get_summary())
 # {'average': 75.0, 'letter_grade': 'C', 'status': 'PASSING', 'needs_improvement': True, 'grade_count': 4}
 
-```text
+```
 
 ///
 ///
@@ -985,7 +985,7 @@ print("Statistics:", processor.get_statistics())
 print("Most common:", processor.find_most_common_words(3))
 print("Removed 'the':", processor.remove_words_containing("the"))
 
-```text
+```
 
 ///
 ///
@@ -1034,7 +1034,7 @@ class StudentManager:
         
         return True, report
 
-```text
+```
 
 **Task**: Break this into focused methods with single responsibilities.
 
@@ -1126,7 +1126,7 @@ class StudentManager:
 # 4. Easy to modify specific functionality
 # 5. Reusable methods can be called from other places
 
-```text
+```
 
 ///
 ///

@@ -69,7 +69,7 @@ hifi --> req : Iterate based on feedback
 note bottom : Wireframing is an iterative process\nthat refines through user feedback
 @enduml
 
-```text
+```
 
 ```python
 class WireframeDesigner:
@@ -513,7 +513,7 @@ def demonstrate_wireframe_creation():
 if __name__ == "__main__":
     wireframe_demo = demonstrate_wireframe_creation()
 
-```text
+```
 
 ---
 
@@ -1006,7 +1006,7 @@ def demonstrate_usability_evaluation():
 if __name__ == "__main__":
     usability_demo = demonstrate_usability_evaluation()
 
-```text
+```
 
 ---
 
@@ -1609,7 +1609,7 @@ def demonstrate_accessibility_implementation():
 if __name__ == "__main__":
     accessibility_demo = demonstrate_accessibility_implementation()
 
-```text
+```
 
 ---
 
@@ -1720,7 +1720,7 @@ designer.create_wireframe(
     ]
 )
 
-```text
+```
 
 **Key Design Decisions:**
 
@@ -1839,7 +1839,7 @@ usability_test = evaluator.conduct_usability_test(
     {'device': 'Mixed (desktop/tablet)', 'environment': 'Remote testing'}
 )
 
-```text
+```
 
 **Key Recommendations:**
 
@@ -1998,7 +1998,7 @@ priority_features = [
 
 checklist = auditor.create_implementation_checklist(priority_features)
 
-```text
+```
 
 **Implementation Timeline:**
 

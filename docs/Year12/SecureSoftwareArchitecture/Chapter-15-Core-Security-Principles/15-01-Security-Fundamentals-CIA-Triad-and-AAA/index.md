@@ -125,7 +125,7 @@ def is_authorized(user, student_id):
         user.role != 'student_self' or user.student_id == student_id
     )
 
-```text
+```
 
 ### Integrity: Ensuring Data Accuracy and Trustworthiness
 
@@ -272,7 +272,7 @@ def demonstrate_tampering_detection():
     except ValueError as e:
         print(f"Tampering detected: {e}")
 
-```text
+```
 
 ### Availability: Maintaining System Accessibility
 
@@ -448,7 +448,7 @@ def demonstrate_availability_protection():
     health = protector.health_check()
     print(f"System health: {health}")
 
-```text
+```
 
 ## Guided Example: Implementing CIA Triad for Student Records
 
@@ -497,7 +497,7 @@ class SecureStudentRecordSystem:
     
     # [Content continues but truncated for length...]
 
-```text
+```
 
 ## Summary
 
@@ -756,7 +756,7 @@ def demonstrate_authentication():
         success, message = auth_system.authenticate_user("student123", "wrong_password")
         print(f"Failed attempt {i+1}: {message}")
 
-```text
+```
 
 ### Authorization: Controlling Access to Resources
 
@@ -958,7 +958,7 @@ def demonstrate_authorization():
         print(f"{user_id} ({role.value}) {action} {resource_type} {resource_id}: "
               f"{'ALLOWED' if can_access else 'DENIED'} - {message}")
 
-```text
+```
 
 ### Accountability: Tracking and Auditing System Activities
 
@@ -1244,7 +1244,7 @@ def demonstrate_complete_aaa_system():
         integrity_report = system.auditor.verify_log_integrity()
         print(f"Audit log integrity: {integrity_report}")
 
-```text
+```
 
 ## Practice Exercises
 
@@ -1435,7 +1435,7 @@ document = doc_manager.retrieve_document("STUDENT_RECORD_001", "authorized_user"
 print(f"Retrieved: {document['content'][:50]}...")
 print(f"Classification: {document['metadata']['classification']}")
 
-```text
+```
 
 ///
 ///
@@ -1768,7 +1768,7 @@ if admin_auth[0]:
     audit_report, message = library_system.get_audit_report(admin_token)
     print(f"Audit report entries: {len(audit_report)}")
 
-```text
+```
 
 ///
 ///

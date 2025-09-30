@@ -28,7 +28,7 @@ print(calculate_discount(100, 150))  # -50.0 - customer gets money back?!
 print(calculate_discount(-10, 10))   # -9.0 - negative price?
 print(calculate_discount(100, -10))  # 110.0 - negative discount increases price?
 
-```text
+```
 
 Without proper test data design, bugs like these can make it into production!
 
@@ -72,7 +72,7 @@ for weight, height, expected in normal_test_cases:
     status = "✓ PASS" if abs(result - expected) < 0.1 else "✗ FAIL"
     print(f"BMI({weight}kg, {height}m) = {result} (expected {expected}) {status}")
 
-```text
+```
 
 ### Boundary/Edge Data
 
@@ -119,7 +119,7 @@ for score, expected in boundary_test_cases:
     status = "✓ PASS" if result == expected else "✗ FAIL"
     print(f"grade({score}) = '{result}' (expected '{expected}') {status}")
 
-```text
+```
 
 ### Extreme Data
 
@@ -163,7 +163,7 @@ for principal, rate, years, expected in extreme_test_cases:
     else:
         print(f"compound_interest({principal}, {rate}%, {years}y) = None (invalid input)")
 
-```text
+```
 
 ### Invalid/Error Data
 
@@ -235,7 +235,7 @@ for test_id in valid_test_cases:
     else:
         print(f"parse_student_id('{test_id}') = Invalid: {result['error']} ✗ FAIL")
 
-```text
+```
 
 ## Test Data Design Strategies
 
@@ -288,7 +288,7 @@ for age, expected in equivalence_test_cases:
     status = "✓ PASS" if result == expected else "✗ FAIL"
     print(f"categorize_age({age}) = '{result}' (expected '{expected}') {status}")
 
-```text
+```
 
 ### Decision Table Testing
 
@@ -357,7 +357,7 @@ for weight, distance, express, member, expected in decision_table_tests:
     status = "✓ PASS" if abs(result - expected) < 0.01 else "✗ FAIL"
     print(f"{weight:6.1f} | {distance:8.0f} | {express:7} | {member:6} | {result:6.2f} | {expected:8.2f} | {status}")
 
-```text
+```
 
 ## Creating Comprehensive Test Suites
 
@@ -494,7 +494,7 @@ def test_student_grade_processing():
 # Run the comprehensive test suite
 test_student_grade_processing()
 
-```text
+```
 
 ## Test Data Documentation
 
@@ -608,7 +608,7 @@ def run_test_suite(test_cases, function_to_test):
 # Run the documented test suite
 run_test_suite(test_cases, calculate_letter_grade)
 
-```text
+```
 
 
 ## Summary

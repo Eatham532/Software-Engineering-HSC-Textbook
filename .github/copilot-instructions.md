@@ -6,13 +6,13 @@ This is an **educational MkDocs site** for NSW HSC Software Engineering, structu
 
 ### Core Structure Pattern
 
-```text
+```
 
 docs/Year{11|12}/{ModuleName}/Chapter-{XX}-{Name}/Section-{YY}-{Name}/
 ├── index.md    # Main content with PlantUML diagrams, code examples
 └── quiz.md     # Interactive assessments (6-10 questions each)
 
-```text
+```
 
 **Critical**: All navigation is controlled by `docs/.nav.yml` via mkdocs-awesome-nav. **Never** add manual `nav:` sections to `mkdocs.yml`.
 
@@ -60,7 +60,7 @@ Before writing substantial content, AI contributors MUST:
 # Primary development command (use this, not raw mkdocs serve)
 .\scripts\serve.ps1
 
-```text
+```
 
 This script sets `PYTHONPATH` to repo root for custom Python extensions and activates the venv.
 
@@ -73,7 +73,7 @@ python scripts/smoke_test.py  # Validates build + diagram integration
 python scripts/fix_quiz_format.py  # Standardizes quiz formatting across Year12
 python scripts/simple_md_lint.py  # Basic Markdown linting and formatting
 
-```text
+```
 
 ### Python Environment
 
@@ -126,7 +126,7 @@ python scripts/simple_md_lint.py  # Basic Markdown linting and formatting
         - Option C
         - Option D
 
-```text
+```
 
 **Quiz Debugging**: If answers show "Try again" when correct:
 
@@ -193,7 +193,7 @@ class Student {
 }
 @enduml
 
-```text
+```
 
 ### PyMdownX Extensions Usage
 
@@ -220,7 +220,7 @@ class Student {
 ///
 ///
 
-```text
+```
 
 ## Key Technical Patterns
 

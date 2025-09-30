@@ -37,7 +37,7 @@ radius = 5
 area = math.pi * math.pow(radius, 2)
 print(f"Area of circle with radius {radius}: {area:.2f}")
 
-```text
+```
 
 ### Essential Math Functions
 
@@ -84,7 +84,7 @@ def demonstrate_math_functions():
 
 demonstrate_math_functions()
 
-```text
+```
 
 ### Practical Math Applications
 
@@ -165,7 +165,7 @@ print(f"Maximum height: {height:.2f} meters")
 print(f"Flight time: {time_flight:.2f} seconds")
 print(f"Range: {range_dist:.2f} meters")
 
-```text
+```
 
 ## The Random Module
 
@@ -211,7 +211,7 @@ def demonstrate_random_basics():
 
 demonstrate_random_basics()
 
-```text
+```
 
 ### Random Module Functions
 
@@ -259,7 +259,7 @@ def demonstrate_random_functions():
 
 demonstrate_random_functions()
 
-```text
+```
 
 ### Practical Random Applications
 
@@ -420,7 +420,7 @@ print()
 # Interactive quiz (uncomment to run)
 # create_quiz_generator()
 
-```text
+```
 
 ## Combining Math and Random Modules
 
@@ -531,7 +531,7 @@ print()
 # Create histogram
 create_histogram(test_scores, 12)
 
-```text
+```
 
 ### Game Development Examples
 
@@ -675,7 +675,7 @@ print("Number Guessing Game:")
 print("\nRPG Battle Demo:")
 # create_simple_rpg_battle()  # Uncomment to play
 
-```text
+```
 
 ## Pure Functions and Best Practices
 
@@ -746,7 +746,7 @@ def demonstrate_pure_functions():
 
 demonstrate_pure_functions()
 
-```text
+```
 
 ### Module Import Best Practices
 
@@ -790,7 +790,7 @@ def demonstrate_import_styles():
 
 demonstrate_import_styles()
 
-```text
+```
 
 ## Common Patterns and Applications
 
@@ -904,7 +904,7 @@ def create_data_analysis_toolkit():
 
 create_data_analysis_toolkit()
 
-```text
+```
 
 ## Summary
 

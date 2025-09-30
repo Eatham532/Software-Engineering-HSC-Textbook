@@ -40,14 +40,14 @@ Before contributing, ensure you have:
    git clone https://github.com/your-username/NSW-HSC-Software-Engineering-Textbook.git
    cd NSW-HSC-Software-Engineering-Textbook
 
-   ```text
+   ```
 
 2. **Install dependencies**:
 
    ```powershell
    uv sync
 
-   ```text
+   ```
 
 3. **Activate the virtual environment**:
 
@@ -58,7 +58,7 @@ Before contributing, ensure you have:
    # macOS/Linux
    source .venv/bin/activate
 
-   ```text
+   ```
 
 4. **Start the development server**:
 
@@ -69,7 +69,7 @@ Before contributing, ensure you have:
    # Or use MkDocs directly
    mkdocs serve
 
-   ```text
+   ```
 
 5. **Open your browser** to `http://127.0.0.1:8000` to view the site
 
@@ -82,7 +82,7 @@ When using the kroki server I reccomend to run the docs with:
 ```powershell
 mkdocs serve --no-livereload
 
-```text
+```
 
 ## 📋 Content Guidelines
 
@@ -90,12 +90,12 @@ mkdocs serve --no-livereload
 
 **File Organization**:
 
-```text
+```
 docs/Year{11|12}/{ModuleName}/Chapter-{XX}-{Name}/Section-{YY}-{Name}/
 ├── index.md    # Main educational content
 └── quiz.md     # Interactive assessment questions
 
-```text
+```
 
 **Naming Conventions**:
 
@@ -155,7 +155,7 @@ python scripts/simple_md_lint.py
 # Fix quiz formatting issues
 python scripts/fix_quiz_format.py
 
-```text
+```
 
 ### MkDocs Configuration
 

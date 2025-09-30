@@ -185,7 +185,7 @@ interview_data = {
 interview_feedback = feedback_collector.collect_interview_feedback(interview_data)
 print(f"Interview feedback collected for {interview_feedback['participant_id']}")
 
-```text
+```
 
 ### Feedback synthesis and pattern identification
 
@@ -398,7 +398,7 @@ print(f"\nTop priority issues:")
 for issue in priority_analysis[:3]:
     print(f"  {issue['issue']} (Score: {issue['priority_score']:.1f})")
 
-```text
+```
 
 ### Decision-making frameworks for next steps
 
@@ -486,7 +486,7 @@ communication --> process
 
 @enduml
 
-```text
+```
 
 ### Guided example: Analyzing feedback for a student gradebook system
 
@@ -650,7 +650,7 @@ print("\nImmediate Actions Required:")
 for action in action_plan["immediate_actions"]:
     print(f"  - {action['issue']} ({action['feature_area']})")
 
-```text
+```
 
 **Step 2: Impact vs effort analysis**
 
@@ -708,7 +708,7 @@ print("\nImpact vs Effort Analysis:")
 for item in matrix_analysis:
     print(f"  {item['feature']}: {item['priority_quadrant']} (Impact: {item['impact_score']}, Effort: {item['effort_score']})")
 
-```text
+```
 
 ## Practice
 

@@ -25,19 +25,19 @@ Both methods bridge the gap between human thinking and computer code.
 
 ### Basic Structure
 
-```text
+```
 ALGORITHM AlgorithmName
 BEGIN
     // Algorithm steps go here
 END
 
-```text
+```
 
 ### Sequence Pattern
 
 For steps that happen one after another:
 
-```text
+```
 ALGORITHM MakeTea
 BEGIN
     Boil water
@@ -48,21 +48,21 @@ BEGIN
     Add milk if desired
 END
 
-```text
+```
 
 ### Input/Output Patterns
 
-```text
+```
 INPUT variableName
 OUTPUT message
 OUTPUT variableName
 OUTPUT "literal text"
 
-```text
+```
 
 **Example:**
 
-```text
+```
 ALGORITHM GreetUser
 BEGIN
     OUTPUT "What is your name?"
@@ -70,23 +70,23 @@ BEGIN
     OUTPUT "Hello, " + userName + "!"
 END
 
-```text
+```
 
 ### Variable Assignment Pattern
 
-```text
+```
 SET variableName = expression
 
-```text
+```
 
 **Examples:**
 
-```text
+```
 SET total = price + tax
 SET average = (num1 + num2 + num3) / 3
 SET isValid = (age >= 18) AND (hasLicense = true)
 
-```text
+```
 
 ### Selection Patterns
 
@@ -94,12 +94,12 @@ SET isValid = (age >= 18) AND (hasLicense = true)
     type: note
     open: false
 
-```text
+```
 IF condition THEN
     statements
 END IF
 
-```text
+```
 
 ///
 
@@ -107,14 +107,14 @@ END IF
     type: note
     open: false
 
-```text
+```
 IF condition THEN
     statements for true
 ELSE
     statements for false
 END IF
 
-```text
+```
 
 ///
 
@@ -122,7 +122,7 @@ END IF
     type: note
     open: false
 
-```text
+```
 IF condition1 THEN
     statements for condition1
 ELSE IF condition2 THEN
@@ -131,11 +131,11 @@ ELSE
     statements for all other cases
 END IF
 
-```text
+```
 
 **Example: Grade Calculator**
 
-```text
+```
 ALGORITHM DetermineGrade
 BEGIN
     INPUT score
@@ -155,7 +155,7 @@ BEGIN
     OUTPUT "Your grade is: " + grade
 END
 
-```text
+```
 
 ///
 
@@ -165,12 +165,12 @@ END
     type: note
     open: false
 
-```text
+```
 WHILE condition DO
     statements
 END WHILE
 
-```text
+```
 
 ///
 
@@ -178,12 +178,12 @@ END WHILE
     type: note
     open: false
 
-```text
+```
 FOR variable = start TO end DO
     statements
 END FOR
 
-```text
+```
 
 ///
 
@@ -191,16 +191,16 @@ END FOR
     type: note
     open: false
 
-```text
+```
 FOR EACH item IN collection DO
     statements
 END FOR
 
-```text
+```
 
 **Example: Find Maximum**
 
-```text
+```
 ALGORITHM FindMaximum
 BEGIN
     INPUT numbers (list)
@@ -215,7 +215,7 @@ BEGIN
     OUTPUT "The maximum is: " + maximum
 END
 
-```text
+```
 
 ///
 
@@ -234,7 +234,7 @@ start
 stop
 @enduml
 
-```text
+```
 
 ### Input/Output Shapes
 
@@ -247,7 +247,7 @@ start
 stop
 @enduml
 
-```text
+```
 
 ### Decision (Selection) Shapes
 
@@ -263,7 +263,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ### Multiple Conditions
 
@@ -286,7 +286,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ### Loops in Flowcharts
 
@@ -305,7 +305,7 @@ endwhile (no)
 stop
 @enduml
 
-```text
+```
 
 ///
 
@@ -329,7 +329,7 @@ endwhile (no)
 stop
 @enduml
 
-```text
+```
 
 ///
 
@@ -339,7 +339,7 @@ Let's see the same algorithm expressed in both pseudocode and flowchart form:
 
 ### Pseudocode Version
 
-```text
+```
 ALGORITHM CheckPasswordStrength
 BEGIN
     OUTPUT "Enter your password:"
@@ -397,7 +397,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ### Flowchart Version
 
@@ -460,7 +460,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ## Pseudocode Style Guidelines
 
@@ -468,25 +468,25 @@ stop
 
 **Good:**
 
-```text
+```
 SET totalPrice = itemPrice + tax + shipping
 SET isEligibleForDiscount = (age >= 65) OR (isStudent = true)
 
-```text
+```
 
 **Avoid:**
 
-```text
+```
 SET x = a + b + c
 SET flag = (n >= 65) OR (s = true)
 
-```text
+```
 
 ### 2. Indent Consistently
 
 **Good:**
 
-```text
+```
 IF weather = "sunny" THEN
     IF temperature > 20 THEN
         OUTPUT "Perfect day for a picnic!"
@@ -497,11 +497,11 @@ ELSE
     OUTPUT "Not ideal weather"
 END IF
 
-```text
+```
 
 **Avoid:**
 
-```text
+```
 IF weather = "sunny" THEN
 IF temperature > 20 THEN
 OUTPUT "Perfect day for a picnic!"
@@ -512,34 +512,34 @@ ELSE
 OUTPUT "Not ideal weather"
 END IF
 
-```text
+```
 
 ### 3. One Action Per Line
 
 **Good:**
 
-```text
+```
 INPUT firstName
 INPUT lastName
 SET fullName = firstName + " " + lastName
 OUTPUT fullName
 
-```text
+```
 
 **Avoid:**
 
-```text
+```
 INPUT firstName, INPUT lastName, SET fullName = firstName + " " + lastName, OUTPUT fullName
 
-```text
+```
 
 ### 4. Use Comments for Complex Logic
 
-```text
+```
 // Calculate compound interest: A = P(1 + r/n)^(nt)
 SET amount = principal * (1 + rate/compoundFrequency)^(compoundFrequency * years)
 
-```text
+```
 
 ## Converting Between Representations
 
@@ -550,7 +550,7 @@ SET amount = principal * (1 + rate/compoundFrequency)^(compoundFrequency * years
 
 **Pseudocode:**
 
-```text
+```
 ALGORITHM FindLargestOfThree
 BEGIN
     OUTPUT "Enter three numbers:"
@@ -571,7 +571,7 @@ BEGIN
     OUTPUT "The largest number is: " + largest
 END
 
-```text
+```
 
 ### From Pseudocode to Flowchart
 
@@ -595,7 +595,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ## Practice Activity: Library Book System
 
@@ -617,7 +617,7 @@ Let's create both pseudocode and flowchart for a library book borrowing system t
 
 ### Your Task: Complete the Pseudocode
 
-```text
+```
 ALGORITHM LibraryBookBorrowing
 BEGIN
     OUTPUT "Welcome to the Library System"
@@ -646,11 +646,11 @@ BEGIN
     
 END
 
-```text
+```
 
 ### Solution
 
-```text
+```
 ALGORITHM LibraryBookBorrowing
 BEGIN
     OUTPUT "Welcome to the Library System"
@@ -682,7 +682,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ### Flowchart Version
 
@@ -713,7 +713,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 ## Common Pseudocode Patterns Summary
 

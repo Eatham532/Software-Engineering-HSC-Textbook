@@ -26,7 +26,7 @@
         class Dog(Animal):
             def make_sound(self):
                 return "Woof!"
-        ```text
+        ```
 
         - Abstraction
         - Generalisation
@@ -53,7 +53,7 @@
         def play_instruments(instruments):
             for instrument in instruments:
                 print(instrument.play())
-        ```text
+        ```
 
         - Abstraction
         - Generalisation
@@ -78,7 +78,7 @@
 
         ```python
         file_manager.save_file("data.txt", content)
-        ```text
+        ```
 
         - It uses a short method name
         - It hides the complex file operations behind a simple interface { data-correct }

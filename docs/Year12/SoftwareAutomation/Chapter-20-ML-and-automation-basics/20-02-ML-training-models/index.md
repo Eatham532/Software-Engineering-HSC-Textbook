@@ -295,7 +295,7 @@ def demonstrate_supervised_learning():
 if __name__ == "__main__":
     demo_classifier, results = demonstrate_supervised_learning()
 
-```text
+```
 
 ---
 
@@ -611,7 +611,7 @@ def demonstrate_unsupervised_learning():
 if __name__ == "__main__":
     demo_clusterer, cluster_results = demonstrate_unsupervised_learning()
 
-```text
+```
 
 ---
 
@@ -925,7 +925,7 @@ def demonstrate_semi_supervised_learning():
 if __name__ == "__main__":
     demo_learner, accuracy_gain = demonstrate_semi_supervised_learning()
 
-```text
+```
 
 ---
 
@@ -1258,7 +1258,7 @@ def demonstrate_reinforcement_learning():
 if __name__ == "__main__":
     demo_agent, results = demonstrate_reinforcement_learning()
 
-```text
+```
 
 ---
 
@@ -1367,7 +1367,7 @@ graph TD
     L -->|Patterns/clusters| M[Clustering/dimensionality reduction]
     L -->|Anomalies| N[Anomaly detection]
 
-```text
+```
 
 ### Quick Reference Guide
 

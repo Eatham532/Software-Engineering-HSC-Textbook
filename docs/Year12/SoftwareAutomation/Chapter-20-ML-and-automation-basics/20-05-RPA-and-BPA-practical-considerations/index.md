@@ -98,7 +98,7 @@ end note
 
 @enduml
 
-```text
+```
 
 ### Typical RPA Use Cases
 
@@ -1419,7 +1419,7 @@ if __name__ == "__main__":
     print("• Repetitive administrative tasks")
     print("=" * 60)
 
-```text
+```
 
 This concludes Part 1 focusing on RPA Implementation and Use Cases. The examples demonstrate practical Python-based automation for common business scenarios: invoice processing, data migration, and administrative task automation.
 
@@ -1521,7 +1521,7 @@ bpa_workflow --> apis : Service calls
 
 @enduml
 
-```text
+```
 
 ### When to Apply RPA vs BPA: Decision Framework
 
@@ -2135,7 +2135,7 @@ if __name__ == "__main__":
     import asyncio
     asyncio.run(run_bpa_demo())
 
-```text
+```
 
 ### Low-Code Platforms vs Custom Scripts
 
@@ -2241,36 +2241,36 @@ if __name__ == "__main__":
 
 **UiPath**:
 
-```text
+```
 
 Strengths: Comprehensive ecosystem, strong community
 Use Cases: Large enterprise deployments, complex workflows
 Licensing: Per-robot pricing, enterprise features
 Learning Curve: Moderate, good documentation
 
-```text
+```
 
 **Automation Anywhere**:
 
-```text
+```
 
 Strengths: Cloud-native, AI integration, scalability
 Use Cases: Cloud-first organizations, AI-enhanced automation
 Licensing: SaaS model, usage-based pricing
 Learning Curve: Low, intuitive interface
 
-```text
+```
 
 **Blue Prism**:
 
-```text
+```
 
 Strengths: Enterprise governance, security, audit trail
 Use Cases: Highly regulated industries, enterprise IT
 Licensing: Per-robot, enterprise focused
 Learning Curve: Higher, more technical approach
 
-```text
+```
 
 #### Custom Development Approaches
 
@@ -2308,7 +2308,7 @@ def automate_web_form():
     finally:
         driver.quit()
 
-```text
+```
 
 **Python + API Integration**:
 
@@ -2350,7 +2350,7 @@ def integrate_systems():
     
     return len(customers)
 
-```text
+```
 
 ### Making the Right Choice: Decision Framework
 
@@ -2414,11 +2414,11 @@ stop
 
 @enduml
 
-```text
+```
 
 @enduml
 
-```text
+```
 
 ---
 
@@ -2945,7 +2945,7 @@ class SecureRPAAuthenticator:
         
         return True, session_data
 
-```text
+```
 
 #### Data Encryption and Secure Storage
 
@@ -3524,7 +3524,7 @@ if __name__ == "__main__":
     print("• Bot lifecycle management and maintenance procedures")
     print("=" * 60)
 
-```text
+```
 
 ### Key Takeaways: Sustainable Automation
 
@@ -3644,7 +3644,7 @@ async def execute_workflow_step(self, instance_id: str, step_name: str):
     if not step:
         raise ValueError(f"Step {step_name} not found")
 
-```text
+```
 
 a) What design pattern is being used for error handling?
 b) Why is this approach better than silently failing?
@@ -3658,7 +3658,7 @@ password_hash = hashlib.pbkdf2_hmac('sha256',
                                   salt, 
                                   100000)
 
-```text
+```
 
 a) Why is PBKDF2 used instead of simple SHA256 hashing?
 b) What is the purpose of the 100,000 iterations parameter?

@@ -14,9 +14,9 @@ def fix_code_blocks(content):
     # Fix 1: ``python -> ```python (malformed fence starts)
     content = re.sub(r'^``([a-zA-Z]+)$', r'```\1', content, flags=re.MULTILINE)
     
-    # Fix 2: ```text -> ``` (close fence after ```text blocks)
-    # Look for ```text followed by content, then fix missing closing fence
-    content = re.sub(r'^```text\s*$\n(.*?)^```text\s*$', r'```\n\1```', content, flags=re.MULTILINE | re.DOTALL)
+    # Fix 2: ``` -> ``` (close fence after ``` blocks)
+    # Look for ``` followed by content, then fix missing closing fence
+    content = re.sub(r'^```\s*$\n(.*?)^```\s*$', r'```\n\1```', content, flags=re.MULTILINE | re.DOTALL)
     
     # Fix 3: Ensure code blocks are properly closed
     # Find opening ``` that don't have matching closing ```
@@ -50,8 +50,8 @@ def fix_code_blocks(content):
     # Fix 4: Remove duplicate consecutive code fences
     content = re.sub(r'^```\s*\n```\s*$', '```', content, flags=re.MULTILINE)
     
-    # Fix 5: Fix ```text at end of files (should just be ```)
-    content = re.sub(r'^```text\s*$(?=\s*$)', '```', content, flags=re.MULTILINE)
+    # Fix 5: Fix ``` at end of files (should just be ```)
+    content = re.sub(r'^```\s*$(?=\s*$)', '```', content, flags=re.MULTILINE)
     
     return content
 

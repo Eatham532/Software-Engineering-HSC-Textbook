@@ -63,7 +63,7 @@ def get_user_vulnerable(username, password):
 # This creates the query: SELECT * FROM users WHERE username = 'admin' OR '1'='1' --' AND password = '...'
 # The -- comments out the password check, bypassing authentication
 
-```text
+```
 
 ### Secure Implementation with Parameterized Queries
 
@@ -409,7 +409,7 @@ def demonstrate_sql_injection_protection():
     search_results = db_manager.search_users(malicious_search, "username")
     print(f"Malicious search results: {len(search_results)} users found (should be 0)")
 
-```text
+```
 
 ## Cross-Site Scripting (XSS) Prevention
 
@@ -725,7 +725,7 @@ def demonstrate_xss_protection():
         if field != 'password':  # Don't display password
             print(f"  {field}: {value}")
 
-```text
+```
 
 ## Input Validation Strategies: Whitelist vs Blacklist
 
@@ -996,7 +996,7 @@ def demonstrate_whitelist_validation():
         result = validator.validate_field(field, invalid_value)
         print(f"{field}: '{invalid_value}' -> {result['error'].value if result['error'] else 'VALID'}")
 
-```text
+```
 
 ### Blacklist Approach (Use with Caution)
 
@@ -1124,7 +1124,7 @@ def demonstrate_blacklist_limitations():
                 print(f"  Detected: {threat['type']} - {threat.get('pattern', threat.get('word'))}")
         print()
 
-```text
+```
 
 ## Safe Error Message Design
 
@@ -1223,7 +1223,7 @@ class SafeErrorHandler:
         
         return "Too many requests. Please wait before trying again."
 
-```text
+```
 
 ## File Upload Security
 

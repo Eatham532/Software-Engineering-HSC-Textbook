@@ -53,7 +53,7 @@ message = "Hello World"
 # or:
 message = 'Hello World'
 
-```text
+```
 
 ///
 
@@ -97,7 +97,7 @@ def fixed_function():
     if x > 5:
         print("Greater than 5")
 
-```text
+```
 
 ///
 
@@ -160,7 +160,7 @@ def safe_division_example():
 
 safe_division_example()
 
-```text
+```
 
 ///
 
@@ -218,7 +218,7 @@ def index_error_examples():
 
 index_error_examples()
 
-```text
+```
 
 ///
 
@@ -283,7 +283,7 @@ def key_error_examples():
 
 key_error_examples()
 
-```text
+```
 
 ///
 
@@ -356,7 +356,7 @@ def type_error_examples():
 
 type_error_examples()
 
-```text
+```
 
 ///
 
@@ -432,7 +432,7 @@ def off_by_one_examples():
 
 off_by_one_examples()
 
-```text
+```
 
 ///
 
@@ -531,7 +531,7 @@ def logic_condition_examples():
 
 logic_condition_examples()
 
-```text
+```
 
 ///
 
@@ -639,7 +639,7 @@ def infinite_loop_examples():
 # Note: We don't actually run the infinite loop examples to avoid hanging
 print("Infinite loop examples defined (safe to demonstrate concepts)")
 
-```text
+```
 
 ///
 
@@ -697,7 +697,7 @@ def variable_name_errors():
 
 variable_name_errors()
 
-```text
+```
 
 ### Function Definition and Call Errors
 
@@ -760,7 +760,7 @@ def function_errors():
 
 function_errors()
 
-```text
+```
 
 ## Debugging Strategies for Common Errors
 
@@ -896,7 +896,7 @@ def debugging_strategies():
 
 debugging_strategies()
 
-```text
+```
 
 ## Error Prevention Best Practices
 
@@ -1007,7 +1007,7 @@ def defensive_programming():
 
 defensive_programming()
 
-```text
+```
 
 ## Summary
 

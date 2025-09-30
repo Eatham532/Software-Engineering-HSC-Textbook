@@ -54,7 +54,7 @@ class C:
 c = C("John", 1000, 1500)
 result = c.calc()
 
-```text
+```
 
 **Good naming:**
 
@@ -72,7 +72,7 @@ class BankAccount:
 account = BankAccount("John", 1000, 1500)
 net_change = account.calculate_net_change()
 
-```text
+```
 
 ### Python Naming Conventions
 
@@ -114,7 +114,7 @@ class LibraryBook:
             return max(0, days_loaned - self.MAX_LOAN_DAYS)
         return 0
 
-```text
+```
 
 ## Documentation with Docstrings and Comments
 
@@ -140,7 +140,7 @@ def method_name(parameter1, parameter2):
         ExceptionType: Description of when this exception is raised
     """
 
-```text
+```
 
 **Example with comprehensive docstrings:**
 
@@ -218,7 +218,7 @@ class Student:
         else:
             return 0.0
 
-```text
+```
 
 ### Strategic Use of Comments
 
@@ -235,7 +235,7 @@ if self.balance > amount:
     # Subtract amount from balance
     self.balance -= amount
 
-```text
+```
 
 **Good commenting:**
 
@@ -250,7 +250,7 @@ if self.balance - amount >= 10:
 else:
     raise InsufficientFundsError("Transaction would violate minimum balance requirement")
 
-```text
+```
 
 ## Managing Method Length and Complexity
 
@@ -313,7 +313,7 @@ def process_order(self, order_items, customer_info, payment_info):
     # Generate receipt and update inventory...
     # (even more code would go here)
 
-```text
+```
 
 ### Refactoring to Smaller, Focused Methods
 
@@ -411,7 +411,7 @@ class OrderProcessor:
             raise ValueError("Insufficient funds")
         # Process debit payment logic here
 
-```text
+```
 
 ## Simple Refactoring Patterns
 
@@ -445,7 +445,7 @@ def generate_report(self, students):
     
     return report
 
-```text
+```
 
 **After:**
 
@@ -487,7 +487,7 @@ def _format_student_section(self, student):
     section += "\n"
     return section
 
-```text
+```
 
 ### Replace Magic Numbers with Named Constants
 
@@ -502,7 +502,7 @@ def calculate_late_fee(self, days_late):
     else:
         return 7 * 0.5 + 23 * 1.0 + (days_late - 30) * 2.0
 
-```text
+```
 
 **After:**
 
@@ -535,7 +535,7 @@ class LibraryFeeCalculator:
             extended_fee = extended_days * self.EXTENDED_FEE_PER_DAY
             return grace_fee + standard_fee + extended_fee
 
-```text
+```
 
 ## Practical Code Quality Checklist
 
@@ -614,7 +614,7 @@ class C:
     def check(self, amt):
         return amt <= self.calc(5)
 
-```text
+```
 
 ///
 
@@ -668,7 +668,7 @@ def analyze_exam_results(self, exam_scores):
     
     return report
 
-```text
+```
 
 ///
 

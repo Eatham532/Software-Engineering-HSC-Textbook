@@ -43,7 +43,7 @@ class BankAccount:
         """Return current account balance."""
         return self.balance
 
-```text
+```
 
 ### Designing with stubs
 
@@ -86,7 +86,7 @@ class ShoppingCart:
         print(f"Processing checkout for ${total}")
         return True
 
-```text
+```
 
 /// details | Guided example: Student gradebook
     type: example
@@ -168,7 +168,7 @@ gradebook.record_grade("12345", "Science", 92)
 
 print(gradebook.generate_report("12345"))
 
-```text
+```
 
 ///
 
@@ -203,7 +203,7 @@ class Gradebook {
 Gradebook --> "*" Student : manages
 @enduml
 
-```text
+```
 
 ## Try it
 
@@ -299,7 +299,7 @@ class Library:
         print(f"TODO: Process checkout for member {member_id}, book {isbn}")
         return False
 
-```text
+```
 
 ///
 ///
@@ -382,7 +382,7 @@ class TaskList:
         print(f"TODO: Mark '{task_title}' as complete")
         return False
 
-```text
+```
 
 ///
 ///

@@ -63,7 +63,7 @@ new_size = 130
 predicted_price = slope * new_size + intercept
 print(f"Predicted price for {new_size}m²: ${predicted_price:.0f}k")
 
-```text
+```
 
 ### Logistic regression
 
@@ -122,7 +122,7 @@ test_count = 10
 probability = sigmoid(weight * test_count + bias)
 print(f"Email with {test_count} suspicious words: {probability:.1%} spam probability")
 
-```text
+```
 
 ### K-nearest neighbour
 
@@ -186,7 +186,7 @@ new_flower = [4.5, 1.5]
 predicted_type = knn_classify(flower_features, flower_types, new_flower, k=3)
 print(f"Flower with petals {new_flower} is predicted to be: {predicted_type}")
 
-```text
+```
 
 ### Polynomial regression
 
@@ -254,7 +254,7 @@ test_x = 9
 prediction = predict_polynomial(test_x, poly_weights)
 print(f"Prediction for x={test_x}: {prediction:.1f}")
 
-```text
+```
 
 ### Guided example
 
@@ -294,7 +294,7 @@ end fork
 stop
 @enduml
 
-```text
+```
 
 ```python
 def evaluate_model_performance():
@@ -351,7 +351,7 @@ def evaluate_model_performance():
 # Run the comparison
 performance_results = evaluate_model_performance()
 
-```text
+```
 
 ### Avoiding overfitting
 
@@ -396,7 +396,7 @@ x_sample = list(range(1, 21))
 y_sample = [x*x + random.uniform(-10, 10) for x in x_sample]
 check_overfitting(x_sample, y_sample)
 
-```text
+```
 
 ## Try it
 
@@ -434,7 +434,7 @@ prices = [house[3] for house in houses]
 # Implement and compare models
 # Consider normalizing features for better performance
 
-```text
+```
 
 ///
 ///

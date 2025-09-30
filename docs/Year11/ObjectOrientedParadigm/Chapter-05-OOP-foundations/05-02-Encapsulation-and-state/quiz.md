@@ -32,7 +32,7 @@
 
         account = BankAccount(100)
         account._balance = -500  # Problem here
-        ```text
+        ```
 
         - It's perfectly fine
         - It bypasses validation and can create invalid state { data-correct }
@@ -59,7 +59,7 @@
         @property
         def temperature(self):
             return self._celsius
-        ```text
+        ```
 
         - Makes the method private
         - Allows the method to be accessed like an attribute { data-correct }

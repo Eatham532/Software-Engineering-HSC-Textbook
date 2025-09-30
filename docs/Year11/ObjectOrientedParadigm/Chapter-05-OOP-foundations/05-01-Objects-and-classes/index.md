@@ -29,7 +29,7 @@ Object-oriented programming takes this natural way of thinking about the world a
 # Attributes: account_number, balance, owner_name
 # Behaviours: deposit, withdraw, check_balance
 
-```text
+```
 
 ## What are classes?
 
@@ -63,7 +63,7 @@ class BankAccount:
         """A simple getter method"""
         return f"Current balance: ${self.balance}"
 
-```text
+```
 
 ## Instances vs Classes
 
@@ -78,7 +78,7 @@ bob_account = BankAccount("ACC002", "Bob Jones", 500)
 print(alice_account.check_balance())  # Current balance: $1000
 print(bob_account.check_balance())    # Current balance: $500
 
-```text
+```
 
 Key differences:
 
@@ -105,7 +105,7 @@ print(result)  # Deposited $200. New balance: $1200
 result = bob_account.withdraw(100)   # Bob receives a "withdraw" message
 print(result)  # Withdrew $100. New balance: $400
 
-```text
+```
 
 When you write `alice_account.deposit(200)`, you're:
 
@@ -122,7 +122,7 @@ When you call a method on an object, several things happen behind the scenes:
 ```python
 alice_account.deposit(200)
 
-```text
+```
 
 1. **Method lookup**: Python finds the `deposit` method in the `BankAccount` class
 
@@ -140,7 +140,7 @@ alice_account.deposit(200)
 # But we write it as:
 alice_account.deposit(200)
 
-```text
+```
 
 ## Practice
 
@@ -228,7 +228,7 @@ student1 = Student("Alice", "STU001", 11)
 print(student1.introduce())  # Hello, I'm Alice (ID: STU001) in grade 11
 print(student1.study("Mathematics"))  # Alice is studying Mathematics
 
-```text
+```
 
 ///
 ///
@@ -266,7 +266,7 @@ print(alice.study("Computer Science"))
 print(bob.study("Mathematics"))
 print(alice.study("Physics"))
 
-```text
+```
 
 **Explanation**: This demonstrates message passing where:
 

@@ -284,7 +284,7 @@ def demonstrate_security_roi():
 if __name__ == "__main__":
     demonstrate_security_roi()
 
-```text
+```
 
 ### Security Investment Portfolio Optimization
 
@@ -454,7 +454,7 @@ def demonstrate_portfolio_optimization():
 if __name__ == "__main__":
     demonstrate_portfolio_optimization()
 
-```text
+```
 
 ## Compliance and Regulatory Advantages
 
@@ -676,7 +676,7 @@ def demonstrate_gdpr_compliance():
 if __name__ == "__main__":
     demonstrate_gdpr_compliance()
 
-```text
+```
 
 ## Building Customer Trust and Market Differentiation
 
@@ -799,7 +799,7 @@ def demonstrate_trust_analysis():
 if __name__ == "__main__":
     demonstrate_trust_analysis()
 
-```text
+```
 
 ## Risk Management and Insurance Implications
 
@@ -1052,7 +1052,7 @@ def demonstrate_insurance_optimization():
 if __name__ == "__main__":
     demonstrate_insurance_optimization()
 
-```text
+```
 
 ## Security as a Competitive Advantage
 
@@ -1258,7 +1258,7 @@ def demonstrate_competitive_analysis():
 if __name__ == "__main__":
     demonstrate_competitive_analysis()
 
-```text
+```
 
 ## Practice Exercises
 

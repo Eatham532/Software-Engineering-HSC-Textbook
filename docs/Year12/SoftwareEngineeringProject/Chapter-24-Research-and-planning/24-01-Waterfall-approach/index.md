@@ -71,7 +71,7 @@ deploy --> maint
 note bottom : Each phase has formal review\nand approval before progression
 @enduml
 
-```text
+```
 
 #### Phase 1: Requirements Analysis
 
@@ -326,7 +326,7 @@ def demonstrate_requirements_phase():
 if __name__ == "__main__":
     requirements_demo = demonstrate_requirements_phase()
 
-```text
+```
 
 #### Phase 2: System Design
 
@@ -704,7 +704,7 @@ def demonstrate_waterfall_suitability():
 if __name__ == "__main__":
     suitability_examples = demonstrate_waterfall_suitability()
 
-```text
+```
 
 ### Risks and challenges of Waterfall
 
@@ -856,7 +856,7 @@ def complete_waterfall_analysis(project_name, project_type):
         'suitability': suitability
     }
 
-```text
+```
 
 Use this template to structure your analysis and ensure comprehensive coverage of all Waterfall aspects.
 ///

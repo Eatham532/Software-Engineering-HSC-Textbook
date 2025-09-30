@@ -73,7 +73,7 @@ standards_demo = WebStandardsDemo()
 standards_demo.demonstrate_standards_impact()
 standards_demo.show_standards_evolution()
 
-```text
+```
 
 ### Web Accessibility Initiative (WAI) and accessibility guidelines
 
@@ -230,7 +230,7 @@ accessibility.check_image_accessibility(sample_images)
 accessibility.generate_accessible_form()
 accessibility.check_color_contrast("#767676", "#ffffff")
 
-```text
+```
 
 ### Internationalisation (i18n) and localisation (l10n)
 
@@ -379,7 +379,7 @@ for locale in locales:
 
 i18n_demo.demonstrate_text_direction()
 
-```text
+```
 
 ### Web security standards and recommended patterns
 
@@ -510,7 +510,7 @@ security.implement_secure_headers()
 security.demonstrate_secure_authentication()
 security.show_input_validation_patterns()
 
-```text
+```
 
 ### Privacy and privacy-by-design principles
 
@@ -658,7 +658,7 @@ privacy.demonstrate_consent_management()
 privacy.implement_data_retention_policy()
 privacy.create_privacy_dashboard()
 
-```text
+```
 
 ### Machine-readable data standards
 
@@ -880,7 +880,7 @@ machine_data.create_microdata_example()
 machine_data.create_json_ld_example()
 machine_data.demonstrate_semantic_html()
 
-```text
+```
 
 ## Try it
 
@@ -1049,7 +1049,7 @@ print(f"Accessibility Issues Found: {report['total_issues']}")
 for issue in report['issues']:
     print(f"- {issue['type']}: {issue['element']} (WCAG {issue['wcag']})")
 
-```text
+```
 
 ///
 ///
@@ -1333,7 +1333,7 @@ print("\nPrivacy dashboard generated successfully")
 export_data = consent_manager.export_consent_data('user123')
 print("\nData export available in JSON format")
 
-```text
+```
 
 ///
 ///

@@ -148,7 +148,7 @@ workshop.record_decision(
 
 print(workshop.generate_workshop_summary())
 
-```text
+```
 
 ///
 
@@ -195,7 +195,7 @@ endif
 stop
 @enduml
 
-```text
+```
 
 /// tab | Feedback Collection Strategy
 **Multi-Channel Feedback Approach**:
@@ -349,7 +349,7 @@ feedback_manager.categorise_feedback(usability_feedback, FeedbackPriority.MEDIUM
 
 print(feedback_manager.generate_feedback_report())
 
-```text
+```
 
 
 ### Negotiating scope and priorities
@@ -545,7 +545,7 @@ if mobile_app.effort_estimate_hours > 100:
     )
     print(f"Alternative for {mobile_app.title}: {alternative['alternative_description']}")
 
-```text
+```
 
 ///
 
@@ -737,7 +737,7 @@ assessment.add_mitigation_strategy("Add explanation features for recommendations
 
 print(assessment.generate_ethics_report())
 
-```text
+```
 
 ///
 

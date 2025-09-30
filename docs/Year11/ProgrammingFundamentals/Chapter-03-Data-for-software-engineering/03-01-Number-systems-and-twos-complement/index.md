@@ -48,7 +48,7 @@ To convert decimal 45 to binary:
 
 3. Read remainders from bottom to top
 
-```text
+```
 45 ÷ 2 = 22 remainder 1
 22 ÷ 2 = 11 remainder 0  
 11 ÷ 2 = 5  remainder 1
@@ -56,7 +56,7 @@ To convert decimal 45 to binary:
 2  ÷ 2 = 1  remainder 0
 1  ÷ 2 = 0  remainder 1
 
-```text
+```
 
 Reading bottom to top: **101101₂**
 
@@ -64,13 +64,13 @@ Reading bottom to top: **101101₂**
 
 To convert 101101₂ to decimal:
 
-```text
+```
 Position:  5  4  3  2  1  0
 Digit:     1  0  1  1  0  1
 Value:     1×2⁵ + 0×2⁴ + 1×2³ + 1×2² + 0×2¹ + 1×2⁰
          = 32 + 0 + 8 + 4 + 0 + 1 = 45
 
-```text
+```
 
 ### Hexadecimal conversions
 
@@ -160,7 +160,7 @@ manual_calc = 0b11101110
 print(f"Manual: {manual_calc}, Python: {eight_bit_pattern}")
 print(f"Are they equal? {manual_calc == eight_bit_pattern}")
 
-```text
+```
 
 ## Practice activity
 

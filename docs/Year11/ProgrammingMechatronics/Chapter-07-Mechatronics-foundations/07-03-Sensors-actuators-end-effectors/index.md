@@ -52,7 +52,7 @@ package "Light Sensors" {
 [ADC] --> [Microcontroller]
 @enduml
 
-```text
+```
 
 ### Motion sensors
 
@@ -166,7 +166,7 @@ print(f"Reading: {photodiode.read_value():.1f} lux")
 print(f"\nPIR: {pir_sensor.get_characteristics()}")
 print(f"Motion detected: {pir_sensor.read_value() > 0.5}")
 
-```text
+```
 
 ### Actuators: creating movement and force
 
@@ -239,7 +239,7 @@ note right of [Hydraulic Cylinder] : Force = Pressure × Area
 note bottom of [Load/End Effector] : High force output\nfor heavy tasks
 @enduml
 
-```text
+```
 
 ### End effectors: performing the final task
 
@@ -389,7 +389,7 @@ if suitable_grippers:
 else:
     print("No grippers meet all requirements - specifications need revision")
 
-```text
+```
 
 ### Trade-offs in component selection
 
@@ -447,7 +447,7 @@ skinparam shadowing false
 @endmindmap
 @enduml
 
-```text
+```
 
 ## Try it
 

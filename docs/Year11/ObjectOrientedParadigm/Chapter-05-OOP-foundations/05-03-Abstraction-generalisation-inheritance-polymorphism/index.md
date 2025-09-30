@@ -60,7 +60,7 @@ file_manager = FileManager()
 file_manager.save_data("notes.txt", "My important notes")
 content = file_manager.load_data("notes.txt")
 
-```text
+```
 
 ## Generalisation: Finding common patterns
 
@@ -117,7 +117,7 @@ class Vehicle:
         self.speed = 0
         return f"{self.vehicle_type} stopped"
 
-```text
+```
 
 ## Inheritance: Building on existing code
 
@@ -197,7 +197,7 @@ print(motorcycle.start())    # Inherited method
 print(motorcycle.accelerate())  # Overridden method
 print(motorcycle.wheelie())  # Motorcycle-specific method
 
-```text
+```
 
 ## Polymorphism: Same interface, different behavior
 
@@ -264,7 +264,7 @@ def pet_interaction(pet):
 pet_interaction(Dog("Rover"))
 pet_interaction(Cat("Fluffy"))
 
-```text
+```
 
 ## Bringing it all together
 
@@ -338,7 +338,7 @@ for shape in shapes:
 
 print(f"Total area of all shapes: {calculate_total_area(shapes)}")
 
-```text
+```
 
 ## Practice
 
@@ -371,7 +371,7 @@ def start_playlist(players):
     for player in players:
         print(player.play())
 
-```text
+```
 
 **Task**: Identify and explain each concept in this code.
 
@@ -460,7 +460,7 @@ class Designer(Employee):
     def review_design(self):
         return f"{self.name} is reviewing design mockups"
 
-```text
+```
 
 ///
 ///
@@ -538,7 +538,7 @@ appliances = [
 for appliance in appliances:
     run_appliance(appliance)
 
-```text
+```
 
 ///
 ///

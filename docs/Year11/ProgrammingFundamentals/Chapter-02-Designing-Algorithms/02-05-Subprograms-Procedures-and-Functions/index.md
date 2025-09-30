@@ -105,7 +105,7 @@ package "Grade Processing System" {
 }
 @enduml
 
-```text
+```
 
 ## Parameters
 
@@ -119,14 +119,14 @@ package "Grade Processing System" {
 
 Data passed into the subprogram that it reads but doesn't change.
 
-```text
+```
 FUNCTION CalculateCircleArea(radius)
 BEGIN
     SET area = 3.14159 * radius * radius
     RETURN area
 END
 
-```text
+```
 
 ///
 
@@ -136,7 +136,7 @@ END
 
 Variables that the subprogram modifies to send results back.
 
-```text
+```
 PROCEDURE GetStudentInfo(OUT studentName, OUT studentID, OUT age)
 BEGIN
     OUTPUT "Enter student name:"
@@ -147,7 +147,7 @@ BEGIN
     INPUT age
 END
 
-```text
+```
 
 ///
 
@@ -157,7 +157,7 @@ END
 
 Data that comes in, gets modified, and goes back out.
 
-```text
+```
 PROCEDURE UpdateGrade(IN_OUT student, newGrade)
 BEGIN
     SET student.totalPoints = student.totalPoints + newGrade
@@ -165,7 +165,7 @@ BEGIN
     SET student.average = student.totalPoints / student.numAssignments
 END
 
-```text
+```
 
 ///
 
@@ -173,18 +173,18 @@ END
 
 **Function with Multiple Parameters:**
 
-```text
+```
 FUNCTION CalculateCompoundInterest(principal, rate, time, compoundFrequency)
 BEGIN
     SET amount = principal * (1 + rate/compoundFrequency)^(compoundFrequency * time)
     RETURN amount
 END
 
-```text
+```
 
 **Procedure with Mixed Parameters:**
 
-```text
+```
 PROCEDURE ProcessStudentGrades(IN studentList, IN assignmentScores, OUT finalGrades, OUT classAverage)
 BEGIN
     SET totalGrades = 0
@@ -201,7 +201,7 @@ BEGIN
     SET classAverage = totalGrades / studentCount
 END
 
-```text
+```
 
 ## Return Values
 
@@ -211,7 +211,7 @@ END
 
 Most functions return one value:
 
-```text
+```
 FUNCTION IsEven(number)
 BEGIN
     IF number MOD 2 = 0 THEN
@@ -229,7 +229,7 @@ BEGIN
     RETURN size
 END
 
-```text
+```
 
 ### Using Return Values
 
@@ -237,35 +237,35 @@ Return values can be used in several ways:
 
 **Assignment:**
 
-```text
+```
 SET average = CalculateAverage(scores)
 SET isValid = ValidateEmail(emailAddress)
 
-```text
+```
 
 **Expressions:**
 
-```text
+```
 SET finalGrade = CalculateAverage(scores) * 0.8 + examScore * 0.2
 IF ValidateInput(userInput) AND userInput > 0 THEN
 
-```text
+```
 
 **Nested Function Calls:**
 
-```text
+```
 SET letterGrade = DetermineLetterGrade(CalculateAverage(scores))
 SET formatted = FormatCurrency(CalculateTotal(prices))
 
-```text
+```
 
 **Direct Output:**
 
-```text
+```
 OUTPUT "Your GPA is: " + CalculateGPA(grades)
 OUTPUT "File size: " + GetFileSize("data.txt") + " bytes"
 
-```text
+```
 
 ## Cohesion in Subprograms
 
@@ -279,12 +279,12 @@ OUTPUT "File size: " + GetFileSize("data.txt") + " bytes"
 
 Everything contributes to a single, well-defined task.
 
-```text
+```
 ✓ FUNCTION CalculateCircleArea(radius)
 ✓ PROCEDURE SaveStudentRecord(student)
 ✓ FUNCTION ValidateEmailAddress(email)
 
-```text
+```
 
 ///
 
@@ -294,7 +294,7 @@ Everything contributes to a single, well-defined task.
 
 Elements are related because the output of one becomes the input of the next.
 
-```text
+```
 PROCEDURE ProcessOrderAndShip(order)
 BEGIN
     ValidateOrder(order)          // Step 1
@@ -303,7 +303,7 @@ BEGIN
     ArrangeShipping(order)        // Step 4 (uses charged order)
 END
 
-```text
+```
 
 ///
 
@@ -313,7 +313,7 @@ END
 
 Elements work on the same data.
 
-```text
+```
 PROCEDURE UpdateStudentRecord(student)
 BEGIN
     ValidateStudentData(student)
@@ -321,7 +321,7 @@ BEGIN
     FormatStudentReport(student)
 END
 
-```text
+```
 
 ///
 
@@ -331,7 +331,7 @@ END
 
 **Temporal Cohesion (Poor)** - grouped only because they happen at the same time:
 
-```text
+```
 ✗ PROCEDURE SystemStartup()
 BEGIN
     InitializeDatabase()
@@ -341,11 +341,11 @@ BEGIN
     StartBackgroundMusic()
 END
 
-```text
+```
 
 **Logical Cohesion (Poor)** - grouped because they're similar but do different things:
 
-```text
+```
 ✗ PROCEDURE HandleAllInputs(inputType, data)
 BEGIN
     IF inputType = "keyboard" THEN
@@ -357,7 +357,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ///
 
@@ -365,7 +365,7 @@ END
 
 **Instead of one large subprogram:**
 
-```text
+```
 ✗ PROCEDURE ProcessCompleteOrder(customer, items, paymentInfo)
 BEGIN
     // Validate customer (20 lines)
@@ -377,11 +377,11 @@ BEGIN
     // Send confirmation email (10 lines)
 END
 
-```text
+```
 
 **Create focused subprograms:**
 
-```text
+```
 ✓ FUNCTION ValidateCustomer(customer) → boolean
 ✓ FUNCTION CalculateOrderTotal(items) → amount
 ✓ FUNCTION ApplyDiscounts(customer, total) → discountedTotal
@@ -390,7 +390,7 @@ END
 ✓ PROCEDURE GenerateReceipt(order)
 ✓ PROCEDURE SendConfirmationEmail(customer, order)
 
-```text
+```
 
 ## Identifying Subprograms in Algorithms
 
@@ -420,7 +420,7 @@ END
 
 Let's identify subprograms in a library system algorithm:
 
-```text
+```
 ALGORITHM LibraryManagement
 BEGIN
     WHILE system is running DO
@@ -468,7 +468,7 @@ BEGIN
     END WHILE
 END
 
-```text
+```
 
 ### Structure Chart with Subprograms
 
@@ -523,7 +523,7 @@ main --> [ProcessBookBorrowing()]
 [ProcessBookReturn()] --> [UpdateBookStatus()]
 @enduml
 
-```text
+```
 
 ## Design Guidelines for Subprograms
 
@@ -541,13 +541,13 @@ main --> [ProcessBookBorrowing()]
 
 **Good Function Examples:**
 
-```text
+```
 ✓ FUNCTION CalculateAge(birthDate, currentDate) → integer
 ✓ FUNCTION IsValidEmail(emailString) → boolean
 ✓ FUNCTION ConvertCelsiusToFahrenheit(celsius) → real
 ✓ FUNCTION CountWordsInText(text) → integer
 
-```text
+```
 
 ### Procedure Design Guidelines
 
@@ -563,13 +563,13 @@ main --> [ProcessBookBorrowing()]
 
 **Good Procedure Examples:**
 
-```text
+```
 ✓ PROCEDURE SaveStudentRecord(student, filename)
 ✓ PROCEDURE DisplayWelcomeMessage(userName)
 ✓ PROCEDURE BackupDatabase(sourceDB, backupLocation)
 ✓ PROCEDURE SendEmailNotification(recipient, subject, message)
 
-```text
+```
 
 ## Practice Activity: Student Grade Calculator
 
@@ -591,7 +591,7 @@ Let's design a complete student grade calculator using appropriate subprograms:
 
 **Main Algorithm:**
 
-```text
+```
 ALGORITHM StudentGradeCalculator
 BEGIN
     SET students = LoadStudentData()
@@ -609,7 +609,7 @@ BEGIN
     _______________  // Procedure call to save results
 END
 
-```text
+```
 
 **Identify the missing subprograms:**
 
@@ -631,7 +631,7 @@ END
 
 **Complete Algorithm with Subprograms:**
 
-```text
+```
 ALGORITHM StudentGradeCalculator
 BEGIN
     SET students = LoadStudentData()
@@ -726,13 +726,13 @@ BEGIN
     CLOSE file
 END
 
-```text
+```
 
 ## Common Subprogram Patterns
 
 ### Input Validation Functions
 
-```text
+```
 FUNCTION IsValidAge(age)
 BEGIN
     RETURN (age >= 0) AND (age <= 150)
@@ -748,11 +748,11 @@ BEGIN
     RETURN (value >= minimum) AND (value <= maximum)
 END
 
-```text
+```
 
 ### Data Transformation Functions
 
-```text
+```
 FUNCTION FormatPhoneNumber(phoneNumber)
 BEGIN
     // Remove non-digits
@@ -770,11 +770,11 @@ BEGIN
     RETURN JoinWords(words)
 END
 
-```text
+```
 
 ### Calculation Functions
 
-```text
+```
 FUNCTION CalculateDistance(x1, y1, x2, y2)
 BEGIN
     SET deltaX = x2 - x1
@@ -788,7 +788,7 @@ BEGIN
     RETURN amount - principal
 END
 
-```text
+```
 
 
 ## Summary

@@ -96,7 +96,7 @@ def plan_increment(increment_number, available_weeks):
             }
     return {"status": "all_increments_planned"}
 
-```text
+```
 
 ### Quality maintenance strategies
 
@@ -198,7 +198,7 @@ completed_review = quality_system.conduct_review(review, "senior_developer", fin
 coverage_result = quality_system.check_test_coverage("user_auth", 0.92)
 print(f"Test coverage status: {coverage_result['status']}")
 
-```text
+```
 
 ### Integration and deployment practices
 
@@ -268,7 +268,7 @@ stage --> prod
 
 @enduml
 
-```text
+```
 
 ### Guided example: Building a student progress tracking system
 
@@ -325,7 +325,7 @@ def test_student_basic_functionality():
 
 test_student_basic_functionality()
 
-```text
+```
 
 **Increment 2: Progress tracking and reporting (Week 3-4)**
 
@@ -418,7 +418,7 @@ def test_progress_tracking():
 
 test_progress_tracking()
 
-```text
+```
 
 ## Practice
 

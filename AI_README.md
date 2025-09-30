@@ -58,7 +58,7 @@ Student -> Site: Open Section
 Site --> Student: Rendered page
 @enduml
 
-```text
+```
 
 Links are used across the textbook to reduce duplication and maintain a single source of truth for terms and concepts.
 
@@ -122,7 +122,7 @@ Quizzes belong in a separate `quiz.md` adjacent to each section’s `index.md`. 
 ///
 ///
 
-```text
+```
 
 ## Using pymdownx extensions
 
@@ -141,23 +141,23 @@ Guidelines and common patterns:
 
   print('hello')
 
-  ```text
+  ```
 
   ///
 
   /// tab | Pseudocode
 
-  ```text
+  ```
 
   OUTPUT "hello"
 
-  ```text
+  ```
 
   ///
 
-  ```text
+  ```
 
-  ```text
+  ```
 
   Notes:
 
@@ -181,7 +181,7 @@ Guidelines and common patterns:
   Content goes here
   ///
 
-  ```text
+  ```
 
   Available types: `note`, `warning`, `info`, `success`, `question`, `failure`, `danger`, `bug`, `example`, `quote`, `tip`
 
@@ -278,16 +278,16 @@ Content here.
 ```py
 print('tiny example')
 
-```text
+```
 
 ///
 
 /// tab | Pseudocode
 
-```text
+```
 OUTPUT "tiny example"
 
-```text
+```
 
 ///
 
@@ -301,7 +301,7 @@ OUTPUT "tiny example"
 
 Short summary.
 
-````text
+````
 
 ### Quiz authoring — Markdown-only interactive quizzes
 
@@ -387,7 +387,7 @@ qs.forEach((q, qi) => {
   }));
 });
 
-```text
+```
 
 To temporarily enable verbose logs in the page Console:
 
@@ -396,7 +396,7 @@ To temporarily enable verbose logs in the page Console:
 window.__quiz_debug = true; // or false to silence
 location.reload();
 
-```text
+```
 
 If you need me to debug, paste the Console output showing `quiz:marker`, `quiz:toggle`, `quiz:question state` and `quiz:grade result` lines.
 
@@ -467,7 +467,7 @@ Following this pattern keeps content consistent with teaching goals and assessme
 
 ## Repository structure (example)
 
-```text
+```
 
 docs/
   Year11/
@@ -490,7 +490,7 @@ docs/
       Chapter-03-Data-for-Software-Engineering/
       Chapter-04-Developing-Solutions-with-Code/
 
-```text
+```
 
 Conventions:
 
@@ -517,7 +517,7 @@ Student -> Site: Open Section
 Site --> Student: Rendered page
 @enduml
 
-```text
+```
 
 ## Section template (index.md)
 
@@ -561,7 +561,7 @@ Use a single admonition block for the entire quiz:
         - Second choice { data-correct }
         - Third choice
 
-```text
+```
 
 **Indentation Rules:**
 

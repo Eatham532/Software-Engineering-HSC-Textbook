@@ -26,7 +26,7 @@ age = int(input("What's your age? "))
 print(f"Hello {name}, you are {age} years old!")
 print("Program finished.")
 
-```text
+```
 
 ### Grade Calculator Example
 
@@ -59,7 +59,7 @@ print(f"Assignment 2: {assignment2}")
 print(f"Test Score: {test_score}")
 print(f"Average: {average:.1f}")
 
-```text
+```
 
 ///
 
@@ -77,7 +77,7 @@ if age >= 18:
     print("You are eligible to vote!")
     print("Don't forget to register!")
 
-```text
+```
 
 ### If-Else Statements
 
@@ -91,7 +91,7 @@ else:
     print("You need to retake the test.")
     print("Study hard and try again!")
 
-```text
+```
 
 ### If-Elif-Else (Multiple Conditions)
 
@@ -115,7 +115,7 @@ student_score = 85
 letter = get_letter_grade(student_score)
 print(f"Score: {student_score} = Grade: {letter}")
 
-```text
+```
 
 ### Nested If Statements
 
@@ -134,7 +134,7 @@ else:
     years_to_wait = 16 - age
     print(f"Wait {years_to_wait} more years.")
 
-```text
+```
 
 ### Logical Operators
 
@@ -156,7 +156,7 @@ if age < 13 or age > 65:
 if not (age >= 18):
     print("You are under 18")
 
-```text
+```
 
 ## Iteration (Loops)
 
@@ -182,7 +182,7 @@ print(f"\nLetters in '{word}':")
 for letter in word:
     print(letter)
 
-```text
+```
 
 ### Range Function Variations
 
@@ -210,7 +210,7 @@ for i in range(5, 0, -1):
     print(i, end=" ")
 print("Blast off!")
 
-```text
+```
 
 ### While Loops (Indefinite Iteration)
 
@@ -226,7 +226,7 @@ while count <= 5:
 
 print("Done!")
 
-```text
+```
 
 ### Input Validation with While
 
@@ -240,7 +240,7 @@ while age < 0 or age > 120:
 
 print(f"Thank you! You entered age: {age}")
 
-```text
+```
 
 ### Menu System Example
 
@@ -284,7 +284,7 @@ while choice != "4":
     else:
         print("Invalid choice. Please try again.")
 
-```text
+```
 
 ## Mapping from Pseudocode to Python
 
@@ -296,7 +296,7 @@ while choice != "4":
 
 /// tab | Pseudocode
 
-```text
+```
 BEGIN NumberGuessingGame
     SET secret_number = 7
     SET guess = 0
@@ -319,7 +319,7 @@ BEGIN NumberGuessingGame
     PRINT "You won in " + attempts + " attempts!"
 END
 
-```text
+```
 
 ///
 
@@ -344,7 +344,7 @@ while guess != secret_number:
 
 print(f"You won in {attempts} attempts!")
 
-```text
+```
 
 ///
 ///
@@ -357,7 +357,7 @@ print(f"You won in {attempts} attempts!")
 
 /// tab | Pseudocode
 
-```text
+```
 BEGIN GradeClassifier
     FOR each student in class DO
         READ student_name
@@ -379,7 +379,7 @@ BEGIN GradeClassifier
     END FOR
 END
 
-```text
+```
 
 ///
 
@@ -407,7 +407,7 @@ for i in range(len(students)):
     
     print(f"{student_name}: {grade}")
 
-```text
+```
 
 ///
 ///
@@ -452,7 +452,7 @@ for password in test_passwords:
     strength = check_password_strength(password)
     print(f"'{password}' is {strength}")
 
-```text
+```
 
 ### Shopping Cart Calculator
 
@@ -504,7 +504,7 @@ def shopping_cart():
 # Run the shopping cart
 shopping_cart()
 
-```text
+```
 
 ## Common Patterns and Best Practices
 
@@ -536,7 +536,7 @@ def get_valid_integer(prompt, min_value=None, max_value=None):
 age = get_valid_integer("Enter your age (0-120): ", 0, 120)
 score = get_valid_integer("Enter test score (0-100): ", 0, 100)
 
-```text
+```
 
 ### Flag-Controlled Loop Pattern
 
@@ -565,7 +565,7 @@ numbers = [10, 25, 30, 45, 50]
 find_target_in_list(numbers, 30)  # Found at position 2
 find_target_in_list(numbers, 99)  # Not found
 
-```text
+```
 
 ## Practice Exercises
 
@@ -636,7 +636,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-```text
+```
 
 This program demonstrates:
 
@@ -741,7 +741,7 @@ def main():
 if __name__ == "__main__":
     main()
 
-```text
+```
 
 This program demonstrates:
 
@@ -865,7 +865,7 @@ Class Statistics:")
 if __name__ == "__main__":
     main()
 
-```text
+```
 
 This program demonstrates:
 
@@ -902,7 +902,7 @@ This program demonstrates:
        print(count)
        count += 1
 
-   ```text
+   ```
 
 2. **Off-by-one errors**: Be careful with range boundaries
 
@@ -915,7 +915,7 @@ This program demonstrates:
    for i in range(len(my_list)):
        print(my_list[i])
 
-   ```text
+   ```
 
 3. **Indentation errors**: Python relies on proper indentation
 
@@ -928,7 +928,7 @@ This program demonstrates:
    if score >= 90:
        print("Excellent!")
 
-   ```text
+   ```
 
 ## Summary
 

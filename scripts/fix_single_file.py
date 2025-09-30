@@ -42,8 +42,8 @@ def fix_code_blocks(content):
     # Fix 3: Remove duplicate consecutive code fences
     content = re.sub(r'^```\s*\n```\s*$', '```', content, flags=re.MULTILINE)
     
-    # Fix 4: Fix ```text at end of files (should just be ```)
-    content = re.sub(r'^```text\s*$(?=\s*$)', '```', content, flags=re.MULTILINE)
+    # Fix 4: Fix ``` at end of files (should just be ```)
+    content = re.sub(r'^```\s*$(?=\s*$)', '```', content, flags=re.MULTILINE)
     
     return content
 

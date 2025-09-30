@@ -33,7 +33,7 @@ components --> data : triggers updates
 data --> state : updates state
 @enduml
 
-```text
+```
 
 ```python
 # Example: Python backend supporting framework-based front-end
@@ -106,7 +106,7 @@ def framework_app():
     """Serve single-page application for framework"""
     return render_template('framework_app.html')
 
-```text
+```
 
 Example HTML template for framework integration (`templates/framework_app.html`):
 
@@ -220,7 +220,7 @@ Example HTML template for framework integration (`templates/framework_app.html`)
 </body>
 </html>
 
-```text
+```
 
 ### Template engines for server-side rendering
 
@@ -332,7 +332,7 @@ def get_template_data(user_role):
     data = template_engine.prepare_template_data(user_role)
     return jsonify(data)
 
-```text
+```
 
 ### CSS and UI component libraries
 
@@ -524,7 +524,7 @@ def component_demo():
     """Demonstrate component library usage"""
     return render_template('component_demo.html')
 
-```text
+```
 
 ### When to adopt libraries versus building bespoke code
 
@@ -560,7 +560,7 @@ timeline --> use_lib : fast delivery
 maintenance --> build_custom : full control
 @enduml
 
-```text
+```
 
 ```python
 # Example: Decision framework for library adoption
@@ -733,7 +733,7 @@ def decision_tool():
     """Serve decision-making tool interface"""
     return render_template('decision_tool.html')
 
-```text
+```
 
 /// details | Choosing the right approach for a student portal
     type: info
@@ -788,7 +788,7 @@ def student_portal_analysis():
     analysis = analyze_student_portal_requirements()
     return jsonify(analysis)
 
-```text
+```
 
 ///
 
@@ -896,7 +896,7 @@ component_library = {
     }
 }
 
-```text
+```
 
 **Component creation guidelines**:
 

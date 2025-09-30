@@ -168,7 +168,7 @@ def popular_posts():
     
     return response
 
-```text
+```
 
 ### CDN integration and static asset caching
 
@@ -289,7 +289,7 @@ def inject_asset_helpers():
         'js_bundle': lambda name: asset_manager.generate_bundle_html('js', name)
     }
 
-```text
+```
 
 ### Compression techniques
 
@@ -476,7 +476,7 @@ def performance_demo():
         ]
     })
 
-```text
+```
 
 ### Lazy loading and asset bundling
 
@@ -522,7 +522,7 @@ rectangle "Performance Optimization Flow" {
 }
 @enduml
 
-```text
+```
 
 ```python
 # Lazy loading and progressive enhancement
@@ -708,7 +708,7 @@ def index():
 if __name__ == '__main__':
     app.run(debug=True)
 
-```text
+```
 
 ## Try it
 
@@ -764,7 +764,7 @@ def invalidate_post_cache():
     """Invalidate post-related caches when posts change"""
     cache_manager.invalidate_group('posts')
 
-```text
+```
 
 ///
 ///

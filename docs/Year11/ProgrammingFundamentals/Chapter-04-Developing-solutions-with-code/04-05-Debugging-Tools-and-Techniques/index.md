@@ -21,7 +21,7 @@ def calculate_average(numbers:  # Missing closing parenthesis
 
 print("Hello World"  # Missing closing quote and parenthesis
 
-```text
+```
 
 ### Runtime Errors
 
@@ -35,7 +35,7 @@ def calculate_average(numbers):
 # This will crash when called with an empty list
 result = calculate_average([])  # ZeroDivisionError
 
-```text
+```
 
 ### Logic Errors
 
@@ -52,7 +52,7 @@ def get_last_element_wrong(my_list):
         return my_list[len(my_list) - 2]  # Returns second-to-last, not last!
     return None
 
-```text
+```
 
 ## Debugging Output Statements
 
@@ -102,7 +102,7 @@ final = 89
 result = calculate_grade_average(assignments, tests, final)
 print(f"Final result: {result}")
 
-```text
+```
 
 ### Strategic Print Placement
 
@@ -136,7 +136,7 @@ test_numbers = [3, 7, 2, 9, 1, 8]
 maximum = find_maximum_value(test_numbers)
 print(f"Maximum value found: {maximum}")
 
-```text
+```
 
 ## The Factorial Debugging Activity
 
@@ -162,7 +162,7 @@ print(f"factorial(0) = {factorial_buggy(0)} (should be 1)")
 print(f"factorial(1) = {factorial_buggy(1)} (should be 1)")
 print(f"factorial(5) = {factorial_buggy(5)} (should be 120)")
 
-```text
+```
 
 ### Debugging with Print Statements
 
@@ -192,7 +192,7 @@ print("=== Debugging factorial function ===")
 print(f"factorial_debug_v1(0) = {factorial_debug_v1(0)}")
 print(f"factorial_debug_v1(3) = {factorial_debug_v1(3)}")
 
-```text
+```
 
 ### Identifying and Fixing the Bug
 
@@ -229,7 +229,7 @@ for test_value in [0, 1, 3, 5]:
     print(f"factorial({test_value}) = {result}")
     print()
 
-```text
+```
 
 ### Clean Final Version
 
@@ -259,7 +259,7 @@ for i, test_val in enumerate(test_cases):
     status = "✓ PASS" if actual == expected_val else "✗ FAIL"
     print(f"factorial({test_val}) = {actual} (expected {expected_val}) {status}")
 
-```text
+```
 
 ## IDE Debugger Tools
 
@@ -297,7 +297,7 @@ def calculate_compound_interest(principal, rate, time):
 # 3. Inspect variables when execution pauses
 # 4. Step through code line by line
 
-```text
+```
 
 ### Single Line Stepping
 
@@ -331,7 +331,7 @@ def bubble_sort_debug(arr):
 # 3. Use "Step Out" to exit the current function
 # 4. Watch how variables change with each step
 
-```text
+```
 
 ### Watches and Variable Inspection
 
@@ -397,7 +397,7 @@ sample_students = [
 results = analyze_student_grades(sample_students)
 print("Grade analysis results:", results)
 
-```text
+```
 
 ## Debugging Function Interfaces
 
@@ -466,7 +466,7 @@ print(f"Result 2: {cost2}\n")
 cost3 = calculate_shipping_cost(2.5, 100, "super_fast")
 print(f"Result 3: {cost3}\n")
 
-```text
+```
 
 ### Debugging Return Values
 
@@ -554,7 +554,7 @@ test_class = [
 class_results = process_class_records(test_class)
 print(f"\nFinal output: {len(class_results)} valid student records processed")
 
-```text
+```
 
 ## Advanced Debugging Techniques
 
@@ -604,7 +604,7 @@ try:
 except AssertionError as e:
     print(f"Assertion failed: {e}")
 
-```text
+```
 
 ### Debugging with Try-Except Blocks
 
@@ -660,7 +660,7 @@ def robust_division_calculator():
 # Run the robust calculator
 # robust_division_calculator()  # Uncomment to test
 
-```text
+```
 
 ## Debugging Best Practices
 
@@ -717,7 +717,7 @@ for test in test_cases:
     result = buggy_average_calculator(test)
     print(f"Average of {test}: {result}\n")
 
-```text
+```
 
 ### 2. Debugging Checklist
 
@@ -744,7 +744,7 @@ def debugging_checklist():
 
 debugging_checklist()
 
-```text
+```
 
 
 ## Summary

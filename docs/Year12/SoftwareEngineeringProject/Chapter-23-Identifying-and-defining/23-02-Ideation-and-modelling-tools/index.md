@@ -60,7 +60,7 @@ add_idea("Mobile app with push notifications", "Sarah")
 add_idea("Integration with existing school systems", "Mike")
 show_all_ideas()
 
-```text
+```
 
 ///
 
@@ -118,7 +118,7 @@ RECTANGLE "Features" {
 "Student Assignment Tracker" --> "Features"
 @enduml
 
-```text
+```
 
 ### Storyboards for user experience
 
@@ -183,7 +183,7 @@ for step in steps:
     step.display()
     print()
 
-```text
+```
 
 ///
 
@@ -248,7 +248,7 @@ math_assignment = Assignment(
 
 print(f"Days until due: {math_assignment.days_until_due()}")
 
-```text
+```
 
 ///
 

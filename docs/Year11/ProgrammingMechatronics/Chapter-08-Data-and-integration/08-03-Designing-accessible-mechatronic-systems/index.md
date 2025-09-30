@@ -46,7 +46,7 @@ package "Accessible Mechatronic System" {
 }
 @enduml
 
-```text
+```
 
 ### Physical accessibility requirements
 
@@ -92,7 +92,7 @@ heavy_pressure = 15  # Newtons
 print(f"Light pressure activates: {control.check_activation(light_pressure, current_time)}")
 print(f"Heavy pressure activates: {control.check_activation(heavy_pressure, current_time)}")
 
-```text
+```
 
 ### Alternative interface methods
 
@@ -149,7 +149,7 @@ input_system.register_eye_gaze(320, 240, 1.2)  # Gaze at center for 1.2 seconds
 
 print(f"Command history: {input_system.command_history}")
 
-```text
+```
 
 ### Guided example
 
@@ -208,7 +208,7 @@ AccessibleRobotController --> SafetyMonitor
 AccessibleRobotController --> MultimodalFeedback
 @enduml
 
-```text
+```
 
 ```python
 # Accessible robotic arm controller implementation
@@ -300,7 +300,7 @@ controller.set_force_sensitivity(user_max_force)
 controller.move_arm("forward", 4.5)  # Within safe force limit
 controller.move_arm("up", 60)  # Exceeds safe force limit
 
-```text
+```
 
 ### Safety systems and emergency stops
 
@@ -372,7 +372,7 @@ safety_system.check_voice_stop("emergency stop now")
 safety_system.last_user_input = current_time - 35  # Simulate 35 seconds of inactivity
 safety_system.check_timeout(current_time)
 
-```text
+```
 
 ### Maintainability considerations
 
@@ -518,7 +518,7 @@ for i in range(15):
     control.record_activation(intentional)
     print(f"Activation {i+1}: {'Intentional' if intentional else 'Accidental'}")
 
-```text
+```
 
 ///
 ///

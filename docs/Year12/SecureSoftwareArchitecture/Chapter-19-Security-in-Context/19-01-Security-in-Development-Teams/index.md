@@ -238,7 +238,7 @@ class GitSecurityHooks:
             'issues': issues
         }
 
-```text
+```
 
 ### Pair Programming for Security
 
@@ -416,7 +416,7 @@ class SecurityReviewTemplates:
         
         return actions
 
-```text
+```
 
 ## Security Requirements in Agile Development
 
@@ -669,7 +669,7 @@ class SecurityDefinitionOfDone:
         else:
             return 'Security Definition of Done satisfied'
 
-```text
+```
 
 ## Threat Modeling in Team Settings
 
@@ -1006,7 +1006,7 @@ class ThreatModelingWorkshop:
             'Action item tracking template'
         ]
 
-```text
+```
 
 ## Security Documentation and Knowledge Sharing
 
@@ -1420,7 +1420,7 @@ class SecurityKnowledgeSharing:
             "Update training materials based on feedback"
         ]
 
-```text
+```
 
 ## Balancing Security with Development Velocity
 
@@ -1455,7 +1455,7 @@ class DevSecOpsVelocityOptimizer:
             }
         }
 
-```text
+```
 
 ## Key Takeaways
 

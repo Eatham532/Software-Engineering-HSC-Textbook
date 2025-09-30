@@ -40,7 +40,7 @@
         class PostService:
             def create_post(self, author_id, title, content): pass
             def delete_post(self, post_id, user_id): pass
-        ```text
+        ```
 
         - Each class can be developed by different team members independently { data-correct }
         - It makes the code run faster

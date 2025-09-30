@@ -33,7 +33,7 @@
     5. Look at this code snippet:
         ```python
         total = grade1 + grade2 + grade3
-        ```text
+        ```
         What's wrong with this comment?
 
         - It's too short
@@ -53,7 +53,7 @@
         def convert_celsius_to_fahrenheit(celsius):
             """_________"""
             return (celsius * 9/5) + 32
-        ```text
+        ```
 
         - "This function converts temperature"
         - "Convert temperature from Celsius to Fahrenheit." {data-correct}

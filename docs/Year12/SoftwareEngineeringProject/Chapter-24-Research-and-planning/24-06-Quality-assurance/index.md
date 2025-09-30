@@ -57,7 +57,7 @@ def assess_quality(system, criteria):
             })
     return results
 
-```text
+```
 
 ### Continual checking processes
 
@@ -116,7 +116,7 @@ qa_system.track_acceptance_criteria("login_feature", [
     "Account lockout after 3 failed attempts"
 ])
 
-```text
+```
 
 ### Compliance and legislative requirements
 
@@ -177,7 +177,7 @@ RECTANGLE "Testing Integration" {
 
 @enduml
 
-```text
+```
 
 ### Guided example: Implementing QA for a school library system
 
@@ -209,7 +209,7 @@ library_qa_criteria = {
     }
 }
 
-```text
+```
 
 **Step 2: Establish review checkpoints**
 
@@ -221,7 +221,7 @@ review_schedule = [
     {"phase": "Testing", "reviewers": ["QA_tester", "end_users"]}
 ]
 
-```text
+```
 
 **Step 3: Compliance checklist**
 
@@ -244,7 +244,7 @@ compliance_requirements = {
     ]
 }
 
-```text
+```
 
 ## Practice
 

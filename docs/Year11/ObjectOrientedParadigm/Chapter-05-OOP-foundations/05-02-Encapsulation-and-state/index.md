@@ -46,7 +46,7 @@ class BankAccount:
     def get_transaction_count(self):
         return self._transaction_count
 
-```text
+```
 
 ### Public interface vs internal state
 
@@ -64,7 +64,7 @@ print(account.get_balance())          # ✅ Good - using public method
 print(account._balance)               # ❌ Bad - accessing internal state directly
 account._balance = 999999             # ❌ Very bad - bypassing all controls!
 
-```text
+```
 
 **Why keep internal state private?**
 
@@ -119,7 +119,7 @@ Note on double underscores:
 - Most idiomatic Python code uses a single underscore for "internal" members and relies on conventions.
 """
 
-```text
+```
 
 ### Invariants
 
@@ -165,7 +165,7 @@ try:
 except ValueError as e:
     print(f"Error: {e}")  # Error: Width must be positive
 
-```text
+```
 
 ### Simple getters and setters
 
@@ -204,7 +204,7 @@ print(f"Temperature: {temp.get_fahrenheit()}°F")     # 77°F
 temp.set_fahrenheit(86)
 print(f"Temperature: {temp.get_celsius()}°C")        # 30°C
 
-```text
+```
 
 ### When to use getters and setters
 
@@ -255,7 +255,7 @@ print(circle.area)    # 78.53975
 circle.radius = 3     # Uses the setter with validation
 print(circle.area)    # 28.27431
 
-```text
+```
 
 ## Practice
 
@@ -276,7 +276,7 @@ car = Car(50)
 car.fuel_level = -10        # Problem 1: What's wrong here?
 car.engine_running = True   # Problem 2: What could go wrong?
 
-```text
+```
 
 **Task**: Identify the encapsulation violations and explain why they're problematic.
 
@@ -353,7 +353,7 @@ class DigitalClock:
         else:
             return f"{self._hours - 12}:{self._minutes:02d} PM"
 
-```text
+```
 
 ///
 ///
@@ -371,7 +371,7 @@ class GameScore:
         self.lives = 3
         self.level = 1
 
-```text
+```
 
 **Task**: Add proper encapsulation with:
 
@@ -429,7 +429,7 @@ class GameScore:
         """Check if game is over"""
         return self._lives <= 0
 
-```text
+```
 
 ///
 ///

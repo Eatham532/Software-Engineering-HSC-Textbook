@@ -91,7 +91,7 @@ Before you start coding, you need to clearly understand the problem you're solvi
 
 **Problem statement structure** - A clear way to describe the problem:
 
-```text
+```
 For [who has the problem]
 Who [their situation and challenges]
 The [your solution name] is a [type of solution]
@@ -99,7 +99,7 @@ That [main benefit it provides]
 Unlike [current alternatives]
 Our solution [unique advantage]
 
-```text
+```
 
 **Root cause analysis** - Ask "why" five times to find the real problem:
 
@@ -197,7 +197,7 @@ Good requirements are SMART: **Specific**, **Measurable**, **Achievable**, **Rel
 
 **Interviews and surveys**: Direct stakeholder input
 
-```text
+```
 Sample interview questions:
 
 - What tasks do you perform most frequently?
@@ -206,7 +206,7 @@ Sample interview questions:
 - What are your biggest frustrations?
 - How do you measure productivity?
 
-```text
+```
 
 **Observation and job shadowing**: Understanding actual workflows
 
@@ -235,7 +235,7 @@ Sample interview questions:
 
 **User stories format**: Requirements from user perspective
 
-```text
+```
 As a [user type]
 I want [functionality]
 So that [business value]
@@ -245,11 +245,11 @@ Acceptance criteria:
 - When [action]
 - Then [expected result]
 
-```text
+```
 
 **Traditional specification format**:
 
-```text
+```
 REQ-001: Grade Input Validation
 Description: The system shall validate grade inputs to ensure data quality
 Priority: High
@@ -261,7 +261,7 @@ Details:
 - The system shall highlight invalid fields in red
 Test criteria: Enter grade of -5, verify error message appears
 
-```text
+```
 
 ///
 
@@ -357,14 +357,14 @@ Good software design is like organizing a kitchen - everything should have its p
 
 **Separation of concerns** - Like a restaurant kitchen where different chefs handle different tasks:
 
-```text
+```
 Example: Grade Calculator separation
 - Input chef: Handles user input and checks if it's valid
 - Math chef: Performs the calculations
 - Presentation chef: Formats the results for display
 - Head chef: Coordinates between all the specialists
 
-```text
+```
 
 **Single responsibility principle** - Each part should have just one job:
 
@@ -426,7 +426,7 @@ blockdiag {
     Output [label = "Output Layer"];
 }
 
-```text
+```
 
 **Component design specification**:
 
@@ -524,13 +524,13 @@ if __name__ == '__main__':
     except (TypeError, ValueError) as e:
         print(f"Error: {e}")
 
-```text
+```
 
 ///
 
 /// tab | Pseudocode
 
-```text
+```
 ALGORITHM GradeCalculator
 
 FUNCTION validate_grade(grade)
@@ -569,7 +569,7 @@ MAIN
     END TRY
 END MAIN
 
-```text
+```
 
 ///
 
@@ -731,13 +731,13 @@ Design a solution for the coffee shop revenue calculator.
 
 **Function Interface Design**:
 
-```text
+```
 validate_amount(amount, category) → validated_float
 calculate_total_revenue(coffee, pastries, merchandise) → total
 calculate_percentages(coffee, pastries, merchandise, total) → dict
 format_report(totals, percentages) → formatted_string
 
-```text
+```
 
 **Error handling plan**:
 
@@ -888,7 +888,7 @@ blockdiag {
   Config -> Calculator;
 }
 
-```text
+```
 
 *Key algorithms*:
 

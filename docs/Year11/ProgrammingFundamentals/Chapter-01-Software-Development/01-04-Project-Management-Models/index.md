@@ -30,7 +30,7 @@ The Waterfall model follows a linear, sequential approach where each phase must 
         D --> E[Deployment]
         E --> F[Maintenance]
 
-```text
+```
 
 **Phase-by-phase execution:**
 
@@ -126,7 +126,7 @@ flowchart LR
     E1 --> A2
     E2 --> A3
 
-```text
+```
 
 **Sprint-based execution:**
 

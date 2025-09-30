@@ -37,7 +37,7 @@ print(grades[0])    # Output: 85 (first element)
 print(names[1])     # Output: "Bob" (second element)
 print(grades[-1])   # Output: 88 (last element)
 
-```text
+```
 
 ### Common Operations
 
@@ -59,7 +59,7 @@ length = len(student_scores)        # Get number of elements
 print(f"Score 91 is at position {position}")
 print(f"We have {length} scores")
 
-```text
+```
 
 ### When to Use Lists
 
@@ -93,7 +93,7 @@ bob_science = grade_book[1][2]    # Bob's science grade (row 1, column 2)
 print(f"Alice's math grade: {alice_math}")
 print(f"Bob's science grade: {bob_science}")
 
-```text
+```
 
 ### Practical Example: Seating Chart
 
@@ -119,7 +119,7 @@ def find_available_seats():
 
 print("Available seats:", find_available_seats())
 
-```text
+```
 
 ## Records (Dictionaries)
 
@@ -142,7 +142,7 @@ print(f"Student: {student['name']}")
 print(f"Age: {student['age']}")
 print(f"Average: {student['grade_average']}%")
 
-```text
+```
 
 ### Multiple Records
 
@@ -162,7 +162,7 @@ for student in class_roster:
 
 print("High achievers:", high_achievers)
 
-```text
+```
 
 ## Trees (Conceptual Introduction)
 
@@ -202,7 +202,7 @@ def print_family(person, level=0):
 print("Family Tree:")
 print_family(family_tree)
 
-```text
+```
 
 ### When to Use Trees
 
@@ -241,7 +241,7 @@ if browser_history:
     current_page = browser_history[-1]
     print(f"Current page: {current_page}")
 
-```text
+```
 
 ### Practical Example: Undo Function
 
@@ -272,7 +272,7 @@ print(f"Current text: '{editor.text}'")
 editor.undo()
 print(f"After undo: '{editor.text}'")
 
-```text
+```
 
 ## Hash Tables (Python Dictionaries)
 
@@ -300,7 +300,7 @@ phone_book["Emma"] = "555-0105"
 if "Bob" in phone_book:
     print(f"Bob's number is {phone_book['Bob']}")
 
-```text
+```
 
 ### When to Use Hash Tables
 
@@ -331,7 +331,7 @@ message = "Hello World"
 frequencies = count_letters(message)
 print("Letter frequencies:", frequencies)
 
-```text
+```
 
 ## Sequential Files (CSV)
 
@@ -368,7 +368,7 @@ with open("students.csv", "r") as file:
             name, age, grade = row
             print(f"Student: {name}, Age: {age}, Grade: {grade}")
 
-```text
+```
 
 ### Working with CSV Dictionaries
 
@@ -394,7 +394,7 @@ with open("students_dict.csv", "r") as file:
     for student in reader:
         print(f"{student['name']} is {student['age']} with grade {student['grade']}")
 
-```text
+```
 
 ## Choosing the Right Data Structure
 
@@ -423,7 +423,7 @@ with open("students_dict.csv", "r") as file:
 # - Adding new key-value pairs: very fast
 # - No ordering (before Python 3.7)
 
-```text
+```
 
 ## Practice Exercises
 
@@ -469,7 +469,7 @@ print(f"Highest grade: {max(all_grades)}")
 print(f"Lowest grade: {min(all_grades)}")
 print(f"Class average: {sum(all_grades)/len(all_grades):.1f}")
 
-```text
+```
 
 This demonstrates:
 
@@ -554,7 +554,7 @@ remove_item(inventory, "monitor", 1)  # Should fail
 print("\nFinal inventory:")
 display_inventory(inventory)
 
-```text
+```
 
 This demonstrates:
 
@@ -657,7 +657,7 @@ print("\nTrying to go back when at beginning...")
 browser.go_back()
 browser.go_back()  # Should fail
 
-```text
+```
 
 This demonstrates:
 
@@ -795,7 +795,7 @@ print(f"\nClass average: {average:.2f}")
 if os.path.exists(filename):
     os.remove(filename)
 
-```text
+```
 
 This demonstrates:
 

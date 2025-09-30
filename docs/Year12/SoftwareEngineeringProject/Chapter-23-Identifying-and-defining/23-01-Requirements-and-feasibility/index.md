@@ -285,7 +285,7 @@ def demonstrate_stakeholder_analysis():
 if __name__ == "__main__":
     stakeholder_analysis = demonstrate_stakeholder_analysis()
 
-```text
+```
 
 ### Market and user research methods
 
@@ -337,7 +337,7 @@ package "Requirements Gathering Process" {
 }
 @enduml
 
-```text
+```
 
 ---
 
@@ -634,7 +634,7 @@ def demonstrate_financial_feasibility():
 if __name__ == "__main__":
     financial_analysis = demonstrate_financial_feasibility()
 
-```text
+```
 
 ### Scheduling feasibility
 
@@ -815,7 +815,7 @@ def demonstrate_functional_requirements():
 if __name__ == "__main__":
     functional_requirements = demonstrate_functional_requirements()
 
-```text
+```
 
 ### Non-functional requirements
 
@@ -1012,7 +1012,7 @@ def demonstrate_non_functional_requirements():
 if __name__ == "__main__":
     non_functional_requirements = demonstrate_non_functional_requirements()
 
-```text
+```
 
 ---
 
@@ -1250,7 +1250,7 @@ def demonstrate_data_structure_analysis():
 if __name__ == "__main__":
     data_analysis = demonstrate_data_structure_analysis()
 
-```text
+```
 
 ---
 
@@ -1319,7 +1319,7 @@ note right of "Future Scope"
 end note
 @enduml
 
-```text
+```
 
 ```python
 class ScopeDefinition:
@@ -1648,7 +1648,7 @@ def demonstrate_scope_definition():
 if __name__ == "__main__":
     project_scope = demonstrate_scope_definition()
 
-```text
+```
 
 ---
 
@@ -1738,7 +1738,7 @@ def complete_requirements_analysis(project_name):
         'scope': scope
     }
 
-```text
+```
 
 Use this template to structure your analysis and ensure you address all aspects of requirements and feasibility assessment.
 ///

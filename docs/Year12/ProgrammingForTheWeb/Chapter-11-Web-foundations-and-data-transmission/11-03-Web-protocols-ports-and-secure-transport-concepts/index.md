@@ -46,7 +46,7 @@ def check_certificate(hostname, port=443):
 # Check a real certificate
 check_certificate('github.com')
 
-```text
+```
 
 ### Encryption algorithms: symmetric vs asymmetric
 
@@ -105,7 +105,7 @@ encrypted_asym = asym.encrypt_with_public("Hello")
 decrypted_asym = asym.decrypt_with_private(encrypted_asym)
 print(f"Asymmetric: Hello → {encrypted_asym} → {decrypted_asym}")
 
-```text
+```
 
 ### Plain text vs cipher text
 
@@ -144,7 +144,7 @@ def demonstrate_encryption_need():
 
 demonstrate_encryption_need()
 
-```text
+```
 
 ### Authentication and authorisation
 
@@ -206,7 +206,7 @@ security.authorize("alice", "delete")      # Admin can delete
 security.authorize("bob", "delete")        # User cannot delete
 security.authorize("bob", "read")          # User can read
 
-```text
+```
 
 ### Hash values for integrity and passwords
 
@@ -253,7 +253,7 @@ def demonstrate_hashing():
 
 demonstrate_hashing()
 
-```text
+```
 
 ### Digital signatures
 
@@ -320,7 +320,7 @@ signed_contract["content"] = "Agreement to develop web application for $1,000"
 print(f"\nAfter tampering:")
 alice.verify_signature(signed_contract)
 
-```text
+```
 
 ### Guided example: HTTPS connection flow
 
@@ -357,7 +357,7 @@ note left of S
 end note
 @enduml
 
-```text
+```
 
 ## Try it
 
@@ -426,7 +426,7 @@ sites = ['github.com', 'google.com', 'stackoverflow.com']
 for site in sites:
     analyze_certificate(site)
 
-```text
+```
 
 ///
 ///
@@ -549,7 +549,7 @@ print("\n=== Testing Login ===")
 auth_system.verify_login("alice", "wrongpassword")  # Should fail
 auth_system.verify_login("alice", "StrongPass123!")  # Should succeed
 
-```text
+```
 
 ///
 ///

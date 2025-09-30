@@ -144,7 +144,7 @@ class TestGradeCalculatorBlackBox(unittest.TestCase):
         self.assertEqual(self.calculator.calculate_grade(79.9), "C")
         self.assertEqual(self.calculator.calculate_grade(59.9), "F")
 
-```text
+```
 
 ### Boundary Value Analysis
 
@@ -191,7 +191,7 @@ class TestPasswordValidatorBlackBox(unittest.TestCase):
         # Exactly one digit - should pass
         self.assertTrue(self.validator.validate("Abcdef1!"))
 
-```text
+```
 
 ### Equivalence Partitioning
 
@@ -235,7 +235,7 @@ class TestEmailValidatorBlackBox(unittest.TestCase):
         # Invalid characters
         self.assertFalse(self.validator.is_valid("user name@domain.com"))
 
-```text
+```
 
 ## White Box Testing
 
@@ -375,7 +375,7 @@ class TestDiscountCalculatorWhiteBox(unittest.TestCase):
         expected = 0.15  # 0.0 (regular) + 0.1 (large order) + 0.05 (holiday)
         self.assertEqual(result, expected)
 
-```text
+```
 
 ### Statement and Branch Coverage
 
@@ -409,7 +409,7 @@ class TestBankAccountWhiteBox(unittest.TestCase):
         self.assertEqual(len(account.transaction_history), 1)
         self.assertIn("Withdrawal", account.transaction_history[0])
 
-```text
+```
 
 ## Grey Box Testing
 
@@ -496,7 +496,7 @@ class TestUserAuthenticationGreyBox(unittest.TestCase):
         result = self.auth_system.authenticate(username, password)
         self.assertTrue(result)  # Should work again after cooldown
 
-```text
+```
 
 ### Integration Testing with Grey Box Approach
 
@@ -553,7 +553,7 @@ class TestOrderProcessingGreyBox(unittest.TestCase):
         expected_stock = initial_stock - 3 - 4
         self.assertEqual(final_stock, expected_stock)
 
-```text
+```
 
 ## Choosing the Right Testing Strategy
 
@@ -636,7 +636,7 @@ def calculate_shipping_cost(weight, distance, priority):
     
     return round(base_cost, 2)
 
-```text
+```
 
 ///
 ///

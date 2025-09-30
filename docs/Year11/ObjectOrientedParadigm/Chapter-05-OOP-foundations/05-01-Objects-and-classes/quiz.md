@@ -26,7 +26,7 @@
         acc1 = BankAccount(100)
         acc2 = BankAccount(200)
         acc3 = acc1
-        ```text
+        ```
 
         - 1
         - 2 { data-correct }
@@ -69,7 +69,7 @@
         c2 = Counter()
         print(c1.increment())
         print(c2.increment())
-        ```text
+        ```
 
         - 1, 1 { data-correct }
         - 1, 2

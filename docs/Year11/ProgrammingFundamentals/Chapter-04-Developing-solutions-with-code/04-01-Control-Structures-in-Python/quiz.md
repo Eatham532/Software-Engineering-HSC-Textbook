@@ -21,7 +21,7 @@
         ```python
         for i in range(3):
             print(i)
-        ```text
+        ```
 
         - 1, 2, 3
         - 0, 1, 2 { data-correct }
@@ -48,7 +48,7 @@
         count = 1
         while count <= 3:
             print(count)
-        ```text
+        ```
 
         - Prints 1, 2, 3 and stops
         - Prints nothing
@@ -85,14 +85,14 @@
 
     11. Which control structure is being used in this pseudocode?
 
-        ```text
+        ```
         IF score >= 90 THEN
             grade = "A"
         ELIF score >= 80 THEN
             grade = "B"
         ELSE
             grade = "C"
-        ```text
+        ```
 
         - Sequence
         - Selection { data-correct }

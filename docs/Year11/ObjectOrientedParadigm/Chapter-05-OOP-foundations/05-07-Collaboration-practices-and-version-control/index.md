@@ -77,7 +77,7 @@ class BlogApplication:
         # Coordinates between modules without knowing implementation details
         pass
 
-```text
+```
 
 ### Well-defined interfaces
 
@@ -108,7 +108,7 @@ class PaymentProcessor:
         """Process a refund for a previous transaction"""
         pass
 
-```text
+```
 
 This interface allows team members to:
 
@@ -143,7 +143,7 @@ class Payment: pass        # Team member C
 class EmailService: pass   # Team member D
 class ReportGenerator: pass # Team member E
 
-```text
+```
 
 ## Version control fundamentals
 
@@ -171,11 +171,11 @@ git status
 # See what changed
 git diff
 
-```text
+```
 
 ### Repository structure for OOP projects
 
-```text
+```
 project/
 ├── src/
 │   ├── models/          # Data classes (User, Post, etc.)
@@ -187,7 +187,7 @@ project/
 ├── README.md           # Project overview
 └── requirements.txt    # Dependencies
 
-```text
+```
 
 This structure allows different team members to work in different directories with minimal conflicts.
 
@@ -218,13 +218,13 @@ git push origin feature/user-authentication
 git checkout main
 git merge feature/user-authentication
 
-```text
+```
 
 ### Common branching strategies
 
 **Git Flow:**
 
-```text
+```
 main branch (production-ready code)
 ├── develop branch (integration of features)
 │   ├── feature/user-system (Team Member A)
@@ -232,17 +232,17 @@ main branch (production-ready code)
 │   └── feature/reporting (Team Member C)
 └── hotfix/critical-bug (Emergency fixes)
 
-```text
+```
 
 **GitHub Flow (simpler):**
 
-```text
+```
 main branch (production-ready code)
 ├── feature/user-authentication
 ├── feature/shopping-cart
 └── feature/email-notifications
 
-```text
+```
 
 ### Handling merge conflicts
 
@@ -265,7 +265,7 @@ class UserManager:
     def create_user(self, username, email):
         # Rest of the method...
 
-```text
+```
 
 To resolve:
 
@@ -314,7 +314,7 @@ None - this is a new feature that doesn't affect existing code.
 ## Screenshots
 [Include relevant UI screenshots if applicable]
 
-```text
+```
 
 ### Code review best practices
 
@@ -350,7 +350,7 @@ to make it easier to change later and more self-documenting."
 # Less helpful review comment:
 "This is wrong, fix it."
 
-```text
+```
 
 ## Documentation for collaboration
 
@@ -392,7 +392,7 @@ The system is organized into several main components:
 - Write unit tests for new functionality
 - Follow PEP 8 style guidelines
 
-```text
+```
 
 ### Class documentation
 
@@ -449,7 +449,7 @@ class PostService:
         """
         # Implementation here...
 
-```text
+```
 
 ### API contracts
 
@@ -490,7 +490,7 @@ class SMTPEmailService(EmailService):
         # Actual SMTP implementation
         pass
 
-```text
+```
 
 ## Collaborative development workflow
 
@@ -512,7 +512,7 @@ class PostServiceInterface:
     def get_post(self, post_id): pass
     def delete_post(self, post_id, user_id): pass
 
-```text
+```
 
 ### 2. Parallel development
 
@@ -529,7 +529,7 @@ git checkout -b feature/post-management
 git checkout -b feature/main-application
 # Uses the interfaces to build the main app
 
-```text
+```
 
 ### 3. Integration and testing
 
@@ -549,7 +549,7 @@ class TestUserPostIntegration:
         assert post.author_id == user.id
         assert post.title == "My Post"
 
-```text
+```
 
 ## Practice
 
@@ -585,7 +585,7 @@ class UserService:
 class User:
     def __init__(self, user_id, username, email): pass
 
-```text
+```
 
 **Team Member B - Product Catalog:**
 
@@ -599,7 +599,7 @@ class ProductService:
 class Product:
     def __init__(self, product_id, name, price, inventory): pass
 
-```text
+```
 
 **Team Member C - Shopping Cart:**
 
@@ -613,7 +613,7 @@ class CartService:
 class ShoppingCart:
     def __init__(self, user_id): pass
 
-```text
+```
 
 **Team Member D - Order Processing:**
 
@@ -631,7 +631,7 @@ class OrderService:
 class Order:
     def __init__(self, order_id, user_id, items, total): pass
 
-```text
+```
 
 **Interfaces allow parallel development:**
 
@@ -671,7 +671,7 @@ git checkout main                    # Switch to main branch
 git pull origin main                # Get latest changes
 git checkout -b feature/user-profile-editing  # Create and switch to feature branch
 
-```text
+```
 
 **2. Making commits during development:**
 
@@ -688,7 +688,7 @@ git commit -m "Add profile editing methods to UserService"
 git add tests/test_user_profile.py
 git commit -m "Add comprehensive tests for profile editing"
 
-```text
+```
 
 **3. Pushing and creating pull request:**
 
@@ -696,7 +696,7 @@ git commit -m "Add comprehensive tests for profile editing"
 git push origin feature/user-profile-editing
 # Then create pull request through GitHub/GitLab interface
 
-```text
+```
 
 **4. Handling merge conflict:**
 
@@ -717,7 +717,7 @@ git add user_service.py             # Mark conflict as resolved
 git commit -m "Resolve merge conflict in user_service.py"
 git push origin feature/user-profile-editing
 
-```text
+```
 
 ///
 ///
@@ -744,7 +744,7 @@ class UserManager:
                 return u
         return None
 
-```text
+```
 
 **Task**: Provide specific, constructive feedback for improving this code.
 
@@ -767,14 +767,14 @@ class UserManager:
    ```python
    def add_user(self, name, email, password):  # Instead of n, e, p
 
-   ```text
+   ```
 
 2. **Variable naming** (lines 7, 11): Use full names instead of abbreviations:
 
    ```python
    user = {"name": name, ...}  # Instead of u = {"name": n, ...}
 
-   ```text
+   ```
 
 3. **Security concern** (line 7): Passwords should be hashed, never stored in plain text:
 
@@ -782,7 +782,7 @@ class UserManager:
    import hashlib
    hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
-   ```text
+   ```
 
 4. **Data structure** (line 7): Consider using a User class instead of dictionaries for type safety:
 
@@ -794,7 +794,7 @@ class UserManager:
            self.email = email
            self.password_hash = password_hash
 
-   ```text
+   ```
 
 5. **ID generation** (line 7): Using `len(self.users)` for IDs can cause problems if users are deleted. Consider using a counter or UUID.
 
@@ -823,7 +823,7 @@ class UserManager:
         self.next_id += 1
         return user
 
-```text
+```
 
 ///
 ///

@@ -48,7 +48,7 @@
 
         - `"""This method calculates something"""`
         - `"""Calculate student GPA. Args: grades (list). Returns: float."""`
-        - ```text
+        - ```
         """
         Calculate the Grade Point Average for a student.
 
@@ -58,7 +58,7 @@
         Returns:
             float: GPA value between 0.0 and 4.0
         """ { data-correct }
-        ```text
+        ```
         - `# This calculates GPA`
 
     8. What is the most important factor when deciding whether to break a long method into smaller methods?
@@ -83,7 +83,7 @@
             grade = "A"
         elif score >= 80:
             grade = "B"
-        ```text
+        ```
 
         **Version B:**
         ```python
@@ -94,7 +94,7 @@
             grade = "A"
         elif score >= B_THRESHOLD:
             grade = "B"
-        ```text
+        ```
 
         - Version A, because it's shorter
         - Version B, because it uses named constants { data-correct }

@@ -315,7 +315,7 @@ def demonstrate_ai_vs_ml():
 if __name__ == "__main__":
     ai_sys, ml_sys = demonstrate_ai_vs_ml()
 
-```text
+```
 
 ### Key Differences Summary
 
@@ -572,7 +572,7 @@ def demonstrate_rpa():
 if __name__ == "__main__":
     rpa_demo = demonstrate_rpa()
 
-```text
+```
 
 ---
 
@@ -971,7 +971,7 @@ def demonstrate_bpa():
 if __name__ == "__main__":
     bpa_demo = demonstrate_bpa()
 
-```text
+```
 
 ---
 
@@ -1342,7 +1342,7 @@ def demonstrate_ml_enhanced_automation():
 if __name__ == "__main__":
     ml_automation = demonstrate_ml_enhanced_automation()
 
-```text
+```
 
 ### Benefits of ML-Enhanced Automation
 
@@ -1374,7 +1374,7 @@ def recommend_approach(scenario_description):
     # - Need for adaptation
     pass
 
-```text
+```
 
 ### Task 2: RPA Workflow Design
 

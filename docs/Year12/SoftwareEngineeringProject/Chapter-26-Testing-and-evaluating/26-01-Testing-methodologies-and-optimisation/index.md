@@ -64,7 +64,7 @@ package "Test Techniques" {
 
 @enduml
 
-```text
+```
 
 /// tab | Test Plan Structure
 **Test Plan Components**:
@@ -324,7 +324,7 @@ test_plan.add_risk(
 summary = test_plan.generate_test_summary()
 print(f"Test Plan Summary: {summary}")
 
-```text
+```
 
 ///
 
@@ -571,7 +571,7 @@ suite.add_test(perf_test)
 report = suite.run_all_tests()
 print(f"Test Suite Report: {report}")
 
-```text
+```
 
 ///
 
@@ -803,7 +803,7 @@ def test_grade_validation():
 
 test_grade_validation()
 
-```text
+```
 
 ///
 
@@ -843,7 +843,7 @@ Test Steps:
 Pass Criteria: [Conditions for test success]
 Fail Criteria: [Conditions indicating test failure]
 
-```text
+```
 
 **Acceptance Test Criteria**:
 - Directly tied to user stories and requirements
@@ -1065,7 +1065,7 @@ print(f"  Steps executed: {len(report['steps'])}")
 print(f"  Execution status: {report['execution_status']}")
 print(f"  Criteria assessment: {report['criteria_met']}")
 
-```text
+```
 ///
 
 ### Automated vs manual testing approaches
@@ -1372,7 +1372,7 @@ def demonstrate_testing_approaches():
 
 demonstrate_testing_approaches()
 
-```text
+```
 ///
 
 ## Practice

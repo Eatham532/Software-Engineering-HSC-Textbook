@@ -58,7 +58,7 @@ note right of Running : Main operational state\nwith continuous monitoring
 note left of Paused : Temporary halt\nwith state preservation
 @enduml
 
-```text
+```
 
 ### Guided example: conveyor belt state machine
 
@@ -203,7 +203,7 @@ conveyor.handle_event("startup_complete")
 conveyor.handle_event("emergency_stop")
 print(f"Status: {conveyor.get_status()}")
 
-```text
+```
 
 ### PID control: continuous regulation
 
@@ -219,10 +219,10 @@ PID (Proportional-Integral-Derivative) controllers provide smooth, continuous re
 
 **Control equation**:
 
-```text
+```
 output = Kp × error + Ki × ∫error dt + Kd × (d_error/dt)
 
-```text
+```
 
 **Conceptual understanding**:
 
@@ -259,7 +259,7 @@ note bottom of [Derivative] : Kd × d_error/dt
 note right of [Plant/System] : The system being controlled\n(motor, heater, etc.)
 @enduml
 
-```text
+```
 
 ### Guided example: temperature control PID
 
@@ -422,7 +422,7 @@ for tuning in tuning_sets:
     
     print(f"{tuning['name']:6s}: Final error = {final_error:.1f}°C")
 
-```text
+```
 
 ### Basic scheduling: coordinating multiple tasks
 
@@ -652,7 +652,7 @@ for task_info in final_status['tasks']:
           f"next in {task_info['next_run']}, "
           f"avg time {task_info['avg_execution']}")
 
-```text
+```
 
 ## Try it
 

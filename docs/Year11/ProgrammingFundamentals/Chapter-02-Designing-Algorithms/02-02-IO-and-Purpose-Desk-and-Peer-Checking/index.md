@@ -81,11 +81,11 @@ endif
 stop
 @enduml
 
-```text
+```
 
 **Algorithm:**
 
-```text
+```
 ALGORITHM CalculateGrade
 BEGIN
     INPUT studentName     // Input: student's name (string)
@@ -111,7 +111,7 @@ BEGIN
     OUTPUT "Average score: " + average               // Output: numerical average
 END
 
-```text
+```
 
 **Analysis:**
 
@@ -313,11 +313,11 @@ endif
 stop
 @enduml
 
-```text
+```
 
 **Algorithm:**
 
-```text
+```
 ALGORITHM CheckPasswordStrength
 BEGIN
     INPUT password
@@ -341,7 +341,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ### Your Task: Desk Check Two Branches
 

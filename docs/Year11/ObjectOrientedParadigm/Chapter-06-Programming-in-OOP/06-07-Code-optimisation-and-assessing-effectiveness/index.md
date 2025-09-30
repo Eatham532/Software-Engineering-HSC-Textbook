@@ -59,7 +59,7 @@ class BankAccount:
             return self.balance
         return False
 
-```text
+```
 
 ## Improved version with better correctness
 
@@ -97,7 +97,7 @@ class ImprovedBankAccount:
         self.transaction_history.append(f"Withdrawal: ${amount:.2f}")
         return self.balance
 
-```text
+```
 
 ### 2. Clarity
 
@@ -180,7 +180,7 @@ class OrderCalculator:
         
         return total_cost
 
-```text
+```
 
 ### 3. Performance
 
@@ -345,7 +345,7 @@ def performance_comparison():
     print(f"Fast lookup (hash table): {fast_time:.4f} seconds")
     print(f"Speed improvement: {slow_time/fast_time:.1f}x faster")
 
-```text
+```
 
 ### 4. Maintainability
 
@@ -520,7 +520,7 @@ class ImprovedOrderProcessor:
         """Calculate subtotal for order items."""
         return sum(item['price'] * item['quantity'] for item in items)
 
-```text
+```
 
 ## Basic Optimization Techniques
 
@@ -582,7 +582,7 @@ class ProductCatalog:
         """Index-based category search - O(1) to find category, O(k) to return results."""
         return self._products_by_category.get(category, [])
 
-```text
+```
 
 ### 2. Data Structure Selection
 
@@ -675,7 +675,7 @@ def demonstrate_data_structure_performance():
     print(f"Set membership testing: {set_time:.4f} seconds")
     print(f"Set is {list_time/set_time:.1f}x faster")
 
-```text
+```
 
 ### 3. Avoiding Premature Optimization
 
@@ -775,7 +775,7 @@ class OptimizedTextProcessor:
         self.processed_words.extend(words)
         return words
 
-```text
+```
 
 ## Simple Profiling Techniques
 
@@ -920,7 +920,7 @@ def demonstrate_detailed_profiling():
     
     profiler.print_profile_summary()
 
-```text
+```
 
 ### Memory Profiling
 
@@ -980,7 +980,7 @@ def demonstrate_memory_profiling():
     profiler.compare_snapshots("Start", "After creating large list")
     profiler.compare_snapshots("After creating large dict", "After cleanup")
 
-```text
+```
 
 ## Trade-offs Between Readability and Performance
 
@@ -1135,7 +1135,7 @@ def compare_readability_vs_performance():
         else:
             print("Recommendation: Consider optimized version if this is a bottleneck")
 
-```text
+```
 
 ## Guidelines for Effective Optimization
 
@@ -1195,7 +1195,7 @@ def optimization_workflow_example():
         else:
             print("Optimization marginal: consider keeping readable version")
 
-```text
+```
 
 ### 2. Focus on Algorithmic Improvements
 
@@ -1255,7 +1255,7 @@ def algorithmic_optimization_example():
     if fast_time > 0:
         print(f"Algorithmic improvement: {slow_time/fast_time:.1f}x faster")
 
-```text
+```
 
 ## Practice Exercises
 
@@ -1292,7 +1292,7 @@ class ShoppingCart:
                 return True
         return False
 
-```text
+```
 
 ///
 
@@ -1332,7 +1332,7 @@ def process_sales_data(sales_records):
     
     return sorted_products[:10]  # Top 10 products
 
-```text
+```
 
 ///
 

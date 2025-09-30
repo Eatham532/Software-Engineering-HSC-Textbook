@@ -53,14 +53,14 @@
 
     1. Consider this high-level algorithm:
 
-        ```text
+        ```
         ALGORITHM GradeProcessor
         BEGIN
             Read student data
             Calculate grades
             Generate reports
         END
-        ```text
+        ```
 
         What would be the next step in stepwise refinement?
 
@@ -106,14 +106,14 @@
 
     1. Complete this refinement step:
 
-        ```text
+        ```
         Step 1: Process student enrollment
         Step 2: ________________________________
         Step 3: - Validate student information
                 - Check course availability  
                 - Verify prerequisites
                 - Update enrollment records
-        ```text
+        ```
 
         - Write the complete code
         - Get student details; Check course requirements; Confirm enrollment { data-correct }

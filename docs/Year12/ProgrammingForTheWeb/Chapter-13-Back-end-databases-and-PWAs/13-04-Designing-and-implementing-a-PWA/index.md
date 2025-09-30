@@ -415,7 +415,7 @@ def offline_page():
     </html>
     '''
 
-```text
+```
 
 ### Installable app characteristics
 
@@ -736,7 +736,7 @@ def track_installation():
     
     return jsonify({'status': 'tracked'})
 
-```text
+```
 
 ### Syncing strategies and background sync
 
@@ -782,7 +782,7 @@ rectangle "PWA Sync Architecture" {
 }
 @enduml
 
-```text
+```
 
 ```python
 # Background sync and data synchronization
@@ -1205,7 +1205,7 @@ def accessibility_status():
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
 
-```text
+```
 
 ## Try it
 
@@ -1268,7 +1268,7 @@ if (url.pathname.startsWith('/api/notes')) {
 }
 '''
 
-```text
+```
 
 ///
 ///

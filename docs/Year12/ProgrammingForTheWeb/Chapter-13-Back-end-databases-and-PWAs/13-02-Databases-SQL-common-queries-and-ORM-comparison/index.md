@@ -202,7 +202,7 @@ def get_user(user_id):
     else:
         return jsonify({'error': 'User not found'}), 404
 
-```text
+```
 
 ### SELECT operations and field selection
 
@@ -318,7 +318,7 @@ def query_examples():
     finally:
         query_builder.close()
 
-```text
+```
 
 ### GROUP BY and aggregation
 
@@ -417,7 +417,7 @@ def aggregation_examples():
     finally:
         agg_queries.close()
 
-```text
+```
 
 ### Table joins and relationships
 
@@ -470,7 +470,7 @@ categories ||--o{ posts : "category_id"
 posts ||--o{ comments : "post_id"
 @enduml
 
-```text
+```
 
 ```python
 # Table joins demonstration
@@ -572,7 +572,7 @@ def join_examples():
 if __name__ == '__main__':
     app.run(debug=True)
 
-```text
+```
 
 ## Try it
 
@@ -637,7 +637,7 @@ def get_users_with_post_count():
     ''')
     return [dict(row) for row in cursor.fetchall()]
 
-```text
+```
 
 ///
 ///
@@ -757,7 +757,7 @@ class Comment(db.Model):
 with app.app_context():
     db.create_all()
 
-```text
+```
 
 ### ORM vs Raw SQL comparison
 
@@ -931,7 +931,7 @@ def comparison_demo():
         'performance_note': 'Times may vary based on data size and query complexity'
     })
 
-```text
+```
 
 ### Trade-offs analysis: ORM vs Raw SQL
 
@@ -977,7 +977,7 @@ note bottom of factor_skills : Junior developers → ORM\nSQL experts → Raw SQ
 note bottom of factor_perf : Standard CRUD → ORM\nHigh performance → Raw SQL
 @enduml
 
-```text
+```
 
 ```python
 # Trade-offs demonstration with practical examples
@@ -1113,7 +1113,7 @@ def orm_tradeoffs():
 if __name__ == '__main__':
     app.run(debug=True)
 
-```text
+```
 
 ## Additional exercises
 
@@ -1165,7 +1165,7 @@ users = User.query.join(UserProfile, isouter=True).filter(
     User.username.like('%john%')
 ).all()
 
-```text
+```
 
 **Trade-off analysis**:
 

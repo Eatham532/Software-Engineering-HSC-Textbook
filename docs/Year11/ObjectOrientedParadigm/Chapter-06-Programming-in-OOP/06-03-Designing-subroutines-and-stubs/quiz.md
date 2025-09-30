@@ -42,7 +42,7 @@
         ```python
         def calculate_total(self):
             pass
-        ```text
+        ```
 
         ```python
         def calculate_total(self):
@@ -53,12 +53,12 @@
         ```python
         def calculate_total(self):
             raise Exception("Not implemented")
-        ```text
+        ```
 
         ```python
         def calculate_total(self):
             return
-        ```text
+        ```
 
     7. What is the benefit of designing method signatures before implementing the full logic?
 

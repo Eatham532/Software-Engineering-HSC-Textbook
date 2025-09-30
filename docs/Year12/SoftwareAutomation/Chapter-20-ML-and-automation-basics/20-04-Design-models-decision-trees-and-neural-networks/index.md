@@ -79,7 +79,7 @@ rectangle "Email Classification Decision Tree" {
 
 @enduml
 
-```text
+```
 
 ### Python Implementation: Building a Decision Tree from Scratch
 
@@ -406,7 +406,7 @@ def demonstrate_decision_tree():
 if __name__ == "__main__":
     demo_tree = demonstrate_decision_tree()
 
-```text
+```
 
 ### Tracing Through Decision Tree Decisions
 
@@ -470,7 +470,7 @@ This transparency makes decision trees excellent for:
 
 **1. Medical Diagnosis**
 
-```text
+```
 Patient Age > 65?
 ├─ Yes: Cholesterol > 240?
 │  ├─ Yes: High Risk
@@ -479,11 +479,11 @@ Patient Age > 65?
    ├─ Yes: Medium Risk
    └─ No: Low Risk
 
-```text
+```
 
 **2. Credit Approval**
 
-```text
+```
 Income > $50,000?
 ├─ Yes: Credit Score > 700?
 │  ├─ Yes: Approve
@@ -492,22 +492,22 @@ Income > $50,000?
    ├─ Yes: Manual Review
    └─ No: Reject
 
-```text
+```
 
 **3. Quality Control**
 
-```text
+```
 Temperature > 150°C?
 ├─ Yes: Pressure > 5 PSI?
 │  ├─ Yes: Product OK
 │  └─ No: Check Pressure System
 └─ No: Check Heating System
 
-```text
+```
 
    └─ No: Check Heating System
 
-```text
+```
 
 ---
 
@@ -578,7 +578,7 @@ end note
 
 @enduml
 
-```text
+```
 
 ### Python Implementation: Perceptron from Scratch
 
@@ -960,7 +960,7 @@ if __name__ == "__main__":
     demo_perceptron = demonstrate_perceptron()
     demo_mlp = demonstrate_mlp()
 
-```text
+```
 
 ### Understanding Neural Network Learning
 
@@ -1016,35 +1016,35 @@ Neural networks learn through a process called **backpropagation**:
 
 **1. Image Recognition**
 
-```text
+```
 
 Input: Pixel values → Hidden Layers: Feature detection → Output: Object classes
 
-```text
+```
 
 **2. Language Translation**
 
-```text
+```
 
 Input: Source text → Hidden Layers: Meaning representation → Output: Target text
 
-```text
+```
 
 **3. Medical Diagnosis**
 
-```text
+```
 
 Input: Symptoms/tests → Hidden Layers: Pattern recognition → Output: Diagnosis probability
 
-```text
+```
 
 **4. Recommendation Systems**
 
-```text
+```
 
 Input: User preferences → Hidden Layers: Similarity analysis → Output: Recommended items
 
-```text
+```
 
 ---
 

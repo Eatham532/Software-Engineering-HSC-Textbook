@@ -56,7 +56,7 @@ package "Student Management System" {
 [Report Generator] --> [Grade Calculator]
 @enduml
 
-```text
+```
 
 At the highest level, we see major components. Each component hides its internal complexity from the others.
 
@@ -111,7 +111,7 @@ package "Online Shopping System" {
 [Shopping Cart] --> [Order Processing]
 @enduml
 
-```text
+```
 
 **Advantages:**
 
@@ -184,7 +184,7 @@ package "Calculator Application" {
 [Calculator Engine] --> [Calculator Application]
 @enduml
 
-```text
+```
 
 **Advantages:**
 
@@ -273,13 +273,13 @@ note right of validate : Ensures data quality
 note right of calcGrade : Uses average to determine letter
 @enduml
 
-```text
+```
 
 ///
 
 ### Data Flow in Structure Charts
 
-```text
+```
 Main Program
 ├── Get Student Info → student_name, student_id
 ├── Get Assignment Scores → scores_list
@@ -287,7 +287,7 @@ Main Program
 ├── Determine Letter Grade(average_score) → letter_grade
 └── Display Results(student_name, average_score, letter_grade)
 
-```text
+```
 
 ## Stepwise Refinement
 
@@ -299,7 +299,7 @@ Main Program
 
 **Step 1: High-Level Solution**
 
-```text
+```
 ALGORITHM LibrarySystem
 BEGIN
     Handle book borrowing
@@ -307,11 +307,11 @@ BEGIN
     Generate reports
 END
 
-```text
+```
 
 **Step 2: First Refinement**
 
-```text
+```
 ALGORITHM LibrarySystem
 BEGIN
     WHILE system is running DO
@@ -329,11 +329,11 @@ BEGIN
     END WHILE
 END
 
-```text
+```
 
 **Step 3: Refine "Process book borrowing"**
 
-```text
+```
 ALGORITHM ProcessBookBorrowing
 BEGIN
     Get library card number
@@ -351,11 +351,11 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 **Step 4: Refine "Validate card is active"**
 
-```text
+```
 ALGORITHM ValidateCard
 BEGIN
     Look up card in database
@@ -370,7 +370,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ///
 
@@ -444,7 +444,7 @@ overdue --> readCard
 popular --> readBook
 @enduml
 
-```text
+```
 
 ## Benefits of Structured Design
 
@@ -510,7 +510,7 @@ package "Student Report System" {
 }
 @enduml
 
-```text
+```
 
 **Step 2: Refine each major module**
 
@@ -552,7 +552,7 @@ individual --> export
 classReport --> classStats
 @enduml
 
-```text
+```
 
 ### Solution
 
@@ -597,11 +597,11 @@ classReport --> classStats
 summary --> classStats
 @enduml
 
-```text
+```
 
 **Step 3: Add data flow**
 
-```text
+```
 Main Program
 ├── Read Student Files → student_records_list
 ├── Calculate Averages(student_records_list) → averages_list
@@ -610,7 +610,7 @@ Main Program
 ├── Individual Reports(student_records, grades, gpa) → report_files
 └── Export to File(report_files) → saved_reports
 
-```text
+```
 
 ## Common Structure Chart Patterns
 
@@ -623,7 +623,7 @@ Main Program
 [Step 3] --> [Step 4]
 @enduml
 
-```text
+```
 
 ### Data Transformation Pipeline
 
@@ -635,7 +635,7 @@ Main Program
 [Calculate] --> [Output]
 @enduml
 
-```text
+```
 
 ### Service-Oriented Architecture
 
@@ -654,7 +654,7 @@ package "Core Services" {
 [Main Application] --> [Reporting Service]
 @enduml
 
-```text
+```
 
 ### Layered Architecture
 
@@ -681,7 +681,7 @@ package "Data Access Layer" {
 [Business Rules] --> [File Operations]
 @enduml
 
-```text
+```
 
 ## Design Guidelines
 
@@ -699,23 +699,23 @@ package "Data Access Layer" {
 
 ### Good Module Examples
 
-```text
+```
 ✓ CalculateGPA(grades_list) → gpa_value
 ✓ ValidateEmailAddress(email_string) → boolean
 ✓ FormatCurrency(amount, currency_code) → formatted_string
 ✓ ReadConfigFile(filename) → config_dictionary
 
-```text
+```
 
 ### Poor Module Examples
 
-```text
+```
 ✗ DoEverything() - too broad, violates single responsibility
 ✗ GetAndValidateAndStoreData() - does too many things
 ✗ X() - unclear purpose, poor naming
 ✗ ProcessUserInputAndCalculateResultsAndDisplayOutput() - too long, too coupled
 
-```text
+```
 
 
 ## Summary

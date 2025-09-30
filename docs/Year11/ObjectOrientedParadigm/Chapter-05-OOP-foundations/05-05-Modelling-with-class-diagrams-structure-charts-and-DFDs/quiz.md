@@ -32,9 +32,9 @@
 
     5. Look at this PlantUML notation. What relationship does it show?
 
-        ```text
+        ```
         class Student extends Person
-        ```text
+        ```
 
         - Composition
         - Association

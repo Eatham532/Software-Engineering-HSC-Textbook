@@ -206,7 +206,7 @@ update_log = requirements_doc.update_artefact(
 report = manager.generate_documentation_report()
 print(f"Documentation Report: {report}")
 
-```text
+```
 
 ///
 
@@ -248,7 +248,7 @@ Security: Regular updates for security patches
 Used for: Component-based UI development
 Installation: npm install react@18.2.0
 
-```text
+```
 
 /// tab | Python Dependency Tracker
 ///
@@ -424,7 +424,7 @@ attribution = dep_manager.generate_attribution_text()
 print("Generated attribution text:")
 print(attribution[:200] + "...")  # Show first 200 characters
 
-```text
+```
 ///
 
 ### Back-end engineering contributions
@@ -479,7 +479,7 @@ package "Infrastructure" {
 
 @enduml
 
-```text
+```
 
 /// tab | Technology Stack
 **Web Servers**:
@@ -745,7 +745,7 @@ backup_result = user_db.backup_database()
 print(f"Database Query Result: {query_result}")
 print(f"Backup Result: {backup_result}")
 
-```text
+```
 ///
 
 ## Practice
@@ -818,7 +818,7 @@ audit_manager = ArtefactManager()
 
 report = audit_manager.generate_documentation_report()
 
-```text
+```
 ///
 ///
 
@@ -879,7 +879,7 @@ dep_manager = DependencyManager(LicenseType.MIT)
 security_risks = dep_manager.find_security_risks()
 outdated_deps = dep_manager.find_outdated_dependencies()
 
-```text
+```
 ///
 ///
 

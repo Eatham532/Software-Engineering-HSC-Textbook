@@ -40,7 +40,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 
 **Example thinking pattern:**
 
-```text
+```
 "To make tea:
 1. Fill kettle with water
 2. Turn on kettle
@@ -48,7 +48,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 4. Put tea bag in cup
 5. Pour hot water into cup"
 
-```text
+```
 
 **Best for:** Tasks with clear sequential steps, system programming, when you need precise control.
 
@@ -68,7 +68,7 @@ Each style has its strengths and is suited to different purposes. Programming pa
 
 **Example thinking pattern:**
 
-```text
+```
 "A Student object has:
 - Properties: name, age, grades
 - Abilities: enroll_in_course(), calculate_gpa(), submit_assignment()
@@ -77,7 +77,7 @@ A Course object has:
 - Properties: course_code, instructor, enrolled_students
 - Abilities: add_student(), remove_student(), assign_grade()"
 
-```text
+```
 
 **Best for:** Complex systems, user interfaces, modeling real-world scenarios.
 
@@ -97,7 +97,7 @@ A Course object has:
 
 **Example thinking pattern:**
 
-```text
+```
 "Facts:
 - Socrates is a man
 - All men are mortal
@@ -108,7 +108,7 @@ Rule:
 Query: Is Socrates mortal?
 Answer: Yes (computer deduces this)"
 
-```text
+```
 
 **Best for:** Expert systems, artificial intelligence, complex rule-based problems.
 
@@ -128,13 +128,13 @@ Answer: Yes (computer deduces this)"
 
 **Example thinking pattern:**
 
-```text
+```
 "To process student grades:
 - map(convert_to_percentage, raw_scores)
 - filter(above_passing_grade, percentage_scores)  
 - reduce(calculate_average, passing_scores)"
 
-```text
+```
 
 **Best for:** Mathematical computations, data processing, parallel processing.
 
@@ -175,7 +175,7 @@ note right of "Logic" : What is true
 note right of "Functional" : Transform data
 @enduml
 
-```text
+```
 
 | Paradigm | Focus | Strengths | Example Use |
 |----------|-------|-----------|-------------|
@@ -194,33 +194,33 @@ The same problem can be solved using different paradigms:
 
 **Imperative approach:**
 
-```text
+```
 "Start with total = 0
 For each item in cart:
   Add item price to total
 Add tax to total
 Return total"
 
-```text
+```
 
 **Object-oriented approach:**
 
-```text
+```
 "ShoppingCart object:
   - Has list of Item objects
   - Has calculate_total() method
   - Item objects know their own prices"
 
-```text
+```
 
 **Functional approach:**
 
-```text
+```
 "Apply 'get_price' function to all items
 Apply 'sum' function to all prices  
 Apply 'add_tax' function to result"
 
-```text
+```
 
 ### Choosing the Right Tool
 

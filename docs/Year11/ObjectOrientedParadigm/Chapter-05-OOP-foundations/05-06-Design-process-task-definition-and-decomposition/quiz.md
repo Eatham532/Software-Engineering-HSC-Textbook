@@ -50,7 +50,7 @@
         class Member: # manages member data
         class Book: # manages book availability  
         class Library: # coordinates operations
-        ```text
+        ```
 
         - Member class
         - Book class

@@ -44,7 +44,7 @@ frameworks --> community : supported by
 maintainers --> servers : maintain
 @enduml
 
-```text
+```
 
 #### Community-driven development model
 
@@ -207,7 +207,7 @@ def get_contribution_workflow():
     workflow = analyzer.get_contribution_workflow()
     return jsonify(workflow)
 
-```text
+```
 
 #### Licensing considerations
 
@@ -334,7 +334,7 @@ def check_license_compatibility():
     result = license_manager.check_compatibility(project_license, dependencies)
     return jsonify(result)
 
-```text
+```
 
 ### Content Management Systems (CMS)
 
@@ -374,7 +374,7 @@ db --> templates : provides data
 templates --> public : generates pages
 @enduml
 
-```text
+```
 
 #### Hosted vs. self-hosted CMS platforms
 
@@ -576,7 +576,7 @@ def get_cms_platforms():
     """Get information about all CMS platforms"""
     return jsonify(cms_evaluator.cms_platforms)
 
-```text
+```
 
 #### Plugin ecosystems and extensibility
 
@@ -749,7 +749,7 @@ def get_plugin_best_practices():
     practices = plugin_manager.get_plugin_best_practices()
     return jsonify(practices)
 
-```text
+```
 
 ### Guided example: Choosing between CMS approaches for a school website
 
@@ -859,7 +859,7 @@ def school_cms_evaluation():
 if __name__ == '__main__':
     app.run(debug=True)
 
-```text
+```
 
 ## Try it
 

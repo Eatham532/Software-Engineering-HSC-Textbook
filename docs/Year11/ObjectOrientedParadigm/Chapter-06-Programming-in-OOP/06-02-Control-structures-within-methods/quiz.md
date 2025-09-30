@@ -27,7 +27,7 @@
 
         ```python
         def process_order(self, order):
-        ```text
+        ```
 
         - It uses too many variables
         - It does too many different things (lacks cohesion) { data-correct }
@@ -71,7 +71,7 @@
             gpa = self._calculate_gpa(data)
             status = self._determine_status(gpa)
             return self._generate_report(data, gpa, status)
-        ```text
+        ```
 
         - Poor method design
         - Good method cohesion and single responsibility { data-correct }

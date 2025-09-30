@@ -4,14 +4,14 @@
 
     1. What are the inputs and outputs of this algorithm?
 
-        ```text
+        ```
         ALGORITHM ConvertTemperature
         BEGIN
             INPUT celsius
             SET fahrenheit = (celsius * 9 / 5) + 32
             OUTPUT "Temperature in Fahrenheit: " + fahrenheit
         END
-        ```text
+        ```
 
         - Input: fahrenheit; Output: celsius
         - Input: celsius; Output: "Temperature in Fahrenheit: " + fahrenheit { data-correct }
@@ -20,7 +20,7 @@
 
     1. What is the purpose of this algorithm?
 
-        ```text
+        ```
         ALGORITHM FindLargest
         BEGIN
             INPUT num1, num2, num3
@@ -33,7 +33,7 @@
             END IF
             OUTPUT largest
         END
-        ```text
+        ```
 
         - Add three numbers together
         - Find the smallest of three numbers
@@ -49,14 +49,14 @@
 
     1. Complete this desk check for the temperature converter with input celsius = 0:
 
-        ```text
+        ```
         ALGORITHM ConvertTemperature
         BEGIN
             INPUT celsius
             SET fahrenheit = (celsius * 9 / 5) + 32
             OUTPUT "Temperature in Fahrenheit: " + fahrenheit
         END
-        ```text
+        ```
 
         What is the final output?
 
@@ -81,7 +81,7 @@
 
     1. Complete the desk check for this algorithm with input: password = "Test5"
 
-        ```text
+        ```
         ALGORITHM SimplePasswordCheck
         BEGIN
             INPUT password
@@ -92,7 +92,7 @@
                 OUTPUT "Too short"
             END IF
         END
-        ```text
+        ```
 
         What is the output?
 
@@ -117,7 +117,7 @@
 
     1. Complete this trace table for the first two steps:
 
-        ```text
+        ```
         ALGORITHM CalculateBonus
         BEGIN
             INPUT sales, rate
@@ -127,7 +127,7 @@
             END IF
             OUTPUT bonus
         END
-        ```text
+        ```
 
         **Inputs:** sales = 15000, rate = 8
 

@@ -75,7 +75,7 @@ malicious_html = '''
 </html>
 '''
 
-```text
+```
 
 ### CSRF Prevention Implementation
 
@@ -227,7 +227,7 @@ secure_form_template = '''
 </form>
 '''
 
-```text
+```
 
 ### SameSite Cookie Protection
 
@@ -258,7 +258,7 @@ def set_secure_headers(response):
     
     return response
 
-```text
+```
 
 ## Broken Authentication Patterns
 
@@ -519,7 +519,7 @@ def protected_resource():
     except Exception as e:
         return jsonify({'error': str(e)}), 401
 
-```text
+```
 
 ## Security Misconfigurations
 
@@ -671,7 +671,7 @@ def create_secure_app():
     
     return secure_app
 
-```text
+```
 
 ### Environment-Specific Security
 
@@ -780,7 +780,7 @@ class EnvironmentSecurityValidator:
         if password_policy.get('min_length', 0) < 12:
             raise ValueError("Password minimum length should be at least 12 characters")
 
-```text
+```
 
 ## Race Conditions and Concurrency Issues
 
@@ -970,7 +970,7 @@ def demonstrate_race_condition():
 if __name__ == "__main__":
     demonstrate_race_condition()
 
-```text
+```
 
 ### Database-Level Race Condition Prevention
 
@@ -1045,7 +1045,7 @@ class DatabaseTransactionManager:
             
             return new_balance
 
-```text
+```
 
 ## Side-Channel Attacks
 
@@ -1278,7 +1278,7 @@ def demonstrate_timing_attack():
 if __name__ == "__main__":
     demonstrate_timing_attack()
 
-```text
+```
 
 ## Comprehensive Web Security Implementation
 
@@ -1446,7 +1446,7 @@ if __name__ == "__main__":
     app = create_app()
     app.run(debug=False, host='127.0.0.1', port=5000)
 
-```text
+```
 
 ## Key Takeaways
 

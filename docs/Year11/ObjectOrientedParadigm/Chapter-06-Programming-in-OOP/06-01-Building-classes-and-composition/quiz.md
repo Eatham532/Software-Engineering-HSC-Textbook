@@ -20,7 +20,7 @@
 
         ```python
         student = Student("Alice", "S12345")
-        ```text
+        ```
 
         - A class definition
         - An instance (object) of the Student class { data-correct }
@@ -48,7 +48,7 @@
             def \_\_init\_\_(self, engine, wheels):
                 self.engine = engine
                 self.wheels = wheels
-        ```text
+        ```
 
         - Inheritance
         - Composition { data-correct }
@@ -74,7 +74,7 @@
                 raise ValueError("Invalid input")
             self.name = name
             self.age = age
-        ```text
+        ```
 
         - Option A - simpler code
         - Option B - includes validation { data-correct }
@@ -95,7 +95,7 @@
             def add_item(self, item): pass
             def _calculate_total(self): pass
             def get_total(self): return self._calculate_total()
-        ```text
+        ```
 
         - Public method intended for external use
         - Private helper method for internal use { data-correct }

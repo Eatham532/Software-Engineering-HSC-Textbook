@@ -201,7 +201,7 @@ class TestBankAccount(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-```text
+```
 
 ### Subsystem Testing
 
@@ -374,7 +374,7 @@ class TestLibrarySubsystem(unittest.TestCase):
         
         self.assertIn("not checked out to Bob", str(context.exception))
 
-```text
+```
 
 ### System Testing
 
@@ -437,7 +437,7 @@ class TestLibrarySystem(unittest.TestCase):
         self.assertEqual(charlie_books[0], "978-0-134-494162")
         self.assertEqual(diana_books[0], "978-0-13-110362-7")
 
-```text
+```
 
 ## Quality Assurance Practices
 
@@ -530,7 +530,7 @@ class Calculator:
             raise ZeroDivisionError("Cannot divide by zero")
         return a / b
 
-```text
+```
 
 **2. Regular Test Execution**
 
@@ -553,7 +553,7 @@ if __name__ == '__main__':
         print(f"\n❌ {len(result.failures)} test(s) failed")
         print(f"❌ {len(result.errors)} test(s) had errors")
 
-```text
+```
 
 ### Acceptance Criteria
 
@@ -623,7 +623,7 @@ class TestStudentManagementAcceptance(unittest.TestCase):
         original_student = self.student_mgr.find_student(original_id)
         self.assertEqual(original_student.name, "Alice")
 
-```text
+```
 
 ## Practice Exercises
 
@@ -684,7 +684,7 @@ class ShoppingCart:
                       for item in self.items.values())
         return subtotal * (1 - self.discount_rate)
 
-```text
+```
 
 ///
 
@@ -743,7 +743,7 @@ class OrderProcessor:
         # Check availability, reserve items, update order status
         pass
 
-```text
+```
 
 ///
 

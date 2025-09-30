@@ -268,7 +268,7 @@ def get_student_grades(student_id, user_id):
     query = "SELECT course, grade, date FROM grades WHERE student_id = ?"
     return database.execute(query, (student_id,))
 
-```text
+```
 
 ### Testing Phase: Security Validation
 
@@ -303,7 +303,7 @@ def test_grade_access_authorization():
     logs = get_security_logs()
     assert f"Unauthorized grade access attempt by {student1.id}" in logs
 
-```text
+```
 
 ### Deployment Phase: Production Security
 
@@ -419,12 +419,12 @@ Apply the STRIDE framework to threat model a simple online quiz system with the 
 
 ### System Architecture
 
-```text
+```
 [Students] ---> [Web App] ---> [Database]
 [Teachers] ---> [Web App] ---> [Quiz Engine]
                [Auth System]
 
-```text
+```
 
 ### STRIDE Analysis
 

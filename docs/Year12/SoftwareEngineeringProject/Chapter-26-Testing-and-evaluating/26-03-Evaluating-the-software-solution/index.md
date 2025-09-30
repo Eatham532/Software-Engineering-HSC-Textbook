@@ -73,7 +73,7 @@ package "Software Solution Evaluation Process" {
 note bottom : Evaluation is an iterative process that informs\ncontinuous solution improvement
 @enduml
 
-```text
+```
 
 ```python
 class SolutionEvaluator:
@@ -1065,7 +1065,7 @@ def demonstrate_solution_evaluation():
 if __name__ == "__main__":
     evaluation_demo = demonstrate_solution_evaluation()
 
-```text
+```
 
 ---
 
@@ -1775,7 +1775,7 @@ def demonstrate_evaluation_test_planning():
 if __name__ == "__main__":
     test_planning_demo = demonstrate_evaluation_test_planning()
 
-```text
+```
 
 
 

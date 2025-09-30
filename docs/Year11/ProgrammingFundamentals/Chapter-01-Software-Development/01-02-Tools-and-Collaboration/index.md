@@ -22,7 +22,7 @@ An Integrated Development Environment (IDE) combines a text editor, file browser
 
 The IDE file explorer shows the project structure as a tree hierarchy. Understanding this structure is critical:
 
-```text
+```
 project-folder/
 ├── .git/                 # Hidden Git repository data
 ├── .gitignore           # Files to exclude from version control
@@ -34,7 +34,7 @@ project-folder/
 │   └── test_main.py    # Tests for main.py
 └── requirements.txt    # Python dependencies
 
-```text
+```
 
 Key file operations in the IDE:
 
@@ -83,7 +83,7 @@ python3 main.py
 # Run with module syntax (useful for packages)
 python -m src.main
 
-```text
+```
 
 ///
 
@@ -130,7 +130,7 @@ echo. > new-file.py # Create empty file (Windows)
 cp source dest      # Copy file (Unix/macOS)
 copy source dest    # Copy file (Windows)
 
-```text
+```
 
 ## Version control with Git
 
@@ -156,7 +156,7 @@ Version control solves fundamental problems in software development:
 
 Understanding Git's internal structure clarifies how commands work:
 
-```text
+```
 project/.git/
 ├── HEAD                 # Points to current branch
 ├── config              # Repository configuration
@@ -172,7 +172,7 @@ project/.git/
 │   └── tags/          # Tag references
 └── logs/              # Reference change history
 
-```text
+```
 
 Key concepts:
 
@@ -224,7 +224,7 @@ cd project-name
 git clone https://github.com/user/repo.git
 git clone git@github.com:user/repo.git  # SSH variant
 
-```text
+```
 
 The `git init` command creates the `.git/` directory structure and initializes an empty repository. The working tree starts untracked - no files are under version control until explicitly added.
 
@@ -246,7 +246,7 @@ git add -p filename.py
 # Stage only part of a file's changes
 git add --patch filename.py
 
-```text
+```
 
 Staging serves multiple purposes:
 
@@ -271,7 +271,7 @@ git commit -am "Fix validation bugs in form processing"
 # Amend the previous commit (before pushing)
 git commit --amend -m "Corrected commit message"
 
-```text
+```
 
 **Commit message best practices**:
 
@@ -283,7 +283,7 @@ git commit --amend -m "Corrected commit message"
 
 Example of a well-structured commit message:
 
-```text
+```
 Add password reset functionality
 
 Implement secure token-based password reset system:
@@ -294,7 +294,7 @@ Implement secure token-based password reset system:
 Resolves: #123
 Breaking change: Updates user model schema
 
-```text
+```
 
 ### Inspect changes and history (comprehensive)
 
@@ -311,7 +311,7 @@ git status --short
 # Show status with branch and tracking information
 git status -b
 
-```text
+```
 
 Status output interpretation:
 
@@ -350,7 +350,7 @@ git diff --word-diff
 # Statistical summary of changes
 git diff --stat
 
-```text
+```
 
 #### Viewing commit history
 
@@ -388,7 +388,7 @@ git log --all --date-order --graph
 # Beautiful colored output with custom format
 git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 
-```text
+```
 
 #### Detailed commit inspection
 
@@ -407,7 +407,7 @@ git show --stat HEAD
 git show HEAD:filename.py
 git show abc123:src/main.py
 
-```text
+```
 
 ### Undo and recovery operations (comprehensive)
 
@@ -425,7 +425,7 @@ git restore --staged .
 # Legacy command (still works)
 git reset HEAD filename.py
 
-```text
+```
 
 #### Discarding working tree changes
 
@@ -440,7 +440,7 @@ git restore .
 git checkout -- filename.py
 git checkout .
 
-```text
+```
 
 /// admonition | Watch out when discarding changes!
     type: warning
@@ -461,7 +461,7 @@ git commit --amend --no-edit
 # Combine staging and amending
 git commit --amend -am "Updated message with additional changes"
 
-```text
+```
 
 **Important**: Only amend commits that haven't been pushed to shared repositories.
 
@@ -479,7 +479,7 @@ git revert HEAD~3..HEAD    # Revert last 3 commits
 # Revert without creating commit (stage changes only)
 git revert --no-commit HEAD
 
-```text
+```
 
 Revert is safe for shared repositories because it creates new commits rather than modifying history.
 
@@ -494,7 +494,7 @@ git reset --hard HEAD~1    # DESTRUCTIVE: discard everything
 # Reset to specific commit
 git reset --hard abc123f
 
-```text
+```
 
 /// admonition | Warning
     type: warning
@@ -517,7 +517,7 @@ git branch recovery-branch HEAD@{5}
 # Find lost commits in unreachable objects
 git fsck --lost-found
 
-```text
+```
 
 ### `.gitignore` configuration (comprehensive)
 
@@ -607,7 +607,7 @@ site/
 ehthumbs.db
 Thumbs.db
 
-```text
+```
 
 #### Gitignore syntax rules
 
@@ -645,7 +645,7 @@ docs/**/*.pdf
 [Tt]humbs.db
 [Dd]esktop.ini
 
-```text
+```
 
 ///
 
@@ -668,7 +668,7 @@ git commit -m "Apply gitignore to existing files"
 # Global gitignore for user-specific preferences
 git config --global core.excludesfile ~/.gitignore_global
 
-```text
+```
 
 #### Common gitignore mistakes
 
@@ -718,7 +718,7 @@ git branch -m new-branch-name
 # Rename any branch
 git branch -m old-name new-name
 
-```text
+```
 
 #### Branch workflow strategies
 
@@ -752,7 +752,7 @@ git merge feature-user-auth
 # Clean up
 git branch -d feature-user-auth
 
-```text
+```
 
 #### Merging strategies
 
@@ -762,7 +762,7 @@ git branch -d feature-user-auth
 git merge feature-branch       # Fast-forward if possible
 git merge --no-ff feature-branch  # Force merge commit
 
-```text
+```
 
 **Three-way merge**: When branches have diverged, Git creates a merge commit with two parents.
 
@@ -783,7 +783,7 @@ git rebase main
 git switch main
 git merge feature-branch  # Fast-forward merge
 
-```text
+```
 
 #### Handling merge conflicts
 
@@ -808,7 +808,7 @@ git status
 git add resolved-file.py
 git commit  # Complete the merge
 
-```text
+```
 
 #### Advanced branching
 
@@ -831,7 +831,7 @@ git branch --contains abc123f
 # Show unmerged branches
 git branch --no-merged main
 
-```text
+```
 
 ## Worked example
 
@@ -841,13 +841,13 @@ git branch --no-merged main
 # hello.py — run this from the terminal or IDE run button
 print("Hello, repo!")
 
-```text
+```
 
 ///
 
 /// tab | Terminal
 
-```text
+```
 # initialising a repository and making two commits (illustrative)
 git init
 git add hello.py
@@ -856,7 +856,7 @@ echo "# Project" > README.md
 git add README.md
 git commit -m "Add README"
 
-```text
+```
 
 ///
 
@@ -880,7 +880,7 @@ Complete the tasks below to reinforce Git and IDE concepts.
 
 - Create the following directory structure using the IDE file explorer:
 
-  ```text
+  ```
   my-project/
   ├── src/
   │   └── main.py
@@ -888,7 +888,7 @@ Complete the tasks below to reinforce Git and IDE concepts.
   │   └── test_main.py
   └── README.md
 
-  ```text
+  ```
 
 - Configure your IDE's integrated terminal to open in the project root
 
@@ -983,14 +983,14 @@ Complete the tasks below to reinforce Git and IDE concepts.
    mkdir grade-calculator
    cd grade-calculator
 
-   ```text
+   ```
 
 2. **Initialize Git repository**:
 
    ```bash
    git init
 
-   ```text
+   ```
 
 3. **Create README.md**:
 
@@ -1005,7 +1005,7 @@ Complete the tasks below to reinforce Git and IDE concepts.
    ## How to run
    python main.py
 
-   ```text
+   ```
 
 4. **Initial commit**:
 
@@ -1013,7 +1013,7 @@ Complete the tasks below to reinforce Git and IDE concepts.
    git add README.md
    git commit -m "Initial project setup"
 
-   ```text
+   ```
 
 5. **Add calculator code**: Create `main.py` with the Grade Calculator function from Section 1.1
 
@@ -1023,14 +1023,14 @@ Complete the tasks below to reinforce Git and IDE concepts.
    git add main.py
    git commit -m "Add basic grade calculation function"
 
-   ```text
+   ```
 
 7. **Check repository status**:
 
    ```bash
    git log --oneline
 
-   ```text
+   ```
 
 This activity demonstrates the complete Git workflow: initialization, staging, committing, and history tracking for a real project.
 

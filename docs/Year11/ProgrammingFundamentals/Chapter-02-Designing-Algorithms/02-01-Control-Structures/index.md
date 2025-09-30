@@ -31,7 +31,7 @@ flowchart TD
     B --> C[Step 3: Bake for 30 minutes]
     C --> D[Step 4: Cool and serve]
 
-```text
+```
 
 **Key characteristics:**
 
@@ -47,7 +47,7 @@ flowchart TD
     type: example
     open: false
 
-```text
+```
 ALGORITHM MakeSandwich
 BEGIN
     Get two slices of bread
@@ -57,7 +57,7 @@ BEGIN
     Cut sandwich in half
 END
 
-```text
+```
 
 **Tracing through the sequence:**
 
@@ -94,9 +94,9 @@ flowchart TD
     C --> E[Go outside]
     D --> E
 
-```text
+```
 
-```text
+```
 ALGORITHM CheckWeather
 BEGIN
     INPUT weather
@@ -108,7 +108,7 @@ BEGIN
     OUTPUT "Go outside"
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -157,9 +157,9 @@ flowchart TD
     C --> E[Go outside]
     D --> E
 
-```text
+```
 
-```text
+```
 ALGORITHM ChooseClothing
 BEGIN
     INPUT temperature
@@ -173,7 +173,7 @@ BEGIN
     OUTPUT "Ready to go outside"
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -235,9 +235,9 @@ flowchart TD
     I --> K
     J --> K
 
-```text
+```
 
-```text
+```
 ALGORITHM AssignGrade
 BEGIN
     INPUT score
@@ -255,7 +255,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -284,9 +284,9 @@ flowchart TD
     G --> I
     H --> I
 
-```text
+```
 
-```text
+```
 ALGORITHM CheckVotingEligibility
 BEGIN
     INPUT age, is_citizen, is_registered
@@ -306,7 +306,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -374,9 +374,9 @@ flowchart TD
     J --> L
     K --> L
 
-```text
+```
 
-```text
+```
 ALGORITHM GetDayName
 BEGIN
     INPUT day_number
@@ -393,11 +393,11 @@ BEGIN
     END CASE
 END
 
-```text
+```
 
 **Note:** This can also be written using multiple IF-THEN-ELSE IF statements:
 
-```text
+```
 ALGORITHM GetDayNameWithIF
 BEGIN
     INPUT day_number
@@ -421,7 +421,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -495,9 +495,9 @@ flowchart TD
     E --> C
     C -->|No| F[End]
 
-```text
+```
 
-```text
+```
 ALGORITHM CountToTen
 BEGIN
     FOR counter = 1 TO 10 DO
@@ -506,7 +506,7 @@ BEGIN
     OUTPUT "Exercise complete!"
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -551,7 +551,7 @@ END
 
 **Final output:**
 
-```text
+```
 Jumping jack 1
 Jumping jack 2
 Jumping jack 3
@@ -559,7 +559,7 @@ Jumping jack 3
 Jumping jack 10
 Exercise complete!
 
-```text
+```
 
 ///
 
@@ -569,7 +569,7 @@ Exercise complete!
 
 **Counting backwards:**
 
-```text
+```
 ALGORITHM CountDown
 BEGIN
     FOR i = 10 TO 1 STEP -1 DO
@@ -578,11 +578,11 @@ BEGIN
     OUTPUT "Blast off!"
 END
 
-```text
+```
 
 **Processing array elements:**
 
-```text
+```
 ALGORITHM SumArray
 BEGIN
     SET total = 0
@@ -592,7 +592,7 @@ BEGIN
     OUTPUT "Sum: " + total
 END
 
-```text
+```
 
 ///
 
@@ -610,9 +610,9 @@ flowchart TD
     E --> B
     C -->|No| F[End]
 
-```text
+```
 
-```text
+```
 ALGORITHM ProcessUserInput
 BEGIN
     INPUT command
@@ -625,7 +625,7 @@ BEGIN
     OUTPUT "Goodbye!"
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -665,12 +665,12 @@ END
 
 **Output:**
 
-```text
+```
 Processing: hello
 Processing: world
 Goodbye!
 
-```text
+```
 
 ///
 
@@ -680,7 +680,7 @@ Goodbye!
 
 **Searching through data:**
 
-```text
+```
 ALGORITHM FindValue
 BEGIN
     SET found = false
@@ -701,11 +701,11 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 **Reading until end of file:**
 
-```text
+```
 ALGORITHM ProcessFile
 BEGIN
     READ first_line
@@ -716,7 +716,7 @@ BEGIN
     END WHILE
 END
 
-```text
+```
 
 ///
 
@@ -733,9 +733,9 @@ flowchart TD
     D -->|No| B
     D -->|Yes| E[End]
 
-```text
+```
 
-```text
+```
 ALGORITHM GetValidInput
 BEGIN
     REPEAT
@@ -748,7 +748,7 @@ BEGIN
     OUTPUT "Thank you! You entered: " + number
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -788,12 +788,12 @@ END
 
 **Output:**
 
-```text
+```
 Invalid! Please enter 1-100
 Invalid! Please enter 1-100
 Thank you! You entered: 75
 
-```text
+```
 
 ///
 
@@ -805,7 +805,7 @@ Thank you! You entered: 75
 
 **REPEAT-UNTIL (post-test):**
 
-```text
+```
 ALGORITHM GetPasswordRepeat
 BEGIN
     REPEAT
@@ -816,11 +816,11 @@ BEGIN
     UNTIL length(password) >= 8
 END
 
-```text
+```
 
 **WHILE (pre-test):**
 
-```text
+```
 ALGORITHM GetPasswordWhile
 BEGIN
     INPUT password
@@ -830,7 +830,7 @@ BEGIN
     END WHILE
 END
 
-```text
+```
 
 **Key difference:** REPEAT-UNTIL always asks for input at least once, while WHILE requires initialization before the loop.
 
@@ -855,9 +855,9 @@ flowchart TD
     I --> C
     C -->|No| J[End]
 
-```text
+```
 
-```text
+```
 ALGORITHM PrintRectangle
 BEGIN
     FOR row = 1 TO 3 DO
@@ -868,7 +868,7 @@ BEGIN
     END FOR
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -922,12 +922,12 @@ END
 
 **Final output:**
 
-```text
+```
 ****
 ****
 ****
 
-```text
+```
 
 ///
 
@@ -937,7 +937,7 @@ END
 
 **Multiplication table:**
 
-```text
+```
 ALGORITHM MultiplicationTable
 BEGIN
     FOR i = 1 TO 10 DO
@@ -949,11 +949,11 @@ BEGIN
     END FOR
 END
 
-```text
+```
 
 **Processing 2D array:**
 
-```text
+```
 ALGORITHM Sum2DArray
 BEGIN
     SET total = 0
@@ -965,11 +965,11 @@ BEGIN
     OUTPUT "Sum: " + total
 END
 
-```text
+```
 
 **Triangle pattern:**
 
-```text
+```
 ALGORITHM PrintTriangle
 BEGIN
     FOR row = 1 TO 5 DO
@@ -980,18 +980,18 @@ BEGIN
     END FOR
 END
 
-```text
+```
 
 **Output:**
 
-```text
+```
 *
 **
 ***
 ****
 *****
 
-```text
+```
 
 ///
 
@@ -1016,9 +1016,9 @@ flowchart TD
     J --> B
     I --> K[End program]
 
-```text
+```
 
-```text
+```
 ALGORITHM MenuSystem
 BEGIN
     LOOP
@@ -1040,7 +1040,7 @@ BEGIN
     END LOOP
 END
 
-```text
+```
 
 **Key characteristics:**
 
@@ -1058,7 +1058,7 @@ END
 
 **Using WHILE TRUE:**
 
-```text
+```
 ALGORITHM MenuWithWhile
 BEGIN
     WHILE true DO
@@ -1073,11 +1073,11 @@ BEGIN
     END WHILE
 END
 
-```text
+```
 
 **Using REPEAT with flag:**
 
-```text
+```
 ALGORITHM MenuWithRepeat
 BEGIN
     SET keep_running = true
@@ -1094,7 +1094,7 @@ BEGIN
     UNTIL NOT keep_running
 END
 
-```text
+```
 
 All three approaches achieve the same result - choose based on readability and language support.
 
@@ -1118,7 +1118,7 @@ All three approaches achieve the same result - choose based on readability and l
 
 **FOR loop approach:**
 
-```text
+```
 ALGORITHM SumWithFor
 BEGIN
     SET sum = 0
@@ -1128,11 +1128,11 @@ BEGIN
     OUTPUT sum
 END
 
-```text
+```
 
 **WHILE loop approach:**
 
-```text
+```
 ALGORITHM SumWithWhile
 BEGIN
     SET sum = 0
@@ -1144,11 +1144,11 @@ BEGIN
     OUTPUT sum
 END
 
-```text
+```
 
 **REPEAT-UNTIL approach:**
 
-```text
+```
 ALGORITHM SumWithRepeat
 BEGIN
     SET sum = 0
@@ -1160,7 +1160,7 @@ BEGIN
     OUTPUT sum
 END
 
-```text
+```
 
 All three produce the same result: sum = 15
 ///
@@ -1171,7 +1171,7 @@ Real algorithms combine sequence, selection, and iteration to solve complex prob
 
 /// tab | Pseudocode
 
-```text
+```
 ALGORITHM ProcessStudentGrades
 BEGIN
     SET total = 0
@@ -1206,7 +1206,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 ///
 
@@ -1247,7 +1247,7 @@ def process_student_grades():
     else:
         print("No valid grades were entered.")
 
-```text
+```
 
 ///
 This algorithm combines:
@@ -1275,7 +1275,7 @@ flowchart TD
     G -->|No| H[Calculate average]
     H --> I[End]
 
-```text
+```
 
 ## Tracing algorithms
 
@@ -1287,7 +1287,7 @@ Create a table to track variable values as they change:
 
 **Algorithm:**
 
-```text
+```
 ALGORITHM FindMaximum
 BEGIN
     INPUT num1, num2, num3
@@ -1304,7 +1304,7 @@ BEGIN
     OUTPUT maximum
 END
 
-```text
+```
 
 **Tracing with inputs: num1=15, num2=8, num3=22**
 
@@ -1386,7 +1386,7 @@ Most of the process is sequential with a couple of decision points and one repet
 
 Trace through this algorithm with the given inputs and show what gets printed:
 
-```text
+```
 ALGORITHM Mystery
 BEGIN
     INPUT x, y
@@ -1403,7 +1403,7 @@ BEGIN
     OUTPUT result
 END
 
-```text
+```
 
 **Trace with inputs: x = 5, y = 3**
 
@@ -1452,7 +1452,7 @@ Use appropriate control structures and show your algorithm in pseudocode.
     type: success
     open: false
 
-```text
+```
 ALGORITHM CalculateAverage
 BEGIN
     SET sum = 0
@@ -1482,7 +1482,7 @@ BEGIN
     END IF
 END
 
-```text
+```
 
 **Control structures used:**
 
@@ -1503,7 +1503,7 @@ END
 
 Analyze this algorithm and determine what it does. Then trace it with the input array [64, 34, 25, 12, 22, 11, 90]:
 
-```text
+```
 ALGORITHM MysterySort
 BEGIN
     INPUT array
@@ -1526,7 +1526,7 @@ BEGIN
     OUTPUT array
 END
 
-```text
+```
 
 1. What does this algorithm accomplish?
 
