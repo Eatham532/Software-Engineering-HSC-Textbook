@@ -6,7 +6,7 @@ on:
       - master
       - main
 
-permissions:
+permissions:a
   contents: write
 
 jobs:
@@ -40,21 +40,27 @@ jobs:
             docs
             includes
 
-      - name: Mark repository safe for git (fix "dubious ownership")
+      - name: Mark repository safe for git (must run before any git command)
         shell: bash
         run: |
+          # Ensure git will allow operations inside the runner workspace.
+          # Do this immediately after checkout and before any git remote / log commands.
           git config --global --add safe.directory "${{ github.workspace }}"
-          git config --global --list
+          # Sometimes git reports a different working directory; also add the present working directory
+          git config --global --add safe.directory "$(pwd)"
+          git config --global --list | sed -n '1,200p'
 
-      - name: Ensure origin remote is present and authenticated
+      - name: Ensure origin remote is present and pushable (use GITHUB_TOKEN)
         shell: bash
         run: |
-          # Add an HTTPS origin using the workflow token if origin is missing or not pushable
+          set -euo pipefail
+          # Use the repository variable and GITHUB_TOKEN to construct an authenticated origin.
+          # Prefer to keep existing origin if it is already configured.
           if ! git remote get-url origin >/dev/null 2>&1; then
             git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
-            echo "Added origin using GITHUB_TOKEN"
+            echo "Added authenticated origin with GITHUB_TOKEN"
           else
-            # If origin exists, verify push is possible (best-effort)
+            echo "origin exists; showing remote urls"
             git remote -v
           fi
 
@@ -76,30 +82,7 @@ jobs:
         run: |
           set -euo pipefail
           # Prefer editable install so local modules/plugins are importable
-          if python -m pip install -e . ; then
-            echo "Installed editable package"
-          elif python -m pip install . ; then
-            echo "Installed package (non-editable)"
-          else
-            echo "Package install failed; installing mkdocs + common plugins as fallback"
-            python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin
-          fi
-
-      - name: Verify kroki_wrapper import and mkdocs
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m pip list --disable-pip-version-check | head -n 60
-          command -v mkdocs || true
-          python - <<'PY'
-          import importlib
-          try:
-              importlib.import_module("kroki_wrapper")
-              print("kroki_wrapper import OK")
-          except Exception as e:
-              print("ERROR importing kroki_wrapper:", e)
-              raise
-          PY
+          python -m pip install -e . || python -m pip install .
 
       - name: Deploy MkDocs site
         env:
