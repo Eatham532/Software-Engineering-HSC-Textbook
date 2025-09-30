@@ -926,7 +926,6 @@ blockdiag {
 
 This comprehensive practice progression builds from basic problem analysis through complete system development, preparing students for real-world software engineering challenges.
 
-
 ## Recap
 
 The Software Development Lifecycle is your roadmap for building successful software:
