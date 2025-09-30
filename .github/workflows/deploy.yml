@@ -12,7 +12,9 @@ permissions:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    
+    container:
+      image: python:3.13
+
     services:
       kroki:
         image: yuzutech/kroki
@@ -38,6 +40,7 @@ jobs:
             docs
             includes
 
+      # Python is already installed in the container, but setup-python can still set up environment variables if needed
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -56,19 +59,6 @@ jobs:
 
       - name: Install dependencies with uv
         run: uv sync
-
-      - name: Wait for Kroki to be ready
-        run: |
-          for i in {1..10}; do
-            if curl -s http://kroki:8000/health | grep -q "UP"; then
-              echo "Kroki is ready!"
-              exit 0
-            fi
-            echo "Waiting for Kroki..."
-            sleep 3
-          done
-          echo "Kroki did not start in time"
-          exit 1
 
       - name: Deploy MkDocs site
         env:
