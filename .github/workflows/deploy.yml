@@ -40,6 +40,13 @@ jobs:
             docs
             includes
 
+      - name: Mark repository safe for git
+        shell: bash
+        run: |
+          # Fix 'detected dubious ownership' errors when git is invoked in the runner
+          git config --global --add safe.directory "${{ github.workspace }}"
+          git config --global --list | sed -n '1,200p'
+
       - name: Install dependencies
         run: pip install -e .
 
