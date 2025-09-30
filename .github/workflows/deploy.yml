@@ -40,18 +40,76 @@ jobs:
             docs
             includes
 
-      - name: Mark repository safe for git
+      - name: Mark repository safe for git (fix "dubious ownership")
         shell: bash
         run: |
-          # Fix 'detected dubious ownership' errors when git is invoked in the runner
           git config --global --add safe.directory "${{ github.workspace }}"
-          git config --global --list | sed -n '1,200p'
+          git config --global --list
 
-      - name: Install dependencies
-        run: pip install -e .
+      - name: Ensure origin remote is present and authenticated
+        shell: bash
+        run: |
+          # Add an HTTPS origin using the workflow token if origin is missing or not pushable
+          if ! git remote get-url origin >/dev/null 2>&1; then
+            git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+            echo "Added origin using GITHUB_TOKEN"
+          else
+            # If origin exists, verify push is possible (best-effort)
+            git remote -v
+          fi
+
+      - name: Configure git user
+        shell: bash
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "github-actions"
+
+      - name: Prepare pip/build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          python --version
+          python -m pip install --upgrade pip setuptools wheel build
+
+      - name: Install project (from pyproject.toml)
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Prefer editable install so local modules/plugins are importable
+          if python -m pip install -e . ; then
+            echo "Installed editable package"
+          elif python -m pip install . ; then
+            echo "Installed package (non-editable)"
+          else
+            echo "Package install failed; installing mkdocs + common plugins as fallback"
+            python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin
+          fi
+
+      - name: Verify kroki_wrapper import and mkdocs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip list --disable-pip-version-check | head -n 60
+          command -v mkdocs || true
+          python - <<'PY'
+          import importlib
+          try:
+              importlib.import_module("kroki_wrapper")
+              print("kroki_wrapper import OK")
+          except Exception as e:
+              print("ERROR importing kroki_wrapper:", e)
+              raise
+          PY
 
       - name: Deploy MkDocs site
         env:
           KROKI_SERVER_URL: http://kroki:8000
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
-        run: mkdocs gh-deploy --force
+        run: |
+          set -euo pipefail
+          if ! command -v mkdocs >/dev/null 2>&1; then
+            echo "ERROR: mkdocs not found on PATH. Aborting."
+            exit 1
+          fi
+          mkdocs gh-deploy --force --clean --remote-name origin
