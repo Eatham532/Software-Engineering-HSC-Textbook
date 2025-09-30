@@ -33,28 +33,55 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           sparse-checkout: |
             docs
             includes
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v1
+      - name: Install project dependencies into container Python (pip, from pyproject)
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Python: $(python --version)"
+          python -m pip install --upgrade pip setuptools wheel
 
-      - name: Cache uv dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/uv
-          key: uv-cache-${{ hashFiles('pyproject.toml', 'uv.lock') }}
-          restore-keys: |
-            uv-cache-
+          # Try to install the project with the common docs extras if present
+          echo "Attempting to install project and docs extras via pip"
+          if python -m pip install ".[docs]"; then
+            echo "Installed project with docs extras"
+          else
+            echo "Failed to install '.[docs]'; attempting plain install from pyproject"
+            if python -m pip install .; then
+              echo "Installed project (without docs extras)"
+            else
+              echo "Failed to install project from pyproject. Installing mkdocs + common plugins explicitly"
+              python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin
+            fi
+          fi
 
-      - name: Install dependencies with uv
-        run: uv sync
+      - name: Debug: confirm mkdocs presence
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "PATH=$PATH"
+          echo "mkdocs binary:"
+          command -v mkdocs || true
+          echo "mkdocs --version (may fail if mkdocs not installed)"
+          mkdocs --version || true
+          echo "pip list (top entries)"
+          python -m pip list --disable-pip-version-check | head -n 50 || true
 
       - name: Deploy MkDocs site
         env:
           KROKI_SERVER_URL: http://kroki:8000
-        run: mkdocs gh-deploy --force
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v mkdocs >/dev/null 2>&1; then
+            echo "ERROR: mkdocs not found on PATH. Aborting. See debug output above."
+            exit 1
+          fi
+          # Run the deploy
+          mkdocs gh-deploy --force
