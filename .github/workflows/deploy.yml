@@ -40,23 +40,25 @@ jobs:
             docs
             includes
 
-      - name: Install project dependencies into container Python (pip, from pyproject)
+      - name: Install project dependencies into container Python (pip from pyproject)
         shell: bash
         run: |
           set -euo pipefail
           echo "Python: $(python --version)"
+
+          # ensure pip and build tools are available
           python -m pip install --upgrade pip setuptools wheel
 
-          # Try to install the project with the common docs extras if present
-          echo "Attempting to install project and docs extras via pip"
+          # try to install project with docs extras (common pattern)
+          echo "Attempting: python -m pip install '.[docs]'"
           if python -m pip install ".[docs]"; then
             echo "Installed project with docs extras"
           else
-            echo "Failed to install '.[docs]'; attempting plain install from pyproject"
+            echo "Failed to install '.[docs]', trying 'python -m pip install .'"
             if python -m pip install .; then
               echo "Installed project (without docs extras)"
             else
-              echo "Failed to install project from pyproject. Installing mkdocs + common plugins explicitly"
+              echo "Failed to install project from pyproject.toml; installing mkdocs (+ common plugins) explicitly"
               python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin
             fi
           fi
@@ -70,7 +72,7 @@ jobs:
           command -v mkdocs || true
           echo "mkdocs --version (may fail if mkdocs not installed)"
           mkdocs --version || true
-          echo "pip list (top entries)"
+          echo "Installed packages (top):"
           python -m pip list --disable-pip-version-check | head -n 50 || true
 
       - name: Deploy MkDocs site
@@ -83,5 +85,4 @@ jobs:
             echo "ERROR: mkdocs not found on PATH. Aborting. See debug output above."
             exit 1
           fi
-          # Run the deploy
           mkdocs gh-deploy --force
