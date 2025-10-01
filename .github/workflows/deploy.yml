@@ -5,6 +5,12 @@ on:
     branches:
       - master
       - main
+  workflow_dispatch:  # Allow manual triggers
+
+# Cancel in-progress runs when new commit is pushed
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -35,10 +41,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Full history for git-revision-date plugin
           sparse-checkout: |
             docs
             includes
+            kroki_wrapper.py
+            mermaid_wrapper.py
+            pyproject.toml
+            mkdocs.yml
 
       - name: Install project dependencies into container Python (pip from pyproject)
         shell: bash
@@ -46,43 +56,56 @@ jobs:
           set -euo pipefail
           echo "Python: $(python --version)"
 
-          # ensure pip and build tools are available
+          # Ensure pip and build tools are available
           python -m pip install --upgrade pip setuptools wheel
 
-          # try to install project with docs extras (common pattern)
+          # Install project with docs extras (falls back if needed)
           echo "Attempting: python -m pip install '.[docs]'"
           if python -m pip install ".[docs]"; then
-            echo "Installed project with docs extras"
+            echo "✅ Installed project with docs extras"
           else
-            echo "Failed to install '.[docs]', trying 'python -m pip install .'"
+            echo "⚠️ Failed to install '.[docs]', trying 'python -m pip install .'"
             if python -m pip install .; then
-              echo "Installed project (without docs extras)"
+              echo "✅ Installed project (without docs extras)"
             else
-              echo "Failed to install project from pyproject.toml; installing mkdocs (+ common plugins) explicitly"
-              python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin
+              echo "❌ Failed to install project from pyproject.toml; installing mkdocs explicitly"
+              python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin mkdocs-awesome-pages-plugin
             fi
           fi
 
-      - name: "Debug: confirm mkdocs presence"
+      - name: Verify MkDocs installation
         shell: bash
         run: |
           set -euo pipefail
-          echo "PATH=$PATH"
-          echo "mkdocs binary:"
-          command -v mkdocs || true
-          echo "mkdocs --version (may fail if mkdocs not installed)"
-          mkdocs --version || true
-          echo "Installed packages (top):"
-          python -m pip list --disable-pip-version-check | head -n 50 || true
+          if ! command -v mkdocs >/dev/null 2>&1; then
+            echo "❌ ERROR: mkdocs not found on PATH"
+            exit 1
+          fi
+          echo "✅ MkDocs found: $(command -v mkdocs)"
+          echo "📦 MkDocs version:"
+          mkdocs --version
+          echo ""
+          echo "📦 Installed packages (first 30):"
+          python -m pip list --disable-pip-version-check | head -n 30
 
-      - name: Deploy MkDocs site
+      - name: Build MkDocs site
         env:
           KROKI_SERVER_URL: http://kroki:8000
         shell: bash
         run: |
           set -euo pipefail
-          if ! command -v mkdocs >/dev/null 2>&1; then
-            echo "ERROR: mkdocs not found on PATH. Aborting. See debug output above."
-            exit 1
-          fi
-          mkdocs gh-deploy --force
+          echo "🔨 Building MkDocs site..."
+          mkdocs build --strict --verbose
+          echo "✅ Build completed successfully"
+
+      - name: Deploy to GitHub Pages
+        env:
+          KROKI_SERVER_URL: http://kroki:8000
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "🚀 Deploying to GitHub Pages..."
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          mkdocs gh-deploy --force --verbose
+          echo "✅ Deployment completed successfully"
