@@ -2,7 +2,7 @@
 
 ## From Theory to Implementation
 
-In [Section 3.4](../../Chapter-03-Data-for-software-engineering/Section-04-Data-Structures-Overview/index.md), we learned about different data structures conceptually. Now it's time to implement them in Python! This section focuses on the specific data structures required for the NSW HSC syllabus, showing you how to use them effectively in your programs.
+In [Section 3.4](../../Chapter-03-Data-for-software-engineering/03-04-Data-Structures-Overview/index.md), we learned about different data structures conceptually. Now it's time to implement them in Python! This section focuses on the specific data structures required for the NSW HSC syllabus, showing you how to use them effectively in your programs.
 
 The required data structures are:
 

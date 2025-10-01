@@ -535,4 +535,4 @@ Key principles for choosing algorithms:
 
 These algorithms prepare you for implementing automation systems that can learn from data and make intelligent decisions in business processes.
 
-See also [20.4 Design models: decision trees and neural networks](../../Chapter-20-ML-and-automation-basics/Section-04-Design-models-decision-trees-and-neural-networks/index.md) for conceptual foundations and [21.2 Neural networks: concepts and implementation](../Section-02-Neural-networks-concepts-and-implementation/index.md) for more advanced learning algorithms.
+See also [20.4 Design models: decision trees and neural networks](../../Chapter-20-ML-and-automation-basics/20-04-Design-models-decision-trees-and-neural-networks/index.md) for conceptual foundations and [21.2 Neural networks: concepts and implementation](../21-02-Neural-networks-concepts-and-implementation/index.md) for more advanced learning algorithms.

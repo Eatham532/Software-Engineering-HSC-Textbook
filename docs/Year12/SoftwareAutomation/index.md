@@ -48,12 +48,10 @@ This module emphasizes **practical understanding through implementation**:
 
 ## Getting Started
 
-1. **Read the [Module Plan](ModulePlan.md)** for detailed scope and learning objectives
+1. **Begin with Chapter 20** to establish ML and automation foundations
 
-2. **Begin with Chapter 20** to establish ML and automation foundations
+2. **Progress through Chapter 21** for hands-on algorithm implementation
 
-3. **Progress through Chapter 21** for hands-on algorithm implementation
-
-4. **Complete with Chapter 22** to understand broader implications and ethical considerations
+3. **Complete with Chapter 22** to understand broader implications and ethical considerations
 
 The module is designed for sequential progression, with each chapter building upon previous concepts while introducing new practical applications and implementation challenges.

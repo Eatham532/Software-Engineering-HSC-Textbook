@@ -604,11 +604,4 @@ Sensors, actuators, and end effectors are the interface between digital control 
 
 Understanding these characteristics enables informed component selection that meets functional requirements within budget and reliability constraints.
 
-See also [8.2 Wiring diagrams and power requirements](../../Chapter-08-Data-and-integration/Section-02-Wiring-diagrams-and-power-requirements/index.md) for electrical integration considerations.
-
-
-
-
-
-
-
+See also [8.2 Wiring diagrams and power requirements](../../Chapter-08-Data-and-integration/08-02-Wiring-diagrams-and-power-requirements/index.md) for electrical integration considerations.

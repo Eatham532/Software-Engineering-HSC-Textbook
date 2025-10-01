@@ -528,4 +528,4 @@ Mechatronic systems operate across diverse domains from manufacturing to healthc
 
 Understanding these applications and constraints helps engineers make informed design decisions. The next sections will explore the computing hardware and components that make these systems possible.
 
-See also [8.3 Designing accessible mechatronic systems](../../Chapter-08-Data-and-integration/Section-03-Designing-accessible-mechatronic-systems/index.md) for specific accessibility considerations in system design.
+See also [8.3 Designing accessible mechatronic systems](../../Chapter-08-Data-and-integration/08-03-Designing-accessible-mechatronic-systems/index.md) for specific accessibility considerations in system design.
