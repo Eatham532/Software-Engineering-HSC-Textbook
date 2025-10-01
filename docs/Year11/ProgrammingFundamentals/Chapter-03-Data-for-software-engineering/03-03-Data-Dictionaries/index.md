@@ -72,7 +72,7 @@ How different data elements connect to each other:
 
 ## Creating a Data Dictionary
 
-Let's work through the activity from our module plan: creating a data dictionary for a Student record.
+Let's create a data dictionary for a Student record.
 
 ### Student Record Data Dictionary
 

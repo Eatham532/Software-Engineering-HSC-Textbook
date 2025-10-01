@@ -140,7 +140,7 @@ print(f"Maximum value found: {maximum}")
 
 ## The Factorial Debugging Activity
 
-Let's work through the specific activity from the module plan: debugging a factorial function that returns wrong results for input 0.
+Let's work through debugging a factorial function that returns wrong results for input 0.
 
 ### The Buggy Factorial Function
 
