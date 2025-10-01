@@ -1,6 +1,6 @@
-# 15.01 Security Fundamentals Cia Triad And Aaa - Quiz
+# 15.01 Security Fundamentals CIA Triad and AAA - Quiz
 
-!!! quiz "Check your understanding"
+!!! quiz "Section 15.01 Quiz: CIA Triad and AAA"
 
     **Question 1:** What does the "C" in the CIA Triad represent?
 

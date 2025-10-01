@@ -1,6 +1,6 @@
-# 20.01 What Is Ai Vs Ml - Quiz
+# 20.01 What is AI vs ML - Quiz
 
-!!! quiz "Section 20.01 Quiz: What Is Ai Vs Ml"
+!!! quiz "Section 20.01 Quiz: What is AI vs ML"
 
     Test your understanding of key concepts from this section.
 
