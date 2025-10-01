@@ -1,49 +1,6 @@
-// Optimized SVG tracking
-window.diagramSvgs = new Map();
-let svgCounter = 0;
-
-// Simple SVG observer
-function initSvgTracking() {
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            mutation.addedNodes.forEach((node) => {
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                    const svgs = node.tagName === 'svg' ? [node] : (node.querySelectorAll?.('svg') || []);
-                    svgs.forEach(trackSvg);
-                }
-            });
-        });
-    });
-    
-    observer.observe(document.body, { childList: true, subtree: true });
-    
-    // Track existing SVGs with multiple attempts to catch late-loading content
-    setTimeout(() => {
-        document.querySelectorAll('svg').forEach(trackSvg);
-    }, 100);
-    
-    setTimeout(() => {
-        document.querySelectorAll('svg').forEach(trackSvg);
-    }, 500);
-    
-    setTimeout(() => {
-        document.querySelectorAll('svg').forEach(trackSvg);
-    }, 1000);
-}
-
-function trackSvg(svg) {
-    // Handle both Mermaid diagrams (__mermaid_*) and Kroki diagrams (id="Kroki" or data-diagram-type)
-    const isMermaid = svg?.id?.startsWith('__mermaid_');
-    const isKroki = svg?.id === 'Kroki' || svg?.getAttribute('data-diagram-type');
-    
-    if ((!isMermaid && !isKroki) || window.diagramSvgs.has(svg.id)) return;
-    
-    const diagramId = `diagram-${svgCounter++}`;
-    window.diagramSvgs.set(diagramId, svg);
-    if (svg.id) {
-        window.diagramSvgs.set(svg.id, svg);
-    }
-}
+// Diagram Modal System - Clean and Reliable
+// Maps diagram container IDs to their SVG elements
+window.diagramRegistry = new Map();
 
 // Initialize on DOM ready
 if (document.readyState === 'loading') {
@@ -53,11 +10,43 @@ if (document.readyState === 'loading') {
 }
 
 function init() {
-    initSvgTracking();
-    setTimeout(() => {
-        initializeDiagramButtons();
-        window.diagramModal = new DiagramModal();
-    }, 200);
+    // Initialize modal immediately
+    window.diagramModal = new DiagramModal();
+    
+    // Index diagrams with multiple attempts to catch late-loading Kroki content
+    const indexAttempts = [100, 300, 500, 1000, 2000];
+    indexAttempts.forEach(delay => {
+        setTimeout(indexAllDiagrams, delay);
+    });
+    
+    // Also re-index on any DOM changes (catches dynamically loaded content)
+    const observer = new MutationObserver(indexAllDiagrams);
+    observer.observe(document.body, { 
+        childList: true, 
+        subtree: true 
+    });
+}
+
+/**
+ * Indexes all diagrams on the page by finding .diagram-content containers
+ * and mapping their IDs to the SVG elements they contain.
+ */
+function indexAllDiagrams() {
+    window.diagramRegistry.clear();
+    
+    // Find all diagram containers created by kroki_wrapper.py
+    const diagramContainers = document.querySelectorAll('.diagram-content');
+    
+    diagramContainers.forEach((container) => {
+        const containerId = container.id;
+        if (!containerId) return;
+        
+        // Find the SVG inside this specific container
+        const svg = container.querySelector('svg');
+        if (svg) {
+            window.diagramRegistry.set(containerId, svg);
+        }
+    });
 }
 
 class DiagramModal {
@@ -75,6 +64,7 @@ class DiagramModal {
     }
 
     createModal() {
+        console.log("Creating diagram modal1");
         if (document.getElementById('diagram-modal')) return;
         
         document.body.insertAdjacentHTML('beforeend', `
@@ -97,9 +87,11 @@ class DiagramModal {
                         </div>
                         <div class="diagram-help">
                             <strong>Controls:</strong><br>
-                            Mouse wheel: Zoom <br>
-                            Drag: Pan <br>
-                            Double-click: Reset <br>
+                            Scroll: Pan up/down<br>
+                            Shift+Scroll: Zoom<br>
+                            Drag: Pan<br>
+                            Pinch: Zoom<br>
+                            Double-click: Reset<br>
                             ESC: Close
                         </div>
                         <div class="diagram-loading" id="diagram-loading" style="display: none;">
@@ -176,35 +168,24 @@ class DiagramModal {
     }
 
     open(diagramId) {
-        let svg = window.diagramSvgs?.get(diagramId);
-        
-        // Show loading state
-        const loading = document.getElementById('diagram-loading');
-        if (loading) loading.style.display = 'flex';
-        
-        // If not found in our map, try to find by container ID
-        if (!svg) {
-            const diagramContainer = document.getElementById(diagramId);
-            if (diagramContainer) {
-                svg = diagramContainer.querySelector('svg');
-                if (svg) {
-                    // Add to our tracking
-                    trackSvg(svg);
-                    window.diagramSvgs.set(diagramId, svg);
-                }
-            }
-        }
+        // Look up the SVG from our registry
+        const svg = window.diagramRegistry.get(diagramId);
         
         if (!svg) {
-            console.error('SVG not found:', diagramId);
-            if (loading) loading.style.display = 'none';
+            console.error(`Diagram not found: ${diagramId}`);
             return;
         }
 
         const viewport = document.getElementById('diagram-viewport');
+        const loading = document.getElementById('diagram-loading');
+        
+        // Show loading state
+        if (loading) loading.style.display = 'flex';
+        
+        // Clone the SVG to avoid modifying the original
         const clonedSvg = svg.cloneNode(true);
         
-        // Reset viewport and add SVG
+        // Clear viewport and add cloned SVG
         viewport.innerHTML = '';
         viewport.appendChild(clonedSvg);
         
@@ -212,10 +193,9 @@ class DiagramModal {
         this.modal.classList.add('active');
         document.body.style.overflow = 'hidden';
         
-        // Update header with diagram type info
+        // Update header
         const header = this.modal.querySelector('.diagram-modal-header h3');
-        const diagramType = this.getDiagramType(svg);
-        header.textContent = diagramType;
+        header.textContent = 'Diagram Viewer';
         
         // Setup interaction and fit to screen
         this.setupSvgInteraction(viewport);
@@ -224,23 +204,6 @@ class DiagramModal {
             this.fitToScreen();
             if (loading) loading.style.display = 'none';
         }, 100);
-    }
-    
-    getDiagramType(svg) {
-        // const dataType = svg.getAttribute('data-diagram-type');
-        // if (dataType) {
-        //     return dataType.charAt(0).toUpperCase() + dataType.slice(1).toLowerCase() + ' Diagram';
-        // }
-        
-        // if (svg.id?.startsWith('__mermaid_')) {
-        //     return 'Mermaid Diagram';
-        // }
-        
-        // if (svg.id === 'Kroki') {
-        //     return 'PlantUML Diagram';
-        // }
-        
-        return 'Diagram Viewer';
     }
 
     close() {
@@ -262,15 +225,32 @@ class DiagramModal {
     }
 
     setupSvgInteraction(viewport) {
-        // Mouse wheel zoom
+        // Enhanced wheel/touchpad handling
         viewport.addEventListener('wheel', (e) => {
             e.preventDefault();
             const rect = viewport.getBoundingClientRect();
             const mouseX = e.clientX - rect.left;
             const mouseY = e.clientY - rect.top;
-            const delta = e.deltaY > 0 ? -0.1 : 0.1;
-            this.zoomAt(mouseX, mouseY, delta);
-        });
+            
+            // Shift + scroll = zoom
+            if (e.shiftKey) {
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                this.zoomAt(mouseX, mouseY, delta);
+            }
+            // Ctrl + scroll = pinch zoom (touchpad)
+            else if (e.ctrlKey) {
+                const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                this.zoomAt(mouseX, mouseY, delta);
+            }
+            // Regular scroll = pan
+            else {
+                // Vertical scroll pans up/down
+                this.translateY -= e.deltaY;
+                // Horizontal scroll pans left/right
+                this.translateX -= e.deltaX;
+                this.updateTransform();
+            }
+        }, { passive: false });
 
         // Mouse drag
         viewport.addEventListener('mousedown', (e) => {
@@ -379,14 +359,23 @@ class DiagramModal {
             this.modal.requestFullscreen?.() || 
             this.modal.webkitRequestFullscreen?.() || 
             this.modal.mozRequestFullScreen?.();
+            this.modal.classList.add('is-fullscreen');
         } else {
             document.exitFullscreen?.() || 
             document.webkitExitFullscreen?.() || 
             document.mozCancelFullScreen?.();
+            this.modal.classList.remove('is-fullscreen');
         }
     }
     
     handleFullscreenChange() {
+        // Update fullscreen class based on actual fullscreen state
+        if (document.fullscreenElement) {
+            this.modal.classList.add('is-fullscreen');
+        } else {
+            this.modal.classList.remove('is-fullscreen');
+        }
+        
         // Re-fit diagram when entering/exiting fullscreen
         setTimeout(() => {
             if (this.currentSvg) {
@@ -396,35 +385,16 @@ class DiagramModal {
     }
 }
 
-// Global functions
+// Global function to open diagram modal (called by onclick in HTML)
 function openDiagramModal(diagramId) {
-    window.diagramModal?.open(diagramId);
-}
-
-function initializeDiagramButtons() {
-    // Handle buttons that may not have been properly connected yet
-    const buttons = document.querySelectorAll('.diagram-expand-btn');
-    buttons.forEach((button, index) => {
-        if (!button.onclick) {
-            // Find the associated diagram content
-            const container = button.closest('.diagram-container');
-            if (container) {
-                const diagramContent = container.querySelector('.diagram-content');
-                if (diagramContent && diagramContent.id) {
-                    const diagramId = diagramContent.id;
-                    button.onclick = () => openDiagramModal(diagramId);
-                } else if (diagramContent) {
-                    // Create an ID if it doesn't exist
-                    const diagramId = `diagram-${index}`;
-                    diagramContent.id = diagramId;
-                    button.onclick = () => openDiagramModal(diagramId);
-                }
+    if (!window.diagramModal) {
+        // Try to initialize and retry
+        setTimeout(() => {
+            if (window.diagramModal) {
+                window.diagramModal.open(diagramId);
             }
-        }
-    });
-    
-    // Also track SVGs within diagram containers
-    document.querySelectorAll('.diagram-content svg').forEach(svg => {
-        trackSvg(svg);
-    });
+        }, 500);
+        return;
+    }
+    window.diagramModal.open(diagramId);
 }
