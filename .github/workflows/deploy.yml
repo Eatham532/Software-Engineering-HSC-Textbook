@@ -16,7 +16,8 @@ permissions:
   contents: write
 
 jobs:
-  build_and_deploy:
+  deploy:
+    name: 🚀 Deploy to GitHub Pages
     runs-on: ubuntu-latest
     container:
       image: python:3.13
@@ -38,7 +39,7 @@ jobs:
         image: yuzutech/kroki-excalidraw
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Full history for git-revision-date plugin
@@ -49,30 +50,38 @@ jobs:
             pyproject.toml
             mkdocs.yml
 
-      - name: Install project dependencies into container Python (pip from pyproject)
+      - name: 🔐 Mark repository safe for git
+        shell: bash
+        run: |
+          # Allow git operations inside the runner workspace
+          git config --global --add safe.directory "${{ github.workspace }}"
+          git config --global --add safe.directory "$(pwd)"
+          echo "✅ Git safe directories configured"
+
+      - name: 👤 Configure git user
+        shell: bash
+        run: |
+          git config --global user.email "78714349+Eatham532@users.noreply.github.com"
+          git config --global user.name "Eatham532"
+          echo "✅ Git user configured as Eatham532"
+
+      - name: 🔧 Setup Python environment
         shell: bash
         run: |
           set -euo pipefail
-          echo "Python: $(python --version)"
+          python --version
+          python -m pip install --upgrade pip setuptools wheel build
 
-          # Ensure pip and build tools are available
-          python -m pip install --upgrade pip setuptools wheel
+      - name: 📦 Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -e . || python -m pip install .
 
-          # Install project with docs extras (falls back if needed)
-          echo "Attempting: python -m pip install '.[docs]'"
-          if python -m pip install ".[docs]"; then
-            echo "✅ Installed project with docs extras"
-          else
-            echo "⚠️ Failed to install '.[docs]', trying 'python -m pip install .'"
-            if python -m pip install .; then
-              echo "✅ Installed project (without docs extras)"
-            else
-              echo "❌ Failed to install project from pyproject.toml; installing mkdocs explicitly"
-              python -m pip install mkdocs mkdocs-material mkdocs-kroki-plugin mkdocs-include-markdown-plugin mkdocs-macros-plugin mkdocs-awesome-pages-plugin
-            fi
-          fi
-
-      - name: Verify MkDocs installation
+      - name: 🚀 Deploy to GitHub Pages
+        env:
+          KROKI_SERVER_URL: http://kroki:8000
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
@@ -80,31 +89,6 @@ jobs:
             echo "❌ ERROR: mkdocs not found on PATH"
             exit 1
           fi
-          echo "✅ MkDocs found: $(command -v mkdocs)"
-          echo "📦 MkDocs version:"
-          mkdocs --version
-          echo ""
-          echo "📦 Installed packages (first 30):"
-          python -m pip list --disable-pip-version-check | head -n 30
-
-      - name: Build MkDocs site
-        env:
-          KROKI_SERVER_URL: http://kroki:8000
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "🔨 Building MkDocs site..."
-          mkdocs build --strict --verbose
-          echo "✅ Build completed successfully"
-
-      - name: Deploy to GitHub Pages
-        env:
-          KROKI_SERVER_URL: http://kroki:8000
-        shell: bash
-        run: |
-          set -euo pipefail
           echo "🚀 Deploying to GitHub Pages..."
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          mkdocs gh-deploy --force --verbose
-          echo "✅ Deployment completed successfully"
+          mkdocs gh-deploy --force --clean --remote-name origin
+          echo "✅ Deployment complete!"
