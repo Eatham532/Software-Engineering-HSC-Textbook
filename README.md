@@ -1,5 +1,6 @@
 
 # NSW HSC Software Engineering Textbook
+[**GO TO THE TEXTBOOK**](https://eatham532.github.io/Software-Engineering-HSC-Textbook/)
 
 This project is a comprehensive digital textbook for the NSW HSC Software Engineering 11–12 Syllabus (2022+), presented as a static website using MkDocs with the Material theme.
 
