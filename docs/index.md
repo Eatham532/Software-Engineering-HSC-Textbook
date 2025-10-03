@@ -119,15 +119,6 @@
 
 ---
 
-## Quick Navigation
-
-!!! tip "Find Topics Fast"
-    __Search by keyword__: Use ++ctrl+k++ (or ++cmd+k++ on Mac) to search the entire textbook
-
-    **Jump to quizzes**: Every section has a dedicated quiz page—look for "Quiz" in the navigation
-
----
-
 !!! success "Ready to learn?"
     Choose your year level above or use the navigation menu to explore specific topics. Each section builds on the previous one, so we recommend following the syllabus sequence.
 
