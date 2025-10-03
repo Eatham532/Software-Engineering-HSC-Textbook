@@ -18,15 +18,20 @@ class KrokiWrapperPostprocessor(Postprocessor):
         self.counter = start_id
 
     def run(self, text: str) -> str:
-        # Find SVGs that look like Kroki diagrams and wrap them
-        # Look for <p><svg ... id="Kroki" or data-diagram-type="...">...</svg></p>
+        # Find SVGs that look like Kroki diagrams (both PlantUML and Mermaid)
+        # Pattern matches: <p><svg ...>...</svg></p> or just <svg ...>...</svg>
+        # Look for SVG tags that might be from Kroki/Mermaid
         pattern = re.compile(
-            r'<p>(\s*<svg[^>]*(?:id="Kroki"|data-diagram-type="[^"]*")[^>]*>.*?</svg>\s*)</p>',
+            r'<p>(\s*<svg[^>]*>.*?</svg>\s*)</p>',
             re.DOTALL | re.IGNORECASE
         )
 
         def replace_kroki_svg(match: Match) -> str:
             svg_content = match.group(1).strip()
+            
+            # Skip if this SVG is not from a diagram (heuristic: check for substantial content)
+            if len(svg_content) < 100:
+                return match.group(0)
             
             # Check if already wrapped (idempotent)
             start_pos = max(0, match.start() - 200)
@@ -34,14 +39,24 @@ class KrokiWrapperPostprocessor(Postprocessor):
             if 'class="diagram-container"' in before_context.lower():
                 return match.group(0)  # Return original if already wrapped
             
-            diagram_id = f"diagram-{self.counter}"
+            # Use kroki-diagram prefix to avoid collision with JS-generated IDs
+            diagram_id = f"kroki-diagram-{self.counter}"
+            svg_id = f"kroki-svg-{self.counter}"
             self.counter += 1
 
+            # Inject a data-diagram-id attribute into the SVG for reliable tracking
+            svg_with_id = re.sub(
+                r'(<svg[^>]*)',
+                rf'\1 data-diagram-id="{svg_id}"',
+                svg_content,
+                count=1
+            )
+
             wrapped = (
-                f'<div class="diagram-container">'
+                f'<div class="diagram-container" data-container-id="{diagram_id}">'
                 f'<button class="diagram-expand-btn" onclick="openDiagramModal(\'{diagram_id}\')">🔍 View Larger</button>'
                 f'<div id="{diagram_id}" class="diagram-content">'
-                f'<p>{svg_content}</p>'
+                f'<p>{svg_with_id}</p>'
                 f'</div>'
                 f'</div>'
             )
