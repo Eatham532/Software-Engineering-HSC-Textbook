@@ -252,6 +252,75 @@ class DiagramModal {
             }
         }, { passive: false });
 
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartDistance = 0;
+        let touchStartScale = 1;
+        
+        viewport.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            
+            if (e.touches.length === 1) {
+                // Single touch - pan
+                this.isDragging = true;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                this.lastX = touchStartX;
+                this.lastY = touchStartY;
+            } else if (e.touches.length === 2) {
+                // Two finger pinch - zoom
+                this.isDragging = false;
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                touchStartDistance = Math.sqrt(dx * dx + dy * dy);
+                touchStartScale = this.scale;
+            }
+        }, { passive: false });
+        
+        viewport.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            
+            if (e.touches.length === 1 && this.isDragging) {
+                // Single touch pan
+                const touchX = e.touches[0].clientX;
+                const touchY = e.touches[0].clientY;
+                
+                this.translateX += touchX - this.lastX;
+                this.translateY += touchY - this.lastY;
+                this.lastX = touchX;
+                this.lastY = touchY;
+                this.updateTransform();
+            } else if (e.touches.length === 2) {
+                // Pinch zoom
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                const scaleFactor = distance / touchStartDistance;
+                const newScale = Math.max(0.1, Math.min(5, touchStartScale * scaleFactor));
+                
+                // Zoom towards center of pinch
+                const centerX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+                const centerY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+                const rect = viewport.getBoundingClientRect();
+                const localX = centerX - rect.left;
+                const localY = centerY - rect.top;
+                
+                const oldScale = this.scale;
+                const ratio = newScale / oldScale;
+                this.translateX = localX - (localX - this.translateX) * ratio;
+                this.translateY = localY - (localY - this.translateY) * ratio;
+                this.scale = newScale;
+                this.updateTransform();
+            }
+        }, { passive: false });
+        
+        viewport.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.isDragging = false;
+        }, { passive: false });
+
         // Mouse drag
         viewport.addEventListener('mousedown', (e) => {
             this.isDragging = true;
