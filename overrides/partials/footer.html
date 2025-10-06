@@ -1,0 +1,30 @@
+{% import "partials/language.html" as lang with context %}
+
+<!-- Footer -->
+<footer class="md-footer">
+  {% if page and page.meta and page.meta.hide %}
+    <!-- Hidden page footer -->
+  {% elif page %}
+    <!-- Custom footer with left/right layout -->
+    <div class="md-footer__inner md-grid">
+      <!-- Left side: Copyright and cookie settings -->
+      <div class="md-footer__left">
+        <div class="md-footer__copyright">
+          {% if config.copyright %}
+            {{ config.copyright }}
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right side: Page name and BETA -->
+      <div class="md-footer__right">
+        <div class="md-footer__page-info">
+          <span class="md-footer__page-title">{{ page.title }}</span>
+          {% if config.extra.footer and config.extra.footer.show_beta_badge %}
+            <span class="md-footer__beta-badge">BETA</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</footer>

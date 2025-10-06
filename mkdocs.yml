@@ -1,7 +1,7 @@
 site_name: Software Engineering Textbook HSC
 site_description: Comprehensive educational resource for NSW HSC Software Engineering syllabus
 docs_dir: docs
-repo_url: https://github.com/Eatham532/Software-Engineering-HSC-Textbook
+repo_url: https://github.com/Eatham532/Software-Engineering-HSC-Textbook/
 site_url: https://eatham532.github.io/Software-Engineering-HSC-Textbook/
 repo_name: Eatham532/Software-Engineering-HSC-Textbook
 edit_uri: edit/main/docs/
@@ -40,6 +40,7 @@ theme:
   language: en
   icon:
     repo: fontawesome/brands/git-alt
+  custom_dir: overrides
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -122,6 +123,7 @@ extra_css:
   - assets/common.css
   - assets/diagram-fix.css
   - assets/cross-reference.css
+  - assets/site-banner.css
 
 extra_javascript:
   - assets/diagram-modal.js
@@ -130,9 +132,21 @@ extra_javascript:
 extra:
     generator: false
     domain: auto
+    # Site-wide alert banner configuration
+    site_banner:
+      enabled: true
+      text: "This textbook is in <strong>beta</strong> – content is actively being refined."
+      link_text: "Report issues or suggestions"
+      link_url: "/issues/new/choose"  # Relative to repo_url
+      variant: "warning"  # Options: info, warning, error, success
+      version: "1"  # Increment this to force re-show after dismissal
+    # Footer configuration
+    footer:
+      show_beta_badge: true  # Set to false to hide the BETA badge in footer
     # IndexNow configuration for instant search engine indexing
     indexnow:
       enabled: true  # Set to false to disable IndexNow submissions
+      production_url: "https://eatham532.github.io/Software-Engineering-HSC-Textbook/"
     consent:
       title: Cookie consent
       actions:
