@@ -3,14 +3,16 @@ IndexNow Notification Script for GitHub Actions
 Detects changed markdown files and submits corresponding URLs to IndexNow API.
 
 This script is called as the final step in the GitHub Actions deployment workflow.
-It only notifies IndexNow about pages that were actually changed in the commit,
+It only notifies IndexNow about pages that were actually changed in the push,
 rather than submitting all pages on every build.
 
 How it works:
-1. Uses git diff to detect .md files changed between HEAD~1 and HEAD
-2. Converts changed markdown file paths to deployed URLs
-3. Submits only those URLs to the IndexNow API
-4. Uses the existing API key file from docs/
+1. Receives the base commit SHA from GitHub Actions (via GITHUB_BASE_SHA env var)
+2. Compares base SHA with current HEAD to detect ALL .md files changed in the push
+3. This captures multiple commits pushed together, not just the last single commit
+4. Converts changed markdown file paths to their deployed URLs
+5. Submits only those URLs to the IndexNow API
+6. Uses the existing API key file from docs/
 
 The script always exits with code 0 to prevent deployment failures if IndexNow
 has issues (network problems, API errors, etc.).
@@ -53,22 +55,37 @@ class IndexNowNotifier:
         
         return key_file.read_text().strip()
     
-    def get_changed_files(self) -> Set[str]:
+    def get_changed_files(self, base_sha: str | None = None) -> Set[str]:
         """
         Get list of changed markdown files from git diff.
-        Compares HEAD with HEAD~1 to find files changed in the latest commit.
+        Compares base commit with current HEAD to find all changes in this push.
+        
+        Args:
+            base_sha: The base commit SHA to compare against (from GitHub Actions event)
+                     If None, falls back to comparing with previous commit
         
         Returns:
             Set of relative paths to changed .md files
         """
         try:
-            # Get files changed in the latest commit
-            result = subprocess.run(
-                ['git', 'diff', '--name-only', 'HEAD~1', 'HEAD'],
-                capture_output=True,
-                text=True,
-                check=True
-            )
+            if base_sha:
+                # Compare with the commit before this push (from GitHub event)
+                print(f"[IndexNow] Comparing with base commit: {base_sha}")
+                result = subprocess.run(
+                    ['git', 'diff', '--name-only', f'{base_sha}...HEAD'],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
+            else:
+                # Fallback: compare with previous commit
+                print("[IndexNow] No base SHA provided, comparing with HEAD~1")
+                result = subprocess.run(
+                    ['git', 'diff', '--name-only', 'HEAD~1', 'HEAD'],
+                    capture_output=True,
+                    text=True,
+                    check=True
+                )
             
             changed_files = set()
             for line in result.stdout.strip().split('\n'):
@@ -154,9 +171,12 @@ class IndexNowNotifier:
             print(f"[IndexNow] ❌ ERROR: Submission failed: {e}")
             return False
     
-    def notify_changes(self) -> bool:
+    def notify_changes(self, base_sha: str | None = None) -> bool:
         """
         Main method: detect changed files and notify IndexNow.
+        
+        Args:
+            base_sha: Optional base commit SHA to compare against (from GitHub Actions)
         
         Returns:
             True if successful (or no changes), False if errors occurred
@@ -166,10 +186,10 @@ class IndexNowNotifier:
         print("="*60)
         
         # Get changed markdown files
-        changed_files = self.get_changed_files()
+        changed_files = self.get_changed_files(base_sha)
         
         if not changed_files:
-            print("[IndexNow] No markdown files changed in this commit")
+            print("[IndexNow] No markdown files changed in this push")
             print("[IndexNow] Skipping IndexNow notification")
             return True
         
@@ -189,13 +209,18 @@ class IndexNowNotifier:
 
 def main():
     """Main entry point for the script."""
+    import os
+    
     # Configuration
     SITE_URL = "https://eatham532.github.io/Software-Engineering-HSC-Textbook/"
     KEY_LOCATION = "docs"
     
+    # Get base SHA from environment variable (set by GitHub Actions)
+    base_sha = os.environ.get('GITHUB_BASE_SHA')
+    
     try:
         notifier = IndexNowNotifier(site_url=SITE_URL, key_location=KEY_LOCATION)
-        success = notifier.notify_changes()
+        success = notifier.notify_changes(base_sha)
         
         # Exit with appropriate code
         # Note: We don't fail the workflow even if IndexNow fails

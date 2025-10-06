@@ -105,7 +105,8 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2  # Need at least 2 commits for git diff HEAD~1
+          fetch-depth: 0  # Full history to compare with gh-pages branch
+          ref: ${{ github.ref }}  # Checkout the branch that triggered the workflow
       
       - name: 🔧 Setup Python
         uses: actions/setup-python@v5
@@ -120,7 +121,10 @@ jobs:
       
       - name: 🔔 Notify IndexNow of changes
         shell: bash
+        env:
+          GITHUB_BASE_SHA: ${{ github.event.before }}  # SHA before the push
         run: |
           echo "🔔 Notifying search engines of changed pages..."
+          echo "Comparing ${{ github.event.before }} ... ${{ github.sha }}"
           python scripts/indexnow_notify.py
         continue-on-error: true  # Don't fail workflow if IndexNow has issues
