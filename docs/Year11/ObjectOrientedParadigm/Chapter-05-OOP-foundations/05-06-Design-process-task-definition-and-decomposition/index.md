@@ -22,36 +22,24 @@ Good software design follows a systematic process that transforms user needs int
 
 Requirements → Responsibilities → Collaborations → Implementation
 
-```kroki-plantuml
-@startuml
-@enduml
-
-```
-
-@startuml
-@enduml
 
 ```
 @startuml
-rectangle "1. Requirements" as req {
-    note right : What does the system need to do?
-}
-rectangle "2. Responsibilities" as resp {
-    note right : What tasks need to be performed?
-}
-rectangle "3. Collaborations" as collab {
-    note right : How do objects work together?
-}
-rectangle "4. Implementation" as impl {
-    note right : Write the actual code
-}
+[1. Requirements] as req
+[2. Responsibilities] as resp
+[3. Collaborations] as collab
+[4. Implementation] as impl
+
+note right of req : What does the system need to do?
+note right of resp : What tasks need to be performed?
+note right of collab : How do objects work together?
+note right of impl : Write the actual code
 
 req --> resp : Analyze and break down
 resp --> collab : Assign to objects
 collab --> impl : Design interactions
 impl --> req : Validate against requirements
 @enduml
-
 ```
 
 Let's work through this process with a practical example.
