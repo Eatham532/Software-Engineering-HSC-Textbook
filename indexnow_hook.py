@@ -136,6 +136,9 @@ def on_post_build(config, **kwargs):
     site_dir = Path(config.get('site_dir', 'site'))
     urls = []
     
+    # Normalize site_url to not end with slash
+    base_url = site_url.rstrip('/')
+    
     for html_file in site_dir.rglob('*.html'):
         # Convert file path to URL
         relative_path = html_file.relative_to(site_dir)
@@ -143,12 +146,12 @@ def on_post_build(config, **kwargs):
         # Convert index.html to directory URLs
         if relative_path.name == 'index.html':
             if relative_path.parent == Path('.'):
-                url = site_url
+                url = base_url + '/'
             else:
-                url = f"{site_url}/{relative_path.parent}/"
+                url = f"{base_url}/{relative_path.parent}/"
         else:
             # Regular HTML files
-            url = f"{site_url}/{relative_path.with_suffix('')}/"
+            url = f"{base_url}/{relative_path.with_suffix('')}/"
         
         urls.append(url)
     
