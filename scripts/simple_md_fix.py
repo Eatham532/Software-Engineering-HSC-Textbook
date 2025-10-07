@@ -126,11 +126,9 @@ def fix_file(p: Path):
     while out and out[-1].strip() == '':
         out.pop()
 
-    # Ensure a single blank line at end of file (one empty line before final newline)
-    out.append('')
-
-    # Join and ensure file ends with a single final newline
-    new_text = '\n'.join(out) + '\n'
+    # Ensure file ends with exactly one final newline (no extra blank lines)
+    body = '\n'.join(out).rstrip('\n')
+    new_text = body + '\n'
     if new_text != text:
         p.write_text(new_text, encoding='utf-8')
         return True
