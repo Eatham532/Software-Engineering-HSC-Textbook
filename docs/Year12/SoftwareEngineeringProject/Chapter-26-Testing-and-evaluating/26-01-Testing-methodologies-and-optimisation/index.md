@@ -826,33 +826,32 @@ Components of effective test cases:
 - **Test data**: Specific inputs required for test execution
 
 /// tab | Test Case Structure
+
 **Test Case Template**:
-///
-Test Case ID: TC_[Module]_[Feature]_[Number]
-Test Title: [Descriptive title of functionality being tested]
-Test Objective: [What this test aims to verify]
-Prerequisites: [Setup requirements and preconditions]
-Test Data: [Specific inputs needed for the test]
-Test Steps:
+**Test Case Template**:
 
-  1. [Action] → Expected: [Result]
-
-  2. [Action] → Expected: [Result]
-
-  3. [Action] → Expected: [Result]
-Pass Criteria: [Conditions for test success]
-Fail Criteria: [Conditions indicating test failure]
-
-```
+| Field | Description | Example |
+|-------|-------------|---------|
+| **Test Case ID** | Unique identifier for tracking | TC_AUTH_001 |
+| **Title** | Brief, descriptive name | User Login with Valid Credentials |
+| **Objective** | What the test verifies | Verify students can log in with correct credentials |
+| **Prerequisites** | Required setup or conditions | User account exists, login page accessible |
+| **Test Steps** | Numbered sequence of actions | 1. Navigate to login page<br>2. Enter username<br>3. Enter password<br>4. Click login button |
+| **Expected Results** | Anticipated outcomes | User redirected to dashboard, session established |
+| **Test Data** | Input values needed | Username: <student@school.edu><br>Password: SecurePass123 |
+| **Post-conditions** | System state after test | User logged in, session active |
+| **Pass/Fail Criteria** | How to determine success | All steps complete with expected results |
 
 **Acceptance Test Criteria**:
+
 - Directly tied to user stories and requirements
 - Written in business language, not technical terms
 - Testable and measurable outcomes
 - Clear pass/fail criteria
 
-/// tab | Python Test Case Builder
 ///
+
+/// tab | Python Test Case Builder
 
 ```py
 
@@ -1066,6 +1065,7 @@ print(f"  Execution status: {report['execution_status']}")
 print(f"  Criteria assessment: {report['criteria_met']}")
 
 ```
+
 ///
 
 ### Automated vs manual testing approaches
@@ -1074,6 +1074,7 @@ Both automated and manual testing serve important roles in a comprehensive testi
 
 /// tab | Testing Approach Selection
 **Automated Testing - Best For**:
+
 - **Regression testing**: Re-running tests after code changes
 - **Performance testing**: Load and stress testing scenarios
 - **Repetitive tests**: Tests that need frequent execution
@@ -1081,6 +1082,7 @@ Both automated and manual testing serve important roles in a comprehensive testi
 - **Continuous integration**: Tests that run with every build
 
 **Manual Testing - Best For**:
+
 - **Exploratory testing**: Discovering unexpected issues
 - **Usability testing**: Evaluating user experience
 - **Ad-hoc testing**: Unstructured investigation
@@ -1088,6 +1090,7 @@ Both automated and manual testing serve important roles in a comprehensive testi
 - **Complex scenarios**: Tests requiring human judgment
 
 **Decision Factors**:
+
 - Test frequency and repetition requirements
 - Complexity of test scenarios
 - Available resources and timeline
@@ -1373,6 +1376,7 @@ def demonstrate_testing_approaches():
 demonstrate_testing_approaches()
 
 ```
+
 ///
 
 ## Practice
