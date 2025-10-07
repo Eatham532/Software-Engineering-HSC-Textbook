@@ -18,7 +18,6 @@ def fix_file(p: Path):
     out = []
     in_fence = False
     first_h1_seen = False
-    changed = False
     i = 0
     while i < len(lines):
         line = lines[i]
@@ -28,14 +27,12 @@ def fix_file(p: Path):
             # ensure blank line before fence if not already blank and not at start
             if out and out[-1].strip() != '':
                 out.append('')
-                changed = True
             out.append(line)
             in_fence = not in_fence
             i += 1
             # ensure blank line after fence if next line exists and isn't blank
             if not in_fence and i < len(lines) and lines[i].strip() != '':
                 out.append('')
-                changed = True
             continue
         if in_fence:
             out.append(line)
@@ -83,20 +80,17 @@ def fix_file(p: Path):
                 # ensure blank line above
                 if out and out[-1].strip() != '':
                     out.append('')
-                    changed = True
                 out.append(line)
                 # ensure blank line after
                 nxt = lines[i+1] if i+1 < len(lines) else ''
                 if nxt.strip() != '':
                     out.append('')
-                    changed = True
                 i += 1
                 continue
             else:
                 # convert to H2
                 new_line = line.replace('# ', '## ', 1)
-                if new_line != line:
-                    changed = True
+                # conversion applied if needed; no separate flag required
                 # ensure blank line above
                 if out and out[-1].strip() != '':
                     out.append('')
@@ -111,26 +105,32 @@ def fix_file(p: Path):
         if re.match(r'^(#{2,})\s', stripped):
             if out and out[-1].strip() != '':
                 out.append('')
-                changed = True
             out.append(line)
             nxt = lines[i+1] if i+1 < len(lines) else ''
             if nxt.strip() != '':
                 out.append('')
-                changed = True
             i += 1
             continue
         # list item: if previous output line not blank, insert blank
         if re.match(r'^([-*+]\s|\d+\.\s)', stripped):
             if out and out[-1].strip() != '':
                 out.append('')
-                changed = True
             out.append(line)
             i += 1
             continue
         # default
         out.append(line)
         i += 1
-    new_text = '\n'.join(out) + ('\n' if out and out[-1] != '' else '')
+    # Normalize trailing blank lines: ensure exactly one blank line at EOF
+    # Remove any number of trailing blank lines produced during fixes
+    while out and out[-1].strip() == '':
+        out.pop()
+
+    # Ensure a single blank line at end of file (one empty line before final newline)
+    out.append('')
+
+    # Join and ensure file ends with a single final newline
+    new_text = '\n'.join(out) + '\n'
     if new_text != text:
         p.write_text(new_text, encoding='utf-8')
         return True
