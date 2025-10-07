@@ -887,10 +887,3 @@ Unit testing mechatronic subsystems requires specialized approaches to handle ha
 Effective testing strategies enable reliable mechatronic systems by validating control logic, safety features, and system integration before deploying to physical hardware.
 
 See also [10.1 Simulations and prototypes for testing](../10-01-Simulations-and-prototypes-for-testing/index.md) for simulation-based testing approaches.
-
-
-
-
-
-
-

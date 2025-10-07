@@ -1007,10 +1007,3 @@ WAgile methodology provides a practical hybrid approach that combines **waterfal
 **Stage gates** provide formal checkpoints for approval, quality assurance, and risk assessment, while **iterative delivery within stages** allows teams to refine work progressively and respond to stakeholder feedback. The balance between waterfall and agile elements should be determined by project scale, regulatory requirements, team experience, and organisational culture.
 
 WAgile interventions are most effective when applied thoughtfully based on specific project characteristics rather than as a one-size-fits-all approach. Success depends on clear gate criteria, appropriate governance levels, and maintaining team agility within the structured framework.
-
-
-
-
-
-
-

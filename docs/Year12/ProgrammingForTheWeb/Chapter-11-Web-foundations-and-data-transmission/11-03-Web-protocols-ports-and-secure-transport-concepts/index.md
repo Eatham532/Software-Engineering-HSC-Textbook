@@ -570,10 +570,3 @@ Web security relies on multiple layers:
 - **Digital signatures** provide non-repudiation and authenticity
 
 Understanding these concepts helps you build secure web applications and make informed decisions about protecting user data. Each piece works together to create the secure web experience users expect.
-
-
-
-
-
-
-

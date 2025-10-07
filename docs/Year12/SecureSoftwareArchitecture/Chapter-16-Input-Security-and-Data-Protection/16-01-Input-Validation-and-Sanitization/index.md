@@ -1631,6 +1631,7 @@ def demonstrate_complete_secure_registration():
             'user_creation', '192.168.1.100', str(message)
         )
         print(f"❌ Registration failed: {safe_error}")
+
 ```
 
 ## Summary
@@ -1640,43 +1641,61 @@ def demonstrate_complete_secure_registration():
 **SQL Injection Prevention:**
 
 - **Always use parameterized queries** - never concatenate user input directly into SQL
+
 - **Validate all input** before database operations
+
 - **Apply principle of least privilege** to database accounts
+
 - **Monitor and log** authentication attempts and database errors
 
 **XSS Protection:**
 
 - **Escape output by default** - encode data when displaying to users
+
 - **Use whitelist validation** for rich content
+
 - **Apply context-aware encoding** (HTML, JavaScript, CSS contexts require different approaches)
+
 - **Implement Content Security Policy** to restrict script execution
 
 **Input Validation Strategy:**
 
 - **Prefer whitelist over blacklist** approaches
+
 - **Validate both format and content** of uploaded files
+
 - **Implement multiple layers** of validation
+
 - **Fail securely** when validation errors occur
 
 **Safe Error Handling:**
 
 - **Log detailed errors** for administrators
+
 - **Return generic messages** to users
+
 - **Avoid information disclosure** in error responses
+
 - **Monitor error patterns** for attack detection
 
 **File Upload Security:**
 
 - **Validate file types** by content, not just extension
+
 - **Scan for malware** before storage
+
 - **Use secure file naming** to prevent conflicts and attacks
+
 - **Apply size limits** to prevent resource exhaustion
 
 **Implementation best practices:**
 
 - **Defense in depth**: Multiple validation layers
+
 - **Fail securely**: Default to rejecting suspicious input
+
 - **Log security events**: Monitor for attack patterns
+
 - **Regular updates**: Keep security libraries current
 
 Understanding and implementing comprehensive input validation protects applications from the majority of common web vulnerabilities and provides a solid foundation for secure system design.

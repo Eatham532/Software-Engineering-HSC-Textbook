@@ -838,5 +838,3 @@ END
 - **Maintainability** localizes changes and updates
 
 - **Readability** makes algorithms easier to understand
-
-

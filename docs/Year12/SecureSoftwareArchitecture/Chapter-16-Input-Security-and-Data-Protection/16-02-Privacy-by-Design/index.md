@@ -2037,6 +2037,7 @@ def demonstrate_gdpr_compliance():
         print("\nRecommendations:")
         for i, rec in enumerate(compliance_status['recommendations'][:3], 1):
             print(f"  {i}. {rec}")
+
 ```
 
 ## Summary
@@ -2046,43 +2047,61 @@ def demonstrate_gdpr_compliance():
 **Data Minimization:**
 
 - **Collect only necessary data** for specified purposes
+
 - **Reject excessive data collection** during system design
+
 - **Categorize data by sensitivity** and apply appropriate protections
+
 - **Document collection rationale** for transparency and compliance
 
 **Consent Management:**
 
 - **Obtain explicit consent** for non-essential processing
+
 - **Provide clear information** about data use and rights
+
 - **Enable easy consent withdrawal** without service penalties
+
 - **Maintain detailed consent records** for accountability
 
 **Purpose Limitation and Retention:**
 
 - **Use data only for declared purposes** to prevent scope creep
+
 - **Implement automated deletion** based on retention policies
+
 - **Regular review and cleanup** of unnecessary data
+
 - **Legal basis assessment** for all processing activities
 
 **Privacy Impact Assessments:**
 
 - **Systematic privacy risk evaluation** for new projects
+
 - **Early identification and mitigation** of privacy risks
+
 - **Documentation of design decisions** and their privacy implications
+
 - **Stakeholder consultation** when high risks are identified
 
 **GDPR Compliance:**
 
 - **Robust data subject rights procedures** with defined response times
+
 - **Clear legal basis** for all processing activities
+
 - **Comprehensive documentation** of processing activities
+
 - **Regular compliance monitoring** and improvement
 
 **Implementation best practices:**
 
 - **Privacy by default**: Most privacy-friendly settings as standard
+
 - **Technical and organizational measures**: Both code and procedures matter
+
 - **Regular training**: Keep staff updated on privacy requirements
+
 - **Continuous improvement**: Regular review and enhancement of privacy protections
 
 Understanding and implementing Privacy by Design principles creates software systems that respect user privacy, comply with legal requirements, and build lasting trust with users while maintaining functional excellence.

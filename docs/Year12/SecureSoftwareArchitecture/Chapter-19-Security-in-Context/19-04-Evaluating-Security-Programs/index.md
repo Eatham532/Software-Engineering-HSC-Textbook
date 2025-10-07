@@ -1725,10 +1725,3 @@ Effective security program evaluation depends on:
 - **Executive Support**: Leadership engagement and commitment to acting on evaluation results
 
 Security evaluation is not a one-time activity but an ongoing process that enables organizations to demonstrate value, identify improvements, and maintain effective security postures in evolving threat landscapes.
-
-
-
-
-
-
-

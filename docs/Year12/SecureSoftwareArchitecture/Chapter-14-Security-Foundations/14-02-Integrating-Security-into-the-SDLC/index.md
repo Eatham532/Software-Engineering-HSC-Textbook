@@ -544,5 +544,3 @@ Apply the STRIDE framework to threat model a simple online quiz system with the 
 - **Risk reduction**: Lower probability of production security incidents
 
 Security integration isn't just about preventing attacks—it's about building systems that stakeholders can trust, that meet regulatory requirements, and that provide sustainable competitive advantages in an increasingly security-conscious market.
-
-

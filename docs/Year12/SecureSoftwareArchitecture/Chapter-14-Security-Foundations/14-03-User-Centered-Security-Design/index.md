@@ -610,5 +610,3 @@ Design a user testing protocol for a new two-factor authentication system for an
 - **Better adoption**: Security features that enhance rather than hinder workflows get used consistently
 
 Security that users understand, trust, and find helpful creates stronger protection than complex security that users avoid or circumvent. The most secure system is one that users actively want to use correctly.
-
-

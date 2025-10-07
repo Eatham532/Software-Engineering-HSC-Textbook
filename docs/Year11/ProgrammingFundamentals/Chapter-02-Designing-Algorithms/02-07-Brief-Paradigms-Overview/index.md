@@ -292,5 +292,3 @@ Many modern applications combine paradigms:
 - Later courses will explore paradigms in more depth
 
 - Understanding these concepts now prepares you for more advanced programming
-
-

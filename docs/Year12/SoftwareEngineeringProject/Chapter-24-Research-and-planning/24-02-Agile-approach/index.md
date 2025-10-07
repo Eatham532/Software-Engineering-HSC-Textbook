@@ -881,10 +881,3 @@ So that I can encourage participation and ensure all students are included.
 The Agile approach emphasises iterative development through **sprints** that deliver working software incrementally. **Agile ceremonies** - Sprint Planning, Daily Standups, Sprint Reviews, and Sprint Retrospectives - provide structure for team collaboration and continuous improvement. **User Stories** capture requirements from the user's perspective, focusing on value and functionality rather than technical implementation details.
 
 Successful Agile implementation requires commitment to the ceremonies, clear communication during standups, and well-written user stories with specific acceptance criteria. The approach works best when teams embrace change, focus on delivering value, and continuously reflect on their processes to improve effectiveness. Agile's flexibility makes it particularly suitable for projects where requirements may evolve based on user feedback and changing business needs.
-
-
-
-
-
-
-

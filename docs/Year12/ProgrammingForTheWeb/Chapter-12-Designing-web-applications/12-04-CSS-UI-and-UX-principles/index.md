@@ -956,10 +956,3 @@ CSS and UI/UX principles form the foundation of effective web application design
 - **Accessibility and inclusivity** ensure web applications work for everyone, regardless of abilities or assistive technologies
 
 Understanding these principles enables developers to create web applications that are not only visually appealing but also usable, accessible, and maintainable.
-
-
-
-
-
-
-

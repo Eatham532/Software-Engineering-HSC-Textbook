@@ -744,10 +744,3 @@ In this section, you learned about autonomous control features in mechatronic sy
 - Test autonomous features extensively before deployment
 
 In the next section, we'll explore algorithmic patterns that implement these autonomous control features.
-
-
-
-
-
-
-

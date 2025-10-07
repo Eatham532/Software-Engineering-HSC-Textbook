@@ -457,10 +457,3 @@ In this section, you learned about the computing hardware that powers mechatroni
 - Register knowledge helps you optimize code for better performance
 
 In the next section, we'll explore the sensors and actuators that connect your computing hardware to the physical world.
-
-
-
-
-
-
-

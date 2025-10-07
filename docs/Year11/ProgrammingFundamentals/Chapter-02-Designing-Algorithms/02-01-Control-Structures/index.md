@@ -1624,6 +1624,3 @@ The algorithm continues until the entire array is sorted: [11, 12, 22, 25, 34, 6
 **Combining structures** creates powerful algorithms that can solve complex problems. Master these three patterns, and you can express any logical process as a clear, step-by-step algorithm.
 
 **Remember:** Always trace through your algorithms with sample data to verify they work correctly!
-
-
-

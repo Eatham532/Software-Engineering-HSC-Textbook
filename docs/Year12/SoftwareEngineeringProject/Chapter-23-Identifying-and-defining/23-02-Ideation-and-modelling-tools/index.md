@@ -484,10 +484,3 @@ print(f"Days until due: {math_assignment.days_until_due()}")
 Ideation and modelling tools are essential for translating problems into implementable solutions. **Brainstorming** generates creative options without premature filtering. **Mind-mapping** visualises relationships between concepts and helps explore connections. **Storyboards** capture user experiences and identify potential issues before development. **Data dictionaries** define the structure and constraints of information that systems need to handle.
 
 These tools work best when used together: brainstorming generates possibilities, mind-mapping organises them, storyboards show how they work in practice, and data dictionaries specify the technical requirements. The investment in planning with these tools reduces development time and improves the quality of the final solution.
-
-
-
-
-
-
-

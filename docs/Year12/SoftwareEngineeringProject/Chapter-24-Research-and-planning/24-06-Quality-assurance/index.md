@@ -369,10 +369,3 @@ Quality assurance is a comprehensive approach to ensuring software engineering s
 Effective QA processes reduce project risks, improve user satisfaction, and ensure legal compliance. They require coordination between development teams, stakeholders, and end users throughout the software development lifecycle.
 
 Quality assurance is not just about finding defects—it's about preventing them through systematic processes, clear standards, and continuous validation that the software meets both technical requirements and user needs.
-
-
-
-
-
-
-

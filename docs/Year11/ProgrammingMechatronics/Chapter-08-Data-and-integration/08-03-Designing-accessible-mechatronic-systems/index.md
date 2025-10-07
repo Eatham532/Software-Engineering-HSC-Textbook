@@ -536,10 +536,3 @@ Accessible mechatronic system design requires understanding diverse user needs a
 - **Maintainability**: Ensure long-term accessibility through remote diagnostics and user-adjustable settings
 
 Accessible design creates more robust systems that benefit all users while ensuring compliance with accessibility standards and ethical design principles.
-
-
-
-
-
-
-

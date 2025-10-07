@@ -9,9 +9,13 @@ Without functions, you'd have to copy-paste the same code everywhere you need it
 Functions also help you think like a software engineer:
 
 - **Decomposition**: Break complex problems into smaller, manageable pieces
+
 - **Abstraction**: Hide implementation details behind a simple interface
+
 - **Reusability**: Write once, use many times
+
 - **Testability**: Test each piece independently
+
 - **Maintainability**: Fix bugs in one place instead of many
 
 ## Understanding functions
@@ -30,15 +34,21 @@ def function_name(parameter1, parameter2):
     # Function body - the code that does the work
     result = parameter1 + parameter2
     return result  # Send the result back to the caller
+
 ```
 
 **Key parts**:
 
 - `def`: Keyword that starts a function definition
+
 - `function_name`: Descriptive name following snake_case convention
+
 - `(parameters)`: Inputs the function needs (can be zero or more)
+
 - `"""docstring"""`: Documentation explaining what the function does
+
 - Function body: Indented code that does the work
+
 - `return`: Sends a value back to whoever called the function
 
 ### Functions vs procedures
@@ -46,11 +56,13 @@ def function_name(parameter1, parameter2):
 In some programming languages, there's a distinction:
 
 - **Function**: Returns a value (like a calculation)
+
 - **Procedure**: Performs an action without returning a value
 
 In Python, everything is technically a function, but we use the same terminology:
 
 - Functions that `return` a value are typically called **functions**
+
 - Functions that don't return a value (or return `None`) act like **procedures**
 
 ```python
@@ -66,6 +78,7 @@ def print_grade_report(student_name, average):
     print(f"Student: {student_name}")
     print(f"Average: {average:.1f}")
     # No return statement - returns None implicitly
+
 ```
 
 ## From pseudocode to Python
@@ -75,31 +88,38 @@ def print_grade_report(student_name, average):
 Let's convert pseudocode to Python functions step by step.
 
 **Pseudocode**:
+
 ```
 FUNCTION calculate_area(length, width)
     area ← length × width
     RETURN area
 END FUNCTION
+
 ```
 
 **Python**:
+
 ```python
 def calculate_area(length, width):
     """Calculate the area of a rectangle."""
     area = length * width
     return area
+
 ```
 
 Even simpler, you can return directly:
+
 ```python
 def calculate_area(length, width):
     """Calculate the area of a rectangle."""
     return length * width
+
 ```
 
 ### Functions with multiple parameters
 
 **Pseudocode**:
+
 ```
 FUNCTION find_maximum(num1, num2, num3)
     max_value ← num1
@@ -114,9 +134,11 @@ FUNCTION find_maximum(num1, num2, num3)
     
     RETURN max_value
 END FUNCTION
+
 ```
 
 **Python**:
+
 ```python
 def find_maximum(num1, num2, num3):
     """Find the largest of three numbers."""
@@ -133,26 +155,32 @@ def find_maximum(num1, num2, num3):
 # Using the function
 result = find_maximum(45, 89, 67)
 print(result)  # Output: 89
+
 ```
 
 **Python shortcut** (using built-in `max` function):
+
 ```python
 def find_maximum(num1, num2, num3):
     """Find the largest of three numbers."""
     return max(num1, num2, num3)
+
 ```
 
 ### Functions without return values
 
 **Pseudocode**:
+
 ```
 PROCEDURE display_welcome_message(user_name)
     OUTPUT "Welcome, " + user_name + "!"
     OUTPUT "Today is a great day to learn Python."
 END PROCEDURE
+
 ```
 
 **Python**:
+
 ```python
 def display_welcome_message(user_name):
     """Display a personalized welcome message."""
@@ -164,6 +192,7 @@ display_welcome_message("Alice")
 # Output:
 # Welcome, Alice!
 # Today is a great day to learn Python.
+
 ```
 
 ## Parameter passing
@@ -182,6 +211,7 @@ def format_name(first_name, last_name):
 # Order matters
 print(format_name("Alice", "Smith"))    # Alice Smith
 print(format_name("Smith", "Alice"))    # Smith Alice (wrong!)
+
 ```
 
 ### Default parameters
@@ -195,6 +225,7 @@ def greet(name, greeting="Hello"):
 
 print(greet("Alice"))                   # Hello, Alice!
 print(greet("Bob", "Good morning"))     # Good morning, Bob!
+
 ```
 
 **Rule**: Default parameters must come after non-default parameters.
@@ -207,6 +238,7 @@ def example(a=1, b):
 # ✅ Correct
 def example(b, a=1):
     pass
+
 ```
 
 ### Keyword arguments
@@ -230,6 +262,7 @@ student2 = create_student_record(grade=87, name="Bob", age=17)
 
 # Mix positional and keyword (positional must come first)
 student3 = create_student_record("Charlie", age=16, grade=92)
+
 ```
 
 ## One logical task per function
@@ -262,6 +295,7 @@ def process_student_data(name, test1, test2, test3):
     # Saving to file
     with open('grades.txt', 'a') as f:
         f.write(f"{name},{average},{letter_grade}\n")
+
 ```
 
 This function calculates, grades, displays, AND saves data—too many responsibilities!
@@ -304,13 +338,17 @@ def process_student_grades(name, test1, test2, test3):
 
 # Main execution
 process_student_grades("Alice", 85, 92, 88)
+
 ```
 
 **Benefits of this approach**:
 
 - Each function can be tested independently
+
 - Functions can be reused in different contexts
+
 - Easy to modify one aspect without affecting others
+
 - Code is self-documenting through function names
 
 ## Worked examples
@@ -339,6 +377,7 @@ MAIN
     temp_c ← fahrenheit_to_celsius(temp_f)
     OUTPUT temp_f + "°F = " + temp_c + "°C"
 END MAIN
+
 ```
 
 ///
@@ -369,6 +408,7 @@ if __name__ == '__main__':
 # Output:
 # 25°C = 77.0°F
 # 77°F = 25.0°C
+
 ```
 
 ///
@@ -376,8 +416,11 @@ if __name__ == '__main__':
 **What's happening**:
 
 1. Define two conversion functions, each with one clear purpose
+
 2. Each function takes one parameter and returns one result
+
 3. The `if __name__ == '__main__':` block runs only when the script is executed directly
+
 4. We call the functions and use their return values in print statements
 
 ### Example 2: Validating user input
@@ -410,6 +453,7 @@ MAIN
     user_age ← get_valid_age()
     OUTPUT "Your age is: " + user_age
 END MAIN
+
 ```
 
 ///
@@ -447,6 +491,7 @@ if __name__ == '__main__':
 # Please enter a valid number.
 # Enter your age: 25
 # Your age is: 25
+
 ```
 
 ///
@@ -454,8 +499,11 @@ if __name__ == '__main__':
 **Function breakdown**:
 
 - `is_valid_age()`: Single responsibility—validate age range
+
 - `get_valid_age()`: Single responsibility—get validated input from user
+
 - Separation of concerns: validation logic separate from input logic
+
 - Reusable: `is_valid_age()` can be used anywhere age validation is needed
 
 ### Example 3: Shopping cart calculator
@@ -492,6 +540,7 @@ MAIN
     OUTPUT "Tax (10%): " + format_currency(tax)
     OUTPUT "Total: " + format_currency(total)
 END MAIN
+
 ```
 
 ///
@@ -533,6 +582,7 @@ if __name__ == '__main__':
 # Subtotal: $59.97
 # Tax (10%): $6.00
 # Total: $65.97
+
 ```
 
 ///
@@ -540,9 +590,13 @@ if __name__ == '__main__':
 **Design principles demonstrated**:
 
 - **Small, focused functions**: Each does one calculation
+
 - **Pure functions**: No side effects, same inputs always produce same outputs
+
 - **Composability**: Functions work together to solve larger problem
+
 - **Clear names**: Function names describe exactly what they do
+
 - **Easy testing**: Each function can be tested with known inputs/outputs
 
 ## Practice exercises
@@ -560,6 +614,7 @@ FUNCTION calculate_circle_area(radius)
     area ← 3.14159 × radius × radius
     RETURN area
 END FUNCTION
+
 ```
 
 Test your function with radiuses: 5, 10, and 2.5
@@ -587,7 +642,9 @@ def calculate_circle_area(radius):
     return math.pi * radius ** 2
 
 print(calculate_circle_area(5))     # 78.53981633974483
+
 ```
+
 ///
 ///
 
@@ -598,6 +655,7 @@ print(calculate_circle_area(5))     # 78.53981633974483
 Create a function `calculate_bmi(weight_kg, height_m)` that:
 
 1. Calculates BMI using formula: weight / (height × height)
+
 2. Returns the BMI rounded to 1 decimal place
 
 Test with: weight=70kg, height=1.75m (expected BMI: 22.9)
@@ -627,7 +685,9 @@ print(f"BMI: {result}")  # BMI: 22.9
 # Additional tests
 print(calculate_bmi(80, 1.80))  # 24.7
 print(calculate_bmi(60, 1.65))  # 22.0
+
 ```
+
 ///
 ///
 
@@ -640,7 +700,9 @@ print(calculate_bmi(60, 1.65))  # 22.0
 Create three functions that work together:
 
 1. `is_passing_grade(score)` - returns True if score >= 50, False otherwise
+
 2. `count_passing_students(scores)` - returns count of passing scores in a list
+
 3. `calculate_pass_rate(scores)` - returns percentage of students passing
 
 Test with: `[45, 67, 89, 34, 56, 78, 90, 23, 67, 81]`
@@ -681,7 +743,9 @@ print(f"Pass rate: {calculate_pass_rate(test_scores)}%")           # 70.0%
 def count_passing_students(scores):
     """Count how many scores are passing grades."""
     return sum(1 for score in scores if is_passing_grade(score))
+
 ```
+
 ///
 ///
 
@@ -692,8 +756,11 @@ def count_passing_students(scores):
 Create a function `get_valid_score()` that:
 
 1. Prompts the user for a test score
+
 2. Validates the score is between 0 and 100
+
 3. Keeps asking until valid input is received
+
 4. Returns the valid score
 
 Include a helper function `is_valid_score(score)` for validation.
@@ -733,7 +800,9 @@ if __name__ == '__main__':
 # Please enter a valid number.
 # Enter test score (0-100): 85.5
 # Valid score entered: 85.5
+
 ```
+
 ///
 ///
 
@@ -746,8 +815,11 @@ if __name__ == '__main__':
 Build a complete grade calculation system with these functions:
 
 1. `calculate_weighted_average(assignments, tests, exam)` - weights: 30%, 40%, 30%
+
 2. `get_letter_grade(average)` - A: 90+, B: 80+, C: 70+, D: 60+, F: below 60
+
 3. `format_grade_report(name, assignments, tests, exam)` - creates formatted report
+
 4. `is_honor_roll(average)` - True if average >= 85
 
 Create a complete program that uses all functions together.
@@ -848,7 +920,9 @@ if __name__ == '__main__':
 # Letter Grade:      A
 # Honor Roll:        Yes
 # ========================================
+
 ```
+
 ///
 ///
 
@@ -871,6 +945,7 @@ def calculate_total(price, tax):
     """Calculate total price including tax."""
     total = price + tax
     return total  # or: return price + tax
+
 ```
 
 ### 2. Using print instead of return
@@ -893,6 +968,7 @@ def double(number):
 result = double(5)
 print(result)  # 10
 # Can use in calculations: result * 3, etc.
+
 ```
 
 ### 3. Modifying parameters (mutation)
@@ -916,6 +992,7 @@ def add_item(shopping_list, item):
 my_list = ['bread', 'milk']
 new_list = add_item(my_list, 'eggs')
 # my_list unchanged, new_list has 'eggs'
+
 ```
 
 ### 4. Too many responsibilities
@@ -947,6 +1024,7 @@ def format_output(result):
 def save_to_file(output, filename):
     """Save output to file."""
     pass
+
 ```
 
 ## Recap
@@ -956,28 +1034,39 @@ Functions are the building blocks of well-organized programs. Here's what you've
 **Function basics**:
 
 - Use `def` to define functions with parameters
+
 - Use `return` to send values back to the caller
+
 - Functions without `return` act like procedures
+
 - Always include docstrings to explain what functions do
 
 **Parameter passing**:
 
 - Positional parameters: order matters
+
 - Default parameters: provide fallback values
+
 - Keyword arguments: specify by name for clarity
 
 **Design principles**:
 
 - One logical task per function (Single Responsibility Principle)
+
 - Small, focused functions are easier to test and reuse
+
 - Pure functions (no side effects) are easier to reason about
+
 - Compose small functions to solve complex problems
 
 **Common patterns**:
 
 - Validation functions: check if data is valid
+
 - Calculation functions: perform computations
+
 - Formatting functions: prepare data for display
+
 - Helper functions: support main program logic
 
 **Next steps**: Now that you can organize code into functions, you'll learn to use standard Python modules (Section 4.4) to access pre-built functions for common tasks like math operations and random number generation.

@@ -1396,10 +1396,3 @@ Effective software engineering requires strong **stakeholder engagement** throug
 **Scope negotiation** involves balancing stakeholder needs with technical constraints through transparent communication, alternative solution exploration, and priority-based decision making. **Ethical considerations** must address privacy, accessibility, bias, and transparency to ensure software serves people appropriately and responsibly.
 
 Success in these social and communication aspects depends on building trust through transparency, maintaining ongoing dialogue with diverse stakeholders, and making decisions that consider both technical excellence and human impact. These skills are as critical as technical abilities for delivering software that truly serves its intended purpose and users.
-
-
-
-
-
-
-

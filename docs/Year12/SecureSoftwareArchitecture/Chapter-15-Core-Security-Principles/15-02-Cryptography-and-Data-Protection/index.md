@@ -911,5 +911,3 @@ def demonstrate_password_manager():
 - **Plan for key recovery**: Ensure data isn't lost if keys are compromised
 
 Understanding cryptography enables developers to make informed decisions about data protection and implement security controls that effectively protect sensitive information throughout its lifecycle.
-
-

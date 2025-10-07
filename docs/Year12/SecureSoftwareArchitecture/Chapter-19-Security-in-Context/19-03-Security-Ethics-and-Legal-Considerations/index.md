@@ -2329,11 +2329,3 @@ if __name__ == "__main__":
 6. **Ethical Framework**: Every security decision has broader implications that extend beyond technical effectiveness to societal impact.
 
 Security practitioners have a responsibility to consider the broader implications of their work, ensuring that security enhancements serve all members of society while respecting fundamental rights and promoting inclusive access to digital services.
-
-
-
-
-
-
-
-

@@ -709,5 +709,3 @@ Trace one piece of data through the entire system:
 - Leverages **structure charts** understanding from Section 2.4
 
 - Builds on **subprogram knowledge** from Section 2.5
-
-

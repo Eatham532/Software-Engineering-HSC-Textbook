@@ -2053,10 +2053,3 @@ In this section, you learned how to create effective prototypes and user interfa
 **Integration with software engineering process:**
 
 Prototype and UI design activities should be integrated throughout the software development lifecycle, with wireframes informing technical architecture decisions, usability testing validating design choices, and accessibility requirements guiding implementation approaches. Well-designed interfaces reduce development rework, improve user satisfaction, and ensure software solutions meet diverse user needs effectively.
-
-
-
-
-
-
-

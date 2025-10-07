@@ -792,13 +792,3 @@ stop
 - while/endwhile for loops
 
 **Both methods help bridge the gap between human thinking and computer code, making algorithms easier to understand, verify, and implement.**
-
-
-
-
-
-
-
-
-
-

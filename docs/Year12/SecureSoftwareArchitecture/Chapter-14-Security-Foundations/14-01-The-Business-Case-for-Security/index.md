@@ -314,5 +314,3 @@ Each message should be 2-3 sentences and appropriate for that audience.
 - Protects company assets and competitive position
 
 Understanding security's business context helps developers build systems that protect both technical assets and business value, making security a competitive advantage rather than just a compliance requirement.
-
-

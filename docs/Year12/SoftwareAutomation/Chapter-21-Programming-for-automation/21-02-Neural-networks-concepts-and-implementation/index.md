@@ -1718,10 +1718,3 @@ if __name__ == "__main__":
     all_results = run_all_neural_network_demonstrations()
  
  
-
-
-
-
-
-
-

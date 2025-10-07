@@ -1235,10 +1235,3 @@ In this section, you learned about creating effective user interfaces for mechat
 - Voice interfaces for hands-free operation
 
 In the next section, we'll explore how to test these interfaces and the systems they control.
-
-
-
-
-
-
-

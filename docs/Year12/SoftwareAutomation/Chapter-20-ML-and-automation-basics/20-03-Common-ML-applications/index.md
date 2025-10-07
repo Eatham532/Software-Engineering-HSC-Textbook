@@ -1982,10 +1982,3 @@ Improve the `DocumentScannerOCR` system by adding:
 5. **Continuous Learning**: ML systems improve over time as they process more data and receive feedback
 
 Python's strengths in ML applications stem from its ability to handle the entire pipeline: data processing, model development, deployment, and integration. This makes it an ideal choice for students learning ML concepts and professionals building production systems.
-
-
-
-
-
-
-

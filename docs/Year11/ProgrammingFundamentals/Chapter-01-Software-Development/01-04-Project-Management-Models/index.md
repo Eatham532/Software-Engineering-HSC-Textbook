@@ -463,6 +463,3 @@ Compare how the Grade Calculator project from Section 1.1 would be handled diffe
 **For classroom projects:** Consider a hybrid approach that combines Waterfall planning with Agile development sprints. This gives you structure while maintaining flexibility to adapt and improve.
 
 **Remember:** The methodology is a tool to help you succeed, not a rigid rule. Adapt it to fit your project's specific needs and constraints.
-
-
-

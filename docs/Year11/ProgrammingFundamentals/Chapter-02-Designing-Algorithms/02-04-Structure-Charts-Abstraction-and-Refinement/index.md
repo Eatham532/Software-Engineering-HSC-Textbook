@@ -761,5 +761,3 @@ package "Data Access Layer" {
 - **Reusability** reduces duplication and development time
 
 - **Maintainability** localizes changes and simplifies updates
-
-

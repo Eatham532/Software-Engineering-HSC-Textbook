@@ -40,6 +40,7 @@ resp --> collab : Assign to objects
 collab --> impl : Design interactions
 impl --> req : Validate against requirements
 @enduml
+
 ```
 
 Let's work through this process with a practical example.

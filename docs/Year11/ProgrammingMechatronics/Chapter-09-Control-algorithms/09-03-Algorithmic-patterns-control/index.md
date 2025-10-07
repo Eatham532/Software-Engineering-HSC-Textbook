@@ -821,10 +821,3 @@ Three algorithmic patterns form the foundation of mechatronic control systems:
 Understanding these patterns enables the design of robust, predictable, and maintainable control systems that can handle complex mechatronic applications.
 
 See also [10.2 Implementing closed loop control](../../Chapter-10-Programming-and-building/10-02-Implementing-closed-loop-control/index.md) for practical implementation techniques.
-
-
-
-
-
-
-

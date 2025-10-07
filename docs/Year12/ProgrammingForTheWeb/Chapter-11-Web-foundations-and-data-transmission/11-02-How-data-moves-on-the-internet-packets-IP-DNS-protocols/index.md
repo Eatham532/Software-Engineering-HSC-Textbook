@@ -387,10 +387,3 @@ You can now trace how data moves on the internet:
 - Developer tools let you observe each stage and validate security
 
 Outcome mapping: SE-12-03 — investigate and describe the function of web protocols and their ports, and trace request/response paths including DNS and transport layers.
-
-
-
-
-
-
-

@@ -707,10 +707,3 @@ Enrolled type: BOOLEAN
 - Use meaningful variable names that indicate the data type's purpose
 
 Understanding data types is essential for writing reliable programs that handle information correctly and efficiently.
-
-
-
-
-
-
-
