@@ -74,7 +74,7 @@ import secrets
 from typing import Optional, Dict, Any
 
 class SecureDatabaseManager:
-    def \_\_init\_\_(self, db_path: str = "secure_users.db"):
+    def __init__(self, db_path: str = "secure_users.db"):
         self.db_path = db_path
         self.setup_database()
     
@@ -431,7 +431,7 @@ from urllib.parse import quote, unquote
 from typing import Dict, List, Any, Optional
 
 class XSSProtectionManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         # Define allowed HTML tags and attributes for rich content
         self.allowed_tags = [
             'p', 'br', 'strong', 'em', 'u', 'ol', 'ul', 'li', 
@@ -768,7 +768,7 @@ class ValidationResult(Enum):
     MISSING_REQUIRED = "missing_required"
 
 class WhitelistValidator:
-    def \_\_init\_\_(self):
+    def __init__(self):
         # Define allowed patterns for different input types
         self.validation_patterns = {
             'username': r'^[a-zA-Z0-9_]{3,50}$',
@@ -1022,7 +1022,7 @@ def demonstrate_whitelist_validation():
 
 ```python
 class BlacklistValidator:
-    def \_\_init\_\_(self):
+    def __init__(self):
         # Define dangerous patterns to block
         self.dangerous_patterns = [
             # SQL injection patterns
@@ -1136,7 +1136,7 @@ import logging
 from typing import Dict, Any
 
 class SafeErrorHandler:
-    def \_\_init\_\_(self):
+    def __init__(self):
         # Setup logging for security events
         logging.basicConfig(
             level=logging.INFO,
@@ -1237,7 +1237,7 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 class SecureFileUploadManager:
-    def \_\_init\_\_(self, upload_directory: str = "uploads"):
+    def __init__(self, upload_directory: str = "uploads"):
         self.upload_directory = Path(upload_directory)
         self.upload_directory.mkdir(exist_ok=True, mode=0o755)
         
@@ -1631,6 +1631,7 @@ def demonstrate_complete_secure_registration():
             'user_creation', '192.168.1.100', str(message)
         )
         print(f"❌ Registration failed: {safe_error}")
+```
 
 ## Summary
 
@@ -1679,5 +1680,3 @@ def demonstrate_complete_secure_registration():
 - **Regular updates**: Keep security libraries current
 
 Understanding and implementing comprehensive input validation protects applications from the majority of common web vulnerabilities and provides a solid foundation for secure system design.
-
-

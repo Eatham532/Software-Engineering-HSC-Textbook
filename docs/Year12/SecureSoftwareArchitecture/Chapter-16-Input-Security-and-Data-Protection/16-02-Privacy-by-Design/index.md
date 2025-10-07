@@ -57,7 +57,7 @@ class PurposeLimitation(Enum):
     LEGAL_COMPLIANCE = "legal_compliance"
 
 class DataMinimizationManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         # Define what data is necessary for each purpose
         self.purpose_data_mapping = {
             PurposeLimitation.ACCOUNT_MANAGEMENT: {
@@ -302,7 +302,7 @@ class ConsentStatus(Enum):
     EXPIRED = "expired"
 
 class ConsentRecord:
-    def \_\_init\_\_(self, consent_type: ConsentType, status: ConsentStatus, 
+    def __init__(self, consent_type: ConsentType, status: ConsentStatus, 
                  user_id: str, ip_address: str = "unknown", user_agent: str = "unknown"):
         self.consent_id = str(uuid.uuid4())
         self.consent_type = consent_type
@@ -338,7 +338,7 @@ class ConsentRecord:
         return False
 
 class ConsentManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.consent_records: Dict[str, List[ConsentRecord]] = {}
         
         # Define what each consent type enables
@@ -692,7 +692,7 @@ from enum import Enum
 import json
 
 class RetentionPolicy:
-    def \_\_init\_\_(self, policy_id: str, data_category: str, 
+    def __init__(self, policy_id: str, data_category: str, 
                  retention_period: timedelta, legal_basis: str):
         self.policy_id = policy_id
         self.data_category = data_category
@@ -710,7 +710,7 @@ class RetentionPolicy:
         return datetime.now() >= deletion_date
 
 class DataRetentionManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         # Define retention policies for different data types
         self.retention_policies = {
             'account_data': RetentionPolicy(
@@ -1084,7 +1084,7 @@ class DataSensitivity(Enum):
     RESTRICTED = "restricted"
 
 class PrivacyRisk:
-    def \_\_init\_\_(self, risk_id: str, description: str, likelihood: RiskLevel, 
+    def __init__(self, risk_id: str, description: str, likelihood: RiskLevel, 
                  impact: RiskLevel, data_types_affected: List[str]):
         self.risk_id = risk_id
         self.description = description
@@ -1134,7 +1134,7 @@ class PrivacyRisk:
                 self.residual_risk = RiskLevel.MEDIUM
 
 class PrivacyImpactAssessment:
-    def \_\_init\_\_(self, project_name: str, assessor: str):
+    def __init__(self, project_name: str, assessor: str):
         self.assessment_id = f"PIA_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         self.project_name = project_name
         self.assessor = assessor
@@ -1599,7 +1599,7 @@ class RequestStatus(Enum):
     PARTIALLY_COMPLETED = "partially_completed"
 
 class GDPRComplianceManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.data_subject_requests = {}
         self.processing_records = {}
         self.consent_records = {}
@@ -2037,6 +2037,7 @@ def demonstrate_gdpr_compliance():
         print("\nRecommendations:")
         for i, rec in enumerate(compliance_status['recommendations'][:3], 1):
             print(f"  {i}. {rec}")
+```
 
 ## Summary
 
@@ -2085,5 +2086,3 @@ def demonstrate_gdpr_compliance():
 - **Continuous improvement**: Regular review and enhancement of privacy protections
 
 Understanding and implementing Privacy by Design principles creates software systems that respect user privacy, comply with legal requirements, and build lasting trust with users while maintaining functional excellence.
-
-
