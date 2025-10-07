@@ -25,6 +25,7 @@ Before contributing, ensure you have:
 - Python 3.13+ (or any Python 3.x version)
 
 - [uv](https://docs.astral.sh/uv/) for Python package management
+- [uv](https://docs.astral.sh/uv/) (recommended) or `pip` for Python package management
 
 - Git for version control
 
@@ -45,8 +46,12 @@ Before contributing, ensure you have:
 2. **Install dependencies**:
 
    ```powershell
+   # Recommended: use uv if you're familiar with it
    uv sync
 
+   # Or use pip (standard Python installer)
+   python -m pip install --upgrade pip
+   python -m pip install -e .
    ```
 
 3. **Activate the virtual environment**:
@@ -146,7 +151,7 @@ docs/Year{11|12}/{ModuleName}/Chapter-{XX}-{Name}/Section-{YY}-{Name}/
 **Testing and Validation**:
 
 ```powershell
-# Run smoke tests to validate build
+# Run smoke tests to ensure diagrams are working (I should probably remove this at some point)
 python scripts/smoke_test.py
 
 # Check Markdown formatting
