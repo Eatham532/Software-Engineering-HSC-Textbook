@@ -65,7 +65,7 @@ class ArtefactStatus(Enum):
     OUTDATED = "outdated"
 
 class DevelopmentArtefact:
-    def \_\_init\_\_(self, title, artefact_type, author, file_path):
+    def __init__(self, title, artefact_type, author, file_path):
         self.title = title
         self.artefact_type = artefact_type
         self.author = author
@@ -122,7 +122,7 @@ class DevelopmentArtefact:
         }
 
 class ArtefactManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.artefacts = []
         self.artefact_index = {}
     
@@ -274,7 +274,7 @@ class SecurityRisk(Enum):
     CRITICAL = "critical"
 
 class Dependency:
-    def \_\_init\_\_(self, name, version, license_type, purpose):
+    def __init__(self, name, version, license_type, purpose):
         self.name = name
         self.version = version
         self.license_type = license_type
@@ -335,7 +335,7 @@ class Dependency:
         return False
 
 class DependencyManager:
-    def \_\_init\_\_(self, project_license):
+    def __init__(self, project_license):
         self.project_license = project_license
         self.dependencies = []
         self.dependency_index = {}
@@ -526,7 +526,7 @@ class DatabaseType(Enum):
     REDIS = "redis"
 
 class BackendService:
-    def \_\_init\_\_(self, name, service_type, port):
+    def __init__(self, name, service_type, port):
         self.name = name
         self.service_type = service_type
         self.port = port
@@ -588,7 +588,7 @@ class BackendService:
         print(f"[{timestamp}] {self.name}: {message}")
 
 class Database:
-    def \_\_init\_\_(self, name, db_type, connection_string):
+    def __init__(self, name, db_type, connection_string):
         self.name = name
         self.db_type = db_type
         self.connection_string = connection_string
@@ -631,7 +631,7 @@ class Database:
         }
 
 class APIGateway:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.services = {}
         self.rate_limits = {}
         self.request_log = []

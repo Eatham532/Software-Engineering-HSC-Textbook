@@ -2,7 +2,7 @@
 
 !!! quiz "Check your understanding"
 
-    1. What is the primary purpose of the `\_\_init\_\_` method in a Python class?
+    1. What is the primary purpose of the `__init__` method in a Python class?
 
         - To delete objects when they're no longer needed
         - To initialize a new object's attributes and set up its initial state { data-correct }
@@ -45,7 +45,7 @@
 
         ```python
         class Car:
-            def \_\_init\_\_(self, engine, wheels):
+            def __init__(self, engine, wheels):
                 self.engine = engine
                 self.wheels = wheels
         ```
@@ -65,11 +65,11 @@
     8. Which constructor design is better?
 
         ```python
-        def \_\_init\_\_(self, name, age):
+        def __init__(self, name, age):
             self.name = name
             self.age = age
 
-        def \_\_init\_\_(self, name, age):
+        def __init__(self, name, age):
             if not name or age < 0:
                 raise ValueError("Invalid input")
             self.name = name

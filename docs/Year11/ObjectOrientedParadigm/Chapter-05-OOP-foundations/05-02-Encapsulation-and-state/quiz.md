@@ -27,7 +27,7 @@
 
         ```python
         class BankAccount:
-            def \_\_init\_\_(self, balance):
+            def __init__(self, balance):
                 self._balance = balance
 
         account = BankAccount(100)

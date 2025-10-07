@@ -47,7 +47,7 @@ Characteristics of direct implementation:
 
 ```py
 class DirectImplementation:
-    def \_\_init\_\_(self, old_system, new_system):
+    def __init__(self, old_system, new_system):
         self.old_system = old_system
         self.new_system = new_system
         self.cutover_date = None
@@ -133,7 +133,7 @@ note right of P4 : Dashboard reports\nPerformance analytics
 from datetime import date, timedelta
 
 class Phase:
-    def \_\_init\_\_(self, name, features, duration_weeks):
+    def __init__(self, name, features, duration_weeks):
         self.name = name
         self.features = features
         self.duration_weeks = duration_weeks
@@ -202,7 +202,7 @@ Benefits of parallel implementation:
 
 ```py
 class ParallelImplementation:
-    def \_\_init\_\_(self, old_system, new_system):
+    def __init__(self, old_system, new_system):
         self.old_system = old_system
         self.new_system = new_system
         self.parallel_period_days = 30
@@ -272,7 +272,7 @@ from datetime import date
 import random
 
 class PilotGroup:
-    def \_\_init\_\_(self, name, size, characteristics):
+    def __init__(self, name, size, characteristics):
         self.name = name
         self.size = size
         self.characteristics = characteristics

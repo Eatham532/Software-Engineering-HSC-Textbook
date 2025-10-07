@@ -20,7 +20,7 @@
 
         ```python
         class BankAccount:
-            def \_\_init\_\_(self, balance):
+            def __init__(self, balance):
                 self.balance = balance
 
         acc1 = BankAccount(100)
@@ -58,7 +58,7 @@
 
         ```python
         class Counter:
-            def \_\_init\_\_(self):
+            def __init__(self):
                 self.count = 0
 
             def increment(self):

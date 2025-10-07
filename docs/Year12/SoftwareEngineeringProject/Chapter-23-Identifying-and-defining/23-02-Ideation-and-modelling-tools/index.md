@@ -162,7 +162,7 @@ A typical storyboard includes:
 
 ```py
 class StoryboardStep:
-    def \_\_init\_\_(self, time, action, user_feeling):
+    def __init__(self, time, action, user_feeling):
         self.time = time
         self.action = action
         self.user_feeling = user_feeling

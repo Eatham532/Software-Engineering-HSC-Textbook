@@ -63,7 +63,7 @@ class StakeholderRole(Enum):
     BUSINESS_OWNER = "business_owner"
 
 class Stakeholder:
-    def \_\_init\_\_(self, name, role, contact_info, influence_level):
+    def __init__(self, name, role, contact_info, influence_level):
         self.name = name
         self.role = role
         self.contact_info = contact_info
@@ -82,7 +82,7 @@ class Stakeholder:
         self.engagement_score += 1
 
 class RequirementsWorkshop:
-    def \_\_init\_\_(self, title, date_scheduled):
+    def __init__(self, title, date_scheduled):
         self.title = title
         self.date_scheduled = date_scheduled
         self.participants = []
@@ -245,7 +245,7 @@ class FeedbackPriority(Enum):
     LOW = "low"
 
 class FeedbackItem:
-    def \_\_init\_\_(self, title, description, feedback_type, source_stakeholder):
+    def __init__(self, title, description, feedback_type, source_stakeholder):
         self.title = title
         self.description = description
         self.feedback_type = feedback_type
@@ -269,7 +269,7 @@ class FeedbackItem:
         return f"Feedback '{self.title}' resolved: {resolution_notes}"
 
 class FeedbackManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.feedback_items = []
         self.feedback_by_stakeholder = {}
     
@@ -418,7 +418,7 @@ class RequestStatus(Enum):
     REJECTED = "rejected"
 
 class ScopeRequest:
-    def \_\_init\_\_(self, title, stakeholder, business_value, technical_complexity):
+    def __init__(self, title, stakeholder, business_value, technical_complexity):
         self.title = title
         self.stakeholder = stakeholder
         self.business_value = business_value  # 1-10 scale
@@ -456,7 +456,7 @@ class ScopeRequest:
         self.status = decision
 
 class ScopeNegotiator:
-    def \_\_init\_\_(self, project_capacity_hours):
+    def __init__(self, project_capacity_hours):
         self.project_capacity_hours = project_capacity_hours
         self.scope_requests = []
         self.committed_hours = 0
@@ -611,7 +611,7 @@ class EthicalRisk(Enum):
     CRITICAL = "critical"
 
 class EthicalAssessment:
-    def \_\_init\_\_(self, feature_name):
+    def __init__(self, feature_name):
         self.feature_name = feature_name
         self.privacy_risk = EthicalRisk.LOW
         self.accessibility_risk = EthicalRisk.LOW

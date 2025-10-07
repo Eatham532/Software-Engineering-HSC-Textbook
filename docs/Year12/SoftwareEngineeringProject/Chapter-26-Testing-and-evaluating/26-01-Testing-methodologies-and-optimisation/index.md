@@ -129,7 +129,7 @@ class TestStatus(Enum):
     BLOCKED = "blocked"
 
 class TestCase:
-    def \_\_init\_\_(self, test_id, title, test_type, priority):
+    def __init__(self, test_id, title, test_type, priority):
         self.test_id = test_id
         self.title = title
         self.test_type = test_type
@@ -189,7 +189,7 @@ class TestCase:
         }
 
 class TestPlan:
-    def \_\_init\_\_(self, project_name, version, test_manager):
+    def __init__(self, project_name, version, test_manager):
         self.project_name = project_name
         self.version = version
         self.test_manager = test_manager
@@ -373,7 +373,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 
 class TestResult:
-    def \_\_init\_\_(self, test_name, test_type):
+    def __init__(self, test_name, test_type):
         self.test_name = test_name
         self.test_type = test_type
         self.start_time = None
@@ -400,7 +400,7 @@ class TestResult:
         self.metrics[name] = value
 
 class BaseTest(ABC):
-    def \_\_init\_\_(self, name):
+    def __init__(self, name):
         self.name = name
         self.result = None
     
@@ -421,7 +421,7 @@ class BaseTest(ABC):
         return self.result
 
 class FunctionalTest(BaseTest):
-    def \_\_init\_\_(self, name, test_function, expected_result):
+    def __init__(self, name, test_function, expected_result):
         super().__init__(name)
         self.test_function = test_function
         self.expected_result = expected_result
@@ -433,7 +433,7 @@ class FunctionalTest(BaseTest):
         return actual_result == self.expected_result
 
 class IntegrationTest(BaseTest):
-    def \_\_init\_\_(self, name, components, integration_function):
+    def __init__(self, name, components, integration_function):
         super().__init__(name)
         self.components = components
         self.integration_function = integration_function
@@ -460,7 +460,7 @@ class IntegrationTest(BaseTest):
         return random.choice([True, True, True, False])  # 75% availability
 
 class NonFunctionalTest(BaseTest):
-    def \_\_init\_\_(self, name, performance_function, threshold, metric_name):
+    def __init__(self, name, performance_function, threshold, metric_name):
         super().__init__(name)
         self.performance_function = performance_function
         self.threshold = threshold
@@ -485,7 +485,7 @@ class NonFunctionalTest(BaseTest):
         return True
 
 class TestSuite:
-    def \_\_init\_\_(self, name):
+    def __init__(self, name):
         self.name = name
         self.tests = []
         self.results = []
@@ -635,7 +635,7 @@ class BoundaryType(Enum):
     TYPICAL = "typical"
 
 class TestDataGenerator:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.generated_data = []
     
     def generate_numeric_boundaries(self, min_val, max_val, data_type="integer"):
@@ -734,7 +734,7 @@ class TestDataGenerator:
         return boundary_dates
 
 class PathTestGenerator:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.test_paths = []
     
     def generate_decision_paths(self, conditions):
@@ -866,7 +866,7 @@ class TestStepType(Enum):
     CLEANUP = "cleanup"
 
 class AcceptanceCriteria:
-    def \_\_init\_\_(self, criteria_id, description, measurement):
+    def __init__(self, criteria_id, description, measurement):
         self.criteria_id = criteria_id
         self.description = description
         self.measurement = measurement
@@ -887,7 +887,7 @@ class AcceptanceCriteria:
         }
 
 class TestStep:
-    def \_\_init\_\_(self, step_number, step_type, action, expected_result):
+    def __init__(self, step_number, step_type, action, expected_result):
         self.step_number = step_number
         self.step_type = step_type
         self.action = action
@@ -913,7 +913,7 @@ class TestStep:
         }
 
 class DetailedTestCase:
-    def \_\_init\_\_(self, test_id, title, objective, module, feature):
+    def __init__(self, test_id, title, objective, module, feature):
         self.test_id = test_id
         self.title = title
         self.objective = objective
@@ -1107,7 +1107,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class AutomatedTestSuite:
-    def \_\_init\_\_(self, base_url):
+    def __init__(self, base_url):
         self.base_url = base_url
         self.driver = None
         self.test_results = []
@@ -1173,7 +1173,7 @@ class AutomatedTestSuite:
             return False
 
 class ManualTestManager:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.manual_tests = []
         self.session_notes = []
     
@@ -1238,7 +1238,7 @@ class ManualTestManager:
         }
 
 class TestStrategy:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.automated_suite = None
         self.manual_manager = ManualTestManager()
         self.strategy_recommendations = []

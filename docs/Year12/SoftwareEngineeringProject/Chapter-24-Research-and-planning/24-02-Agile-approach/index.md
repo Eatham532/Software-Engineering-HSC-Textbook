@@ -55,7 +55,7 @@ class SprintStatus(Enum):
     COMPLETE = "complete"
 
 class Sprint:
-    def \_\_init\_\_(self, number, duration_weeks=2):
+    def __init__(self, number, duration_weeks=2):
         self.number = number
         self.duration_weeks = duration_weeks
         self.start_date = None
@@ -178,7 +178,7 @@ Sprint Planning is a collaborative meeting where the team selects work for the u
 
 ```py
 class UserStory:
-    def \_\_init\_\_(self, title, description, points, acceptance_criteria):
+    def __init__(self, title, description, points, acceptance_criteria):
         self.title = title
         self.description = description
         self.points = points
@@ -197,7 +197,7 @@ class UserStory:
         return sum(task["estimated_hours"] for task in self.tasks)
 
 class SprintPlanning:
-    def \_\_init\_\_(self, team_capacity_hours):
+    def __init__(self, team_capacity_hours):
         self.team_capacity_hours = team_capacity_hours
         self.selected_stories = []
         self.total_committed_hours = 0
@@ -281,7 +281,7 @@ Daily Standup is a brief (15-minute) meeting where team members synchronise thei
 from datetime import date
 
 class StandupUpdate:
-    def \_\_init\_\_(self, team_member, completed_yesterday, planned_today, blockers=None):
+    def __init__(self, team_member, completed_yesterday, planned_today, blockers=None):
         self.team_member = team_member
         self.completed_yesterday = completed_yesterday
         self.planned_today = planned_today
@@ -300,7 +300,7 @@ class StandupUpdate:
         return update
 
 class DailyStandup:
-    def \_\_init\_\_(self, sprint_day):
+    def __init__(self, sprint_day):
         self.sprint_day = sprint_day
         self.updates = []
         self.action_items = []
@@ -431,7 +431,7 @@ So that I can stay informed about their academic progress.
 ```py
 
 class AcceptanceCriteria:
-    def \_\_init\_\_(self, description, test_method="manual"):
+    def __init__(self, description, test_method="manual"):
         self.description = description
         self.test_method = test_method
         self.status = "pending"
@@ -440,7 +440,7 @@ class AcceptanceCriteria:
         self.status = "complete"
 
 class UserStory:
-    def \_\_init\_\_(self, user_type, functionality, benefit):
+    def __init__(self, user_type, functionality, benefit):
         self.user_type = user_type
         self.functionality = functionality
         self.benefit = benefit

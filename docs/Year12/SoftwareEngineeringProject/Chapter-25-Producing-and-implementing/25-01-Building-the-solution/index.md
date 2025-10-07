@@ -279,7 +279,7 @@ Let's walk through building a student progress tracking system using incremental
 ```python
 # Basic student and grade tracking
 class Student:
-    def \_\_init\_\_(self, student_id, name):
+    def __init__(self, student_id, name):
         self.student_id = student_id
         self.name = name
         self.grades = {}
@@ -332,7 +332,7 @@ test_student_basic_functionality()
 ```python
 # Enhanced system with progress tracking
 class ProgressTracker:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.students = {}
         self.grade_thresholds = {
             "A": 90,

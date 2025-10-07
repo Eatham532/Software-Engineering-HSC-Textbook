@@ -132,7 +132,7 @@ class GateStatus(Enum):
     REJECTED = "rejected"
 
 class GateCriteria:
-    def \_\_init\_\_(self, description, weight=1):
+    def __init__(self, description, weight=1):
         self.description = description
         self.weight = weight
         self.status = "not_started"
@@ -145,7 +145,7 @@ class GateCriteria:
         self.reviewer_notes = notes
 
 class StageGate:
-    def \_\_init\_\_(self, name, gate_number):
+    def __init__(self, name, gate_number):
         self.name = name
         self.gate_number = gate_number
         self.criteria = []
@@ -249,7 +249,7 @@ Benefits of iterative delivery in WAgile:
 from datetime import date, timedelta
 
 class Iteration:
-    def \_\_init\_\_(self, number, stage_name, duration_weeks=2):
+    def __init__(self, number, stage_name, duration_weeks=2):
         self.number = number
         self.stage_name = stage_name
         self.duration_weeks = duration_weeks
@@ -371,7 +371,7 @@ Decision factors for WAgile interventions:
 
 ```py
 class ProjectCharacteristics:
-    def \_\_init\_\_(self):
+    def __init__(self):
         self.regulatory_requirements = False
         self.budget_constraints = False
         self.changing_requirements = False
@@ -480,7 +480,7 @@ Scaling considerations:
 
 ```py
 class ProjectScale:
-    def \_\_init\_\_(self, team_size, duration_months, budget, complexity):
+    def __init__(self, team_size, duration_months, budget, complexity):
         self.team_size = team_size
         self.duration_months = duration_months
         self.budget = budget
