@@ -121,10 +121,7 @@ jobs:
       
       - name: 🔔 Notify IndexNow of changes
         shell: bash
-        env:
-          GITHUB_BASE_SHA: ${{ github.event.before }}  # SHA before the push
         run: |
           echo "🔔 Notifying search engines of changed pages..."
-          echo "Comparing ${{ github.event.before }} ... ${{ github.sha }}"
           python scripts/indexnow_notify.py
         continue-on-error: true  # Don't fail workflow if IndexNow has issues
