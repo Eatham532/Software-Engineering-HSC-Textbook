@@ -1,24 +1,26 @@
 """
 IndexNow Notification Script for GitHub Actions
-Detects changed markdown files and submits corresponding URLs to IndexNow API.
+Detects changed and deleted markdown files and submits corresponding URLs to IndexNow API.
 
 This script is called as the final step in the GitHub Actions deployment workflow.
-It only notifies IndexNow about pages that were actually changed between deployments,
+It only notifies IndexNow about pages that were actually changed or deleted between deployments,
 rather than submitting all pages on every build.
 
 How it works:
 1. Fetches the gh-pages branch which contains deployment history
 2. Examines the last 2 commits on gh-pages (each represents a deployment)
 3. Extracts source commit SHAs from commit messages (format: "Deployed abc123 with MkDocs...")
-4. Compares those two source commits on main branch to find changed .md files
-5. Converts changed markdown file paths to their deployed URLs
-6. Submits only those URLs to the IndexNow API
-7. Uses the existing API key file from docs/
+4. Compares those two source commits on main branch using git diff --name-status
+5. Detects both changed/added files AND deleted files
+6. Converts all affected markdown file paths to their deployed URLs
+7. Submits all URLs to the IndexNow API (search engines will verify and handle dead links)
+8. Uses the existing API key file from docs/
 
 This approach correctly handles:
 - Single commits
 - Multiple commits pushed together (compares last deployment to current)
 - First deployment (gracefully skips if only 1 gh-pages commit exists)
+- Deleted pages (notifies search engines to remove from index)
 
 The script always exits with code 0 to prevent deployment failures if IndexNow
 has issues (network problems, API errors, etc.).
@@ -61,9 +63,9 @@ class IndexNowNotifier:
         
         return key_file.read_text().strip()
     
-    def get_changed_files(self, base_sha: str | None = None) -> Set[str]:
+    def get_changed_files(self, base_sha: str | None = None) -> tuple[Set[str], Set[str]]:
         """
-        Get list of changed markdown files from git diff.
+        Get list of changed and deleted markdown files from git diff.
         Compares the last two deployments on gh-pages branch.
         
         Each commit on gh-pages has a message like "Deployed abc123 with MkDocs version: X.Y.Z"
@@ -75,7 +77,7 @@ class IndexNowNotifier:
             base_sha: Optional override for base commit SHA (for testing)
         
         Returns:
-            Set of relative paths to changed .md files
+            Tuple of (changed_files, deleted_files) - both are sets of relative paths to .md files
         """
         try:
             # Fetch gh-pages to get latest deployment info
@@ -100,7 +102,7 @@ class IndexNowNotifier:
             if len(commit_messages) < 2:
                 print("[IndexNow] Not enough gh-pages commits for comparison")
                 print("[IndexNow] This might be the first deployment")
-                return set()
+                return set(), set()
             
             # Extract source SHAs from commit messages
             # Format: "Deployed abc123 with MkDocs version: X.Y.Z"
@@ -114,7 +116,7 @@ class IndexNowNotifier:
                 print("[IndexNow] WARNING: Could not extract SHAs from gh-pages commits")
                 print(f"[IndexNow] Current message: {commit_messages[0]}")
                 print(f"[IndexNow] Previous message: {commit_messages[1]}")
-                return set()
+                return set(), set()
             
             current = current_sha.group(1)
             previous = previous_sha.group(1)
@@ -123,25 +125,43 @@ class IndexNowNotifier:
             print(f"  Previous: {previous}")
             print(f"  Current:  {current}")
             
-            # Compare the two source commits
+            # Compare the two source commits with --name-status to detect deletions
             result = subprocess.run(
-                ['git', 'diff', '--name-only', f'{previous}...{current}'],
+                ['git', 'diff', '--name-status', f'{previous}...{current}'],
                 capture_output=True,
                 text=True,
                 check=True
             )
             
             changed_files = set()
-            for line in result.stdout.strip().split('\n'):
-                if line and line.endswith('.md') and line.startswith('docs/'):
-                    changed_files.add(line)
+            deleted_files = set()
             
-            return changed_files
+            for line in result.stdout.strip().split('\n'):
+                if not line:
+                    continue
+                    
+                parts = line.split('\t', 1)
+                if len(parts) != 2:
+                    continue
+                    
+                status, filepath = parts
+                
+                # Only process markdown files in docs/
+                if not filepath.endswith('.md') or not filepath.startswith('docs/'):
+                    continue
+                
+                # D = deleted, A = added, M = modified, R = renamed
+                if status.startswith('D'):
+                    deleted_files.add(filepath)
+                elif status.startswith(('A', 'M', 'R')):
+                    changed_files.add(filepath)
+            
+            return changed_files, deleted_files
             
         except subprocess.CalledProcessError as e:
             print(f"[IndexNow] ERROR: Failed to get git diff: {e}")
             print(f"[IndexNow] stderr: {e.stderr}")
-            return set()
+            return set(), set()
     
     def markdown_to_url(self, md_path: str) -> str:
         """
@@ -234,28 +254,41 @@ class IndexNowNotifier:
             True if successful (or no changes), False if errors occurred
         """
         print("\n" + "="*60)
-        print("[IndexNow] Detecting changed pages...")
+        print("[IndexNow] Detecting changed and deleted pages...")
         if dry_run:
             print("[IndexNow] 🧪 DRY RUN MODE - No actual API calls will be made")
         print("="*60)
         
-        # Get changed markdown files by comparing last 2 gh-pages deployments
-        changed_files = self.get_changed_files()
+        # Get changed and deleted markdown files by comparing last 2 gh-pages deployments
+        changed_files, deleted_files = self.get_changed_files()
         
-        if not changed_files:
-            print("[IndexNow] No markdown files changed in this push")
+        if not changed_files and not deleted_files:
+            print("[IndexNow] No markdown files changed or deleted in this deployment")
             print("[IndexNow] Skipping IndexNow notification")
             return True
         
-        print(f"[IndexNow] Found {len(changed_files)} changed markdown file(s):")
-        for file in sorted(changed_files):
-            print(f"  - {file}")
+        # Report changes
+        if changed_files:
+            print(f"[IndexNow] Found {len(changed_files)} changed/added markdown file(s):")
+            for file in sorted(changed_files):
+                print(f"  ✏️  {file}")
         
-        # Convert to URLs
-        urls = [self.markdown_to_url(file) for file in changed_files]
+        if deleted_files:
+            print(f"[IndexNow] Found {len(deleted_files)} deleted markdown file(s):")
+            for file in sorted(deleted_files):
+                print(f"  🗑️  {file}")
         
-        # Submit to IndexNow
-        success = self.submit_urls(urls, dry_run=dry_run)
+        # Convert to URLs (both changed and deleted files need to be reported)
+        all_urls = []
+        
+        if changed_files:
+            all_urls.extend([self.markdown_to_url(file) for file in changed_files])
+        
+        if deleted_files:
+            all_urls.extend([self.markdown_to_url(file) for file in deleted_files])
+        
+        # Submit to IndexNow (search engines will check and remove dead links)
+        success = self.submit_urls(all_urls, dry_run=dry_run)
         
         print("="*60)
         return success
