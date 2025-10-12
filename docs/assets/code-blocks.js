@@ -47,24 +47,6 @@
             ideTab: 'web',
             runnable: false,
             preview: true
-        },
-        bash: {
-            executable: false,
-            ideTab: 'terminal',
-            runnable: false,
-            readOnly: true
-        },
-        shell: {
-            executable: false,
-            ideTab: 'terminal',
-            runnable: false,
-            readOnly: true
-        },
-        powershell: {
-            executable: false,
-            ideTab: 'terminal',
-            runnable: false,
-            readOnly: true
         }
     };
 
@@ -72,61 +54,176 @@
      * Load Pyodide (Python in WebAssembly)
      * Uses lazy loading - only loads when first needed
      */
-    async function loadPyodide() {
+    async function loadPyodide(outputElement = null) {
         if (pyodideInstance) {
             return pyodideInstance;
         }
 
         if (pyodideLoading) {
-            return pyodideLoadPromise;
+            // Wait for existing load to complete
+            return new Promise((resolve) => {
+                const interval = setInterval(() => {
+                    if (pyodideInstance) {
+                        clearInterval(interval);
+                        resolve(pyodideInstance);
+                    }
+                }, 100);
+            });
         }
 
         pyodideLoading = true;
         console.log('[CodeRunner] Loading Pyodide...');
 
-        pyodideLoadPromise = (async () => {
-            try {
-                // Load Pyodide from CDN
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-                document.head.appendChild(script);
+        // Create progress indicator if output element provided
+        let progressId = null;
+        let progressInterval = null;
+        
+        if (outputElement) {
+            progressId = `pyodide-progress-${Date.now()}`;
+            const progressHTML = `
+                <div class="pyodide-progress" id="${progressId}">
+                    <div class="pyodide-progress-text">Loading Python environment...</div>
+                    <div class="pyodide-progress-bar">
+                        <div class="pyodide-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="pyodide-progress-percentage">0%</div>
+                </div>
+            `;
+            outputElement.insertAdjacentHTML('beforeend', progressHTML);
+        }
 
-                await new Promise((resolve, reject) => {
-                    script.onload = resolve;
-                    script.onerror = reject;
-                });
-
-                // Initialize Pyodide
-                pyodideInstance = await loadPyodide({
-                    indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
-                });
-
-                console.log('[CodeRunner] Pyodide loaded successfully');
-                
-                // Store in localStorage to indicate it's cached
-                try {
-                    localStorage.setItem('pyodide_loaded', 'true');
-                } catch (e) {
-                    console.warn('[CodeRunner] Could not access localStorage:', e);
+        try {
+            // Suppress stackframe and error-stack-parser 404 errors (harmless Monaco loader issues)
+            const originalError = console.error;
+            const originalWarn = console.warn;
+            
+            console.error = function(...args) {
+                const msg = args.join(' ');
+                if (msg.includes('stackframe') || msg.includes('error-stack-parser') || msg.includes('404')) {
+                    return; // Suppress these specific errors
                 }
+                originalError.apply(console, args);
+            };
+            
+            console.warn = function(...args) {
+                const msg = args.join(' ');
+                if (msg.includes('stackframe') || msg.includes('error-stack-parser')) {
+                    return;
+                }
+                originalWarn.apply(console, args);
+            };
 
-                return pyodideInstance;
-            } catch (error) {
-                console.error('[CodeRunner] Failed to load Pyodide:', error);
-                pyodideLoading = false;
-                pyodideLoadPromise = null;
-                throw error;
+            // Simulate progress during loading
+            let currentProgress = 0;
+            if (progressId) {
+                progressInterval = setInterval(() => {
+                    if (currentProgress < 90) {
+                        // Gradually increase progress (slows down as it approaches 90%)
+                        const increment = (90 - currentProgress) * 0.1;
+                        currentProgress += Math.max(increment, 2);
+                        currentProgress = Math.min(currentProgress, 90);
+                        updateProgress(progressId, Math.floor(currentProgress), 'Loading Python packages...');
+                    }
+                }, 200);
             }
-        })();
 
-        return pyodideLoadPromise;
+            // Load Pyodide script
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
+            document.head.appendChild(script);
+
+            await new Promise((resolve, reject) => {
+                script.onload = resolve;
+                script.onerror = reject;
+            });
+
+            // Update progress
+            if (progressId) {
+                updateProgress(progressId, 30, 'Initializing Python runtime...');
+            }
+
+            // Initialize Pyodide
+            pyodideInstance = await window.loadPyodide({
+                indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
+            });
+
+            // Stop progress simulation
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
+            // Update progress to 100%
+            if (progressId) {
+                updateProgress(progressId, 100, 'Python ready!');
+                setTimeout(() => {
+                    const progressEl = document.getElementById(progressId);
+                    if (progressEl) {
+                        progressEl.style.transition = 'opacity 0.3s ease';
+                        progressEl.style.opacity = '0';
+                        setTimeout(() => progressEl.remove(), 300);
+                    }
+                }, 1000);
+            }
+
+            // Restore console methods
+            console.error = originalError;
+            console.warn = originalWarn;
+
+            console.log('[CodeRunner] Pyodide loaded successfully');
+            
+            // Store in localStorage to indicate it's cached
+            try {
+                localStorage.setItem('pyodide_loaded', 'true');
+            } catch (e) {
+                console.warn('[CodeRunner] Could not access localStorage:', e);
+            }
+
+            pyodideLoading = false;
+            return pyodideInstance;
+        } catch (error) {
+            console.error('[CodeRunner] Failed to load Pyodide:', error);
+            pyodideLoading = false;
+            pyodideLoadPromise = null;
+            
+            // Stop progress simulation
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+            
+            // Show error in progress bar
+            if (progressId) {
+                const progressEl = document.getElementById(progressId);
+                if (progressEl) {
+                    progressEl.innerHTML = `
+                        <div class="pyodide-progress-text" style="color: var(--md-error-fg-color);">
+                            Failed to load Python: ${error.message}
+                        </div>
+                    `;
+                }
+            }
+            
+            throw error;
+        }
+    }
+
+    function updateProgress(progressId, percent, message) {
+        const progressEl = document.getElementById(progressId);
+        if (!progressEl) return;
+
+        const fill = progressEl.querySelector('.pyodide-progress-fill');
+        const text = progressEl.querySelector('.pyodide-progress-text');
+        const percentage = progressEl.querySelector('.pyodide-progress-percentage');
+
+        if (fill) fill.style.width = `${percent}%`;
+        if (text) text.textContent = message;
+        if (percentage) percentage.textContent = `${percent}%`;
     }
 
     /**
      * Execute Python code using Pyodide
      */
-    async function executePythonCode(code) {
-        const pyodide = await loadPyodide();
+    async function executePythonCode(code, outputElement = null) {
+        const pyodide = await loadPyodide(outputElement ? outputElement.querySelector('.code-output-content') : null);
 
         // Capture stdout and stderr
         let output = {
@@ -274,7 +371,7 @@ sys.stderr = sys.__stderr__
         content.appendChild(loadingDiv);
 
         try {
-            const output = await executePythonCode(code);
+            const output = await executePythonCode(code, outputElement);
             displayOutput(outputElement, output);
         } catch (error) {
             content.innerHTML = '';
@@ -293,13 +390,11 @@ sys.stderr = sys.__stderr__
      */
     function getIDETab(language) {
         const webLangs = ['html', 'css', 'javascript', 'js'];
-        const terminalLangs = ['bash', 'shell', 'powershell', 'sh', 'zsh'];
         
         if (webLangs.includes(language.toLowerCase())) {
             return 'web';
-        } else if (terminalLangs.includes(language.toLowerCase())) {
-            return 'terminal';
         }
+        // Default to Python for all other languages (including terminal languages which we'll just show as reference)
         return 'python';
     }
 
@@ -325,11 +420,17 @@ sys.stderr = sys.__stderr__
         // Open editor in new tab
         window.open('/Software-Engineering-HSC-Textbook/code-editor/', '_blank');
     }
-
     /**
      * Add action buttons to a code block
+     * Adds buttons directly to the pre element (alongside copy button)
      */
     function addCodeButtons(codeBlock) {
+        // codeBlock should be the <pre> element
+        if (!codeBlock || codeBlock.tagName !== 'PRE') return;
+        
+        // Check if buttons already added
+        if (codeBlock.querySelector('.code-action-btn')) return;
+        
         const container = codeBlock.closest('.highlight');
         if (!container) return;
 
@@ -346,61 +447,43 @@ sys.stderr = sys.__stderr__
         // Determine capabilities
         const isExecutable = language === 'python';
         const isWebLang = ['html', 'css', 'javascript', 'js'].includes(language.toLowerCase());
-        const isTerminalLang = ['bash', 'shell', 'powershell'].includes(language.toLowerCase());
 
-        // Create action buttons container
-        const actionsDiv = document.createElement('div');
-        actionsDiv.className = 'code-actions';
+        // Get reference element (insert before first child to appear at the front)
+        const firstChild = codeBlock.firstChild;
 
         // Open in Editor button (for all types)
         const editorBtn = document.createElement('button');
-        editorBtn.className = 'code-action-btn code-editor-btn';
-        
-        if (isTerminalLang) {
-            editorBtn.textContent = 'View in Terminal';
-            editorBtn.title = 'View this command in the Terminal reference';
-        } else if (isWebLang) {
-            editorBtn.textContent = 'Open in Web IDE';
-            editorBtn.title = 'Open this code in the Web IDE';
-        } else {
-            editorBtn.textContent = 'Open in Editor';
-            editorBtn.title = 'Open this code in the IDE';
-        }
+        editorBtn.className = 'code-action-btn code-editor-btn md-icon';
+        editorBtn.title = isWebLang ? 'Open in Web IDE' : 'Open in Editor';
         
         editorBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
-        actionsDiv.appendChild(editorBtn);
+        codeBlock.insertBefore(editorBtn, firstChild);
 
         // Run/Preview button (only for exec type)
         if (fenceType === 'exec') {
             if (isExecutable) {
                 // Python: Add Run button
                 const runBtn = document.createElement('button');
-                runBtn.className = 'code-action-btn code-run-btn';
-                runBtn.textContent = 'Run';
+                runBtn.className = 'code-action-btn code-run-btn md-icon';
                 runBtn.title = 'Execute this Python code';
                 runBtn.addEventListener('click', () => handleRunCode(runBtn, codeBlock, code));
-                actionsDiv.appendChild(runBtn);
+                codeBlock.insertBefore(runBtn, firstChild);
             } else if (isWebLang) {
                 // Web languages: Add Preview button
                 const previewBtn = document.createElement('button');
-                previewBtn.className = 'code-action-btn code-preview-btn';
-                previewBtn.textContent = 'Preview';
+                previewBtn.className = 'code-action-btn code-preview-btn md-icon';
                 previewBtn.title = 'Preview in Web IDE';
                 previewBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
-                actionsDiv.appendChild(previewBtn);
+                codeBlock.insertBefore(previewBtn, firstChild);
             }
         }
         
-        // Add tooltip for non-exec types or read-only languages
+        // Add tooltip for non-exec types
         if (fenceType === 'template') {
             container.setAttribute('data-tooltip', 'Template code - may not run as-is');
         } else if (fenceType === 'error') {
             container.setAttribute('data-tooltip', 'Error example - for educational purposes');
-        } else if (isTerminalLang) {
-            container.setAttribute('data-tooltip', 'Terminal commands are read-only for security');
         }
-
-        container.appendChild(actionsDiv);
     }
 
     /**

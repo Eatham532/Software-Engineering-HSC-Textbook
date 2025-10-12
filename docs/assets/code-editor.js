@@ -21,17 +21,16 @@
         pyodideLoading: false,
         editor: null,
         consoleCollapsed: false,
-        sidebarCollapsed: false,
+        sidebarCollapsed: window.innerWidth <= 768, // Start collapsed on mobile
         modified: new Set(),
         tabs: [],
-        currentMode: 'python', // 'python', 'web', or 'terminal'
-        webFiles: { html: '', css: '', js: '' }
+        currentMode: 'python', // 'python' or 'web'
+        webFiles: { html: '', css: '', js: '', current: 'html' }
     };
 
     // Constants
     const STORAGE_KEY = 'python_ide_files';
     const WEB_STORAGE_KEY = 'web_ide_files';
-    const TERMINAL_STORAGE_KEY = 'terminal_commands';
     
     const DEFAULT_FILES = {
         python: {
@@ -50,10 +49,6 @@
         js: {
             name: 'script.js',
             content: '// JavaScript Code\nfunction greet() {\n    const name = prompt("What\'s your name?");\n    if (name) {\n        alert(`Hello, ${name}! Welcome to the Web IDE!`);\n    }\n}\n\nconsole.log("Web IDE loaded successfully!");\n'
-        },
-        terminal: {
-            name: 'commands.sh',
-            content: '# Common Terminal Commands\n\n# Navigation\ncd ~/projects\nls -la\npwd\n\n# File Operations\nmkdir new_folder\ntouch new_file.txt\ncp source.txt destination.txt\nmv old_name.txt new_name.txt\nrm unwanted_file.txt\n\n# Python\npython3 --version\npip install requests\npython3 script.py\n\n# Git\ngit status\ngit add .\ngit commit -m "Update files"\ngit push origin main\n'
         }
     };
 
@@ -104,23 +99,25 @@
         
         const modeTitle = {
             python: 'Python IDE',
-            web: 'Web IDE',
-            terminal: 'Terminal'
+            web: 'Web IDE'
         }[state.currentMode] || 'Code Editor';
         
         const actionButtons = state.currentMode === 'python' 
             ? `<button class="ide-btn ide-btn-run primary" id="run-code">
                    ${icons.play}<span>Run</span>
                </button>`
-            : state.currentMode === 'web'
-            ? `<button class="ide-btn ide-btn-run primary" id="refresh-preview">
+            : `<button class="ide-btn ide-btn-run primary" id="refresh-preview">
                    ${icons.refresh}<span>Refresh</span>
-               </button>`
-            : '';
+               </button>`;
         
         app.innerHTML = `
             <div class="ide-toolbar">
                 <div class="ide-toolbar-left">
+                    ${state.currentMode === 'python' ? `
+                    <button class="mobile-files-toggle" id="mobile-files-toggle" title="Toggle Files">
+                        ${icons.file}
+                    </button>
+                    ` : ''}
                     <div class="ide-mode-switcher">
                         <button class="mode-btn ${state.currentMode === 'python' ? 'active' : ''}" data-mode="python">
                             Python
@@ -128,38 +125,35 @@
                         <button class="mode-btn ${state.currentMode === 'web' ? 'active' : ''}" data-mode="web">
                             Web
                         </button>
-                        <button class="mode-btn ${state.currentMode === 'terminal' ? 'active' : ''}" data-mode="terminal">
-                            Terminal
-                        </button>
                     </div>
                     <div class="ide-title">${modeTitle}</div>
                 </div>
                 <div class="ide-toolbar-actions">
                     ${actionButtons}
-                    ${state.currentMode !== 'terminal' ? `
                     <button class="ide-btn ide-btn-new" id="new-file">
                         ${icons.plus}<span>New</span>
                     </button>
                     <button class="ide-btn ide-btn-save" id="save-all">
                         ${icons.save}<span>Save</span>
-                    </button>` : ''}
+                    </button>
                 </div>
             </div>
             
             <div class="ide-workspace">
+                ${state.currentMode === 'python' ? `
                 <aside class="ide-sidebar" id="sidebar">
                     <div class="sidebar-header">
                         <span class="sidebar-title">Files</span>
                         <button class="sidebar-toggle" id="toggle-sidebar">◀</button>
                     </div>
                     <div class="file-list" id="file-list"></div>
-                    ${state.currentMode !== 'terminal' ? `
                     <div class="new-file-form">
                         <input type="text" class="new-file-input" id="new-file-input" 
-                               placeholder="${state.currentMode === 'python' ? 'new_file.py' : 'index.html'}" 
+                               placeholder="new_file.py" 
                                style="display: none;">
-                    </div>` : ''}
+                    </div>
                 </aside>
+                ` : ''}
                 
                 <div class="ide-editor-area">
                     ${state.currentMode === 'web' ? `
@@ -190,11 +184,7 @@
                         <div class="editor-empty-state" id="empty-state">
                             <div class="editor-empty-state-icon">${icons.file}</div>
                             <div class="editor-empty-state-text">No file selected</div>
-                            <div class="editor-empty-state-hint">
-                                ${state.currentMode === 'terminal' 
-                                    ? 'View common terminal commands and syntax reference' 
-                                    : 'Create a new file or select one from the sidebar'}
-                            </div>
+                            <div class="editor-empty-state-hint">Create a new file or select one from the sidebar</div>
                         </div>
                     </div>
                     `}
@@ -227,23 +217,28 @@
             document.getElementById('new-file').addEventListener('click', showNewFileInput);
             document.getElementById('save-all').addEventListener('click', saveAllFiles);
             document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
+            document.getElementById('mobile-files-toggle').addEventListener('click', toggleSidebar);
             document.getElementById('console-header').addEventListener('click', toggleConsole);
             document.getElementById('clear-console').addEventListener('click', clearConsole);
             document.getElementById('new-file-input').addEventListener('keydown', handleNewFileInput);
             setupResizeHandle();
+            
+            // Close sidebar when clicking backdrop on mobile
+            const workspace = document.querySelector('.ide-workspace');
+            workspace.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && 
+                    !state.sidebarCollapsed && 
+                    e.target === workspace) {
+                    toggleSidebar();
+                }
+            });
         } else if (state.currentMode === 'web') {
             document.getElementById('refresh-preview').addEventListener('click', updateWebPreview);
-            document.getElementById('new-file').addEventListener('click', showNewFileInput);
-            document.getElementById('save-all').addEventListener('click', saveAllFiles);
-            document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
-            document.getElementById('new-file-input').addEventListener('keydown', handleNewFileInput);
             
             // Web tab switcher
             document.querySelectorAll('.web-tab').forEach(tab => {
                 tab.addEventListener('click', () => switchWebFile(tab.dataset.webFile));
             });
-        } else if (state.currentMode === 'terminal') {
-            document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
         }
         
         // Render file list
@@ -258,56 +253,67 @@
      */
     async function initMonaco() {
         return new Promise((resolve, reject) => {
-            require.config({ 
-                paths: { 
-                    'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' 
-                } 
-            });
-
-            require(['vs/editor/editor.main'], function() {
-                // Determine theme based on Material theme
-                const isDark = document.querySelector('[data-md-color-scheme="slate"]') !== null;
-                const theme = isDark ? 'vs-dark' : 'vs';
-
-                state.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
-                    value: '',
-                    language: 'python',
-                    theme: theme,
-                    fontSize: 14,
-                    lineNumbers: 'on',
-                    roundedSelection: false,
-                    scrollBeyondLastLine: false,
-                    automaticLayout: true,
-                    minimap: { enabled: true },
-                    scrollbar: {
-                        useShadows: false,
-                        verticalScrollbarSize: 10,
-                        horizontalScrollbarSize: 10
-                    },
-                    padding: { top: 16, bottom: 16 }
-                });
-
-                // Listen for content changes
-                state.editor.onDidChangeModelContent(() => {
-                    if (state.currentFile) {
-                        markAsModified(state.currentFile);
-                    }
-                });
-
-                // Listen for theme changes
-                const observer = new MutationObserver(() => {
-                    const isDark = document.querySelector('[data-md-color-scheme="slate"]') !== null;
-                    monaco.editor.setTheme(isDark ? 'vs-dark' : 'vs');
-                });
+            // Wait for Monaco's AMD loader to be ready
+            const waitForRequire = () => {
+                if (typeof require === 'undefined') {
+                    setTimeout(waitForRequire, 50);
+                    return;
+                }
                 
-                observer.observe(document.documentElement, {
-                    attributes: true,
-                    attributeFilter: ['data-md-color-scheme']
+                require.config({ 
+                    paths: { 
+                        'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' 
+                    } 
                 });
 
-                console.log('[IDE] Monaco Editor initialized');
-                resolve();
-            });
+                require(['vs/editor/editor.main'], function() {
+                    // Determine theme based on Material theme
+                    const isDark = document.querySelector('[data-md-color-scheme="slate"]') !== null;
+                    const theme = isDark ? 'vs-dark' : 'vs';
+
+                    state.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+                        value: '',
+                        language: 'python',
+                        theme: theme,
+                        fontSize: 14,
+                        lineNumbers: 'on',
+                        roundedSelection: false,
+                        scrollBeyondLastLine: false,
+                        automaticLayout: true,
+                        minimap: { enabled: true },
+                        scrollbar: {
+                            useShadows: false,
+                            verticalScrollbarSize: 10,
+                            horizontalScrollbarSize: 10
+                        },
+                        padding: { top: 16, bottom: 16 }
+                    });
+
+                    // Listen for content changes
+                    state.editor.onDidChangeModelContent(() => {
+                        if (state.currentFile) {
+                            markAsModified(state.currentFile);
+                        }
+                    });
+
+                    // Listen for theme changes
+                    const observer = new MutationObserver(() => {
+                        const isDark = document.querySelector('[data-md-color-scheme="slate"]') !== null;
+                        monaco.editor.setTheme(isDark ? 'vs-dark' : 'vs');
+                    });
+                    
+                    observer.observe(document.documentElement, {
+                        attributes: true,
+                        attributeFilter: ['data-md-color-scheme']
+                    });
+
+                    console.log('[IDE] Monaco Editor initialized');
+                    resolve();
+                });
+            };
+            
+            // Start waiting for require
+            waitForRequire();
         });
     }
 
@@ -346,7 +352,7 @@
             
             // Open first file
             const firstFile = Object.keys(state.files)[0];
-            if (firstFile) {
+            if (firstFile && state.editor) {
                 openFile(firstFile);
             }
         } else if (state.currentMode === 'web') {
@@ -354,11 +360,11 @@
             loadWebFiles();
             
             // Initialize web editor with HTML
-            state.webFiles.current = 'html';
             if (state.editor) {
                 const language = 'html';
                 monaco.editor.setModelLanguage(state.editor.getModel(), language);
                 state.editor.setValue(state.webFiles.html);
+                state.editor.updateOptions({ readOnly: false });
                 
                 // Update preview on every change
                 state.editor.onDidChangeModelContent(() => {
@@ -368,13 +374,6 @@
             }
             
             updateWebPreview();
-        } else if (state.currentMode === 'terminal') {
-            // Load terminal commands as read-only
-            if (state.editor) {
-                monaco.editor.setModelLanguage(state.editor.getModel(), 'shell');
-                state.editor.setValue(DEFAULT_FILES.terminal.content);
-                state.editor.updateOptions({ readOnly: true });
-            }
         }
     }
 
@@ -730,7 +729,16 @@
     }
 
     function renderTabs() {
+        // Only render tabs in Python mode (Web mode has different tab system)
+        if (state.currentMode !== 'python') {
+            return;
+        }
+        
         const tabsContainer = document.getElementById('editor-tabs');
+        if (!tabsContainer) {
+            return;
+        }
+        
         tabsContainer.innerHTML = '';
 
         state.tabs.forEach(name => {
@@ -868,6 +876,13 @@
         runBtn.disabled = true;
         runBtn.innerHTML = '<span>Running...</span>';
         
+        // Ensure console is expanded for progress visibility
+        const consoleEl = document.getElementById('console');
+        if (consoleEl && state.consoleCollapsed) {
+            state.consoleCollapsed = false;
+            consoleEl.classList.remove('collapsed');
+        }
+        
         clearConsole();
         appendConsole('Running code...', 'info');
 
@@ -928,7 +943,63 @@
 
         state.pyodideLoading = true;
 
+        // Create progress indicator in console
+        let progressId = null;
+        let progressInterval = null;
+        
+        if (state.currentMode === 'python') {
+            progressId = `pyodide-progress-${Date.now()}`;
+            const progressHTML = `
+                <div class="pyodide-progress" id="${progressId}">
+                    <div class="pyodide-progress-text">Loading Python environment...</div>
+                    <div class="pyodide-progress-bar">
+                        <div class="pyodide-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="pyodide-progress-percentage">0%</div>
+                </div>
+            `;
+            const consoleOutput = document.getElementById('console-output');
+            if (consoleOutput) {
+                consoleOutput.insertAdjacentHTML('beforeend', progressHTML);
+            }
+        }
+
         try {
+            // Suppress stackframe and error-stack-parser 404 errors (harmless Monaco loader issues)
+            const originalError = console.error;
+            const originalWarn = console.warn;
+            
+            console.error = function(...args) {
+                const msg = args.join(' ');
+                if (msg.includes('stackframe') || msg.includes('error-stack-parser') || msg.includes('404')) {
+                    return; // Suppress these specific errors
+                }
+                originalError.apply(console, args);
+            };
+            
+            console.warn = function(...args) {
+                const msg = args.join(' ');
+                if (msg.includes('stackframe') || msg.includes('error-stack-parser')) {
+                    return;
+                }
+                originalWarn.apply(console, args);
+            };
+
+            // Simulate progress during loading
+            let currentProgress = 0;
+            if (progressId) {
+                progressInterval = setInterval(() => {
+                    if (currentProgress < 90) {
+                        // Gradually increase progress (slows down as it approaches 90%)
+                        const increment = (90 - currentProgress) * 0.1;
+                        currentProgress += Math.max(increment, 2);
+                        currentProgress = Math.min(currentProgress, 90);
+                        updateProgress(progressId, Math.floor(currentProgress), 'Loading Python packages...');
+                    }
+                }, 200);
+            }
+
+            // Load Pyodide script
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
             document.head.appendChild(script);
@@ -938,16 +1009,76 @@
                 script.onerror = reject;
             });
 
-            state.pyodide = await loadPyodide({
+            // Update progress
+            if (progressId) {
+                updateProgress(progressId, 30, 'Initializing Python runtime...');
+            }
+
+            // Initialize Pyodide
+            state.pyodide = await window.loadPyodide({
                 indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
             });
 
+            // Stop progress simulation
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+
+            // Update progress to 100%
+            if (progressId) {
+                updateProgress(progressId, 100, 'Python ready!');
+                setTimeout(() => {
+                    const progressEl = document.getElementById(progressId);
+                    if (progressEl) {
+                        progressEl.style.transition = 'opacity 0.3s ease';
+                        progressEl.style.opacity = '0';
+                        setTimeout(() => progressEl.remove(), 300);
+                    }
+                }, 1000);
+            }
+
+            // Restore console methods
+            console.error = originalError;
+            console.warn = originalWarn;
+
             console.log('[IDE] Pyodide loaded');
+            state.pyodideLoading = false;
             return state.pyodide;
         } catch (error) {
             state.pyodideLoading = false;
+            
+            // Stop progress simulation
+            if (progressInterval) {
+                clearInterval(progressInterval);
+            }
+            
+            // Show error in progress bar
+            if (progressId) {
+                const progressEl = document.getElementById(progressId);
+                if (progressEl) {
+                    progressEl.innerHTML = `
+                        <div class="pyodide-progress-text" style="color: var(--md-error-fg-color);">
+                            Failed to load Python: ${error.message}
+                        </div>
+                    `;
+                }
+            }
+            
             throw error;
         }
+    }
+
+    function updateProgress(progressId, percent, message) {
+        const progressEl = document.getElementById(progressId);
+        if (!progressEl) return;
+
+        const fill = progressEl.querySelector('.pyodide-progress-fill');
+        const text = progressEl.querySelector('.pyodide-progress-text');
+        const percentage = progressEl.querySelector('.pyodide-progress-percentage');
+
+        if (fill) fill.style.width = `${percent}%`;
+        if (text && message) text.textContent = message;
+        if (percentage) percentage.textContent = `${percent}%`;
     }
 
     async function executePython(code) {
@@ -1166,15 +1297,95 @@ sys.stderr = sys.__stderr__
             if (importData) {
                 const data = JSON.parse(importData);
                 
-                // Create a new file with imported code
-                const fileName = `imported_${Date.now()}.py`;
-                createFile(fileName, data.code, data.type);
+                // Determine which mode to use based on language
+                const isWebLanguage = ['html', 'css', 'javascript', 'js'].includes(data.language.toLowerCase());
+                const isPythonLanguage = data.language.toLowerCase() === 'python';
+                
+                if (isWebLanguage) {
+                    // Switch to Web mode if not already there
+                    if (state.currentMode !== 'web') {
+                        state.currentMode = 'web';
+                        buildIDE();
+                        if (state.editor) {
+                            state.editor.dispose();
+                            state.editor = null;
+                        }
+                        initMonaco();
+                    }
+                    
+                    // Import into the appropriate web file
+                    const langMap = {
+                        'html': 'html',
+                        'css': 'css',
+                        'javascript': 'js',
+                        'js': 'js'
+                    };
+                    
+                    const webFileType = langMap[data.language.toLowerCase()] || 'html';
+                    state.webFiles[webFileType] = data.code;
+                    state.webFiles.current = webFileType;
+                    
+                    // Update editor if it exists
+                    if (state.editor) {
+                        const monacoLangMap = {
+                            'html': 'html',
+                            'css': 'css',
+                            'js': 'javascript'
+                        };
+                        monaco.editor.setModelLanguage(state.editor.getModel(), monacoLangMap[webFileType]);
+                        state.editor.setValue(data.code);
+                        
+                        // Update active tab
+                        document.querySelectorAll('.web-tab').forEach(tab => {
+                            tab.classList.toggle('active', tab.dataset.webFile === webFileType);
+                        });
+                        
+                        // Update preview
+                        updateWebPreview();
+                    }
+                    
+                    saveWebFiles();
+                    showHint(`${data.language.toUpperCase()} code imported from textbook`);
+                    
+                } else if (isPythonLanguage) {
+                    // Switch to Python mode if not already there
+                    if (state.currentMode !== 'python') {
+                        state.currentMode = 'python';
+                        buildIDE();
+                        if (state.editor) {
+                            state.editor.dispose();
+                            state.editor = null;
+                        }
+                        initMonaco();
+                    }
+                    
+                    // Create a new Python file with imported code
+                    const fileName = `imported_${Date.now()}.py`;
+                    createFile(fileName, data.code, data.type || 'exec');
+                    showHint('Python code imported from textbook');
+                    
+                } else {
+                    // For other languages (bash, shell, etc.), default to Python mode as reference
+                    if (state.currentMode !== 'python') {
+                        state.currentMode = 'python';
+                        buildIDE();
+                        if (state.editor) {
+                            state.editor.dispose();
+                            state.editor = null;
+                        }
+                        initMonaco();
+                    }
+                    
+                    const ext = data.language.toLowerCase() === 'bash' || data.language.toLowerCase() === 'shell' ? 'sh' : 'txt';
+                    const fileName = `imported_${Date.now()}.${ext}`;
+                    createFile(fileName, data.code, 'template');
+                    showHint(`${data.language} code imported as reference`);
+                }
                 
                 // Clear the import
                 sessionStorage.removeItem('code_editor_import');
                 
-                showHint('Code imported from textbook');
-                console.log('[IDE] Imported code from textbook');
+                console.log('[IDE] Imported code from textbook:', data.language);
             }
         } catch (e) {
             console.error('[IDE] Failed to import code:', e);

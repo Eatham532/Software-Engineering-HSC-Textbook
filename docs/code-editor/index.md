@@ -38,6 +38,37 @@ template: main.html
 .md-content h1 {
     display: none;
 }
+
+/* Hide feedback widget on code editor page */
+.md-feedback {
+    display: none !important;
+}
+
+aside .md-source-file,
+a.md-content__button:nth-child(1),
+a.md-content__button:nth-child(2) {
+    display: none !important;
+}
+
+/* Ensure code editor doesn't overlap navbar */
+#code-editor-app {
+    margin-top: 0;
+    z-index: 1;
+}
+
+/* When page is a smaller screen */
+@media (max-width: 768px) {
+    #code-editor-app {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (min-width: 76.2344em) {
+    #code-editor-app {
+        margin-top: 36px; /* Height of navbar */
+    }
+}
+
 </style>
 
 <div id="code-editor-app">
@@ -48,6 +79,5 @@ template: main.html
     </div>
 </div>
 
-<link rel="stylesheet" href="{{ base_url }}/assets/code-editor.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
-<script src="{{ base_url }}/assets/code-editor.js"></script>
+<script src="../assets/code-editor.js"></script>

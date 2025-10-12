@@ -125,6 +125,41 @@
     gap: 0.5rem;
 }
 
+/* Mobile Files Toggle - Hidden by default, shown only on mobile */
+.mobile-files-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.mobile-files-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-files-toggle:active {
+    transform: scale(0.95);
+}
+
+.mobile-files-toggle svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
 .ide-btn {
     display: inline-flex;
     align-items: center;
@@ -180,35 +215,52 @@
 
 /* File Explorer (Sidebar) */
 .ide-sidebar {
-    width: 220px;
+    width: 200px;
+    min-width: 150px;
+    max-width: 400px;
     background: var(--md-code-bg-color);
     border-right: 1px solid var(--md-default-fg-color--lightest);
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: width 0.3s ease;
+    transition: all 0.3s ease;
+    position: relative;
+    resize: horizontal;
 }
 
 .ide-sidebar.collapsed {
-    width: 0;
-    min-width: 0;
+    width: 40px !important;
+    min-width: 40px !important;
+    resize: none;
 }
 
 .sidebar-header {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     background: var(--md-default-fg-color--lightest);
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-height: 36px;
+}
+
+.ide-sidebar.collapsed .sidebar-header {
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
 }
 
 .sidebar-title {
     font-weight: 600;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--md-default-fg-color--light);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.ide-sidebar.collapsed .sidebar-title {
+    display: none;
 }
 
 .sidebar-toggle {
@@ -216,9 +268,10 @@
     border: none;
     color: var(--md-default-fg-color--light);
     cursor: pointer;
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.25rem;
     transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
 .ide-sidebar.collapsed .sidebar-toggle {
@@ -228,19 +281,24 @@
 .file-list {
     flex: 1;
     overflow-y: auto;
-    padding: 0.5rem;
+    padding: 0.25rem;
+}
+
+.ide-sidebar.collapsed .file-list {
+    display: none;
 }
 
 .file-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 0.75rem;
+    gap: 0.4rem;
+    padding: 0.4rem 0.5rem;
     cursor: pointer;
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     transition: all 0.2s ease;
     position: relative;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.2rem;
+    font-size: 0.85rem;
 }
 
 .file-item:hover {
@@ -256,13 +314,14 @@
 .file-item.template::after {
     content: '⚠';
     position: absolute;
-    right: 2.5rem;
+    right: 2rem;
     opacity: 0.4;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .file-icon {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    flex-shrink: 0;
 }
 
 .file-icon::before {
@@ -275,7 +334,11 @@
 
 .file-name {
     flex: 1;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .file-delete {
@@ -302,20 +365,24 @@
 }
 
 .new-file-form {
-    padding: 0.75rem;
+    padding: 0.5rem;
     background: var(--md-default-fg-color--lightest);
     border-top: 1px solid var(--md-default-fg-color--lighter);
 }
 
+.ide-sidebar.collapsed .new-file-form {
+    display: none;
+}
+
 .new-file-input {
     width: 100%;
-    padding: 0.6rem;
+    padding: 0.5rem;
     border: 1px solid var(--md-default-fg-color--lighter);
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     background: var(--md-default-bg-color);
     color: var(--md-default-fg-color);
     font-family: var(--md-code-font-family);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .new-file-input:focus {
@@ -496,8 +563,13 @@
 }
 
 .ide-console.collapsed {
-    height: 45px;
-    min-height: 45px;
+    height: 60px;
+    min-height: 60px;
+}
+
+.ide-console.collapsed .console-output,
+.ide-console.collapsed .console-header.console-actions {
+    display: none;
 }
 
 .console-header {
@@ -606,6 +678,67 @@
     margin-right: 0.5rem;
 }
 
+/* Pyodide Loading Progress */
+.pyodide-progress {
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    background: var(--md-code-bg-color);
+    border-radius: 0.375rem;
+    border-left: 3px solid var(--md-primary-fg-color);
+}
+
+.pyodide-progress-text {
+    font-size: 0.85rem;
+    color: var(--md-default-fg-color--light);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.pyodide-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pyodide-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+    border-radius: 3px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.pyodide-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: progress-shimmer 1.5s infinite;
+}
+
+@keyframes progress-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.pyodide-progress-percentage {
+    font-size: 0.75rem;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0.25rem;
+    text-align: right;
+}
+
 /* Resize Handle */
 .resize-handle {
     height: 4px;
@@ -659,6 +792,37 @@
         display: none;
     }
     
+    /* Show mobile files toggle on mobile */
+    .mobile-files-toggle {
+        display: inline-flex;
+    }
+    
+    /* Sidebar container with backdrop for mobile */
+    .ide-workspace {
+        position: relative;
+    }
+    
+    .ide-workspace::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 99;
+    }
+    
+    /* Show backdrop when sidebar is open on mobile */
+    .ide-sidebar:not(.collapsed) ~ .ide-editor-area::before,
+    body:has(.ide-sidebar:not(.collapsed)) .ide-workspace::before {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    
     .ide-sidebar {
         position: absolute;
         left: 0;
@@ -667,6 +831,7 @@
         width: 200px;
         z-index: 100;
         box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
     }
     
     .ide-sidebar.collapsed {
@@ -853,4 +1018,8 @@
         border-right: none;
         border-bottom: 1px solid var(--md-default-fg-color--lightest);
     }
+}
+
+@media screen and (min-width: 76.25em) {
+
 }
