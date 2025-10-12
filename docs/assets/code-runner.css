@@ -43,6 +43,10 @@
     outline: none;
 }
 
+:hover > .code-action-btn:not(:disabled) {
+    color: var(--md-default-fg-color--light);
+}
+
 /* Position buttons from right to left (copy button is rightmost) */
 .code-editor-btn {
     right: 2.5em; /* Next to copy button */
@@ -62,49 +66,6 @@
 [data-fence-type="template"] .code-action-btn:hover,
 [data-fence-type="error"] .code-action-btn:hover {
     color: var(--md-error-fg-color, #ef5350);
-}
-
-/* Add warning icon before the first button */
-[data-fence-type="template"] pre::before,
-[data-fence-type="error"] pre::before {
-    content: '⚠';
-    position: absolute;
-    left: 0.5em;
-    top: 0.5em;
-    font-size: 1.2em;
-    color: var(--md-warning-fg-color, #ff9800);
-    z-index: 1;
-    cursor: help;
-    transition: opacity 0.25s;
-}
-
-[data-fence-type="template"] pre:hover::before,
-[data-fence-type="error"] pre:hover::before {
-    opacity: 1;
-}
-
-/* Tooltip on warning icon */
-[data-fence-type="template"] pre::after,
-[data-fence-type="error"] pre::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    left: 2.5em;
-    top: 0.5em;
-    padding: 0.4em 0.8em;
-    background: var(--md-default-fg-color);
-    color: var(--md-default-bg-color);
-    font-size: 0.75rem;
-    border-radius: 0.25rem;
-    white-space: nowrap;
-    z-index: 20;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.25s;
-}
-
-[data-fence-type="template"] pre:hover::after,
-[data-fence-type="error"] pre:hover::after {
-    opacity: 1;
 }
 
 .code-action-btn:hover:not(:disabled) {

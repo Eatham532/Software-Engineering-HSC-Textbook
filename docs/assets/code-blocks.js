@@ -454,7 +454,7 @@ sys.stderr = sys.__stderr__
         // Open in Editor button (for all types)
         const editorBtn = document.createElement('button');
         editorBtn.className = 'code-action-btn code-editor-btn md-icon';
-        editorBtn.title = isWebLang ? 'Open in Web IDE' : 'Open in Editor';
+        editorBtn.title = isWebLang ? 'Open in Web Editor' : 'Open in Editor';
         
         editorBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
         codeBlock.insertBefore(editorBtn, firstChild);
@@ -472,7 +472,7 @@ sys.stderr = sys.__stderr__
                 // Web languages: Add Preview button
                 const previewBtn = document.createElement('button');
                 previewBtn.className = 'code-action-btn code-preview-btn md-icon';
-                previewBtn.title = 'Preview in Web IDE';
+                previewBtn.title = 'Preview in Web Editor';
                 previewBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
                 codeBlock.insertBefore(previewBtn, firstChild);
             }

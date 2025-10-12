@@ -22,6 +22,7 @@
         editor: null,
         consoleCollapsed: false,
         sidebarCollapsed: window.innerWidth <= 768, // Start collapsed on mobile
+        webSidebarCollapsed: window.innerWidth <= 768, // Web env sidebar
         modified: new Set(),
         tabs: [],
         currentMode: 'python', // 'python' or 'web'
@@ -31,6 +32,8 @@
     // Constants
     const STORAGE_KEY = 'python_ide_files';
     const WEB_STORAGE_KEY = 'web_ide_files';
+    const WEB_ENVIRONMENTS_KEY = 'web_ide_environments';
+    const CURRENT_ENV_KEY = 'web_ide_current_env';
     
     const DEFAULT_FILES = {
         python: {
@@ -40,7 +43,7 @@
         },
         html: {
             name: 'index.html',
-            content: '<!DOCTYPE html>\n<html>\n<head>\n    <title>My Web Page</title>\n    <link rel="stylesheet" href="styles.css">\n</head>\n<body>\n    <h1>Welcome to the Web IDE!</h1>\n    <p>Edit HTML, CSS, and JavaScript to see live preview.</p>\n    <button onclick="greet()">Click Me</button>\n    \n    <script src="script.js"></script>\n</body>\n</html>\n'
+            content: '<!DOCTYPE html>\n<html>\n<head>\n    <title>My Web Page</title>\n</head>\n<body>\n    <h1>Welcome to the Web Editor!</h1>\n    <p>Edit HTML, CSS, and JavaScript to see live preview.</p>\n    <button onclick="greet()">Click Me</button>\n    \n</body>\n</html>\n'
         },
         css: {
             name: 'styles.css',
@@ -48,7 +51,7 @@
         },
         js: {
             name: 'script.js',
-            content: '// JavaScript Code\nfunction greet() {\n    const name = prompt("What\'s your name?");\n    if (name) {\n        alert(`Hello, ${name}! Welcome to the Web IDE!`);\n    }\n}\n\nconsole.log("Web IDE loaded successfully!");\n'
+            content: '// JavaScript Code\nfunction greet() {\n    const name = prompt("What\'s your name?");\n    if (name) {\n        alert(`Hello, ${name}! Welcome to the Web Editor!`);\n    }\n}\n\nconsole.log("Web Editor loaded successfully!");\n'
         }
     };
 
@@ -67,8 +70,8 @@
         // Initialize Monaco Editor
         await initMonaco();
         
-        // Check for imported code from textbook pages
-        checkImportedCode();
+        // Initialize mode-specific content after editor is ready
+        initializeMode();
         
         // Set up keyboard shortcuts
         setupKeyboardShortcuts();
@@ -78,17 +81,17 @@
 
     // SVG Icons (Feather icons style - no color, stroke only)
     const icons = {
-        play: '<svg><polyline points="5 3 19 12 5 21 5 3"></polyline></svg>',
-        refresh: '<svg><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>',
-        plus: '<svg><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
-        save: '<svg><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>',
-        file: '<svg><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>',
-        trash: '<svg><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
-        code: '<svg><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
-        terminal: '<svg><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>',
-        globe: '<svg><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
-        chevronLeft: '<svg><polyline points="15 18 9 12 15 6"></polyline></svg>',
-        chevronRight: '<svg><polyline points="9 18 15 12 9 6"></polyline></svg>'
+        play: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>',
+        refresh: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>',
+        plus: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+        save: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`,
+        file: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>',
+        trash: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
+        code: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
+        terminal: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>',
+        globe: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
+        chevronLeft: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>',
+        chevronRight: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>'
     };
 
     /**
@@ -98,8 +101,8 @@
         const app = document.getElementById('code-editor-app');
         
         const modeTitle = {
-            python: 'Python IDE',
-            web: 'Web IDE'
+            python: 'Python Editor',
+            web: 'Web Editor'
         }[state.currentMode] || 'Code Editor';
         
         const actionButtons = state.currentMode === 'python' 
@@ -117,6 +120,10 @@
                     <button class="mobile-files-toggle" id="mobile-files-toggle" title="Toggle Files">
                         ${icons.file}
                     </button>
+                    ` : state.currentMode === 'web' ? `
+                    <button class="mobile-files-toggle" id="mobile-env-toggle" title="Toggle Environments">
+                        ${icons.globe}
+                    </button>
                     ` : ''}
                     <div class="ide-mode-switcher">
                         <button class="mode-btn ${state.currentMode === 'python' ? 'active' : ''}" data-mode="python">
@@ -130,9 +137,11 @@
                 </div>
                 <div class="ide-toolbar-actions">
                     ${actionButtons}
+                    ${state.currentMode === 'python' ? `
                     <button class="ide-btn ide-btn-new" id="new-file">
                         ${icons.plus}<span>New</span>
                     </button>
+                    ` : ''}
                     <button class="ide-btn ide-btn-save" id="save-all">
                         ${icons.save}<span>Save</span>
                     </button>
@@ -158,6 +167,19 @@
                 <div class="ide-editor-area">
                     ${state.currentMode === 'web' ? `
                     <div class="web-layout">
+                        <div class="web-sidebar ${state.webSidebarCollapsed ? 'collapsed' : ''}" id="web-sidebar">
+                            <div class="web-sidebar-header">
+                                <span class="web-sidebar-title">Environments</span>
+                                <button class="sidebar-toggle" id="toggle-web-sidebar">◀</button>
+                            </div>
+                            <div class="web-env-actions">
+                                <input type="text" class="env-name-input" id="env-name-input" placeholder="Environment name">
+                                <button class="ide-btn ide-btn-small" id="save-env">
+                                    ${icons.save}<span>Save</span>
+                                </button>
+                            </div>
+                            <div class="environment-list" id="environment-list"></div>
+                        </div>
                         <div class="web-editors">
                             <div class="web-editor-tabs">
                                 <button class="web-tab ${state.webFiles.current === 'html' ? 'active' : ''}" data-web-file="html">
@@ -174,7 +196,7 @@
                         </div>
                         <div class="web-preview">
                             <div class="preview-header">Live Preview</div>
-                            <iframe id="preview-iframe" sandbox="allow-scripts"></iframe>
+                            <iframe id="preview-iframe" sandbox="allow-scripts allow-modals"></iframe>
                         </div>
                     </div>
                     ` : `
@@ -192,7 +214,7 @@
                     <div class="resize-handle" id="resize-handle"></div>
                     <div class="ide-console" id="console">
                         <div class="console-header" id="console-header">
-                            <div class="console-title">Console Output</div>
+                            <div class="console-title">Terminal</div>
                             <div class="console-actions">
                                 <button class="console-btn" id="clear-console">Clear</button>
                             </div>
@@ -211,11 +233,21 @@
             btn.addEventListener('click', () => switchMode(btn.dataset.mode));
         });
 
+        // Universal save button - saves files in Python mode, environment in Web mode
+        document.getElementById('save-all').addEventListener('click', () => {
+            if (state.currentMode === 'python') {
+                saveAllFiles();
+            } else if (state.currentMode === 'web') {
+                promptSaveEnvironment();
+                // Update preview after saving in Web mode
+                updateWebPreview();
+            }
+        });
+
         // Set up event listeners based on current mode
         if (state.currentMode === 'python') {
             document.getElementById('run-code').addEventListener('click', runCode);
             document.getElementById('new-file').addEventListener('click', showNewFileInput);
-            document.getElementById('save-all').addEventListener('click', saveAllFiles);
             document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
             document.getElementById('mobile-files-toggle').addEventListener('click', toggleSidebar);
             document.getElementById('console-header').addEventListener('click', toggleConsole);
@@ -233,19 +265,56 @@
                 }
             });
         } else if (state.currentMode === 'web') {
-            document.getElementById('refresh-preview').addEventListener('click', updateWebPreview);
+            document.getElementById('refresh-preview').addEventListener('click', () => {
+                // Save environment before refreshing
+                saveWebFiles();
+                updateWebPreview();
+            });
+            document.getElementById('toggle-web-sidebar').addEventListener('click', toggleWebSidebar);
+            document.getElementById('mobile-env-toggle').addEventListener('click', toggleWebSidebar);
             
             // Web tab switcher
             document.querySelectorAll('.web-tab').forEach(tab => {
                 tab.addEventListener('click', () => switchWebFile(tab.dataset.webFile));
             });
+            
+            // Environment management
+            document.getElementById('save-env').addEventListener('click', () => {
+                const nameInput = document.getElementById('env-name-input');
+                const name = nameInput.value.trim();
+                if (name) {
+                    saveEnvironment(name);
+                    nameInput.value = '';
+                }
+            });
+            
+            // Allow Enter key to save environment
+            document.getElementById('env-name-input').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const name = e.target.value.trim();
+                    if (name) {
+                        saveEnvironment(name);
+                        e.target.value = '';
+                    }
+                }
+            });
+            
+            // Load environment list
+            updateEnvironmentList();
+            
+            // Close sidebar when clicking backdrop on mobile
+            const workspace = document.querySelector('.ide-workspace');
+            workspace.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && 
+                    !state.webSidebarCollapsed && 
+                    e.target === workspace) {
+                    toggleWebSidebar();
+                }
+            });
         }
         
         // Render file list
         renderFileList();
-        
-        // Initialize mode-specific content
-        initializeMode();
     }
 
     /**
@@ -340,10 +409,16 @@
             state.editor.dispose();
             state.editor = null;
         }
-        initMonaco();
+        initMonaco().then(() => {
+            // Initialize mode-specific content after editor is ready
+            initializeMode();
+        });
     }
 
     function initializeMode() {
+        // Check for imported code FIRST before loading any files
+        checkImportedCode();
+        
         if (state.currentMode === 'python') {
             // Load Python files
             if (Object.keys(state.files).length === 0) {
@@ -356,14 +431,27 @@
                 openFile(firstFile);
             }
         } else if (state.currentMode === 'web') {
-            // Load web files
+            // Load web files FIRST
             loadWebFiles();
             
             // Initialize web editor with HTML
             if (state.editor) {
-                const language = 'html';
-                monaco.editor.setModelLanguage(state.editor.getModel(), language);
-                state.editor.setValue(state.webFiles.html);
+                const currentFile = state.webFiles.current || 'html';
+                const languageMap = {
+                    html: 'html',
+                    css: 'css',
+                    js: 'javascript'
+                };
+                
+                // Ensure we have content to display
+                const content = state.webFiles[currentFile];
+                if (!content) {
+                    console.warn('[IDE] No content for', currentFile, 'using default');
+                    state.webFiles[currentFile] = DEFAULT_FILES[currentFile].content;
+                }
+                
+                monaco.editor.setModelLanguage(state.editor.getModel(), languageMap[currentFile]);
+                state.editor.setValue(state.webFiles[currentFile]);
                 state.editor.updateOptions({ readOnly: false });
                 
                 // Update preview on every change
@@ -371,6 +459,8 @@
                     state.webFiles[state.webFiles.current] = state.editor.getValue();
                     updateWebPreview();
                 });
+                
+                console.log('[IDE] Web editor initialized with', currentFile, 'length:', state.webFiles[currentFile].length);
             }
             
             updateWebPreview();
@@ -385,16 +475,27 @@
             const stored = localStorage.getItem(WEB_STORAGE_KEY);
             if (stored) {
                 const savedFiles = JSON.parse(stored);
-                state.webFiles = { ...state.webFiles, ...savedFiles, current: 'html' };
+                // Use saved values only if they have content, otherwise use defaults
+                state.webFiles.html = (savedFiles.html && savedFiles.html.trim()) ? savedFiles.html : DEFAULT_FILES.html.content;
+                state.webFiles.css = (savedFiles.css && savedFiles.css.trim()) ? savedFiles.css : DEFAULT_FILES.css.content;
+                state.webFiles.js = (savedFiles.js && savedFiles.js.trim()) ? savedFiles.js : DEFAULT_FILES.js.content;
+                state.webFiles.current = 'html';
             } else {
-                // Use defaults
+                // Use defaults - always ensure we have content
                 state.webFiles.html = DEFAULT_FILES.html.content;
                 state.webFiles.css = DEFAULT_FILES.css.content;
                 state.webFiles.js = DEFAULT_FILES.js.content;
                 state.webFiles.current = 'html';
             }
+            
+            console.log('[IDE] Loaded web files');
         } catch (e) {
             console.error('[IDE] Failed to load web files:', e);
+            // Fallback to defaults on error
+            state.webFiles.html = DEFAULT_FILES.html.content;
+            state.webFiles.css = DEFAULT_FILES.css.content;
+            state.webFiles.js = DEFAULT_FILES.js.content;
+            state.webFiles.current = 'html';
         }
     }
 
@@ -419,6 +520,171 @@
         }
     }
 
+    /**
+     * Web Environment Management
+     */
+    function getEnvironments() {
+        try {
+            const stored = localStorage.getItem(WEB_ENVIRONMENTS_KEY);
+            return stored ? JSON.parse(stored) : {};
+        } catch (e) {
+            console.error('[IDE] Failed to load environments:', e);
+            return {};
+        }
+    }
+
+    function saveEnvironment(name) {
+        if (!name || !name.trim()) {
+            showHint('Environment name required', true);
+            return;
+        }
+
+        try {
+            // Save current editor content first
+            if (state.webFiles.current && state.editor) {
+                state.webFiles[state.webFiles.current] = state.editor.getValue();
+            }
+
+            const environments = getEnvironments();
+            environments[name] = {
+                html: state.webFiles.html || '',
+                css: state.webFiles.css || '',
+                js: state.webFiles.js || '',
+                timestamp: Date.now()
+            };
+
+            localStorage.setItem(WEB_ENVIRONMENTS_KEY, JSON.stringify(environments));
+            localStorage.setItem(CURRENT_ENV_KEY, name);
+            
+            console.log('[IDE] Saved environment:', name);
+            showHint(`Environment "${name}" saved ✓`);
+            
+            // Refresh environment list if visible
+            updateEnvironmentList();
+        } catch (e) {
+            console.error('[IDE] Failed to save environment:', e);
+            showHint('Failed to save environment', true);
+        }
+    }
+
+    function loadEnvironment(name) {
+        try {
+            const environments = getEnvironments();
+            const env = environments[name];
+
+            if (!env) {
+                showHint('Environment not found', true);
+                return;
+            }
+
+            state.webFiles.html = env.html || '';
+            state.webFiles.css = env.css || '';
+            state.webFiles.js = env.js || '';
+
+            // Update editor with current file
+            if (state.editor && state.webFiles.current) {
+                state.editor.setValue(state.webFiles[state.webFiles.current] || '');
+            }
+
+            // Save as current files
+            saveWebFiles();
+            
+            // Update preview
+            updateWebPreview();
+            
+            localStorage.setItem(CURRENT_ENV_KEY, name);
+            console.log('[IDE] Loaded environment:', name);
+            showHint(`Environment "${name}" loaded ✓`);
+            
+            // Refresh environment list
+            updateEnvironmentList();
+        } catch (e) {
+            console.error('[IDE] Failed to load environment:', e);
+            showHint('Failed to load environment', true);
+        }
+    }
+
+    function deleteEnvironment(name) {
+        if (!confirm(`Delete environment "${name}"?`)) {
+            return;
+        }
+
+        try {
+            const environments = getEnvironments();
+            delete environments[name];
+
+            localStorage.setItem(WEB_ENVIRONMENTS_KEY, JSON.stringify(environments));
+            
+            // Clear current environment if it was deleted
+            const currentEnv = localStorage.getItem(CURRENT_ENV_KEY);
+            if (currentEnv === name) {
+                localStorage.removeItem(CURRENT_ENV_KEY);
+            }
+
+            console.log('[IDE] Deleted environment:', name);
+            showHint(`Environment "${name}" deleted`);
+            
+            // Refresh environment list
+            updateEnvironmentList();
+        } catch (e) {
+            console.error('[IDE] Failed to delete environment:', e);
+            showHint('Failed to delete environment', true);
+        }
+    }
+
+    function updateEnvironmentList() {
+        const container = document.getElementById('environment-list');
+        if (!container) return;
+
+        const environments = getEnvironments();
+        const currentEnv = localStorage.getItem(CURRENT_ENV_KEY);
+        
+        const envNames = Object.keys(environments).sort();
+        
+        if (envNames.length === 0) {
+            container.innerHTML = '<div class="env-empty">No saved environments</div>';
+            return;
+        }
+
+        container.innerHTML = envNames.map(name => {
+            const env = environments[name];
+            const isCurrent = name === currentEnv;
+            const date = new Date(env.timestamp).toLocaleDateString();
+            
+            return `
+                <div class="env-item ${isCurrent ? 'current' : ''}" data-env="${name}">
+                    <div class="env-info">
+                        <div class="env-name">${name}</div>
+                        <div class="env-date">${date}</div>
+                    </div>
+                    <div class="env-actions">
+                        <button class="env-btn env-load" data-env="${name}" title="Load">
+                            ${icons.refresh}
+                        </button>
+                        <button class="env-btn env-delete" data-env="${name}" title="Delete">
+                            ${icons.trash}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        // Add event listeners
+        container.querySelectorAll('.env-load').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                loadEnvironment(btn.dataset.env);
+            });
+        });
+
+        container.querySelectorAll('.env-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteEnvironment(btn.dataset.env);
+            });
+        });
+    }
+
     function switchWebFile(fileType) {
         if (!state.editor) return;
         
@@ -434,8 +700,11 @@
             js: 'javascript'
         };
         
+        // Ensure file has content (use empty string if undefined)
+        const content = state.webFiles[fileType] || '';
+        
         monaco.editor.setModelLanguage(state.editor.getModel(), languageMap[fileType]);
-        state.editor.setValue(state.webFiles[fileType]);
+        state.editor.setValue(content);
         
         // Update active tab
         document.querySelectorAll('.web-tab').forEach(tab => {
@@ -686,6 +955,8 @@
      */
     function renderFileList() {
         const fileList = document.getElementById('file-list');
+        if (!fileList) return; // Only render if in Python mode
+        
         fileList.innerHTML = '';
 
         const fileNames = Object.keys(state.files).sort();
@@ -1171,6 +1442,43 @@ sys.stderr = sys.__stderr__
         }
     }
 
+    function toggleWebSidebar() {
+        const sidebar = document.getElementById('web-sidebar');
+        state.webSidebarCollapsed = !state.webSidebarCollapsed;
+        
+        if (state.webSidebarCollapsed) {
+            sidebar.classList.add('collapsed');
+        } else {
+            sidebar.classList.remove('collapsed');
+        }
+    }
+
+    function promptSaveEnvironment() {
+        const currentEnv = localStorage.getItem(CURRENT_ENV_KEY);
+        let name = currentEnv;
+        
+        // If no current environment, prompt for name
+        if (!name) {
+            name = prompt('Enter environment name:');
+        }
+        
+        if (name && name.trim()) {
+            saveEnvironment(name.trim());
+        }
+    }
+
+    function saveEnvironmentSilently() {
+        const currentEnv = localStorage.getItem(CURRENT_ENV_KEY);
+        let name = currentEnv;
+        
+        // If no current environment, use a default name
+        if (!name) {
+            name = 'Untitled';
+        }
+        
+        saveEnvironment(name);
+    }
+
     function showNewFileInput() {
         const input = document.getElementById('new-file-input');
         input.style.display = 'block';
@@ -1195,7 +1503,13 @@ sys.stderr = sys.__stderr__
     }
 
     function saveAllFiles() {
-        saveFiles();
+        if (state.currentMode === 'python') {
+            saveFiles();
+        } else if (state.currentMode === 'web') {
+            saveEnvironmentSilently();
+            // Update preview after saving in Web mode
+            updateWebPreview();
+        }
     }
 
     function showHint(text, isError = false) {
@@ -1310,7 +1624,9 @@ sys.stderr = sys.__stderr__
                             state.editor.dispose();
                             state.editor = null;
                         }
-                        initMonaco();
+                        initMonaco().then(() => {
+                            initializeMode();
+                        });
                     }
                     
                     // Import into the appropriate web file
@@ -1356,7 +1672,9 @@ sys.stderr = sys.__stderr__
                             state.editor.dispose();
                             state.editor = null;
                         }
-                        initMonaco();
+                        initMonaco().then(() => {
+                            initializeMode();
+                        });
                     }
                     
                     // Create a new Python file with imported code
@@ -1373,7 +1691,9 @@ sys.stderr = sys.__stderr__
                             state.editor.dispose();
                             state.editor = null;
                         }
-                        initMonaco();
+                        initMonaco().then(() => {
+                            initializeMode();
+                        });
                     }
                     
                     const ext = data.language.toLowerCase() === 'bash' || data.language.toLowerCase() === 'shell' ? 'sh' : 'txt';
