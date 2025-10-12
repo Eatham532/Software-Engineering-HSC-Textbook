@@ -1,0 +1,317 @@
+/**
+ * Code Runner Styles
+ * 
+ * Styles for the code execution features including:
+ * - Run and Open in Editor buttons
+ * - Console output display
+ * - Template/error code indicators
+ * - Material Design theme integration
+ */
+
+/* Code block container modifications */
+.highlight {
+    position: relative;
+    margin: 1em 0;
+}
+
+/* Code action buttons container */
+.code-actions {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    display: flex;
+    gap: 0.5em;
+    z-index: 10;
+}
+
+/* Base button styles */
+.code-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0.4em 0.8em;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--md-code-font-family);
+    white-space: nowrap;
+}
+
+/* Run button */
+.code-run-btn {
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.code-run-btn:hover:not(:disabled) {
+    background: var(--md-accent-fg-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.code-run-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    position: relative;
+}
+
+/* Preview button (for web languages) */
+.code-preview-btn {
+    background: var(--md-accent-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.code-preview-btn:hover {
+    background: var(--md-accent-fg-color--transparent);
+    color: var(--md-accent-fg-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Open in Editor button */
+.code-editor-btn {
+    background: var(--md-default-fg-color--light);
+    color: var(--md-default-bg-color);
+}
+
+[data-md-color-scheme="slate"] .code-editor-btn {
+    background: var(--md-default-fg-color--lighter);
+    color: var(--md-default-bg-color);
+}
+
+.code-editor-btn:hover {
+    background: var(--md-accent-fg-color--transparent);
+    color: var(--md-accent-fg-color);
+    transform: translateY(-1px);
+}
+
+/* Button icons */
+.code-action-btn::before {
+    font-family: 'Material Icons';
+    font-size: 1.1em;
+}
+
+.code-run-btn::before {
+    content: '▶';
+}
+
+.code-preview-btn::before {
+    content: '👁';
+}
+
+.code-editor-btn::before {
+    content: '⇱';
+    font-size: 1.3em;
+}
+
+/* Loading state */
+.code-run-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.code-run-btn.loading::before {
+    content: '⟳';
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Template/Error code indicator */
+.python-template .code-actions::after,
+.python-error .code-actions::after {
+    content: '⚠';
+    position: absolute;
+    top: 0;
+    left: -2em;
+    font-size: 1.2rem;
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+    cursor: help;
+}
+
+.python-template .code-actions:hover::after,
+.python-error .code-actions:hover::after {
+    opacity: 1;
+}
+
+/* Tooltip for template/error indicator */
+.python-template:hover::before,
+.python-error:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -2em;
+    right: 0.5em;
+    padding: 0.4em 0.8em;
+    background: var(--md-default-fg-color);
+    color: var(--md-default-bg-color);
+    font-size: 0.75rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* Console output container */
+.code-output {
+    margin-top: 0;
+    margin-bottom: 1em;
+    border-radius: 0 0 0.25rem 0.25rem;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-top: none;
+}
+
+.code-output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+    background: var(--md-default-fg-color--lightest);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color--light);
+}
+
+[data-md-color-scheme="slate"] .code-output-header {
+    background: var(--md-code-bg-color);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.code-output-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.code-output-title::before {
+    content: '▶';
+    font-size: 0.8em;
+}
+
+.code-output-clear {
+    background: none;
+    border: none;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    padding: 0.2em 0.5em;
+    font-size: 0.7rem;
+    transition: color 0.2s ease;
+}
+
+.code-output-clear:hover {
+    color: var(--md-accent-fg-color);
+}
+
+.code-output-content {
+    padding: 1em;
+    font-family: var(--md-code-font-family);
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Output styling */
+.code-output-content .output-line {
+    margin: 0.2em 0;
+}
+
+.code-output-content .output-stdout {
+    color: var(--md-default-fg-color);
+}
+
+.code-output-content .output-stderr {
+    color: var(--md-error-fg-color, #ef5350);
+}
+
+.code-output-content .output-error {
+    color: var(--md-error-fg-color, #ef5350);
+    font-weight: 500;
+}
+
+.code-output-content .output-success {
+    color: var(--md-success-fg-color, #66bb6a);
+}
+
+.code-output-content .output-info {
+    color: var(--md-accent-fg-color);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* Empty state */
+.code-output-content:empty::before {
+    content: 'No output yet. Click "Run" to execute the code.';
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
+    opacity: 0.6;
+}
+
+/* Adjust for existing copy button */
+.highlight button[class*="copy"] {
+    top: 0.5em;
+    right: 0.5em;
+}
+
+/* When code actions exist, adjust copy button position */
+.highlight:has(.code-actions) button[class*="copy"] {
+    right: auto;
+    left: 0.5em;
+}
+
+/* Smooth transitions */
+.code-output {
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-actions {
+        flex-direction: column;
+        gap: 0.3em;
+    }
+    
+    .code-action-btn {
+        padding: 0.3em 0.6em;
+        font-size: 0.7rem;
+    }
+    
+    .code-output-content {
+        font-size: 0.8em;
+        max-height: 300px;
+    }
+}
+
+/* Dark mode specific adjustments */
+[data-md-color-scheme="slate"] .code-output {
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .code-output-content .output-error {
+    color: #ff6b6b;
+}
+
+[data-md-color-scheme="slate"] .code-output-content .output-success {
+    color: #51cf66;
+}

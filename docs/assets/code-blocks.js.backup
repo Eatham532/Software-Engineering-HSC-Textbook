@@ -289,30 +289,13 @@ sys.stderr = sys.__stderr__
     }
 
     /**
-     * Get IDE tab name based on language
-     */
-    function getIDETab(language) {
-        const webLangs = ['html', 'css', 'javascript', 'js'];
-        const terminalLangs = ['bash', 'shell', 'powershell', 'sh', 'zsh'];
-        
-        if (webLangs.includes(language.toLowerCase())) {
-            return 'web';
-        } else if (terminalLangs.includes(language.toLowerCase())) {
-            return 'terminal';
-        }
-        return 'python';
-    }
-
-    /**
      * Handle Open in Editor button click
      */
-    function handleOpenInEditor(code, language, fenceType) {
+    function handleOpenInEditor(code, fenceType) {
         // Store code in sessionStorage to pass to editor page
         const editorData = {
             code: code,
-            language: language,
             type: fenceType,
-            ideTab: getIDETab(language),
             timestamp: Date.now()
         };
         
@@ -334,19 +317,12 @@ sys.stderr = sys.__stderr__
         if (!container) return;
 
         const fenceType = container.dataset.fenceType;
-        const language = container.dataset.language;
-        
-        if (!fenceType || !language) return; // Not a custom fence
+        if (!fenceType) return; // Not a custom Python fence
 
         const codeElement = codeBlock.querySelector('code');
         if (!codeElement) return;
 
         const code = codeElement.textContent;
-
-        // Determine capabilities
-        const isExecutable = language === 'python';
-        const isWebLang = ['html', 'css', 'javascript', 'js'].includes(language.toLowerCase());
-        const isTerminalLang = ['bash', 'shell', 'powershell'].includes(language.toLowerCase());
 
         // Create action buttons container
         const actionsDiv = document.createElement('div');
@@ -355,49 +331,25 @@ sys.stderr = sys.__stderr__
         // Open in Editor button (for all types)
         const editorBtn = document.createElement('button');
         editorBtn.className = 'code-action-btn code-editor-btn';
-        
-        if (isTerminalLang) {
-            editorBtn.textContent = 'View in Terminal';
-            editorBtn.title = 'View this command in the Terminal reference';
-        } else if (isWebLang) {
-            editorBtn.textContent = 'Open in Web IDE';
-            editorBtn.title = 'Open this code in the Web IDE';
-        } else {
-            editorBtn.textContent = 'Open in Editor';
-            editorBtn.title = 'Open this code in the IDE';
-        }
-        
-        editorBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
+        editorBtn.textContent = 'Open in Editor';
+        editorBtn.title = 'Open this code in the full IDE';
+        editorBtn.addEventListener('click', () => handleOpenInEditor(code, fenceType));
         actionsDiv.appendChild(editorBtn);
 
-        // Run/Preview button (only for exec type)
+        // Run button (only for exec type)
         if (fenceType === 'exec') {
-            if (isExecutable) {
-                // Python: Add Run button
-                const runBtn = document.createElement('button');
-                runBtn.className = 'code-action-btn code-run-btn';
-                runBtn.textContent = 'Run';
-                runBtn.title = 'Execute this Python code';
-                runBtn.addEventListener('click', () => handleRunCode(runBtn, codeBlock, code));
-                actionsDiv.appendChild(runBtn);
-            } else if (isWebLang) {
-                // Web languages: Add Preview button
-                const previewBtn = document.createElement('button');
-                previewBtn.className = 'code-action-btn code-preview-btn';
-                previewBtn.textContent = 'Preview';
-                previewBtn.title = 'Preview in Web IDE';
-                previewBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
-                actionsDiv.appendChild(previewBtn);
-            }
-        }
-        
-        // Add tooltip for non-exec types or read-only languages
-        if (fenceType === 'template') {
-            container.setAttribute('data-tooltip', 'Template code - may not run as-is');
-        } else if (fenceType === 'error') {
-            container.setAttribute('data-tooltip', 'Error example - for educational purposes');
-        } else if (isTerminalLang) {
-            container.setAttribute('data-tooltip', 'Terminal commands are read-only for security');
+            const runBtn = document.createElement('button');
+            runBtn.className = 'code-action-btn code-run-btn';
+            runBtn.textContent = 'Run';
+            runBtn.title = 'Execute this code';
+            runBtn.addEventListener('click', () => handleRunCode(runBtn, codeBlock, code));
+            actionsDiv.appendChild(runBtn);
+        } else {
+            // Add tooltip for template/error types
+            const tooltipText = fenceType === 'template' 
+                ? 'Template code - may not run as-is' 
+                : 'Error example - for educational purposes';
+            container.setAttribute('data-tooltip', tooltipText);
         }
 
         container.appendChild(actionsDiv);
@@ -407,8 +359,8 @@ sys.stderr = sys.__stderr__
      * Initialize code blocks
      */
     function initCodeBlocks() {
-        // Find all code blocks with custom fence types
-        const codeBlocks = document.querySelectorAll('[data-fence-type] pre');
+        // Find all Python code blocks with custom fence types
+        const codeBlocks = document.querySelectorAll('.python-exec pre, .python-template pre, .python-error pre');
         
         codeBlocks.forEach(codeBlock => {
             addCodeButtons(codeBlock);
