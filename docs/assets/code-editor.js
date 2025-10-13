@@ -148,7 +148,7 @@
                 </div>
             </div>
             
-            <div class="ide-workspace">
+            <div class="ide-workspace ${state.currentMode === 'python' ? 'python-mode' : state.currentMode === 'web' ? 'web-mode' : ''}">
                 ${state.currentMode === 'python' ? `
                 <aside class="ide-sidebar" id="sidebar">
                     <div class="sidebar-header">
@@ -315,6 +315,155 @@
         
         // Render file list
         renderFileList();
+        
+        // Setup resize handlers
+        setupResizeHandlers();
+    }
+
+    /**
+     * Setup resize handlers for sidebars and console
+     */
+    function setupResizeHandlers() {
+        // Python mode: sidebar resize
+        const pythonSidebar = document.querySelector('.ide-sidebar');
+        if (pythonSidebar && !pythonSidebar.querySelector('.sidebar-resize-handle')) {
+            const handle = document.createElement('div');
+            handle.className = 'sidebar-resize-handle';
+            pythonSidebar.appendChild(handle);
+            setupHorizontalResize(pythonSidebar, handle);
+        }
+
+        // Python mode: console resize
+        const console = document.querySelector('.ide-console');
+        if (console && !console.querySelector('.console-resize-handle')) {
+            const handle = document.createElement('div');
+            handle.className = 'console-resize-handle';
+            console.appendChild(handle);
+            setupVerticalResize(console, handle);
+        }
+
+        // Web mode: web sidebar resize
+        const webSidebar = document.querySelector('.web-sidebar');
+        if (webSidebar && !webSidebar.querySelector('.web-sidebar-resize-handle')) {
+            const handle = document.createElement('div');
+            handle.className = 'web-sidebar-resize-handle';
+            webSidebar.appendChild(handle);
+            setupHorizontalResize(webSidebar, handle);
+        }
+
+        // Web mode: web editors resize
+        const webEditors = document.querySelector('.web-editors');
+        if (webEditors && !webEditors.querySelector('.web-editors-resize-handle')) {
+            const handle = document.createElement('div');
+            handle.className = 'web-editors-resize-handle';
+            webEditors.appendChild(handle);
+            setupHorizontalResize(webEditors, handle);
+        }
+    }
+
+    /**
+     * Setup horizontal resize for an element (sidebar)
+     */
+    function setupHorizontalResize(element, handle) {
+        let isResizing = false;
+        let startX = 0;
+        let startWidth = 0;
+
+        const onMouseDown = (e) => {
+            isResizing = true;
+            startX = e.clientX;
+            startWidth = element.offsetWidth;
+            handle.classList.add('resizing');
+            document.body.style.cursor = 'col-resize';
+            e.preventDefault();
+        };
+
+        const onMouseMove = (e) => {
+            if (!isResizing) return;
+            
+            const deltaX = e.clientX - startX;
+            const newWidth = startWidth + deltaX;
+            
+            // Get constraints
+            const minWidth = parseInt(getComputedStyle(element).minWidth) || 150;
+            let maxWidth = parseInt(getComputedStyle(element).maxWidth) || 600;
+            
+            // For web-editors, calculate max based on container and preview min-width
+            if (element.classList.contains('web-editors')) {
+                const container = element.closest('.web-layout');
+                const preview = container?.querySelector('.web-preview');
+                const sidebar = container?.querySelector('.web-sidebar');
+                
+                if (container && preview) {
+                    const containerWidth = container.offsetWidth;
+                    const sidebarWidth = sidebar ? sidebar.offsetWidth : 0;
+                    const previewMinWidth = parseInt(getComputedStyle(preview).minWidth) || 300;
+                    
+                    // Max width = container - sidebar - preview min width - gaps
+                    const calculatedMax = containerWidth - sidebarWidth - previewMinWidth - 20;
+                    maxWidth = Math.min(maxWidth, calculatedMax);
+                }
+            }
+            
+            if (newWidth >= minWidth && newWidth <= maxWidth) {
+                element.style.width = `${newWidth}px`;
+            }
+        };
+
+        const onMouseUp = () => {
+            if (isResizing) {
+                isResizing = false;
+                handle.classList.remove('resizing');
+                document.body.style.cursor = '';
+            }
+        };
+
+        handle.addEventListener('mousedown', onMouseDown);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    }
+
+    /**
+     * Setup vertical resize for console
+     */
+    function setupVerticalResize(element, handle) {
+        let isResizing = false;
+        let startY = 0;
+        let startHeight = 0;
+
+        const onMouseDown = (e) => {
+            isResizing = true;
+            startY = e.clientY;
+            startHeight = element.offsetHeight;
+            handle.classList.add('resizing');
+            document.body.style.cursor = 'ns-resize';
+            e.preventDefault();
+        };
+
+        const onMouseMove = (e) => {
+            if (!isResizing) return;
+            
+            const deltaY = startY - e.clientY; // Inverted because we're resizing from top
+            const newHeight = startHeight + deltaY;
+            const minHeight = parseInt(getComputedStyle(element).minHeight) || 100;
+            const maxHeight = parseInt(getComputedStyle(element).maxHeight) || 600;
+            
+            if (newHeight >= minHeight && newHeight <= maxHeight) {
+                element.style.height = `${newHeight}px`;
+            }
+        };
+
+        const onMouseUp = () => {
+            if (isResizing) {
+                isResizing = false;
+                handle.classList.remove('resizing');
+                document.body.style.cursor = '';
+            }
+        };
+
+        handle.addEventListener('mousedown', onMouseDown);
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
     }
 
     /**
@@ -344,7 +493,7 @@
                         value: '',
                         language: 'python',
                         theme: theme,
-                        fontSize: 14,
+                        fontSize: 13,
                         lineNumbers: 'on',
                         roundedSelection: false,
                         scrollBeyondLastLine: false,
@@ -355,7 +504,7 @@
                             verticalScrollbarSize: 10,
                             horizontalScrollbarSize: 10
                         },
-                        padding: { top: 16, bottom: 16 }
+                        padding: { top: 4, bottom: 4 }
                     });
 
                     // Listen for content changes
@@ -1423,6 +1572,8 @@ sys.stderr = sys.__stderr__
         
         if (state.consoleCollapsed) {
             consoleEl.classList.add('collapsed');
+            // Clear inline height when collapsing
+            consoleEl.style.height = '';
         } else {
             consoleEl.classList.remove('collapsed');
         }
@@ -1437,6 +1588,8 @@ sys.stderr = sys.__stderr__
         
         if (state.sidebarCollapsed) {
             sidebar.classList.add('collapsed');
+            // Clear inline width when collapsing
+            sidebar.style.width = '';
         } else {
             sidebar.classList.remove('collapsed');
         }
@@ -1448,6 +1601,8 @@ sys.stderr = sys.__stderr__
         
         if (state.webSidebarCollapsed) {
             sidebar.classList.add('collapsed');
+            // Clear inline width when collapsing
+            sidebar.style.width = '';
         } else {
             sidebar.classList.remove('collapsed');
         }

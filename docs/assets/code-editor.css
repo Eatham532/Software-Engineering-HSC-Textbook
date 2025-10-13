@@ -43,15 +43,12 @@
 
 /* Main IDE Container */
 #code-editor-app {
-    position: fixed;
-    top: var(--md-header-height, 3rem);
-    left: 0;
-    right: 0;
-    bottom: 0;
     display: flex;
     flex-direction: column;
     background: var(--md-default-bg-color);
     overflow: hidden;
+    height: 100%;
+    min-height: 0;
 }
 
 /* Toolbar */
@@ -59,18 +56,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0.375rem 0.75rem;
     background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
     color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 10;
-    min-height: 48px;
+    z-index: 3;
+    min-height: 42px;
 }
 
 .ide-toolbar-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
 }
 
 /* Mode Switcher */
@@ -122,7 +119,7 @@
 
 .ide-toolbar-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.375rem;
 }
 
 /* Mobile Files Toggle - Hidden by default, shown only on mobile */
@@ -208,9 +205,35 @@
 
 /* Main Workspace */
 .ide-workspace {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     flex: 1;
+    min-height: 0;
     overflow: hidden;
+}
+
+/* Python layout: sidebar column | editor column (editor-area uses flexbox internally) */
+.ide-workspace.python-mode {
+    grid-template-columns: auto 1fr;
+}
+
+.ide-workspace.python-mode .ide-sidebar {
+    /* Sidebar is full height, independent column */
+    height: 100%;
+}
+
+.ide-workspace.python-mode .ide-editor-area {
+    /* Editor area uses flexbox to stack editor and console */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+/* Web mode uses different grid (handled separately in .web-layout) */
+.ide-workspace.web-mode {
+    display: flex;
+    flex-direction: column;
 }
 
 /* File Explorer (Sidebar) */
@@ -223,25 +246,46 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: width 0.3s ease;
     position: relative;
-    resize: horizontal;
+}
+
+/* Resize handle for sidebar */
+.sidebar-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.sidebar-resize-handle:hover,
+.sidebar-resize-handle.resizing {
+    background: var(--md-accent-fg-color);
+    opacity: 0.6;
 }
 
 .ide-sidebar.collapsed {
     width: 40px !important;
     min-width: 40px !important;
-    resize: none;
+}
+
+.ide-sidebar.collapsed .sidebar-resize-handle {
+    display: none;
 }
 
 .sidebar-header {
-    padding: 0.5rem 0.75rem;
+    padding: 0.375rem 0.625rem;
     background: var(--md-default-fg-color--lightest);
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 36px;
+    min-height: 32px;
 }
 
 .ide-sidebar.collapsed .sidebar-header {
@@ -291,14 +335,14 @@
 .file-item {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.5rem;
+    gap: 0.375rem;
+    padding: 0.3rem 0.5rem;
     cursor: pointer;
     border-radius: 0.25rem;
     transition: all 0.2s ease;
     position: relative;
-    margin-bottom: 0.2rem;
-    font-size: 0.85rem;
+    margin-bottom: 0.125rem;
+    font-size: 0.8rem;
 }
 
 .file-item:hover {
@@ -334,7 +378,7 @@
 .file-name {
     color: var(--md-typeset-color);
     flex: 1;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -398,7 +442,7 @@
     border-radius: 0.375rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 0.5rem 0;
-    z-index: 1000;
+    z-index: 300;
     min-width: 180px;
 }
 
@@ -455,8 +499,8 @@
 .editor-tab {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1.25rem;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
     border-right: 1px solid var(--md-default-fg-color--lighter);
     cursor: pointer;
     transition: all 0.2s ease;
@@ -474,7 +518,7 @@
 }
 
 .editor-tab-name {
-    font-size: 0.9rem;
+    font-size: 0.8125rem;
     font-family: var(--md-code-font-family);
 }
 
@@ -559,13 +603,37 @@
     flex-direction: column;
     transition: height 0.3s ease;
     height: 300px;
-    min-height: 0;
+    min-height: 100px;
+    max-height: 600px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    position: relative;
+}
+
+/* Resize handle for console */
+.console-resize-handle {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #404040;
+    cursor: ns-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.console-resize-handle:hover,
+.console-resize-handle.resizing {
+    background: #4ade80;
 }
 
 .ide-console.collapsed {
-    height: 60px;
-    min-height: 60px;
+    height: 40px;
+    min-height: 40px;
+}
+
+.ide-console.collapsed .console-resize-handle {
+    display: none;
 }
 
 .ide-console.collapsed .console-output,
@@ -769,6 +837,7 @@
     background: #404040;
     cursor: ns-resize;
     transition: background 0.2s ease;
+    display: none; /* Hidden - using ::before on console instead */
 }
 
 .resize-handle:hover,
@@ -853,13 +922,29 @@
         top: 0;
         bottom: 0;
         width: 200px;
-        z-index: 100;
+        z-index: 30;
         box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
     }
     
+    .ide-sidebar::after {
+        display: none; /* No resize handle on mobile */
+    }
+    
+    .sidebar-resize-handle {
+        display: none; /* No resize handle on mobile */
+    }
+    
     .ide-sidebar.collapsed {
         transform: translateX(-100%);
+    }
+    
+    .ide-sidebar.collapsed::after {
+        display: none;
+    }
+    
+    .ide-sidebar.collapsed .sidebar-resize-handle {
+        display: none;
     }
     
     .ide-btn span {
@@ -934,7 +1019,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
-    z-index: 1000;
+    z-index: 300;
 }
 
 .keyboard-hint.show {
@@ -965,8 +1050,17 @@
 .web-layout {
     display: grid;
     grid-template-columns: auto 1fr 1fr;
-    gap: 0;
+    grid-template-rows: 100%;
     height: 100%;
+    min-height: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.web-layout > * {
+    /* Ensure all grid children are full height */
+    height: 100%;
+    min-height: 0;
 }
 
 /* Web Environment Sidebar */
@@ -978,11 +1072,38 @@
     overflow: hidden;
     transition: width 0.3s ease, transform 0.3s ease;
     width: 250px;
+    min-width: 150px;
+    max-width: 400px;
+    position: relative;
+    height: 100%; /* Explicit full height */
+}
+
+/* Resize handle for web sidebar */
+.web-sidebar-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.web-sidebar-resize-handle:hover,
+.web-sidebar-resize-handle.resizing {
+    background: var(--md-accent-fg-color);
+    opacity: 0.6;
 }
 
 .web-sidebar.collapsed {
     width: 40px;
     min-width: 40px;
+}
+
+.web-sidebar.collapsed .web-sidebar-resize-handle {
+    display: none;
 }
 
 .web-sidebar.collapsed .web-sidebar-title,
@@ -992,16 +1113,16 @@
 }
 
 .web-sidebar-header {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     background: var(--md-default-fg-color--lightest);
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--md-default-fg-color);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 40px;
+    min-height: 36px;
 }
 
 .web-sidebar.collapsed .web-sidebar-header {
@@ -1016,7 +1137,7 @@
 }
 
 .web-env-actions {
-    padding: 1rem;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -1062,11 +1183,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem;
-    margin-bottom: 0.5rem;
+    padding: 0.625rem;
+    margin-bottom: 0.375rem;
     background: var(--md-default-bg-color);
     border: 1px solid var(--md-default-fg-color--lightest);
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -1094,9 +1215,9 @@
 
 .env-name {
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--md-default-fg-color);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.125rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1161,23 +1282,46 @@
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--md-default-fg-color--lightest);
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+    height: 100%; /* Explicit full height */
+}
+
+/* Resize handle for web editors */
+.web-editors-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.web-editors-resize-handle:hover,
+.web-editors-resize-handle.resizing {
+    background: var(--md-accent-fg-color);
+    opacity: 0.6;
 }
 
 .web-editor-tabs {
     display: flex;
     background: var(--md-code-bg-color);
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
+    padding: 0.375rem 0.75rem;
+    gap: 0.375rem;
 }
 
 .web-tab {
-    padding: 0.5rem 1rem;
+    padding: 0.375rem 0.75rem;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 0.375rem;
+    border-radius: 0.25rem;
     color: var(--md-default-fg-color--light);
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s;
@@ -1203,13 +1347,17 @@
     display: flex;
     flex-direction: column;
     background: var(--md-default-bg-color);
+    min-width: 300px;
+    overflow: hidden;
+    height: 100%; /* Explicit full height */
 }
 
 .preview-header {
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     background: var(--md-code-bg-color);
     border-bottom: 1px solid var(--md-default-fg-color--lightest);
     font-weight: 600;
+    font-size: 0.8rem;
     color: var(--md-default-fg-color);
 }
 
@@ -1224,15 +1372,24 @@
     .web-layout {
         grid-template-columns: 200px 1fr;
         grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "sidebar editors"
+            "sidebar preview";
     }
     
     .web-sidebar {
-        grid-row: 1 / -1;
+        grid-area: sidebar;
+        height: 100%; /* Full height across both rows */
     }
     
     .web-editors {
+        grid-area: editors;
         border-right: none;
         border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    }
+    
+    .web-preview {
+        grid-area: preview;
     }
 }
 
@@ -1240,6 +1397,9 @@
     .web-layout {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "editors"
+            "preview";
     }
     
     .web-sidebar {
@@ -1248,12 +1408,21 @@
         top: 0;
         bottom: 0;
         width: 200px;
+        height: 100%; /* Full viewport height when shown */
         max-height: none;
-        z-index: 100;
+        z-index: 30;
         box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
         border-right: 1px solid var(--md-default-fg-color--lightest);
         border-bottom: none;
+    }
+    
+    .web-editors {
+        grid-area: editors;
+    }
+    
+    .web-preview {
+        grid-area: preview;
     }
     
     .web-sidebar.collapsed {
@@ -1261,16 +1430,20 @@
         width: 200px;
     }
     
+    .web-sidebar.collapsed .web-sidebar-resize-handle {
+        display: none;
+    }
+    
+    .web-sidebar-resize-handle {
+        display: none; /* No resize handle on mobile */
+    }
+    
     .environment-list {
         max-height: none;
     }
     
-    .web-editors {
-        grid-row: 1;
-    }
-    
-    .web-preview {
-        grid-row: 2;
+    .web-editors-resize-handle {
+        display: none; /* No resize handle on mobile */
     }
 }
 
