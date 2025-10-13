@@ -19,6 +19,7 @@
         currentFile: null,
         pyodide: null,
         pyodideLoading: false,
+        pyodideWorker: null, // Web Worker for Python execution
         editor: null,
         consoleCollapsed: false,
         sidebarCollapsed: window.innerWidth <= 768, // Start collapsed on mobile
@@ -26,7 +27,9 @@
         modified: new Set(),
         tabs: [],
         currentMode: 'python', // 'python' or 'web'
-        webFiles: { html: '', css: '', js: '', current: 'html' }
+        webFiles: { html: '', css: '', js: '', current: 'html' },
+        executing: false, // Track if code is currently executing
+        shouldStop: false // Flag to stop execution
     };
 
     // Constants
@@ -38,7 +41,7 @@
     const DEFAULT_FILES = {
         python: {
             name: 'main.py',
-            content: '# Welcome to the Python IDE!\n# Write your code here and click Run to execute it.\n\nprint("Hello, World!")\n',
+            content: '# Welcome to the Python IDE!\n# Write your code here and click Run to execute it.\n# You can use print() for output and input() for user input.\n\nprint("Hello, World!")\n\n# Try using input():\n# name = input("What is your name? ")\n# print(f"Nice to meet you, {name}!")\n',
             type: 'exec'
         },
         html: {
@@ -82,6 +85,7 @@
     // SVG Icons (Feather icons style - no color, stroke only)
     const icons = {
         play: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>',
+        stop: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>',
         refresh: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-cw"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>',
         plus: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
         save: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>`,
@@ -108,6 +112,9 @@
         const actionButtons = state.currentMode === 'python' 
             ? `<button class="ide-btn ide-btn-run primary" id="run-code">
                    ${icons.play}<span>Run</span>
+               </button>
+               <button class="ide-btn ide-btn-stop" id="stop-code" style="display: none;">
+                   ${icons.stop}<span>Stop</span>
                </button>`
             : `<button class="ide-btn ide-btn-run primary" id="refresh-preview">
                    ${icons.refresh}<span>Refresh</span>
@@ -247,13 +254,14 @@
         // Set up event listeners based on current mode
         if (state.currentMode === 'python') {
             document.getElementById('run-code').addEventListener('click', runCode);
+            document.getElementById('stop-code').addEventListener('click', stopCode);
             document.getElementById('new-file').addEventListener('click', showNewFileInput);
             document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
             document.getElementById('mobile-files-toggle').addEventListener('click', toggleSidebar);
             document.getElementById('console-header').addEventListener('click', toggleConsole);
             document.getElementById('clear-console').addEventListener('click', clearConsole);
             document.getElementById('new-file-input').addEventListener('keydown', handleNewFileInput);
-            setupResizeHandle();
+            setupResizeHandlers();
             
             // Close sidebar when clicking backdrop on mobile
             const workspace = document.querySelector('.ide-workspace');
@@ -1276,7 +1284,7 @@
     }
 
     /**
-     * Code Execution
+     * Code Execution (using Web Worker)
      */
     async function runCode() {
         if (!state.currentFile) {
@@ -1284,267 +1292,252 @@
             return;
         }
 
+        if (state.executing) {
+            return; // Already running
+        }
+
         const code = state.editor.getValue();
         const runBtn = document.getElementById('run-code');
+        const stopBtn = document.getElementById('stop-code');
         
         // Expand console if collapsed
         if (state.consoleCollapsed) {
             toggleConsole();
         }
 
-        // Show loading state
-        runBtn.disabled = true;
-        runBtn.innerHTML = '<span>Running...</span>';
-        
-        // Ensure console is expanded for progress visibility
-        const consoleEl = document.getElementById('console');
-        if (consoleEl && state.consoleCollapsed) {
-            state.consoleCollapsed = false;
-            consoleEl.classList.remove('collapsed');
-        }
+        // Show executing state
+        state.executing = true;
+        state.shouldStop = false;
+        runBtn.style.display = 'none';
+        stopBtn.style.display = 'inline-flex';
         
         clearConsole();
         appendConsole('Running code...', 'info');
 
         try {
-            // Load Pyodide if not already loaded
-            if (!state.pyodide) {
+            // Initialize worker if needed
+            if (!state.pyodideWorker) {
                 appendConsole('Loading Python environment (this may take a moment)...', 'info');
-                state.pyodide = await loadPyodide();
+                await initPyodideWorker();
             }
 
-            const output = await executePython(code);
-            
-            // Display output
-            if (output.stdout.length > 0) {
-                output.stdout.forEach(line => appendConsole(line, 'stdout'));
-            }
-            
-            if (output.stderr.length > 0) {
-                output.stderr.forEach(line => appendConsole(line, 'stderr'));
-            }
-            
-            if (output.result !== null && output.result !== undefined && String(output.result) !== 'undefined') {
-                appendConsole(`→ ${output.result}`, 'success');
-            }
-            
-            if (output.error) {
-                appendConsole(`Error: ${output.error}`, 'error');
-            }
-            
-            if (!output.stdout.length && !output.stderr.length && !output.error && !output.result) {
-                appendConsole('Code executed successfully (no output)', 'info');
-            }
+            // Execute code in worker
+            state.pyodideWorker.postMessage({
+                type: 'execute',
+                data: { code }
+            });
 
         } catch (error) {
             appendConsole(`Execution failed: ${error.message}`, 'error');
-        } finally {
-            runBtn.disabled = false;
-            runBtn.innerHTML = '<span>Run Code</span>';
+            state.executing = false;
+            runBtn.style.display = 'inline-flex';
+            stopBtn.style.display = 'none';
         }
     }
 
-    async function loadPyodide() {
-        if (state.pyodide) {
-            return state.pyodide;
-        }
-
-        if (state.pyodideLoading) {
-            // Wait for existing load to complete
-            return new Promise((resolve) => {
-                const interval = setInterval(() => {
-                    if (state.pyodide) {
-                        clearInterval(interval);
-                        resolve(state.pyodide);
+    /**
+     * Initialize Pyodide Web Worker
+     */
+    function initPyodideWorker() {
+        return new Promise((resolve, reject) => {
+            try {
+                // Create worker - determine path based on current page location
+                const currentPath = window.location.pathname;
+                const assetsPath = currentPath.includes('/code-editor/') 
+                    ? '../assets/pyodide-worker.js'  // From code-editor page
+                    : 'assets/pyodide-worker.js';     // From root
+                
+                console.log('[IDE] Loading worker from:', assetsPath);
+                state.pyodideWorker = new Worker(assetsPath);
+                
+                // Handle worker messages
+                state.pyodideWorker.onmessage = function(e) {
+                    const { type, data } = e.data;
+                    
+                    switch (type) {
+                        case 'ready':
+                            appendConsole('Python environment ready!', 'success');
+                            resolve();
+                            break;
+                        
+                        case 'progress':
+                            appendConsole(data.message, 'info');
+                            break;
+                        
+                        case 'output':
+                            appendConsole(data.text, data.stream);
+                            break;
+                        
+                        case 'input_request':
+                            handleInputRequest(data.prompt);
+                            break;
+                        
+                        case 'complete':
+                            handleExecutionComplete(data);
+                            break;
+                        
+                        case 'error':
+                            appendConsole(`Error: ${data.message}`, 'error');
+                            if (!state.executing) {
+                                reject(new Error(data.message));
+                            }
+                            break;
+                        
+                        case 'info':
+                            appendConsole(data.message, 'info');
+                            break;
                     }
-                }, 100);
-            });
-        }
+                };
+                
+                state.pyodideWorker.onerror = function(error) {
+                    appendConsole(`Worker error: ${error.message}`, 'error');
+                    reject(error);
+                };
+                
+                // Start loading
+                state.pyodideWorker.postMessage({ type: 'load' });
+                
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
 
-        state.pyodideLoading = true;
-
-        // Create progress indicator in console
-        let progressId = null;
-        let progressInterval = null;
+    /**
+     * Handle input request from worker
+     */
+    function handleInputRequest(prompt) {
+        const consoleOutput = document.getElementById('console-output');
         
-        if (state.currentMode === 'python') {
-            progressId = `pyodide-progress-${Date.now()}`;
-            const progressHTML = `
-                <div class="pyodide-progress" id="${progressId}">
-                    <div class="pyodide-progress-text">Loading Python environment...</div>
-                    <div class="pyodide-progress-bar">
-                        <div class="pyodide-progress-fill" style="width: 0%"></div>
-                    </div>
-                    <div class="pyodide-progress-percentage">0%</div>
-                </div>
-            `;
-            const consoleOutput = document.getElementById('console-output');
-            if (consoleOutput) {
-                consoleOutput.insertAdjacentHTML('beforeend', progressHTML);
-            }
+        // Only show prompt line if a prompt was provided
+        if (prompt) {
+            const promptLine = document.createElement('div');
+            promptLine.className = 'console-line info';
+            promptLine.textContent = prompt;
+            consoleOutput.appendChild(promptLine);
         }
-
-        try {
-            // Suppress stackframe and error-stack-parser 404 errors (harmless Monaco loader issues)
-            const originalError = console.error;
-            const originalWarn = console.warn;
-            
-            console.error = function(...args) {
-                const msg = args.join(' ');
-                if (msg.includes('stackframe') || msg.includes('error-stack-parser') || msg.includes('404')) {
-                    return; // Suppress these specific errors
+        
+        // Create input line with text field
+        const inputLine = document.createElement('div');
+        inputLine.className = 'console-input-line';
+        inputLine.innerHTML = `
+            <span class="console-input-prompt">></span>
+            <input type="text" class="console-input-field" id="console-input-field" autocomplete="off">
+        `;
+        consoleOutput.appendChild(inputLine);
+        
+        // Focus the input field
+        const inputField = inputLine.querySelector('.console-input-field');
+        inputField.focus();
+        
+        // Scroll to bottom
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        
+        // Handle input submission
+        inputField.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const value = inputField.value;
+                
+                // Remove the input field
+                inputLine.remove();
+                
+                // Show what was entered
+                const echoLine = document.createElement('div');
+                echoLine.className = 'console-line stdout';
+                echoLine.textContent = value;
+                consoleOutput.appendChild(echoLine);
+                
+                // Scroll to bottom
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                
+                // Send value to worker
+                if (state.pyodideWorker) {
+                    state.pyodideWorker.postMessage({
+                        type: 'input_response',
+                        data: { value: value }
+                    });
                 }
-                originalError.apply(console, args);
-            };
-            
-            console.warn = function(...args) {
-                const msg = args.join(' ');
-                if (msg.includes('stackframe') || msg.includes('error-stack-parser')) {
-                    return;
+            } else if (e.key === 'Escape') {
+                // Cancel input
+                inputLine.remove();
+                
+                appendConsole('Input cancelled', 'error');
+                
+                // Send cancellation to worker
+                if (state.pyodideWorker) {
+                    state.pyodideWorker.postMessage({
+                        type: 'input_response',
+                        data: { value: null }
+                    });
                 }
-                originalWarn.apply(console, args);
-            };
-
-            // Simulate progress during loading
-            let currentProgress = 0;
-            if (progressId) {
-                progressInterval = setInterval(() => {
-                    if (currentProgress < 90) {
-                        // Gradually increase progress (slows down as it approaches 90%)
-                        const increment = (90 - currentProgress) * 0.1;
-                        currentProgress += Math.max(increment, 2);
-                        currentProgress = Math.min(currentProgress, 90);
-                        updateProgress(progressId, Math.floor(currentProgress), 'Loading Python packages...');
-                    }
-                }, 200);
             }
+        });
+    }
 
-            // Load Pyodide script
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
-            document.head.appendChild(script);
+    /**
+     * Handle execution completion
+     */
+    function handleExecutionComplete(output) {
+        const runBtn = document.getElementById('run-code');
+        const stopBtn = document.getElementById('stop-code');
+        
+        // Note: stdout/stderr are already streamed during execution
+        // Only add result and error messages here
+        
+        if (output.result !== null && output.result !== undefined && String(output.result) !== 'undefined') {
+            appendConsole(`→ ${output.result}`, 'success');
+        }
+        
+        if (output.error) {
+            appendConsole(`Error: ${output.error}`, 'error');
+        }
+        
+        // Check if there was any output
+        const hasOutput = output.stdout.length > 0 || output.stderr.length > 0 || 
+                        output.error || (output.result !== null && output.result !== undefined);
+        
+        if (!hasOutput) {
+            appendConsole('Code executed successfully (no output)', 'info');
+        }
+        
+        // Reset state
+        state.executing = false;
+        state.shouldStop = false;
+        runBtn.style.display = 'inline-flex';
+        stopBtn.style.display = 'none';
+    }
 
-            await new Promise((resolve, reject) => {
-                script.onload = resolve;
-                script.onerror = reject;
-            });
-
-            // Update progress
-            if (progressId) {
-                updateProgress(progressId, 30, 'Initializing Python runtime...');
-            }
-
-            // Initialize Pyodide
-            state.pyodide = await window.loadPyodide({
-                indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
-            });
-
-            // Stop progress simulation
-            if (progressInterval) {
-                clearInterval(progressInterval);
-            }
-
-            // Update progress to 100%
-            if (progressId) {
-                updateProgress(progressId, 100, 'Python ready!');
+    /**
+     * Stop code execution
+     */
+    function stopCode() {
+        if (state.executing) {
+            state.shouldStop = true;
+            appendConsole('Stopping execution...', 'info');
+            
+            if (state.pyodideWorker) {
+                // Send interrupt to worker
+                state.pyodideWorker.postMessage({ type: 'interrupt' });
+                
+                // Force terminate after 2 seconds if still running
                 setTimeout(() => {
-                    const progressEl = document.getElementById(progressId);
-                    if (progressEl) {
-                        progressEl.style.transition = 'opacity 0.3s ease';
-                        progressEl.style.opacity = '0';
-                        setTimeout(() => progressEl.remove(), 300);
+                    if (state.executing) {
+                        appendConsole('Force stopping worker...', 'info');
+                        state.pyodideWorker.terminate();
+                        state.pyodideWorker = null;
+                        
+                        // Reset UI
+                        const runBtn = document.getElementById('run-code');
+                        const stopBtn = document.getElementById('stop-code');
+                        state.executing = false;
+                        runBtn.style.display = 'inline-flex';
+                        stopBtn.style.display = 'none';
+                        
+                        appendConsole('Execution forcefully stopped', 'error');
                     }
-                }, 1000);
+                }, 2000);
             }
-
-            // Restore console methods
-            console.error = originalError;
-            console.warn = originalWarn;
-
-            console.log('[IDE] Pyodide loaded');
-            state.pyodideLoading = false;
-            return state.pyodide;
-        } catch (error) {
-            state.pyodideLoading = false;
-            
-            // Stop progress simulation
-            if (progressInterval) {
-                clearInterval(progressInterval);
-            }
-            
-            // Show error in progress bar
-            if (progressId) {
-                const progressEl = document.getElementById(progressId);
-                if (progressEl) {
-                    progressEl.innerHTML = `
-                        <div class="pyodide-progress-text" style="color: var(--md-error-fg-color);">
-                            Failed to load Python: ${error.message}
-                        </div>
-                    `;
-                }
-            }
-            
-            throw error;
         }
-    }
-
-    function updateProgress(progressId, percent, message) {
-        const progressEl = document.getElementById(progressId);
-        if (!progressEl) return;
-
-        const fill = progressEl.querySelector('.pyodide-progress-fill');
-        const text = progressEl.querySelector('.pyodide-progress-text');
-        const percentage = progressEl.querySelector('.pyodide-progress-percentage');
-
-        if (fill) fill.style.width = `${percent}%`;
-        if (text && message) text.textContent = message;
-        if (percentage) percentage.textContent = `${percent}%`;
-    }
-
-    async function executePython(code) {
-        const pyodide = state.pyodide;
-        
-        let output = {
-            stdout: [],
-            stderr: [],
-            error: null,
-            result: null
-        };
-
-        try {
-            // Redirect stdout/stderr
-            await pyodide.runPythonAsync(`
-import sys
-from io import StringIO
-
-_stdout = StringIO()
-_stderr = StringIO()
-sys.stdout = _stdout
-sys.stderr = _stderr
-            `);
-
-            // Run the code
-            const result = await pyodide.runPythonAsync(code);
-
-            // Get captured output
-            const stdout = await pyodide.runPythonAsync('_stdout.getvalue()');
-            const stderr = await pyodide.runPythonAsync('_stderr.getvalue()');
-
-            output.stdout = stdout ? stdout.split('\n').filter(line => line) : [];
-            output.stderr = stderr ? stderr.split('\n').filter(line => line) : [];
-            output.result = result;
-
-            // Restore stdout/stderr
-            await pyodide.runPythonAsync(`
-sys.stdout = sys.__stdout__
-sys.stderr = sys.__stderr__
-            `);
-
-        } catch (error) {
-            output.error = error.message;
-        }
-
-        return output;
     }
 
     /**
@@ -1560,6 +1553,13 @@ sys.stderr = sys.__stderr__
         // Auto-scroll to bottom
         consoleOutput.scrollTop = consoleOutput.scrollHeight;
     }
+    
+    // Expose appendConsole and prompt globally for Pyodide access
+    window.appendConsole = appendConsole;
+    window.prompt = window.prompt || function(message) {
+        // Fallback prompt implementation if not available
+        return window.confirm(message + '\n\n(Click OK to continue)') ? '' : null;
+    };
 
     function clearConsole() {
         const consoleOutput = document.getElementById('console-output');
