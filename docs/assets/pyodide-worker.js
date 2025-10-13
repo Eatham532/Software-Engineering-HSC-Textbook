@@ -5,10 +5,11 @@
 
 let pyodide = null;
 let pyodideReady = false;
+let currentExecutionId = null;
 
 // Handle messages from main thread
 self.onmessage = async function(e) {
-    const { type, data } = e.data;
+    const { type, data, executionId } = e.data;
 
     try {
         switch (type) {
@@ -17,7 +18,9 @@ self.onmessage = async function(e) {
                 break;
             
             case 'execute':
+                currentExecutionId = executionId;
                 await executePython(data.code);
+                currentExecutionId = null;
                 break;
             
             case 'interrupt':
@@ -42,6 +45,7 @@ sys._worker_input_value = ${JSON.stringify(data.value)}
     } catch (error) {
         self.postMessage({
             type: 'error',
+            executionId: currentExecutionId,
             data: { message: error.message }
         });
     }
@@ -217,6 +221,7 @@ builtins.input = _original_input
         // Send completion
         self.postMessage({
             type: 'complete',
+            executionId: currentExecutionId,
             data: output
         });
 
@@ -234,6 +239,7 @@ builtins.input = _original_input
 
         self.postMessage({
             type: 'complete',
+            executionId: currentExecutionId,
             data: {
                 stdout: output.stdout,
                 stderr: output.stderr,

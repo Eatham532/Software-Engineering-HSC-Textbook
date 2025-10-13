@@ -234,19 +234,42 @@
         };
 
         try {
-            // Redirect stdout/stderr
+            // Setup stdout/stderr capture and async input support
             await pyodide.runPythonAsync(`
 import sys
 from io import StringIO
+import builtins
+import asyncio
 
 _stdout = StringIO()
 _stderr = StringIO()
+_original_stdout = sys.stdout
+_original_stderr = sys.stderr
+_original_input = builtins.input
+
 sys.stdout = _stdout
 sys.stderr = _stderr
+
+# Simple async input that prompts user
+async def custom_input(prompt=''):
+    """Custom input function for inline code blocks"""
+    import js
+    # Use browser prompt for simple inline examples
+    value = js.window.prompt(prompt if prompt else 'Enter input:')
+    if value is None:
+        raise KeyboardInterrupt('Input cancelled')
+    # Echo the input to output
+    print(f'{value}')
+    return str(value)
+
+builtins.input = custom_input
             `);
 
+            // Pre-process code to add 'await' before input() calls (same as code-editor)
+            const processedCode = code.replace(/(\s*)([a-zA-Z_][a-zA-Z0-9_]*\s*=\s*)?input\(/g, '$1$2await input(');
+
             // Run the user's code
-            const result = await pyodide.runPythonAsync(code);
+            const result = await pyodide.runPythonAsync(processedCode);
 
             // Get captured output
             const stdout = await pyodide.runPythonAsync('_stdout.getvalue()');
@@ -256,13 +279,24 @@ sys.stderr = _stderr
             output.stderr = stderr ? stderr.split('\n').filter(line => line) : [];
             output.result = result;
 
-            // Restore stdout/stderr
+            // Restore stdout/stderr/input
             await pyodide.runPythonAsync(`
-sys.stdout = sys.__stdout__
-sys.stderr = sys.__stderr__
+sys.stdout = _original_stdout
+sys.stderr = _original_stderr
+builtins.input = _original_input
             `);
 
         } catch (error) {
+            // Try to restore on error
+            try {
+                await pyodide.runPythonAsync(`
+sys.stdout = _original_stdout
+sys.stderr = _original_stderr
+builtins.input = _original_input
+                `);
+            } catch (e) {
+                // Ignore restoration errors
+            }
             output.error = error.message;
         }
 
