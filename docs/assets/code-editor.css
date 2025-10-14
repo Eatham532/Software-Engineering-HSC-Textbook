@@ -704,8 +704,8 @@
 }
 
 .ide-console.collapsed {
-    height: 40px;
-    min-height: 40px;
+    height: 50px;
+    min-height: 50px;
 }
 
 .ide-console.collapsed .console-resize-handle {
@@ -968,10 +968,6 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .ide-sidebar {
-        width: 200px;
-    }
-    
     .ide-toolbar {
         padding: 0.5rem 0.75rem;
     }
@@ -984,15 +980,17 @@
         display: none;
     }
     
-    /* Collapse sidebars on tablets and smaller */
-    .ide-sidebar {
+    /* On tablets, collapsed sidebar is 40px, expanded sidebar uses natural width */
+    .ide-sidebar.collapsed {
         width: 40px !important;
         min-width: 40px !important;
     }
     
-    .ide-sidebar:not(.force-expanded) {
-        width: 40px !important;
-        min-width: 40px !important;
+    /* When expanded on tablet, allow sidebar to take its saved/natural width */
+    .ide-sidebar:not(.collapsed) {
+        width: auto;
+        min-width: 150px;
+        max-width: 400px;
     }
 }
 
@@ -1464,7 +1462,7 @@
 /* Web IDE Responsive */
 @media (max-width: 1024px) {
     .web-layout {
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: auto 1fr;
         grid-template-rows: 1fr 1fr;
         grid-template-areas:
             "sidebar editors"

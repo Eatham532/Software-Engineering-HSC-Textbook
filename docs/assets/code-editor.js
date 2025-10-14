@@ -22,10 +22,17 @@
         pyodideWorker: null, // Web Worker for Python execution
         editor: null,
         consoleCollapsed: false,
-        sidebarCollapsed: window.innerWidth <= 1024, // Unified sidebar state - start collapsed on tablets and mobile
+        sidebarCollapsed: (() => {
+            // Restore collapsed state from localStorage, or default based on screen size
+            const saved = localStorage.getItem('ide-sidebar-collapsed');
+            if (saved !== null) {
+                return saved === 'true';
+            }
+            return window.innerWidth <= 1024;
+        })(),
         modified: new Set(),
         tabs: [],
-        currentMode: 'python', // 'python' or 'web'
+        currentMode: localStorage.getItem('ide-current-mode') || 'python', // Restore last mode
         webFiles: { html: '', css: '', js: '', current: 'html' },
         executing: false, // Track if code is currently executing
         shouldStop: false // Flag to stop execution
@@ -185,6 +192,9 @@
             
             state.sidebarCollapsed = !state.sidebarCollapsed;
             
+            // Save collapsed state to localStorage
+            localStorage.setItem('ide-sidebar-collapsed', state.sidebarCollapsed);
+            
             if (state.sidebarCollapsed) {
                 sidebar.classList.add('collapsed');
                 sidebar.style.width = ''; // Clear inline width
@@ -195,12 +205,29 @@
                 // Mobile button stays the same - it's always the open button
             } else {
                 sidebar.classList.remove('collapsed');
+                // Restore saved width when expanding (shared across modes)
+                const savedWidth = localStorage.getItem('ide-sidebar-width');
+                if (savedWidth) {
+                    // Apply with slight delay to ensure DOM is ready
+                    setTimeout(() => {
+                        sidebar.style.width = savedWidth;
+                    }, 10);
+                }
                 if (toggleBtn) {
                     toggleBtn.innerHTML = icons.chevronLeft;
                     toggleBtn.title = 'Collapse';
                 }
                 // Mobile button stays the same - close button is separate
             }
+            
+            // Restore terminal height after layout change
+            setTimeout(() => {
+                const consoleEl = document.getElementById('console');
+                const savedHeight = localStorage.getItem('ide-terminal-height');
+                if (consoleEl && savedHeight) {
+                    consoleEl.style.height = savedHeight;
+                }
+            }, 10);
         },
 
         /**
@@ -220,6 +247,15 @@
             if (state.sidebarCollapsed) {
                 state.sidebarCollapsed = false;
                 sidebar.classList.remove('collapsed');
+                
+                // Restore terminal height after layout change
+                setTimeout(() => {
+                    const consoleEl = document.getElementById('console');
+                    const savedHeight = localStorage.getItem('ide-terminal-height');
+                    if (consoleEl && savedHeight) {
+                        consoleEl.style.height = savedHeight;
+                    }
+                }, 10);
             }
         },
 
@@ -252,6 +288,15 @@
         setupResize() {
             const sidebar = document.getElementById('ide-sidebar');
             if (!sidebar || sidebar.querySelector('.sidebar-resize-handle')) return;
+            
+            // Restore saved width from localStorage (shared across modes)
+            const savedWidth = localStorage.getItem('ide-sidebar-width');
+            if (savedWidth && !state.sidebarCollapsed) {
+                // Apply with slight delay to ensure DOM is ready
+                setTimeout(() => {
+                    sidebar.style.width = savedWidth;
+                }, 10);
+            }
             
             const handle = document.createElement('div');
             handle.className = 'sidebar-resize-handle';
@@ -288,6 +333,9 @@
                     isResizing = false;
                     handle.classList.remove('resizing');
                     document.body.style.cursor = '';
+                    
+                    // Save width to localStorage (shared across modes)
+                    localStorage.setItem('ide-sidebar-width', sidebar.style.width);
                 }
             });
         },
@@ -305,18 +353,15 @@
             
             const isMobile = width <= 768;
             
-            // Auto-collapse on tablet/mobile if not manually opened
-            if (width <= 1024 && width > 768 && !state.sidebarCollapsed) {
-                state.sidebarCollapsed = true;
+            // Respect user's saved collapsed state - don't auto-collapse/expand anymore
+            // Update UI to match current state
+            if (state.sidebarCollapsed) {
                 sidebar.classList.add('collapsed');
-                sidebar.style.width = '';
                 if (toggleBtn) {
                     toggleBtn.innerHTML = icons.chevronRight;
                     toggleBtn.title = 'Expand';
                 }
-            } else if (width > 1024 && state.sidebarCollapsed) {
-                // Auto-expand on desktop
-                state.sidebarCollapsed = false;
+            } else {
                 sidebar.classList.remove('collapsed');
                 if (toggleBtn) {
                     toggleBtn.innerHTML = icons.chevronLeft;
@@ -331,6 +376,15 @@
             if (toggleBtn) {
                 toggleBtn.style.display = isMobile ? 'none' : 'flex';
             }
+            
+            // Restore terminal height after layout change
+            setTimeout(() => {
+                const consoleEl = document.getElementById('console');
+                const savedHeight = localStorage.getItem('ide-terminal-height');
+                if (consoleEl && savedHeight) {
+                    consoleEl.style.height = savedHeight;
+                }
+            }, 10);
         }
     };
 
@@ -480,6 +534,9 @@
         // Setup unified sidebar
         Sidebar.setupListeners();
         Sidebar.setupResize();
+        
+        // Ensure sidebar state is properly applied after rebuild
+        Sidebar.handleResize();
 
         // Set up event listeners based on current mode
         if (state.currentMode === 'python') {
@@ -648,6 +705,9 @@
         }
         
         state.currentMode = newMode;
+        
+        // Save mode to localStorage
+        localStorage.setItem('ide-current-mode', newMode);
         
         // Rebuild IDE with new mode
         buildIDE();
@@ -1778,6 +1838,14 @@
         
         if (!handle || !consoleEl) return;
         
+        // Restore saved height from localStorage with a slight delay to ensure CSS is applied
+        setTimeout(() => {
+            const savedHeight = localStorage.getItem('ide-terminal-height');
+            if (savedHeight) {
+                consoleEl.style.height = savedHeight;
+            }
+        }, 10);
+        
         let isResizing = false;
         let startY = 0;
         let startHeight = 0;
@@ -1804,6 +1872,10 @@
                 isResizing = false;
                 handle.classList.remove('resizing');
                 document.body.style.cursor = '';
+                
+                // Save height to localStorage (just the numeric value)
+                const heightValue = consoleEl.style.height;
+                localStorage.setItem('ide-terminal-height', heightValue);
             }
         });
     }
@@ -1818,6 +1890,12 @@
         const preview = document.querySelector('.web-preview');
         
         if (!handle || !layout || !editors || !preview) return;
+        
+        // Restore saved width from localStorage
+        const savedWidth = localStorage.getItem('ide-web-editors-width');
+        if (savedWidth) {
+            layout.style.gridTemplateColumns = `${savedWidth} 1fr`;
+        }
         
         let isResizing = false;
         let startX = 0;
@@ -1857,6 +1935,11 @@
                 isResizing = false;
                 handle.classList.remove('resizing');
                 document.body.style.cursor = '';
+                
+                // Save width to localStorage
+                const currentColumns = layout.style.gridTemplateColumns;
+                const width = currentColumns.split(' ')[0]; // Extract first column width
+                localStorage.setItem('ide-web-editors-width', width);
             }
         });
     }
