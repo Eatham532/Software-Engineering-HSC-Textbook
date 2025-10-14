@@ -71,7 +71,7 @@ body {
     padding: 0 !important;
 }
 
-aside .md-source-file {
+.md-source-file {
     display: none !important;
 }
 
