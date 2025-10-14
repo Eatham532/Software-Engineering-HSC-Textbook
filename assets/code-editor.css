@@ -1,0 +1,1655 @@
+/**
+ * Multi-Language Code Editor IDE Styles
+ * 
+ * A full-featured IDE interface with:
+ * - Python: File explorer, Monaco Editor, Pyodide execution
+ * - Web: HTML/CSS/JS editors with live preview
+ * - Terminal: Command reference (read-only)
+ * - Material Design theme integration
+ * 
+ * Design: Custom educational IDE (not VS Code clone)
+ */
+
+/* Loading State */
+.editor-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 1.5rem;
+    background: var(--md-default-bg-color);
+}
+
+.loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--md-default-fg-color--lightest);
+    border-top: 4px solid var(--md-primary-fg-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.editor-loading p {
+    color: var(--md-default-fg-color--light);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Main IDE Container */
+#code-editor-app {
+    display: flex;
+    flex-direction: column;
+    background: var(--md-default-bg-color);
+    overflow: hidden;
+    height: 100%;
+    min-height: 0;
+}
+
+/* Toolbar */
+.ide-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.375rem 0.75rem;
+    background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 4;
+    min-height: 42px;
+}
+
+.ide-toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Mode Switcher */
+.ide-mode-switcher {
+    display: flex;
+    gap: 0.25rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.25rem;
+    border-radius: 0.375rem;
+}
+
+.mode-btn {
+    padding: 0.375rem 0.75rem;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.mode-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.mode-btn.active {
+    background: white;
+    color: var(--md-primary-fg-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ide-title {
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ide-title::before {
+    content: '{ }';
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.ide-toolbar-actions {
+    display: flex;
+    gap: 0.375rem;
+}
+
+/* Mobile Files Toggle - Hidden by default, shown only on mobile */
+/* Unified Mobile Sidebar Toggle Button */
+.mobile-sidebar-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+.mobile-sidebar-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-sidebar-btn:active {
+    transform: scale(0.95);
+}
+
+.mobile-sidebar-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+.ide-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+.ide-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.ide-btn:active {
+    transform: translateY(0);
+}
+
+.ide-btn.primary {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--md-primary-fg-color);
+}
+
+.ide-btn.primary:hover {
+    background: white;
+}
+
+.ide-btn-stop {
+    background: rgba(239, 83, 80, 0.9);
+    color: white;
+}
+
+.ide-btn-stop:hover {
+    background: rgba(239, 83, 80, 1);
+}
+
+/* SVG Icons for buttons */
+.ide-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Main Workspace */
+.ide-workspace {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* Python layout: sidebar column | editor column (editor-area uses flexbox internally) */
+.ide-workspace.python-mode {
+    grid-template-columns: auto 1fr;
+}
+
+.ide-workspace.python-mode .ide-sidebar {
+    /* Sidebar is full height, independent column */
+    height: 100%;
+}
+
+.ide-workspace.python-mode .ide-editor-area {
+    /* Editor area uses flexbox to stack editor and console */
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+/* Web mode: sidebar column | editor column (same grid layout as Python) */
+.ide-workspace.web-mode {
+    grid-template-columns: auto 1fr;
+}
+
+.ide-workspace.web-mode .ide-sidebar {
+    height: 100%;
+}
+
+.ide-workspace.web-mode .ide-editor-area {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+/* Unified IDE Sidebar - Works for both Python and Web modes */
+.ide-sidebar {
+    width: 250px;
+    min-width: 150px;
+    max-width: 400px;
+    background: var(--md-code-bg-color);
+    border-right: 1px solid var(--md-default-fg-color--lightest);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+/* Sidebar Header - Unified design */
+.sidebar-header {
+    padding: 0.5rem 0.75rem;
+    background: var(--md-default-fg-color--lightest);
+    border-bottom: 1px solid var(--md-default-fg-color--lighter);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+}
+
+.sidebar-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sidebar-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--md-default-fg-color);
+    fill: none;
+}
+
+.sidebar-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--md-default-fg-color);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.sidebar-toggle-btn:hover {
+    color: var(--md-primary-fg-color);
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 0.25rem;
+}
+
+.sidebar-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+}
+
+/* Sidebar Content Area */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Collapsed State */
+.ide-sidebar.collapsed {
+    width: 40px !important;
+    min-width: 40px !important;
+}
+
+.ide-sidebar.collapsed .sidebar-resize-handle {
+    display: none;
+}
+
+.ide-sidebar.collapsed .sidebar-header {
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ide-sidebar.collapsed .sidebar-title {
+    display: none;
+}
+
+.ide-sidebar.collapsed .sidebar-icon {
+    margin: 0;
+}
+
+.ide-sidebar.collapsed .sidebar-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.ide-sidebar.collapsed .sidebar-toggle-btn {
+    padding: 0.125rem;
+}
+
+.ide-sidebar.collapsed .sidebar-toggle-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.ide-sidebar.collapsed .sidebar-content {
+    display: none;
+}
+
+/* Unified Sidebar Resize Handle */
+.sidebar-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.sidebar-resize-handle:hover,
+.sidebar-resize-handle.resizing {
+    background: var(--md-accent-fg-color);
+    opacity: 0.6;
+}
+
+/* Python Mode: File List */
+.file-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    position: relative;
+    margin-bottom: 0.125rem;
+    font-size: 0.8rem;
+}
+
+.file-item:hover {
+    background: var(--md-default-fg-color--lightest);
+}
+
+.file-item.active {
+    background: var(--md-primary-fg-color--transparent);
+    font-weight: 500;
+}
+
+.file-item.template::after {
+    content: '⚠';
+    position: absolute;
+    right: 2rem;
+    opacity: 0.4;
+    font-size: 0.8rem;
+}
+
+.file-icon {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.file-icon::before {
+    content: '📄';
+}
+
+.file-item.active .file-icon::before {
+    content: '📝';
+}
+
+.file-name {
+    color: var(--md-typeset-color);
+    flex: 1;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.file-delete {
+    background: none;
+    border: none;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.file-item:hover .file-delete {
+    opacity: 1;
+}
+
+.file-delete:hover {
+    color: var(--md-error-fg-color, #ef5350);
+}
+
+.file-delete::before {
+    content: '✕';
+    font-size: 1.1rem;
+}
+
+.new-file-form {
+    padding: 0.5rem;
+    background: var(--md-default-fg-color--lightest);
+    border-top: 1px solid var(--md-default-fg-color--lighter);
+    flex-shrink: 0;
+}
+
+.ide-sidebar.collapsed .new-file-form {
+    display: none;
+}
+
+.new-file-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--md-default-fg-color--lighter);
+    border-radius: 0.25rem;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    font-family: var(--md-code-font-family);
+    font-size: 0.85rem;
+    box-sizing: border-box;
+}
+
+.new-file-input:focus {
+    outline: none;
+    border-color: var(--md-primary-fg-color);
+}
+
+/* Context Menu */
+.context-menu {
+    position: fixed;
+    background: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lighter);
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0;
+    z-index: 300;
+    min-width: 180px;
+}
+
+.context-menu-item {
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.context-menu-item:hover {
+    background: var(--md-default-fg-color--lightest);
+}
+
+.context-menu-item::before {
+    width: 1.2rem;
+    text-align: center;
+}
+
+.context-menu-item.rename::before { content: '✏'; }
+.context-menu-item.duplicate::before { content: '📋'; }
+.context-menu-item.delete::before { content: '🗑'; }
+
+/* Editor Area */
+.ide-editor-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
+}
+
+/* File Tabs */
+.editor-tabs {
+    display: flex;
+    background: var(--md-default-fg-color--lightest);
+    border-bottom: 1px solid var(--md-default-fg-color--lighter);
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.editor-tabs::-webkit-scrollbar {
+    height: 4px;
+}
+
+.editor-tabs::-webkit-scrollbar-thumb {
+    background: var(--md-default-fg-color--lighter);
+    border-radius: 2px;
+}
+
+.editor-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid var(--md-default-fg-color--lighter);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    position: relative;
+}
+
+.editor-tab:hover {
+    background: var(--md-default-fg-color--lightest);
+}
+
+.editor-tab.active {
+    background: var(--md-code-bg-color);
+    border-bottom: 2px solid var(--md-primary-fg-color);
+}
+
+.editor-tab-name {
+    font-size: 0.8125rem;
+    font-family: var(--md-code-font-family);
+}
+
+.editor-tab.modified .editor-tab-name::after {
+    content: '●';
+    margin-left: 0.5rem;
+    color: var(--md-accent-fg-color);
+}
+
+.editor-tab-close {
+    background: none;
+    border: none;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    padding: 0.2rem;
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+
+.editor-tab:hover .editor-tab-close {
+    opacity: 1;
+}
+
+.editor-tab-close:hover {
+    color: var(--md-error-fg-color, #ef5350);
+}
+
+.editor-tab-close::before {
+    content: '✕';
+}
+
+/* Monaco Editor Container */
+.editor-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    min-height: 200px; /* Prevent console from squeezing editor too much */
+}
+
+#monaco-editor {
+    width: 100%;
+    height: 100%;
+}
+
+/* Empty State */
+.editor-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 1.5rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.editor-empty-state-icon {
+    opacity: 0.3;
+}
+
+.editor-empty-state-icon svg {
+    width: 64px;
+    height: 64px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+}
+
+.editor-empty-state-text {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.editor-empty-state-hint {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Console Panel - Terminal Style */
+.ide-console {
+    border-top: 1px solid var(--md-default-fg-color--lighter);
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    min-height: 100px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    position: relative;
+}
+
+/* Resize handle for console */
+.console-resize-handle {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #404040;
+    cursor: ns-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.console-resize-handle:hover,
+.console-resize-handle.resizing {
+    background: #4ade80;
+}
+
+.ide-console.collapsed {
+    height: 50px;
+    min-height: 50px;
+}
+
+.ide-console.collapsed .console-resize-handle {
+    display: none;
+}
+
+.ide-console.collapsed .console-output,
+.ide-console.collapsed .console-header.console-actions {
+    display: none;
+}
+
+.console-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    background: #2d2d2d;
+    border-bottom: 1px solid #404040;
+    cursor: pointer;
+    user-select: none;
+}
+
+.console-title {
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: #cccccc;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: inherit;
+}
+
+.console-title::before {
+    content: '>_';
+    font-size: 0.9rem;
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.ide-console.collapsed .console-title::before {
+    content: '▶';
+    color: #cccccc;
+}
+
+.ide-console:not(.collapsed) .console-title::before {
+    content: '▼';
+    color: #cccccc;
+}
+
+.console-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.console-btn {
+    background: none;
+    border: none;
+    color: #888888;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    transition: color 0.2s ease;
+    font-family: inherit;
+}
+
+.console-btn:hover {
+    color: #ffffff;
+}
+
+.console-output {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem 1rem;
+    background: #1a1a1a;
+    font-family: inherit;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: #cccccc;
+}
+
+.console-output::-webkit-scrollbar {
+    width: 8px;
+}
+
+.console-output::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 4px;
+}
+
+.console-output::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
+.console-output::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+.console-line {
+    margin: 0.2rem 0;
+    padding: 0.1rem 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    transition: background-color 0.2s ease;
+}
+
+.console-line:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.console-line.stdout {
+    color: #cccccc;
+}
+
+.console-line.stderr {
+    color: #ff6b6b;
+}
+
+.console-line.error {
+    color: #ff4444;
+    font-weight: 500;
+}
+
+.console-line.success {
+    color: #4ade80;
+}
+
+.console-line.info {
+    color: #ffd93d;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.console-line.info::before {
+    content: '? ';
+    color: #ffd93d;
+}
+
+.console-line::before {
+    content: '$ ';
+    color: #4ade80;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+/* Console Input Line */
+.console-input-line {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    margin: 0;
+    background: transparent;
+    border: none;
+}
+
+.console-input-prompt {
+    color: #4ade80;
+    font-weight: bold;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.console-input-field {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #e5e7eb;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    padding: 0.25rem;
+    outline: none;
+    caret-color: #4ade80;
+}
+
+.console-input-field::placeholder {
+    color: #6b7280;
+    opacity: 0.7;
+}
+
+.console-input-field:focus {
+    background: rgba(74, 222, 128, 0.05);
+    border-radius: 0.25rem;
+}
+
+/* Pyodide Loading Progress - Terminal Style */
+.pyodide-progress {
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    background: #2d2d2d;
+    border-radius: 0.375rem;
+    border-left: 3px solid #4ade80;
+    color: #cccccc;
+    font-family: inherit;
+}
+
+.pyodide-progress-text {
+    font-size: 0.85rem;
+    color: #cccccc;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.pyodide-progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #404040;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pyodide-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4ade80, #22c55e);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.pyodide-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: progress-shimmer 1.5s infinite;
+}
+
+@keyframes progress-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.pyodide-progress-percentage {
+    font-size: 0.75rem;
+    color: #888888;
+    margin-top: 0.25rem;
+    text-align: right;
+}
+
+/* Resize Handle - Terminal Style */
+.resize-handle {
+    height: 4px;
+    background: #404040;
+    cursor: ns-resize;
+    transition: background 0.2s ease;
+    flex-shrink: 0;
+}
+
+.resize-handle:hover,
+.resize-handle.resizing {
+    background: #4ade80;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ide-toolbar {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .ide-title {
+        font-size: 0.9rem;
+    }
+    
+    .ide-title::before {
+        display: none;
+    }
+    
+    /* On tablets, collapsed sidebar is 40px, expanded sidebar uses natural width */
+    .ide-sidebar.collapsed {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+    
+    /* When expanded on tablet, allow sidebar to take its saved/natural width */
+    .ide-sidebar:not(.collapsed) {
+        width: auto;
+        min-width: 150px;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ide-toolbar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .ide-toolbar-left {
+        gap: 0.5rem;
+        flex: 1;
+    }
+    
+    .ide-mode-switcher {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .ide-title {
+        display: none;
+    }
+    
+    /* Show mobile sidebar toggle on mobile */
+    .mobile-sidebar-btn {
+        display: inline-flex;
+    }
+    
+    /* Collapse sidebar completely on mobile */
+    .ide-sidebar {
+        display: none;
+    }
+    
+    .ide-workspace,
+    .ide-workspace.python-mode,
+    .ide-workspace.web-mode {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .ide-editor-area {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .sidebar-resize-handle {
+        display: none !important;
+    }
+    
+    .ide-btn span {
+        display: none;
+    }
+    
+    .ide-btn {
+        padding: 0.5rem;
+        min-width: 36px;
+        justify-content: center;
+    }
+    
+    .ide-console {
+        height: 180px;
+    }
+    
+    .web-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    
+    .web-editors {
+        border-right: none;
+        border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    }
+}
+
+@media (max-width: 480px) {
+    .mode-btn {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .ide-sidebar {
+        width: 180px;
+    }
+    
+    .web-editor-tabs {
+        padding: 0.375rem 0.5rem;
+        gap: 0.25rem;
+    }
+    
+    .web-tab {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Dark Mode Enhancements */
+[data-md-color-scheme="slate"] .ide-toolbar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-md-color-scheme="slate"] .context-menu {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-md-color-scheme="slate"] .file-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Keyboard Shortcuts Hint */
+.keyboard-hint {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--md-default-fg-color);
+    color: var(--md-default-bg-color);
+    border-radius: 0.375rem;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 300;
+}
+
+.keyboard-hint.show {
+    opacity: 0.9;
+}
+
+/* Template Warning Banner */
+.template-warning {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255, 152, 0, 0.1);
+    border-left: 4px solid var(--md-warning-fg-color, #ff9800);
+    color: var(--md-warning-fg-color, #ff9800);
+    font-size: 0.9rem;
+}
+
+.template-warning::before {
+    content: '⚠';
+    font-size: 1.3rem;
+}
+
+/* ========================================
+   WEB IDE LAYOUT
+   ======================================== */
+
+.web-layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+    grid-template-rows: 100%;
+    height: 100%;
+    min-height: 0;
+    flex: 1;
+    overflow: hidden;
+}
+
+.web-layout > * {
+    /* Ensure all grid children are full height */
+    height: 100%;
+    min-height: 0;
+}
+
+/* Web Environment Sidebar */
+.web-sidebar {
+    display: flex;
+    flex-direction: column;
+    background: var(--md-code-bg-color);
+    border-right: 1px solid var(--md-default-fg-color--lightest);
+    overflow: hidden;
+    transition: width 0.3s ease, transform 0.3s ease;
+    width: 250px;
+    min-width: 150px;
+    position: relative;
+    height: 100%; /* Explicit full height */
+}
+
+/* Resize handle for web sidebar */
+.web-sidebar-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.web-sidebar-resize-handle:hover,
+.web-sidebar-resize-handle.resizing {
+    background: var(--md-accent-fg-color);
+    opacity: 0.6;
+}
+
+.web-sidebar.collapsed {
+    width: 40px;
+    min-width: 40px;
+}
+
+.web-sidebar.collapsed .web-sidebar-resize-handle {
+    display: none;
+}
+
+.web-sidebar.collapsed .web-sidebar-title,
+.web-sidebar.collapsed .web-env-actions,
+.web-sidebar.collapsed .environment-list {
+    display: none;
+}
+
+.web-sidebar-header {
+    padding: 0.5rem 0.75rem;
+    background: var(--md-default-fg-color--lightest);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 36px;
+}
+
+.web-sidebar.collapsed .web-sidebar-header {
+    padding: 0.5rem;
+    justify-content: center;
+}
+
+.web-sidebar-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.web-env-actions {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.env-name-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.25rem;
+    background: var(--md-default-bg-color);
+    color: var(--md-default-fg-color);
+    font-size: 0.875rem;
+    font-family: inherit;
+}
+
+.env-name-input:focus {
+    outline: none;
+    border-color: var(--md-accent-fg-color);
+}
+
+.ide-btn-small {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+}
+
+.environment-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+
+.env-empty {
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.875rem;
+    font-style: italic;
+}
+
+.env-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem;
+    margin-bottom: 0.375rem;
+    background: var(--md-default-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.env-item:hover {
+    background: var(--md-default-fg-color--lightest);
+    border-color: var(--md-accent-fg-color);
+}
+
+.env-item.current {
+    background: var(--md-accent-fg-color);
+    border-color: var(--md-accent-fg-color);
+    color: white;
+}
+
+.env-item.current .env-name,
+.env-item.current .env-date {
+    color: white;
+}
+
+.env-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.env-name {
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color);
+    margin-bottom: 0.125rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.env-date {
+    font-size: 0.75rem;
+    color: var(--md-default-fg-color--light);
+}
+
+.env-actions {
+    display: flex;
+    gap: 0.25rem;
+    margin-left: 0.5rem;
+}
+
+.env-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.env-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--md-default-fg-color--light);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+.env-btn:hover {
+    background: var(--md-default-fg-color--lightest);
+}
+
+.env-btn:hover svg {
+    stroke: var(--md-accent-fg-color);
+}
+
+.env-item.current .env-btn svg {
+    stroke: white;
+}
+
+.env-item.current .env-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.env-delete:hover svg {
+    stroke: var(--md-error-fg-color, #ef5350);
+}
+
+.web-editors {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--md-default-fg-color--lightest);
+    min-width: 300px;
+    overflow: hidden;
+    position: relative;
+    height: 100%; /* Explicit full height */
+}
+
+/* Resize handle for web editors */
+.web-editors-resize-handle {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: transparent;
+    cursor: col-resize;
+    z-index: 3;
+    transition: background 0.2s ease;
+}
+
+.web-editors-resize-handle:hover,
+.web-editors-resize-handle.resizing {
+    background: var(--md-accent-fg-color);
+    opacity: 0.6;
+}
+
+.web-editor-tabs {
+    display: flex;
+    background: var(--md-code-bg-color);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    padding: 0.375rem 0.75rem;
+    gap: 0.375rem;
+}
+
+.web-tab {
+    padding: 0.375rem 0.75rem;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    color: var(--md-default-fg-color--light);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.web-tab:hover {
+    background: var(--md-default-fg-color--lightest);
+    color: var(--md-default-fg-color);
+}
+
+.web-tab.active {
+    background: var(--md-primary-fg-color);
+    color: white;
+    border-color: var(--md-primary-fg-color);
+}
+
+.web-monaco {
+    flex: 1;
+    overflow: hidden;
+}
+
+.web-preview {
+    display: flex;
+    flex-direction: column;
+    background: var(--md-default-bg-color);
+    min-width: 300px;
+    overflow: hidden;
+    height: 100%; /* Explicit full height */
+}
+
+.preview-header {
+    padding: 0.5rem 1rem;
+    background: var(--md-code-bg-color);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--md-default-fg-color);
+}
+
+#preview-iframe {
+    flex: 1;
+    border: none;
+    background: white;
+}
+
+/* Web IDE Responsive */
+@media (max-width: 1024px) {
+    .web-layout {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "sidebar editors"
+            "sidebar preview";
+    }
+    
+    .web-sidebar {
+        grid-area: sidebar;
+        height: 100%; /* Full height across both rows */
+    }
+    
+    .web-editors {
+        grid-area: editors;
+        border-right: none;
+        border-bottom: 1px solid var(--md-default-fg-color--lightest);
+    }
+    
+    .web-preview {
+        grid-area: preview;
+    }
+    
+    /* Collapse web sidebar on tablets and smaller */
+    .web-sidebar {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+    
+    .web-sidebar:not(.force-expanded) {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .web-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "editors"
+            "preview";
+    }
+    
+    .web-sidebar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 200px;
+        height: 100%; /* Full viewport height when shown */
+        max-height: none;
+        z-index: 4;
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+        border-right: 1px solid var(--md-default-fg-color--lightest);
+        border-bottom: none;
+        /* Start collapsed on mobile */
+        transform: translateX(-100%);
+    }
+    
+    .web-sidebar:not(.force-expanded) {
+        transform: translateX(-100%);
+    }
+    
+    .web-editors {
+        grid-area: editors;
+    }
+    
+    .web-preview {
+        grid-area: preview;
+    }
+    
+    .web-sidebar.collapsed {
+        transform: translateX(-100%);
+        width: 200px;
+    }
+    
+    .web-sidebar.collapsed .web-sidebar-resize-handle {
+        display: none;
+    }
+    
+    .web-sidebar-resize-handle {
+        display: none; /* No resize handle on mobile */
+    }
+    
+    .environment-list {
+        max-height: none;
+    }
+    
+    .web-editors-resize-handle {
+        display: none; /* No resize handle on mobile */
+    }
+}
+
+@media screen and (min-width: 76.25em) {
+
+}
+/* ========================================
+   MOBILE OVERLAY MODAL
+   Full-page overlay for files/environments on mobile
+   ======================================== */
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--md-default-bg-color);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.mobile-overlay.active {
+    display: flex;
+}
+
+.mobile-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    min-height: 56px;
+}
+
+.mobile-overlay-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mobile-overlay-title svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+}
+
+.mobile-overlay-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: all 0.2s ease;
+}
+
+.mobile-overlay-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-overlay-close:active {
+    transform: scale(0.95);
+}
+
+.mobile-overlay-close svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+.mobile-overlay-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: var(--md-default-bg-color);
+}
+
+/* Show overlay only on mobile */
+@media (min-width: 769px) {
+    .mobile-overlay {
+        display: none !important;
+    }
+}
