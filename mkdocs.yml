@@ -95,7 +95,67 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.mark
   - pymdownx.tasklist
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        # Python
+        - name: python-exec
+          class: python-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: python-template
+          class: python-template
+          format: !!python/name:code_fence_formatter.format_template
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: python-error
+          class: python-error
+          format: !!python/name:code_fence_formatter.format_error
+          validator: !!python/name:code_fence_formatter.fence_validator
+        # Web Languages
+        - name: html-exec
+          class: html-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: html-template
+          class: html-template
+          format: !!python/name:code_fence_formatter.format_template
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: css-exec
+          class: css-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: css-template
+          class: css-template
+          format: !!python/name:code_fence_formatter.format_template
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: javascript-exec
+          class: javascript-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: javascript-template
+          class: javascript-template
+          format: !!python/name:code_fence_formatter.format_template
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: js-exec
+          class: js-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: js-template
+          class: js-template
+          format: !!python/name:code_fence_formatter.format_template
+          validator: !!python/name:code_fence_formatter.fence_validator
+        # Shell/Terminal (read-only)
+        - name: bash-exec
+          class: bash-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: shell-exec
+          class: shell-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
+        - name: powershell-exec
+          class: powershell-exec
+          format: !!python/name:code_fence_formatter.format_exec
+          validator: !!python/name:code_fence_formatter.fence_validator
   - pymdownx.escapeall
   - toc:
       permalink: true
@@ -120,10 +180,13 @@ extra_css:
   - assets/diagram-fix.css
   - assets/cross-reference.css
   - assets/site-banner.css
+  - assets/code-runner.css
+  - assets/code-editor.css
 
 extra_javascript:
   - assets/diagram-modal.js
   - assets/quiz.js
+  - assets/code-blocks.js
 
 extra:
     generator: false

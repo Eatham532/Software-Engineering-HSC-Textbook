@@ -1,0 +1,340 @@
+/**
+ * Code Runner Styles
+ * 
+ * Styles for the code execution features including:
+ * - Run and Open in Editor buttons
+ * - Console output display
+ * - Template/error code indicators
+ * - Material Design theme integration
+ */
+
+/* Code block container modifications */
+.highlight {
+    position: relative;
+    margin: 1em 0;
+}
+
+/* Base button styles - match Material's md-clipboard button */
+.code-action-btn {
+    border-radius: 0.1rem;
+    color: var(--md-default-fg-color--lightest);
+    cursor: pointer;
+    height: 1.5em;
+    outline-color: var(--md-accent-fg-color);
+    outline-offset: 0.1rem;
+    position: absolute;
+    top: 0.5em;
+    transition: color 0.25s;
+    width: 1.5em;
+    z-index: 1;
+    background: transparent;
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.code-action-btn:not(.focus-visible) {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+:hover > .code-action-btn:not(:disabled) {
+    color: var(--md-default-fg-color--light);
+}
+
+/* Position buttons from right to left (copy button is rightmost) */
+.code-editor-btn {
+    right: 2.5em; /* Next to copy button */
+}
+
+.code-run-btn,
+.code-preview-btn {
+    right: 4em; /* Next to editor button */
+}
+
+.code-action-btn:hover:not(:disabled) {
+    color: var(--md-accent-fg-color);
+}
+
+.code-action-btn:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+/* Button icons - using simple unicode */
+.code-run-btn::before {
+    content: '▶';
+    font-size: 0.9em;
+}
+
+.code-preview-btn::before {
+    content: '👁';
+    font-size: 1em;
+}
+
+.code-editor-btn::before {
+    content: '⇱';
+    font-size: 1.1em;
+}
+
+/* Loading state */
+.code-run-btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.code-run-btn.loading::before {
+    content: '⟳';
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Console output container */
+.code-output {
+    margin-top: 0;
+    margin-bottom: 1em;
+    border-radius: 0 0 0.25rem 0.25rem;
+    overflow: hidden;
+    background: var(--md-code-bg-color);
+    border: 1px solid var(--md-default-fg-color--lightest);
+    border-top: none;
+}
+
+/* For small screens */
+@media screen and (max-width: 44.9844em) {
+    .code-output {
+        border-radius: 0px;
+        margin: 1em -.8rem;
+    }
+}
+
+.code-output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em 1em;
+    background: var(--md-default-fg-color--lightest);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color--light);
+}
+
+[data-md-color-scheme="slate"] .code-output-header {
+    background: var(--md-code-bg-color);
+    border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.code-output-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.code-output-title::before {
+    content: '▶';
+    font-size: 0.8em;
+}
+
+.code-output-clear {
+    background: none;
+    border: none;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    padding: 0.2em 0.5em;
+    font-size: 0.7rem;
+    transition: color 0.2s ease;
+}
+
+.code-output-clear:hover {
+    color: var(--md-accent-fg-color);
+}
+
+.code-output-content {
+    padding: 1em;
+    font-family: var(--md-code-font-family);
+    font-size: 0.85em;
+    line-height: 1.5;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Output styling */
+.code-output-content .output-line {
+    margin: 0.2em 0;
+}
+
+.code-output-content .output-stdout {
+    color: var(--md-default-fg-color);
+}
+
+.code-output-content .output-stderr {
+    color: var(--md-error-fg-color, #ef5350);
+}
+
+.code-output-content .output-error {
+    color: var(--md-error-fg-color, #ef5350);
+    font-weight: 500;
+}
+
+.code-output-content .output-success {
+    color: var(--md-success-fg-color, #66bb6a);
+}
+
+.code-output-content .output-info {
+    color: var(--md-accent-fg-color);
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* Empty state */
+.code-output-content:empty::before {
+    content: 'No output yet. Click "Run" to execute the code.';
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
+    opacity: 0.6;
+}
+
+/* Adjust for existing copy button */
+.highlight button[class*="copy"] {
+    top: 0.5em;
+    right: 0.5em;
+}
+
+/* When code actions exist, adjust copy button position */
+.highlight:has(.code-actions) button[class*="copy"] {
+    right: auto;
+    left: 0.5em;
+}
+
+/* Smooth transitions */
+.code-output {
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-actions {
+        flex-direction: column;
+        gap: 0.3em;
+    }
+    
+    .code-action-btn {
+        padding: 0.3em 0.6em;
+        font-size: 0.7rem;
+    }
+    
+    .code-output-content {
+        font-size: 0.8em;
+        max-height: 300px;
+    }
+}
+
+/* Dark mode specific adjustments */
+[data-md-color-scheme="slate"] .code-output {
+    border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .code-output-content .output-error {
+    color: #ff6b6b;
+}
+
+[data-md-color-scheme="slate"] .code-output-content .output-success {
+    color: #51cf66;
+}
+
+/* Pyodide loading progress bar */
+.pyodide-progress {
+    padding: 1em;
+    margin: 0.5em 0;
+    background: var(--md-code-bg-color);
+    border-radius: 0.25rem;
+    border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.pyodide-progress-text {
+    font-size: 0.85em;
+    color: var(--md-default-fg-color--light);
+    margin-bottom: 0.5em;
+    font-weight: 500;
+}
+
+.pyodide-progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pyodide-progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        var(--md-accent-fg-color) 0%,
+        var(--md-primary-fg-color) 100%
+    );
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.pyodide-progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.pyodide-progress-percentage {
+    font-size: 0.75em;
+    color: var(--md-default-fg-color--light);
+    margin-top: 0.5em;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+[data-md-color-scheme="slate"] .pyodide-progress {
+    background: rgba(0, 0, 0, 0.2);
+}
