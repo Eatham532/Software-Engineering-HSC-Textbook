@@ -1769,6 +1769,7 @@
     }
 
     function promptSaveEnvironment() {
+        const currentEnv = localStorage.getItem(CURRENT_ENV_KEY);
         let name = currentEnv;
         
         // If no current environment, prompt for name

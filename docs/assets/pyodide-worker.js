@@ -7,6 +7,85 @@ let pyodide = null;
 let pyodideReady = false;
 let currentExecutionId = null;
 
+/**
+ * Robustly preprocess Python code to add 'await' before input() calls
+ * Handles various edge cases: assignments, nested expressions, comments, strings
+ *
+ * NOTE: This is duplicated from ide-utils.js since web workers cannot share
+ * functions with the main thread. Keep in sync with the shared utility.
+ */
+function preprocessInputCalls(code) {
+    // Simple tokenizer to handle strings and comments
+    const tokens = [];
+    let i = 0;
+    
+    while (i < code.length) {
+        const char = code[i];
+        
+        // Handle string literals
+        if (char === '"' || char === "'") {
+            const quote = char;
+            let str = char;
+            i++;
+            while (i < code.length && (code[i] !== quote || code[i-1] === '\\')) {
+                str += code[i];
+                i++;
+            }
+            if (i < code.length) {
+                str += code[i];
+                i++;
+            }
+            tokens.push({ type: 'string', value: str });
+            continue;
+        }
+        
+        // Handle comments
+        if (char === '#') {
+            let comment = '';
+            while (i < code.length && code[i] !== '\n') {
+                comment += code[i];
+                i++;
+            }
+            tokens.push({ type: 'comment', value: comment });
+            continue;
+        }
+        
+        // Handle regular code
+        let codeSegment = '';
+        while (i < code.length && char !== '"' && char !== "'" && char !== '#') {
+            codeSegment += code[i];
+            i++;
+            if (code[i] === '\n') break; // Process line by line for simplicity
+        }
+        
+        if (codeSegment.trim()) {
+            tokens.push({ type: 'code', value: codeSegment });
+        }
+    }
+    
+    // Process code tokens to replace input() calls
+    const processedTokens = tokens.map(token => {
+        if (token.type !== 'code') {
+            return token;
+        }
+        
+        // Use regex to find ALL input( calls and add await
+        // Match any context before input( - more aggressive to catch all cases
+        const processed = token.value.replace(
+            /(?<!await\s)(\b)input\s*\(/g,
+            (match, boundary) => {
+                // Check if 'await ' appears immediately before
+                return boundary + 'await input(';
+            }
+        );
+        
+        return { ...token, value: processed };
+    });
+    
+    // Reconstruct the code
+    return processedTokens.map(token => token.value).join('');
+}
+
 // Handle messages from main thread
 self.onmessage = async function(e) {
     const { type, data, executionId } = e.data;
@@ -110,11 +189,25 @@ async function writeFilesToFS(files) {
     }
 
     try {
-        // Write each file to Pyodide's virtual filesystem using Python's open()
+        // Write each file to Pyodide's virtual filesystem
+        // For Python files, preprocess to add 'await' to input() and make functions async
         for (const [filename, content] of Object.entries(files)) {
+            let processedContent = content;
+            
+            if (filename.endsWith('.py')) {
+                // First, add 'await' before input() calls
+                processedContent = preprocessInputCalls(content);
+                
+                // Then, make all function definitions async
+                processedContent = processedContent.replace(
+                    /^(\s*)def\s+(\w+)\s*\(/gm,
+                    '$1async def $2('
+                );
+            }
+            
             await pyodide.runPythonAsync(`
 with open(${JSON.stringify(filename)}, 'w', encoding='utf-8') as f:
-    f.write(${JSON.stringify(content)})
+    f.write(${JSON.stringify(processedContent)})
 `);
         }
         
@@ -177,8 +270,8 @@ class StreamToMain:
     def getvalue(self):
         return ''.join(self.buffer)
 
-async def custom_input(prompt=''):
-    """Custom input function that requests input from main thread"""
+async def _async_custom_input(prompt=''):
+    """Async input function that requests input from main thread"""
     import js
     import asyncio
     
@@ -216,12 +309,26 @@ _stderr_stream = StreamToMain('stderr')
 # Redirect
 sys.stdout = _stdout_stream
 sys.stderr = _stderr_stream
-builtins.input = custom_input
+builtins.input = _async_custom_input
         `);
 
         // Run the code (runPythonAsync supports top-level await)
-        // Pre-process code to add 'await' before input() calls
-        const processedCode = code.replace(/(\s*)([a-zA-Z_][a-zA-Z0-9_]*\s*=\s*)?input\(/g, '$1$2await input(');
+        // Preprocess to add 'await' before input() calls
+        let processedCode = preprocessInputCalls(code);
+        
+        // Also need to await function calls in imported modules
+        // Add 'await' before function calls that might be async
+        processedCode = processedCode.replace(
+            /^(\s*)(\w+)\s*\(/gm,
+            (match, indent, funcName) => {
+                // Don't await built-in functions or already awaited calls
+                const builtins = ['print', 'len', 'range', 'str', 'int', 'float', 'bool', 'list', 'dict', 'set', 'tuple', 'type', 'isinstance', 'hasattr', 'getattr', 'setattr'];
+                if (builtins.includes(funcName) || match.includes('await ')) {
+                    return match;
+                }
+                return `${indent}await ${funcName}(`;
+            }
+        );
         
         try {
             const result = await pyodide.runPythonAsync(processedCode);

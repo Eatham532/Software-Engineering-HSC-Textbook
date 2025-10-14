@@ -219,9 +219,7 @@
         if (percentage) percentage.textContent = `${percent}%`;
     }
 
-    /**
-     * Execute Python code using Pyodide
-     */
+
     async function executePythonCode(code, outputElement = null) {
         const pyodide = await loadPyodide(outputElement ? outputElement.querySelector('.code-output-content') : null);
 
@@ -265,8 +263,8 @@ async def custom_input(prompt=''):
 builtins.input = custom_input
             `);
 
-            // Pre-process code to add 'await' before input() calls (same as code-editor)
-            const processedCode = code.replace(/(\s*)([a-zA-Z_][a-zA-Z0-9_]*\s*=\s*)?input\(/g, '$1$2await input(');
+            // Pre-process code to add 'await' before input() calls
+            const processedCode = window.IDEUtils.preprocessInputCalls(code);
 
             // Run the user's code
             const result = await pyodide.runPythonAsync(processedCode);
