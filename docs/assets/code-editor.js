@@ -2345,18 +2345,6 @@
     }
 
     /**
-     * Setup window resize listener for responsive behavior
-     */
-    function setupWindowResizeListener_OLD() {
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            // Debounce resize events
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(handleResponsiveCollapse, 250);
-        });
-    }
-
-    /**
      * Initialize when DOM is ready
      */
     if (document.readyState === 'loading') {

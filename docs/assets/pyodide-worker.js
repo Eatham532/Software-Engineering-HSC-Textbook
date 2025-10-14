@@ -114,11 +114,15 @@ self.onmessage = async function(e) {
                 // Provide input value to waiting Python code
                 if (pyodide && pyodideReady) {
                     try {
-                        // Use runPython to safely set the value in Python context
+                        // Safely set the value using globals - no code injection risk
+                        pyodide.globals.set('_worker_input_value', data.value);
+                        
+                        // Then just make it available in sys module
                         pyodide.runPython(`
-import sys
-sys._worker_input_value = ${JSON.stringify(data.value)}
-`);
+            import sys
+            sys._worker_input_value = _worker_input_value
+            del globals()['_worker_input_value']  # Clean up global namespace
+            `);
                     } catch (err) {
                         console.error('Error setting input value:', err);
                     }
