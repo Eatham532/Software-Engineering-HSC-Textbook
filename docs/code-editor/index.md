@@ -71,6 +71,10 @@ body {
     padding: 0 !important;
 }
 
+aside .md-source-file {
+    display: none !important;
+}
+
 /* Sidebar & header tweaks *//* Use sidebar for nav instead of tabs */
 .md-container .md-tabs { display: none !important; }
 
