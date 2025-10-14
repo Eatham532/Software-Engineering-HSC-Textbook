@@ -35,7 +35,8 @@
         currentMode: localStorage.getItem('ide-current-mode') || 'python', // Restore last mode
         webFiles: { html: '', css: '', js: '', current: 'html' },
         executing: false, // Track if code is currently executing
-        shouldStop: false // Flag to stop execution
+        shouldStop: false, // Flag to stop execution
+        isLoadingContent: false // Flag to prevent false modified detection when loading files
     };
 
     // Constants
@@ -47,7 +48,7 @@
     const DEFAULT_FILES = {
         python: {
             name: 'main.py',
-            content: '# Welcome to the Python IDE!\n# Write your code here and click Run to execute it.\n# You can use print() for output and input() for user input.\n\nprint("Hello, World!")\n\n# Try using input():\n# name = input("What is your name? ")\n# print(f"Nice to meet you, {name}!")\n',
+            content: '# Welcome to the Python Editor!\n# Write your code here and click Run to execute it.\n# You can use print() for output and input() for user input.\n\nprint("Hello, World!")\n\n# Try using input():\n# name = input("What is your name? ")\n# print(f"Nice to meet you, {name}!")\n',
             type: 'exec'
         },
         html: {
@@ -665,7 +666,8 @@
 
                     // Listen for content changes
                     state.editor.onDidChangeModelContent(() => {
-                        if (state.currentFile) {
+                        // Only mark as modified if we're not programmatically loading content
+                        if (state.currentFile && !state.isLoadingContent) {
                             markAsModified(state.currentFile);
                         }
                     });
@@ -759,7 +761,9 @@
                 }
                 
                 monaco.editor.setModelLanguage(state.editor.getModel(), languageMap[currentFile]);
+                state.isLoadingContent = true;
                 state.editor.setValue(state.webFiles[currentFile]);
+                state.isLoadingContent = false;
                 state.editor.updateOptions({ readOnly: false });
                 
                 // Update preview on every change
@@ -891,7 +895,9 @@
 
             // Update editor with current file
             if (state.editor && state.webFiles.current) {
+                state.isLoadingContent = true;
                 state.editor.setValue(state.webFiles[state.webFiles.current] || '');
+                state.isLoadingContent = false;
             }
 
             // Save as current files
@@ -1012,7 +1018,9 @@
         const content = state.webFiles[fileType] || '';
         
         monaco.editor.setModelLanguage(state.editor.getModel(), languageMap[fileType]);
+        state.isLoadingContent = true;
         state.editor.setValue(content);
+        state.isLoadingContent = false;
         
         // Update active tab
         document.querySelectorAll('.web-tab').forEach(tab => {
@@ -1210,7 +1218,9 @@
 
         // Load content into editor
         const file = state.files[name];
+        state.isLoadingContent = true;
         state.editor.setValue(file.content);
+        state.isLoadingContent = false;
         
         // Show template warning if needed
         showTemplateWarning(file.type);
@@ -1245,7 +1255,9 @@
                 openFile(state.tabs[newIndex]);
             } else {
                 state.currentFile = null;
+                state.isLoadingContent = true;
                 state.editor.setValue('');
+                state.isLoadingContent = false;
                 updateEmptyState();
             }
         }
@@ -2030,7 +2042,9 @@
                             'js': 'javascript'
                         };
                         monaco.editor.setModelLanguage(state.editor.getModel(), monacoLangMap[webFileType]);
+                        state.isLoadingContent = true;
                         state.editor.setValue(data.code);
+                        state.isLoadingContent = false;
                         
                         // Update active tab
                         document.querySelectorAll('.web-tab').forEach(tab => {
