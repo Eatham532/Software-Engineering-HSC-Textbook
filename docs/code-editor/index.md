@@ -1,8 +1,11 @@
 ---
 title: Python Code Editor
 hide:
+
   - navigation
+
   - toc
+
   - footer
 template: main.html
 ---

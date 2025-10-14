@@ -25,6 +25,7 @@ Before contributing, ensure you have:
 - Python 3.13+ (or any Python 3.x version)
 
 - [uv](https://docs.astral.sh/uv/) for Python package management
+
 - [uv](https://docs.astral.sh/uv/) (recommended) or `pip` for Python package management
 
 - Git for version control
@@ -52,6 +53,7 @@ Before contributing, ensure you have:
    # Or use pip (standard Python installer)
    python -m pip install --upgrade pip
    python -m pip install -e .
+
    ```
 
 3. **Activate the virtual environment**:

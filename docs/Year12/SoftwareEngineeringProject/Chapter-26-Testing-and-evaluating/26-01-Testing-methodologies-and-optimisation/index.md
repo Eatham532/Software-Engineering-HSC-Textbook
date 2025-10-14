@@ -845,8 +845,11 @@ Components of effective test cases:
 **Acceptance Test Criteria**:
 
 - Directly tied to user stories and requirements
+
 - Written in business language, not technical terms
+
 - Testable and measurable outcomes
+
 - Clear pass/fail criteria
 
 ///
@@ -1076,25 +1079,37 @@ Both automated and manual testing serve important roles in a comprehensive testi
 **Automated Testing - Best For**:
 
 - **Regression testing**: Re-running tests after code changes
+
 - **Performance testing**: Load and stress testing scenarios
+
 - **Repetitive tests**: Tests that need frequent execution
+
 - **Data-driven testing**: Testing with large datasets
+
 - **Continuous integration**: Tests that run with every build
 
 **Manual Testing - Best For**:
 
 - **Exploratory testing**: Discovering unexpected issues
+
 - **Usability testing**: Evaluating user experience
+
 - **Ad-hoc testing**: Unstructured investigation
+
 - **Initial test creation**: Developing new test scenarios
+
 - **Complex scenarios**: Tests requiring human judgment
 
 **Decision Factors**:
 
 - Test frequency and repetition requirements
+
 - Complexity of test scenarios
+
 - Available resources and timeline
+
 - Return on investment for automation
+
 - Type of functionality being tested
 ///
 
