@@ -84,7 +84,12 @@ jobs:
           set -euo pipefail
           python -m pip install -e . || python -m pip install .
 
-      - name: � Build site for release
+      - name: 🛠️ Install zip utility
+        shell: bash
+        run: |
+          apt-get update && apt-get install -y zip
+
+      - name: 📦 Build site for release
         env:
           KROKI_SERVER_URL: http://kroki:8000
         shell: bash
