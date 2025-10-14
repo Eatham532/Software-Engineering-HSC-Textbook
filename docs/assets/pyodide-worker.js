@@ -17,6 +17,10 @@ self.onmessage = async function(e) {
                 await loadPyodide();
                 break;
             
+            case 'write_files':
+                await writeFilesToFS(data.files);
+                break;
+            
             case 'execute':
                 currentExecutionId = executionId;
                 await executePython(data.code);
@@ -96,6 +100,32 @@ async function loadPyodide() {
         self.postMessage({
             type: 'error',
             data: { message: `Failed to load Python: ${error.message}` }
+        });
+    }
+}
+
+async function writeFilesToFS(files) {
+    if (!pyodideReady) {
+        throw new Error('Python environment not loaded');
+    }
+
+    try {
+        // Write each file to Pyodide's virtual filesystem using Python's open()
+        for (const [filename, content] of Object.entries(files)) {
+            await pyodide.runPythonAsync(`
+with open(${JSON.stringify(filename)}, 'w', encoding='utf-8') as f:
+    f.write(${JSON.stringify(content)})
+`);
+        }
+        
+        self.postMessage({
+            type: 'files_written',
+            data: { count: Object.keys(files).length }
+        });
+    } catch (error) {
+        self.postMessage({
+            type: 'error',
+            data: { message: `Failed to write files: ${error.message}` }
         });
     }
 }

@@ -22,8 +22,7 @@
         pyodideWorker: null, // Web Worker for Python execution
         editor: null,
         consoleCollapsed: false,
-        sidebarCollapsed: window.innerWidth <= 768, // Start collapsed on mobile
-        webSidebarCollapsed: window.innerWidth <= 768, // Web env sidebar
+        sidebarCollapsed: window.innerWidth <= 1024, // Unified sidebar state - start collapsed on tablets and mobile
         modified: new Set(),
         tabs: [],
         currentMode: 'python', // 'python' or 'web'
@@ -79,6 +78,9 @@
         // Set up keyboard shortcuts
         setupKeyboardShortcuts();
         
+        // Set up window resize listener for responsive behavior
+        setupWindowResizeListener();
+        
         console.log('[IDE] Initialized successfully');
     }
 
@@ -95,11 +97,248 @@
         terminal: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>',
         globe: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>',
         chevronLeft: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>',
-        chevronRight: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>'
+        chevronRight: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>',
+        x: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>'
+    };
+
+    /**
+     * Unified Sidebar System
+     * Works for both Python (files) and Web (environments) modes
+     */
+    const Sidebar = {
+        /**
+         * Create sidebar HTML structure
+         */
+        create(mode) {
+            const isMobile = window.innerWidth <= 768;
+            const isCollapsed = state.sidebarCollapsed;
+            
+            const config = mode === 'python' ? {
+                id: 'ide-sidebar',
+                title: 'Files',
+                icon: icons.file,
+                toggleId: 'sidebar-toggle',
+                mobileToggleId: 'mobile-sidebar-toggle',
+                contentId: 'sidebar-content'
+            } : {
+                id: 'ide-sidebar',
+                title: 'Environments',
+                icon: icons.globe,
+                toggleId: 'sidebar-toggle',
+                mobileToggleId: 'mobile-sidebar-toggle',
+                contentId: 'sidebar-content'
+            };
+
+            return `
+                <aside class="ide-sidebar ${isCollapsed ? 'collapsed' : ''}" id="${config.id}">
+                    <div class="sidebar-header">
+                        <span class="sidebar-icon">${config.icon}</span>
+                        <span class="sidebar-title">${config.title}</span>
+                        <button class="sidebar-toggle-btn" id="${config.toggleId}" title="${isCollapsed ? 'Expand' : 'Collapse'}">
+                            ${isCollapsed ? icons.chevronRight : icons.chevronLeft}
+                        </button>
+                    </div>
+                    <div class="sidebar-content" id="${config.contentId}">
+                        ${mode === 'python' ? this.pythonContent() : this.webContent()}
+                    </div>
+                </aside>
+            `;
+        },
+
+        /**
+         * Python mode sidebar content (file list)
+         */
+        pythonContent() {
+            return `
+                <div class="file-list" id="file-list"></div>
+                <div class="new-file-form">
+                    <input type="text" class="new-file-input" id="new-file-input" 
+                           placeholder="new_file.py" 
+                           style="display: none;">
+                </div>
+            `;
+        },
+
+        /**
+         * Web mode sidebar content (environment list)
+         */
+        webContent() {
+            return `
+                <div class="web-env-actions">
+                    <input type="text" class="env-name-input" id="env-name-input" placeholder="Environment name">
+                    <button class="ide-btn ide-btn-small" id="save-env">
+                        ${icons.save}<span>Save</span>
+                    </button>
+                </div>
+                <div class="environment-list" id="environment-list"></div>
+            `;
+        },
+
+        /**
+         * Toggle sidebar collapsed/expanded state
+         */
+        toggle() {
+            const sidebar = document.getElementById('ide-sidebar');
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const mobileBtn = document.getElementById('mobile-sidebar-toggle');
+            const isMobile = window.innerWidth <= 768;
+            
+            state.sidebarCollapsed = !state.sidebarCollapsed;
+            
+            if (state.sidebarCollapsed) {
+                sidebar.classList.add('collapsed');
+                sidebar.style.width = ''; // Clear inline width
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = icons.chevronRight;
+                    toggleBtn.title = 'Expand';
+                }
+                // Mobile button stays the same - it's always the open button
+            } else {
+                sidebar.classList.remove('collapsed');
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = icons.chevronLeft;
+                    toggleBtn.title = 'Collapse';
+                }
+                // Mobile button stays the same - close button is separate
+            }
+        },
+
+        /**
+         * Mobile-specific toggle - always expands on mobile
+         */
+        toggleMobile() {
+            const sidebar = document.getElementById('ide-sidebar');
+            const isMobile = window.innerWidth <= 768;
+            
+            if (!isMobile) {
+                // On larger screens, use normal toggle
+                this.toggle();
+                return;
+            }
+            
+            // On mobile, only expand (close button is separate)
+            if (state.sidebarCollapsed) {
+                state.sidebarCollapsed = false;
+                sidebar.classList.remove('collapsed');
+            }
+        },
+
+        /**
+         * Setup sidebar event listeners
+         */
+        setupListeners() {
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const mobileBtn = document.getElementById('mobile-sidebar-toggle');
+            
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => this.toggle());
+            }
+            
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
+                    // On mobile, open the overlay modal instead
+                    if (window.innerWidth <= 768) {
+                        openMobileOverlay();
+                    } else {
+                        this.toggleMobile();
+                    }
+                });
+            }
+        },
+
+        /**
+         * Setup resize handle
+         */
+        setupResize() {
+            const sidebar = document.getElementById('ide-sidebar');
+            if (!sidebar || sidebar.querySelector('.sidebar-resize-handle')) return;
+            
+            const handle = document.createElement('div');
+            handle.className = 'sidebar-resize-handle';
+            sidebar.appendChild(handle);
+            
+            let isResizing = false;
+            let startX = 0;
+            let startWidth = 0;
+            
+            handle.addEventListener('mousedown', (e) => {
+                isResizing = true;
+                startX = e.clientX;
+                startWidth = sidebar.offsetWidth;
+                handle.classList.add('resizing');
+                document.body.style.cursor = 'col-resize';
+                e.preventDefault();
+            });
+            
+            document.addEventListener('mousemove', (e) => {
+                if (!isResizing) return;
+                
+                const deltaX = e.clientX - startX;
+                const newWidth = startWidth + deltaX;
+                const minWidth = 150;
+                const maxWidth = 400;
+                
+                // Clamp and apply directly (smooth like terminal resize)
+                const clampedWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
+                sidebar.style.width = `${clampedWidth}px`;
+            });
+            
+            document.addEventListener('mouseup', () => {
+                if (isResizing) {
+                    isResizing = false;
+                    handle.classList.remove('resizing');
+                    document.body.style.cursor = '';
+                }
+            });
+        },
+
+        /**
+         * Handle responsive behavior
+         */
+        handleResize() {
+            const width = window.innerWidth;
+            const sidebar = document.getElementById('ide-sidebar');
+            const toggleBtn = document.getElementById('sidebar-toggle');
+            const mobileBtn = document.getElementById('mobile-sidebar-toggle');
+            
+            if (!sidebar) return;
+            
+            const isMobile = width <= 768;
+            
+            // Auto-collapse on tablet/mobile if not manually opened
+            if (width <= 1024 && width > 768 && !state.sidebarCollapsed) {
+                state.sidebarCollapsed = true;
+                sidebar.classList.add('collapsed');
+                sidebar.style.width = '';
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = icons.chevronRight;
+                    toggleBtn.title = 'Expand';
+                }
+            } else if (width > 1024 && state.sidebarCollapsed) {
+                // Auto-expand on desktop
+                state.sidebarCollapsed = false;
+                sidebar.classList.remove('collapsed');
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = icons.chevronLeft;
+                    toggleBtn.title = 'Collapse';
+                }
+            }
+            
+            // Update button visibility for mobile/desktop transitions
+            if (mobileBtn) {
+                mobileBtn.style.display = isMobile ? 'inline-flex' : 'none';
+            }
+            if (toggleBtn) {
+                toggleBtn.style.display = isMobile ? 'none' : 'flex';
+            }
+        }
     };
 
     /**
      * Build the IDE HTML structure
+     */
+    /**
+     * Build the IDE HTML structure with unified sidebar
      */
     function buildIDE() {
         const app = document.getElementById('code-editor-app');
@@ -120,18 +359,15 @@
                    ${icons.refresh}<span>Refresh</span>
                </button>`;
         
+        const sidebarIcon = state.currentMode === 'python' ? icons.file : icons.globe;
+        const sidebarTitle = state.currentMode === 'python' ? 'Files' : 'Environments';
+        
         app.innerHTML = `
-            <div class="ide-toolbar">
+            <div class="ide-toolbar md-header--shadow">
                 <div class="ide-toolbar-left">
-                    ${state.currentMode === 'python' ? `
-                    <button class="mobile-files-toggle" id="mobile-files-toggle" title="Toggle Files">
-                        ${icons.file}
+                    <button class="mobile-sidebar-btn" id="mobile-sidebar-toggle" title="Toggle ${sidebarTitle}">
+                        ${sidebarIcon}
                     </button>
-                    ` : state.currentMode === 'web' ? `
-                    <button class="mobile-files-toggle" id="mobile-env-toggle" title="Toggle Environments">
-                        ${icons.globe}
-                    </button>
-                    ` : ''}
                     <div class="ide-mode-switcher">
                         <button class="mode-btn ${state.currentMode === 'python' ? 'active' : ''}" data-mode="python">
                             Python
@@ -155,38 +391,12 @@
                 </div>
             </div>
             
-            <div class="ide-workspace ${state.currentMode === 'python' ? 'python-mode' : state.currentMode === 'web' ? 'web-mode' : ''}">
-                ${state.currentMode === 'python' ? `
-                <aside class="ide-sidebar" id="sidebar">
-                    <div class="sidebar-header">
-                        <span class="sidebar-title">Files</span>
-                        <button class="sidebar-toggle" id="toggle-sidebar">◀</button>
-                    </div>
-                    <div class="file-list" id="file-list"></div>
-                    <div class="new-file-form">
-                        <input type="text" class="new-file-input" id="new-file-input" 
-                               placeholder="new_file.py" 
-                               style="display: none;">
-                    </div>
-                </aside>
-                ` : ''}
+            <div class="ide-workspace ${state.currentMode === 'python' ? 'python-mode' : 'web-mode'}">
+                ${Sidebar.create(state.currentMode)}
                 
                 <div class="ide-editor-area">
                     ${state.currentMode === 'web' ? `
                     <div class="web-layout">
-                        <div class="web-sidebar ${state.webSidebarCollapsed ? 'collapsed' : ''}" id="web-sidebar">
-                            <div class="web-sidebar-header">
-                                <span class="web-sidebar-title">Environments</span>
-                                <button class="sidebar-toggle" id="toggle-web-sidebar">◀</button>
-                            </div>
-                            <div class="web-env-actions">
-                                <input type="text" class="env-name-input" id="env-name-input" placeholder="Environment name">
-                                <button class="ide-btn ide-btn-small" id="save-env">
-                                    ${icons.save}<span>Save</span>
-                                </button>
-                            </div>
-                            <div class="environment-list" id="environment-list"></div>
-                        </div>
                         <div class="web-editors">
                             <div class="web-editor-tabs">
                                 <button class="web-tab ${state.webFiles.current === 'html' ? 'active' : ''}" data-web-file="html">
@@ -200,6 +410,7 @@
                                 </button>
                             </div>
                             <div id="monaco-editor" class="web-monaco"></div>
+                            <div class="web-editors-resize-handle"></div>
                         </div>
                         <div class="web-preview">
                             <div class="preview-header">Live Preview</div>
@@ -233,6 +444,22 @@
             </div>
             
             <div class="keyboard-hint" id="keyboard-hint"></div>
+            
+            <!-- Mobile Overlay Modal -->
+            <div class="mobile-overlay" id="mobile-overlay">
+                <div class="mobile-overlay-header">
+                    <div class="mobile-overlay-title" id="mobile-overlay-title">
+                        ${state.currentMode === 'python' ? icons.file : icons.globe}
+                        <span>${state.currentMode === 'python' ? 'Files' : 'Environments'}</span>
+                    </div>
+                    <button class="mobile-overlay-close" id="mobile-overlay-close">
+                        ${icons.x}
+                    </button>
+                </div>
+                <div class="mobile-overlay-content" id="mobile-overlay-content">
+                    <!-- Content will be populated dynamically -->
+                </div>
+            </div>
         `;
 
         // Set up mode switcher
@@ -240,46 +467,41 @@
             btn.addEventListener('click', () => switchMode(btn.dataset.mode));
         });
 
-        // Universal save button - saves files in Python mode, environment in Web mode
+        // Universal save button
         document.getElementById('save-all').addEventListener('click', () => {
             if (state.currentMode === 'python') {
                 saveAllFiles();
             } else if (state.currentMode === 'web') {
                 promptSaveEnvironment();
-                // Update preview after saving in Web mode
                 updateWebPreview();
             }
         });
+
+        // Setup unified sidebar
+        Sidebar.setupListeners();
+        Sidebar.setupResize();
 
         // Set up event listeners based on current mode
         if (state.currentMode === 'python') {
             document.getElementById('run-code').addEventListener('click', runCode);
             document.getElementById('stop-code').addEventListener('click', stopCode);
-            document.getElementById('new-file').addEventListener('click', showNewFileInput);
-            document.getElementById('toggle-sidebar').addEventListener('click', toggleSidebar);
-            document.getElementById('mobile-files-toggle').addEventListener('click', toggleSidebar);
+            const newFileBtn = document.getElementById('new-file');
+            if (newFileBtn) {
+                newFileBtn.addEventListener('click', showNewFileInput);
+            }
             document.getElementById('console-header').addEventListener('click', toggleConsole);
             document.getElementById('clear-console').addEventListener('click', clearConsole);
-            document.getElementById('new-file-input').addEventListener('keydown', handleNewFileInput);
-            setupResizeHandlers();
+            const newFileInput = document.getElementById('new-file-input');
+            if (newFileInput) {
+                newFileInput.addEventListener('keydown', handleNewFileInput);
+            }
             
-            // Close sidebar when clicking backdrop on mobile
-            const workspace = document.querySelector('.ide-workspace');
-            workspace.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768 && 
-                    !state.sidebarCollapsed && 
-                    e.target === workspace) {
-                    toggleSidebar();
-                }
-            });
         } else if (state.currentMode === 'web') {
             document.getElementById('refresh-preview').addEventListener('click', () => {
                 // Save environment before refreshing
                 saveWebFiles();
                 updateWebPreview();
             });
-            document.getElementById('toggle-web-sidebar').addEventListener('click', toggleWebSidebar);
-            document.getElementById('mobile-env-toggle').addEventListener('click', toggleWebSidebar);
             
             // Web tab switcher
             document.querySelectorAll('.web-tab').forEach(tab => {
@@ -287,191 +509,47 @@
             });
             
             // Environment management
-            document.getElementById('save-env').addEventListener('click', () => {
-                const nameInput = document.getElementById('env-name-input');
-                const name = nameInput.value.trim();
-                if (name) {
-                    saveEnvironment(name);
-                    nameInput.value = '';
-                }
-            });
+            const saveEnvBtn = document.getElementById('save-env');
+            const envNameInput = document.getElementById('env-name-input');
             
-            // Allow Enter key to save environment
-            document.getElementById('env-name-input').addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const name = e.target.value.trim();
+            if (saveEnvBtn && envNameInput) {
+                saveEnvBtn.addEventListener('click', () => {
+                    const name = envNameInput.value.trim();
                     if (name) {
                         saveEnvironment(name);
-                        e.target.value = '';
+                        envNameInput.value = '';
                     }
-                }
-            });
+                });
+                
+                // Allow Enter key to save environment
+                envNameInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const name = e.target.value.trim();
+                        if (name) {
+                            saveEnvironment(name);
+                            e.target.value = '';
+                        }
+                    }
+                });
+            }
             
             // Load environment list
             updateEnvironmentList();
             
-            // Close sidebar when clicking backdrop on mobile
-            const workspace = document.querySelector('.ide-workspace');
-            workspace.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768 && 
-                    !state.webSidebarCollapsed && 
-                    e.target === workspace) {
-                    toggleWebSidebar();
-                }
-            });
+            // Setup web editors resize handle for Web mode
+            setupWebEditorsResize();
         }
         
-        // Render file list
-        renderFileList();
+        // Render file list for Python mode
+        if (state.currentMode === 'python') {
+            renderFileList();
+            
+            // Setup console resize handle for Python mode
+            setupResizeHandle();
+        }
         
-        // Setup resize handlers
-        setupResizeHandlers();
-    }
-
-    /**
-     * Setup resize handlers for sidebars and console
-     */
-    function setupResizeHandlers() {
-        // Python mode: sidebar resize
-        const pythonSidebar = document.querySelector('.ide-sidebar');
-        if (pythonSidebar && !pythonSidebar.querySelector('.sidebar-resize-handle')) {
-            const handle = document.createElement('div');
-            handle.className = 'sidebar-resize-handle';
-            pythonSidebar.appendChild(handle);
-            setupHorizontalResize(pythonSidebar, handle);
-        }
-
-        // Python mode: console resize
-        const console = document.querySelector('.ide-console');
-        if (console && !console.querySelector('.console-resize-handle')) {
-            const handle = document.createElement('div');
-            handle.className = 'console-resize-handle';
-            console.appendChild(handle);
-            setupVerticalResize(console, handle);
-        }
-
-        // Web mode: web sidebar resize
-        const webSidebar = document.querySelector('.web-sidebar');
-        if (webSidebar && !webSidebar.querySelector('.web-sidebar-resize-handle')) {
-            const handle = document.createElement('div');
-            handle.className = 'web-sidebar-resize-handle';
-            webSidebar.appendChild(handle);
-            setupHorizontalResize(webSidebar, handle);
-        }
-
-        // Web mode: web editors resize
-        const webEditors = document.querySelector('.web-editors');
-        if (webEditors && !webEditors.querySelector('.web-editors-resize-handle')) {
-            const handle = document.createElement('div');
-            handle.className = 'web-editors-resize-handle';
-            webEditors.appendChild(handle);
-            setupHorizontalResize(webEditors, handle);
-        }
-    }
-
-    /**
-     * Setup horizontal resize for an element (sidebar)
-     */
-    function setupHorizontalResize(element, handle) {
-        let isResizing = false;
-        let startX = 0;
-        let startWidth = 0;
-
-        const onMouseDown = (e) => {
-            isResizing = true;
-            startX = e.clientX;
-            startWidth = element.offsetWidth;
-            handle.classList.add('resizing');
-            document.body.style.cursor = 'col-resize';
-            e.preventDefault();
-        };
-
-        const onMouseMove = (e) => {
-            if (!isResizing) return;
-            
-            const deltaX = e.clientX - startX;
-            const newWidth = startWidth + deltaX;
-            
-            // Get constraints
-            const minWidth = parseInt(getComputedStyle(element).minWidth) || 150;
-            let maxWidth = parseInt(getComputedStyle(element).maxWidth) || 600;
-            
-            // For web-editors, calculate max based on container and preview min-width
-            if (element.classList.contains('web-editors')) {
-                const container = element.closest('.web-layout');
-                const preview = container?.querySelector('.web-preview');
-                const sidebar = container?.querySelector('.web-sidebar');
-                
-                if (container && preview) {
-                    const containerWidth = container.offsetWidth;
-                    const sidebarWidth = sidebar ? sidebar.offsetWidth : 0;
-                    const previewMinWidth = parseInt(getComputedStyle(preview).minWidth) || 300;
-                    
-                    // Max width = container - sidebar - preview min width - gaps
-                    const calculatedMax = containerWidth - sidebarWidth - previewMinWidth - 20;
-                    maxWidth = Math.min(maxWidth, calculatedMax);
-                }
-            }
-            
-            if (newWidth >= minWidth && newWidth <= maxWidth) {
-                element.style.width = `${newWidth}px`;
-            }
-        };
-
-        const onMouseUp = () => {
-            if (isResizing) {
-                isResizing = false;
-                handle.classList.remove('resizing');
-                document.body.style.cursor = '';
-            }
-        };
-
-        handle.addEventListener('mousedown', onMouseDown);
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
-    }
-
-    /**
-     * Setup vertical resize for console
-     */
-    function setupVerticalResize(element, handle) {
-        let isResizing = false;
-        let startY = 0;
-        let startHeight = 0;
-
-        const onMouseDown = (e) => {
-            isResizing = true;
-            startY = e.clientY;
-            startHeight = element.offsetHeight;
-            handle.classList.add('resizing');
-            document.body.style.cursor = 'ns-resize';
-            e.preventDefault();
-        };
-
-        const onMouseMove = (e) => {
-            if (!isResizing) return;
-            
-            const deltaY = startY - e.clientY; // Inverted because we're resizing from top
-            const newHeight = startHeight + deltaY;
-            const minHeight = parseInt(getComputedStyle(element).minHeight) || 100;
-            const maxHeight = parseInt(getComputedStyle(element).maxHeight) || 600;
-            
-            if (newHeight >= minHeight && newHeight <= maxHeight) {
-                element.style.height = `${newHeight}px`;
-            }
-        };
-
-        const onMouseUp = () => {
-            if (isResizing) {
-                isResizing = false;
-                handle.classList.remove('resizing');
-                document.body.style.cursor = '';
-            }
-        };
-
-        handle.addEventListener('mousedown', onMouseDown);
-        document.addEventListener('mousemove', onMouseMove);
-        document.addEventListener('mouseup', onMouseUp);
+        // Setup mobile overlay
+        setupMobileOverlay();
     }
 
     /**
@@ -479,6 +557,14 @@
      */
     async function initMonaco() {
         return new Promise((resolve, reject) => {
+            // Wait for DOM to be ready
+            const editorElement = document.getElementById('monaco-editor');
+            if (!editorElement) {
+                console.error('[IDE] monaco-editor element not found');
+                reject(new Error('monaco-editor element not found'));
+                return;
+            }
+
             // Wait for Monaco's AMD loader to be ready
             const waitForRequire = () => {
                 if (typeof require === 'undefined') {
@@ -497,7 +583,12 @@
                     const isDark = document.querySelector('[data-md-color-scheme="slate"]') !== null;
                     const theme = isDark ? 'vs-dark' : 'vs';
 
-                    state.editor = monaco.editor.create(document.getElementById('monaco-editor'), {
+                    // Dispose existing editor if it exists
+                    if (state.editor) {
+                        state.editor.dispose();
+                    }
+
+                    state.editor = monaco.editor.create(editorElement, {
                         value: '',
                         language: 'python',
                         theme: theme,
@@ -1321,6 +1412,21 @@
                 await initPyodideWorker();
             }
 
+            // Write all Python files to Pyodide filesystem before execution
+            // This allows files to import each other
+            if (Object.keys(state.files).length > 0) {
+                // Extract just the content strings from file objects
+                const fileContents = {};
+                for (const [filename, fileObj] of Object.entries(state.files)) {
+                    fileContents[filename] = fileObj.content || '';
+                }
+                
+                state.pyodideWorker.postMessage({
+                    type: 'write_files',
+                    data: { files: fileContents }
+                });
+            }
+
             // Execute code in worker
             state.pyodideWorker.postMessage({
                 type: 'execute',
@@ -1385,6 +1491,11 @@
                         
                         case 'info':
                             appendConsole(data.message, 'info');
+                            break;
+                        
+                        case 'files_written':
+                            // Files successfully written to Pyodide filesystem
+                            console.log(`[IDE] ${data.count} file(s) written to Pyodide FS`);
                             break;
                     }
                 };
@@ -1572,7 +1683,6 @@
         
         if (state.consoleCollapsed) {
             consoleEl.classList.add('collapsed');
-            // Clear inline height when collapsing
             consoleEl.style.height = '';
         } else {
             consoleEl.classList.remove('collapsed');
@@ -1580,36 +1690,13 @@
     }
 
     /**
-     * UI Controls
+     * UI Controls - Unified Sidebar System
      */
     function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        state.sidebarCollapsed = !state.sidebarCollapsed;
-        
-        if (state.sidebarCollapsed) {
-            sidebar.classList.add('collapsed');
-            // Clear inline width when collapsing
-            sidebar.style.width = '';
-        } else {
-            sidebar.classList.remove('collapsed');
-        }
-    }
-
-    function toggleWebSidebar() {
-        const sidebar = document.getElementById('web-sidebar');
-        state.webSidebarCollapsed = !state.webSidebarCollapsed;
-        
-        if (state.webSidebarCollapsed) {
-            sidebar.classList.add('collapsed');
-            // Clear inline width when collapsing
-            sidebar.style.width = '';
-        } else {
-            sidebar.classList.remove('collapsed');
-        }
+        Sidebar.toggle();
     }
 
     function promptSaveEnvironment() {
-        const currentEnv = localStorage.getItem(CURRENT_ENV_KEY);
         let name = currentEnv;
         
         // If no current environment, prompt for name
@@ -1688,6 +1775,9 @@
     function setupResizeHandle() {
         const handle = document.getElementById('resize-handle');
         const consoleEl = document.getElementById('console');
+        
+        if (!handle || !consoleEl) return;
+        
         let isResizing = false;
         let startY = 0;
         let startHeight = 0;
@@ -1705,8 +1795,61 @@
             if (!isResizing) return;
             
             const delta = startY - e.pageY;
-            const newHeight = Math.max(45, Math.min(600, startHeight + delta));
+            const newHeight = Math.max(100, Math.min(600, startHeight + delta));
             consoleEl.style.height = newHeight + 'px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isResizing) {
+                isResizing = false;
+                handle.classList.remove('resizing');
+                document.body.style.cursor = '';
+            }
+        });
+    }
+
+    /**
+     * Setup Web Editors Resize Handle
+     */
+    function setupWebEditorsResize() {
+        const handle = document.querySelector('.web-editors-resize-handle');
+        const layout = document.querySelector('.web-layout');
+        const editors = document.querySelector('.web-editors');
+        const preview = document.querySelector('.web-preview');
+        
+        if (!handle || !layout || !editors || !preview) return;
+        
+        let isResizing = false;
+        let startX = 0;
+        let startEditorsWidth = 0;
+        let startPreviewWidth = 0;
+
+        handle.addEventListener('mousedown', (e) => {
+            isResizing = true;
+            startX = e.clientX;
+            startEditorsWidth = editors.offsetWidth;
+            startPreviewWidth = preview.offsetWidth;
+            handle.classList.add('resizing');
+            document.body.style.cursor = 'col-resize';
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            
+            const delta = e.clientX - startX;
+            const newEditorsWidth = startEditorsWidth + delta;
+            
+            // Enforce minimum widths (editor min 300px, preview min 300px)
+            const layoutWidth = layout.offsetWidth;
+            const minEditorsWidth = 300;
+            const maxEditorsWidth = layoutWidth - 300; // Leave 300px for preview
+            
+            // Clamp and apply (smooth like terminal resize)
+            const clampedWidth = Math.max(minEditorsWidth, Math.min(maxEditorsWidth, newEditorsWidth));
+            
+            // Set editors to fixed width, let preview flex to fill remaining space
+            layout.style.gridTemplateColumns = `${clampedWidth}px 1fr`;
         });
 
         document.addEventListener('mouseup', () => {
@@ -1865,6 +2008,254 @@
         } catch (e) {
             console.error('[IDE] Failed to import code:', e);
         }
+    }
+
+    /**
+     * Handle responsive sidebar collapsing based on window width
+     * Delegates to unified Sidebar system
+     */
+    function handleResponsiveCollapse() {
+        Sidebar.handleResize();
+    }
+
+    /**
+     * Reset mobile button to default icon when sidebar closes
+     */
+    function resetMobileButton(buttonId) {
+        // No longer needed - handled by Sidebar system
+    }
+
+    /**
+     * Setup window resize listener for responsive behavior
+     */
+    function setupWindowResizeListener() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            // Debounce resize events
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(handleResponsiveCollapse, 250);
+        });
+    }
+
+    /**
+     * Mobile Overlay Functions
+     */
+    function setupMobileOverlay() {
+        const closeBtn = document.getElementById('mobile-overlay-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeMobileOverlay);
+        }
+    }
+
+    function openMobileOverlay() {
+        const overlay = document.getElementById('mobile-overlay');
+        const content = document.getElementById('mobile-overlay-content');
+        
+        if (!overlay || !content) return;
+        
+        // Populate content based on mode
+        if (state.currentMode === 'python') {
+            content.innerHTML = createMobilePythonContent();
+            // Setup event listeners for file items
+            setupMobileFileListeners();
+        } else if (state.currentMode === 'web') {
+            content.innerHTML = createMobileWebContent();
+            // Setup event listeners for environments
+            setupMobileEnvironmentListeners();
+        }
+        
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileOverlay() {
+        const overlay = document.getElementById('mobile-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function createMobilePythonContent() {
+        const fileNames = Object.keys(state.files).sort();
+        
+        let html = '<div style="margin-bottom: 1rem;">';
+        html += '<button class="ide-btn primary" id="mobile-new-file" style="width: 100%; justify-content: center;">';
+        html += `${icons.plus}<span>New File</span>`;
+        html += '</button></div>';
+        
+        html += '<div class="file-list">';
+        
+        fileNames.forEach(name => {
+            const file = state.files[name];
+            const isActive = name === state.currentFile;
+            const isTemplate = file.type === 'template' || file.type === 'error';
+            
+            html += `
+                <div class="file-item ${isActive ? 'active' : ''} ${isTemplate ? 'template' : ''}" data-file="${name}">
+                    <span class="file-icon"></span>
+                    <span class="file-name">${name}</span>
+                    <button class="file-delete" data-file="${name}"></button>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        return html;
+    }
+
+    function createMobileWebContent() {
+        const envList = JSON.parse(localStorage.getItem('web-environments') || '{}');
+        const envNames = Object.keys(envList).sort();
+        
+        let html = '<div class="web-env-actions">';
+        html += '<input type="text" class="env-name-input" id="mobile-env-name-input" placeholder="Environment name">';
+        html += `<button class="ide-btn ide-btn-small primary" id="mobile-save-env" style="width: 100%; justify-content: center;">${icons.save}<span>Save Environment</span></button>`;
+        html += '</div>';
+        
+        html += '<div class="environment-list">';
+        
+        if (envNames.length === 0) {
+            html += '<div class="env-empty">No saved environments yet</div>';
+        } else {
+            envNames.forEach(name => {
+                const env = envList[name];
+                const isCurrent = name === state.currentEnvironment;
+                
+                html += `
+                    <div class="env-item ${isCurrent ? 'current' : ''}" data-env="${name}">
+                        <div class="env-info">
+                            <div class="env-name">${name}</div>
+                            <div class="env-date">${new Date(env.timestamp).toLocaleDateString()}</div>
+                        </div>
+                        <div class="env-actions">
+                            <button class="env-btn env-load" data-env="${name}">
+                                ${icons.play}
+                            </button>
+                            <button class="env-btn env-delete" data-env="${name}">
+                                ${icons.trash}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        html += '</div>';
+        return html;
+    }
+
+    function setupMobileFileListeners() {
+        // New file button
+        const newFileBtn = document.getElementById('mobile-new-file');
+        if (newFileBtn) {
+            newFileBtn.addEventListener('click', () => {
+                const name = prompt('Enter file name (e.g., script.py)');
+                if (name && name.trim()) {
+                    createFile(name.trim());
+                    closeMobileOverlay();
+                }
+            });
+        }
+        
+        // File items
+        document.querySelectorAll('.mobile-overlay .file-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('file-delete')) {
+                    openFile(item.dataset.file);
+                    closeMobileOverlay();
+                }
+            });
+        });
+        
+        // Delete buttons
+        document.querySelectorAll('.mobile-overlay .file-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deleteFile(btn.dataset.file);
+                // Refresh overlay content
+                const content = document.getElementById('mobile-overlay-content');
+                if (content) {
+                    content.innerHTML = createMobilePythonContent();
+                    setupMobileFileListeners();
+                }
+            });
+        });
+    }
+
+    function setupMobileEnvironmentListeners() {
+        // Save environment button
+        const saveBtn = document.getElementById('mobile-save-env');
+        const nameInput = document.getElementById('mobile-env-name-input');
+        
+        if (saveBtn && nameInput) {
+            saveBtn.addEventListener('click', () => {
+                const name = nameInput.value.trim();
+                if (name) {
+                    saveEnvironment(name);
+                    nameInput.value = '';
+                    // Refresh overlay content
+                    const content = document.getElementById('mobile-overlay-content');
+                    if (content) {
+                        content.innerHTML = createMobileWebContent();
+                        setupMobileEnvironmentListeners();
+                    }
+                }
+            });
+            
+            nameInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const name = e.target.value.trim();
+                    if (name) {
+                        saveEnvironment(name);
+                        e.target.value = '';
+                        // Refresh overlay content
+                        const content = document.getElementById('mobile-overlay-content');
+                        if (content) {
+                            content.innerHTML = createMobileWebContent();
+                            setupMobileEnvironmentListeners();
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Load environment buttons
+        document.querySelectorAll('.mobile-overlay .env-load').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                loadEnvironment(btn.dataset.env);
+                closeMobileOverlay();
+            });
+        });
+        
+        // Delete environment buttons
+        document.querySelectorAll('.mobile-overlay .env-delete').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (confirm(`Delete environment "${btn.dataset.env}"?`)) {
+                    deleteEnvironment(btn.dataset.env);
+                    // Refresh overlay content
+                    const content = document.getElementById('mobile-overlay-content');
+                    if (content) {
+                        content.innerHTML = createMobileWebContent();
+                        setupMobileEnvironmentListeners();
+                    }
+                }
+            });
+        });
+    }
+
+    /**
+     * Setup window resize listener for responsive behavior
+     */
+    function setupWindowResizeListener_OLD() {
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            // Debounce resize events
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(handleResponsiveCollapse, 250);
+        });
     }
 
     /**

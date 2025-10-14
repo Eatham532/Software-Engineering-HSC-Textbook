@@ -60,7 +60,7 @@
     background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
     color: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    z-index: 3;
+    z-index: 4;
     min-height: 42px;
 }
 
@@ -123,7 +123,8 @@
 }
 
 /* Mobile Files Toggle - Hidden by default, shown only on mobile */
-.mobile-files-toggle {
+/* Unified Mobile Sidebar Toggle Button */
+.mobile-sidebar-btn {
     display: none;
     align-items: center;
     justify-content: center;
@@ -139,15 +140,15 @@
     backdrop-filter: blur(10px);
 }
 
-.mobile-files-toggle:hover {
+.mobile-sidebar-btn:hover {
     background: rgba(255, 255, 255, 0.3);
 }
 
-.mobile-files-toggle:active {
+.mobile-sidebar-btn:active {
     transform: scale(0.95);
 }
 
-.mobile-files-toggle svg {
+.mobile-sidebar-btn svg {
     width: 20px;
     height: 20px;
     stroke: currentColor;
@@ -239,15 +240,25 @@
     height: 100%;
 }
 
-/* Web mode uses different grid (handled separately in .web-layout) */
+/* Web mode: sidebar column | editor column (same grid layout as Python) */
 .ide-workspace.web-mode {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: auto 1fr;
 }
 
-/* File Explorer (Sidebar) */
+.ide-workspace.web-mode .ide-sidebar {
+    height: 100%;
+}
+
+.ide-workspace.web-mode .ide-editor-area {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+/* Unified IDE Sidebar - Works for both Python and Web modes */
 .ide-sidebar {
-    width: 200px;
+    width: 250px;
     min-width: 150px;
     max-width: 400px;
     background: var(--md-code-bg-color);
@@ -255,11 +266,122 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    transition: width 0.3s ease;
+    transition: width 0.3s ease, transform 0.3s ease;
     position: relative;
 }
 
-/* Resize handle for sidebar */
+/* Sidebar Header - Unified design */
+.sidebar-header {
+    padding: 0.5rem 0.75rem;
+    background: var(--md-default-fg-color--lightest);
+    border-bottom: 1px solid var(--md-default-fg-color--lighter);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 40px;
+}
+
+.sidebar-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sidebar-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--md-default-fg-color);
+    fill: none;
+}
+
+.sidebar-title {
+    flex: 1;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--md-default-fg-color);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--md-default-fg-color--light);
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.sidebar-toggle-btn:hover {
+    color: var(--md-primary-fg-color);
+    background: var(--md-default-fg-color--lightest);
+    border-radius: 0.25rem;
+}
+
+.sidebar-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+}
+
+/* Sidebar Content Area */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Collapsed State */
+.ide-sidebar.collapsed {
+    width: 40px !important;
+    min-width: 40px !important;
+}
+
+.ide-sidebar.collapsed .sidebar-resize-handle {
+    display: none;
+}
+
+.ide-sidebar.collapsed .sidebar-header {
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.ide-sidebar.collapsed .sidebar-title {
+    display: none;
+}
+
+.ide-sidebar.collapsed .sidebar-icon {
+    margin: 0;
+}
+
+.ide-sidebar.collapsed .sidebar-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.ide-sidebar.collapsed .sidebar-toggle-btn {
+    padding: 0.125rem;
+}
+
+.ide-sidebar.collapsed .sidebar-toggle-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.ide-sidebar.collapsed .sidebar-content {
+    display: none;
+}
+
+/* Unified Sidebar Resize Handle */
 .sidebar-resize-handle {
     position: absolute;
     right: -2px;
@@ -278,67 +400,11 @@
     opacity: 0.6;
 }
 
-.ide-sidebar.collapsed {
-    width: 40px !important;
-    min-width: 40px !important;
-}
-
-.ide-sidebar.collapsed .sidebar-resize-handle {
-    display: none;
-}
-
-.sidebar-header {
-    padding: 0.375rem 0.625rem;
-    background: var(--md-default-fg-color--lightest);
-    border-bottom: 1px solid var(--md-default-fg-color--lightest);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 32px;
-}
-
-.ide-sidebar.collapsed .sidebar-header {
-    justify-content: center;
-    padding: 0.5rem 0.25rem;
-}
-
-.sidebar-title {
-    font-weight: 600;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--md-default-fg-color--light);
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.ide-sidebar.collapsed .sidebar-title {
-    display: none;
-}
-
-.sidebar-toggle {
-    background: none;
-    border: none;
-    color: var(--md-default-fg-color--light);
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0.25rem;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-}
-
-.ide-sidebar.collapsed .sidebar-toggle {
-    transform: rotate(180deg);
-}
-
+/* Python Mode: File List */
 .file-list {
     flex: 1;
     overflow-y: auto;
-    padding: 0.25rem;
-}
-
-.ide-sidebar.collapsed .file-list {
-    display: none;
+    padding: 0.5rem;
 }
 
 .file-item {
@@ -421,6 +487,7 @@
     padding: 0.5rem;
     background: var(--md-default-fg-color--lightest);
     border-top: 1px solid var(--md-default-fg-color--lighter);
+    flex-shrink: 0;
 }
 
 .ide-sidebar.collapsed .new-file-form {
@@ -436,6 +503,7 @@
     color: var(--md-default-fg-color);
     font-family: var(--md-code-font-family);
     font-size: 0.85rem;
+    box-sizing: border-box;
 }
 
 .new-file-input:focus {
@@ -564,6 +632,7 @@
     flex: 1;
     overflow: hidden;
     position: relative;
+    min-height: 200px; /* Prevent console from squeezing editor too much */
 }
 
 #monaco-editor {
@@ -610,10 +679,8 @@
     background: #1a1a1a;
     display: flex;
     flex-direction: column;
-    transition: height 0.3s ease;
     height: 300px;
     min-height: 100px;
-    max-height: 600px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     position: relative;
 }
@@ -891,7 +958,7 @@
     background: #404040;
     cursor: ns-resize;
     transition: background 0.2s ease;
-    display: none; /* Hidden - using ::before on console instead */
+    flex-shrink: 0;
 }
 
 .resize-handle:hover,
@@ -916,6 +983,17 @@
     .ide-title::before {
         display: none;
     }
+    
+    /* Collapse sidebars on tablets and smaller */
+    .ide-sidebar {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+    
+    .ide-sidebar:not(.force-expanded) {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -939,66 +1017,29 @@
         display: none;
     }
     
-    /* Show mobile files toggle on mobile */
-    .mobile-files-toggle {
+    /* Show mobile sidebar toggle on mobile */
+    .mobile-sidebar-btn {
         display: inline-flex;
     }
     
-    /* Sidebar container with backdrop for mobile */
-    .ide-workspace {
-        position: relative;
-    }
-    
-    .ide-workspace::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-        z-index: 99;
-    }
-    
-    /* Show backdrop when sidebar is open on mobile */
-    .ide-sidebar:not(.collapsed) ~ .ide-editor-area::before,
-    body:has(.ide-sidebar:not(.collapsed)) .ide-workspace::before {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    
+    /* Collapse sidebar completely on mobile */
     .ide-sidebar {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        width: 200px;
-        z-index: 30;
-        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
-        transition: transform 0.3s ease;
+        display: none;
     }
     
-    .ide-sidebar::after {
-        display: none; /* No resize handle on mobile */
+    .ide-workspace,
+    .ide-workspace.python-mode,
+    .ide-workspace.web-mode {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .ide-editor-area {
+        width: 100%;
+        max-width: 100%;
     }
     
     .sidebar-resize-handle {
-        display: none; /* No resize handle on mobile */
-    }
-    
-    .ide-sidebar.collapsed {
-        transform: translateX(-100%);
-    }
-    
-    .ide-sidebar.collapsed::after {
-        display: none;
-    }
-    
-    .ide-sidebar.collapsed .sidebar-resize-handle {
-        display: none;
+        display: none !important;
     }
     
     .ide-btn span {
@@ -1103,7 +1144,7 @@
 
 .web-layout {
     display: grid;
-    grid-template-columns: auto 1fr 1fr;
+    grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
     grid-template-rows: 100%;
     height: 100%;
     min-height: 0;
@@ -1127,7 +1168,6 @@
     transition: width 0.3s ease, transform 0.3s ease;
     width: 250px;
     min-width: 150px;
-    max-width: 400px;
     position: relative;
     height: 100%; /* Explicit full height */
 }
@@ -1336,7 +1376,7 @@
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--md-default-fg-color--lightest);
-    min-width: 0;
+    min-width: 300px;
     overflow: hidden;
     position: relative;
     height: 100%; /* Explicit full height */
@@ -1445,6 +1485,17 @@
     .web-preview {
         grid-area: preview;
     }
+    
+    /* Collapse web sidebar on tablets and smaller */
+    .web-sidebar {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
+    
+    .web-sidebar:not(.force-expanded) {
+        width: 40px !important;
+        min-width: 40px !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1464,11 +1515,17 @@
         width: 200px;
         height: 100%; /* Full viewport height when shown */
         max-height: none;
-        z-index: 30;
+        z-index: 4;
         box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
         transition: transform 0.3s ease;
         border-right: 1px solid var(--md-default-fg-color--lightest);
         border-bottom: none;
+        /* Start collapsed on mobile */
+        transform: translateX(-100%);
+    }
+    
+    .web-sidebar:not(.force-expanded) {
+        transform: translateX(-100%);
     }
     
     .web-editors {
@@ -1503,4 +1560,98 @@
 
 @media screen and (min-width: 76.25em) {
 
+}
+/* ========================================
+   MOBILE OVERLAY MODAL
+   Full-page overlay for files/environments on mobile
+   ======================================== */
+
+.mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--md-default-bg-color);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.mobile-overlay.active {
+    display: flex;
+}
+
+.mobile-overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(135deg, var(--md-primary-fg-color), var(--md-accent-fg-color));
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    min-height: 56px;
+}
+
+.mobile-overlay-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mobile-overlay-title svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+}
+
+.mobile-overlay-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    transition: all 0.2s ease;
+}
+
+.mobile-overlay-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-overlay-close:active {
+    transform: scale(0.95);
+}
+
+.mobile-overlay-close svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+}
+
+.mobile-overlay-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: var(--md-default-bg-color);
+}
+
+/* Show overlay only on mobile */
+@media (min-width: 769px) {
+    .mobile-overlay {
+        display: none !important;
+    }
 }

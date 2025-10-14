@@ -15,12 +15,25 @@ html, body {
     overflow: hidden !important;
 }
 
-/* Material theme container overrides - force full height */
+/* Body needs to be flexbox to contain header + container */
+body {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+/* Header takes its natural height */
+.md-header {
+    flex-shrink: 0 !important;
+}
+
+/* Material theme container overrides - flex to fill remaining space */
 .md-container {
-    height: 100vh !important;
+    flex: 1 !important;
+    min-height: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     padding: 0 !important;
+    overflow: hidden !important;
 }
 
 .md-main {
@@ -58,17 +71,8 @@ html, body {
     padding: 0 !important;
 }
 
-nav.md-tabs {
-    display: none !important;
-}
-
-.md-header__button.md-logo {
-    display: none !important;
-}
-
-.md-header__button.md-icon[for="__drawer"] {
-    display: block !important;
-}
+/* Sidebar & header tweaks *//* Use sidebar for nav instead of tabs */
+.md-container .md-tabs { display: none !important; }
 
 /* Force article to fill */
 .md-content__inner > article {
@@ -91,6 +95,10 @@ nav.md-tabs {
     flex-direction: column !important;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+.md-content__inner::before {
+    content: none !important;
 }
 
 /* Hide the title */
