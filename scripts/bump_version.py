@@ -87,9 +87,9 @@ def main():
     # Get bump type from command line (default: patch)
     bump_type = sys.argv[1] if len(sys.argv) > 1 else 'patch'
     
-    if bump_type not in ('major', 'minor', 'patch', 'show'):
+    if bump_type not in ('major', 'minor', 'patch', 'show', 'set'):
         print(f"Error: Invalid bump type '{bump_type}'", file=sys.stderr)
-        print("Usage: bump_version.py [major|minor|patch|show]", file=sys.stderr)
+        print("Usage: bump_version.py [major|minor|patch|show|set VERSION]", file=sys.stderr)
         sys.exit(1)
     
     # Read current version
@@ -104,12 +104,23 @@ def main():
         print(current_version)
         return
     
-    # Bump version
-    try:
-        new_version = bump_version(current_version, bump_type)
-    except Exception as e:
-        print(f"Error bumping version: {e}", file=sys.stderr)
-        sys.exit(1)
+    # If 'set', use the provided version
+    if bump_type == 'set':
+        if len(sys.argv) < 3:
+            print("Error: 'set' requires a version argument", file=sys.stderr)
+            print("Usage: bump_version.py set VERSION", file=sys.stderr)
+            sys.exit(1)
+        new_version = sys.argv[2]
+        print(f"{current_version} -> {new_version}")
+    else:
+        # Bump version
+        try:
+            new_version = bump_version(current_version, bump_type)
+        except Exception as e:
+            print(f"Error bumping version: {e}", file=sys.stderr)
+            sys.exit(1)
+        
+        print(f"{current_version} -> {new_version}")
     
     # Write new version
     try:
@@ -117,8 +128,6 @@ def main():
     except Exception as e:
         print(f"Error writing version: {e}", file=sys.stderr)
         sys.exit(1)
-    
-    print(f"{current_version} -> {new_version}")
 
 
 if __name__ == "__main__":

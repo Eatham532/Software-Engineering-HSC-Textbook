@@ -5,7 +5,37 @@ on:
     branches:
       - master
       - main
-  workflow_dispatch:  # Allow manual triggers
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type (manual only)'
+        required: false
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - none
+      skip_deploy:
+        description: 'Skip deployment (manual only)'
+        required: false
+        default: false
+        type: boolean
+      skip_indexnow:
+        description: 'Skip IndexNow notification (manual only)'
+        required: false
+        default: false
+        type: boolean
+      skip_release:
+        description: 'Skip creating release (manual only)'
+        required: false
+        default: false
+        type: boolean
+      custom_version:
+        description: 'Custom version (if bump=none, manual only)'
+        required: false
+        type: string
 
 # Cancel in-progress runs when new commit is pushed
 concurrency:
@@ -21,8 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: python:3.13
-    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip deploy]') }}
-    # Skip deployment if commit message contains '[skip deploy]' (only for push events)
+    if: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.skip_deploy != 'true') || (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip deploy]')) }}
 
     services:
       kroki:
@@ -133,7 +162,7 @@ jobs:
     name: 🔔 Notify Search Engines
     runs-on: ubuntu-latest
     needs: deploy  # Only run after deployment succeeds
-    if: success() && !contains(github.event.head_commit.message, '[skip indexnow]')  # Only run if deployment was successful AND not skipping IndexNow
+    if: success() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.skip_indexnow != 'true') || (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip indexnow]')))
     
     steps:
       - name: 📥 Checkout repository
@@ -164,7 +193,7 @@ jobs:
     name: 📦 Create GitHub Release
     runs-on: ubuntu-latest
     needs: [deploy, notify-indexnow]  # Run after deployment and notification
-    if: success() && !contains(github.event.head_commit.message, '[skip deploy]')  # Only run if deployment was successful AND not skipping deploy
+    if: success() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.skip_release != 'true') || (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip deploy]')))
     permissions:
       contents: write
     
@@ -188,17 +217,41 @@ jobs:
           echo "current_version=${current_version}" >> $GITHUB_OUTPUT
           echo "📌 Current version: ${current_version}"
       
-      - name: 🔼 Bump patch version
+      - name: 🔼 Determine new version
         id: bump_version
         shell: bash
         run: |
-          # Bump the patch version
-          version_change=$(python scripts/bump_version.py patch)
-          new_version=$(echo "$version_change" | cut -d' ' -f3)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual trigger - use configured options
+            bump_type="${{ github.event.inputs.version_bump }}"
+            if [ "$bump_type" = "none" ]; then
+              if [ -n "${{ github.event.inputs.custom_version }}" ]; then
+                # Custom version - set it
+                version_change=$(python scripts/bump_version.py set "${{ github.event.inputs.custom_version }}")
+                new_version=$(echo "$version_change" | cut -d' ' -f3)
+                echo "📝 Set custom version: ${version_change}"
+              else
+                # No bump, no custom - use current version, don't update file
+                new_version="${{ steps.get_version.outputs.current_version }}"
+                echo "📌 Using current version (no file update): ${new_version}"
+              fi
+            else
+              # Bump the version
+              version_change=$(python scripts/bump_version.py "$bump_type")
+              new_version=$(echo "$version_change" | cut -d' ' -f3)
+              echo "✅ Version bumped: ${version_change}"
+            fi
+          else
+            # Push trigger - auto bump patch
+            version_change=$(python scripts/bump_version.py patch)
+            new_version=$(echo "$version_change" | cut -d' ' -f3)
+            echo "✅ Auto-bumped patch version: ${version_change}"
+          fi
           echo "new_version=${new_version}" >> $GITHUB_OUTPUT
-          echo "✅ Version bumped: ${version_change}"
+          echo "should_commit=${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.version_bump != 'none' || github.event.inputs.custom_version != '')) }}" >> $GITHUB_OUTPUT
       
       - name: 💾 Commit version bump
+        if: steps.bump_version.outputs.should_commit == 'true'
         shell: bash
         run: |
           git config user.name "Eatham532"
