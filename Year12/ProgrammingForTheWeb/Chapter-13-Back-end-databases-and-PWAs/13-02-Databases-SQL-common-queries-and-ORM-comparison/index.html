@@ -1573,509 +1573,509 @@
 <h3 id="crud-patterns-and-basic-sql-operations">CRUD patterns and basic SQL operations<a class="headerlink" href="#crud-patterns-and-basic-sql-operations" title="Permanent link">&para;</a></h3>
 <p>CRUD (Create, Read, Update, Delete) operations form the foundation of database interactions:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Database setup and CRUD operations with Python
-import sqlite3
-from flask import Flask, request, jsonify
-from datetime import datetime
-import os
+<pre><code class="language-python"><span class="c1"># Database setup and CRUD operations with Python</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-app = Flask(__name__)
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-# Database configuration
-DATABASE = &#x27;webapp.db&#x27;
+<span class="c1"># Database configuration</span>
+<span class="n">DATABASE</span> <span class="o">=</span> <span class="s1">&#39;webapp.db&#39;</span>
 
-def init_database():
-    &quot;&quot;&quot;Initialize database with sample schema&quot;&quot;&quot;
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
+<span class="k">def</span><span class="w"> </span><span class="nf">init_database</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize database with sample schema&quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DATABASE</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-    # Create tables
-    cursor.execute(&#x27;&#x27;&#x27;
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT UNIQUE NOT NULL,
-            email TEXT UNIQUE NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            is_active BOOLEAN DEFAULT 1
-        )
-    &#x27;&#x27;&#x27;)
+    <span class="c1"># Create tables</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE IF NOT EXISTS users (</span>
+<span class="s1">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s1">            username TEXT UNIQUE NOT NULL,</span>
+<span class="s1">            email TEXT UNIQUE NOT NULL,</span>
+<span class="s1">            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</span>
+<span class="s1">            is_active BOOLEAN DEFAULT 1</span>
+<span class="s1">        )</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
 
-    cursor.execute(&#x27;&#x27;&#x27;
-        CREATE TABLE IF NOT EXISTS posts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT NOT NULL,
-            content TEXT NOT NULL,
-            author_id INTEGER,
-            category_id INTEGER,
-            published BOOLEAN DEFAULT 0,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (author_id) REFERENCES users (id),
-            FOREIGN KEY (category_id) REFERENCES categories (id)
-        )
-    &#x27;&#x27;&#x27;)
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE IF NOT EXISTS posts (</span>
+<span class="s1">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s1">            title TEXT NOT NULL,</span>
+<span class="s1">            content TEXT NOT NULL,</span>
+<span class="s1">            author_id INTEGER,</span>
+<span class="s1">            category_id INTEGER,</span>
+<span class="s1">            published BOOLEAN DEFAULT 0,</span>
+<span class="s1">            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</span>
+<span class="s1">            FOREIGN KEY (author_id) REFERENCES users (id),</span>
+<span class="s1">            FOREIGN KEY (category_id) REFERENCES categories (id)</span>
+<span class="s1">        )</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
 
-    cursor.execute(&#x27;&#x27;&#x27;
-        CREATE TABLE IF NOT EXISTS categories (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT UNIQUE NOT NULL,
-            description TEXT
-        )
-    &#x27;&#x27;&#x27;)
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE IF NOT EXISTS categories (</span>
+<span class="s1">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s1">            name TEXT UNIQUE NOT NULL,</span>
+<span class="s1">            description TEXT</span>
+<span class="s1">        )</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
 
-    cursor.execute(&#x27;&#x27;&#x27;
-        CREATE TABLE IF NOT EXISTS comments (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            post_id INTEGER,
-            author_id INTEGER,
-            content TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (post_id) REFERENCES posts (id),
-            FOREIGN KEY (author_id) REFERENCES users (id)
-        )
-    &#x27;&#x27;&#x27;)
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE IF NOT EXISTS comments (</span>
+<span class="s1">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s1">            post_id INTEGER,</span>
+<span class="s1">            author_id INTEGER,</span>
+<span class="s1">            content TEXT NOT NULL,</span>
+<span class="s1">            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,</span>
+<span class="s1">            FOREIGN KEY (post_id) REFERENCES posts (id),</span>
+<span class="s1">            FOREIGN KEY (author_id) REFERENCES users (id)</span>
+<span class="s1">        )</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
 
-    conn.commit()
-    conn.close()
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-def get_db_connection():
-    &quot;&quot;&quot;Get database connection with row factory&quot;&quot;&quot;
-    conn = sqlite3.connect(DATABASE)
-    conn.row_factory = sqlite3.Row
-    return conn
+<span class="k">def</span><span class="w"> </span><span class="nf">get_db_connection</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get database connection with row factory&quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DATABASE</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
+    <span class="k">return</span> <span class="n">conn</span>
 
-class DatabaseManager:
-    &quot;&quot;&quot;Database operations with proper error handling&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">DatabaseManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Database operations with proper error handling&quot;&quot;&quot;</span>
 
-    def create_user(self, username, email):
-        &quot;&quot;&quot;CREATE: Insert new user (safe parameterized query)&quot;&quot;&quot;
-        conn = get_db_connection()
-        try:
-            cursor = conn.cursor()
-            cursor.execute(
-                &#x27;INSERT INTO users (username, email) VALUES (?, ?)&#x27;,
-                (username, email)
-            )
-            conn.commit()
-            user_id = cursor.lastrowid
-            return user_id
-        except sqlite3.IntegrityError:
-            return None  # Username or email already exists
-        finally:
-            conn.close()
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;CREATE: Insert new user (safe parameterized query)&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s1">&#39;INSERT INTO users (username, email) VALUES (?, ?)&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">user_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+            <span class="k">return</span> <span class="n">user_id</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Username or email already exists</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    def get_user(self, user_id):
-        &quot;&quot;&quot;READ: Select specific user&quot;&quot;&quot;
-        conn = get_db_connection()
-        try:
-            cursor = conn.cursor()
-            cursor.execute(
-                &#x27;SELECT id, username, email, created_at, is_active FROM users WHERE id = ?&#x27;,
-                (user_id,)
-            )
-            user = cursor.fetchone()
-            return dict(user) if user else None
-        finally:
-            conn.close()
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;READ: Select specific user&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s1">&#39;SELECT id, username, email, created_at, is_active FROM users WHERE id = ?&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">user_id</span><span class="p">,)</span>
+            <span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="k">if</span> <span class="n">user</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    def update_user(self, user_id, username=None, email=None):
-        &quot;&quot;&quot;UPDATE: Modify existing user&quot;&quot;&quot;
-        conn = get_db_connection()
-        try:
-            cursor = conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;UPDATE: Modify existing user&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-            # Build dynamic update query
-            updates = []
-            params = []
+            <span class="c1"># Build dynamic update query</span>
+            <span class="n">updates</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
 
-            if username is not None:
-                updates.append(&#x27;username = ?&#x27;)
-                params.append(username)
+            <span class="k">if</span> <span class="n">username</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;username = ?&#39;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>
 
-            if email is not None:
-                updates.append(&#x27;email = ?&#x27;)
-                params.append(email)
+            <span class="k">if</span> <span class="n">email</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">updates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;email = ?&#39;</span><span class="p">)</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
 
-            if not updates:
-                return False
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">updates</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
 
-            params.append(user_id)  # Add WHERE parameter
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>  <span class="c1"># Add WHERE parameter</span>
 
-            query = f&#x27;UPDATE users SET {&quot;, &quot;.join(updates)} WHERE id = ?&#x27;
-            cursor.execute(query, params)
-            conn.commit()
+            <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;UPDATE users SET </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">updates</span><span class="p">)</span><span class="si">}</span><span class="s1"> WHERE id = ?&#39;</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
-            return cursor.rowcount &gt; 0
-        except sqlite3.IntegrityError:
-            return False
-        finally:
-            conn.close()
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    def delete_user(self, user_id):
-        &quot;&quot;&quot;DELETE: Remove user (with cascade consideration)&quot;&quot;&quot;
-        conn = get_db_connection()
-        try:
-            cursor = conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;DELETE: Remove user (with cascade consideration)&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-            # Check if user has posts or comments
-            cursor.execute(&#x27;SELECT COUNT(*) FROM posts WHERE author_id = ?&#x27;, (user_id,))
-            post_count = cursor.fetchone()[0]
+            <span class="c1"># Check if user has posts or comments</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM posts WHERE author_id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+            <span class="n">post_count</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 
-            cursor.execute(&#x27;SELECT COUNT(*) FROM comments WHERE author_id = ?&#x27;, (user_id,))
-            comment_count = cursor.fetchone()[0]
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) FROM comments WHERE author_id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+            <span class="n">comment_count</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
 
-            if post_count &gt; 0 or comment_count &gt; 0:
-                # Soft delete - deactivate instead of removing
-                cursor.execute(&#x27;UPDATE users SET is_active = 0 WHERE id = ?&#x27;, (user_id,))
-            else:
-                # Hard delete - safe to remove
-                cursor.execute(&#x27;DELETE FROM users WHERE id = ?&#x27;, (user_id,))
+            <span class="k">if</span> <span class="n">post_count</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">comment_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Soft delete - deactivate instead of removing</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;UPDATE users SET is_active = 0 WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Hard delete - safe to remove</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;DELETE FROM users WHERE id = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
 
-            conn.commit()
-            return cursor.rowcount &gt; 0
-        finally:
-            conn.close()
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-# Initialize database
-init_database()
-db_manager = DatabaseManager()
+<span class="c1"># Initialize database</span>
+<span class="n">init_database</span><span class="p">()</span>
+<span class="n">db_manager</span> <span class="o">=</span> <span class="n">DatabaseManager</span><span class="p">()</span>
 
-@app.route(&#x27;/api/users&#x27;, methods=[&#x27;POST&#x27;])
-def create_user():
-    &quot;&quot;&quot;API endpoint for user creation&quot;&quot;&quot;
-    data = request.get_json()
-    username = data.get(&#x27;username&#x27;, &#x27;&#x27;).strip()
-    email = data.get(&#x27;email&#x27;, &#x27;&#x27;).strip()
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/users&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_user</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint for user creation&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-    if not username or not email:
-        return jsonify({&#x27;error&#x27;: &#x27;Username and email required&#x27;}), 400
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Username and email required&#39;</span><span class="p">}),</span> <span class="mi">400</span>
 
-    user_id = db_manager.create_user(username, email)
-    if user_id:
-        return jsonify({&#x27;id&#x27;: user_id, &#x27;username&#x27;: username, &#x27;email&#x27;: email}), 201
-    else:
-        return jsonify({&#x27;error&#x27;: &#x27;Username or email already exists&#x27;}), 409
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user_id</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span><span class="p">}),</span> <span class="mi">201</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Username or email already exists&#39;</span><span class="p">}),</span> <span class="mi">409</span>
 
-@app.route(&#x27;/api/users/&lt;int:user_id&gt;&#x27;)
-def get_user(user_id):
-    &quot;&quot;&quot;API endpoint for user retrieval&quot;&quot;&quot;
-    user = db_manager.get_user(user_id)
-    if user:
-        return jsonify(user)
-    else:
-        return jsonify({&#x27;error&#x27;: &#x27;User not found&#x27;}), 404
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/users/&lt;int:user_id&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint for user retrieval&quot;&quot;&quot;</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;User not found&#39;</span><span class="p">}),</span> <span class="mi">404</span>
 </code></pre>
 </div>
 <h3 id="select-operations-and-field-selection">SELECT operations and field selection<a class="headerlink" href="#select-operations-and-field-selection" title="Permanent link">&para;</a></h3>
 <p>Understanding how to retrieve specific data efficiently:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Advanced SELECT operations
-class QueryBuilder:
-    &quot;&quot;&quot;Build complex SELECT queries safely&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># Advanced SELECT operations</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">QueryBuilder</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build complex SELECT queries safely&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.conn = get_db_connection()
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
 
-    def select_fields_example(self):
-        &quot;&quot;&quot;Demonstrate field selection strategies&quot;&quot;&quot;
-        cursor = self.conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_fields_example</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Demonstrate field selection strategies&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # Select specific fields (efficient)
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT id, username, email 
-            FROM users 
-            WHERE is_active = 1
-        &#x27;&#x27;&#x27;)
-        active_users = cursor.fetchall()
+        <span class="c1"># Select specific fields (efficient)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT id, username, email </span>
+<span class="s1">            FROM users </span>
+<span class="s1">            WHERE is_active = 1</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">active_users</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Select with aliases for clarity
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                u.id as user_id,
-                u.username,
-                u.email,
-                u.created_at as registration_date
-            FROM users u
-            WHERE u.is_active = 1
-        &#x27;&#x27;&#x27;)
-        users_with_aliases = cursor.fetchall()
+        <span class="c1"># Select with aliases for clarity</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                u.id as user_id,</span>
+<span class="s1">                u.username,</span>
+<span class="s1">                u.email,</span>
+<span class="s1">                u.created_at as registration_date</span>
+<span class="s1">            FROM users u</span>
+<span class="s1">            WHERE u.is_active = 1</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">users_with_aliases</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Select with calculated fields
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                username,
-                email,
-                CASE 
-                    WHEN is_active = 1 THEN &#x27;Active&#x27;
-                    ELSE &#x27;Inactive&#x27;
-                END as status,
-                julianday(&#x27;now&#x27;) - julianday(created_at) as days_since_registration
-            FROM users
-        &#x27;&#x27;&#x27;)
-        users_with_calculated = cursor.fetchall()
+        <span class="c1"># Select with calculated fields</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                username,</span>
+<span class="s1">                email,</span>
+<span class="s1">                CASE </span>
+<span class="s1">                    WHEN is_active = 1 THEN &#39;Active&#39;</span>
+<span class="s1">                    ELSE &#39;Inactive&#39;</span>
+<span class="s1">                END as status,</span>
+<span class="s1">                julianday(&#39;now&#39;) - julianday(created_at) as days_since_registration</span>
+<span class="s1">            FROM users</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">users_with_calculated</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        return {
-            &#x27;active_users&#x27;: [dict(row) for row in active_users],
-            &#x27;users_with_aliases&#x27;: [dict(row) for row in users_with_aliases],
-            &#x27;users_with_calculated&#x27;: [dict(row) for row in users_with_calculated]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;active_users&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">active_users</span><span class="p">],</span>
+            <span class="s1">&#39;users_with_aliases&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">users_with_aliases</span><span class="p">],</span>
+            <span class="s1">&#39;users_with_calculated&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">users_with_calculated</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def filtering_and_ordering(self):
-        &quot;&quot;&quot;Demonstrate WHERE clauses and ORDER BY&quot;&quot;&quot;
-        cursor = self.conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">filtering_and_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Demonstrate WHERE clauses and ORDER BY&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # Basic filtering
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT username, email, created_at
-            FROM users
-            WHERE created_at &gt; date(&#x27;now&#x27;, &#x27;-30 days&#x27;)
-            ORDER BY created_at DESC
-        &#x27;&#x27;&#x27;)
-        recent_users = cursor.fetchall()
+        <span class="c1"># Basic filtering</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT username, email, created_at</span>
+<span class="s1">            FROM users</span>
+<span class="s1">            WHERE created_at &gt; date(&#39;now&#39;, &#39;-30 days&#39;)</span>
+<span class="s1">            ORDER BY created_at DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">recent_users</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Multiple conditions
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT username, email
-            FROM users
-            WHERE is_active = 1 
-              AND email LIKE &#x27;%@example.com&#x27;
-            ORDER BY username ASC
-        &#x27;&#x27;&#x27;)
-        filtered_users = cursor.fetchall()
+        <span class="c1"># Multiple conditions</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT username, email</span>
+<span class="s1">            FROM users</span>
+<span class="s1">            WHERE is_active = 1 </span>
+<span class="s1">              AND email LIKE &#39;%@example.com&#39;</span>
+<span class="s1">            ORDER BY username ASC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">filtered_users</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Range filtering with parameters
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT username, created_at
-            FROM users
-            WHERE created_at BETWEEN ? AND ?
-            ORDER BY created_at DESC
-            LIMIT ?
-        &#x27;&#x27;&#x27;, (&#x27;2024-01-01&#x27;, &#x27;2024-12-31&#x27;, 10))
-        year_users = cursor.fetchall()
+        <span class="c1"># Range filtering with parameters</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT username, created_at</span>
+<span class="s1">            FROM users</span>
+<span class="s1">            WHERE created_at BETWEEN ? AND ?</span>
+<span class="s1">            ORDER BY created_at DESC</span>
+<span class="s1">            LIMIT ?</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-12-31&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="n">year_users</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        return {
-            &#x27;recent_users&#x27;: [dict(row) for row in recent_users],
-            &#x27;filtered_users&#x27;: [dict(row) for row in filtered_users],
-            &#x27;year_users&#x27;: [dict(row) for row in year_users]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;recent_users&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">recent_users</span><span class="p">],</span>
+            <span class="s1">&#39;filtered_users&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">filtered_users</span><span class="p">],</span>
+            <span class="s1">&#39;year_users&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">year_users</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def close(self):
-        &quot;&quot;&quot;Close database connection&quot;&quot;&quot;
-        self.conn.close()
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close database connection&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-@app.route(&#x27;/api/query-examples&#x27;)
-def query_examples():
-    &quot;&quot;&quot;Demonstrate various query patterns&quot;&quot;&quot;
-    query_builder = QueryBuilder()
-    try:
-        field_examples = query_builder.select_fields_example()
-        filter_examples = query_builder.filtering_and_ordering()
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/query-examples&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">query_examples</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate various query patterns&quot;&quot;&quot;</span>
+    <span class="n">query_builder</span> <span class="o">=</span> <span class="n">QueryBuilder</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">field_examples</span> <span class="o">=</span> <span class="n">query_builder</span><span class="o">.</span><span class="n">select_fields_example</span><span class="p">()</span>
+        <span class="n">filter_examples</span> <span class="o">=</span> <span class="n">query_builder</span><span class="o">.</span><span class="n">filtering_and_ordering</span><span class="p">()</span>
 
-        return jsonify({
-            &#x27;field_selection&#x27;: field_examples,
-            &#x27;filtering_ordering&#x27;: filter_examples
-        })
-    finally:
-        query_builder.close()
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;field_selection&#39;</span><span class="p">:</span> <span class="n">field_examples</span><span class="p">,</span>
+            <span class="s1">&#39;filtering_ordering&#39;</span><span class="p">:</span> <span class="n">filter_examples</span>
+        <span class="p">})</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">query_builder</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="group-by-and-aggregation">GROUP BY and aggregation<a class="headerlink" href="#group-by-and-aggregation" title="Permanent link">&para;</a></h3>
 <p>Grouping and summarizing data for insights:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># GROUP BY and aggregation examples
-class AggregationQueries:
-    &quot;&quot;&quot;Demonstrate aggregation and grouping&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># GROUP BY and aggregation examples</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AggregationQueries</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate aggregation and grouping&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.conn = get_db_connection()
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
 
-    def basic_aggregation(self):
-        &quot;&quot;&quot;Basic COUNT, SUM, AVG operations&quot;&quot;&quot;
-        cursor = self.conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">basic_aggregation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Basic COUNT, SUM, AVG operations&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # Count users by status
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                CASE WHEN is_active = 1 THEN &#x27;Active&#x27; ELSE &#x27;Inactive&#x27; END as status,
-                COUNT(*) as user_count
-            FROM users
-            GROUP BY is_active
-        &#x27;&#x27;&#x27;)
-        user_counts = cursor.fetchall()
+        <span class="c1"># Count users by status</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                CASE WHEN is_active = 1 THEN &#39;Active&#39; ELSE &#39;Inactive&#39; END as status,</span>
+<span class="s1">                COUNT(*) as user_count</span>
+<span class="s1">            FROM users</span>
+<span class="s1">            GROUP BY is_active</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">user_counts</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Posts per user
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                u.username,
-                COUNT(p.id) as post_count,
-                COUNT(CASE WHEN p.published = 1 THEN 1 END) as published_count
-            FROM users u
-            LEFT JOIN posts p ON u.id = p.author_id
-            GROUP BY u.id, u.username
-            ORDER BY post_count DESC
-        &#x27;&#x27;&#x27;)
-        user_post_stats = cursor.fetchall()
+        <span class="c1"># Posts per user</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                u.username,</span>
+<span class="s1">                COUNT(p.id) as post_count,</span>
+<span class="s1">                COUNT(CASE WHEN p.published = 1 THEN 1 END) as published_count</span>
+<span class="s1">            FROM users u</span>
+<span class="s1">            LEFT JOIN posts p ON u.id = p.author_id</span>
+<span class="s1">            GROUP BY u.id, u.username</span>
+<span class="s1">            ORDER BY post_count DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">user_post_stats</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        return {
-            &#x27;user_counts&#x27;: [dict(row) for row in user_counts],
-            &#x27;user_post_stats&#x27;: [dict(row) for row in user_post_stats]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;user_counts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">user_counts</span><span class="p">],</span>
+            <span class="s1">&#39;user_post_stats&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">user_post_stats</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def advanced_grouping(self):
-        &quot;&quot;&quot;Advanced GROUP BY with HAVING&quot;&quot;&quot;
-        cursor = self.conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">advanced_grouping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Advanced GROUP BY with HAVING&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # Users with more than 5 posts
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                u.username,
-                COUNT(p.id) as post_count
-            FROM users u
-            INNER JOIN posts p ON u.id = p.author_id
-            GROUP BY u.id, u.username
-            HAVING COUNT(p.id) &gt; 5
-            ORDER BY post_count DESC
-        &#x27;&#x27;&#x27;)
-        prolific_users = cursor.fetchall()
+        <span class="c1"># Users with more than 5 posts</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                u.username,</span>
+<span class="s1">                COUNT(p.id) as post_count</span>
+<span class="s1">            FROM users u</span>
+<span class="s1">            INNER JOIN posts p ON u.id = p.author_id</span>
+<span class="s1">            GROUP BY u.id, u.username</span>
+<span class="s1">            HAVING COUNT(p.id) &gt; 5</span>
+<span class="s1">            ORDER BY post_count DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">prolific_users</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Monthly post statistics
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                strftime(&#x27;%Y-%m&#x27;, created_at) as month,
-                COUNT(*) as total_posts,
-                COUNT(CASE WHEN published = 1 THEN 1 END) as published_posts,
-                COUNT(DISTINCT author_id) as unique_authors
-            FROM posts
-            GROUP BY strftime(&#x27;%Y-%m&#x27;, created_at)
-            ORDER BY month DESC
-        &#x27;&#x27;&#x27;)
-        monthly_stats = cursor.fetchall()
+        <span class="c1"># Monthly post statistics</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                strftime(&#39;%Y-%m&#39;, created_at) as month,</span>
+<span class="s1">                COUNT(*) as total_posts,</span>
+<span class="s1">                COUNT(CASE WHEN published = 1 THEN 1 END) as published_posts,</span>
+<span class="s1">                COUNT(DISTINCT author_id) as unique_authors</span>
+<span class="s1">            FROM posts</span>
+<span class="s1">            GROUP BY strftime(&#39;%Y-%m&#39;, created_at)</span>
+<span class="s1">            ORDER BY month DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">monthly_stats</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        return {
-            &#x27;prolific_users&#x27;: [dict(row) for row in prolific_users],
-            &#x27;monthly_stats&#x27;: [dict(row) for row in monthly_stats]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;prolific_users&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">prolific_users</span><span class="p">],</span>
+            <span class="s1">&#39;monthly_stats&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">monthly_stats</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def close(self):
-        self.conn.close()
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-@app.route(&#x27;/api/aggregation-examples&#x27;)
-def aggregation_examples():
-    &quot;&quot;&quot;API endpoint for aggregation demonstrations&quot;&quot;&quot;
-    agg_queries = AggregationQueries()
-    try:
-        basic_stats = agg_queries.basic_aggregation()
-        advanced_stats = agg_queries.advanced_grouping()
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/aggregation-examples&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">aggregation_examples</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint for aggregation demonstrations&quot;&quot;&quot;</span>
+    <span class="n">agg_queries</span> <span class="o">=</span> <span class="n">AggregationQueries</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">basic_stats</span> <span class="o">=</span> <span class="n">agg_queries</span><span class="o">.</span><span class="n">basic_aggregation</span><span class="p">()</span>
+        <span class="n">advanced_stats</span> <span class="o">=</span> <span class="n">agg_queries</span><span class="o">.</span><span class="n">advanced_grouping</span><span class="p">()</span>
 
-        return jsonify({
-            &#x27;basic_aggregation&#x27;: basic_stats,
-            &#x27;advanced_grouping&#x27;: advanced_stats
-        })
-    finally:
-        agg_queries.close()
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;basic_aggregation&#39;</span><span class="p">:</span> <span class="n">basic_stats</span><span class="p">,</span>
+            <span class="s1">&#39;advanced_grouping&#39;</span><span class="p">:</span> <span class="n">advanced_stats</span>
+        <span class="p">})</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">agg_queries</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="table-joins-and-relationships">Table joins and relationships<a class="headerlink" href="#table-joins-and-relationships" title="Permanent link">&para;</a></h3>
 <p>Understanding how to combine data from multiple tables:</p>
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS" height="589px" preserveAspectRatio="xMaxYMax meet" style="width:421px;height:589px;background:#FFFFFF;" version="1.1" viewBox="0 0 421 589" width="421px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="entity" data-entity="users" data-source-line="4" data-uid="ent0002" id="entity_users"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="201.7314" x="7" y="7" /><ellipse cx="84.7007" cy="23" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M88.8101,29 L81.0913,29 L81.0913,16.6094 L88.8101,16.6094 L88.8101,18.7656 L83.5444,18.7656 L83.5444,21.4375 L88.3101,21.4375 L88.3101,23.5938 L83.5444,23.5938 L83.5444,26.8438 L88.8101,26.8438 L88.8101,29 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37.8301" x="105.2007" y="27.8467">users</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="207.7314" y1="39" y2="39" /><ellipse cx="18" cy="52.6484" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120.8115" x="27" y="55.9951">id : INTEGER (PK)</text><line style="stroke:#181818;stroke-width:1;" x1="8" x2="207.7314" y1="63.2969" y2="63.2969" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189.7314" x="13" y="80.292">username : TEXT (UNIQUE)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="158.1016" x="13" y="96.5889">email : TEXT (UNIQUE)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169.4629" x="13" y="112.8857">created_at : TIMESTAMP</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142.6934" x="13" y="129.1826">is_active : BOOLEAN</text></g><g class="entity" data-entity="posts" data-source-line="13" data-uid="ent0003" id="entity_posts"><rect fill="#F1F1F1" height="162.0781" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="201.2939" x="206.22" y="213.49" /><ellipse cx="283.8523" cy="229.49" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M287.9617,235.49 L280.2429,235.49 L280.2429,223.0994 L287.9617,223.0994 L287.9617,225.2556 L282.6961,225.2556 L282.6961,227.9275 L287.4617,227.9275 L287.4617,230.0837 L282.6961,230.0837 L282.6961,233.3337 L287.9617,233.3337 L287.9617,235.49 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37.5293" x="304.3523" y="234.3367">posts</text><line style="stroke:#181818;stroke-width:0.5;" x1="207.22" x2="406.5139" y1="245.49" y2="245.49" /><ellipse cx="217.22" cy="259.1384" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120.8115" x="226.22" y="262.4851">id : INTEGER (PK)</text><line style="stroke:#181818;stroke-width:1;" x1="207.22" x2="406.5139" y1="269.7869" y2="269.7869" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.5283" x="212.22" y="286.782">title : TEXT</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102.7578" x="212.22" y="303.0789">content : TEXT</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173.5576" x="212.22" y="319.3757">author_id : INTEGER (FK)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189.2939" x="212.22" y="335.6726">category_id : INTEGER (FK)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150.0488" x="212.22" y="351.9695">published : BOOLEAN</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169.4629" x="212.22" y="368.2664">created_at : TIMESTAMP</text></g><g class="entity" data-entity="categories" data-source-line="24" data-uid="ent0004" id="entity_categories"><rect fill="#F1F1F1" height="96.8906" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="171.1953" x="243.27" y="23.3" /><ellipse cx="287.9258" cy="39.3" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M292.0351,45.3 L284.3164,45.3 L284.3164,32.9094 L292.0351,32.9094 L292.0351,35.0656 L286.7695,35.0656 L286.7695,37.7375 L291.5351,37.7375 L291.5351,39.8937 L286.7695,39.8937 L286.7695,43.1437 L292.0351,43.1437 L292.0351,45.3 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73.3838" x="308.4258" y="44.1467">categories</text><line style="stroke:#181818;stroke-width:0.5;" x1="244.27" x2="413.4653" y1="55.3" y2="55.3" /><ellipse cx="254.27" cy="68.9484" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120.8115" x="263.27" y="72.2951">id : INTEGER (PK)</text><line style="stroke:#181818;stroke-width:1;" x1="244.27" x2="413.4653" y1="79.5969" y2="79.5969" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.1953" x="249.27" y="96.592">name : TEXT (UNIQUE)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126.998" x="249.27" y="112.8889">description : TEXT</text></g><g class="entity" data-entity="comments" data-source-line="31" data-uid="ent0005" id="entity_comments"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="185.5576" x="44.09" y="452.57" /><ellipse cx="95.715" cy="468.57" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M99.8244,474.57 L92.1056,474.57 L92.1056,462.1794 L99.8244,462.1794 L99.8244,464.3356 L94.5588,464.3356 L94.5588,467.0075 L99.3244,467.0075 L99.3244,469.1637 L94.5588,469.1637 L94.5588,472.4137 L99.8244,472.4137 L99.8244,474.57 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73.8076" x="116.215" y="473.4167">comments</text><line style="stroke:#181818;stroke-width:0.5;" x1="45.09" x2="228.6476" y1="484.57" y2="484.57" /><ellipse cx="55.09" cy="498.2184" fill="#000000" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120.8115" x="64.09" y="501.5651">id : INTEGER (PK)</text><line style="stroke:#181818;stroke-width:1;" x1="45.09" x2="228.6476" y1="508.8669" y2="508.8669" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157.6572" x="50.09" y="525.862">post_id : INTEGER (FK)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173.5576" x="50.09" y="542.1589">author_id : INTEGER (FK)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102.7578" x="50.09" y="558.4557">content : TEXT</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="169.4629" x="50.09" y="574.7526">created_at : TIMESTAMP</text></g><g class="link" data-entity-1="users" data-entity-2="posts" data-source-line="40" data-uid="lnk6" id="link_users_posts"><path codeLine="40" d="M171.046,142.8425 C192.506,166.6525 199.7204,174.6481 222.3204,199.7281" fill="none" id="users-posts" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="165.3967" x2="171.3392" y1="142.5492" y2="137.1933" /><line style="stroke:#181818;stroke-width:1;" x1="167.4052" x2="173.3477" y1="144.7777" y2="139.4217" /><line style="stroke:#181818;stroke-width:1;" x1="171.046" x2="165.69" y1="142.8425" y2="136.9" /><line style="stroke:#181818;stroke-width:1;" x1="229.0146" x2="238.8273" y1="207.1569" y2="209.0835" /><line style="stroke:#181818;stroke-width:1;" x1="229.0146" x2="229.9127" y1="207.1569" y2="217.1165" /><line style="stroke:#181818;stroke-width:1;" x1="229.0146" x2="234.37" y1="207.1569" y2="213.1" /><ellipse cx="224.9981" cy="202.6997" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="61.2041" x="208.87" y="179.5569">author_id</text></g><g class="link" data-entity-1="users" data-entity-2="comments" data-source-line="41" data-uid="lnk7" id="link_users_comments"><path codeLine="41" d="M111.7717,144.8478 C115.1617,206.1578 120.2,293.21 125.87,375.57 C127.59,400.63 128.2818,410.236 130.1818,434.276" fill="none" id="users-comments" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="107.5569" x2="115.5447" y1="141.0747" y2="140.6331" /><line style="stroke:#181818;stroke-width:1;" x1="107.7226" x2="115.7104" y1="144.0702" y2="143.6285" /><line style="stroke:#181818;stroke-width:1;" x1="111.7717" x2="111.33" y1="144.8478" y2="136.86" /><line style="stroke:#181818;stroke-width:1;" x1="130.9697" x2="137.5813" y1="444.2449" y2="451.7473" /><line style="stroke:#181818;stroke-width:1;" x1="130.9697" x2="125.6187" y1="444.2449" y2="452.6927" /><line style="stroke:#181818;stroke-width:1;" x1="130.9697" x2="131.6" y1="444.2449" y2="452.22" /><ellipse cx="130.497" cy="438.2635" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="61.2041" x="126.87" y="299.0969">author_id</text></g><g class="link" data-entity-1="categories" data-entity-2="posts" data-source-line="42" data-uid="lnk8" id="link_categories_posts"><path codeLine="42" d="M323.2972,128.6106 C320.6072,155.6206 319.7594,164.2092 316.6594,195.2392" fill="none" id="categories-posts" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="319.7133" x2="327.6739" y1="124.2339" y2="125.0267" /><line style="stroke:#181818;stroke-width:1;" x1="319.416" x2="327.3766" y1="127.2191" y2="128.012" /><line style="stroke:#181818;stroke-width:1;" x1="323.2972" x2="324.09" y1="128.6106" y2="120.65" /><line style="stroke:#181818;stroke-width:1;" x1="315.6653" x2="320.8403" y1="205.1896" y2="213.7465" /><line style="stroke:#181818;stroke-width:1;" x1="315.6653" x2="308.8997" y1="205.1896" y2="212.5535" /><line style="stroke:#181818;stroke-width:1;" x1="315.6653" x2="314.87" y1="205.1896" y2="213.15" /><ellipse cx="316.2617" cy="199.2193" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75.8164" x="320.87" y="179.5569">category_id</text></g><g class="link" data-entity-1="posts" data-entity-2="comments" data-source-line="43" data-uid="lnk9" id="link_posts_comments"><path codeLine="43" d="M240.1285,382.1981 C220.7585,407.3481 215.5217,414.1581 197.1417,438.0281" fill="none" id="posts-comments" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="239.4002" x2="245.7383" y1="376.5883" y2="381.4698" /><line style="stroke:#181818;stroke-width:1;" x1="237.5697" x2="243.9078" y1="378.9651" y2="383.8466" /><line style="stroke:#181818;stroke-width:1;" x1="240.1285" x2="245.01" y1="382.1981" y2="375.86" /><line style="stroke:#181818;stroke-width:1;" x1="191.0408" x2="190.914" y1="445.9514" y2="455.9506" /><line style="stroke:#181818;stroke-width:1;" x1="191.0408" x2="181.406" y1="445.9514" y2="448.6294" /><line style="stroke:#181818;stroke-width:1;" x1="191.0408" x2="186.16" y1="445.9514" y2="452.29" /><ellipse cx="194.7013" cy="441.1974" fill="none" rx="4" ry="4" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="46.4395" x="222.87" y="418.6369">post_id</text></g></g></svg></p></div></div>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Table joins demonstration
-class JoinQueries:
-    &quot;&quot;&quot;Demonstrate different types of joins&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># Table joins demonstration</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JoinQueries</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate different types of joins&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.conn = get_db_connection()
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
 
-    def inner_joins(self):
-        &quot;&quot;&quot;INNER JOIN examples - only matching records&quot;&quot;&quot;
-        cursor = self.conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_joins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;INNER JOIN examples - only matching records&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # Posts with author information
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                p.id,
-                p.title,
-                p.created_at,
-                u.username as author,
-                u.email as author_email
-            FROM posts p
-            INNER JOIN users u ON p.author_id = u.id
-            WHERE p.published = 1
-            ORDER BY p.created_at DESC
-        &#x27;&#x27;&#x27;)
-        published_posts = cursor.fetchall()
+        <span class="c1"># Posts with author information</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                p.id,</span>
+<span class="s1">                p.title,</span>
+<span class="s1">                p.created_at,</span>
+<span class="s1">                u.username as author,</span>
+<span class="s1">                u.email as author_email</span>
+<span class="s1">            FROM posts p</span>
+<span class="s1">            INNER JOIN users u ON p.author_id = u.id</span>
+<span class="s1">            WHERE p.published = 1</span>
+<span class="s1">            ORDER BY p.created_at DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">published_posts</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # Posts with both author and category
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                p.title,
-                u.username as author,
-                c.name as category
-            FROM posts p
-            INNER JOIN users u ON p.author_id = u.id
-            INNER JOIN categories c ON p.category_id = c.id
-            WHERE p.published = 1
-        &#x27;&#x27;&#x27;)
-        posts_with_details = cursor.fetchall()
+        <span class="c1"># Posts with both author and category</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                p.title,</span>
+<span class="s1">                u.username as author,</span>
+<span class="s1">                c.name as category</span>
+<span class="s1">            FROM posts p</span>
+<span class="s1">            INNER JOIN users u ON p.author_id = u.id</span>
+<span class="s1">            INNER JOIN categories c ON p.category_id = c.id</span>
+<span class="s1">            WHERE p.published = 1</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">posts_with_details</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        return {
-            &#x27;published_posts&#x27;: [dict(row) for row in published_posts],
-            &#x27;posts_with_details&#x27;: [dict(row) for row in posts_with_details]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;published_posts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">published_posts</span><span class="p">],</span>
+            <span class="s1">&#39;posts_with_details&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">posts_with_details</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def left_joins(self):
-        &quot;&quot;&quot;LEFT JOIN examples - all records from left table&quot;&quot;&quot;
-        cursor = self.conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">left_joins</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;LEFT JOIN examples - all records from left table&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # All users with their post count (including users with no posts)
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                u.username,
-                u.email,
-                COUNT(p.id) as post_count
-            FROM users u
-            LEFT JOIN posts p ON u.id = p.author_id
-            GROUP BY u.id, u.username, u.email
-            ORDER BY post_count DESC
-        &#x27;&#x27;&#x27;)
-        all_users_with_posts = cursor.fetchall()
+        <span class="c1"># All users with their post count (including users with no posts)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                u.username,</span>
+<span class="s1">                u.email,</span>
+<span class="s1">                COUNT(p.id) as post_count</span>
+<span class="s1">            FROM users u</span>
+<span class="s1">            LEFT JOIN posts p ON u.id = p.author_id</span>
+<span class="s1">            GROUP BY u.id, u.username, u.email</span>
+<span class="s1">            ORDER BY post_count DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">all_users_with_posts</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        # All posts with comment count (including posts with no comments)
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                p.id,
-                p.title,
-                u.username as author,
-                COUNT(c.id) as comment_count
-            FROM posts p
-            INNER JOIN users u ON p.author_id = u.id
-            LEFT JOIN comments c ON p.id = c.post_id
-            GROUP BY p.id, p.title, u.username
-            ORDER BY comment_count DESC
-        &#x27;&#x27;&#x27;)
-        posts_with_comments = cursor.fetchall()
+        <span class="c1"># All posts with comment count (including posts with no comments)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                p.id,</span>
+<span class="s1">                p.title,</span>
+<span class="s1">                u.username as author,</span>
+<span class="s1">                COUNT(c.id) as comment_count</span>
+<span class="s1">            FROM posts p</span>
+<span class="s1">            INNER JOIN users u ON p.author_id = u.id</span>
+<span class="s1">            LEFT JOIN comments c ON p.id = c.post_id</span>
+<span class="s1">            GROUP BY p.id, p.title, u.username</span>
+<span class="s1">            ORDER BY comment_count DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">posts_with_comments</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-        return {
-            &#x27;all_users_with_posts&#x27;: [dict(row) for row in all_users_with_posts],
-            &#x27;posts_with_comments&#x27;: [dict(row) for row in posts_with_comments]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;all_users_with_posts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_users_with_posts</span><span class="p">],</span>
+            <span class="s1">&#39;posts_with_comments&#39;</span><span class="p">:</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">posts_with_comments</span><span class="p">]</span>
+        <span class="p">}</span>
 
-@app.route(&#x27;/api/join-examples&#x27;)
-def join_examples():
-    &quot;&quot;&quot;API endpoint for join demonstrations&quot;&quot;&quot;
-    join_queries = JoinQueries()
-    try:
-        inner_results = join_queries.inner_joins()
-        left_results = join_queries.left_joins()
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/join-examples&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">join_examples</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint for join demonstrations&quot;&quot;&quot;</span>
+    <span class="n">join_queries</span> <span class="o">=</span> <span class="n">JoinQueries</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">inner_results</span> <span class="o">=</span> <span class="n">join_queries</span><span class="o">.</span><span class="n">inner_joins</span><span class="p">()</span>
+        <span class="n">left_results</span> <span class="o">=</span> <span class="n">join_queries</span><span class="o">.</span><span class="n">left_joins</span><span class="p">()</span>
 
-        return jsonify({
-            &#x27;inner_joins&#x27;: inner_results,
-            &#x27;left_joins&#x27;: left_results
-        })
-    finally:
-        join_queries.close()
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;inner_joins&#39;</span><span class="p">:</span> <span class="n">inner_results</span><span class="p">,</span>
+            <span class="s1">&#39;left_joins&#39;</span><span class="p">:</span> <span class="n">left_results</span>
+        <span class="p">})</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">join_queries</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-if __name__ == &#x27;__main__&#x27;:
-    app.run(debug=True)
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2097,47 +2097,47 @@ if __name__ == &#x27;__main__&#x27;:
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def create_user_safe(username, email, password):
-    &quot;&quot;&quot;CREATE with duplicate prevention&quot;&quot;&quot;
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">create_user_safe</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;CREATE with duplicate prevention&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-        # Check for existing user first
-        cursor.execute(
-            &#x27;SELECT id FROM users WHERE username = ? OR email = ?&#x27;,
-            (username, email)
-        )
-        if cursor.fetchone():
-            return {&#x27;error&#x27;: &#x27;Username or email already exists&#x27;}
+        <span class="c1"># Check for existing user first</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s1">&#39;SELECT id FROM users WHERE username = ? OR email = ?&#39;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">():</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Username or email already exists&#39;</span><span class="p">}</span>
 
-        # Insert new user
-        cursor.execute(
-            &#x27;INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)&#x27;,
-            (username, email, generate_password_hash(password))
-        )
-        conn.commit()
-        return {&#x27;success&#x27;: True, &#x27;user_id&#x27;: cursor.lastrowid}
+        <span class="c1"># Insert new user</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="s1">&#39;INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)&#39;</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span><span class="p">}</span>
 
-    except sqlite3.Error as e:
-        return {&#x27;error&#x27;: f&#x27;Database error: {str(e)}&#x27;}
-    finally:
-        conn.close()
+    <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Database error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-def get_users_with_post_count():
-    &quot;&quot;&quot;READ with aggregated data&quot;&quot;&quot;
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute(&#x27;&#x27;&#x27;
-        SELECT 
-            u.id, u.username, u.email,
-            COUNT(p.id) as post_count
-        FROM users u
-        LEFT JOIN posts p ON u.id = p.author_id
-        GROUP BY u.id
-        ORDER BY post_count DESC
-    &#x27;&#x27;&#x27;)
-    return [dict(row) for row in cursor.fetchall()]
+<span class="k">def</span><span class="w"> </span><span class="nf">get_users_with_post_count</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;READ with aggregated data&quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">get_db_connection</span><span class="p">()</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        SELECT </span>
+<span class="s1">            u.id, u.username, u.email,</span>
+<span class="s1">            COUNT(p.id) as post_count</span>
+<span class="s1">        FROM users u</span>
+<span class="s1">        LEFT JOIN posts p ON u.id = p.author_id</span>
+<span class="s1">        GROUP BY u.id</span>
+<span class="s1">        ORDER BY post_count DESC</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2165,408 +2165,408 @@ def get_users_with_post_count():
 <h3 id="object-relational-mapping-orm-fundamentals">Object-Relational Mapping (ORM) fundamentals<a class="headerlink" href="#object-relational-mapping-orm-fundamentals" title="Permanent link">&para;</a></h3>
 <p>ORMs provide an abstraction layer that maps database tables to Python classes and rows to objects:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># SQLAlchemy ORM example - setting up models
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
-from werkzeug.security import generate_password_hash, check_password_hash
+<pre><code class="language-python"><span class="c1"># SQLAlchemy ORM example - setting up models</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask_sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
 
-app = Flask(__name__)
-app.config[&#x27;SQLALCHEMY_DATABASE_URI&#x27;] = &#x27;sqlite:///blog_orm.db&#x27;
-app.config[&#x27;SQLALCHEMY_TRACK_MODIFICATIONS&#x27;] = False
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///blog_orm.db&#39;</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_TRACK_MODIFICATIONS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 
-db = SQLAlchemy(app)
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-# ORM Models - Classes map to tables
-class User(db.Model):
-    &quot;&quot;&quot;User model demonstrating ORM class-to-table mapping&quot;&quot;&quot;
-    __tablename__ = &#x27;users&#x27;
+<span class="c1"># ORM Models - Classes map to tables</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;User model demonstrating ORM class-to-table mapping&quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;users&#39;</span>
 
-    # Columns defined as class attributes
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(128))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    is_active = db.Column(db.Boolean, default=True)
+    <span class="c1"># Columns defined as class attributes</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">password_hash</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">)</span>
+    <span class="n">is_active</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    # Relationships - ORM handles joins automatically
-    posts = db.relationship(&#x27;Post&#x27;, backref=&#x27;author&#x27;, lazy=True)
-    comments = db.relationship(&#x27;Comment&#x27;, backref=&#x27;author&#x27;, lazy=True)
+    <span class="c1"># Relationships - ORM handles joins automatically</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    def set_password(self, password):
-        &quot;&quot;&quot;Hash and store password&quot;&quot;&quot;
-        self.password_hash = generate_password_hash(password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Hash and store password&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-    def check_password(self, password):
-        &quot;&quot;&quot;Verify password&quot;&quot;&quot;
-        return check_password_hash(self.password_hash, password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify password&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
-    def to_dict(self):
-        &quot;&quot;&quot;Convert object to dictionary for JSON serialization&quot;&quot;&quot;
-        return {
-            &#x27;id&#x27;: self.id,
-            &#x27;username&#x27;: self.username,
-            &#x27;email&#x27;: self.email,
-            &#x27;created_at&#x27;: self.created_at.isoformat(),
-            &#x27;is_active&#x27;: self.is_active
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert object to dictionary for JSON serialization&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;is_active&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span>
+        <span class="p">}</span>
 
-    def __repr__(self):
-        return f&#x27;&lt;User {self.username}&gt;&#x27;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;User </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s1">&gt;&#39;</span>
 
-class Category(db.Model):
-    &quot;&quot;&quot;Category model&quot;&quot;&quot;
-    __tablename__ = &#x27;categories&#x27;
+<span class="k">class</span><span class="w"> </span><span class="nc">Category</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Category model&quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;categories&#39;</span>
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), unique=True, nullable=False)
-    description = db.Column(db.Text)
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 
-    # One-to-many relationship
-    posts = db.relationship(&#x27;Post&#x27;, backref=&#x27;category&#x27;, lazy=True)
+    <span class="c1"># One-to-many relationship</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Post&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-class Post(db.Model):
-    &quot;&quot;&quot;Post model with foreign key relationships&quot;&quot;&quot;
-    __tablename__ = &#x27;posts&#x27;
+<span class="k">class</span><span class="w"> </span><span class="nc">Post</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Post model with foreign key relationships&quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;posts&#39;</span>
 
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    published = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">published</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">)</span>
 
-    # Foreign keys
-    author_id = db.Column(db.Integer, db.ForeignKey(&#x27;users.id&#x27;), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey(&#x27;categories.id&#x27;))
+    <span class="c1"># Foreign keys</span>
+    <span class="n">author_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;users.id&#39;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">category_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;categories.id&#39;</span><span class="p">))</span>
 
-    # One-to-many relationship
-    comments = db.relationship(&#x27;Comment&#x27;, backref=&#x27;post&#x27;, lazy=True, cascade=&#x27;all, delete-orphan&#x27;)
+    <span class="c1"># One-to-many relationship</span>
+    <span class="n">comments</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;Comment&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">lazy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cascade</span><span class="o">=</span><span class="s1">&#39;all, delete-orphan&#39;</span><span class="p">)</span>
 
-class Comment(db.Model):
-    &quot;&quot;&quot;Comment model&quot;&quot;&quot;
-    __tablename__ = &#x27;comments&#x27;
+<span class="k">class</span><span class="w"> </span><span class="nc">Comment</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comment model&quot;&quot;&quot;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;comments&#39;</span>
 
-    id = db.Column(db.Integer, primary_key=True)
-    content = db.Column(db.Text, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">created_at</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">DateTime</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">)</span>
 
-    # Foreign keys
-    post_id = db.Column(db.Integer, db.ForeignKey(&#x27;posts.id&#x27;), nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey(&#x27;users.id&#x27;), nullable=False)
+    <span class="c1"># Foreign keys</span>
+    <span class="n">post_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;posts.id&#39;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">author_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;users.id&#39;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-# Create tables
-with app.app_context():
-    db.create_all()
+<span class="c1"># Create tables</span>
+<span class="k">with</span> <span class="n">app</span><span class="o">.</span><span class="n">app_context</span><span class="p">():</span>
+    <span class="n">db</span><span class="o">.</span><span class="n">create_all</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="orm-vs-raw-sql-comparison">ORM vs Raw SQL comparison<a class="headerlink" href="#orm-vs-raw-sql-comparison" title="Permanent link">&para;</a></h3>
 <p>Comparing the same operations using ORM and raw SQL approaches:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Direct comparison: ORM vs Raw SQL
-import sqlite3
-from sqlalchemy import text
+<pre><code class="language-python"><span class="c1"># Direct comparison: ORM vs Raw SQL</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">text</span>
 
-class DatabaseComparison:
-    &quot;&quot;&quot;Compare ORM and raw SQL approaches&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">DatabaseComparison</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare ORM and raw SQL approaches&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.raw_conn = sqlite3.connect(&#x27;blog_raw.db&#x27;)
-        self.raw_conn.row_factory = sqlite3.Row
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;blog_raw.db&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
 
-    # CREATE operations comparison
-    def create_user_raw_sql(self, username, email, password):
-        &quot;&quot;&quot;Raw SQL user creation&quot;&quot;&quot;
-        cursor = self.raw_conn.cursor()
-        try:
-            password_hash = generate_password_hash(password)
-            cursor.execute(&#x27;&#x27;&#x27;
-                INSERT INTO users (username, email, password_hash) 
-                VALUES (?, ?, ?)
-            &#x27;&#x27;&#x27;, (username, email, password_hash))
-            self.raw_conn.commit()
-            return cursor.lastrowid
-        except sqlite3.IntegrityError:
-            return None
+    <span class="c1"># CREATE operations comparison</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_user_raw_sql</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raw SQL user creation&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">password_hash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                INSERT INTO users (username, email, password_hash) </span>
+<span class="s1">                VALUES (?, ?, ?)</span>
+<span class="s1">            &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password_hash</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">raw_conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-    def create_user_orm(self, username, email, password):
-        &quot;&quot;&quot;ORM user creation&quot;&quot;&quot;
-        try:
-            user = User(username=username, email=email)
-            user.set_password(password)
-            db.session.add(user)
-            db.session.commit()
-            return user.id
-        except Exception:
-            db.session.rollback()
-            return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_user_orm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ORM user creation&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">)</span>
+            <span class="n">user</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-    # READ operations comparison
-    def get_users_with_post_count_raw(self):
-        &quot;&quot;&quot;Raw SQL with JOIN and aggregation&quot;&quot;&quot;
-        cursor = self.raw_conn.cursor()
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                u.id, u.username, u.email,
-                COUNT(p.id) as post_count
-            FROM users u
-            LEFT JOIN posts p ON u.id = p.author_id
-            WHERE u.is_active = 1
-            GROUP BY u.id, u.username, u.email
-            ORDER BY post_count DESC
-        &#x27;&#x27;&#x27;)
-        return [dict(row) for row in cursor.fetchall()]
+    <span class="c1"># READ operations comparison</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_users_with_post_count_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raw SQL with JOIN and aggregation&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                u.id, u.username, u.email,</span>
+<span class="s1">                COUNT(p.id) as post_count</span>
+<span class="s1">            FROM users u</span>
+<span class="s1">            LEFT JOIN posts p ON u.id = p.author_id</span>
+<span class="s1">            WHERE u.is_active = 1</span>
+<span class="s1">            GROUP BY u.id, u.username, u.email</span>
+<span class="s1">            ORDER BY post_count DESC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
 
-    def get_users_with_post_count_orm(self):
-        &quot;&quot;&quot;ORM equivalent with relationship loading&quot;&quot;&quot;
-        from sqlalchemy import func
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_users_with_post_count_orm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ORM equivalent with relationship loading&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">func</span>
 
-        users = db.session.query(
-            User.id,
-            User.username,
-            User.email,
-            func.count(Post.id).label(&#x27;post_count&#x27;)
-        ).outerjoin(Post).filter(
-            User.is_active == True
-        ).group_by(
-            User.id, User.username, User.email
-        ).order_by(
-            func.count(Post.id).desc()
-        ).all()
+        <span class="n">users</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">User</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+            <span class="n">User</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;post_count&#39;</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">User</span><span class="o">.</span><span class="n">is_active</span> <span class="o">==</span> <span class="kc">True</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span>
+            <span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">email</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">desc</span><span class="p">()</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
-        return [
-            {
-                &#x27;id&#x27;: user.id,
-                &#x27;username&#x27;: user.username,
-                &#x27;email&#x27;: user.email,
-                &#x27;post_count&#x27;: user.post_count
-            }
-            for user in users
-        ]
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+                <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+                <span class="s1">&#39;post_count&#39;</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">post_count</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span>
+        <span class="p">]</span>
 
-    # Complex query comparison
-    def get_recent_posts_with_details_raw(self, days=30):
-        &quot;&quot;&quot;Complex raw SQL query&quot;&quot;&quot;
-        cursor = self.raw_conn.cursor()
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT 
-                p.id, p.title, p.created_at,
-                u.username as author_name,
-                c.name as category_name,
-                COUNT(cm.id) as comment_count
-            FROM posts p
-            INNER JOIN users u ON p.author_id = u.id
-            LEFT JOIN categories c ON p.category_id = c.id
-            LEFT JOIN comments cm ON p.id = cm.post_id
-            WHERE p.published = 1 
-              AND p.created_at &gt; date(&#x27;now&#x27;, &#x27;-&#x27; || ? || &#x27; days&#x27;)
-            GROUP BY p.id, p.title, p.created_at, u.username, c.name
-            ORDER BY p.created_at DESC
-            LIMIT 10
-        &#x27;&#x27;&#x27;, (days,))
-        return [dict(row) for row in cursor.fetchall()]
+    <span class="c1"># Complex query comparison</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent_posts_with_details_raw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Complex raw SQL query&quot;&quot;&quot;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT </span>
+<span class="s1">                p.id, p.title, p.created_at,</span>
+<span class="s1">                u.username as author_name,</span>
+<span class="s1">                c.name as category_name,</span>
+<span class="s1">                COUNT(cm.id) as comment_count</span>
+<span class="s1">            FROM posts p</span>
+<span class="s1">            INNER JOIN users u ON p.author_id = u.id</span>
+<span class="s1">            LEFT JOIN categories c ON p.category_id = c.id</span>
+<span class="s1">            LEFT JOIN comments cm ON p.id = cm.post_id</span>
+<span class="s1">            WHERE p.published = 1 </span>
+<span class="s1">              AND p.created_at &gt; date(&#39;now&#39;, &#39;-&#39; || ? || &#39; days&#39;)</span>
+<span class="s1">            GROUP BY p.id, p.title, p.created_at, u.username, c.name</span>
+<span class="s1">            ORDER BY p.created_at DESC</span>
+<span class="s1">            LIMIT 10</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">days</span><span class="p">,))</span>
+        <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
 
-    def get_recent_posts_with_details_orm(self, days=30):
-        &quot;&quot;&quot;ORM equivalent using relationships&quot;&quot;&quot;
-        from sqlalchemy import func, and_
-        from datetime import datetime, timedelta
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent_posts_with_details_orm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;ORM equivalent using relationships&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">func</span><span class="p">,</span> <span class="n">and_</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-        cutoff_date = datetime.utcnow() - timedelta(days=days)
+        <span class="n">cutoff_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
 
-        posts = db.session.query(
-            Post.id,
-            Post.title,
-            Post.created_at,
-            User.username.label(&#x27;author_name&#x27;),
-            Category.name.label(&#x27;category_name&#x27;),
-            func.count(Comment.id).label(&#x27;comment_count&#x27;)
-        ).join(User).outerjoin(Category).outerjoin(Comment).filter(
-            and_(Post.published == True, Post.created_at &gt; cutoff_date)
-        ).group_by(
-            Post.id, Post.title, Post.created_at, User.username, Category.name
-        ).order_by(Post.created_at.desc()).limit(10).all()
+        <span class="n">posts</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+            <span class="n">Post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="n">Post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">Post</span><span class="o">.</span><span class="n">created_at</span><span class="p">,</span>
+            <span class="n">User</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;author_name&#39;</span><span class="p">),</span>
+            <span class="n">Category</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;category_name&#39;</span><span class="p">),</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Comment</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;comment_count&#39;</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">Category</span><span class="p">)</span><span class="o">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">Comment</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="n">and_</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">published</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="n">Post</span><span class="o">.</span><span class="n">created_at</span> <span class="o">&gt;</span> <span class="n">cutoff_date</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span>
+            <span class="n">Post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">Post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="n">Post</span><span class="o">.</span><span class="n">created_at</span><span class="p">,</span> <span class="n">User</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">Category</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Post</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
-        return [
-            {
-                &#x27;id&#x27;: post.id,
-                &#x27;title&#x27;: post.title,
-                &#x27;created_at&#x27;: post.created_at.isoformat(),
-                &#x27;author_name&#x27;: post.author_name,
-                &#x27;category_name&#x27;: post.category_name,
-                &#x27;comment_count&#x27;: post.comment_count
-            }
-            for post in posts
-        ]
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                <span class="s1">&#39;author_name&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">author_name</span><span class="p">,</span>
+                <span class="s1">&#39;category_name&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">category_name</span><span class="p">,</span>
+                <span class="s1">&#39;comment_count&#39;</span><span class="p">:</span> <span class="n">post</span><span class="o">.</span><span class="n">comment_count</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">post</span> <span class="ow">in</span> <span class="n">posts</span>
+        <span class="p">]</span>
 
-# Performance and trade-offs demonstration
-@app.route(&#x27;/api/comparison-demo&#x27;)
-def comparison_demo():
-    &quot;&quot;&quot;API endpoint demonstrating ORM vs Raw SQL&quot;&quot;&quot;
-    comparison = DatabaseComparison()
+<span class="c1"># Performance and trade-offs demonstration</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/comparison-demo&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">comparison_demo</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint demonstrating ORM vs Raw SQL&quot;&quot;&quot;</span>
+    <span class="n">comparison</span> <span class="o">=</span> <span class="n">DatabaseComparison</span><span class="p">()</span>
 
-    import time
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-    # Time raw SQL query
-    start_time = time.time()
-    raw_results = comparison.get_recent_posts_with_details_raw()
-    raw_time = time.time() - start_time
+    <span class="c1"># Time raw SQL query</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">raw_results</span> <span class="o">=</span> <span class="n">comparison</span><span class="o">.</span><span class="n">get_recent_posts_with_details_raw</span><span class="p">()</span>
+    <span class="n">raw_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    # Time ORM query
-    start_time = time.time()
-    orm_results = comparison.get_recent_posts_with_details_orm()
-    orm_time = time.time() - start_time
+    <span class="c1"># Time ORM query</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">orm_results</span> <span class="o">=</span> <span class="n">comparison</span><span class="o">.</span><span class="n">get_recent_posts_with_details_orm</span><span class="p">()</span>
+    <span class="n">orm_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    return jsonify({
-        &#x27;raw_sql&#x27;: {
-            &#x27;execution_time&#x27;: f&#x27;{raw_time:.4f}s&#x27;,
-            &#x27;result_count&#x27;: len(raw_results),
-            &#x27;sample_result&#x27;: raw_results[0] if raw_results else None
-        },
-        &#x27;orm&#x27;: {
-            &#x27;execution_time&#x27;: f&#x27;{orm_time:.4f}s&#x27;,
-            &#x27;result_count&#x27;: len(orm_results),
-            &#x27;sample_result&#x27;: orm_results[0] if orm_results else None
-        },
-        &#x27;performance_note&#x27;: &#x27;Times may vary based on data size and query complexity&#x27;
-    })
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;raw_sql&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;execution_time&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">raw_time</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;result_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_results</span><span class="p">),</span>
+            <span class="s1">&#39;sample_result&#39;</span><span class="p">:</span> <span class="n">raw_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">raw_results</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;orm&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;execution_time&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">orm_time</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;result_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">orm_results</span><span class="p">),</span>
+            <span class="s1">&#39;sample_result&#39;</span><span class="p">:</span> <span class="n">orm_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">orm_results</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;performance_note&#39;</span><span class="p">:</span> <span class="s1">&#39;Times may vary based on data size and query complexity&#39;</span>
+    <span class="p">})</span>
 </code></pre>
 </div>
 <h3 id="trade-offs-analysis-orm-vs-raw-sql">Trade-offs analysis: ORM vs Raw SQL<a class="headerlink" href="#trade-offs-analysis-orm-vs-raw-sql" title="Permanent link">&para;</a></h3>
 <p>Understanding when to use each approach:</p>
 <div class="diagram-container" data-container-id="kroki-diagram-1"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-1')">🔍 View Larger</button><div id="kroki-diagram-1" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="209px" preserveAspectRatio="xMaxYMax meet" style="width:2346px;height:209px;background:#FFFFFF;" version="1.1" viewBox="0 0 2346 209" width="2346px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-1"><defs /><g><g class="cluster" data-entity="ORM Benefits" data-source-line="4" data-uid="ent0002" id="cluster_ORM Benefits"><path d="M111.39,6 L219.4203,6 A3.75,3.75 0 0 1 221.9203,8.5 L228.9203,28.2969 L733.39,28.2969 A2.5,2.5 0 0 1 735.89,30.7969 L735.89,100.8 A2.5,2.5 0 0 1 733.39,103.3 L111.39,103.3 A2.5,2.5 0 0 1 108.89,100.8 L108.89,8.5 A2.5,2.5 0 0 1 111.39,6" fill="none" style="stroke:#000000;stroke-width:1.5;" /><line style="stroke:#000000;stroke-width:1.5;" x1="108.89" x2="228.9203" y1="28.2969" y2="28.2969" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="107.0303" x="112.89" y="20.9951">ORM Benefits</text></g><g class="cluster" data-entity="Raw SQL Benefits" data-source-line="11" data-uid="ent0007" id="cluster_Raw SQL Benefits"><path d="M972.39,6 L1112.7474,6 A3.75,3.75 0 0 1 1115.2474,8.5 L1122.2474,28.2969 L1561.39,28.2969 A2.5,2.5 0 0 1 1563.89,30.7969 L1563.89,100.8 A2.5,2.5 0 0 1 1561.39,103.3 L972.39,103.3 A2.5,2.5 0 0 1 969.89,100.8 L969.89,8.5 A2.5,2.5 0 0 1 972.39,6" fill="none" style="stroke:#000000;stroke-width:1.5;" /><line style="stroke:#000000;stroke-width:1.5;" x1="969.89" x2="1122.2474" y1="28.2969" y2="28.2969" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="139.3574" x="973.89" y="20.9951">Raw SQL Benefits</text></g><g class="cluster" data-entity="Decision Factors" data-source-line="18" data-uid="ent0012" id="cluster_Decision Factors"><path d="M1766.39,6 L1898.0521,6 A3.75,3.75 0 0 1 1900.5521,8.5 L1907.5521,28.2969 L2283.39,28.2969 A2.5,2.5 0 0 1 2285.89,30.7969 L2285.89,100.8 A2.5,2.5 0 0 1 2283.39,103.3 L1766.39,103.3 A2.5,2.5 0 0 1 1763.89,100.8 L1763.89,8.5 A2.5,2.5 0 0 1 1766.39,6" fill="none" style="stroke:#000000;stroke-width:1.5;" /><line style="stroke:#000000;stroke-width:1.5;" x1="1763.89" x2="1907.5521" y1="28.2969" y2="28.2969" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="130.6621" x="1767.89" y="20.9951">Decision Factors</text></g><g class="entity" data-entity="orm_prod" data-source-line="5" data-uid="ent0003" id="entity_orm_prod"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="123.5488" x="125.11" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="228.6588" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="226.6588" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="226.6588" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="83.5488" x="140.11" y="73.9951">Productivity</text></g><g class="entity" data-entity="orm_abs" data-source-line="6" data-uid="ent0004" id="entity_orm_abs"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="120.0967" x="283.84" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="383.9367" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="381.9367" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="381.9367" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="80.0967" x="298.84" y="73.9951">Abstraction</text></g><g class="entity" data-entity="orm_port" data-source-line="7" data-uid="ent0005" id="entity_orm_port"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="111.1621" x="439.31" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="530.4721" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="528.4721" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="528.4721" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71.1621" x="454.31" y="73.9951">Portability</text></g><g class="entity" data-entity="orm_rel" data-source-line="8" data-uid="ent0006" id="entity_orm_rel"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133.8643" x="585.96" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="699.8243" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="697.8243" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="697.8243" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93.8643" x="600.96" y="73.9951">Relationships</text></g><g class="entity" data-entity="sql_perf" data-source-line="12" data-uid="ent0008" id="entity_sql_perf"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="129.4619" x="986.16" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1095.6219" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1093.6219" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1093.6219" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89.4619" x="1001.16" y="73.9951">Performance</text></g><g class="entity" data-entity="sql_ctrl" data-source-line="13" data-uid="ent0009" id="entity_sql_ctrl"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="90.9141" x="1150.43" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1221.3441" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1219.3441" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1219.3441" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50.9141" x="1165.43" y="73.9951">Control</text></g><g class="entity" data-entity="sql_opt" data-source-line="14" data-uid="ent0010" id="entity_sql_opt"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="129.5576" x="1276.11" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1385.6676" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1383.6676" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1383.6676" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89.5576" x="1291.11" y="73.9951">Optimization</text></g><g class="entity" data-entity="sql_flex" data-source-line="15" data-uid="ent0011" id="entity_sql_flex"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="107.0605" x="1440.36" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1527.4205" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1525.4205" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1525.4205" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67.0605" x="1455.36" y="73.9951">Flexibility</text></g><g class="entity" data-entity="factor_size" data-source-line="19" data-uid="ent0013" id="entity_factor_size"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="121.6416" x="1780.07" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1881.7116" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1879.7116" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1879.7116" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="81.6416" x="1795.07" y="73.9951">Project Size</text></g><g class="entity" data-entity="factor_skills" data-source-line="20" data-uid="ent0014" id="entity_factor_skills"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="119.7891" x="1936.99" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2036.7791" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2034.7791" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2034.7791" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79.7891" x="1951.99" y="73.9951">Team Skills</text></g><g class="entity" data-entity="factor_perf" data-source-line="21" data-uid="ent0015" id="entity_factor_perf"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="177.792" x="2091.99" y="41" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2249.782" y="46" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2247.782" y="48" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2247.782" y="52" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="137.792" x="2106.99" y="73.9951">Performance Needs</text></g><g class="entity" data-entity="GMN16" data-source-line="24" data-uid="ent0017" id="entity_GMN16"><path d="M6,147.3 L6,202.6984 A0,0 0 0 0 6,202.6984 L193.7783,202.6984 A0,0 0 0 0 193.7783,202.6984 L193.7783,157.3 L183.7783,147.3 L125.59,147.3 L168.86,87.71 L117.59,147.3 L6,147.3 A0,0 0 0 0 6,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M183.7783,147.3 L183.7783,157.3 L193.7783,157.3 L183.7783,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130.5459" x="12" y="164.3669">Faster development</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="138.0996" x="12" y="179.4997">Less boilerplate code</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="166.7783" x="12" y="194.6325">Object-oriented approach</text></g><g class="entity" data-entity="GMN19" data-source-line="25" data-uid="ent0020" id="entity_GMN19"><path d="M229.2,147.3 L229.2,202.6984 A0,0 0 0 0 229.2,202.6984 L408.5867,202.6984 A0,0 0 0 0 408.5867,202.6984 L408.5867,157.3 L398.5867,147.3 L329.12,147.3 L338.71,87.71 L321.12,147.3 L229.2,147.3 A0,0 0 0 0 229.2,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M398.5867,147.3 L398.5867,157.3 L408.5867,157.3 L398.5867,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="158.3867" x="235.2" y="164.3669">Database independence</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140.3149" x="235.2" y="179.4997">Automatic migrations</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114.1563" x="235.2" y="194.6325">Built-in validation</text></g><g class="entity" data-entity="GMN22" data-source-line="26" data-uid="ent0023" id="entity_GMN22"><path d="M443.9,147.3 L443.9,202.6984 A0,0 0 0 0 443.9,202.6984 L595.8712,202.6984 A0,0 0 0 0 595.8712,202.6984 L595.8712,157.3 L585.8712,147.3 L517.65,147.3 L500.07,87.71 L509.65,147.3 L443.9,147.3 A0,0 0 0 0 443.9,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M585.8712,147.3 L585.8712,157.3 L595.8712,157.3 L585.8712,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="128.7432" x="449.9" y="164.3669">Multiple DB support</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="79.8472" x="449.9" y="179.4997">Easy testing</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130.9712" x="449.9" y="194.6325">Consistent interface</text></g><g class="entity" data-entity="GMN25" data-source-line="27" data-uid="ent0026" id="entity_GMN25"><path d="M630.59,147.3 L630.59,202.6984 A0,0 0 0 0 630.59,202.6984 L823.1925,202.6984 A0,0 0 0 0 823.1925,202.6984 L823.1925,157.3 L813.1925,147.3 L712.43,147.3 L668.22,87.71 L704.43,147.3 L630.59,147.3 A0,0 0 0 0 630.59,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M813.1925,147.3 L813.1925,157.3 L823.1925,157.3 L813.1925,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="100.9912" x="636.59" y="164.3669">Automatic joins</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81.7451" x="636.59" y="179.4997">Lazy loading</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="171.6025" x="636.59" y="194.6325">Relationship management</text></g><g class="entity" data-entity="GMN28" data-source-line="29" data-uid="ent0029" id="entity_GMN28"><path d="M858.61,147.3 L858.61,202.6984 A0,0 0 0 0 858.61,202.6984 L1031.1603,202.6984 A0,0 0 0 0 1031.1603,202.6984 L1031.1603,157.3 L1021.1603,147.3 L975.33,147.3 L1028.93,87.71 L967.33,147.3 L858.61,147.3 A0,0 0 0 0 858.61,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M1021.1603,147.3 L1021.1603,157.3 L1031.1603,157.3 L1021.1603,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="151.5503" x="864.61" y="164.3669">Direct database access</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="116.4985" x="864.61" y="179.4997">Minimal overhead</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118.8916" x="864.61" y="194.6325">Optimized queries</text></g><g class="entity" data-entity="GMN31" data-source-line="30" data-uid="ent0032" id="entity_GMN31"><path d="M1066.41,147.3 L1066.41,202.6984 A0,0 0 0 0 1066.41,202.6984 L1261.3739,202.6984 A0,0 0 0 0 1261.3739,202.6984 L1261.3739,157.3 L1251.3739,147.3 L1175.87,147.3 L1189.26,87.71 L1167.87,147.3 L1066.41,147.3 A0,0 0 0 0 1066.41,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M1251.3739,147.3 L1251.3739,157.3 L1261.3739,157.3 L1251.3739,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="127.2578" x="1072.41" y="164.3669">Exact query control</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="113.8135" x="1072.41" y="179.4997">Custom functions</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="173.9639" x="1072.41" y="194.6325">Database-specific features</text></g><g class="entity" data-entity="GMN34" data-source-line="31" data-uid="ent0035" id="entity_GMN34"><path d="M1296.26,147.3 L1296.26,202.6984 A0,0 0 0 0 1296.26,202.6984 L1449.5134,202.6984 A0,0 0 0 0 1449.5134,202.6984 L1449.5134,157.3 L1439.5134,147.3 L1368.91,147.3 L1347.52,87.71 L1360.91,147.3 L1296.26,147.3 A0,0 0 0 0 1296.26,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M1439.5134,147.3 L1439.5134,157.3 L1449.5134,157.3 L1439.5134,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="132.2534" x="1302.26" y="164.3669">Manual optimization</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="104.5015" x="1302.26" y="179.4997">Custom indexes</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="100.0518" x="1302.26" y="194.6325">Query planning</text></g><g class="entity" data-entity="GMN37" data-source-line="32" data-uid="ent0038" id="entity_GMN37"><path d="M1484.18,147.3 L1484.18,202.6984 A0,0 0 0 0 1484.18,202.6984 L1657.6063,202.6984 A0,0 0 0 0 1657.6063,202.6984 L1657.6063,157.3 L1647.6063,147.3 L1555.69,147.3 L1509.84,87.71 L1547.69,147.3 L1484.18,147.3 A0,0 0 0 0 1484.18,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M1647.6063,147.3 L1647.6063,157.3 L1657.6063,157.3 L1647.6063,147.3" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="109.5986" x="1490.18" y="164.3669">Complex queries</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="120.3325" x="1490.18" y="179.4997">Stored procedures</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="152.4263" x="1490.18" y="194.6325">Advanced SQL features</text></g><g class="entity" data-entity="GMN40" data-source-line="34" data-uid="ent0041" id="entity_GMN40"><path d="M1692.21,154.87 L1692.21,195.1356 A0,0 0 0 0 1692.21,195.1356 L1869.5718,195.1356 A0,0 0 0 0 1869.5718,195.1356 L1869.5718,164.87 L1859.5718,154.87 L1795.7,154.87 L1828.46,87.71 L1787.7,154.87 L1692.21,154.87 A0,0 0 0 0 1692.21,154.87" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M1859.5718,154.87 L1859.5718,164.87 L1869.5718,164.87 L1859.5718,154.87" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142.105" x="1698.21" y="171.9369">Small/Medium &#8594; ORM</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="156.3618" x="1698.21" y="187.0697">Large/Complex &#8594; Mixed</text></g><g class="entity" data-entity="GMN43" data-source-line="35" data-uid="ent0044" id="entity_GMN43"><path d="M1904.96,154.87 L1904.96,195.1356 A0,0 0 0 0 1904.96,195.1356 L2088.8282,195.1356 A0,0 0 0 0 2088.8282,195.1356 L2088.8282,164.87 L2078.8282,154.87 L2000.89,154.87 L1996.89,87.71 L1992.89,154.87 L1904.96,154.87 A0,0 0 0 0 1904.96,154.87" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M2078.8282,154.87 L2078.8282,164.87 L2088.8282,164.87 L2078.8282,154.87" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="162.8682" x="1910.96" y="171.9369">Junior developers &#8594; ORM</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155.6636" x="1910.96" y="187.0697">SQL experts &#8594; Raw SQL</text></g><g class="entity" data-entity="GMN46" data-source-line="36" data-uid="ent0047" id="entity_GMN46"><path d="M2124.32,154.87 L2124.32,195.1356 A0,0 0 0 0 2124.32,195.1356 L2339.4631,195.1356 A0,0 0 0 0 2339.4631,195.1356 L2339.4631,164.87 L2329.4631,154.87 L2226.7,154.87 L2191.46,87.71 L2218.7,154.87 L2124.32,154.87 A0,0 0 0 0 2124.32,154.87" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M2329.4631,154.87 L2329.4631,164.87 L2339.4631,164.87 L2329.4631,154.87" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="150.7759" x="2130.32" y="171.9369">Standard CRUD &#8594; ORM</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="194.1431" x="2130.32" y="187.0697">High performance &#8594; Raw SQL</text></g></g></svg></p></div></div>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Trade-offs demonstration with practical examples
-class ORMTradeoffDemo:
-    &quot;&quot;&quot;Demonstrate ORM vs Raw SQL trade-offs&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># Trade-offs demonstration with practical examples</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ORMTradeoffDemo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate ORM vs Raw SQL trade-offs&quot;&quot;&quot;</span>
 
-    def productivity_comparison(self):
-        &quot;&quot;&quot;Show development speed differences&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">productivity_comparison</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show development speed differences&quot;&quot;&quot;</span>
 
-        # ORM: Simple and readable
-        orm_example = &#x27;&#x27;&#x27;
-        # ORM - Create user with posts
-        user = User(username=&#x27;john&#x27;, email=&#x27;john@example.com&#x27;)
-        db.session.add(user)
+        <span class="c1"># ORM: Simple and readable</span>
+        <span class="n">orm_example</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        # ORM - Create user with posts</span>
+<span class="s1">        user = User(username=&#39;john&#39;, email=&#39;john@example.com&#39;)</span>
+<span class="s1">        db.session.add(user)</span>
 
-        post1 = Post(title=&#x27;First Post&#x27;, content=&#x27;Content...&#x27;, author=user)
-        post2 = Post(title=&#x27;Second Post&#x27;, content=&#x27;More content...&#x27;, author=user)
+<span class="s1">        post1 = Post(title=&#39;First Post&#39;, content=&#39;Content...&#39;, author=user)</span>
+<span class="s1">        post2 = Post(title=&#39;Second Post&#39;, content=&#39;More content...&#39;, author=user)</span>
 
-        db.session.add_all([post1, post2])
-        db.session.commit()
+<span class="s1">        db.session.add_all([post1, post2])</span>
+<span class="s1">        db.session.commit()</span>
 
-        # Query with relationships
-        posts_with_authors = Post.query.join(User).all()
-        &#x27;&#x27;&#x27;
+<span class="s1">        # Query with relationships</span>
+<span class="s1">        posts_with_authors = Post.query.join(User).all()</span>
+<span class="s1">        &#39;&#39;&#39;</span>
 
-        # Raw SQL: More verbose but explicit
-        raw_sql_example = &#x27;&#x27;&#x27;
-        # Raw SQL - Same operations
-        cursor.execute(&quot;INSERT INTO users (username, email) VALUES (?, ?)&quot;, 
-                      (&#x27;john&#x27;, &#x27;john@example.com&#x27;))
-        user_id = cursor.lastrowid
+        <span class="c1"># Raw SQL: More verbose but explicit</span>
+        <span class="n">raw_sql_example</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        # Raw SQL - Same operations</span>
+<span class="s1">        cursor.execute(&quot;INSERT INTO users (username, email) VALUES (?, ?)&quot;, </span>
+<span class="s1">                      (&#39;john&#39;, &#39;john@example.com&#39;))</span>
+<span class="s1">        user_id = cursor.lastrowid</span>
 
-        cursor.execute(&quot;INSERT INTO posts (title, content, author_id) VALUES (?, ?, ?)&quot;,
-                      (&#x27;First Post&#x27;, &#x27;Content...&#x27;, user_id))
-        cursor.execute(&quot;INSERT INTO posts (title, content, author_id) VALUES (?, ?, ?)&quot;,
-                      (&#x27;Second Post&#x27;, &#x27;More content...&#x27;, user_id))
-        conn.commit()
+<span class="s1">        cursor.execute(&quot;INSERT INTO posts (title, content, author_id) VALUES (?, ?, ?)&quot;,</span>
+<span class="s1">                      (&#39;First Post&#39;, &#39;Content...&#39;, user_id))</span>
+<span class="s1">        cursor.execute(&quot;INSERT INTO posts (title, content, author_id) VALUES (?, ?, ?)&quot;,</span>
+<span class="s1">                      (&#39;Second Post&#39;, &#39;More content...&#39;, user_id))</span>
+<span class="s1">        conn.commit()</span>
 
-        # Query with join
-        cursor.execute(&quot;&quot;&quot;
-            SELECT p.*, u.username, u.email 
-            FROM posts p 
-            JOIN users u ON p.author_id = u.id
-        &quot;&quot;&quot;)
-        &#x27;&#x27;&#x27;
+<span class="s1">        # Query with join</span>
+<span class="s1">        cursor.execute(&quot;&quot;&quot;</span>
+<span class="s1">            SELECT p.*, u.username, u.email </span>
+<span class="s1">            FROM posts p </span>
+<span class="s1">            JOIN users u ON p.author_id = u.id</span>
+<span class="s1">        &quot;&quot;&quot;)</span>
+<span class="s1">        &#39;&#39;&#39;</span>
 
-        return {
-            &#x27;orm_approach&#x27;: {
-                &#x27;code&#x27;: orm_example.strip(),
-                &#x27;lines_of_code&#x27;: len(orm_example.strip().split(&#x27;\n&#x27;)),
-                &#x27;readability&#x27;: &#x27;High - object-oriented, intuitive&#x27;,
-                &#x27;maintenance&#x27;: &#x27;Easy - relationship changes handled automatically&#x27;
-            },
-            &#x27;raw_sql_approach&#x27;: {
-                &#x27;code&#x27;: raw_sql_example.strip(),
-                &#x27;lines_of_code&#x27;: len(raw_sql_example.strip().split(&#x27;\n&#x27;)),
-                &#x27;readability&#x27;: &#x27;Moderate - requires SQL knowledge&#x27;,
-                &#x27;maintenance&#x27;: &#x27;Manual - schema changes need code updates&#x27;
-            }
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;orm_approach&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="n">orm_example</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                <span class="s1">&#39;lines_of_code&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">orm_example</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;readability&#39;</span><span class="p">:</span> <span class="s1">&#39;High - object-oriented, intuitive&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;maintenance&#39;</span><span class="p">:</span> <span class="s1">&#39;Easy - relationship changes handled automatically&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;raw_sql_approach&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;code&#39;</span><span class="p">:</span> <span class="n">raw_sql_example</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span>
+                <span class="s1">&#39;lines_of_code&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">raw_sql_example</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)),</span>
+                <span class="s1">&#39;readability&#39;</span><span class="p">:</span> <span class="s1">&#39;Moderate - requires SQL knowledge&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;maintenance&#39;</span><span class="p">:</span> <span class="s1">&#39;Manual - schema changes need code updates&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-    def performance_scenarios(self):
-        &quot;&quot;&quot;Analyze performance characteristics&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">performance_scenarios</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze performance characteristics&quot;&quot;&quot;</span>
 
-        scenarios = {
-            &#x27;simple_crud&#x27;: {
-                &#x27;description&#x27;: &#x27;Basic create, read, update, delete operations&#x27;,
-                &#x27;orm_performance&#x27;: &#x27;Good - minimal overhead&#x27;,
-                &#x27;sql_performance&#x27;: &#x27;Slightly better - direct queries&#x27;,
-                &#x27;recommendation&#x27;: &#x27;Use ORM - productivity benefits outweigh small performance cost&#x27;
-            },
-            &#x27;complex_reporting&#x27;: {
-                &#x27;description&#x27;: &#x27;Multi-table joins with aggregations&#x27;,
-                &#x27;orm_performance&#x27;: &#x27;Poor - may generate inefficient queries&#x27;,
-                &#x27;sql_performance&#x27;: &#x27;Excellent - hand-optimized queries&#x27;,
-                &#x27;recommendation&#x27;: &#x27;Use raw SQL - performance critical&#x27;
-            },
-            &#x27;bulk_operations&#x27;: {
-                &#x27;description&#x27;: &#x27;Processing thousands of records&#x27;,
-                &#x27;orm_performance&#x27;: &#x27;Poor - object overhead per record&#x27;,
-                &#x27;sql_performance&#x27;: &#x27;Excellent - bulk operations optimized&#x27;,
-                &#x27;recommendation&#x27;: &#x27;Use raw SQL or ORM bulk methods&#x27;
-            },
-            &#x27;rapid_prototyping&#x27;: {
-                &#x27;description&#x27;: &#x27;Building MVP or proof of concept&#x27;,
-                &#x27;orm_performance&#x27;: &#x27;Acceptable - fast development&#x27;,
-                &#x27;sql_performance&#x27;: &#x27;Good but slower development&#x27;,
-                &#x27;recommendation&#x27;: &#x27;Use ORM - speed to market important&#x27;
-            }
-        }
+        <span class="n">scenarios</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;simple_crud&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Basic create, read, update, delete operations&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;orm_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Good - minimal overhead&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;sql_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Slightly better - direct queries&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="s1">&#39;Use ORM - productivity benefits outweigh small performance cost&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;complex_reporting&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Multi-table joins with aggregations&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;orm_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Poor - may generate inefficient queries&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;sql_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Excellent - hand-optimized queries&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="s1">&#39;Use raw SQL - performance critical&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;bulk_operations&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Processing thousands of records&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;orm_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Poor - object overhead per record&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;sql_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Excellent - bulk operations optimized&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="s1">&#39;Use raw SQL or ORM bulk methods&#39;</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;rapid_prototyping&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Building MVP or proof of concept&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;orm_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Acceptable - fast development&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;sql_performance&#39;</span><span class="p">:</span> <span class="s1">&#39;Good but slower development&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="s1">&#39;Use ORM - speed to market important&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        return scenarios
+        <span class="k">return</span> <span class="n">scenarios</span>
 
-    def decision_framework(self):
-        &quot;&quot;&quot;Provide framework for choosing approach&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">decision_framework</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provide framework for choosing approach&quot;&quot;&quot;</span>
 
-        return {
-            &#x27;use_orm_when&#x27;: [
-                &#x27;Building CRUD applications&#x27;,
-                &#x27;Team has limited SQL experience&#x27;,
-                &#x27;Database portability is important&#x27;,
-                &#x27;Rapid development is priority&#x27;,
-                &#x27;Working with object-oriented patterns&#x27;,
-                &#x27;Automatic migration management needed&#x27;
-            ],
-            &#x27;use_raw_sql_when&#x27;: [
-                &#x27;Performance is critical&#x27;,
-                &#x27;Complex reporting requirements&#x27;,
-                &#x27;Using database-specific features&#x27;,
-                &#x27;Team has strong SQL skills&#x27;,
-                &#x27;Fine-grained query control needed&#x27;,
-                &#x27;Working with legacy database schemas&#x27;
-            ],
-            &#x27;hybrid_approach&#x27;: [
-                &#x27;Use ORM for standard CRUD operations&#x27;,
-                &#x27;Use raw SQL for complex queries and reports&#x27;,
-                &#x27;Use ORM for development speed, optimize with SQL later&#x27;,
-                &#x27;Consider ORM query compilation to understand generated SQL&#x27;
-            ]
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;use_orm_when&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;Building CRUD applications&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Team has limited SQL experience&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Database portability is important&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Rapid development is priority&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Working with object-oriented patterns&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Automatic migration management needed&#39;</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;use_raw_sql_when&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;Performance is critical&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Complex reporting requirements&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Using database-specific features&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Team has strong SQL skills&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Fine-grained query control needed&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Working with legacy database schemas&#39;</span>
+            <span class="p">],</span>
+            <span class="s1">&#39;hybrid_approach&#39;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s1">&#39;Use ORM for standard CRUD operations&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Use raw SQL for complex queries and reports&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Use ORM for development speed, optimize with SQL later&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Consider ORM query compilation to understand generated SQL&#39;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
 
-@app.route(&#x27;/api/orm-tradeoffs&#x27;)
-def orm_tradeoffs():
-    &quot;&quot;&quot;API endpoint for ORM trade-off analysis&quot;&quot;&quot;
-    demo = ORMTradeoffDemo()
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/orm-tradeoffs&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">orm_tradeoffs</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;API endpoint for ORM trade-off analysis&quot;&quot;&quot;</span>
+    <span class="n">demo</span> <span class="o">=</span> <span class="n">ORMTradeoffDemo</span><span class="p">()</span>
 
-    return jsonify({
-        &#x27;productivity_comparison&#x27;: demo.productivity_comparison(),
-        &#x27;performance_scenarios&#x27;: demo.performance_scenarios(),
-        &#x27;decision_framework&#x27;: demo.decision_framework()
-    })
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;productivity_comparison&#39;</span><span class="p">:</span> <span class="n">demo</span><span class="o">.</span><span class="n">productivity_comparison</span><span class="p">(),</span>
+        <span class="s1">&#39;performance_scenarios&#39;</span><span class="p">:</span> <span class="n">demo</span><span class="o">.</span><span class="n">performance_scenarios</span><span class="p">(),</span>
+        <span class="s1">&#39;decision_framework&#39;</span><span class="p">:</span> <span class="n">demo</span><span class="o">.</span><span class="n">decision_framework</span><span class="p">()</span>
+    <span class="p">})</span>
 
-if __name__ == &#x27;__main__&#x27;:
-    app.run(debug=True)
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="additional-exercises">Additional exercises<a class="headerlink" href="#additional-exercises" title="Permanent link">&para;</a></h2>
@@ -2588,34 +2588,34 @@ if __name__ == &#x27;__main__&#x27;:
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># ORM Models
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+<pre><code class="language-python"><span class="c1"># ORM Models</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">120</span><span class="p">),</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    # One-to-one relationship
-    profile = db.relationship(&#x27;UserProfile&#x27;, backref=&#x27;user&#x27;, uselist=False)
+    <span class="c1"># One-to-one relationship</span>
+    <span class="n">profile</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">relationship</span><span class="p">(</span><span class="s1">&#39;UserProfile&#39;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-class UserProfile(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(&#x27;user.id&#x27;), nullable=False)
-    bio = db.Column(db.Text)
-    location = db.Column(db.String(100))
+<span class="k">class</span><span class="w"> </span><span class="nc">UserProfile</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;user.id&#39;</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">bio</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 
-# Query comparison
-# Raw SQL:
-cursor.execute(&quot;&quot;&quot;
-    SELECT u.username, u.email, p.bio, p.location 
-    FROM users u 
-    LEFT JOIN user_profiles p ON u.id = p.user_id 
-    WHERE u.username LIKE ?
-&quot;&quot;&quot;, (&#x27;%john%&#x27;,))
+<span class="c1"># Query comparison</span>
+<span class="c1"># Raw SQL:</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT u.username, u.email, p.bio, p.location </span>
+<span class="s2">    FROM users u </span>
+<span class="s2">    LEFT JOIN user_profiles p ON u.id = p.user_id </span>
+<span class="s2">    WHERE u.username LIKE ?</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;%john%&#39;</span><span class="p">,))</span>
 
-# ORM equivalent:
-users = User.query.join(UserProfile, isouter=True).filter(
-    User.username.like(&#x27;%john%&#x27;)
-).all()
+<span class="c1"># ORM equivalent:</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">UserProfile</span><span class="p">,</span> <span class="n">isouter</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+    <span class="n">User</span><span class="o">.</span><span class="n">username</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;%john%&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </code></pre>
 </div>
 <p><strong>Trade-off analysis</strong>:</p>
@@ -2879,6 +2879,8 @@ users = User.query.join(UserProfile, isouter=True).filter(
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

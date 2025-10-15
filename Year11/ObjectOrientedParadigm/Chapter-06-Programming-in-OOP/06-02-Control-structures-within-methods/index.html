@@ -1646,681 +1646,681 @@
 <p><strong>Selection structures</strong> (if/elif/else statements) allow methods to make decisions based on object state, parameters, or external conditions.</p>
 <h3 id="basic-selection-in-methods">Basic selection in methods<a class="headerlink" href="#basic-selection-in-methods" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BankAccount:
-    &quot;&quot;&quot;Bank account demonstrating selection structures in methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bank account demonstrating selection structures in methods&quot;&quot;&quot;</span>
 
-    def __init__(self, account_number, initial_balance=0):
-        self.account_number = account_number
-        self.balance = initial_balance
-        self.is_frozen = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_frozen</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def withdraw(self, amount):
-        &quot;&quot;&quot;Withdraw money with multiple validation checks&quot;&quot;&quot;
-        # Selection based on account state
-        if self.is_frozen:
-            return False, &quot;Account is frozen&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Withdraw money with multiple validation checks&quot;&quot;&quot;</span>
+        <span class="c1"># Selection based on account state</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_frozen</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Account is frozen&quot;</span>
 
-        # Selection based on parameter validation
-        if amount &lt;= 0:
-            return False, &quot;Amount must be positive&quot;
+        <span class="c1"># Selection based on parameter validation</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Amount must be positive&quot;</span>
 
-        # Selection based on balance check
-        if amount &gt; self.balance:
-            return False, &quot;Insufficient funds&quot;
+        <span class="c1"># Selection based on balance check</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Insufficient funds&quot;</span>
 
-        # All checks passed - perform withdrawal
-        self.balance -= amount
-        return True, f&quot;Withdrew ${amount}. Balance: ${self.balance}&quot;
+        <span class="c1"># All checks passed - perform withdrawal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Withdrew $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def get_account_status(self):
-        &quot;&quot;&quot;Determine account status using selection&quot;&quot;&quot;
-        if self.is_frozen:
-            return &quot;FROZEN&quot;
-        elif self.balance &lt; 0:
-            return &quot;OVERDRAWN&quot;
-        elif self.balance &lt; 100:
-            return &quot;LOW_BALANCE&quot;
-        elif self.balance &lt; 1000:
-            return &quot;NORMAL&quot;
-        else:
-            return &quot;HIGH_BALANCE&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_account_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine account status using selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_frozen</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;FROZEN&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;OVERDRAWN&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;LOW_BALANCE&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;NORMAL&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;HIGH_BALANCE&quot;</span>
 
-    def apply_fees(self):
-        &quot;&quot;&quot;Apply different fees based on account status&quot;&quot;&quot;
-        status = self.get_account_status()
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_fees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply different fees based on account status&quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_account_status</span><span class="p">()</span>
 
-        if status == &quot;OVERDRAWN&quot;:
-            fee = 35
-            self.balance -= fee
-            return f&quot;Applied overdraft fee: ${fee}&quot;
-        elif status == &quot;LOW_BALANCE&quot;:
-            fee = 5
-            self.balance -= fee
-            return f&quot;Applied low balance fee: ${fee}&quot;
-        else:
-            return &quot;No fees applied&quot;
+        <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OVERDRAWN&quot;</span><span class="p">:</span>
+            <span class="n">fee</span> <span class="o">=</span> <span class="mi">35</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">fee</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Applied overdraft fee: $</span><span class="si">{</span><span class="n">fee</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">elif</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;LOW_BALANCE&quot;</span><span class="p">:</span>
+            <span class="n">fee</span> <span class="o">=</span> <span class="mi">5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">fee</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Applied low balance fee: $</span><span class="si">{</span><span class="n">fee</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;No fees applied&quot;</span>
 
-# Usage
-account = BankAccount(&quot;ACC001&quot;, 150)
-print(account.withdraw(200))        # (False, &#x27;Insufficient funds&#x27;)
-print(account.get_account_status()) # LOW_BALANCE
-print(account.apply_fees())         # Applied low balance fee: $5
+<span class="c1"># Usage</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC001&quot;</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>        <span class="c1"># (False, &#39;Insufficient funds&#39;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">get_account_status</span><span class="p">())</span> <span class="c1"># LOW_BALANCE</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">apply_fees</span><span class="p">())</span>         <span class="c1"># Applied low balance fee: $5</span>
 </code></pre>
 </div>
 <h3 id="complex-selection-with-multiple-conditions">Complex selection with multiple conditions<a class="headerlink" href="#complex-selection-with-multiple-conditions" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Student:
-    &quot;&quot;&quot;Student class demonstrating complex selection logic&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Student class demonstrating complex selection logic&quot;&quot;&quot;</span>
 
-    def __init__(self, name, student_id):
-        self.name = name
-        self.student_id = student_id
-        self.grades = []
-        self.attendance_percentage = 100
-        self.assignments_submitted = 0
-        self.total_assignments = 0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assignments_submitted</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total_assignments</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def calculate_letter_grade(self):
-        &quot;&quot;&quot;Calculate letter grade using complex selection&quot;&quot;&quot;
-        if not self.grades:
-            return &quot;I&quot;  # Incomplete
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_letter_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate letter grade using complex selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;I&quot;</span>  <span class="c1"># Incomplete</span>
 
-        average = sum(self.grades) / len(self.grades)
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-        # Multiple conditions for grade determination
-        if average &gt;= 90 and self.attendance_percentage &gt;= 80:
-            return &quot;A&quot;
-        elif average &gt;= 80 and self.attendance_percentage &gt;= 75:
-            return &quot;B&quot;
-        elif average &gt;= 70 and self.attendance_percentage &gt;= 70:
-            return &quot;C&quot;
-        elif average &gt;= 60 and self.attendance_percentage &gt;= 65:
-            return &quot;D&quot;
-        else:
-            return &quot;F&quot;
+        <span class="c1"># Multiple conditions for grade determination</span>
+        <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">90</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-    def can_graduate(self):
-        &quot;&quot;&quot;Check graduation eligibility with multiple criteria&quot;&quot;&quot;
-        if not self.grades:
-            return False, &quot;No grades recorded&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_graduate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check graduation eligibility with multiple criteria&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;No grades recorded&quot;</span>
 
-        average = sum(self.grades) / len(self.grades)
-        assignment_completion = (self.assignments_submitted / self.total_assignments * 100 
-                               if self.total_assignments &gt; 0 else 0)
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
+        <span class="n">assignment_completion</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">assignments_submitted</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_assignments</span> <span class="o">*</span> <span class="mi">100</span> 
+                               <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_assignments</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
 
-        # Complex boolean logic
-        if (average &gt;= 70 and 
-            self.attendance_percentage &gt;= 80 and 
-            assignment_completion &gt;= 90):
-            return True, &quot;Eligible for graduation&quot;
-        else:
-            issues = []
-            if average &lt; 70:
-                issues.append(f&quot;Average too low: {average:.1f}% (need 70%)&quot;)
-            if self.attendance_percentage &lt; 80:
-                issues.append(f&quot;Poor attendance: {self.attendance_percentage}% (need 80%)&quot;)
-            if assignment_completion &lt; 90:
-                issues.append(f&quot;Missing assignments: {assignment_completion:.1f}% completed (need 90%)&quot;)
+        <span class="c1"># Complex boolean logic</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="ow">and</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">80</span> <span class="ow">and</span> 
+            <span class="n">assignment_completion</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Eligible for graduation&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">average</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">:</span>
+                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average too low: </span><span class="si">{</span><span class="n">average</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% (need 70%)&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">:</span>
+                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Poor attendance: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span><span class="si">}</span><span class="s2">% (need 80%)&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">assignment_completion</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">:</span>
+                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing assignments: </span><span class="si">{</span><span class="n">assignment_completion</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% completed (need 90%)&quot;</span><span class="p">)</span>
 
-            return False, &quot;; &quot;.join(issues)
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">issues</span><span class="p">)</span>
 
-    def get_academic_standing(self):
-        &quot;&quot;&quot;Determine academic standing using nested selection&quot;&quot;&quot;
-        if not self.grades:
-            return &quot;PENDING&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_academic_standing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine academic standing using nested selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;PENDING&quot;</span>
 
-        average = sum(self.grades) / len(self.grades)
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-        if average &gt;= 85:
-            if self.attendance_percentage &gt;= 95:
-                return &quot;DEAN&#x27;S LIST&quot;
-            else:
-                return &quot;HONOR ROLL&quot;
-        elif average &gt;= 70:
-            if self.attendance_percentage &gt;= 80:
-                return &quot;GOOD_STANDING&quot;
-            else:
-                return &quot;PROBATION_WARNING&quot;
-        else:
-            return &quot;ACADEMIC_PROBATION&quot;
+        <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">85</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">95</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;DEAN&#39;S LIST&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;HONOR ROLL&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;GOOD_STANDING&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;PROBATION_WARNING&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;ACADEMIC_PROBATION&quot;</span>
 
-# Usage
-student = Student(&quot;Alice Johnson&quot;, &quot;S12345&quot;)
-student.grades = [88, 92, 85, 90]
-student.attendance_percentage = 95
-student.assignments_submitted = 18
-student.total_assignments = 20
+<span class="c1"># Usage</span>
+<span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;S12345&quot;</span><span class="p">)</span>
+<span class="n">student</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+<span class="n">student</span><span class="o">.</span><span class="n">attendance_percentage</span> <span class="o">=</span> <span class="mi">95</span>
+<span class="n">student</span><span class="o">.</span><span class="n">assignments_submitted</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">student</span><span class="o">.</span><span class="n">total_assignments</span> <span class="o">=</span> <span class="mi">20</span>
 
-print(student.calculate_letter_grade())    # A
-print(student.get_academic_standing())     # DEAN&#x27;S LIST
-print(student.can_graduate())              # (True, &#x27;Eligible for graduation&#x27;)
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">calculate_letter_grade</span><span class="p">())</span>    <span class="c1"># A</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get_academic_standing</span><span class="p">())</span>     <span class="c1"># DEAN&#39;S LIST</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">can_graduate</span><span class="p">())</span>              <span class="c1"># (True, &#39;Eligible for graduation&#39;)</span>
 </code></pre>
 </div>
 <h2 id="iteration-structures-in-methods">Iteration structures in methods<a class="headerlink" href="#iteration-structures-in-methods" title="Permanent link">&para;</a></h2>
 <p><strong>Iteration structures</strong> (for and while loops) allow methods to process collections, repeat operations, or continue until a condition is met.</p>
 <h3 id="for-loops-in-methods">For loops in methods<a class="headerlink" href="#for-loops-in-methods" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Inventory:
-    &quot;&quot;&quot;Inventory management demonstrating for loops in methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory management demonstrating for loops in methods&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.items = {}  # {item_name: quantity}
-        self.prices = {}  # {item_name: price}
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {item_name: quantity}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prices</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># {item_name: price}</span>
 
-    def add_item(self, name, quantity, price):
-        &quot;&quot;&quot;Add item to inventory&quot;&quot;&quot;
-        self.items[name] = self.items.get(name, 0) + quantity
-        self.prices[name] = price
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add item to inventory&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">quantity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">price</span>
 
-    def calculate_total_value(self):
-        &quot;&quot;&quot;Calculate total inventory value using for loop&quot;&quot;&quot;
-        total_value = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_total_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate total inventory value using for loop&quot;&quot;&quot;</span>
+        <span class="n">total_value</span> <span class="o">=</span> <span class="mi">0</span>
 
-        for item_name, quantity in self.items.items():
-            if item_name in self.prices:
-                item_value = quantity * self.prices[item_name]
-                total_value += item_value
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="p">:</span>
+                <span class="n">item_value</span> <span class="o">=</span> <span class="n">quantity</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span>
+                <span class="n">total_value</span> <span class="o">+=</span> <span class="n">item_value</span>
 
-        return total_value
+        <span class="k">return</span> <span class="n">total_value</span>
 
-    def find_low_stock_items(self, threshold=10):
-        &quot;&quot;&quot;Find items with low stock using for loop&quot;&quot;&quot;
-        low_stock = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_low_stock_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find items with low stock using for loop&quot;&quot;&quot;</span>
+        <span class="n">low_stock</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for item_name, quantity in self.items.items():
-            if quantity &lt; threshold:
-                low_stock.append({
-                    &#x27;name&#x27;: item_name,
-                    &#x27;quantity&#x27;: quantity,
-                    &#x27;price&#x27;: self.prices.get(item_name, 0)
-                })
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">quantity</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="n">low_stock</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">item_name</span><span class="p">,</span>
+                    <span class="s1">&#39;quantity&#39;</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+                    <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="p">})</span>
 
-        return low_stock
+        <span class="k">return</span> <span class="n">low_stock</span>
 
-    def apply_discount(self, discount_percentage):
-        &quot;&quot;&quot;Apply discount to all items using for loop&quot;&quot;&quot;
-        discount_factor = 1 - (discount_percentage / 100)
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_discount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discount_percentage</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply discount to all items using for loop&quot;&quot;&quot;</span>
+        <span class="n">discount_factor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">discount_percentage</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
 
-        for item_name in self.prices:
-            self.prices[item_name] *= discount_factor
+        <span class="k">for</span> <span class="n">item_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">*=</span> <span class="n">discount_factor</span>
 
-    def generate_report(self):
-        &quot;&quot;&quot;Generate inventory report using for loop&quot;&quot;&quot;
-        report_lines = [&quot;INVENTORY REPORT&quot;, &quot;=&quot; * 40]
-        total_items = 0
-        total_value = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate inventory report using for loop&quot;&quot;&quot;</span>
+        <span class="n">report_lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;INVENTORY REPORT&quot;</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">]</span>
+        <span class="n">total_items</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_value</span> <span class="o">=</span> <span class="mi">0</span>
 
-        for item_name, quantity in self.items.items():
-            price = self.prices.get(item_name, 0)
-            item_value = quantity * price
-            total_items += quantity
-            total_value += item_value
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">item_value</span> <span class="o">=</span> <span class="n">quantity</span> <span class="o">*</span> <span class="n">price</span>
+            <span class="n">total_items</span> <span class="o">+=</span> <span class="n">quantity</span>
+            <span class="n">total_value</span> <span class="o">+=</span> <span class="n">item_value</span>
 
-            report_lines.append(f&quot;{item_name:20} | Qty: {quantity:3} | ${price:6.2f} | ${item_value:8.2f}&quot;)
+            <span class="n">report_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item_name</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> | Qty: </span><span class="si">{</span><span class="n">quantity</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2"> | $</span><span class="si">{</span><span class="n">price</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> | $</span><span class="si">{</span><span class="n">item_value</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        report_lines.extend([
-            &quot;=&quot; * 40,
-            f&quot;Total Items: {total_items}&quot;,
-            f&quot;Total Value: ${total_value:.2f}&quot;
-        ])
+        <span class="n">report_lines</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+            <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Total Items: </span><span class="si">{</span><span class="n">total_items</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Total Value: $</span><span class="si">{</span><span class="n">total_value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">])</span>
 
-        return &quot;\n&quot;.join(report_lines)
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">report_lines</span><span class="p">)</span>
 
-# Usage
-inventory = Inventory()
-inventory.add_item(&quot;Laptop&quot;, 5, 999.99)
-inventory.add_item(&quot;Mouse&quot;, 25, 29.99)
-inventory.add_item(&quot;Keyboard&quot;, 8, 79.99)
+<span class="c1"># Usage</span>
+<span class="n">inventory</span> <span class="o">=</span> <span class="n">Inventory</span><span class="p">()</span>
+<span class="n">inventory</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;Laptop&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">999.99</span><span class="p">)</span>
+<span class="n">inventory</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;Mouse&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mf">29.99</span><span class="p">)</span>
+<span class="n">inventory</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;Keyboard&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">79.99</span><span class="p">)</span>
 
-print(f&quot;Total value: ${inventory.calculate_total_value():.2f}&quot;)
-print(&quot;Low stock items:&quot;, inventory.find_low_stock_items())
-print(inventory.generate_report())
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total value: $</span><span class="si">{</span><span class="n">inventory</span><span class="o">.</span><span class="n">calculate_total_value</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Low stock items:&quot;</span><span class="p">,</span> <span class="n">inventory</span><span class="o">.</span><span class="n">find_low_stock_items</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inventory</span><span class="o">.</span><span class="n">generate_report</span><span class="p">())</span>
 </code></pre>
 </div>
 <h3 id="while-loops-in-methods">While loops in methods<a class="headerlink" href="#while-loops-in-methods" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class NumberProcessor:
-    &quot;&quot;&quot;Demonstrating while loops in methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">NumberProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrating while loops in methods&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.processed_numbers = []
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processed_numbers</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def process_until_condition(self, start_number, condition_func):
-        &quot;&quot;&quot;Process numbers until a condition is met&quot;&quot;&quot;
-        current = start_number
-        iterations = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_until_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_number</span><span class="p">,</span> <span class="n">condition_func</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process numbers until a condition is met&quot;&quot;&quot;</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">start_number</span>
+        <span class="n">iterations</span> <span class="o">=</span> <span class="mi">0</span>
 
-        while not condition_func(current) and iterations &lt; 100:  # Safety limit
-            self.processed_numbers.append(current)
-            current += 1
-            iterations += 1
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">condition_func</span><span class="p">(</span><span class="n">current</span><span class="p">)</span> <span class="ow">and</span> <span class="n">iterations</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>  <span class="c1"># Safety limit</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processed_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current</span><span class="p">)</span>
+            <span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">iterations</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return iterations
+        <span class="k">return</span> <span class="n">iterations</span>
 
-    def find_first_multiple(self, number, multiple_of):
-        &quot;&quot;&quot;Find first multiple using while loop&quot;&quot;&quot;
-        candidate = number
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_first_multiple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">multiple_of</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find first multiple using while loop&quot;&quot;&quot;</span>
+        <span class="n">candidate</span> <span class="o">=</span> <span class="n">number</span>
 
-        while candidate % multiple_of != 0:
-            candidate += 1
+        <span class="k">while</span> <span class="n">candidate</span> <span class="o">%</span> <span class="n">multiple_of</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">candidate</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return candidate
+        <span class="k">return</span> <span class="n">candidate</span>
 
-    def validate_input_with_retry(self, input_func, validator_func, max_attempts=3):
-        &quot;&quot;&quot;Keep asking for input until valid (with limit)&quot;&quot;&quot;
-        attempts = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_input_with_retry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_func</span><span class="p">,</span> <span class="n">validator_func</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Keep asking for input until valid (with limit)&quot;&quot;&quot;</span>
+        <span class="n">attempts</span> <span class="o">=</span> <span class="mi">0</span>
 
-        while attempts &lt; max_attempts:
-            try:
-                user_input = input_func()
-                if validator_func(user_input):
-                    return user_input, True
-                else:
-                    print(&quot;Invalid input, please try again&quot;)
-            except Exception as e:
-                print(f&quot;Error: {e}&quot;)
+        <span class="k">while</span> <span class="n">attempts</span> <span class="o">&lt;</span> <span class="n">max_attempts</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">user_input</span> <span class="o">=</span> <span class="n">input_func</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">validator_func</span><span class="p">(</span><span class="n">user_input</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="n">user_input</span><span class="p">,</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input, please try again&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            attempts += 1
+            <span class="n">attempts</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return None, False
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">False</span>
 
-class Queue:
-    &quot;&quot;&quot;Queue implementation demonstrating while loops&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Queue</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Queue implementation demonstrating while loops&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.items = []
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def enqueue(self, item):
-        &quot;&quot;&quot;Add item to queue&quot;&quot;&quot;
-        self.items.append(item)
+    <span class="k">def</span><span class="w"> </span><span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add item to queue&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-    def dequeue(self):
-        &quot;&quot;&quot;Remove item from queue&quot;&quot;&quot;
-        if self.items:
-            return self.items.pop(0)
-        return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove item from queue&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    def process_all_items(self, processor_func):
-        &quot;&quot;&quot;Process all items in queue using while loop&quot;&quot;&quot;
-        processed_count = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_all_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">processor_func</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process all items in queue using while loop&quot;&quot;&quot;</span>
+        <span class="n">processed_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-        while self.items:  # Continue while queue is not empty
-            item = self.dequeue()
-            if item is not None:
-                processor_func(item)
-                processed_count += 1
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>  <span class="c1"># Continue while queue is not empty</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">processor_func</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="n">processed_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return processed_count
+        <span class="k">return</span> <span class="n">processed_count</span>
 
-    def process_until_condition(self, processor_func, stop_condition):
-        &quot;&quot;&quot;Process items until a stop condition is met&quot;&quot;&quot;
-        processed_items = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_until_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">processor_func</span><span class="p">,</span> <span class="n">stop_condition</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process items until a stop condition is met&quot;&quot;&quot;</span>
+        <span class="n">processed_items</span> <span class="o">=</span> <span class="p">[]</span>
 
-        while self.items and not stop_condition():
-            item = self.dequeue()
-            if item is not None:
-                result = processor_func(item)
-                processed_items.append(result)
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">stop_condition</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">processor_func</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="n">processed_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-        return processed_items
+        <span class="k">return</span> <span class="n">processed_items</span>
 
-# Usage
-processor = NumberProcessor()
+<span class="c1"># Usage</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">NumberProcessor</span><span class="p">()</span>
 
-# Process numbers until we find one greater than 10
-processor.process_until_condition(1, lambda x: x &gt; 10)
-print(processor.processed_numbers)  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+<span class="c1"># Process numbers until we find one greater than 10</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">process_until_condition</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processor</span><span class="o">.</span><span class="n">processed_numbers</span><span class="p">)</span>  <span class="c1"># [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span>
 
-# Find first multiple of 7 starting from 20
-first_multiple = processor.find_first_multiple(20, 7)
-print(first_multiple)  # 21
+<span class="c1"># Find first multiple of 7 starting from 20</span>
+<span class="n">first_multiple</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">find_first_multiple</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">first_multiple</span><span class="p">)</span>  <span class="c1"># 21</span>
 </code></pre>
 </div>
 <h2 id="keeping-methods-short-and-cohesive">Keeping methods short and cohesive<a class="headerlink" href="#keeping-methods-short-and-cohesive" title="Permanent link">&para;</a></h2>
 <p><strong>Method cohesion</strong> means each method should have a single, clear purpose. Short, focused methods are easier to understand, test, and maintain.</p>
 <h3 id="breaking-down-complex-methods">Breaking down complex methods<a class="headerlink" href="#breaking-down-complex-methods" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class OrderProcessor:
-    &quot;&quot;&quot;Demonstrating how to break down complex methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">OrderProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrating how to break down complex methods&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.orders = []
-        self.inventory = {}
-        self.customers = {}
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">customers</span> <span class="o">=</span> <span class="p">{}</span>
 
-    # BAD: One large method doing everything
-    def process_order_bad(self, customer_id, items):
-        &quot;&quot;&quot;Example of a method that does too much&quot;&quot;&quot;
-        # Validate customer
-        if customer_id not in self.customers:
-            return False, &quot;Invalid customer&quot;
-        customer = self.customers[customer_id]
-        if not customer.get(&#x27;active&#x27;, False):
-            return False, &quot;Inactive customer&quot;
+    <span class="c1"># BAD: One large method doing everything</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order_bad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Example of a method that does too much&quot;&quot;&quot;</span>
+        <span class="c1"># Validate customer</span>
+        <span class="k">if</span> <span class="n">customer_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">customers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Invalid customer&quot;</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">customers</span><span class="p">[</span><span class="n">customer_id</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">customer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Inactive customer&quot;</span>
 
-        # Check inventory
-        for item_name, quantity in items.items():
-            if item_name not in self.inventory:
-                return False, f&quot;Item {item_name} not found&quot;
-            if self.inventory[item_name] &lt; quantity:
-                return False, f&quot;Insufficient stock for {item_name}&quot;
+        <span class="c1"># Check inventory</span>
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Item </span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2"> not found&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">quantity</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Insufficient stock for </span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        # Calculate pricing
-        total = 0
-        for item_name, quantity in items.items():
-            price = self.get_item_price(item_name)
-            total += price * quantity
+        <span class="c1"># Calculate pricing</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">price</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_item_price</span><span class="p">(</span><span class="n">item_name</span><span class="p">)</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">quantity</span>
 
-        # Apply discounts
-        if customer.get(&#x27;vip&#x27;, False):
-            total *= 0.9  # 10% VIP discount
-        if total &gt; 100:
-            total *= 0.95  # 5% bulk discount
+        <span class="c1"># Apply discounts</span>
+        <span class="k">if</span> <span class="n">customer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vip&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">*=</span> <span class="mf">0.9</span>  <span class="c1"># 10% VIP discount</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">*=</span> <span class="mf">0.95</span>  <span class="c1"># 5% bulk discount</span>
 
-        # Update inventory
-        for item_name, quantity in items.items():
-            self.inventory[item_name] -= quantity
+        <span class="c1"># Update inventory</span>
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">-=</span> <span class="n">quantity</span>
 
-        # Create order record
-        order = {
-            &#x27;customer_id&#x27;: customer_id,
-            &#x27;items&#x27;: items,
-            &#x27;total&#x27;: total,
-            &#x27;status&#x27;: &#x27;confirmed&#x27;
-        }
-        self.orders.append(order)
+        <span class="c1"># Create order record</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="n">customer_id</span><span class="p">,</span>
+            <span class="s1">&#39;items&#39;</span><span class="p">:</span> <span class="n">items</span><span class="p">,</span>
+            <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;confirmed&#39;</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
 
-        return True, f&quot;Order processed. Total: ${total:.2f}&quot;
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Order processed. Total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    # GOOD: Broken down into focused methods
-    def process_order_good(self, customer_id, items):
-        &quot;&quot;&quot;Well-structured order processing&quot;&quot;&quot;
-        # Each step is a separate, focused method
-        if not self._validate_customer(customer_id):
-            return False, &quot;Customer validation failed&quot;
+    <span class="c1"># GOOD: Broken down into focused methods</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order_good</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Well-structured order processing&quot;&quot;&quot;</span>
+        <span class="c1"># Each step is a separate, focused method</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_customer</span><span class="p">(</span><span class="n">customer_id</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Customer validation failed&quot;</span>
 
-        if not self._check_inventory_availability(items):
-            return False, &quot;Inventory check failed&quot;
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_inventory_availability</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Inventory check failed&quot;</span>
 
-        total = self._calculate_order_total(customer_id, items)
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_order_total</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">items</span><span class="p">)</span>
 
-        self._update_inventory(items)
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_inventory</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
 
-        order = self._create_order_record(customer_id, items, total)
+        <span class="n">order</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_order_record</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 
-        return True, f&quot;Order processed. Total: ${total:.2f}&quot;
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Order processed. Total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def _validate_customer(self, customer_id):
-        &quot;&quot;&quot;Single responsibility: validate customer&quot;&quot;&quot;
-        if customer_id not in self.customers:
-            return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_customer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: validate customer&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">customer_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">customers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        customer = self.customers[customer_id]
-        return customer.get(&#x27;active&#x27;, False)
+        <span class="n">customer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">customers</span><span class="p">[</span><span class="n">customer_id</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">customer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-    def _check_inventory_availability(self, items):
-        &quot;&quot;&quot;Single responsibility: check if items are in stock&quot;&quot;&quot;
-        for item_name, quantity in items.items():
-            if item_name not in self.inventory:
-                return False
-            if self.inventory[item_name] &lt; quantity:
-                return False
-        return True
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_inventory_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: check if items are in stock&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">item_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">quantity</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def _calculate_order_total(self, customer_id, items):
-        &quot;&quot;&quot;Single responsibility: calculate total with discounts&quot;&quot;&quot;
-        # Calculate base total
-        total = sum(self.get_item_price(name) * qty for name, qty in items.items())
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_order_total</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: calculate total with discounts&quot;&quot;&quot;</span>
+        <span class="c1"># Calculate base total</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_item_price</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">*</span> <span class="n">qty</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">qty</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
 
-        # Apply discounts
-        total = self._apply_customer_discounts(customer_id, total)
-        total = self._apply_volume_discounts(total)
+        <span class="c1"># Apply discounts</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_customer_discounts</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_volume_discounts</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 
-        return total
+        <span class="k">return</span> <span class="n">total</span>
 
-    def _apply_customer_discounts(self, customer_id, total):
-        &quot;&quot;&quot;Apply customer-specific discounts&quot;&quot;&quot;
-        customer = self.customers[customer_id]
-        if customer.get(&#x27;vip&#x27;, False):
-            total *= 0.9  # 10% VIP discount
-        return total
+    <span class="k">def</span><span class="w"> </span><span class="nf">_apply_customer_discounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">total</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply customer-specific discounts&quot;&quot;&quot;</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">customers</span><span class="p">[</span><span class="n">customer_id</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">customer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vip&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">total</span> <span class="o">*=</span> <span class="mf">0.9</span>  <span class="c1"># 10% VIP discount</span>
+        <span class="k">return</span> <span class="n">total</span>
 
-    def _apply_volume_discounts(self, total):
-        &quot;&quot;&quot;Apply volume-based discounts&quot;&quot;&quot;
-        if total &gt; 100:
-            total *= 0.95  # 5% bulk discount
-        return total
+    <span class="k">def</span><span class="w"> </span><span class="nf">_apply_volume_discounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">total</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply volume-based discounts&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">*=</span> <span class="mf">0.95</span>  <span class="c1"># 5% bulk discount</span>
+        <span class="k">return</span> <span class="n">total</span>
 
-    def _update_inventory(self, items):
-        &quot;&quot;&quot;Single responsibility: update inventory quantities&quot;&quot;&quot;
-        for item_name, quantity in items.items():
-            self.inventory[item_name] -= quantity
+    <span class="k">def</span><span class="w"> </span><span class="nf">_update_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: update inventory quantities&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">quantity</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">[</span><span class="n">item_name</span><span class="p">]</span> <span class="o">-=</span> <span class="n">quantity</span>
 
-    def _create_order_record(self, customer_id, items, total):
-        &quot;&quot;&quot;Single responsibility: create and store order record&quot;&quot;&quot;
-        order = {
-            &#x27;customer_id&#x27;: customer_id,
-            &#x27;items&#x27;: items,
-            &#x27;total&#x27;: total,
-            &#x27;status&#x27;: &#x27;confirmed&#x27;
-        }
-        self.orders.append(order)
-        return order
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_order_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">total</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: create and store order record&quot;&quot;&quot;</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;customer_id&#39;</span><span class="p">:</span> <span class="n">customer_id</span><span class="p">,</span>
+            <span class="s1">&#39;items&#39;</span><span class="p">:</span> <span class="n">items</span><span class="p">,</span>
+            <span class="s1">&#39;total&#39;</span><span class="p">:</span> <span class="n">total</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;confirmed&#39;</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">order</span>
 
-    def get_item_price(self, item_name):
-        &quot;&quot;&quot;Get price for an item&quot;&quot;&quot;
-        # Simplified - in real system this might query a database
-        prices = {&#x27;laptop&#x27;: 999, &#x27;mouse&#x27;: 25, &#x27;keyboard&#x27;: 75}
-        return prices.get(item_name, 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_item_price</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get price for an item&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified - in real system this might query a database</span>
+        <span class="n">prices</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;laptop&#39;</span><span class="p">:</span> <span class="mi">999</span><span class="p">,</span> <span class="s1">&#39;mouse&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;keyboard&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">prices</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="guidelines-for-method-design">Guidelines for method design<a class="headerlink" href="#guidelines-for-method-design" title="Permanent link">&para;</a></h3>
 <p><strong>1. Single Responsibility Principle:</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TextAnalyzer:
-    &quot;&quot;&quot;Example of methods with single responsibilities&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TextAnalyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of methods with single responsibilities&quot;&quot;&quot;</span>
 
-    def __init__(self, text):
-        self.text = text
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">text</span>
 
-    # Good: Each method has one clear purpose
-    def count_words(self):
-        &quot;&quot;&quot;Count total words in text&quot;&quot;&quot;
-        return len(self.text.split())
+    <span class="c1"># Good: Each method has one clear purpose</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_words</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count total words in text&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 
-    def count_sentences(self):
-        &quot;&quot;&quot;Count sentences (simplified)&quot;&quot;&quot;
-        return self.text.count(&#x27;.&#x27;) + self.text.count(&#x27;!&#x27;) + self.text.count(&#x27;?&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_sentences</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count sentences (simplified)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;!&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">)</span>
 
-    def find_longest_word(self):
-        &quot;&quot;&quot;Find the longest word&quot;&quot;&quot;
-        words = self.text.split()
-        return max(words, key=len) if words else &quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_longest_word</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the longest word&quot;&quot;&quot;</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)</span> <span class="k">if</span> <span class="n">words</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
 
-    def get_word_frequency(self):
-        &quot;&quot;&quot;Get frequency count of each word&quot;&quot;&quot;
-        words = self.text.lower().split()
-        frequency = {}
-        for word in words:
-            frequency[word] = frequency.get(word, 0) + 1
-        return frequency
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_word_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get frequency count of each word&quot;&quot;&quot;</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">frequency</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">frequency</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">frequency</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">frequency</span>
 
-    # Good: Combines other methods appropriately
-    def generate_summary(self):
-        &quot;&quot;&quot;Generate text summary using other methods&quot;&quot;&quot;
-        return {
-            &#x27;word_count&#x27;: self.count_words(),
-            &#x27;sentence_count&#x27;: self.count_sentences(),
-            &#x27;longest_word&#x27;: self.find_longest_word(),
-            &#x27;most_common_words&#x27;: self._get_top_words(5)
-        }
+    <span class="c1"># Good: Combines other methods appropriately</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate text summary using other methods&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;word_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_words</span><span class="p">(),</span>
+            <span class="s1">&#39;sentence_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_sentences</span><span class="p">(),</span>
+            <span class="s1">&#39;longest_word&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_longest_word</span><span class="p">(),</span>
+            <span class="s1">&#39;most_common_words&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_words</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def _get_top_words(self, n):
-        &quot;&quot;&quot;Helper method: get top N most frequent words&quot;&quot;&quot;
-        frequency = self.get_word_frequency()
-        sorted_words = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
-        return sorted_words[:n]
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_top_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method: get top N most frequent words&quot;&quot;&quot;</span>
+        <span class="n">frequency</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_word_frequency</span><span class="p">()</span>
+        <span class="n">sorted_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">frequency</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sorted_words</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
 </code></pre>
 </div>
 <p><strong>2. Keep methods short (generally under 20 lines):</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Calculator:
-    &quot;&quot;&quot;Examples of appropriately sized methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Calculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Examples of appropriately sized methods&quot;&quot;&quot;</span>
 
-    def add(self, a, b):
-        &quot;&quot;&quot;Simple, short method&quot;&quot;&quot;
-        return a + b
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simple, short method&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
-    def calculate_compound_interest(self, principal, rate, time, compounds_per_year):
-        &quot;&quot;&quot;Medium-length method with clear steps&quot;&quot;&quot;
-        # Validate inputs
-        if principal &lt;= 0 or rate &lt; 0 or time &lt;= 0 or compounds_per_year &lt;= 0:
-            raise ValueError(&quot;Invalid input parameters&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_compound_interest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">compounds_per_year</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Medium-length method with clear steps&quot;&quot;&quot;</span>
+        <span class="c1"># Validate inputs</span>
+        <span class="k">if</span> <span class="n">principal</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">rate</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">time</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">compounds_per_year</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid input parameters&quot;</span><span class="p">)</span>
 
-        # Calculate compound interest
-        rate_per_period = rate / compounds_per_year
-        total_periods = compounds_per_year * time
+        <span class="c1"># Calculate compound interest</span>
+        <span class="n">rate_per_period</span> <span class="o">=</span> <span class="n">rate</span> <span class="o">/</span> <span class="n">compounds_per_year</span>
+        <span class="n">total_periods</span> <span class="o">=</span> <span class="n">compounds_per_year</span> <span class="o">*</span> <span class="n">time</span>
 
-        # Apply compound interest formula
-        amount = principal * (1 + rate_per_period) ** total_periods
+        <span class="c1"># Apply compound interest formula</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate_per_period</span><span class="p">)</span> <span class="o">**</span> <span class="n">total_periods</span>
 
-        return amount
+        <span class="k">return</span> <span class="n">amount</span>
 
-    def solve_quadratic(self, a, b, c):
-        &quot;&quot;&quot;Method that&#x27;s at the upper limit of good length&quot;&quot;&quot;
-        if a == 0:
-            raise ValueError(&quot;Coefficient &#x27;a&#x27; cannot be zero&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve_quadratic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method that&#39;s at the upper limit of good length&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Coefficient &#39;a&#39; cannot be zero&quot;</span><span class="p">)</span>
 
-        # Calculate discriminant
-        discriminant = b**2 - 4*a*c
+        <span class="c1"># Calculate discriminant</span>
+        <span class="n">discriminant</span> <span class="o">=</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span>
 
-        # Determine number and type of solutions
-        if discriminant &gt; 0:
-            # Two real solutions
-            sqrt_discriminant = discriminant ** 0.5
-            x1 = (-b + sqrt_discriminant) / (2*a)
-            x2 = (-b - sqrt_discriminant) / (2*a)
-            return (x1, x2)
-        elif discriminant == 0:
-            # One real solution
-            x = -b / (2*a)
-            return (x,)
-        else:
-            # Complex solutions
-            real_part = -b / (2*a)
-            imaginary_part = (abs(discriminant) ** 0.5) / (2*a)
-            return (complex(real_part, imaginary_part), complex(real_part, -imaginary_part))
+        <span class="c1"># Determine number and type of solutions</span>
+        <span class="k">if</span> <span class="n">discriminant</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Two real solutions</span>
+            <span class="n">sqrt_discriminant</span> <span class="o">=</span> <span class="n">discriminant</span> <span class="o">**</span> <span class="mf">0.5</span>
+            <span class="n">x1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">sqrt_discriminant</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">x2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">sqrt_discriminant</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">discriminant</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># One real solution</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Complex solutions</span>
+            <span class="n">real_part</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">imaginary_part</span> <span class="o">=</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">discriminant</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">(</span><span class="nb">complex</span><span class="p">(</span><span class="n">real_part</span><span class="p">,</span> <span class="n">imaginary_part</span><span class="p">),</span> <span class="nb">complex</span><span class="p">(</span><span class="n">real_part</span><span class="p">,</span> <span class="o">-</span><span class="n">imaginary_part</span><span class="p">))</span>
 </code></pre>
 </div>
 <h3 id="method-extraction-techniques">Method extraction techniques<a class="headerlink" href="#method-extraction-techniques" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ReportGenerator:
-    &quot;&quot;&quot;Demonstrating method extraction techniques&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ReportGenerator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrating method extraction techniques&quot;&quot;&quot;</span>
 
-    def __init__(self, data):
-        self.data = data
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
 
-    # Before extraction: complex method
-    def generate_sales_report_before(self):
-        &quot;&quot;&quot;Complex method before extraction&quot;&quot;&quot;
-        report = []
+    <span class="c1"># Before extraction: complex method</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_sales_report_before</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Complex method before extraction&quot;&quot;&quot;</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="p">[]</span>
 
-        # Header section
-        report.append(&quot;SALES REPORT&quot;)
-        report.append(&quot;=&quot; * 50)
-        report.append(f&quot;Generated on: {self._get_current_date()}&quot;)
-        report.append(&quot;&quot;)
+        <span class="c1"># Header section</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;SALES REPORT&quot;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated on: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_current_date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-        # Calculate totals
-        total_sales = 0
-        total_orders = len(self.data)
+        <span class="c1"># Calculate totals</span>
+        <span class="n">total_sales</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_orders</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
-        for order in self.data:
-            total_sales += order.get(&#x27;amount&#x27;, 0)
+        <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">total_sales</span> <span class="o">+=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        # Summary section
-        average_order = total_sales / total_orders if total_orders &gt; 0 else 0
-        report.append(f&quot;Total Orders: {total_orders}&quot;)
-        report.append(f&quot;Total Sales: ${total_sales:.2f}&quot;)
-        report.append(f&quot;Average Order: ${average_order:.2f}&quot;)
-        report.append(&quot;&quot;)
+        <span class="c1"># Summary section</span>
+        <span class="n">average_order</span> <span class="o">=</span> <span class="n">total_sales</span> <span class="o">/</span> <span class="n">total_orders</span> <span class="k">if</span> <span class="n">total_orders</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Orders: </span><span class="si">{</span><span class="n">total_orders</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Sales: $</span><span class="si">{</span><span class="n">total_sales</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average Order: $</span><span class="si">{</span><span class="n">average_order</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-        # Detailed section
-        report.append(&quot;DETAILED BREAKDOWN&quot;)
-        report.append(&quot;-&quot; * 30)
+        <span class="c1"># Detailed section</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;DETAILED BREAKDOWN&quot;</span><span class="p">)</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
 
-        for order in self.data:
-            customer = order.get(&#x27;customer&#x27;, &#x27;Unknown&#x27;)
-            amount = order.get(&#x27;amount&#x27;, 0)
-            date = order.get(&#x27;date&#x27;, &#x27;Unknown&#x27;)
-            report.append(f&quot;{date:10} | {customer:20} | ${amount:8.2f}&quot;)
+        <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">customer</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date</span><span class="si">:</span><span class="s2">10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">customer</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> | $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return &quot;\n&quot;.join(report)
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
 
-    # After extraction: broken into focused methods
-    def generate_sales_report_after(self):
-        &quot;&quot;&quot;Well-structured method after extraction&quot;&quot;&quot;
-        report_sections = []
+    <span class="c1"># After extraction: broken into focused methods</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_sales_report_after</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Well-structured method after extraction&quot;&quot;&quot;</span>
+        <span class="n">report_sections</span> <span class="o">=</span> <span class="p">[]</span>
 
-        report_sections.append(self._generate_header())
-        report_sections.append(self._generate_summary())
-        report_sections.append(self._generate_detailed_breakdown())
+        <span class="n">report_sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_header</span><span class="p">())</span>
+        <span class="n">report_sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_summary</span><span class="p">())</span>
+        <span class="n">report_sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_detailed_breakdown</span><span class="p">())</span>
 
-        return &quot;\n\n&quot;.join(report_sections)
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">report_sections</span><span class="p">)</span>
 
-    def _generate_header(self):
-        &quot;&quot;&quot;Extract header generation&quot;&quot;&quot;
-        lines = [
-            &quot;SALES REPORT&quot;,
-            &quot;=&quot; * 50,
-            f&quot;Generated on: {self._get_current_date()}&quot;
-        ]
-        return &quot;\n&quot;.join(lines)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract header generation&quot;&quot;&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;SALES REPORT&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Generated on: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_current_date</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-    def _generate_summary(self):
-        &quot;&quot;&quot;Extract summary calculations&quot;&quot;&quot;
-        totals = self._calculate_totals()
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract summary calculations&quot;&quot;&quot;</span>
+        <span class="n">totals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_totals</span><span class="p">()</span>
 
-        lines = [
-            f&quot;Total Orders: {totals[&#x27;order_count&#x27;]}&quot;,
-            f&quot;Total Sales: ${totals[&#x27;total_sales&#x27;]:.2f}&quot;,
-            f&quot;Average Order: ${totals[&#x27;average_order&#x27;]:.2f}&quot;
-        ]
-        return &quot;\n&quot;.join(lines)
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;Total Orders: </span><span class="si">{</span><span class="n">totals</span><span class="p">[</span><span class="s1">&#39;order_count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Total Sales: $</span><span class="si">{</span><span class="n">totals</span><span class="p">[</span><span class="s1">&#39;total_sales&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Average Order: $</span><span class="si">{</span><span class="n">totals</span><span class="p">[</span><span class="s1">&#39;average_order&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-    def _generate_detailed_breakdown(self):
-        &quot;&quot;&quot;Extract detailed breakdown&quot;&quot;&quot;
-        lines = [&quot;DETAILED BREAKDOWN&quot;, &quot;-&quot; * 30]
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_detailed_breakdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract detailed breakdown&quot;&quot;&quot;</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;DETAILED BREAKDOWN&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">]</span>
 
-        for order in self.data:
-            line = self._format_order_line(order)
-            lines.append(line)
+        <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_order_line</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
-        return &quot;\n&quot;.join(lines)
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-    def _calculate_totals(self):
-        &quot;&quot;&quot;Extract total calculations&quot;&quot;&quot;
-        total_sales = sum(order.get(&#x27;amount&#x27;, 0) for order in self.data)
-        total_orders = len(self.data)
-        average_order = total_sales / total_orders if total_orders &gt; 0 else 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_totals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract total calculations&quot;&quot;&quot;</span>
+        <span class="n">total_sales</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">total_orders</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">average_order</span> <span class="o">=</span> <span class="n">total_sales</span> <span class="o">/</span> <span class="n">total_orders</span> <span class="k">if</span> <span class="n">total_orders</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
-        return {
-            &#x27;total_sales&#x27;: total_sales,
-            &#x27;order_count&#x27;: total_orders,
-            &#x27;average_order&#x27;: average_order
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;total_sales&#39;</span><span class="p">:</span> <span class="n">total_sales</span><span class="p">,</span>
+            <span class="s1">&#39;order_count&#39;</span><span class="p">:</span> <span class="n">total_orders</span><span class="p">,</span>
+            <span class="s1">&#39;average_order&#39;</span><span class="p">:</span> <span class="n">average_order</span>
+        <span class="p">}</span>
 
-    def _format_order_line(self, order):
-        &quot;&quot;&quot;Extract order formatting&quot;&quot;&quot;
-        customer = order.get(&#x27;customer&#x27;, &#x27;Unknown&#x27;)
-        amount = order.get(&#x27;amount&#x27;, 0)
-        date = order.get(&#x27;date&#x27;, &#x27;Unknown&#x27;)
-        return f&quot;{date:10} | {customer:20} | ${amount:8.2f}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_format_order_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract order formatting&quot;&quot;&quot;</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">date</span><span class="si">:</span><span class="s2">10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">customer</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> | $</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def _get_current_date(self):
-        &quot;&quot;&quot;Helper method for date formatting&quot;&quot;&quot;
-        from datetime import datetime
-        return datetime.now().strftime(&quot;%Y-%m-%d %H:%M&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_current_date</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method for date formatting&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+        <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -2345,94 +2345,94 @@ print(first_multiple)  # 21
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class GradeCalculator:
-    &quot;&quot;&quot;Grade calculator demonstrating selection structures&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">GradeCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Grade calculator demonstrating selection structures&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.grades = []
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def add_grade(self, grade):
-        &quot;&quot;&quot;Add grade with validation using selection&quot;&quot;&quot;
-        if not isinstance(grade, (int, float)):
-            return False, &quot;Grade must be a number&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add grade with validation using selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">grade</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Grade must be a number&quot;</span>
 
-        if grade &lt; 0 or grade &gt; 100:
-            return False, &quot;Grade must be between 0 and 100&quot;
+        <span class="k">if</span> <span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">grade</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Grade must be between 0 and 100&quot;</span>
 
-        self.grades.append(grade)
-        return True, f&quot;Grade {grade} added successfully&quot;
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Grade </span><span class="si">{</span><span class="n">grade</span><span class="si">}</span><span class="s2"> added successfully&quot;</span>
 
-    def get_letter_grade(self):
-        &quot;&quot;&quot;Calculate letter grade using selection&quot;&quot;&quot;
-        if not self.grades:
-            return &quot;I&quot;  # Incomplete
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_letter_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate letter grade using selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;I&quot;</span>  <span class="c1"># Incomplete</span>
 
-        average = sum(self.grades) / len(self.grades)
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-        if average &gt;= 90:
-            return &quot;A&quot;
-        elif average &gt;= 80:
-            return &quot;B&quot;
-        elif average &gt;= 70:
-            return &quot;C&quot;
-        elif average &gt;= 60:
-            return &quot;D&quot;
-        else:
-            return &quot;F&quot;
+        <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-    def get_status(self):
-        &quot;&quot;&quot;Determine passing status using selection&quot;&quot;&quot;
-        if not self.grades:
-            return &quot;NO_GRADES&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine passing status using selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;NO_GRADES&quot;</span>
 
-        average = sum(self.grades) / len(self.grades)
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-        if average &gt;= 60:
-            return &quot;PASSING&quot;
-        else:
-            return &quot;FAILING&quot;
+        <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;PASSING&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;FAILING&quot;</span>
 
-    def needs_improvement(self):
-        &quot;&quot;&quot;Check if student needs improvement using selection&quot;&quot;&quot;
-        if not self.grades:
-            return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">needs_improvement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if student needs improvement using selection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        average = sum(self.grades) / len(self.grades)
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-        # Check if average is below 70
-        if average &lt; 70:
-            return True
+        <span class="c1"># Check if average is below 70</span>
+        <span class="k">if</span> <span class="n">average</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
 
-        # Check if any individual grade is below 50
-        for grade in self.grades:
-            if grade &lt; 50:
-                return True
+        <span class="c1"># Check if any individual grade is below 50</span>
+        <span class="k">for</span> <span class="n">grade</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">grade</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
 
-        return False
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def get_summary(self):
-        &quot;&quot;&quot;Generate summary using other methods&quot;&quot;&quot;
-        if not self.grades:
-            return &quot;No grades recorded&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate summary using other methods&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;No grades recorded&quot;</span>
 
-        average = sum(self.grades) / len(self.grades)
-        return {
-            &#x27;average&#x27;: round(average, 2),
-            &#x27;letter_grade&#x27;: self.get_letter_grade(),
-            &#x27;status&#x27;: self.get_status(),
-            &#x27;needs_improvement&#x27;: self.needs_improvement(),
-            &#x27;grade_count&#x27;: len(self.grades)
-        }
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;average&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">average</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s1">&#39;letter_grade&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_letter_grade</span><span class="p">(),</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_status</span><span class="p">(),</span>
+            <span class="s1">&#39;needs_improvement&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">needs_improvement</span><span class="p">(),</span>
+            <span class="s1">&#39;grade_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
+        <span class="p">}</span>
 
-# Test the class
-calc = GradeCalculator()
-calc.add_grade(85)
-calc.add_grade(78)
-calc.add_grade(92)
-calc.add_grade(45)  # Low grade
+<span class="c1"># Test the class</span>
+<span class="n">calc</span> <span class="o">=</span> <span class="n">GradeCalculator</span><span class="p">()</span>
+<span class="n">calc</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">calc</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="mi">78</span><span class="p">)</span>
+<span class="n">calc</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="mi">92</span><span class="p">)</span>
+<span class="n">calc</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>  <span class="c1"># Low grade</span>
 
-print(calc.get_summary())
-# {&#x27;average&#x27;: 75.0, &#x27;letter_grade&#x27;: &#x27;C&#x27;, &#x27;status&#x27;: &#x27;PASSING&#x27;, &#x27;needs_improvement&#x27;: True, &#x27;grade_count&#x27;: 4}
+<span class="nb">print</span><span class="p">(</span><span class="n">calc</span><span class="o">.</span><span class="n">get_summary</span><span class="p">())</span>
+<span class="c1"># {&#39;average&#39;: 75.0, &#39;letter_grade&#39;: &#39;C&#39;, &#39;status&#39;: &#39;PASSING&#39;, &#39;needs_improvement&#39;: True, &#39;grade_count&#39;: 4}</span>
 </code></pre>
 </div>
 </details>
@@ -2461,130 +2461,130 @@ print(calc.get_summary())
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class WordProcessor:
-    &quot;&quot;&quot;Word processor demonstrating iteration structures&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">WordProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Word processor demonstrating iteration structures&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.texts = []
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">texts</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def add_text(self, text):
-        &quot;&quot;&quot;Add text to storage&quot;&quot;&quot;
-        if text and text.strip():
-            self.texts.append(text.strip())
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add text to storage&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">text</span> <span class="ow">and</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def _get_all_words(self):
-        &quot;&quot;&quot;Helper method to get all words from all texts&quot;&quot;&quot;
-        all_words = []
-        for text in self.texts:
-            words = text.lower().split()
-            for word in words:
-                # Clean word of punctuation
-                cleaned = &#x27;&#x27;.join(char for char in word if char.isalnum())
-                if cleaned:
-                    all_words.append(cleaned)
-        return all_words
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_all_words</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method to get all words from all texts&quot;&quot;&quot;</span>
+        <span class="n">all_words</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">:</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+                <span class="c1"># Clean word of punctuation</span>
+                <span class="n">cleaned</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">char</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">cleaned</span><span class="p">:</span>
+                    <span class="n">all_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cleaned</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">all_words</span>
 
-    def find_words_longer_than(self, length):
-        &quot;&quot;&quot;Find words longer than specified length using iteration&quot;&quot;&quot;
-        long_words = []
-        all_words = self._get_all_words()
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_words_longer_than</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find words longer than specified length using iteration&quot;&quot;&quot;</span>
+        <span class="n">long_words</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">all_words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all_words</span><span class="p">()</span>
 
-        for word in all_words:
-            if len(word) &gt; length:
-                if word not in long_words:  # Avoid duplicates
-                    long_words.append(word)
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">all_words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">length</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">long_words</span><span class="p">:</span>  <span class="c1"># Avoid duplicates</span>
+                    <span class="n">long_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
-        return long_words
+        <span class="k">return</span> <span class="n">long_words</span>
 
-    def count_word_frequencies(self):
-        &quot;&quot;&quot;Count word frequencies using iteration&quot;&quot;&quot;
-        frequencies = {}
-        all_words = self._get_all_words()
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_word_frequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count word frequencies using iteration&quot;&quot;&quot;</span>
+        <span class="n">frequencies</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">all_words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all_words</span><span class="p">()</span>
 
-        for word in all_words:
-            if word in frequencies:
-                frequencies[word] += 1
-            else:
-                frequencies[word] = 1
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">all_words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="p">:</span>
+                <span class="n">frequencies</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">frequencies</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-        return frequencies
+        <span class="k">return</span> <span class="n">frequencies</span>
 
-    def remove_words_containing(self, substring):
-        &quot;&quot;&quot;Remove words containing substring using iteration&quot;&quot;&quot;
-        removed_count = 0
-        substring_lower = substring.lower()
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_words_containing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">substring</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove words containing substring using iteration&quot;&quot;&quot;</span>
+        <span class="n">removed_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">substring_lower</span> <span class="o">=</span> <span class="n">substring</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-        # Process each text
-        for i in range(len(self.texts)):
-            words = self.texts[i].split()
-            filtered_words = []
+        <span class="c1"># Process each text</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">)):</span>
+            <span class="n">words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">filtered_words</span> <span class="o">=</span> <span class="p">[]</span>
 
-            for word in words:
-                if substring_lower not in word.lower():
-                    filtered_words.append(word)
-                else:
-                    removed_count += 1
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">substring_lower</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="n">filtered_words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">removed_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            self.texts[i] = &#x27; &#x27;.join(filtered_words)
+            <span class="bp">self</span><span class="o">.</span><span class="n">texts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filtered_words</span><span class="p">)</span>
 
-        return removed_count
+        <span class="k">return</span> <span class="n">removed_count</span>
 
-    def get_statistics(self):
-        &quot;&quot;&quot;Calculate statistics using iteration&quot;&quot;&quot;
-        all_words = self._get_all_words()
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate statistics using iteration&quot;&quot;&quot;</span>
+        <span class="n">all_words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_all_words</span><span class="p">()</span>
 
-        if not all_words:
-            return {
-                &#x27;total_words&#x27;: 0,
-                &#x27;unique_words&#x27;: 0,
-                &#x27;average_length&#x27;: 0
-            }
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">all_words</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;total_words&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">&#39;unique_words&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">&#39;average_length&#39;</span><span class="p">:</span> <span class="mi">0</span>
+            <span class="p">}</span>
 
-        # Count unique words
-        unique_words = set()
-        total_length = 0
+        <span class="c1"># Count unique words</span>
+        <span class="n">unique_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">total_length</span> <span class="o">=</span> <span class="mi">0</span>
 
-        for word in all_words:
-            unique_words.add(word)
-            total_length += len(word)
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">all_words</span><span class="p">:</span>
+            <span class="n">unique_words</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="n">total_length</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
 
-        return {
-            &#x27;total_words&#x27;: len(all_words),
-            &#x27;unique_words&#x27;: len(unique_words),
-            &#x27;average_length&#x27;: round(total_length / len(all_words), 2)
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;total_words&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_words</span><span class="p">),</span>
+            <span class="s1">&#39;unique_words&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_words</span><span class="p">),</span>
+            <span class="s1">&#39;average_length&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_length</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_words</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def find_most_common_words(self, n=5):
-        &quot;&quot;&quot;Find N most common words using iteration&quot;&quot;&quot;
-        frequencies = self.count_word_frequencies()
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_most_common_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find N most common words using iteration&quot;&quot;&quot;</span>
+        <span class="n">frequencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">count_word_frequencies</span><span class="p">()</span>
 
-        if not frequencies:
-            return []
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">frequencies</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
 
-        # Convert to list of tuples and sort
-        word_freq_pairs = []
-        for word, freq in frequencies.items():
-            word_freq_pairs.append((word, freq))
+        <span class="c1"># Convert to list of tuples and sort</span>
+        <span class="n">word_freq_pairs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">freq</span> <span class="ow">in</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">word_freq_pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">word</span><span class="p">,</span> <span class="n">freq</span><span class="p">))</span>
 
-        # Sort by frequency (descending)
-        for i in range(len(word_freq_pairs)):
-            for j in range(i + 1, len(word_freq_pairs)):
-                if word_freq_pairs[j][1] &gt; word_freq_pairs[i][1]:
-                    word_freq_pairs[i], word_freq_pairs[j] = word_freq_pairs[j], word_freq_pairs[i]
+        <span class="c1"># Sort by frequency (descending)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word_freq_pairs</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word_freq_pairs</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">word_freq_pairs</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">word_freq_pairs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">word_freq_pairs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">word_freq_pairs</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">word_freq_pairs</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">word_freq_pairs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-        return word_freq_pairs[:n]
+        <span class="k">return</span> <span class="n">word_freq_pairs</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
 
-# Test the class
-processor = WordProcessor()
-processor.add_text(&quot;The quick brown fox jumps over the lazy dog&quot;)
-processor.add_text(&quot;The dog was very lazy and the fox was quick&quot;)
+<span class="c1"># Test the class</span>
+<span class="n">processor</span> <span class="o">=</span> <span class="n">WordProcessor</span><span class="p">()</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s2">&quot;The quick brown fox jumps over the lazy dog&quot;</span><span class="p">)</span>
+<span class="n">processor</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s2">&quot;The dog was very lazy and the fox was quick&quot;</span><span class="p">)</span>
 
-print(&quot;Long words:&quot;, processor.find_words_longer_than(4))
-print(&quot;Statistics:&quot;, processor.get_statistics())
-print(&quot;Most common:&quot;, processor.find_most_common_words(3))
-print(&quot;Removed &#x27;the&#x27;:&quot;, processor.remove_words_containing(&quot;the&quot;))
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Long words:&quot;</span><span class="p">,</span> <span class="n">processor</span><span class="o">.</span><span class="n">find_words_longer_than</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Statistics:&quot;</span><span class="p">,</span> <span class="n">processor</span><span class="o">.</span><span class="n">get_statistics</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most common:&quot;</span><span class="p">,</span> <span class="n">processor</span><span class="o">.</span><span class="n">find_most_common_words</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Removed &#39;the&#39;:&quot;</span><span class="p">,</span> <span class="n">processor</span><span class="o">.</span><span class="n">remove_words_containing</span><span class="p">(</span><span class="s2">&quot;the&quot;</span><span class="p">))</span>
 </code></pre>
 </div>
 </details>
@@ -2593,130 +2593,130 @@ print(&quot;Removed &#x27;the&#x27;:&quot;, processor.remove_words_containing(&q
 <summary>Exercise 3: Refactor a complex method</summary>
 <p>This method does too much. Refactor it into smaller, focused methods:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class StudentManager:
-    def process_student_data(self, student_data):
-        # Validate student data
-        if not student_data.get(&#x27;name&#x27;) or not student_data.get(&#x27;id&#x27;):
-            return False, &quot;Missing required fields&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">StudentManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_student_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_data</span><span class="p">):</span>
+        <span class="c1"># Validate student data</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Missing required fields&quot;</span>
 
-        # Calculate GPA
-        grades = student_data.get(&#x27;grades&#x27;, [])
-        if grades:
-            total = sum(grades)
-            gpa = total / len(grades)
-        else:
-            gpa = 0
+        <span class="c1"># Calculate GPA</span>
+        <span class="n">grades</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;grades&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="k">if</span> <span class="n">grades</span><span class="p">:</span>
+            <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+            <span class="n">gpa</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gpa</span> <span class="o">=</span> <span class="mi">0</span>
 
-        # Determine academic status
-        if gpa &gt;= 3.5:
-            status = &quot;Honor Roll&quot;
-        elif gpa &gt;= 2.0:
-            status = &quot;Good Standing&quot;
-        else:
-            status = &quot;Probation&quot;
+        <span class="c1"># Determine academic status</span>
+        <span class="k">if</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">3.5</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Honor Roll&quot;</span>
+        <span class="k">elif</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Good Standing&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Probation&quot;</span>
 
-        # Check graduation eligibility
-        required_credits = 120
-        earned_credits = student_data.get(&#x27;credits&#x27;, 0)
-        can_graduate = earned_credits &gt;= required_credits and gpa &gt;= 2.0
+        <span class="c1"># Check graduation eligibility</span>
+        <span class="n">required_credits</span> <span class="o">=</span> <span class="mi">120</span>
+        <span class="n">earned_credits</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;credits&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">can_graduate</span> <span class="o">=</span> <span class="n">earned_credits</span> <span class="o">&gt;=</span> <span class="n">required_credits</span> <span class="ow">and</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">2.0</span>
 
-        # Generate report
-        report = f&quot;Student: {student_data[&#x27;name&#x27;]}\n&quot;
-        report += f&quot;ID: {student_data[&#x27;id&#x27;]}\n&quot;
-        report += f&quot;GPA: {gpa:.2f}\n&quot;
-        report += f&quot;Status: {status}\n&quot;
-        report += f&quot;Credits: {earned_credits}/{required_credits}\n&quot;
-        report += f&quot;Can Graduate: {&#x27;Yes&#x27; if can_graduate else &#x27;No&#x27;}\n&quot;
+        <span class="c1"># Generate report</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Student: </span><span class="si">{</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;GPA: </span><span class="si">{</span><span class="n">gpa</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Credits: </span><span class="si">{</span><span class="n">earned_credits</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">required_credits</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">report</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Can Graduate: </span><span class="si">{</span><span class="s1">&#39;Yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">can_graduate</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;No&#39;</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-        return True, report
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">report</span>
 </code></pre>
 </div>
 <p><strong>Task</strong>: Break this into focused methods with single responsibilities.</p>
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class StudentManager:
-    &quot;&quot;&quot;Refactored version with focused methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">StudentManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Refactored version with focused methods&quot;&quot;&quot;</span>
 
-    def process_student_data(self, student_data):
-        &quot;&quot;&quot;Main method that coordinates other methods&quot;&quot;&quot;
-        # Validation
-        if not self._validate_student_data(student_data):
-            return False, &quot;Missing required fields&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_student_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main method that coordinates other methods&quot;&quot;&quot;</span>
+        <span class="c1"># Validation</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_student_data</span><span class="p">(</span><span class="n">student_data</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Missing required fields&quot;</span>
 
-        # Process the data using focused methods
-        gpa = self._calculate_gpa(student_data.get(&#x27;grades&#x27;, []))
-        status = self._determine_academic_status(gpa)
-        can_graduate = self._check_graduation_eligibility(student_data, gpa)
-        report = self._generate_student_report(student_data, gpa, status, can_graduate)
+        <span class="c1"># Process the data using focused methods</span>
+        <span class="n">gpa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_gpa</span><span class="p">(</span><span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;grades&#39;</span><span class="p">,</span> <span class="p">[]))</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_determine_academic_status</span><span class="p">(</span><span class="n">gpa</span><span class="p">)</span>
+        <span class="n">can_graduate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_graduation_eligibility</span><span class="p">(</span><span class="n">student_data</span><span class="p">,</span> <span class="n">gpa</span><span class="p">)</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_student_report</span><span class="p">(</span><span class="n">student_data</span><span class="p">,</span> <span class="n">gpa</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">can_graduate</span><span class="p">)</span>
 
-        return True, report
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">report</span>
 
-    def _validate_student_data(self, student_data):
-        &quot;&quot;&quot;Single responsibility: validate required fields&quot;&quot;&quot;
-        required_fields = [&#x27;name&#x27;, &#x27;id&#x27;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">_validate_student_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: validate required fields&quot;&quot;&quot;</span>
+        <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
-        for field in required_fields:
-            if not student_data.get(field):
-                return False
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">required_fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
 
-        return True
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def _calculate_gpa(self, grades):
-        &quot;&quot;&quot;Single responsibility: calculate GPA from grades&quot;&quot;&quot;
-        if not grades:
-            return 0.0
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grades</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: calculate GPA from grades&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
 
-        total = sum(grades)
-        return total / len(grades)
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
 
-    def _determine_academic_status(self, gpa):
-        &quot;&quot;&quot;Single responsibility: determine academic status&quot;&quot;&quot;
-        if gpa &gt;= 3.5:
-            return &quot;Honor Roll&quot;
-        elif gpa &gt;= 2.0:
-            return &quot;Good Standing&quot;
-        else:
-            return &quot;Probation&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_determine_academic_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gpa</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: determine academic status&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">3.5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Honor Roll&quot;</span>
+        <span class="k">elif</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Good Standing&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Probation&quot;</span>
 
-    def _check_graduation_eligibility(self, student_data, gpa):
-        &quot;&quot;&quot;Single responsibility: check if student can graduate&quot;&quot;&quot;
-        required_credits = 120
-        earned_credits = student_data.get(&#x27;credits&#x27;, 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_graduation_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_data</span><span class="p">,</span> <span class="n">gpa</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: check if student can graduate&quot;&quot;&quot;</span>
+        <span class="n">required_credits</span> <span class="o">=</span> <span class="mi">120</span>
+        <span class="n">earned_credits</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;credits&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        return earned_credits &gt;= required_credits and gpa &gt;= 2.0
+        <span class="k">return</span> <span class="n">earned_credits</span> <span class="o">&gt;=</span> <span class="n">required_credits</span> <span class="ow">and</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="mf">2.0</span>
 
-    def _generate_student_report(self, student_data, gpa, status, can_graduate):
-        &quot;&quot;&quot;Single responsibility: format the report&quot;&quot;&quot;
-        required_credits = 120
-        earned_credits = student_data.get(&#x27;credits&#x27;, 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_student_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_data</span><span class="p">,</span> <span class="n">gpa</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">can_graduate</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single responsibility: format the report&quot;&quot;&quot;</span>
+        <span class="n">required_credits</span> <span class="o">=</span> <span class="mi">120</span>
+        <span class="n">earned_credits</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;credits&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        lines = [
-            f&quot;Student: {student_data[&#x27;name&#x27;]}&quot;,
-            f&quot;ID: {student_data[&#x27;id&#x27;]}&quot;,
-            f&quot;GPA: {gpa:.2f}&quot;,
-            f&quot;Status: {status}&quot;,
-            f&quot;Credits: {earned_credits}/{required_credits}&quot;,
-            f&quot;Can Graduate: {&#x27;Yes&#x27; if can_graduate else &#x27;No&#x27;}&quot;
-        ]
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;Student: </span><span class="si">{</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;ID: </span><span class="si">{</span><span class="n">student_data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;GPA: </span><span class="si">{</span><span class="n">gpa</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Credits: </span><span class="si">{</span><span class="n">earned_credits</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">required_credits</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Can Graduate: </span><span class="si">{</span><span class="s1">&#39;Yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">can_graduate</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;No&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">]</span>
 
-        return &#x27;\n&#x27;.join(lines)
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 
-    # Additional helper methods for extended functionality
-    def _get_required_credits(self):
-        &quot;&quot;&quot;Get required credits for graduation&quot;&quot;&quot;
-        return 120
+    <span class="c1"># Additional helper methods for extended functionality</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_required_credits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get required credits for graduation&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">120</span>
 
-    def _format_gpa(self, gpa):
-        &quot;&quot;&quot;Format GPA for display&quot;&quot;&quot;
-        return f&quot;{gpa:.2f}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_format_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gpa</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format GPA for display&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">gpa</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Benefits of refactoring:
-# 1. Each method has a single, clear responsibility
-# 2. Methods are short and easy to understand
-# 3. Easy to test individual components
-# 4. Easy to modify specific functionality
-# 5. Reusable methods can be called from other places
+<span class="c1"># Benefits of refactoring:</span>
+<span class="c1"># 1. Each method has a single, clear responsibility</span>
+<span class="c1"># 2. Methods are short and easy to understand</span>
+<span class="c1"># 3. Easy to test individual components</span>
+<span class="c1"># 4. Easy to modify specific functionality</span>
+<span class="c1"># 5. Reusable methods can be called from other places</span>
 </code></pre>
 </div>
 </details>
@@ -2973,6 +2973,8 @@ print(&quot;Removed &#x27;the&#x27;:&quot;, processor.remove_words_containing(&q
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

@@ -1522,149 +1522,149 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Comprehensive feedback collection system
-class FeedbackCollector:
-    def __init__(self):
-        self.feedback_sources = {
-            &quot;user_surveys&quot;: [],
-            &quot;interviews&quot;: [],
-            &quot;support_tickets&quot;: [],
-            &quot;beta_testing&quot;: [],
-            &quot;analytics&quot;: [],
-            &quot;error_logs&quot;: []
-        }
-        self.feedback_items = []
+<pre><code class="language-python"><span class="c1"># Example: Comprehensive feedback collection system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FeedbackCollector</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_sources</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;user_surveys&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;interviews&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;support_tickets&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;beta_testing&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;analytics&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;error_logs&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def collect_survey_feedback(self, survey_data):
-        &quot;&quot;&quot;Process structured survey responses&quot;&quot;&quot;
-        for response in survey_data:
-            feedback_item = {
-                &quot;source&quot;: &quot;user_survey&quot;,
-                &quot;user_id&quot;: response.get(&quot;user_id&quot;),
-                &quot;timestamp&quot;: &quot;2024-03-20&quot;,
-                &quot;category&quot;: self._categorize_survey_response(response),
-                &quot;satisfaction_score&quot;: response.get(&quot;satisfaction&quot;, 0),
-                &quot;feedback_text&quot;: response.get(&quot;comments&quot;, &quot;&quot;),
-                &quot;feature_area&quot;: response.get(&quot;feature_discussed&quot;),
-                &quot;priority_indicator&quot;: self._calculate_priority(response)
-            }
-            self.feedback_items.append(feedback_item)
+    <span class="k">def</span><span class="w"> </span><span class="nf">collect_survey_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">survey_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process structured survey responses&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">survey_data</span><span class="p">:</span>
+            <span class="n">feedback_item</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_survey&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_categorize_survey_response</span><span class="p">(</span><span class="n">response</span><span class="p">),</span>
+                <span class="s2">&quot;satisfaction_score&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="s2">&quot;feedback_text&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comments&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feature_discussed&quot;</span><span class="p">),</span>
+                <span class="s2">&quot;priority_indicator&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_priority</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback_item</span><span class="p">)</span>
 
-        return len(survey_data)
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">survey_data</span><span class="p">)</span>
 
-    def collect_interview_feedback(self, interview_notes):
-        &quot;&quot;&quot;Process qualitative interview data&quot;&quot;&quot;
-        feedback_item = {
-            &quot;source&quot;: &quot;user_interview&quot;,
-            &quot;participant_id&quot;: interview_notes[&quot;participant&quot;],
-            &quot;timestamp&quot;: interview_notes[&quot;date&quot;],
-            &quot;category&quot;: &quot;qualitative&quot;,
-            &quot;key_insights&quot;: interview_notes[&quot;insights&quot;],
-            &quot;pain_points&quot;: interview_notes[&quot;pain_points&quot;],
-            &quot;feature_requests&quot;: interview_notes[&quot;requests&quot;],
-            &quot;user_journey_feedback&quot;: interview_notes[&quot;journey_notes&quot;]
-        }
-        self.feedback_items.append(feedback_item)
+    <span class="k">def</span><span class="w"> </span><span class="nf">collect_interview_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interview_notes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process qualitative interview data&quot;&quot;&quot;</span>
+        <span class="n">feedback_item</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_interview&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;participant_id&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;participant&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;qualitative&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;key_insights&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;insights&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;pain_points&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;pain_points&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;feature_requests&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;requests&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;user_journey_feedback&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;journey_notes&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback_item</span><span class="p">)</span>
 
-        return feedback_item
+        <span class="k">return</span> <span class="n">feedback_item</span>
 
-    def collect_analytics_data(self, analytics_report):
-        &quot;&quot;&quot;Process usage analytics and behavioral data&quot;&quot;&quot;
-        analytics_feedback = {
-            &quot;source&quot;: &quot;analytics&quot;,
-            &quot;report_period&quot;: analytics_report[&quot;period&quot;],
-            &quot;user_engagement&quot;: {
-                &quot;daily_active_users&quot;: analytics_report[&quot;dau&quot;],
-                &quot;session_duration&quot;: analytics_report[&quot;avg_session&quot;],
-                &quot;feature_usage&quot;: analytics_report[&quot;feature_stats&quot;],
-                &quot;drop_off_points&quot;: analytics_report[&quot;abandonment_data&quot;]
-            },
-            &quot;performance_metrics&quot;: {
-                &quot;page_load_times&quot;: analytics_report[&quot;performance&quot;],
-                &quot;error_rates&quot;: analytics_report[&quot;errors&quot;],
-                &quot;conversion_rates&quot;: analytics_report[&quot;conversions&quot;]
-            }
-        }
-        self.feedback_items.append(analytics_feedback)
+    <span class="k">def</span><span class="w"> </span><span class="nf">collect_analytics_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analytics_report</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process usage analytics and behavioral data&quot;&quot;&quot;</span>
+        <span class="n">analytics_feedback</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;analytics&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;report_period&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;user_engagement&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;daily_active_users&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;dau&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;session_duration&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;avg_session&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;feature_usage&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;feature_stats&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;drop_off_points&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;abandonment_data&quot;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;performance_metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;page_load_times&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;performance&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;error_rates&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;conversion_rates&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;conversions&quot;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analytics_feedback</span><span class="p">)</span>
 
-        return analytics_feedback
+        <span class="k">return</span> <span class="n">analytics_feedback</span>
 
-    def _categorize_survey_response(self, response):
-        &quot;&quot;&quot;Automatically categorize survey feedback&quot;&quot;&quot;
-        keywords = {
-            &quot;usability&quot;: [&quot;confusing&quot;, &quot;difficult&quot;, &quot;hard to use&quot;, &quot;intuitive&quot;],
-            &quot;performance&quot;: [&quot;slow&quot;, &quot;fast&quot;, &quot;responsive&quot;, &quot;loading&quot;],
-            &quot;functionality&quot;: [&quot;feature&quot;, &quot;function&quot;, &quot;capability&quot;, &quot;works&quot;],
-            &quot;design&quot;: [&quot;looks&quot;, &quot;appearance&quot;, &quot;layout&quot;, &quot;visual&quot;]
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">_categorize_survey_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically categorize survey feedback&quot;&quot;&quot;</span>
+        <span class="n">keywords</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;usability&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;confusing&quot;</span><span class="p">,</span> <span class="s2">&quot;difficult&quot;</span><span class="p">,</span> <span class="s2">&quot;hard to use&quot;</span><span class="p">,</span> <span class="s2">&quot;intuitive&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;performance&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="s2">&quot;responsive&quot;</span><span class="p">,</span> <span class="s2">&quot;loading&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;functionality&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;capability&quot;</span><span class="p">,</span> <span class="s2">&quot;works&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;looks&quot;</span><span class="p">,</span> <span class="s2">&quot;appearance&quot;</span><span class="p">,</span> <span class="s2">&quot;layout&quot;</span><span class="p">,</span> <span class="s2">&quot;visual&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
-        text = response.get(&quot;comments&quot;, &quot;&quot;).lower()
+        <span class="n">text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comments&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-        for category, category_keywords in keywords.items():
-            if any(keyword in text for keyword in category_keywords):
-                return category
+        <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">category_keywords</span> <span class="ow">in</span> <span class="n">keywords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">keyword</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">category_keywords</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">category</span>
 
-        return &quot;general&quot;
+        <span class="k">return</span> <span class="s2">&quot;general&quot;</span>
 
-    def _calculate_priority(self, response):
-        &quot;&quot;&quot;Calculate feedback priority based on multiple factors&quot;&quot;&quot;
-        priority_score = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate feedback priority based on multiple factors&quot;&quot;&quot;</span>
+        <span class="n">priority_score</span> <span class="o">=</span> <span class="mi">0</span>
 
-        # Satisfaction score impact
-        satisfaction = response.get(&quot;satisfaction&quot;, 5)
-        if satisfaction &lt;= 2:
-            priority_score += 3
-        elif satisfaction &lt;= 3:
-            priority_score += 2
+        <span class="c1"># Satisfaction score impact</span>
+        <span class="n">satisfaction</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">satisfaction</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">3</span>
+        <span class="k">elif</span> <span class="n">satisfaction</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">2</span>
 
-        # Frequency of mention
-        if response.get(&quot;mentions_count&quot;, 1) &gt; 5:
-            priority_score += 2
+        <span class="c1"># Frequency of mention</span>
+        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mentions_count&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">2</span>
 
-        # Critical feature areas
-        critical_areas = [&quot;login&quot;, &quot;payment&quot;, &quot;data_loss&quot;, &quot;security&quot;]
-        feature = response.get(&quot;feature_discussed&quot;, &quot;&quot;).lower()
-        if any(area in feature for area in critical_areas):
-            priority_score += 3
+        <span class="c1"># Critical feature areas</span>
+        <span class="n">critical_areas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;login&quot;</span><span class="p">,</span> <span class="s2">&quot;payment&quot;</span><span class="p">,</span> <span class="s2">&quot;data_loss&quot;</span><span class="p">,</span> <span class="s2">&quot;security&quot;</span><span class="p">]</span>
+        <span class="n">feature</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feature_discussed&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">area</span> <span class="ow">in</span> <span class="n">feature</span> <span class="k">for</span> <span class="n">area</span> <span class="ow">in</span> <span class="n">critical_areas</span><span class="p">):</span>
+            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">3</span>
 
-        return min(priority_score, 5)  # Cap at 5
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">priority_score</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Cap at 5</span>
 
-# Example usage
-feedback_collector = FeedbackCollector()
+<span class="c1"># Example usage</span>
+<span class="n">feedback_collector</span> <span class="o">=</span> <span class="n">FeedbackCollector</span><span class="p">()</span>
 
-# Collect survey feedback
-survey_responses = [
-    {
-        &quot;user_id&quot;: &quot;U001&quot;,
-        &quot;satisfaction&quot;: 2,
-        &quot;comments&quot;: &quot;The login process is confusing and takes too long&quot;,
-        &quot;feature_discussed&quot;: &quot;authentication&quot;,
-        &quot;mentions_count&quot;: 8
-    },
-    {
-        &quot;user_id&quot;: &quot;U002&quot;, 
-        &quot;satisfaction&quot;: 4,
-        &quot;comments&quot;: &quot;Overall good but page loading is slow&quot;,
-        &quot;feature_discussed&quot;: &quot;performance&quot;,
-        &quot;mentions_count&quot;: 3
-    }
-]
+<span class="c1"># Collect survey feedback</span>
+<span class="n">survey_responses</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;U001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;The login process is confusing and takes too long&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;feature_discussed&quot;</span><span class="p">:</span> <span class="s2">&quot;authentication&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mentions_count&quot;</span><span class="p">:</span> <span class="mi">8</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;U002&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;Overall good but page loading is slow&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;feature_discussed&quot;</span><span class="p">:</span> <span class="s2">&quot;performance&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;mentions_count&quot;</span><span class="p">:</span> <span class="mi">3</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 
-collected_surveys = feedback_collector.collect_survey_feedback(survey_responses)
-print(f&quot;Collected {collected_surveys} survey responses&quot;)
+<span class="n">collected_surveys</span> <span class="o">=</span> <span class="n">feedback_collector</span><span class="o">.</span><span class="n">collect_survey_feedback</span><span class="p">(</span><span class="n">survey_responses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collected </span><span class="si">{</span><span class="n">collected_surveys</span><span class="si">}</span><span class="s2"> survey responses&quot;</span><span class="p">)</span>
 
-# Collect interview feedback
-interview_data = {
-    &quot;participant&quot;: &quot;Teacher_Mary&quot;,
-    &quot;date&quot;: &quot;2024-03-20&quot;,
-    &quot;insights&quot;: [&quot;Students struggle with grade entry workflow&quot;, &quot;Need bulk operations&quot;],
-    &quot;pain_points&quot;: [&quot;Too many clicks for simple tasks&quot;, &quot;No undo functionality&quot;],
-    &quot;requests&quot;: [&quot;Keyboard shortcuts&quot;, &quot;Better error messages&quot;],
-    &quot;journey_notes&quot;: &quot;Users get lost between grade entry and student management sections&quot;
-}
+<span class="c1"># Collect interview feedback</span>
+<span class="n">interview_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;participant&quot;</span><span class="p">:</span> <span class="s2">&quot;Teacher_Mary&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;insights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Students struggle with grade entry workflow&quot;</span><span class="p">,</span> <span class="s2">&quot;Need bulk operations&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;pain_points&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Too many clicks for simple tasks&quot;</span><span class="p">,</span> <span class="s2">&quot;No undo functionality&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;requests&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Keyboard shortcuts&quot;</span><span class="p">,</span> <span class="s2">&quot;Better error messages&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;journey_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Users get lost between grade entry and student management sections&quot;</span>
+<span class="p">}</span>
 
-interview_feedback = feedback_collector.collect_interview_feedback(interview_data)
-print(f&quot;Interview feedback collected for {interview_feedback[&#x27;participant_id&#x27;]}&quot;)
+<span class="n">interview_feedback</span> <span class="o">=</span> <span class="n">feedback_collector</span><span class="o">.</span><span class="n">collect_interview_feedback</span><span class="p">(</span><span class="n">interview_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interview feedback collected for </span><span class="si">{</span><span class="n">interview_feedback</span><span class="p">[</span><span class="s1">&#39;participant_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="feedback-synthesis-and-pattern-identification">Feedback synthesis and pattern identification<a class="headerlink" href="#feedback-synthesis-and-pattern-identification" title="Permanent link">&para;</a></h3>
@@ -1715,181 +1715,181 @@ print(f&quot;Interview feedback collected for {interview_feedback[&#x27;particip
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Feedback synthesis and pattern analysis system
-class FeedbackAnalyzer:
-    def __init__(self):
-        self.sentiment_keywords = {
-            &quot;positive&quot;: [&quot;good&quot;, &quot;great&quot;, &quot;love&quot;, &quot;excellent&quot;, &quot;helpful&quot;, &quot;easy&quot;],
-            &quot;negative&quot;: [&quot;bad&quot;, &quot;terrible&quot;, &quot;hate&quot;, &quot;awful&quot;, &quot;confusing&quot;, &quot;difficult&quot;],
-            &quot;neutral&quot;: [&quot;okay&quot;, &quot;fine&quot;, &quot;average&quot;, &quot;normal&quot;]
-        }
+<pre><code class="language-python"><span class="c1"># Example: Feedback synthesis and pattern analysis system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">FeedbackAnalyzer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentiment_keywords</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;good&quot;</span><span class="p">,</span> <span class="s2">&quot;great&quot;</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;excellent&quot;</span><span class="p">,</span> <span class="s2">&quot;helpful&quot;</span><span class="p">,</span> <span class="s2">&quot;easy&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bad&quot;</span><span class="p">,</span> <span class="s2">&quot;terrible&quot;</span><span class="p">,</span> <span class="s2">&quot;hate&quot;</span><span class="p">,</span> <span class="s2">&quot;awful&quot;</span><span class="p">,</span> <span class="s2">&quot;confusing&quot;</span><span class="p">,</span> <span class="s2">&quot;difficult&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;neutral&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;okay&quot;</span><span class="p">,</span> <span class="s2">&quot;fine&quot;</span><span class="p">,</span> <span class="s2">&quot;average&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
-        self.theme_patterns = {
-            &quot;usability&quot;: [&quot;user interface&quot;, &quot;navigation&quot;, &quot;intuitive&quot;, &quot;confusing&quot;, &quot;workflow&quot;],
-            &quot;performance&quot;: [&quot;speed&quot;, &quot;slow&quot;, &quot;fast&quot;, &quot;loading&quot;, &quot;responsive&quot;, &quot;timeout&quot;],
-            &quot;functionality&quot;: [&quot;feature&quot;, &quot;function&quot;, &quot;capability&quot;, &quot;missing&quot;, &quot;broken&quot;],
-            &quot;accessibility&quot;: [&quot;screen reader&quot;, &quot;keyboard&quot;, &quot;color&quot;, &quot;contrast&quot;, &quot;disability&quot;],
-            &quot;mobile&quot;: [&quot;mobile&quot;, &quot;phone&quot;, &quot;tablet&quot;, &quot;responsive&quot;, &quot;touch&quot;]
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;usability&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;user interface&quot;</span><span class="p">,</span> <span class="s2">&quot;navigation&quot;</span><span class="p">,</span> <span class="s2">&quot;intuitive&quot;</span><span class="p">,</span> <span class="s2">&quot;confusing&quot;</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;performance&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">,</span> <span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="s2">&quot;loading&quot;</span><span class="p">,</span> <span class="s2">&quot;responsive&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;functionality&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;capability&quot;</span><span class="p">,</span> <span class="s2">&quot;missing&quot;</span><span class="p">,</span> <span class="s2">&quot;broken&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;accessibility&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;screen reader&quot;</span><span class="p">,</span> <span class="s2">&quot;keyboard&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="s2">&quot;contrast&quot;</span><span class="p">,</span> <span class="s2">&quot;disability&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;mobile&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;mobile&quot;</span><span class="p">,</span> <span class="s2">&quot;phone&quot;</span><span class="p">,</span> <span class="s2">&quot;tablet&quot;</span><span class="p">,</span> <span class="s2">&quot;responsive&quot;</span><span class="p">,</span> <span class="s2">&quot;touch&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def analyze_sentiment(self, feedback_text):
-        &quot;&quot;&quot;Analyze sentiment of feedback text&quot;&quot;&quot;
-        text_lower = feedback_text.lower()
-        sentiment_scores = {&quot;positive&quot;: 0, &quot;negative&quot;: 0, &quot;neutral&quot;: 0}
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_sentiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze sentiment of feedback text&quot;&quot;&quot;</span>
+        <span class="n">text_lower</span> <span class="o">=</span> <span class="n">feedback_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">sentiment_scores</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-        for sentiment, keywords in self.sentiment_keywords.items():
-            for keyword in keywords:
-                if keyword in text_lower:
-                    sentiment_scores[sentiment] += 1
+        <span class="k">for</span> <span class="n">sentiment</span><span class="p">,</span> <span class="n">keywords</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment_keywords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">text_lower</span><span class="p">:</span>
+                    <span class="n">sentiment_scores</span><span class="p">[</span><span class="n">sentiment</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        # Determine overall sentiment
-        max_sentiment = max(sentiment_scores, key=sentiment_scores.get)
-        confidence = sentiment_scores[max_sentiment] / sum(sentiment_scores.values()) if sum(sentiment_scores.values()) &gt; 0 else 0
+        <span class="c1"># Determine overall sentiment</span>
+        <span class="n">max_sentiment</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sentiment_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">sentiment_scores</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+        <span class="n">confidence</span> <span class="o">=</span> <span class="n">sentiment_scores</span><span class="p">[</span><span class="n">max_sentiment</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sentiment_scores</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sentiment_scores</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
-        return {
-            &quot;sentiment&quot;: max_sentiment,
-            &quot;confidence&quot;: confidence,
-            &quot;scores&quot;: sentiment_scores
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;sentiment&quot;</span><span class="p">:</span> <span class="n">max_sentiment</span><span class="p">,</span>
+            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
+            <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="n">sentiment_scores</span>
+        <span class="p">}</span>
 
-    def identify_themes(self, feedback_collection):
-        &quot;&quot;&quot;Identify common themes across feedback items&quot;&quot;&quot;
-        theme_frequency = {theme: 0 for theme in self.theme_patterns.keys()}
-        theme_examples = {theme: [] for theme in self.theme_patterns.keys()}
+    <span class="k">def</span><span class="w"> </span><span class="nf">identify_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_collection</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify common themes across feedback items&quot;&quot;&quot;</span>
+        <span class="n">theme_frequency</span> <span class="o">=</span> <span class="p">{</span><span class="n">theme</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+        <span class="n">theme_examples</span> <span class="o">=</span> <span class="p">{</span><span class="n">theme</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
 
-        for feedback in feedback_collection:
-            feedback_text = feedback.get(&quot;feedback_text&quot;, &quot;&quot;) + &quot; &quot; + str(feedback.get(&quot;key_insights&quot;, []))
-            text_lower = feedback_text.lower()
+        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">feedback_collection</span><span class="p">:</span>
+            <span class="n">feedback_text</span> <span class="o">=</span> <span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;key_insights&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+            <span class="n">text_lower</span> <span class="o">=</span> <span class="n">feedback_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-            for theme, keywords in self.theme_patterns.items():
-                theme_score = sum(1 for keyword in keywords if keyword in text_lower)
-                if theme_score &gt; 0:
-                    theme_frequency[theme] += theme_score
-                    theme_examples[theme].append({
-                        &quot;source&quot;: feedback.get(&quot;source&quot;),
-                        &quot;text_snippet&quot;: feedback_text[:100] + &quot;...&quot;,
-                        &quot;score&quot;: theme_score
-                    })
+            <span class="k">for</span> <span class="n">theme</span><span class="p">,</span> <span class="n">keywords</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">theme_score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span> <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">text_lower</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">theme_score</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">theme_frequency</span><span class="p">[</span><span class="n">theme</span><span class="p">]</span> <span class="o">+=</span> <span class="n">theme_score</span>
+                    <span class="n">theme_examples</span><span class="p">[</span><span class="n">theme</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
+                        <span class="s2">&quot;text_snippet&quot;</span><span class="p">:</span> <span class="n">feedback_text</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">theme_score</span>
+                    <span class="p">})</span>
 
-        # Sort themes by frequency
-        sorted_themes = sorted(theme_frequency.items(), key=lambda x: x[1], reverse=True)
+        <span class="c1"># Sort themes by frequency</span>
+        <span class="n">sorted_themes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">theme_frequency</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        return {
-            &quot;theme_rankings&quot;: sorted_themes,
-            &quot;theme_examples&quot;: theme_examples,
-            &quot;total_feedback_items&quot;: len(feedback_collection)
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;theme_rankings&quot;</span><span class="p">:</span> <span class="n">sorted_themes</span><span class="p">,</span>
+            <span class="s2">&quot;theme_examples&quot;</span><span class="p">:</span> <span class="n">theme_examples</span><span class="p">,</span>
+            <span class="s2">&quot;total_feedback_items&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback_collection</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def prioritize_issues(self, feedback_collection):
-        &quot;&quot;&quot;Prioritize issues based on frequency, severity, and impact&quot;&quot;&quot;
-        issue_tracker = {}
+    <span class="k">def</span><span class="w"> </span><span class="nf">prioritize_issues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_collection</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prioritize issues based on frequency, severity, and impact&quot;&quot;&quot;</span>
+        <span class="n">issue_tracker</span> <span class="o">=</span> <span class="p">{}</span>
 
-        for feedback in feedback_collection:
-            # Extract issues from feedback
-            issues = self._extract_issues(feedback)
+        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">feedback_collection</span><span class="p">:</span>
+            <span class="c1"># Extract issues from feedback</span>
+            <span class="n">issues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_issues</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
 
-            for issue in issues:
-                issue_key = issue[&quot;description&quot;]
+            <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">issues</span><span class="p">:</span>
+                <span class="n">issue_key</span> <span class="o">=</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
 
-                if issue_key not in issue_tracker:
-                    issue_tracker[issue_key] = {
-                        &quot;frequency&quot;: 0,
-                        &quot;total_severity&quot;: 0,
-                        &quot;sources&quot;: [],
-                        &quot;examples&quot;: []
-                    }
+                <span class="k">if</span> <span class="n">issue_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">issue_tracker</span><span class="p">:</span>
+                    <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;total_severity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                        <span class="s2">&quot;examples&quot;</span><span class="p">:</span> <span class="p">[]</span>
+                    <span class="p">}</span>
 
-                issue_tracker[issue_key][&quot;frequency&quot;] += 1
-                issue_tracker[issue_key][&quot;total_severity&quot;] += issue[&quot;severity&quot;]
-                issue_tracker[issue_key][&quot;sources&quot;].append(feedback.get(&quot;source&quot;))
-                issue_tracker[issue_key][&quot;examples&quot;].append(feedback.get(&quot;feedback_text&quot;, &quot;&quot;)[:100])
+                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;total_severity&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;severity&quot;</span><span class="p">]</span>
+                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;sources&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">))</span>
+                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;examples&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[:</span><span class="mi">100</span><span class="p">])</span>
 
-        # Calculate priority scores
-        prioritized_issues = []
-        for issue_desc, data in issue_tracker.items():
-            avg_severity = data[&quot;total_severity&quot;] / data[&quot;frequency&quot;]
-            unique_sources = len(set(data[&quot;sources&quot;]))
+        <span class="c1"># Calculate priority scores</span>
+        <span class="n">prioritized_issues</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">issue_desc</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">issue_tracker</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">avg_severity</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;total_severity&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span>
+            <span class="n">unique_sources</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sources&quot;</span><span class="p">]))</span>
 
-            priority_score = (data[&quot;frequency&quot;] * 2) + (avg_severity * 3) + (unique_sources * 1)
+            <span class="n">priority_score</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg_severity</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">unique_sources</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
 
-            prioritized_issues.append({
-                &quot;issue&quot;: issue_desc,
-                &quot;priority_score&quot;: priority_score,
-                &quot;frequency&quot;: data[&quot;frequency&quot;],
-                &quot;average_severity&quot;: avg_severity,
-                &quot;source_diversity&quot;: unique_sources,
-                &quot;examples&quot;: data[&quot;examples&quot;][:3]  # Top 3 examples
-            })
+            <span class="n">prioritized_issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">issue_desc</span><span class="p">,</span>
+                <span class="s2">&quot;priority_score&quot;</span><span class="p">:</span> <span class="n">priority_score</span><span class="p">,</span>
+                <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;average_severity&quot;</span><span class="p">:</span> <span class="n">avg_severity</span><span class="p">,</span>
+                <span class="s2">&quot;source_diversity&quot;</span><span class="p">:</span> <span class="n">unique_sources</span><span class="p">,</span>
+                <span class="s2">&quot;examples&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;examples&quot;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># Top 3 examples</span>
+            <span class="p">})</span>
 
-        return sorted(prioritized_issues, key=lambda x: x[&quot;priority_score&quot;], reverse=True)
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">prioritized_issues</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;priority_score&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    def _extract_issues(self, feedback_item):
-        &quot;&quot;&quot;Extract specific issues from feedback&quot;&quot;&quot;
-        # Simplified issue extraction - in practice would use NLP
-        issues = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_issues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_item</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract specific issues from feedback&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified issue extraction - in practice would use NLP</span>
+        <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
 
-        text = feedback_item.get(&quot;feedback_text&quot;, &quot;&quot;)
-        pain_points = feedback_item.get(&quot;pain_points&quot;, [])
+        <span class="n">text</span> <span class="o">=</span> <span class="n">feedback_item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">pain_points</span> <span class="o">=</span> <span class="n">feedback_item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pain_points&quot;</span><span class="p">,</span> <span class="p">[])</span>
 
-        # Extract from pain points
-        for pain_point in pain_points:
-            issues.append({
-                &quot;description&quot;: pain_point,
-                &quot;severity&quot;: 3,  # Default medium severity
-                &quot;type&quot;: &quot;pain_point&quot;
-            })
+        <span class="c1"># Extract from pain points</span>
+        <span class="k">for</span> <span class="n">pain_point</span> <span class="ow">in</span> <span class="n">pain_points</span><span class="p">:</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">pain_point</span><span class="p">,</span>
+                <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>  <span class="c1"># Default medium severity</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;pain_point&quot;</span>
+            <span class="p">})</span>
 
-        # Extract from negative sentiment feedback
-        if &quot;confusing&quot; in text.lower():
-            issues.append({
-                &quot;description&quot;: &quot;User interface confusion&quot;,
-                &quot;severity&quot;: 4,
-                &quot;type&quot;: &quot;usability&quot;
-            })
+        <span class="c1"># Extract from negative sentiment feedback</span>
+        <span class="k">if</span> <span class="s2">&quot;confusing&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;User interface confusion&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;usability&quot;</span>
+            <span class="p">})</span>
 
-        if &quot;slow&quot; in text.lower():
-            issues.append({
-                &quot;description&quot;: &quot;Performance issues&quot;,
-                &quot;severity&quot;: 3,
-                &quot;type&quot;: &quot;performance&quot;
-            })
+        <span class="k">if</span> <span class="s2">&quot;slow&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Performance issues&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;performance&quot;</span>
+            <span class="p">})</span>
 
-        return issues
+        <span class="k">return</span> <span class="n">issues</span>
 
-# Example usage
-analyzer = FeedbackAnalyzer()
+<span class="c1"># Example usage</span>
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">FeedbackAnalyzer</span><span class="p">()</span>
 
-# Sample feedback collection
-sample_feedback = [
-    {
-        &quot;source&quot;: &quot;user_survey&quot;,
-        &quot;feedback_text&quot;: &quot;The interface is confusing and navigation is slow&quot;,
-        &quot;satisfaction_score&quot;: 2
-    },
-    {
-        &quot;source&quot;: &quot;user_interview&quot;, 
-        &quot;key_insights&quot;: [&quot;Interface navigation needs improvement&quot;],
-        &quot;pain_points&quot;: [&quot;Too many steps to complete simple tasks&quot;, &quot;Buttons are not intuitive&quot;]
-    },
-    {
-        &quot;source&quot;: &quot;support_ticket&quot;,
-        &quot;feedback_text&quot;: &quot;Cannot find the save button, very frustrating experience&quot;,
-        &quot;satisfaction_score&quot;: 1
-    }
-]
+<span class="c1"># Sample feedback collection</span>
+<span class="n">sample_feedback</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_survey&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;feedback_text&quot;</span><span class="p">:</span> <span class="s2">&quot;The interface is confusing and navigation is slow&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;satisfaction_score&quot;</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_interview&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;key_insights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Interface navigation needs improvement&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;pain_points&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Too many steps to complete simple tasks&quot;</span><span class="p">,</span> <span class="s2">&quot;Buttons are not intuitive&quot;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;support_ticket&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;feedback_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Cannot find the save button, very frustrating experience&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;satisfaction_score&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 
-# Analyze themes
-theme_analysis = analyzer.identify_themes(sample_feedback)
-print(&quot;Top themes identified:&quot;)
-for theme, count in theme_analysis[&quot;theme_rankings&quot;][:3]:
-    if count &gt; 0:
-        print(f&quot;  {theme}: {count} mentions&quot;)
+<span class="c1"># Analyze themes</span>
+<span class="n">theme_analysis</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">identify_themes</span><span class="p">(</span><span class="n">sample_feedback</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top themes identified:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">theme</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">theme_analysis</span><span class="p">[</span><span class="s2">&quot;theme_rankings&quot;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">theme</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> mentions&quot;</span><span class="p">)</span>
 
-# Prioritize issues
-priority_analysis = analyzer.prioritize_issues(sample_feedback)
-print(f&quot;\nTop priority issues:&quot;)
-for issue in priority_analysis[:3]:
-    print(f&quot;  {issue[&#x27;issue&#x27;]} (Score: {issue[&#x27;priority_score&#x27;]:.1f})&quot;)
+<span class="c1"># Prioritize issues</span>
+<span class="n">priority_analysis</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">prioritize_issues</span><span class="p">(</span><span class="n">sample_feedback</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Top priority issues:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">priority_analysis</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;issue&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (Score: </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;priority_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="decision-making-frameworks-for-next-steps">Decision-making frameworks for next steps<a class="headerlink" href="#decision-making-frameworks-for-next-steps" title="Permanent link">&para;</a></h3>
@@ -1944,160 +1944,160 @@ for issue in priority_analysis[:3]:
 <p>Let&rsquo;s walk through a complete feedback analysis process for a school gradebook application:</p>
 <p><strong>Step 1: Feedback collection summary</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Gradebook feedback analysis example
-class GradebookFeedbackAnalysis:
-    def __init__(self):
-        self.collected_feedback = {
-            &quot;teacher_surveys&quot;: 45,
-            &quot;student_interviews&quot;: 12,
-            &quot;parent_feedback&quot;: 23,
-            &quot;admin_reviews&quot;: 8,
-            &quot;support_tickets&quot;: 67,
-            &quot;usage_analytics&quot;: &quot;3 months data&quot;
-        }
+<pre><code class="language-python"><span class="c1"># Gradebook feedback analysis example</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GradebookFeedbackAnalysis</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collected_feedback</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;teacher_surveys&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
+            <span class="s2">&quot;student_interviews&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="s2">&quot;parent_feedback&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+            <span class="s2">&quot;admin_reviews&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="s2">&quot;support_tickets&quot;</span><span class="p">:</span> <span class="mi">67</span><span class="p">,</span>
+            <span class="s2">&quot;usage_analytics&quot;</span><span class="p">:</span> <span class="s2">&quot;3 months data&quot;</span>
+        <span class="p">}</span>
 
-        self.raw_feedback_data = [
-            {
-                &quot;source&quot;: &quot;teacher_survey&quot;,
-                &quot;respondent&quot;: &quot;High School Math Teacher&quot;,
-                &quot;feedback&quot;: &quot;Grade entry takes too long - need bulk operations&quot;,
-                &quot;satisfaction&quot;: 2,
-                &quot;feature_area&quot;: &quot;grade_entry&quot;,
-                &quot;priority&quot;: &quot;high&quot;
-            },
-            {
-                &quot;source&quot;: &quot;student_interview&quot;,
-                &quot;respondent&quot;: &quot;Year 11 Student&quot;,
-                &quot;feedback&quot;: &quot;Can&#x27;t see detailed feedback on assignments, just grades&quot;,
-                &quot;satisfaction&quot;: 3,
-                &quot;feature_area&quot;: &quot;student_view&quot;,
-                &quot;priority&quot;: &quot;medium&quot;
-            },
-            {
-                &quot;source&quot;: &quot;parent_feedback&quot;,
-                &quot;respondent&quot;: &quot;Parent via email&quot;,
-                &quot;feedback&quot;: &quot;Notification system is excellent, helps me stay informed&quot;,
-                &quot;satisfaction&quot;: 5,
-                &quot;feature_area&quot;: &quot;notifications&quot;,
-                &quot;priority&quot;: &quot;low&quot;
-            },
-            {
-                &quot;source&quot;: &quot;admin_review&quot;,
-                &quot;respondent&quot;: &quot;School Principal&quot;,
-                &quot;feedback&quot;: &quot;Reports generation is slow during peak times&quot;,
-                &quot;satisfaction&quot;: 2,
-                &quot;feature_area&quot;: &quot;reporting&quot;,
-                &quot;priority&quot;: &quot;high&quot;
-            },
-            {
-                &quot;source&quot;: &quot;support_ticket&quot;,
-                &quot;respondent&quot;: &quot;Multiple users&quot;,
-                &quot;feedback&quot;: &quot;Gradebook crashes when uploading large files&quot;,
-                &quot;satisfaction&quot;: 1,
-                &quot;feature_area&quot;: &quot;file_upload&quot;,
-                &quot;priority&quot;: &quot;critical&quot;
-            }
-        ]
+        <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;teacher_survey&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;High School Math Teacher&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Grade entry takes too long - need bulk operations&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;grade_entry&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;student_interview&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;Year 11 Student&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Can&#39;t see detailed feedback on assignments, just grades&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;student_view&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;parent_feedback&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent via email&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Notification system is excellent, helps me stay informed&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;notifications&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;admin_review&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;School Principal&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Reports generation is slow during peak times&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;reporting&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;support_ticket&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;Multiple users&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Gradebook crashes when uploading large files&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;file_upload&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;critical&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
 
-    def analyze_by_stakeholder_group(self):
-        &quot;&quot;&quot;Group feedback by stakeholder type for targeted analysis&quot;&quot;&quot;
-        stakeholder_analysis = {
-            &quot;teachers&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []},
-            &quot;students&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []},
-            &quot;parents&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []},
-            &quot;administrators&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []}
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_by_stakeholder_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Group feedback by stakeholder type for targeted analysis&quot;&quot;&quot;</span>
+        <span class="n">stakeholder_analysis</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;teachers&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]},</span>
+            <span class="s2">&quot;students&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]},</span>
+            <span class="s2">&quot;parents&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]},</span>
+            <span class="s2">&quot;administrators&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="p">}</span>
 
-        stakeholder_mapping = {
-            &quot;teacher_survey&quot;: &quot;teachers&quot;,
-            &quot;student_interview&quot;: &quot;students&quot;, 
-            &quot;parent_feedback&quot;: &quot;parents&quot;,
-            &quot;admin_review&quot;: &quot;administrators&quot;
-        }
+        <span class="n">stakeholder_mapping</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;teacher_survey&quot;</span><span class="p">:</span> <span class="s2">&quot;teachers&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;student_interview&quot;</span><span class="p">:</span> <span class="s2">&quot;students&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;parent_feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;parents&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;admin_review&quot;</span><span class="p">:</span> <span class="s2">&quot;administrators&quot;</span>
+        <span class="p">}</span>
 
-        for feedback in self.raw_feedback_data:
-            source = feedback[&quot;source&quot;]
-            if source in stakeholder_mapping:
-                group = stakeholder_mapping[source]
-                stakeholder_analysis[group][&quot;satisfaction_avg&quot;] += feedback[&quot;satisfaction&quot;]
-                stakeholder_analysis[group][&quot;count&quot;] += 1
-                stakeholder_analysis[group][&quot;top_issues&quot;].append({
-                    &quot;issue&quot;: feedback[&quot;feedback&quot;],
-                    &quot;priority&quot;: feedback[&quot;priority&quot;],
-                    &quot;feature&quot;: feedback[&quot;feature_area&quot;]
-                })
+        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span><span class="p">:</span>
+            <span class="n">source</span> <span class="o">=</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">stakeholder_mapping</span><span class="p">:</span>
+                <span class="n">group</span> <span class="o">=</span> <span class="n">stakeholder_mapping</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
+                <span class="n">stakeholder_analysis</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">]</span>
+                <span class="n">stakeholder_analysis</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">stakeholder_analysis</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="s2">&quot;top_issues&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">]</span>
+                <span class="p">})</span>
 
-        # Calculate averages
-        for group, data in stakeholder_analysis.items():
-            if data[&quot;count&quot;] &gt; 0:
-                data[&quot;satisfaction_avg&quot;] = data[&quot;satisfaction_avg&quot;] / data[&quot;count&quot;]
+        <span class="c1"># Calculate averages</span>
+        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">stakeholder_analysis</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
 
-        return stakeholder_analysis
+        <span class="k">return</span> <span class="n">stakeholder_analysis</span>
 
-    def generate_action_plan(self, stakeholder_analysis):
-        &quot;&quot;&quot;Create prioritized action plan based on feedback analysis&quot;&quot;&quot;
-        action_plan = {
-            &quot;immediate_actions&quot;: [],
-            &quot;short_term_improvements&quot;: [],
-            &quot;long_term_enhancements&quot;: [],
-            &quot;monitoring_areas&quot;: []
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_action_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stakeholder_analysis</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create prioritized action plan based on feedback analysis&quot;&quot;&quot;</span>
+        <span class="n">action_plan</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;immediate_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;short_term_improvements&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;long_term_enhancements&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;monitoring_areas&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
 
-        # Identify critical issues (satisfaction &lt;= 2, high/critical priority)
-        critical_issues = []
-        for feedback in self.raw_feedback_data:
-            if feedback[&quot;satisfaction&quot;] &lt;= 2 and feedback[&quot;priority&quot;] in [&quot;high&quot;, &quot;critical&quot;]:
-                critical_issues.append(feedback)
+        <span class="c1"># Identify critical issues (satisfaction &lt;= 2, high/critical priority)</span>
+        <span class="n">critical_issues</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">]:</span>
+                <span class="n">critical_issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
 
-        # Categorize actions
-        for issue in critical_issues:
-            if &quot;crash&quot; in issue[&quot;feedback&quot;].lower() or issue[&quot;priority&quot;] == &quot;critical&quot;:
-                action_plan[&quot;immediate_actions&quot;].append({
-                    &quot;issue&quot;: issue[&quot;feedback&quot;],
-                    &quot;feature_area&quot;: issue[&quot;feature_area&quot;],
-                    &quot;estimated_effort&quot;: &quot;1-2 days&quot;,
-                    &quot;responsible_team&quot;: &quot;Backend/Infrastructure&quot;
-                })
-            else:
-                action_plan[&quot;short_term_improvements&quot;].append({
-                    &quot;issue&quot;: issue[&quot;feedback&quot;],
-                    &quot;feature_area&quot;: issue[&quot;feature_area&quot;],
-                    &quot;estimated_effort&quot;: &quot;1-2 weeks&quot;,
-                    &quot;responsible_team&quot;: &quot;Feature Development&quot;
-                })
+        <span class="c1"># Categorize actions</span>
+        <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">critical_issues</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;crash&quot;</span> <span class="ow">in</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span>
+                <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;immediate_actions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;responsible_team&quot;</span><span class="p">:</span> <span class="s2">&quot;Backend/Infrastructure&quot;</span>
+                <span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;short_term_improvements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 weeks&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;responsible_team&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature Development&quot;</span>
+                <span class="p">})</span>
 
-        # Add positive feedback areas to monitoring
-        positive_feedback = [f for f in self.raw_feedback_data if f[&quot;satisfaction&quot;] &gt;= 4]
-        for feedback in positive_feedback:
-            action_plan[&quot;monitoring_areas&quot;].append({
-                &quot;strength&quot;: feedback[&quot;feedback&quot;],
-                &quot;feature_area&quot;: feedback[&quot;feature_area&quot;],
-                &quot;recommendation&quot;: &quot;Maintain current functionality&quot;
-            })
+        <span class="c1"># Add positive feedback areas to monitoring</span>
+        <span class="n">positive_feedback</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">positive_feedback</span><span class="p">:</span>
+            <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;monitoring_areas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;strength&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Maintain current functionality&quot;</span>
+            <span class="p">})</span>
 
-        return action_plan
+        <span class="k">return</span> <span class="n">action_plan</span>
 
-# Example usage
-gradebook_analysis = GradebookFeedbackAnalysis()
+<span class="c1"># Example usage</span>
+<span class="n">gradebook_analysis</span> <span class="o">=</span> <span class="n">GradebookFeedbackAnalysis</span><span class="p">()</span>
 
-# Analyze by stakeholder groups
-stakeholder_results = gradebook_analysis.analyze_by_stakeholder_group()
-print(&quot;Stakeholder Satisfaction Analysis:&quot;)
-for group, data in stakeholder_results.items():
-    if data[&quot;count&quot;] &gt; 0:
-        print(f&quot;  {group}: {data[&#x27;satisfaction_avg&#x27;]:.1f}/5 satisfaction ({data[&#x27;count&#x27;]} responses)&quot;)
+<span class="c1"># Analyze by stakeholder groups</span>
+<span class="n">stakeholder_results</span> <span class="o">=</span> <span class="n">gradebook_analysis</span><span class="o">.</span><span class="n">analyze_by_stakeholder_group</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stakeholder Satisfaction Analysis:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">stakeholder_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;satisfaction_avg&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">/5 satisfaction (</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> responses)&quot;</span><span class="p">)</span>
 
-# Generate action plan
-action_plan = gradebook_analysis.generate_action_plan(stakeholder_results)
-print(f&quot;\nAction Plan:&quot;)
-print(f&quot;  Immediate Actions: {len(action_plan[&#x27;immediate_actions&#x27;])}&quot;)
-print(f&quot;  Short-term Improvements: {len(action_plan[&#x27;short_term_improvements&#x27;])}&quot;)
-print(f&quot;  Areas to Monitor: {len(action_plan[&#x27;monitoring_areas&#x27;])}&quot;)
+<span class="c1"># Generate action plan</span>
+<span class="n">action_plan</span> <span class="o">=</span> <span class="n">gradebook_analysis</span><span class="o">.</span><span class="n">generate_action_plan</span><span class="p">(</span><span class="n">stakeholder_results</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Action Plan:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Immediate Actions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">action_plan</span><span class="p">[</span><span class="s1">&#39;immediate_actions&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Short-term Improvements: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">action_plan</span><span class="p">[</span><span class="s1">&#39;short_term_improvements&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Areas to Monitor: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">action_plan</span><span class="p">[</span><span class="s1">&#39;monitoring_areas&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Display immediate actions
-print(&quot;\nImmediate Actions Required:&quot;)
-for action in action_plan[&quot;immediate_actions&quot;]:
-    print(f&quot;  - {action[&#x27;issue&#x27;]} ({action[&#x27;feature_area&#x27;]})&quot;)
+<span class="c1"># Display immediate actions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Immediate Actions Required:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;immediate_actions&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">action</span><span class="p">[</span><span class="s1">&#39;issue&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">action</span><span class="p">[</span><span class="s1">&#39;feature_area&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <p><strong>Step 2: Impact vs effort analysis</strong></p>
@@ -2635,6 +2635,8 @@ for action in action_plan[&quot;immediate_actions&quot;]:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

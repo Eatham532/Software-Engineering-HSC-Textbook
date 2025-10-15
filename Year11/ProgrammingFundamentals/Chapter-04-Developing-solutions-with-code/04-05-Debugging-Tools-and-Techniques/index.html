@@ -2117,206 +2117,206 @@
 <h3 id="logic-errors">Logic Errors<a class="headerlink" href="#logic-errors" title="Permanent link">&para;</a></h3>
 <p>Code that runs without crashing but produces incorrect results.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Logic error - off-by-one error
-def get_last_element(my_list):
-    return my_list[len(my_list)]  # Should be len(my_list) - 1
+<pre><code class="language-python"><span class="c1"># Logic error - off-by-one error</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_last_element</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">my_list</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)]</span>  <span class="c1"># Should be len(my_list) - 1</span>
 
-# This will cause an IndexError, or if we &quot;fix&quot; it incorrectly:
-def get_last_element_wrong(my_list):
-    if len(my_list) &gt; 0:
-        return my_list[len(my_list) - 2]  # Returns second-to-last, not last!
-    return None
+<span class="c1"># This will cause an IndexError, or if we &quot;fix&quot; it incorrectly:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_last_element_wrong</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">my_list</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># Returns second-to-last, not last!</span>
+    <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
 <h2 id="debugging-output-statements">Debugging Output Statements<a class="headerlink" href="#debugging-output-statements" title="Permanent link">&para;</a></h2>
 <h3 id="basic-print-debugging">Basic Print Debugging<a class="headerlink" href="#basic-print-debugging" title="Permanent link">&para;</a></h3>
 <p>The simplest debugging technique is adding <code>print()</code> statements to see what your code is doing.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_grade_average(assignments, tests, final_exam):
-    &quot;&quot;&quot;Calculate student&#x27;s final grade with weighted averages.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_grade_average</span><span class="p">(</span><span class="n">assignments</span><span class="p">,</span> <span class="n">tests</span><span class="p">,</span> <span class="n">final_exam</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate student&#39;s final grade with weighted averages.&quot;&quot;&quot;</span>
 
-    # Add debug prints to trace execution
-    print(f&quot;DEBUG: Input assignments: {assignments}&quot;)
-    print(f&quot;DEBUG: Input tests: {tests}&quot;)
-    print(f&quot;DEBUG: Input final_exam: {final_exam}&quot;)
+    <span class="c1"># Add debug prints to trace execution</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Input assignments: </span><span class="si">{</span><span class="n">assignments</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Input tests: </span><span class="si">{</span><span class="n">tests</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Input final_exam: </span><span class="si">{</span><span class="n">final_exam</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Calculate assignment average (30% of grade)
-    if assignments:
-        assignment_avg = sum(assignments) / len(assignments)
-        print(f&quot;DEBUG: Assignment average: {assignment_avg}&quot;)
-    else:
-        assignment_avg = 0
-        print(&quot;DEBUG: No assignments provided&quot;)
+    <span class="c1"># Calculate assignment average (30% of grade)</span>
+    <span class="k">if</span> <span class="n">assignments</span><span class="p">:</span>
+        <span class="n">assignment_avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">assignments</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">assignments</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Assignment average: </span><span class="si">{</span><span class="n">assignment_avg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">assignment_avg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: No assignments provided&quot;</span><span class="p">)</span>
 
-    # Calculate test average (40% of grade)
-    if tests:
-        test_avg = sum(tests) / len(tests)
-        print(f&quot;DEBUG: Test average: {test_avg}&quot;)
-    else:
-        test_avg = 0
-        print(&quot;DEBUG: No tests provided&quot;)
+    <span class="c1"># Calculate test average (40% of grade)</span>
+    <span class="k">if</span> <span class="n">tests</span><span class="p">:</span>
+        <span class="n">test_avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Test average: </span><span class="si">{</span><span class="n">test_avg</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_avg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: No tests provided&quot;</span><span class="p">)</span>
 
-    # Final exam is 30% of grade
-    print(f&quot;DEBUG: Final exam score: {final_exam}&quot;)
+    <span class="c1"># Final exam is 30% of grade</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final exam score: </span><span class="si">{</span><span class="n">final_exam</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Calculate weighted final grade
-    final_grade = (assignment_avg * 0.3) + (test_avg * 0.4) + (final_exam * 0.3)
-    print(f&quot;DEBUG: Calculated final grade: {final_grade}&quot;)
+    <span class="c1"># Calculate weighted final grade</span>
+    <span class="n">final_grade</span> <span class="o">=</span> <span class="p">(</span><span class="n">assignment_avg</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">test_avg</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">final_exam</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Calculated final grade: </span><span class="si">{</span><span class="n">final_grade</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    return final_grade
+    <span class="k">return</span> <span class="n">final_grade</span>
 
-# Test the function
-assignments = [85, 90, 88]
-tests = [92, 87]
-final = 89
+<span class="c1"># Test the function</span>
+<span class="n">assignments</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
+<span class="n">tests</span> <span class="o">=</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">87</span><span class="p">]</span>
+<span class="n">final</span> <span class="o">=</span> <span class="mi">89</span>
 
-result = calculate_grade_average(assignments, tests, final)
-print(f&quot;Final result: {result}&quot;)
+<span class="n">result</span> <span class="o">=</span> <span class="n">calculate_grade_average</span><span class="p">(</span><span class="n">assignments</span><span class="p">,</span> <span class="n">tests</span><span class="p">,</span> <span class="n">final</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="strategic-print-placement">Strategic Print Placement<a class="headerlink" href="#strategic-print-placement" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def find_maximum_value(numbers):
-    &quot;&quot;&quot;Find the maximum value in a list - with debugging.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">find_maximum_value</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the maximum value in a list - with debugging.&quot;&quot;&quot;</span>
 
-    print(f&quot;DEBUG: Starting with list: {numbers}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Starting with list: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    if not numbers:
-        print(&quot;DEBUG: Empty list detected&quot;)
-        return None
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: Empty list detected&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    max_value = numbers[0]
-    print(f&quot;DEBUG: Initial max_value: {max_value}&quot;)
+    <span class="n">max_value</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Initial max_value: </span><span class="si">{</span><span class="n">max_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    for i in range(1, len(numbers)):
-        print(f&quot;DEBUG: Checking index {i}, value {numbers[i]}&quot;)
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Checking index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">, value </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if numbers[i] &gt; max_value:
-            print(f&quot;DEBUG: Found new maximum: {numbers[i]} &gt; {max_value}&quot;)
-            max_value = numbers[i]
-        else:
-            print(f&quot;DEBUG: {numbers[i]} is not greater than current max {max_value}&quot;)
+        <span class="k">if</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_value</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Found new maximum: </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">max_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">max_value</span> <span class="o">=</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is not greater than current max </span><span class="si">{</span><span class="n">max_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(f&quot;DEBUG: Final maximum: {max_value}&quot;)
-    return max_value
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final maximum: </span><span class="si">{</span><span class="n">max_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">max_value</span>
 
-# Test with debug output
-test_numbers = [3, 7, 2, 9, 1, 8]
-maximum = find_maximum_value(test_numbers)
-print(f&quot;Maximum value found: {maximum}&quot;)
+<span class="c1"># Test with debug output</span>
+<span class="n">test_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">maximum</span> <span class="o">=</span> <span class="n">find_maximum_value</span><span class="p">(</span><span class="n">test_numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum value found: </span><span class="si">{</span><span class="n">maximum</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="the-factorial-debugging-activity">The Factorial Debugging Activity<a class="headerlink" href="#the-factorial-debugging-activity" title="Permanent link">&para;</a></h2>
 <p>Let&rsquo;s work through debugging a factorial function that returns wrong results for input 0.</p>
 <h3 id="the-buggy-factorial-function">The Buggy Factorial Function<a class="headerlink" href="#the-buggy-factorial-function" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def factorial_buggy(n):
-    &quot;&quot;&quot;Calculate factorial of n - but has bugs!&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">factorial_buggy</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate factorial of n - but has bugs!&quot;&quot;&quot;</span>
 
-    result = 1
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
 
-    # Bug 1: Wrong condition for the loop
-    for i in range(n):  # Should be range(1, n + 1)
-        result = result * i
+    <span class="c1"># Bug 1: Wrong condition for the loop</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>  <span class="c1"># Should be range(1, n + 1)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">i</span>
 
-    return result
+    <span class="k">return</span> <span class="n">result</span>
 
-# Test the function
-print(&quot;Testing factorial function:&quot;)
-print(f&quot;factorial(0) = {factorial_buggy(0)} (should be 1)&quot;)
-print(f&quot;factorial(1) = {factorial_buggy(1)} (should be 1)&quot;)
-print(f&quot;factorial(5) = {factorial_buggy(5)} (should be 120)&quot;)
+<span class="c1"># Test the function</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing factorial function:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(0) = </span><span class="si">{</span><span class="n">factorial_buggy</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2"> (should be 1)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(1) = </span><span class="si">{</span><span class="n">factorial_buggy</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2"> (should be 1)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(5) = </span><span class="si">{</span><span class="n">factorial_buggy</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="si">}</span><span class="s2"> (should be 120)&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="debugging-with-print-statements">Debugging with Print Statements<a class="headerlink" href="#debugging-with-print-statements" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def factorial_debug_v1(n):
-    &quot;&quot;&quot;Debug the factorial function with print statements.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">factorial_debug_v1</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Debug the factorial function with print statements.&quot;&quot;&quot;</span>
 
-    print(f&quot;DEBUG: Called factorial_debug_v1({n})&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Called factorial_debug_v1(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
-    result = 1
-    print(f&quot;DEBUG: Initial result = {result}&quot;)
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Initial result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(f&quot;DEBUG: About to start loop with range({n})&quot;)
-    print(f&quot;DEBUG: range({n}) produces: {list(range(n))}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: About to start loop with range(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: range(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) produces: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    for i in range(n):
-        print(f&quot;DEBUG: Loop iteration - i = {i}&quot;)
-        print(f&quot;DEBUG: Before multiplication - result = {result}&quot;)
-        result = result * i
-        print(f&quot;DEBUG: After multiplication - result = {result}&quot;)
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Loop iteration - i = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Before multiplication - result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: After multiplication - result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(f&quot;DEBUG: Final result = {result}&quot;)
-    return result
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 
-# Test with debugging
-print(&quot;=== Debugging factorial function ===&quot;)
-print(f&quot;factorial_debug_v1(0) = {factorial_debug_v1(0)}&quot;)
-print(f&quot;factorial_debug_v1(3) = {factorial_debug_v1(3)}&quot;)
+<span class="c1"># Test with debugging</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Debugging factorial function ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial_debug_v1(0) = </span><span class="si">{</span><span class="n">factorial_debug_v1</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial_debug_v1(3) = </span><span class="si">{</span><span class="n">factorial_debug_v1</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="identifying-and-fixing-the-bug">Identifying and Fixing the Bug<a class="headerlink" href="#identifying-and-fixing-the-bug" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def factorial_debug_v2(n):
-    &quot;&quot;&quot;Second attempt at fixing factorial - still debugging.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">factorial_debug_v2</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Second attempt at fixing factorial - still debugging.&quot;&quot;&quot;</span>
 
-    print(f&quot;DEBUG: Called factorial_debug_v2({n})&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Called factorial_debug_v2(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
-    # Special case for 0! = 1
-    if n == 0:
-        print(&quot;DEBUG: Special case n=0, returning 1&quot;)
-        return 1
+    <span class="c1"># Special case for 0! = 1</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: Special case n=0, returning 1&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span>
 
-    result = 1
-    print(f&quot;DEBUG: Initial result = {result}&quot;)
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Initial result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Fix: Use range(1, n + 1) instead of range(n)
-    print(f&quot;DEBUG: Using range(1, {n + 1}) = {list(range(1, n + 1))}&quot;)
+    <span class="c1"># Fix: Use range(1, n + 1) instead of range(n)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Using range(1, </span><span class="si">{</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    for i in range(1, n + 1):
-        print(f&quot;DEBUG: Loop iteration - i = {i}&quot;)
-        print(f&quot;DEBUG: Before multiplication - result = {result}&quot;)
-        result = result * i
-        print(f&quot;DEBUG: After multiplication - result = {result}&quot;)
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Loop iteration - i = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Before multiplication - result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">i</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: After multiplication - result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(f&quot;DEBUG: Final result = {result}&quot;)
-    return result
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final result = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 
-# Test the fixed version
-print(&quot;\n=== Testing fixed factorial function ===&quot;)
-for test_value in [0, 1, 3, 5]:
-    result = factorial_debug_v2(test_value)
-    print(f&quot;factorial({test_value}) = {result}&quot;)
-    print()
+<span class="c1"># Test the fixed version</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Testing fixed factorial function ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">test_value</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">factorial_debug_v2</span><span class="p">(</span><span class="n">test_value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(</span><span class="si">{</span><span class="n">test_value</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="clean-final-version">Clean Final Version<a class="headerlink" href="#clean-final-version" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def factorial_clean(n):
-    &quot;&quot;&quot;Calculate factorial of n - clean final version.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">factorial_clean</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate factorial of n - clean final version.&quot;&quot;&quot;</span>
 
-    # Handle special case
-    if n == 0:
-        return 1
+    <span class="c1"># Handle special case</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
 
-    # Calculate factorial
-    result = 1
-    for i in range(1, n + 1):
-        result = result * i
+    <span class="c1"># Calculate factorial</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">*</span> <span class="n">i</span>
 
-    return result
+    <span class="k">return</span> <span class="n">result</span>
 
-# Test clean version
-print(&quot;=== Clean factorial function ===&quot;)
-test_cases = [0, 1, 3, 5, 10]
-expected = [1, 1, 6, 120, 3628800]
+<span class="c1"># Test clean version</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Clean factorial function ===&quot;</span><span class="p">)</span>
+<span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">expected</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">3628800</span><span class="p">]</span>
 
-for i, test_val in enumerate(test_cases):
-    actual = factorial_clean(test_val)
-    expected_val = expected[i]
-    status = &quot;✓ PASS&quot; if actual == expected_val else &quot;✗ FAIL&quot;
-    print(f&quot;factorial({test_val}) = {actual} (expected {expected_val}) {status}&quot;)
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">test_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_cases</span><span class="p">):</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">factorial_clean</span><span class="p">(</span><span class="n">test_val</span><span class="p">)</span>
+    <span class="n">expected_val</span> <span class="o">=</span> <span class="n">expected</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓ PASS&quot;</span> <span class="k">if</span> <span class="n">actual</span> <span class="o">==</span> <span class="n">expected_val</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;factorial(</span><span class="si">{</span><span class="n">test_val</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">actual</span><span class="si">}</span><span class="s2"> (expected </span><span class="si">{</span><span class="n">expected_val</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="ide-debugger-tools">IDE Debugger Tools<a class="headerlink" href="#ide-debugger-tools" title="Permanent link">&para;</a></h2>
@@ -2324,277 +2324,277 @@ for i, test_val in enumerate(test_cases):
 <h3 id="setting-breakpoints">Setting Breakpoints<a class="headerlink" href="#setting-breakpoints" title="Permanent link">&para;</a></h3>
 <p><strong>Breakpoints</strong> are markers that pause your program&rsquo;s execution at specific lines, allowing you to inspect the program&rsquo;s state.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_compound_interest(principal, rate, time):
-    &quot;&quot;&quot;Calculate compound interest - demonstrates breakpoint usage.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_compound_interest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">time</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate compound interest - demonstrates breakpoint usage.&quot;&quot;&quot;</span>
 
-    # Set breakpoint here to inspect initial values
-    annual_rate = rate / 100
+    <span class="c1"># Set breakpoint here to inspect initial values</span>
+    <span class="n">annual_rate</span> <span class="o">=</span> <span class="n">rate</span> <span class="o">/</span> <span class="mi">100</span>
 
-    # Set breakpoint here to check the conversion
-    amount = principal
+    <span class="c1"># Set breakpoint here to check the conversion</span>
+    <span class="n">amount</span> <span class="o">=</span> <span class="n">principal</span>
 
-    # Set breakpoint here to watch the loop
-    for year in range(time):
-        # Set breakpoint inside loop to see year-by-year changes
-        interest = amount * annual_rate
-        amount = amount + interest
+    <span class="c1"># Set breakpoint here to watch the loop</span>
+    <span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
+        <span class="c1"># Set breakpoint inside loop to see year-by-year changes</span>
+        <span class="n">interest</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">annual_rate</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">+</span> <span class="n">interest</span>
 
-        # You can inspect &#x27;year&#x27;, &#x27;interest&#x27;, and &#x27;amount&#x27; at each iteration
+        <span class="c1"># You can inspect &#39;year&#39;, &#39;interest&#39;, and &#39;amount&#39; at each iteration</span>
 
-    # Set breakpoint here to see final result
-    total_interest = amount - principal
-    return amount, total_interest
+    <span class="c1"># Set breakpoint here to see final result</span>
+    <span class="n">total_interest</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">-</span> <span class="n">principal</span>
+    <span class="k">return</span> <span class="n">amount</span><span class="p">,</span> <span class="n">total_interest</span>
 
-# When debugging, you can:
-# 1. Set breakpoints by clicking in the margin (IDE-specific)
-# 2. Run in debug mode
-# 3. Inspect variables when execution pauses
-# 4. Step through code line by line
+<span class="c1"># When debugging, you can:</span>
+<span class="c1"># 1. Set breakpoints by clicking in the margin (IDE-specific)</span>
+<span class="c1"># 2. Run in debug mode</span>
+<span class="c1"># 3. Inspect variables when execution pauses</span>
+<span class="c1"># 4. Step through code line by line</span>
 </code></pre>
 </div>
 <h3 id="single-line-stepping">Single Line Stepping<a class="headerlink" href="#single-line-stepping" title="Permanent link">&para;</a></h3>
 <p><strong>Single line stepping</strong> lets you execute your program one line at a time.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def bubble_sort_debug(arr):
-    &quot;&quot;&quot;Bubble sort with comments for stepping through.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">bubble_sort_debug</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bubble sort with comments for stepping through.&quot;&quot;&quot;</span>
 
-    n = len(arr)
-    # Step here: Check initial array length
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+    <span class="c1"># Step here: Check initial array length</span>
 
-    for i in range(n):
-        # Step here: Start of outer loop - check value of i
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="c1"># Step here: Start of outer loop - check value of i</span>
 
-        for j in range(0, n - i - 1):
-            # Step here: Start of inner loop - check values of i and j
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># Step here: Start of inner loop - check values of i and j</span>
 
-            if arr[j] &gt; arr[j + 1]:
-                # Step here: Found elements to swap - inspect arr[j] and arr[j+1]
+            <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="c1"># Step here: Found elements to swap - inspect arr[j] and arr[j+1]</span>
 
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                # Step here: After swap - see the array change
+                <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">arr</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="c1"># Step here: After swap - see the array change</span>
 
-    # Step here: Final sorted array
-    return arr
+    <span class="c1"># Step here: Final sorted array</span>
+    <span class="k">return</span> <span class="n">arr</span>
 
-# When stepping through:
-# 1. Use &quot;Step Over&quot; to execute the current line
-# 2. Use &quot;Step Into&quot; to enter function calls
-# 3. Use &quot;Step Out&quot; to exit the current function
-# 4. Watch how variables change with each step
+<span class="c1"># When stepping through:</span>
+<span class="c1"># 1. Use &quot;Step Over&quot; to execute the current line</span>
+<span class="c1"># 2. Use &quot;Step Into&quot; to enter function calls</span>
+<span class="c1"># 3. Use &quot;Step Out&quot; to exit the current function</span>
+<span class="c1"># 4. Watch how variables change with each step</span>
 </code></pre>
 </div>
 <h3 id="watches-and-variable-inspection">Watches and Variable Inspection<a class="headerlink" href="#watches-and-variable-inspection" title="Permanent link">&para;</a></h3>
 <p><strong>Watches</strong> let you monitor specific variables or expressions during debugging.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def analyze_student_grades(students_data):
-    &quot;&quot;&quot;Analyze grades - good for watching variables.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">analyze_student_grades</span><span class="p">(</span><span class="n">students_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze grades - good for watching variables.&quot;&quot;&quot;</span>
 
-    total_students = len(students_data)
-    # Watch: total_students
+    <span class="n">total_students</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">students_data</span><span class="p">)</span>
+    <span class="c1"># Watch: total_students</span>
 
-    total_score = 0
-    passing_students = 0
-    # Watch: total_score, passing_students
+    <span class="n">total_score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">passing_students</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Watch: total_score, passing_students</span>
 
-    grade_distribution = {&quot;A&quot;: 0, &quot;B&quot;: 0, &quot;C&quot;: 0, &quot;D&quot;: 0, &quot;F&quot;: 0}
-    # Watch: grade_distribution (expand to see all values)
+    <span class="n">grade_distribution</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="c1"># Watch: grade_distribution (expand to see all values)</span>
 
-    for student in students_data:
-        score = student[&quot;score&quot;]
-        total_score += score
-        # Watch: score, total_score (see running total)
+    <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">students_data</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span>
+        <span class="n">total_score</span> <span class="o">+=</span> <span class="n">score</span>
+        <span class="c1"># Watch: score, total_score (see running total)</span>
 
-        if score &gt;= 60:
-            passing_students += 1
-        # Watch: passing_students (see count increase)
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="n">passing_students</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Watch: passing_students (see count increase)</span>
 
-        # Determine letter grade
-        if score &gt;= 90:
-            letter_grade = &quot;A&quot;
-        elif score &gt;= 80:
-            letter_grade = &quot;B&quot;
-        elif score &gt;= 70:
-            letter_grade = &quot;C&quot;
-        elif score &gt;= 60:
-            letter_grade = &quot;D&quot;
-        else:
-            letter_grade = &quot;F&quot;
+        <span class="c1"># Determine letter grade</span>
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;F&quot;</span>
 
-        grade_distribution[letter_grade] += 1
-        # Watch: letter_grade, grade_distribution[letter_grade]
+        <span class="n">grade_distribution</span><span class="p">[</span><span class="n">letter_grade</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Watch: letter_grade, grade_distribution[letter_grade]</span>
 
-    average_score = total_score / total_students
-    passing_rate = (passing_students / total_students) * 100
-    # Watch: average_score, passing_rate
+    <span class="n">average_score</span> <span class="o">=</span> <span class="n">total_score</span> <span class="o">/</span> <span class="n">total_students</span>
+    <span class="n">passing_rate</span> <span class="o">=</span> <span class="p">(</span><span class="n">passing_students</span> <span class="o">/</span> <span class="n">total_students</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="c1"># Watch: average_score, passing_rate</span>
 
-    return {
-        &quot;average&quot;: average_score,
-        &quot;passing_rate&quot;: passing_rate,
-        &quot;distribution&quot;: grade_distribution
-    }
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="n">average_score</span><span class="p">,</span>
+        <span class="s2">&quot;passing_rate&quot;</span><span class="p">:</span> <span class="n">passing_rate</span><span class="p">,</span>
+        <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="n">grade_distribution</span>
+    <span class="p">}</span>
 
-# Sample data for testing
-sample_students = [
-    {&quot;name&quot;: &quot;Alice&quot;, &quot;score&quot;: 92},
-    {&quot;name&quot;: &quot;Bob&quot;, &quot;score&quot;: 87},
-    {&quot;name&quot;: &quot;Charlie&quot;, &quot;score&quot;: 76},
-    {&quot;name&quot;: &quot;Diana&quot;, &quot;score&quot;: 95},
-    {&quot;name&quot;: &quot;Eve&quot;, &quot;score&quot;: 58}
-]
+<span class="c1"># Sample data for testing</span>
+<span class="n">sample_students</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">92</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">87</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">76</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Diana&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">95</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Eve&quot;</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">58</span><span class="p">}</span>
+<span class="p">]</span>
 
-results = analyze_student_grades(sample_students)
-print(&quot;Grade analysis results:&quot;, results)
+<span class="n">results</span> <span class="o">=</span> <span class="n">analyze_student_grades</span><span class="p">(</span><span class="n">sample_students</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grade analysis results:&quot;</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="debugging-function-interfaces">Debugging Function Interfaces<a class="headerlink" href="#debugging-function-interfaces" title="Permanent link">&para;</a></h2>
 <p>Understanding how functions interact is crucial for debugging larger programs.</p>
 <h3 id="debugging-function-parameters">Debugging Function Parameters<a class="headerlink" href="#debugging-function-parameters" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_shipping_cost(weight, distance, shipping_type):
-    &quot;&quot;&quot;Calculate shipping cost - debug parameter passing.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">shipping_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate shipping cost - debug parameter passing.&quot;&quot;&quot;</span>
 
-    print(f&quot;DEBUG: Function called with:&quot;)
-    print(f&quot;  weight: {weight} (type: {type(weight)})&quot;)
-    print(f&quot;  distance: {distance} (type: {type(distance)})&quot;)
-    print(f&quot;  shipping_type: {shipping_type} (type: {type(shipping_type)})&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Function called with:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  weight: </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  distance: </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  shipping_type: </span><span class="si">{</span><span class="n">shipping_type</span><span class="si">}</span><span class="s2"> (type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">shipping_type</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
-    # Validate parameters
-    if weight &lt;= 0:
-        print(f&quot;DEBUG: Invalid weight: {weight}&quot;)
-        return None
+    <span class="c1"># Validate parameters</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Invalid weight: </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    if distance &lt;= 0:
-        print(f&quot;DEBUG: Invalid distance: {distance}&quot;)
-        return None
+    <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Invalid distance: </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    # Base rates
-    base_rates = {
-        &quot;standard&quot;: 0.50,
-        &quot;express&quot;: 1.00,
-        &quot;overnight&quot;: 2.00
-    }
+    <span class="c1"># Base rates</span>
+    <span class="n">base_rates</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;standard&quot;</span><span class="p">:</span> <span class="mf">0.50</span><span class="p">,</span>
+        <span class="s2">&quot;express&quot;</span><span class="p">:</span> <span class="mf">1.00</span><span class="p">,</span>
+        <span class="s2">&quot;overnight&quot;</span><span class="p">:</span> <span class="mf">2.00</span>
+    <span class="p">}</span>
 
-    if shipping_type not in base_rates:
-        print(f&quot;DEBUG: Invalid shipping type: {shipping_type}&quot;)
-        print(f&quot;DEBUG: Available types: {list(base_rates.keys())}&quot;)
-        return None
+    <span class="k">if</span> <span class="n">shipping_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">base_rates</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Invalid shipping type: </span><span class="si">{</span><span class="n">shipping_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Available types: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">base_rates</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    rate = base_rates[shipping_type]
-    print(f&quot;DEBUG: Base rate for {shipping_type}: ${rate}&quot;)
+    <span class="n">rate</span> <span class="o">=</span> <span class="n">base_rates</span><span class="p">[</span><span class="n">shipping_type</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Base rate for </span><span class="si">{</span><span class="n">shipping_type</span><span class="si">}</span><span class="s2">: $</span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Calculate cost
-    cost = weight * distance * rate
-    print(f&quot;DEBUG: Calculation: {weight} * {distance} * {rate} = {cost}&quot;)
+    <span class="c1"># Calculate cost</span>
+    <span class="n">cost</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">distance</span> <span class="o">*</span> <span class="n">rate</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Calculation: </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2"> * </span><span class="si">{</span><span class="n">distance</span><span class="si">}</span><span class="s2"> * </span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Apply minimum charge
-    minimum_charge = 5.00
-    if cost &lt; minimum_charge:
-        print(f&quot;DEBUG: Cost {cost} below minimum {minimum_charge}, adjusting&quot;)
-        cost = minimum_charge
+    <span class="c1"># Apply minimum charge</span>
+    <span class="n">minimum_charge</span> <span class="o">=</span> <span class="mf">5.00</span>
+    <span class="k">if</span> <span class="n">cost</span> <span class="o">&lt;</span> <span class="n">minimum_charge</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Cost </span><span class="si">{</span><span class="n">cost</span><span class="si">}</span><span class="s2"> below minimum </span><span class="si">{</span><span class="n">minimum_charge</span><span class="si">}</span><span class="s2">, adjusting&quot;</span><span class="p">)</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="n">minimum_charge</span>
 
-    print(f&quot;DEBUG: Final cost: ${cost}&quot;)
-    return cost
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final cost: $</span><span class="si">{</span><span class="n">cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cost</span>
 
-# Test with different parameter types
-print(&quot;=== Testing shipping cost function ===&quot;)
+<span class="c1"># Test with different parameter types</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing shipping cost function ===&quot;</span><span class="p">)</span>
 
-# Test 1: Normal case
-cost1 = calculate_shipping_cost(2.5, 100, &quot;standard&quot;)
-print(f&quot;Result 1: ${cost1}\n&quot;)
+<span class="c1"># Test 1: Normal case</span>
+<span class="n">cost1</span> <span class="o">=</span> <span class="n">calculate_shipping_cost</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result 1: $</span><span class="si">{</span><span class="n">cost1</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Test 2: Invalid weight
-cost2 = calculate_shipping_cost(-1, 100, &quot;standard&quot;)
-print(f&quot;Result 2: {cost2}\n&quot;)
+<span class="c1"># Test 2: Invalid weight</span>
+<span class="n">cost2</span> <span class="o">=</span> <span class="n">calculate_shipping_cost</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result 2: </span><span class="si">{</span><span class="n">cost2</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Test 3: Invalid shipping type
-cost3 = calculate_shipping_cost(2.5, 100, &quot;super_fast&quot;)
-print(f&quot;Result 3: {cost3}\n&quot;)
+<span class="c1"># Test 3: Invalid shipping type</span>
+<span class="n">cost3</span> <span class="o">=</span> <span class="n">calculate_shipping_cost</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;super_fast&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result 3: </span><span class="si">{</span><span class="n">cost3</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="debugging-return-values">Debugging Return Values<a class="headerlink" href="#debugging-return-values" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def process_student_record(student_data):
-    &quot;&quot;&quot;Process student record - debug return values.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">process_student_record</span><span class="p">(</span><span class="n">student_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process student record - debug return values.&quot;&quot;&quot;</span>
 
-    print(f&quot;DEBUG: Processing student: {student_data}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Processing student: </span><span class="si">{</span><span class="n">student_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Extract data
-    name = student_data.get(&quot;name&quot;, &quot;Unknown&quot;)
-    scores = student_data.get(&quot;scores&quot;, [])
+    <span class="c1"># Extract data</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">student_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scores&quot;</span><span class="p">,</span> <span class="p">[])</span>
 
-    print(f&quot;DEBUG: Extracted name: &#x27;{name}&#x27;&quot;)
-    print(f&quot;DEBUG: Extracted scores: {scores}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Extracted name: &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Extracted scores: </span><span class="si">{</span><span class="n">scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Validate scores
-    if not scores:
-        print(&quot;DEBUG: No scores provided, returning None&quot;)
-        return None
+    <span class="c1"># Validate scores</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">scores</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: No scores provided, returning None&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    # Calculate average
-    total = sum(scores)
-    count = len(scores)
-    average = total / count
+    <span class="c1"># Calculate average</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span>
 
-    print(f&quot;DEBUG: Total: {total}, Count: {count}, Average: {average}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Total: </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">, Count: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">, Average: </span><span class="si">{</span><span class="n">average</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Determine grade
-    if average &gt;= 90:
-        letter_grade = &quot;A&quot;
-    elif average &gt;= 80:
-        letter_grade = &quot;B&quot;
-    elif average &gt;= 70:
-        letter_grade = &quot;C&quot;
-    elif average &gt;= 60:
-        letter_grade = &quot;D&quot;
-    else:
-        letter_grade = &quot;F&quot;
+    <span class="c1"># Determine grade</span>
+    <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;A&quot;</span>
+    <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;B&quot;</span>
+    <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+        <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
+    <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;D&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">letter_grade</span> <span class="o">=</span> <span class="s2">&quot;F&quot;</span>
 
-    print(f&quot;DEBUG: Assigned letter grade: {letter_grade}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Assigned letter grade: </span><span class="si">{</span><span class="n">letter_grade</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Create result
-    result = {
-        &quot;name&quot;: name,
-        &quot;average&quot;: round(average, 2),
-        &quot;letter_grade&quot;: letter_grade,
-        &quot;scores&quot;: scores
-    }
+    <span class="c1"># Create result</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">average</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">&quot;letter_grade&quot;</span><span class="p">:</span> <span class="n">letter_grade</span><span class="p">,</span>
+        <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="n">scores</span>
+    <span class="p">}</span>
 
-    print(f&quot;DEBUG: Returning result: {result}&quot;)
-    return result
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Returning result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
 
-def process_class_records(class_data):
-    &quot;&quot;&quot;Process multiple student records - debug function interactions.&quot;&quot;&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">process_class_records</span><span class="p">(</span><span class="n">class_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process multiple student records - debug function interactions.&quot;&quot;&quot;</span>
 
-    print(f&quot;DEBUG: Processing {len(class_data)} students&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">class_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> students&quot;</span><span class="p">)</span>
 
-    results = []
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 
-    for i, student in enumerate(class_data):
-        print(f&quot;\nDEBUG: Processing student {i + 1}:&quot;)
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">student</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">class_data</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DEBUG: Processing student </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
 
-        # Call helper function
-        processed = process_student_record(student)
+        <span class="c1"># Call helper function</span>
+        <span class="n">processed</span> <span class="o">=</span> <span class="n">process_student_record</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 
-        if processed:
-            results.append(processed)
-            print(f&quot;DEBUG: Added to results: {processed[&#x27;name&#x27;]}&quot;)
-        else:
-            print(f&quot;DEBUG: Skipped invalid student record&quot;)
+        <span class="k">if</span> <span class="n">processed</span><span class="p">:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Added to results: </span><span class="si">{</span><span class="n">processed</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Skipped invalid student record&quot;</span><span class="p">)</span>
 
-    print(f&quot;\nDEBUG: Final results count: {len(results)}&quot;)
-    return results
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DEBUG: Final results count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
 
-# Test data
-test_class = [
-    {&quot;name&quot;: &quot;Alice&quot;, &quot;scores&quot;: [92, 88, 95]},
-    {&quot;name&quot;: &quot;Bob&quot;, &quot;scores&quot;: [87, 91, 84]},
-    {&quot;name&quot;: &quot;Charlie&quot;, &quot;scores&quot;: []},  # Invalid - no scores
-    {&quot;name&quot;: &quot;Diana&quot;, &quot;scores&quot;: [95, 93, 97]}
-]
+<span class="c1"># Test data</span>
+<span class="n">test_class</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">95</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">87</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">84</span><span class="p">]},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[]},</span>  <span class="c1"># Invalid - no scores</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Diana&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">93</span><span class="p">,</span> <span class="mi">97</span><span class="p">]}</span>
+<span class="p">]</span>
 
-# Process with debugging
-class_results = process_class_records(test_class)
-print(f&quot;\nFinal output: {len(class_results)} valid student records processed&quot;)
+<span class="c1"># Process with debugging</span>
+<span class="n">class_results</span> <span class="o">=</span> <span class="n">process_class_records</span><span class="p">(</span><span class="n">test_class</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Final output: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">class_results</span><span class="p">)</span><span class="si">}</span><span class="s2"> valid student records processed&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="advanced-debugging-techniques">Advanced Debugging Techniques<a class="headerlink" href="#advanced-debugging-techniques" title="Permanent link">&para;</a></h2>
@@ -2644,135 +2644,135 @@ print(f&quot;\nFinal output: {len(class_results)} valid student records processe
 </span></code></pre></div>
 <h3 id="debugging-with-try-except-blocks">Debugging with Try-Except Blocks<a class="headerlink" href="#debugging-with-try-except-blocks" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def robust_division_calculator():
-    &quot;&quot;&quot;Calculator that handles and debugs errors gracefully.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">robust_division_calculator</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculator that handles and debugs errors gracefully.&quot;&quot;&quot;</span>
 
-    while True:
-        print(&quot;\n=== Division Calculator ===&quot;)
-        print(&quot;Enter &#x27;quit&#x27; to exit&quot;)
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Division Calculator ===&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;quit&#39; to exit&quot;</span><span class="p">)</span>
 
-        try:
-            # Get first number
-            num1_input = input(&quot;Enter first number: &quot;)
-            if num1_input.lower() == &#x27;quit&#x27;:
-                break
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Get first number</span>
+            <span class="n">num1_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter first number: &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">num1_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
+                <span class="k">break</span>
 
-            num1 = float(num1_input)
-            print(f&quot;DEBUG: First number parsed: {num1}&quot;)
+            <span class="n">num1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num1_input</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: First number parsed: </span><span class="si">{</span><span class="n">num1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Get second number
-            num2_input = input(&quot;Enter second number: &quot;)
-            if num2_input.lower() == &#x27;quit&#x27;:
-                break
+            <span class="c1"># Get second number</span>
+            <span class="n">num2_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter second number: &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">num2_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;quit&#39;</span><span class="p">:</span>
+                <span class="k">break</span>
 
-            num2 = float(num2_input)
-            print(f&quot;DEBUG: Second number parsed: {num2}&quot;)
+            <span class="n">num2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">num2_input</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Second number parsed: </span><span class="si">{</span><span class="n">num2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Check for division by zero
-            if num2 == 0:
-                print(&quot;DEBUG: Division by zero detected&quot;)
-                print(&quot;Error: Cannot divide by zero!&quot;)
-                continue
+            <span class="c1"># Check for division by zero</span>
+            <span class="k">if</span> <span class="n">num2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: Division by zero detected&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Cannot divide by zero!&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
 
-            # Perform division
-            result = num1 / num2
-            print(f&quot;DEBUG: Calculation: {num1} / {num2} = {result}&quot;)
-            print(f&quot;Result: {result}&quot;)
+            <span class="c1"># Perform division</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">/</span> <span class="n">num2</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Calculation: </span><span class="si">{</span><span class="n">num1</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">num2</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        except ValueError as e:
-            print(f&quot;DEBUG: ValueError caught: {e}&quot;)
-            print(&quot;Error: Please enter valid numbers!&quot;)
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: ValueError caught: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Please enter valid numbers!&quot;</span><span class="p">)</span>
 
-        except KeyboardInterrupt:
-            print(f&quot;\nDEBUG: KeyboardInterrupt caught&quot;)
-            print(&quot;Exiting calculator...&quot;)
-            break
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DEBUG: KeyboardInterrupt caught&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exiting calculator...&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
 
-        except Exception as e:
-            print(f&quot;DEBUG: Unexpected error: {type(e).__name__}: {e}&quot;)
-            print(&quot;An unexpected error occurred!&quot;)
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Unexpected error: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;An unexpected error occurred!&quot;</span><span class="p">)</span>
 
-# Run the robust calculator
-# robust_division_calculator()  # Uncomment to test
+<span class="c1"># Run the robust calculator</span>
+<span class="c1"># robust_division_calculator()  # Uncomment to test</span>
 </code></pre>
 </div>
 <h2 id="debugging-best-practices">Debugging Best Practices<a class="headerlink" href="#debugging-best-practices" title="Permanent link">&para;</a></h2>
 <h3 id="1-systematic-debugging-approach">1. Systematic Debugging Approach<a class="headerlink" href="#1-systematic-debugging-approach" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def debug_systematically():
-    &quot;&quot;&quot;Demonstrate systematic debugging approach.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">debug_systematically</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate systematic debugging approach.&quot;&quot;&quot;</span>
 
-    print(&quot;=== Systematic Debugging Steps ===&quot;)
-    print(&quot;1. Reproduce the bug consistently&quot;)
-    print(&quot;2. Isolate the problem area&quot;)
-    print(&quot;3. Form a hypothesis about the cause&quot;)
-    print(&quot;4. Test the hypothesis&quot;)
-    print(&quot;5. Fix the bug&quot;)
-    print(&quot;6. Test that the fix works&quot;)
-    print(&quot;7. Make sure you didn&#x27;t break anything else&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Systematic Debugging Steps ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Reproduce the bug consistently&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Isolate the problem area&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Form a hypothesis about the cause&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Test the hypothesis&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. Fix the bug&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;6. Test that the fix works&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;7. Make sure you didn&#39;t break anything else&quot;</span><span class="p">)</span>
 
-def buggy_average_calculator(numbers):
-    &quot;&quot;&quot;Function with intentional bug for demonstration.&quot;&quot;&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">buggy_average_calculator</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function with intentional bug for demonstration.&quot;&quot;&quot;</span>
 
-    # Step 1: Reproduce the bug
-    print(f&quot;Input: {numbers}&quot;)
+    <span class="c1"># Step 1: Reproduce the bug</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input: </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Step 2: Isolate - the bug is in this function
-    total = 0
-    count = 0
+    <span class="c1"># Step 2: Isolate - the bug is in this function</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 
-    for num in numbers:
-        total += num
-        count += 1
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">num</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    # Step 3: Hypothesis - maybe division by zero?
-    # Step 4: Test with debugging
-    print(f&quot;DEBUG: total = {total}, count = {count}&quot;)
+    <span class="c1"># Step 3: Hypothesis - maybe division by zero?</span>
+    <span class="c1"># Step 4: Test with debugging</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: total = </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">, count = </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    if count &gt; 0:
-        average = total / count
-        print(f&quot;DEBUG: average = {average}&quot;)
-        return average
-    else:
-        print(&quot;DEBUG: count is 0, returning 0&quot;)
-        return 0  # Step 5: This might be wrong - should it be None?
+    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="n">count</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: average = </span><span class="si">{</span><span class="n">average</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">average</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: count is 0, returning 0&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span>  <span class="c1"># Step 5: This might be wrong - should it be None?</span>
 
-# Step 6: Test the fix
-test_cases = [
-    [1, 2, 3, 4, 5],  # Normal case
-    [],               # Empty list
-    [10],             # Single element
-    [-1, 0, 1]        # Mix of negative, zero, positive
-]
+<span class="c1"># Step 6: Test the fix</span>
+<span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>  <span class="c1"># Normal case</span>
+    <span class="p">[],</span>               <span class="c1"># Empty list</span>
+    <span class="p">[</span><span class="mi">10</span><span class="p">],</span>             <span class="c1"># Single element</span>
+    <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>        <span class="c1"># Mix of negative, zero, positive</span>
+<span class="p">]</span>
 
-for test in test_cases:
-    result = buggy_average_calculator(test)
-    print(f&quot;Average of {test}: {result}\n&quot;)
+<span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">buggy_average_calculator</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average of </span><span class="si">{</span><span class="n">test</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="2-debugging-checklist">2. Debugging Checklist<a class="headerlink" href="#2-debugging-checklist" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def debugging_checklist():
-    &quot;&quot;&quot;Checklist for effective debugging.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">debugging_checklist</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checklist for effective debugging.&quot;&quot;&quot;</span>
 
-    checklist = [
-        &quot;✓ Can you reproduce the bug consistently?&quot;,
-        &quot;✓ Do you understand what the code is supposed to do?&quot;,
-        &quot;✓ Have you checked for common errors (typos, off-by-one, etc.)?&quot;,
-        &quot;✓ Have you tested with different inputs?&quot;,
-        &quot;✓ Are you using appropriate debugging tools?&quot;,
-        &quot;✓ Have you traced through the code step by step?&quot;,
-        &quot;✓ Are you making assumptions that might be wrong?&quot;,
-        &quot;✓ Have you asked someone else to look at it?&quot;,
-        &quot;✓ Did you test your fix thoroughly?&quot;,
-        &quot;✓ Did you document what caused the bug?&quot;
-    ]
+    <span class="n">checklist</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;✓ Can you reproduce the bug consistently?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Do you understand what the code is supposed to do?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Have you checked for common errors (typos, off-by-one, etc.)?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Have you tested with different inputs?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Are you using appropriate debugging tools?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Have you traced through the code step by step?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Are you making assumptions that might be wrong?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Have you asked someone else to look at it?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Did you test your fix thoroughly?&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;✓ Did you document what caused the bug?&quot;</span>
+    <span class="p">]</span>
 
-    print(&quot;=== Debugging Checklist ===&quot;)
-    for item in checklist:
-        print(item)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Debugging Checklist ===&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">checklist</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-debugging_checklist()
+<span class="n">debugging_checklist</span><span class="p">()</span>
 </code></pre>
 </div>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
@@ -3056,6 +3056,8 @@ debugging_checklist()
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

@@ -1496,40 +1496,40 @@
 <p><strong>Reach limitations</strong> require careful placement of controls and interfaces. The standard reach envelope for wheelchair users differs significantly from standing users. Controls should be positioned between 380mm and 1220mm from the floor, with the optimal range being 600mm to 1000mm.</p>
 <p><strong>Force limitations</strong> affect the maximum pressure users can apply to buttons, levers, or touch interfaces. Many users cannot apply more than 5 pounds (22 Newtons) of force. Some users may have tremors or involuntary movements that require larger target areas and stable activation methods.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Force-sensitive control with accessibility considerations
-class AccessibleControl:
-    def __init__(self, max_force_newtons=22):
-        self.max_required_force = max_force_newtons
-        self.activation_threshold = max_force_newtons * 0.3  # 30% of max
-        self.hold_time_required = 0.5  # seconds to prevent accidental activation
-        self.last_activation = 0
+<pre><code class="language-python"><span class="c1"># Example: Force-sensitive control with accessibility considerations</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AccessibleControl</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_force_newtons</span><span class="o">=</span><span class="mi">22</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_required_force</span> <span class="o">=</span> <span class="n">max_force_newtons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation_threshold</span> <span class="o">=</span> <span class="n">max_force_newtons</span> <span class="o">*</span> <span class="mf">0.3</span>  <span class="c1"># 30% of max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hold_time_required</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># seconds to prevent accidental activation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_activation</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def check_activation(self, applied_force, current_time):
-        &quot;&quot;&quot;Check if control should activate based on force and timing.&quot;&quot;&quot;
-        if applied_force &gt;= self.activation_threshold:
-            if current_time - self.last_activation &gt;= self.hold_time_required:
-                self.last_activation = current_time
-                return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_activation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">applied_force</span><span class="p">,</span> <span class="n">current_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if control should activate based on force and timing.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">applied_force</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation_threshold</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_activation</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hold_time_required</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_activation</span> <span class="o">=</span> <span class="n">current_time</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def set_sensitivity(self, user_preference):
-        &quot;&quot;&quot;Allow users to adjust activation threshold.&quot;&quot;&quot;
-        # Range from 10% to 50% of maximum force
-        sensitivity = max(0.1, min(0.5, user_preference))
-        self.activation_threshold = self.max_required_force * sensitivity
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_preference</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Allow users to adjust activation threshold.&quot;&quot;&quot;</span>
+        <span class="c1"># Range from 10% to 50% of maximum force</span>
+        <span class="n">sensitivity</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">user_preference</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation_threshold</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_required_force</span> <span class="o">*</span> <span class="n">sensitivity</span>
 
-# Example usage
-control = AccessibleControl()
-control.set_sensitivity(0.2)  # User prefers lighter touch
+<span class="c1"># Example usage</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">AccessibleControl</span><span class="p">()</span>
+<span class="n">control</span><span class="o">.</span><span class="n">set_sensitivity</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># User prefers lighter touch</span>
 
-# Simulate control activation
-import time
-current_time = time.time()
-light_pressure = 5  # Newtons
-heavy_pressure = 15  # Newtons
+<span class="c1"># Simulate control activation</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">light_pressure</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Newtons</span>
+<span class="n">heavy_pressure</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># Newtons</span>
 
-print(f&quot;Light pressure activates: {control.check_activation(light_pressure, current_time)}&quot;)
-print(f&quot;Heavy pressure activates: {control.check_activation(heavy_pressure, current_time)}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Light pressure activates: </span><span class="si">{</span><span class="n">control</span><span class="o">.</span><span class="n">check_activation</span><span class="p">(</span><span class="n">light_pressure</span><span class="p">,</span><span class="w"> </span><span class="n">current_time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Heavy pressure activates: </span><span class="si">{</span><span class="n">control</span><span class="o">.</span><span class="n">check_activation</span><span class="p">(</span><span class="n">heavy_pressure</span><span class="p">,</span><span class="w"> </span><span class="n">current_time</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="alternative-interface-methods">Alternative interface methods<a class="headerlink" href="#alternative-interface-methods" title="Permanent link">&para;</a></h3>
@@ -1538,49 +1538,49 @@ print(f&quot;Heavy pressure activates: {control.check_activation(heavy_pressure,
 <p><strong>Voice control</strong> provides hands-free operation but requires robust speech recognition that works with varied speech patterns, including those affected by conditions like cerebral palsy or stroke.</p>
 <p><strong>Eye tracking</strong> enables control through gaze direction, useful for users with severe mobility limitations.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Multi-modal input system
-class MultiModalInput:
-    def __init__(self):
-        self.input_methods = {
-            &#x27;switch&#x27;: False,
-            &#x27;voice&#x27;: False, 
-            &#x27;touch&#x27;: False,
-            &#x27;eye_track&#x27;: False
-        }
-        self.command_history = []
+<pre><code class="language-python"><span class="c1"># Example: Multi-modal input system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiModalInput</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_methods</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;switch&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;voice&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> 
+            <span class="s1">&#39;touch&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;eye_track&#39;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">command_history</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def register_switch_input(self, switch_id, state):
-        &quot;&quot;&quot;Handle switch-based input (head switch, sip-puff, etc.)&quot;&quot;&quot;
-        if state and switch_id == 1:  # Primary action switch
-            self.add_command(&#x27;PRIMARY_ACTION&#x27;)
-        elif state and switch_id == 2:  # Navigation switch
-            self.add_command(&#x27;NAVIGATE&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_switch_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">switch_id</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle switch-based input (head switch, sip-puff, etc.)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">and</span> <span class="n">switch_id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Primary action switch</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="s1">&#39;PRIMARY_ACTION&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">state</span> <span class="ow">and</span> <span class="n">switch_id</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># Navigation switch</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="s1">&#39;NAVIGATE&#39;</span><span class="p">)</span>
 
-    def register_voice_command(self, command_text, confidence):
-        &quot;&quot;&quot;Handle voice input with confidence filtering&quot;&quot;&quot;
-        if confidence &gt; 0.7:  # Only accept high-confidence recognition
-            command = command_text.upper().replace(&#x27; &#x27;, &#x27;_&#x27;)
-            self.add_command(f&#x27;VOICE_{command}&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_voice_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_text</span><span class="p">,</span> <span class="n">confidence</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle voice input with confidence filtering&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">confidence</span> <span class="o">&gt;</span> <span class="mf">0.7</span><span class="p">:</span>  <span class="c1"># Only accept high-confidence recognition</span>
+            <span class="n">command</span> <span class="o">=</span> <span class="n">command_text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;VOICE_</span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    def register_eye_gaze(self, x_position, y_position, dwell_time):
-        &quot;&quot;&quot;Handle eye tracking input&quot;&quot;&quot;
-        if dwell_time &gt; 1.0:  # Require 1 second dwell for activation
-            self.add_command(f&#x27;GAZE_{x_position}_{y_position}&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_eye_gaze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x_position</span><span class="p">,</span> <span class="n">y_position</span><span class="p">,</span> <span class="n">dwell_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle eye tracking input&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">dwell_time</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>  <span class="c1"># Require 1 second dwell for activation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GAZE_</span><span class="si">{</span><span class="n">x_position</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">y_position</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    def add_command(self, command):
-        &quot;&quot;&quot;Add command to history and process&quot;&quot;&quot;
-        self.command_history.append(command)
-        print(f&quot;Command received: {command}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add command to history and process&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">command_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command received: </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Example usage
-input_system = MultiModalInput()
+<span class="c1"># Example usage</span>
+<span class="n">input_system</span> <span class="o">=</span> <span class="n">MultiModalInput</span><span class="p">()</span>
 
-# Simulate different input methods
-input_system.register_switch_input(1, True)  # Head switch activated
-input_system.register_voice_command(&quot;move forward&quot;, 0.85)  # High confidence
-input_system.register_eye_gaze(320, 240, 1.2)  # Gaze at center for 1.2 seconds
+<span class="c1"># Simulate different input methods</span>
+<span class="n">input_system</span><span class="o">.</span><span class="n">register_switch_input</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>  <span class="c1"># Head switch activated</span>
+<span class="n">input_system</span><span class="o">.</span><span class="n">register_voice_command</span><span class="p">(</span><span class="s2">&quot;move forward&quot;</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">)</span>  <span class="c1"># High confidence</span>
+<span class="n">input_system</span><span class="o">.</span><span class="n">register_eye_gaze</span><span class="p">(</span><span class="mi">320</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>  <span class="c1"># Gaze at center for 1.2 seconds</span>
 
-print(f&quot;Command history: {input_system.command_history}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Command history: </span><span class="si">{</span><span class="n">input_system</span><span class="o">.</span><span class="n">command_history</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
@@ -1605,94 +1605,94 @@ print(f&quot;Command history: {input_system.command_history}&quot;)
 </ul>
 <div class="diagram-container" data-container-id="kroki-diagram-1"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-1')">🔍 View Larger</button><div id="kroki-diagram-1" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS" height="427px" preserveAspectRatio="xMaxYMax meet" style="width:443px;height:427px;background:#FFFFFF;" version="1.1" viewBox="0 0 443 427" width="443px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-1"><defs /><g><g class="entity" data-entity="AccessibleRobotController" data-source-line="5" data-uid="ent0002" id="entity_AccessibleRobotController"><rect fill="#FFFFFF" height="206.9688" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="218.0449" x="126.22" y="12" /><ellipse cx="142.0035" cy="26" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M145.4097,27.9688 C144.691,28.6406 143.3941,29.8125 141.6441,29.8125 C139.4254,29.8125 138.4566,27.875 138.4566,25.9219 C138.4566,23.5313 139.941,22.2656 141.5816,22.2656 C143.5972,22.2656 143.816,23.7813 143.9879,24.875 L145.4097,24.6875 C145.316,24.1094 145.2379,23.5313 145.2379,22.5625 C145.2379,21.8906 145.2847,21.3438 145.316,20.9219 L143.9097,20.9219 L143.8004,21.875 C143.2066,21.3438 142.566,20.7969 141.3472,20.7969 C139.3004,20.7969 136.8941,22.625 136.8941,25.9375 C136.8941,28.875 138.6597,31.2656 141.6597,31.2656 C144.0972,31.2656 145.8004,29.6406 146.3941,29.0625 L145.4097,27.9688 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="183.8594" x="154.6221" y="30.8467">AccessibleRobotController</text><line style="stroke:#000000;stroke-width:1;" x1="127.22" x2="343.2649" y1="40" y2="40" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="134.22" y="50.6484" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="194.0449" x="144.22" y="56.9951">height_adjustable_interface</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="134.22" y="66.9453" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="178.6709" x="144.22" y="73.292">force_adjustable_controls</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="134.22" y="83.2422" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="123.1494" x="144.22" y="89.5889">voice_recognition</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="134.22" y="99.5391" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="110.1064" x="144.22" y="105.8857">audio_feedback</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="134.22" y="115.8359" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="181.1182" x="144.22" y="122.1826">emergency_stop_systems</text><line style="stroke:#000000;stroke-width:1;" x1="127.22" x2="343.2649" y1="129.4844" y2="129.4844" /><ellipse cx="137.22" cy="143.1328" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="175" x="144.22" y="146.4795">adjust_interface_height()</text><ellipse cx="137.22" cy="159.4297" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="153.1729" x="144.22" y="162.7764">set_force_sensitivity()</text><ellipse cx="137.22" cy="175.7266" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="158.2656" x="144.22" y="179.0732">enable_voice_control()</text><ellipse cx="137.22" cy="192.0234" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="159.6191" x="144.22" y="195.3701">provide_audio_status()</text><ellipse cx="137.22" cy="208.3203" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="181.4121" x="144.22" y="211.667">trigger_emergency_stop()</text></g><g class="entity" data-entity="SafetyMonitor" data-source-line="18" data-uid="ent0003" id="entity_SafetyMonitor"><rect fill="#FFFFFF" height="141.7813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="216.4863" x="12" y="278.97" /><ellipse cx="67.4932" cy="292.97" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M70.8994,294.9388 C70.1807,295.6106 68.8838,296.7825 67.1338,296.7825 C64.915,296.7825 63.9463,294.845 63.9463,292.8919 C63.9463,290.5013 65.4307,289.2356 67.0713,289.2356 C69.0869,289.2356 69.3057,290.7513 69.4775,291.845 L70.8994,291.6575 C70.8057,291.0794 70.7275,290.5013 70.7275,289.5325 C70.7275,288.8606 70.7744,288.3138 70.8057,287.8919 L69.3994,287.8919 L69.29,288.845 C68.6963,288.3138 68.0557,287.7669 66.8369,287.7669 C64.79,287.7669 62.3838,289.595 62.3838,292.9075 C62.3838,295.845 64.1494,298.2356 67.1494,298.2356 C69.5869,298.2356 71.29,296.6106 71.8838,296.0325 L70.8994,294.9388 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="98" x="84.9932" y="297.8167">SafetyMonitor</text><line style="stroke:#000000;stroke-width:1;" x1="13" x2="227.4863" y1="306.97" y2="306.97" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="20" y="317.6184" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="80.6504" x="30" y="323.9651">force_limits</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="20" y="333.9153" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="134.2373" x="30" y="340.262">motion_boundaries</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="20" y="350.2122" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="117.3867" x="30" y="356.5589">timeout_settings</text><line style="stroke:#000000;stroke-width:1;" x1="13" x2="227.4863" y1="363.8606" y2="363.8606" /><ellipse cx="23" cy="377.5091" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="192.4863" x="30" y="380.8557">monitor_force_application()</text><ellipse cx="23" cy="393.8059" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="153.0225" x="30" y="397.1526">check_motion_limits()</text><ellipse cx="23" cy="410.1028" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="127.4902" x="30" y="413.4495">handle_timeouts()</text></g><g class="entity" data-entity="MultimodalFeedback" data-source-line="27" data-uid="ent0004" id="entity_MultimodalFeedback"><rect fill="#FFFFFF" height="141.7813" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="173.2158" x="263.64" y="278.97" /><ellipse cx="276.64" cy="292.97" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M280.0463,294.9388 C279.3275,295.6106 278.0306,296.7825 276.2806,296.7825 C274.0619,296.7825 273.0931,294.845 273.0931,292.8919 C273.0931,290.5013 274.5775,289.2356 276.2181,289.2356 C278.2338,289.2356 278.4525,290.7513 278.6244,291.845 L280.0463,291.6575 C279.9525,291.0794 279.8744,290.5013 279.8744,289.5325 C279.8744,288.8606 279.9213,288.3138 279.9525,287.8919 L278.5463,287.8919 L278.4369,288.845 C277.8431,288.3138 277.2025,287.7669 275.9838,287.7669 C273.9369,287.7669 271.5306,289.595 271.5306,292.9075 C271.5306,295.845 273.2963,298.2356 276.2963,298.2356 C278.7338,298.2356 280.4369,296.6106 281.0306,296.0325 L280.0463,294.9388 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="145.2158" x="288.64" y="297.8167">MultimodalFeedback</text><line style="stroke:#000000;stroke-width:1;" x1="264.64" x2="435.8558" y1="306.97" y2="306.97" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="271.64" y="317.6184" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="97.5215" x="281.64" y="323.9651">visual_display</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="271.64" y="333.9153" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="85.415" x="281.64" y="340.262">audio_alerts</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="271.64" y="350.2122" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="114.7275" x="281.64" y="356.5589">haptic_feedback</text><line style="stroke:#000000;stroke-width:1;" x1="264.64" x2="435.8558" y1="363.8606" y2="363.8606" /><ellipse cx="274.64" cy="377.5091" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="110.6533" x="281.64" y="380.8557">display_status()</text><ellipse cx="274.64" cy="393.8059" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="118.542" x="281.64" y="397.1526">play_audio_cue()</text><ellipse cx="274.64" cy="410.1028" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="133.0205" x="281.64" y="413.4495">provide_vibration()</text></g><g class="link" data-entity-1="AccessibleRobotController" data-entity-2="SafetyMonitor" data-source-line="36" data-uid="lnk5" id="link_AccessibleRobotController_SafetyMonitor"><path codeLine="36" d="M184.3,219.42 C174.39,239.45 166.8714,254.6425 157.6314,273.3125" fill="none" id="AccessibleRobotController-to-SafetyMonitor" style="stroke:#000000;stroke-width:1;" /><polygon fill="#000000" points="154.97,278.69,162.547,272.3981,157.1878,274.2088,155.3771,268.8496,154.97,278.69" style="stroke:#000000;stroke-width:1;" /></g><g class="link" data-entity-1="AccessibleRobotController" data-entity-2="MultimodalFeedback" data-source-line="37" data-uid="lnk6" id="link_AccessibleRobotController_MultimodalFeedback"><path codeLine="37" d="M286.19,219.42 C296.1,239.45 303.6186,254.6425 312.8586,273.3125" fill="none" id="AccessibleRobotController-to-MultimodalFeedback" style="stroke:#000000;stroke-width:1;" /><polygon fill="#000000" points="315.52,278.69,315.1129,268.8496,313.3022,274.2088,307.943,272.3981,315.52,278.69" style="stroke:#000000;stroke-width:1;" /></g></g></svg></p></div></div>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Accessible robotic arm controller implementation
-class AccessibleRobotController:
-    def __init__(self):
-        self.interface_height = 800  # mm from floor
-        self.force_sensitivity = 0.3  # 30% of maximum force
-        self.voice_enabled = False
-        self.audio_feedback = True
-        self.safety_monitor = SafetyMonitor()
-        self.feedback_system = MultimodalFeedback()
+<pre><code class="language-python"><span class="c1"># Accessible robotic arm controller implementation</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AccessibleRobotController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface_height</span> <span class="o">=</span> <span class="mi">800</span>  <span class="c1"># mm from floor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_sensitivity</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># 30% of maximum force</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voice_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">audio_feedback</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_monitor</span> <span class="o">=</span> <span class="n">SafetyMonitor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_system</span> <span class="o">=</span> <span class="n">MultimodalFeedback</span><span class="p">()</span>
 
-    def adjust_interface_height(self, user_reach_range):
-        &quot;&quot;&quot;Adjust interface based on user&#x27;s reach capabilities&quot;&quot;&quot;
-        min_height, max_height = user_reach_range
-        # Keep controls within user&#x27;s comfortable reach
-        self.interface_height = min(max_height - 100, max(min_height + 100, 700))
-        self.feedback_system.announce(f&quot;Interface adjusted to {self.interface_height}mm&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_interface_height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_reach_range</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust interface based on user&#39;s reach capabilities&quot;&quot;&quot;</span>
+        <span class="n">min_height</span><span class="p">,</span> <span class="n">max_height</span> <span class="o">=</span> <span class="n">user_reach_range</span>
+        <span class="c1"># Keep controls within user&#39;s comfortable reach</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interface_height</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_height</span> <span class="o">-</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">min_height</span> <span class="o">+</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">700</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_system</span><span class="o">.</span><span class="n">announce</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interface adjusted to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">interface_height</span><span class="si">}</span><span class="s2">mm&quot;</span><span class="p">)</span>
 
-    def set_force_sensitivity(self, user_max_force):
-        &quot;&quot;&quot;Set activation force based on user capabilities&quot;&quot;&quot;
-        # Use 30% of user&#x27;s maximum comfortable force
-        self.force_sensitivity = user_max_force * 0.3
-        self.feedback_system.announce(f&quot;Force sensitivity set to {self.force_sensitivity:.1f}N&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_force_sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_max_force</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set activation force based on user capabilities&quot;&quot;&quot;</span>
+        <span class="c1"># Use 30% of user&#39;s maximum comfortable force</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">force_sensitivity</span> <span class="o">=</span> <span class="n">user_max_force</span> <span class="o">*</span> <span class="mf">0.3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_system</span><span class="o">.</span><span class="n">announce</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Force sensitivity set to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">force_sensitivity</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">N&quot;</span><span class="p">)</span>
 
-    def move_arm(self, direction, force_applied):
-        &quot;&quot;&quot;Move robotic arm with safety checks&quot;&quot;&quot;
-        if not self.safety_monitor.check_force_safe(force_applied):
-            self.feedback_system.alert(&quot;Force too high - movement stopped&quot;)
-            return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_arm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">force_applied</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move robotic arm with safety checks&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_monitor</span><span class="o">.</span><span class="n">check_force_safe</span><span class="p">(</span><span class="n">force_applied</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feedback_system</span><span class="o">.</span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;Force too high - movement stopped&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        if not self.safety_monitor.check_motion_safe(direction):
-            self.feedback_system.alert(&quot;Motion boundary reached&quot;)
-            return False
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_monitor</span><span class="o">.</span><span class="n">check_motion_safe</span><span class="p">(</span><span class="n">direction</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feedback_system</span><span class="o">.</span><span class="n">alert</span><span class="p">(</span><span class="s2">&quot;Motion boundary reached&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        # Execute movement
-        self.feedback_system.announce(f&quot;Moving {direction}&quot;)
-        return True
+        <span class="c1"># Execute movement</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_system</span><span class="o">.</span><span class="n">announce</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Moving </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-class SafetyMonitor:
-    def __init__(self):
-        self.max_safe_force = 50  # Newtons
-        self.motion_boundaries = {
-            &#x27;x&#x27;: (-500, 500),  # mm
-            &#x27;y&#x27;: (-300, 300),
-            &#x27;z&#x27;: (0, 600)
-        }
+<span class="k">class</span><span class="w"> </span><span class="nc">SafetyMonitor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_safe_force</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Newtons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_boundaries</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span>  <span class="c1"># mm</span>
+            <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
+            <span class="s1">&#39;z&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def check_force_safe(self, force):
-        &quot;&quot;&quot;Verify applied force is within safe limits&quot;&quot;&quot;
-        return force &lt;= self.max_safe_force
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_force_safe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify applied force is within safe limits&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">force</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_safe_force</span>
 
-    def check_motion_safe(self, direction):
-        &quot;&quot;&quot;Verify motion stays within safe boundaries&quot;&quot;&quot;
-        # Simplified check - in practice would track current position
-        return True  # Placeholder for actual boundary checking
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_motion_safe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify motion stays within safe boundaries&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified check - in practice would track current position</span>
+        <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># Placeholder for actual boundary checking</span>
 
-class MultimodalFeedback:
-    def __init__(self):
-        self.audio_enabled = True
-        self.visual_enabled = True
-        self.haptic_enabled = True
+<span class="k">class</span><span class="w"> </span><span class="nc">MultimodalFeedback</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">audio_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">visual_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">haptic_enabled</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def announce(self, message):
-        &quot;&quot;&quot;Provide audio feedback for status updates&quot;&quot;&quot;
-        if self.audio_enabled:
-            print(f&quot;🔊 {message}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">announce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provide audio feedback for status updates&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">audio_enabled</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔊 </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def alert(self, warning):
-        &quot;&quot;&quot;Provide multi-modal warning feedback&quot;&quot;&quot;
-        if self.audio_enabled:
-            print(f&quot;⚠️ AUDIO ALERT: {warning}&quot;)
-        if self.visual_enabled:
-            print(f&quot;🚨 VISUAL ALERT: {warning}&quot;)
-        if self.haptic_enabled:
-            print(f&quot;📳 HAPTIC ALERT: {warning}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">alert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">warning</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Provide multi-modal warning feedback&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">audio_enabled</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️ AUDIO ALERT: </span><span class="si">{</span><span class="n">warning</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">visual_enabled</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🚨 VISUAL ALERT: </span><span class="si">{</span><span class="n">warning</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">haptic_enabled</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📳 HAPTIC ALERT: </span><span class="si">{</span><span class="n">warning</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Example usage
-controller = AccessibleRobotController()
+<span class="c1"># Example usage</span>
+<span class="n">controller</span> <span class="o">=</span> <span class="n">AccessibleRobotController</span><span class="p">()</span>
 
-# Configure for a wheelchair user with limited grip strength
-user_reach = (600, 1200)  # mm from floor
-user_max_force = 15  # Newtons
+<span class="c1"># Configure for a wheelchair user with limited grip strength</span>
+<span class="n">user_reach</span> <span class="o">=</span> <span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>  <span class="c1"># mm from floor</span>
+<span class="n">user_max_force</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># Newtons</span>
 
-controller.adjust_interface_height(user_reach)
-controller.set_force_sensitivity(user_max_force)
+<span class="n">controller</span><span class="o">.</span><span class="n">adjust_interface_height</span><span class="p">(</span><span class="n">user_reach</span><span class="p">)</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">set_force_sensitivity</span><span class="p">(</span><span class="n">user_max_force</span><span class="p">)</span>
 
-# Attempt to move the arm
-controller.move_arm(&quot;forward&quot;, 4.5)  # Within safe force limit
-controller.move_arm(&quot;up&quot;, 60)  # Exceeds safe force limit
+<span class="c1"># Attempt to move the arm</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">move_arm</span><span class="p">(</span><span class="s2">&quot;forward&quot;</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">)</span>  <span class="c1"># Within safe force limit</span>
+<span class="n">controller</span><span class="o">.</span><span class="n">move_arm</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># Exceeds safe force limit</span>
 </code></pre>
 </div>
 <h3 id="safety-systems-and-emergency-stops">Safety systems and emergency stops<a class="headerlink" href="#safety-systems-and-emergency-stops" title="Permanent link">&para;</a></h3>
@@ -1701,64 +1701,64 @@ controller.move_arm(&quot;up&quot;, 60)  # Exceeds safe force limit
 <p><strong>Force limiting</strong> prevents the system from applying dangerous forces. This is especially important when users have reduced sensation or awareness of applied forces.</p>
 <p><strong>Automatic shutdown</strong> activates when the system detects unusual conditions like loss of user input, sensor failures, or boundary violations.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Safety system implementation
-class EmergencyStopSystem:
-    def __init__(self):
-        self.stop_buttons = []
-        self.voice_stop_enabled = True
-        self.auto_timeout = 30  # seconds of inactivity
-        self.last_user_input = 0
-        self.system_stopped = False
+<pre><code class="language-python"><span class="c1"># Safety system implementation</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">EmergencyStopSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_buttons</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">voice_stop_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auto_timeout</span> <span class="o">=</span> <span class="mi">30</span>  <span class="c1"># seconds of inactivity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_user_input</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_stopped</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def add_stop_button(self, button_id, location, max_force_required=5):
-        &quot;&quot;&quot;Add an emergency stop button with accessibility requirements&quot;&quot;&quot;
-        button = {
-            &#x27;id&#x27;: button_id,
-            &#x27;location&#x27;: location,
-            &#x27;max_force&#x27;: max_force_required,  # Newtons
-            &#x27;size&#x27;: &#x27;large&#x27;,  # Minimum 50mm diameter
-            &#x27;colour&#x27;: &#x27;red&#x27;
-        }
-        self.stop_buttons.append(button)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_stop_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_id</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">max_force_required</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add an emergency stop button with accessibility requirements&quot;&quot;&quot;</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">button_id</span><span class="p">,</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+            <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="n">max_force_required</span><span class="p">,</span>  <span class="c1"># Newtons</span>
+            <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="s1">&#39;large&#39;</span><span class="p">,</span>  <span class="c1"># Minimum 50mm diameter</span>
+            <span class="s1">&#39;colour&#39;</span><span class="p">:</span> <span class="s1">&#39;red&#39;</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_buttons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
 
-    def check_voice_stop(self, audio_input):
-        &quot;&quot;&quot;Monitor for voice emergency stop commands&quot;&quot;&quot;
-        stop_words = [&#x27;stop&#x27;, &#x27;emergency&#x27;, &#x27;help&#x27;, &#x27;halt&#x27;]
-        if any(word in audio_input.lower() for word in stop_words):
-            self.trigger_emergency_stop(&#x27;voice&#x27;)
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_voice_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_input</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Monitor for voice emergency stop commands&quot;&quot;&quot;</span>
+        <span class="n">stop_words</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;emergency&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">,</span> <span class="s1">&#39;halt&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">word</span> <span class="ow">in</span> <span class="n">audio_input</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">stop_words</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_emergency_stop</span><span class="p">(</span><span class="s1">&#39;voice&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def check_timeout(self, current_time):
-        &quot;&quot;&quot;Check if system should stop due to user inactivity&quot;&quot;&quot;
-        if current_time - self.last_user_input &gt; self.auto_timeout:
-            self.trigger_emergency_stop(&#x27;timeout&#x27;)
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if system should stop due to user inactivity&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">current_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_user_input</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_timeout</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trigger_emergency_stop</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def trigger_emergency_stop(self, trigger_source):
-        &quot;&quot;&quot;Immediately stop all system operations&quot;&quot;&quot;
-        self.system_stopped = True
-        print(f&quot;🛑 EMERGENCY STOP triggered by: {trigger_source}&quot;)
-        print(&quot;🔧 All actuators disabled&quot;)
-        print(&quot;🔊 Audible alarm activated&quot;)
-        print(&quot;💡 Visual warning lights activated&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">trigger_emergency_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">trigger_source</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Immediately stop all system operations&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_stopped</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🛑 EMERGENCY STOP triggered by: </span><span class="si">{</span><span class="n">trigger_source</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔧 All actuators disabled&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔊 Audible alarm activated&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;💡 Visual warning lights activated&quot;</span><span class="p">)</span>
 
-# Example usage
-safety_system = EmergencyStopSystem()
+<span class="c1"># Example usage</span>
+<span class="n">safety_system</span> <span class="o">=</span> <span class="n">EmergencyStopSystem</span><span class="p">()</span>
 
-# Add multiple emergency stop buttons for accessibility
-safety_system.add_stop_button(1, &quot;left_armrest&quot;, max_force_required=3)
-safety_system.add_stop_button(2, &quot;right_armrest&quot;, max_force_required=3)
-safety_system.add_stop_button(3, &quot;head_height&quot;, max_force_required=2)  # Head-operated
+<span class="c1"># Add multiple emergency stop buttons for accessibility</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">add_stop_button</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;left_armrest&quot;</span><span class="p">,</span> <span class="n">max_force_required</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">add_stop_button</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;right_armrest&quot;</span><span class="p">,</span> <span class="n">max_force_required</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">add_stop_button</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;head_height&quot;</span><span class="p">,</span> <span class="n">max_force_required</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Head-operated</span>
 
-# Test different stop triggers
-import time
-current_time = time.time()
+<span class="c1"># Test different stop triggers</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-safety_system.check_voice_stop(&quot;emergency stop now&quot;)
-safety_system.last_user_input = current_time - 35  # Simulate 35 seconds of inactivity
-safety_system.check_timeout(current_time)
+<span class="n">safety_system</span><span class="o">.</span><span class="n">check_voice_stop</span><span class="p">(</span><span class="s2">&quot;emergency stop now&quot;</span><span class="p">)</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">last_user_input</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">-</span> <span class="mi">35</span>  <span class="c1"># Simulate 35 seconds of inactivity</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">check_timeout</span><span class="p">(</span><span class="n">current_time</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="maintainability-considerations">Maintainability considerations<a class="headerlink" href="#maintainability-considerations" title="Permanent link">&para;</a></h3>
@@ -1863,50 +1863,50 @@ safety_system.check_timeout(current_time)
 <details class="success">
 <summary>Sample solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class AdaptiveForceControl:
-    def __init__(self):
-        self.sensitivity = 0.3  # Start at 30% of max force
-        self.successful_activations = 0
-        self.accidental_activations = 0
-        self.adjustment_threshold = 10  # Evaluate after 10 interactions
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveForceControl</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span> <span class="o">=</span> <span class="mf">0.3</span>  <span class="c1"># Start at 30% of max force</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">successful_activations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accidental_activations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adjustment_threshold</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Evaluate after 10 interactions</span>
 
-    def record_activation(self, was_intentional):
-        &quot;&quot;&quot;Record whether activation was intentional&quot;&quot;&quot;
-        if was_intentional:
-            self.successful_activations += 1
-        else:
-            self.accidental_activations += 1
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_activation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">was_intentional</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record whether activation was intentional&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">was_intentional</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">successful_activations</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">accidental_activations</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        # Adjust sensitivity if we have enough data
-        total_activations = self.successful_activations + self.accidental_activations
-        if total_activations &gt;= self.adjustment_threshold:
-            self.adjust_sensitivity()
+        <span class="c1"># Adjust sensitivity if we have enough data</span>
+        <span class="n">total_activations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">successful_activations</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">accidental_activations</span>
+        <span class="k">if</span> <span class="n">total_activations</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjustment_threshold</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">adjust_sensitivity</span><span class="p">()</span>
 
-    def adjust_sensitivity(self):
-        &quot;&quot;&quot;Adjust sensitivity based on success rate&quot;&quot;&quot;
-        total = self.successful_activations + self.accidental_activations
-        success_rate = self.successful_activations / total
+    <span class="k">def</span><span class="w"> </span><span class="nf">adjust_sensitivity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust sensitivity based on success rate&quot;&quot;&quot;</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">successful_activations</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">accidental_activations</span>
+        <span class="n">success_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">successful_activations</span> <span class="o">/</span> <span class="n">total</span>
 
-        if success_rate &lt; 0.7:  # Too many accidents
-            self.sensitivity = min(0.8, self.sensitivity + 0.1)
-            print(f&quot;Increasing sensitivity to {self.sensitivity:.1f}&quot;)
-        elif success_rate &gt; 0.95:  # Very few accidents
-            self.sensitivity = max(0.1, self.sensitivity - 0.05)
-            print(f&quot;Decreasing sensitivity to {self.sensitivity:.1f}&quot;)
+        <span class="k">if</span> <span class="n">success_rate</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="p">:</span>  <span class="c1"># Too many accidents</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Increasing sensitivity to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">success_rate</span> <span class="o">&gt;</span> <span class="mf">0.95</span><span class="p">:</span>  <span class="c1"># Very few accidents</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decreasing sensitivity to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sensitivity</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Reset counters
-        self.successful_activations = 0
-        self.accidental_activations = 0
+        <span class="c1"># Reset counters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">successful_activations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">accidental_activations</span> <span class="o">=</span> <span class="mi">0</span>
 
-# Example usage
-control = AdaptiveForceControl()
+<span class="c1"># Example usage</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">AdaptiveForceControl</span><span class="p">()</span>
 
-# Simulate user learning curve
-for i in range(15):
-    # Early interactions have more accidents
-    intentional = i &gt; 3 and (i % 4 != 0)  # Accidents on multiples of 4, after initial learning
-    control.record_activation(intentional)
-    print(f&quot;Activation {i+1}: {&#x27;Intentional&#x27; if intentional else &#x27;Accidental&#x27;}&quot;)
+<span class="c1"># Simulate user learning curve</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+    <span class="c1"># Early interactions have more accidents</span>
+    <span class="n">intentional</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Accidents on multiples of 4, after initial learning</span>
+    <span class="n">control</span><span class="o">.</span><span class="n">record_activation</span><span class="p">(</span><span class="n">intentional</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Activation </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;Intentional&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">intentional</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;Accidental&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2152,6 +2152,8 @@ for i in range(15):
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

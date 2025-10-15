@@ -1582,62 +1582,62 @@
 </ul>
 <p>Let&rsquo;s see how this works in code:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class AutonomousSystem:
-    def __init__(self, autonomy_level):
-        self.autonomy_level = autonomy_level
-        self.human_override = False
-        self.system_status = &quot;operational&quot;
-        self.sensor_data = {}
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">AutonomousSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autonomy_level</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">=</span> <span class="n">autonomy_level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">human_override</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_status</span> <span class="o">=</span> <span class="s2">&quot;operational&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_data</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def process_sensor_input(self, sensor_type, value):
-        &quot;&quot;&quot;Process incoming sensor data&quot;&quot;&quot;
-        self.sensor_data[sensor_type] = value
-        print(f&quot;Sensor update: {sensor_type} = {value}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_sensor_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process incoming sensor data&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_data</span><span class="p">[</span><span class="n">sensor_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sensor update: </span><span class="si">{</span><span class="n">sensor_type</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def make_decision(self, situation):
-        &quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;
-        if self.human_override:
-            return &quot;waiting_for_human&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_decision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">situation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">human_override</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;waiting_for_human&quot;</span>
 
-        if self.autonomy_level == 0:
-            return &quot;request_human_input&quot;
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;request_human_input&quot;</span>
 
-        elif self.autonomy_level == 1:
-            # Basic assistance - only handle simple cases
-            if situation == &quot;routine_task&quot;:
-                return &quot;execute_automatically&quot;
-            else:
-                return &quot;request_human_input&quot;
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Basic assistance - only handle simple cases</span>
+            <span class="k">if</span> <span class="n">situation</span> <span class="o">==</span> <span class="s2">&quot;routine_task&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;execute_automatically&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;request_human_input&quot;</span>
 
-        elif self.autonomy_level &gt;= 2:
-            # Partial autonomy and above - handle more situations
-            if situation in [&quot;routine_task&quot;, &quot;minor_obstacle&quot;, &quot;pattern_deviation&quot;]:
-                return &quot;execute_automatically&quot;
-            else:
-                return &quot;request_human_assistance&quot;
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="c1"># Partial autonomy and above - handle more situations</span>
+            <span class="k">if</span> <span class="n">situation</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;routine_task&quot;</span><span class="p">,</span> <span class="s2">&quot;minor_obstacle&quot;</span><span class="p">,</span> <span class="s2">&quot;pattern_deviation&quot;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="s2">&quot;execute_automatically&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;request_human_assistance&quot;</span>
 
-        elif self.autonomy_level &gt;= 4:
-            # High autonomy - handle most situations
-            if situation == &quot;critical_failure&quot;:
-                return &quot;emergency_shutdown&quot;
-            else:
-                return &quot;execute_automatically&quot;
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c1"># High autonomy - handle most situations</span>
+            <span class="k">if</span> <span class="n">situation</span> <span class="o">==</span> <span class="s2">&quot;critical_failure&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;emergency_shutdown&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;execute_automatically&quot;</span>
 
-    def demonstrate_autonomy_levels(self):
-        &quot;&quot;&quot;Show how different autonomy levels respond to situations&quot;&quot;&quot;
-        situations = [&quot;routine_task&quot;, &quot;minor_obstacle&quot;, &quot;unexpected_object&quot;, &quot;critical_failure&quot;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_autonomy_levels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show how different autonomy levels respond to situations&quot;&quot;&quot;</span>
+        <span class="n">situations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;routine_task&quot;</span><span class="p">,</span> <span class="s2">&quot;minor_obstacle&quot;</span><span class="p">,</span> <span class="s2">&quot;unexpected_object&quot;</span><span class="p">,</span> <span class="s2">&quot;critical_failure&quot;</span><span class="p">]</span>
 
-        for level in range(0, 6):
-            print(f&quot;\n--- Autonomy Level {level} ---&quot;)
-            self.autonomy_level = level
+        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Autonomy Level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">=</span> <span class="n">level</span>
 
-            for situation in situations:
-                decision = self.make_decision(situation)
-                print(f&quot;Situation: {situation:20} → Decision: {decision}&quot;)
+            <span class="k">for</span> <span class="n">situation</span> <span class="ow">in</span> <span class="n">situations</span><span class="p">:</span>
+                <span class="n">decision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_decision</span><span class="p">(</span><span class="n">situation</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Situation: </span><span class="si">{</span><span class="n">situation</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> → Decision: </span><span class="si">{</span><span class="n">decision</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Demonstrate different autonomy levels
-system = AutonomousSystem(autonomy_level=2)
-system.demonstrate_autonomy_levels()
+<span class="c1"># Demonstrate different autonomy levels</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">AutonomousSystem</span><span class="p">(</span><span class="n">autonomy_level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">system</span><span class="o">.</span><span class="n">demonstrate_autonomy_levels</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="safety-interlocks-and-fallbacks">Safety interlocks and fallbacks<a class="headerlink" href="#safety-interlocks-and-fallbacks" title="Permanent link">&para;</a></h3>
@@ -1645,567 +1645,567 @@ system.demonstrate_autonomy_levels()
 <p><strong>Fallback systems</strong> are backup plans that kick in when the main system fails or encounters something it can&rsquo;t handle.</p>
 <p>Think of these as the &ldquo;safety equipment&rdquo; of autonomous systems:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class SafeAutonomousSystem:
-    def __init__(self):
-        self.emergency_stop_active = False
-        self.safety_interlocks = {
-            &quot;temperature&quot;: {&quot;max&quot;: 80, &quot;current&quot;: 25},
-            &quot;pressure&quot;: {&quot;max&quot;: 100, &quot;current&quot;: 45},
-            &quot;speed&quot;: {&quot;max&quot;: 50, &quot;current&quot;: 0},
-            &quot;position&quot;: {&quot;safe_zone&quot;: (0, 100), &quot;current&quot;: 50}
-        }
-        self.fallback_actions = []
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">SafeAutonomousSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+            <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">},</span>
+            <span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;safe_zone&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_actions</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def check_safety_interlocks(self):
-        &quot;&quot;&quot;Check all safety conditions before allowing operation&quot;&quot;&quot;
-        violations = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_safety_interlocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check all safety conditions before allowing operation&quot;&quot;&quot;</span>
+        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        # Temperature check
-        temp = self.safety_interlocks[&quot;temperature&quot;]
-        if temp[&quot;current&quot;] &gt; temp[&quot;max&quot;]:
-            violations.append(f&quot;Temperature too high: {temp[&#x27;current&#x27;]}°C &gt; {temp[&#x27;max&#x27;]}°C&quot;)
+        <span class="c1"># Temperature check</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">temp</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature too high: </span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C &gt; </span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 
-        # Pressure check
-        pressure = self.safety_interlocks[&quot;pressure&quot;]
-        if pressure[&quot;current&quot;] &gt; pressure[&quot;max&quot;]:
-            violations.append(f&quot;Pressure too high: {pressure[&#x27;current&#x27;]} &gt; {pressure[&#x27;max&#x27;]}&quot;)
+        <span class="c1"># Pressure check</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">pressure</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pressure</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure too high: </span><span class="si">{</span><span class="n">pressure</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">pressure</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Speed check
-        speed = self.safety_interlocks[&quot;speed&quot;]
-        if speed[&quot;current&quot;] &gt; speed[&quot;max&quot;]:
-            violations.append(f&quot;Speed too high: {speed[&#x27;current&#x27;]} &gt; {speed[&#x27;max&#x27;]}&quot;)
+        <span class="c1"># Speed check</span>
+        <span class="n">speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">speed</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">speed</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speed too high: </span><span class="si">{</span><span class="n">speed</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">speed</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Position check
-        pos = self.safety_interlocks[&quot;position&quot;]
-        safe_min, safe_max = pos[&quot;safe_zone&quot;]
-        if not (safe_min &lt;= pos[&quot;current&quot;] &lt;= safe_max):
-            violations.append(f&quot;Position unsafe: {pos[&#x27;current&#x27;]} not in range {safe_min}-{safe_max}&quot;)
+        <span class="c1"># Position check</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span>
+        <span class="n">safe_min</span><span class="p">,</span> <span class="n">safe_max</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="s2">&quot;safe_zone&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">safe_min</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">safe_max</span><span class="p">):</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position unsafe: </span><span class="si">{</span><span class="n">pos</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> not in range </span><span class="si">{</span><span class="n">safe_min</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">safe_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return violations
+        <span class="k">return</span> <span class="n">violations</span>
 
-    def execute_emergency_stop(self, reason):
-        &quot;&quot;&quot;Immediate shutdown for safety&quot;&quot;&quot;
-        self.emergency_stop_active = True
-        print(f&quot;🚨 EMERGENCY STOP: {reason}&quot;)
-        print(&quot;- All motion stopped&quot;)
-        print(&quot;- Power reduced to safe levels&quot;)
-        print(&quot;- Human operator notified&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute_emergency_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Immediate shutdown for safety&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop_active</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🚨 EMERGENCY STOP: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- All motion stopped&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Power reduced to safe levels&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Human operator notified&quot;</span><span class="p">)</span>
 
-    def try_fallback_action(self, primary_action):
-        &quot;&quot;&quot;Attempt fallback when primary action fails&quot;&quot;&quot;
-        print(f&quot;Primary action &#x27;{primary_action}&#x27; failed. Trying fallbacks...&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">try_fallback_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primary_action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Attempt fallback when primary action fails&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Primary action &#39;</span><span class="si">{</span><span class="n">primary_action</span><span class="si">}</span><span class="s2">&#39; failed. Trying fallbacks...&quot;</span><span class="p">)</span>
 
-        fallback_plans = {
-            &quot;move_forward&quot;: [&quot;reduce_speed&quot;, &quot;find_alternate_path&quot;, &quot;stop_and_wait&quot;],
-            &quot;pick_up_object&quot;: [&quot;adjust_grip&quot;, &quot;change_approach_angle&quot;, &quot;request_human_help&quot;],
-            &quot;navigate_to_target&quot;: [&quot;recalculate_route&quot;, &quot;use_backup_sensors&quot;, &quot;return_to_safe_position&quot;]
-        }
+        <span class="n">fallback_plans</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;move_forward&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;reduce_speed&quot;</span><span class="p">,</span> <span class="s2">&quot;find_alternate_path&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_and_wait&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;pick_up_object&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;adjust_grip&quot;</span><span class="p">,</span> <span class="s2">&quot;change_approach_angle&quot;</span><span class="p">,</span> <span class="s2">&quot;request_human_help&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;navigate_to_target&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;recalculate_route&quot;</span><span class="p">,</span> <span class="s2">&quot;use_backup_sensors&quot;</span><span class="p">,</span> <span class="s2">&quot;return_to_safe_position&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
-        if primary_action in fallback_plans:
-            for fallback in fallback_plans[primary_action]:
-                print(f&quot;  Trying fallback: {fallback}&quot;)
-                if self.attempt_action(fallback):
-                    print(f&quot;  ✅ Fallback &#x27;{fallback}&#x27; succeeded!&quot;)
-                    return True
-                else:
-                    print(f&quot;  ❌ Fallback &#x27;{fallback}&#x27; failed.&quot;)
+        <span class="k">if</span> <span class="n">primary_action</span> <span class="ow">in</span> <span class="n">fallback_plans</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">fallback</span> <span class="ow">in</span> <span class="n">fallback_plans</span><span class="p">[</span><span class="n">primary_action</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Trying fallback: </span><span class="si">{</span><span class="n">fallback</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attempt_action</span><span class="p">(</span><span class="n">fallback</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Fallback &#39;</span><span class="si">{</span><span class="n">fallback</span><span class="si">}</span><span class="s2">&#39; succeeded!&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Fallback &#39;</span><span class="si">{</span><span class="n">fallback</span><span class="si">}</span><span class="s2">&#39; failed.&quot;</span><span class="p">)</span>
 
-        print(&quot;  All fallbacks exhausted. Requesting human assistance.&quot;)
-        return False
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  All fallbacks exhausted. Requesting human assistance.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def attempt_action(self, action):
-        &quot;&quot;&quot;Simulate attempting an action (simplified for demo)&quot;&quot;&quot;
-        # Simulate success/failure for different actions
-        success_rates = {
-            &quot;reduce_speed&quot;: 0.9,
-            &quot;find_alternate_path&quot;: 0.7,
-            &quot;stop_and_wait&quot;: 1.0,  # Always succeeds
-            &quot;adjust_grip&quot;: 0.6,
-            &quot;change_approach_angle&quot;: 0.8,
-            &quot;request_human_help&quot;: 1.0,  # Always succeeds
-            &quot;recalculate_route&quot;: 0.8,
-            &quot;use_backup_sensors&quot;: 0.7,
-            &quot;return_to_safe_position&quot;: 0.95
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">attempt_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate attempting an action (simplified for demo)&quot;&quot;&quot;</span>
+        <span class="c1"># Simulate success/failure for different actions</span>
+        <span class="n">success_rates</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;reduce_speed&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+            <span class="s2">&quot;find_alternate_path&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+            <span class="s2">&quot;stop_and_wait&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Always succeeds</span>
+            <span class="s2">&quot;adjust_grip&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
+            <span class="s2">&quot;change_approach_angle&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+            <span class="s2">&quot;request_human_help&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Always succeeds</span>
+            <span class="s2">&quot;recalculate_route&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+            <span class="s2">&quot;use_backup_sensors&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+            <span class="s2">&quot;return_to_safe_position&quot;</span><span class="p">:</span> <span class="mf">0.95</span>
+        <span class="p">}</span>
 
-        import random
-        return random.random() &lt; success_rates.get(action, 0.5)
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">success_rates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
 
-    def safe_operation_cycle(self, requested_action):
-        &quot;&quot;&quot;Perform an action safely with all checks&quot;&quot;&quot;
-        print(f&quot;\n🔍 Safety check for action: {requested_action}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">safe_operation_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requested_action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform an action safely with all checks&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔍 Safety check for action: </span><span class="si">{</span><span class="n">requested_action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Step 1: Check safety interlocks
-        violations = self.check_safety_interlocks()
-        if violations:
-            print(&quot;❌ Safety violations detected:&quot;)
-            for violation in violations:
-                print(f&quot;   - {violation}&quot;)
-            self.execute_emergency_stop(&quot;Safety interlock violation&quot;)
-            return False
+        <span class="c1"># Step 1: Check safety interlocks</span>
+        <span class="n">violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_safety_interlocks</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">violations</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Safety violations detected:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">violations</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execute_emergency_stop</span><span class="p">(</span><span class="s2">&quot;Safety interlock violation&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        # Step 2: Check if emergency stop is active
-        if self.emergency_stop_active:
-            print(&quot;❌ Emergency stop is active. Cannot proceed.&quot;)
-            return False
+        <span class="c1"># Step 2: Check if emergency stop is active</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop_active</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Emergency stop is active. Cannot proceed.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        # Step 3: Attempt the action
-        print(&quot;✅ Safety checks passed. Attempting action...&quot;)
-        if self.attempt_action(requested_action):
-            print(f&quot;✅ Action &#x27;{requested_action}&#x27; completed successfully!&quot;)
-            return True
-        else:
-            print(f&quot;❌ Action &#x27;{requested_action}&#x27; failed.&quot;)
-            # Step 4: Try fallback actions
-            return self.try_fallback_action(requested_action)
+        <span class="c1"># Step 3: Attempt the action</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Safety checks passed. Attempting action...&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attempt_action</span><span class="p">(</span><span class="n">requested_action</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Action &#39;</span><span class="si">{</span><span class="n">requested_action</span><span class="si">}</span><span class="s2">&#39; completed successfully!&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Action &#39;</span><span class="si">{</span><span class="n">requested_action</span><span class="si">}</span><span class="s2">&#39; failed.&quot;</span><span class="p">)</span>
+            <span class="c1"># Step 4: Try fallback actions</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">try_fallback_action</span><span class="p">(</span><span class="n">requested_action</span><span class="p">)</span>
 
-# Demonstrate safety system
-safe_system = SafeAutonomousSystem()
+<span class="c1"># Demonstrate safety system</span>
+<span class="n">safe_system</span> <span class="o">=</span> <span class="n">SafeAutonomousSystem</span><span class="p">()</span>
 
-# Simulate some operations
-print(&quot;=== Safe Operation Demonstration ===&quot;)
-safe_system.safe_operation_cycle(&quot;move_forward&quot;)
+<span class="c1"># Simulate some operations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Safe Operation Demonstration ===&quot;</span><span class="p">)</span>
+<span class="n">safe_system</span><span class="o">.</span><span class="n">safe_operation_cycle</span><span class="p">(</span><span class="s2">&quot;move_forward&quot;</span><span class="p">)</span>
 
-# Simulate a safety violation
-print(&quot;\n=== Safety Violation Simulation ===&quot;)
-safe_system.safety_interlocks[&quot;temperature&quot;][&quot;current&quot;] = 95  # Exceed safe temperature
-safe_system.safe_operation_cycle(&quot;pick_up_object&quot;)
+<span class="c1"># Simulate a safety violation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Safety Violation Simulation ===&quot;</span><span class="p">)</span>
+<span class="n">safe_system</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">][</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">95</span>  <span class="c1"># Exceed safe temperature</span>
+<span class="n">safe_system</span><span class="o">.</span><span class="n">safe_operation_cycle</span><span class="p">(</span><span class="s2">&quot;pick_up_object&quot;</span><span class="p">)</span>
 
-# Reset and try again
-print(&quot;\n=== After Safety Reset ===&quot;)
-safe_system.safety_interlocks[&quot;temperature&quot;][&quot;current&quot;] = 25  # Back to safe temperature
-safe_system.emergency_stop_active = False  # Reset emergency stop
-safe_system.safe_operation_cycle(&quot;navigate_to_target&quot;)
+<span class="c1"># Reset and try again</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== After Safety Reset ===&quot;</span><span class="p">)</span>
+<span class="n">safe_system</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">][</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">25</span>  <span class="c1"># Back to safe temperature</span>
+<span class="n">safe_system</span><span class="o">.</span><span class="n">emergency_stop_active</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Reset emergency stop</span>
+<span class="n">safe_system</span><span class="o">.</span><span class="n">safe_operation_cycle</span><span class="p">(</span><span class="s2">&quot;navigate_to_target&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s build a comprehensive autonomous cleaning robot that demonstrates different autonomy levels and safety features:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import random
-import time
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-class AutonomousCleaningRobot:
-    def __init__(self, autonomy_level=2):
-        # Robot state
-        self.autonomy_level = autonomy_level
-        self.position = [50, 50]  # x, y coordinates
-        self.battery_level = 100
-        self.dirt_collected = 0
-        self.cleaning_pattern = &quot;random&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">AutonomousCleaningRobot</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autonomy_level</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># Robot state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">=</span> <span class="n">autonomy_level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>  <span class="c1"># x, y coordinates</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_pattern</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span>
 
-        # Safety systems
-        self.emergency_stop = False
-        self.stuck_counter = 0
-        self.max_stuck_attempts = 3
+        <span class="c1"># Safety systems</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_stuck_attempts</span> <span class="o">=</span> <span class="mi">3</span>
 
-        # Autonomous features
-        self.cleaning_mode = &quot;auto&quot;
-        self.home_position = [0, 0]
-        self.cleaning_schedule = {&quot;enabled&quot;: False, &quot;time&quot;: &quot;09:00&quot;}
+        <span class="c1"># Autonomous features</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_mode</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">home_position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_schedule</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;09:00&quot;</span><span class="p">}</span>
 
-        # Environmental awareness
-        self.room_map = self.generate_room_map()
-        self.obstacles = [(30, 40), (70, 20), (10, 80)]  # Known obstacles
+        <span class="c1"># Environmental awareness</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_room_map</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obstacles</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">)]</span>  <span class="c1"># Known obstacles</span>
 
-    def generate_room_map(self):
-        &quot;&quot;&quot;Create a simple room map (100x100 grid)&quot;&quot;&quot;
-        return {
-            &quot;width&quot;: 100,
-            &quot;height&quot;: 100,
-            &quot;cleaned_areas&quot;: set(),
-            &quot;dirty_areas&quot;: {(x, y) for x in range(20, 80) for y in range(20, 80) if random.random() &lt; 0.3}
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_room_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a simple room map (100x100 grid)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;cleaned_areas&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(),</span>
+            <span class="s2">&quot;dirty_areas&quot;</span><span class="p">:</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">}</span>
+        <span class="p">}</span>
 
-    def detect_obstacle(self):
-        &quot;&quot;&quot;Simulate obstacle detection&quot;&quot;&quot;
-        current_pos = tuple(self.position)
-        return current_pos in self.obstacles or random.random() &lt; 0.1  # 10% chance of random obstacle
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate obstacle detection&quot;&quot;&quot;</span>
+        <span class="n">current_pos</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_pos</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obstacles</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.1</span>  <span class="c1"># 10% chance of random obstacle</span>
 
-    def autonomous_decision_making(self):
-        &quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;
-        print(f&quot;\n🤖 Robot thinking (Autonomy Level {self.autonomy_level})...&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">autonomous_decision_making</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🤖 Robot thinking (Autonomy Level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">)</span>
 
-        # Level 0: No autonomy - wait for commands
-        if self.autonomy_level == 0:
-            print(&quot;   Waiting for human command...&quot;)
-            return &quot;wait_for_command&quot;
+        <span class="c1"># Level 0: No autonomy - wait for commands</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Waiting for human command...&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;wait_for_command&quot;</span>
 
-        # Check critical conditions first (all levels)
-        if self.battery_level &lt; 20:
-            if self.autonomy_level &gt;= 2:
-                print(&quot;   Low battery detected. Returning to charging station.&quot;)
-                return &quot;return_to_charge&quot;
-            else:
-                print(&quot;   Low battery. Requesting human assistance.&quot;)
-                return &quot;request_help&quot;
+        <span class="c1"># Check critical conditions first (all levels)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Low battery detected. Returning to charging station.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;return_to_charge&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Low battery. Requesting human assistance.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;request_help&quot;</span>
 
-        # Level 1: Basic assistance
-        if self.autonomy_level == 1:
-            if self.detect_obstacle():
-                print(&quot;   Obstacle detected. Stopping and requesting help.&quot;)
-                return &quot;request_help&quot;
-            else:
-                print(&quot;   Continuing basic cleaning pattern.&quot;)
-                return &quot;clean_forward&quot;
+        <span class="c1"># Level 1: Basic assistance</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_obstacle</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Obstacle detected. Stopping and requesting help.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;request_help&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Continuing basic cleaning pattern.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;clean_forward&quot;</span>
 
-        # Level 2+: Partial autonomy and above
-        if self.autonomy_level &gt;= 2:
-            if self.detect_obstacle():
-                if self.stuck_counter &lt; self.max_stuck_attempts:
-                    print(&quot;   Obstacle detected. Trying to navigate around it.&quot;)
-                    return &quot;navigate_around_obstacle&quot;
-                else:
-                    print(&quot;   Stuck too many times. Requesting human help.&quot;)
-                    return &quot;request_help&quot;
+        <span class="c1"># Level 2+: Partial autonomy and above</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_obstacle</span><span class="p">():</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_stuck_attempts</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Obstacle detected. Trying to navigate around it.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;navigate_around_obstacle&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Stuck too many times. Requesting human help.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;request_help&quot;</span>
 
-            # Check if cleaning is complete
-            if len(self.room_map[&quot;dirty_areas&quot;]) == 0:
-                print(&quot;   Room appears clean. Returning home.&quot;)
-                return &quot;return_home&quot;
+            <span class="c1"># Check if cleaning is complete</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Room appears clean. Returning home.&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;return_home&quot;</span>
 
-            # Continue autonomous cleaning
-            print(&quot;   Continuing autonomous cleaning pattern.&quot;)
-            return &quot;autonomous_clean&quot;
+            <span class="c1"># Continue autonomous cleaning</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Continuing autonomous cleaning pattern.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;autonomous_clean&quot;</span>
 
-        # Level 4+: High autonomy
-        if self.autonomy_level &gt;= 4:
-            # Advanced features like scheduling
-            if self.cleaning_schedule[&quot;enabled&quot;]:
-                current_time = &quot;09:00&quot;  # Simplified time check
-                if current_time == self.cleaning_schedule[&quot;time&quot;]:
-                    print(&quot;   Scheduled cleaning time. Starting automatic session.&quot;)
-                    return &quot;start_scheduled_clean&quot;
+        <span class="c1"># Level 4+: High autonomy</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c1"># Advanced features like scheduling</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_schedule</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]:</span>
+                <span class="n">current_time</span> <span class="o">=</span> <span class="s2">&quot;09:00&quot;</span>  <span class="c1"># Simplified time check</span>
+                <span class="k">if</span> <span class="n">current_time</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_schedule</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Scheduled cleaning time. Starting automatic session.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;start_scheduled_clean&quot;</span>
 
-        return &quot;autonomous_clean&quot;
+        <span class="k">return</span> <span class="s2">&quot;autonomous_clean&quot;</span>
 
-    def execute_action(self, action):
-        &quot;&quot;&quot;Execute the decided action with safety checks&quot;&quot;&quot;
-        print(f&quot;   Executing: {action}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the decided action with safety checks&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Executing: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Safety interlock: Emergency stop check
-        if self.emergency_stop:
-            print(&quot;   ❌ Emergency stop active. All actions halted.&quot;)
-            return False
+        <span class="c1"># Safety interlock: Emergency stop check</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ❌ Emergency stop active. All actions halted.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        # Safety interlock: Battery check
-        if self.battery_level &lt; 5:
-            print(&quot;   ❌ Critical battery level. Emergency shutdown.&quot;)
-            self.emergency_stop = True
-            return False
+        <span class="c1"># Safety interlock: Battery check</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ❌ Critical battery level. Emergency shutdown.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        # Execute specific actions
-        if action == &quot;clean_forward&quot;:
-            self.move_and_clean([self.position[0] + 5, self.position[1]])
+        <span class="c1"># Execute specific actions</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;clean_forward&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">move_and_clean</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
-        elif action == &quot;navigate_around_obstacle&quot;:
-            # Try different directions
-            directions = [[0, 5], [5, 0], [0, -5], [-5, 0]]
-            for direction in directions:
-                new_pos = [self.position[0] + direction[0], self.position[1] + direction[1]]
-                if not self.would_hit_obstacle(new_pos):
-                    self.move_and_clean(new_pos)
-                    self.stuck_counter = 0  # Reset stuck counter
-                    return True
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;navigate_around_obstacle&quot;</span><span class="p">:</span>
+            <span class="c1"># Try different directions</span>
+            <span class="n">directions</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">directions</span><span class="p">:</span>
+                <span class="n">new_pos</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">would_hit_obstacle</span><span class="p">(</span><span class="n">new_pos</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">move_and_clean</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Reset stuck counter</span>
+                    <span class="k">return</span> <span class="kc">True</span>
 
-            self.stuck_counter += 1
-            print(f&quot;   Still stuck (attempt {self.stuck_counter})&quot;)
-            return False
+            <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Still stuck (attempt </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        elif action == &quot;autonomous_clean&quot;:
-            # Smart cleaning pattern
-            target = self.find_nearest_dirty_spot()
-            if target:
-                self.move_and_clean(target)
-            else:
-                print(&quot;   No more dirty spots found.&quot;)
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;autonomous_clean&quot;</span><span class="p">:</span>
+            <span class="c1"># Smart cleaning pattern</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_nearest_dirty_spot</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">target</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">move_and_clean</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   No more dirty spots found.&quot;</span><span class="p">)</span>
 
-        elif action == &quot;return_to_charge&quot;:
-            print(&quot;   Navigating to charging station...&quot;)
-            self.position = [0, 0]  # Simplified - instant return
-            self.battery_level = 100
-            print(&quot;   ✅ Charging complete!&quot;)
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;return_to_charge&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Navigating to charging station...&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Simplified - instant return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">=</span> <span class="mi">100</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Charging complete!&quot;</span><span class="p">)</span>
 
-        elif action == &quot;return_home&quot;:
-            print(&quot;   Returning to home position...&quot;)
-            self.position = self.home_position.copy()
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;return_home&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Returning to home position...&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">home_position</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        elif action == &quot;request_help&quot;:
-            print(&quot;   📱 Notifying human operator for assistance...&quot;)
-            print(&quot;   Robot status sent to mobile app.&quot;)
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;request_help&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   📱 Notifying human operator for assistance...&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Robot status sent to mobile app.&quot;</span><span class="p">)</span>
 
-        elif action == &quot;wait_for_command&quot;:
-            print(&quot;   Idle - waiting for manual control...&quot;)
+        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;wait_for_command&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Idle - waiting for manual control...&quot;</span><span class="p">)</span>
 
-        # Update battery (cleaning uses energy)
-        if action in [&quot;clean_forward&quot;, &quot;navigate_around_obstacle&quot;, &quot;autonomous_clean&quot;]:
-            self.battery_level -= random.randint(1, 3)
+        <span class="c1"># Update battery (cleaning uses energy)</span>
+        <span class="k">if</span> <span class="n">action</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;clean_forward&quot;</span><span class="p">,</span> <span class="s2">&quot;navigate_around_obstacle&quot;</span><span class="p">,</span> <span class="s2">&quot;autonomous_clean&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">-=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 
-        return True
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def move_and_clean(self, new_position):
-        &quot;&quot;&quot;Move to new position and clean if there&#x27;s dirt&quot;&quot;&quot;
-        self.position = new_position
-        pos_tuple = tuple(new_position)
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_and_clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_position</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move to new position and clean if there&#39;s dirt&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">new_position</span>
+        <span class="n">pos_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">new_position</span><span class="p">)</span>
 
-        if pos_tuple in self.room_map[&quot;dirty_areas&quot;]:
-            self.room_map[&quot;dirty_areas&quot;].remove(pos_tuple)
-            self.room_map[&quot;cleaned_areas&quot;].add(pos_tuple)
-            self.dirt_collected += 1
-            print(f&quot;   🧹 Cleaned dirt at {new_position}. Total dirt collected: {self.dirt_collected}&quot;)
+        <span class="k">if</span> <span class="n">pos_tuple</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pos_tuple</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;cleaned_areas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pos_tuple</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   🧹 Cleaned dirt at </span><span class="si">{</span><span class="n">new_position</span><span class="si">}</span><span class="s2">. Total dirt collected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        print(f&quot;   Moved to position {new_position}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Moved to position </span><span class="si">{</span><span class="n">new_position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def find_nearest_dirty_spot(self):
-        &quot;&quot;&quot;Find the closest dirty area to clean&quot;&quot;&quot;
-        if not self.room_map[&quot;dirty_areas&quot;]:
-            return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_nearest_dirty_spot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the closest dirty area to clean&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        min_distance = float(&#x27;inf&#x27;)
-        nearest_spot = None
+        <span class="n">min_distance</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+        <span class="n">nearest_spot</span> <span class="o">=</span> <span class="kc">None</span>
 
-        for dirty_spot in self.room_map[&quot;dirty_areas&quot;]:
-            distance = abs(dirty_spot[0] - self.position[0]) + abs(dirty_spot[1] - self.position[1])
-            if distance &lt; min_distance:
-                min_distance = distance
-                nearest_spot = list(dirty_spot)
+        <span class="k">for</span> <span class="n">dirty_spot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dirty_spot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dirty_spot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">min_distance</span><span class="p">:</span>
+                <span class="n">min_distance</span> <span class="o">=</span> <span class="n">distance</span>
+                <span class="n">nearest_spot</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dirty_spot</span><span class="p">)</span>
 
-        return nearest_spot
+        <span class="k">return</span> <span class="n">nearest_spot</span>
 
-    def would_hit_obstacle(self, position):
-        &quot;&quot;&quot;Check if a position would hit an obstacle&quot;&quot;&quot;
-        return tuple(position) in self.obstacles
+    <span class="k">def</span><span class="w"> </span><span class="nf">would_hit_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a position would hit an obstacle&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obstacles</span>
 
-    def run_cleaning_cycle(self, steps=5):
-        &quot;&quot;&quot;Run an autonomous cleaning cycle&quot;&quot;&quot;
-        print(f&quot;🏠 Starting cleaning cycle (Autonomy Level {self.autonomy_level})&quot;)
-        print(f&quot;   Initial status: Battery {self.battery_level}%, Position {self.position}&quot;)
-        print(f&quot;   Dirty areas remaining: {len(self.room_map[&#x27;dirty_areas&#x27;])}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_cleaning_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run an autonomous cleaning cycle&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🏠 Starting cleaning cycle (Autonomy Level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Initial status: Battery </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span><span class="si">}</span><span class="s2">%, Position </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Dirty areas remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s1">&#39;dirty_areas&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        for step in range(steps):
-            print(f&quot;\n--- Step {step + 1} ---&quot;)
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Step </span><span class="si">{</span><span class="n">step</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
 
-            # Make autonomous decision
-            action = self.autonomous_decision_making()
+            <span class="c1"># Make autonomous decision</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomous_decision_making</span><span class="p">()</span>
 
-            # Execute with safety checks
-            success = self.execute_action(action)
+            <span class="c1"># Execute with safety checks</span>
+            <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
 
-            if not success and action == &quot;request_help&quot;:
-                print(&quot;   Human intervention required. Pausing autonomous operation.&quot;)
-                break
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span> <span class="ow">and</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;request_help&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Human intervention required. Pausing autonomous operation.&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
 
-            if self.emergency_stop:
-                print(&quot;   Emergency stop activated. Cleaning cycle halted.&quot;)
-                break
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Emergency stop activated. Cleaning cycle halted.&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
 
-            # Show current status
-            print(f&quot;   Status: Battery {self.battery_level}%, Position {self.position}, Dirt collected: {self.dirt_collected}&quot;)
+            <span class="c1"># Show current status</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: Battery </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span><span class="si">}</span><span class="s2">%, Position </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">, Dirt collected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Brief pause for readability
-            time.sleep(0.5)
+            <span class="c1"># Brief pause for readability</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
-        print(f&quot;\n🏁 Cleaning cycle complete!&quot;)
-        print(f&quot;   Final status: Battery {self.battery_level}%, Dirt collected: {self.dirt_collected}&quot;)
-        print(f&quot;   Dirty areas remaining: {len(self.room_map[&#x27;dirty_areas&#x27;])}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🏁 Cleaning cycle complete!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Final status: Battery </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span><span class="si">}</span><span class="s2">%, Dirt collected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Dirty areas remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s1">&#39;dirty_areas&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Demonstrate different autonomy levels
-print(&quot;=== Autonomy Level Comparison ===&quot;)
+<span class="c1"># Demonstrate different autonomy levels</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Autonomy Level Comparison ===&quot;</span><span class="p">)</span>
 
-for level in [1, 2, 4]:
-    print(f&quot;\n{&#x27;=&#x27;*50}&quot;)
-    print(f&quot;Testing Autonomy Level {level}&quot;)
-    print(f&quot;{&#x27;=&#x27;*50}&quot;)
+<span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing Autonomy Level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    robot = AutonomousCleaningRobot(autonomy_level=level)
-    robot.run_cleaning_cycle(steps=3)
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">AutonomousCleaningRobot</span><span class="p">(</span><span class="n">autonomy_level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
+    <span class="n">robot</span><span class="o">.</span><span class="n">run_cleaning_cycle</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
 <h3 id="exercise-1-design-autonomy-levels-for-different-systems">Exercise 1: Design autonomy levels for different systems<a class="headerlink" href="#exercise-1-design-autonomy-levels-for-different-systems" title="Permanent link">&para;</a></h3>
 <p>Consider how autonomy levels might work for different mechatronic systems:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def design_autonomy_system(system_type):
-    &quot;&quot;&quot;Design appropriate autonomy levels for different systems&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">design_autonomy_system</span><span class="p">(</span><span class="n">system_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Design appropriate autonomy levels for different systems&quot;&quot;&quot;</span>
 
-    autonomy_designs = {
-        &quot;smart_thermostat&quot;: {
-            &quot;level_1&quot;: &quot;Respond to manual temperature changes&quot;,
-            &quot;level_2&quot;: &quot;Learn daily patterns and adjust automatically&quot;, 
-            &quot;level_3&quot;: &quot;Optimize for energy efficiency and comfort&quot;,
-            &quot;level_4&quot;: &quot;Coordinate with other smart home devices&quot;,
-            &quot;safety_features&quot;: [&quot;Temperature limits&quot;, &quot;Frost protection&quot;, &quot;Equipment monitoring&quot;]
-        },
+    <span class="n">autonomy_designs</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;smart_thermostat&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="s2">&quot;Respond to manual temperature changes&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="s2">&quot;Learn daily patterns and adjust automatically&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="s2">&quot;Optimize for energy efficiency and comfort&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="s2">&quot;Coordinate with other smart home devices&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;safety_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Temperature limits&quot;</span><span class="p">,</span> <span class="s2">&quot;Frost protection&quot;</span><span class="p">,</span> <span class="s2">&quot;Equipment monitoring&quot;</span><span class="p">]</span>
+        <span class="p">},</span>
 
-        &quot;automated_greenhouse&quot;: {
-            &quot;level_1&quot;: &quot;Monitor sensors and alert on issues&quot;,
-            &quot;level_2&quot;: &quot;Automatic watering based on soil moisture&quot;,
-            &quot;level_3&quot;: &quot;Climate control with weather forecast integration&quot;, 
-            &quot;level_4&quot;: &quot;Full crop management with growth optimization&quot;,
-            &quot;safety_features&quot;: [&quot;Water flow limits&quot;, &quot;Temperature boundaries&quot;, &quot;Chemical safety locks&quot;]
-        },
+        <span class="s2">&quot;automated_greenhouse&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="s2">&quot;Monitor sensors and alert on issues&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="s2">&quot;Automatic watering based on soil moisture&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="s2">&quot;Climate control with weather forecast integration&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="s2">&quot;Full crop management with growth optimization&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;safety_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Water flow limits&quot;</span><span class="p">,</span> <span class="s2">&quot;Temperature boundaries&quot;</span><span class="p">,</span> <span class="s2">&quot;Chemical safety locks&quot;</span><span class="p">]</span>
+        <span class="p">},</span>
 
-        &quot;delivery_drone&quot;: {
-            &quot;level_1&quot;: &quot;Remote pilot control with automated stability&quot;,
-            &quot;level_2&quot;: &quot;Waypoint navigation with obstacle avoidance&quot;,
-            &quot;level_3&quot;: &quot;Route planning with weather adaptation&quot;,
-            &quot;level_4&quot;: &quot;Fleet coordination and dynamic rerouting&quot;, 
-            &quot;safety_features&quot;: [&quot;Geofencing&quot;, &quot;Emergency landing&quot;, &quot;Battery monitoring&quot;, &quot;Collision avoidance&quot;]
-        }
-    }
+        <span class="s2">&quot;delivery_drone&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="s2">&quot;Remote pilot control with automated stability&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="s2">&quot;Waypoint navigation with obstacle avoidance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="s2">&quot;Route planning with weather adaptation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="s2">&quot;Fleet coordination and dynamic rerouting&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;safety_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Geofencing&quot;</span><span class="p">,</span> <span class="s2">&quot;Emergency landing&quot;</span><span class="p">,</span> <span class="s2">&quot;Battery monitoring&quot;</span><span class="p">,</span> <span class="s2">&quot;Collision avoidance&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 
-    if system_type in autonomy_designs:
-        design = autonomy_designs[system_type]
-        print(f&quot;\n🎯 Autonomy Design for {system_type.replace(&#x27;_&#x27;, &#x27; &#x27;).title()}:&quot;)
-        print(&quot;   Autonomy Levels:&quot;)
-        for level in range(1, 5):
-            key = f&quot;level_{level}&quot;
-            if key in design:
-                print(f&quot;   Level {level}: {design[key]}&quot;)
+    <span class="k">if</span> <span class="n">system_type</span> <span class="ow">in</span> <span class="n">autonomy_designs</span><span class="p">:</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">autonomy_designs</span><span class="p">[</span><span class="n">system_type</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Autonomy Design for </span><span class="si">{</span><span class="n">system_type</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Autonomy Levels:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;level_</span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">design</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">design</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        print(&quot;   Safety Features:&quot;)
-        for safety_feature in design[&quot;safety_features&quot;]:
-            print(f&quot;   • {safety_feature}&quot;)
-    else:
-        print(f&quot;Design not available for {system_type}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Safety Features:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">safety_feature</span> <span class="ow">in</span> <span class="n">design</span><span class="p">[</span><span class="s2">&quot;safety_features&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • </span><span class="si">{</span><span class="n">safety_feature</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Design not available for </span><span class="si">{</span><span class="n">system_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Try different systems
-design_autonomy_system(&quot;smart_thermostat&quot;)
-design_autonomy_system(&quot;automated_greenhouse&quot;) 
-design_autonomy_system(&quot;delivery_drone&quot;)
+<span class="c1"># Try different systems</span>
+<span class="n">design_autonomy_system</span><span class="p">(</span><span class="s2">&quot;smart_thermostat&quot;</span><span class="p">)</span>
+<span class="n">design_autonomy_system</span><span class="p">(</span><span class="s2">&quot;automated_greenhouse&quot;</span><span class="p">)</span> 
+<span class="n">design_autonomy_system</span><span class="p">(</span><span class="s2">&quot;delivery_drone&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="exercise-2-build-a-safety-interlock-system">Exercise 2: Build a safety interlock system<a class="headerlink" href="#exercise-2-build-a-safety-interlock-system" title="Permanent link">&para;</a></h3>
 <p>Create a comprehensive safety system for an industrial robot:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class IndustrialRobotSafety:
-    def __init__(self):
-        self.safety_zones = {
-            &quot;red_zone&quot;: {&quot;description&quot;: &quot;No humans allowed during operation&quot;, &quot;violation_response&quot;: &quot;immediate_stop&quot;},
-            &quot;yellow_zone&quot;: {&quot;description&quot;: &quot;Reduced speed when humans present&quot;, &quot;violation_response&quot;: &quot;slow_operation&quot;},
-            &quot;green_zone&quot;: {&quot;description&quot;: &quot;Safe for human interaction&quot;, &quot;violation_response&quot;: &quot;normal_operation&quot;}
-        }
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">IndustrialRobotSafety</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_zones</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;red_zone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;No humans allowed during operation&quot;</span><span class="p">,</span> <span class="s2">&quot;violation_response&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate_stop&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;yellow_zone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Reduced speed when humans present&quot;</span><span class="p">,</span> <span class="s2">&quot;violation_response&quot;</span><span class="p">:</span> <span class="s2">&quot;slow_operation&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;green_zone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Safe for human interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;violation_response&quot;</span><span class="p">:</span> <span class="s2">&quot;normal_operation&quot;</span><span class="p">}</span>
+        <span class="p">}</span>
 
-        self.safety_sensors = {
-            &quot;light_curtain&quot;: {&quot;status&quot;: &quot;clear&quot;, &quot;critical&quot;: True},
-            &quot;pressure_mat&quot;: {&quot;status&quot;: &quot;clear&quot;, &quot;critical&quot;: True}, 
-            &quot;motion_detector&quot;: {&quot;status&quot;: &quot;clear&quot;, &quot;critical&quot;: False},
-            &quot;emergency_button&quot;: {&quot;status&quot;: &quot;normal&quot;, &quot;critical&quot;: True}
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensors</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;light_curtain&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;clear&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+            <span class="s2">&quot;pressure_mat&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;clear&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> 
+            <span class="s2">&quot;motion_detector&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;clear&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="s2">&quot;emergency_button&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+        <span class="p">}</span>
 
-        self.operational_limits = {
-            &quot;max_speed&quot;: 100,  # cm/second
-            &quot;max_force&quot;: 50,   # Newtons
-            &quot;max_reach&quot;: 200,  # cm from base
-            &quot;temperature_limit&quot;: 70  # Celsius
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;max_speed&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># cm/second</span>
+            <span class="s2">&quot;max_force&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>   <span class="c1"># Newtons</span>
+            <span class="s2">&quot;max_reach&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>  <span class="c1"># cm from base</span>
+            <span class="s2">&quot;temperature_limit&quot;</span><span class="p">:</span> <span class="mi">70</span>  <span class="c1"># Celsius</span>
+        <span class="p">}</span>
 
-        self.current_state = {
-            &quot;speed&quot;: 0,
-            &quot;force&quot;: 0, 
-            &quot;position&quot;: 0,
-            &quot;temperature&quot;: 25
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mi">25</span>
+        <span class="p">}</span>
 
-    def check_safety_zones(self, detected_humans):
-        &quot;&quot;&quot;Check if humans are in safe zones&quot;&quot;&quot;
-        violations = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_safety_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detected_humans</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if humans are in safe zones&quot;&quot;&quot;</span>
+        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for location, zone_type in detected_humans.items():
-            zone_info = self.safety_zones.get(zone_type, {})
+        <span class="k">for</span> <span class="n">location</span><span class="p">,</span> <span class="n">zone_type</span> <span class="ow">in</span> <span class="n">detected_humans</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">zone_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_zones</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">zone_type</span><span class="p">,</span> <span class="p">{})</span>
 
-            if zone_type == &quot;red_zone&quot;:
-                violations.append(f&quot;Human detected in red zone at {location} - CRITICAL&quot;)
-            elif zone_type == &quot;yellow_zone&quot;:
-                violations.append(f&quot;Human detected in yellow zone at {location} - CAUTION&quot;)
+            <span class="k">if</span> <span class="n">zone_type</span> <span class="o">==</span> <span class="s2">&quot;red_zone&quot;</span><span class="p">:</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Human detected in red zone at </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2"> - CRITICAL&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">zone_type</span> <span class="o">==</span> <span class="s2">&quot;yellow_zone&quot;</span><span class="p">:</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Human detected in yellow zone at </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2"> - CAUTION&quot;</span><span class="p">)</span>
 
-        return violations
+        <span class="k">return</span> <span class="n">violations</span>
 
-    def check_sensor_status(self):
-        &quot;&quot;&quot;Check all safety sensor status&quot;&quot;&quot;
-        violations = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_sensor_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check all safety sensor status&quot;&quot;&quot;</span>
+        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for sensor, info in self.safety_sensors.items():
-            if info[&quot;status&quot;] != &quot;clear&quot; and info[&quot;status&quot;] != &quot;normal&quot;:
-                severity = &quot;CRITICAL&quot; if info[&quot;critical&quot;] else &quot;WARNING&quot;
-                violations.append(f&quot;{sensor}: {info[&#x27;status&#x27;]} - {severity}&quot;)
+        <span class="k">for</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;clear&quot;</span> <span class="ow">and</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span>
+                <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL&quot;</span> <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;critical&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;WARNING&quot;</span>
+                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sensor</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">severity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return violations
+        <span class="k">return</span> <span class="n">violations</span>
 
-    def check_operational_limits(self):
-        &quot;&quot;&quot;Check if robot is operating within safe limits&quot;&quot;&quot;
-        violations = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_operational_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if robot is operating within safe limits&quot;&quot;&quot;</span>
+        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if self.current_state[&quot;speed&quot;] &gt; self.operational_limits[&quot;max_speed&quot;]:
-            violations.append(f&quot;Speed exceeded: {self.current_state[&#x27;speed&#x27;]} &gt; {self.operational_limits[&#x27;max_speed&#x27;]}&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;max_speed&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speed exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;max_speed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if self.current_state[&quot;force&quot;] &gt; self.operational_limits[&quot;max_force&quot;]:
-            violations.append(f&quot;Force exceeded: {self.current_state[&#x27;force&#x27;]} &gt; {self.operational_limits[&#x27;max_force&#x27;]}&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;force&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;max_force&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Force exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;max_force&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if self.current_state[&quot;position&quot;] &gt; self.operational_limits[&quot;max_reach&quot;]:
-            violations.append(f&quot;Reach exceeded: {self.current_state[&#x27;position&#x27;]} &gt; {self.operational_limits[&#x27;max_reach&#x27;]}&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;max_reach&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reach exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;max_reach&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if self.current_state[&quot;temperature&quot;] &gt; self.operational_limits[&quot;temperature_limit&quot;]:
-            violations.append(f&quot;Temperature exceeded: {self.current_state[&#x27;temperature&#x27;]} &gt; {self.operational_limits[&#x27;temperature_limit&#x27;]}&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;temperature_limit&quot;</span><span class="p">]:</span>
+            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;temperature_limit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return violations
+        <span class="k">return</span> <span class="n">violations</span>
 
-    def comprehensive_safety_check(self, detected_humans=None):
-        &quot;&quot;&quot;Perform complete safety assessment&quot;&quot;&quot;
-        if detected_humans is None:
-            detected_humans = {}
+    <span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_safety_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detected_humans</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform complete safety assessment&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">detected_humans</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">detected_humans</span> <span class="o">=</span> <span class="p">{}</span>
 
-        print(&quot;🔒 Comprehensive Safety Check&quot;)
-        print(&quot;-&quot; * 40)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔒 Comprehensive Safety Check&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 
-        all_violations = []
+        <span class="n">all_violations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        # Check each safety system
-        zone_violations = self.check_safety_zones(detected_humans)
-        sensor_violations = self.check_sensor_status()
-        limit_violations = self.check_operational_limits()
+        <span class="c1"># Check each safety system</span>
+        <span class="n">zone_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_safety_zones</span><span class="p">(</span><span class="n">detected_humans</span><span class="p">)</span>
+        <span class="n">sensor_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_sensor_status</span><span class="p">()</span>
+        <span class="n">limit_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_operational_limits</span><span class="p">()</span>
 
-        all_violations.extend(zone_violations)
-        all_violations.extend(sensor_violations) 
-        all_violations.extend(limit_violations)
+        <span class="n">all_violations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">zone_violations</span><span class="p">)</span>
+        <span class="n">all_violations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sensor_violations</span><span class="p">)</span> 
+        <span class="n">all_violations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">limit_violations</span><span class="p">)</span>
 
-        # Report results
-        if not all_violations:
-            print(&quot;✅ All safety checks passed - Operation authorized&quot;)
-            return &quot;safe_to_operate&quot;
-        else:
-            print(&quot;❌ Safety violations detected:&quot;)
-            critical_violations = [v for v in all_violations if &quot;CRITICAL&quot; in v]
-            warning_violations = [v for v in all_violations if &quot;WARNING&quot; in v or &quot;CAUTION&quot; in v]
+        <span class="c1"># Report results</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">all_violations</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ All safety checks passed - Operation authorized&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;safe_to_operate&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Safety violations detected:&quot;</span><span class="p">)</span>
+            <span class="n">critical_violations</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_violations</span> <span class="k">if</span> <span class="s2">&quot;CRITICAL&quot;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
+            <span class="n">warning_violations</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_violations</span> <span class="k">if</span> <span class="s2">&quot;WARNING&quot;</span> <span class="ow">in</span> <span class="n">v</span> <span class="ow">or</span> <span class="s2">&quot;CAUTION&quot;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
 
-            for violation in critical_violations:
-                print(f&quot;   🚨 {violation}&quot;)
-            for violation in warning_violations:
-                print(f&quot;   ⚠️  {violation}&quot;)
+            <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">critical_violations</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   🚨 </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">warning_violations</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️  </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            if critical_violations:
-                return &quot;emergency_stop&quot;
-            else:
-                return &quot;restricted_operation&quot;
+            <span class="k">if</span> <span class="n">critical_violations</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;emergency_stop&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;restricted_operation&quot;</span>
 
-# Test the safety system
-safety_system = IndustrialRobotSafety()
+<span class="c1"># Test the safety system</span>
+<span class="n">safety_system</span> <span class="o">=</span> <span class="n">IndustrialRobotSafety</span><span class="p">()</span>
 
-# Test 1: Normal operation
-print(&quot;=== Test 1: Normal Operation ===&quot;)
-result = safety_system.comprehensive_safety_check()
-print(f&quot;Result: {result}\n&quot;)
+<span class="c1"># Test 1: Normal operation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test 1: Normal Operation ===&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">comprehensive_safety_check</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Test 2: Human in yellow zone
-print(&quot;=== Test 2: Human in Caution Zone ===&quot;)
-result = safety_system.comprehensive_safety_check({&quot;area_B&quot;: &quot;yellow_zone&quot;})
-print(f&quot;Result: {result}\n&quot;)
+<span class="c1"># Test 2: Human in yellow zone</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test 2: Human in Caution Zone ===&quot;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">comprehensive_safety_check</span><span class="p">({</span><span class="s2">&quot;area_B&quot;</span><span class="p">:</span> <span class="s2">&quot;yellow_zone&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Test 3: Critical violations
-print(&quot;=== Test 3: Critical Safety Violation ===&quot;)
-safety_system.safety_sensors[&quot;emergency_button&quot;][&quot;status&quot;] = &quot;pressed&quot;
-safety_system.current_state[&quot;speed&quot;] = 150  # Exceed speed limit
-result = safety_system.comprehensive_safety_check({&quot;area_A&quot;: &quot;red_zone&quot;})
-print(f&quot;Result: {result}&quot;)
+<span class="c1"># Test 3: Critical violations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test 3: Critical Safety Violation ===&quot;</span><span class="p">)</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">safety_sensors</span><span class="p">[</span><span class="s2">&quot;emergency_button&quot;</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pressed&quot;</span>
+<span class="n">safety_system</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># Exceed speed limit</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">comprehensive_safety_check</span><span class="p">({</span><span class="s2">&quot;area_A&quot;</span><span class="p">:</span> <span class="s2">&quot;red_zone&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="recap">Recap<a class="headerlink" href="#recap" title="Permanent link">&para;</a></h2>
@@ -2483,6 +2483,8 @@ print(f&quot;Result: {result}&quot;)
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

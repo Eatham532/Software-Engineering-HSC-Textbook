@@ -1935,233 +1935,233 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class WaterfallRequirementsPhase:
-    &quot;&quot;&quot;
-    Framework for managing the Requirements Analysis phase in Waterfall methodology.
-    Focuses on comprehensive documentation and stakeholder approval.
-    &quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">WaterfallRequirementsPhase</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Framework for managing the Requirements Analysis phase in Waterfall methodology.</span>
+<span class="sd">    Focuses on comprehensive documentation and stakeholder approval.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    def __init__(self, project_name):
-        self.project_name = project_name
-        self.requirements = []
-        self.stakeholders = []
-        self.acceptance_criteria = {}
-        self.phase_status = &quot;Not Started&quot;
-        self.approval_signatures = {}
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stakeholders</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_criteria</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phase_status</span> <span class="o">=</span> <span class="s2">&quot;Not Started&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">approval_signatures</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def add_requirement(self, req_id, description, type_category, priority, source):
-        &quot;&quot;&quot;
-        Document a system requirement with full traceability.
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_requirement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req_id</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">type_category</span><span class="p">,</span> <span class="n">priority</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Document a system requirement with full traceability.</span>
 
-        Args:
-            req_id: Unique requirement identifier (e.g., REQ-001)
-            description: Clear, unambiguous requirement description
-            type_category: Functional, Non-functional, or Constraint
-            priority: Critical, High, Medium, or Low
-            source: Stakeholder or document source of requirement
-        &quot;&quot;&quot;
-        requirement = {
-            &#x27;id&#x27;: req_id,
-            &#x27;description&#x27;: description,
-            &#x27;type&#x27;: type_category,
-            &#x27;priority&#x27;: priority,
-            &#x27;source&#x27;: source,
-            &#x27;status&#x27;: &#x27;Draft&#x27;,
-            &#x27;approval_date&#x27;: None,
-            &#x27;test_cases&#x27;: []
-        }
-        self.requirements.append(requirement)
+<span class="sd">        Args:</span>
+<span class="sd">            req_id: Unique requirement identifier (e.g., REQ-001)</span>
+<span class="sd">            description: Clear, unambiguous requirement description</span>
+<span class="sd">            type_category: Functional, Non-functional, or Constraint</span>
+<span class="sd">            priority: Critical, High, Medium, or Low</span>
+<span class="sd">            source: Stakeholder or document source of requirement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">requirement</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">req_id</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="n">type_category</span><span class="p">,</span>
+            <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">priority</span><span class="p">,</span>
+            <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">source</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Draft&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;approval_date&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;test_cases&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">requirement</span><span class="p">)</span>
 
-    def add_acceptance_criterion(self, req_id, criterion_description):
-        &quot;&quot;&quot;
-        Add acceptance criteria for a specific requirement.
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_acceptance_criterion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req_id</span><span class="p">,</span> <span class="n">criterion_description</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add acceptance criteria for a specific requirement.</span>
 
-        Args:
-            req_id: Requirement this criterion applies to
-            criterion_description: Specific, testable criterion
-        &quot;&quot;&quot;
-        if req_id not in self.acceptance_criteria:
-            self.acceptance_criteria[req_id] = []
-        self.acceptance_criteria[req_id].append(criterion_description)
+<span class="sd">        Args:</span>
+<span class="sd">            req_id: Requirement this criterion applies to</span>
+<span class="sd">            criterion_description: Specific, testable criterion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">req_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_criteria</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_criteria</span><span class="p">[</span><span class="n">req_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_criteria</span><span class="p">[</span><span class="n">req_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">criterion_description</span><span class="p">)</span>
 
-    def conduct_requirements_review(self, reviewer, requirements_approved):
-        &quot;&quot;&quot;
-        Formal review process for requirements approval.
+    <span class="k">def</span><span class="w"> </span><span class="nf">conduct_requirements_review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">requirements_approved</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Formal review process for requirements approval.</span>
 
-        Args:
-            reviewer: Name/role of person conducting review
-            requirements_approved: List of requirement IDs approved
-        &quot;&quot;&quot;
-        for req_id in requirements_approved:
-            # Find and approve the requirement
-            for req in self.requirements:
-                if req[&#x27;id&#x27;] == req_id:
-                    req[&#x27;status&#x27;] = &#x27;Approved&#x27;
-                    req[&#x27;approval_date&#x27;] = &#x27;2025-09-20&#x27;  # In practice, use current date
+<span class="sd">        Args:</span>
+<span class="sd">            reviewer: Name/role of person conducting review</span>
+<span class="sd">            requirements_approved: List of requirement IDs approved</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">req_id</span> <span class="ow">in</span> <span class="n">requirements_approved</span><span class="p">:</span>
+            <span class="c1"># Find and approve the requirement</span>
+            <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">req</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">req_id</span><span class="p">:</span>
+                    <span class="n">req</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Approved&#39;</span>
+                    <span class="n">req</span><span class="p">[</span><span class="s1">&#39;approval_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;2025-09-20&#39;</span>  <span class="c1"># In practice, use current date</span>
 
-        self.approval_signatures[reviewer] = {
-            &#x27;date&#x27;: &#x27;2025-09-20&#x27;,
-            &#x27;approved_requirements&#x27;: requirements_approved
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">approval_signatures</span><span class="p">[</span><span class="n">reviewer</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2025-09-20&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;approved_requirements&#39;</span><span class="p">:</span> <span class="n">requirements_approved</span>
+        <span class="p">}</span>
 
-    def generate_requirements_specification(self):
-        &quot;&quot;&quot;
-        Generate formal Requirements Specification Document.
-        Critical Waterfall artefact for next phase.
-        &quot;&quot;&quot;
-        rsd = f&quot;&quot;&quot;
-REQUIREMENTS SPECIFICATION DOCUMENT
-Project: {self.project_name}
-Version: 1.0
-Date: 2025-09-20
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_requirements_specification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate formal Requirements Specification Document.</span>
+<span class="sd">        Critical Waterfall artefact for next phase.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rsd</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">REQUIREMENTS SPECIFICATION DOCUMENT</span>
+<span class="s2">Project: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_name</span><span class="si">}</span>
+<span class="s2">Version: 1.0</span>
+<span class="s2">Date: 2025-09-20</span>
 
-1. INTRODUCTION
-This document specifies the functional and non-functional requirements 
-for {self.project_name}.
+<span class="s2">1. INTRODUCTION</span>
+<span class="s2">This document specifies the functional and non-functional requirements </span>
+<span class="s2">for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_name</span><span class="si">}</span><span class="s2">.</span>
 
-2. FUNCTIONAL REQUIREMENTS
-&quot;&quot;&quot;
+<span class="s2">2. FUNCTIONAL REQUIREMENTS</span>
+<span class="s2">&quot;&quot;&quot;</span>
 
-        functional_reqs = [r for r in self.requirements if r[&#x27;type&#x27;] == &#x27;Functional&#x27;]
-        for req in functional_reqs:
-            rsd += f&quot;\n{req[&#x27;id&#x27;]}: {req[&#x27;description&#x27;]}\n&quot;
-            rsd += f&quot;Priority: {req[&#x27;priority&#x27;]}\n&quot;
-            rsd += f&quot;Source: {req[&#x27;source&#x27;]}\n&quot;
+        <span class="n">functional_reqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Functional&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">functional_reqs</span><span class="p">:</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Priority: </span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Source: </span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-            if req[&#x27;id&#x27;] in self.acceptance_criteria:
-                rsd += &quot;Acceptance Criteria:\n&quot;
-                for criterion in self.acceptance_criteria[req[&#x27;id&#x27;]]:
-                    rsd += f&quot;  - {criterion}\n&quot;
-            rsd += &quot;\n&quot;
+            <span class="k">if</span> <span class="n">req</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_criteria</span><span class="p">:</span>
+                <span class="n">rsd</span> <span class="o">+=</span> <span class="s2">&quot;Acceptance Criteria:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">criterion</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance_criteria</span><span class="p">[</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]]:</span>
+                    <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">criterion</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-        rsd += &quot;\n3. NON-FUNCTIONAL REQUIREMENTS\n&quot;
-        non_functional_reqs = [r for r in self.requirements if r[&#x27;type&#x27;] == &#x27;Non-functional&#x27;]
-        for req in non_functional_reqs:
-            rsd += f&quot;\n{req[&#x27;id&#x27;]}: {req[&#x27;description&#x27;]}\n&quot;
-            rsd += f&quot;Priority: {req[&#x27;priority&#x27;]}\n&quot;
+        <span class="n">rsd</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. NON-FUNCTIONAL REQUIREMENTS</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">non_functional_reqs</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Non-functional&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">req</span> <span class="ow">in</span> <span class="n">non_functional_reqs</span><span class="p">:</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Priority: </span><span class="si">{</span><span class="n">req</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-        rsd += &quot;\n4. APPROVAL SIGNATURES\n&quot;
-        for reviewer, details in self.approval_signatures.items():
-            rsd += f&quot;{reviewer}: Approved on {details[&#x27;date&#x27;]}\n&quot;
+        <span class="n">rsd</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. APPROVAL SIGNATURES</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">details</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">approval_signatures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">rsd</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reviewer</span><span class="si">}</span><span class="s2">: Approved on </span><span class="si">{</span><span class="n">details</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
 
-        return rsd
+        <span class="k">return</span> <span class="n">rsd</span>
 
-    def check_phase_completion(self):
-        &quot;&quot;&quot;
-        Verify all requirements are approved before proceeding to design phase.
-        Critical Waterfall gate-keeping function.
-        &quot;&quot;&quot;
-        total_requirements = len(self.requirements)
-        approved_requirements = len([r for r in self.requirements if r[&#x27;status&#x27;] == &#x27;Approved&#x27;])
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_phase_completion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verify all requirements are approved before proceeding to design phase.</span>
+<span class="sd">        Critical Waterfall gate-keeping function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_requirements</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requirements</span><span class="p">)</span>
+        <span class="n">approved_requirements</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">requirements</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Approved&#39;</span><span class="p">])</span>
 
-        completion_status = {
-            &#x27;total_requirements&#x27;: total_requirements,
-            &#x27;approved_requirements&#x27;: approved_requirements,
-            &#x27;completion_percentage&#x27;: (approved_requirements / total_requirements) * 100 if total_requirements &gt; 0 else 0,
-            &#x27;ready_for_next_phase&#x27;: approved_requirements == total_requirements and len(self.approval_signatures) &gt;= 2
-        }
+        <span class="n">completion_status</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;total_requirements&#39;</span><span class="p">:</span> <span class="n">total_requirements</span><span class="p">,</span>
+            <span class="s1">&#39;approved_requirements&#39;</span><span class="p">:</span> <span class="n">approved_requirements</span><span class="p">,</span>
+            <span class="s1">&#39;completion_percentage&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">approved_requirements</span> <span class="o">/</span> <span class="n">total_requirements</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">total_requirements</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;ready_for_next_phase&#39;</span><span class="p">:</span> <span class="n">approved_requirements</span> <span class="o">==</span> <span class="n">total_requirements</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">approval_signatures</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span>
+        <span class="p">}</span>
 
-        return completion_status
+        <span class="k">return</span> <span class="n">completion_status</span>
 
-def demonstrate_requirements_phase():
-    &quot;&quot;&quot;
-    Practical example of Waterfall Requirements Analysis phase.
-    Shows comprehensive documentation and approval process.
-    &quot;&quot;&quot;
-    print(&quot;WATERFALL REQUIREMENTS PHASE EXAMPLE&quot;)
-    print(&quot;=&quot; * 38)
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_requirements_phase</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Practical example of Waterfall Requirements Analysis phase.</span>
+<span class="sd">    Shows comprehensive documentation and approval process.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WATERFALL REQUIREMENTS PHASE EXAMPLE&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">38</span><span class="p">)</span>
 
-    # Initialize requirements phase for school management system
-    req_phase = WaterfallRequirementsPhase(&quot;School Management System&quot;)
+    <span class="c1"># Initialize requirements phase for school management system</span>
+    <span class="n">req_phase</span> <span class="o">=</span> <span class="n">WaterfallRequirementsPhase</span><span class="p">(</span><span class="s2">&quot;School Management System&quot;</span><span class="p">)</span>
 
-    # Document functional requirements
-    req_phase.add_requirement(
-        &quot;REQ-001&quot;,
-        &quot;System shall authenticate users via username and password&quot;,
-        &quot;Functional&quot;,
-        &quot;Critical&quot;,
-        &quot;School Administration&quot;
-    )
+    <span class="c1"># Document functional requirements</span>
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_requirement</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;System shall authenticate users via username and password&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Functional&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;School Administration&quot;</span>
+    <span class="p">)</span>
 
-    req_phase.add_requirement(
-        &quot;REQ-002&quot;, 
-        &quot;Teachers shall be able to enter grades for students in their classes&quot;,
-        &quot;Functional&quot;,
-        &quot;High&quot;,
-        &quot;Teacher Stakeholder Group&quot;
-    )
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_requirement</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-002&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;Teachers shall be able to enter grades for students in their classes&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Functional&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Teacher Stakeholder Group&quot;</span>
+    <span class="p">)</span>
 
-    req_phase.add_requirement(
-        &quot;REQ-003&quot;,
-        &quot;Students shall be able to view their current grades and attendance&quot;,
-        &quot;Functional&quot;, 
-        &quot;High&quot;,
-        &quot;Student Representative&quot;
-    )
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_requirement</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-003&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Students shall be able to view their current grades and attendance&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Functional&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Student Representative&quot;</span>
+    <span class="p">)</span>
 
-    # Document non-functional requirements
-    req_phase.add_requirement(
-        &quot;REQ-004&quot;,
-        &quot;System shall respond to user requests within 2 seconds under normal load&quot;,
-        &quot;Non-functional&quot;,
-        &quot;Medium&quot;,
-        &quot;IT Department&quot;
-    )
+    <span class="c1"># Document non-functional requirements</span>
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_requirement</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-004&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;System shall respond to user requests within 2 seconds under normal load&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Non-functional&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;IT Department&quot;</span>
+    <span class="p">)</span>
 
-    req_phase.add_requirement(
-        &quot;REQ-005&quot;,
-        &quot;System shall be available 99.5% of time during school hours&quot;,
-        &quot;Non-functional&quot;,
-        &quot;High&quot;, 
-        &quot;School Administration&quot;
-    )
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_requirement</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-005&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;System shall be available 99.5</span><span class="si">% o</span><span class="s2">f time during school hours&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Non-functional&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;High&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;School Administration&quot;</span>
+    <span class="p">)</span>
 
-    # Add acceptance criteria
-    req_phase.add_acceptance_criterion(
-        &quot;REQ-001&quot;,
-        &quot;Failed login attempts are logged and limited to 3 per account per 15 minutes&quot;
-    )
+    <span class="c1"># Add acceptance criteria</span>
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_acceptance_criterion</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Failed login attempts are logged and limited to 3 per account per 15 minutes&quot;</span>
+    <span class="p">)</span>
 
-    req_phase.add_acceptance_criterion(
-        &quot;REQ-002&quot;,
-        &quot;Grade changes are logged with timestamp and teacher identification&quot;
-    )
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_acceptance_criterion</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-002&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Grade changes are logged with timestamp and teacher identification&quot;</span>
+    <span class="p">)</span>
 
-    req_phase.add_acceptance_criterion(
-        &quot;REQ-003&quot;, 
-        &quot;Students can only access their own academic records&quot;
-    )
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">add_acceptance_criterion</span><span class="p">(</span>
+        <span class="s2">&quot;REQ-003&quot;</span><span class="p">,</span> 
+        <span class="s2">&quot;Students can only access their own academic records&quot;</span>
+    <span class="p">)</span>
 
-    # Conduct formal review and approval
-    req_phase.conduct_requirements_review(
-        &quot;Project Manager&quot;, 
-        [&quot;REQ-001&quot;, &quot;REQ-002&quot;, &quot;REQ-003&quot;, &quot;REQ-004&quot;, &quot;REQ-005&quot;]
-    )
+    <span class="c1"># Conduct formal review and approval</span>
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">conduct_requirements_review</span><span class="p">(</span>
+        <span class="s2">&quot;Project Manager&quot;</span><span class="p">,</span> 
+        <span class="p">[</span><span class="s2">&quot;REQ-001&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-002&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-003&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-004&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-005&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
 
-    req_phase.conduct_requirements_review(
-        &quot;Business Analyst&quot;,
-        [&quot;REQ-001&quot;, &quot;REQ-002&quot;, &quot;REQ-003&quot;, &quot;REQ-004&quot;, &quot;REQ-005&quot;]
-    )
+    <span class="n">req_phase</span><span class="o">.</span><span class="n">conduct_requirements_review</span><span class="p">(</span>
+        <span class="s2">&quot;Business Analyst&quot;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;REQ-001&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-002&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-003&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-004&quot;</span><span class="p">,</span> <span class="s2">&quot;REQ-005&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
 
-    # Check phase completion
-    completion = req_phase.check_phase_completion()
+    <span class="c1"># Check phase completion</span>
+    <span class="n">completion</span> <span class="o">=</span> <span class="n">req_phase</span><span class="o">.</span><span class="n">check_phase_completion</span><span class="p">()</span>
 
-    print(f&quot;Requirements Analysis Phase Status:&quot;)
-    print(f&quot;Total Requirements: {completion[&#x27;total_requirements&#x27;]}&quot;)
-    print(f&quot;Approved Requirements: {completion[&#x27;approved_requirements&#x27;]}&quot;)
-    print(f&quot;Completion: {completion[&#x27;completion_percentage&#x27;]:.1f}%&quot;)
-    print(f&quot;Ready for Design Phase: {completion[&#x27;ready_for_next_phase&#x27;]}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Requirements Analysis Phase Status:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Requirements: </span><span class="si">{</span><span class="n">completion</span><span class="p">[</span><span class="s1">&#39;total_requirements&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Approved Requirements: </span><span class="si">{</span><span class="n">completion</span><span class="p">[</span><span class="s1">&#39;approved_requirements&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completion: </span><span class="si">{</span><span class="n">completion</span><span class="p">[</span><span class="s1">&#39;completion_percentage&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ready for Design Phase: </span><span class="si">{</span><span class="n">completion</span><span class="p">[</span><span class="s1">&#39;ready_for_next_phase&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    if completion[&#x27;ready_for_next_phase&#x27;]:
-        print(&quot;\n✅ Requirements phase complete - proceed to System Design&quot;)
-    else:
-        print(&quot;\n❌ Requirements phase incomplete - address approvals before proceeding&quot;)
+    <span class="k">if</span> <span class="n">completion</span><span class="p">[</span><span class="s1">&#39;ready_for_next_phase&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">✅ Requirements phase complete - proceed to System Design&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">❌ Requirements phase incomplete - address approvals before proceeding&quot;</span><span class="p">)</span>
 
-    return req_phase
+    <span class="k">return</span> <span class="n">req_phase</span>
 
-# Run demonstration
-if __name__ == &quot;__main__&quot;:
-    requirements_demo = demonstrate_requirements_phase()
+<span class="c1"># Run demonstration</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">requirements_demo</span> <span class="o">=</span> <span class="n">demonstrate_requirements_phase</span><span class="p">()</span>
 </code></pre>
 </div>
 <h4 id="phase-2-system-design">Phase 2: System Design<a class="headerlink" href="#phase-2-system-design" title="Permanent link">&para;</a></h4>
@@ -2380,218 +2380,218 @@ if __name__ == &quot;__main__&quot;:
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class WaterfallBenefitsAnalysis:
-    &quot;&quot;&quot;
-    Framework for evaluating the benefits of Waterfall methodology
-    for specific project contexts and organizational needs.
-    &quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">WaterfallBenefitsAnalysis</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Framework for evaluating the benefits of Waterfall methodology</span>
+<span class="sd">    for specific project contexts and organizational needs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    def __init__(self, project_name):
-        self.project_name = project_name
-        self.project_characteristics = {}
-        self.organizational_factors = {}
-        self.benefit_ratings = {}
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">benefit_ratings</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def assess_project_characteristics(self, requirements_stability, timeline_pressure, 
-                                     complexity_level, regulatory_requirements):
-        &quot;&quot;&quot;
-        Evaluate project characteristics that influence Waterfall suitability.
+    <span class="k">def</span><span class="w"> </span><span class="nf">assess_project_characteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requirements_stability</span><span class="p">,</span> <span class="n">timeline_pressure</span><span class="p">,</span> 
+                                     <span class="n">complexity_level</span><span class="p">,</span> <span class="n">regulatory_requirements</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate project characteristics that influence Waterfall suitability.</span>
 
-        Args:
-            requirements_stability: High/Medium/Low - how stable are requirements
-            timeline_pressure: High/Medium/Low - pressure for quick delivery
-            complexity_level: High/Medium/Low - technical and business complexity
-            regulatory_requirements: High/Medium/Low - compliance and audit needs
-        &quot;&quot;&quot;
-        self.project_characteristics = {
-            &#x27;requirements_stability&#x27;: requirements_stability,
-            &#x27;timeline_pressure&#x27;: timeline_pressure,
-            &#x27;complexity_level&#x27;: complexity_level,
-            &#x27;regulatory_requirements&#x27;: regulatory_requirements
-        }
+<span class="sd">        Args:</span>
+<span class="sd">            requirements_stability: High/Medium/Low - how stable are requirements</span>
+<span class="sd">            timeline_pressure: High/Medium/Low - pressure for quick delivery</span>
+<span class="sd">            complexity_level: High/Medium/Low - technical and business complexity</span>
+<span class="sd">            regulatory_requirements: High/Medium/Low - compliance and audit needs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;requirements_stability&#39;</span><span class="p">:</span> <span class="n">requirements_stability</span><span class="p">,</span>
+            <span class="s1">&#39;timeline_pressure&#39;</span><span class="p">:</span> <span class="n">timeline_pressure</span><span class="p">,</span>
+            <span class="s1">&#39;complexity_level&#39;</span><span class="p">:</span> <span class="n">complexity_level</span><span class="p">,</span>
+            <span class="s1">&#39;regulatory_requirements&#39;</span><span class="p">:</span> <span class="n">regulatory_requirements</span>
+        <span class="p">}</span>
 
-    def assess_organizational_factors(self, team_experience, client_involvement, 
-                                    documentation_culture, change_tolerance):
-        &quot;&quot;&quot;
-        Evaluate organizational factors that affect Waterfall success.
+    <span class="k">def</span><span class="w"> </span><span class="nf">assess_organizational_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_experience</span><span class="p">,</span> <span class="n">client_involvement</span><span class="p">,</span> 
+                                    <span class="n">documentation_culture</span><span class="p">,</span> <span class="n">change_tolerance</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate organizational factors that affect Waterfall success.</span>
 
-        Args:
-            team_experience: High/Medium/Low - team&#x27;s Waterfall experience
-            client_involvement: High/Medium/Low - client availability for reviews
-            documentation_culture: High/Medium/Low - organization values documentation
-            change_tolerance: High/Medium/Low - tolerance for late-stage changes
-        &quot;&quot;&quot;
-        self.organizational_factors = {
-            &#x27;team_experience&#x27;: team_experience,
-            &#x27;client_involvement&#x27;: client_involvement,
-            &#x27;documentation_culture&#x27;: documentation_culture,
-            &#x27;change_tolerance&#x27;: change_tolerance
-        }
+<span class="sd">        Args:</span>
+<span class="sd">            team_experience: High/Medium/Low - team&#39;s Waterfall experience</span>
+<span class="sd">            client_involvement: High/Medium/Low - client availability for reviews</span>
+<span class="sd">            documentation_culture: High/Medium/Low - organization values documentation</span>
+<span class="sd">            change_tolerance: High/Medium/Low - tolerance for late-stage changes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;team_experience&#39;</span><span class="p">:</span> <span class="n">team_experience</span><span class="p">,</span>
+            <span class="s1">&#39;client_involvement&#39;</span><span class="p">:</span> <span class="n">client_involvement</span><span class="p">,</span>
+            <span class="s1">&#39;documentation_culture&#39;</span><span class="p">:</span> <span class="n">documentation_culture</span><span class="p">,</span>
+            <span class="s1">&#39;change_tolerance&#39;</span><span class="p">:</span> <span class="n">change_tolerance</span>
+        <span class="p">}</span>
 
-    def calculate_waterfall_suitability(self):
-        &quot;&quot;&quot;
-        Calculate overall suitability score for Waterfall methodology.
-        Returns score from 0-100 and recommendation.
-        &quot;&quot;&quot;
-        # Scoring weights for different factors
-        characteristic_weights = {
-            &#x27;requirements_stability&#x27;: 25,
-            &#x27;regulatory_requirements&#x27;: 20,
-            &#x27;complexity_level&#x27;: 15,
-            &#x27;timeline_pressure&#x27;: 10
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_waterfall_suitability</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate overall suitability score for Waterfall methodology.</span>
+<span class="sd">        Returns score from 0-100 and recommendation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Scoring weights for different factors</span>
+        <span class="n">characteristic_weights</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;requirements_stability&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+            <span class="s1">&#39;regulatory_requirements&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s1">&#39;complexity_level&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="s1">&#39;timeline_pressure&#39;</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">}</span>
 
-        organizational_weights = {
-            &#x27;documentation_culture&#x27;: 15,
-            &#x27;team_experience&#x27;: 10,
-            &#x27;client_involvement&#x27;: 5
-        }
+        <span class="n">organizational_weights</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;documentation_culture&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="s1">&#39;team_experience&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="s1">&#39;client_involvement&#39;</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="p">}</span>
 
-        # Convert ratings to scores (High=3, Medium=2, Low=1)
-        rating_values = {&#x27;High&#x27;: 3, &#x27;Medium&#x27;: 2, &#x27;Low&#x27;: 1}
+        <span class="c1"># Convert ratings to scores (High=3, Medium=2, Low=1)</span>
+        <span class="n">rating_values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;High&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Medium&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
 
-        total_score = 0
-        max_possible = 0
+        <span class="n">total_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">max_possible</span> <span class="o">=</span> <span class="mi">0</span>
 
-        # Calculate project characteristics score
-        for factor, weight in characteristic_weights.items():
-            if factor in self.project_characteristics:
-                # For timeline_pressure, lower is better for Waterfall
-                if factor == &#x27;timeline_pressure&#x27;:
-                    score = 4 - rating_values[self.project_characteristics[factor]]
-                else:
-                    score = rating_values[self.project_characteristics[factor]]
-                total_score += score * weight
-            max_possible += 3 * weight
+        <span class="c1"># Calculate project characteristics score</span>
+        <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">characteristic_weights</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">factor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="p">:</span>
+                <span class="c1"># For timeline_pressure, lower is better for Waterfall</span>
+                <span class="k">if</span> <span class="n">factor</span> <span class="o">==</span> <span class="s1">&#39;timeline_pressure&#39;</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">-</span> <span class="n">rating_values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="p">[</span><span class="n">factor</span><span class="p">]]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="n">rating_values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="p">[</span><span class="n">factor</span><span class="p">]]</span>
+                <span class="n">total_score</span> <span class="o">+=</span> <span class="n">score</span> <span class="o">*</span> <span class="n">weight</span>
+            <span class="n">max_possible</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">weight</span>
 
-        # Calculate organizational factors score
-        for factor, weight in organizational_weights.items():
-            if factor in self.organizational_factors:
-                # For change_tolerance, lower is better for Waterfall
-                if factor == &#x27;change_tolerance&#x27;:
-                    score = 4 - rating_values[self.organizational_factors[factor]]
-                else:
-                    score = rating_values[self.organizational_factors[factor]]
-                total_score += score * weight
-            max_possible += 3 * weight
+        <span class="c1"># Calculate organizational factors score</span>
+        <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="n">organizational_weights</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">factor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span><span class="p">:</span>
+                <span class="c1"># For change_tolerance, lower is better for Waterfall</span>
+                <span class="k">if</span> <span class="n">factor</span> <span class="o">==</span> <span class="s1">&#39;change_tolerance&#39;</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">-</span> <span class="n">rating_values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span><span class="p">[</span><span class="n">factor</span><span class="p">]]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">score</span> <span class="o">=</span> <span class="n">rating_values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span><span class="p">[</span><span class="n">factor</span><span class="p">]]</span>
+                <span class="n">total_score</span> <span class="o">+=</span> <span class="n">score</span> <span class="o">*</span> <span class="n">weight</span>
+            <span class="n">max_possible</span> <span class="o">+=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">weight</span>
 
-        # Convert to percentage
-        suitability_percentage = (total_score / max_possible) * 100 if max_possible &gt; 0 else 0
+        <span class="c1"># Convert to percentage</span>
+        <span class="n">suitability_percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_score</span> <span class="o">/</span> <span class="n">max_possible</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">max_possible</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
-        # Generate recommendation
-        if suitability_percentage &gt;= 80:
-            recommendation = &quot;Highly Suitable - Waterfall strongly recommended&quot;
-        elif suitability_percentage &gt;= 65:
-            recommendation = &quot;Suitable - Waterfall appropriate with careful planning&quot;
-        elif suitability_percentage &gt;= 50:
-            recommendation = &quot;Moderately Suitable - Consider hybrid approach&quot;
-        else:
-            recommendation = &quot;Not Suitable - Consider Agile or other methodologies&quot;
+        <span class="c1"># Generate recommendation</span>
+        <span class="k">if</span> <span class="n">suitability_percentage</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="n">recommendation</span> <span class="o">=</span> <span class="s2">&quot;Highly Suitable - Waterfall strongly recommended&quot;</span>
+        <span class="k">elif</span> <span class="n">suitability_percentage</span> <span class="o">&gt;=</span> <span class="mi">65</span><span class="p">:</span>
+            <span class="n">recommendation</span> <span class="o">=</span> <span class="s2">&quot;Suitable - Waterfall appropriate with careful planning&quot;</span>
+        <span class="k">elif</span> <span class="n">suitability_percentage</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">:</span>
+            <span class="n">recommendation</span> <span class="o">=</span> <span class="s2">&quot;Moderately Suitable - Consider hybrid approach&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">recommendation</span> <span class="o">=</span> <span class="s2">&quot;Not Suitable - Consider Agile or other methodologies&quot;</span>
 
-        return {
-            &#x27;suitability_score&#x27;: suitability_percentage,
-            &#x27;recommendation&#x27;: recommendation,
-            &#x27;key_benefits&#x27;: self._identify_key_benefits(),
-            &#x27;potential_risks&#x27;: self._identify_potential_risks()
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;suitability_score&#39;</span><span class="p">:</span> <span class="n">suitability_percentage</span><span class="p">,</span>
+            <span class="s1">&#39;recommendation&#39;</span><span class="p">:</span> <span class="n">recommendation</span><span class="p">,</span>
+            <span class="s1">&#39;key_benefits&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_identify_key_benefits</span><span class="p">(),</span>
+            <span class="s1">&#39;potential_risks&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_identify_potential_risks</span><span class="p">()</span>
+        <span class="p">}</span>
 
-    def _identify_key_benefits(self):
-        &quot;&quot;&quot;Identify the primary benefits for this specific project context.&quot;&quot;&quot;
-        benefits = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">_identify_key_benefits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify the primary benefits for this specific project context.&quot;&quot;&quot;</span>
+        <span class="n">benefits</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if self.project_characteristics.get(&#x27;requirements_stability&#x27;) == &#x27;High&#x27;:
-            benefits.append(&quot;Stable requirements allow comprehensive upfront planning&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;requirements_stability&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span>
+            <span class="n">benefits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Stable requirements allow comprehensive upfront planning&quot;</span><span class="p">)</span>
 
-        if self.project_characteristics.get(&#x27;regulatory_requirements&#x27;) == &#x27;High&#x27;:
-            benefits.append(&quot;Comprehensive documentation supports compliance needs&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;regulatory_requirements&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span>
+            <span class="n">benefits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Comprehensive documentation supports compliance needs&quot;</span><span class="p">)</span>
 
-        if self.organizational_factors.get(&#x27;documentation_culture&#x27;) == &#x27;High&#x27;:
-            benefits.append(&quot;Organization values and can maintain comprehensive documentation&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;documentation_culture&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span>
+            <span class="n">benefits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Organization values and can maintain comprehensive documentation&quot;</span><span class="p">)</span>
 
-        if self.project_characteristics.get(&#x27;complexity_level&#x27;) == &#x27;High&#x27;:
-            benefits.append(&quot;Structured approach helps manage complexity systematically&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;complexity_level&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span>
+            <span class="n">benefits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Structured approach helps manage complexity systematically&quot;</span><span class="p">)</span>
 
-        return benefits
+        <span class="k">return</span> <span class="n">benefits</span>
 
-    def _identify_potential_risks(self):
-        &quot;&quot;&quot;Identify the primary risks for this specific project context.&quot;&quot;&quot;
-        risks = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">_identify_potential_risks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify the primary risks for this specific project context.&quot;&quot;&quot;</span>
+        <span class="n">risks</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if self.project_characteristics.get(&#x27;timeline_pressure&#x27;) == &#x27;High&#x27;:
-            risks.append(&quot;Sequential phases may delay delivery under time pressure&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;timeline_pressure&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span>
+            <span class="n">risks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Sequential phases may delay delivery under time pressure&quot;</span><span class="p">)</span>
 
-        if self.project_characteristics.get(&#x27;requirements_stability&#x27;) == &#x27;Low&#x27;:
-            risks.append(&quot;Requirements changes will be expensive and disruptive&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_characteristics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;requirements_stability&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span>
+            <span class="n">risks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Requirements changes will be expensive and disruptive&quot;</span><span class="p">)</span>
 
-        if self.organizational_factors.get(&#x27;client_involvement&#x27;) == &#x27;Low&#x27;:
-            risks.append(&quot;Limited client feedback may lead to misaligned solution&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;client_involvement&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span>
+            <span class="n">risks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Limited client feedback may lead to misaligned solution&quot;</span><span class="p">)</span>
 
-        if self.organizational_factors.get(&#x27;team_experience&#x27;) == &#x27;Low&#x27;:
-            risks.append(&quot;Team inexperience with Waterfall may impact execution quality&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">organizational_factors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;team_experience&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span>
+            <span class="n">risks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Team inexperience with Waterfall may impact execution quality&quot;</span><span class="p">)</span>
 
-        return risks
+        <span class="k">return</span> <span class="n">risks</span>
 
-def demonstrate_waterfall_suitability():
-    &quot;&quot;&quot;
-    Practical example of evaluating Waterfall suitability for different project types.
-    &quot;&quot;&quot;
-    print(&quot;WATERFALL SUITABILITY ANALYSIS&quot;)
-    print(&quot;=&quot; * 32)
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_waterfall_suitability</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Practical example of evaluating Waterfall suitability for different project types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WATERFALL SUITABILITY ANALYSIS&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">32</span><span class="p">)</span>
 
-    # Example 1: Government compliance system
-    gov_project = WaterfallBenefitsAnalysis(&quot;Government Compliance System&quot;)
-    gov_project.assess_project_characteristics(
-        requirements_stability=&quot;High&quot;,
-        timeline_pressure=&quot;Low&quot;, 
-        complexity_level=&quot;High&quot;,
-        regulatory_requirements=&quot;High&quot;
-    )
-    gov_project.assess_organizational_factors(
-        team_experience=&quot;High&quot;,
-        client_involvement=&quot;Medium&quot;,
-        documentation_culture=&quot;High&quot;,
-        change_tolerance=&quot;Low&quot;
-    )
+    <span class="c1"># Example 1: Government compliance system</span>
+    <span class="n">gov_project</span> <span class="o">=</span> <span class="n">WaterfallBenefitsAnalysis</span><span class="p">(</span><span class="s2">&quot;Government Compliance System&quot;</span><span class="p">)</span>
+    <span class="n">gov_project</span><span class="o">.</span><span class="n">assess_project_characteristics</span><span class="p">(</span>
+        <span class="n">requirements_stability</span><span class="o">=</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="n">timeline_pressure</span><span class="o">=</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span> 
+        <span class="n">complexity_level</span><span class="o">=</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="n">regulatory_requirements</span><span class="o">=</span><span class="s2">&quot;High&quot;</span>
+    <span class="p">)</span>
+    <span class="n">gov_project</span><span class="o">.</span><span class="n">assess_organizational_factors</span><span class="p">(</span>
+        <span class="n">team_experience</span><span class="o">=</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="n">client_involvement</span><span class="o">=</span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+        <span class="n">documentation_culture</span><span class="o">=</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="n">change_tolerance</span><span class="o">=</span><span class="s2">&quot;Low&quot;</span>
+    <span class="p">)</span>
 
-    gov_analysis = gov_project.calculate_waterfall_suitability()
+    <span class="n">gov_analysis</span> <span class="o">=</span> <span class="n">gov_project</span><span class="o">.</span><span class="n">calculate_waterfall_suitability</span><span class="p">()</span>
 
-    print(&quot;PROJECT: Government Compliance System&quot;)
-    print(f&quot;Suitability Score: {gov_analysis[&#x27;suitability_score&#x27;]:.1f}%&quot;)
-    print(f&quot;Recommendation: {gov_analysis[&#x27;recommendation&#x27;]}&quot;)
-    print(&quot;Key Benefits:&quot;)
-    for benefit in gov_analysis[&#x27;key_benefits&#x27;]:
-        print(f&quot;  • {benefit}&quot;)
-    print()
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PROJECT: Government Compliance System&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Suitability Score: </span><span class="si">{</span><span class="n">gov_analysis</span><span class="p">[</span><span class="s1">&#39;suitability_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommendation: </span><span class="si">{</span><span class="n">gov_analysis</span><span class="p">[</span><span class="s1">&#39;recommendation&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key Benefits:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">benefit</span> <span class="ow">in</span> <span class="n">gov_analysis</span><span class="p">[</span><span class="s1">&#39;key_benefits&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">benefit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
 
-    # Example 2: Startup mobile app
-    startup_project = WaterfallBenefitsAnalysis(&quot;Startup Mobile App&quot;)
-    startup_project.assess_project_characteristics(
-        requirements_stability=&quot;Low&quot;,
-        timeline_pressure=&quot;High&quot;,
-        complexity_level=&quot;Medium&quot;, 
-        regulatory_requirements=&quot;Low&quot;
-    )
-    startup_project.assess_organizational_factors(
-        team_experience=&quot;Low&quot;,
-        client_involvement=&quot;High&quot;,
-        documentation_culture=&quot;Low&quot;,
-        change_tolerance=&quot;High&quot;
-    )
+    <span class="c1"># Example 2: Startup mobile app</span>
+    <span class="n">startup_project</span> <span class="o">=</span> <span class="n">WaterfallBenefitsAnalysis</span><span class="p">(</span><span class="s2">&quot;Startup Mobile App&quot;</span><span class="p">)</span>
+    <span class="n">startup_project</span><span class="o">.</span><span class="n">assess_project_characteristics</span><span class="p">(</span>
+        <span class="n">requirements_stability</span><span class="o">=</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+        <span class="n">timeline_pressure</span><span class="o">=</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="n">complexity_level</span><span class="o">=</span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span> 
+        <span class="n">regulatory_requirements</span><span class="o">=</span><span class="s2">&quot;Low&quot;</span>
+    <span class="p">)</span>
+    <span class="n">startup_project</span><span class="o">.</span><span class="n">assess_organizational_factors</span><span class="p">(</span>
+        <span class="n">team_experience</span><span class="o">=</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+        <span class="n">client_involvement</span><span class="o">=</span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
+        <span class="n">documentation_culture</span><span class="o">=</span><span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+        <span class="n">change_tolerance</span><span class="o">=</span><span class="s2">&quot;High&quot;</span>
+    <span class="p">)</span>
 
-    startup_analysis = startup_project.calculate_waterfall_suitability()
+    <span class="n">startup_analysis</span> <span class="o">=</span> <span class="n">startup_project</span><span class="o">.</span><span class="n">calculate_waterfall_suitability</span><span class="p">()</span>
 
-    print(&quot;PROJECT: Startup Mobile App&quot;)
-    print(f&quot;Suitability Score: {startup_analysis[&#x27;suitability_score&#x27;]:.1f}%&quot;)
-    print(f&quot;Recommendation: {startup_analysis[&#x27;recommendation&#x27;]}&quot;)
-    print(&quot;Potential Risks:&quot;)
-    for risk in startup_analysis[&#x27;potential_risks&#x27;]:
-        print(f&quot;  • {risk}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PROJECT: Startup Mobile App&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Suitability Score: </span><span class="si">{</span><span class="n">startup_analysis</span><span class="p">[</span><span class="s1">&#39;suitability_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommendation: </span><span class="si">{</span><span class="n">startup_analysis</span><span class="p">[</span><span class="s1">&#39;recommendation&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Potential Risks:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">risk</span> <span class="ow">in</span> <span class="n">startup_analysis</span><span class="p">[</span><span class="s1">&#39;potential_risks&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">risk</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    return [gov_project, startup_project]
+    <span class="k">return</span> <span class="p">[</span><span class="n">gov_project</span><span class="p">,</span> <span class="n">startup_project</span><span class="p">]</span>
 
-# Run demonstration
-if __name__ == &quot;__main__&quot;:
-    suitability_examples = demonstrate_waterfall_suitability()
+<span class="c1"># Run demonstration</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">suitability_examples</span> <span class="o">=</span> <span class="n">demonstrate_waterfall_suitability</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="risks-and-challenges-of-waterfall">Risks and challenges of Waterfall<a class="headerlink" href="#risks-and-challenges-of-waterfall" title="Permanent link">&para;</a></h3>
@@ -2750,33 +2750,33 @@ if __name__ == &quot;__main__&quot;:
 <summary>Sample solution framework</summary>
 <p>Here&rsquo;s a framework for completing the practice tasks:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Task completion template
-def complete_waterfall_analysis(project_name, project_type):
-    &quot;&quot;&quot;Template for comprehensive Waterfall methodology analysis.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># Task completion template</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_waterfall_analysis</span><span class="p">(</span><span class="n">project_name</span><span class="p">,</span> <span class="n">project_type</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Template for comprehensive Waterfall methodology analysis.&quot;&quot;&quot;</span>
 
-    # Task 1: Phase Planning
-    phases = {
-        &#x27;Requirements&#x27;: {&#x27;duration&#x27;: &#x27;4 weeks&#x27;, &#x27;key_artefacts&#x27;: [&#x27;RSD&#x27;, &#x27;Acceptance Criteria&#x27;]},
-        &#x27;Design&#x27;: {&#x27;duration&#x27;: &#x27;6 weeks&#x27;, &#x27;key_artefacts&#x27;: [&#x27;SAD&#x27;, &#x27;Database Design&#x27;]},
-        &#x27;Implementation&#x27;: {&#x27;duration&#x27;: &#x27;12 weeks&#x27;, &#x27;key_artefacts&#x27;: [&#x27;Source Code&#x27;, &#x27;Unit Tests&#x27;]},
-        &#x27;Testing&#x27;: {&#x27;duration&#x27;: &#x27;4 weeks&#x27;, &#x27;key_artefacts&#x27;: [&#x27;Test Plans&#x27;, &#x27;Test Results&#x27;]},
-        &#x27;Deployment&#x27;: {&#x27;duration&#x27;: &#x27;2 weeks&#x27;, &#x27;key_artefacts&#x27;: [&#x27;Deployment Guide&#x27;, &#x27;User Manual&#x27;]},
-        &#x27;Maintenance&#x27;: {&#x27;duration&#x27;: &#x27;Ongoing&#x27;, &#x27;key_artefacts&#x27;: [&#x27;Support Procedures&#x27;, &#x27;Change Log&#x27;]}
-    }
+    <span class="c1"># Task 1: Phase Planning</span>
+    <span class="n">phases</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Requirements&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="s1">&#39;4 weeks&#39;</span><span class="p">,</span> <span class="s1">&#39;key_artefacts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;RSD&#39;</span><span class="p">,</span> <span class="s1">&#39;Acceptance Criteria&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;Design&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="s1">&#39;6 weeks&#39;</span><span class="p">,</span> <span class="s1">&#39;key_artefacts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;SAD&#39;</span><span class="p">,</span> <span class="s1">&#39;Database Design&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;Implementation&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="s1">&#39;12 weeks&#39;</span><span class="p">,</span> <span class="s1">&#39;key_artefacts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Source Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Unit Tests&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;Testing&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="s1">&#39;4 weeks&#39;</span><span class="p">,</span> <span class="s1">&#39;key_artefacts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Test Plans&#39;</span><span class="p">,</span> <span class="s1">&#39;Test Results&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;Deployment&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="s1">&#39;2 weeks&#39;</span><span class="p">,</span> <span class="s1">&#39;key_artefacts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Deployment Guide&#39;</span><span class="p">,</span> <span class="s1">&#39;User Manual&#39;</span><span class="p">]},</span>
+        <span class="s1">&#39;Maintenance&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;duration&#39;</span><span class="p">:</span> <span class="s1">&#39;Ongoing&#39;</span><span class="p">,</span> <span class="s1">&#39;key_artefacts&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Support Procedures&#39;</span><span class="p">,</span> <span class="s1">&#39;Change Log&#39;</span><span class="p">]}</span>
+    <span class="p">}</span>
 
-    # Task 2: Requirements Phase
-    req_phase = WaterfallRequirementsPhase(project_name)
-    # Add your requirements, criteria, and approvals here...
+    <span class="c1"># Task 2: Requirements Phase</span>
+    <span class="n">req_phase</span> <span class="o">=</span> <span class="n">WaterfallRequirementsPhase</span><span class="p">(</span><span class="n">project_name</span><span class="p">)</span>
+    <span class="c1"># Add your requirements, criteria, and approvals here...</span>
 
-    # Task 3: Suitability Analysis
-    suitability = WaterfallBenefitsAnalysis(project_name)
-    # Assess characteristics and factors here...
+    <span class="c1"># Task 3: Suitability Analysis</span>
+    <span class="n">suitability</span> <span class="o">=</span> <span class="n">WaterfallBenefitsAnalysis</span><span class="p">(</span><span class="n">project_name</span><span class="p">)</span>
+    <span class="c1"># Assess characteristics and factors here...</span>
 
-    return {
-        &#x27;phase_plan&#x27;: phases,
-        &#x27;requirements&#x27;: req_phase,
-        &#x27;suitability&#x27;: suitability
-    }
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;phase_plan&#39;</span><span class="p">:</span> <span class="n">phases</span><span class="p">,</span>
+        <span class="s1">&#39;requirements&#39;</span><span class="p">:</span> <span class="n">req_phase</span><span class="p">,</span>
+        <span class="s1">&#39;suitability&#39;</span><span class="p">:</span> <span class="n">suitability</span>
+    <span class="p">}</span>
 </code></pre>
 </div>
 <p>Use this template to structure your analysis and ensure comprehensive coverage of all Waterfall aspects.</p>
@@ -3051,6 +3051,8 @@ def complete_waterfall_analysis(project_name, project_type):
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

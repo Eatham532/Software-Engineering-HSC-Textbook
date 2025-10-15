@@ -1719,71 +1719,71 @@
 <h3 id="understanding-user-psychology">Understanding User Psychology<a class="headerlink" href="#understanding-user-psychology" title="Permanent link">&para;</a></h3>
 <p>People&rsquo;s reactions to automated decisions and interfaces are deeply rooted in psychological principles. These responses can significantly impact system adoption and effectiveness.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class UserPsychologyModel:
-    &quot;&quot;&quot;Model user psychological responses to automation&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">UserPsychologyModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model user psychological responses to automation&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.trust_level = 50  # Initial neutral trust (0-100)
-        self.comfort_with_automation = 30
-        self.perceived_control = 70
-        self.anxiety_level = 20
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Initial neutral trust (0-100)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">=</span> <span class="mi">30</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">=</span> <span class="mi">70</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">=</span> <span class="mi">20</span>
 
-    def process_automation_interaction(self, interaction_type, outcome_success):
-        &quot;&quot;&quot;Simulate psychological response to automation interaction&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_automation_interaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction_type</span><span class="p">,</span> <span class="n">outcome_success</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate psychological response to automation interaction&quot;&quot;&quot;</span>
 
-        if interaction_type == &quot;transparent_decision&quot;:
-            # Users respond better to explainable decisions
-            self.trust_level += 5 if outcome_success else -3
-            self.perceived_control += 3
-            self.anxiety_level -= 2
+        <span class="k">if</span> <span class="n">interaction_type</span> <span class="o">==</span> <span class="s2">&quot;transparent_decision&quot;</span><span class="p">:</span>
+            <span class="c1"># Users respond better to explainable decisions</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">+=</span> <span class="mi">5</span> <span class="k">if</span> <span class="n">outcome_success</span> <span class="k">else</span> <span class="o">-</span><span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">+=</span> <span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">-=</span> <span class="mi">2</span>
 
-        elif interaction_type == &quot;black_box_decision&quot;:
-            # Mysterious decisions create anxiety
-            self.trust_level += 2 if outcome_success else -8
-            self.perceived_control -= 5
-            self.anxiety_level += 4
+        <span class="k">elif</span> <span class="n">interaction_type</span> <span class="o">==</span> <span class="s2">&quot;black_box_decision&quot;</span><span class="p">:</span>
+            <span class="c1"># Mysterious decisions create anxiety</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">+=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">outcome_success</span> <span class="k">else</span> <span class="o">-</span><span class="mi">8</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">-=</span> <span class="mi">5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">+=</span> <span class="mi">4</span>
 
-        elif interaction_type == &quot;collaborative_decision&quot;:
-            # Human-AI collaboration feels more comfortable
-            self.trust_level += 4 if outcome_success else -2
-            self.comfort_with_automation += 3
-            self.perceived_control += 2
+        <span class="k">elif</span> <span class="n">interaction_type</span> <span class="o">==</span> <span class="s2">&quot;collaborative_decision&quot;</span><span class="p">:</span>
+            <span class="c1"># Human-AI collaboration feels more comfortable</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">+=</span> <span class="mi">4</span> <span class="k">if</span> <span class="n">outcome_success</span> <span class="k">else</span> <span class="o">-</span><span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">+=</span> <span class="mi">3</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">+=</span> <span class="mi">2</span>
 
-        # Clamp values to realistic ranges
-        self.trust_level = max(0, min(100, self.trust_level))
-        self.comfort_with_automation = max(0, min(100, self.comfort_with_automation))
-        self.perceived_control = max(0, min(100, self.perceived_control))
-        self.anxiety_level = max(0, min(100, self.anxiety_level))
+        <span class="c1"># Clamp values to realistic ranges</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span><span class="p">))</span>
 
-    def get_acceptance_likelihood(self):
-        &quot;&quot;&quot;Calculate likelihood of system acceptance&quot;&quot;&quot;
-        # Weighted combination of psychological factors
-        acceptance = (
-            self.trust_level * 0.4 +
-            self.comfort_with_automation * 0.3 +
-            self.perceived_control * 0.2 +
-            (100 - self.anxiety_level) * 0.1
-        )
-        return min(100, max(0, acceptance))
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_acceptance_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate likelihood of system acceptance&quot;&quot;&quot;</span>
+        <span class="c1"># Weighted combination of psychological factors</span>
+        <span class="n">acceptance</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">*</span> <span class="mf">0.4</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">*</span> <span class="mf">0.3</span> <span class="o">+</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">*</span> <span class="mf">0.2</span> <span class="o">+</span>
+            <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acceptance</span><span class="p">))</span>
 
-# Demonstrate psychological response patterns
-user = UserPsychologyModel()
-print(f&quot;Initial acceptance likelihood: {user.get_acceptance_likelihood():.1f}%&quot;)
+<span class="c1"># Demonstrate psychological response patterns</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">UserPsychologyModel</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial acceptance likelihood: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_acceptance_likelihood</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-# Simulate different interaction patterns
-interactions = [
-    (&quot;transparent_decision&quot;, True),
-    (&quot;transparent_decision&quot;, True),
-    (&quot;black_box_decision&quot;, False),
-    (&quot;collaborative_decision&quot;, True),
-    (&quot;transparent_decision&quot;, False)
-]
+<span class="c1"># Simulate different interaction patterns</span>
+<span class="n">interactions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;transparent_decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;transparent_decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;black_box_decision&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;collaborative_decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;transparent_decision&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="p">]</span>
 
-for interaction_type, success in interactions:
-    user.process_automation_interaction(interaction_type, success)
-    print(f&quot;After {interaction_type} ({&#x27;success&#x27; if success else &#x27;failure&#x27;}): &quot;
-          f&quot;Trust={user.trust_level}, Control={user.perceived_control}, &quot;
-          f&quot;Acceptance={user.get_acceptance_likelihood():.1f}%&quot;)
+<span class="k">for</span> <span class="n">interaction_type</span><span class="p">,</span> <span class="n">success</span> <span class="ow">in</span> <span class="n">interactions</span><span class="p">:</span>
+    <span class="n">user</span><span class="o">.</span><span class="n">process_automation_interaction</span><span class="p">(</span><span class="n">interaction_type</span><span class="p">,</span> <span class="n">success</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After </span><span class="si">{</span><span class="n">interaction_type</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">&#39;success&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;failure&#39;</span><span class="si">}</span><span class="s2">): &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Trust=</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">trust_level</span><span class="si">}</span><span class="s2">, Control=</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">perceived_control</span><span class="si">}</span><span class="s2">, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Acceptance=</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_acceptance_likelihood</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="key-psychological-factors">Key Psychological Factors<a class="headerlink" href="#key-psychological-factors" title="Permanent link">&para;</a></h3>
@@ -1795,89 +1795,89 @@ for interaction_type, success in interactions:
 <h3 id="how-stress-affects-behaviour">How Stress Affects Behaviour<a class="headerlink" href="#how-stress-affects-behaviour" title="Permanent link">&para;</a></h3>
 <p>Acute stress significantly alters human behaviour patterns, which can impact both data collection and system performance.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import random
-import matplotlib.pyplot as plt
-from datetime import datetime, timedelta
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-class StressResponseSimulator:
-    &quot;&quot;&quot;Simulate how acute stress affects user behaviour and data patterns&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">StressResponseSimulator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate how acute stress affects user behaviour and data patterns&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.baseline_accuracy = 0.92
-        self.baseline_response_time = 2.5  # seconds
-        self.baseline_decision_consistency = 0.88
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_accuracy</span> <span class="o">=</span> <span class="mf">0.92</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_response_time</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># seconds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_decision_consistency</span> <span class="o">=</span> <span class="mf">0.88</span>
 
-    def generate_user_data(self, stress_level, num_interactions=100):
-        &quot;&quot;&quot;Generate user interaction data under different stress levels
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_user_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stress_level</span><span class="p">,</span> <span class="n">num_interactions</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate user interaction data under different stress levels</span>
 
-        Args:
-            stress_level: 0-100, where 0 is no stress, 100 is extreme stress
-        &quot;&quot;&quot;
+<span class="sd">        Args:</span>
+<span class="sd">            stress_level: 0-100, where 0 is no stress, 100 is extreme stress</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
-        # Stress impacts on behaviour
-        stress_factor = stress_level / 100.0
+        <span class="c1"># Stress impacts on behaviour</span>
+        <span class="n">stress_factor</span> <span class="o">=</span> <span class="n">stress_level</span> <span class="o">/</span> <span class="mf">100.0</span>
 
-        # Accuracy decreases with stress
-        accuracy_impact = self.baseline_accuracy * (1 - 0.3 * stress_factor)
+        <span class="c1"># Accuracy decreases with stress</span>
+        <span class="n">accuracy_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_accuracy</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">stress_factor</span><span class="p">)</span>
 
-        # Response time increases with stress (rushed or frozen responses)
-        response_time_impact = self.baseline_response_time * (1 + 0.8 * stress_factor)
+        <span class="c1"># Response time increases with stress (rushed or frozen responses)</span>
+        <span class="n">response_time_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_response_time</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">stress_factor</span><span class="p">)</span>
 
-        # Decision consistency decreases with stress
-        consistency_impact = self.baseline_decision_consistency * (1 - 0.4 * stress_factor)
+        <span class="c1"># Decision consistency decreases with stress</span>
+        <span class="n">consistency_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_decision_consistency</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">stress_factor</span><span class="p">)</span>
 
-        interactions = []
+        <span class="n">interactions</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for i in range(num_interactions):
-            # Add random variation
-            accuracy = max(0, min(1, accuracy_impact + random.gauss(0, 0.1)))
-            response_time = max(0.5, response_time_impact + random.gauss(0, 0.5))
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_interactions</span><span class="p">):</span>
+            <span class="c1"># Add random variation</span>
+            <span class="n">accuracy</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">accuracy_impact</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)))</span>
+            <span class="n">response_time</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">response_time_impact</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
 
-            # Stress makes decisions less consistent
-            if random.random() &gt; consistency_impact:
-                # Inconsistent decision - flip accuracy
-                accuracy = 1 - accuracy
+            <span class="c1"># Stress makes decisions less consistent</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">consistency_impact</span><span class="p">:</span>
+                <span class="c1"># Inconsistent decision - flip accuracy</span>
+                <span class="n">accuracy</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy</span>
 
-            interactions.append({
-                &#x27;timestamp&#x27;: datetime.now() + timedelta(seconds=i*10),
-                &#x27;accuracy&#x27;: accuracy,
-                &#x27;response_time&#x27;: response_time,
-                &#x27;stress_level&#x27;: stress_level,
-                &#x27;user_id&#x27;: f&#x27;user_{random.randint(1000, 9999)}&#x27;
-            })
+            <span class="n">interactions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
+                <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+                <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="n">response_time</span><span class="p">,</span>
+                <span class="s1">&#39;stress_level&#39;</span><span class="p">:</span> <span class="n">stress_level</span><span class="p">,</span>
+                <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;user_</span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">})</span>
 
-        return interactions
+        <span class="k">return</span> <span class="n">interactions</span>
 
-    def analyze_stress_impact(self):
-        &quot;&quot;&quot;Analyze how different stress levels affect data quality&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_stress_impact</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze how different stress levels affect data quality&quot;&quot;&quot;</span>
 
-        stress_levels = [0, 25, 50, 75, 100]
-        results = {}
+        <span class="n">stress_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
 
-        for stress in stress_levels:
-            data = self.generate_user_data(stress, 50)
+        <span class="k">for</span> <span class="n">stress</span> <span class="ow">in</span> <span class="n">stress_levels</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_user_data</span><span class="p">(</span><span class="n">stress</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 
-            avg_accuracy = sum(d[&#x27;accuracy&#x27;] for d in data) / len(data)
-            avg_response_time = sum(d[&#x27;response_time&#x27;] for d in data) / len(data)
+            <span class="n">avg_accuracy</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">avg_response_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;response_time&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-            results[stress] = {
-                &#x27;accuracy&#x27;: avg_accuracy,
-                &#x27;response_time&#x27;: avg_response_time,
-                &#x27;data_quality_score&#x27;: avg_accuracy * (1 / (1 + avg_response_time/10))
-            }
+            <span class="n">results</span><span class="p">[</span><span class="n">stress</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">avg_accuracy</span><span class="p">,</span>
+                <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="n">avg_response_time</span><span class="p">,</span>
+                <span class="s1">&#39;data_quality_score&#39;</span><span class="p">:</span> <span class="n">avg_accuracy</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">avg_response_time</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
+            <span class="p">}</span>
 
-        return results
+        <span class="k">return</span> <span class="n">results</span>
 
-# Demonstrate stress impact on data patterns
-simulator = StressResponseSimulator()
-stress_analysis = simulator.analyze_stress_impact()
+<span class="c1"># Demonstrate stress impact on data patterns</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">StressResponseSimulator</span><span class="p">()</span>
+<span class="n">stress_analysis</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">analyze_stress_impact</span><span class="p">()</span>
 
-print(&quot;Stress Impact on User Data:&quot;)
-print(&quot;Stress% | Accuracy | Response Time | Data Quality&quot;)
-print(&quot;-&quot; * 50)
-for stress, metrics in stress_analysis.items():
-    print(f&quot;{stress:5d} | {metrics[&#x27;accuracy&#x27;]:8.3f} | {metrics[&#x27;response_time&#x27;]:11.1f}s | &quot;
-          f&quot;{metrics[&#x27;data_quality_score&#x27;]:10.3f}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stress Impact on User Data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stress% | Accuracy | Response Time | Data Quality&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">stress</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">stress_analysis</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stress</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">8.3f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;response_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">11.1f</span><span class="si">}</span><span class="s2">s | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;data_quality_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">10.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="implications-for-ml-systems">Implications for ML Systems<a class="headerlink" href="#implications-for-ml-systems" title="Permanent link">&para;</a></h3>
@@ -1889,131 +1889,131 @@ for stress, metrics in stress_analysis.items():
 <h3 id="understanding-cultural-differences">Understanding Cultural Differences<a class="headerlink" href="#understanding-cultural-differences" title="Permanent link">&para;</a></h3>
 <p>Cultural background significantly influences how people interact with technology and what they expect from automated systems.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class CulturalContext:
-    &quot;&quot;&quot;Model cultural factors affecting AI system design&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">CulturalContext</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model cultural factors affecting AI system design&quot;&quot;&quot;</span>
 
-    def __init__(self, culture_profile):
-        self.culture_profile = culture_profile
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">culture_profile</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span> <span class="o">=</span> <span class="n">culture_profile</span>
 
-    def evaluate_design_acceptance(self, system_design):
-        &quot;&quot;&quot;Evaluate how well a system design fits cultural expectations&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_design_acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_design</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate how well a system design fits cultural expectations&quot;&quot;&quot;</span>
 
-        acceptance_score = 0
-        max_score = 0
+        <span class="n">acceptance_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">max_score</span> <span class="o">=</span> <span class="mi">0</span>
 
-        # Authority and hierarchy preferences
-        if &#x27;authority_acceptance&#x27; in self.culture_profile:
-            max_score += 20
-            if system_design.get(&#x27;shows_confidence&#x27;, False):
-                if self.culture_profile[&#x27;authority_acceptance&#x27;] == &#x27;high&#x27;:
-                    acceptance_score += 15  # High authority cultures like confident systems
-                else:
-                    acceptance_score += 5   # Low authority cultures prefer collaborative tone
+        <span class="c1"># Authority and hierarchy preferences</span>
+        <span class="k">if</span> <span class="s1">&#39;authority_acceptance&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
+            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">20</span>
+            <span class="k">if</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;shows_confidence&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;authority_acceptance&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span>
+                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>  <span class="c1"># High authority cultures like confident systems</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">5</span>   <span class="c1"># Low authority cultures prefer collaborative tone</span>
 
-            if system_design.get(&#x27;allows_questioning&#x27;, False):
-                if self.culture_profile[&#x27;authority_acceptance&#x27;] == &#x27;low&#x27;:
-                    acceptance_score += 15  # Low authority cultures want to question decisions
-                else:
-                    acceptance_score += 8   # High authority cultures still value some input
+            <span class="k">if</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;allows_questioning&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;authority_acceptance&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span>
+                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>  <span class="c1"># Low authority cultures want to question decisions</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">8</span>   <span class="c1"># High authority cultures still value some input</span>
 
-        # Privacy expectations
-        if &#x27;privacy_sensitivity&#x27; in self.culture_profile:
-            max_score += 25
-            data_collection = system_design.get(&#x27;data_collection_level&#x27;, &#x27;medium&#x27;)
-            privacy_level = self.culture_profile[&#x27;privacy_sensitivity&#x27;]
+        <span class="c1"># Privacy expectations</span>
+        <span class="k">if</span> <span class="s1">&#39;privacy_sensitivity&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
+            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">25</span>
+            <span class="n">data_collection</span> <span class="o">=</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_collection_level&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">)</span>
+            <span class="n">privacy_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">]</span>
 
-            if privacy_level == &#x27;high&#x27; and data_collection == &#x27;minimal&#x27;:
-                acceptance_score += 25
-            elif privacy_level == &#x27;medium&#x27; and data_collection in [&#x27;minimal&#x27;, &#x27;medium&#x27;]:
-                acceptance_score += 20
-            elif privacy_level == &#x27;low&#x27;:
-                acceptance_score += 15  # Less concerned about data collection
+            <span class="k">if</span> <span class="n">privacy_level</span> <span class="o">==</span> <span class="s1">&#39;high&#39;</span> <span class="ow">and</span> <span class="n">data_collection</span> <span class="o">==</span> <span class="s1">&#39;minimal&#39;</span><span class="p">:</span>
+                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">25</span>
+            <span class="k">elif</span> <span class="n">privacy_level</span> <span class="o">==</span> <span class="s1">&#39;medium&#39;</span> <span class="ow">and</span> <span class="n">data_collection</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;minimal&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">]:</span>
+                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">20</span>
+            <span class="k">elif</span> <span class="n">privacy_level</span> <span class="o">==</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span>
+                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>  <span class="c1"># Less concerned about data collection</span>
 
-        # Communication style
-        if &#x27;communication_style&#x27; in self.culture_profile:
-            max_score += 20
-            explanation_style = system_design.get(&#x27;explanation_style&#x27;, &#x27;direct&#x27;)
+        <span class="c1"># Communication style</span>
+        <span class="k">if</span> <span class="s1">&#39;communication_style&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
+            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">20</span>
+            <span class="n">explanation_style</span> <span class="o">=</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;explanation_style&#39;</span><span class="p">,</span> <span class="s1">&#39;direct&#39;</span><span class="p">)</span>
 
-            if (self.culture_profile[&#x27;communication_style&#x27;] == &#x27;direct&#x27; and 
-                explanation_style == &#x27;direct&#x27;):
-                acceptance_score += 20
-            elif (self.culture_profile[&#x27;communication_style&#x27;] == &#x27;indirect&#x27; and 
-                  explanation_style == &#x27;contextual&#x27;):
-                acceptance_score += 20
-            else:
-                acceptance_score += 10  # Partial match
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;communication_style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;direct&#39;</span> <span class="ow">and</span> 
+                <span class="n">explanation_style</span> <span class="o">==</span> <span class="s1">&#39;direct&#39;</span><span class="p">):</span>
+                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">20</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;communication_style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;indirect&#39;</span> <span class="ow">and</span> 
+                  <span class="n">explanation_style</span> <span class="o">==</span> <span class="s1">&#39;contextual&#39;</span><span class="p">):</span>
+                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">20</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">10</span>  <span class="c1"># Partial match</span>
 
-        # Decision-making style
-        if &#x27;decision_making&#x27; in self.culture_profile:
-            max_score += 15
-            if system_design.get(&#x27;supports_group_decisions&#x27;, False):
-                if self.culture_profile[&#x27;decision_making&#x27;] == &#x27;collective&#x27;:
-                    acceptance_score += 15
-                else:
-                    acceptance_score += 8
+        <span class="c1"># Decision-making style</span>
+        <span class="k">if</span> <span class="s1">&#39;decision_making&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
+            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">15</span>
+            <span class="k">if</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;decision_making&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;collective&#39;</span><span class="p">:</span>
+                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">8</span>
 
-        return (acceptance_score / max_score * 100) if max_score &gt; 0 else 0
+        <span class="k">return</span> <span class="p">(</span><span class="n">acceptance_score</span> <span class="o">/</span> <span class="n">max_score</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">max_score</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
-# Define different cultural profiles
-cultures = {
-    &#x27;scandinavian&#x27;: {
-        &#x27;authority_acceptance&#x27;: &#x27;low&#x27;,
-        &#x27;privacy_sensitivity&#x27;: &#x27;high&#x27;,
-        &#x27;communication_style&#x27;: &#x27;direct&#x27;,
-        &#x27;decision_making&#x27;: &#x27;individual&#x27;
-    },
-    &#x27;east_asian&#x27;: {
-        &#x27;authority_acceptance&#x27;: &#x27;high&#x27;,
-        &#x27;privacy_sensitivity&#x27;: &#x27;medium&#x27;,
-        &#x27;communication_style&#x27;: &#x27;indirect&#x27;,
-        &#x27;decision_making&#x27;: &#x27;collective&#x27;
-    },
-    &#x27;american&#x27;: {
-        &#x27;authority_acceptance&#x27;: &#x27;medium&#x27;,
-        &#x27;privacy_sensitivity&#x27;: &#x27;medium&#x27;,
-        &#x27;communication_style&#x27;: &#x27;direct&#x27;,
-        &#x27;decision_making&#x27;: &#x27;individual&#x27;
-    }
-}
+<span class="c1"># Define different cultural profiles</span>
+<span class="n">cultures</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;scandinavian&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;authority_acceptance&#39;</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;communication_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;decision_making&#39;</span><span class="p">:</span> <span class="s1">&#39;individual&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;east_asian&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;authority_acceptance&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;communication_style&#39;</span><span class="p">:</span> <span class="s1">&#39;indirect&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;decision_making&#39;</span><span class="p">:</span> <span class="s1">&#39;collective&#39;</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;american&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;authority_acceptance&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;communication_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;decision_making&#39;</span><span class="p">:</span> <span class="s1">&#39;individual&#39;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-# Test different system designs
-system_designs = {
-    &#x27;authoritative&#x27;: {
-        &#x27;shows_confidence&#x27;: True,
-        &#x27;allows_questioning&#x27;: False,
-        &#x27;data_collection_level&#x27;: &#x27;high&#x27;,
-        &#x27;explanation_style&#x27;: &#x27;direct&#x27;,
-        &#x27;supports_group_decisions&#x27;: False
-    },
-    &#x27;collaborative&#x27;: {
-        &#x27;shows_confidence&#x27;: False,
-        &#x27;allows_questioning&#x27;: True,
-        &#x27;data_collection_level&#x27;: &#x27;minimal&#x27;,
-        &#x27;explanation_style&#x27;: &#x27;contextual&#x27;,
-        &#x27;supports_group_decisions&#x27;: True
-    },
-    &#x27;balanced&#x27;: {
-        &#x27;shows_confidence&#x27;: True,
-        &#x27;allows_questioning&#x27;: True,
-        &#x27;data_collection_level&#x27;: &#x27;medium&#x27;,
-        &#x27;explanation_style&#x27;: &#x27;direct&#x27;,
-        &#x27;supports_group_decisions&#x27;: False
-    }
-}
+<span class="c1"># Test different system designs</span>
+<span class="n">system_designs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;authoritative&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;shows_confidence&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;allows_questioning&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;data_collection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;explanation_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;collaborative&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;shows_confidence&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;allows_questioning&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;data_collection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;minimal&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;explanation_style&#39;</span><span class="p">:</span> <span class="s1">&#39;contextual&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;balanced&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;shows_confidence&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;allows_questioning&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;data_collection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;explanation_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-print(&quot;Cultural Acceptance Analysis:&quot;)
-print(&quot;Culture       | Authoritative | Collaborative | Balanced&quot;)
-print(&quot;-&quot; * 60)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cultural Acceptance Analysis:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Culture       | Authoritative | Collaborative | Balanced&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
-for culture_name, culture_data in cultures.items():
-    context = CulturalContext(culture_data)
-    scores = {}
+<span class="k">for</span> <span class="n">culture_name</span><span class="p">,</span> <span class="n">culture_data</span> <span class="ow">in</span> <span class="n">cultures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">CulturalContext</span><span class="p">(</span><span class="n">culture_data</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
 
-    for design_name, design in system_designs.items():
-        scores[design_name] = context.evaluate_design_acceptance(design)
+    <span class="k">for</span> <span class="n">design_name</span><span class="p">,</span> <span class="n">design</span> <span class="ow">in</span> <span class="n">system_designs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">scores</span><span class="p">[</span><span class="n">design_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">evaluate_design_acceptance</span><span class="p">(</span><span class="n">design</span><span class="p">)</span>
 
-    print(f&quot;{culture_name:12} | {scores[&#x27;authoritative&#x27;]:11.1f}% | &quot;
-          f&quot;{scores[&#x27;collaborative&#x27;]:11.1f}% | {scores[&#x27;balanced&#x27;]:6.1f}%&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">culture_name</span><span class="si">:</span><span class="s2">12</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;authoritative&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">11.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;collaborative&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">11.1f</span><span class="si">}</span><span class="s2">% | </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;balanced&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <hr />
@@ -2021,137 +2021,137 @@ for culture_name, culture_data in cultures.items():
 <h3 id="how-beliefs-shape-technology-acceptance">How Beliefs Shape Technology Acceptance<a class="headerlink" href="#how-beliefs-shape-technology-acceptance" title="Permanent link">&para;</a></h3>
 <p>Personal belief systems significantly influence how users interact with and accept AI technologies.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BeliefSystemAnalyzer:
-    &quot;&quot;&quot;Analyze how belief systems affect AI acceptance&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BeliefSystemAnalyzer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze how belief systems affect AI acceptance&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.belief_dimensions = [
-            &#x27;technology_optimism&#x27;,      # Trust in technology benefits
-            &#x27;human_agency_importance&#x27;,  # Belief in human control/responsibility
-            &#x27;privacy_as_fundamental&#x27;,   # Privacy as basic right vs convenience
-            &#x27;algorithmic_fairness&#x27;,     # Expectation of fair treatment
-            &#x27;transparency_requirement&#x27;  # Need to understand decisions
-        ]
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">belief_dimensions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;technology_optimism&#39;</span><span class="p">,</span>      <span class="c1"># Trust in technology benefits</span>
+            <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">,</span>  <span class="c1"># Belief in human control/responsibility</span>
+            <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">,</span>   <span class="c1"># Privacy as basic right vs convenience</span>
+            <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">,</span>     <span class="c1"># Expectation of fair treatment</span>
+            <span class="s1">&#39;transparency_requirement&#39;</span>  <span class="c1"># Need to understand decisions</span>
+        <span class="p">]</span>
 
-    def create_user_profile(self, beliefs):
-        &quot;&quot;&quot;Create a user profile based on belief system&quot;&quot;&quot;
-        return {dimension: beliefs.get(dimension, 50) for dimension in self.belief_dimensions}
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_user_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beliefs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a user profile based on belief system&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">dimension</span><span class="p">:</span> <span class="n">beliefs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="k">for</span> <span class="n">dimension</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">belief_dimensions</span><span class="p">}</span>
 
-    def predict_feature_acceptance(self, user_profile, ai_features):
-        &quot;&quot;&quot;Predict acceptance of AI features based on beliefs&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict_feature_acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_profile</span><span class="p">,</span> <span class="n">ai_features</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict acceptance of AI features based on beliefs&quot;&quot;&quot;</span>
 
-        acceptance_predictions = {}
+        <span class="n">acceptance_predictions</span> <span class="o">=</span> <span class="p">{}</span>
 
-        for feature_name, feature_props in ai_features.items():
-            score = 0
-            weight_sum = 0
+        <span class="k">for</span> <span class="n">feature_name</span><span class="p">,</span> <span class="n">feature_props</span> <span class="ow">in</span> <span class="n">ai_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">weight_sum</span> <span class="o">=</span> <span class="mi">0</span>
 
-            # Technology optimism affects overall acceptance
-            if &#x27;automation_level&#x27; in feature_props:
-                weight = 0.3
-                automation_bonus = (user_profile[&#x27;technology_optimism&#x27;] / 100) * feature_props[&#x27;automation_level&#x27;]
-                score += automation_bonus * weight
-                weight_sum += weight
+            <span class="c1"># Technology optimism affects overall acceptance</span>
+            <span class="k">if</span> <span class="s1">&#39;automation_level&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.3</span>
+                <span class="n">automation_bonus</span> <span class="o">=</span> <span class="p">(</span><span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;technology_optimism&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;automation_level&#39;</span><span class="p">]</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="n">automation_bonus</span> <span class="o">*</span> <span class="n">weight</span>
+                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
 
-            # Human agency importance
-            if &#x27;human_override&#x27; in feature_props:
-                weight = 0.25
-                if feature_props[&#x27;human_override&#x27;]:
-                    agency_score = user_profile[&#x27;human_agency_importance&#x27;] / 100
-                else:
-                    agency_score = (100 - user_profile[&#x27;human_agency_importance&#x27;]) / 100
-                score += agency_score * weight
-                weight_sum += weight
+            <span class="c1"># Human agency importance</span>
+            <span class="k">if</span> <span class="s1">&#39;human_override&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.25</span>
+                <span class="k">if</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;human_override&#39;</span><span class="p">]:</span>
+                    <span class="n">agency_score</span> <span class="o">=</span> <span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;human_agency_importance&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">agency_score</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;human_agency_importance&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="n">agency_score</span> <span class="o">*</span> <span class="n">weight</span>
+                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
 
-            # Privacy considerations
-            if &#x27;data_usage&#x27; in feature_props:
-                weight = 0.2
-                privacy_concern = user_profile[&#x27;privacy_as_fundamental&#x27;] / 100
-                data_invasiveness = feature_props[&#x27;data_usage&#x27;] / 100
-                privacy_score = 1 - (privacy_concern * data_invasiveness)
-                score += privacy_score * weight
-                weight_sum += weight
+            <span class="c1"># Privacy considerations</span>
+            <span class="k">if</span> <span class="s1">&#39;data_usage&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.2</span>
+                <span class="n">privacy_concern</span> <span class="o">=</span> <span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+                <span class="n">data_invasiveness</span> <span class="o">=</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;data_usage&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+                <span class="n">privacy_score</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">privacy_concern</span> <span class="o">*</span> <span class="n">data_invasiveness</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="n">privacy_score</span> <span class="o">*</span> <span class="n">weight</span>
+                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
 
-            # Fairness expectations
-            if &#x27;fairness_measures&#x27; in feature_props:
-                weight = 0.15
-                fairness_score = (user_profile[&#x27;algorithmic_fairness&#x27;] / 100) * (feature_props[&#x27;fairness_measures&#x27;] / 100)
-                score += fairness_score * weight
-                weight_sum += weight
+            <span class="c1"># Fairness expectations</span>
+            <span class="k">if</span> <span class="s1">&#39;fairness_measures&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.15</span>
+                <span class="n">fairness_score</span> <span class="o">=</span> <span class="p">(</span><span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;fairness_measures&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="n">fairness_score</span> <span class="o">*</span> <span class="n">weight</span>
+                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
 
-            # Transparency requirements
-            if &#x27;explainability&#x27; in feature_props:
-                weight = 0.1
-                transparency_match = 1 - abs(user_profile[&#x27;transparency_requirement&#x27;] - feature_props[&#x27;explainability&#x27;]) / 100
-                score += transparency_match * weight
-                weight_sum += weight
+            <span class="c1"># Transparency requirements</span>
+            <span class="k">if</span> <span class="s1">&#39;explainability&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.1</span>
+                <span class="n">transparency_match</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;transparency_requirement&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;explainability&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span>
+                <span class="n">score</span> <span class="o">+=</span> <span class="n">transparency_match</span> <span class="o">*</span> <span class="n">weight</span>
+                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
 
-            acceptance_predictions[feature_name] = (score / weight_sum * 100) if weight_sum &gt; 0 else 0
+            <span class="n">acceptance_predictions</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">score</span> <span class="o">/</span> <span class="n">weight_sum</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">weight_sum</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
-        return acceptance_predictions
+        <span class="k">return</span> <span class="n">acceptance_predictions</span>
 
-# Define different belief profiles
-belief_profiles = {
-    &#x27;tech_enthusiast&#x27;: {
-        &#x27;technology_optimism&#x27;: 85,
-        &#x27;human_agency_importance&#x27;: 30,
-        &#x27;privacy_as_fundamental&#x27;: 40,
-        &#x27;algorithmic_fairness&#x27;: 70,
-        &#x27;transparency_requirement&#x27;: 50
-    },
-    &#x27;privacy_advocate&#x27;: {
-        &#x27;technology_optimism&#x27;: 45,
-        &#x27;human_agency_importance&#x27;: 80,
-        &#x27;privacy_as_fundamental&#x27;: 90,
-        &#x27;algorithmic_fairness&#x27;: 85,
-        &#x27;transparency_requirement&#x27;: 95
-    },
-    &#x27;pragmatic_user&#x27;: {
-        &#x27;technology_optimism&#x27;: 65,
-        &#x27;human_agency_importance&#x27;: 60,
-        &#x27;privacy_as_fundamental&#x27;: 55,
-        &#x27;algorithmic_fairness&#x27;: 75,
-        &#x27;transparency_requirement&#x27;: 70
-    }
-}
+<span class="c1"># Define different belief profiles</span>
+<span class="n">belief_profiles</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;tech_enthusiast&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;technology_optimism&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
+        <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+        <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+        <span class="s1">&#39;transparency_requirement&#39;</span><span class="p">:</span> <span class="mi">50</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;privacy_advocate&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;technology_optimism&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
+        <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+        <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
+        <span class="s1">&#39;transparency_requirement&#39;</span><span class="p">:</span> <span class="mi">95</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;pragmatic_user&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;technology_optimism&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span>
+        <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
+        <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+        <span class="s1">&#39;transparency_requirement&#39;</span><span class="p">:</span> <span class="mi">70</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-# Define AI features with different characteristics
-ai_features = {
-    &#x27;auto_decision_making&#x27;: {
-        &#x27;automation_level&#x27;: 90,
-        &#x27;human_override&#x27;: False,
-        &#x27;data_usage&#x27;: 70,
-        &#x27;fairness_measures&#x27;: 60,
-        &#x27;explainability&#x27;: 30
-    },
-    &#x27;recommendation_system&#x27;: {
-        &#x27;automation_level&#x27;: 60,
-        &#x27;human_override&#x27;: True,
-        &#x27;data_usage&#x27;: 80,
-        &#x27;fairness_measures&#x27;: 70,
-        &#x27;explainability&#x27;: 70
-    },
-    &#x27;transparent_assistant&#x27;: {
-        &#x27;automation_level&#x27;: 40,
-        &#x27;human_override&#x27;: True,
-        &#x27;data_usage&#x27;: 30,
-        &#x27;fairness_measures&#x27;: 85,
-        &#x27;explainability&#x27;: 95
-    }
-}
+<span class="c1"># Define AI features with different characteristics</span>
+<span class="n">ai_features</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;auto_decision_making&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;automation_level&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+        <span class="s1">&#39;human_override&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s1">&#39;data_usage&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+        <span class="s1">&#39;fairness_measures&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s1">&#39;explainability&#39;</span><span class="p">:</span> <span class="mi">30</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;recommendation_system&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;automation_level&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s1">&#39;human_override&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;data_usage&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+        <span class="s1">&#39;fairness_measures&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+        <span class="s1">&#39;explainability&#39;</span><span class="p">:</span> <span class="mi">70</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;transparent_assistant&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;automation_level&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+        <span class="s1">&#39;human_override&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;data_usage&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s1">&#39;fairness_measures&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
+        <span class="s1">&#39;explainability&#39;</span><span class="p">:</span> <span class="mi">95</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-analyzer = BeliefSystemAnalyzer()
+<span class="n">analyzer</span> <span class="o">=</span> <span class="n">BeliefSystemAnalyzer</span><span class="p">()</span>
 
-print(&quot;Belief-Based Feature Acceptance Predictions:&quot;)
-print(&quot;User Type        | Auto Decisions | Recommendations | Transparent Assistant&quot;)
-print(&quot;-&quot; * 75)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Belief-Based Feature Acceptance Predictions:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User Type        | Auto Decisions | Recommendations | Transparent Assistant&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
 
-for profile_name, beliefs in belief_profiles.items():
-    user_profile = analyzer.create_user_profile(beliefs)
-    predictions = analyzer.predict_feature_acceptance(user_profile, ai_features)
+<span class="k">for</span> <span class="n">profile_name</span><span class="p">,</span> <span class="n">beliefs</span> <span class="ow">in</span> <span class="n">belief_profiles</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">user_profile</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">create_user_profile</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">predict_feature_acceptance</span><span class="p">(</span><span class="n">user_profile</span><span class="p">,</span> <span class="n">ai_features</span><span class="p">)</span>
 
-    print(f&quot;{profile_name:15} | {predictions[&#x27;auto_decision_making&#x27;]:12.1f}% | &quot;
-          f&quot;{predictions[&#x27;recommendation_system&#x27;]:13.1f}% | {predictions[&#x27;transparent_assistant&#x27;]:15.1f}%&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">profile_name</span><span class="si">:</span><span class="s2">15</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;auto_decision_making&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">12.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;recommendation_system&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">13.1f</span><span class="si">}</span><span class="s2">% | </span><span class="si">{</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;transparent_assistant&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">15.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <hr />
@@ -2159,112 +2159,112 @@ for profile_name, beliefs in belief_profiles.items():
 <h3 id="accounting-for-human-behaviour-in-mlai-design">Accounting for Human Behaviour in ML/AI Design<a class="headerlink" href="#accounting-for-human-behaviour-in-mlai-design" title="Permanent link">&para;</a></h3>
 <p>Understanding human behaviour patterns should directly inform system design decisions:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class HumanCenteredAIDesigner:
-    &quot;&quot;&quot;Framework for incorporating human behaviour insights into AI design&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">HumanCenteredAIDesigner</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Framework for incorporating human behaviour insights into AI design&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.design_principles = {
-            &#x27;transparency&#x27;: &quot;Provide clear explanations for AI decisions&quot;,
-            &#x27;control&#x27;: &quot;Allow meaningful human oversight and intervention&quot;,
-            &#x27;fairness&#x27;: &quot;Ensure equitable treatment across user groups&quot;,
-            &#x27;cultural_sensitivity&#x27;: &quot;Adapt to local cultural norms and expectations&quot;,
-            &#x27;stress_awareness&#x27;: &quot;Recognize and adapt to user stress levels&quot;,
-            &#x27;trust_building&#x27;: &quot;Build confidence through consistent, reliable performance&quot;
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">design_principles</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;transparency&#39;</span><span class="p">:</span> <span class="s2">&quot;Provide clear explanations for AI decisions&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;control&#39;</span><span class="p">:</span> <span class="s2">&quot;Allow meaningful human oversight and intervention&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;fairness&#39;</span><span class="p">:</span> <span class="s2">&quot;Ensure equitable treatment across user groups&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;cultural_sensitivity&#39;</span><span class="p">:</span> <span class="s2">&quot;Adapt to local cultural norms and expectations&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;stress_awareness&#39;</span><span class="p">:</span> <span class="s2">&quot;Recognize and adapt to user stress levels&quot;</span><span class="p">,</span>
+            <span class="s1">&#39;trust_building&#39;</span><span class="p">:</span> <span class="s2">&quot;Build confidence through consistent, reliable performance&quot;</span>
+        <span class="p">}</span>
 
-    def design_evaluation_framework(self, system_specs):
-        &quot;&quot;&quot;Evaluate system design against human behaviour principles&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">design_evaluation_framework</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_specs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate system design against human behaviour principles&quot;&quot;&quot;</span>
 
-        evaluation = {}
+        <span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>
 
-        # Transparency evaluation
-        transparency_score = 0
-        if system_specs.get(&#x27;provides_explanations&#x27;, False):
-            transparency_score += 40
-        if system_specs.get(&#x27;shows_confidence_levels&#x27;, False):
-            transparency_score += 30
-        if system_specs.get(&#x27;reveals_data_sources&#x27;, False):
-            transparency_score += 30
-        evaluation[&#x27;transparency&#x27;] = transparency_score
+        <span class="c1"># Transparency evaluation</span>
+        <span class="n">transparency_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;provides_explanations&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">transparency_score</span> <span class="o">+=</span> <span class="mi">40</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;shows_confidence_levels&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">transparency_score</span> <span class="o">+=</span> <span class="mi">30</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reveals_data_sources&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">transparency_score</span> <span class="o">+=</span> <span class="mi">30</span>
+        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;transparency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">transparency_score</span>
 
-        # Control evaluation
-        control_score = 0
-        if system_specs.get(&#x27;human_override_available&#x27;, False):
-            control_score += 50
-        if system_specs.get(&#x27;customizable_thresholds&#x27;, False):
-            control_score += 30
-        if system_specs.get(&#x27;feedback_incorporation&#x27;, False):
-            control_score += 20
-        evaluation[&#x27;control&#x27;] = control_score
+        <span class="c1"># Control evaluation</span>
+        <span class="n">control_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;human_override_available&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">control_score</span> <span class="o">+=</span> <span class="mi">50</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customizable_thresholds&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">control_score</span> <span class="o">+=</span> <span class="mi">30</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;feedback_incorporation&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">control_score</span> <span class="o">+=</span> <span class="mi">20</span>
+        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">control_score</span>
 
-        # Cultural sensitivity
-        cultural_score = 0
-        if system_specs.get(&#x27;localization_support&#x27;, False):
-            cultural_score += 40
-        if system_specs.get(&#x27;cultural_testing&#x27;, False):
-            cultural_score += 35
-        if system_specs.get(&#x27;diverse_team_design&#x27;, False):
-            cultural_score += 25
-        evaluation[&#x27;cultural_sensitivity&#x27;] = cultural_score
+        <span class="c1"># Cultural sensitivity</span>
+        <span class="n">cultural_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;localization_support&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">cultural_score</span> <span class="o">+=</span> <span class="mi">40</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cultural_testing&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">cultural_score</span> <span class="o">+=</span> <span class="mi">35</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;diverse_team_design&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">cultural_score</span> <span class="o">+=</span> <span class="mi">25</span>
+        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;cultural_sensitivity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cultural_score</span>
 
-        # Stress awareness
-        stress_score = 0
-        if system_specs.get(&#x27;stress_detection&#x27;, False):
-            stress_score += 50
-        if system_specs.get(&#x27;adaptive_interface&#x27;, False):
-            stress_score += 30
-        if system_specs.get(&#x27;calm_design_principles&#x27;, False):
-            stress_score += 20
-        evaluation[&#x27;stress_awareness&#x27;] = stress_score
+        <span class="c1"># Stress awareness</span>
+        <span class="n">stress_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;stress_detection&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">stress_score</span> <span class="o">+=</span> <span class="mi">50</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;adaptive_interface&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">stress_score</span> <span class="o">+=</span> <span class="mi">30</span>
+        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;calm_design_principles&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">stress_score</span> <span class="o">+=</span> <span class="mi">20</span>
+        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;stress_awareness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stress_score</span>
 
-        return evaluation
+        <span class="k">return</span> <span class="n">evaluation</span>
 
-    def recommend_improvements(self, evaluation):
-        &quot;&quot;&quot;Recommend improvements based on evaluation results&quot;&quot;&quot;
-        recommendations = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">recommend_improvements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recommend improvements based on evaluation results&quot;&quot;&quot;</span>
+        <span class="n">recommendations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for principle, score in evaluation.items():
-            if score &lt; 70:
-                if principle == &#x27;transparency&#x27;:
-                    recommendations.append(&quot;Add explanation features and confidence indicators&quot;)
-                elif principle == &#x27;control&#x27;:
-                    recommendations.append(&quot;Implement human override and customization options&quot;)
-                elif principle == &#x27;cultural_sensitivity&#x27;:
-                    recommendations.append(&quot;Conduct cultural research and diverse user testing&quot;)
-                elif principle == &#x27;stress_awareness&#x27;:
-                    recommendations.append(&quot;Add stress detection and adaptive interface elements&quot;)
+        <span class="k">for</span> <span class="n">principle</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;transparency&#39;</span><span class="p">:</span>
+                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Add explanation features and confidence indicators&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;control&#39;</span><span class="p">:</span>
+                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Implement human override and customization options&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;cultural_sensitivity&#39;</span><span class="p">:</span>
+                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Conduct cultural research and diverse user testing&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;stress_awareness&#39;</span><span class="p">:</span>
+                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Add stress detection and adaptive interface elements&quot;</span><span class="p">)</span>
 
-        return recommendations
+        <span class="k">return</span> <span class="n">recommendations</span>
 
-# Example system evaluation
-example_system = {
-    &#x27;provides_explanations&#x27;: True,
-    &#x27;shows_confidence_levels&#x27;: False,
-    &#x27;reveals_data_sources&#x27;: True,
-    &#x27;human_override_available&#x27;: True,
-    &#x27;customizable_thresholds&#x27;: False,
-    &#x27;feedback_incorporation&#x27;: True,
-    &#x27;localization_support&#x27;: False,
-    &#x27;cultural_testing&#x27;: False,
-    &#x27;diverse_team_design&#x27;: True,
-    &#x27;stress_detection&#x27;: False,
-    &#x27;adaptive_interface&#x27;: False,
-    &#x27;calm_design_principles&#x27;: True
-}
+<span class="c1"># Example system evaluation</span>
+<span class="n">example_system</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;provides_explanations&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;shows_confidence_levels&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;reveals_data_sources&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;human_override_available&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;customizable_thresholds&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;feedback_incorporation&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;localization_support&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;cultural_testing&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;diverse_team_design&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">&#39;stress_detection&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;adaptive_interface&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;calm_design_principles&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
 
-designer = HumanCenteredAIDesigner()
-eval_results = designer.design_evaluation_framework(example_system)
-improvements = designer.recommend_improvements(eval_results)
+<span class="n">designer</span> <span class="o">=</span> <span class="n">HumanCenteredAIDesigner</span><span class="p">()</span>
+<span class="n">eval_results</span> <span class="o">=</span> <span class="n">designer</span><span class="o">.</span><span class="n">design_evaluation_framework</span><span class="p">(</span><span class="n">example_system</span><span class="p">)</span>
+<span class="n">improvements</span> <span class="o">=</span> <span class="n">designer</span><span class="o">.</span><span class="n">recommend_improvements</span><span class="p">(</span><span class="n">eval_results</span><span class="p">)</span>
 
-print(&quot;Human-Centered AI Design Evaluation:&quot;)
-print(&quot;-&quot; * 40)
-for principle, score in eval_results.items():
-    status = &quot;✓&quot; if score &gt;= 70 else &quot;⚠&quot;
-    print(f&quot;{principle:20} {status} {score:3d}%&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Human-Centered AI Design Evaluation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">principle</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">eval_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓&quot;</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="k">else</span> <span class="s2">&quot;⚠&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">principle</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-print(&quot;\nRecommended Improvements:&quot;)
-for i, recommendation in enumerate(improvements, 1):
-    print(f&quot;{i}. {recommendation}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Recommended Improvements:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">recommendation</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">improvements</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">recommendation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <hr />
@@ -2529,6 +2529,8 @@ for i, recommendation in enumerate(improvements, 1):
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

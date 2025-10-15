@@ -1528,303 +1528,303 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class FileManager:
-    &quot;&quot;&quot;Abstract file operations - users don&#x27;t need to know about
-    file handles, buffer sizes, or error codes&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">FileManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract file operations - users don&#39;t need to know about</span>
+<span class="sd">    file handles, buffer sizes, or error codes&quot;&quot;&quot;</span>
 
-    def save_data(self, filename, data):
-        &quot;&quot;&quot;Simple interface hides complex file operations&quot;&quot;&quot;
-        try:
-            with open(filename, &#x27;w&#x27;) as file:
-                # Complex operations hidden here:
-                # - Opening file handles
-                # - Buffer management
-                # - Error handling
-                # - Resource cleanup
-                file.write(data)
-            return &quot;File saved successfully&quot;
-        except Exception as e:
-            return f&quot;Error saving file: {str(e)}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simple interface hides complex file operations&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="c1"># Complex operations hidden here:</span>
+                <span class="c1"># - Opening file handles</span>
+                <span class="c1"># - Buffer management</span>
+                <span class="c1"># - Error handling</span>
+                <span class="c1"># - Resource cleanup</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;File saved successfully&quot;</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Error saving file: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def load_data(self, filename):
-        &quot;&quot;&quot;Another simple interface for complex operations&quot;&quot;&quot;
-        try:
-            with open(filename, &#x27;r&#x27;) as file:
-                return file.read()
-        except FileNotFoundError:
-            return None
-        except Exception as e:
-            return f&quot;Error: {str(e)}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Another simple interface for complex operations&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Usage: simple and clean, complexity is hidden
-file_manager = FileManager()
-file_manager.save_data(&quot;notes.txt&quot;, &quot;My important notes&quot;)
-content = file_manager.load_data(&quot;notes.txt&quot;)
+<span class="c1"># Usage: simple and clean, complexity is hidden</span>
+<span class="n">file_manager</span> <span class="o">=</span> <span class="n">FileManager</span><span class="p">()</span>
+<span class="n">file_manager</span><span class="o">.</span><span class="n">save_data</span><span class="p">(</span><span class="s2">&quot;notes.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;My important notes&quot;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">file_manager</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;notes.txt&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="generalisation-finding-common-patterns">Generalisation: Finding common patterns<a class="headerlink" href="#generalisation-finding-common-patterns" title="Permanent link">&para;</a></h2>
 <p><strong>Generalisation</strong> is the process of identifying common characteristics and behaviors across different objects, then creating a general model that captures these similarities.</p>
 <p>Think about vehicles: cars, motorcycles, trucks, and bicycles are all different, but they share common characteristics (wheels, steering, movement) and behaviors (start, stop, turn).</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Before generalisation: separate, similar classes
-class Car:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-        self.speed = 0
+<pre><code class="language-python"><span class="c1"># Before generalisation: separate, similar classes</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def start_engine(self):
-        return f&quot;{self.make} {self.model} engine started&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> engine started&quot;</span>
 
-    def accelerate(self):
-        self.speed += 10
-        return f&quot;Car accelerating, speed: {self.speed}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">10</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Car accelerating, speed: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2">&quot;</span>
 
-class Motorcycle:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-        self.speed = 0
+<span class="k">class</span><span class="w"> </span><span class="nc">Motorcycle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def start_engine(self):
-        return f&quot;{self.make} {self.model} engine started&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> engine started&quot;</span>
 
-    def accelerate(self):
-        self.speed += 15
-        return f&quot;Motorcycle accelerating, speed: {self.speed}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">15</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Motorcycle accelerating, speed: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# After generalisation: common base class
-class Vehicle:
-    &quot;&quot;&quot;General vehicle class capturing common characteristics&quot;&quot;&quot;
+<span class="c1"># After generalisation: common base class</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;General vehicle class capturing common characteristics&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, vehicle_type):
-        self.make = make
-        self.model = model
-        self.vehicle_type = vehicle_type
-        self.speed = 0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vehicle_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_type</span> <span class="o">=</span> <span class="n">vehicle_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def start_engine(self):
-        return f&quot;{self.make} {self.model} engine started&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_engine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> engine started&quot;</span>
 
-    def accelerate(self, increment=10):
-        self.speed += increment
-        return f&quot;{self.vehicle_type} accelerating, speed: {self.speed}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">increment</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="n">increment</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_type</span><span class="si">}</span><span class="s2"> accelerating, speed: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def stop(self):
-        self.speed = 0
-        return f&quot;{self.vehicle_type} stopped&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_type</span><span class="si">}</span><span class="s2"> stopped&quot;</span>
 </code></pre>
 </div>
 <h2 id="inheritance-building-on-existing-code">Inheritance: Building on existing code<a class="headerlink" href="#inheritance-building-on-existing-code" title="Permanent link">&para;</a></h2>
 <p><strong>Inheritance</strong> allows us to create new classes based on existing ones, inheriting their attributes and methods while adding new features or modifying existing ones.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Vehicle:
-    &quot;&quot;&quot;Base class for all vehicles&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for all vehicles&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-        self.speed = 0
-        self.is_running = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def start(self):
-        if not self.is_running:
-            self.is_running = True
-            return f&quot;{self.make} {self.model} started&quot;
-        return &quot;Already running&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> started&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Already running&quot;</span>
 
-    def stop(self):
-        self.speed = 0
-        self.is_running = False
-        return f&quot;{self.make} {self.model} stopped&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> stopped&quot;</span>
 
-    def get_info(self):
-        return f&quot;{self.make} {self.model}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span>
 
-class Car(Vehicle):
-    &quot;&quot;&quot;Car inherits from Vehicle and adds car-specific features&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Car inherits from Vehicle and adds car-specific features&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, doors):
-        super().__init__(make, model)  # Call parent constructor
-        self.doors = doors  # Car-specific attribute
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">doors</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>  <span class="c1"># Call parent constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doors</span> <span class="o">=</span> <span class="n">doors</span>  <span class="c1"># Car-specific attribute</span>
 
-    def accelerate(self):
-        &quot;&quot;&quot;Car-specific acceleration&quot;&quot;&quot;
-        if self.is_running:
-            self.speed += 10
-            return f&quot;Car accelerating, speed: {self.speed} km/h&quot;
-        return &quot;Start the car first&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Car-specific acceleration&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">10</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Car accelerating, speed: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2"> km/h&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Start the car first&quot;</span>
 
-    def open_doors(self):
-        &quot;&quot;&quot;Car-specific method&quot;&quot;&quot;
-        return f&quot;Opening {self.doors} doors&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">open_doors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Car-specific method&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Opening </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="si">}</span><span class="s2"> doors&quot;</span>
 
-class Motorcycle(Vehicle):
-    &quot;&quot;&quot;Motorcycle inherits from Vehicle with different characteristics&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Motorcycle</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Motorcycle inherits from Vehicle with different characteristics&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, engine_size):
-        super().__init__(make, model)
-        self.engine_size = engine_size
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">engine_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">=</span> <span class="n">engine_size</span>
 
-    def accelerate(self):
-        &quot;&quot;&quot;Motorcycle accelerates differently than cars&quot;&quot;&quot;
-        if self.is_running:
-            self.speed += 20  # Motorcycles accelerate faster
-            return f&quot;Motorcycle accelerating, speed: {self.speed} km/h&quot;
-        return &quot;Start the motorcycle first&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Motorcycle accelerates differently than cars&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">20</span>  <span class="c1"># Motorcycles accelerate faster</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Motorcycle accelerating, speed: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2"> km/h&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Start the motorcycle first&quot;</span>
 
-    def wheelie(self):
-        &quot;&quot;&quot;Motorcycle-specific method&quot;&quot;&quot;
-        if self.speed &gt; 30:
-            return &quot;Performing a wheelie!&quot;
-        return &quot;Need more speed for a wheelie&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">wheelie</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Motorcycle-specific method&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Performing a wheelie!&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Need more speed for a wheelie&quot;</span>
 
-# Usage demonstrates inheritance
-car = Car(&quot;Toyota&quot;, &quot;Camry&quot;, 4)
-motorcycle = Motorcycle(&quot;Honda&quot;, &quot;CBR&quot;, 600)
+<span class="c1"># Usage demonstrates inheritance</span>
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">&quot;Toyota&quot;</span><span class="p">,</span> <span class="s2">&quot;Camry&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">motorcycle</span> <span class="o">=</span> <span class="n">Motorcycle</span><span class="p">(</span><span class="s2">&quot;Honda&quot;</span><span class="p">,</span> <span class="s2">&quot;CBR&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
 
-print(car.start())           # Inherited method
-print(car.accelerate())      # Overridden method
-print(car.open_doors())      # Car-specific method
+<span class="nb">print</span><span class="p">(</span><span class="n">car</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>           <span class="c1"># Inherited method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">car</span><span class="o">.</span><span class="n">accelerate</span><span class="p">())</span>      <span class="c1"># Overridden method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">car</span><span class="o">.</span><span class="n">open_doors</span><span class="p">())</span>      <span class="c1"># Car-specific method</span>
 
-print(motorcycle.start())    # Inherited method
-print(motorcycle.accelerate())  # Overridden method
-print(motorcycle.wheelie())  # Motorcycle-specific method
+<span class="nb">print</span><span class="p">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>    <span class="c1"># Inherited method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="n">accelerate</span><span class="p">())</span>  <span class="c1"># Overridden method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="n">wheelie</span><span class="p">())</span>  <span class="c1"># Motorcycle-specific method</span>
 </code></pre>
 </div>
 <h2 id="polymorphism-same-interface-different-behavior">Polymorphism: Same interface, different behavior<a class="headerlink" href="#polymorphism-same-interface-different-behavior" title="Permanent link">&para;</a></h2>
 <p><strong>Polymorphism</strong> means &ldquo;many forms.&rdquo; It allows different objects to respond to the same message (method call) in their own way. In Python, this often works through &ldquo;duck typing&rdquo; - if it walks like a duck and quacks like a duck, treat it like a duck.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Dog:
-    def __init__(self, name):
-        self.name = name
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
-    def make_sound(self):
-        return f&quot;{self.name} says Woof!&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> says Woof!&quot;</span>
 
-    def move(self):
-        return f&quot;{self.name} runs on four legs&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> runs on four legs&quot;</span>
 
-class Cat:
-    def __init__(self, name):
-        self.name = name
+<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
-    def make_sound(self):
-        return f&quot;{self.name} says Meow!&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> says Meow!&quot;</span>
 
-    def move(self):
-        return f&quot;{self.name} stalks silently&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> stalks silently&quot;</span>
 
-class Bird:
-    def __init__(self, name):
-        self.name = name
+<span class="k">class</span><span class="w"> </span><span class="nc">Bird</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
-    def make_sound(self):
-        return f&quot;{self.name} says Tweet!&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> says Tweet!&quot;</span>
 
-    def move(self):
-        return f&quot;{self.name} flies through the air&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> flies through the air&quot;</span>
 
-def animal_concert(animals):
-    &quot;&quot;&quot;Polymorphism in action: same method call, different behaviors&quot;&quot;&quot;
-    print(&quot;🎵 Animal Concert Starting! 🎵&quot;)
-    for animal in animals:
-        print(animal.make_sound())  # Same method name, different sounds
-        print(animal.move())        # Same method name, different movements
-        print(&quot;---&quot;)
+<span class="k">def</span><span class="w"> </span><span class="nf">animal_concert</span><span class="p">(</span><span class="n">animals</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Polymorphism in action: same method call, different behaviors&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎵 Animal Concert Starting! 🎵&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">animal</span><span class="o">.</span><span class="n">make_sound</span><span class="p">())</span>  <span class="c1"># Same method name, different sounds</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">animal</span><span class="o">.</span><span class="n">move</span><span class="p">())</span>        <span class="c1"># Same method name, different movements</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
 
-# Create different animals
-pets = [
-    Dog(&quot;Buddy&quot;),
-    Cat(&quot;Whiskers&quot;),
-    Bird(&quot;Tweety&quot;),
-    Dog(&quot;Max&quot;)
-]
+<span class="c1"># Create different animals</span>
+<span class="n">pets</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Dog</span><span class="p">(</span><span class="s2">&quot;Buddy&quot;</span><span class="p">),</span>
+    <span class="n">Cat</span><span class="p">(</span><span class="s2">&quot;Whiskers&quot;</span><span class="p">),</span>
+    <span class="n">Bird</span><span class="p">(</span><span class="s2">&quot;Tweety&quot;</span><span class="p">),</span>
+    <span class="n">Dog</span><span class="p">(</span><span class="s2">&quot;Max&quot;</span><span class="p">)</span>
+<span class="p">]</span>
 
-# Polymorphism: each animal responds differently to the same method calls
-animal_concert(pets)
+<span class="c1"># Polymorphism: each animal responds differently to the same method calls</span>
+<span class="n">animal_concert</span><span class="p">(</span><span class="n">pets</span><span class="p">)</span>
 
-# Duck typing example
-def pet_interaction(pet):
-    &quot;&quot;&quot;This function works with any object that has make_sound() and move()&quot;&quot;&quot;
-    print(f&quot;Interacting with pet:&quot;)
-    print(pet.make_sound())
-    print(pet.move())
+<span class="c1"># Duck typing example</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">pet_interaction</span><span class="p">(</span><span class="n">pet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function works with any object that has make_sound() and move()&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interacting with pet:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pet</span><span class="o">.</span><span class="n">make_sound</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pet</span><span class="o">.</span><span class="n">move</span><span class="p">())</span>
 
-# Works with any &quot;pet-like&quot; object
-pet_interaction(Dog(&quot;Rover&quot;))
-pet_interaction(Cat(&quot;Fluffy&quot;))
+<span class="c1"># Works with any &quot;pet-like&quot; object</span>
+<span class="n">pet_interaction</span><span class="p">(</span><span class="n">Dog</span><span class="p">(</span><span class="s2">&quot;Rover&quot;</span><span class="p">))</span>
+<span class="n">pet_interaction</span><span class="p">(</span><span class="n">Cat</span><span class="p">(</span><span class="s2">&quot;Fluffy&quot;</span><span class="p">))</span>
 </code></pre>
 </div>
 <h2 id="bringing-it-all-together">Bringing it all together<a class="headerlink" href="#bringing-it-all-together" title="Permanent link">&para;</a></h2>
 <p>These four concepts work together to create powerful, flexible code:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Abstract base for all shapes
-class Shape:
-    &quot;&quot;&quot;Abstract shape class demonstrating all four concepts&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># Abstract base for all shapes</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract shape class demonstrating all four concepts&quot;&quot;&quot;</span>
 
-    def __init__(self, name):
-        self.name = name
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
-    def area(self):
-        &quot;&quot;&quot;Abstract method - must be implemented by subclasses&quot;&quot;&quot;
-        raise NotImplementedError(&quot;Subclasses must implement area()&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract method - must be implemented by subclasses&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses must implement area()&quot;</span><span class="p">)</span>
 
-    def perimeter(self):
-        &quot;&quot;&quot;Abstract method&quot;&quot;&quot;
-        raise NotImplementedError(&quot;Subclasses must implement perimeter()&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract method&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses must implement perimeter()&quot;</span><span class="p">)</span>
 
-    def describe(self):
-        &quot;&quot;&quot;Common behavior for all shapes&quot;&quot;&quot;
-        return f&quot;This is a {self.name}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Common behavior for all shapes&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;This is a </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Inheritance: specific shapes inherit from Shape
-class Rectangle(Shape):
-    def __init__(self, width, height):
-        super().__init__(&quot;Rectangle&quot;)  # Generalisation
-        self.width = width
-        self.height = height
+<span class="c1"># Inheritance: specific shapes inherit from Shape</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Rectangle&quot;</span><span class="p">)</span>  <span class="c1"># Generalisation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
 
-    def area(self):  # Polymorphism: different implementation
-        return self.width * self.height
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Polymorphism: different implementation</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
 
-    def perimeter(self):  # Polymorphism: different implementation
-        return 2 * (self.width + self.height)
+    <span class="k">def</span><span class="w"> </span><span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Polymorphism: different implementation</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
 
-class Circle(Shape):
-    def __init__(self, radius):
-        super().__init__(&quot;Circle&quot;)
-        self.radius = radius
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Circle&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
 
-    def area(self):  # Polymorphism: different implementation
-        return 3.14159 * self.radius ** 2
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Polymorphism: different implementation</span>
+        <span class="k">return</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
 
-    def perimeter(self):  # Polymorphism: different implementation
-        return 2 * 3.14159 * self.radius
+    <span class="k">def</span><span class="w"> </span><span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Polymorphism: different implementation</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
 
-# Abstraction: simple function hides complexity of different shapes
-def calculate_total_area(shapes):
-    &quot;&quot;&quot;Works with any shape objects - abstraction and polymorphism&quot;&quot;&quot;
-    total = 0
-    for shape in shapes:
-        total += shape.area()  # Polymorphic method call
-    return total
+<span class="c1"># Abstraction: simple function hides complexity of different shapes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_total_area</span><span class="p">(</span><span class="n">shapes</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Works with any shape objects - abstraction and polymorphism&quot;&quot;&quot;</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">shape</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>  <span class="c1"># Polymorphic method call</span>
+    <span class="k">return</span> <span class="n">total</span>
 
-# Usage demonstrates all concepts working together
-shapes = [
-    Rectangle(5, 3),
-    Circle(4),
-    Rectangle(2, 8)
-]
+<span class="c1"># Usage demonstrates all concepts working together</span>
+<span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="n">Circle</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+    <span class="n">Rectangle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="p">]</span>
 
-print(&quot;Shape calculations:&quot;)
-for shape in shapes:
-    print(f&quot;{shape.describe()}&quot;)  # Inherited method
-    print(f&quot;Area: {shape.area()}&quot;)  # Polymorphic method
-    print(f&quot;Perimeter: {shape.perimeter()}&quot;)  # Polymorphic method
-    print(&quot;---&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape calculations:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">shape</span> <span class="ow">in</span> <span class="n">shapes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Inherited method</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Polymorphic method</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Perimeter: </span><span class="si">{</span><span class="n">shape</span><span class="o">.</span><span class="n">perimeter</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Polymorphic method</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
 
-print(f&quot;Total area of all shapes: {calculate_total_area(shapes)}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total area of all shapes: </span><span class="si">{</span><span class="n">calculate_total_area</span><span class="p">(</span><span class="n">shapes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -1832,27 +1832,27 @@ print(f&quot;Total area of all shapes: {calculate_total_area(shapes)}&quot;)
 <summary>Exercise 1: Identifying the concepts</summary>
 <p>Look at this code and identify examples of abstraction, generalisation, inheritance, and polymorphism:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class MediaPlayer:
-    def __init__(self, name):
-        self.name = name
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">MediaPlayer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
 
-    def play(self):
-        return f&quot;{self.name} is playing&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is playing&quot;</span>
 
-    def stop(self):
-        return f&quot;{self.name} stopped&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> stopped&quot;</span>
 
-class AudioPlayer(MediaPlayer):
-    def play(self):
-        return f&quot;🎵 {self.name} playing audio&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">AudioPlayer</span><span class="p">(</span><span class="n">MediaPlayer</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;🎵 </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> playing audio&quot;</span>
 
-class VideoPlayer(MediaPlayer):
-    def play(self):
-        return f&quot;🎬 {self.name} playing video&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">VideoPlayer</span><span class="p">(</span><span class="n">MediaPlayer</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;🎬 </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> playing video&quot;</span>
 
-def start_playlist(players):
-    for player in players:
-        print(player.play())
+<span class="k">def</span><span class="w"> </span><span class="nf">start_playlist</span><span class="p">(</span><span class="n">players</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">player</span><span class="o">.</span><span class="n">play</span><span class="p">())</span>
 </code></pre>
 </div>
 <p><strong>Task</strong>: Identify and explain each concept in this code.</p>
@@ -1888,53 +1888,53 @@ def start_playlist(players):
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Employee:
-    &quot;&quot;&quot;Base class for all employees&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Employee</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for all employees&quot;&quot;&quot;</span>
 
-    def __init__(self, name, employee_id, base_salary):
-        self.name = name
-        self.employee_id = employee_id
-        self.base_salary = base_salary
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">base_salary</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">employee_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_salary</span> <span class="o">=</span> <span class="n">base_salary</span>
 
-    def work(self):
-        return f&quot;{self.name} is working&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is working&quot;</span>
 
-    def get_info(self):
-        return f&quot;Employee: {self.name} (ID: {self.employee_id})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Employee: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">employee_id</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-class Manager(Employee):
-    def __init__(self, name, employee_id, base_salary):
-        super().__init__(name, employee_id, base_salary)
-        self.team = []
+<span class="k">class</span><span class="w"> </span><span class="nc">Manager</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">base_salary</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">base_salary</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">team</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def work(self):
-        return f&quot;Manager {self.name} is managing the team&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Manager </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is managing the team&quot;</span>
 
-    def assign_task(self, task, employee):
-        return f&quot;{self.name} assigned &#x27;{task}&#x27; to {employee.name}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">assign_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">,</span> <span class="n">employee</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> assigned &#39;</span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s2">&#39; to </span><span class="si">{</span><span class="n">employee</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def hold_meeting(self):
-        return f&quot;{self.name} is holding a team meeting&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">hold_meeting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is holding a team meeting&quot;</span>
 
-class Developer(Employee):
-    def work(self):
-        return f&quot;Developer {self.name} is coding&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Developer</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Developer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is coding&quot;</span>
 
-    def write_code(self, language):
-        return f&quot;{self.name} is writing {language} code&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is writing </span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s2"> code&quot;</span>
 
-    def debug(self):
-        return f&quot;{self.name} is debugging code&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is debugging code&quot;</span>
 
-class Designer(Employee):
-    def work(self):
-        return f&quot;Designer {self.name} is designing&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Designer</span><span class="p">(</span><span class="n">Employee</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">work</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Designer </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is designing&quot;</span>
 
-    def create_design(self, design_type):
-        return f&quot;{self.name} is creating a {design_type} design&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_design</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">design_type</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is creating a </span><span class="si">{</span><span class="n">design_type</span><span class="si">}</span><span class="s2"> design&quot;</span>
 
-    def review_design(self):
-        return f&quot;{self.name} is reviewing design mockups&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">review_design</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is reviewing design mockups&quot;</span>
 </code></pre>
 </div>
 </details>
@@ -1954,61 +1954,61 @@ class Designer(Employee):
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class WashingMachine:
-    def __init__(self, brand):
-        self.brand = brand
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">WashingMachine</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
 
-    def start(self):
-        return f&quot;{self.brand} washing machine starting wash cycle&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> washing machine starting wash cycle&quot;</span>
 
-    def process(self):
-        return &quot;Washing clothes with soap and water&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Washing clothes with soap and water&quot;</span>
 
-    def finish(self):
-        return &quot;Wash cycle complete, clothes are clean&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Wash cycle complete, clothes are clean&quot;</span>
 
-class Dishwasher:
-    def __init__(self, brand):
-        self.brand = brand
+<span class="k">class</span><span class="w"> </span><span class="nc">Dishwasher</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
 
-    def start(self):
-        return f&quot;{self.brand} dishwasher starting cleaning cycle&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> dishwasher starting cleaning cycle&quot;</span>
 
-    def process(self):
-        return &quot;Spraying dishes with hot soapy water&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Spraying dishes with hot soapy water&quot;</span>
 
-    def finish(self):
-        return &quot;Dishes are clean and dry&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Dishes are clean and dry&quot;</span>
 
-class Printer:
-    def __init__(self, brand):
-        self.brand = brand
+<span class="k">class</span><span class="w"> </span><span class="nc">Printer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
 
-    def start(self):
-        return f&quot;{self.brand} printer initializing&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> printer initializing&quot;</span>
 
-    def process(self):
-        return &quot;Printing document pages&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Printing document pages&quot;</span>
 
-    def finish(self):
-        return &quot;Document printed successfully&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">finish</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Document printed successfully&quot;</span>
 
-def run_appliance(appliance):
-    &quot;&quot;&quot;Duck typing: works with any object that has start/process/finish&quot;&quot;&quot;
-    print(appliance.start())
-    print(appliance.process())
-    print(appliance.finish())
-    print(&quot;---&quot;)
+<span class="k">def</span><span class="w"> </span><span class="nf">run_appliance</span><span class="p">(</span><span class="n">appliance</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Duck typing: works with any object that has start/process/finish&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">appliance</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">appliance</span><span class="o">.</span><span class="n">process</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">appliance</span><span class="o">.</span><span class="n">finish</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&quot;</span><span class="p">)</span>
 
-# All three work with the same function despite no inheritance
-appliances = [
-    WashingMachine(&quot;Samsung&quot;),
-    Dishwasher(&quot;Bosch&quot;),
-    Printer(&quot;HP&quot;)
-]
+<span class="c1"># All three work with the same function despite no inheritance</span>
+<span class="n">appliances</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">WashingMachine</span><span class="p">(</span><span class="s2">&quot;Samsung&quot;</span><span class="p">),</span>
+    <span class="n">Dishwasher</span><span class="p">(</span><span class="s2">&quot;Bosch&quot;</span><span class="p">),</span>
+    <span class="n">Printer</span><span class="p">(</span><span class="s2">&quot;HP&quot;</span><span class="p">)</span>
+<span class="p">]</span>
 
-for appliance in appliances:
-    run_appliance(appliance)
+<span class="k">for</span> <span class="n">appliance</span> <span class="ow">in</span> <span class="n">appliances</span><span class="p">:</span>
+    <span class="n">run_appliance</span><span class="p">(</span><span class="n">appliance</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2259,6 +2259,8 @@ for appliance in appliances:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

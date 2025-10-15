@@ -2352,23 +2352,23 @@
 </ul>
 <p><strong>Sample Security Test:</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def test_grade_access_authorization():
-    &quot;&quot;&quot;Test that students can&#x27;t access other students&#x27; grades&quot;&quot;&quot;
-    # Setup: Create two student accounts
-    student1 = create_test_user(&quot;student1&quot;)
-    student2 = create_test_user(&quot;student2&quot;)
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">test_grade_access_authorization</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that students can&#39;t access other students&#39; grades&quot;&quot;&quot;</span>
+    <span class="c1"># Setup: Create two student accounts</span>
+    <span class="n">student1</span> <span class="o">=</span> <span class="n">create_test_user</span><span class="p">(</span><span class="s2">&quot;student1&quot;</span><span class="p">)</span>
+    <span class="n">student2</span> <span class="o">=</span> <span class="n">create_test_user</span><span class="p">(</span><span class="s2">&quot;student2&quot;</span><span class="p">)</span>
 
-    # Test: Student1 tries to access Student2&#x27;s grades
-    login_as(student1)
-    response = client.get(f&quot;/grades/{student2.id}&quot;)
+    <span class="c1"># Test: Student1 tries to access Student2&#39;s grades</span>
+    <span class="n">login_as</span><span class="p">(</span><span class="n">student1</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/grades/</span><span class="si">{</span><span class="n">student2</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Verify: Access should be denied
-    assert response.status_code == 403
-    assert &quot;Access denied&quot; in response.text
+    <span class="c1"># Verify: Access should be denied</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">403</span>
+    <span class="k">assert</span> <span class="s2">&quot;Access denied&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
 
-    # Verify: Security event should be logged
-    logs = get_security_logs()
-    assert f&quot;Unauthorized grade access attempt by {student1.id}&quot; in logs
+    <span class="c1"># Verify: Security event should be logged</span>
+    <span class="n">logs</span> <span class="o">=</span> <span class="n">get_security_logs</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="sa">f</span><span class="s2">&quot;Unauthorized grade access attempt by </span><span class="si">{</span><span class="n">student1</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">logs</span>
 </code></pre>
 </div>
 <h3 id="deployment-phase-production-security">Deployment Phase: Production Security<a class="headerlink" href="#deployment-phase-production-security" title="Permanent link">&para;</a></h3>
@@ -2909,6 +2909,8 @@
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

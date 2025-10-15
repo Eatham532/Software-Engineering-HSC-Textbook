@@ -1946,45 +1946,45 @@
 <h2 id="python-implementation">Python Implementation<a class="headerlink" href="#python-implementation" title="Permanent link">&para;</a></h2>
 <p>Here&rsquo;s how we might implement validation based on our data dictionary:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def validate_student_data(name, age, grade_average, enrollment_status):
-    &quot;&quot;&quot;
-    Validate student data against our data dictionary constraints.
-    Returns True if valid, False with error message if invalid.
-    &quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">validate_student_data</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">grade_average</span><span class="p">,</span> <span class="n">enrollment_status</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate student data against our data dictionary constraints.</span>
+<span class="sd">    Returns True if valid, False with error message if invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    # Validate name
-    if not isinstance(name, str):
-        return False, &quot;Name must be a string&quot;
-    if len(name) &lt; 2 or len(name) &gt; 50:
-        return False, &quot;Name must be between 2 and 50 characters&quot;
+    <span class="c1"># Validate name</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Name must be a string&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Name must be between 2 and 50 characters&quot;</span>
 
-    # Validate age
-    if not isinstance(age, int):
-        return False, &quot;Age must be an integer&quot;
-    if age &lt; 16 or age &gt; 25:
-        return False, &quot;Age must be between 16 and 25&quot;
+    <span class="c1"># Validate age</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Age must be an integer&quot;</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">16</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Age must be between 16 and 25&quot;</span>
 
-    # Validate grade average
-    if not isinstance(grade_average, (int, float)):
-        return False, &quot;Grade average must be a number&quot;
-    if grade_average &lt; 0.0 or grade_average &gt; 100.0:
-        return False, &quot;Grade average must be between 0.0 and 100.0&quot;
+    <span class="c1"># Validate grade average</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">grade_average</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Grade average must be a number&quot;</span>
+    <span class="k">if</span> <span class="n">grade_average</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">grade_average</span> <span class="o">&gt;</span> <span class="mf">100.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Grade average must be between 0.0 and 100.0&quot;</span>
 
-    # Validate enrollment status
-    if not isinstance(enrollment_status, bool):
-        return False, &quot;Enrollment status must be True or False&quot;
+    <span class="c1"># Validate enrollment status</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">enrollment_status</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Enrollment status must be True or False&quot;</span>
 
-    return True, &quot;All data is valid&quot;
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;All data is valid&quot;</span>
 
-# Test our validation function
-print(validate_student_data(&quot;Sarah Johnson&quot;, 17, 87.5, True))
-# Output: (True, &#x27;All data is valid&#x27;)
+<span class="c1"># Test our validation function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validate_student_data</span><span class="p">(</span><span class="s2">&quot;Sarah Johnson&quot;</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mf">87.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+<span class="c1"># Output: (True, &#39;All data is valid&#39;)</span>
 
-print(validate_student_data(&quot;&quot;, 17, 87.5, True))
-# Output: (False, &#x27;Name must be between 2 and 50 characters&#x27;)
+<span class="nb">print</span><span class="p">(</span><span class="n">validate_student_data</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mf">87.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+<span class="c1"># Output: (False, &#39;Name must be between 2 and 50 characters&#39;)</span>
 
-print(validate_student_data(&quot;Sarah Johnson&quot;, 30, 87.5, True))
-# Output: (False, &#x27;Age must be between 16 and 25&#x27;)
+<span class="nb">print</span><span class="p">(</span><span class="n">validate_student_data</span><span class="p">(</span><span class="s2">&quot;Sarah Johnson&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">87.5</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+<span class="c1"># Output: (False, &#39;Age must be between 16 and 25&#39;)</span>
 </code></pre>
 </div>
 <h2 id="real-world-example-e-commerce-product">Real-World Example: E-commerce Product<a class="headerlink" href="#real-world-example-e-commerce-product" title="Permanent link">&para;</a></h2>
@@ -2070,11 +2070,11 @@ print(validate_student_data(&quot;Sarah Johnson&quot;, 30, 87.5, True))
 <h3 id="conditional-constraints">Conditional Constraints<a class="headerlink" href="#conditional-constraints" title="Permanent link">&para;</a></h3>
 <p>Some constraints depend on other fields:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def validate_stock_rules(in_stock, stock_quantity):
-    &quot;&quot;&quot;Stock quantity must be &gt; 0 if in_stock is True.&quot;&quot;&quot;
-    if in_stock and stock_quantity &lt;= 0:
-        return False, &quot;In-stock items must have quantity &gt; 0&quot;
-    return True, &quot;Stock rules valid&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">validate_stock_rules</span><span class="p">(</span><span class="n">in_stock</span><span class="p">,</span> <span class="n">stock_quantity</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Stock quantity must be &gt; 0 if in_stock is True.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">in_stock</span> <span class="ow">and</span> <span class="n">stock_quantity</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;In-stock items must have quantity &gt; 0&quot;</span>
+    <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Stock rules valid&quot;</span>
 </code></pre>
 </div>
 <h2 id="data-dictionary-vs-database-schema">Data Dictionary vs Database Schema<a class="headerlink" href="#data-dictionary-vs-database-schema" title="Permanent link">&para;</a></h2>
@@ -2389,6 +2389,8 @@ print(validate_student_data(&quot;Sarah Johnson&quot;, 30, 87.5, True))
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

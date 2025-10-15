@@ -1712,40 +1712,40 @@
 <p>A <strong>class</strong> is a blueprint that defines the structure and behavior of objects. It specifies what attributes (data) and methods (functions) objects of that type will have.</p>
 <h3 id="basic-class-syntax">Basic class syntax<a class="headerlink" href="#basic-class-syntax" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Student:
-    &quot;&quot;&quot;A class to represent a student&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to represent a student&quot;&quot;&quot;</span>
 
-    def __init__(self, name, student_id):
-        &quot;&quot;&quot;Constructor - called when creating a new Student object&quot;&quot;&quot;
-        self.name = name
-        self.student_id = student_id
-        self.grades = []  # Initialize empty list of grades
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor - called when creating a new Student object&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialize empty list of grades</span>
 
-    def add_grade(self, grade):
-        &quot;&quot;&quot;Method to add a grade to the student&#x27;s record&quot;&quot;&quot;
-        if 0 &lt;= grade &lt;= 100:
-            self.grades.append(grade)
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to add a grade to the student&#39;s record&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">grade</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def get_average(self):
-        &quot;&quot;&quot;Method to calculate the student&#x27;s average grade&quot;&quot;&quot;
-        if not self.grades:
-            return 0
-        return sum(self.grades) / len(self.grades)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to calculate the student&#39;s average grade&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-    def __str__(self):
-        &quot;&quot;&quot;String representation of the student&quot;&quot;&quot;
-        return f&quot;Student({self.name}, ID: {self.student_id})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;String representation of the student&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Student(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">student_id</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-# Creating objects (instantiation)
-alice = Student(&quot;Alice Johnson&quot;, &quot;S12345&quot;)
-bob = Student(&quot;Bob Smith&quot;, &quot;S12346&quot;)
+<span class="c1"># Creating objects (instantiation)</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;S12345&quot;</span><span class="p">)</span>
+<span class="n">bob</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Bob Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;S12346&quot;</span><span class="p">)</span>
 
-# Using the objects
-alice.add_grade(85)
-alice.add_grade(92)
-print(f&quot;{alice.name}&#x27;s average: {alice.get_average()}&quot;)  # Alice&#x27;s average: 88.5
+<span class="c1"># Using the objects</span>
+<span class="n">alice</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">)</span>
+<span class="n">alice</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="mi">92</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alice</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;s average: </span><span class="si">{</span><span class="n">alice</span><span class="o">.</span><span class="n">get_average</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Alice&#39;s average: 88.5</span>
 </code></pre>
 </div>
 <h3 id="key-components-explained">Key components explained<a class="headerlink" href="#key-components-explained" title="Permanent link">&para;</a></h3>
@@ -1788,159 +1788,159 @@ print(f&quot;{alice.name}&#x27;s average: {alice.get_average()}&quot;)  # Alice&
 <p>The <strong>constructor</strong> (<code>__init__</code>) is responsible for setting up a new object&rsquo;s initial state. It&rsquo;s one of the most important methods in a class.</p>
 <h3 id="constructor-best-practices">Constructor best practices<a class="headerlink" href="#constructor-best-practices" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BankAccount:
-    &quot;&quot;&quot;A simple bank account class demonstrating good constructor practices&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple bank account class demonstrating good constructor practices&quot;&quot;&quot;</span>
 
-    def __init__(self, account_number, owner_name, initial_balance=0):
-        &quot;&quot;&quot;
-        Initialize a new bank account
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">owner_name</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a new bank account</span>
 
-        Args:
-            account_number (str): Unique account identifier
-            owner_name (str): Name of the account owner
-            initial_balance (float): Starting balance (default: 0)
-        &quot;&quot;&quot;
-        # Validate inputs
-        if not account_number or not account_number.strip():
-            raise ValueError(&quot;Account number cannot be empty&quot;)
-        if not owner_name or not owner_name.strip():
-            raise ValueError(&quot;Owner name cannot be empty&quot;)
-        if initial_balance &lt; 0:
-            raise ValueError(&quot;Initial balance cannot be negative&quot;)
+<span class="sd">        Args:</span>
+<span class="sd">            account_number (str): Unique account identifier</span>
+<span class="sd">            owner_name (str): Name of the account owner</span>
+<span class="sd">            initial_balance (float): Starting balance (default: 0)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Validate inputs</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">account_number</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">account_number</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Account number cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">owner_name</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">owner_name</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Owner name cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">initial_balance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Initial balance cannot be negative&quot;</span><span class="p">)</span>
 
-        # Set up instance attributes
-        self.account_number = account_number.strip()
-        self.owner_name = owner_name.strip()
-        self.balance = initial_balance
-        self.transaction_history = []  # Start with empty history
+        <span class="c1"># Set up instance attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner_name</span> <span class="o">=</span> <span class="n">owner_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Start with empty history</span>
 
-        # Record the initial deposit if any
-        if initial_balance &gt; 0:
-            self.transaction_history.append(f&quot;Initial deposit: +${initial_balance}&quot;)
+        <span class="c1"># Record the initial deposit if any</span>
+        <span class="k">if</span> <span class="n">initial_balance</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial deposit: +$</span><span class="si">{</span><span class="n">initial_balance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Good usage
-account = BankAccount(&quot;ACC001&quot;, &quot;Alice Johnson&quot;, 1000)
+<span class="c1"># Good usage</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC001&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-# Constructor validation prevents bad data
-try:
-    bad_account = BankAccount(&quot;&quot;, &quot;Bob&quot;, -100)  # Will raise ValueError
-except ValueError as e:
-    print(f&quot;Error: {e}&quot;)
+<span class="c1"># Constructor validation prevents bad data</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">bad_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Will raise ValueError</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="constructor-parameters-and-defaults">Constructor parameters and defaults<a class="headerlink" href="#constructor-parameters-and-defaults" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Rectangle:
-    &quot;&quot;&quot;Rectangle class showing different parameter patterns&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rectangle class showing different parameter patterns&quot;&quot;&quot;</span>
 
-    def __init__(self, width, height=None):
-        &quot;&quot;&quot;
-        Create a rectangle
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a rectangle</span>
 
-        Args:
-            width (float): Width of rectangle
-            height (float, optional): Height of rectangle. If None, creates a square
-        &quot;&quot;&quot;
-        if width &lt;= 0:
-            raise ValueError(&quot;Width must be positive&quot;)
+<span class="sd">        Args:</span>
+<span class="sd">            width (float): Width of rectangle</span>
+<span class="sd">            height (float, optional): Height of rectangle. If None, creates a square</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Width must be positive&quot;</span><span class="p">)</span>
 
-        self.width = width
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
 
-        # If height not provided, make it a square
-        if height is None:
-            self.height = width
-        else:
-            if height &lt;= 0:
-                raise ValueError(&quot;Height must be positive&quot;)
-            self.height = height
+        <span class="c1"># If height not provided, make it a square</span>
+        <span class="k">if</span> <span class="n">height</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">height</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Height must be positive&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
 
-    def area(self):
-        return self.width * self.height
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
 
-    def is_square(self):
-        return self.width == self.height
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_square</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
 
-# Different ways to create rectangles
-rect1 = Rectangle(5, 3)    # Rectangle: 5x3
-rect2 = Rectangle(4)       # Square: 4x4 (height defaults to width)
+<span class="c1"># Different ways to create rectangles</span>
+<span class="n">rect1</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>    <span class="c1"># Rectangle: 5x3</span>
+<span class="n">rect2</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>       <span class="c1"># Square: 4x4 (height defaults to width)</span>
 
-print(f&quot;Rectangle area: {rect1.area()}&quot;)  # 15
-print(f&quot;Square area: {rect2.area()}&quot;)     # 16
-print(f&quot;Is rect2 a square? {rect2.is_square()}&quot;)  # True
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rectangle area: </span><span class="si">{</span><span class="n">rect1</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># 15</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Square area: </span><span class="si">{</span><span class="n">rect2</span><span class="o">.</span><span class="n">area</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>     <span class="c1"># 16</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Is rect2 a square? </span><span class="si">{</span><span class="n">rect2</span><span class="o">.</span><span class="n">is_square</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># True</span>
 </code></pre>
 </div>
 <h2 id="methods-defining-behavior">Methods: defining behavior<a class="headerlink" href="#methods-defining-behavior" title="Permanent link">&para;</a></h2>
 <p><strong>Methods</strong> are functions that belong to a class and define what objects of that class can do. They have access to the object&rsquo;s data and can modify it.</p>
 <h3 id="instance-methods">Instance methods<a class="headerlink" href="#instance-methods" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Counter:
-    &quot;&quot;&quot;A simple counter class demonstrating various method patterns&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple counter class demonstrating various method patterns&quot;&quot;&quot;</span>
 
-    def __init__(self, start_value=0):
-        &quot;&quot;&quot;Initialize counter with starting value&quot;&quot;&quot;
-        self.value = start_value
-        self.history = [start_value]  # Track all values
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_value</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize counter with starting value&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">start_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_value</span><span class="p">]</span>  <span class="c1"># Track all values</span>
 
-    def increment(self, amount=1):
-        &quot;&quot;&quot;Increase counter by specified amount (default: 1)&quot;&quot;&quot;
-        if amount &lt;= 0:
-            raise ValueError(&quot;Increment amount must be positive&quot;)
-        self.value += amount
-        self.history.append(self.value)
+    <span class="k">def</span><span class="w"> </span><span class="nf">increment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Increase counter by specified amount (default: 1)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Increment amount must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-    def decrement(self, amount=1):
-        &quot;&quot;&quot;Decrease counter by specified amount (default: 1)&quot;&quot;&quot;
-        if amount &lt;= 0:
-            raise ValueError(&quot;Decrement amount must be positive&quot;)
-        self.value -= amount
-        self.history.append(self.value)
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrease counter by specified amount (default: 1)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Decrement amount must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">-=</span> <span class="n">amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-    def reset(self, new_value=0):
-        &quot;&quot;&quot;Reset counter to specified value (default: 0)&quot;&quot;&quot;
-        self.value = new_value
-        self.history.append(self.value)
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_value</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset counter to specified value (default: 0)&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">new_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-    def get_value(self):
-        &quot;&quot;&quot;Get current counter value&quot;&quot;&quot;
-        return self.value
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current counter value&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
-    def get_history(self):
-        &quot;&quot;&quot;Get list of all values the counter has had&quot;&quot;&quot;
-        return self.history.copy()  # Return copy to protect internal data
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of all values the counter has had&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Return copy to protect internal data</span>
 
-    def __str__(self):
-        return f&quot;Counter(value={self.value})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Counter(value=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-# Using the counter
-counter = Counter(10)
-counter.increment(5)      # value = 15
-counter.decrement(3)      # value = 12
-counter.increment()       # value = 13 (default increment of 1)
+<span class="c1"># Using the counter</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">counter</span><span class="o">.</span><span class="n">increment</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>      <span class="c1"># value = 15</span>
+<span class="n">counter</span><span class="o">.</span><span class="n">decrement</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>      <span class="c1"># value = 12</span>
+<span class="n">counter</span><span class="o">.</span><span class="n">increment</span><span class="p">()</span>       <span class="c1"># value = 13 (default increment of 1)</span>
 
-print(counter)            # Counter(value=13)
-print(counter.get_history())  # [10, 15, 12, 13]
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>            <span class="c1"># Counter(value=13)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="o">.</span><span class="n">get_history</span><span class="p">())</span>  <span class="c1"># [10, 15, 12, 13]</span>
 </code></pre>
 </div>
 <h3 id="method-design-principles">Method design principles<a class="headerlink" href="#method-design-principles" title="Permanent link">&para;</a></h3>
 <p><strong>1. Single responsibility:</strong> Each method should do one thing well</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class EmailValidator:
-    &quot;&quot;&quot;Class demonstrating single responsibility in methods&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">EmailValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class demonstrating single responsibility in methods&quot;&quot;&quot;</span>
 
-    def is_valid_email(self, email):
-        &quot;&quot;&quot;Check if email format is valid&quot;&quot;&quot;
-        return self._has_at_symbol(email) and self._has_domain(email)
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if email format is valid&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_at_symbol</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_domain</span><span class="p">(</span><span class="n">email</span><span class="p">)</span>
 
-    def _has_at_symbol(self, email):
-        &quot;&quot;&quot;Private helper: check for @ symbol&quot;&quot;&quot;
-        return &#x27;@&#x27; in email and email.count(&#x27;@&#x27;) == 1
+    <span class="k">def</span><span class="w"> </span><span class="nf">_has_at_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Private helper: check for @ symbol&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;@&#39;</span> <span class="ow">in</span> <span class="n">email</span> <span class="ow">and</span> <span class="n">email</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
 
-    def _has_domain(self, email):
-        &quot;&quot;&quot;Private helper: check for domain part&quot;&quot;&quot;
-        if &#x27;@&#x27; not in email:
-            return False
-        domain = email.split(&#x27;@&#x27;)[1]
-        return &#x27;.&#x27; in domain and len(domain) &gt; 3
+    <span class="k">def</span><span class="w"> </span><span class="nf">_has_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Private helper: check for domain part&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;@&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">domain</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span>
 </code></pre>
 </div>
 <p><strong>2. Meaningful names:</strong> Method names should clearly describe what they do</p>
@@ -1958,22 +1958,22 @@ print(counter.get_history())  # [10, 15, 12, 13]
 </span></code></pre></div>
 <p><strong>3. Consistent parameter patterns:</strong> Similar methods should have similar signatures</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class MathOperations:
-    &quot;&quot;&quot;Consistent parameter patterns&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">MathOperations</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Consistent parameter patterns&quot;&quot;&quot;</span>
 
-    def add(self, a, b):
-        return a + b
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
-    def subtract(self, a, b):
-        return a - b
+    <span class="k">def</span><span class="w"> </span><span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
 
-    def multiply(self, a, b):
-        return a * b
+    <span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
 
-    def divide(self, a, b):
-        if b == 0:
-            raise ValueError(&quot;Cannot divide by zero&quot;)
-        return a / b
+    <span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot divide by zero&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
 </code></pre>
 </div>
 <h2 id="composition-building-with-components">Composition: building with components<a class="headerlink" href="#composition-building-with-components" title="Permanent link">&para;</a></h2>
@@ -2012,230 +2012,230 @@ print(counter.get_history())  # [10, 15, 12, 13]
 <details class="info">
 <summary>Basic composition example</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Engine:
-    &quot;&quot;&quot;Simple engine component&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Engine</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple engine component&quot;&quot;&quot;</span>
 
-    def __init__(self, horsepower, fuel_type):
-        self.horsepower = horsepower
-        self.fuel_type = fuel_type
-        self.is_running = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">horsepower</span><span class="p">,</span> <span class="n">fuel_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horsepower</span> <span class="o">=</span> <span class="n">horsepower</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuel_type</span> <span class="o">=</span> <span class="n">fuel_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def start(self):
-        if not self.is_running:
-            self.is_running = True
-            return f&quot;{self.horsepower}hp {self.fuel_type} engine started&quot;
-        return &quot;Engine already running&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">horsepower</span><span class="si">}</span><span class="s2">hp </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fuel_type</span><span class="si">}</span><span class="s2"> engine started&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Engine already running&quot;</span>
 
-    def stop(self):
-        if self.is_running:
-            self.is_running = False
-            return &quot;Engine stopped&quot;
-        return &quot;Engine already stopped&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="s2">&quot;Engine stopped&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Engine already stopped&quot;</span>
 
-class Wheels:
-    &quot;&quot;&quot;Wheel system component&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Wheels</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wheel system component&quot;&quot;&quot;</span>
 
-    def __init__(self, wheel_count, wheel_size):
-        self.wheel_count = wheel_count
-        self.wheel_size = wheel_size
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wheel_count</span><span class="p">,</span> <span class="n">wheel_size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wheel_count</span> <span class="o">=</span> <span class="n">wheel_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wheel_size</span> <span class="o">=</span> <span class="n">wheel_size</span>
 
-    def get_info(self):
-        return f&quot;{self.wheel_count} wheels, {self.wheel_size} inch diameter&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheel_count</span><span class="si">}</span><span class="s2"> wheels, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheel_size</span><span class="si">}</span><span class="s2"> inch diameter&quot;</span>
 
-class Car:
-    &quot;&quot;&quot;Car class using composition instead of inheritance&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Car class using composition instead of inheritance&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, engine, wheels):
-        self.make = make
-        self.model = model
-        self.engine = engine      # Composition: Car HAS-A Engine
-        self.wheels = wheels      # Composition: Car HAS-A Wheels system
-        self.speed = 0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">wheels</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">engine</span>      <span class="c1"># Composition: Car HAS-A Engine</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wheels</span> <span class="o">=</span> <span class="n">wheels</span>      <span class="c1"># Composition: Car HAS-A Wheels system</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def start(self):
-        &quot;&quot;&quot;Start the car by starting its engine&quot;&quot;&quot;
-        result = self.engine.start()
-        return f&quot;{self.make} {self.model}: {result}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the car by starting its engine&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def stop(self):
-        &quot;&quot;&quot;Stop the car&quot;&quot;&quot;
-        self.speed = 0
-        result = self.engine.stop()
-        return f&quot;{self.make} {self.model}: {result}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop the car&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def accelerate(self, amount):
-        &quot;&quot;&quot;Accelerate if engine is running&quot;&quot;&quot;
-        if self.engine.is_running:
-            self.speed += amount
-            return f&quot;Accelerating to {self.speed} km/h&quot;
-        return &quot;Cannot accelerate - engine not running&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Accelerate if engine is running&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Accelerating to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2"> km/h&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Cannot accelerate - engine not running&quot;</span>
 
-    def get_specs(self):
-        &quot;&quot;&quot;Get car specifications&quot;&quot;&quot;
-        return f&quot;{self.make} {self.model} - {self.engine.horsepower}hp {self.engine.fuel_type}, {self.wheels.get_info()}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get car specifications&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">horsepower</span><span class="si">}</span><span class="s2">hp </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">fuel_type</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheels</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Creating a car using composition
-v8_engine = Engine(400, &quot;gasoline&quot;)
-standard_wheels = Wheels(4, 18)
-sports_car = Car(&quot;Ferrari&quot;, &quot;F40&quot;, v8_engine, standard_wheels)
+<span class="c1"># Creating a car using composition</span>
+<span class="n">v8_engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="s2">&quot;gasoline&quot;</span><span class="p">)</span>
+<span class="n">standard_wheels</span> <span class="o">=</span> <span class="n">Wheels</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">sports_car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">&quot;Ferrari&quot;</span><span class="p">,</span> <span class="s2">&quot;F40&quot;</span><span class="p">,</span> <span class="n">v8_engine</span><span class="p">,</span> <span class="n">standard_wheels</span><span class="p">)</span>
 
-print(sports_car.start())        # Ferrari F40: 400hp gasoline engine started
-print(sports_car.accelerate(50)) # Accelerating to 50 km/h
-print(sports_car.get_specs())    # Ferrari F40 - 400hp gasoline, 4 wheels, 18 inch diameter
+<span class="nb">print</span><span class="p">(</span><span class="n">sports_car</span><span class="o">.</span><span class="n">start</span><span class="p">())</span>        <span class="c1"># Ferrari F40: 400hp gasoline engine started</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sports_car</span><span class="o">.</span><span class="n">accelerate</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span> <span class="c1"># Accelerating to 50 km/h</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sports_car</span><span class="o">.</span><span class="n">get_specs</span><span class="p">())</span>    <span class="c1"># Ferrari F40 - 400hp gasoline, 4 wheels, 18 inch diameter</span>
 </code></pre>
 </div>
 </details>
 <h3 id="advanced-composition-patterns">Advanced composition patterns<a class="headerlink" href="#advanced-composition-patterns" title="Permanent link">&para;</a></h3>
 <p><strong>1. Composition with dependency injection:</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class FileLogger:
-    &quot;&quot;&quot;Logs messages to a file&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">FileLogger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Logs messages to a file&quot;&quot;&quot;</span>
 
-    def __init__(self, filename):
-        self.filename = filename
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
 
-    def log(self, message):
-        with open(self.filename, &#x27;a&#x27;) as f:
-            f.write(f&quot;{message}\n&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-class ConsoleLogger:
-    &quot;&quot;&quot;Logs messages to console&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">ConsoleLogger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Logs messages to console&quot;&quot;&quot;</span>
 
-    def log(self, message):
-        print(f&quot;LOG: {message}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOG: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-class ShoppingCart:
-    &quot;&quot;&quot;Shopping cart that can use different logging strategies&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">ShoppingCart</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shopping cart that can use different logging strategies&quot;&quot;&quot;</span>
 
-    def __init__(self, logger):
-        self.items = []
-        self.logger = logger  # Composition: inject any logger
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logger</span>  <span class="c1"># Composition: inject any logger</span>
 
-    def add_item(self, item, price):
-        self.items.append({&quot;item&quot;: item, &quot;price&quot;: price})
-        self.logger.log(f&quot;Added {item} (${price}) to cart&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="n">item</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2"> ($</span><span class="si">{</span><span class="n">price</span><span class="si">}</span><span class="s2">) to cart&quot;</span><span class="p">)</span>
 
-    def remove_item(self, item):
-        self.items = [i for i in self.items if i[&quot;item&quot;] != item]
-        self.logger.log(f&quot;Removed {item} from cart&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="s2">&quot;item&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">item</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removed </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2"> from cart&quot;</span><span class="p">)</span>
 
-    def get_total(self):
-        total = sum(item[&quot;price&quot;] for item in self.items)
-        self.logger.log(f&quot;Calculated total: ${total}&quot;)
-        return total
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calculated total: $</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span>
 
-# Using different loggers with the same cart
-console_logger = ConsoleLogger()
-file_logger = FileLogger(&quot;cart.log&quot;)
+<span class="c1"># Using different loggers with the same cart</span>
+<span class="n">console_logger</span> <span class="o">=</span> <span class="n">ConsoleLogger</span><span class="p">()</span>
+<span class="n">file_logger</span> <span class="o">=</span> <span class="n">FileLogger</span><span class="p">(</span><span class="s2">&quot;cart.log&quot;</span><span class="p">)</span>
 
-cart1 = ShoppingCart(console_logger)  # Logs to console
-cart2 = ShoppingCart(file_logger)     # Logs to file
+<span class="n">cart1</span> <span class="o">=</span> <span class="n">ShoppingCart</span><span class="p">(</span><span class="n">console_logger</span><span class="p">)</span>  <span class="c1"># Logs to console</span>
+<span class="n">cart2</span> <span class="o">=</span> <span class="n">ShoppingCart</span><span class="p">(</span><span class="n">file_logger</span><span class="p">)</span>     <span class="c1"># Logs to file</span>
 
-cart1.add_item(&quot;Book&quot;, 25.99)    # Prints: LOG: Added Book ($25.99) to cart
-cart2.add_item(&quot;Phone&quot;, 699.99)  # Writes to cart.log file
+<span class="n">cart1</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;Book&quot;</span><span class="p">,</span> <span class="mf">25.99</span><span class="p">)</span>    <span class="c1"># Prints: LOG: Added Book ($25.99) to cart</span>
+<span class="n">cart2</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s2">&quot;Phone&quot;</span><span class="p">,</span> <span class="mf">699.99</span><span class="p">)</span>  <span class="c1"># Writes to cart.log file</span>
 </code></pre>
 </div>
 <p><strong>2. Complex composition with multiple components:</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Display:
-    &quot;&quot;&quot;Display component for devices&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Display</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Display component for devices&quot;&quot;&quot;</span>
 
-    def __init__(self, width, height, resolution):
-        self.width = width
-        self.height = height
-        self.resolution = resolution
-        self.is_on = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_on</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def turn_on(self):
-        self.is_on = True
-        return f&quot;Display on: {self.width}x{self.height} at {self.resolution}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">turn_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_on</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Display on: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def turn_off(self):
-        self.is_on = False
-        return &quot;Display off&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">turn_off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_on</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="s2">&quot;Display off&quot;</span>
 
-class Battery:
-    &quot;&quot;&quot;Battery component for portable devices&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Battery</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Battery component for portable devices&quot;&quot;&quot;</span>
 
-    def __init__(self, capacity_mah):
-        self.capacity_mah = capacity_mah
-        self.current_charge = capacity_mah  # Start fully charged
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity_mah</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity_mah</span> <span class="o">=</span> <span class="n">capacity_mah</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_charge</span> <span class="o">=</span> <span class="n">capacity_mah</span>  <span class="c1"># Start fully charged</span>
 
-    def get_charge_percentage(self):
-        return (self.current_charge / self.capacity_mah) * 100
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_charge_percentage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_charge</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity_mah</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-    def use_power(self, amount_mah):
-        &quot;&quot;&quot;Use some battery power&quot;&quot;&quot;
-        self.current_charge = max(0, self.current_charge - amount_mah)
+    <span class="k">def</span><span class="w"> </span><span class="nf">use_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount_mah</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use some battery power&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_charge</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_charge</span> <span class="o">-</span> <span class="n">amount_mah</span><span class="p">)</span>
 
-    def charge(self, amount_mah):
-        &quot;&quot;&quot;Charge the battery&quot;&quot;&quot;
-        self.current_charge = min(self.capacity_mah, self.current_charge + amount_mah)
+    <span class="k">def</span><span class="w"> </span><span class="nf">charge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount_mah</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Charge the battery&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_charge</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity_mah</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_charge</span> <span class="o">+</span> <span class="n">amount_mah</span><span class="p">)</span>
 
-class CPU:
-    &quot;&quot;&quot;CPU component&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">CPU</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;CPU component&quot;&quot;&quot;</span>
 
-    def __init__(self, speed_ghz, cores):
-        self.speed_ghz = speed_ghz
-        self.cores = cores
-        self.is_active = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed_ghz</span><span class="p">,</span> <span class="n">cores</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_ghz</span> <span class="o">=</span> <span class="n">speed_ghz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cores</span> <span class="o">=</span> <span class="n">cores</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def start(self):
-        self.is_active = True
-        return f&quot;CPU started: {self.cores} cores at {self.speed_ghz}GHz&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;CPU started: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cores</span><span class="si">}</span><span class="s2"> cores at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed_ghz</span><span class="si">}</span><span class="s2">GHz&quot;</span>
 
-    def stop(self):
-        self.is_active = False
-        return &quot;CPU stopped&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="s2">&quot;CPU stopped&quot;</span>
 
-class Laptop:
-    &quot;&quot;&quot;Laptop composed of multiple components&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Laptop</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Laptop composed of multiple components&quot;&quot;&quot;</span>
 
-    def __init__(self, brand, model, cpu, display, battery):
-        self.brand = brand
-        self.model = model
-        self.cpu = cpu          # Composition
-        self.display = display  # Composition
-        self.battery = battery  # Composition
-        self.is_running = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">cpu</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="n">battery</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span> <span class="o">=</span> <span class="n">cpu</span>          <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span> <span class="o">=</span> <span class="n">display</span>  <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">battery</span> <span class="o">=</span> <span class="n">battery</span>  <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def power_on(self):
-        &quot;&quot;&quot;Power on the laptop&quot;&quot;&quot;
-        if self.battery.get_charge_percentage() &lt; 5:
-            return &quot;Cannot power on: battery too low&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">power_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Power on the laptop&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">get_charge_percentage</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Cannot power on: battery too low&quot;</span>
 
-        self.is_running = True
-        cpu_msg = self.cpu.start()
-        display_msg = self.display.turn_on()
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">cpu_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">display_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">turn_on</span><span class="p">()</span>
 
-        # Use some power to start up
-        self.battery.use_power(50)
+        <span class="c1"># Use some power to start up</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">use_power</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 
-        return f&quot;{self.brand} {self.model} powered on\n{cpu_msg}\n{display_msg}&quot;
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> powered on</span><span class="se">\n</span><span class="si">{</span><span class="n">cpu_msg</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">display_msg</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def power_off(self):
-        &quot;&quot;&quot;Power off the laptop&quot;&quot;&quot;
-        self.is_running = False
-        cpu_msg = self.cpu.stop()
-        display_msg = self.display.turn_off()
-        return f&quot;{self.brand} {self.model} powered off\n{cpu_msg}\n{display_msg}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">power_off</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Power off the laptop&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">cpu_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpu</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="n">display_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">turn_off</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> powered off</span><span class="se">\n</span><span class="si">{</span><span class="n">cpu_msg</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">display_msg</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def get_status(self):
-        &quot;&quot;&quot;Get current laptop status&quot;&quot;&quot;
-        battery_pct = self.battery.get_charge_percentage()
-        status = &quot;ON&quot; if self.is_running else &quot;OFF&quot;
-        return f&quot;{self.brand} {self.model}: {status}, Battery: {battery_pct:.1f}%&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current laptop status&quot;&quot;&quot;</span>
+        <span class="n">battery_pct</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery</span><span class="o">.</span><span class="n">get_charge_percentage</span><span class="p">()</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;ON&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="k">else</span> <span class="s2">&quot;OFF&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">, Battery: </span><span class="si">{</span><span class="n">battery_pct</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span>
 
-# Creating a laptop with composed components
-i7_cpu = CPU(2.8, 4)
-hd_display = Display(1920, 1080, &quot;1080p&quot;)
-lithium_battery = Battery(5000)  # 5000 mAh
+<span class="c1"># Creating a laptop with composed components</span>
+<span class="n">i7_cpu</span> <span class="o">=</span> <span class="n">CPU</span><span class="p">(</span><span class="mf">2.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">hd_display</span> <span class="o">=</span> <span class="n">Display</span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">,</span> <span class="s2">&quot;1080p&quot;</span><span class="p">)</span>
+<span class="n">lithium_battery</span> <span class="o">=</span> <span class="n">Battery</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>  <span class="c1"># 5000 mAh</span>
 
-macbook = Laptop(&quot;Apple&quot;, &quot;MacBook Pro&quot;, i7_cpu, hd_display, lithium_battery)
+<span class="n">macbook</span> <span class="o">=</span> <span class="n">Laptop</span><span class="p">(</span><span class="s2">&quot;Apple&quot;</span><span class="p">,</span> <span class="s2">&quot;MacBook Pro&quot;</span><span class="p">,</span> <span class="n">i7_cpu</span><span class="p">,</span> <span class="n">hd_display</span><span class="p">,</span> <span class="n">lithium_battery</span><span class="p">)</span>
 
-print(macbook.power_on())
-print(macbook.get_status())
-print(macbook.power_off())
+<span class="nb">print</span><span class="p">(</span><span class="n">macbook</span><span class="o">.</span><span class="n">power_on</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">macbook</span><span class="o">.</span><span class="n">get_status</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">macbook</span><span class="o">.</span><span class="n">power_off</span><span class="p">())</span>
 </code></pre>
 </div>
 <h2 id="building-cohesive-classes">Building cohesive classes<a class="headerlink" href="#building-cohesive-classes" title="Permanent link">&para;</a></h2>
@@ -2243,121 +2243,121 @@ print(macbook.power_off())
 <details class="example">
 <summary>High cohesion example</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class PasswordValidator:
-    &quot;&quot;&quot;Highly cohesive class - everything relates to password validation&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">PasswordValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Highly cohesive class - everything relates to password validation&quot;&quot;&quot;</span>
 
-    def __init__(self, min_length=8, require_uppercase=True, require_numbers=True):
-        self.min_length = min_length
-        self.require_uppercase = require_uppercase
-        self.require_numbers = require_numbers
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">require_uppercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">require_numbers</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_length</span> <span class="o">=</span> <span class="n">min_length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">require_uppercase</span> <span class="o">=</span> <span class="n">require_uppercase</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">require_numbers</span> <span class="o">=</span> <span class="n">require_numbers</span>
 
-    def is_valid(self, password):
-        &quot;&quot;&quot;Main validation method that uses all helper methods&quot;&quot;&quot;
-        return (self._check_length(password) and
-                self._check_uppercase(password) and
-                self._check_numbers(password))
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main validation method that uses all helper methods&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_length</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_check_uppercase</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_check_numbers</span><span class="p">(</span><span class="n">password</span><span class="p">))</span>
 
-    def _check_length(self, password):
-        &quot;&quot;&quot;Check if password meets minimum length&quot;&quot;&quot;
-        return len(password) &gt;= self.min_length
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_length</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if password meets minimum length&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_length</span>
 
-    def _check_uppercase(self, password):
-        &quot;&quot;&quot;Check if password has uppercase letters (if required)&quot;&quot;&quot;
-        if not self.require_uppercase:
-            return True
-        return any(c.isupper() for c in password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_uppercase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if password has uppercase letters (if required)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">require_uppercase</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">)</span>
 
-    def _check_numbers(self, password):
-        &quot;&quot;&quot;Check if password has numbers (if required)&quot;&quot;&quot;
-        if not self.require_numbers:
-            return True
-        return any(c.isdigit() for c in password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if password has numbers (if required)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">require_numbers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">password</span><span class="p">)</span>
 
-    def get_requirements(self):
-        &quot;&quot;&quot;Return a description of password requirements&quot;&quot;&quot;
-        requirements = [f&quot;At least {self.min_length} characters&quot;]
-        if self.require_uppercase:
-            requirements.append(&quot;At least one uppercase letter&quot;)
-        if self.require_numbers:
-            requirements.append(&quot;At least one number&quot;)
-        return requirements
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_requirements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a description of password requirements&quot;&quot;&quot;</span>
+        <span class="n">requirements</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;At least </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min_length</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">require_uppercase</span><span class="p">:</span>
+            <span class="n">requirements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;At least one uppercase letter&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">require_numbers</span><span class="p">:</span>
+            <span class="n">requirements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;At least one number&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">requirements</span>
 
-# Usage
-validator = PasswordValidator(min_length=10, require_uppercase=True, require_numbers=True)
-print(validator.is_valid(&quot;MyPassword123&quot;))  # True
-print(validator.get_requirements())         # List of requirements
+<span class="c1"># Usage</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">PasswordValidator</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">require_uppercase</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">require_numbers</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;MyPassword123&quot;</span><span class="p">))</span>  <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">validator</span><span class="o">.</span><span class="n">get_requirements</span><span class="p">())</span>         <span class="c1"># List of requirements</span>
 </code></pre>
 </div>
 </details>
 <details class="example">
 <summary>Low cohesion example (what to avoid)</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class UserAccount:
-    &quot;&quot;&quot;Low cohesion - too many unrelated responsibilities&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">UserAccount</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Low cohesion - too many unrelated responsibilities&quot;&quot;&quot;</span>
 
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-        self.password_hash = None
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="kc">None</span>
 
-    # User management (appropriate)
-    def set_password(self, password):
-        self.password_hash = hash(password)
+    <span class="c1"># User management (appropriate)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-    # Email functionality (should be separate class)
-    def send_welcome_email(self):
-        print(f&quot;Sending welcome email to {self.email}&quot;)
+    <span class="c1"># Email functionality (should be separate class)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_welcome_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending welcome email to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # File operations (should be separate class)
-    def save_to_file(self, filename):
-        with open(filename, &#x27;w&#x27;) as f:
-            f.write(f&quot;{self.username},{self.email}&quot;)
+    <span class="c1"># File operations (should be separate class)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Database operations (should be separate class)
-    def save_to_database(self, db_connection):
-        # Database save logic here
-        pass
+    <span class="c1"># Database operations (should be separate class)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_to_database</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">db_connection</span><span class="p">):</span>
+        <span class="c1"># Database save logic here</span>
+        <span class="k">pass</span>
 
-    # Logging (should be separate class)
-    def log_login_attempt(self, success):
-        print(f&quot;Login attempt for {self.username}: {&#x27;SUCCESS&#x27; if success else &#x27;FAILED&#x27;}&quot;)
+    <span class="c1"># Logging (should be separate class)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_login_attempt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">success</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Login attempt for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;SUCCESS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAILED&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
 <p><strong>Better approach with high cohesion:</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class User:
-    &quot;&quot;&quot;High cohesion - focused on user data and basic operations&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;High cohesion - focused on user data and basic operations&quot;&quot;&quot;</span>
 
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-        self.password_hash = None
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def set_password(self, password):
-        self.password_hash = hash(password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-    def check_password(self, password):
-        return self.password_hash == hash(password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">password_hash</span> <span class="o">==</span> <span class="nb">hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-class EmailService:
-    &quot;&quot;&quot;Focused on email operations&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">EmailService</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Focused on email operations&quot;&quot;&quot;</span>
 
-    def send_welcome_email(self, user):
-        print(f&quot;Sending welcome email to {user.email}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_welcome_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending welcome email to </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-class UserRepository:
-    &quot;&quot;&quot;Focused on user data persistence&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">UserRepository</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Focused on user data persistence&quot;&quot;&quot;</span>
 
-    def save_user(self, user, filename):
-        with open(filename, &#x27;w&#x27;) as f:
-            f.write(f&quot;{user.username},{user.email}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-class LoginLogger:
-    &quot;&quot;&quot;Focused on login tracking&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">LoginLogger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Focused on login tracking&quot;&quot;&quot;</span>
 
-    def log_attempt(self, username, success):
-        print(f&quot;Login attempt for {username}: {&#x27;SUCCESS&#x27; if success else &#x27;FAILED&#x27;}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_attempt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">success</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Login attempt for </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;SUCCESS&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;FAILED&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -2385,61 +2385,61 @@ class LoginLogger:
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Book:
-    &quot;&quot;&quot;Represents a book with basic information and operations&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Book</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a book with basic information and operations&quot;&quot;&quot;</span>
 
-    def __init__(self, title, author, isbn, pages):
-        &quot;&quot;&quot;
-        Initialize a new book
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">pages</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a new book</span>
 
-        Args:
-            title (str): Book title
-            author (str): Author name
-            isbn (str): ISBN number
-            pages (int): Number of pages
-        &quot;&quot;&quot;
-        # Validation
-        if not title or not title.strip():
-            raise ValueError(&quot;Title cannot be empty&quot;)
-        if not author or not author.strip():
-            raise ValueError(&quot;Author cannot be empty&quot;)
-        if not isbn or not isbn.strip():
-            raise ValueError(&quot;ISBN cannot be empty&quot;)
-        if pages &lt;= 0:
-            raise ValueError(&quot;Pages must be positive&quot;)
+<span class="sd">        Args:</span>
+<span class="sd">            title (str): Book title</span>
+<span class="sd">            author (str): Author name</span>
+<span class="sd">            isbn (str): ISBN number</span>
+<span class="sd">            pages (int): Number of pages</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Validation</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">title</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Title cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">author</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">author</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Author cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isbn</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">isbn</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ISBN cannot be empty&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pages</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Pages must be positive&quot;</span><span class="p">)</span>
 
-        # Set attributes
-        self.title = title.strip()
-        self.author = author.strip()
-        self.isbn = isbn.strip()
-        self.pages = pages
+        <span class="c1"># Set attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">=</span> <span class="n">pages</span>
 
-    def is_long(self):
-        &quot;&quot;&quot;Check if book is long (more than 300 pages)&quot;&quot;&quot;
-        return self.pages &gt; 300
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_long</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if book is long (more than 300 pages)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">&gt;</span> <span class="mi">300</span>
 
-    def get_summary(self):
-        &quot;&quot;&quot;Get a summary string of the book&quot;&quot;&quot;
-        length_desc = &quot;long&quot; if self.is_long() else &quot;standard&quot;
-        return f&quot;&#x27;{self.title}&#x27; by {self.author} ({self.pages} pages, {length_desc})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a summary string of the book&quot;&quot;&quot;</span>
+        <span class="n">length_desc</span> <span class="o">=</span> <span class="s2">&quot;long&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_long</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;standard&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39; by </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pages</span><span class="si">}</span><span class="s2"> pages, </span><span class="si">{</span><span class="n">length_desc</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-    def matches_search(self, search_term):
-        &quot;&quot;&quot;Check if search term appears in title or author&quot;&quot;&quot;
-        search_lower = search_term.lower()
-        return (search_lower in self.title.lower() or 
-                search_lower in self.author.lower())
+    <span class="k">def</span><span class="w"> </span><span class="nf">matches_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">search_term</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if search term appears in title or author&quot;&quot;&quot;</span>
+        <span class="n">search_lower</span> <span class="o">=</span> <span class="n">search_term</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">search_lower</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> 
+                <span class="n">search_lower</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
 
-    def __str__(self):
-        return f&quot;Book({self.title}, {self.author})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Book(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-# Test the class
-book1 = Book(&quot;The Great Gatsby&quot;, &quot;F. Scott Fitzgerald&quot;, &quot;978-0-7432-7356-5&quot;, 180)
-book2 = Book(&quot;War and Peace&quot;, &quot;Leo Tolstoy&quot;, &quot;978-0-14-044793-4&quot;, 1225)
+<span class="c1"># Test the class</span>
+<span class="n">book1</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="s2">&quot;The Great Gatsby&quot;</span><span class="p">,</span> <span class="s2">&quot;F. Scott Fitzgerald&quot;</span><span class="p">,</span> <span class="s2">&quot;978-0-7432-7356-5&quot;</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
+<span class="n">book2</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="s2">&quot;War and Peace&quot;</span><span class="p">,</span> <span class="s2">&quot;Leo Tolstoy&quot;</span><span class="p">,</span> <span class="s2">&quot;978-0-14-044793-4&quot;</span><span class="p">,</span> <span class="mi">1225</span><span class="p">)</span>
 
-print(book1.get_summary())  # &#x27;The Great Gatsby&#x27; by F. Scott Fitzgerald (180 pages, standard)
-print(book2.is_long())      # True
-print(book1.matches_search(&quot;gatsby&quot;))  # True
-print(book2.matches_search(&quot;Tolstoy&quot;)) # True
+<span class="nb">print</span><span class="p">(</span><span class="n">book1</span><span class="o">.</span><span class="n">get_summary</span><span class="p">())</span>  <span class="c1"># &#39;The Great Gatsby&#39; by F. Scott Fitzgerald (180 pages, standard)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">book2</span><span class="o">.</span><span class="n">is_long</span><span class="p">())</span>      <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">book1</span><span class="o">.</span><span class="n">matches_search</span><span class="p">(</span><span class="s2">&quot;gatsby&quot;</span><span class="p">))</span>  <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">book2</span><span class="o">.</span><span class="n">matches_search</span><span class="p">(</span><span class="s2">&quot;Tolstoy&quot;</span><span class="p">))</span> <span class="c1"># True</span>
 </code></pre>
 </div>
 </details>
@@ -2474,105 +2474,105 @@ print(book2.matches_search(&quot;Tolstoy&quot;)) # True
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Processor:
-    &quot;&quot;&quot;CPU component&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Processor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;CPU component&quot;&quot;&quot;</span>
 
-    def __init__(self, brand, speed_ghz, cores):
-        self.brand = brand
-        self.speed_ghz = speed_ghz
-        self.cores = cores
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">speed_ghz</span><span class="p">,</span> <span class="n">cores</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_ghz</span> <span class="o">=</span> <span class="n">speed_ghz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cores</span> <span class="o">=</span> <span class="n">cores</span>
 
-    def get_specs(self):
-        return f&quot;{self.brand} {self.speed_ghz}GHz {self.cores}-core&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed_ghz</span><span class="si">}</span><span class="s2">GHz </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cores</span><span class="si">}</span><span class="s2">-core&quot;</span>
 
-    def can_handle_load(self, required_speed):
-        return self.speed_ghz &gt;= required_speed
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_handle_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">required_speed</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_ghz</span> <span class="o">&gt;=</span> <span class="n">required_speed</span>
 
-class Memory:
-    &quot;&quot;&quot;RAM component&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Memory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;RAM component&quot;&quot;&quot;</span>
 
-    def __init__(self, capacity_gb, memory_type):
-        self.capacity_gb = capacity_gb
-        self.memory_type = memory_type
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity_gb</span><span class="p">,</span> <span class="n">memory_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity_gb</span> <span class="o">=</span> <span class="n">capacity_gb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_type</span> <span class="o">=</span> <span class="n">memory_type</span>
 
-    def get_specs(self):
-        return f&quot;{self.capacity_gb}GB {self.memory_type}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity_gb</span><span class="si">}</span><span class="s2">GB </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_type</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def can_handle_load(self, required_gb):
-        return self.capacity_gb &gt;= required_gb
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_handle_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">required_gb</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">capacity_gb</span> <span class="o">&gt;=</span> <span class="n">required_gb</span>
 
-class Storage:
-    &quot;&quot;&quot;Storage component&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Storage</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Storage component&quot;&quot;&quot;</span>
 
-    def __init__(self, capacity_gb, storage_type):
-        self.capacity_gb = capacity_gb
-        self.storage_type = storage_type
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity_gb</span><span class="p">,</span> <span class="n">storage_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capacity_gb</span> <span class="o">=</span> <span class="n">capacity_gb</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage_type</span> <span class="o">=</span> <span class="n">storage_type</span>
 
-    def get_specs(self):
-        return f&quot;{self.capacity_gb}GB {self.storage_type}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">capacity_gb</span><span class="si">}</span><span class="s2">GB </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">storage_type</span><span class="si">}</span><span class="s2">&quot;</span>
 
-class Computer:
-    &quot;&quot;&quot;Computer built using composition&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Computer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computer built using composition&quot;&quot;&quot;</span>
 
-    def __init__(self, brand, model, processor, memory, storage):
-        self.brand = brand
-        self.model = model
-        self.processor = processor    # Composition
-        self.memory = memory         # Composition
-        self.storage = storage       # Composition
-        self.is_running = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">processor</span><span class="p">,</span> <span class="n">memory</span><span class="p">,</span> <span class="n">storage</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processor</span> <span class="o">=</span> <span class="n">processor</span>    <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">memory</span>         <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span> <span class="o">=</span> <span class="n">storage</span>       <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def start_up(self):
-        &quot;&quot;&quot;Start the computer&quot;&quot;&quot;
-        if not self.is_running:
-            self.is_running = True
-            return f&quot;{self.brand} {self.model} started successfully&quot;
-        return &quot;Computer already running&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_up</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the computer&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> started successfully&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Computer already running&quot;</span>
 
-    def shutdown(self):
-        &quot;&quot;&quot;Shutdown the computer&quot;&quot;&quot;
-        if self.is_running:
-            self.is_running = False
-            return f&quot;{self.brand} {self.model} shut down&quot;
-        return &quot;Computer already off&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shutdown the computer&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_running</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> shut down&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Computer already off&quot;</span>
 
-    def get_system_specs(self):
-        &quot;&quot;&quot;Get complete system specifications&quot;&quot;&quot;
-        specs = [
-            f&quot;Computer: {self.brand} {self.model}&quot;,
-            f&quot;Processor: {self.processor.get_specs()}&quot;,
-            f&quot;Memory: {self.memory.get_specs()}&quot;,
-            f&quot;Storage: {self.storage.get_specs()}&quot;
-        ]
-        return &quot;\n&quot;.join(specs)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_system_specs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get complete system specifications&quot;&quot;&quot;</span>
+        <span class="n">specs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s2">&quot;Computer: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Processor: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">processor</span><span class="o">.</span><span class="n">get_specs</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Memory: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">get_specs</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s2">&quot;Storage: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">get_specs</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">specs</span><span class="p">)</span>
 
-    def can_run_program(self, program_name, min_speed_ghz, min_memory_gb):
-        &quot;&quot;&quot;Check if computer meets program requirements&quot;&quot;&quot;
-        cpu_ok = self.processor.can_handle_load(min_speed_ghz)
-        memory_ok = self.memory.can_handle_load(min_memory_gb)
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_run_program</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">program_name</span><span class="p">,</span> <span class="n">min_speed_ghz</span><span class="p">,</span> <span class="n">min_memory_gb</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if computer meets program requirements&quot;&quot;&quot;</span>
+        <span class="n">cpu_ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processor</span><span class="o">.</span><span class="n">can_handle_load</span><span class="p">(</span><span class="n">min_speed_ghz</span><span class="p">)</span>
+        <span class="n">memory_ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">can_handle_load</span><span class="p">(</span><span class="n">min_memory_gb</span><span class="p">)</span>
 
-        if cpu_ok and memory_ok:
-            return f&quot;✓ Can run {program_name}&quot;
-        else:
-            issues = []
-            if not cpu_ok:
-                issues.append(f&quot;CPU too slow (need {min_speed_ghz}GHz, have {self.processor.speed_ghz}GHz)&quot;)
-            if not memory_ok:
-                issues.append(f&quot;Not enough RAM (need {min_memory_gb}GB, have {self.memory.capacity_gb}GB)&quot;)
-            return f&quot;✗ Cannot run {program_name}: {&#x27;, &#x27;.join(issues)}&quot;
+        <span class="k">if</span> <span class="n">cpu_ok</span> <span class="ow">and</span> <span class="n">memory_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;✓ Can run </span><span class="si">{</span><span class="n">program_name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">cpu_ok</span><span class="p">:</span>
+                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CPU too slow (need </span><span class="si">{</span><span class="n">min_speed_ghz</span><span class="si">}</span><span class="s2">GHz, have </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">processor</span><span class="o">.</span><span class="n">speed_ghz</span><span class="si">}</span><span class="s2">GHz)&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">memory_ok</span><span class="p">:</span>
+                <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Not enough RAM (need </span><span class="si">{</span><span class="n">min_memory_gb</span><span class="si">}</span><span class="s2">GB, have </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="o">.</span><span class="n">capacity_gb</span><span class="si">}</span><span class="s2">GB)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;✗ Cannot run </span><span class="si">{</span><span class="n">program_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">issues</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Create components
-intel_cpu = Processor(&quot;Intel i7&quot;, 3.2, 8)
-ddr4_ram = Memory(16, &quot;DDR4&quot;)
-ssd_storage = Storage(512, &quot;SSD&quot;)
+<span class="c1"># Create components</span>
+<span class="n">intel_cpu</span> <span class="o">=</span> <span class="n">Processor</span><span class="p">(</span><span class="s2">&quot;Intel i7&quot;</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">ddr4_ram</span> <span class="o">=</span> <span class="n">Memory</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;DDR4&quot;</span><span class="p">)</span>
+<span class="n">ssd_storage</span> <span class="o">=</span> <span class="n">Storage</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="s2">&quot;SSD&quot;</span><span class="p">)</span>
 
-# Create computer using composition
-gaming_pc = Computer(&quot;ASUS&quot;, &quot;ROG Strix&quot;, intel_cpu, ddr4_ram, ssd_storage)
+<span class="c1"># Create computer using composition</span>
+<span class="n">gaming_pc</span> <span class="o">=</span> <span class="n">Computer</span><span class="p">(</span><span class="s2">&quot;ASUS&quot;</span><span class="p">,</span> <span class="s2">&quot;ROG Strix&quot;</span><span class="p">,</span> <span class="n">intel_cpu</span><span class="p">,</span> <span class="n">ddr4_ram</span><span class="p">,</span> <span class="n">ssd_storage</span><span class="p">)</span>
 
-print(gaming_pc.start_up())
-print(gaming_pc.get_system_specs())
-print(gaming_pc.can_run_program(&quot;Photoshop&quot;, 2.5, 8))   # Should pass
-print(gaming_pc.can_run_program(&quot;Video Editor&quot;, 4.0, 32))  # Should fail
+<span class="nb">print</span><span class="p">(</span><span class="n">gaming_pc</span><span class="o">.</span><span class="n">start_up</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gaming_pc</span><span class="o">.</span><span class="n">get_system_specs</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gaming_pc</span><span class="o">.</span><span class="n">can_run_program</span><span class="p">(</span><span class="s2">&quot;Photoshop&quot;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>   <span class="c1"># Should pass</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gaming_pc</span><span class="o">.</span><span class="n">can_run_program</span><span class="p">(</span><span class="s2">&quot;Video Editor&quot;</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>  <span class="c1"># Should fail</span>
 </code></pre>
 </div>
 </details>
@@ -2581,137 +2581,137 @@ print(gaming_pc.can_run_program(&quot;Video Editor&quot;, 4.0, 32))  # Should fa
 <summary>Exercise 3: Refactor inheritance to composition</summary>
 <p>You have this inheritance-based design. Refactor it to use composition instead:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Vehicle:
-    def __init__(self, make, model):
-        self.make = make
-        self.model = model
-        self.speed = 0
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
 
-class Car(Vehicle):
-    def __init__(self, make, model, doors):
-        super().__init__(make, model)
-        self.doors = doors
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">doors</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doors</span> <span class="o">=</span> <span class="n">doors</span>
 
-    def accelerate(self):
-        self.speed += 10
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">10</span>
 
-class Motorcycle(Vehicle):
-    def __init__(self, make, model, engine_size):
-        super().__init__(make, model)
-        self.engine_size = engine_size
+<span class="k">class</span><span class="w"> </span><span class="nc">Motorcycle</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">engine_size</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">=</span> <span class="n">engine_size</span>
 
-    def accelerate(self):
-        self.speed += 20
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="mi">20</span>
 </code></pre>
 </div>
 <p><strong>Task</strong>: Redesign using composition with separate components for different aspects.</p>
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class VehicleInfo:
-    &quot;&quot;&quot;Component for basic vehicle information&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">VehicleInfo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Component for basic vehicle information&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, vehicle_type):
-        self.make = make
-        self.model = model
-        self.vehicle_type = vehicle_type
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vehicle_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make</span> <span class="o">=</span> <span class="n">make</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vehicle_type</span> <span class="o">=</span> <span class="n">vehicle_type</span>
 
-    def get_description(self):
-        return f&quot;{self.make} {self.model} ({self.vehicle_type})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">make</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">vehicle_type</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-class MotionSystem:
-    &quot;&quot;&quot;Component for movement and acceleration&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">MotionSystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Component for movement and acceleration&quot;&quot;&quot;</span>
 
-    def __init__(self, acceleration_rate):
-        self.speed = 0
-        self.acceleration_rate = acceleration_rate
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">acceleration_rate</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acceleration_rate</span> <span class="o">=</span> <span class="n">acceleration_rate</span>
 
-    def accelerate(self):
-        self.speed += self.acceleration_rate
-        return f&quot;Accelerating to {self.speed} km/h&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceleration_rate</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Accelerating to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2"> km/h&quot;</span>
 
-    def brake(self, amount):
-        self.speed = max(0, self.speed - amount)
-        return f&quot;Slowing to {self.speed} km/h&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">brake</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">-</span> <span class="n">amount</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Slowing to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="si">}</span><span class="s2"> km/h&quot;</span>
 
-    def get_speed(self):
-        return self.speed
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span>
 
-class CarFeatures:
-    &quot;&quot;&quot;Component for car-specific features&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">CarFeatures</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Component for car-specific features&quot;&quot;&quot;</span>
 
-    def __init__(self, doors):
-        self.doors = doors
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doors</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doors</span> <span class="o">=</span> <span class="n">doors</span>
 
-    def get_info(self):
-        return f&quot;{self.doors} doors&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="si">}</span><span class="s2"> doors&quot;</span>
 
-class MotorcycleFeatures:
-    &quot;&quot;&quot;Component for motorcycle-specific features&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">MotorcycleFeatures</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Component for motorcycle-specific features&quot;&quot;&quot;</span>
 
-    def __init__(self, engine_size):
-        self.engine_size = engine_size
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine_size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine_size</span> <span class="o">=</span> <span class="n">engine_size</span>
 
-    def get_info(self):
-        return f&quot;{self.engine_size}cc engine&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">engine_size</span><span class="si">}</span><span class="s2">cc engine&quot;</span>
 
-class Vehicle:
-    &quot;&quot;&quot;Base vehicle using composition&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base vehicle using composition&quot;&quot;&quot;</span>
 
-    def __init__(self, vehicle_info, motion_system):
-        self.info = vehicle_info          # Composition
-        self.motion = motion_system       # Composition
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vehicle_info</span><span class="p">,</span> <span class="n">motion_system</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">vehicle_info</span>          <span class="c1"># Composition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion</span> <span class="o">=</span> <span class="n">motion_system</span>       <span class="c1"># Composition</span>
 
-    def accelerate(self):
-        return self.motion.accelerate()
+    <span class="k">def</span><span class="w"> </span><span class="nf">accelerate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion</span><span class="o">.</span><span class="n">accelerate</span><span class="p">()</span>
 
-    def brake(self, amount=10):
-        return self.motion.brake(amount)
+    <span class="k">def</span><span class="w"> </span><span class="nf">brake</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion</span><span class="o">.</span><span class="n">brake</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
 
-    def get_description(self):
-        return self.info.get_description()
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">info</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span>
 
-    def get_speed(self):
-        return self.motion.get_speed()
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion</span><span class="o">.</span><span class="n">get_speed</span><span class="p">()</span>
 
-class Car(Vehicle):
-    &quot;&quot;&quot;Car using composition instead of inheritance&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Car using composition instead of inheritance&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, doors):
-        vehicle_info = VehicleInfo(make, model, &quot;Car&quot;)
-        motion_system = MotionSystem(10)  # Cars accelerate by 10 km/h
-        super().__init__(vehicle_info, motion_system)
-        self.features = CarFeatures(doors)  # Car-specific composition
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">doors</span><span class="p">):</span>
+        <span class="n">vehicle_info</span> <span class="o">=</span> <span class="n">VehicleInfo</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="s2">&quot;Car&quot;</span><span class="p">)</span>
+        <span class="n">motion_system</span> <span class="o">=</span> <span class="n">MotionSystem</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Cars accelerate by 10 km/h</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_info</span><span class="p">,</span> <span class="n">motion_system</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">CarFeatures</span><span class="p">(</span><span class="n">doors</span><span class="p">)</span>  <span class="c1"># Car-specific composition</span>
 
-    def get_full_description(self):
-        return f&quot;{self.get_description()} - {self.features.get_info()}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_full_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 
-class Motorcycle(Vehicle):
-    &quot;&quot;&quot;Motorcycle using composition instead of inheritance&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Motorcycle</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Motorcycle using composition instead of inheritance&quot;&quot;&quot;</span>
 
-    def __init__(self, make, model, engine_size):
-        vehicle_info = VehicleInfo(make, model, &quot;Motorcycle&quot;)
-        motion_system = MotionSystem(20)  # Motorcycles accelerate by 20 km/h
-        super().__init__(vehicle_info, motion_system)
-        self.features = MotorcycleFeatures(engine_size)  # Motorcycle-specific composition
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">engine_size</span><span class="p">):</span>
+        <span class="n">vehicle_info</span> <span class="o">=</span> <span class="n">VehicleInfo</span><span class="p">(</span><span class="n">make</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="s2">&quot;Motorcycle&quot;</span><span class="p">)</span>
+        <span class="n">motion_system</span> <span class="o">=</span> <span class="n">MotionSystem</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Motorcycles accelerate by 20 km/h</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">vehicle_info</span><span class="p">,</span> <span class="n">motion_system</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="n">MotorcycleFeatures</span><span class="p">(</span><span class="n">engine_size</span><span class="p">)</span>  <span class="c1"># Motorcycle-specific composition</span>
 
-    def get_full_description(self):
-        return f&quot;{self.get_description()} - {self.features.get_info()}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_full_description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_description</span><span class="p">()</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">get_info</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Usage
-car = Car(&quot;Toyota&quot;, &quot;Camry&quot;, 4)
-motorcycle = Motorcycle(&quot;Honda&quot;, &quot;CBR&quot;, 600)
+<span class="c1"># Usage</span>
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">&quot;Toyota&quot;</span><span class="p">,</span> <span class="s2">&quot;Camry&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">motorcycle</span> <span class="o">=</span> <span class="n">Motorcycle</span><span class="p">(</span><span class="s2">&quot;Honda&quot;</span><span class="p">,</span> <span class="s2">&quot;CBR&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
 
-print(car.accelerate())           # Accelerating to 10 km/h
-print(motorcycle.accelerate())    # Accelerating to 20 km/h
-print(car.get_full_description()) # Toyota Camry (Car) - 4 doors
-print(motorcycle.get_full_description()) # Honda CBR (Motorcycle) - 600cc engine
+<span class="nb">print</span><span class="p">(</span><span class="n">car</span><span class="o">.</span><span class="n">accelerate</span><span class="p">())</span>           <span class="c1"># Accelerating to 10 km/h</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="n">accelerate</span><span class="p">())</span>    <span class="c1"># Accelerating to 20 km/h</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">car</span><span class="o">.</span><span class="n">get_full_description</span><span class="p">())</span> <span class="c1"># Toyota Camry (Car) - 4 doors</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">motorcycle</span><span class="o">.</span><span class="n">get_full_description</span><span class="p">())</span> <span class="c1"># Honda CBR (Motorcycle) - 600cc engine</span>
 
-# Benefits of composition:
-# 1. Can change motion system at runtime
-# 2. Can reuse MotionSystem in other contexts
-# 3. Easier to test components separately
-# 4. More flexible than inheritance hierarchy
+<span class="c1"># Benefits of composition:</span>
+<span class="c1"># 1. Can change motion system at runtime</span>
+<span class="c1"># 2. Can reuse MotionSystem in other contexts</span>
+<span class="c1"># 3. Easier to test components separately</span>
+<span class="c1"># 4. More flexible than inheritance hierarchy</span>
 </code></pre>
 </div>
 </details>
@@ -2965,6 +2965,8 @@ print(motorcycle.get_full_description()) # Honda CBR (Motorcycle) - 600cc engine
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

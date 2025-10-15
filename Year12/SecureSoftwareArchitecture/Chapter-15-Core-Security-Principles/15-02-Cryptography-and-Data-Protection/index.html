@@ -1600,139 +1600,139 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import hashlib
-import secrets
-import time
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-class SecureHashingManager:
-    def __init__(self):
-        self.supported_algorithms = [&#x27;sha256&#x27;, &#x27;sha3_256&#x27;, &#x27;blake2b&#x27;]
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureHashingManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">supported_algorithms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="s1">&#39;sha3_256&#39;</span><span class="p">,</span> <span class="s1">&#39;blake2b&#39;</span><span class="p">]</span>
 
-    def hash_password(self, password, salt=None, algorithm=&#x27;sha256&#x27;, iterations=100000):
-        &quot;&quot;&quot;Securely hash password with salt and key stretching&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">hash_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">100000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Securely hash password with salt and key stretching&quot;&quot;&quot;</span>
 
-        if salt is None:
-            salt = secrets.token_bytes(32)  # 256-bit salt
-        elif isinstance(salt, str):
-            salt = salt.encode(&#x27;utf-8&#x27;)
+        <span class="k">if</span> <span class="n">salt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">salt</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_bytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>  <span class="c1"># 256-bit salt</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">salt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">salt</span> <span class="o">=</span> <span class="n">salt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 
-        # Use PBKDF2 for key stretching (makes brute force attacks slower)
-        password_hash = hashlib.pbkdf2_hmac(
-            algorithm,
-            password.encode(&#x27;utf-8&#x27;),
-            salt,
-            iterations
-        )
+        <span class="c1"># Use PBKDF2 for key stretching (makes brute force attacks slower)</span>
+        <span class="n">password_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">pbkdf2_hmac</span><span class="p">(</span>
+            <span class="n">algorithm</span><span class="p">,</span>
+            <span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+            <span class="n">salt</span><span class="p">,</span>
+            <span class="n">iterations</span>
+        <span class="p">)</span>
 
-        return {
-            &#x27;hash&#x27;: password_hash.hex(),
-            &#x27;salt&#x27;: salt.hex(),
-            &#x27;algorithm&#x27;: algorithm,
-            &#x27;iterations&#x27;: iterations
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;hash&#39;</span><span class="p">:</span> <span class="n">password_hash</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span>
+            <span class="s1">&#39;salt&#39;</span><span class="p">:</span> <span class="n">salt</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span>
+            <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="n">algorithm</span><span class="p">,</span>
+            <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="n">iterations</span>
+        <span class="p">}</span>
 
-    def verify_password(self, password, stored_hash_data):
-        &quot;&quot;&quot;Verify password against stored hash&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">stored_hash_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify password against stored hash&quot;&quot;&quot;</span>
 
-        # Recreate hash with same parameters
-        verification_hash = hashlib.pbkdf2_hmac(
-            stored_hash_data[&#x27;algorithm&#x27;],
-            password.encode(&#x27;utf-8&#x27;),
-            bytes.fromhex(stored_hash_data[&#x27;salt&#x27;]),
-            stored_hash_data[&#x27;iterations&#x27;]
-        )
+        <span class="c1"># Recreate hash with same parameters</span>
+        <span class="n">verification_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">pbkdf2_hmac</span><span class="p">(</span>
+            <span class="n">stored_hash_data</span><span class="p">[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">],</span>
+            <span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+            <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="n">stored_hash_data</span><span class="p">[</span><span class="s1">&#39;salt&#39;</span><span class="p">]),</span>
+            <span class="n">stored_hash_data</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
 
-        # Constant-time comparison to prevent timing attacks
-        return secrets.compare_digest(
-            verification_hash.hex(),
-            stored_hash_data[&#x27;hash&#x27;]
-        )
+        <span class="c1"># Constant-time comparison to prevent timing attacks</span>
+        <span class="k">return</span> <span class="n">secrets</span><span class="o">.</span><span class="n">compare_digest</span><span class="p">(</span>
+            <span class="n">verification_hash</span><span class="o">.</span><span class="n">hex</span><span class="p">(),</span>
+            <span class="n">stored_hash_data</span><span class="p">[</span><span class="s1">&#39;hash&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
 
-    def hash_file_for_integrity(self, file_path, algorithm=&#x27;sha256&#x27;):
-        &quot;&quot;&quot;Calculate file hash for integrity verification&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">hash_file_for_integrity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;sha256&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate file hash for integrity verification&quot;&quot;&quot;</span>
 
-        hash_obj = hashlib.new(algorithm)
+        <span class="n">hash_obj</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">algorithm</span><span class="p">)</span>
 
-        try:
-            with open(file_path, &#x27;rb&#x27;) as f:
-                # Read file in chunks to handle large files
-                for chunk in iter(lambda: f.read(4096), b&quot;&quot;):
-                    hash_obj.update(chunk)
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="c1"># Read file in chunks to handle large files</span>
+                <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4096</span><span class="p">),</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+                    <span class="n">hash_obj</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 
-            return {
-                &#x27;file_path&#x27;: file_path,
-                &#x27;hash&#x27;: hash_obj.hexdigest(),
-                &#x27;algorithm&#x27;: algorithm,
-                &#x27;timestamp&#x27;: time.time()
-            }
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;file_path&#39;</span><span class="p">:</span> <span class="n">file_path</span><span class="p">,</span>
+                <span class="s1">&#39;hash&#39;</span><span class="p">:</span> <span class="n">hash_obj</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span>
+                <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="n">algorithm</span><span class="p">,</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="p">}</span>
 
-        except FileNotFoundError:
-            raise FileNotFoundError(f&quot;File not found: {file_path}&quot;)
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def verify_file_integrity(self, file_path, expected_hash, algorithm=&#x27;sha256&#x27;):
-        &quot;&quot;&quot;Verify file hasn&#x27;t been modified&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_file_integrity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">expected_hash</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;sha256&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify file hasn&#39;t been modified&quot;&quot;&quot;</span>
 
-        current_hash_data = self.hash_file_for_integrity(file_path, algorithm)
+        <span class="n">current_hash_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_file_for_integrity</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="p">)</span>
 
-        return secrets.compare_digest(
-            current_hash_data[&#x27;hash&#x27;],
-            expected_hash
-        )
+        <span class="k">return</span> <span class="n">secrets</span><span class="o">.</span><span class="n">compare_digest</span><span class="p">(</span>
+            <span class="n">current_hash_data</span><span class="p">[</span><span class="s1">&#39;hash&#39;</span><span class="p">],</span>
+            <span class="n">expected_hash</span>
+        <span class="p">)</span>
 
-    def demonstrate_avalanche_effect(self, base_text=&quot;Hello World&quot;):
-        &quot;&quot;&quot;Show how small changes create completely different hashes&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_avalanche_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_text</span><span class="o">=</span><span class="s2">&quot;Hello World&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show how small changes create completely different hashes&quot;&quot;&quot;</span>
 
-        texts = [
-            base_text,
-            base_text + &quot;!&quot;,  # Add exclamation
-            base_text.replace(&quot;l&quot;, &quot;L&quot;),  # Change case
-            base_text + &quot; &quot;  # Add space
-        ]
+        <span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">base_text</span><span class="p">,</span>
+            <span class="n">base_text</span> <span class="o">+</span> <span class="s2">&quot;!&quot;</span><span class="p">,</span>  <span class="c1"># Add exclamation</span>
+            <span class="n">base_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="s2">&quot;L&quot;</span><span class="p">),</span>  <span class="c1"># Change case</span>
+            <span class="n">base_text</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span>  <span class="c1"># Add space</span>
+        <span class="p">]</span>
 
-        results = []
-        for text in texts:
-            hash_value = hashlib.sha256(text.encode()).hexdigest()
-            results.append({
-                &#x27;input&#x27;: repr(text),
-                &#x27;hash&#x27;: hash_value,
-                &#x27;length&#x27;: len(hash_value)
-            })
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+            <span class="n">hash_value</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="nb">repr</span><span class="p">(</span><span class="n">text</span><span class="p">),</span>
+                <span class="s1">&#39;hash&#39;</span><span class="p">:</span> <span class="n">hash_value</span><span class="p">,</span>
+                <span class="s1">&#39;length&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">hash_value</span><span class="p">)</span>
+            <span class="p">})</span>
 
-        return results
+        <span class="k">return</span> <span class="n">results</span>
 
-# Example usage for password security
-def demonstrate_secure_password_hashing():
-    &quot;&quot;&quot;Demonstrate secure password handling&quot;&quot;&quot;
+<span class="c1"># Example usage for password security</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_secure_password_hashing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate secure password handling&quot;&quot;&quot;</span>
 
-    hash_manager = SecureHashingManager()
+    <span class="n">hash_manager</span> <span class="o">=</span> <span class="n">SecureHashingManager</span><span class="p">()</span>
 
-    print(&quot;=== Secure Password Hashing Demo ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Secure Password Hashing Demo ===&quot;</span><span class="p">)</span>
 
-    # Hash a password
-    password = &quot;SecureStudentPassword123!&quot;
-    hash_data = hash_manager.hash_password(password)
+    <span class="c1"># Hash a password</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecureStudentPassword123!&quot;</span>
+    <span class="n">hash_data</span> <span class="o">=</span> <span class="n">hash_manager</span><span class="o">.</span><span class="n">hash_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-    print(f&quot;Original password: {password}&quot;)
-    print(f&quot;Salt: {hash_data[&#x27;salt&#x27;][:16]}... (truncated)&quot;)
-    print(f&quot;Hash: {hash_data[&#x27;hash&#x27;][:16]}... (truncated)&quot;)
-    print(f&quot;Algorithm: {hash_data[&#x27;algorithm&#x27;]}&quot;)
-    print(f&quot;Iterations: {hash_data[&#x27;iterations&#x27;]}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original password: </span><span class="si">{</span><span class="n">password</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Salt: </span><span class="si">{</span><span class="n">hash_data</span><span class="p">[</span><span class="s1">&#39;salt&#39;</span><span class="p">][:</span><span class="mi">16</span><span class="p">]</span><span class="si">}</span><span class="s2">... (truncated)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hash: </span><span class="si">{</span><span class="n">hash_data</span><span class="p">[</span><span class="s1">&#39;hash&#39;</span><span class="p">][:</span><span class="mi">16</span><span class="p">]</span><span class="si">}</span><span class="s2">... (truncated)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Algorithm: </span><span class="si">{</span><span class="n">hash_data</span><span class="p">[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iterations: </span><span class="si">{</span><span class="n">hash_data</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Verify correct password
-    is_valid = hash_manager.verify_password(password, hash_data)
-    print(f&quot;Correct password verification: {is_valid}&quot;)
+    <span class="c1"># Verify correct password</span>
+    <span class="n">is_valid</span> <span class="o">=</span> <span class="n">hash_manager</span><span class="o">.</span><span class="n">verify_password</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">hash_data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correct password verification: </span><span class="si">{</span><span class="n">is_valid</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Verify incorrect password
-    is_valid_wrong = hash_manager.verify_password(&quot;WrongPassword&quot;, hash_data)
-    print(f&quot;Wrong password verification: {is_valid_wrong}&quot;)
+    <span class="c1"># Verify incorrect password</span>
+    <span class="n">is_valid_wrong</span> <span class="o">=</span> <span class="n">hash_manager</span><span class="o">.</span><span class="n">verify_password</span><span class="p">(</span><span class="s2">&quot;WrongPassword&quot;</span><span class="p">,</span> <span class="n">hash_data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrong password verification: </span><span class="si">{</span><span class="n">is_valid_wrong</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(&quot;\n=== Avalanche Effect Demo ===&quot;)
-    avalanche_results = hash_manager.demonstrate_avalanche_effect()
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Avalanche Effect Demo ===&quot;</span><span class="p">)</span>
+    <span class="n">avalanche_results</span> <span class="o">=</span> <span class="n">hash_manager</span><span class="o">.</span><span class="n">demonstrate_avalanche_effect</span><span class="p">()</span>
 
-    for result in avalanche_results:
-        print(f&quot;Input: {result[&#x27;input&#x27;]}&quot;)
-        print(f&quot;Hash:  {result[&#x27;hash&#x27;]}&quot;)
-        print()
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">avalanche_results</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hash:  </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;hash&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="encryption-reversible-data-protection">Encryption: Reversible Data Protection<a class="headerlink" href="#encryption-reversible-data-protection" title="Permanent link">&para;</a></h3>
@@ -1768,647 +1768,647 @@ def demonstrate_secure_password_hashing():
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives import hashes, serialization
-from cryptography.hazmat.primitives.asymmetric import rsa, padding
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-import base64
-import os
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.fernet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fernet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives</span><span class="w"> </span><span class="kn">import</span> <span class="n">hashes</span><span class="p">,</span> <span class="n">serialization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.asymmetric</span><span class="w"> </span><span class="kn">import</span> <span class="n">rsa</span><span class="p">,</span> <span class="n">padding</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.hazmat.primitives.kdf.pbkdf2</span><span class="w"> </span><span class="kn">import</span> <span class="n">PBKDF2HMAC</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-class SecureEncryptionManager:
-    def __init__(self):
-        self.symmetric_keys = {}
-        self.asymmetric_keys = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureEncryptionManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_keys</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">asymmetric_keys</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def generate_symmetric_key(self, key_id=&quot;default&quot;):
-        &quot;&quot;&quot;Generate symmetric encryption key&quot;&quot;&quot;
-        key = Fernet.generate_key()
-        self.symmetric_keys[key_id] = key
-        return key
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_symmetric_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_id</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate symmetric encryption key&quot;&quot;&quot;</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="k">return</span> <span class="n">key</span>
 
-    def derive_key_from_password(self, password, salt=None):
-        &quot;&quot;&quot;Derive encryption key from password&quot;&quot;&quot;
-        if salt is None:
-            salt = os.urandom(16)
+    <span class="k">def</span><span class="w"> </span><span class="nf">derive_key_from_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derive encryption key from password&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">salt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">salt</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 
-        kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=salt,
-            iterations=100000,
-        )
+        <span class="n">kdf</span> <span class="o">=</span> <span class="n">PBKDF2HMAC</span><span class="p">(</span>
+            <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+            <span class="n">length</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+            <span class="n">salt</span><span class="o">=</span><span class="n">salt</span><span class="p">,</span>
+            <span class="n">iterations</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
+        <span class="p">)</span>
 
-        key = base64.urlsafe_b64encode(kdf.derive(password.encode()))
-        return key, salt
+        <span class="n">key</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">urlsafe_b64encode</span><span class="p">(</span><span class="n">kdf</span><span class="o">.</span><span class="n">derive</span><span class="p">(</span><span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">key</span><span class="p">,</span> <span class="n">salt</span>
 
-    def encrypt_data(self, data, key_id=&quot;default&quot;):
-        &quot;&quot;&quot;Encrypt data using symmetric encryption&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">key_id</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Encrypt data using symmetric encryption&quot;&quot;&quot;</span>
 
-        if key_id not in self.symmetric_keys:
-            self.generate_symmetric_key(key_id)
+        <span class="k">if</span> <span class="n">key_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">generate_symmetric_key</span><span class="p">(</span><span class="n">key_id</span><span class="p">)</span>
 
-        key = self.symmetric_keys[key_id]
-        fernet = Fernet(key)
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span>
+        <span class="n">fernet</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-        if isinstance(data, str):
-            data = data.encode(&#x27;utf-8&#x27;)
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 
-        encrypted_data = fernet.encrypt(data)
+        <span class="n">encrypted_data</span> <span class="o">=</span> <span class="n">fernet</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-        return {
-            &#x27;encrypted_data&#x27;: encrypted_data,
-            &#x27;key_id&#x27;: key_id,
-            &#x27;algorithm&#x27;: &#x27;Fernet (AES-128)&#x27;
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;encrypted_data&#39;</span><span class="p">:</span> <span class="n">encrypted_data</span><span class="p">,</span>
+            <span class="s1">&#39;key_id&#39;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+            <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;Fernet (AES-128)&#39;</span>
+        <span class="p">}</span>
 
-    def decrypt_data(self, encrypted_data, key_id=&quot;default&quot;):
-        &quot;&quot;&quot;Decrypt data using symmetric encryption&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encrypted_data</span><span class="p">,</span> <span class="n">key_id</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrypt data using symmetric encryption&quot;&quot;&quot;</span>
 
-        if key_id not in self.symmetric_keys:
-            raise ValueError(f&quot;Key &#x27;{key_id}&#x27; not found&quot;)
+        <span class="k">if</span> <span class="n">key_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
 
-        key = self.symmetric_keys[key_id]
-        fernet = Fernet(key)
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span>
+        <span class="n">fernet</span> <span class="o">=</span> <span class="n">Fernet</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-        if isinstance(encrypted_data, dict):
-            encrypted_data = encrypted_data[&#x27;encrypted_data&#x27;]
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">encrypted_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">encrypted_data</span> <span class="o">=</span> <span class="n">encrypted_data</span><span class="p">[</span><span class="s1">&#39;encrypted_data&#39;</span><span class="p">]</span>
 
-        try:
-            decrypted_data = fernet.decrypt(encrypted_data)
-            return decrypted_data.decode(&#x27;utf-8&#x27;)
-        except Exception as e:
-            raise ValueError(f&quot;Decryption failed: {e}&quot;)
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">fernet</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted_data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">decrypted_data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decryption failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def generate_asymmetric_keypair(self, key_id=&quot;default&quot;):
-        &quot;&quot;&quot;Generate RSA public/private key pair&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_asymmetric_keypair</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_id</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate RSA public/private key pair&quot;&quot;&quot;</span>
 
-        private_key = rsa.generate_private_key(
-            public_exponent=65537,
-            key_size=2048,
-        )
-        public_key = private_key.public_key()
+        <span class="n">private_key</span> <span class="o">=</span> <span class="n">rsa</span><span class="o">.</span><span class="n">generate_private_key</span><span class="p">(</span>
+            <span class="n">public_exponent</span><span class="o">=</span><span class="mi">65537</span><span class="p">,</span>
+            <span class="n">key_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">public_key</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">public_key</span><span class="p">()</span>
 
-        self.asymmetric_keys[key_id] = {
-            &#x27;private_key&#x27;: private_key,
-            &#x27;public_key&#x27;: public_key
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">asymmetric_keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;private_key&#39;</span><span class="p">:</span> <span class="n">private_key</span><span class="p">,</span>
+            <span class="s1">&#39;public_key&#39;</span><span class="p">:</span> <span class="n">public_key</span>
+        <span class="p">}</span>
 
-        return {
-            &#x27;public_key&#x27;: public_key,
-            &#x27;private_key&#x27;: private_key,
-            &#x27;key_id&#x27;: key_id
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;public_key&#39;</span><span class="p">:</span> <span class="n">public_key</span><span class="p">,</span>
+            <span class="s1">&#39;private_key&#39;</span><span class="p">:</span> <span class="n">private_key</span><span class="p">,</span>
+            <span class="s1">&#39;key_id&#39;</span><span class="p">:</span> <span class="n">key_id</span>
+        <span class="p">}</span>
 
-    def encrypt_with_public_key(self, data, key_id=&quot;default&quot;):
-        &quot;&quot;&quot;Encrypt data using RSA public key&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt_with_public_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">key_id</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Encrypt data using RSA public key&quot;&quot;&quot;</span>
 
-        if key_id not in self.asymmetric_keys:
-            self.generate_asymmetric_keypair(key_id)
+        <span class="k">if</span> <span class="n">key_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">asymmetric_keys</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">generate_asymmetric_keypair</span><span class="p">(</span><span class="n">key_id</span><span class="p">)</span>
 
-        public_key = self.asymmetric_keys[key_id][&#x27;public_key&#x27;]
+        <span class="n">public_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">asymmetric_keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">][</span><span class="s1">&#39;public_key&#39;</span><span class="p">]</span>
 
-        if isinstance(data, str):
-            data = data.encode(&#x27;utf-8&#x27;)
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 
-        # RSA can only encrypt small amounts of data
-        if len(data) &gt; 190:  # RSA-2048 limit minus padding
-            raise ValueError(&quot;Data too large for RSA encryption&quot;)
+        <span class="c1"># RSA can only encrypt small amounts of data</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">190</span><span class="p">:</span>  <span class="c1"># RSA-2048 limit minus padding</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Data too large for RSA encryption&quot;</span><span class="p">)</span>
 
-        encrypted_data = public_key.encrypt(
-            data,
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                algorithm=hashes.SHA256(),
-                label=None
-            )
-        )
+        <span class="n">encrypted_data</span> <span class="o">=</span> <span class="n">public_key</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">.</span><span class="n">OAEP</span><span class="p">(</span>
+                <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+                <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+                <span class="n">label</span><span class="o">=</span><span class="kc">None</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 
-        return encrypted_data
+        <span class="k">return</span> <span class="n">encrypted_data</span>
 
-    def decrypt_with_private_key(self, encrypted_data, key_id=&quot;default&quot;):
-        &quot;&quot;&quot;Decrypt data using RSA private key&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt_with_private_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encrypted_data</span><span class="p">,</span> <span class="n">key_id</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrypt data using RSA private key&quot;&quot;&quot;</span>
 
-        if key_id not in self.asymmetric_keys:
-            raise ValueError(f&quot;Key &#x27;{key_id}&#x27; not found&quot;)
+        <span class="k">if</span> <span class="n">key_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">asymmetric_keys</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
 
-        private_key = self.asymmetric_keys[key_id][&#x27;private_key&#x27;]
+        <span class="n">private_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">asymmetric_keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">][</span><span class="s1">&#39;private_key&#39;</span><span class="p">]</span>
 
-        try:
-            decrypted_data = private_key.decrypt(
-                encrypted_data,
-                padding.OAEP(
-                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                    algorithm=hashes.SHA256(),
-                    label=None
-                )
-            )
-            return decrypted_data.decode(&#x27;utf-8&#x27;)
-        except Exception as e:
-            raise ValueError(f&quot;Decryption failed: {e}&quot;)
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">private_key</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span>
+                <span class="n">encrypted_data</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">.</span><span class="n">OAEP</span><span class="p">(</span>
+                    <span class="n">mgf</span><span class="o">=</span><span class="n">padding</span><span class="o">.</span><span class="n">MGF1</span><span class="p">(</span><span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">()),</span>
+                    <span class="n">algorithm</span><span class="o">=</span><span class="n">hashes</span><span class="o">.</span><span class="n">SHA256</span><span class="p">(),</span>
+                    <span class="n">label</span><span class="o">=</span><span class="kc">None</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">decrypted_data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decryption failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Example usage for student record encryption
-def demonstrate_encryption_scenarios():
-    &quot;&quot;&quot;Demonstrate different encryption use cases&quot;&quot;&quot;
+<span class="c1"># Example usage for student record encryption</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_encryption_scenarios</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate different encryption use cases&quot;&quot;&quot;</span>
 
-    encryption_manager = SecureEncryptionManager()
+    <span class="n">encryption_manager</span> <span class="o">=</span> <span class="n">SecureEncryptionManager</span><span class="p">()</span>
 
-    print(&quot;=== Symmetric Encryption Demo ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Symmetric Encryption Demo ===&quot;</span><span class="p">)</span>
 
-    # Encrypt student personal information
-    student_info = {
-        &#x27;student_id&#x27;: &#x27;S12345&#x27;,
-        &#x27;name&#x27;: &#x27;Alice Johnson&#x27;,
-        &#x27;ssn&#x27;: &#x27;123-45-6789&#x27;,
-        &#x27;address&#x27;: &#x27;123 School St, Education City&#x27;,
-        &#x27;grade_level&#x27;: 11
-    }
+    <span class="c1"># Encrypt student personal information</span>
+    <span class="n">student_info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;student_id&#39;</span><span class="p">:</span> <span class="s1">&#39;S12345&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Alice Johnson&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ssn&#39;</span><span class="p">:</span> <span class="s1">&#39;123-45-6789&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;123 School St, Education City&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;grade_level&#39;</span><span class="p">:</span> <span class="mi">11</span>
+    <span class="p">}</span>
 
-    # Convert to string for encryption
-    student_data = str(student_info)
+    <span class="c1"># Convert to string for encryption</span>
+    <span class="n">student_data</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">student_info</span><span class="p">)</span>
 
-    # Encrypt
-    encrypted_result = encryption_manager.encrypt_data(student_data, &quot;student_records&quot;)
-    print(f&quot;Original data length: {len(student_data)} characters&quot;)
-    print(f&quot;Encrypted data length: {len(encrypted_result[&#x27;encrypted_data&#x27;])} bytes&quot;)
-    print(f&quot;Algorithm: {encrypted_result[&#x27;algorithm&#x27;]}&quot;)
+    <span class="c1"># Encrypt</span>
+    <span class="n">encrypted_result</span> <span class="o">=</span> <span class="n">encryption_manager</span><span class="o">.</span><span class="n">encrypt_data</span><span class="p">(</span><span class="n">student_data</span><span class="p">,</span> <span class="s2">&quot;student_records&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original data length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encrypted data length: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">encrypted_result</span><span class="p">[</span><span class="s1">&#39;encrypted_data&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Algorithm: </span><span class="si">{</span><span class="n">encrypted_result</span><span class="p">[</span><span class="s1">&#39;algorithm&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Decrypt
-    decrypted_data = encryption_manager.decrypt_data(encrypted_result, &quot;student_records&quot;)
-    print(f&quot;Decryption successful: {decrypted_data == student_data}&quot;)
+    <span class="c1"># Decrypt</span>
+    <span class="n">decrypted_data</span> <span class="o">=</span> <span class="n">encryption_manager</span><span class="o">.</span><span class="n">decrypt_data</span><span class="p">(</span><span class="n">encrypted_result</span><span class="p">,</span> <span class="s2">&quot;student_records&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decryption successful: </span><span class="si">{</span><span class="n">decrypted_data</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">student_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(&quot;\n=== Asymmetric Encryption Demo ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Asymmetric Encryption Demo ===&quot;</span><span class="p">)</span>
 
-    # Generate keypair for secure communication
-    keypair = encryption_manager.generate_asymmetric_keypair(&quot;communication&quot;)
+    <span class="c1"># Generate keypair for secure communication</span>
+    <span class="n">keypair</span> <span class="o">=</span> <span class="n">encryption_manager</span><span class="o">.</span><span class="n">generate_asymmetric_keypair</span><span class="p">(</span><span class="s2">&quot;communication&quot;</span><span class="p">)</span>
 
-    # Encrypt small sensitive message
-    message = &quot;Grade change: Student S12345 Math grade updated to 95&quot;
+    <span class="c1"># Encrypt small sensitive message</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Grade change: Student S12345 Math grade updated to 95&quot;</span>
 
-    try:
-        encrypted_message = encryption_manager.encrypt_with_public_key(message, &quot;communication&quot;)
-        print(f&quot;Message encrypted successfully&quot;)
-        print(f&quot;Original message: {message}&quot;)
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">encrypted_message</span> <span class="o">=</span> <span class="n">encryption_manager</span><span class="o">.</span><span class="n">encrypt_with_public_key</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="s2">&quot;communication&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message encrypted successfully&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original message: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Decrypt message
-        decrypted_message = encryption_manager.decrypt_with_private_key(encrypted_message, &quot;communication&quot;)
-        print(f&quot;Decrypted message: {decrypted_message}&quot;)
-        print(f&quot;Decryption successful: {message == decrypted_message}&quot;)
+        <span class="c1"># Decrypt message</span>
+        <span class="n">decrypted_message</span> <span class="o">=</span> <span class="n">encryption_manager</span><span class="o">.</span><span class="n">decrypt_with_private_key</span><span class="p">(</span><span class="n">encrypted_message</span><span class="p">,</span> <span class="s2">&quot;communication&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decrypted message: </span><span class="si">{</span><span class="n">decrypted_message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decryption successful: </span><span class="si">{</span><span class="n">message</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">decrypted_message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    except ValueError as e:
-        print(f&quot;Encryption error: {e}&quot;)
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encryption error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="key-management-fundamentals">Key Management Fundamentals<a class="headerlink" href="#key-management-fundamentals" title="Permanent link">&para;</a></h2>
 <p>Proper key management is crucial for cryptographic security. Keys must be generated securely, stored safely, and rotated regularly.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import json
-import os
-from datetime import datetime, timedelta
-from cryptography.fernet import Fernet
-import secrets
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cryptography.fernet</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fernet</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
 
-class CryptographicKeyManager:
-    def __init__(self, key_store_path=&quot;keystore&quot;):
-        self.key_store_path = key_store_path
-        self.keys = {}
-        self.key_metadata = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">CryptographicKeyManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_store_path</span><span class="o">=</span><span class="s2">&quot;keystore&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span> <span class="o">=</span> <span class="n">key_store_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span> <span class="o">=</span> <span class="p">{}</span>
 
-        # Create secure key storage directory
-        os.makedirs(key_store_path, exist_ok=True, mode=0o700)  # Owner only
+        <span class="c1"># Create secure key storage directory</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">key_store_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="mo">0o700</span><span class="p">)</span>  <span class="c1"># Owner only</span>
 
-        self.load_existing_keys()
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_existing_keys</span><span class="p">()</span>
 
-    def generate_key(self, key_id, key_type=&quot;symmetric&quot;, purpose=&quot;general&quot;, 
-                    expiry_days=365):
-        &quot;&quot;&quot;Generate new cryptographic key with metadata&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_id</span><span class="p">,</span> <span class="n">key_type</span><span class="o">=</span><span class="s2">&quot;symmetric&quot;</span><span class="p">,</span> <span class="n">purpose</span><span class="o">=</span><span class="s2">&quot;general&quot;</span><span class="p">,</span> 
+                    <span class="n">expiry_days</span><span class="o">=</span><span class="mi">365</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate new cryptographic key with metadata&quot;&quot;&quot;</span>
 
-        if key_type == &quot;symmetric&quot;:
-            key = Fernet.generate_key()
-        else:
-            raise ValueError(f&quot;Unsupported key type: {key_type}&quot;)
+        <span class="k">if</span> <span class="n">key_type</span> <span class="o">==</span> <span class="s2">&quot;symmetric&quot;</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">Fernet</span><span class="o">.</span><span class="n">generate_key</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported key type: </span><span class="si">{</span><span class="n">key_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Store key metadata
-        metadata = {
-            &#x27;key_id&#x27;: key_id,
-            &#x27;key_type&#x27;: key_type,
-            &#x27;purpose&#x27;: purpose,
-            &#x27;created_at&#x27;: datetime.now().isoformat(),
-            &#x27;expires_at&#x27;: (datetime.now() + timedelta(days=expiry_days)).isoformat(),
-            &#x27;algorithm&#x27;: &#x27;Fernet (AES-128)&#x27;,
-            &#x27;status&#x27;: &#x27;active&#x27;
-        }
+        <span class="c1"># Store key metadata</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;key_id&#39;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+            <span class="s1">&#39;key_type&#39;</span><span class="p">:</span> <span class="n">key_type</span><span class="p">,</span>
+            <span class="s1">&#39;purpose&#39;</span><span class="p">:</span> <span class="n">purpose</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;expires_at&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">expiry_days</span><span class="p">))</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;algorithm&#39;</span><span class="p">:</span> <span class="s1">&#39;Fernet (AES-128)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;active&#39;</span>
+        <span class="p">}</span>
 
-        # Store key securely
-        self.keys[key_id] = key
-        self.key_metadata[key_id] = metadata
+        <span class="c1"># Store key securely</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span>
 
-        # Persist to secure storage
-        self._save_key_to_storage(key_id, key, metadata)
+        <span class="c1"># Persist to secure storage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_key_to_storage</span><span class="p">(</span><span class="n">key_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span>
 
-        return {
-            &#x27;key_id&#x27;: key_id,
-            &#x27;metadata&#x27;: metadata,
-            &#x27;key_created&#x27;: True
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;key_id&#39;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+            <span class="s1">&#39;metadata&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">,</span>
+            <span class="s1">&#39;key_created&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
 
-    def get_key(self, key_id):
-        &quot;&quot;&quot;Retrieve key with validation&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve key with validation&quot;&quot;&quot;</span>
 
-        if key_id not in self.keys:
-            raise ValueError(f&quot;Key &#x27;{key_id}&#x27; not found&quot;)
+        <span class="k">if</span> <span class="n">key_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">&#39; not found&quot;</span><span class="p">)</span>
 
-        metadata = self.key_metadata[key_id]
+        <span class="n">metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span>
 
-        # Check if key has expired
-        expiry_date = datetime.fromisoformat(metadata[&#x27;expires_at&#x27;])
-        if datetime.now() &gt; expiry_date:
-            raise ValueError(f&quot;Key &#x27;{key_id}&#x27; has expired&quot;)
+        <span class="c1"># Check if key has expired</span>
+        <span class="n">expiry_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">expiry_date</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">&#39; has expired&quot;</span><span class="p">)</span>
 
-        # Check if key is active
-        if metadata[&#x27;status&#x27;] != &#x27;active&#x27;:
-            raise ValueError(f&quot;Key &#x27;{key_id}&#x27; is not active&quot;)
+        <span class="c1"># Check if key is active</span>
+        <span class="k">if</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;active&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key &#39;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">&#39; is not active&quot;</span><span class="p">)</span>
 
-        return self.keys[key_id]
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span>
 
-    def rotate_key(self, old_key_id, new_key_id=None):
-        &quot;&quot;&quot;Rotate encryption key&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">rotate_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_key_id</span><span class="p">,</span> <span class="n">new_key_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotate encryption key&quot;&quot;&quot;</span>
 
-        if new_key_id is None:
-            new_key_id = f&quot;{old_key_id}_rotated_{int(datetime.now().timestamp())}&quot;
+        <span class="k">if</span> <span class="n">new_key_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_key_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">old_key_id</span><span class="si">}</span><span class="s2">_rotated_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        # Get old key metadata for reference
-        old_metadata = self.key_metadata.get(old_key_id, {})
+        <span class="c1"># Get old key metadata for reference</span>
+        <span class="n">old_metadata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">old_key_id</span><span class="p">,</span> <span class="p">{})</span>
 
-        # Generate new key with same purpose
-        new_key_result = self.generate_key(
-            new_key_id,
-            key_type=old_metadata.get(&#x27;key_type&#x27;, &#x27;symmetric&#x27;),
-            purpose=old_metadata.get(&#x27;purpose&#x27;, &#x27;general&#x27;)
-        )
+        <span class="c1"># Generate new key with same purpose</span>
+        <span class="n">new_key_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_key</span><span class="p">(</span>
+            <span class="n">new_key_id</span><span class="p">,</span>
+            <span class="n">key_type</span><span class="o">=</span><span class="n">old_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;key_type&#39;</span><span class="p">,</span> <span class="s1">&#39;symmetric&#39;</span><span class="p">),</span>
+            <span class="n">purpose</span><span class="o">=</span><span class="n">old_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;purpose&#39;</span><span class="p">,</span> <span class="s1">&#39;general&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
 
-        # Mark old key as deprecated (don&#x27;t delete immediately for data recovery)
-        if old_key_id in self.key_metadata:
-            self.key_metadata[old_key_id][&#x27;status&#x27;] = &#x27;deprecated&#x27;
-            self.key_metadata[old_key_id][&#x27;deprecated_at&#x27;] = datetime.now().isoformat()
-            self.key_metadata[old_key_id][&#x27;replaced_by&#x27;] = new_key_id
+        <span class="c1"># Mark old key as deprecated (don&#39;t delete immediately for data recovery)</span>
+        <span class="k">if</span> <span class="n">old_key_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">[</span><span class="n">old_key_id</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;deprecated&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">[</span><span class="n">old_key_id</span><span class="p">][</span><span class="s1">&#39;deprecated_at&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">[</span><span class="n">old_key_id</span><span class="p">][</span><span class="s1">&#39;replaced_by&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_key_id</span>
 
-        return {
-            &#x27;old_key_id&#x27;: old_key_id,
-            &#x27;new_key_id&#x27;: new_key_id,
-            &#x27;rotation_completed&#x27;: True
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;old_key_id&#39;</span><span class="p">:</span> <span class="n">old_key_id</span><span class="p">,</span>
+            <span class="s1">&#39;new_key_id&#39;</span><span class="p">:</span> <span class="n">new_key_id</span><span class="p">,</span>
+            <span class="s1">&#39;rotation_completed&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
 
-    def list_keys(self, include_deprecated=False):
-        &quot;&quot;&quot;List all keys with their status&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_deprecated</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all keys with their status&quot;&quot;&quot;</span>
 
-        key_list = []
-        for key_id, metadata in self.key_metadata.items():
-            if not include_deprecated and metadata[&#x27;status&#x27;] == &#x27;deprecated&#x27;:
-                continue
+        <span class="n">key_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">key_id</span><span class="p">,</span> <span class="n">metadata</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">include_deprecated</span> <span class="ow">and</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;deprecated&#39;</span><span class="p">:</span>
+                <span class="k">continue</span>
 
-            key_info = {
-                &#x27;key_id&#x27;: key_id,
-                &#x27;purpose&#x27;: metadata[&#x27;purpose&#x27;],
-                &#x27;status&#x27;: metadata[&#x27;status&#x27;],
-                &#x27;created_at&#x27;: metadata[&#x27;created_at&#x27;],
-                &#x27;expires_at&#x27;: metadata[&#x27;expires_at&#x27;]
-            }
+            <span class="n">key_info</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;key_id&#39;</span><span class="p">:</span> <span class="n">key_id</span><span class="p">,</span>
+                <span class="s1">&#39;purpose&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;purpose&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;expires_at&#39;</span><span class="p">:</span> <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
 
-            # Check expiry status
-            expiry_date = datetime.fromisoformat(metadata[&#x27;expires_at&#x27;])
-            if datetime.now() &gt; expiry_date:
-                key_info[&#x27;expired&#x27;] = True
+            <span class="c1"># Check expiry status</span>
+            <span class="n">expiry_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">expiry_date</span><span class="p">:</span>
+                <span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;expired&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
-            key_list.append(key_info)
+            <span class="n">key_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key_info</span><span class="p">)</span>
 
-        return key_list
+        <span class="k">return</span> <span class="n">key_list</span>
 
-    def _save_key_to_storage(self, key_id, key, metadata):
-        &quot;&quot;&quot;Securely save key to filesystem&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_save_key_to_storage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key_id</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">metadata</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Securely save key to filesystem&quot;&quot;&quot;</span>
 
-        # In production, use HSM or secure key management service
-        key_file = os.path.join(self.key_store_path, f&quot;{key_id}.key&quot;)
-        metadata_file = os.path.join(self.key_store_path, f&quot;{key_id}.metadata&quot;)
+        <span class="c1"># In production, use HSM or secure key management service</span>
+        <span class="n">key_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">.key&quot;</span><span class="p">)</span>
+        <span class="n">metadata_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">.metadata&quot;</span><span class="p">)</span>
 
-        # Save key (in production, encrypt this with master key)
-        with open(key_file, &#x27;wb&#x27;) as f:
-            f.write(key)
-        os.chmod(key_file, 0o600)  # Owner read/write only
+        <span class="c1"># Save key (in production, encrypt this with master key)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">key_file</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">key_file</span><span class="p">,</span> <span class="mo">0o600</span><span class="p">)</span>  <span class="c1"># Owner read/write only</span>
 
-        # Save metadata
-        with open(metadata_file, &#x27;w&#x27;) as f:
-            json.dump(metadata, f, indent=2)
-        os.chmod(metadata_file, 0o600)
+        <span class="c1"># Save metadata</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">,</span> <span class="mo">0o600</span><span class="p">)</span>
 
-    def load_existing_keys(self):
-        &quot;&quot;&quot;Load keys from secure storage on startup&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_existing_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load keys from secure storage on startup&quot;&quot;&quot;</span>
 
-        if not os.path.exists(self.key_store_path):
-            return
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span><span class="p">):</span>
+            <span class="k">return</span>
 
-        for filename in os.listdir(self.key_store_path):
-            if filename.endswith(&#x27;.metadata&#x27;):
-                key_id = filename[:-9]  # Remove .metadata extension
+        <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">filename</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.metadata&#39;</span><span class="p">):</span>
+                <span class="n">key_id</span> <span class="o">=</span> <span class="n">filename</span><span class="p">[:</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span>  <span class="c1"># Remove .metadata extension</span>
 
-                try:
-                    # Load metadata
-                    metadata_file = os.path.join(self.key_store_path, filename)
-                    with open(metadata_file, &#x27;r&#x27;) as f:
-                        metadata = json.load(f)
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Load metadata</span>
+                    <span class="n">metadata_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">metadata</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-                    # Load key
-                    key_file = os.path.join(self.key_store_path, f&quot;{key_id}.key&quot;)
-                    with open(key_file, &#x27;rb&#x27;) as f:
-                        key = f.read()
+                    <span class="c1"># Load key</span>
+                    <span class="n">key_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key_store_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">.key&quot;</span><span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">key_file</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-                    self.keys[key_id] = key
-                    self.key_metadata[key_id] = metadata
+                    <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">key</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">key_metadata</span><span class="p">[</span><span class="n">key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">metadata</span>
 
-                except (FileNotFoundError, json.JSONDecodeError) as e:
-                    print(f&quot;Warning: Could not load key {key_id}: {e}&quot;)
+                <span class="k">except</span> <span class="p">(</span><span class="ne">FileNotFoundError</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Could not load key </span><span class="si">{</span><span class="n">key_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Example usage for school system key management
-def demonstrate_key_management():
-    &quot;&quot;&quot;Demonstrate key management for school system&quot;&quot;&quot;
+<span class="c1"># Example usage for school system key management</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_key_management</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate key management for school system&quot;&quot;&quot;</span>
 
-    key_manager = CryptographicKeyManager()
+    <span class="n">key_manager</span> <span class="o">=</span> <span class="n">CryptographicKeyManager</span><span class="p">()</span>
 
-    print(&quot;=== Key Management Demo ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Key Management Demo ===&quot;</span><span class="p">)</span>
 
-    # Generate keys for different purposes
-    purposes = [
-        (&quot;student_records&quot;, &quot;student record encryption&quot;),
-        (&quot;grade_data&quot;, &quot;grade database encryption&quot;),
-        (&quot;communication&quot;, &quot;secure messaging&quot;)
-    ]
+    <span class="c1"># Generate keys for different purposes</span>
+    <span class="n">purposes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;student_records&quot;</span><span class="p">,</span> <span class="s2">&quot;student record encryption&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;grade_data&quot;</span><span class="p">,</span> <span class="s2">&quot;grade database encryption&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;communication&quot;</span><span class="p">,</span> <span class="s2">&quot;secure messaging&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
 
-    for key_id, purpose in purposes:
-        result = key_manager.generate_key(key_id, purpose=purpose)
-        print(f&quot;Generated key: {result[&#x27;key_id&#x27;]} for {purpose}&quot;)
+    <span class="k">for</span> <span class="n">key_id</span><span class="p">,</span> <span class="n">purpose</span> <span class="ow">in</span> <span class="n">purposes</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">key_manager</span><span class="o">.</span><span class="n">generate_key</span><span class="p">(</span><span class="n">key_id</span><span class="p">,</span> <span class="n">purpose</span><span class="o">=</span><span class="n">purpose</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated key: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;key_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">purpose</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # List current keys
-    print(&quot;\n=== Current Keys ===&quot;)
-    keys = key_manager.list_keys()
-    for key_info in keys:
-        print(f&quot;Key: {key_info[&#x27;key_id&#x27;]}&quot;)
-        print(f&quot;  Purpose: {key_info[&#x27;purpose&#x27;]}&quot;)
-        print(f&quot;  Status: {key_info[&#x27;status&#x27;]}&quot;)
-        print(f&quot;  Expires: {key_info[&#x27;expires_at&#x27;][:10]}&quot;)
-        print()
+    <span class="c1"># List current keys</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Current Keys ===&quot;</span><span class="p">)</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">key_manager</span><span class="o">.</span><span class="n">list_keys</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">key_info</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key: </span><span class="si">{</span><span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;key_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Purpose: </span><span class="si">{</span><span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;purpose&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Status: </span><span class="si">{</span><span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Expires: </span><span class="si">{</span><span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;expires_at&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 
-    # Demonstrate key rotation
-    print(&quot;=== Key Rotation Demo ===&quot;)
-    rotation_result = key_manager.rotate_key(&quot;student_records&quot;)
-    print(f&quot;Rotated {rotation_result[&#x27;old_key_id&#x27;]} to {rotation_result[&#x27;new_key_id&#x27;]}&quot;)
+    <span class="c1"># Demonstrate key rotation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Key Rotation Demo ===&quot;</span><span class="p">)</span>
+    <span class="n">rotation_result</span> <span class="o">=</span> <span class="n">key_manager</span><span class="o">.</span><span class="n">rotate_key</span><span class="p">(</span><span class="s2">&quot;student_records&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rotated </span><span class="si">{</span><span class="n">rotation_result</span><span class="p">[</span><span class="s1">&#39;old_key_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">rotation_result</span><span class="p">[</span><span class="s1">&#39;new_key_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Show updated key list
-    print(&quot;\n=== Keys After Rotation ===&quot;)
-    keys = key_manager.list_keys(include_deprecated=True)
-    for key_info in keys:
-        status_indicator = &quot;🔑&quot; if key_info[&#x27;status&#x27;] == &#x27;active&#x27; else &quot;⚠️&quot;
-        print(f&quot;{status_indicator} {key_info[&#x27;key_id&#x27;]} ({key_info[&#x27;status&#x27;]})&quot;)
+    <span class="c1"># Show updated key list</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Keys After Rotation ===&quot;</span><span class="p">)</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">key_manager</span><span class="o">.</span><span class="n">list_keys</span><span class="p">(</span><span class="n">include_deprecated</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key_info</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+        <span class="n">status_indicator</span> <span class="o">=</span> <span class="s2">&quot;🔑&quot;</span> <span class="k">if</span> <span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;active&#39;</span> <span class="k">else</span> <span class="s2">&quot;⚠️&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status_indicator</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;key_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">key_info</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="guided-example-secure-password-manager">Guided Example: Secure Password Manager<a class="headerlink" href="#guided-example-secure-password-manager" title="Permanent link">&para;</a></h2>
 <p>Let&rsquo;s build a complete password manager that demonstrates all cryptographic concepts.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import json
-import getpass
-from datetime import datetime
-import secrets
-import base64
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">getpass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">base64</span>
 
-class SecurePasswordManager:
-    def __init__(self, master_password=None):
-        self.encryption_manager = SecureEncryptionManager()
-        self.hash_manager = SecureHashingManager()
-        self.key_manager = CryptographicKeyManager()
+<span class="k">class</span><span class="w"> </span><span class="nc">SecurePasswordManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master_password</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span> <span class="o">=</span> <span class="n">SecureEncryptionManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_manager</span> <span class="o">=</span> <span class="n">SecureHashingManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key_manager</span> <span class="o">=</span> <span class="n">CryptographicKeyManager</span><span class="p">()</span>
 
-        self.vault_file = &quot;password_vault.enc&quot;
-        self.master_key_id = &quot;master_vault_key&quot;
-        self.vault_data = {}
+        <span class="bp">self</span><span class="o">.</span><span class="n">vault_file</span> <span class="o">=</span> <span class="s2">&quot;password_vault.enc&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">master_key_id</span> <span class="o">=</span> <span class="s2">&quot;master_vault_key&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span> <span class="o">=</span> <span class="p">{}</span>
 
-        if master_password:
-            self._initialize_vault(master_password)
+        <span class="k">if</span> <span class="n">master_password</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_vault</span><span class="p">(</span><span class="n">master_password</span><span class="p">)</span>
 
-    def _initialize_vault(self, master_password):
-        &quot;&quot;&quot;Initialize password vault with master password&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initialize_vault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master_password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize password vault with master password&quot;&quot;&quot;</span>
 
-        # Create master encryption key from password
-        master_key, salt = self.encryption_manager.derive_key_from_password(master_password)
+        <span class="c1"># Create master encryption key from password</span>
+        <span class="n">master_key</span><span class="p">,</span> <span class="n">salt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span><span class="o">.</span><span class="n">derive_key_from_password</span><span class="p">(</span><span class="n">master_password</span><span class="p">)</span>
 
-        # Store the key securely
-        self.encryption_manager.symmetric_keys[self.master_key_id] = master_key
+        <span class="c1"># Store the key securely</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">master_key</span>
 
-        # Store salt for future key derivation
-        self.vault_salt = salt
+        <span class="c1"># Store salt for future key derivation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vault_salt</span> <span class="o">=</span> <span class="n">salt</span>
 
-        # Try to load existing vault
-        self._load_vault()
+        <span class="c1"># Try to load existing vault</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_vault</span><span class="p">()</span>
 
-    def unlock_vault(self, master_password):
-        &quot;&quot;&quot;Unlock vault with master password&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">unlock_vault</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">master_password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Unlock vault with master password&quot;&quot;&quot;</span>
 
-        try:
-            # Derive key from password and stored salt
-            master_key, _ = self.encryption_manager.derive_key_from_password(
-                master_password, self.vault_salt
-            )
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Derive key from password and stored salt</span>
+            <span class="n">master_key</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span><span class="o">.</span><span class="n">derive_key_from_password</span><span class="p">(</span>
+                <span class="n">master_password</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vault_salt</span>
+            <span class="p">)</span>
 
-            self.encryption_manager.symmetric_keys[self.master_key_id] = master_key
+            <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span><span class="o">.</span><span class="n">symmetric_keys</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">master_key_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">master_key</span>
 
-            # Try to decrypt vault to verify password
-            self._load_vault()
-            return True, &quot;Vault unlocked successfully&quot;
+            <span class="c1"># Try to decrypt vault to verify password</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_load_vault</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Vault unlocked successfully&quot;</span>
 
-        except Exception as e:
-            return False, &quot;Invalid master password&quot;
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Invalid master password&quot;</span>
 
-    def add_password(self, service, username, password, notes=&quot;&quot;):
-        &quot;&quot;&quot;Add password entry to vault&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">notes</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add password entry to vault&quot;&quot;&quot;</span>
 
-        # Generate entry ID
-        entry_id = secrets.token_hex(8)
+        <span class="c1"># Generate entry ID</span>
+        <span class="n">entry_id</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_hex</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
 
-        # Create password entry
-        entry = {
-            &#x27;service&#x27;: service,
-            &#x27;username&#x27;: username,
-            &#x27;password&#x27;: password,
-            &#x27;notes&#x27;: notes,
-            &#x27;created_at&#x27;: datetime.now().isoformat(),
-            &#x27;last_modified&#x27;: datetime.now().isoformat()
-        }
+        <span class="c1"># Create password entry</span>
+        <span class="n">entry</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;service&#39;</span><span class="p">:</span> <span class="n">service</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+            <span class="s1">&#39;notes&#39;</span><span class="p">:</span> <span class="n">notes</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;last_modified&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="p">}</span>
 
-        # Add to vault
-        self.vault_data[entry_id] = entry
+        <span class="c1"># Add to vault</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span><span class="p">[</span><span class="n">entry_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span>
 
-        # Save vault
-        self._save_vault()
+        <span class="c1"># Save vault</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_save_vault</span><span class="p">()</span>
 
-        return entry_id
+        <span class="k">return</span> <span class="n">entry_id</span>
 
-    def get_password(self, entry_id):
-        &quot;&quot;&quot;Retrieve password entry from vault&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve password entry from vault&quot;&quot;&quot;</span>
 
-        if entry_id not in self.vault_data:
-            raise ValueError(&quot;Entry not found&quot;)
+        <span class="k">if</span> <span class="n">entry_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Entry not found&quot;</span><span class="p">)</span>
 
-        return self.vault_data[entry_id]
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span><span class="p">[</span><span class="n">entry_id</span><span class="p">]</span>
 
-    def list_entries(self):
-        &quot;&quot;&quot;List all password entries (without passwords)&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all password entries (without passwords)&quot;&quot;&quot;</span>
 
-        entries = []
-        for entry_id, entry in self.vault_data.items():
-            entries.append({
-                &#x27;entry_id&#x27;: entry_id,
-                &#x27;service&#x27;: entry[&#x27;service&#x27;],
-                &#x27;username&#x27;: entry[&#x27;username&#x27;],
-                &#x27;created_at&#x27;: entry[&#x27;created_at&#x27;]
-            })
+        <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">entry_id</span><span class="p">,</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;entry_id&#39;</span><span class="p">:</span> <span class="n">entry_id</span><span class="p">,</span>
+                <span class="s1">&#39;service&#39;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span>
+            <span class="p">})</span>
 
-        return entries
+        <span class="k">return</span> <span class="n">entries</span>
 
-    def generate_secure_password(self, length=16, include_symbols=True):
-        &quot;&quot;&quot;Generate cryptographically secure password&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_secure_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">include_symbols</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate cryptographically secure password&quot;&quot;&quot;</span>
 
-        # Character sets
-        lowercase = &#x27;abcdefghijklmnopqrstuvwxyz&#x27;
-        uppercase = &#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;
-        digits = &#x27;0123456789&#x27;
-        symbols = &#x27;!@#$%^&amp;*()_+-=[]{}|;:,.&lt;&gt;?&#x27;
+        <span class="c1"># Character sets</span>
+        <span class="n">lowercase</span> <span class="o">=</span> <span class="s1">&#39;abcdefghijklmnopqrstuvwxyz&#39;</span>
+        <span class="n">uppercase</span> <span class="o">=</span> <span class="s1">&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+        <span class="n">digits</span> <span class="o">=</span> <span class="s1">&#39;0123456789&#39;</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="s1">&#39;!@#$%^&amp;*()_+-=[]</span><span class="si">{}</span><span class="s1">|;:,.&lt;&gt;?&#39;</span>
 
-        # Build character set
-        charset = lowercase + uppercase + digits
-        if include_symbols:
-            charset += symbols
+        <span class="c1"># Build character set</span>
+        <span class="n">charset</span> <span class="o">=</span> <span class="n">lowercase</span> <span class="o">+</span> <span class="n">uppercase</span> <span class="o">+</span> <span class="n">digits</span>
+        <span class="k">if</span> <span class="n">include_symbols</span><span class="p">:</span>
+            <span class="n">charset</span> <span class="o">+=</span> <span class="n">symbols</span>
 
-        # Generate password ensuring at least one character from each set
-        password = []
+        <span class="c1"># Generate password ensuring at least one character from each set</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="p">[]</span>
 
-        # Ensure minimum complexity
-        password.append(secrets.choice(lowercase))
-        password.append(secrets.choice(uppercase))
-        password.append(secrets.choice(digits))
+        <span class="c1"># Ensure minimum complexity</span>
+        <span class="n">password</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">lowercase</span><span class="p">))</span>
+        <span class="n">password</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">uppercase</span><span class="p">))</span>
+        <span class="n">password</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">digits</span><span class="p">))</span>
 
-        if include_symbols:
-            password.append(secrets.choice(symbols))
+        <span class="k">if</span> <span class="n">include_symbols</span><span class="p">:</span>
+            <span class="n">password</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">symbols</span><span class="p">))</span>
 
-        # Fill remaining length
-        for _ in range(length - len(password)):
-            password.append(secrets.choice(charset))
+        <span class="c1"># Fill remaining length</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)):</span>
+            <span class="n">password</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">secrets</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">charset</span><span class="p">))</span>
 
-        # Shuffle the password
-        secrets.SystemRandom().shuffle(password)
+        <span class="c1"># Shuffle the password</span>
+        <span class="n">secrets</span><span class="o">.</span><span class="n">SystemRandom</span><span class="p">()</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-        return &#x27;&#x27;.join(password)
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-    def _save_vault(self):
-        &quot;&quot;&quot;Save encrypted vault to disk&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_save_vault</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save encrypted vault to disk&quot;&quot;&quot;</span>
 
-        # Convert vault to JSON
-        vault_json = json.dumps(self.vault_data, indent=2)
+        <span class="c1"># Convert vault to JSON</span>
+        <span class="n">vault_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-        # Encrypt vault data
-        encrypted_vault = self.encryption_manager.encrypt_data(
-            vault_json, self.master_key_id
-        )
+        <span class="c1"># Encrypt vault data</span>
+        <span class="n">encrypted_vault</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span><span class="o">.</span><span class="n">encrypt_data</span><span class="p">(</span>
+            <span class="n">vault_json</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">master_key_id</span>
+        <span class="p">)</span>
 
-        # Save to file
-        vault_container = {
-            &#x27;encrypted_data&#x27;: base64.b64encode(encrypted_vault[&#x27;encrypted_data&#x27;]).decode(),
-            &#x27;salt&#x27;: base64.b64encode(self.vault_salt).decode(),
-            &#x27;created_at&#x27;: datetime.now().isoformat()
-        }
+        <span class="c1"># Save to file</span>
+        <span class="n">vault_container</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;encrypted_data&#39;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">encrypted_vault</span><span class="p">[</span><span class="s1">&#39;encrypted_data&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+            <span class="s1">&#39;salt&#39;</span><span class="p">:</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_salt</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="p">}</span>
 
-        with open(self.vault_file, &#x27;w&#x27;) as f:
-            json.dump(vault_container, f, indent=2)
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">vault_container</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-    def _load_vault(self):
-        &quot;&quot;&quot;Load and decrypt vault from disk&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_vault</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load and decrypt vault from disk&quot;&quot;&quot;</span>
 
-        try:
-            with open(self.vault_file, &#x27;r&#x27;) as f:
-                vault_container = json.load(f)
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vault_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">vault_container</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-            # Extract encrypted data and salt
-            encrypted_data = base64.b64decode(vault_container[&#x27;encrypted_data&#x27;])
-            self.vault_salt = base64.b64decode(vault_container[&#x27;salt&#x27;])
+            <span class="c1"># Extract encrypted data and salt</span>
+            <span class="n">encrypted_data</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">vault_container</span><span class="p">[</span><span class="s1">&#39;encrypted_data&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vault_salt</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">vault_container</span><span class="p">[</span><span class="s1">&#39;salt&#39;</span><span class="p">])</span>
 
-            # Decrypt vault
-            decrypted_json = self.encryption_manager.decrypt_data(
-                encrypted_data, self.master_key_id
-            )
+            <span class="c1"># Decrypt vault</span>
+            <span class="n">decrypted_json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encryption_manager</span><span class="o">.</span><span class="n">decrypt_data</span><span class="p">(</span>
+                <span class="n">encrypted_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">master_key_id</span>
+            <span class="p">)</span>
 
-            # Load vault data
-            self.vault_data = json.loads(decrypted_json)
+            <span class="c1"># Load vault data</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">decrypted_json</span><span class="p">)</span>
 
-        except FileNotFoundError:
-            # New vault
-            self.vault_data = {}
-        except Exception as e:
-            raise ValueError(f&quot;Could not load vault: {e}&quot;)
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="c1"># New vault</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vault_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not load vault: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Demonstration of complete password manager
-def demonstrate_password_manager():
-    &quot;&quot;&quot;Demonstrate secure password manager functionality&quot;&quot;&quot;
+<span class="c1"># Demonstration of complete password manager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_password_manager</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate secure password manager functionality&quot;&quot;&quot;</span>
 
-    print(&quot;=== Secure Password Manager Demo ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Secure Password Manager Demo ===&quot;</span><span class="p">)</span>
 
-    # Create password manager
-    master_password = &quot;SuperSecureMasterPassword123!&quot;
-    pm = SecurePasswordManager(master_password)
+    <span class="c1"># Create password manager</span>
+    <span class="n">master_password</span> <span class="o">=</span> <span class="s2">&quot;SuperSecureMasterPassword123!&quot;</span>
+    <span class="n">pm</span> <span class="o">=</span> <span class="n">SecurePasswordManager</span><span class="p">(</span><span class="n">master_password</span><span class="p">)</span>
 
-    # Generate and store secure passwords
-    print(&quot;\n=== Adding Password Entries ===&quot;)
+    <span class="c1"># Generate and store secure passwords</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Adding Password Entries ===&quot;</span><span class="p">)</span>
 
-    entries = [
-        (&quot;School Email&quot;, &quot;student@school.edu&quot;, &quot;&quot;),
-        (&quot;Learning Management System&quot;, &quot;student123&quot;, &quot;&quot;),
-        (&quot;Library System&quot;, &quot;student123&quot;, &quot;Main campus library&quot;)
-    ]
+    <span class="n">entries</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;School Email&quot;</span><span class="p">,</span> <span class="s2">&quot;student@school.edu&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Learning Management System&quot;</span><span class="p">,</span> <span class="s2">&quot;student123&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;Library System&quot;</span><span class="p">,</span> <span class="s2">&quot;student123&quot;</span><span class="p">,</span> <span class="s2">&quot;Main campus library&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
 
-    for service, username, notes in entries:
-        # Generate secure password
-        secure_password = pm.generate_secure_password(length=12)
+    <span class="k">for</span> <span class="n">service</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">notes</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="c1"># Generate secure password</span>
+        <span class="n">secure_password</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">generate_secure_password</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-        # Add to vault
-        entry_id = pm.add_password(service, username, secure_password, notes)
+        <span class="c1"># Add to vault</span>
+        <span class="n">entry_id</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">add_password</span><span class="p">(</span><span class="n">service</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">secure_password</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
 
-        print(f&quot;Added {service}: {username}&quot;)
-        print(f&quot;  Password: {secure_password}&quot;)
-        print(f&quot;  Entry ID: {entry_id}&quot;)
-        print()
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Password: </span><span class="si">{</span><span class="n">secure_password</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Entry ID: </span><span class="si">{</span><span class="n">entry_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 
-    print(&quot;=== Vault Contents ===&quot;)
-    entries = pm.list_entries()
-    for entry in entries:
-        print(f&quot;Service: {entry[&#x27;service&#x27;]}&quot;)
-        print(f&quot;Username: {entry[&#x27;username&#x27;]}&quot;)
-        print(f&quot;Entry ID: {entry[&#x27;entry_id&#x27;]}&quot;)
-        print()
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Vault Contents ===&quot;</span><span class="p">)</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">list_entries</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Service: </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Username: </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entry ID: </span><span class="si">{</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;entry_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 
-    # Demonstrate vault security
-    print(&quot;=== Testing Vault Security ===&quot;)
+    <span class="c1"># Demonstrate vault security</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Vault Security ===&quot;</span><span class="p">)</span>
 
-    # Save current vault
-    pm._save_vault()
+    <span class="c1"># Save current vault</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">_save_vault</span><span class="p">()</span>
 
-    # Create new manager instance (simulating restart)
-    pm2 = SecurePasswordManager()
+    <span class="c1"># Create new manager instance (simulating restart)</span>
+    <span class="n">pm2</span> <span class="o">=</span> <span class="n">SecurePasswordManager</span><span class="p">()</span>
 
-    # Try with wrong password
-    unlock_result = pm2.unlock_vault(&quot;WrongPassword&quot;)
-    print(f&quot;Wrong password unlock: {unlock_result}&quot;)
+    <span class="c1"># Try with wrong password</span>
+    <span class="n">unlock_result</span> <span class="o">=</span> <span class="n">pm2</span><span class="o">.</span><span class="n">unlock_vault</span><span class="p">(</span><span class="s2">&quot;WrongPassword&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wrong password unlock: </span><span class="si">{</span><span class="n">unlock_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Try with correct password
-    unlock_result = pm2.unlock_vault(master_password)
-    print(f&quot;Correct password unlock: {unlock_result}&quot;)
+    <span class="c1"># Try with correct password</span>
+    <span class="n">unlock_result</span> <span class="o">=</span> <span class="n">pm2</span><span class="o">.</span><span class="n">unlock_vault</span><span class="p">(</span><span class="n">master_password</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correct password unlock: </span><span class="si">{</span><span class="n">unlock_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    if unlock_result[0]:
-        retrieved_entries = pm2.list_entries()
-        print(f&quot;Retrieved {len(retrieved_entries)} entries after unlock&quot;)
+    <span class="k">if</span> <span class="n">unlock_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">retrieved_entries</span> <span class="o">=</span> <span class="n">pm2</span><span class="o">.</span><span class="n">list_entries</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Retrieved </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">retrieved_entries</span><span class="p">)</span><span class="si">}</span><span class="s2"> entries after unlock&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
@@ -2698,6 +2698,8 @@ def demonstrate_password_manager():
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

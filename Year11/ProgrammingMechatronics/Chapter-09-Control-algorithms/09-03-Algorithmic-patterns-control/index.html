@@ -1613,143 +1613,143 @@
 <h3 id="guided-example-conveyor-belt-state-machine">Guided example: conveyor belt state machine<a class="headerlink" href="#guided-example-conveyor-belt-state-machine" title="Permanent link">&para;</a></h3>
 <p>A conveyor belt system has several operational states based on safety sensors and user commands.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">from enum import Enum
-import time
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-class ConveyorState(Enum):
-    STOPPED = &quot;stopped&quot;
-    STARTING = &quot;starting&quot;
-    RUNNING = &quot;running&quot;
-    STOPPING = &quot;stopping&quot;
-    ERROR = &quot;error&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">ConveyorState</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">STOPPED</span> <span class="o">=</span> <span class="s2">&quot;stopped&quot;</span>
+    <span class="n">STARTING</span> <span class="o">=</span> <span class="s2">&quot;starting&quot;</span>
+    <span class="n">RUNNING</span> <span class="o">=</span> <span class="s2">&quot;running&quot;</span>
+    <span class="n">STOPPING</span> <span class="o">=</span> <span class="s2">&quot;stopping&quot;</span>
+    <span class="n">ERROR</span> <span class="o">=</span> <span class="s2">&quot;error&quot;</span>
 
-class ConveyorBelt:
-    def __init__(self):
-        self.state = ConveyorState.STOPPED
-        self.speed = 0
-        self.emergency_stop = False
-        self.safety_sensor = True  # True = clear, False = blocked
-        self.start_time = 0
+<span class="k">class</span><span class="w"> </span><span class="nc">ConveyorBelt</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># True = clear, False = blocked</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def handle_event(self, event, data=None):
-        &quot;&quot;&quot;Process events and handle state transitions&quot;&quot;&quot;
-        print(f&quot;Current state: {self.state.value}, Event: {event}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process events and handle state transitions&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current state: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">, Event: </span><span class="si">{</span><span class="n">event</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Emergency stop overrides all other logic
-        if event == &quot;emergency_stop&quot;:
-            self._transition_to(ConveyorState.ERROR)
-            return
+        <span class="c1"># Emergency stop overrides all other logic</span>
+        <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;emergency_stop&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+            <span class="k">return</span>
 
-        # State-specific event handling
-        if self.state == ConveyorState.STOPPED:
-            if event == &quot;start_button&quot; and self.safety_sensor:
-                self._transition_to(ConveyorState.STARTING)
-            elif event == &quot;start_button&quot; and not self.safety_sensor:
-                print(&quot;Cannot start: safety sensor blocked&quot;)
+        <span class="c1"># State-specific event handling</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;start_button&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">STARTING</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;start_button&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cannot start: safety sensor blocked&quot;</span><span class="p">)</span>
 
-        elif self.state == ConveyorState.STARTING:
-            if event == &quot;startup_complete&quot;:
-                self._transition_to(ConveyorState.RUNNING)
-            elif event == &quot;stop_button&quot;:
-                self._transition_to(ConveyorState.STOPPED)
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STARTING</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;startup_complete&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;stop_button&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">)</span>
 
-        elif self.state == ConveyorState.RUNNING:
-            if event == &quot;stop_button&quot;:
-                self._transition_to(ConveyorState.STOPPING)
-            elif event == &quot;safety_blocked&quot;:
-                self._transition_to(ConveyorState.STOPPING)
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;stop_button&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPING</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;safety_blocked&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPING</span><span class="p">)</span>
 
-        elif self.state == ConveyorState.STOPPING:
-            if event == &quot;stop_complete&quot;:
-                self._transition_to(ConveyorState.STOPPED)
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPING</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;stop_complete&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">)</span>
 
-        elif self.state == ConveyorState.ERROR:
-            if event == &quot;reset_button&quot; and self.safety_sensor:
-                self._transition_to(ConveyorState.STOPPED)
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s2">&quot;reset_button&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_transition_to</span><span class="p">(</span><span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">)</span>
 
-    def _transition_to(self, new_state):
-        &quot;&quot;&quot;Handle state transition with entry/exit actions&quot;&quot;&quot;
-        print(f&quot;Transitioning from {self.state.value} to {new_state.value}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_transition_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle state transition with entry/exit actions&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Transitioning from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">new_state</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Exit actions for current state
-        if self.state == ConveyorState.RUNNING:
-            print(&quot;Exiting RUNNING: disabling motor&quot;)
+        <span class="c1"># Exit actions for current state</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exiting RUNNING: disabling motor&quot;</span><span class="p">)</span>
 
-        # Entry actions for new state
-        if new_state == ConveyorState.STARTING:
-            print(&quot;Entering STARTING: gradual speed increase&quot;)
-            self.start_time = time.time()
-            self.speed = 0.1
+        <span class="c1"># Entry actions for new state</span>
+        <span class="k">if</span> <span class="n">new_state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STARTING</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entering STARTING: gradual speed increase&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mf">0.1</span>
 
-        elif new_state == ConveyorState.RUNNING:
-            print(&quot;Entering RUNNING: full speed operation&quot;)
-            self.speed = 1.0
+        <span class="k">elif</span> <span class="n">new_state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entering RUNNING: full speed operation&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mf">1.0</span>
 
-        elif new_state == ConveyorState.STOPPING:
-            print(&quot;Entering STOPPING: gradual speed decrease&quot;)
+        <span class="k">elif</span> <span class="n">new_state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPING</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entering STOPPING: gradual speed decrease&quot;</span><span class="p">)</span>
 
-        elif new_state == ConveyorState.STOPPED:
-            print(&quot;Entering STOPPED: motor off&quot;)
-            self.speed = 0
+        <span class="k">elif</span> <span class="n">new_state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPED</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entering STOPPED: motor off&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
 
-        elif new_state == ConveyorState.ERROR:
-            print(&quot;Entering ERROR: emergency shutdown&quot;)
-            self.speed = 0
-            self.emergency_stop = True
+        <span class="k">elif</span> <span class="n">new_state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entering ERROR: emergency shutdown&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">True</span>
 
-        self.state = new_state
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">new_state</span>
 
-    def update(self):
-        &quot;&quot;&quot;Called regularly to handle time-based transitions&quot;&quot;&quot;
-        if self.state == ConveyorState.STARTING:
-            # Automatic transition after startup delay
-            if time.time() - self.start_time &gt; 2.0:
-                self.handle_event(&quot;startup_complete&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called regularly to handle time-based transitions&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STARTING</span><span class="p">:</span>
+            <span class="c1"># Automatic transition after startup delay</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;startup_complete&quot;</span><span class="p">)</span>
 
-        elif self.state == ConveyorState.STOPPING:
-            # Simulate gradual deceleration
-            if self.speed &gt; 0:
-                self.speed = max(0, self.speed - 0.1)
-            else:
-                self.handle_event(&quot;stop_complete&quot;)
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">ConveyorState</span><span class="o">.</span><span class="n">STOPPING</span><span class="p">:</span>
+            <span class="c1"># Simulate gradual deceleration</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span> <span class="o">-</span> <span class="mf">0.1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;stop_complete&quot;</span><span class="p">)</span>
 
-    def get_status(self):
-        return {
-            &#x27;state&#x27;: self.state.value,
-            &#x27;speed&#x27;: self.speed,
-            &#x27;emergency_stop&#x27;: self.emergency_stop,
-            &#x27;safety_clear&#x27;: self.safety_sensor
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;state&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed</span><span class="p">,</span>
+            <span class="s1">&#39;emergency_stop&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">,</span>
+            <span class="s1">&#39;safety_clear&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span>
+        <span class="p">}</span>
 
-# Demonstrate state machine operation
-conveyor = ConveyorBelt()
+<span class="c1"># Demonstrate state machine operation</span>
+<span class="n">conveyor</span> <span class="o">=</span> <span class="n">ConveyorBelt</span><span class="p">()</span>
 
-print(&quot;=== Conveyor Belt State Machine Demo ===&quot;)
-print(f&quot;Initial status: {conveyor.get_status()}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Conveyor Belt State Machine Demo ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial status: </span><span class="si">{</span><span class="n">conveyor</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Normal startup sequence
-print(&quot;\n--- Normal Startup ---&quot;)
-conveyor.handle_event(&quot;start_button&quot;)
-print(f&quot;Status: {conveyor.get_status()}&quot;)
+<span class="c1"># Normal startup sequence</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Normal Startup ---&quot;</span><span class="p">)</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;start_button&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">conveyor</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Simulate startup completion
-time.sleep(0.1)  # Brief pause for demo
-conveyor.update()  # This would normally be called by a timer
-conveyor.handle_event(&quot;startup_complete&quot;)  # Manual trigger for demo
-print(f&quot;Status: {conveyor.get_status()}&quot;)
+<span class="c1"># Simulate startup completion</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Brief pause for demo</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>  <span class="c1"># This would normally be called by a timer</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;startup_complete&quot;</span><span class="p">)</span>  <span class="c1"># Manual trigger for demo</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">conveyor</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Normal shutdown
-print(&quot;\n--- Normal Shutdown ---&quot;)
-conveyor.handle_event(&quot;stop_button&quot;)
-conveyor.handle_event(&quot;stop_complete&quot;)  # Manual trigger for demo
-print(f&quot;Status: {conveyor.get_status()}&quot;)
+<span class="c1"># Normal shutdown</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Normal Shutdown ---&quot;</span><span class="p">)</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;stop_button&quot;</span><span class="p">)</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;stop_complete&quot;</span><span class="p">)</span>  <span class="c1"># Manual trigger for demo</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">conveyor</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Emergency scenario
-print(&quot;\n--- Emergency Stop ---&quot;)
-conveyor.handle_event(&quot;start_button&quot;)
-conveyor.handle_event(&quot;startup_complete&quot;)
-conveyor.handle_event(&quot;emergency_stop&quot;)
-print(f&quot;Status: {conveyor.get_status()}&quot;)
+<span class="c1"># Emergency scenario</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Emergency Stop ---&quot;</span><span class="p">)</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;start_button&quot;</span><span class="p">)</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;startup_complete&quot;</span><span class="p">)</span>
+<span class="n">conveyor</span><span class="o">.</span><span class="n">handle_event</span><span class="p">(</span><span class="s2">&quot;emergency_stop&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">conveyor</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="pid-control-continuous-regulation">PID control: continuous regulation<a class="headerlink" href="#pid-control-continuous-regulation" title="Permanent link">&para;</a></h3>
@@ -1785,161 +1785,161 @@ print(f&quot;Status: {conveyor.get_status()}&quot;)
 <h3 id="guided-example-temperature-control-pid">Guided example: temperature control PID<a class="headerlink" href="#guided-example-temperature-control-pid" title="Permanent link">&para;</a></h3>
 <p>A heating system needs to maintain a target temperature using PID control.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
-import math
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 
-class PIDController:
-    def __init__(self, kp, ki, kd, setpoint=0):
-        # PID coefficients
-        self.kp = kp  # Proportional gain
-        self.ki = ki  # Integral gain  
-        self.kd = kd  # Derivative gain
+<span class="k">class</span><span class="w"> </span><span class="nc">PIDController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">setpoint</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># PID coefficients</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">kp</span>  <span class="c1"># Proportional gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">ki</span>  <span class="c1"># Integral gain  </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">=</span> <span class="n">kd</span>  <span class="c1"># Derivative gain</span>
 
-        # Control variables
-        self.setpoint = setpoint
-        self.previous_error = 0
-        self.integral = 0
-        self.previous_time = time.time()
+        <span class="c1"># Control variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setpoint</span> <span class="o">=</span> <span class="n">setpoint</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-        # Output limits
-        self.output_min = 0
-        self.output_max = 100
+        <span class="c1"># Output limits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_min</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_max</span> <span class="o">=</span> <span class="mi">100</span>
 
-    def update(self, measured_value):
-        &quot;&quot;&quot;Calculate PID output based on current measurement&quot;&quot;&quot;
-        current_time = time.time()
-        dt = current_time - self.previous_time
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">measured_value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate PID output based on current measurement&quot;&quot;&quot;</span>
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_time</span>
 
-        # Calculate error
-        error = self.setpoint - measured_value
+        <span class="c1"># Calculate error</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setpoint</span> <span class="o">-</span> <span class="n">measured_value</span>
 
-        # Proportional term
-        proportional = self.kp * error
+        <span class="c1"># Proportional term</span>
+        <span class="n">proportional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">*</span> <span class="n">error</span>
 
-        # Integral term (accumulated error over time)
-        self.integral += error * dt
-        integral_term = self.ki * self.integral
+        <span class="c1"># Integral term (accumulated error over time)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integral</span> <span class="o">+=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">integral_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ki</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">integral</span>
 
-        # Derivative term (rate of error change)
-        if dt &gt; 0:
-            derivative = (error - self.previous_error) / dt
-        else:
-            derivative = 0
-        derivative_term = self.kd * derivative
+        <span class="c1"># Derivative term (rate of error change)</span>
+        <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">derivative</span> <span class="o">=</span> <span class="p">(</span><span class="n">error</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">derivative</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">derivative_term</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">*</span> <span class="n">derivative</span>
 
-        # Calculate total output
-        output = proportional + integral_term + derivative_term
+        <span class="c1"># Calculate total output</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">proportional</span> <span class="o">+</span> <span class="n">integral_term</span> <span class="o">+</span> <span class="n">derivative_term</span>
 
-        # Apply output limits
-        output = max(self.output_min, min(self.output_max, output))
+        <span class="c1"># Apply output limits</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_min</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_max</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
 
-        # Store values for next iteration
-        self.previous_error = error
-        self.previous_time = current_time
+        <span class="c1"># Store values for next iteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span> <span class="o">=</span> <span class="n">error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_time</span> <span class="o">=</span> <span class="n">current_time</span>
 
-        return output, {
-            &#x27;error&#x27;: error,
-            &#x27;proportional&#x27;: proportional,
-            &#x27;integral&#x27;: integral_term,
-            &#x27;derivative&#x27;: derivative_term,
-            &#x27;total_output&#x27;: output
-        }
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span>
+            <span class="s1">&#39;proportional&#39;</span><span class="p">:</span> <span class="n">proportional</span><span class="p">,</span>
+            <span class="s1">&#39;integral&#39;</span><span class="p">:</span> <span class="n">integral_term</span><span class="p">,</span>
+            <span class="s1">&#39;derivative&#39;</span><span class="p">:</span> <span class="n">derivative_term</span><span class="p">,</span>
+            <span class="s1">&#39;total_output&#39;</span><span class="p">:</span> <span class="n">output</span>
+        <span class="p">}</span>
 
-    def set_tuning(self, kp, ki, kd):
-        &quot;&quot;&quot;Update PID tuning parameters&quot;&quot;&quot;
-        self.kp = kp
-        self.ki = ki
-        self.kd = kd
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_tuning</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update PID tuning parameters&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">kp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">ki</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">=</span> <span class="n">kd</span>
 
-    def reset(self):
-        &quot;&quot;&quot;Reset integral and derivative terms&quot;&quot;&quot;
-        self.integral = 0
-        self.previous_error = 0
-        self.previous_time = time.time()
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset integral and derivative terms&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-class HeatingSystem:
-    &quot;&quot;&quot;Simulate a heating system with thermal dynamics&quot;&quot;&quot;
-    def __init__(self):
-        self.temperature = 20.0  # Start at room temperature
-        self.ambient_temp = 20.0
-        self.thermal_mass = 0.95  # How slowly temperature changes
-        self.heat_efficiency = 0.5  # How effectively heat input raises temp
+<span class="k">class</span><span class="w"> </span><span class="nc">HeatingSystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate a heating system with thermal dynamics&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">20.0</span>  <span class="c1"># Start at room temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ambient_temp</span> <span class="o">=</span> <span class="mf">20.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thermal_mass</span> <span class="o">=</span> <span class="mf">0.95</span>  <span class="c1"># How slowly temperature changes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heat_efficiency</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># How effectively heat input raises temp</span>
 
-    def apply_heat(self, heat_percentage):
-        &quot;&quot;&quot;Apply heat and update temperature (simplified physics)&quot;&quot;&quot;
-        # Heat input effect
-        heat_input = heat_percentage / 100.0 * self.heat_efficiency
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_heat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">heat_percentage</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply heat and update temperature (simplified physics)&quot;&quot;&quot;</span>
+        <span class="c1"># Heat input effect</span>
+        <span class="n">heat_input</span> <span class="o">=</span> <span class="n">heat_percentage</span> <span class="o">/</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">heat_efficiency</span>
 
-        # Cooling toward ambient temperature
-        cooling = (self.temperature - self.ambient_temp) * 0.02
+        <span class="c1"># Cooling toward ambient temperature</span>
+        <span class="n">cooling</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ambient_temp</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.02</span>
 
-        # Update temperature with thermal mass
-        temp_change = heat_input - cooling
-        self.temperature += temp_change * (1 - self.thermal_mass)
+        <span class="c1"># Update temperature with thermal mass</span>
+        <span class="n">temp_change</span> <span class="o">=</span> <span class="n">heat_input</span> <span class="o">-</span> <span class="n">cooling</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">+=</span> <span class="n">temp_change</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">thermal_mass</span><span class="p">)</span>
 
-        return self.temperature
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span>
 
-# Demonstrate PID temperature control
-print(&quot;=== PID Temperature Control Demo ===&quot;)
+<span class="c1"># Demonstrate PID temperature control</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== PID Temperature Control Demo ===&quot;</span><span class="p">)</span>
 
-# Create PID controller and heating system
-# PID tuning: start with P-only, then add I and D
-pid = PIDController(kp=2.0, ki=0.1, kd=0.5, setpoint=50.0)
-heater = HeatingSystem()
+<span class="c1"># Create PID controller and heating system</span>
+<span class="c1"># PID tuning: start with P-only, then add I and D</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="n">PIDController</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">setpoint</span><span class="o">=</span><span class="mf">50.0</span><span class="p">)</span>
+<span class="n">heater</span> <span class="o">=</span> <span class="n">HeatingSystem</span><span class="p">()</span>
 
-print(f&quot;Target temperature: {pid.setpoint}°C&quot;)
-print(f&quot;Starting temperature: {heater.temperature:.1f}°C&quot;)
-print()
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target temperature: </span><span class="si">{</span><span class="n">pid</span><span class="o">.</span><span class="n">setpoint</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting temperature: </span><span class="si">{</span><span class="n">heater</span><span class="o">.</span><span class="n">temperature</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 
-# Simulate control loop
-for step in range(20):
-    # Get current temperature
-    current_temp = heater.temperature
+<span class="c1"># Simulate control loop</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="c1"># Get current temperature</span>
+    <span class="n">current_temp</span> <span class="o">=</span> <span class="n">heater</span><span class="o">.</span><span class="n">temperature</span>
 
-    # Calculate PID output
-    heat_output, debug_info = pid.update(current_temp)
+    <span class="c1"># Calculate PID output</span>
+    <span class="n">heat_output</span><span class="p">,</span> <span class="n">debug_info</span> <span class="o">=</span> <span class="n">pid</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">current_temp</span><span class="p">)</span>
 
-    # Apply heat to system
-    new_temp = heater.apply_heat(heat_output)
+    <span class="c1"># Apply heat to system</span>
+    <span class="n">new_temp</span> <span class="o">=</span> <span class="n">heater</span><span class="o">.</span><span class="n">apply_heat</span><span class="p">(</span><span class="n">heat_output</span><span class="p">)</span>
 
-    # Display results every few steps
-    if step % 3 == 0:
-        print(f&quot;Step {step:2d}: Temp={current_temp:5.1f}°C, &quot;
-              f&quot;Error={debug_info[&#x27;error&#x27;]:5.1f}, &quot;
-              f&quot;Heat={heat_output:5.1f}%, &quot;
-              f&quot;P={debug_info[&#x27;proportional&#x27;]:5.1f}, &quot;
-              f&quot;I={debug_info[&#x27;integral&#x27;]:5.1f}, &quot;
-              f&quot;D={debug_info[&#x27;derivative&#x27;]:5.1f}&quot;)
+    <span class="c1"># Display results every few steps</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2">: Temp=</span><span class="si">{</span><span class="n">current_temp</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">°C, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;Error=</span><span class="si">{</span><span class="n">debug_info</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;Heat=</span><span class="si">{</span><span class="n">heat_output</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">%, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;P=</span><span class="si">{</span><span class="n">debug_info</span><span class="p">[</span><span class="s1">&#39;proportional&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;I=</span><span class="si">{</span><span class="n">debug_info</span><span class="p">[</span><span class="s1">&#39;integral&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">, &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;D=</span><span class="si">{</span><span class="n">debug_info</span><span class="p">[</span><span class="s1">&#39;derivative&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Small delay to simulate real-time
-    time.sleep(0.01)
+    <span class="c1"># Small delay to simulate real-time</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
 
-print()
-print(f&quot;Final temperature: {heater.temperature:.1f}°C&quot;)
-print(f&quot;Temperature error: {abs(pid.setpoint - heater.temperature):.1f}°C&quot;)
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final temperature: </span><span class="si">{</span><span class="n">heater</span><span class="o">.</span><span class="n">temperature</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature error: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">pid</span><span class="o">.</span><span class="n">setpoint</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">heater</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 
-# Demonstrate the effect of different tuning
-print(&quot;\n=== PID Tuning Comparison ===&quot;)
-tuning_sets = [
-    {&quot;name&quot;: &quot;P-only&quot;, &quot;kp&quot;: 3.0, &quot;ki&quot;: 0.0, &quot;kd&quot;: 0.0},
-    {&quot;name&quot;: &quot;PI&quot;, &quot;kp&quot;: 2.0, &quot;ki&quot;: 0.1, &quot;kd&quot;: 0.0},
-    {&quot;name&quot;: &quot;PID&quot;, &quot;kp&quot;: 2.0, &quot;ki&quot;: 0.1, &quot;kd&quot;: 0.5}
-]
+<span class="c1"># Demonstrate the effect of different tuning</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== PID Tuning Comparison ===&quot;</span><span class="p">)</span>
+<span class="n">tuning_sets</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;P-only&quot;</span><span class="p">,</span> <span class="s2">&quot;kp&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s2">&quot;ki&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;kd&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PI&quot;</span><span class="p">,</span> <span class="s2">&quot;kp&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;ki&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;kd&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;PID&quot;</span><span class="p">,</span> <span class="s2">&quot;kp&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;ki&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;kd&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span>
+<span class="p">]</span>
 
-for tuning in tuning_sets:
-    # Reset system
-    heater.temperature = 20.0
-    pid.reset()
-    pid.set_tuning(tuning[&quot;kp&quot;], tuning[&quot;ki&quot;], tuning[&quot;kd&quot;])
+<span class="k">for</span> <span class="n">tuning</span> <span class="ow">in</span> <span class="n">tuning_sets</span><span class="p">:</span>
+    <span class="c1"># Reset system</span>
+    <span class="n">heater</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">20.0</span>
+    <span class="n">pid</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">pid</span><span class="o">.</span><span class="n">set_tuning</span><span class="p">(</span><span class="n">tuning</span><span class="p">[</span><span class="s2">&quot;kp&quot;</span><span class="p">],</span> <span class="n">tuning</span><span class="p">[</span><span class="s2">&quot;ki&quot;</span><span class="p">],</span> <span class="n">tuning</span><span class="p">[</span><span class="s2">&quot;kd&quot;</span><span class="p">])</span>
 
-    # Run for 10 steps
-    final_error = 0
-    for _ in range(10):
-        heat_output, debug_info = pid.update(heater.temperature)
-        heater.apply_heat(heat_output)
-        final_error = abs(debug_info[&#x27;error&#x27;])
+    <span class="c1"># Run for 10 steps</span>
+    <span class="n">final_error</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">heat_output</span><span class="p">,</span> <span class="n">debug_info</span> <span class="o">=</span> <span class="n">pid</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">heater</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">heater</span><span class="o">.</span><span class="n">apply_heat</span><span class="p">(</span><span class="n">heat_output</span><span class="p">)</span>
+        <span class="n">final_error</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">debug_info</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">])</span>
 
-    print(f&quot;{tuning[&#x27;name&#x27;]:6s}: Final error = {final_error:.1f}°C&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tuning</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">6s</span><span class="si">}</span><span class="s2">: Final error = </span><span class="si">{</span><span class="n">final_error</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="basic-scheduling-coordinating-multiple-tasks">Basic scheduling: coordinating multiple tasks<a class="headerlink" href="#basic-scheduling-coordinating-multiple-tasks" title="Permanent link">&para;</a></h3>
@@ -1962,214 +1962,214 @@ for tuning in tuning_sets:
 <h3 id="guided-example-multi-sensor-monitoring-scheduler">Guided example: multi-sensor monitoring scheduler<a class="headerlink" href="#guided-example-multi-sensor-monitoring-scheduler" title="Permanent link">&para;</a></h3>
 <p>A greenhouse monitoring system must coordinate multiple sensors and control loops.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
-from dataclasses import dataclass
-from enum import Enum
-from typing import List, Callable
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Callable</span>
 
-class TaskPriority(Enum):
-    LOW = 1
-    MEDIUM = 2
-    HIGH = 3
-    CRITICAL = 4
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskPriority</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">CRITICAL</span> <span class="o">=</span> <span class="mi">4</span>
 
-@dataclass
-class ScheduledTask:
-    name: str
-    function: Callable
-    priority: TaskPriority
-    frequency_hz: float  # How often to run (times per second)
-    last_run: float = 0
-    execution_time: float = 0  # Average execution time
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ScheduledTask</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">function</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">priority</span><span class="p">:</span> <span class="n">TaskPriority</span>
+    <span class="n">frequency_hz</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># How often to run (times per second)</span>
+    <span class="n">last_run</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">execution_time</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Average execution time</span>
 
-    @property
-    def period(self):
-        &quot;&quot;&quot;Time between executions in seconds&quot;&quot;&quot;
-        return 1.0 / self.frequency_hz
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">period</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Time between executions in seconds&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">frequency_hz</span>
 
-    def is_ready(self, current_time):
-        &quot;&quot;&quot;Check if this task should run now&quot;&quot;&quot;
-        return (current_time - self.last_run) &gt;= self.period
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if this task should run now&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_run</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">period</span>
 
-    def execute(self, current_time):
-        &quot;&quot;&quot;Run the task and record timing&quot;&quot;&quot;
-        start_time = time.time()
-        try:
-            result = self.function()
-            self.last_run = current_time
-            self.execution_time = time.time() - start_time
-            return result
-        except Exception as e:
-            print(f&quot;Task {self.name} failed: {e}&quot;)
-            return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_time</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the task and record timing&quot;&quot;&quot;</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_run</span> <span class="o">=</span> <span class="n">current_time</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">execution_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-class TaskScheduler:
-    def __init__(self):
-        self.tasks: List[ScheduledTask] = []
-        self.running = False
-        self.cycle_count = 0
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskScheduler</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ScheduledTask</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def add_task(self, task: ScheduledTask):
-        &quot;&quot;&quot;Add a task to the scheduler&quot;&quot;&quot;
-        self.tasks.append(task)
-        # Sort by priority (highest first), then by frequency
-        self.tasks.sort(key=lambda t: (-t.priority.value, -t.frequency_hz))
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">ScheduledTask</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a task to the scheduler&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="c1"># Sort by priority (highest first), then by frequency</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">.</span><span class="n">priority</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="o">.</span><span class="n">frequency_hz</span><span class="p">))</span>
 
-    def run_cycle(self):
-        &quot;&quot;&quot;Execute one scheduler cycle&quot;&quot;&quot;
-        current_time = time.time()
-        self.cycle_count += 1
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute one scheduler cycle&quot;&quot;&quot;</span>
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        executed_tasks = []
+        <span class="n">executed_tasks</span> <span class="o">=</span> <span class="p">[]</span>
 
-        # Priority-based scheduling with frequency constraints
-        for task in self.tasks:
-            if task.is_ready(current_time):
-                result = task.execute(current_time)
-                executed_tasks.append({
-                    &#x27;name&#x27;: task.name,
-                    &#x27;priority&#x27;: task.priority.name,
-                    &#x27;execution_time&#x27;: task.execution_time * 1000,  # ms
-                    &#x27;result&#x27;: result
-                })
+        <span class="c1"># Priority-based scheduling with frequency constraints</span>
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">is_ready</span><span class="p">(</span><span class="n">current_time</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">current_time</span><span class="p">)</span>
+                <span class="n">executed_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">priority</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;execution_time&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">execution_time</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span>  <span class="c1"># ms</span>
+                    <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span>
+                <span class="p">})</span>
 
-        return executed_tasks
+        <span class="k">return</span> <span class="n">executed_tasks</span>
 
-    def get_status(self):
-        &quot;&quot;&quot;Get scheduler status and task information&quot;&quot;&quot;
-        current_time = time.time()
-        task_status = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get scheduler status and task information&quot;&quot;&quot;</span>
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">task_status</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for task in self.tasks:
-            time_since_last = current_time - task.last_run
-            time_until_next = max(0, task.period - time_since_last)
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">:</span>
+            <span class="n">time_since_last</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">task</span><span class="o">.</span><span class="n">last_run</span>
+            <span class="n">time_until_next</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">period</span> <span class="o">-</span> <span class="n">time_since_last</span><span class="p">)</span>
 
-            task_status.append({
-                &#x27;name&#x27;: task.name,
-                &#x27;priority&#x27;: task.priority.name,
-                &#x27;frequency&#x27;: task.frequency_hz,
-                &#x27;last_run&#x27;: f&quot;{time_since_last:.2f}s ago&quot;,
-                &#x27;next_run&#x27;: f&quot;{time_until_next:.2f}s&quot;,
-                &#x27;avg_execution&#x27;: f&quot;{task.execution_time * 1000:.1f}ms&quot;
-            })
+            <span class="n">task_status</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">priority</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;frequency&#39;</span><span class="p">:</span> <span class="n">task</span><span class="o">.</span><span class="n">frequency_hz</span><span class="p">,</span>
+                <span class="s1">&#39;last_run&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time_since_last</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s ago&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;next_run&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time_until_next</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;avg_execution&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">execution_time</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">ms&quot;</span>
+            <span class="p">})</span>
 
-        return {
-            &#x27;cycle_count&#x27;: self.cycle_count,
-            &#x27;total_tasks&#x27;: len(self.tasks),
-            &#x27;tasks&#x27;: task_status
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;cycle_count&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycle_count</span><span class="p">,</span>
+            <span class="s1">&#39;total_tasks&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="p">),</span>
+            <span class="s1">&#39;tasks&#39;</span><span class="p">:</span> <span class="n">task_status</span>
+        <span class="p">}</span>
 
-# Greenhouse monitoring system tasks
-class GreenhouseMonitor:
-    def __init__(self):
-        self.temperature = 22.0
-        self.humidity = 65.0
-        self.light_level = 500
-        self.soil_moisture = 0.7
-        self.fan_speed = 0
-        self.heater_power = 0
+<span class="c1"># Greenhouse monitoring system tasks</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GreenhouseMonitor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">22.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">=</span> <span class="mf">65.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">light_level</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_moisture</span> <span class="o">=</span> <span class="mf">0.7</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater_power</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def read_temperature(self):
-        &quot;&quot;&quot;High-frequency temperature monitoring&quot;&quot;&quot;
-        # Simulate sensor reading with small variations
-        import random
-        self.temperature += random.uniform(-0.1, 0.1)
-        return {&#x27;temperature&#x27;: round(self.temperature, 1)}
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;High-frequency temperature monitoring&quot;&quot;&quot;</span>
+        <span class="c1"># Simulate sensor reading with small variations</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">+=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
 
-    def read_humidity(self):
-        &quot;&quot;&quot;Medium-frequency humidity monitoring&quot;&quot;&quot;
-        import random
-        self.humidity += random.uniform(-0.5, 0.5)
-        self.humidity = max(30, min(90, self.humidity))  # Clamp to realistic range
-        return {&#x27;humidity&#x27;: round(self.humidity, 1)}
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_humidity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Medium-frequency humidity monitoring&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">+=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span><span class="p">))</span>  <span class="c1"># Clamp to realistic range</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;humidity&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">humidity</span><span class="p">,</span> <span class="mi">1</span><span class="p">)}</span>
 
-    def control_climate(self):
-        &quot;&quot;&quot;Climate control based on current readings&quot;&quot;&quot;
-        # Simple control logic
-        if self.temperature &lt; 20:
-            self.heater_power = min(100, self.heater_power + 10)
-        elif self.temperature &gt; 25:
-            self.heater_power = max(0, self.heater_power - 10)
+    <span class="k">def</span><span class="w"> </span><span class="nf">control_climate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Climate control based on current readings&quot;&quot;&quot;</span>
+        <span class="c1"># Simple control logic</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heater_power</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heater_power</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heater_power</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heater_power</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
 
-        if self.humidity &gt; 80:
-            self.fan_speed = min(100, self.fan_speed + 20)
-        elif self.humidity &lt; 60:
-            self.fan_speed = max(0, self.fan_speed - 20)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed</span> <span class="o">-</span> <span class="mi">20</span><span class="p">)</span>
 
-        return {
-            &#x27;heater_power&#x27;: self.heater_power,
-            &#x27;fan_speed&#x27;: self.fan_speed
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;heater_power&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">heater_power</span><span class="p">,</span>
+            <span class="s1">&#39;fan_speed&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed</span>
+        <span class="p">}</span>
 
-    def check_soil_moisture(self):
-        &quot;&quot;&quot;Low-frequency soil monitoring&quot;&quot;&quot;
-        import random
-        self.soil_moisture += random.uniform(-0.02, 0.01)
-        self.soil_moisture = max(0.2, min(1.0, self.soil_moisture))
-        return {&#x27;soil_moisture&#x27;: round(self.soil_moisture, 2)}
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_soil_moisture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Low-frequency soil monitoring&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_moisture</span> <span class="o">+=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_moisture</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">soil_moisture</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;soil_moisture&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">soil_moisture</span><span class="p">,</span> <span class="mi">2</span><span class="p">)}</span>
 
-    def safety_check(self):
-        &quot;&quot;&quot;Critical safety monitoring&quot;&quot;&quot;
-        issues = []
-        if self.temperature &gt; 35:
-            issues.append(&quot;TEMPERATURE_TOO_HIGH&quot;)
-        if self.temperature &lt; 5:
-            issues.append(&quot;TEMPERATURE_TOO_LOW&quot;)
-        if self.humidity &gt; 95:
-            issues.append(&quot;HUMIDITY_CRITICAL&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">safety_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Critical safety monitoring&quot;&quot;&quot;</span>
+        <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="mi">35</span><span class="p">:</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;TEMPERATURE_TOO_HIGH&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;TEMPERATURE_TOO_LOW&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">&gt;</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;HUMIDITY_CRITICAL&quot;</span><span class="p">)</span>
 
-        return {&#x27;safety_issues&#x27;: issues}
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;safety_issues&#39;</span><span class="p">:</span> <span class="n">issues</span><span class="p">}</span>
 
-# Create greenhouse monitor and scheduler
-greenhouse = GreenhouseMonitor()
-scheduler = TaskScheduler()
+<span class="c1"># Create greenhouse monitor and scheduler</span>
+<span class="n">greenhouse</span> <span class="o">=</span> <span class="n">GreenhouseMonitor</span><span class="p">()</span>
+<span class="n">scheduler</span> <span class="o">=</span> <span class="n">TaskScheduler</span><span class="p">()</span>
 
-print(&quot;=== Greenhouse Monitoring Scheduler Demo ===&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Greenhouse Monitoring Scheduler Demo ===&quot;</span><span class="p">)</span>
 
-# Add tasks with different priorities and frequencies
-tasks = [
-    ScheduledTask(&quot;Safety Check&quot;, greenhouse.safety_check, TaskPriority.CRITICAL, 10.0),
-    ScheduledTask(&quot;Temperature&quot;, greenhouse.read_temperature, TaskPriority.HIGH, 5.0),
-    ScheduledTask(&quot;Climate Control&quot;, greenhouse.control_climate, TaskPriority.HIGH, 2.0),
-    ScheduledTask(&quot;Humidity&quot;, greenhouse.read_humidity, TaskPriority.MEDIUM, 1.0),
-    ScheduledTask(&quot;Soil Moisture&quot;, greenhouse.check_soil_moisture, TaskPriority.LOW, 0.2)
-]
+<span class="c1"># Add tasks with different priorities and frequencies</span>
+<span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ScheduledTask</span><span class="p">(</span><span class="s2">&quot;Safety Check&quot;</span><span class="p">,</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">safety_check</span><span class="p">,</span> <span class="n">TaskPriority</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span>
+    <span class="n">ScheduledTask</span><span class="p">(</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">read_temperature</span><span class="p">,</span> <span class="n">TaskPriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span>
+    <span class="n">ScheduledTask</span><span class="p">(</span><span class="s2">&quot;Climate Control&quot;</span><span class="p">,</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">control_climate</span><span class="p">,</span> <span class="n">TaskPriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+    <span class="n">ScheduledTask</span><span class="p">(</span><span class="s2">&quot;Humidity&quot;</span><span class="p">,</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">read_humidity</span><span class="p">,</span> <span class="n">TaskPriority</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+    <span class="n">ScheduledTask</span><span class="p">(</span><span class="s2">&quot;Soil Moisture&quot;</span><span class="p">,</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">check_soil_moisture</span><span class="p">,</span> <span class="n">TaskPriority</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="p">]</span>
 
-for task in tasks:
-    scheduler.add_task(task)
+<span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+    <span class="n">scheduler</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
 
-print(&quot;Scheduler configured with tasks:&quot;)
-status = scheduler.get_status()
-for task_info in status[&#x27;tasks&#x27;]:
-    print(f&quot;  {task_info[&#x27;name&#x27;]:15s}: {task_info[&#x27;priority&#x27;]:8s} priority, &quot;
-          f&quot;{task_info[&#x27;frequency&#x27;]:4.1f} Hz&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Scheduler configured with tasks:&quot;</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">scheduler</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">task_info</span> <span class="ow">in</span> <span class="n">status</span><span class="p">[</span><span class="s1">&#39;tasks&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2"> priority, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;frequency&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2"> Hz&quot;</span><span class="p">)</span>
 
-print(&quot;\n=== Running Scheduler Cycles ===&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Running Scheduler Cycles ===&quot;</span><span class="p">)</span>
 
-# Run scheduler for several cycles
-for cycle in range(8):
-    executed = scheduler.run_cycle()
+<span class="c1"># Run scheduler for several cycles</span>
+<span class="k">for</span> <span class="n">cycle</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">executed</span> <span class="o">=</span> <span class="n">scheduler</span><span class="o">.</span><span class="n">run_cycle</span><span class="p">()</span>
 
-    if executed:
-        print(f&quot;\nCycle {cycle + 1}:&quot;)
-        for task_exec in executed:
-            print(f&quot;  {task_exec[&#x27;name&#x27;]:15s}: {task_exec[&#x27;execution_time&#x27;]:5.1f}ms &quot;
-                  f&quot;({task_exec[&#x27;priority&#x27;]} priority)&quot;)
-            if task_exec[&#x27;result&#x27;]:
-                result_str = str(task_exec[&#x27;result&#x27;])[:50]  # Truncate long results
-                print(f&quot;    Result: {result_str}&quot;)
+    <span class="k">if</span> <span class="n">executed</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cycle </span><span class="si">{</span><span class="n">cycle</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">task_exec</span> <span class="ow">in</span> <span class="n">executed</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">task_exec</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">task_exec</span><span class="p">[</span><span class="s1">&#39;execution_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">ms &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">task_exec</span><span class="p">[</span><span class="s1">&#39;priority&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> priority)&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">task_exec</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]:</span>
+                <span class="n">result_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">task_exec</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])[:</span><span class="mi">50</span><span class="p">]</span>  <span class="c1"># Truncate long results</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Result: </span><span class="si">{</span><span class="n">result_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Simulate real-time delays
-    time.sleep(0.15)
+    <span class="c1"># Simulate real-time delays</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
 
-print(&quot;\n=== Final Scheduler Status ===&quot;)
-final_status = scheduler.get_status()
-print(f&quot;Total cycles executed: {final_status[&#x27;cycle_count&#x27;]}&quot;)
-print(&quot;Task execution summary:&quot;)
-for task_info in final_status[&#x27;tasks&#x27;]:
-    print(f&quot;  {task_info[&#x27;name&#x27;]:15s}: last run {task_info[&#x27;last_run&#x27;]}, &quot;
-          f&quot;next in {task_info[&#x27;next_run&#x27;]}, &quot;
-          f&quot;avg time {task_info[&#x27;avg_execution&#x27;]}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Final Scheduler Status ===&quot;</span><span class="p">)</span>
+<span class="n">final_status</span> <span class="o">=</span> <span class="n">scheduler</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total cycles executed: </span><span class="si">{</span><span class="n">final_status</span><span class="p">[</span><span class="s1">&#39;cycle_count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Task execution summary:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">task_info</span> <span class="ow">in</span> <span class="n">final_status</span><span class="p">[</span><span class="s1">&#39;tasks&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: last run </span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;last_run&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;next in </span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;next_run&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;avg time </span><span class="si">{</span><span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;avg_execution&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2593,6 +2593,8 @@ for task_info in final_status[&#x27;tasks&#x27;]:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

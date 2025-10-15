@@ -5624,14 +5624,14 @@ d) Random task distribution</p>
 <h3 id="section-d-code-analysis">Section D: Code Analysis<a class="headerlink" href="#section-d-code-analysis" title="Permanent link">&para;</a></h3>
 <p><strong>Question 14</strong>: Examine this code snippet from the BPA orchestration engine:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">async def execute_workflow_step(self, instance_id: str, step_name: str):
-    instance = self.process_instances.get(instance_id)
-    if not instance:
-        raise ValueError(f&quot;Process instance {instance_id} not found&quot;)
+<pre><code class="language-python"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">execute_workflow_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_instances</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instance_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">instance</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Process instance </span><span class="si">{</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
 
-    step = instance.workflow.steps.get(step_name)
-    if not step:
-        raise ValueError(f&quot;Step {step_name} not found&quot;)
+    <span class="n">step</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">step_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">step</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step_name</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <p>a) What design pattern is being used for error handling?
@@ -5951,6 +5951,8 @@ c) How does the salt contribute to security?</p>
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

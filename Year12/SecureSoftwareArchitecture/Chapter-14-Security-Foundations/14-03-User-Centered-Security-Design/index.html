@@ -2331,58 +2331,58 @@
 </ul>
 <h3 id="implementation-with-user-centered-features">Implementation with User-Centered Features<a class="headerlink" href="#implementation-with-user-centered-features" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ProgressiveAuth:
-    def __init__(self):
-        self.security_levels = {
-            &#x27;status_check&#x27;: 1,
-            &#x27;document_upload&#x27;: 2,
-            &#x27;final_submission&#x27;: 3
-        }
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ProgressiveAuth</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">security_levels</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;status_check&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;document_upload&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;final_submission&#39;</span><span class="p">:</span> <span class="mi">3</span>
+        <span class="p">}</span>
 
-    def authenticate_user(self, username, action, auth_data):
-        &quot;&quot;&quot;Authenticate user based on action risk level&quot;&quot;&quot;
-        required_level = self.security_levels.get(action, 1)
+    <span class="k">def</span><span class="w"> </span><span class="nf">authenticate_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">auth_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Authenticate user based on action risk level&quot;&quot;&quot;</span>
+        <span class="n">required_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">security_levels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-        # Level 1: Basic authentication
-        if required_level &gt;= 1:
-            if not self.verify_credentials(username, auth_data.get(&#x27;password&#x27;)):
-                return {
-                    &#x27;success&#x27;: False,
-                    &#x27;message&#x27;: &quot;Please check your username and password&quot;,
-                    &#x27;help_link&#x27;: &quot;/password-reset&quot;,
-                    &#x27;friendly_error&#x27;: True
-                }
+        <span class="c1"># Level 1: Basic authentication</span>
+        <span class="k">if</span> <span class="n">required_level</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_credentials</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">auth_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s2">&quot;Please check your username and password&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;help_link&#39;</span><span class="p">:</span> <span class="s2">&quot;/password-reset&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;friendly_error&#39;</span><span class="p">:</span> <span class="kc">True</span>
+                <span class="p">}</span>
 
-        # Level 2: Additional verification
-        if required_level &gt;= 2:
-            if not self.verify_sms_code(username, auth_data.get(&#x27;sms_code&#x27;)):
-                return {
-                    &#x27;success&#x27;: False,
-                    &#x27;message&#x27;: &quot;Please enter the code sent to your phone&quot;,
-                    &#x27;resend_option&#x27;: True,
-                    &#x27;alternative_methods&#x27;: [&quot;email&quot;, &quot;phone_call&quot;]
-                }
+        <span class="c1"># Level 2: Additional verification</span>
+        <span class="k">if</span> <span class="n">required_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_sms_code</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">auth_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sms_code&#39;</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s2">&quot;Please enter the code sent to your phone&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;resend_option&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s1">&#39;alternative_methods&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;phone_call&quot;</span><span class="p">]</span>
+                <span class="p">}</span>
 
-        # Level 3: High-security verification
-        if required_level &gt;= 3:
-            if not self.verify_additional_factor(username, auth_data):
-                return {
-                    &#x27;success&#x27;: False,
-                    &#x27;message&#x27;: &quot;Additional verification required for final submission&quot;,
-                    &#x27;explanation&#x27;: &quot;This protects your financial information&quot;,
-                    &#x27;support_contact&#x27;: &quot;1-800-HELP-AID&quot;
-                }
+        <span class="c1"># Level 3: High-security verification</span>
+        <span class="k">if</span> <span class="n">required_level</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">verify_additional_factor</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">auth_data</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">{</span>
+                    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s2">&quot;Additional verification required for final submission&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;explanation&#39;</span><span class="p">:</span> <span class="s2">&quot;This protects your financial information&quot;</span><span class="p">,</span>
+                    <span class="s1">&#39;support_contact&#39;</span><span class="p">:</span> <span class="s2">&quot;1-800-HELP-AID&quot;</span>
+                <span class="p">}</span>
 
-        return {&#x27;success&#x27;: True, &#x27;session_token&#x27;: self.create_session(username)}
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;session_token&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">username</span><span class="p">)}</span>
 
-    def provide_security_feedback(self, user_session):
-        &quot;&quot;&quot;Give users transparency about their security status&quot;&quot;&quot;
-        return {
-            &#x27;protection_level&#x27;: &#x27;High security active&#x27;,
-            &#x27;last_login&#x27;: user_session.last_login,
-            &#x27;unusual_activity&#x27;: self.check_for_anomalies(user_session),
-            &#x27;security_tips&#x27;: self.get_contextual_tips(user_session)
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">provide_security_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_session</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Give users transparency about their security status&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;protection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;High security active&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;last_login&#39;</span><span class="p">:</span> <span class="n">user_session</span><span class="o">.</span><span class="n">last_login</span><span class="p">,</span>
+            <span class="s1">&#39;unusual_activity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_for_anomalies</span><span class="p">(</span><span class="n">user_session</span><span class="p">),</span>
+            <span class="s1">&#39;security_tips&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_contextual_tips</span><span class="p">(</span><span class="n">user_session</span><span class="p">)</span>
+        <span class="p">}</span>
 </code></pre>
 </div>
 <h3 id="user-testing-results-and-iterations">User Testing Results and Iterations<a class="headerlink" href="#user-testing-results-and-iterations" title="Permanent link">&para;</a></h3>
@@ -2998,6 +2998,8 @@
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

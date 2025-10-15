@@ -1626,525 +1626,525 @@
 <h3 id="guided-example-temperature-control-system-testing">Guided example: temperature control system testing<a class="headerlink" href="#guided-example-temperature-control-system-testing" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s test a temperature control system that manages heating based on sensor readings and safety limits.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># temperature_controller.py - The system under test
-class TemperatureController:
-    def __init__(self, sensor, heater, safety_limit=80.0):
-        self.sensor = sensor
-        self.heater = heater
-        self.safety_limit = safety_limit
-        self.target_temperature = 20.0
-        self.is_enabled = False
+<pre><code class="language-python"><span class="c1"># temperature_controller.py - The system under test</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TemperatureController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">heater</span><span class="p">,</span> <span class="n">safety_limit</span><span class="o">=</span><span class="mf">80.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span> <span class="o">=</span> <span class="n">heater</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_limit</span> <span class="o">=</span> <span class="n">safety_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="mf">20.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_enabled</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def set_target(self, temperature):
-        &quot;&quot;&quot;Set the target temperature&quot;&quot;&quot;
-        if 10 &lt;= temperature &lt;= 70:
-            self.target_temperature = temperature
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the target temperature&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="mi">10</span> <span class="o">&lt;=</span> <span class="n">temperature</span> <span class="o">&lt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="n">temperature</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def enable(self):
-        &quot;&quot;&quot;Enable the controller&quot;&quot;&quot;
-        self.is_enabled = True
+    <span class="k">def</span><span class="w"> </span><span class="nf">enable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enable the controller&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_enabled</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def disable(self):
-        &quot;&quot;&quot;Disable the controller&quot;&quot;&quot;
-        self.is_enabled = False
-        self.heater.set_power(0)  # Ensure heater is off
+    <span class="k">def</span><span class="w"> </span><span class="nf">disable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Disable the controller&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">set_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Ensure heater is off</span>
 
-    def update(self):
-        &quot;&quot;&quot;Main control loop - call regularly&quot;&quot;&quot;
-        if not self.is_enabled:
-            return
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main control loop - call regularly&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">:</span>
+            <span class="k">return</span>
 
-        # Read current temperature
-        current_temp = self.sensor.read_temperature()
+        <span class="c1"># Read current temperature</span>
+        <span class="n">current_temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">read_temperature</span><span class="p">()</span>
 
-        # Safety check - emergency shutdown if too hot
-        if current_temp &gt;= self.safety_limit:
-            self.disable()
-            raise SafetyException(f&quot;Temperature {current_temp}°C exceeds safety limit {self.safety_limit}°C&quot;)
+        <span class="c1"># Safety check - emergency shutdown if too hot</span>
+        <span class="k">if</span> <span class="n">current_temp</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_limit</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="n">SafetyException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature </span><span class="si">{</span><span class="n">current_temp</span><span class="si">}</span><span class="s2">°C exceeds safety limit </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">safety_limit</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 
-        # Simple proportional control
-        error = self.target_temperature - current_temp
+        <span class="c1"># Simple proportional control</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">-</span> <span class="n">current_temp</span>
 
-        if error &gt; 0:  # Need heating
-            power = min(100, error * 10)  # Proportional gain of 10
-            self.heater.set_power(power)
-        else:  # Too hot or at target
-            self.heater.set_power(0)
+        <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Need heating</span>
+            <span class="n">power</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">error</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Proportional gain of 10</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">set_power</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># Too hot or at target</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">set_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-    def get_status(self):
-        &quot;&quot;&quot;Get current system status&quot;&quot;&quot;
-        return {
-            &#x27;enabled&#x27;: self.is_enabled,
-            &#x27;target&#x27;: self.target_temperature,
-            &#x27;current&#x27;: self.sensor.read_temperature(),
-            &#x27;heater_power&#x27;: self.heater.get_power()
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current system status&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;enabled&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">,</span>
+            <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span><span class="p">,</span>
+            <span class="s1">&#39;current&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">read_temperature</span><span class="p">(),</span>
+            <span class="s1">&#39;heater_power&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">()</span>
+        <span class="p">}</span>
 
-class SafetyException(Exception):
-    &quot;&quot;&quot;Raised when safety limits are exceeded&quot;&quot;&quot;
-    pass
+<span class="k">class</span><span class="w"> </span><span class="nc">SafetyException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when safety limits are exceeded&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
 </code></pre>
 </div>
 <p>Now let&rsquo;s create test fixtures for the sensor and heater:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># test_fixtures.py - Mock devices for testing
-class MockTemperatureSensor:
-    def __init__(self, initial_temperature=20.0):
-        self._temperature = initial_temperature
-        self._noise_level = 0.0
-        self._failure_mode = None
+<pre><code class="language-python"><span class="c1"># test_fixtures.py - Mock devices for testing</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MockTemperatureSensor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_temperature</span><span class="o">=</span><span class="mf">20.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temperature</span> <span class="o">=</span> <span class="n">initial_temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_noise_level</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def read_temperature(self):
-        &quot;&quot;&quot;Read temperature with optional noise and failure simulation&quot;&quot;&quot;
-        if self._failure_mode == &quot;disconnected&quot;:
-            raise ConnectionError(&quot;Sensor disconnected&quot;)
-        elif self._failure_mode == &quot;invalid_reading&quot;:
-            return float(&#x27;nan&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read temperature with optional noise and failure simulation&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">==</span> <span class="s2">&quot;disconnected&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Sensor disconnected&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">==</span> <span class="s2">&quot;invalid_reading&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
 
-        # Add noise if configured
-        import random
-        noise = random.uniform(-self._noise_level, self._noise_level)
-        return self._temperature + noise
+        <span class="c1"># Add noise if configured</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_noise_level</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_noise_level</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temperature</span> <span class="o">+</span> <span class="n">noise</span>
 
-    def set_temperature(self, temperature):
-        &quot;&quot;&quot;Set the simulated temperature (for testing)&quot;&quot;&quot;
-        self._temperature = temperature
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the simulated temperature (for testing)&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temperature</span> <span class="o">=</span> <span class="n">temperature</span>
 
-    def add_noise(self, noise_level):
-        &quot;&quot;&quot;Add random noise to readings&quot;&quot;&quot;
-        self._noise_level = noise_level
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">noise_level</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add random noise to readings&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_noise_level</span> <span class="o">=</span> <span class="n">noise_level</span>
 
-    def simulate_failure(self, failure_type):
-        &quot;&quot;&quot;Simulate sensor failures&quot;&quot;&quot;
-        self._failure_mode = failure_type
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failure_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate sensor failures&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">=</span> <span class="n">failure_type</span>
 
-    def clear_failure(self):
-        &quot;&quot;&quot;Clear simulated failures&quot;&quot;&quot;
-        self._failure_mode = None
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear simulated failures&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">=</span> <span class="kc">None</span>
 
-class MockHeater:
-    def __init__(self):
-        self._power = 0.0
-        self._total_energy = 0.0
-        self._failure_mode = None
+<span class="k">class</span><span class="w"> </span><span class="nc">MockHeater</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_power</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_total_energy</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def set_power(self, power_percentage):
-        &quot;&quot;&quot;Set heater power (0-100%)&quot;&quot;&quot;
-        if self._failure_mode == &quot;stuck_on&quot;:
-            return  # Ignore commands when stuck
-        elif self._failure_mode == &quot;no_response&quot;:
-            raise ConnectionError(&quot;Heater not responding&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power_percentage</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set heater power (0-100%)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">==</span> <span class="s2">&quot;stuck_on&quot;</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Ignore commands when stuck</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">==</span> <span class="s2">&quot;no_response&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Heater not responding&quot;</span><span class="p">)</span>
 
-        self._power = max(0, min(100, power_percentage))
+        <span class="bp">self</span><span class="o">.</span><span class="n">_power</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">power_percentage</span><span class="p">))</span>
 
-    def get_power(self):
-        &quot;&quot;&quot;Get current power setting&quot;&quot;&quot;
-        return self._power
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_power</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current power setting&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_power</span>
 
-    def get_total_energy(self):
-        &quot;&quot;&quot;Get total energy consumed (for testing efficiency)&quot;&quot;&quot;
-        return self._total_energy
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_total_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get total energy consumed (for testing efficiency)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_energy</span>
 
-    def simulate_failure(self, failure_type):
-        &quot;&quot;&quot;Simulate heater failures&quot;&quot;&quot;
-        self._failure_mode = failure_type
-        if failure_type == &quot;stuck_on&quot;:
-            self._power = 100.0  # Stuck at full power
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failure_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate heater failures&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">=</span> <span class="n">failure_type</span>
+        <span class="k">if</span> <span class="n">failure_type</span> <span class="o">==</span> <span class="s2">&quot;stuck_on&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_power</span> <span class="o">=</span> <span class="mf">100.0</span>  <span class="c1"># Stuck at full power</span>
 
-    def clear_failure(self):
-        &quot;&quot;&quot;Clear simulated failures&quot;&quot;&quot;
-        self._failure_mode = None
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear simulated failures&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_failure_mode</span> <span class="o">=</span> <span class="kc">None</span>
 </code></pre>
 </div>
 <h3 id="comprehensive-unit-tests">Comprehensive unit tests<a class="headerlink" href="#comprehensive-unit-tests" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># test_temperature_controller.py - Unit tests using fixtures
-import unittest
-from temperature_controller import TemperatureController, SafetyException
-from test_fixtures import MockTemperatureSensor, MockHeater
+<pre><code class="language-python"><span class="c1"># test_temperature_controller.py - Unit tests using fixtures</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">temperature_controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemperatureController</span><span class="p">,</span> <span class="n">SafetyException</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">test_fixtures</span><span class="w"> </span><span class="kn">import</span> <span class="n">MockTemperatureSensor</span><span class="p">,</span> <span class="n">MockHeater</span>
 
-class TestTemperatureController(unittest.TestCase):
-    def setUp(self):
-        &quot;&quot;&quot;Set up test fixtures before each test&quot;&quot;&quot;
-        self.sensor = MockTemperatureSensor(initial_temperature=20.0)
-        self.heater = MockHeater()
-        self.controller = TemperatureController(self.sensor, self.heater)
+<span class="k">class</span><span class="w"> </span><span class="nc">TestTemperatureController</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up test fixtures before each test&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">MockTemperatureSensor</span><span class="p">(</span><span class="n">initial_temperature</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span> <span class="o">=</span> <span class="n">MockHeater</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">TemperatureController</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="p">)</span>
 
-    def test_initial_state(self):
-        &quot;&quot;&quot;Test controller starts in correct initial state&quot;&quot;&quot;
-        status = self.controller.get_status()
-        self.assertFalse(status[&#x27;enabled&#x27;])
-        self.assertEqual(status[&#x27;target&#x27;], 20.0)
-        self.assertEqual(status[&#x27;current&#x27;], 20.0)
-        self.assertEqual(status[&#x27;heater_power&#x27;], 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_initial_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test controller starts in correct initial state&quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;enabled&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">],</span> <span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">],</span> <span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">status</span><span class="p">[</span><span class="s1">&#39;heater_power&#39;</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_target_temperature_validation(self):
-        &quot;&quot;&quot;Test target temperature range validation&quot;&quot;&quot;
-        # Valid temperatures should be accepted
-        self.assertTrue(self.controller.set_target(25.0))
-        self.assertEqual(self.controller.target_temperature, 25.0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_target_temperature_validation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test target temperature range validation&quot;&quot;&quot;</span>
+        <span class="c1"># Valid temperatures should be accepted</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">25.0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">target_temperature</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">)</span>
 
-        # Invalid temperatures should be rejected
-        self.assertFalse(self.controller.set_target(5.0))   # Too low
-        self.assertFalse(self.controller.set_target(80.0))  # Too high
-        self.assertEqual(self.controller.target_temperature, 25.0)  # Unchanged
+        <span class="c1"># Invalid temperatures should be rejected</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">5.0</span><span class="p">))</span>   <span class="c1"># Too low</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">80.0</span><span class="p">))</span>  <span class="c1"># Too high</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">target_temperature</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">)</span>  <span class="c1"># Unchanged</span>
 
-    def test_enable_disable(self):
-        &quot;&quot;&quot;Test controller enable/disable functionality&quot;&quot;&quot;
-        # Start disabled
-        self.assertFalse(self.controller.is_enabled)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_enable_disable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test controller enable/disable functionality&quot;&quot;&quot;</span>
+        <span class="c1"># Start disabled</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">)</span>
 
-        # Enable
-        self.controller.enable()
-        self.assertTrue(self.controller.is_enabled)
+        <span class="c1"># Enable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">)</span>
 
-        # Disable should turn off heater
-        self.heater.set_power(50)  # Set some power
-        self.controller.disable()
-        self.assertFalse(self.controller.is_enabled)
-        self.assertEqual(self.heater.get_power(), 0)
+        <span class="c1"># Disable should turn off heater</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">set_power</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>  <span class="c1"># Set some power</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">disable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_heating_control(self):
-        &quot;&quot;&quot;Test proportional heating control&quot;&quot;&quot;
-        self.controller.set_target(30.0)
-        self.sensor.set_temperature(20.0)  # 10°C below target
-        self.controller.enable()
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_heating_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test proportional heating control&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># 10°C below target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-        self.controller.update()
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        # Should apply proportional heating (error * 10)
-        expected_power = 10 * 10  # 10°C error * gain of 10
-        self.assertEqual(self.heater.get_power(), min(100, expected_power))
+        <span class="c1"># Should apply proportional heating (error * 10)</span>
+        <span class="n">expected_power</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">10</span>  <span class="c1"># 10°C error * gain of 10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">expected_power</span><span class="p">))</span>
 
-    def test_no_heating_when_at_target(self):
-        &quot;&quot;&quot;Test heater turns off when at target temperature&quot;&quot;&quot;
-        self.controller.set_target(25.0)
-        self.sensor.set_temperature(25.0)
-        self.controller.enable()
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_no_heating_when_at_target</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test heater turns off when at target temperature&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-        self.controller.update()
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        self.assertEqual(self.heater.get_power(), 0)
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_no_heating_when_too_hot(self):
-        &quot;&quot;&quot;Test heater turns off when above target&quot;&quot;&quot;
-        self.controller.set_target(25.0)
-        self.sensor.set_temperature(30.0)  # Above target
-        self.controller.enable()
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_no_heating_when_too_hot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test heater turns off when above target&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>  <span class="c1"># Above target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-        self.controller.update()
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        self.assertEqual(self.heater.get_power(), 0)
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_safety_limit_enforcement(self):
-        &quot;&quot;&quot;Test emergency shutdown at safety limit&quot;&quot;&quot;
-        self.controller.set_target(30.0)
-        self.controller.enable()
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_safety_limit_enforcement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test emergency shutdown at safety limit&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-        # Simulate temperature exceeding safety limit
-        self.sensor.set_temperature(85.0)
+        <span class="c1"># Simulate temperature exceeding safety limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">85.0</span><span class="p">)</span>
 
-        with self.assertRaises(SafetyException) as context:
-            self.controller.update()
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">SafetyException</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        # Controller should be disabled and heater off
-        self.assertFalse(self.controller.is_enabled)
-        self.assertEqual(self.heater.get_power(), 0)
-        self.assertIn(&quot;safety limit&quot;, str(context.exception))
+        <span class="c1"># Controller should be disabled and heater off</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;safety limit&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">))</span>
 
-    def test_disabled_controller_ignores_updates(self):
-        &quot;&quot;&quot;Test disabled controller doesn&#x27;t control heater&quot;&quot;&quot;
-        self.controller.set_target(40.0)
-        self.sensor.set_temperature(20.0)
-        # Keep controller disabled
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_disabled_controller_ignores_updates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test disabled controller doesn&#39;t control heater&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">40.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">20.0</span><span class="p">)</span>
+        <span class="c1"># Keep controller disabled</span>
 
-        self.controller.update()
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        self.assertEqual(self.heater.get_power(), 0)
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_power_limiting(self):
-        &quot;&quot;&quot;Test heater power is limited to 100%&quot;&quot;&quot;
-        self.controller.set_target(50.0)
-        self.sensor.set_temperature(10.0)  # Large error
-        self.controller.enable()
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_power_limiting</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test heater power is limited to 100%&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>  <span class="c1"># Large error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-        self.controller.update()
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        # Even with large error, power should not exceed 100%
-        self.assertEqual(self.heater.get_power(), 100)
+        <span class="c1"># Even with large error, power should not exceed 100%</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
 
-class TestTemperatureControllerWithFailures(unittest.TestCase):
-    &quot;&quot;&quot;Test controller behaviour with simulated device failures&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">TestTemperatureControllerWithFailures</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test controller behaviour with simulated device failures&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        self.sensor = MockTemperatureSensor(initial_temperature=20.0)
-        self.heater = MockHeater()
-        self.controller = TemperatureController(self.sensor, self.heater)
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">MockTemperatureSensor</span><span class="p">(</span><span class="n">initial_temperature</span><span class="o">=</span><span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span> <span class="o">=</span> <span class="n">MockHeater</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span> <span class="o">=</span> <span class="n">TemperatureController</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="p">)</span>
 
-    def test_sensor_disconnection(self):
-        &quot;&quot;&quot;Test handling of sensor connection failure&quot;&quot;&quot;
-        self.controller.enable()
-        self.sensor.simulate_failure(&quot;disconnected&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_sensor_disconnection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of sensor connection failure&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">simulate_failure</span><span class="p">(</span><span class="s2">&quot;disconnected&quot;</span><span class="p">)</span>
 
-        with self.assertRaises(ConnectionError):
-            self.controller.update()
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ConnectionError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-    def test_sensor_invalid_reading(self):
-        &quot;&quot;&quot;Test handling of invalid sensor data&quot;&quot;&quot;
-        self.controller.enable()
-        self.sensor.simulate_failure(&quot;invalid_reading&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_sensor_invalid_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test handling of invalid sensor data&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">simulate_failure</span><span class="p">(</span><span class="s2">&quot;invalid_reading&quot;</span><span class="p">)</span>
 
-        # Controller should handle NaN readings gracefully
-        # Implementation detail: this might raise an exception or use a default
-        with self.assertRaises((ValueError, TypeError)):
-            self.controller.update()
+        <span class="c1"># Controller should handle NaN readings gracefully</span>
+        <span class="c1"># Implementation detail: this might raise an exception or use a default</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">((</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-    def test_heater_failure(self):
-        &quot;&quot;&quot;Test detection of heater communication failure&quot;&quot;&quot;
-        self.controller.set_target(30.0)
-        self.controller.enable()
-        self.heater.simulate_failure(&quot;no_response&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_heater_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test detection of heater communication failure&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">simulate_failure</span><span class="p">(</span><span class="s2">&quot;no_response&quot;</span><span class="p">)</span>
 
-        with self.assertRaises(ConnectionError):
-            self.controller.update()
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ConnectionError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-    def test_sensor_noise_handling(self):
-        &quot;&quot;&quot;Test controller stability with noisy sensor readings&quot;&quot;&quot;
-        self.controller.set_target(25.0)
-        self.controller.enable()
-        self.sensor.add_noise(0.5)  # ±0.5°C noise
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_sensor_noise_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test controller stability with noisy sensor readings&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">add_noise</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># ±0.5°C noise</span>
 
-        # Run multiple updates with noise
-        power_readings = []
-        for _ in range(10):
-            self.sensor.set_temperature(24.0)  # Slightly below target
-            self.controller.update()
-            power_readings.append(self.heater.get_power())
+        <span class="c1"># Run multiple updates with noise</span>
+        <span class="n">power_readings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="mf">24.0</span><span class="p">)</span>  <span class="c1"># Slightly below target</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+            <span class="n">power_readings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">())</span>
 
-        # Power should be generally consistent despite noise
-        avg_power = sum(power_readings) / len(power_readings)
-        self.assertGreater(avg_power, 5)  # Should be heating
-        self.assertLess(avg_power, 20)    # But not too much
+        <span class="c1"># Power should be generally consistent despite noise</span>
+        <span class="n">avg_power</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">power_readings</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">power_readings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertGreater</span><span class="p">(</span><span class="n">avg_power</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Should be heating</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertLess</span><span class="p">(</span><span class="n">avg_power</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>    <span class="c1"># But not too much</span>
 
-# Test runner
-if __name__ == &#x27;__main__&#x27;:
-    # Run all tests
-    unittest.main(verbosity=2)
+<span class="c1"># Test runner</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c1"># Run all tests</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">verbosity</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="testability-patterns">Testability patterns<a class="headerlink" href="#testability-patterns" title="Permanent link">&para;</a></h3>
 <p>Designing systems for testability requires specific architectural patterns that separate concerns and enable dependency injection.</p>
 <h4 id="dependency-injection-pattern">Dependency injection pattern<a class="headerlink" href="#dependency-injection-pattern" title="Permanent link">&para;</a></h4>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class RobotArm:
-    &quot;&quot;&quot;Example of dependency injection for testability&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">RobotArm</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example of dependency injection for testability&quot;&quot;&quot;</span>
 
-    def __init__(self, motor_controller, position_sensor, safety_monitor):
-        # Dependencies injected at construction
-        self.motor = motor_controller
-        self.sensor = position_sensor
-        self.safety = safety_monitor
-        self.current_position = 0.0
-        self.target_position = 0.0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motor_controller</span><span class="p">,</span> <span class="n">position_sensor</span><span class="p">,</span> <span class="n">safety_monitor</span><span class="p">):</span>
+        <span class="c1"># Dependencies injected at construction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">motor_controller</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">position_sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety</span> <span class="o">=</span> <span class="n">safety_monitor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    def move_to(self, target_position):
-        &quot;&quot;&quot;Move arm to target position with safety checks&quot;&quot;&quot;
-        if not self.safety.is_position_safe(target_position):
-            raise SafetyException(f&quot;Target position {target_position} is not safe&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_position</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move arm to target position with safety checks&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety</span><span class="o">.</span><span class="n">is_position_safe</span><span class="p">(</span><span class="n">target_position</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">SafetyException</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target position </span><span class="si">{</span><span class="n">target_position</span><span class="si">}</span><span class="s2"> is not safe&quot;</span><span class="p">)</span>
 
-        self.target_position = target_position
-        self._execute_move()
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="n">target_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_execute_move</span><span class="p">()</span>
 
-    def _execute_move(self):
-        &quot;&quot;&quot;Internal move execution logic&quot;&quot;&quot;
-        self.current_position = self.sensor.read_position()
-        error = self.target_position - self.current_position
+    <span class="k">def</span><span class="w"> </span><span class="nf">_execute_move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal move execution logic&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">read_position</span><span class="p">()</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span>
 
-        if abs(error) &lt; 0.1:  # Close enough
-            self.motor.stop()
-        elif error &gt; 0:
-            self.motor.move_forward(min(100, abs(error) * 50))
-        else:
-            self.motor.move_backward(min(100, abs(error) * 50))
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>  <span class="c1"># Close enough</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">move_forward</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">move_backward</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">*</span> <span class="mi">50</span><span class="p">))</span>
 
-# Mock implementations for testing
-class MockMotorController:
-    def __init__(self):
-        self.current_command = &quot;stop&quot;
-        self.power_level = 0
+<span class="c1"># Mock implementations for testing</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MockMotorController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_command</span> <span class="o">=</span> <span class="s2">&quot;stop&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_level</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def move_forward(self, power):
-        self.current_command = &quot;forward&quot;
-        self.power_level = power
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_command</span> <span class="o">=</span> <span class="s2">&quot;forward&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_level</span> <span class="o">=</span> <span class="n">power</span>
 
-    def move_backward(self, power):
-        self.current_command = &quot;backward&quot;
-        self.power_level = power
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_command</span> <span class="o">=</span> <span class="s2">&quot;backward&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_level</span> <span class="o">=</span> <span class="n">power</span>
 
-    def stop(self):
-        self.current_command = &quot;stop&quot;
-        self.power_level = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_command</span> <span class="o">=</span> <span class="s2">&quot;stop&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_level</span> <span class="o">=</span> <span class="mi">0</span>
 
-class MockPositionSensor:
-    def __init__(self, position=0.0):
-        self._position = position
+<span class="k">class</span><span class="w"> </span><span class="nc">MockPositionSensor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_position</span> <span class="o">=</span> <span class="n">position</span>
 
-    def read_position(self):
-        return self._position
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_position</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_position</span>
 
-    def set_position(self, position):
-        self._position = position
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_position</span> <span class="o">=</span> <span class="n">position</span>
 
-class MockSafetyMonitor:
-    def __init__(self):
-        self.safe_range = (-100, 100)
+<span class="k">class</span><span class="w"> </span><span class="nc">MockSafetyMonitor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safe_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-    def is_position_safe(self, position):
-        return self.safe_range[0] &lt;= position &lt;= self.safe_range[1]
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_position_safe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">safe_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">position</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safe_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-    def set_safe_range(self, min_pos, max_pos):
-        self.safe_range = (min_pos, max_pos)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_safe_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_pos</span><span class="p">,</span> <span class="n">max_pos</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safe_range</span> <span class="o">=</span> <span class="p">(</span><span class="n">min_pos</span><span class="p">,</span> <span class="n">max_pos</span><span class="p">)</span>
 
-# Test using dependency injection
-def test_robot_arm_movement():
-    &quot;&quot;&quot;Test robot arm with injected mock dependencies&quot;&quot;&quot;
-    motor = MockMotorController()
-    sensor = MockPositionSensor(position=10.0)
-    safety = MockSafetyMonitor()
+<span class="c1"># Test using dependency injection</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_robot_arm_movement</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test robot arm with injected mock dependencies&quot;&quot;&quot;</span>
+    <span class="n">motor</span> <span class="o">=</span> <span class="n">MockMotorController</span><span class="p">()</span>
+    <span class="n">sensor</span> <span class="o">=</span> <span class="n">MockPositionSensor</span><span class="p">(</span><span class="n">position</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+    <span class="n">safety</span> <span class="o">=</span> <span class="n">MockSafetyMonitor</span><span class="p">()</span>
 
-    arm = RobotArm(motor, sensor, safety)
+    <span class="n">arm</span> <span class="o">=</span> <span class="n">RobotArm</span><span class="p">(</span><span class="n">motor</span><span class="p">,</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">safety</span><span class="p">)</span>
 
-    # Test normal movement
-    arm.move_to(20.0)
-    assert motor.current_command == &quot;forward&quot;
-    assert motor.power_level &gt; 0
+    <span class="c1"># Test normal movement</span>
+    <span class="n">arm</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mf">20.0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">motor</span><span class="o">.</span><span class="n">current_command</span> <span class="o">==</span> <span class="s2">&quot;forward&quot;</span>
+    <span class="k">assert</span> <span class="n">motor</span><span class="o">.</span><span class="n">power_level</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
-    # Test safety limits
-    safety.set_safe_range(-50, 50)
-    try:
-        arm.move_to(100.0)  # Outside safe range
-        assert False, &quot;Should have raised SafetyException&quot;
-    except SafetyException:
-        pass  # Expected
+    <span class="c1"># Test safety limits</span>
+    <span class="n">safety</span><span class="o">.</span><span class="n">set_safe_range</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">arm</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>  <span class="c1"># Outside safe range</span>
+        <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Should have raised SafetyException&quot;</span>
+    <span class="k">except</span> <span class="n">SafetyException</span><span class="p">:</span>
+        <span class="k">pass</span>  <span class="c1"># Expected</span>
 </code></pre>
 </div>
 <h3 id="integration-testing-with-fixture-orchestration">Integration testing with fixture orchestration<a class="headerlink" href="#integration-testing-with-fixture-orchestration" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># test_system_integration.py - Testing multiple subsystems together
-class GreenhouseIntegrationTest(unittest.TestCase):
-    &quot;&quot;&quot;Integration tests using multiple coordinated fixtures&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># test_system_integration.py - Testing multiple subsystems together</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GreenhouseIntegrationTest</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integration tests using multiple coordinated fixtures&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        # Create an integrated mock environment
-        self.environment = MockGreenhouseEnvironment()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Create an integrated mock environment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">MockGreenhouseEnvironment</span><span class="p">()</span>
 
-        # Create subsystem fixtures
-        self.temp_sensor = MockTemperatureSensor(20.0)
-        self.humidity_sensor = MockHumiditySensor(60.0)
-        self.fan = MockFan()
-        self.heater = MockHeater()
+        <span class="c1"># Create subsystem fixtures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor</span> <span class="o">=</span> <span class="n">MockTemperatureSensor</span><span class="p">(</span><span class="mf">20.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity_sensor</span> <span class="o">=</span> <span class="n">MockHumiditySensor</span><span class="p">(</span><span class="mf">60.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fan</span> <span class="o">=</span> <span class="n">MockFan</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heater</span> <span class="o">=</span> <span class="n">MockHeater</span><span class="p">()</span>
 
-        # Connect fixtures to environment
-        self.environment.add_sensor(self.temp_sensor)
-        self.environment.add_sensor(self.humidity_sensor)
-        self.environment.add_actuator(self.fan)
-        self.environment.add_actuator(self.heater)
+        <span class="c1"># Connect fixtures to environment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">humidity_sensor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">add_actuator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fan</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">add_actuator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="p">)</span>
 
-        # Create system under test
-        self.greenhouse_controller = GreenhouseController(
-            temp_sensor=self.temp_sensor,
-            humidity_sensor=self.humidity_sensor,
-            fan=self.fan,
-            heater=self.heater
-        )
+        <span class="c1"># Create system under test</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span> <span class="o">=</span> <span class="n">GreenhouseController</span><span class="p">(</span>
+            <span class="n">temp_sensor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor</span><span class="p">,</span>
+            <span class="n">humidity_sensor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">humidity_sensor</span><span class="p">,</span>
+            <span class="n">fan</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fan</span><span class="p">,</span>
+            <span class="n">heater</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span>
+        <span class="p">)</span>
 
-    def test_coordinated_climate_control(self):
-        &quot;&quot;&quot;Test temperature and humidity control working together&quot;&quot;&quot;
-        # Set targets
-        self.greenhouse_controller.set_temperature_target(25.0)
-        self.greenhouse_controller.set_humidity_target(70.0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_coordinated_climate_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test temperature and humidity control working together&quot;&quot;&quot;</span>
+        <span class="c1"># Set targets</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">set_temperature_target</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">set_humidity_target</span><span class="p">(</span><span class="mf">70.0</span><span class="p">)</span>
 
-        # Simulate hot, dry conditions
-        self.environment.set_conditions(temperature=30.0, humidity=40.0)
+        <span class="c1"># Simulate hot, dry conditions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">set_conditions</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">humidity</span><span class="o">=</span><span class="mf">40.0</span><span class="p">)</span>
 
-        # Run control cycle
-        self.greenhouse_controller.update()
+        <span class="c1"># Run control cycle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-        # Should activate fan for cooling and humidity
-        self.assertGreater(self.fan.get_speed(), 0)
-        # Should not heat when too hot
-        self.assertEqual(self.heater.get_power(), 0)
+        <span class="c1"># Should activate fan for cooling and humidity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertGreater</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fan</span><span class="o">.</span><span class="n">get_speed</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Should not heat when too hot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">heater</span><span class="o">.</span><span class="n">get_power</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_system_recovery_after_failure(self):
-        &quot;&quot;&quot;Test system behaviour during and after component failure&quot;&quot;&quot;
-        self.greenhouse_controller.enable()
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_system_recovery_after_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test system behaviour during and after component failure&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">enable</span><span class="p">()</span>
 
-        # Simulate sensor failure
-        self.temp_sensor.simulate_failure(&quot;disconnected&quot;)
+        <span class="c1"># Simulate sensor failure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor</span><span class="o">.</span><span class="n">simulate_failure</span><span class="p">(</span><span class="s2">&quot;disconnected&quot;</span><span class="p">)</span>
 
-        # System should detect failure and enter safe mode
-        self.greenhouse_controller.update()
-        self.assertTrue(self.greenhouse_controller.is_in_safe_mode())
+        <span class="c1"># System should detect failure and enter safe mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">is_in_safe_mode</span><span class="p">())</span>
 
-        # Restore sensor
-        self.temp_sensor.clear_failure()
+        <span class="c1"># Restore sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor</span><span class="o">.</span><span class="n">clear_failure</span><span class="p">()</span>
 
-        # System should recover
-        self.greenhouse_controller.update()
-        self.assertFalse(self.greenhouse_controller.is_in_safe_mode())
+        <span class="c1"># System should recover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">greenhouse_controller</span><span class="o">.</span><span class="n">is_in_safe_mode</span><span class="p">())</span>
 
-class MockGreenhouseEnvironment:
-    &quot;&quot;&quot;Orchestrates multiple fixtures to simulate realistic environment&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">MockGreenhouseEnvironment</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Orchestrates multiple fixtures to simulate realistic environment&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.sensors = []
-        self.actuators = []
-        self.temperature = 20.0
-        self.humidity = 60.0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actuators</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">20.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">=</span> <span class="mf">60.0</span>
 
-    def add_sensor(self, sensor):
-        self.sensors.append(sensor)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sensor</span><span class="p">)</span>
 
-    def add_actuator(self, actuator):
-        self.actuators.append(actuator)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_actuator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actuator</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actuators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actuator</span><span class="p">)</span>
 
-    def set_conditions(self, temperature=None, humidity=None):
-        &quot;&quot;&quot;Update environmental conditions&quot;&quot;&quot;
-        if temperature is not None:
-            self.temperature = temperature
-            # Update all temperature sensors
-            for sensor in self.sensors:
-                if hasattr(sensor, &#x27;set_temperature&#x27;):
-                    sensor.set_temperature(temperature)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">humidity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update environmental conditions&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">temperature</span>
+            <span class="c1"># Update all temperature sensors</span>
+            <span class="k">for</span> <span class="n">sensor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span> <span class="s1">&#39;set_temperature&#39;</span><span class="p">):</span>
+                    <span class="n">sensor</span><span class="o">.</span><span class="n">set_temperature</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
 
-        if humidity is not None:
-            self.humidity = humidity
-            # Update all humidity sensors
-            for sensor in self.sensors:
-                if hasattr(sensor, &#x27;set_humidity&#x27;):
-                    sensor.set_humidity(humidity)
+        <span class="k">if</span> <span class="n">humidity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">=</span> <span class="n">humidity</span>
+            <span class="c1"># Update all humidity sensors</span>
+            <span class="k">for</span> <span class="n">sensor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sensor</span><span class="p">,</span> <span class="s1">&#39;set_humidity&#39;</span><span class="p">):</span>
+                    <span class="n">sensor</span><span class="o">.</span><span class="n">set_humidity</span><span class="p">(</span><span class="n">humidity</span><span class="p">)</span>
 
-    def simulate_time_step(self, dt=1.0):
-        &quot;&quot;&quot;Simulate environmental dynamics over time&quot;&quot;&quot;
-        # Simple thermal model
-        heating_effect = sum(
-            actuator.get_power() * 0.01 
-            for actuator in self.actuators 
-            if hasattr(actuator, &#x27;get_power&#x27;)
-        )
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_time_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate environmental dynamics over time&quot;&quot;&quot;</span>
+        <span class="c1"># Simple thermal model</span>
+        <span class="n">heating_effect</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">actuator</span><span class="o">.</span><span class="n">get_power</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.01</span> 
+            <span class="k">for</span> <span class="n">actuator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actuators</span> 
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">actuator</span><span class="p">,</span> <span class="s1">&#39;get_power&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
 
-        cooling_effect = sum(
-            actuator.get_speed() * 0.005
-            for actuator in self.actuators
-            if hasattr(actuator, &#x27;get_speed&#x27;)
-        )
+        <span class="n">cooling_effect</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span>
+            <span class="n">actuator</span><span class="o">.</span><span class="n">get_speed</span><span class="p">()</span> <span class="o">*</span> <span class="mf">0.005</span>
+            <span class="k">for</span> <span class="n">actuator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actuators</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">actuator</span><span class="p">,</span> <span class="s1">&#39;get_speed&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
 
-        self.temperature += (heating_effect - cooling_effect) * dt
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">+=</span> <span class="p">(</span><span class="n">heating_effect</span> <span class="o">-</span> <span class="n">cooling_effect</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
 
-        # Update sensors with new conditions
-        self.set_conditions(self.temperature, self.humidity)
+        <span class="c1"># Update sensors with new conditions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_conditions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2169,66 +2169,66 @@ class MockGreenhouseEnvironment:
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class PressureSensor:
-    def __init__(self, min_pressure=0, max_pressure=1000):
-        self.min_pressure = min_pressure
-        self.max_pressure = max_pressure
-        self.last_valid_reading = 0
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">PressureSensor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_pressure</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_pressure</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_pressure</span> <span class="o">=</span> <span class="n">min_pressure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_pressure</span> <span class="o">=</span> <span class="n">max_pressure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_valid_reading</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def read_pressure(self):
-        # Implementation would read from actual hardware
-        pass
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Implementation would read from actual hardware</span>
+        <span class="k">pass</span>
 
-    def validate_reading(self, raw_reading):
-        if raw_reading &lt; self.min_pressure or raw_reading &gt; self.max_pressure:
-            raise ValueError(f&quot;Pressure {raw_reading} outside valid range&quot;)
-        return raw_reading
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw_reading</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">raw_reading</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_pressure</span> <span class="ow">or</span> <span class="n">raw_reading</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pressure</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure </span><span class="si">{</span><span class="n">raw_reading</span><span class="si">}</span><span class="s2"> outside valid range&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">raw_reading</span>
 
-    def get_safe_reading(self):
-        try:
-            reading = self.read_pressure()
-            validated = self.validate_reading(reading)
-            self.last_valid_reading = validated
-            return validated
-        except (ConnectionError, ValueError):
-            return self.last_valid_reading  # Return last known good value
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_safe_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reading</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_pressure</span><span class="p">()</span>
+            <span class="n">validated</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_reading</span><span class="p">(</span><span class="n">reading</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_valid_reading</span> <span class="o">=</span> <span class="n">validated</span>
+            <span class="k">return</span> <span class="n">validated</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">ConnectionError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_valid_reading</span>  <span class="c1"># Return last known good value</span>
 
-class MockPressureSensor(PressureSensor):
-    def __init__(self):
-        super().__init__()
-        self._pressure = 500
-        self._connected = True
+<span class="k">class</span><span class="w"> </span><span class="nc">MockPressureSensor</span><span class="p">(</span><span class="n">PressureSensor</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pressure</span> <span class="o">=</span> <span class="mi">500</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def read_pressure(self):
-        if not self._connected:
-            raise ConnectionError(&quot;Sensor disconnected&quot;)
-        return self._pressure
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;Sensor disconnected&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pressure</span>
 
-    def set_pressure(self, pressure):
-        self._pressure = pressure
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_pressure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pressure</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pressure</span> <span class="o">=</span> <span class="n">pressure</span>
 
-    def disconnect(self):
-        self._connected = False
+    <span class="k">def</span><span class="w"> </span><span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_connected</span> <span class="o">=</span> <span class="kc">False</span>
 
-class TestPressureSensor(unittest.TestCase):
-    def setUp(self):
-        self.sensor = MockPressureSensor()
+<span class="k">class</span><span class="w"> </span><span class="nc">TestPressureSensor</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span> <span class="o">=</span> <span class="n">MockPressureSensor</span><span class="p">()</span>
 
-    def test_valid_readings(self):
-        self.sensor.set_pressure(500)
-        self.assertEqual(self.sensor.get_safe_reading(), 500)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_valid_readings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_pressure</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">get_safe_reading</span><span class="p">(),</span> <span class="mi">500</span><span class="p">)</span>
 
-    def test_invalid_high_reading(self):
-        self.sensor.set_pressure(1500)  # Above max
-        # Should return last valid (0 initially)
-        self.assertEqual(self.sensor.get_safe_reading(), 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_high_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_pressure</span><span class="p">(</span><span class="mi">1500</span><span class="p">)</span>  <span class="c1"># Above max</span>
+        <span class="c1"># Should return last valid (0 initially)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">get_safe_reading</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_disconnected_sensor(self):
-        self.sensor.set_pressure(300)
-        self.sensor.get_safe_reading()  # Store valid reading
-        self.sensor.disconnect()
-        # Should return last valid reading
-        self.assertEqual(self.sensor.get_safe_reading(), 300)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_disconnected_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">set_pressure</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">get_safe_reading</span><span class="p">()</span>  <span class="c1"># Store valid reading</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+        <span class="c1"># Should return last valid reading</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor</span><span class="o">.</span><span class="n">get_safe_reading</span><span class="p">(),</span> <span class="mi">300</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2253,62 +2253,62 @@ class TestPressureSensor(unittest.TestCase):
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ServoController:
-    def __init__(self, min_angle=-180, max_angle=180, max_speed=90):
-        self.min_angle = min_angle
-        self.max_angle = max_angle
-        self.max_speed = max_speed
-        self.current_position = 0
-        self.target_position = 0
-        self.is_moving = False
-        self.emergency_stop = False
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ServoController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_angle</span><span class="o">=-</span><span class="mi">180</span><span class="p">,</span> <span class="n">max_angle</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">max_speed</span><span class="o">=</span><span class="mi">90</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_angle</span> <span class="o">=</span> <span class="n">min_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_angle</span> <span class="o">=</span> <span class="n">max_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_speed</span> <span class="o">=</span> <span class="n">max_speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_moving</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def move_to(self, target_angle):
-        if self.emergency_stop:
-            return False
-        if not (self.min_angle &lt;= target_angle &lt;= self.max_angle):
-            return False
-        self.target_position = target_angle
-        self.is_moving = True
-        return True
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_angle</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_angle</span> <span class="o">&lt;=</span> <span class="n">target_angle</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_angle</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="n">target_angle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_moving</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def emergency_stop_activate(self):
-        self.emergency_stop = True
-        self.is_moving = False
+    <span class="k">def</span><span class="w"> </span><span class="nf">emergency_stop_activate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_moving</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def update(self, dt):
-        if not self.is_moving or self.emergency_stop:
-            return
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_moving</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">:</span>
+            <span class="k">return</span>
 
-        error = self.target_position - self.current_position
-        if abs(error) &lt; 1:  # Close enough
-            self.is_moving = False
-            return
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Close enough</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_moving</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">return</span>
 
-        # Calculate movement step with speed limit
-        max_step = self.max_speed * dt
-        step = min(max_step, abs(error)) * (1 if error &gt; 0 else -1)
-        self.current_position += step
+        <span class="c1"># Calculate movement step with speed limit</span>
+        <span class="n">max_step</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_speed</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">max_step</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">+=</span> <span class="n">step</span>
 
-class TestServoController(unittest.TestCase):
-    def setUp(self):
-        self.servo = ServoController()
+<span class="k">class</span><span class="w"> </span><span class="nc">TestServoController</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">servo</span> <span class="o">=</span> <span class="n">ServoController</span><span class="p">()</span>
 
-    def test_valid_move_command(self):
-        self.assertTrue(self.servo.move_to(90))
-        self.assertEqual(self.servo.target_position, 90)
-        self.assertTrue(self.servo.is_moving)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_valid_move_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">90</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">target_position</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">is_moving</span><span class="p">)</span>
 
-    def test_invalid_move_command(self):
-        self.assertFalse(self.servo.move_to(200))  # Outside range
-        self.assertEqual(self.servo.target_position, 0)  # Unchanged
-        self.assertFalse(self.servo.is_moving)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_move_command</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>  <span class="c1"># Outside range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">target_position</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Unchanged</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">is_moving</span><span class="p">)</span>
 
-    def test_emergency_stop(self):
-        self.servo.move_to(90)
-        self.servo.emergency_stop_activate()
-        self.assertFalse(self.servo.is_moving)
-        self.assertFalse(self.servo.move_to(45))  # Commands rejected
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_emergency_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">emergency_stop_activate</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">is_moving</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">servo</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">45</span><span class="p">))</span>  <span class="c1"># Commands rejected</span>
 </code></pre>
 </div>
 </details>
@@ -2333,79 +2333,79 @@ class TestServoController(unittest.TestCase):
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ConveyorSystem:
-    def __init__(self, speed_sensor, safety_sensor, motor, estop_button):
-        self.speed_sensor = speed_sensor
-        self.safety_sensor = safety_sensor
-        self.motor = motor
-        self.estop_button = estop_button
-        self.target_speed = 0
-        self.enabled = False
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ConveyorSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed_sensor</span><span class="p">,</span> <span class="n">safety_sensor</span><span class="p">,</span> <span class="n">motor</span><span class="p">,</span> <span class="n">estop_button</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_sensor</span> <span class="o">=</span> <span class="n">speed_sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span> <span class="o">=</span> <span class="n">safety_sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">motor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estop_button</span> <span class="o">=</span> <span class="n">estop_button</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def start(self, speed):
-        if self.estop_button.is_pressed():
-            return False
-        if not self.safety_sensor.is_clear():
-            return False
-        self.target_speed = speed
-        self.enabled = True
-        return True
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">estop_button</span><span class="o">.</span><span class="n">is_pressed</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="o">.</span><span class="n">is_clear</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def stop(self):
-        self.enabled = False
-        self.target_speed = 0
-        self.motor.set_speed(0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-    def update(self):
-        # Emergency stop override
-        if self.estop_button.is_pressed():
-            self.stop()
-            return
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Emergency stop override</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">estop_button</span><span class="o">.</span><span class="n">is_pressed</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">return</span>
 
-        # Safety sensor check
-        if not self.safety_sensor.is_clear():
-            self.stop()
-            return
+        <span class="c1"># Safety sensor check</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="o">.</span><span class="n">is_clear</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+            <span class="k">return</span>
 
-        # Speed control
-        if self.enabled:
-            current_speed = self.speed_sensor.read_speed()
-            error = self.target_speed - current_speed
-            adjustment = error * 0.1  # Simple proportional control
-            new_speed = current_speed + adjustment
-            self.motor.set_speed(max(0, min(100, new_speed)))
+        <span class="c1"># Speed control</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="n">current_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_sensor</span><span class="o">.</span><span class="n">read_speed</span><span class="p">()</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">-</span> <span class="n">current_speed</span>
+            <span class="n">adjustment</span> <span class="o">=</span> <span class="n">error</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># Simple proportional control</span>
+            <span class="n">new_speed</span> <span class="o">=</span> <span class="n">current_speed</span> <span class="o">+</span> <span class="n">adjustment</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">set_speed</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">new_speed</span><span class="p">)))</span>
 
-class TestConveyorIntegration(unittest.TestCase):
-    def setUp(self):
-        self.speed_sensor = MockSpeedSensor()
-        self.safety_sensor = MockSafetySensor(clear=True)
-        self.motor = MockMotor()
-        self.estop = MockEstopButton(pressed=False)
+<span class="k">class</span><span class="w"> </span><span class="nc">TestConveyorIntegration</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_sensor</span> <span class="o">=</span> <span class="n">MockSpeedSensor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span> <span class="o">=</span> <span class="n">MockSafetySensor</span><span class="p">(</span><span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor</span> <span class="o">=</span> <span class="n">MockMotor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estop</span> <span class="o">=</span> <span class="n">MockEstopButton</span><span class="p">(</span><span class="n">pressed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-        self.conveyor = ConveyorSystem(
-            self.speed_sensor, self.safety_sensor, 
-            self.motor, self.estop
-        )
+        <span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span> <span class="o">=</span> <span class="n">ConveyorSystem</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">speed_sensor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="p">,</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">estop</span>
+        <span class="p">)</span>
 
-    def test_normal_operation(self):
-        # Should start successfully
-        self.assertTrue(self.conveyor.start(50))
-        self.conveyor.update()
-        self.assertGreater(self.motor.current_speed, 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_normal_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Should start successfully</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertGreater</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">current_speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    def test_safety_sensor_stops_system(self):
-        self.conveyor.start(50)
-        self.safety_sensor.set_clear(False)  # Block sensor
-        self.conveyor.update()
-        self.assertEqual(self.motor.current_speed, 0)
-        self.assertFalse(self.conveyor.enabled)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_safety_sensor_stops_system</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor</span><span class="o">.</span><span class="n">set_clear</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Block sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">current_speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
 
-    def test_emergency_stop_override(self):
-        self.conveyor.start(50)
-        self.estop.press()
-        self.conveyor.update()
-        self.assertEqual(self.motor.current_speed, 0)
-        self.assertFalse(self.conveyor.enabled)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_emergency_stop_override</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">estop</span><span class="o">.</span><span class="n">press</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">motor</span><span class="o">.</span><span class="n">current_speed</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conveyor</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2645,6 +2645,8 @@ class TestConveyorIntegration(unittest.TestCase):
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

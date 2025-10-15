@@ -1489,430 +1489,430 @@
 <h3 id="data-mining-and-extracting-insights">Data mining and extracting insights<a class="headerlink" href="#data-mining-and-extracting-insights" title="Permanent link">&para;</a></h3>
 <p>Data mining finds patterns and insights in large datasets. Web applications generate enormous amounts of data from user interactions, and mining this data helps improve services and make business decisions.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import json
-from collections import Counter
-from datetime import datetime, timedelta
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-class WebAnalytics:
-    &quot;&quot;&quot;Simple web analytics data mining example.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">WebAnalytics</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple web analytics data mining example.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        # Simulated web server log data
-        self.page_views = [
-            {&quot;url&quot;: &quot;/home&quot;, &quot;user_id&quot;: &quot;user123&quot;, &quot;timestamp&quot;: &quot;2024-01-15 10:30:00&quot;, &quot;user_agent&quot;: &quot;Chrome&quot;},
-            {&quot;url&quot;: &quot;/products&quot;, &quot;user_id&quot;: &quot;user456&quot;, &quot;timestamp&quot;: &quot;2024-01-15 10:35:00&quot;, &quot;user_agent&quot;: &quot;Firefox&quot;},
-            {&quot;url&quot;: &quot;/home&quot;, &quot;user_id&quot;: &quot;user789&quot;, &quot;timestamp&quot;: &quot;2024-01-15 10:40:00&quot;, &quot;user_agent&quot;: &quot;Safari&quot;},
-            {&quot;url&quot;: &quot;/checkout&quot;, &quot;user_id&quot;: &quot;user123&quot;, &quot;timestamp&quot;: &quot;2024-01-15 10:45:00&quot;, &quot;user_agent&quot;: &quot;Chrome&quot;},
-            {&quot;url&quot;: &quot;/products&quot;, &quot;user_id&quot;: &quot;user456&quot;, &quot;timestamp&quot;: &quot;2024-01-15 10:50:00&quot;, &quot;user_agent&quot;: &quot;Firefox&quot;},
-        ]
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Simulated web server log data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">page_views</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/home&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user123&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15 10:30:00&quot;</span><span class="p">,</span> <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Chrome&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/products&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user456&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15 10:35:00&quot;</span><span class="p">,</span> <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Firefox&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/home&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user789&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15 10:40:00&quot;</span><span class="p">,</span> <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Safari&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/checkout&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user123&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15 10:45:00&quot;</span><span class="p">,</span> <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Chrome&quot;</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;/products&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user456&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-15 10:50:00&quot;</span><span class="p">,</span> <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Firefox&quot;</span><span class="p">},</span>
+        <span class="p">]</span>
 
-        self.user_sessions = [
-            {&quot;user_id&quot;: &quot;user123&quot;, &quot;session_length&quot;: 1200, &quot;pages_visited&quot;: 5, &quot;converted&quot;: True},
-            {&quot;user_id&quot;: &quot;user456&quot;, &quot;session_length&quot;: 800, &quot;pages_visited&quot;: 3, &quot;converted&quot;: False},
-            {&quot;user_id&quot;: &quot;user789&quot;, &quot;session_length&quot;: 300, &quot;pages_visited&quot;: 1, &quot;converted&quot;: False},
-        ]
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_sessions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user123&quot;</span><span class="p">,</span> <span class="s2">&quot;session_length&quot;</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span> <span class="s2">&quot;pages_visited&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;converted&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user456&quot;</span><span class="p">,</span> <span class="s2">&quot;session_length&quot;</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span> <span class="s2">&quot;pages_visited&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;converted&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;user789&quot;</span><span class="p">,</span> <span class="s2">&quot;session_length&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="s2">&quot;pages_visited&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;converted&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+        <span class="p">]</span>
 
-    def find_popular_pages(self):
-        &quot;&quot;&quot;Mine data to find most visited pages.&quot;&quot;&quot;
-        page_counts = Counter(view[&quot;url&quot;] for view in self.page_views)
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_popular_pages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mine data to find most visited pages.&quot;&quot;&quot;</span>
+        <span class="n">page_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">view</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">view</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_views</span><span class="p">)</span>
 
-        print(&quot;=== Popular Pages Analysis ===&quot;)
-        for page, count in page_counts.most_common():
-            print(f&quot;{page}: {count} visits&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Popular Pages Analysis ===&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">page</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">page_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> visits&quot;</span><span class="p">)</span>
 
-        return page_counts
+        <span class="k">return</span> <span class="n">page_counts</span>
 
-    def analyze_user_behavior(self):
-        &quot;&quot;&quot;Extract patterns from user behavior data.&quot;&quot;&quot;
-        print(&quot;\n=== User Behavior Analysis ===&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_user_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract patterns from user behavior data.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== User Behavior Analysis ===&quot;</span><span class="p">)</span>
 
-        # Calculate conversion rate
-        total_users = len(self.user_sessions)
-        converted_users = sum(1 for session in self.user_sessions if session[&quot;converted&quot;])
-        conversion_rate = (converted_users / total_users) * 100
+        <span class="c1"># Calculate conversion rate</span>
+        <span class="n">total_users</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_sessions</span><span class="p">)</span>
+        <span class="n">converted_users</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">session</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_sessions</span> <span class="k">if</span> <span class="n">session</span><span class="p">[</span><span class="s2">&quot;converted&quot;</span><span class="p">])</span>
+        <span class="n">conversion_rate</span> <span class="o">=</span> <span class="p">(</span><span class="n">converted_users</span> <span class="o">/</span> <span class="n">total_users</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-        print(f&quot;Conversion rate: {conversion_rate:.1f}%&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conversion rate: </span><span class="si">{</span><span class="n">conversion_rate</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-        # Find patterns in successful conversions
-        converters = [s for s in self.user_sessions if s[&quot;converted&quot;]]
-        non_converters = [s for s in self.user_sessions if not s[&quot;converted&quot;]]
+        <span class="c1"># Find patterns in successful conversions</span>
+        <span class="n">converters</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_sessions</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;converted&quot;</span><span class="p">]]</span>
+        <span class="n">non_converters</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_sessions</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;converted&quot;</span><span class="p">]]</span>
 
-        if converters:
-            avg_converter_pages = sum(s[&quot;pages_visited&quot;] for s in converters) / len(converters)
-            avg_converter_time = sum(s[&quot;session_length&quot;] for s in converters) / len(converters)
+        <span class="k">if</span> <span class="n">converters</span><span class="p">:</span>
+            <span class="n">avg_converter_pages</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;pages_visited&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">converters</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">converters</span><span class="p">)</span>
+            <span class="n">avg_converter_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;session_length&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">converters</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">converters</span><span class="p">)</span>
 
-            print(f&quot;Successful users visit {avg_converter_pages:.1f} pages on average&quot;)
-            print(f&quot;Successful users spend {avg_converter_time:.0f} seconds on average&quot;)
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successful users visit </span><span class="si">{</span><span class="n">avg_converter_pages</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> pages on average&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successful users spend </span><span class="si">{</span><span class="n">avg_converter_time</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2"> seconds on average&quot;</span><span class="p">)</span>
 
-    def detect_browser_trends(self):
-        &quot;&quot;&quot;Mine browser usage patterns.&quot;&quot;&quot;
-        browser_usage = Counter(view[&quot;user_agent&quot;] for view in self.page_views)
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_browser_trends</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mine browser usage patterns.&quot;&quot;&quot;</span>
+        <span class="n">browser_usage</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">view</span><span class="p">[</span><span class="s2">&quot;user_agent&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">view</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">page_views</span><span class="p">)</span>
 
-        print(&quot;\n=== Browser Usage Trends ===&quot;)
-        total_views = len(self.page_views)
-        for browser, count in browser_usage.most_common():
-            percentage = (count / total_views) * 100
-            print(f&quot;{browser}: {percentage:.1f}% of traffic&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Browser Usage Trends ===&quot;</span><span class="p">)</span>
+        <span class="n">total_views</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">page_views</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">browser</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">browser_usage</span><span class="o">.</span><span class="n">most_common</span><span class="p">():</span>
+            <span class="n">percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">count</span> <span class="o">/</span> <span class="n">total_views</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">browser</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">percentage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% of traffic&quot;</span><span class="p">)</span>
 
-# Example usage
-analytics = WebAnalytics()
-analytics.find_popular_pages()
-analytics.analyze_user_behavior()
-analytics.detect_browser_trends()
+<span class="c1"># Example usage</span>
+<span class="n">analytics</span> <span class="o">=</span> <span class="n">WebAnalytics</span><span class="p">()</span>
+<span class="n">analytics</span><span class="o">.</span><span class="n">find_popular_pages</span><span class="p">()</span>
+<span class="n">analytics</span><span class="o">.</span><span class="n">analyze_user_behavior</span><span class="p">()</span>
+<span class="n">analytics</span><span class="o">.</span><span class="n">detect_browser_trends</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="metadata-data-about-data">Metadata: data about data<a class="headerlink" href="#metadata-data-about-data" title="Permanent link">&para;</a></h3>
 <p>Metadata describes and organizes data, making it easier to find, understand, and use. In web applications, metadata helps with search, categorization, and data management.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ContentMetadata:
-    &quot;&quot;&quot;Managing metadata for web content.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ContentMetadata</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Managing metadata for web content.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.articles = [
-            {
-                &quot;id&quot;: 1,
-                &quot;title&quot;: &quot;Getting Started with Python&quot;,
-                &quot;content&quot;: &quot;Python is a beginner-friendly programming language...&quot;,
-                &quot;metadata&quot;: {
-                    &quot;author&quot;: &quot;Alice Smith&quot;,
-                    &quot;created_date&quot;: &quot;2024-01-10&quot;,
-                    &quot;tags&quot;: [&quot;python&quot;, &quot;programming&quot;, &quot;beginner&quot;],
-                    &quot;category&quot;: &quot;tutorial&quot;,
-                    &quot;reading_time&quot;: 5,
-                    &quot;difficulty&quot;: &quot;easy&quot;,
-                    &quot;language&quot;: &quot;en&quot;,
-                    &quot;word_count&quot;: 500
-                }
-            },
-            {
-                &quot;id&quot;: 2,
-                &quot;title&quot;: &quot;Advanced Web Security&quot;,
-                &quot;content&quot;: &quot;Understanding SSL/TLS protocols and certificate management...&quot;,
-                &quot;metadata&quot;: {
-                    &quot;author&quot;: &quot;Bob Johnson&quot;,
-                    &quot;created_date&quot;: &quot;2024-01-12&quot;,
-                    &quot;tags&quot;: [&quot;security&quot;, &quot;web&quot;, &quot;ssl&quot;, &quot;tls&quot;],
-                    &quot;category&quot;: &quot;security&quot;,
-                    &quot;reading_time&quot;: 12,
-                    &quot;difficulty&quot;: &quot;advanced&quot;,
-                    &quot;language&quot;: &quot;en&quot;,
-                    &quot;word_count&quot;: 1200
-                }
-            }
-        ]
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">articles</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Getting Started with Python&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Python is a beginner-friendly programming language...&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice Smith&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;created_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-10&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;programming&quot;</span><span class="p">,</span> <span class="s2">&quot;beginner&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;tutorial&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;reading_time&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                    <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;easy&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;word_count&quot;</span><span class="p">:</span> <span class="mi">500</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Advanced Web Security&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Understanding SSL/TLS protocols and certificate management...&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob Johnson&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;created_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-12&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;security&quot;</span><span class="p">,</span> <span class="s2">&quot;web&quot;</span><span class="p">,</span> <span class="s2">&quot;ssl&quot;</span><span class="p">,</span> <span class="s2">&quot;tls&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;security&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;reading_time&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                    <span class="s2">&quot;difficulty&quot;</span><span class="p">:</span> <span class="s2">&quot;advanced&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;en&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;word_count&quot;</span><span class="p">:</span> <span class="mi">1200</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
 
-    def search_by_metadata(self, **criteria):
-        &quot;&quot;&quot;Search content using metadata criteria.&quot;&quot;&quot;
-        results = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">search_by_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">criteria</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Search content using metadata criteria.&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for article in self.articles:
-            metadata = article[&quot;metadata&quot;]
-            matches = True
+        <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">articles</span><span class="p">:</span>
+            <span class="n">metadata</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">]</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="kc">True</span>
 
-            for key, value in criteria.items():
-                if key == &quot;tags&quot;:
-                    # Check if any search tags match article tags
-                    if not any(tag in metadata.get(&quot;tags&quot;, []) for tag in value):
-                        matches = False
-                        break
-                elif key == &quot;max_reading_time&quot;:
-                    if metadata.get(&quot;reading_time&quot;, 0) &gt; value:
-                        matches = False
-                        break
-                elif key == &quot;min_reading_time&quot;:
-                    if metadata.get(&quot;reading_time&quot;, 0) &lt; value:
-                        matches = False
-                        break
-                else:
-                    if metadata.get(key) != value:
-                        matches = False
-                        break
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">criteria</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;tags&quot;</span><span class="p">:</span>
+                    <span class="c1"># Check if any search tags match article tags</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">tag</span> <span class="ow">in</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="p">[])</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">value</span><span class="p">):</span>
+                        <span class="n">matches</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;max_reading_time&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reading_time&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">value</span><span class="p">:</span>
+                        <span class="n">matches</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;min_reading_time&quot;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reading_time&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">:</span>
+                        <span class="n">matches</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="n">value</span><span class="p">:</span>
+                        <span class="n">matches</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
 
-            if matches:
-                results.append(article)
+            <span class="k">if</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">article</span><span class="p">)</span>
 
-        return results
+        <span class="k">return</span> <span class="n">results</span>
 
-    def generate_content_report(self):
-        &quot;&quot;&quot;Use metadata to generate insights about content.&quot;&quot;&quot;
-        print(&quot;=== Content Analytics Using Metadata ===&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_content_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use metadata to generate insights about content.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Content Analytics Using Metadata ===&quot;</span><span class="p">)</span>
 
-        # Author productivity
-        author_counts = {}
-        for article in self.articles:
-            author = article[&quot;metadata&quot;][&quot;author&quot;]
-            author_counts[author] = author_counts.get(author, 0) + 1
+        <span class="c1"># Author productivity</span>
+        <span class="n">author_counts</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">articles</span><span class="p">:</span>
+            <span class="n">author</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">][</span><span class="s2">&quot;author&quot;</span><span class="p">]</span>
+            <span class="n">author_counts</span><span class="p">[</span><span class="n">author</span><span class="p">]</span> <span class="o">=</span> <span class="n">author_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">author</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-        print(&quot;Articles by author:&quot;)
-        for author, count in author_counts.items():
-            print(f&quot;  {author}: {count} articles&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Articles by author:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">author</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">author_counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">author</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> articles&quot;</span><span class="p">)</span>
 
-        # Difficulty distribution
-        difficulties = [article[&quot;metadata&quot;][&quot;difficulty&quot;] for article in self.articles]
-        difficulty_counts = Counter(difficulties)
+        <span class="c1"># Difficulty distribution</span>
+        <span class="n">difficulties</span> <span class="o">=</span> <span class="p">[</span><span class="n">article</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">][</span><span class="s2">&quot;difficulty&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">articles</span><span class="p">]</span>
+        <span class="n">difficulty_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">difficulties</span><span class="p">)</span>
 
-        print(&quot;\nDifficulty distribution:&quot;)
-        for difficulty, count in difficulty_counts.items():
-            print(f&quot;  {difficulty}: {count} articles&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Difficulty distribution:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">difficulty</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">difficulty_counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">difficulty</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> articles&quot;</span><span class="p">)</span>
 
-        # Average reading time by category
-        category_times = {}
-        category_counts = {}
+        <span class="c1"># Average reading time by category</span>
+        <span class="n">category_times</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">category_counts</span> <span class="o">=</span> <span class="p">{}</span>
 
-        for article in self.articles:
-            category = article[&quot;metadata&quot;][&quot;category&quot;]
-            reading_time = article[&quot;metadata&quot;][&quot;reading_time&quot;]
+        <span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">articles</span><span class="p">:</span>
+            <span class="n">category</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">][</span><span class="s2">&quot;category&quot;</span><span class="p">]</span>
+            <span class="n">reading_time</span> <span class="o">=</span> <span class="n">article</span><span class="p">[</span><span class="s2">&quot;metadata&quot;</span><span class="p">][</span><span class="s2">&quot;reading_time&quot;</span><span class="p">]</span>
 
-            if category not in category_times:
-                category_times[category] = 0
-                category_counts[category] = 0
+            <span class="k">if</span> <span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">category_times</span><span class="p">:</span>
+                <span class="n">category_times</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">category_counts</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-            category_times[category] += reading_time
-            category_counts[category] += 1
+            <span class="n">category_times</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">+=</span> <span class="n">reading_time</span>
+            <span class="n">category_counts</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        print(&quot;\nAverage reading time by category:&quot;)
-        for category in category_times:
-            avg_time = category_times[category] / category_counts[category]
-            print(f&quot;  {category}: {avg_time:.1f} minutes&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Average reading time by category:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">category_times</span><span class="p">:</span>
+            <span class="n">avg_time</span> <span class="o">=</span> <span class="n">category_times</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">/</span> <span class="n">category_counts</span><span class="p">[</span><span class="n">category</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">avg_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> minutes&quot;</span><span class="p">)</span>
 
-# Example usage
-content_system = ContentMetadata()
+<span class="c1"># Example usage</span>
+<span class="n">content_system</span> <span class="o">=</span> <span class="n">ContentMetadata</span><span class="p">()</span>
 
-# Search examples
-python_articles = content_system.search_by_metadata(tags=[&quot;python&quot;])
-quick_reads = content_system.search_by_metadata(max_reading_time=10)
-security_content = content_system.search_by_metadata(category=&quot;security&quot;)
+<span class="c1"># Search examples</span>
+<span class="n">python_articles</span> <span class="o">=</span> <span class="n">content_system</span><span class="o">.</span><span class="n">search_by_metadata</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">])</span>
+<span class="n">quick_reads</span> <span class="o">=</span> <span class="n">content_system</span><span class="o">.</span><span class="n">search_by_metadata</span><span class="p">(</span><span class="n">max_reading_time</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">security_content</span> <span class="o">=</span> <span class="n">content_system</span><span class="o">.</span><span class="n">search_by_metadata</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s2">&quot;security&quot;</span><span class="p">)</span>
 
-print(&quot;Python articles:&quot;, len(python_articles))
-print(&quot;Quick reads (≤10 min):&quot;, len(quick_reads))
-print(&quot;Security content:&quot;, len(security_content))
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python articles:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">python_articles</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Quick reads (≤10 min):&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">quick_reads</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Security content:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">security_content</span><span class="p">))</span>
 
-content_system.generate_content_report()
+<span class="n">content_system</span><span class="o">.</span><span class="n">generate_content_report</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="streaming-challenges">Streaming challenges<a class="headerlink" href="#streaming-challenges" title="Permanent link">&para;</a></h3>
 <p>Streaming data arrives continuously and must be processed in real-time. This creates unique challenges for web applications handling live data feeds, real-time analytics, or user interactions.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
-import threading
-from queue import Queue
-from collections import deque
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">queue</span><span class="w"> </span><span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
 
-class DataStream:
-    &quot;&quot;&quot;Simulate real-time data streaming challenges.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">DataStream</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate real-time data streaming challenges.&quot;&quot;&quot;</span>
 
-    def __init__(self, buffer_size=100):
-        self.data_queue = Queue()
-        self.processed_data = deque(maxlen=buffer_size)
-        self.is_streaming = False
-        self.dropped_messages = 0
-        self.processing_errors = 0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">buffer_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processed_data</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">buffer_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_streaming</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropped_messages</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processing_errors</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def start_data_stream(self):
-        &quot;&quot;&quot;Simulate incoming data stream.&quot;&quot;&quot;
-        self.is_streaming = True
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_data_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate incoming data stream.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_streaming</span> <span class="o">=</span> <span class="kc">True</span>
 
-        def generate_data():
-            message_id = 1
-            while self.is_streaming:
-                # Simulate variable data arrival rates
-                data = {
-                    &quot;id&quot;: message_id,
-                    &quot;timestamp&quot;: time.time(),
-                    &quot;value&quot;: message_id * 2,
-                    &quot;source&quot;: &quot;sensor_01&quot;
-                }
+        <span class="k">def</span><span class="w"> </span><span class="nf">generate_data</span><span class="p">():</span>
+            <span class="n">message_id</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_streaming</span><span class="p">:</span>
+                <span class="c1"># Simulate variable data arrival rates</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">message_id</span><span class="p">,</span>
+                    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+                    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">message_id</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;sensor_01&quot;</span>
+                <span class="p">}</span>
 
-                # Handle queue overflow (common streaming challenge)
-                if self.data_queue.qsize() &gt; 50:
-                    self.dropped_messages += 1
-                    print(f&quot;⚠️  Buffer overflow! Dropped message {message_id}&quot;)
-                else:
-                    self.data_queue.put(data)
+                <span class="c1"># Handle queue overflow (common streaming challenge)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_queue</span><span class="o">.</span><span class="n">qsize</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">dropped_messages</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Buffer overflow! Dropped message </span><span class="si">{</span><span class="n">message_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-                message_id += 1
-                time.sleep(0.1)  # 10 messages per second
+                <span class="n">message_id</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># 10 messages per second</span>
 
-        # Start data generation in background thread
-        threading.Thread(target=generate_data, daemon=True).start()
-        print(&quot;📡 Data stream started...&quot;)
+        <span class="c1"># Start data generation in background thread</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">generate_data</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📡 Data stream started...&quot;</span><span class="p">)</span>
 
-    def process_stream(self, duration=5):
-        &quot;&quot;&quot;Process streaming data with error handling.&quot;&quot;&quot;
-        print(f&quot;🔄 Processing stream for {duration} seconds...&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process streaming data with error handling.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔄 Processing stream for </span><span class="si">{</span><span class="n">duration</span><span class="si">}</span><span class="s2"> seconds...&quot;</span><span class="p">)</span>
 
-        start_time = time.time()
-        processed_count = 0
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">processed_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-        while time.time() - start_time &lt; duration:
-            try:
-                if not self.data_queue.empty():
-                    data = self.data_queue.get(timeout=1)
+        <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">duration</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-                    # Simulate processing time and potential errors
-                    if data[&quot;value&quot;] % 13 == 0:  # Simulate occasional errors
-                        self.processing_errors += 1
-                        print(f&quot;❌ Error processing message {data[&#x27;id&#x27;]}&quot;)
-                        continue
+                    <span class="c1"># Simulate processing time and potential errors</span>
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">%</span> <span class="mi">13</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Simulate occasional errors</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">processing_errors</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Error processing message </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="k">continue</span>
 
-                    # Process successfully
-                    processed_data = {
-                        &quot;id&quot;: data[&quot;id&quot;],
-                        &quot;processed_value&quot;: data[&quot;value&quot;] * 1.5,
-                        &quot;processing_time&quot;: time.time()
-                    }
+                    <span class="c1"># Process successfully</span>
+                    <span class="n">processed_data</span> <span class="o">=</span> <span class="p">{</span>
+                        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+                        <span class="s2">&quot;processed_value&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span>
+                        <span class="s2">&quot;processing_time&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+                    <span class="p">}</span>
 
-                    self.processed_data.append(processed_data)
-                    processed_count += 1
+                    <span class="bp">self</span><span class="o">.</span><span class="n">processed_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed_data</span><span class="p">)</span>
+                    <span class="n">processed_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-                    if processed_count % 10 == 0:
-                        print(f&quot;✅ Processed {processed_count} messages&quot;)
+                    <span class="k">if</span> <span class="n">processed_count</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Processed </span><span class="si">{</span><span class="n">processed_count</span><span class="si">}</span><span class="s2"> messages&quot;</span><span class="p">)</span>
 
-                time.sleep(0.05)  # Simulate processing time
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># Simulate processing time</span>
 
-            except Exception as e:
-                self.processing_errors += 1
-                print(f&quot;❌ Processing error: {e}&quot;)
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">processing_errors</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Processing error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        self.stop_stream()
-        self.print_streaming_stats(processed_count)
+        <span class="bp">self</span><span class="o">.</span><span class="n">stop_stream</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_streaming_stats</span><span class="p">(</span><span class="n">processed_count</span><span class="p">)</span>
 
-    def stop_stream(self):
-        &quot;&quot;&quot;Stop the data stream.&quot;&quot;&quot;
-        self.is_streaming = False
-        print(&quot;🛑 Data stream stopped&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop_stream</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop the data stream.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_streaming</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🛑 Data stream stopped&quot;</span><span class="p">)</span>
 
-    def print_streaming_stats(self, processed_count):
-        &quot;&quot;&quot;Show streaming performance statistics.&quot;&quot;&quot;
-        print(f&quot;\n=== Streaming Performance Report ===&quot;)
-        print(f&quot;Messages processed: {processed_count}&quot;)
-        print(f&quot;Messages dropped: {self.dropped_messages}&quot;)
-        print(f&quot;Processing errors: {self.processing_errors}&quot;)
-        print(f&quot;Buffer utilization: {len(self.processed_data)} / {self.processed_data.maxlen}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_streaming_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">processed_count</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show streaming performance statistics.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Streaming Performance Report ===&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Messages processed: </span><span class="si">{</span><span class="n">processed_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Messages dropped: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dropped_messages</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing errors: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">processing_errors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Buffer utilization: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processed_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">processed_data</span><span class="o">.</span><span class="n">maxlen</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if processed_count &gt; 0:
-            success_rate = ((processed_count) / (processed_count + self.dropped_messages + self.processing_errors)) * 100
-            print(f&quot;Success rate: {success_rate:.1f}%&quot;)
+        <span class="k">if</span> <span class="n">processed_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">success_rate</span> <span class="o">=</span> <span class="p">((</span><span class="n">processed_count</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">processed_count</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropped_messages</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">processing_errors</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success rate: </span><span class="si">{</span><span class="n">success_rate</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-# Example: streaming challenges demo
-stream = DataStream(buffer_size=20)
-stream.start_data_stream()
-stream.process_stream(duration=3)
+<span class="c1"># Example: streaming challenges demo</span>
+<span class="n">stream</span> <span class="o">=</span> <span class="n">DataStream</span><span class="p">(</span><span class="n">buffer_size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">stream</span><span class="o">.</span><span class="n">start_data_stream</span><span class="p">()</span>
+<span class="n">stream</span><span class="o">.</span><span class="n">process_stream</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="web-architecture-patterns">Web architecture patterns<a class="headerlink" href="#web-architecture-patterns" title="Permanent link">&para;</a></h3>
 <p>Different architectural patterns solve different scaling and complexity challenges. Each has trade-offs in terms of development complexity, scalability, and operational overhead.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ArchitecturePatterns:
-    &quot;&quot;&quot;Demonstrate different web architecture patterns.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ArchitecturePatterns</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate different web architecture patterns.&quot;&quot;&quot;</span>
 
-    def monolithic_architecture(self):
-        &quot;&quot;&quot;Single deployable unit containing all functionality.&quot;&quot;&quot;
-        print(&quot;=== Monolithic Architecture ===&quot;)
-        print(&quot;Pros:&quot;)
-        print(&quot;  - Simple to develop and deploy initially&quot;)
-        print(&quot;  - Easy to test end-to-end&quot;)
-        print(&quot;  - No network latency between components&quot;)
-        print(&quot;  - Simpler monitoring and debugging&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">monolithic_architecture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Single deployable unit containing all functionality.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Monolithic Architecture ===&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pros:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Simple to develop and deploy initially&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Easy to test end-to-end&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - No network latency between components&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Simpler monitoring and debugging&quot;</span><span class="p">)</span>
 
-        print(&quot;\nCons:&quot;)
-        print(&quot;  - Difficult to scale individual components&quot;)
-        print(&quot;  - Technology lock-in (entire app uses same stack)&quot;)
-        print(&quot;  - Large codebase becomes hard to maintain&quot;)
-        print(&quot;  - Risk of entire system failure&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cons:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Difficult to scale individual components&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Technology lock-in (entire app uses same stack)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Large codebase becomes hard to maintain&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Risk of entire system failure&quot;</span><span class="p">)</span>
 
-        print(&quot;\nBest for:&quot;)
-        print(&quot;  - Small to medium applications&quot;)
-        print(&quot;  - Teams with limited DevOps experience&quot;)
-        print(&quot;  - Applications with tightly coupled features&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best for:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Small to medium applications&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Teams with limited DevOps experience&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Applications with tightly coupled features&quot;</span><span class="p">)</span>
 
-    def microservices_architecture(self):
-        &quot;&quot;&quot;Multiple small, independent services.&quot;&quot;&quot;
-        print(&quot;\n=== Microservices Architecture ===&quot;)
-        print(&quot;Pros:&quot;)
-        print(&quot;  - Independent scaling of services&quot;)
-        print(&quot;  - Different technologies for different services&quot;)
-        print(&quot;  - Fault isolation (one service failure doesn&#x27;t kill all)&quot;)
-        print(&quot;  - Easier to maintain smaller codebases&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">microservices_architecture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Multiple small, independent services.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Microservices Architecture ===&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pros:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Independent scaling of services&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Different technologies for different services&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Fault isolation (one service failure doesn&#39;t kill all)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Easier to maintain smaller codebases&quot;</span><span class="p">)</span>
 
-        print(&quot;\nCons:&quot;)
-        print(&quot;  - Complex deployment and orchestration&quot;)
-        print(&quot;  - Network latency between services&quot;)
-        print(&quot;  - Distributed system debugging challenges&quot;)
-        print(&quot;  - Data consistency across services&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cons:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Complex deployment and orchestration&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Network latency between services&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Distributed system debugging challenges&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Data consistency across services&quot;</span><span class="p">)</span>
 
-        print(&quot;\nBest for:&quot;)
-        print(&quot;  - Large applications with distinct domains&quot;)
-        print(&quot;  - Organizations with strong DevOps practices&quot;)
-        print(&quot;  - Applications requiring different scaling patterns&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best for:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Large applications with distinct domains&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Organizations with strong DevOps practices&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Applications requiring different scaling patterns&quot;</span><span class="p">)</span>
 
-    def serverless_architecture(self):
-        &quot;&quot;&quot;Functions-as-a-Service (FaaS) event-driven approach.&quot;&quot;&quot;
-        print(&quot;\n=== Serverless Architecture ===&quot;)
-        print(&quot;Pros:&quot;)
-        print(&quot;  - Pay only for actual usage&quot;)
-        print(&quot;  - Automatic scaling to zero&quot;)
-        print(&quot;  - No server management required&quot;)
-        print(&quot;  - Built-in fault tolerance&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">serverless_architecture</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Functions-as-a-Service (FaaS) event-driven approach.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Serverless Architecture ===&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pros:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Pay only for actual usage&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Automatic scaling to zero&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - No server management required&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Built-in fault tolerance&quot;</span><span class="p">)</span>
 
-        print(&quot;\nCons:&quot;)
-        print(&quot;  - Cold start latency&quot;)
-        print(&quot;  - Vendor lock-in concerns&quot;)
-        print(&quot;  - Limited execution time per function&quot;)
-        print(&quot;  - Complex debugging and monitoring&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cons:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Cold start latency&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Vendor lock-in concerns&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Limited execution time per function&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Complex debugging and monitoring&quot;</span><span class="p">)</span>
 
-        print(&quot;\nBest for:&quot;)
-        print(&quot;  - Event-driven applications&quot;)
-        print(&quot;  - Applications with variable or unpredictable load&quot;)
-        print(&quot;  - Teams wanting to focus on business logic&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best for:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Event-driven applications&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Applications with variable or unpredictable load&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Teams wanting to focus on business logic&quot;</span><span class="p">)</span>
 
-# Demonstrate scaling concerns
-class ScalingChallenges:
-    &quot;&quot;&quot;Show how different concerns affect architectural choices.&quot;&quot;&quot;
+<span class="c1"># Demonstrate scaling concerns</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ScalingChallenges</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show how different concerns affect architectural choices.&quot;&quot;&quot;</span>
 
-    def demonstrate_scaling_decisions(self):
-        &quot;&quot;&quot;Show decision points for scaling.&quot;&quot;&quot;
-        scenarios = [
-            {
-                &quot;name&quot;: &quot;Startup MVP&quot;,
-                &quot;users&quot;: &quot;&lt; 1,000&quot;,
-                &quot;recommendation&quot;: &quot;Monolithic&quot;,
-                &quot;reasoning&quot;: &quot;Simple deployment, fast development, low operational overhead&quot;
-            },
-            {
-                &quot;name&quot;: &quot;Growing SaaS&quot;,
-                &quot;users&quot;: &quot;10,000 - 100,000&quot;,
-                &quot;recommendation&quot;: &quot;Monolithic with caching&quot;,
-                &quot;reasoning&quot;: &quot;Add database scaling and CDN before architectural complexity&quot;
-            },
-            {
-                &quot;name&quot;: &quot;Large Enterprise&quot;,
-                &quot;users&quot;: &quot;1M+&quot;,
-                &quot;recommendation&quot;: &quot;Microservices&quot;,
-                &quot;reasoning&quot;: &quot;Independent team scaling, different performance requirements&quot;
-            },
-            {
-                &quot;name&quot;: &quot;Event Processing&quot;,
-                &quot;users&quot;: &quot;Variable&quot;,
-                &quot;recommendation&quot;: &quot;Serverless&quot;,
-                &quot;reasoning&quot;: &quot;Unpredictable load, event-driven processing&quot;
-            }
-        ]
+    <span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_scaling_decisions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show decision points for scaling.&quot;&quot;&quot;</span>
+        <span class="n">scenarios</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Startup MVP&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt; 1,000&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Monolithic&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="s2">&quot;Simple deployment, fast development, low operational overhead&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Growing SaaS&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="s2">&quot;10,000 - 100,000&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Monolithic with caching&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="s2">&quot;Add database scaling and CDN before architectural complexity&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Large Enterprise&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="s2">&quot;1M+&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Microservices&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="s2">&quot;Independent team scaling, different performance requirements&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Event Processing&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;users&quot;</span><span class="p">:</span> <span class="s2">&quot;Variable&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Serverless&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="s2">&quot;Unpredictable load, event-driven processing&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
 
-        print(&quot;=== Scaling Decision Matrix ===&quot;)
-        for scenario in scenarios:
-            print(f&quot;\n{scenario[&#x27;name&#x27;]} ({scenario[&#x27;users&#x27;]} users):&quot;)
-            print(f&quot;  Recommended: {scenario[&#x27;recommendation&#x27;]}&quot;)
-            print(f&quot;  Why: {scenario[&#x27;reasoning&#x27;]}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Scaling Decision Matrix ===&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">scenario</span> <span class="ow">in</span> <span class="n">scenarios</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> users):&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Recommended: </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;recommendation&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Why: </span><span class="si">{</span><span class="n">scenario</span><span class="p">[</span><span class="s1">&#39;reasoning&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Example usage
-patterns = ArchitecturePatterns()
-patterns.monolithic_architecture()
-patterns.microservices_architecture()
-patterns.serverless_architecture()
+<span class="c1"># Example usage</span>
+<span class="n">patterns</span> <span class="o">=</span> <span class="n">ArchitecturePatterns</span><span class="p">()</span>
+<span class="n">patterns</span><span class="o">.</span><span class="n">monolithic_architecture</span><span class="p">()</span>
+<span class="n">patterns</span><span class="o">.</span><span class="n">microservices_architecture</span><span class="p">()</span>
+<span class="n">patterns</span><span class="o">.</span><span class="n">serverless_architecture</span><span class="p">()</span>
 
-scaling = ScalingChallenges()
-scaling.demonstrate_scaling_decisions()
+<span class="n">scaling</span> <span class="o">=</span> <span class="n">ScalingChallenges</span><span class="p">()</span>
+<span class="n">scaling</span><span class="o">.</span><span class="n">demonstrate_scaling_decisions</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="architecture-visualization">Architecture visualization<a class="headerlink" href="#architecture-visualization" title="Permanent link">&para;</a></h3>
@@ -1944,113 +1944,113 @@ scaling.demonstrate_scaling_decisions()
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import random
-from datetime import datetime, timedelta
-from collections import Counter, defaultdict
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
 
-class EcommerceAnalytics:
-    def __init__(self):
-        # Generate sample data
-        self.interactions = self.generate_sample_data()
+<span class="k">class</span><span class="w"> </span><span class="nc">EcommerceAnalytics</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Generate sample data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interactions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_sample_data</span><span class="p">()</span>
 
-    def generate_sample_data(self):
-        &quot;&quot;&quot;Generate realistic e-commerce interaction data.&quot;&quot;&quot;
-        products = [&quot;laptop&quot;, &quot;phone&quot;, &quot;headphones&quot;, &quot;tablet&quot;, &quot;mouse&quot;, &quot;keyboard&quot;]
-        users = [f&quot;user_{i}&quot; for i in range(1, 101)]
-        actions = [&quot;view&quot;, &quot;add_to_cart&quot;, &quot;purchase&quot;, &quot;search&quot;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_sample_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate realistic e-commerce interaction data.&quot;&quot;&quot;</span>
+        <span class="n">products</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;laptop&quot;</span><span class="p">,</span> <span class="s2">&quot;phone&quot;</span><span class="p">,</span> <span class="s2">&quot;headphones&quot;</span><span class="p">,</span> <span class="s2">&quot;tablet&quot;</span><span class="p">,</span> <span class="s2">&quot;mouse&quot;</span><span class="p">,</span> <span class="s2">&quot;keyboard&quot;</span><span class="p">]</span>
+        <span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;user_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)]</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">,</span> <span class="s2">&quot;add_to_cart&quot;</span><span class="p">,</span> <span class="s2">&quot;purchase&quot;</span><span class="p">,</span> <span class="s2">&quot;search&quot;</span><span class="p">]</span>
 
-        interactions = []
-        base_time = datetime.now() - timedelta(days=30)
+        <span class="n">interactions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">base_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
-        for i in range(1000):
-            interaction = {
-                &quot;user_id&quot;: random.choice(users),
-                &quot;product&quot;: random.choice(products),
-                &quot;action&quot;: random.choice(actions),
-                &quot;timestamp&quot;: base_time + timedelta(minutes=random.randint(0, 43200)),
-                &quot;value&quot;: random.randint(50, 1000) if random.choice(actions) == &quot;purchase&quot; else 0
-            }
-            interactions.append(interaction)
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+            <span class="n">interaction</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">users</span><span class="p">),</span>
+                <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">products</span><span class="p">),</span>
+                <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">actions</span><span class="p">),</span>
+                <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">base_time</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">43200</span><span class="p">)),</span>
+                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;purchase&quot;</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="p">}</span>
+            <span class="n">interactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction</span><span class="p">)</span>
 
-        return interactions
+        <span class="k">return</span> <span class="n">interactions</span>
 
-    def find_popular_products(self):
-        &quot;&quot;&quot;Identify most popular products.&quot;&quot;&quot;
-        product_popularity = Counter()
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_popular_products</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify most popular products.&quot;&quot;&quot;</span>
+        <span class="n">product_popularity</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
 
-        for interaction in self.interactions:
-            if interaction[&quot;action&quot;] in [&quot;view&quot;, &quot;purchase&quot;]:
-                product_popularity[interaction[&quot;product&quot;]] += 1
+        <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;view&quot;</span><span class="p">,</span> <span class="s2">&quot;purchase&quot;</span><span class="p">]:</span>
+                <span class="n">product_popularity</span><span class="p">[</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        print(&quot;=== Most Popular Products ===&quot;)
-        for product, count in product_popularity.most_common(5):
-            print(f&quot;{product}: {count} interactions&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Most Popular Products ===&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">product</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">product_popularity</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">product</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> interactions&quot;</span><span class="p">)</span>
 
-        return product_popularity
+        <span class="k">return</span> <span class="n">product_popularity</span>
 
-    def analyze_purchase_behavior(self):
-        &quot;&quot;&quot;Find patterns leading to purchases.&quot;&quot;&quot;
-        user_journeys = defaultdict(list)
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_purchase_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find patterns leading to purchases.&quot;&quot;&quot;</span>
+        <span class="n">user_journeys</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 
-        # Group interactions by user
-        for interaction in self.interactions:
-            user_journeys[interaction[&quot;user_id&quot;]].append(interaction)
+        <span class="c1"># Group interactions by user</span>
+        <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactions</span><span class="p">:</span>
+            <span class="n">user_journeys</span><span class="p">[</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interaction</span><span class="p">)</span>
 
-        # Analyze successful purchase journeys
-        purchase_patterns = []
+        <span class="c1"># Analyze successful purchase journeys</span>
+        <span class="n">purchase_patterns</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for user_id, journey in user_journeys.items():
-            # Sort by timestamp
-            journey.sort(key=lambda x: x[&quot;timestamp&quot;])
+        <span class="k">for</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">journey</span> <span class="ow">in</span> <span class="n">user_journeys</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Sort by timestamp</span>
+            <span class="n">journey</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])</span>
 
-            # Find purchases and preceding actions
-            for i, interaction in enumerate(journey):
-                if interaction[&quot;action&quot;] == &quot;purchase&quot;:
-                    # Look at actions in the 2 steps before purchase
-                    preceding_actions = [j[&quot;action&quot;] for j in journey[max(0, i-2):i]]
-                    purchase_patterns.append(preceding_actions)
+            <span class="c1"># Find purchases and preceding actions</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">journey</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;purchase&quot;</span><span class="p">:</span>
+                    <span class="c1"># Look at actions in the 2 steps before purchase</span>
+                    <span class="n">preceding_actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">journey</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span><span class="n">i</span><span class="p">]]</span>
+                    <span class="n">purchase_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">preceding_actions</span><span class="p">)</span>
 
-        print(&quot;\n=== Purchase Journey Patterns ===&quot;)
-        pattern_counts = Counter(tuple(pattern) for pattern in purchase_patterns)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Purchase Journey Patterns ===&quot;</span><span class="p">)</span>
+        <span class="n">pattern_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">purchase_patterns</span><span class="p">)</span>
 
-        for pattern, count in pattern_counts.most_common(5):
-            print(f&quot;Pattern {&#x27; → &#x27;.join(pattern)} → purchase: {count} times&quot;)
+        <span class="k">for</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">pattern_counts</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pattern </span><span class="si">{</span><span class="s1">&#39; → &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span><span class="si">}</span><span class="s2"> → purchase: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> times&quot;</span><span class="p">)</span>
 
-    def create_simple_recommendations(self, user_id):
-        &quot;&quot;&quot;Basic recommendation system.&quot;&quot;&quot;
-        # Find what this user has interacted with
-        user_products = set()
-        for interaction in self.interactions:
-            if interaction[&quot;user_id&quot;] == user_id:
-                user_products.add(interaction[&quot;product&quot;])
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_simple_recommendations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Basic recommendation system.&quot;&quot;&quot;</span>
+        <span class="c1"># Find what this user has interacted with</span>
+        <span class="n">user_products</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">user_id</span><span class="p">:</span>
+                <span class="n">user_products</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">])</span>
 
-        # Find what other users with similar interests bought
-        similar_users = set()
-        for interaction in self.interactions:
-            if (interaction[&quot;product&quot;] in user_products and 
-                interaction[&quot;user_id&quot;] != user_id):
-                similar_users.add(interaction[&quot;user_id&quot;])
+        <span class="c1"># Find what other users with similar interests bought</span>
+        <span class="n">similar_users</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">user_products</span> <span class="ow">and</span> 
+                <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">user_id</span><span class="p">):</span>
+                <span class="n">similar_users</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">])</span>
 
-        # Recommend products bought by similar users
-        recommendations = Counter()
-        for interaction in self.interactions:
-            if (interaction[&quot;user_id&quot;] in similar_users and 
-                interaction[&quot;action&quot;] == &quot;purchase&quot; and 
-                interaction[&quot;product&quot;] not in user_products):
-                recommendations[interaction[&quot;product&quot;]] += 1
+        <span class="c1"># Recommend products bought by similar users</span>
+        <span class="n">recommendations</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">interaction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">interactions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;user_id&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="n">similar_users</span> <span class="ow">and</span> 
+                <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;action&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;purchase&quot;</span> <span class="ow">and</span> 
+                <span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">user_products</span><span class="p">):</span>
+                <span class="n">recommendations</span><span class="p">[</span><span class="n">interaction</span><span class="p">[</span><span class="s2">&quot;product&quot;</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        print(f&quot;\n=== Recommendations for {user_id} ===&quot;)
-        if recommendations:
-            for product, score in recommendations.most_common(3):
-                print(f&quot;Recommend {product} (confidence: {score})&quot;)
-        else:
-            print(&quot;No recommendations available&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Recommendations for </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">recommendations</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">product</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">recommendations</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommend </span><span class="si">{</span><span class="n">product</span><span class="si">}</span><span class="s2"> (confidence: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No recommendations available&quot;</span><span class="p">)</span>
 
-# Example usage
-analytics = EcommerceAnalytics()
-analytics.find_popular_products()
-analytics.analyze_purchase_behavior()
-analytics.create_simple_recommendations(&quot;user_1&quot;)
+<span class="c1"># Example usage</span>
+<span class="n">analytics</span> <span class="o">=</span> <span class="n">EcommerceAnalytics</span><span class="p">()</span>
+<span class="n">analytics</span><span class="o">.</span><span class="n">find_popular_products</span><span class="p">()</span>
+<span class="n">analytics</span><span class="o">.</span><span class="n">analyze_purchase_behavior</span><span class="p">()</span>
+<span class="n">analytics</span><span class="o">.</span><span class="n">create_simple_recommendations</span><span class="p">(</span><span class="s2">&quot;user_1&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2072,152 +2072,152 @@ analytics.create_simple_recommendations(&quot;user_1&quot;)
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ArchitectureAdvisor:
-    &quot;&quot;&quot;Tool to recommend web architecture patterns.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ArchitectureAdvisor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tool to recommend web architecture patterns.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.scoring_weights = {
-            &quot;monolithic&quot;: 0,
-            &quot;microservices&quot;: 0,
-            &quot;serverless&quot;: 0
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scoring_weights</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;monolithic&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;microservices&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;serverless&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
 
-    def assess_project(self):
-        &quot;&quot;&quot;Gather project information and make recommendations.&quot;&quot;&quot;
-        print(&quot;=== Web Architecture Advisor ===&quot;)
-        print(&quot;Answer the following questions to get architecture recommendations:\n&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">assess_project</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gather project information and make recommendations.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Web Architecture Advisor ===&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Answer the following questions to get architecture recommendations:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Team size assessment
-        team_size = self.ask_multiple_choice(
-            &quot;What is your team size?&quot;,
-            [&quot;1-3 developers&quot;, &quot;4-10 developers&quot;, &quot;10+ developers&quot;],
-            [(&quot;monolithic&quot;, 3), (&quot;monolithic&quot;, 2), (&quot;microservices&quot;, 3)]
-        )
+        <span class="c1"># Team size assessment</span>
+        <span class="n">team_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_multiple_choice</span><span class="p">(</span>
+            <span class="s2">&quot;What is your team size?&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;1-3 developers&quot;</span><span class="p">,</span> <span class="s2">&quot;4-10 developers&quot;</span><span class="p">,</span> <span class="s2">&quot;10+ developers&quot;</span><span class="p">],</span>
+            <span class="p">[(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+        <span class="p">)</span>
 
-        # Expected user load
-        user_load = self.ask_multiple_choice(
-            &quot;Expected number of users?&quot;,
-            [&quot;&lt; 1,000&quot;, &quot;1,000 - 100,000&quot;, &quot;100,000+&quot;, &quot;Highly variable/unpredictable&quot;],
-            [(&quot;monolithic&quot;, 3), (&quot;monolithic&quot;, 2), (&quot;microservices&quot;, 3), (&quot;serverless&quot;, 3)]
-        )
+        <span class="c1"># Expected user load</span>
+        <span class="n">user_load</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_multiple_choice</span><span class="p">(</span>
+            <span class="s2">&quot;Expected number of users?&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;&lt; 1,000&quot;</span><span class="p">,</span> <span class="s2">&quot;1,000 - 100,000&quot;</span><span class="p">,</span> <span class="s2">&quot;100,000+&quot;</span><span class="p">,</span> <span class="s2">&quot;Highly variable/unpredictable&quot;</span><span class="p">],</span>
+            <span class="p">[(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;serverless&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+        <span class="p">)</span>
 
-        # Development speed priority
-        speed_priority = self.ask_multiple_choice(
-            &quot;How important is fast initial development?&quot;,
-            [&quot;Critical - need MVP quickly&quot;, &quot;Important but not critical&quot;, &quot;Not a priority&quot;],
-            [(&quot;monolithic&quot;, 3), (&quot;monolithic&quot;, 1), (&quot;microservices&quot;, 2)]
-        )
+        <span class="c1"># Development speed priority</span>
+        <span class="n">speed_priority</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_multiple_choice</span><span class="p">(</span>
+            <span class="s2">&quot;How important is fast initial development?&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;Critical - need MVP quickly&quot;</span><span class="p">,</span> <span class="s2">&quot;Important but not critical&quot;</span><span class="p">,</span> <span class="s2">&quot;Not a priority&quot;</span><span class="p">],</span>
+            <span class="p">[(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+        <span class="p">)</span>
 
-        # Operational complexity tolerance
-        ops_complexity = self.ask_multiple_choice(
-            &quot;Team&#x27;s operational/DevOps experience?&quot;,
-            [&quot;Limited&quot;, &quot;Moderate&quot;, &quot;Advanced&quot;],
-            [(&quot;monolithic&quot;, 3), (&quot;microservices&quot;, 1), (&quot;microservices&quot;, 3)]
-        )
+        <span class="c1"># Operational complexity tolerance</span>
+        <span class="n">ops_complexity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_multiple_choice</span><span class="p">(</span>
+            <span class="s2">&quot;Team&#39;s operational/DevOps experience?&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;Limited&quot;</span><span class="p">,</span> <span class="s2">&quot;Moderate&quot;</span><span class="p">,</span> <span class="s2">&quot;Advanced&quot;</span><span class="p">],</span>
+            <span class="p">[(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+        <span class="p">)</span>
 
-        # Scaling requirements
-        scaling_needs = self.ask_multiple_choice(
-            &quot;Different parts of your app need different scaling?&quot;,
-            [&quot;No, everything scales together&quot;, &quot;Some parts need more scaling&quot;, &quot;Very different scaling needs&quot;],
-            [(&quot;monolithic&quot;, 3), (&quot;microservices&quot;, 1), (&quot;microservices&quot;, 3)]
-        )
+        <span class="c1"># Scaling requirements</span>
+        <span class="n">scaling_needs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_multiple_choice</span><span class="p">(</span>
+            <span class="s2">&quot;Different parts of your app need different scaling?&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;No, everything scales together&quot;</span><span class="p">,</span> <span class="s2">&quot;Some parts need more scaling&quot;</span><span class="p">,</span> <span class="s2">&quot;Very different scaling needs&quot;</span><span class="p">],</span>
+            <span class="p">[(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;microservices&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+        <span class="p">)</span>
 
-        # Budget constraints
-        budget = self.ask_multiple_choice(
-            &quot;Budget for infrastructure and operations?&quot;,
-            [&quot;Very limited&quot;, &quot;Moderate&quot;, &quot;Flexible&quot;],
-            [(&quot;monolithic&quot;, 2), (&quot;monolithic&quot;, 1), (&quot;serverless&quot;, 2)]
-        )
+        <span class="c1"># Budget constraints</span>
+        <span class="n">budget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ask_multiple_choice</span><span class="p">(</span>
+            <span class="s2">&quot;Budget for infrastructure and operations?&quot;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s2">&quot;Very limited&quot;</span><span class="p">,</span> <span class="s2">&quot;Moderate&quot;</span><span class="p">,</span> <span class="s2">&quot;Flexible&quot;</span><span class="p">],</span>
+            <span class="p">[(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;monolithic&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;serverless&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span>
+        <span class="p">)</span>
 
-        return self.make_recommendation()
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_recommendation</span><span class="p">()</span>
 
-    def ask_multiple_choice(self, question, options, scoring):
-        &quot;&quot;&quot;Ask a multiple choice question and update scores.&quot;&quot;&quot;
-        print(f&quot;{question}&quot;)
-        for i, option in enumerate(options, 1):
-            print(f&quot;  {i}. {option}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">ask_multiple_choice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">question</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">scoring</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ask a multiple choice question and update scores.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">option</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">option</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        while True:
-            try:
-                choice = int(input(&quot;Enter choice (number): &quot;)) - 1
-                if 0 &lt;= choice &lt; len(options):
-                    # Update scores based on choice
-                    arch_type, points = scoring[choice]
-                    self.scoring_weights[arch_type] += points
-                    print(f&quot;Selected: {options[choice]}\n&quot;)
-                    break
-                else:
-                    print(&quot;Please enter a valid choice number.&quot;)
-            except ValueError:
-                print(&quot;Please enter a number.&quot;)
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter choice (number): &quot;</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">choice</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">options</span><span class="p">):</span>
+                    <span class="c1"># Update scores based on choice</span>
+                    <span class="n">arch_type</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">scoring</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">scoring_weights</span><span class="p">[</span><span class="n">arch_type</span><span class="p">]</span> <span class="o">+=</span> <span class="n">points</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Selected: </span><span class="si">{</span><span class="n">options</span><span class="p">[</span><span class="n">choice</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a valid choice number.&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a number.&quot;</span><span class="p">)</span>
 
-    def make_recommendation(self):
-        &quot;&quot;&quot;Analyze scores and make recommendation.&quot;&quot;&quot;
-        print(&quot;=== Architecture Recommendation ===&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_recommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze scores and make recommendation.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Architecture Recommendation ===&quot;</span><span class="p">)</span>
 
-        # Find highest scoring architecture
-        recommended = max(self.scoring_weights.items(), key=lambda x: x[1])
-        arch_name, score = recommended
+        <span class="c1"># Find highest scoring architecture</span>
+        <span class="n">recommended</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scoring_weights</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">arch_name</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="n">recommended</span>
 
-        print(f&quot;Recommended Architecture: {arch_name.title()}&quot;)
-        print(f&quot;Confidence Score: {score}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended Architecture: </span><span class="si">{</span><span class="n">arch_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Confidence Score: </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Provide reasoning
-        self.explain_recommendation(arch_name)
+        <span class="c1"># Provide reasoning</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">explain_recommendation</span><span class="p">(</span><span class="n">arch_name</span><span class="p">)</span>
 
-        # Show alternative considerations
-        self.show_alternatives()
+        <span class="c1"># Show alternative considerations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_alternatives</span><span class="p">()</span>
 
-    def explain_recommendation(self, architecture):
-        &quot;&quot;&quot;Explain why this architecture was recommended.&quot;&quot;&quot;
-        explanations = {
-            &quot;monolithic&quot;: [
-                &quot;✓ Simpler to develop and deploy initially&quot;,
-                &quot;✓ Lower operational complexity&quot;,
-                &quot;✓ Better for smaller teams and user bases&quot;,
-                &quot;✓ Faster initial development and testing&quot;
-            ],
-            &quot;microservices&quot;: [
-                &quot;✓ Better for large teams and user bases&quot;,
-                &quot;✓ Independent scaling of components&quot;,
-                &quot;✓ Technology diversity across services&quot;,
-                &quot;✓ Fault isolation and resilience&quot;
-            ],
-            &quot;serverless&quot;: [
-                &quot;✓ Pay-per-use cost model&quot;,
-                &quot;✓ Automatic scaling to zero&quot;,
-                &quot;✓ Reduced operational overhead&quot;,
-                &quot;✓ Good for variable or event-driven workloads&quot;
-            ]
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">explain_recommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">architecture</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Explain why this architecture was recommended.&quot;&quot;&quot;</span>
+        <span class="n">explanations</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;monolithic&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;✓ Simpler to develop and deploy initially&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Lower operational complexity&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Better for smaller teams and user bases&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Faster initial development and testing&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;microservices&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;✓ Better for large teams and user bases&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Independent scaling of components&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Technology diversity across services&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Fault isolation and resilience&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;serverless&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;✓ Pay-per-use cost model&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Automatic scaling to zero&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Reduced operational overhead&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;✓ Good for variable or event-driven workloads&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
 
-        print(f&quot;\nWhy {architecture.title()}?&quot;)
-        for reason in explanations[architecture]:
-            print(f&quot;  {reason}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Why </span><span class="si">{</span><span class="n">architecture</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">?&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">reason</span> <span class="ow">in</span> <span class="n">explanations</span><span class="p">[</span><span class="n">architecture</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def show_alternatives(self):
-        &quot;&quot;&quot;Show when to consider other architectures.&quot;&quot;&quot;
-        print(f&quot;\nConsider alternatives if:&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">show_alternatives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show when to consider other architectures.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Consider alternatives if:&quot;</span><span class="p">)</span>
 
-        # Sort architectures by score
-        sorted_archs = sorted(self.scoring_weights.items(), key=lambda x: x[1], reverse=True)
+        <span class="c1"># Sort architectures by score</span>
+        <span class="n">sorted_archs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scoring_weights</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        for arch, score in sorted_archs[1:]:  # Skip the recommended one
-            if arch == &quot;monolithic&quot;:
-                print(f&quot;  • {arch.title()} if: team is small, simple requirements, need fast delivery&quot;)
-            elif arch == &quot;microservices&quot;:
-                print(f&quot;  • {arch.title()} if: large team, complex domain, different scaling needs&quot;)
-            elif arch == &quot;serverless&quot;:
-                print(f&quot;  • {arch.title()} if: event-driven, variable load, minimal ops team&quot;)
+        <span class="k">for</span> <span class="n">arch</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">sorted_archs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>  <span class="c1"># Skip the recommended one</span>
+            <span class="k">if</span> <span class="n">arch</span> <span class="o">==</span> <span class="s2">&quot;monolithic&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">arch</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> if: team is small, simple requirements, need fast delivery&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">arch</span> <span class="o">==</span> <span class="s2">&quot;microservices&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">arch</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> if: large team, complex domain, different scaling needs&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">arch</span> <span class="o">==</span> <span class="s2">&quot;serverless&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">arch</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2"> if: event-driven, variable load, minimal ops team&quot;</span><span class="p">)</span>
 
-# Interactive example (commented out for demo)
-# advisor = ArchitectureAdvisor()
-# advisor.assess_project()
+<span class="c1"># Interactive example (commented out for demo)</span>
+<span class="c1"># advisor = ArchitectureAdvisor()</span>
+<span class="c1"># advisor.assess_project()</span>
 
-# Demo with preset answers
-demo_advisor = ArchitectureAdvisor()
-demo_advisor.scoring_weights = {&quot;monolithic&quot;: 8, &quot;microservices&quot;: 5, &quot;serverless&quot;: 3}
-demo_advisor.make_recommendation()
+<span class="c1"># Demo with preset answers</span>
+<span class="n">demo_advisor</span> <span class="o">=</span> <span class="n">ArchitectureAdvisor</span><span class="p">()</span>
+<span class="n">demo_advisor</span><span class="o">.</span><span class="n">scoring_weights</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;monolithic&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;microservices&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;serverless&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">demo_advisor</span><span class="o">.</span><span class="n">make_recommendation</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>
@@ -2488,6 +2488,8 @@ demo_advisor.make_recommendation()
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

@@ -1836,183 +1836,183 @@
 <h3 id="example-testing-a-grade-calculator-black-box-approach">Example: Testing a Grade Calculator (Black Box Approach)<a class="headerlink" href="#example-testing-a-grade-calculator-black-box-approach" title="Permanent link">&para;</a></h3>
 <p><strong>Specification</strong>: &ldquo;The grade calculator should convert numerical scores (0-100) to letter grades using the standard scale: A (90-100), B (80-89), C (70-79), D (60-69), F (0-59). Invalid inputs should raise appropriate errors.&rdquo;</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import unittest
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
 
-class GradeCalculator:
-    &quot;&quot;&quot;Converts numerical scores to letter grades.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">GradeCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts numerical scores to letter grades.&quot;&quot;&quot;</span>
 
-    def calculate_grade(self, score):
-        &quot;&quot;&quot;
-        Convert numerical score to letter grade.
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert numerical score to letter grade.</span>
 
-        Args:
-            score (float): Numerical score between 0 and 100
+<span class="sd">        Args:</span>
+<span class="sd">            score (float): Numerical score between 0 and 100</span>
 
-        Returns:
-            str: Letter grade (A, B, C, D, or F)
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Letter grade (A, B, C, D, or F)</span>
 
-        Raises:
-            ValueError: If score is not between 0 and 100
-        &quot;&quot;&quot;
-        if not isinstance(score, (int, float)):
-            raise ValueError(&quot;Score must be a number&quot;)
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If score is not between 0 and 100</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be a number&quot;</span><span class="p">)</span>
 
-        if score &lt; 0 or score &gt; 100:
-            raise ValueError(&quot;Score must be between 0 and 100&quot;)
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be between 0 and 100&quot;</span><span class="p">)</span>
 
-        if score &gt;= 90:
-            return &quot;A&quot;
-        elif score &gt;= 80:
-            return &quot;B&quot;
-        elif score &gt;= 70:
-            return &quot;C&quot;
-        elif score &gt;= 60:
-            return &quot;D&quot;
-        else:
-            return &quot;F&quot;
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
 
-class TestGradeCalculatorBlackBox(unittest.TestCase):
-    &quot;&quot;&quot;Black box tests based on specification only.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">TestGradeCalculatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box tests based on specification only.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        self.calculator = GradeCalculator()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">GradeCalculator</span><span class="p">()</span>
 
-    def test_a_grade_range(self):
-        &quot;&quot;&quot;Test A grade range (90-100) based on specification.&quot;&quot;&quot;
-        # Test boundary values and middle values
-        self.assertEqual(self.calculator.calculate_grade(90), &quot;A&quot;)  # Lower boundary
-        self.assertEqual(self.calculator.calculate_grade(95), &quot;A&quot;)  # Middle value
-        self.assertEqual(self.calculator.calculate_grade(100), &quot;A&quot;) # Upper boundary
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_a_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test A grade range (90-100) based on specification.&quot;&quot;&quot;</span>
+        <span class="c1"># Test boundary values and middle values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">95</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="c1"># Upper boundary</span>
 
-    def test_b_grade_range(self):
-        &quot;&quot;&quot;Test B grade range (80-89) based on specification.&quot;&quot;&quot;
-        self.assertEqual(self.calculator.calculate_grade(80), &quot;B&quot;)  # Lower boundary
-        self.assertEqual(self.calculator.calculate_grade(85), &quot;B&quot;)  # Middle value
-        self.assertEqual(self.calculator.calculate_grade(89), &quot;B&quot;)  # Upper boundary
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_b_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test B grade range (80-89) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">89</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
 
-    def test_c_grade_range(self):
-        &quot;&quot;&quot;Test C grade range (70-79) based on specification.&quot;&quot;&quot;
-        self.assertEqual(self.calculator.calculate_grade(70), &quot;C&quot;)
-        self.assertEqual(self.calculator.calculate_grade(75), &quot;C&quot;)
-        self.assertEqual(self.calculator.calculate_grade(79), &quot;C&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_c_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test C grade range (70-79) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">70</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">75</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">79</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
 
-    def test_d_grade_range(self):
-        &quot;&quot;&quot;Test D grade range (60-69) based on specification.&quot;&quot;&quot;
-        self.assertEqual(self.calculator.calculate_grade(60), &quot;D&quot;)
-        self.assertEqual(self.calculator.calculate_grade(65), &quot;D&quot;)
-        self.assertEqual(self.calculator.calculate_grade(69), &quot;D&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_d_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test D grade range (60-69) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">65</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">69</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
 
-    def test_f_grade_range(self):
-        &quot;&quot;&quot;Test F grade range (0-59) based on specification.&quot;&quot;&quot;
-        self.assertEqual(self.calculator.calculate_grade(0), &quot;F&quot;)   # Lower boundary
-        self.assertEqual(self.calculator.calculate_grade(30), &quot;F&quot;)  # Middle value
-        self.assertEqual(self.calculator.calculate_grade(59), &quot;F&quot;)  # Upper boundary
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_f_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test F grade range (0-59) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>   <span class="c1"># Lower boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">59</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
 
-    def test_invalid_inputs_based_on_specification(self):
-        &quot;&quot;&quot;Test error handling based on specification.&quot;&quot;&quot;
-        # Negative numbers should raise error
-        with self.assertRaises(ValueError):
-            self.calculator.calculate_grade(-1)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_inputs_based_on_specification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test error handling based on specification.&quot;&quot;&quot;</span>
+        <span class="c1"># Negative numbers should raise error</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
-        # Numbers above 100 should raise error
-        with self.assertRaises(ValueError):
-            self.calculator.calculate_grade(101)
+        <span class="c1"># Numbers above 100 should raise error</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
 
-        # Non-numeric inputs should raise error
-        with self.assertRaises(ValueError):
-            self.calculator.calculate_grade(&quot;85&quot;)
+        <span class="c1"># Non-numeric inputs should raise error</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="s2">&quot;85&quot;</span><span class="p">)</span>
 
-    def test_decimal_scores(self):
-        &quot;&quot;&quot;Test decimal scores based on specification.&quot;&quot;&quot;
-        self.assertEqual(self.calculator.calculate_grade(89.5), &quot;B&quot;)
-        self.assertEqual(self.calculator.calculate_grade(79.9), &quot;C&quot;)
-        self.assertEqual(self.calculator.calculate_grade(59.9), &quot;F&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_decimal_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test decimal scores based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">89.5</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">79.9</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">59.9</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="boundary-value-analysis">Boundary Value Analysis<a class="headerlink" href="#boundary-value-analysis" title="Permanent link">&para;</a></h3>
 <p>Black box testing often uses <strong>boundary value analysis</strong> to identify test cases at the edges of input domains:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestPasswordValidatorBlackBox(unittest.TestCase):
-    &quot;&quot;&quot;Black box testing using boundary value analysis.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestPasswordValidatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box testing using boundary value analysis.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        # Specification: Password must be 8-20 characters, contain at least
-        # one uppercase, one lowercase, one digit, and one special character
-        self.validator = PasswordValidator()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Specification: Password must be 8-20 characters, contain at least</span>
+        <span class="c1"># one uppercase, one lowercase, one digit, and one special character</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">PasswordValidator</span><span class="p">()</span>
 
-    def test_length_boundaries(self):
-        &quot;&quot;&quot;Test password length boundaries.&quot;&quot;&quot;
-        # Just below minimum (7 chars) - should fail
-        with self.assertRaises(ValueError):
-            self.validator.validate(&quot;Abc123!&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_length_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test password length boundaries.&quot;&quot;&quot;</span>
+        <span class="c1"># Just below minimum (7 chars) - should fail</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!&quot;</span><span class="p">)</span>
 
-        # Minimum length (8 chars) - should pass
-        self.assertTrue(self.validator.validate(&quot;Abc1234!&quot;))
+        <span class="c1"># Minimum length (8 chars) - should pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc1234!&quot;</span><span class="p">))</span>
 
-        # Maximum length (20 chars) - should pass
-        self.assertTrue(self.validator.validate(&quot;Abc123!@#$%^&amp;*()1234&quot;))
+        <span class="c1"># Maximum length (20 chars) - should pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!@#$%^&amp;*()1234&quot;</span><span class="p">))</span>
 
-        # Just above maximum (21 chars) - should fail
-        with self.assertRaises(ValueError):
-            self.validator.validate(&quot;Abc123!@#$%^&amp;*()12345&quot;)
+        <span class="c1"># Just above maximum (21 chars) - should fail</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!@#$%^&amp;*()12345&quot;</span><span class="p">)</span>
 
-    def test_character_requirements_boundaries(self):
-        &quot;&quot;&quot;Test character requirement boundaries.&quot;&quot;&quot;
-        # No uppercase - should fail
-        with self.assertRaises(ValueError):
-            self.validator.validate(&quot;abc123!@&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_character_requirements_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test character requirement boundaries.&quot;&quot;&quot;</span>
+        <span class="c1"># No uppercase - should fail</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;abc123!@&quot;</span><span class="p">)</span>
 
-        # Exactly one uppercase - should pass
-        self.assertTrue(self.validator.validate(&quot;Abc123!@&quot;))
+        <span class="c1"># Exactly one uppercase - should pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!@&quot;</span><span class="p">))</span>
 
-        # No digits - should fail
-        with self.assertRaises(ValueError):
-            self.validator.validate(&quot;Abcdef!@&quot;)
+        <span class="c1"># No digits - should fail</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abcdef!@&quot;</span><span class="p">)</span>
 
-        # Exactly one digit - should pass
-        self.assertTrue(self.validator.validate(&quot;Abcdef1!&quot;))
+        <span class="c1"># Exactly one digit - should pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abcdef1!&quot;</span><span class="p">))</span>
 </code></pre>
 </div>
 <h3 id="equivalence-partitioning">Equivalence Partitioning<a class="headerlink" href="#equivalence-partitioning" title="Permanent link">&para;</a></h3>
 <p><strong>Equivalence partitioning</strong> divides input data into groups that should be processed similarly:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestEmailValidatorBlackBox(unittest.TestCase):
-    &quot;&quot;&quot;Black box testing using equivalence partitioning.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestEmailValidatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box testing using equivalence partitioning.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        self.validator = EmailValidator()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">EmailValidator</span><span class="p">()</span>
 
-    def test_valid_email_equivalence_classes(self):
-        &quot;&quot;&quot;Test different types of valid emails.&quot;&quot;&quot;
-        # Standard email format
-        self.assertTrue(self.validator.is_valid(&quot;user@domain.com&quot;))
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_valid_email_equivalence_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test different types of valid emails.&quot;&quot;&quot;</span>
+        <span class="c1"># Standard email format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">))</span>
 
-        # Email with numbers
-        self.assertTrue(self.validator.is_valid(&quot;user123@domain.com&quot;))
+        <span class="c1"># Email with numbers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user123@domain.com&quot;</span><span class="p">))</span>
 
-        # Email with dots in username
-        self.assertTrue(self.validator.is_valid(&quot;first.last@domain.com&quot;))
+        <span class="c1"># Email with dots in username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;first.last@domain.com&quot;</span><span class="p">))</span>
 
-        # Email with subdomain
-        self.assertTrue(self.validator.is_valid(&quot;user@mail.domain.com&quot;))
+        <span class="c1"># Email with subdomain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@mail.domain.com&quot;</span><span class="p">))</span>
 
-    def test_invalid_email_equivalence_classes(self):
-        &quot;&quot;&quot;Test different types of invalid emails.&quot;&quot;&quot;
-        # Missing @ symbol
-        self.assertFalse(self.validator.is_valid(&quot;userdomain.com&quot;))
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_email_equivalence_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test different types of invalid emails.&quot;&quot;&quot;</span>
+        <span class="c1"># Missing @ symbol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;userdomain.com&quot;</span><span class="p">))</span>
 
-        # Missing domain
-        self.assertFalse(self.validator.is_valid(&quot;user@&quot;))
+        <span class="c1"># Missing domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@&quot;</span><span class="p">))</span>
 
-        # Missing username
-        self.assertFalse(self.validator.is_valid(&quot;@domain.com&quot;))
+        <span class="c1"># Missing username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;@domain.com&quot;</span><span class="p">))</span>
 
-        # Multiple @ symbols
-        self.assertFalse(self.validator.is_valid(&quot;user@@domain.com&quot;))
+        <span class="c1"># Multiple @ symbols</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@@domain.com&quot;</span><span class="p">))</span>
 
-        # Invalid characters
-        self.assertFalse(self.validator.is_valid(&quot;user name@domain.com&quot;))
+        <span class="c1"># Invalid characters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user name@domain.com&quot;</span><span class="p">))</span>
 </code></pre>
 </div>
 <h2 id="white-box-testing">White Box Testing<a class="headerlink" href="#white-box-testing" title="Permanent link">&para;</a></h2>
@@ -2035,155 +2035,155 @@ class TestGradeCalculatorBlackBox(unittest.TestCase):
 <h3 id="example-testing-a-discount-calculator-white-box-approach">Example: Testing a Discount Calculator (White Box Approach)<a class="headerlink" href="#example-testing-a-discount-calculator-white-box-approach" title="Permanent link">&para;</a></h3>
 <p>Looking at the implementation to design comprehensive tests:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class DiscountCalculator:
-    &quot;&quot;&quot;Calculates discounts based on customer type and order amount.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">DiscountCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates discounts based on customer type and order amount.&quot;&quot;&quot;</span>
 
-    def calculate_discount(self, customer_type, order_amount, is_holiday_season=False):
-        &quot;&quot;&quot;
-        Calculate discount percentage based on customer and order details.
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_type</span><span class="p">,</span> <span class="n">order_amount</span><span class="p">,</span> <span class="n">is_holiday_season</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate discount percentage based on customer and order details.</span>
 
-        Args:
-            customer_type (str): &quot;regular&quot;, &quot;premium&quot;, or &quot;vip&quot;
-            order_amount (float): Order total amount
-            is_holiday_season (bool): Whether it&#x27;s holiday season
+<span class="sd">        Args:</span>
+<span class="sd">            customer_type (str): &quot;regular&quot;, &quot;premium&quot;, or &quot;vip&quot;</span>
+<span class="sd">            order_amount (float): Order total amount</span>
+<span class="sd">            is_holiday_season (bool): Whether it&#39;s holiday season</span>
 
-        Returns:
-            float: Discount percentage (0.0 to 0.5)
-        &quot;&quot;&quot;
-        discount = 0.0
+<span class="sd">        Returns:</span>
+<span class="sd">            float: Discount percentage (0.0 to 0.5)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-        # Base discount by customer type
-        if customer_type == &quot;regular&quot;:
-            discount = 0.0
-        elif customer_type == &quot;premium&quot;:
-            discount = 0.1
-        elif customer_type == &quot;vip&quot;:
-            discount = 0.2
-        else:
-            raise ValueError(f&quot;Invalid customer type: {customer_type}&quot;)
+        <span class="c1"># Base discount by customer type</span>
+        <span class="k">if</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;premium&quot;</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;vip&quot;</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid customer type: </span><span class="si">{</span><span class="n">customer_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Additional discount for large orders
-        if order_amount &gt; 1000:
-            discount += 0.1
-        elif order_amount &gt; 500:
-            discount += 0.05
+        <span class="c1"># Additional discount for large orders</span>
+        <span class="k">if</span> <span class="n">order_amount</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">+=</span> <span class="mf">0.1</span>
+        <span class="k">elif</span> <span class="n">order_amount</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">+=</span> <span class="mf">0.05</span>
 
-        # Holiday season bonus
-        if is_holiday_season:
-            discount += 0.05
+        <span class="c1"># Holiday season bonus</span>
+        <span class="k">if</span> <span class="n">is_holiday_season</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">+=</span> <span class="mf">0.05</span>
 
-        # Cap maximum discount
-        if discount &gt; 0.5:
-            discount = 0.5
+        <span class="c1"># Cap maximum discount</span>
+        <span class="k">if</span> <span class="n">discount</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.5</span>
 
-        return discount
+        <span class="k">return</span> <span class="n">discount</span>
 
 
-class TestDiscountCalculatorWhiteBox(unittest.TestCase):
-    &quot;&quot;&quot;White box tests ensuring all code paths are covered.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">TestDiscountCalculatorWhiteBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;White box tests ensuring all code paths are covered.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        self.calculator = DiscountCalculator()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">DiscountCalculator</span><span class="p">()</span>
 
-    def test_all_customer_type_paths(self):
-        &quot;&quot;&quot;Test all customer type code paths.&quot;&quot;&quot;
-        # Path 1: Regular customer (discount = 0.0)
-        result = self.calculator.calculate_discount(&quot;regular&quot;, 100)
-        self.assertEqual(result, 0.0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_all_customer_type_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all customer type code paths.&quot;&quot;&quot;</span>
+        <span class="c1"># Path 1: Regular customer (discount = 0.0)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
 
-        # Path 2: Premium customer (discount = 0.1)
-        result = self.calculator.calculate_discount(&quot;premium&quot;, 100)
-        self.assertEqual(result, 0.1)
+        <span class="c1"># Path 2: Premium customer (discount = 0.1)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 
-        # Path 3: VIP customer (discount = 0.2)
-        result = self.calculator.calculate_discount(&quot;vip&quot;, 100)
-        self.assertEqual(result, 0.2)
+        <span class="c1"># Path 3: VIP customer (discount = 0.2)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
 
-        # Path 4: Invalid customer type (exception path)
-        with self.assertRaises(ValueError):
-            self.calculator.calculate_discount(&quot;invalid&quot;, 100)
+        <span class="c1"># Path 4: Invalid customer type (exception path)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;invalid&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-    def test_all_order_amount_conditions(self):
-        &quot;&quot;&quot;Test all order amount condition branches.&quot;&quot;&quot;
-        # Amount &lt;= 500: no additional discount
-        result = self.calculator.calculate_discount(&quot;regular&quot;, 400)
-        self.assertEqual(result, 0.0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_all_order_amount_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all order amount condition branches.&quot;&quot;&quot;</span>
+        <span class="c1"># Amount &lt;= 500: no additional discount</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
 
-        # 500 &lt; amount &lt;= 1000: +0.05 discount
-        result = self.calculator.calculate_discount(&quot;regular&quot;, 600)
-        self.assertEqual(result, 0.05)
+        <span class="c1"># 500 &lt; amount &lt;= 1000: +0.05 discount</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
 
-        # Amount &gt; 1000: +0.1 discount
-        result = self.calculator.calculate_discount(&quot;regular&quot;, 1200)
-        self.assertEqual(result, 0.1)
+        <span class="c1"># Amount &gt; 1000: +0.1 discount</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
 
-    def test_holiday_season_condition(self):
-        &quot;&quot;&quot;Test holiday season condition branch.&quot;&quot;&quot;
-        # Without holiday season
-        result = self.calculator.calculate_discount(&quot;premium&quot;, 600, False)
-        self.assertEqual(result, 0.15)  # 0.1 + 0.05
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_holiday_season_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test holiday season condition branch.&quot;&quot;&quot;</span>
+        <span class="c1"># Without holiday season</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>  <span class="c1"># 0.1 + 0.05</span>
 
-        # With holiday season
-        result = self.calculator.calculate_discount(&quot;premium&quot;, 600, True)
-        self.assertEqual(result, 0.2)   # 0.1 + 0.05 + 0.05
+        <span class="c1"># With holiday season</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>   <span class="c1"># 0.1 + 0.05 + 0.05</span>
 
-    def test_maximum_discount_cap_condition(self):
-        &quot;&quot;&quot;Test the discount cap condition.&quot;&quot;&quot;
-        # Test case that would exceed 0.5 limit
-        # VIP (0.2) + large order (0.1) + holiday (0.05) + more = would be &gt; 0.5
-        result = self.calculator.calculate_discount(&quot;vip&quot;, 1500, True)
-        self.assertEqual(result, 0.35)  # 0.2 + 0.1 + 0.05 = 0.35 (under cap)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_maximum_discount_cap_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the discount cap condition.&quot;&quot;&quot;</span>
+        <span class="c1"># Test case that would exceed 0.5 limit</span>
+        <span class="c1"># VIP (0.2) + large order (0.1) + holiday (0.05) + more = would be &gt; 0.5</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span>  <span class="c1"># 0.2 + 0.1 + 0.05 = 0.35 (under cap)</span>
 
-        # Create scenario that hits the cap
-        # Need to modify method or create extreme case that would exceed 0.5
+        <span class="c1"># Create scenario that hits the cap</span>
+        <span class="c1"># Need to modify method or create extreme case that would exceed 0.5</span>
 
-    def test_complex_path_combinations(self):
-        &quot;&quot;&quot;Test combinations of conditions to ensure all paths work together.&quot;&quot;&quot;
-        # VIP customer + large order + holiday season
-        result = self.calculator.calculate_discount(&quot;vip&quot;, 1200, True)
-        expected = 0.35  # 0.2 (vip) + 0.1 (large order) + 0.05 (holiday)
-        self.assertEqual(result, expected)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_complex_path_combinations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test combinations of conditions to ensure all paths work together.&quot;&quot;&quot;</span>
+        <span class="c1"># VIP customer + large order + holiday season</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.35</span>  <span class="c1"># 0.2 (vip) + 0.1 (large order) + 0.05 (holiday)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
-        # Premium customer + medium order + no holiday
-        result = self.calculator.calculate_discount(&quot;premium&quot;, 750, False)
-        expected = 0.15  # 0.1 (premium) + 0.05 (medium order)
-        self.assertEqual(result, expected)
+        <span class="c1"># Premium customer + medium order + no holiday</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 0.1 (premium) + 0.05 (medium order)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 
-        # Regular customer + large order + holiday
-        result = self.calculator.calculate_discount(&quot;regular&quot;, 1100, True)
-        expected = 0.15  # 0.0 (regular) + 0.1 (large order) + 0.05 (holiday)
-        self.assertEqual(result, expected)
+        <span class="c1"># Regular customer + large order + holiday</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 0.0 (regular) + 0.1 (large order) + 0.05 (holiday)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="statement-and-branch-coverage">Statement and Branch Coverage<a class="headerlink" href="#statement-and-branch-coverage" title="Permanent link">&para;</a></h3>
 <p>White box testing aims for complete coverage:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestBankAccountWhiteBox(unittest.TestCase):
-    &quot;&quot;&quot;White box testing ensuring statement and branch coverage.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestBankAccountWhiteBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;White box testing ensuring statement and branch coverage.&quot;&quot;&quot;</span>
 
-    def test_withdraw_method_all_branches(self):
-        &quot;&quot;&quot;Test all branches in withdraw method.&quot;&quot;&quot;
-        account = BankAccount(&quot;Test&quot;, 100)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_withdraw_method_all_branches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all branches in withdraw method.&quot;&quot;&quot;</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
-        # Branch 1: amount &lt;= 0 (first if condition true)
-        with self.assertRaises(ValueError):
-            account.withdraw(-10)
+        <span class="c1"># Branch 1: amount &lt;= 0 (first if condition true)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
 
-        with self.assertRaises(ValueError):
-            account.withdraw(0)
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-        # Branch 2: amount &gt; balance (second if condition true)
-        with self.assertRaises(ValueError):
-            account.withdraw(150)
+        <span class="c1"># Branch 2: amount &gt; balance (second if condition true)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
 
-        # Branch 3: valid withdrawal (both if conditions false)
-        result = account.withdraw(50)
-        self.assertEqual(result, 50)
-        self.assertEqual(account.balance, 50)
+        <span class="c1"># Branch 3: valid withdrawal (both if conditions false)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 
-        # Ensure transaction history is updated (statement coverage)
-        self.assertEqual(len(account.transaction_history), 1)
-        self.assertIn(&quot;Withdrawal&quot;, account.transaction_history[0])
+        <span class="c1"># Ensure transaction history is updated (statement coverage)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;Withdrawal&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </code></pre>
 </div>
 <h2 id="grey-box-testing">Grey Box Testing<a class="headerlink" href="#grey-box-testing" title="Permanent link">&para;</a></h2>
@@ -2206,126 +2206,126 @@ class TestDiscountCalculatorWhiteBox(unittest.TestCase):
 <h3 id="example-testing-a-user-authentication-system-grey-box-approach">Example: Testing a User Authentication System (Grey Box Approach)<a class="headerlink" href="#example-testing-a-user-authentication-system-grey-box-approach" title="Permanent link">&para;</a></h3>
 <p>Knowing that the system uses password hashing and session management internally:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestUserAuthenticationGreyBox(unittest.TestCase):
-    &quot;&quot;&quot;Grey box testing with knowledge of internal security mechanisms.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestUserAuthenticationGreyBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Grey box testing with knowledge of internal security mechanisms.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        self.auth_system = UserAuthenticationSystem()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span> <span class="o">=</span> <span class="n">UserAuthenticationSystem</span><span class="p">()</span>
 
-    def test_password_storage_security(self):
-        &quot;&quot;&quot;Test that passwords are not stored in plain text (internal knowledge).&quot;&quot;&quot;
-        username = &quot;testuser&quot;
-        password = &quot;SecurePass123!&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_password_storage_security</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that passwords are not stored in plain text (internal knowledge).&quot;&quot;&quot;</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;testuser&quot;</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecurePass123!&quot;</span>
 
-        # Create user
-        self.auth_system.create_user(username, password)
+        <span class="c1"># Create user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
-        # Grey box knowledge: passwords should be hashed, not stored plainly
-        # We can&#x27;t see the implementation, but we know hashing is used
-        user_data = self.auth_system._get_user_data(username)  # Internal method
+        <span class="c1"># Grey box knowledge: passwords should be hashed, not stored plainly</span>
+        <span class="c1"># We can&#39;t see the implementation, but we know hashing is used</span>
+        <span class="n">user_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">_get_user_data</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>  <span class="c1"># Internal method</span>
 
-        # The stored password should not match the original
-        self.assertNotEqual(user_data[&#x27;password_hash&#x27;], password)
+        <span class="c1"># The stored password should not match the original</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">user_data</span><span class="p">[</span><span class="s1">&#39;password_hash&#39;</span><span class="p">],</span> <span class="n">password</span><span class="p">)</span>
 
-        # But authentication should still work
-        self.assertTrue(self.auth_system.authenticate(username, password))
+        <span class="c1"># But authentication should still work</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
 
-    def test_session_timeout_behavior(self):
-        &quot;&quot;&quot;Test session timeout (knowing sessions are used internally).&quot;&quot;&quot;
-        username = &quot;testuser&quot;
-        password = &quot;SecurePass123!&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_session_timeout_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test session timeout (knowing sessions are used internally).&quot;&quot;&quot;</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;testuser&quot;</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecurePass123!&quot;</span>
 
-        # Create and login user
-        self.auth_system.create_user(username, password)
-        session_id = self.auth_system.login(username, password)
+        <span class="c1"># Create and login user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="n">session_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
-        # Initially, session should be valid
-        self.assertTrue(self.auth_system.is_session_valid(session_id))
+        <span class="c1"># Initially, session should be valid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">is_session_valid</span><span class="p">(</span><span class="n">session_id</span><span class="p">))</span>
 
-        # Grey box knowledge: sessions have timeout mechanism
-        # Simulate time passing (if system has time-based expiry)
-        self.auth_system._advance_time(hours=25)  # Internal method
+        <span class="c1"># Grey box knowledge: sessions have timeout mechanism</span>
+        <span class="c1"># Simulate time passing (if system has time-based expiry)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">_advance_time</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Internal method</span>
 
-        # Session should now be invalid
-        self.assertFalse(self.auth_system.is_session_valid(session_id))
+        <span class="c1"># Session should now be invalid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">is_session_valid</span><span class="p">(</span><span class="n">session_id</span><span class="p">))</span>
 
-    def test_rate_limiting_mechanism(self):
-        &quot;&quot;&quot;Test login rate limiting (knowing it exists internally).&quot;&quot;&quot;
-        username = &quot;testuser&quot;
-        password = &quot;SecurePass123!&quot;
-        wrong_password = &quot;WrongPassword&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_rate_limiting_mechanism</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test login rate limiting (knowing it exists internally).&quot;&quot;&quot;</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;testuser&quot;</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecurePass123!&quot;</span>
+        <span class="n">wrong_password</span> <span class="o">=</span> <span class="s2">&quot;WrongPassword&quot;</span>
 
-        self.auth_system.create_user(username, password)
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
-        # Grey box knowledge: system has rate limiting after failed attempts
-        # Make multiple failed login attempts
-        for i in range(5):  # Assuming 5 is the limit
-            result = self.auth_system.authenticate(username, wrong_password)
-            self.assertFalse(result)
+        <span class="c1"># Grey box knowledge: system has rate limiting after failed attempts</span>
+        <span class="c1"># Make multiple failed login attempts</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>  <span class="c1"># Assuming 5 is the limit</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">wrong_password</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-        # Now even correct password should be temporarily blocked
-        result = self.auth_system.authenticate(username, password)
-        self.assertFalse(result)  # Should be blocked due to rate limiting
+        <span class="c1"># Now even correct password should be temporarily blocked</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Should be blocked due to rate limiting</span>
 
-        # Verify the blocking is temporary (wait for cooldown)
-        self.auth_system._advance_time(minutes=15)  # Internal time advancement
-        result = self.auth_system.authenticate(username, password)
-        self.assertTrue(result)  # Should work again after cooldown
+        <span class="c1"># Verify the blocking is temporary (wait for cooldown)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">_advance_time</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Internal time advancement</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Should work again after cooldown</span>
 </code></pre>
 </div>
 <h3 id="integration-testing-with-grey-box-approach">Integration Testing with Grey Box Approach<a class="headerlink" href="#integration-testing-with-grey-box-approach" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestOrderProcessingGreyBox(unittest.TestCase):
-    &quot;&quot;&quot;Grey box testing for order processing system integration.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestOrderProcessingGreyBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Grey box testing for order processing system integration.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        # Grey box knowledge: system uses database transactions
-        self.order_system = OrderProcessingSystem()
-        self.inventory = InventorySystem()
-        self.payment = PaymentSystem()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Grey box knowledge: system uses database transactions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span> <span class="o">=</span> <span class="n">OrderProcessingSystem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="n">InventorySystem</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment</span> <span class="o">=</span> <span class="n">PaymentSystem</span><span class="p">()</span>
 
-        # Set up test data knowing internal structure
-        self.inventory.add_product(&quot;PROD001&quot;, &quot;Widget&quot;, 10.0, 100)
-        self.payment.add_test_account(&quot;CUST001&quot;, 1000.0)
+        <span class="c1"># Set up test data knowing internal structure</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="s2">&quot;PROD001&quot;</span><span class="p">,</span> <span class="s2">&quot;Widget&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment</span><span class="o">.</span><span class="n">add_test_account</span><span class="p">(</span><span class="s2">&quot;CUST001&quot;</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">)</span>
 
-    def test_order_rollback_on_payment_failure(self):
-        &quot;&quot;&quot;Test transaction rollback behavior (grey box knowledge).&quot;&quot;&quot;
-        customer_id = &quot;CUST001&quot;
-        product_id = &quot;PROD001&quot;
-        quantity = 5
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_order_rollback_on_payment_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test transaction rollback behavior (grey box knowledge).&quot;&quot;&quot;</span>
+        <span class="n">customer_id</span> <span class="o">=</span> <span class="s2">&quot;CUST001&quot;</span>
+        <span class="n">product_id</span> <span class="o">=</span> <span class="s2">&quot;PROD001&quot;</span>
+        <span class="n">quantity</span> <span class="o">=</span> <span class="mi">5</span>
 
-        # Grey box knowledge: system uses transactions that can rollback
-        original_inventory = self.inventory.get_stock(product_id)
+        <span class="c1"># Grey box knowledge: system uses transactions that can rollback</span>
+        <span class="n">original_inventory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
 
-        # Simulate payment failure by removing customer funds
-        self.payment.set_account_balance(customer_id, 1.0)  # Not enough for order
+        <span class="c1"># Simulate payment failure by removing customer funds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment</span><span class="o">.</span><span class="n">set_account_balance</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Not enough for order</span>
 
-        # Attempt to place order
-        with self.assertRaises(PaymentFailureError):
-            self.order_system.process_order(customer_id, product_id, quantity)
+        <span class="c1"># Attempt to place order</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">PaymentFailureError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span>
 
-        # Grey box expectation: inventory should be unchanged due to rollback
-        current_inventory = self.inventory.get_stock(product_id)
-        self.assertEqual(current_inventory, original_inventory)
+        <span class="c1"># Grey box expectation: inventory should be unchanged due to rollback</span>
+        <span class="n">current_inventory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">current_inventory</span><span class="p">,</span> <span class="n">original_inventory</span><span class="p">)</span>
 
-    def test_concurrent_order_handling(self):
-        &quot;&quot;&quot;Test concurrent order processing (knowing internal locking).&quot;&quot;&quot;
-        # Grey box knowledge: system has concurrency controls
-        product_id = &quot;PROD001&quot;
-        initial_stock = self.inventory.get_stock(product_id)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_concurrent_order_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test concurrent order processing (knowing internal locking).&quot;&quot;&quot;</span>
+        <span class="c1"># Grey box knowledge: system has concurrency controls</span>
+        <span class="n">product_id</span> <span class="o">=</span> <span class="s2">&quot;PROD001&quot;</span>
+        <span class="n">initial_stock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
 
-        # Simulate concurrent orders for same product
-        order1_result = self.order_system.process_order(&quot;CUST001&quot;, product_id, 3)
-        order2_result = self.order_system.process_order(&quot;CUST002&quot;, product_id, 4)
+        <span class="c1"># Simulate concurrent orders for same product</span>
+        <span class="n">order1_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="s2">&quot;CUST001&quot;</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">order2_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="s2">&quot;CUST002&quot;</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
-        # Both orders should succeed (enough stock)
-        self.assertTrue(order1_result.success)
-        self.assertTrue(order2_result.success)
+        <span class="c1"># Both orders should succeed (enough stock)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">order1_result</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">order2_result</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
 
-        # Stock should be correctly decremented
-        final_stock = self.inventory.get_stock(product_id)
-        expected_stock = initial_stock - 3 - 4
-        self.assertEqual(final_stock, expected_stock)
+        <span class="c1"># Stock should be correctly decremented</span>
+        <span class="n">final_stock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
+        <span class="n">expected_stock</span> <span class="o">=</span> <span class="n">initial_stock</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">final_stock</span><span class="p">,</span> <span class="n">expected_stock</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="choosing-the-right-testing-strategy">Choosing the Right Testing Strategy<a class="headerlink" href="#choosing-the-right-testing-strategy" title="Permanent link">&para;</a></h2>
@@ -2386,33 +2386,33 @@ class TestDiscountCalculatorWhiteBox(unittest.TestCase):
 <summary>Exercise 2: White Box Test Design</summary>
 <p>Analyze this code and design white box tests to achieve 100% statement and branch coverage:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_shipping_cost(weight, distance, priority):
-    &quot;&quot;&quot;Calculate shipping cost based on weight, distance, and priority.&quot;&quot;&quot;
-    base_cost = 0.0
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate shipping cost based on weight, distance, and priority.&quot;&quot;&quot;</span>
+    <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    # Weight-based cost
-    if weight &lt;= 1:
-        base_cost = 5.0
-    elif weight &lt;= 5:
-        base_cost = 10.0
-    else:
-        base_cost = 15.0 + (weight - 5) * 2.0
+    <span class="c1"># Weight-based cost</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="k">elif</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">15.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">weight</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.0</span>
 
-    # Distance multiplier
-    if distance &gt; 1000:
-        base_cost *= 2.0
-    elif distance &gt; 500:
-        base_cost *= 1.5
+    <span class="c1"># Distance multiplier</span>
+    <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
+    <span class="k">elif</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">1.5</span>
 
-    # Priority adjustment
-    if priority == &quot;express&quot;:
-        base_cost *= 2.0
-    elif priority == &quot;overnight&quot;:
-        base_cost *= 3.0
-    elif priority != &quot;standard&quot;:
-        raise ValueError(&quot;Invalid priority level&quot;)
+    <span class="c1"># Priority adjustment</span>
+    <span class="k">if</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;express&quot;</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
+    <span class="k">elif</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;overnight&quot;</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">3.0</span>
+    <span class="k">elif</span> <span class="n">priority</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid priority level&quot;</span><span class="p">)</span>
 
-    return round(base_cost, 2)
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">base_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2678,6 +2678,8 @@ class TestDiscountCalculatorWhiteBox(unittest.TestCase):
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

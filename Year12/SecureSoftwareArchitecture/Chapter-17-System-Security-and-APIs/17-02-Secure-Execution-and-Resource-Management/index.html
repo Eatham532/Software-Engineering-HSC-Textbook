@@ -1856,761 +1856,761 @@
 <h3 id="understanding-buffer-overflows">Understanding Buffer Overflows<a class="headerlink" href="#understanding-buffer-overflows" title="Permanent link">&para;</a></h3>
 <p>A <strong>buffer overflow</strong> occurs when a program writes more data to a buffer than it can hold, potentially overwriting adjacent memory. While Python manages memory automatically, understanding these concepts helps you write more secure code.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Dangerous pattern that could cause issues
-def unsafe_string_handling():
-    # This could be problematic with very large inputs
-    user_input = input(&quot;Enter data: &quot;)
-    # Processing without length checks
-    result = user_input * 1000000  # Could consume massive memory
-    return result
+<pre><code class="language-python"><span class="c1"># Dangerous pattern that could cause issues</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">unsafe_string_handling</span><span class="p">():</span>
+    <span class="c1"># This could be problematic with very large inputs</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter data: &quot;</span><span class="p">)</span>
+    <span class="c1"># Processing without length checks</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">user_input</span> <span class="o">*</span> <span class="mi">1000000</span>  <span class="c1"># Could consume massive memory</span>
+    <span class="k">return</span> <span class="n">result</span>
 
-# Secure approach with limits
-def safe_string_handling():
-    user_input = input(&quot;Enter data: &quot;)
+<span class="c1"># Secure approach with limits</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_string_handling</span><span class="p">():</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter data: &quot;</span><span class="p">)</span>
 
-    # Validate input length
-    if len(user_input) &gt; 1000:
-        raise ValueError(&quot;Input too long (max 1000 characters)&quot;)
+    <span class="c1"># Validate input length</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input too long (max 1000 characters)&quot;</span><span class="p">)</span>
 
-    # Safe processing with reasonable limits
-    if len(user_input) * 1000 &gt; 10000:  # Reasonable output limit
-        raise ValueError(&quot;Processing would exceed memory limits&quot;)
+    <span class="c1"># Safe processing with reasonable limits</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>  <span class="c1"># Reasonable output limit</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Processing would exceed memory limits&quot;</span><span class="p">)</span>
 
-    result = user_input * min(1000, 10000 // len(user_input))
-    return result
+    <span class="n">result</span> <span class="o">=</span> <span class="n">user_input</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">user_input</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
 </code></pre>
 </div>
 <h3 id="memory-safe-coding-practices">Memory-Safe Coding Practices<a class="headerlink" href="#memory-safe-coding-practices" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import sys
-import tracemalloc
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tracemalloc</span>
 
-class SecureMemoryManager:
-    def __init__(self, max_memory_mb=100):
-        self.max_memory_bytes = max_memory_mb * 1024 * 1024
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureMemoryManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_memory_mb</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_memory_bytes</span> <span class="o">=</span> <span class="n">max_memory_mb</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
 
-    def check_memory_usage(self):
-        &quot;&quot;&quot;Monitor current memory usage&quot;&quot;&quot;
-        tracemalloc.start()
-        current, peak = tracemalloc.get_traced_memory()
-        tracemalloc.stop()
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Monitor current memory usage&quot;&quot;&quot;</span>
+        <span class="n">tracemalloc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">current</span><span class="p">,</span> <span class="n">peak</span> <span class="o">=</span> <span class="n">tracemalloc</span><span class="o">.</span><span class="n">get_traced_memory</span><span class="p">()</span>
+        <span class="n">tracemalloc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
-        if current &gt; self.max_memory_bytes:
-            raise MemoryError(f&quot;Memory usage {current} exceeds limit {self.max_memory_bytes}&quot;)
+        <span class="k">if</span> <span class="n">current</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_memory_bytes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">MemoryError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memory usage </span><span class="si">{</span><span class="n">current</span><span class="si">}</span><span class="s2"> exceeds limit </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_memory_bytes</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return current
+        <span class="k">return</span> <span class="n">current</span>
 
-    def safe_list_creation(self, size, max_size=10000):
-        &quot;&quot;&quot;Create lists with size limits&quot;&quot;&quot;
-        if size &gt; max_size:
-            raise ValueError(f&quot;List size {size} exceeds maximum {max_size}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">safe_list_creation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create lists with size limits&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="n">max_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List size </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> exceeds maximum </span><span class="si">{</span><span class="n">max_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Check memory before creating large structures
-        self.check_memory_usage()
+        <span class="c1"># Check memory before creating large structures</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_memory_usage</span><span class="p">()</span>
 
-        return [0] * size
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span>
 
-# Example usage
-memory_manager = SecureMemoryManager()
+<span class="c1"># Example usage</span>
+<span class="n">memory_manager</span> <span class="o">=</span> <span class="n">SecureMemoryManager</span><span class="p">()</span>
 
-def create_safe_data_structure(user_requested_size):
-    try:
-        # Validate size is reasonable
-        if not isinstance(user_requested_size, int) or user_requested_size &lt; 0:
-            raise ValueError(&quot;Size must be a positive integer&quot;)
+<span class="k">def</span><span class="w"> </span><span class="nf">create_safe_data_structure</span><span class="p">(</span><span class="n">user_requested_size</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Validate size is reasonable</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_requested_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">user_requested_size</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Size must be a positive integer&quot;</span><span class="p">)</span>
 
-        # Create with memory monitoring
-        data = memory_manager.safe_list_creation(user_requested_size)
-        print(f&quot;Created list of size {len(data)}&quot;)
-        return data
+        <span class="c1"># Create with memory monitoring</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">memory_manager</span><span class="o">.</span><span class="n">safe_list_creation</span><span class="p">(</span><span class="n">user_requested_size</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created list of size </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
 
-    except (ValueError, MemoryError) as e:
-        print(f&quot;Error creating data structure: {e}&quot;)
-        return None
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error creating data structure: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
 <h2 id="resource-exhaustion-attacks-dos-prevention">Resource Exhaustion Attacks (DoS Prevention)<a class="headerlink" href="#resource-exhaustion-attacks-dos-prevention" title="Permanent link">&para;</a></h2>
 <h3 id="understanding-dos-attacks">Understanding DoS Attacks<a class="headerlink" href="#understanding-dos-attacks" title="Permanent link">&para;</a></h3>
 <p><strong>Denial of Service (DoS)</strong> attacks attempt to make your application unavailable by exhausting system resources like CPU, memory, disk space, or network bandwidth.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
-import threading
-from collections import defaultdict
-from datetime import datetime, timedelta
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-class ResourceLimiter:
-    def __init__(self):
-        self.request_counts = defaultdict(list)
-        self.max_requests_per_minute = 60
-        self.max_concurrent_operations = 10
-        self.active_operations = 0
-        self.operation_lock = threading.Lock()
+<span class="k">class</span><span class="w"> </span><span class="nc">ResourceLimiter</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_requests_per_minute</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_concurrent_operations</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_operations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operation_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
-    def rate_limit_check(self, client_id):
-        &quot;&quot;&quot;Prevent too many requests from same client&quot;&quot;&quot;
-        now = datetime.now()
-        minute_ago = now - timedelta(minutes=1)
+    <span class="k">def</span><span class="w"> </span><span class="nf">rate_limit_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prevent too many requests from same client&quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">minute_ago</span> <span class="o">=</span> <span class="n">now</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        # Clean old requests
-        self.request_counts[client_id] = [
-            req_time for req_time in self.request_counts[client_id] 
-            if req_time &gt; minute_ago
-        ]
+        <span class="c1"># Clean old requests</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_counts</span><span class="p">[</span><span class="n">client_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">req_time</span> <span class="k">for</span> <span class="n">req_time</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_counts</span><span class="p">[</span><span class="n">client_id</span><span class="p">]</span> 
+            <span class="k">if</span> <span class="n">req_time</span> <span class="o">&gt;</span> <span class="n">minute_ago</span>
+        <span class="p">]</span>
 
-        # Check if over limit
-        if len(self.request_counts[client_id]) &gt;= self.max_requests_per_minute:
-            raise Exception(f&quot;Rate limit exceeded for client {client_id}&quot;)
+        <span class="c1"># Check if over limit</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request_counts</span><span class="p">[</span><span class="n">client_id</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_requests_per_minute</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rate limit exceeded for client </span><span class="si">{</span><span class="n">client_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Record this request
-        self.request_counts[client_id].append(now)
+        <span class="c1"># Record this request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request_counts</span><span class="p">[</span><span class="n">client_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">now</span><span class="p">)</span>
 
-    def acquire_operation_slot(self):
-        &quot;&quot;&quot;Limit concurrent operations&quot;&quot;&quot;
-        with self.operation_lock:
-            if self.active_operations &gt;= self.max_concurrent_operations:
-                raise Exception(&quot;Too many concurrent operations&quot;)
-            self.active_operations += 1
+    <span class="k">def</span><span class="w"> </span><span class="nf">acquire_operation_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Limit concurrent operations&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">operation_lock</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_operations</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_concurrent_operations</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Too many concurrent operations&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_operations</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    def release_operation_slot(self):
-        &quot;&quot;&quot;Release operation slot&quot;&quot;&quot;
-        with self.operation_lock:
-            self.active_operations = max(0, self.active_operations - 1)
+    <span class="k">def</span><span class="w"> </span><span class="nf">release_operation_slot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Release operation slot&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">operation_lock</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">active_operations</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_operations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-# Example: Secure file processing endpoint
-limiter = ResourceLimiter()
+<span class="c1"># Example: Secure file processing endpoint</span>
+<span class="n">limiter</span> <span class="o">=</span> <span class="n">ResourceLimiter</span><span class="p">()</span>
 
-def secure_file_processor(client_id, file_data):
-    try:
-        # Check rate limits
-        limiter.rate_limit_check(client_id)
+<span class="k">def</span><span class="w"> </span><span class="nf">secure_file_processor</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">file_data</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Check rate limits</span>
+        <span class="n">limiter</span><span class="o">.</span><span class="n">rate_limit_check</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
 
-        # Acquire processing slot
-        limiter.acquire_operation_slot()
+        <span class="c1"># Acquire processing slot</span>
+        <span class="n">limiter</span><span class="o">.</span><span class="n">acquire_operation_slot</span><span class="p">()</span>
 
-        # Validate file size
-        if len(file_data) &gt; 10 * 1024 * 1024:  # 10MB limit
-            raise ValueError(&quot;File too large&quot;)
+        <span class="c1"># Validate file size</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">:</span>  <span class="c1"># 10MB limit</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;File too large&quot;</span><span class="p">)</span>
 
-        # Process with timeout
-        return process_file_with_timeout(file_data, timeout_seconds=30)
+        <span class="c1"># Process with timeout</span>
+        <span class="k">return</span> <span class="n">process_file_with_timeout</span><span class="p">(</span><span class="n">file_data</span><span class="p">,</span> <span class="n">timeout_seconds</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
-    except Exception as e:
-        print(f&quot;Processing failed for client {client_id}: {e}&quot;)
-        return None
-    finally:
-        # Always release the slot
-        limiter.release_operation_slot()
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing failed for client </span><span class="si">{</span><span class="n">client_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Always release the slot</span>
+        <span class="n">limiter</span><span class="o">.</span><span class="n">release_operation_slot</span><span class="p">()</span>
 
-def process_file_with_timeout(file_data, timeout_seconds):
-    &quot;&quot;&quot;Process file with timeout to prevent hanging&quot;&quot;&quot;
-    import signal
+<span class="k">def</span><span class="w"> </span><span class="nf">process_file_with_timeout</span><span class="p">(</span><span class="n">file_data</span><span class="p">,</span> <span class="n">timeout_seconds</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process file with timeout to prevent hanging&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">signal</span>
 
-    def timeout_handler(signum, frame):
-        raise TimeoutError(&quot;File processing timed out&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">timeout_handler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">frame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="s2">&quot;File processing timed out&quot;</span><span class="p">)</span>
 
-    # Set timeout (Unix/Linux only - for Windows, use threading.Timer)
-    old_handler = signal.signal(signal.SIGALRM, timeout_handler)
-    signal.alarm(timeout_seconds)
+    <span class="c1"># Set timeout (Unix/Linux only - for Windows, use threading.Timer)</span>
+    <span class="n">old_handler</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">timeout_handler</span><span class="p">)</span>
+    <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="n">timeout_seconds</span><span class="p">)</span>
 
-    try:
-        # Simulate file processing
-        lines = file_data.decode(&#x27;utf-8&#x27;).split(&#x27;\n&#x27;)
-        processed_lines = []
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Simulate file processing</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">file_data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">processed_lines</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for line in lines:
-            # Simulate processing time
-            time.sleep(0.001)  # Small delay
-            processed_lines.append(line.upper())
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="c1"># Simulate processing time</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># Small delay</span>
+            <span class="n">processed_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
 
-        return &#x27;\n&#x27;.join(processed_lines)
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_lines</span><span class="p">)</span>
 
-    finally:
-        # Clear timeout
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, old_handler)
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># Clear timeout</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">old_handler</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="cpu-and-memory-protection">CPU and Memory Protection<a class="headerlink" href="#cpu-and-memory-protection" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import resource
-import psutil
-import os
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">resource</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-class SystemResourceMonitor:
-    def __init__(self, max_cpu_percent=80, max_memory_percent=80):
-        self.max_cpu_percent = max_cpu_percent
-        self.max_memory_percent = max_memory_percent
+<span class="k">class</span><span class="w"> </span><span class="nc">SystemResourceMonitor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_cpu_percent</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">max_memory_percent</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_cpu_percent</span> <span class="o">=</span> <span class="n">max_cpu_percent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_memory_percent</span> <span class="o">=</span> <span class="n">max_memory_percent</span>
 
-    def check_system_resources(self):
-        &quot;&quot;&quot;Monitor system resource usage&quot;&quot;&quot;
-        # Check CPU usage
-        cpu_percent = psutil.cpu_percent(interval=1)
-        if cpu_percent &gt; self.max_cpu_percent:
-            raise SystemError(f&quot;CPU usage {cpu_percent}% exceeds limit {self.max_cpu_percent}%&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_system_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Monitor system resource usage&quot;&quot;&quot;</span>
+        <span class="c1"># Check CPU usage</span>
+        <span class="n">cpu_percent</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cpu_percent</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_cpu_percent</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">SystemError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CPU usage </span><span class="si">{</span><span class="n">cpu_percent</span><span class="si">}</span><span class="s2">% exceeds limit </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_cpu_percent</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-        # Check memory usage
-        memory = psutil.virtual_memory()
-        if memory.percent &gt; self.max_memory_percent:
-            raise SystemError(f&quot;Memory usage {memory.percent}% exceeds limit {self.max_memory_percent}%&quot;)
+        <span class="c1"># Check memory usage</span>
+        <span class="n">memory</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">memory</span><span class="o">.</span><span class="n">percent</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_memory_percent</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">SystemError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memory usage </span><span class="si">{</span><span class="n">memory</span><span class="o">.</span><span class="n">percent</span><span class="si">}</span><span class="s2">% exceeds limit </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_memory_percent</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-    def set_process_limits(self):
-        &quot;&quot;&quot;Set resource limits for current process&quot;&quot;&quot;
-        try:
-            # Limit memory usage to 500MB
-            resource.setrlimit(resource.RLIMIT_AS, (500 * 1024 * 1024, 500 * 1024 * 1024))
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_process_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set resource limits for current process&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Limit memory usage to 500MB</span>
+            <span class="n">resource</span><span class="o">.</span><span class="n">setrlimit</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RLIMIT_AS</span><span class="p">,</span> <span class="p">(</span><span class="mi">500</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">500</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">))</span>
 
-            # Limit CPU time to 60 seconds
-            resource.setrlimit(resource.RLIMIT_CPU, (60, 60))
+            <span class="c1"># Limit CPU time to 60 seconds</span>
+            <span class="n">resource</span><span class="o">.</span><span class="n">setrlimit</span><span class="p">(</span><span class="n">resource</span><span class="o">.</span><span class="n">RLIMIT_CPU</span><span class="p">,</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">))</span>
 
-            print(&quot;Process resource limits set&quot;)
-        except (OSError, AttributeError) as e:
-            print(f&quot;Could not set resource limits: {e}&quot;)
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Process resource limits set&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not set resource limits: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Example: Protected computation
-monitor = SystemResourceMonitor()
+<span class="c1"># Example: Protected computation</span>
+<span class="n">monitor</span> <span class="o">=</span> <span class="n">SystemResourceMonitor</span><span class="p">()</span>
 
-def secure_computation(data):
-    &quot;&quot;&quot;Perform computation with resource monitoring&quot;&quot;&quot;
-    try:
-        # Set process limits
-        monitor.set_process_limits()
+<span class="k">def</span><span class="w"> </span><span class="nf">secure_computation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform computation with resource monitoring&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Set process limits</span>
+        <span class="n">monitor</span><span class="o">.</span><span class="n">set_process_limits</span><span class="p">()</span>
 
-        # Check system resources before starting
-        monitor.check_system_resources()
+        <span class="c1"># Check system resources before starting</span>
+        <span class="n">monitor</span><span class="o">.</span><span class="n">check_system_resources</span><span class="p">()</span>
 
-        # Perform computation with periodic checks
-        result = []
-        for i, item in enumerate(data):
-            # Check resources periodically
-            if i % 1000 == 0:
-                monitor.check_system_resources()
+        <span class="c1"># Perform computation with periodic checks</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+            <span class="c1"># Check resources periodically</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">monitor</span><span class="o">.</span><span class="n">check_system_resources</span><span class="p">()</span>
 
-            # Simulate computation
-            result.append(item ** 2)
+            <span class="c1"># Simulate computation</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
-        return result
+        <span class="k">return</span> <span class="n">result</span>
 
-    except (SystemError, MemoryError) as e:
-        print(f&quot;Computation aborted due to resource limits: {e}&quot;)
-        return None
+    <span class="k">except</span> <span class="p">(</span><span class="ne">SystemError</span><span class="p">,</span> <span class="ne">MemoryError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Computation aborted due to resource limits: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
 <h2 id="secure-file-operations">Secure File Operations<a class="headerlink" href="#secure-file-operations" title="Permanent link">&para;</a></h2>
 <h3 id="safe-file-handling">Safe File Handling<a class="headerlink" href="#safe-file-handling" title="Permanent link">&para;</a></h3>
 <p>File operations are common attack vectors. Always validate paths, check file sizes, and limit file types.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import os
-import tempfile
-import mimetypes
-from pathlib import Path
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mimetypes</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
-class SecureFileHandler:
-    def __init__(self, upload_dir=&quot;/tmp/uploads&quot;, max_file_size=10*1024*1024):
-        self.upload_dir = Path(upload_dir)
-        self.max_file_size = max_file_size
-        self.allowed_extensions = {&#x27;.txt&#x27;, &#x27;.pdf&#x27;, &#x27;.jpg&#x27;, &#x27;.png&#x27;, &#x27;.doc&#x27;, &#x27;.docx&#x27;}
-        self.upload_dir.mkdir(exist_ok=True)
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureFileHandler</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upload_dir</span><span class="o">=</span><span class="s2">&quot;/tmp/uploads&quot;</span><span class="p">,</span> <span class="n">max_file_size</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">upload_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_file_size</span> <span class="o">=</span> <span class="n">max_file_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allowed_extensions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;.pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">,</span> <span class="s1">&#39;.png&#39;</span><span class="p">,</span> <span class="s1">&#39;.doc&#39;</span><span class="p">,</span> <span class="s1">&#39;.docx&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    def validate_filename(self, filename):
-        &quot;&quot;&quot;Validate filename for security&quot;&quot;&quot;
-        # Check for directory traversal attempts
-        if &#x27;..&#x27; in filename or &#x27;/&#x27; in filename or &#x27;\\&#x27; in filename:
-            raise ValueError(&quot;Invalid filename: contains directory traversal&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate filename for security&quot;&quot;&quot;</span>
+        <span class="c1"># Check for directory traversal attempts</span>
+        <span class="k">if</span> <span class="s1">&#39;..&#39;</span> <span class="ow">in</span> <span class="n">filename</span> <span class="ow">or</span> <span class="s1">&#39;/&#39;</span> <span class="ow">in</span> <span class="n">filename</span> <span class="ow">or</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid filename: contains directory traversal&quot;</span><span class="p">)</span>
 
-        # Check for null bytes
-        if &#x27;\x00&#x27; in filename:
-            raise ValueError(&quot;Invalid filename: contains null bytes&quot;)
+        <span class="c1"># Check for null bytes</span>
+        <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid filename: contains null bytes&quot;</span><span class="p">)</span>
 
-        # Check extension
-        file_path = Path(filename)
-        if file_path.suffix.lower() not in self.allowed_extensions:
-            raise ValueError(f&quot;File type not allowed: {file_path.suffix}&quot;)
+        <span class="c1"># Check extension</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">file_path</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed_extensions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File type not allowed: </span><span class="si">{</span><span class="n">file_path</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Check length
-        if len(filename) &gt; 255:
-            raise ValueError(&quot;Filename too long&quot;)
+        <span class="c1"># Check length</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">255</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Filename too long&quot;</span><span class="p">)</span>
 
-        return True
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def validate_file_content(self, file_path):
-        &quot;&quot;&quot;Validate file content matches extension&quot;&quot;&quot;
-        mime_type, _ = mimetypes.guess_type(file_path)
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_file_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate file content matches extension&quot;&quot;&quot;</span>
+        <span class="n">mime_type</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
-        # Read file header to verify type
-        with open(file_path, &#x27;rb&#x27;) as f:
-            header = f.read(512)
+        <span class="c1"># Read file header to verify type</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
 
-        # Check for script content in text files
-        if mime_type and mime_type.startswith(&#x27;text/&#x27;):
-            text_content = header.decode(&#x27;utf-8&#x27;, errors=&#x27;ignore&#x27;)
-            dangerous_patterns = [&#x27;&lt;script&#x27;, &#x27;&lt;?php&#x27;, &#x27;&lt;%&#x27;, &#x27;javascript:&#x27;]
-            for pattern in dangerous_patterns:
-                if pattern.lower() in text_content.lower():
-                    raise ValueError(f&quot;Dangerous content detected: {pattern}&quot;)
+        <span class="c1"># Check for script content in text files</span>
+        <span class="k">if</span> <span class="n">mime_type</span> <span class="ow">and</span> <span class="n">mime_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;text/&#39;</span><span class="p">):</span>
+            <span class="n">text_content</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+            <span class="n">dangerous_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&lt;script&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;?php&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;%&#39;</span><span class="p">,</span> <span class="s1">&#39;javascript:&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">dangerous_patterns</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">pattern</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">text_content</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dangerous content detected: </span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return True
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def secure_file_upload(self, filename, file_content):
-        &quot;&quot;&quot;Securely handle file upload&quot;&quot;&quot;
-        try:
-            # Validate filename
-            self.validate_filename(filename)
+    <span class="k">def</span><span class="w"> </span><span class="nf">secure_file_upload</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">file_content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Securely handle file upload&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Validate filename</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validate_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-            # Check file size
-            if len(file_content) &gt; self.max_file_size:
-                raise ValueError(f&quot;File too large: {len(file_content)} bytes&quot;)
+            <span class="c1"># Check file size</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_file_size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File too large: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
 
-            # Generate safe filename
-            safe_filename = self.generate_safe_filename(filename)
-            file_path = self.upload_dir / safe_filename
+            <span class="c1"># Generate safe filename</span>
+            <span class="n">safe_filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_safe_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span> <span class="o">/</span> <span class="n">safe_filename</span>
 
-            # Write file securely
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-                temp_file.write(file_content)
-                temp_path = temp_file.name
+            <span class="c1"># Write file securely</span>
+            <span class="k">with</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp_file</span><span class="p">:</span>
+                <span class="n">temp_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span>
+                <span class="n">temp_path</span> <span class="o">=</span> <span class="n">temp_file</span><span class="o">.</span><span class="n">name</span>
 
-            # Validate content
-            self.validate_file_content(temp_path)
+            <span class="c1"># Validate content</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validate_file_content</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
 
-            # Move to final location
-            os.rename(temp_path, file_path)
+            <span class="c1"># Move to final location</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">temp_path</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
 
-            # Set secure permissions (readable only by owner)
-            os.chmod(file_path, 0o600)
+            <span class="c1"># Set secure permissions (readable only by owner)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="mo">0o600</span><span class="p">)</span>
 
-            return str(file_path)
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 
-        except Exception as e:
-            # Clean up temp file if it exists
-            if &#x27;temp_path&#x27; in locals() and os.path.exists(temp_path):
-                os.unlink(temp_path)
-            raise e
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Clean up temp file if it exists</span>
+            <span class="k">if</span> <span class="s1">&#39;temp_path&#39;</span> <span class="ow">in</span> <span class="nb">locals</span><span class="p">()</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">temp_path</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">temp_path</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">e</span>
 
-    def generate_safe_filename(self, original_filename):
-        &quot;&quot;&quot;Generate a safe filename&quot;&quot;&quot;
-        import uuid
-        import time
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_safe_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">original_filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a safe filename&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-        # Keep extension but generate new name
-        file_path = Path(original_filename)
-        timestamp = int(time.time())
-        unique_id = str(uuid.uuid4())[:8]
+        <span class="c1"># Keep extension but generate new name</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">original_filename</span><span class="p">)</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        <span class="n">unique_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">]</span>
 
-        return f&quot;{timestamp}_{unique_id}{file_path.suffix}&quot;
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">unique_id</span><span class="si">}{</span><span class="n">file_path</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def secure_file_read(self, filename, max_read_size=1024*1024):
-        &quot;&quot;&quot;Securely read file with size limits&quot;&quot;&quot;
-        file_path = self.upload_dir / filename
+    <span class="k">def</span><span class="w"> </span><span class="nf">secure_file_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">max_read_size</span><span class="o">=</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Securely read file with size limits&quot;&quot;&quot;</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span> <span class="o">/</span> <span class="n">filename</span>
 
-        # Validate path is within upload directory
-        if not str(file_path.resolve()).startswith(str(self.upload_dir.resolve())):
-            raise ValueError(&quot;Invalid file path: outside upload directory&quot;)
+        <span class="c1"># Validate path is within upload directory</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span><span class="o">.</span><span class="n">resolve</span><span class="p">())):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid file path: outside upload directory&quot;</span><span class="p">)</span>
 
-        # Check file exists
-        if not file_path.exists():
-            raise FileNotFoundError(&quot;File not found&quot;)
+        <span class="c1"># Check file exists</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">file_path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;File not found&quot;</span><span class="p">)</span>
 
-        # Check file size
-        file_size = file_path.stat().st_size
-        if file_size &gt; max_read_size:
-            raise ValueError(f&quot;File too large to read: {file_size} bytes&quot;)
+        <span class="c1"># Check file size</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span>
+        <span class="k">if</span> <span class="n">file_size</span> <span class="o">&gt;</span> <span class="n">max_read_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File too large to read: </span><span class="si">{</span><span class="n">file_size</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
 
-        # Read file safely
-        with open(file_path, &#x27;rb&#x27;) as f:
-            return f.read(max_read_size)
+        <span class="c1"># Read file safely</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">max_read_size</span><span class="p">)</span>
 
-# Example usage
-file_handler = SecureFileHandler()
+<span class="c1"># Example usage</span>
+<span class="n">file_handler</span> <span class="o">=</span> <span class="n">SecureFileHandler</span><span class="p">()</span>
 
-def handle_user_upload(filename, file_data):
-    &quot;&quot;&quot;Handle file upload from user&quot;&quot;&quot;
-    try:
-        saved_path = file_handler.secure_file_upload(filename, file_data)
-        print(f&quot;File uploaded successfully: {saved_path}&quot;)
-        return saved_path
-    except Exception as e:
-        print(f&quot;Upload failed: {e}&quot;)
-        return None
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_user_upload</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">file_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle file upload from user&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">saved_path</span> <span class="o">=</span> <span class="n">file_handler</span><span class="o">.</span><span class="n">secure_file_upload</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">file_data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File uploaded successfully: </span><span class="si">{</span><span class="n">saved_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">saved_path</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Upload failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
 <h2 id="timeout-and-retry-strategies">Timeout and Retry Strategies<a class="headerlink" href="#timeout-and-retry-strategies" title="Permanent link">&para;</a></h2>
 <h3 id="implementing-robust-timeouts">Implementing Robust Timeouts<a class="headerlink" href="#implementing-robust-timeouts" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
-import random
-from functools import wraps
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="ne">TimeoutError</span> <span class="k">as</span> <span class="n">FuturesTimeoutError</span>
 
-class TimeoutManager:
-    @staticmethod
-    def timeout_decorator(timeout_seconds):
-        &quot;&quot;&quot;Decorator to add timeout to functions&quot;&quot;&quot;
-        def decorator(func):
-            @wraps(func)
-            def wrapper(*args, **kwargs):
-                with ThreadPoolExecutor(max_workers=1) as executor:
-                    future = executor.submit(func, *args, **kwargs)
-                    try:
-                        return future.result(timeout=timeout_seconds)
-                    except FuturesTimeoutError:
-                        raise TimeoutError(f&quot;Function {func.__name__} timed out after {timeout_seconds}s&quot;)
-            return wrapper
-        return decorator
+<span class="k">class</span><span class="w"> </span><span class="nc">TimeoutManager</span><span class="p">:</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">timeout_decorator</span><span class="p">(</span><span class="n">timeout_seconds</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decorator to add timeout to functions&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+            <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                    <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout_seconds</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">FuturesTimeoutError</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> timed out after </span><span class="si">{</span><span class="n">timeout_seconds</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">wrapper</span>
+        <span class="k">return</span> <span class="n">decorator</span>
 
-    @staticmethod
-    def retry_with_backoff(max_retries=3, base_delay=1, max_delay=60):
-        &quot;&quot;&quot;Decorator for retry logic with exponential backoff&quot;&quot;&quot;
-        def decorator(func):
-            @wraps(func)
-            def wrapper(*args, **kwargs):
-                for attempt in range(max_retries + 1):
-                    try:
-                        return func(*args, **kwargs)
-                    except Exception as e:
-                        if attempt == max_retries:
-                            raise e
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retry_with_backoff</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">base_delay</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_delay</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decorator for retry logic with exponential backoff&quot;&quot;&quot;</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+            <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_retries</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">max_retries</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">e</span>
 
-                        # Calculate delay with exponential backoff and jitter
-                        delay = min(base_delay * (2 ** attempt), max_delay)
-                        jitter = random.uniform(0, delay * 0.1)
-                        total_delay = delay + jitter
+                        <span class="c1"># Calculate delay with exponential backoff and jitter</span>
+                        <span class="n">delay</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">base_delay</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">attempt</span><span class="p">),</span> <span class="n">max_delay</span><span class="p">)</span>
+                        <span class="n">jitter</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">delay</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">)</span>
+                        <span class="n">total_delay</span> <span class="o">=</span> <span class="n">delay</span> <span class="o">+</span> <span class="n">jitter</span>
 
-                        print(f&quot;Attempt {attempt + 1} failed: {e}. Retrying in {total_delay:.2f}s&quot;)
-                        time.sleep(total_delay)
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attempt </span><span class="si">{</span><span class="n">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Retrying in </span><span class="si">{</span><span class="n">total_delay</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+                        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">total_delay</span><span class="p">)</span>
 
-                raise Exception(f&quot;All {max_retries + 1} attempts failed&quot;)
-            return wrapper
-        return decorator
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All </span><span class="si">{</span><span class="n">max_retries</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> attempts failed&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">wrapper</span>
+        <span class="k">return</span> <span class="n">decorator</span>
 
-# Example: Network operation with timeout and retry
-@TimeoutManager.timeout_decorator(10)  # 10 second timeout
-@TimeoutManager.retry_with_backoff(max_retries=3, base_delay=2)
-def fetch_data_from_api(url):
-    &quot;&quot;&quot;Simulate API call with potential failures&quot;&quot;&quot;
-    import requests
+<span class="c1"># Example: Network operation with timeout and retry</span>
+<span class="nd">@TimeoutManager</span><span class="o">.</span><span class="n">timeout_decorator</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># 10 second timeout</span>
+<span class="nd">@TimeoutManager</span><span class="o">.</span><span class="n">retry_with_backoff</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">base_delay</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fetch_data_from_api</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate API call with potential failures&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 
-    # Simulate random failures for demonstration
-    if random.random() &lt; 0.3:  # 30% chance of failure
-        raise requests.RequestException(&quot;Simulated network error&quot;)
+    <span class="c1"># Simulate random failures for demonstration</span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">:</span>  <span class="c1"># 30% chance of failure</span>
+        <span class="k">raise</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span><span class="p">(</span><span class="s2">&quot;Simulated network error&quot;</span><span class="p">)</span>
 
-    # Simulate slow response
-    time.sleep(random.uniform(1, 5))
+    <span class="c1"># Simulate slow response</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
-    return {&quot;data&quot;: &quot;API response&quot;, &quot;url&quot;: url}
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;API response&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">}</span>
 
-# Example: Database operation with circuit breaker pattern
-class CircuitBreaker:
-    def __init__(self, failure_threshold=5, reset_timeout=60):
-        self.failure_threshold = failure_threshold
-        self.reset_timeout = reset_timeout
-        self.failure_count = 0
-        self.last_failure_time = None
-        self.state = &#x27;CLOSED&#x27;  # CLOSED, OPEN, HALF_OPEN
+<span class="c1"># Example: Database operation with circuit breaker pattern</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CircuitBreaker</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">failure_threshold</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">reset_timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_threshold</span> <span class="o">=</span> <span class="n">failure_threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_timeout</span> <span class="o">=</span> <span class="n">reset_timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;CLOSED&#39;</span>  <span class="c1"># CLOSED, OPEN, HALF_OPEN</span>
 
-    def call(self, func, *args, **kwargs):
-        &quot;&quot;&quot;Execute function with circuit breaker protection&quot;&quot;&quot;
-        if self.state == &#x27;OPEN&#x27;:
-            if time.time() - self.last_failure_time &gt; self.reset_timeout:
-                self.state = &#x27;HALF_OPEN&#x27;
-                self.failure_count = 0
-            else:
-                raise Exception(&quot;Circuit breaker is OPEN&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute function with circuit breaker protection&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="s1">&#39;OPEN&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_timeout</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;HALF_OPEN&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Circuit breaker is OPEN&quot;</span><span class="p">)</span>
 
-        try:
-            result = func(*args, **kwargs)
-            self.failure_count = 0
-            self.state = &#x27;CLOSED&#x27;
-            return result
-        except Exception as e:
-            self.failure_count += 1
-            self.last_failure_time = time.time()
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;CLOSED&#39;</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_failure_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-            if self.failure_count &gt;= self.failure_threshold:
-                self.state = &#x27;OPEN&#x27;
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_threshold</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="s1">&#39;OPEN&#39;</span>
 
-            raise e
+            <span class="k">raise</span> <span class="n">e</span>
 
-# Usage example
-circuit_breaker = CircuitBreaker()
+<span class="c1"># Usage example</span>
+<span class="n">circuit_breaker</span> <span class="o">=</span> <span class="n">CircuitBreaker</span><span class="p">()</span>
 
-def database_query(query):
-    &quot;&quot;&quot;Simulate database query&quot;&quot;&quot;
-    if random.random() &lt; 0.4:  # 40% failure rate
-        raise Exception(&quot;Database connection failed&quot;)
-    return f&quot;Result for: {query}&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">database_query</span><span class="p">(</span><span class="n">query</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate database query&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.4</span><span class="p">:</span>  <span class="c1"># 40% failure rate</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Database connection failed&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Result for: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
 
-def safe_database_call(query):
-    &quot;&quot;&quot;Database call protected by circuit breaker&quot;&quot;&quot;
-    try:
-        return circuit_breaker.call(database_query, query)
-    except Exception as e:
-        print(f&quot;Database call failed: {e}&quot;)
-        return None
+<span class="k">def</span><span class="w"> </span><span class="nf">safe_database_call</span><span class="p">(</span><span class="n">query</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Database call protected by circuit breaker&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">circuit_breaker</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">database_query</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Database call failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
 <h2 id="exception-handling-security">Exception Handling Security<a class="headerlink" href="#exception-handling-security" title="Permanent link">&para;</a></h2>
 <h3 id="secure-error-handling">Secure Error Handling<a class="headerlink" href="#secure-error-handling" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import logging
-import traceback
-import sys
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-class SecureErrorHandler:
-    def __init__(self, debug_mode=False):
-        self.debug_mode = debug_mode
-        self.logger = self.setup_logging()
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureErrorHandler</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">debug_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug_mode</span> <span class="o">=</span> <span class="n">debug_mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup_logging</span><span class="p">()</span>
 
-    def setup_logging(self):
-        &quot;&quot;&quot;Configure secure logging&quot;&quot;&quot;
-        logging.basicConfig(
-            level=logging.INFO,
-            format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;,
-            handlers=[
-                logging.FileHandler(&#x27;app_errors.log&#x27;),
-                logging.StreamHandler(sys.stdout)
-            ]
-        )
-        return logging.getLogger(__name__)
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_logging</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Configure secure logging&quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+            <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">handlers</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span><span class="s1">&#39;app_errors.log&#39;</span><span class="p">),</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-    def handle_error(self, e, context=&quot;Unknown&quot;):
-        &quot;&quot;&quot;Handle errors securely without information leakage&quot;&quot;&quot;
-        # Log full error details securely
-        error_id = self.generate_error_id()
-        self.logger.error(f&quot;Error ID {error_id} in {context}: {str(e)}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">handle_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;Unknown&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle errors securely without information leakage&quot;&quot;&quot;</span>
+        <span class="c1"># Log full error details securely</span>
+        <span class="n">error_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_error_id</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error ID </span><span class="si">{</span><span class="n">error_id</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if self.debug_mode:
-            self.logger.error(f&quot;Full traceback for {error_id}: {traceback.format_exc()}&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debug_mode</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Full traceback for </span><span class="si">{</span><span class="n">error_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Return sanitized error message
-        return self.sanitize_error_message(e, error_id)
+        <span class="c1"># Return sanitized error message</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sanitize_error_message</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">error_id</span><span class="p">)</span>
 
-    def generate_error_id(self):
-        &quot;&quot;&quot;Generate unique error ID for tracking&quot;&quot;&quot;
-        import uuid
-        return str(uuid.uuid4())[:8]
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_error_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate unique error ID for tracking&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())[:</span><span class="mi">8</span><span class="p">]</span>
 
-    def sanitize_error_message(self, error, error_id):
-        &quot;&quot;&quot;Return safe error message for users&quot;&quot;&quot;
-        # Define safe error messages
-        safe_messages = {
-            ValueError: &quot;Invalid input provided&quot;,
-            FileNotFoundError: &quot;Requested resource not found&quot;,
-            PermissionError: &quot;Access denied&quot;,
-            TimeoutError: &quot;Operation timed out&quot;,
-            MemoryError: &quot;Insufficient resources&quot;,
-            ConnectionError: &quot;Service temporarily unavailable&quot;
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">sanitize_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">error_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return safe error message for users&quot;&quot;&quot;</span>
+        <span class="c1"># Define safe error messages</span>
+        <span class="n">safe_messages</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="ne">ValueError</span><span class="p">:</span> <span class="s2">&quot;Invalid input provided&quot;</span><span class="p">,</span>
+            <span class="ne">FileNotFoundError</span><span class="p">:</span> <span class="s2">&quot;Requested resource not found&quot;</span><span class="p">,</span>
+            <span class="ne">PermissionError</span><span class="p">:</span> <span class="s2">&quot;Access denied&quot;</span><span class="p">,</span>
+            <span class="ne">TimeoutError</span><span class="p">:</span> <span class="s2">&quot;Operation timed out&quot;</span><span class="p">,</span>
+            <span class="ne">MemoryError</span><span class="p">:</span> <span class="s2">&quot;Insufficient resources&quot;</span><span class="p">,</span>
+            <span class="ne">ConnectionError</span><span class="p">:</span> <span class="s2">&quot;Service temporarily unavailable&quot;</span>
+        <span class="p">}</span>
 
-        error_type = type(error)
-        safe_message = safe_messages.get(error_type, &quot;An unexpected error occurred&quot;)
+        <span class="n">error_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="n">safe_message</span> <span class="o">=</span> <span class="n">safe_messages</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">error_type</span><span class="p">,</span> <span class="s2">&quot;An unexpected error occurred&quot;</span><span class="p">)</span>
 
-        return {
-            &quot;error&quot;: safe_message,
-            &quot;error_id&quot;: error_id,
-            &quot;timestamp&quot;: time.time()
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">safe_message</span><span class="p">,</span>
+            <span class="s2">&quot;error_id&quot;</span><span class="p">:</span> <span class="n">error_id</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">}</span>
 
-# Example: Secure API endpoint
-error_handler = SecureErrorHandler(debug_mode=False)
+<span class="c1"># Example: Secure API endpoint</span>
+<span class="n">error_handler</span> <span class="o">=</span> <span class="n">SecureErrorHandler</span><span class="p">(</span><span class="n">debug_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-def secure_api_endpoint(user_id, operation):
-    &quot;&quot;&quot;Example API endpoint with secure error handling&quot;&quot;&quot;
-    try:
-        # Validate input
-        if not isinstance(user_id, int) or user_id &lt;= 0:
-            raise ValueError(&quot;Invalid user ID&quot;)
+<span class="k">def</span><span class="w"> </span><span class="nf">secure_api_endpoint</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Example API endpoint with secure error handling&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Validate input</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">user_id</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid user ID&quot;</span><span class="p">)</span>
 
-        # Simulate various potential errors
-        if operation == &quot;timeout&quot;:
-            time.sleep(10)  # This would trigger timeout
-        elif operation == &quot;file_error&quot;:
-            open(&quot;nonexistent_file.txt&quot;, &#x27;r&#x27;)
-        elif operation == &quot;permission_error&quot;:
-            open(&quot;/root/secret.txt&quot;, &#x27;r&#x27;)
-        elif operation == &quot;memory_error&quot;:
-            huge_list = [0] * (10**9)  # Trigger memory error
+        <span class="c1"># Simulate various potential errors</span>
+        <span class="k">if</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;timeout&quot;</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># This would trigger timeout</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;file_error&quot;</span><span class="p">:</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;nonexistent_file.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;permission_error&quot;</span><span class="p">:</span>
+            <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/root/secret.txt&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">operation</span> <span class="o">==</span> <span class="s2">&quot;memory_error&quot;</span><span class="p">:</span>
+            <span class="n">huge_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">9</span><span class="p">)</span>  <span class="c1"># Trigger memory error</span>
 
-        return {&quot;success&quot;: True, &quot;data&quot;: f&quot;Operation {operation} completed&quot;}
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Operation </span><span class="si">{</span><span class="n">operation</span><span class="si">}</span><span class="s2"> completed&quot;</span><span class="p">}</span>
 
-    except Exception as e:
-        error_response = error_handler.handle_error(e, f&quot;API endpoint for user {user_id}&quot;)
-        return {&quot;success&quot;: False, **error_response}
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_response</span> <span class="o">=</span> <span class="n">error_handler</span><span class="o">.</span><span class="n">handle_error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;API endpoint for user </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">error_response</span><span class="p">}</span>
 
-# Example: Input validation with secure errors
-def validate_user_input(data):
-    &quot;&quot;&quot;Validate user input with secure error messages&quot;&quot;&quot;
-    try:
-        if not isinstance(data, dict):
-            raise ValueError(&quot;Input must be a dictionary&quot;)
+<span class="c1"># Example: Input validation with secure errors</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">validate_user_input</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate user input with secure error messages&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input must be a dictionary&quot;</span><span class="p">)</span>
 
-        required_fields = [&#x27;username&#x27;, &#x27;email&#x27;, &#x27;age&#x27;]
-        for field in required_fields:
-            if field not in data:
-                raise ValueError(f&quot;Missing required field: {field}&quot;)
+        <span class="n">required_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">required_fields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required field: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Validate email format
-        email = data[&#x27;email&#x27;]
-        if &#x27;@&#x27; not in email or &#x27;.&#x27; not in email:
-            raise ValueError(&quot;Invalid email format&quot;)
+        <span class="c1"># Validate email format</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;@&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">email</span> <span class="ow">or</span> <span class="s1">&#39;.&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid email format&quot;</span><span class="p">)</span>
 
-        # Validate age
-        age = data[&#x27;age&#x27;]
-        if not isinstance(age, int) or age &lt; 0 or age &gt; 150:
-            raise ValueError(&quot;Invalid age&quot;)
+        <span class="c1"># Validate age</span>
+        <span class="n">age</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid age&quot;</span><span class="p">)</span>
 
-        return True
+        <span class="k">return</span> <span class="kc">True</span>
 
-    except Exception as e:
-        error_response = error_handler.handle_error(e, &quot;Input validation&quot;)
-        # Don&#x27;t reveal which specific validation failed
-        return {&quot;valid&quot;: False, &quot;message&quot;: &quot;Invalid input provided&quot;}
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_response</span> <span class="o">=</span> <span class="n">error_handler</span><span class="o">.</span><span class="n">handle_error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&quot;Input validation&quot;</span><span class="p">)</span>
+        <span class="c1"># Don&#39;t reveal which specific validation failed</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;valid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid input provided&quot;</span><span class="p">}</span>
 </code></pre>
 </div>
 <h2 id="practical-example-secure-file-upload-system">Practical Example: Secure File Upload System<a class="headerlink" href="#practical-example-secure-file-upload-system" title="Permanent link">&para;</a></h2>
 <p>Let&rsquo;s build a complete secure file upload system that demonstrates all these concepts:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import os
-import hashlib
-import time
-from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor
-import threading
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
 
-class SecureFileUploadSystem:
-    def __init__(self, upload_dir=&quot;./secure_uploads&quot;, max_file_size=5*1024*1024):
-        self.upload_dir = Path(upload_dir)
-        self.max_file_size = max_file_size
-        self.upload_dir.mkdir(exist_ok=True)
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureFileUploadSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upload_dir</span><span class="o">=</span><span class="s2">&quot;./secure_uploads&quot;</span><span class="p">,</span> <span class="n">max_file_size</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">upload_dir</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_file_size</span> <span class="o">=</span> <span class="n">max_file_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        # Resource management
-        self.limiter = ResourceLimiter()
-        self.error_handler = SecureErrorHandler()
-        self.file_handler = SecureFileHandler(str(self.upload_dir), max_file_size)
+        <span class="c1"># Resource management</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limiter</span> <span class="o">=</span> <span class="n">ResourceLimiter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_handler</span> <span class="o">=</span> <span class="n">SecureErrorHandler</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_handler</span> <span class="o">=</span> <span class="n">SecureFileHandler</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upload_dir</span><span class="p">),</span> <span class="n">max_file_size</span><span class="p">)</span>
 
-        # Track active uploads
-        self.active_uploads = {}
-        self.upload_lock = threading.Lock()
+        <span class="c1"># Track active uploads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_uploads</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
-    def upload_file(self, client_id, filename, file_content):
-        &quot;&quot;&quot;Main upload endpoint with all security measures&quot;&quot;&quot;
-        upload_id = self.generate_upload_id()
+    <span class="k">def</span><span class="w"> </span><span class="nf">upload_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client_id</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">file_content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main upload endpoint with all security measures&quot;&quot;&quot;</span>
+        <span class="n">upload_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_upload_id</span><span class="p">()</span>
 
-        try:
-            # Rate limiting
-            self.limiter.rate_limit_check(client_id)
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Rate limiting</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limiter</span><span class="o">.</span><span class="n">rate_limit_check</span><span class="p">(</span><span class="n">client_id</span><span class="p">)</span>
 
-            # Resource slot management
-            self.limiter.acquire_operation_slot()
+            <span class="c1"># Resource slot management</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limiter</span><span class="o">.</span><span class="n">acquire_operation_slot</span><span class="p">()</span>
 
-            # Track upload
-            with self.upload_lock:
-                self.active_uploads[upload_id] = {
-                    &#x27;client_id&#x27;: client_id,
-                    &#x27;filename&#x27;: filename,
-                    &#x27;start_time&#x27;: time.time(),
-                    &#x27;status&#x27;: &#x27;processing&#x27;
-                }
+            <span class="c1"># Track upload</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload_lock</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">active_uploads</span><span class="p">[</span><span class="n">upload_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;client_id&#39;</span><span class="p">:</span> <span class="n">client_id</span><span class="p">,</span>
+                    <span class="s1">&#39;filename&#39;</span><span class="p">:</span> <span class="n">filename</span><span class="p">,</span>
+                    <span class="s1">&#39;start_time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+                    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;processing&#39;</span>
+                <span class="p">}</span>
 
-            # Process with timeout
-            result = self.process_upload_with_timeout(filename, file_content, timeout=30)
+            <span class="c1"># Process with timeout</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_upload_with_timeout</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">file_content</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 
-            # Update status
-            with self.upload_lock:
-                self.active_uploads[upload_id][&#x27;status&#x27;] = &#x27;completed&#x27;
+            <span class="c1"># Update status</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload_lock</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">active_uploads</span><span class="p">[</span><span class="n">upload_id</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;completed&#39;</span>
 
-            return {
-                &quot;success&quot;: True,
-                &quot;upload_id&quot;: upload_id,
-                &quot;file_path&quot;: result
-            }
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;upload_id&quot;</span><span class="p">:</span> <span class="n">upload_id</span><span class="p">,</span>
+                <span class="s2">&quot;file_path&quot;</span><span class="p">:</span> <span class="n">result</span>
+            <span class="p">}</span>
 
-        except Exception as e:
-            # Secure error handling
-            error_response = self.error_handler.handle_error(e, f&quot;File upload for client {client_id}&quot;)
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Secure error handling</span>
+            <span class="n">error_response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_handler</span><span class="o">.</span><span class="n">handle_error</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;File upload for client </span><span class="si">{</span><span class="n">client_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Update status
-            with self.upload_lock:
-                if upload_id in self.active_uploads:
-                    self.active_uploads[upload_id][&#x27;status&#x27;] = &#x27;failed&#x27;
+            <span class="c1"># Update status</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload_lock</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">upload_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_uploads</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">active_uploads</span><span class="p">[</span><span class="n">upload_id</span><span class="p">][</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;failed&#39;</span>
 
-            return {&quot;success&quot;: False, **error_response}
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">error_response</span><span class="p">}</span>
 
-        finally:
-            # Always release resources
-            self.limiter.release_operation_slot()
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Always release resources</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">limiter</span><span class="o">.</span><span class="n">release_operation_slot</span><span class="p">()</span>
 
-    @TimeoutManager.timeout_decorator(30)
-    def process_upload_with_timeout(self, filename, file_content):
-        &quot;&quot;&quot;Process upload with timeout protection&quot;&quot;&quot;
-        # Secure file handling
-        saved_path = self.file_handler.secure_file_upload(filename, file_content)
+    <span class="nd">@TimeoutManager</span><span class="o">.</span><span class="n">timeout_decorator</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_upload_with_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">file_content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process upload with timeout protection&quot;&quot;&quot;</span>
+        <span class="c1"># Secure file handling</span>
+        <span class="n">saved_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_handler</span><span class="o">.</span><span class="n">secure_file_upload</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">file_content</span><span class="p">)</span>
 
-        # Generate file hash for integrity
-        file_hash = self.generate_file_hash(saved_path)
+        <span class="c1"># Generate file hash for integrity</span>
+        <span class="n">file_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_file_hash</span><span class="p">(</span><span class="n">saved_path</span><span class="p">)</span>
 
-        # Store metadata
-        self.store_file_metadata(saved_path, file_hash)
+        <span class="c1"># Store metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">store_file_metadata</span><span class="p">(</span><span class="n">saved_path</span><span class="p">,</span> <span class="n">file_hash</span><span class="p">)</span>
 
-        return saved_path
+        <span class="k">return</span> <span class="n">saved_path</span>
 
-    def generate_upload_id(self):
-        &quot;&quot;&quot;Generate unique upload ID&quot;&quot;&quot;
-        import uuid
-        return str(uuid.uuid4())
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_upload_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate unique upload ID&quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
 
-    def generate_file_hash(self, file_path):
-        &quot;&quot;&quot;Generate SHA-256 hash of file&quot;&quot;&quot;
-        hasher = hashlib.sha256()
-        with open(file_path, &#x27;rb&#x27;) as f:
-            for chunk in iter(lambda: f.read(4096), b&quot;&quot;):
-                hasher.update(chunk)
-        return hasher.hexdigest()
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_file_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate SHA-256 hash of file&quot;&quot;&quot;</span>
+        <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">4096</span><span class="p">),</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+                <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
-    def store_file_metadata(self, file_path, file_hash):
-        &quot;&quot;&quot;Store file metadata securely&quot;&quot;&quot;
-        metadata = {
-            &#x27;path&#x27;: str(file_path),
-            &#x27;hash&#x27;: file_hash,
-            &#x27;upload_time&#x27;: time.time(),
-            &#x27;size&#x27;: os.path.getsize(file_path)
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">store_file_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">file_hash</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store file metadata securely&quot;&quot;&quot;</span>
+        <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">),</span>
+            <span class="s1">&#39;hash&#39;</span><span class="p">:</span> <span class="n">file_hash</span><span class="p">,</span>
+            <span class="s1">&#39;upload_time&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="p">}</span>
 
-        # Store in secure metadata file
-        metadata_path = Path(file_path).with_suffix(&#x27;.metadata&#x27;)
-        with open(metadata_path, &#x27;w&#x27;) as f:
-            import json
-            json.dump(metadata, f)
+        <span class="c1"># Store in secure metadata file</span>
+        <span class="n">metadata_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s1">&#39;.metadata&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">metadata</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-        # Set secure permissions
-        os.chmod(metadata_path, 0o600)
+        <span class="c1"># Set secure permissions</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">metadata_path</span><span class="p">,</span> <span class="mo">0o600</span><span class="p">)</span>
 
-    def get_upload_status(self, upload_id):
-        &quot;&quot;&quot;Check upload status&quot;&quot;&quot;
-        with self.upload_lock:
-            return self.active_uploads.get(upload_id, {&quot;status&quot;: &quot;not_found&quot;})
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_upload_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">upload_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check upload status&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">upload_lock</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">active_uploads</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;not_found&quot;</span><span class="p">})</span>
 
-# Example usage
-upload_system = SecureFileUploadSystem()
+<span class="c1"># Example usage</span>
+<span class="n">upload_system</span> <span class="o">=</span> <span class="n">SecureFileUploadSystem</span><span class="p">()</span>
 
-def demo_secure_upload():
-    &quot;&quot;&quot;Demonstrate secure file upload&quot;&quot;&quot;
-    # Simulate file upload
-    test_content = b&quot;This is a test file content for secure upload demo.&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">demo_secure_upload</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate secure file upload&quot;&quot;&quot;</span>
+    <span class="c1"># Simulate file upload</span>
+    <span class="n">test_content</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;This is a test file content for secure upload demo.&quot;</span>
 
-    result = upload_system.upload_file(
-        client_id=&quot;user123&quot;,
-        filename=&quot;test_document.txt&quot;,
-        file_content=test_content
-    )
+    <span class="n">result</span> <span class="o">=</span> <span class="n">upload_system</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
+        <span class="n">client_id</span><span class="o">=</span><span class="s2">&quot;user123&quot;</span><span class="p">,</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;test_document.txt&quot;</span><span class="p">,</span>
+        <span class="n">file_content</span><span class="o">=</span><span class="n">test_content</span>
+    <span class="p">)</span>
 
-    print(&quot;Upload result:&quot;, result)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload result:&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 
-    if result[&quot;success&quot;]:
-        status = upload_system.get_upload_status(result[&quot;upload_id&quot;])
-        print(&quot;Upload status:&quot;, status)
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">upload_system</span><span class="o">.</span><span class="n">get_upload_status</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;upload_id&quot;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upload status:&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>
 
-if __name__ == &quot;__main__&quot;:
-    demo_secure_upload()
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">demo_secure_upload</span><span class="p">()</span>
 </code></pre>
 </div>
 <h2 id="security-best-practices-summary">Security Best Practices Summary<a class="headerlink" href="#security-best-practices-summary" title="Permanent link">&para;</a></h2>
@@ -2931,6 +2931,8 @@ if __name__ == &quot;__main__&quot;:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

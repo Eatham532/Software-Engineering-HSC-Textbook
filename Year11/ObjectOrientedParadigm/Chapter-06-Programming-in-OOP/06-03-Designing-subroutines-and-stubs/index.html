@@ -1505,31 +1505,31 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BankAccount:
-    def __init__(self, account_number, initial_balance):
-        &quot;&quot;&quot;Create a new bank account with the given number and balance.&quot;&quot;&quot;
-        self.account_number = account_number
-        self.balance = initial_balance
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">initial_balance</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new bank account with the given number and balance.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
 
-    def deposit(self, amount):
-        &quot;&quot;&quot;Add money to the account. Returns new balance.&quot;&quot;&quot;
-        if amount &lt;= 0:
-            raise ValueError(&quot;Deposit amount must be positive&quot;)
-        self.balance += amount
-        return self.balance
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add money to the account. Returns new balance.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Deposit amount must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
 
-    def withdraw(self, amount):
-        &quot;&quot;&quot;Remove money from account. Returns new balance.&quot;&quot;&quot;
-        if amount &lt;= 0:
-            raise ValueError(&quot;Withdrawal amount must be positive&quot;)
-        if amount &gt; self.balance:
-            raise ValueError(&quot;Insufficient funds&quot;)
-        self.balance -= amount
-        return self.balance
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove money from account. Returns new balance.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Withdrawal amount must be positive&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Insufficient funds&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
 
-    def get_balance(self):
-        &quot;&quot;&quot;Return current account balance.&quot;&quot;&quot;
-        return self.balance
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current account balance.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
 </code></pre>
 </div>
 <h3 id="designing-with-stubs">Designing with stubs<a class="headerlink" href="#designing-with-stubs" title="Permanent link">&para;</a></h3>
@@ -1546,113 +1546,113 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ShoppingCart:
-    def __init__(self):
-        &quot;&quot;&quot;Create an empty shopping cart.&quot;&quot;&quot;
-        self.items = []
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ShoppingCart</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an empty shopping cart.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def add_item(self, product_id, quantity):
-        &quot;&quot;&quot;Add an item to the cart.&quot;&quot;&quot;
-        # Stub: basic implementation for testing
-        self.items.append({&quot;id&quot;: product_id, &quot;qty&quot;: quantity})
-        print(f&quot;Added {quantity} of product {product_id}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add an item to the cart.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: basic implementation for testing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span> <span class="s2">&quot;qty&quot;</span><span class="p">:</span> <span class="n">quantity</span><span class="p">})</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">quantity</span><span class="si">}</span><span class="s2"> of product </span><span class="si">{</span><span class="n">product_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def remove_item(self, product_id):
-        &quot;&quot;&quot;Remove an item from the cart.&quot;&quot;&quot;
-        # Stub: placeholder for now
-        print(f&quot;TODO: Remove product {product_id}&quot;)
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove an item from the cart.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: placeholder for now</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO: Remove product </span><span class="si">{</span><span class="n">product_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def calculate_total(self):
-        &quot;&quot;&quot;Calculate total price of items in cart.&quot;&quot;&quot;
-        # Stub: return dummy value for testing
-        print(&quot;TODO: Calculate real total&quot;)
-        return 0.00
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate total price of items in cart.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: return dummy value for testing</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TODO: Calculate real total&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.00</span>
 
-    def checkout(self):
-        &quot;&quot;&quot;Process the purchase.&quot;&quot;&quot;
-        # Stub: simplified version
-        total = self.calculate_total()
-        print(f&quot;Processing checkout for ${total}&quot;)
-        return True
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process the purchase.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: simplified version</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_total</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing checkout for $</span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
 </code></pre>
 </div>
 <details class="example">
 <summary>Guided example: Student gradebook</summary>
 <p>Let&rsquo;s design a gradebook system using stubs to plan our implementation:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Student:
-    def __init__(self, student_id, name):
-        &quot;&quot;&quot;Create a student with ID and name.&quot;&quot;&quot;
-        self.student_id = student_id
-        self.name = name
-        self.grades = []
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a student with ID and name.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def add_grade(self, subject, score):
-        &quot;&quot;&quot;Add a grade for a subject.&quot;&quot;&quot;
-        # Stub: basic implementation
-        self.grades.append({&quot;subject&quot;: subject, &quot;score&quot;: score})
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a grade for a subject.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: basic implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="n">subject</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">score</span><span class="p">})</span>
 
-    def get_average(self):
-        &quot;&quot;&quot;Calculate average grade across all subjects.&quot;&quot;&quot;
-        # Stub: simplified calculation
-        if not self.grades:
-            return 0.0
-        total = sum(grade[&quot;score&quot;] for grade in self.grades)
-        return total / len(self.grades)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_average</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate average grade across all subjects.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: simplified calculation</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">grade</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">grade</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">)</span>
 
-    def get_grades_for_subject(self, subject):
-        &quot;&quot;&quot;Get all grades for a specific subject.&quot;&quot;&quot;
-        # Stub: placeholder
-        print(f&quot;TODO: Get grades for {subject}&quot;)
-        return []
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_grades_for_subject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all grades for a specific subject.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: placeholder</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO: Get grades for </span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
 
-class Gradebook:
-    def __init__(self):
-        &quot;&quot;&quot;Create an empty gradebook.&quot;&quot;&quot;
-        self.students = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">Gradebook</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an empty gradebook.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def add_student(self, student):
-        &quot;&quot;&quot;Add a student to the gradebook.&quot;&quot;&quot;
-        # Stub: basic implementation
-        self.students[student.student_id] = student
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_student</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a student to the gradebook.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: basic implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student</span><span class="o">.</span><span class="n">student_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">student</span>
 
-    def record_grade(self, student_id, subject, score):
-        &quot;&quot;&quot;Record a grade for a student.&quot;&quot;&quot;
-        # Stub: basic implementation with validation
-        if student_id not in self.students:
-            print(f&quot;Student {student_id} not found&quot;)
-            return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a grade for a student.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: basic implementation with validation</span>
+        <span class="k">if</span> <span class="n">student_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Student </span><span class="si">{</span><span class="n">student_id</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        student = self.students[student_id]
-        student.add_grade(subject, score)
-        return True
+        <span class="n">student</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span>
+        <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="n">subject</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def get_class_average(self, subject):
-        &quot;&quot;&quot;Calculate class average for a subject.&quot;&quot;&quot;
-        # Stub: placeholder for complex calculation
-        print(f&quot;TODO: Calculate class average for {subject}&quot;)
-        return 0.0
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_class_average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate class average for a subject.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: placeholder for complex calculation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO: Calculate class average for </span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
 
-    def generate_report(self, student_id):
-        &quot;&quot;&quot;Generate a grade report for a student.&quot;&quot;&quot;
-        # Stub: basic report
-        if student_id not in self.students:
-            return &quot;Student not found&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a grade report for a student.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub: basic report</span>
+        <span class="k">if</span> <span class="n">student_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Student not found&quot;</span>
 
-        student = self.students[student_id]
-        avg = student.get_average()
-        return f&quot;{student.name}: Average = {avg:.1f}&quot;
+        <span class="n">student</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span>
+        <span class="n">avg</span> <span class="o">=</span> <span class="n">student</span><span class="o">.</span><span class="n">get_average</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: Average = </span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Test our stub implementation
-gradebook = Gradebook()
-student1 = Student(&quot;12345&quot;, &quot;Alice&quot;)
-gradebook.add_student(student1)
+<span class="c1"># Test our stub implementation</span>
+<span class="n">gradebook</span> <span class="o">=</span> <span class="n">Gradebook</span><span class="p">()</span>
+<span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+<span class="n">gradebook</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">student1</span><span class="p">)</span>
 
-gradebook.record_grade(&quot;12345&quot;, &quot;Math&quot;, 85)
-gradebook.record_grade(&quot;12345&quot;, &quot;Science&quot;, 92)
+<span class="n">gradebook</span><span class="o">.</span><span class="n">record_grade</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="n">gradebook</span><span class="o">.</span><span class="n">record_grade</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">,</span> <span class="s2">&quot;Science&quot;</span><span class="p">,</span> <span class="mi">92</span><span class="p">)</span>
 
-print(gradebook.generate_report(&quot;12345&quot;))
+<span class="nb">print</span><span class="p">(</span><span class="n">gradebook</span><span class="o">.</span><span class="n">generate_report</span><span class="p">(</span><span class="s2">&quot;12345&quot;</span><span class="p">))</span>
 </code></pre>
 </div>
 </details>
@@ -1689,72 +1689,72 @@ print(gradebook.generate_report(&quot;12345&quot;))
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Book:
-    def __init__(self, isbn, title, author):
-        &quot;&quot;&quot;Create a book with ISBN, title, and author.&quot;&quot;&quot;
-        self.isbn = isbn
-        self.title = title
-        self.author = author
-        self.is_available = True
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Book</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a book with ISBN, title, and author.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def checkout(self):
-        &quot;&quot;&quot;Mark book as checked out. Returns success status.&quot;&quot;&quot;
-        # Stub implementation
-        if self.is_available:
-            self.is_available = False
-            print(f&quot;Checked out: {self.title}&quot;)
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark book as checked out. Returns success status.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Checked out: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def return_book(self):
-        &quot;&quot;&quot;Mark book as returned.&quot;&quot;&quot;
-        # Stub implementation
-        self.is_available = True
-        print(f&quot;Returned: {self.title}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_book</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark book as returned.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Returned: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-class Member:
-    def __init__(self, member_id, name):
-        &quot;&quot;&quot;Create a library member.&quot;&quot;&quot;
-        self.member_id = member_id
-        self.name = name
-        self.borrowed_books = []
+<span class="k">class</span><span class="w"> </span><span class="nc">Member</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a library member.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">member_id</span> <span class="o">=</span> <span class="n">member_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def borrow_book(self, book):
-        &quot;&quot;&quot;Add book to member&#x27;s borrowed list.&quot;&quot;&quot;
-        # Stub implementation
-        self.borrowed_books.append(book)
-        print(f&quot;{self.name} borrowed {book.title}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">borrow_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add book to member&#39;s borrowed list.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> borrowed </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def return_book(self, book):
-        &quot;&quot;&quot;Remove book from borrowed list.&quot;&quot;&quot;
-        # Stub implementation
-        if book in self.borrowed_books:
-            self.borrowed_books.remove(book)
-            print(f&quot;{self.name} returned {book.title}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove book from borrowed list.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="k">if</span> <span class="n">book</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> returned </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-class Library:
-    def __init__(self):
-        &quot;&quot;&quot;Create an empty library.&quot;&quot;&quot;
-        self.books = {}
-        self.members = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">Library</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an empty library.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">books</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def add_book(self, book):
-        &quot;&quot;&quot;Add a book to the library catalog.&quot;&quot;&quot;
-        # Stub implementation
-        self.books[book.isbn] = book
-        print(f&quot;Added book: {book.title}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a book to the library catalog.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">books</span><span class="p">[</span><span class="n">book</span><span class="o">.</span><span class="n">isbn</span><span class="p">]</span> <span class="o">=</span> <span class="n">book</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added book: </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def register_member(self, member):
-        &quot;&quot;&quot;Register a new library member.&quot;&quot;&quot;
-        # Stub implementation
-        self.members[member.member_id] = member
-        print(f&quot;Registered member: {member.name}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register a new library member.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">[</span><span class="n">member</span><span class="o">.</span><span class="n">member_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">member</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Registered member: </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def checkout_book(self, member_id, isbn):
-        &quot;&quot;&quot;Handle book checkout process.&quot;&quot;&quot;
-        # Stub implementation
-        print(f&quot;TODO: Process checkout for member {member_id}, book {isbn}&quot;)
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">checkout_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member_id</span><span class="p">,</span> <span class="n">isbn</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle book checkout process.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO: Process checkout for member </span><span class="si">{</span><span class="n">member_id</span><span class="si">}</span><span class="s2">, book </span><span class="si">{</span><span class="n">isbn</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </code></pre>
 </div>
 </details>
@@ -1777,64 +1777,64 @@ class Library:
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">from datetime import datetime
+<pre><code class="language-python"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-class Task:
-    def __init__(self, title, description, due_date):
-        &quot;&quot;&quot;Create a task with title, description, and due date.&quot;&quot;&quot;
-        self.title = title
-        self.description = description
-        self.due_date = due_date
-        self.is_complete = False
-        self.created_at = datetime.now()
+<span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">due_date</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a task with title, description, and due date.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">due_date</span> <span class="o">=</span> <span class="n">due_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_complete</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
-    def mark_complete(self):
-        &quot;&quot;&quot;Mark this task as completed.&quot;&quot;&quot;
-        # Stub implementation
-        self.is_complete = True
-        print(f&quot;Completed: {self.title}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">mark_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark this task as completed.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_complete</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completed: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def is_overdue(self):
-        &quot;&quot;&quot;Check if task is past due date.&quot;&quot;&quot;
-        # Stub implementation
-        print(f&quot;TODO: Check if {self.title} is overdue&quot;)
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_overdue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if task is past due date.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO: Check if </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> is overdue&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def get_summary(self):
-        &quot;&quot;&quot;Return a summary string for this task.&quot;&quot;&quot;
-        # Stub implementation
-        status = &quot;✓&quot; if self.is_complete else &quot;○&quot;
-        return f&quot;{status} {self.title} (due: {self.due_date})&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a summary string for this task.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_complete</span> <span class="k">else</span> <span class="s2">&quot;○&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2"> (due: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">due_date</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-class TaskList:
-    def __init__(self, name):
-        &quot;&quot;&quot;Create a named task list.&quot;&quot;&quot;
-        self.name = name
-        self.tasks = []
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskList</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a named task list.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def add_task(self, task):
-        &quot;&quot;&quot;Add a task to this list.&quot;&quot;&quot;
-        # Stub implementation
-        self.tasks.append(task)
-        print(f&quot;Added task: {task.title}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a task to this list.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added task: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def get_incomplete_tasks(self):
-        &quot;&quot;&quot;Return list of incomplete tasks.&quot;&quot;&quot;
-        # Stub implementation
-        print(&quot;TODO: Filter incomplete tasks&quot;)
-        return []
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_incomplete_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of incomplete tasks.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TODO: Filter incomplete tasks&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
 
-    def get_overdue_tasks(self):
-        &quot;&quot;&quot;Return list of overdue tasks.&quot;&quot;&quot;
-        # Stub implementation
-        print(&quot;TODO: Find overdue tasks&quot;)
-        return []
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_overdue_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of overdue tasks.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TODO: Find overdue tasks&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
 
-    def mark_task_complete(self, task_title):
-        &quot;&quot;&quot;Mark a task complete by title.&quot;&quot;&quot;
-        # Stub implementation
-        print(f&quot;TODO: Mark &#x27;{task_title}&#x27; as complete&quot;)
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">mark_task_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_title</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark a task complete by title.&quot;&quot;&quot;</span>
+        <span class="c1"># Stub implementation</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TODO: Mark &#39;</span><span class="si">{</span><span class="n">task_title</span><span class="si">}</span><span class="s2">&#39; as complete&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </code></pre>
 </div>
 </details>
@@ -2080,6 +2080,8 @@ class TaskList:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

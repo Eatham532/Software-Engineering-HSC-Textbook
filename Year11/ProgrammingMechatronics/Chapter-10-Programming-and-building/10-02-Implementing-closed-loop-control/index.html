@@ -1563,38 +1563,38 @@
 <p><strong>Control equation</strong>: <code>output = Kp × error</code></p>
 <p>Higher gain provides faster response but can cause instability. Lower gain is more stable but slower to reach the setpoint.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Basic proportional controller implementation
-class ProportionalController:
-    def __init__(self, kp, output_min=-100, output_max=100):
-        self.kp = kp  # Proportional gain
-        self.output_min = output_min
-        self.output_max = output_max
+<pre><code class="language-python"><span class="c1"># Basic proportional controller implementation</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ProportionalController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">output_min</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">output_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">kp</span>  <span class="c1"># Proportional gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_min</span> <span class="o">=</span> <span class="n">output_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_max</span> <span class="o">=</span> <span class="n">output_max</span>
 
-    def calculate_output(self, setpoint, measured_value):
-        &quot;&quot;&quot;Calculate control output based on proportional control&quot;&quot;&quot;
-        error = setpoint - measured_value
-        output = self.kp * error
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setpoint</span><span class="p">,</span> <span class="n">measured_value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate control output based on proportional control&quot;&quot;&quot;</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">setpoint</span> <span class="o">-</span> <span class="n">measured_value</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">*</span> <span class="n">error</span>
 
-        # Limit output to safe range
-        output = max(self.output_min, min(self.output_max, output))
-        return output
+        <span class="c1"># Limit output to safe range</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_min</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_max</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">output</span>
 
-# Example: Temperature control
-temp_controller = ProportionalController(kp=2.0, output_min=0, output_max=100)
+<span class="c1"># Example: Temperature control</span>
+<span class="n">temp_controller</span> <span class="o">=</span> <span class="n">ProportionalController</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">output_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">output_max</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 
-# Simulate control loop
-setpoint = 25.0  # Target temperature in Celsius
-current_temp = 20.0  # Starting temperature
+<span class="c1"># Simulate control loop</span>
+<span class="n">setpoint</span> <span class="o">=</span> <span class="mf">25.0</span>  <span class="c1"># Target temperature in Celsius</span>
+<span class="n">current_temp</span> <span class="o">=</span> <span class="mf">20.0</span>  <span class="c1"># Starting temperature</span>
 
-for step in range(5):
-    # Calculate control output (heater power percentage)
-    heater_power = temp_controller.calculate_output(setpoint, current_temp)
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># Calculate control output (heater power percentage)</span>
+    <span class="n">heater_power</span> <span class="o">=</span> <span class="n">temp_controller</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">current_temp</span><span class="p">)</span>
 
-    # Simulate temperature change (simplified physics)
-    temp_increase = heater_power * 0.01  # 1% per unit power
-    current_temp += temp_increase
+    <span class="c1"># Simulate temperature change (simplified physics)</span>
+    <span class="n">temp_increase</span> <span class="o">=</span> <span class="n">heater_power</span> <span class="o">*</span> <span class="mf">0.01</span>  <span class="c1"># 1% per unit power</span>
+    <span class="n">current_temp</span> <span class="o">+=</span> <span class="n">temp_increase</span>
 
-    print(f&quot;Step {step+1}: Temp={current_temp:.1f}°C, Error={setpoint-current_temp:.1f}, Power={heater_power:.1f}%&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: Temp=</span><span class="si">{</span><span class="n">current_temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C, Error=</span><span class="si">{</span><span class="n">setpoint</span><span class="o">-</span><span class="n">current_temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Power=</span><span class="si">{</span><span class="n">heater_power</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="pid-control">PID control<a class="headerlink" href="#pid-control" title="Permanent link">&para;</a></h3>
@@ -1612,394 +1612,394 @@ for step in range(5):
 </ul>
 <p><strong>Control equation</strong>: <code>output = Kp×error + Ki×∫error×dt + Kd×(derror/dt)</code></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-class PIDController:
-    def __init__(self, kp, ki, kd, output_min=-100, output_max=100):
-        self.kp = kp  # Proportional gain
-        self.ki = ki  # Integral gain
-        self.kd = kd  # Derivative gain
+<span class="k">class</span><span class="w"> </span><span class="nc">PIDController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">output_min</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">output_max</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">kp</span>  <span class="c1"># Proportional gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">ki</span>  <span class="c1"># Integral gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">=</span> <span class="n">kd</span>  <span class="c1"># Derivative gain</span>
 
-        self.output_min = output_min
-        self.output_max = output_max
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_min</span> <span class="o">=</span> <span class="n">output_min</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_max</span> <span class="o">=</span> <span class="n">output_max</span>
 
-        # Internal state
-        self.previous_error = 0
-        self.integral = 0
-        self.last_time = time.time()
+        <span class="c1"># Internal state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-    def calculate_output(self, setpoint, measured_value):
-        &quot;&quot;&quot;Calculate PID control output&quot;&quot;&quot;
-        current_time = time.time()
-        dt = current_time - self.last_time
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setpoint</span><span class="p">,</span> <span class="n">measured_value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate PID control output&quot;&quot;&quot;</span>
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_time</span>
 
-        if dt &lt;= 0:
-            dt = 0.001  # Prevent division by zero
+        <span class="k">if</span> <span class="n">dt</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.001</span>  <span class="c1"># Prevent division by zero</span>
 
-        # Calculate error
-        error = setpoint - measured_value
+        <span class="c1"># Calculate error</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">setpoint</span> <span class="o">-</span> <span class="n">measured_value</span>
 
-        # Proportional term
-        proportional = self.kp * error
+        <span class="c1"># Proportional term</span>
+        <span class="n">proportional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">*</span> <span class="n">error</span>
 
-        # Integral term (accumulated error over time)
-        self.integral += error * dt
-        integral = self.ki * self.integral
+        <span class="c1"># Integral term (accumulated error over time)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integral</span> <span class="o">+=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="n">integral</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ki</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">integral</span>
 
-        # Derivative term (rate of error change)
-        derivative = 0
-        if dt &gt; 0:
-            derivative = self.kd * (error - self.previous_error) / dt
+        <span class="c1"># Derivative term (rate of error change)</span>
+        <span class="n">derivative</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">derivative</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kd</span> <span class="o">*</span> <span class="p">(</span><span class="n">error</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span><span class="p">)</span> <span class="o">/</span> <span class="n">dt</span>
 
-        # Combine PID terms
-        output = proportional + integral + derivative
+        <span class="c1"># Combine PID terms</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">proportional</span> <span class="o">+</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">derivative</span>
 
-        # Apply output limits
-        output = max(self.output_min, min(self.output_max, output))
+        <span class="c1"># Apply output limits</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_min</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_max</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
 
-        # Store values for next iteration
-        self.previous_error = error
-        self.last_time = current_time
+        <span class="c1"># Store values for next iteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span> <span class="o">=</span> <span class="n">error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_time</span> <span class="o">=</span> <span class="n">current_time</span>
 
-        return output, proportional, integral, derivative
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">proportional</span><span class="p">,</span> <span class="n">integral</span><span class="p">,</span> <span class="n">derivative</span>
 
-    def reset(self):
-        &quot;&quot;&quot;Reset controller state&quot;&quot;&quot;
-        self.previous_error = 0
-        self.integral = 0
-        self.last_time = time.time()
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset controller state&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-# Example: Position control system
-position_controller = PIDController(kp=10.0, ki=2.0, kd=1.0, output_min=-50, output_max=50)
+<span class="c1"># Example: Position control system</span>
+<span class="n">position_controller</span> <span class="o">=</span> <span class="n">PIDController</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">output_min</span><span class="o">=-</span><span class="mi">50</span><span class="p">,</span> <span class="n">output_max</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 
-# Simulate servo motor position control
-target_position = 90  # degrees
-current_position = 0  # starting position
-velocity = 0  # current velocity
+<span class="c1"># Simulate servo motor position control</span>
+<span class="n">target_position</span> <span class="o">=</span> <span class="mi">90</span>  <span class="c1"># degrees</span>
+<span class="n">current_position</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># starting position</span>
+<span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># current velocity</span>
 
-print(&quot;PID Position Control Simulation&quot;)
-print(&quot;Step | Position | Error | P-term | I-term | D-term | Output&quot;)
-print(&quot;-&quot; * 65)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PID Position Control Simulation&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step | Position | Error | P-term | I-term | D-term | Output&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
 
-for step in range(10):
-    # Calculate PID output
-    output, p_term, i_term, d_term = position_controller.calculate_output(
-        target_position, current_position
-    )
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># Calculate PID output</span>
+    <span class="n">output</span><span class="p">,</span> <span class="n">p_term</span><span class="p">,</span> <span class="n">i_term</span><span class="p">,</span> <span class="n">d_term</span> <span class="o">=</span> <span class="n">position_controller</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span>
+        <span class="n">target_position</span><span class="p">,</span> <span class="n">current_position</span>
+    <span class="p">)</span>
 
-    # Simulate motor response (simplified dynamics)
-    acceleration = output * 0.1  # Motor response
-    velocity += acceleration
-    velocity *= 0.9  # Friction/damping
-    current_position += velocity
+    <span class="c1"># Simulate motor response (simplified dynamics)</span>
+    <span class="n">acceleration</span> <span class="o">=</span> <span class="n">output</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># Motor response</span>
+    <span class="n">velocity</span> <span class="o">+=</span> <span class="n">acceleration</span>
+    <span class="n">velocity</span> <span class="o">*=</span> <span class="mf">0.9</span>  <span class="c1"># Friction/damping</span>
+    <span class="n">current_position</span> <span class="o">+=</span> <span class="n">velocity</span>
 
-    error = target_position - current_position
+    <span class="n">error</span> <span class="o">=</span> <span class="n">target_position</span> <span class="o">-</span> <span class="n">current_position</span>
 
-    print(f&quot;{step+1:4d} | {current_position:8.1f} | {error:5.1f} | {p_term:6.1f} | {i_term:6.1f} | {d_term:6.1f} | {output:6.1f}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">current_position</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">p_term</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">i_term</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">d_term</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">output</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    time.sleep(0.1)  # Simulate time step
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Simulate time step</span>
 </code></pre>
 </div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s implement a complete closed loop control system for a simulated robotic arm that needs to maintain a specific angle despite external disturbances.</p>
 <div class="diagram-container" data-container-id="kroki-diagram-1"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-1')">🔍 View Larger</button><div id="kroki-diagram-1" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS" height="379px" preserveAspectRatio="xMaxYMax meet" style="width:874px;height:379px;background:#FFFFFF;" version="1.1" viewBox="0 0 874 379" width="874px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-1"><defs /><g><g class="entity" data-entity="RobotArmController" data-source-line="5" data-uid="ent0002" id="entity_RobotArmController"><rect fill="#FFFFFF" height="174.375" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="221.4492" x="376.2" y="12" /><ellipse cx="413.5321" cy="26" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M416.9383,27.9688 C416.2196,28.6406 414.9227,29.8125 413.1727,29.8125 C410.954,29.8125 409.9852,27.875 409.9852,25.9219 C409.9852,23.5313 411.4696,22.2656 413.1102,22.2656 C415.1258,22.2656 415.3446,23.7813 415.5165,24.875 L416.9383,24.6875 C416.8446,24.1094 416.7665,23.5313 416.7665,22.5625 C416.7665,21.8906 416.8133,21.3438 416.8446,20.9219 L415.4383,20.9219 L415.329,21.875 C414.7352,21.3438 414.0946,20.7969 412.8758,20.7969 C410.829,20.7969 408.4227,22.625 408.4227,25.9375 C408.4227,28.875 410.1883,31.2656 413.1883,31.2656 C415.6258,31.2656 417.329,29.6406 417.9227,29.0625 L416.9383,27.9688 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="139.3779" x="430.9392" y="30.8467">RobotArmController</text><line style="stroke:#000000;stroke-width:1;" x1="377.2" x2="596.6492" y1="40" y2="40" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="384.2" y="50.6484" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="197.4492" x="394.2" y="56.9951">pid_controller: PIDController</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="384.2" y="66.9453" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="137.5186" x="394.2" y="73.292">current_angle: float</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="384.2" y="83.2422" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="129.2744" x="394.2" y="89.5889">target_angle: float</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="384.2" y="99.5391" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="132.9043" x="394.2" y="105.8857">motor_power: float</text><line style="stroke:#000000;stroke-width:1;" x1="377.2" x2="596.6492" y1="113.1875" y2="113.1875" /><ellipse cx="387.2" cy="126.8359" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="166.8174" x="394.2" y="130.1826">set_target_angle(angle)</text><ellipse cx="387.2" cy="143.1328" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="141.9961" x="394.2" y="146.4795">read_angle_sensor()</text><ellipse cx="387.2" cy="159.4297" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="152.9951" x="394.2" y="162.7764">update_control_loop()</text><ellipse cx="387.2" cy="175.7266" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="192.0078" x="394.2" y="179.0732">apply_motor_power(power)</text></g><g class="entity" data-entity="AngleSensor" data-source-line="16" data-uid="ent0003" id="entity_AngleSensor"><rect fill="#FFFFFF" height="109.1875" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="207.8525" x="12" y="263.37" /><ellipse cx="68.2622" cy="277.37" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M71.6685,279.3388 C70.9497,280.0106 69.6528,281.1825 67.9028,281.1825 C65.6841,281.1825 64.7153,279.245 64.7153,277.2919 C64.7153,274.9013 66.1997,273.6356 67.8403,273.6356 C69.856,273.6356 70.0747,275.1513 70.2466,276.245 L71.6685,276.0575 C71.5747,275.4794 71.4966,274.9013 71.4966,273.9325 C71.4966,273.2606 71.5435,272.7138 71.5747,272.2919 L70.1685,272.2919 L70.0591,273.245 C69.4653,272.7138 68.8247,272.1669 67.606,272.1669 C65.5591,272.1669 63.1528,273.995 63.1528,277.3075 C63.1528,280.245 64.9185,282.6356 67.9185,282.6356 C70.356,282.6356 72.0591,281.0106 72.6528,280.4325 L71.6685,279.3388 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="87.8281" x="85.7622" y="282.2167">AngleSensor</text><line style="stroke:#000000;stroke-width:1;" x1="13" x2="218.8525" y1="291.37" y2="291.37" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="20" y="302.0184" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="118.1455" x="30" y="308.3651">noise_level: float</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="20" y="318.3153" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="183.8525" x="30" y="324.662">measurement_delay: float</text><line style="stroke:#000000;stroke-width:1;" x1="13" x2="218.8525" y1="331.9638" y2="331.9638" /><ellipse cx="23" cy="345.6122" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="129.2197" x="30" y="348.9589">read_angle(): float</text><ellipse cx="23" cy="361.9091" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="72.3037" x="30" y="365.2557">calibrate()</text></g><g class="entity" data-entity="ServoMotor" data-source-line="23" data-uid="ent0004" id="entity_ServoMotor"><rect fill="#FFFFFF" height="109.1875" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="219.043" x="254.4" y="263.37" /><ellipse cx="319.8907" cy="277.37" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M323.297,279.3388 C322.5782,280.0106 321.2813,281.1825 319.5313,281.1825 C317.3126,281.1825 316.3438,279.245 316.3438,277.2919 C316.3438,274.9013 317.8282,273.6356 319.4688,273.6356 C321.4845,273.6356 321.7032,275.1513 321.8751,276.245 L323.297,276.0575 C323.2032,275.4794 323.1251,274.9013 323.1251,273.9325 C323.1251,273.2606 323.172,272.7138 323.2032,272.2919 L321.797,272.2919 L321.6876,273.245 C321.0938,272.7138 320.4532,272.1669 319.2345,272.1669 C317.1876,272.1669 314.7813,273.995 314.7813,277.3075 C314.7813,280.245 316.547,282.6356 319.547,282.6356 C321.9845,282.6356 323.6876,281.0106 324.2813,280.4325 L323.297,279.3388 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="80.5615" x="337.3907" y="282.2167">ServoMotor</text><line style="stroke:#000000;stroke-width:1;" x1="255.4" x2="472.443" y1="291.37" y2="291.37" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="262.4" y="302.0184" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="121.6865" x="272.4" y="308.3651">power_limit: float</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="262.4" y="318.3153" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="143.1445" x="272.4" y="324.662">response_time: float</text><line style="stroke:#000000;stroke-width:1;" x1="255.4" x2="472.443" y1="331.9638" y2="331.9638" /><ellipse cx="265.4" cy="345.6122" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="186.792" x="272.4" y="348.9589">set_power(power_percent)</text><ellipse cx="265.4" cy="361.9091" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="195.043" x="272.4" y="365.2557">get_current_position(): float</text></g><g class="entity" data-entity="Disturbance" data-source-line="30" data-uid="ent0005" id="entity_Disturbance"><rect fill="#FFFFFF" height="92.8906" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="203.9082" x="507.97" y="271.52" /><ellipse cx="563.8084" cy="285.52" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M567.2146,287.4888 C566.4959,288.1606 565.199,289.3325 563.449,289.3325 C561.2303,289.3325 560.2615,287.395 560.2615,285.4419 C560.2615,283.0513 561.7459,281.7856 563.3865,281.7856 C565.4021,281.7856 565.6209,283.3013 565.7928,284.395 L567.2146,284.2075 C567.1209,283.6294 567.0428,283.0513 567.0428,282.0825 C567.0428,281.4106 567.0896,280.8638 567.1209,280.4419 L565.7146,280.4419 L565.6053,281.395 C565.0115,280.8638 564.3709,280.3169 563.1521,280.3169 C561.1053,280.3169 558.699,282.145 558.699,285.4575 C558.699,288.395 560.4646,290.7856 563.4646,290.7856 C565.9021,290.7856 567.6053,289.1606 568.199,288.5825 L567.2146,287.4888 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="84.7314" x="581.3084" y="290.3667">Disturbance</text><line style="stroke:#000000;stroke-width:1;" x1="508.97" x2="710.8782" y1="299.52" y2="299.52" /><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="515.97" y="310.1684" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="158.9082" x="525.97" y="316.5151">force_magnitude: float</text><rect fill="none" height="6" style="stroke:#000000;stroke-width:1;" width="6" x="515.97" y="326.4653" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="111.1455" x="525.97" y="332.812">frequency: float</text><line style="stroke:#000000;stroke-width:1;" x1="508.97" x2="710.8782" y1="340.1138" y2="340.1138" /><ellipse cx="518.97" cy="353.7622" fill="#FFFFFF" rx="3" ry="3" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="179.9082" x="525.97" y="357.1089">apply_disturbance(): float</text></g><g class="entity" data-entity="PIDController" data-source-line="36" data-uid="ent0006" id="entity_PIDController"><rect fill="#FFFFFF" height="44" rx="2.5" ry="2.5" style="stroke:#000000;stroke-width:1;" width="120.5244" x="746.66" y="295.97" /><ellipse cx="759.66" cy="309.97" fill="#FFFFFF" rx="9" ry="9" style="stroke:#000000;stroke-width:1;" /><path d="M763.0663,311.9387 C762.3475,312.6106 761.0506,313.7825 759.3006,313.7825 C757.0819,313.7825 756.1131,311.845 756.1131,309.8919 C756.1131,307.5012 757.5975,306.2356 759.2381,306.2356 C761.2538,306.2356 761.4725,307.7512 761.6444,308.845 L763.0663,308.6575 C762.9725,308.0794 762.8944,307.5012 762.8944,306.5325 C762.8944,305.8606 762.9413,305.3137 762.9725,304.8919 L761.5663,304.8919 L761.4569,305.845 C760.8631,305.3137 760.2225,304.7669 759.0038,304.7669 C756.9569,304.7669 754.5506,306.595 754.5506,309.9075 C754.5506,312.845 756.3163,315.2356 759.3163,315.2356 C761.7538,315.2356 763.4569,313.6106 764.0506,313.0325 L763.0663,311.9387 Z " fill="#000000" /><text fill="#000000" font-family="Verdana" font-size="14" lengthAdjust="spacing" textLength="92.5244" x="771.66" y="314.8167">PIDController</text><line style="stroke:#000000;stroke-width:1;" x1="747.66" x2="866.1844" y1="323.97" y2="323.97" /><line style="stroke:#000000;stroke-width:1;" x1="747.66" x2="866.1844" y1="331.97" y2="331.97" /></g><g class="link" data-entity-1="RobotArmController" data-entity-2="PIDController" data-source-line="36" data-uid="lnk7" id="link_RobotArmController_PIDController"><path codeLine="36" d="M597.9,174.72 C639.1,202.47 686.2,234.29 728.93,263.37 C744.41,273.91 756.6278,282.2879 770.9078,292.1179" fill="none" id="RobotArmController-to-PIDController" style="stroke:#000000;stroke-width:1;" /><polygon fill="#000000" points="775.85,295.52,770.7047,287.122,771.7315,292.6849,766.1686,293.7117,775.85,295.52" style="stroke:#000000;stroke-width:1;" /></g><g class="link" data-entity-1="RobotArmController" data-entity-2="AngleSensor" data-source-line="37" data-uid="lnk8" id="link_RobotArmController_AngleSensor"><path codeLine="37" d="M375.87,165.08 C322.39,196.33 264.2008,230.3335 213.4108,260.0035" fill="none" id="RobotArmController-to-AngleSensor" style="stroke:#000000;stroke-width:1;" /><polygon fill="#000000" points="208.23,263.03,218.0188,261.9442,212.5473,260.5079,213.9835,255.0365,208.23,263.03" style="stroke:#000000;stroke-width:1;" /></g><g class="link" data-entity-1="RobotArmController" data-entity-2="ServoMotor" data-source-line="38" data-uid="lnk9" id="link_RobotArmController_ServoMotor"><path codeLine="38" d="M437.78,186.8 C423.2,212.51 410.6,234.7009 397.55,257.7109" fill="none" id="RobotArmController-to-ServoMotor" style="stroke:#000000;stroke-width:1;" /><polygon fill="#000000" points="394.59,262.93,402.5093,257.0747,397.0566,258.5808,395.5506,253.1281,394.59,262.93" style="stroke:#000000;stroke-width:1;" /></g><g class="link" data-entity-1="RobotArmController" data-entity-2="Disturbance" data-source-line="39" data-uid="lnk10" id="link_RobotArmController_Disturbance"><path codeLine="39" d="M536.07,186.8 C552.46,215.69 567.1195,241.5213 581.0295,266.0413" fill="none" id="RobotArmController-to-Disturbance" style="stroke:#000000;stroke-width:1;stroke-dasharray:7.0,7.0;" /><polygon fill="#000000" points="583.99,271.26,583.0283,261.4582,581.5229,266.9111,576.07,265.4056,583.99,271.26" style="stroke:#000000;stroke-width:1;" /><text fill="#000000" font-family="Verdana" font-size="13" lengthAdjust="spacing" textLength="73.6899" x="560.93" y="229.4369">affected by</text></g></g></svg></p></div></div>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import math
-import random
-import time
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-class RobotArmSimulator:
-    &quot;&quot;&quot;Simulates a robotic arm with realistic physics and disturbances&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">RobotArmSimulator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulates a robotic arm with realistic physics and disturbances&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        # Physical parameters
-        self.angle = 0.0  # Current angle in degrees
-        self.velocity = 0.0  # Angular velocity
-        self.inertia = 2.0  # Rotational inertia
-        self.friction = 0.1  # Friction coefficient
-        self.gravity_torque = 5.0  # Gravity effect
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Physical parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Current angle in degrees</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mf">0.0</span>  <span class="c1"># Angular velocity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># Rotational inertia</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">friction</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Friction coefficient</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gravity_torque</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># Gravity effect</span>
 
-        # Sensor noise
-        self.sensor_noise = 0.5  # degrees
+        <span class="c1"># Sensor noise</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_noise</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># degrees</span>
 
-    def apply_motor_torque(self, torque):
-        &quot;&quot;&quot;Apply motor torque and update physics&quot;&quot;&quot;
-        # External disturbances
-        disturbance = random.uniform(-2, 2)  # Random external forces
-        gravity_effect = self.gravity_torque * math.sin(math.radians(self.angle))
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_motor_torque</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">torque</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply motor torque and update physics&quot;&quot;&quot;</span>
+        <span class="c1"># External disturbances</span>
+        <span class="n">disturbance</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Random external forces</span>
+        <span class="n">gravity_effect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gravity_torque</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">angle</span><span class="p">))</span>
 
-        # Calculate total torque
-        total_torque = torque - gravity_effect - (self.friction * self.velocity) + disturbance
+        <span class="c1"># Calculate total torque</span>
+        <span class="n">total_torque</span> <span class="o">=</span> <span class="n">torque</span> <span class="o">-</span> <span class="n">gravity_effect</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">friction</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="p">)</span> <span class="o">+</span> <span class="n">disturbance</span>
 
-        # Update dynamics
-        acceleration = total_torque / self.inertia
-        self.velocity += acceleration * 0.01  # 10ms time step
-        self.angle += self.velocity * 0.01
+        <span class="c1"># Update dynamics</span>
+        <span class="n">acceleration</span> <span class="o">=</span> <span class="n">total_torque</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">inertia</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">+=</span> <span class="n">acceleration</span> <span class="o">*</span> <span class="mf">0.01</span>  <span class="c1"># 10ms time step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">*</span> <span class="mf">0.01</span>
 
-        # Keep angle in reasonable range
-        self.angle = self.angle % 360
+        <span class="c1"># Keep angle in reasonable range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">%</span> <span class="mi">360</span>
 
-    def read_angle_sensor(self):
-        &quot;&quot;&quot;Read angle with realistic sensor noise&quot;&quot;&quot;
-        noise = random.uniform(-self.sensor_noise, self.sensor_noise)
-        return self.angle + noise
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_angle_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read angle with realistic sensor noise&quot;&quot;&quot;</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor_noise</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor_noise</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">angle</span> <span class="o">+</span> <span class="n">noise</span>
 
-class RobotArmController:
-    &quot;&quot;&quot;Complete closed loop controller for robotic arm&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">RobotArmController</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete closed loop controller for robotic arm&quot;&quot;&quot;</span>
 
-    def __init__(self, kp=15.0, ki=5.0, kd=2.0):
-        self.pid = PIDController(kp, ki, kd, output_min=-100, output_max=100)
-        self.simulator = RobotArmSimulator()
-        self.target_angle = 0.0
-        self.control_active = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">2.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span> <span class="o">=</span> <span class="n">PIDController</span><span class="p">(</span><span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">output_min</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span> <span class="n">output_max</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span> <span class="o">=</span> <span class="n">RobotArmSimulator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_active</span> <span class="o">=</span> <span class="kc">False</span>
 
-        # Data logging
-        self.time_log = []
-        self.angle_log = []
-        self.target_log = []
-        self.output_log = []
-        self.error_log = []
+        <span class="c1"># Data logging</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_log</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">angle_log</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_log</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_log</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_log</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def set_target_angle(self, angle):
-        &quot;&quot;&quot;Set new target angle for the arm&quot;&quot;&quot;
-        self.target_angle = angle
-        print(f&quot;Target angle set to: {angle:.1f}°&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_target_angle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set new target angle for the arm&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span> <span class="o">=</span> <span class="n">angle</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target angle set to: </span><span class="si">{</span><span class="n">angle</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
 
-    def run_control_loop(self, duration_seconds=10):
-        &quot;&quot;&quot;Run the closed loop control for specified duration&quot;&quot;&quot;
-        self.control_active = True
-        self.pid.reset()
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_control_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration_seconds</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the closed loop control for specified duration&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_active</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-        start_time = time.time()
-        step = 0
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
 
-        print(&quot;\nRunning closed loop control...&quot;)
-        print(&quot;Time | Target | Measured | Error | PID Output | Status&quot;)
-        print(&quot;-&quot; * 55)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Running closed loop control...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time | Target | Measured | Error | PID Output | Status&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
 
-        while self.control_active and (time.time() - start_time) &lt; duration_seconds:
-            # Read current angle from sensor
-            measured_angle = self.simulator.read_angle_sensor()
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_active</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">duration_seconds</span><span class="p">:</span>
+            <span class="c1"># Read current angle from sensor</span>
+            <span class="n">measured_angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">read_angle_sensor</span><span class="p">()</span>
 
-            # Calculate PID control output
-            control_output, p, i, d = self.pid.calculate_output(
-                self.target_angle, measured_angle
-            )
+            <span class="c1"># Calculate PID control output</span>
+            <span class="n">control_output</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span><span class="p">,</span> <span class="n">measured_angle</span>
+            <span class="p">)</span>
 
-            # Convert control output to motor torque
-            motor_torque = control_output * 0.5  # Scale to appropriate torque range
+            <span class="c1"># Convert control output to motor torque</span>
+            <span class="n">motor_torque</span> <span class="o">=</span> <span class="n">control_output</span> <span class="o">*</span> <span class="mf">0.5</span>  <span class="c1"># Scale to appropriate torque range</span>
 
-            # Apply torque to simulated arm
-            self.simulator.apply_motor_torque(motor_torque)
+            <span class="c1"># Apply torque to simulated arm</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">simulator</span><span class="o">.</span><span class="n">apply_motor_torque</span><span class="p">(</span><span class="n">motor_torque</span><span class="p">)</span>
 
-            # Log data
-            current_time = time.time() - start_time
-            error = self.target_angle - measured_angle
+            <span class="c1"># Log data</span>
+            <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span> <span class="o">-</span> <span class="n">measured_angle</span>
 
-            self.time_log.append(current_time)
-            self.angle_log.append(measured_angle)
-            self.target_log.append(self.target_angle)
-            self.output_log.append(control_output)
-            self.error_log.append(error)
+            <span class="bp">self</span><span class="o">.</span><span class="n">time_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_time</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">angle_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">measured_angle</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">output_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">control_output</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 
-            # Print status every 10 steps
-            if step % 10 == 0:
-                status = &quot;CONVERGING&quot; if abs(error) &gt; 2.0 else &quot;STABLE&quot;
-                print(f&quot;{current_time:4.1f} | {self.target_angle:6.1f} | {measured_angle:8.1f} | {error:5.1f} | {control_output:10.1f} | {status}&quot;)
+            <span class="c1"># Print status every 10 steps</span>
+            <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;CONVERGING&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">2.0</span> <span class="k">else</span> <span class="s2">&quot;STABLE&quot;</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_time</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">measured_angle</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">control_output</span><span class="si">:</span><span class="s2">10.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            step += 1
-            time.sleep(0.01)  # 100Hz control loop
+            <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># 100Hz control loop</span>
 
-    def stop_control(self):
-        &quot;&quot;&quot;Stop the control loop&quot;&quot;&quot;
-        self.control_active = False
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop the control loop&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_active</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def get_performance_metrics(self):
-        &quot;&quot;&quot;Calculate control performance metrics&quot;&quot;&quot;
-        if not self.error_log:
-            return {}
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_performance_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate control performance metrics&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
 
-        # Steady-state error (average of last 20% of data)
-        steady_state_start = int(len(self.error_log) * 0.8)
-        steady_state_error = sum(abs(e) for e in self.error_log[steady_state_start:])
-        steady_state_error /= len(self.error_log[steady_state_start:])
+        <span class="c1"># Steady-state error (average of last 20% of data)</span>
+        <span class="n">steady_state_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">steady_state_error</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="p">[</span><span class="n">steady_state_start</span><span class="p">:])</span>
+        <span class="n">steady_state_error</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="p">[</span><span class="n">steady_state_start</span><span class="p">:])</span>
 
-        # Maximum overshoot
-        max_overshoot = max(abs(e) for e in self.error_log)
+        <span class="c1"># Maximum overshoot</span>
+        <span class="n">max_overshoot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="p">)</span>
 
-        # Settling time (time to reach within 2% of target)
-        settling_time = None
-        tolerance = self.target_angle * 0.02  # 2% tolerance
+        <span class="c1"># Settling time (time to reach within 2% of target)</span>
+        <span class="n">settling_time</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">tolerance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_angle</span> <span class="o">*</span> <span class="mf">0.02</span>  <span class="c1"># 2% tolerance</span>
 
-        for i, error in enumerate(self.error_log):
-            if abs(error) &lt;= tolerance:
-                settling_time = self.time_log[i]
-                break
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">error</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_log</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tolerance</span><span class="p">:</span>
+                <span class="n">settling_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_log</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">break</span>
 
-        return {
-            &#x27;steady_state_error&#x27;: steady_state_error,
-            &#x27;max_overshoot&#x27;: max_overshoot,
-            &#x27;settling_time&#x27;: settling_time
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;steady_state_error&#39;</span><span class="p">:</span> <span class="n">steady_state_error</span><span class="p">,</span>
+            <span class="s1">&#39;max_overshoot&#39;</span><span class="p">:</span> <span class="n">max_overshoot</span><span class="p">,</span>
+            <span class="s1">&#39;settling_time&#39;</span><span class="p">:</span> <span class="n">settling_time</span>
+        <span class="p">}</span>
 
-# Example usage and testing
-if __name__ == &quot;__main__&quot;:
-    # Create controller
-    arm_controller = RobotArmController(kp=15.0, ki=5.0, kd=2.0)
+<span class="c1"># Example usage and testing</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Create controller</span>
+    <span class="n">arm_controller</span> <span class="o">=</span> <span class="n">RobotArmController</span><span class="p">(</span><span class="n">kp</span><span class="o">=</span><span class="mf">15.0</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
 
-    # Test sequence
-    print(&quot;=== Robotic Arm Closed Loop Control Test ===&quot;)
+    <span class="c1"># Test sequence</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Robotic Arm Closed Loop Control Test ===&quot;</span><span class="p">)</span>
 
-    # Test 1: Step response
-    print(&quot;\nTest 1: Step response to 45°&quot;)
-    arm_controller.set_target_angle(45.0)
-    arm_controller.run_control_loop(duration_seconds=5)
+    <span class="c1"># Test 1: Step response</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test 1: Step response to 45°&quot;</span><span class="p">)</span>
+    <span class="n">arm_controller</span><span class="o">.</span><span class="n">set_target_angle</span><span class="p">(</span><span class="mf">45.0</span><span class="p">)</span>
+    <span class="n">arm_controller</span><span class="o">.</span><span class="n">run_control_loop</span><span class="p">(</span><span class="n">duration_seconds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-    # Test 2: Tracking performance
-    print(&quot;\nTest 2: Tracking response to 90°&quot;)
-    arm_controller.set_target_angle(90.0)
-    arm_controller.run_control_loop(duration_seconds=3)
+    <span class="c1"># Test 2: Tracking performance</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Test 2: Tracking response to 90°&quot;</span><span class="p">)</span>
+    <span class="n">arm_controller</span><span class="o">.</span><span class="n">set_target_angle</span><span class="p">(</span><span class="mf">90.0</span><span class="p">)</span>
+    <span class="n">arm_controller</span><span class="o">.</span><span class="n">run_control_loop</span><span class="p">(</span><span class="n">duration_seconds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-    # Performance analysis
-    metrics = arm_controller.get_performance_metrics()
-    print(f&quot;\nPerformance Metrics:&quot;)
-    print(f&quot;Steady-state error: {metrics[&#x27;steady_state_error&#x27;]:.2f}°&quot;)
-    print(f&quot;Maximum overshoot: {metrics[&#x27;max_overshoot&#x27;]:.2f}°&quot;)
-    print(f&quot;Settling time: {metrics[&#x27;settling_time&#x27;]:.2f}s&quot; if metrics[&#x27;settling_time&#x27;] else &quot;Did not settle&quot;)
+    <span class="c1"># Performance analysis</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">arm_controller</span><span class="o">.</span><span class="n">get_performance_metrics</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Performance Metrics:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Steady-state error: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;steady_state_error&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum overshoot: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;max_overshoot&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Settling time: </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">s&quot;</span> <span class="k">if</span> <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;settling_time&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;Did not settle&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="structured-parameter-management">Structured parameter management<a class="headerlink" href="#structured-parameter-management" title="Permanent link">&para;</a></h3>
 <p>Real control systems require careful parameter management for different operating modes, environmental conditions, and performance requirements.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ControlParameters:
-    &quot;&quot;&quot;Manages PID parameters and operating modes&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ControlParameters</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manages PID parameters and operating modes&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        # Default parameter sets for different operating modes
-        self.parameter_sets = {
-            &#x27;precision&#x27;: {&#x27;kp&#x27;: 25.0, &#x27;ki&#x27;: 8.0, &#x27;kd&#x27;: 3.0, &#x27;output_limit&#x27;: 50},
-            &#x27;fast&#x27;: {&#x27;kp&#x27;: 40.0, &#x27;ki&#x27;: 15.0, &#x27;kd&#x27;: 5.0, &#x27;output_limit&#x27;: 100},
-            &#x27;stable&#x27;: {&#x27;kp&#x27;: 10.0, &#x27;ki&#x27;: 2.0, &#x27;kd&#x27;: 1.0, &#x27;output_limit&#x27;: 75},
-            &#x27;low_power&#x27;: {&#x27;kp&#x27;: 5.0, &#x27;ki&#x27;: 1.0, &#x27;kd&#x27;: 0.5, &#x27;output_limit&#x27;: 25}
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Default parameter sets for different operating modes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kp&#39;</span><span class="p">:</span> <span class="mf">25.0</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span> <span class="s1">&#39;kd&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s1">&#39;output_limit&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+            <span class="s1">&#39;fast&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kp&#39;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">15.0</span><span class="p">,</span> <span class="s1">&#39;kd&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;output_limit&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">},</span>
+            <span class="s1">&#39;stable&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kp&#39;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s1">&#39;kd&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;output_limit&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">},</span>
+            <span class="s1">&#39;low_power&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;kp&#39;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s1">&#39;ki&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;kd&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;output_limit&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}</span>
+        <span class="p">}</span>
 
-        self.current_mode = &#x27;stable&#x27;
-        self.adaptive_enabled = False
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_mode</span> <span class="o">=</span> <span class="s1">&#39;stable&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">adaptive_enabled</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def get_parameters(self, mode=None):
-        &quot;&quot;&quot;Get parameters for specified mode&quot;&quot;&quot;
-        if mode is None:
-            mode = self.current_mode
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get parameters for specified mode&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_mode</span>
 
-        if mode in self.parameter_sets:
-            return self.parameter_sets[mode].copy()
-        else:
-            raise ValueError(f&quot;Unknown parameter mode: {mode}&quot;)
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">[</span><span class="n">mode</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown parameter mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def set_mode(self, mode):
-        &quot;&quot;&quot;Change operating mode&quot;&quot;&quot;
-        if mode in self.parameter_sets:
-            self.current_mode = mode
-            print(f&quot;Control mode changed to: {mode}&quot;)
-        else:
-            raise ValueError(f&quot;Unknown mode: {mode}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change operating mode&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_mode</span> <span class="o">=</span> <span class="n">mode</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Control mode changed to: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown mode: </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def tune_parameters(self, mode, **kwargs):
-        &quot;&quot;&quot;Adjust parameters for specific mode&quot;&quot;&quot;
-        if mode in self.parameter_sets:
-            for param, value in kwargs.items():
-                if param in self.parameter_sets[mode]:
-                    self.parameter_sets[mode][param] = value
-                    print(f&quot;Updated {mode}.{param} = {value}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">tune_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust parameters for specific mode&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">[</span><span class="n">mode</span><span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parameter_sets</span><span class="p">[</span><span class="n">mode</span><span class="p">][</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updated </span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def auto_tune_from_performance(self, performance_metrics):
-        &quot;&quot;&quot;Automatically adjust parameters based on performance&quot;&quot;&quot;
-        if not self.adaptive_enabled:
-            return
+    <span class="k">def</span><span class="w"> </span><span class="nf">auto_tune_from_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">performance_metrics</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically adjust parameters based on performance&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">adaptive_enabled</span><span class="p">:</span>
+            <span class="k">return</span>
 
-        steady_state_error = performance_metrics.get(&#x27;steady_state_error&#x27;, 0)
-        overshoot = performance_metrics.get(&#x27;max_overshoot&#x27;, 0)
+        <span class="n">steady_state_error</span> <span class="o">=</span> <span class="n">performance_metrics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;steady_state_error&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">overshoot</span> <span class="o">=</span> <span class="n">performance_metrics</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_overshoot&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-        current_params = self.get_parameters()
+        <span class="n">current_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()</span>
 
-        # Simple auto-tuning logic
-        if steady_state_error &gt; 2.0:  # Too much steady-state error
-            new_ki = min(current_params[&#x27;ki&#x27;] * 1.2, 20.0)
-            self.tune_parameters(self.current_mode, ki=new_ki)
+        <span class="c1"># Simple auto-tuning logic</span>
+        <span class="k">if</span> <span class="n">steady_state_error</span> <span class="o">&gt;</span> <span class="mf">2.0</span><span class="p">:</span>  <span class="c1"># Too much steady-state error</span>
+            <span class="n">new_ki</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">current_params</span><span class="p">[</span><span class="s1">&#39;ki&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tune_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_mode</span><span class="p">,</span> <span class="n">ki</span><span class="o">=</span><span class="n">new_ki</span><span class="p">)</span>
 
-        if overshoot &gt; 10.0:  # Too much overshoot
-            new_kd = min(current_params[&#x27;kd&#x27;] * 1.1, 10.0)
-            new_kp = max(current_params[&#x27;kp&#x27;] * 0.9, 1.0)
-            self.tune_parameters(self.current_mode, kd=new_kd, kp=new_kp)
+        <span class="k">if</span> <span class="n">overshoot</span> <span class="o">&gt;</span> <span class="mf">10.0</span><span class="p">:</span>  <span class="c1"># Too much overshoot</span>
+            <span class="n">new_kd</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">current_params</span><span class="p">[</span><span class="s1">&#39;kd&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)</span>
+            <span class="n">new_kp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">current_params</span><span class="p">[</span><span class="s1">&#39;kp&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tune_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_mode</span><span class="p">,</span> <span class="n">kd</span><span class="o">=</span><span class="n">new_kd</span><span class="p">,</span> <span class="n">kp</span><span class="o">=</span><span class="n">new_kp</span><span class="p">)</span>
 
-# Enhanced controller with parameter management
-class AdaptiveRobotController(RobotArmController):
-    &quot;&quot;&quot;Robot controller with adaptive parameter management&quot;&quot;&quot;
+<span class="c1"># Enhanced controller with parameter management</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AdaptiveRobotController</span><span class="p">(</span><span class="n">RobotArmController</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Robot controller with adaptive parameter management&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        # Initialize with default parameters
-        params = ControlParameters()
-        default_params = params.get_parameters(&#x27;stable&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Initialize with default parameters</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">ControlParameters</span><span class="p">()</span>
+        <span class="n">default_params</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">(</span><span class="s1">&#39;stable&#39;</span><span class="p">)</span>
 
-        super().__init__(
-            kp=default_params[&#x27;kp&#x27;],
-            ki=default_params[&#x27;ki&#x27;], 
-            kd=default_params[&#x27;kd&#x27;]
-        )
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">kp</span><span class="o">=</span><span class="n">default_params</span><span class="p">[</span><span class="s1">&#39;kp&#39;</span><span class="p">],</span>
+            <span class="n">ki</span><span class="o">=</span><span class="n">default_params</span><span class="p">[</span><span class="s1">&#39;ki&#39;</span><span class="p">],</span> 
+            <span class="n">kd</span><span class="o">=</span><span class="n">default_params</span><span class="p">[</span><span class="s1">&#39;kd&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
 
-        self.param_manager = params
-        self.param_manager.adaptive_enabled = True
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_manager</span> <span class="o">=</span> <span class="n">params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_manager</span><span class="o">.</span><span class="n">adaptive_enabled</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def change_mode(self, mode):
-        &quot;&quot;&quot;Change control mode and update PID parameters&quot;&quot;&quot;
-        try:
-            new_params = self.param_manager.get_parameters(mode)
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change control mode and update PID parameters&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">new_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_manager</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
 
-            # Update PID controller
-            self.pid.kp = new_params[&#x27;kp&#x27;]
-            self.pid.ki = new_params[&#x27;ki&#x27;]
-            self.pid.kd = new_params[&#x27;kd&#x27;]
-            self.pid.output_max = new_params[&#x27;output_limit&#x27;]
-            self.pid.output_min = -new_params[&#x27;output_limit&#x27;]
+            <span class="c1"># Update PID controller</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">new_params</span><span class="p">[</span><span class="s1">&#39;kp&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">new_params</span><span class="p">[</span><span class="s1">&#39;ki&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">kd</span> <span class="o">=</span> <span class="n">new_params</span><span class="p">[</span><span class="s1">&#39;kd&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">output_max</span> <span class="o">=</span> <span class="n">new_params</span><span class="p">[</span><span class="s1">&#39;output_limit&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">output_min</span> <span class="o">=</span> <span class="o">-</span><span class="n">new_params</span><span class="p">[</span><span class="s1">&#39;output_limit&#39;</span><span class="p">]</span>
 
-            # Reset PID state
-            self.pid.reset()
+            <span class="c1"># Reset PID state</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 
-            self.param_manager.set_mode(mode)
+            <span class="bp">self</span><span class="o">.</span><span class="n">param_manager</span><span class="o">.</span><span class="n">set_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">)</span>
 
-        except ValueError as e:
-            print(f&quot;Mode change failed: {e}&quot;)
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mode change failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def optimize_performance(self):
-        &quot;&quot;&quot;Analyze recent performance and adjust parameters&quot;&quot;&quot;
-        metrics = self.get_performance_metrics()
-        if metrics:
-            print(&quot;Analyzing performance...&quot;)
-            self.param_manager.auto_tune_from_performance(metrics)
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimize_performance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze recent performance and adjust parameters&quot;&quot;&quot;</span>
+        <span class="n">metrics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_performance_metrics</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">metrics</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Analyzing performance...&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param_manager</span><span class="o">.</span><span class="n">auto_tune_from_performance</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
 
-            # Apply updated parameters
-            current_params = self.param_manager.get_parameters()
-            self.pid.kp = current_params[&#x27;kp&#x27;]
-            self.pid.ki = current_params[&#x27;ki&#x27;]
-            self.pid.kd = current_params[&#x27;kd&#x27;]
+            <span class="c1"># Apply updated parameters</span>
+            <span class="n">current_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">param_manager</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">current_params</span><span class="p">[</span><span class="s1">&#39;kp&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">ki</span> <span class="o">=</span> <span class="n">current_params</span><span class="p">[</span><span class="s1">&#39;ki&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pid</span><span class="o">.</span><span class="n">kd</span> <span class="o">=</span> <span class="n">current_params</span><span class="p">[</span><span class="s1">&#39;kd&#39;</span><span class="p">]</span>
 
-# Example usage
-adaptive_controller = AdaptiveRobotController()
+<span class="c1"># Example usage</span>
+<span class="n">adaptive_controller</span> <span class="o">=</span> <span class="n">AdaptiveRobotController</span><span class="p">()</span>
 
-print(&quot;Testing different control modes...&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing different control modes...&quot;</span><span class="p">)</span>
 
-# Test precision mode
-adaptive_controller.change_mode(&#x27;precision&#x27;)
-adaptive_controller.set_target_angle(30.0)
-adaptive_controller.run_control_loop(duration_seconds=3)
+<span class="c1"># Test precision mode</span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">change_mode</span><span class="p">(</span><span class="s1">&#39;precision&#39;</span><span class="p">)</span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">set_target_angle</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">run_control_loop</span><span class="p">(</span><span class="n">duration_seconds</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
-# Test fast mode  
-adaptive_controller.change_mode(&#x27;fast&#x27;)
-adaptive_controller.set_target_angle(60.0)
-adaptive_controller.run_control_loop(duration_seconds=2)
+<span class="c1"># Test fast mode  </span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">change_mode</span><span class="p">(</span><span class="s1">&#39;fast&#39;</span><span class="p">)</span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">set_target_angle</span><span class="p">(</span><span class="mf">60.0</span><span class="p">)</span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">run_control_loop</span><span class="p">(</span><span class="n">duration_seconds</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-# Optimize based on performance
-adaptive_controller.optimize_performance()
+<span class="c1"># Optimize based on performance</span>
+<span class="n">adaptive_controller</span><span class="o">.</span><span class="n">optimize_performance</span><span class="p">()</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2021,33 +2021,33 @@ adaptive_controller.optimize_performance()
 <details class="success">
 <summary>Sample solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class HeatingController:
-    def __init__(self, kp):
-        self.kp = kp
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">HeatingController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">=</span> <span class="n">kp</span>
 
-    def calculate_power(self, target_temp, current_temp):
-        error = target_temp - current_temp
-        power = self.kp * error
-        return max(0, min(100, power))  # Limit to 0-100%
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_temp</span><span class="p">,</span> <span class="n">current_temp</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">target_temp</span> <span class="o">-</span> <span class="n">current_temp</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kp</span> <span class="o">*</span> <span class="n">error</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">power</span><span class="p">))</span>  <span class="c1"># Limit to 0-100%</span>
 
-# Test different gains
-target = 22.0
-current_temp = 18.0
+<span class="c1"># Test different gains</span>
+<span class="n">target</span> <span class="o">=</span> <span class="mf">22.0</span>
+<span class="n">current_temp</span> <span class="o">=</span> <span class="mf">18.0</span>
 
-for kp in [0.5, 2.0, 5.0]:
-    controller = HeatingController(kp)
-    temp = current_temp
+<span class="k">for</span> <span class="n">kp</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]:</span>
+    <span class="n">controller</span> <span class="o">=</span> <span class="n">HeatingController</span><span class="p">(</span><span class="n">kp</span><span class="p">)</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">current_temp</span>
 
-    print(f&quot;\nTesting Kp = {kp}&quot;)
-    for step in range(10):
-        power = controller.calculate_power(target, temp)
-        temp += power * 0.02  # Temperature change
-        error = target - temp
-        print(f&quot;Step {step+1}: Temp={temp:.1f}°C, Power={power:.1f}%, Error={error:.1f}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing Kp = </span><span class="si">{</span><span class="n">kp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">controller</span><span class="o">.</span><span class="n">calculate_power</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+        <span class="n">temp</span> <span class="o">+=</span> <span class="n">power</span> <span class="o">*</span> <span class="mf">0.02</span>  <span class="c1"># Temperature change</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">target</span> <span class="o">-</span> <span class="n">temp</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: Temp=</span><span class="si">{</span><span class="n">temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C, Power=</span><span class="si">{</span><span class="n">power</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, Error=</span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        if abs(error) &lt; 0.1:
-            print(f&quot;Target reached in {step+1} steps&quot;)
-            break
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target reached in </span><span class="si">{</span><span class="n">step</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> steps&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
 </code></pre>
 </div>
 <p><strong>Analysis</strong>: Lower Kp (0.5) responds slowly but stably. Higher Kp (5.0) responds quickly but may overshoot. Kp=2.0 provides a good balance.</p>
@@ -2160,20 +2160,20 @@ for kp in [0.5, 2.0, 5.0]:
 </ol>
 <p><strong>Debugging code:</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def debug_pid_output(self, setpoint, measured_value):
-    output, p, i, d = self.calculate_output(setpoint, measured_value)
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">debug_pid_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">setpoint</span><span class="p">,</span> <span class="n">measured_value</span><span class="p">):</span>
+    <span class="n">output</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_output</span><span class="p">(</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">measured_value</span><span class="p">)</span>
 
-    print(f&quot;Debug - P: {p:.2f}, I: {i:.2f}, D: {d:.2f}, Total: {output:.2f}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Debug - P: </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, I: </span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, D: </span><span class="si">{</span><span class="n">d</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Total: </span><span class="si">{</span><span class="n">output</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Check for problems
-    if abs(d) &gt; 50:
-        print(&quot;WARNING: Large derivative term - check for sensor noise&quot;)
-    if abs(i) &gt; 100:
-        print(&quot;WARNING: Integral windup detected&quot;)
-    if abs(p) &lt; 1.0:
-        print(&quot;INFO: Low proportional term - consider increasing Kp&quot;)
+    <span class="c1"># Check for problems</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Large derivative term - check for sensor noise&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Integral windup detected&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;INFO: Low proportional term - consider increasing Kp&quot;</span><span class="p">)</span>
 
-    return output
+    <span class="k">return</span> <span class="n">output</span>
 </code></pre>
 </div>
 </details>
@@ -2422,6 +2422,8 @@ for kp in [0.5, 2.0, 5.0]:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

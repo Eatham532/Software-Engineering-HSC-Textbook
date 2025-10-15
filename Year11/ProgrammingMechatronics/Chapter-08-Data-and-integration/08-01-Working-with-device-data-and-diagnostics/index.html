@@ -1529,34 +1529,34 @@
 <h3 id="units-and-measurement-standards">Units and measurement standards<a class="headerlink" href="#units-and-measurement-standards" title="Permanent link">&para;</a></h3>
 <p>Mechatronic systems work with diverse measurements: temperature in Celsius, distance in millimetres, pressure in pascals, electrical current in amperes. Mixing units or losing track of what units you&rsquo;re using leads to serious errors.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Bad: unclear units
-motor_speed = 1500  # RPM? degrees per second? unclear!
+<pre><code class="language-python"><span class="c1"># Bad: unclear units</span>
+<span class="n">motor_speed</span> <span class="o">=</span> <span class="mi">1500</span>  <span class="c1"># RPM? degrees per second? unclear!</span>
 
-# Good: explicit units
-motor_speed_rpm = 1500
-servo_angle_degrees = 45
-distance_mm = 250.5
+<span class="c1"># Good: explicit units</span>
+<span class="n">motor_speed_rpm</span> <span class="o">=</span> <span class="mi">1500</span>
+<span class="n">servo_angle_degrees</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="n">distance_mm</span> <span class="o">=</span> <span class="mf">250.5</span>
 
-# Even better: use descriptive variable names
-greenhouse_temp_celsius = 22.4
-soil_moisture_percent = 67
+<span class="c1"># Even better: use descriptive variable names</span>
+<span class="n">greenhouse_temp_celsius</span> <span class="o">=</span> <span class="mf">22.4</span>
+<span class="n">soil_moisture_percent</span> <span class="o">=</span> <span class="mi">67</span>
 </code></pre>
 </div>
 <p>For complex systems, consider creating unit-aware data structures:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class SensorReading:
-    def __init__(self, value, unit, sensor_id):
-        self.value = value
-        self.unit = unit
-        self.sensor_id = sensor_id
-        self.timestamp = datetime.datetime.now()
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">SensorReading</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_id</span> <span class="o">=</span> <span class="n">sensor_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
-    def __str__(self):
-        return f&quot;{self.sensor_id}: {self.value} {self.unit} at {self.timestamp}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2"> at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Usage
-temp_reading = SensorReading(23.8, &quot;°C&quot;, &quot;greenhouse_temp_01&quot;)
-print(temp_reading)
+<span class="c1"># Usage</span>
+<span class="n">temp_reading</span> <span class="o">=</span> <span class="n">SensorReading</span><span class="p">(</span><span class="mf">23.8</span><span class="p">,</span> <span class="s2">&quot;°C&quot;</span><span class="p">,</span> <span class="s2">&quot;greenhouse_temp_01&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temp_reading</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="safe-storage-considerations">Safe storage considerations<a class="headerlink" href="#safe-storage-considerations" title="Permanent link">&para;</a></h3>
@@ -1577,34 +1577,34 @@ print(temp_reading)
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import json
-import os
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-class SecureDataLogger:
-    def __init__(self, log_directory):
-        self.log_directory = log_directory
-        # Ensure directory exists and has appropriate permissions
-        os.makedirs(log_directory, mode=0o750, exist_ok=True)
+<span class="k">class</span><span class="w"> </span><span class="nc">SecureDataLogger</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_directory</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_directory</span> <span class="o">=</span> <span class="n">log_directory</span>
+        <span class="c1"># Ensure directory exists and has appropriate permissions</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">log_directory</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="mo">0o750</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    def write_reading(self, sensor_data):
-        # Create daily log files for better organisation
-        today = datetime.date.today()
-        filename = f&quot;sensor_log_{today}.json&quot;
-        filepath = os.path.join(self.log_directory, filename)
+    <span class="k">def</span><span class="w"> </span><span class="nf">write_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_data</span><span class="p">):</span>
+        <span class="c1"># Create daily log files for better organisation</span>
+        <span class="n">today</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;sensor_log_</span><span class="si">{</span><span class="n">today</span><span class="si">}</span><span class="s2">.json&quot;</span>
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_directory</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
-        # Append to existing file or create new one
-        log_entry = {
-            &quot;timestamp&quot;: datetime.datetime.now().isoformat(),
-            &quot;data&quot;: sensor_data
-        }
+        <span class="c1"># Append to existing file or create new one</span>
+        <span class="n">log_entry</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">sensor_data</span>
+        <span class="p">}</span>
 
-        # Safe file writing: write to temp file, then rename
-        temp_filepath = filepath + &quot;.tmp&quot;
-        with open(temp_filepath, &#x27;a&#x27;) as f:
-            json.dump(log_entry, f)
-            f.write(&#x27;\n&#x27;)
+        <span class="c1"># Safe file writing: write to temp file, then rename</span>
+        <span class="n">temp_filepath</span> <span class="o">=</span> <span class="n">filepath</span> <span class="o">+</span> <span class="s2">&quot;.tmp&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">temp_filepath</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">log_entry</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-        os.rename(temp_filepath, filepath)
+        <span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">temp_filepath</span><span class="p">,</span> <span class="n">filepath</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="guided-example-greenhouse-monitoring-system">Guided example: greenhouse monitoring system<a class="headerlink" href="#guided-example-greenhouse-monitoring-system" title="Permanent link">&para;</a></h3>
@@ -1612,142 +1612,142 @@ class SecureDataLogger:
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS" height="382px" preserveAspectRatio="xMaxYMax meet" style="width:528px;height:382px;background:#FFFFFF;" version="1.1" viewBox="0 0 528 382" width="528px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="entity" data-entity="GreenhouseMonitor" data-source-line="4" data-uid="ent0002" id="entity_GreenhouseMonitor"><rect fill="#F1F1F1" height="162.0781" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="276.4141" x="133.43" y="7" /><ellipse cx="198.3167" cy="23" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M201.2855,28.6406 Q200.7073,28.9375 200.0667,29.0781 Q199.4261,29.2344 198.723,29.2344 Q196.223,29.2344 194.8948,27.5938 Q193.5823,25.9375 193.5823,22.8125 Q193.5823,19.6875 194.8948,18.0313 Q196.223,16.375 198.723,16.375 Q199.4261,16.375 200.0667,16.5313 Q200.723,16.6875 201.2855,16.9844 L201.2855,19.7031 Q200.6605,19.125 200.0667,18.8594 Q199.473,18.5781 198.848,18.5781 Q197.5042,18.5781 196.8167,19.6563 Q196.1292,20.7188 196.1292,22.8125 Q196.1292,24.9063 196.8167,25.9844 Q197.5042,27.0469 198.848,27.0469 Q199.473,27.0469 200.0667,26.7813 Q200.6605,26.5 201.2855,25.9219 L201.2855,28.6406 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138.1406" x="218.8167" y="27.8467">GreenhouseMonitor</text><line style="stroke:#181818;stroke-width:0.5;" x1="134.43" x2="408.8441" y1="39" y2="39" /><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="141.43" y="49.6484" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88.8193" x="153.43" y="55.9951">sensors: dict</text><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="141.43" y="65.9453" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99.0186" x="153.43" y="72.292">log_file: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="134.43" x2="408.8441" y1="79.5938" y2="79.5938" /><ellipse cx="144.43" cy="93.2422" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129.5957" x="153.43" y="96.5889">__init__(log_file)</text><ellipse cx="144.43" cy="109.5391" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="250.4141" x="153.43" y="112.8857">add_sensor(sensor_id, sensor_type)</text><ellipse cx="144.43" cy="125.8359" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161.9365" x="153.43" y="129.1826">read_all_sensors(): dict</text><ellipse cx="144.43" cy="142.1328" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160.8223" x="153.43" y="145.4795">log_readings(readings)</text><ellipse cx="144.43" cy="158.4297" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247.543" x="153.43" y="161.7764">get_latest_reading(sensor_id): float</text></g><g class="entity" data-entity="SensorReading" data-source-line="14" data-uid="ent0003" id="entity_SensorReading"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255.2705" x="7" y="246.08" /><ellipse cx="77.6631" cy="262.08" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M80.6318,267.7206 Q80.0537,268.0175 79.4131,268.1581 Q78.7725,268.3144 78.0693,268.3144 Q75.5693,268.3144 74.2412,266.6738 Q72.9287,265.0175 72.9287,261.8925 Q72.9287,258.7675 74.2412,257.1113 Q75.5693,255.455 78.0693,255.455 Q78.7725,255.455 79.4131,255.6113 Q80.0693,255.7675 80.6318,256.0644 L80.6318,258.7831 Q80.0068,258.205 79.4131,257.9394 Q78.8193,257.6581 78.1943,257.6581 Q76.8506,257.6581 76.1631,258.7363 Q75.4756,259.7988 75.4756,261.8925 Q75.4756,263.9863 76.1631,265.0644 Q76.8506,266.1269 78.1943,266.1269 Q78.8193,266.1269 79.4131,265.8613 Q80.0068,265.58 80.6318,265.0019 L80.6318,267.7206 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.4443" x="98.1631" y="266.9267">SensorReading</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="261.2705" y1="278.08" y2="278.08" /><ellipse cx="18" cy="291.7284" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147.8818" x="27" y="295.0751">timestamp: datetime</text><ellipse cx="18" cy="308.0253" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115.5273" x="27" y="311.372">sensor_id: string</text><ellipse cx="18" cy="324.3222" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78.8594" x="27" y="327.6689">value: float</text><ellipse cx="18" cy="340.6191" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.4805" x="27" y="343.9657">unit: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="261.2705" y1="351.2675" y2="351.2675" /><ellipse cx="18" cy="364.9159" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="229.2705" x="27" y="368.2626">__init__(sensor_id, value, unit)</text></g><g class="entity" data-entity="CSVLogger" data-source-line="22" data-uid="ent0004" id="entity_CSVLogger"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="224.625" x="297.32" y="246.08" /><ellipse cx="367.009" cy="262.08" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M369.9777,267.7206 Q369.3996,268.0175 368.759,268.1581 Q368.1183,268.3144 367.4152,268.3144 Q364.9152,268.3144 363.5871,266.6738 Q362.2746,265.0175 362.2746,261.8925 Q362.2746,258.7675 363.5871,257.1113 Q364.9152,255.455 367.4152,255.455 Q368.1183,255.455 368.759,255.6113 Q369.4152,255.7675 369.9777,256.0644 L369.9777,258.7831 Q369.3527,258.205 368.759,257.9394 Q368.1652,257.6581 367.5402,257.6581 Q366.1965,257.6581 365.509,258.7363 Q364.8215,259.7988 364.8215,261.8925 Q364.8215,263.9863 365.509,265.0644 Q366.1965,266.1269 367.5402,266.1269 Q368.1652,266.1269 368.759,265.8613 Q369.3527,265.58 369.9777,265.0019 L369.9777,267.7206 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.7471" x="387.509" y="266.9267">CSVLogger</text><line style="stroke:#181818;stroke-width:0.5;" x1="298.32" x2="520.945" y1="278.08" y2="278.08" /><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="305.32" y="288.7284" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.3799" x="317.32" y="295.0751">filename: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="298.32" x2="520.945" y1="302.3769" y2="302.3769" /><ellipse cx="308.32" cy="316.0253" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140.957" x="317.32" y="319.372">__init__(filename)</text><ellipse cx="308.32" cy="332.3222" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.0586" x="317.32" y="335.6689">write_header(headers)</text><ellipse cx="308.32" cy="348.6191" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198.625" x="317.32" y="351.9657">write_reading(reading_data)</text><ellipse cx="308.32" cy="364.9159" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134.3809" x="317.32" y="368.2626">read_all_data(): list</text></g><g class="link" data-entity-1="GreenhouseMonitor" data-entity-2="SensorReading" data-source-line="30" data-uid="lnk5" id="link_GreenhouseMonitor_SensorReading"><path codeLine="30" d="M221.79,169.37 C206.18,194.52 192.3333,216.8316 177.5233,240.7016" fill="none" id="GreenhouseMonitor-to-SensorReading" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="174.36,245.8,182.5038,240.2612,176.9961,241.5513,175.706,236.0435,174.36,245.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48.3247" x="204.64" y="212.1469">creates</text></g><g class="link" data-entity-1="GreenhouseMonitor" data-entity-2="CSVLogger" data-source-line="31" data-uid="lnk6" id="link_GreenhouseMonitor_CSVLogger"><path codeLine="31" d="M321.85,169.37 C337.57,194.52 351.5198,216.8421 366.4398,240.7121" fill="none" id="GreenhouseMonitor-to-CSVLogger" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="369.62,245.8,368.2416,236.0481,366.9698,241.5601,361.4578,240.2883,369.62,245.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29.7832" x="349.64" y="212.1469">uses</text></g></g></svg></p></div></div>
 <p>Here&rsquo;s the implementation:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import csv
-import datetime
-import random
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 
-class SensorReading:
-    def __init__(self, sensor_id, value, unit):
-        self.sensor_id = sensor_id
-        self.value = value
-        self.unit = unit
-        self.timestamp = datetime.datetime.now()
+<span class="k">class</span><span class="w"> </span><span class="nc">SensorReading</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_id</span> <span class="o">=</span> <span class="n">sensor_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 
-    def to_dict(self):
-        return {
-            &#x27;timestamp&#x27;: self.timestamp.isoformat(),
-            &#x27;sensor_id&#x27;: self.sensor_id,
-            &#x27;value&#x27;: self.value,
-            &#x27;unit&#x27;: self.unit
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;sensor_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor_id</span><span class="p">,</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span>
+        <span class="p">}</span>
 
-class GreenhouseMonitor:
-    def __init__(self, log_file):
-        self.log_file = log_file
-        self.sensors = {}
-        self.setup_csv_logging()
+<span class="k">class</span><span class="w"> </span><span class="nc">GreenhouseMonitor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_file</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_file</span> <span class="o">=</span> <span class="n">log_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_csv_logging</span><span class="p">()</span>
 
-    def setup_csv_logging(self):
-        &quot;&quot;&quot;Create CSV file with headers if it doesn&#x27;t exist&quot;&quot;&quot;
-        try:
-            with open(self.log_file, &#x27;x&#x27;, newline=&#x27;&#x27;) as f:
-                writer = csv.writer(f)
-                writer.writerow([&#x27;timestamp&#x27;, &#x27;sensor_id&#x27;, &#x27;value&#x27;, &#x27;unit&#x27;])
-        except FileExistsError:
-            pass  # File already exists, which is fine
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_csv_logging</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create CSV file with headers if it doesn&#39;t exist&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_id&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">FileExistsError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c1"># File already exists, which is fine</span>
 
-    def add_sensor(self, sensor_id, sensor_type):
-        &quot;&quot;&quot;Register a new sensor with the monitoring system&quot;&quot;&quot;
-        self.sensors[sensor_id] = sensor_type
-        print(f&quot;Added {sensor_type} sensor: {sensor_id}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register a new sensor with the monitoring system&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="p">[</span><span class="n">sensor_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">sensor_type</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Added </span><span class="si">{</span><span class="n">sensor_type</span><span class="si">}</span><span class="s2"> sensor: </span><span class="si">{</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def simulate_reading(self, sensor_id):
-        &quot;&quot;&quot;Simulate sensor readings for demonstration&quot;&quot;&quot;
-        sensor_type = self.sensors.get(sensor_id)
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate sensor readings for demonstration&quot;&quot;&quot;</span>
+        <span class="n">sensor_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">)</span>
 
-        if sensor_type == &quot;temperature&quot;:
-            return round(random.uniform(18.0, 28.0), 1)
-        elif sensor_type == &quot;humidity&quot;:
-            return round(random.uniform(50.0, 80.0), 1)
-        elif sensor_type == &quot;soil_moisture&quot;:
-            return round(random.uniform(30.0, 70.0), 1)
-        else:
-            return 0.0
+        <span class="k">if</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">18.0</span><span class="p">,</span> <span class="mf">28.0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;humidity&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;soil_moisture&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">30.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
 
-    def read_all_sensors(self):
-        &quot;&quot;&quot;Read current values from all registered sensors&quot;&quot;&quot;
-        readings = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_all_sensors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read current values from all registered sensors&quot;&quot;&quot;</span>
+        <span class="n">readings</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for sensor_id, sensor_type in self.sensors.items():
-            value = self.simulate_reading(sensor_id)
+        <span class="k">for</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">sensor_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate_reading</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">)</span>
 
-            # Determine appropriate unit
-            if sensor_type == &quot;temperature&quot;:
-                unit = &quot;°C&quot;
-            elif sensor_type == &quot;humidity&quot;:
-                unit = &quot;%&quot;
-            elif sensor_type == &quot;soil_moisture&quot;:
-                unit = &quot;%&quot;
-            else:
-                unit = &quot;unknown&quot;
+            <span class="c1"># Determine appropriate unit</span>
+            <span class="k">if</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;°C&quot;</span>
+            <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;humidity&quot;</span><span class="p">:</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;%&quot;</span>
+            <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;soil_moisture&quot;</span><span class="p">:</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;%&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
 
-            reading = SensorReading(sensor_id, value, unit)
-            readings.append(reading)
+            <span class="n">reading</span> <span class="o">=</span> <span class="n">SensorReading</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+            <span class="n">readings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reading</span><span class="p">)</span>
 
-        return readings
+        <span class="k">return</span> <span class="n">readings</span>
 
-    def log_readings(self, readings):
-        &quot;&quot;&quot;Write sensor readings to CSV file&quot;&quot;&quot;
-        with open(self.log_file, &#x27;a&#x27;, newline=&#x27;&#x27;) as f:
-            writer = csv.writer(f)
-            for reading in readings:
-                writer.writerow([
-                    reading.timestamp.isoformat(),
-                    reading.sensor_id,
-                    reading.value,
-                    reading.unit
-                ])
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_readings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">readings</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write sensor readings to CSV file&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">readings</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span>
+                    <span class="n">reading</span><span class="o">.</span><span class="n">timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                    <span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="p">,</span>
+                    <span class="n">reading</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                    <span class="n">reading</span><span class="o">.</span><span class="n">unit</span>
+                <span class="p">])</span>
 
-    def get_recent_data(self, hours=24):
-        &quot;&quot;&quot;Read recent data from CSV file&quot;&quot;&quot;
-        cutoff_time = datetime.datetime.now() - datetime.timedelta(hours=hours)
-        recent_readings = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_recent_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read recent data from CSV file&quot;&quot;&quot;</span>
+        <span class="n">cutoff_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">hours</span><span class="p">)</span>
+        <span class="n">recent_readings</span> <span class="o">=</span> <span class="p">[]</span>
 
-        try:
-            with open(self.log_file, &#x27;r&#x27;, newline=&#x27;&#x27;) as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    timestamp = datetime.datetime.fromisoformat(row[&#x27;timestamp&#x27;])
-                    if timestamp &gt;= cutoff_time:
-                        recent_readings.append(row)
-        except FileNotFoundError:
-            print(f&quot;Log file {self.log_file} not found&quot;)
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">timestamp</span> <span class="o">&gt;=</span> <span class="n">cutoff_time</span><span class="p">:</span>
+                        <span class="n">recent_readings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log file </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_file</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
 
-        return recent_readings
+        <span class="k">return</span> <span class="n">recent_readings</span>
 
-# Demonstration usage
-if __name__ == &quot;__main__&quot;:
-    # Create monitoring system
-    monitor = GreenhouseMonitor(&quot;greenhouse_data.csv&quot;)
+<span class="c1"># Demonstration usage</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Create monitoring system</span>
+    <span class="n">monitor</span> <span class="o">=</span> <span class="n">GreenhouseMonitor</span><span class="p">(</span><span class="s2">&quot;greenhouse_data.csv&quot;</span><span class="p">)</span>
 
-    # Register sensors
-    monitor.add_sensor(&quot;temp_01&quot;, &quot;temperature&quot;)
-    monitor.add_sensor(&quot;humid_01&quot;, &quot;humidity&quot;)
-    monitor.add_sensor(&quot;soil_bed_a&quot;, &quot;soil_moisture&quot;)
-    monitor.add_sensor(&quot;soil_bed_b&quot;, &quot;soil_moisture&quot;)
+    <span class="c1"># Register sensors</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;temp_01&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;humid_01&quot;</span><span class="p">,</span> <span class="s2">&quot;humidity&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;soil_bed_a&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_moisture&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;soil_bed_b&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_moisture&quot;</span><span class="p">)</span>
 
-    # Simulate data collection over time
-    print(&quot;\nCollecting sensor data...&quot;)
-    for i in range(5):
-        readings = monitor.read_all_sensors()
-        monitor.log_readings(readings)
+    <span class="c1"># Simulate data collection over time</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Collecting sensor data...&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">readings</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">read_all_sensors</span><span class="p">()</span>
+        <span class="n">monitor</span><span class="o">.</span><span class="n">log_readings</span><span class="p">(</span><span class="n">readings</span><span class="p">)</span>
 
-        print(f&quot;Reading {i+1}:&quot;)
-        for reading in readings:
-            print(f&quot;  {reading.sensor_id}: {reading.value} {reading.unit}&quot;)
-        print()
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">readings</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
 
-    # Analyse recent data
-    print(&quot;Recent 24-hour data summary:&quot;)
-    recent_data = monitor.get_recent_data(24)
-    print(f&quot;Total readings collected: {len(recent_data)}&quot;)
+    <span class="c1"># Analyse recent data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recent 24-hour data summary:&quot;</span><span class="p">)</span>
+    <span class="n">recent_data</span> <span class="o">=</span> <span class="n">monitor</span><span class="o">.</span><span class="n">get_recent_data</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total readings collected: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">recent_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Simple analysis: average temperature
-    temp_readings = [float(row[&#x27;value&#x27;]) for row in recent_data 
-                    if row[&#x27;sensor_id&#x27;] == &#x27;temp_01&#x27;]
-    if temp_readings:
-        avg_temp = sum(temp_readings) / len(temp_readings)
-        print(f&quot;Average temperature: {avg_temp:.1f}°C&quot;)
+    <span class="c1"># Simple analysis: average temperature</span>
+    <span class="n">temp_readings</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">recent_data</span> 
+                    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;sensor_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;temp_01&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">temp_readings</span><span class="p">:</span>
+        <span class="n">avg_temp</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">temp_readings</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp_readings</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average temperature: </span><span class="si">{</span><span class="n">avg_temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -1773,90 +1773,90 @@ if __name__ == &quot;__main__&quot;:
 <details class="success">
 <summary>Sample solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class EnhancedGreenhouseMonitor(GreenhouseMonitor):
-    def __init__(self, log_file):
-        super().__init__(log_file)
-        self.alert_thresholds = {
-            &#x27;temperature&#x27;: (15.0, 30.0),  # min, max in °C
-            &#x27;humidity&#x27;: (40.0, 85.0),     # min, max in %
-            &#x27;light&#x27;: (1000, 50000),       # min, max in lux
-            &#x27;co2&#x27;: (300, 1500)            # min, max in ppm
-        }
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">EnhancedGreenhouseMonitor</span><span class="p">(</span><span class="n">GreenhouseMonitor</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_file</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">log_file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alert_thresholds</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">),</span>  <span class="c1"># min, max in °C</span>
+            <span class="s1">&#39;humidity&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">85.0</span><span class="p">),</span>     <span class="c1"># min, max in %</span>
+            <span class="s1">&#39;light&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">),</span>       <span class="c1"># min, max in lux</span>
+            <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">1500</span><span class="p">)</span>            <span class="c1"># min, max in ppm</span>
+        <span class="p">}</span>
 
-    def simulate_reading(self, sensor_id):
-        &quot;&quot;&quot;Enhanced simulation with more sensor types&quot;&quot;&quot;
-        sensor_type = self.sensors.get(sensor_id)
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_reading</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enhanced simulation with more sensor types&quot;&quot;&quot;</span>
+        <span class="n">sensor_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">)</span>
 
-        if sensor_type == &quot;light&quot;:
-            return round(random.uniform(5000, 45000), 0)
-        elif sensor_type == &quot;co2&quot;:
-            return round(random.uniform(400, 1200), 0)
-        else:
-            return super().simulate_reading(sensor_id)
+        <span class="k">if</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;light&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">45000</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">sensor_type</span> <span class="o">==</span> <span class="s2">&quot;co2&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">1200</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">simulate_reading</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">)</span>
 
-    def check_alerts(self, readings):
-        &quot;&quot;&quot;Check if any readings are outside normal ranges&quot;&quot;&quot;
-        alerts = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_alerts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">readings</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if any readings are outside normal ranges&quot;&quot;&quot;</span>
+        <span class="n">alerts</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for reading in readings:
-            sensor_type = self.sensors.get(reading.sensor_id)
-            if sensor_type in self.alert_thresholds:
-                min_val, max_val = self.alert_thresholds[sensor_type]
-                if reading.value &lt; min_val or reading.value &gt; max_val:
-                    alerts.append(f&quot;ALERT: {reading.sensor_id} = {reading.value} {reading.unit} &quot;
-                                f&quot;(normal range: {min_val}-{max_val})&quot;)
+        <span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">readings</span><span class="p">:</span>
+            <span class="n">sensor_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sensor_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alert_thresholds</span><span class="p">:</span>
+                <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alert_thresholds</span><span class="p">[</span><span class="n">sensor_type</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">reading</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="n">min_val</span> <span class="ow">or</span> <span class="n">reading</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">max_val</span><span class="p">:</span>
+                    <span class="n">alerts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ALERT: </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2"> &quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;(normal range: </span><span class="si">{</span><span class="n">min_val</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">max_val</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
-        return alerts
+        <span class="k">return</span> <span class="n">alerts</span>
 
-    def calculate_hourly_averages(self, hours=1):
-        &quot;&quot;&quot;Calculate average values for the past N hours&quot;&quot;&quot;
-        recent_data = self.get_recent_data(hours)
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_hourly_averages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate average values for the past N hours&quot;&quot;&quot;</span>
+        <span class="n">recent_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_recent_data</span><span class="p">(</span><span class="n">hours</span><span class="p">)</span>
 
-        # Group by sensor_id
-        sensor_groups = {}
-        for row in recent_data:
-            sensor_id = row[&#x27;sensor_id&#x27;]
-            if sensor_id not in sensor_groups:
-                sensor_groups[sensor_id] = []
-            sensor_groups[sensor_id].append(float(row[&#x27;value&#x27;]))
+        <span class="c1"># Group by sensor_id</span>
+        <span class="n">sensor_groups</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">recent_data</span><span class="p">:</span>
+            <span class="n">sensor_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;sensor_id&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">sensor_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sensor_groups</span><span class="p">:</span>
+                <span class="n">sensor_groups</span><span class="p">[</span><span class="n">sensor_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">sensor_groups</span><span class="p">[</span><span class="n">sensor_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]))</span>
 
-        # Calculate averages
-        averages = {}
-        for sensor_id, values in sensor_groups.items():
-            if values:
-                averages[sensor_id] = {
-                    &#x27;average&#x27;: sum(values) / len(values),
-                    &#x27;count&#x27;: len(values),
-                    &#x27;unit&#x27;: self.get_sensor_unit(sensor_id)
-                }
+        <span class="c1"># Calculate averages</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">sensor_groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">values</span><span class="p">:</span>
+                <span class="n">averages</span><span class="p">[</span><span class="n">sensor_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;average&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+                    <span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+                    <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_sensor_unit</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">)</span>
+                <span class="p">}</span>
 
-        return averages
+        <span class="k">return</span> <span class="n">averages</span>
 
-    def get_sensor_unit(self, sensor_id):
-        &quot;&quot;&quot;Get the appropriate unit for a sensor&quot;&quot;&quot;
-        sensor_type = self.sensors.get(sensor_id)
-        units = {
-            &#x27;temperature&#x27;: &#x27;°C&#x27;,
-            &#x27;humidity&#x27;: &#x27;%&#x27;,
-            &#x27;soil_moisture&#x27;: &#x27;%&#x27;,
-            &#x27;light&#x27;: &#x27;lux&#x27;,
-            &#x27;co2&#x27;: &#x27;ppm&#x27;
-        }
-        return units.get(sensor_type, &#x27;unknown&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_sensor_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the appropriate unit for a sensor&quot;&quot;&quot;</span>
+        <span class="n">sensor_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">)</span>
+        <span class="n">units</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="s1">&#39;°C&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;humidity&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;soil_moisture&#39;</span><span class="p">:</span> <span class="s1">&#39;%&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;light&#39;</span><span class="p">:</span> <span class="s1">&#39;lux&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;co2&#39;</span><span class="p">:</span> <span class="s1">&#39;ppm&#39;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">units</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sensor_type</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span>
 
-# Test the enhanced system
-enhanced_monitor = EnhancedGreenhouseMonitor(&quot;enhanced_greenhouse.csv&quot;)
-enhanced_monitor.add_sensor(&quot;light_01&quot;, &quot;light&quot;)
-enhanced_monitor.add_sensor(&quot;co2_01&quot;, &quot;co2&quot;)
-enhanced_monitor.add_sensor(&quot;temp_01&quot;, &quot;temperature&quot;)
+<span class="c1"># Test the enhanced system</span>
+<span class="n">enhanced_monitor</span> <span class="o">=</span> <span class="n">EnhancedGreenhouseMonitor</span><span class="p">(</span><span class="s2">&quot;enhanced_greenhouse.csv&quot;</span><span class="p">)</span>
+<span class="n">enhanced_monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;light_01&quot;</span><span class="p">,</span> <span class="s2">&quot;light&quot;</span><span class="p">)</span>
+<span class="n">enhanced_monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;co2_01&quot;</span><span class="p">,</span> <span class="s2">&quot;co2&quot;</span><span class="p">)</span>
+<span class="n">enhanced_monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;temp_01&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
 
-# Collect data and check for alerts
-readings = enhanced_monitor.read_all_sensors()
-alerts = enhanced_monitor.check_alerts(readings)
-enhanced_monitor.log_readings(readings)
+<span class="c1"># Collect data and check for alerts</span>
+<span class="n">readings</span> <span class="o">=</span> <span class="n">enhanced_monitor</span><span class="o">.</span><span class="n">read_all_sensors</span><span class="p">()</span>
+<span class="n">alerts</span> <span class="o">=</span> <span class="n">enhanced_monitor</span><span class="o">.</span><span class="n">check_alerts</span><span class="p">(</span><span class="n">readings</span><span class="p">)</span>
+<span class="n">enhanced_monitor</span><span class="o">.</span><span class="n">log_readings</span><span class="p">(</span><span class="n">readings</span><span class="p">)</span>
 
-for alert in alerts:
-    print(alert)
+<span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">alerts</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">alert</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -1883,125 +1883,125 @@ for alert in alerts:
 <details class="success">
 <summary>Sample solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import pandas as pd
-from datetime import datetime, timedelta
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-class GreenhouseAnalyser:
-    def __init__(self, csv_file):
-        self.csv_file = csv_file
+<span class="k">class</span><span class="w"> </span><span class="nc">GreenhouseAnalyser</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">csv_file</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">csv_file</span> <span class="o">=</span> <span class="n">csv_file</span>
 
-    def load_data(self):
-        &quot;&quot;&quot;Load and parse CSV data&quot;&quot;&quot;
-        try:
-            df = pd.read_csv(self.csv_file)
-            df[&#x27;timestamp&#x27;] = pd.to_datetime(df[&#x27;timestamp&#x27;])
-            return df
-        except FileNotFoundError:
-            print(f&quot;Data file {self.csv_file} not found&quot;)
-            return pd.DataFrame()
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load and parse CSV data&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_file</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">df</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data file </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">csv_file</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 
-    def get_sensor_statistics(self, sensor_id, days=7):
-        &quot;&quot;&quot;Get min, max, average for a specific sensor&quot;&quot;&quot;
-        df = self.load_data()
-        if df.empty:
-            return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_sensor_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get min, max, average for a specific sensor&quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        # Filter by sensor and time period
-        cutoff = datetime.now() - timedelta(days=days)
-        sensor_data = df[(df[&#x27;sensor_id&#x27;] == sensor_id) &amp; 
-                        (df[&#x27;timestamp&#x27;] &gt;= cutoff)]
+        <span class="c1"># Filter by sensor and time period</span>
+        <span class="n">cutoff</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days</span><span class="p">)</span>
+        <span class="n">sensor_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sensor_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">sensor_id</span><span class="p">)</span> <span class="o">&amp;</span> 
+                        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">cutoff</span><span class="p">)]</span>
 
-        if sensor_data.empty:
-            return None
+        <span class="k">if</span> <span class="n">sensor_data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        return {
-            &#x27;sensor_id&#x27;: sensor_id,
-            &#x27;min_value&#x27;: sensor_data[&#x27;value&#x27;].min(),
-            &#x27;max_value&#x27;: sensor_data[&#x27;value&#x27;].max(),
-            &#x27;avg_value&#x27;: sensor_data[&#x27;value&#x27;].mean(),
-            &#x27;unit&#x27;: sensor_data[&#x27;unit&#x27;].iloc[0],
-            &#x27;reading_count&#x27;: len(sensor_data)
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;sensor_id&#39;</span><span class="p">:</span> <span class="n">sensor_id</span><span class="p">,</span>
+            <span class="s1">&#39;min_value&#39;</span><span class="p">:</span> <span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+            <span class="s1">&#39;max_value&#39;</span><span class="p">:</span> <span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+            <span class="s1">&#39;avg_value&#39;</span><span class="p">:</span> <span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s1">&#39;reading_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">sensor_data</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def find_out_of_range_periods(self, sensor_id, min_threshold, max_threshold):
-        &quot;&quot;&quot;Find periods when sensor values were outside thresholds&quot;&quot;&quot;
-        df = self.load_data()
-        sensor_data = df[df[&#x27;sensor_id&#x27;] == sensor_id].copy()
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_out_of_range_periods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">min_threshold</span><span class="p">,</span> <span class="n">max_threshold</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find periods when sensor values were outside thresholds&quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+        <span class="n">sensor_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;sensor_id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">sensor_id</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        # Mark out-of-range readings
-        sensor_data[&#x27;out_of_range&#x27;] = (
-            (sensor_data[&#x27;value&#x27;] &lt; min_threshold) | 
-            (sensor_data[&#x27;value&#x27;] &gt; max_threshold)
-        )
+        <span class="c1"># Mark out-of-range readings</span>
+        <span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;out_of_range&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min_threshold</span><span class="p">)</span> <span class="o">|</span> 
+            <span class="p">(</span><span class="n">sensor_data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_threshold</span><span class="p">)</span>
+        <span class="p">)</span>
 
-        # Find consecutive out-of-range periods
-        out_of_range_periods = []
-        start_time = None
+        <span class="c1"># Find consecutive out-of-range periods</span>
+        <span class="n">out_of_range_periods</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="kc">None</span>
 
-        for _, row in sensor_data.iterrows():
-            if row[&#x27;out_of_range&#x27;] and start_time is None:
-                start_time = row[&#x27;timestamp&#x27;]
-            elif not row[&#x27;out_of_range&#x27;] and start_time is not None:
-                out_of_range_periods.append({
-                    &#x27;start&#x27;: start_time,
-                    &#x27;end&#x27;: row[&#x27;timestamp&#x27;],
-                    &#x27;duration_minutes&#x27;: (row[&#x27;timestamp&#x27;] - start_time).total_seconds() / 60
-                })
-                start_time = None
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">sensor_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;out_of_range&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">start_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">start_time</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;out_of_range&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">start_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">out_of_range_periods</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;start&#39;</span><span class="p">:</span> <span class="n">start_time</span><span class="p">,</span>
+                    <span class="s1">&#39;end&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;duration_minutes&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span>
+                <span class="p">})</span>
+                <span class="n">start_time</span> <span class="o">=</span> <span class="kc">None</span>
 
-        return out_of_range_periods
+        <span class="k">return</span> <span class="n">out_of_range_periods</span>
 
-    def generate_daily_summary(self):
-        &quot;&quot;&quot;Generate daily summary statistics for all sensors&quot;&quot;&quot;
-        df = self.load_data()
-        if df.empty:
-            return pd.DataFrame()
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_daily_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate daily summary statistics for all sensors&quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
 
-        # Add date column
-        df[&#x27;date&#x27;] = df[&#x27;timestamp&#x27;].dt.date
+        <span class="c1"># Add date column</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span>
 
-        # Group by date and sensor_id, calculate statistics
-        daily_summary = df.groupby([&#x27;date&#x27;, &#x27;sensor_id&#x27;]).agg({
-            &#x27;value&#x27;: [&#x27;min&#x27;, &#x27;max&#x27;, &#x27;mean&#x27;, &#x27;count&#x27;],
-            &#x27;unit&#x27;: &#x27;first&#x27;
-        }).round(2)
+        <span class="c1"># Group by date and sensor_id, calculate statistics</span>
+        <span class="n">daily_summary</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;sensor_id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+            <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="s1">&#39;first&#39;</span>
+        <span class="p">})</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-        # Flatten column names
-        daily_summary.columns = [&#x27;min_value&#x27;, &#x27;max_value&#x27;, &#x27;avg_value&#x27;, &#x27;reading_count&#x27;, &#x27;unit&#x27;]
-        daily_summary = daily_summary.reset_index()
+        <span class="c1"># Flatten column names</span>
+        <span class="n">daily_summary</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;min_value&#39;</span><span class="p">,</span> <span class="s1">&#39;max_value&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_value&#39;</span><span class="p">,</span> <span class="s1">&#39;reading_count&#39;</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">]</span>
+        <span class="n">daily_summary</span> <span class="o">=</span> <span class="n">daily_summary</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
-        return daily_summary
+        <span class="k">return</span> <span class="n">daily_summary</span>
 
-    def export_summary_report(self, output_file):
-        &quot;&quot;&quot;Export comprehensive summary to CSV&quot;&quot;&quot;
-        daily_summary = self.generate_daily_summary()
+    <span class="k">def</span><span class="w"> </span><span class="nf">export_summary_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Export comprehensive summary to CSV&quot;&quot;&quot;</span>
+        <span class="n">daily_summary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_daily_summary</span><span class="p">()</span>
 
-        if not daily_summary.empty:
-            daily_summary.to_csv(output_file, index=False)
-            print(f&quot;Summary report exported to {output_file}&quot;)
-            return True
-        else:
-            print(&quot;No data available for summary report&quot;)
-            return False
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">daily_summary</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="n">daily_summary</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Summary report exported to </span><span class="si">{</span><span class="n">output_file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No data available for summary report&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-# Example usage
-analyser = GreenhouseAnalyser(&quot;greenhouse_data.csv&quot;)
+<span class="c1"># Example usage</span>
+<span class="n">analyser</span> <span class="o">=</span> <span class="n">GreenhouseAnalyser</span><span class="p">(</span><span class="s2">&quot;greenhouse_data.csv&quot;</span><span class="p">)</span>
 
-# Get statistics for temperature sensor
-temp_stats = analyser.get_sensor_statistics(&quot;temp_01&quot;, days=7)
-if temp_stats:
-    print(f&quot;Temperature statistics (7 days):&quot;)
-    print(f&quot;  Min: {temp_stats[&#x27;min_value&#x27;]}{temp_stats[&#x27;unit&#x27;]}&quot;)
-    print(f&quot;  Max: {temp_stats[&#x27;max_value&#x27;]}{temp_stats[&#x27;unit&#x27;]}&quot;)
-    print(f&quot;  Average: {temp_stats[&#x27;avg_value&#x27;]:.1f}{temp_stats[&#x27;unit&#x27;]}&quot;)
-    print(f&quot;  Readings: {temp_stats[&#x27;reading_count&#x27;]}&quot;)
+<span class="c1"># Get statistics for temperature sensor</span>
+<span class="n">temp_stats</span> <span class="o">=</span> <span class="n">analyser</span><span class="o">.</span><span class="n">get_sensor_statistics</span><span class="p">(</span><span class="s2">&quot;temp_01&quot;</span><span class="p">,</span> <span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">temp_stats</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature statistics (7 days):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Min: </span><span class="si">{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;min_value&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Max: </span><span class="si">{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;max_value&#39;</span><span class="p">]</span><span class="si">}{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Average: </span><span class="si">{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;avg_value&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;unit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Readings: </span><span class="si">{</span><span class="n">temp_stats</span><span class="p">[</span><span class="s1">&#39;reading_count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Find periods when temperature was out of acceptable range
-out_of_range = analyser.find_out_of_range_periods(&quot;temp_01&quot;, 18.0, 25.0)
-print(f&quot;\nFound {len(out_of_range)} out-of-range periods&quot;)
+<span class="c1"># Find periods when temperature was out of acceptable range</span>
+<span class="n">out_of_range</span> <span class="o">=</span> <span class="n">analyser</span><span class="o">.</span><span class="n">find_out_of_range_periods</span><span class="p">(</span><span class="s2">&quot;temp_01&quot;</span><span class="p">,</span> <span class="mf">18.0</span><span class="p">,</span> <span class="mf">25.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">out_of_range</span><span class="p">)</span><span class="si">}</span><span class="s2"> out-of-range periods&quot;</span><span class="p">)</span>
 
-# Export daily summary
-analyser.export_summary_report(&quot;greenhouse_daily_summary.csv&quot;)
+<span class="c1"># Export daily summary</span>
+<span class="n">analyser</span><span class="o">.</span><span class="n">export_summary_report</span><span class="p">(</span><span class="s2">&quot;greenhouse_daily_summary.csv&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <p>Note: This solution uses pandas for easier data manipulation. For the basic curriculum, you could implement similar functionality using only built-in Python CSV operations, though it would require more code.</p>
@@ -2032,105 +2032,105 @@ analyser.export_summary_report(&quot;greenhouse_daily_summary.csv&quot;)
 <details class="success">
 <summary>Sample solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import time
-import os
-from datetime import datetime, timedelta
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
 
-class MonitoringDashboard:
-    def __init__(self, monitor):
-        self.monitor = monitor
-        self.previous_readings = {}
-        self.alert_thresholds = {
-            &#x27;temp_01&#x27;: (18.0, 26.0),
-            &#x27;humid_01&#x27;: (50.0, 80.0),
-            &#x27;soil_bed_a&#x27;: (40.0, 70.0),
-            &#x27;soil_bed_b&#x27;: (40.0, 70.0)
-        }
+<span class="k">class</span><span class="w"> </span><span class="nc">MonitoringDashboard</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monitor</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span> <span class="o">=</span> <span class="n">monitor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">previous_readings</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alert_thresholds</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;temp_01&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">18.0</span><span class="p">,</span> <span class="mf">26.0</span><span class="p">),</span>
+            <span class="s1">&#39;humid_01&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">50.0</span><span class="p">,</span> <span class="mf">80.0</span><span class="p">),</span>
+            <span class="s1">&#39;soil_bed_a&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">),</span>
+            <span class="s1">&#39;soil_bed_b&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">40.0</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def get_status_indicator(self, sensor_id, value):
-        &quot;&quot;&quot;Get status indicator based on thresholds&quot;&quot;&quot;
-        if sensor_id in self.alert_thresholds:
-            min_val, max_val = self.alert_thresholds[sensor_id]
-            if value &lt; min_val or value &gt; max_val:
-                return &quot;🔴 ALERT&quot;
-            elif value &lt; min_val * 1.1 or value &gt; max_val * 0.9:
-                return &quot;🟡 WARN&quot;
-            else:
-                return &quot;🟢 OK&quot;
-        return &quot;🔵 UNKNOWN&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get status indicator based on thresholds&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sensor_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">alert_thresholds</span><span class="p">:</span>
+            <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alert_thresholds</span><span class="p">[</span><span class="n">sensor_id</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">min_val</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">max_val</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;🔴 ALERT&quot;</span>
+            <span class="k">elif</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="n">min_val</span> <span class="o">*</span> <span class="mf">1.1</span> <span class="ow">or</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="n">max_val</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;🟡 WARN&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;🟢 OK&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;🔵 UNKNOWN&quot;</span>
 
-    def get_trend_indicator(self, sensor_id, current_value):
-        &quot;&quot;&quot;Compare with previous reading to show trend&quot;&quot;&quot;
-        if sensor_id in self.previous_readings:
-            previous = self.previous_readings[sensor_id]
-            diff = current_value - previous
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_trend_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_id</span><span class="p">,</span> <span class="n">current_value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare with previous reading to show trend&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">sensor_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_readings</span><span class="p">:</span>
+            <span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">previous_readings</span><span class="p">[</span><span class="n">sensor_id</span><span class="p">]</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">current_value</span> <span class="o">-</span> <span class="n">previous</span>
 
-            if abs(diff) &lt; 0.5:  # Stable threshold
-                return &quot;→ STABLE&quot;
-            elif diff &gt; 0:
-                return &quot;↗ RISING&quot;
-            else:
-                return &quot;↘ FALLING&quot;
-        return &quot;— NEW&quot;
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>  <span class="c1"># Stable threshold</span>
+                <span class="k">return</span> <span class="s2">&quot;→ STABLE&quot;</span>
+            <span class="k">elif</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;↗ RISING&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;↘ FALLING&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;— NEW&quot;</span>
 
-    def clear_screen(self):
-        &quot;&quot;&quot;Clear terminal screen&quot;&quot;&quot;
-        os.system(&#x27;cls&#x27; if os.name == &#x27;nt&#x27; else &#x27;clear&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_screen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear terminal screen&quot;&quot;&quot;</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;cls&#39;</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span> <span class="k">else</span> <span class="s1">&#39;clear&#39;</span><span class="p">)</span>
 
-    def display_dashboard(self):
-        &quot;&quot;&quot;Display current dashboard&quot;&quot;&quot;
-        self.clear_screen()
+    <span class="k">def</span><span class="w"> </span><span class="nf">display_dashboard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Display current dashboard&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clear_screen</span><span class="p">()</span>
 
-        print(&quot;=&quot; * 60)
-        print(&quot;🏠 GREENHOUSE MONITORING DASHBOARD&quot;)
-        print(&quot;=&quot; * 60)
-        print(f&quot;Last Update: {datetime.now().strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)}&quot;)
-        print(&quot;-&quot; * 60)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🏠 GREENHOUSE MONITORING DASHBOARD&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Last Update: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
-        # Get current readings
-        readings = self.monitor.read_all_sensors()
+        <span class="c1"># Get current readings</span>
+        <span class="n">readings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">monitor</span><span class="o">.</span><span class="n">read_all_sensors</span><span class="p">()</span>
 
-        # Display each sensor
-        for reading in readings:
-            status = self.get_status_indicator(reading.sensor_id, reading.value)
-            trend = self.get_trend_indicator(reading.sensor_id, reading.value)
+        <span class="c1"># Display each sensor</span>
+        <span class="k">for</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">readings</span><span class="p">:</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_status_indicator</span><span class="p">(</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="p">,</span> <span class="n">reading</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">trend</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_trend_indicator</span><span class="p">(</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="p">,</span> <span class="n">reading</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-            print(f&quot;{reading.sensor_id:15} | {reading.value:6.1f} {reading.unit:3} | {status:10} | {trend}&quot;)
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="si">:</span><span class="s2">15</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">reading</span><span class="o">.</span><span class="n">unit</span><span class="si">:</span><span class="s2">3</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">status</span><span class="si">:</span><span class="s2">10</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">trend</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Update previous readings
-            self.previous_readings[reading.sensor_id] = reading.value
+            <span class="c1"># Update previous readings</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">previous_readings</span><span class="p">[</span><span class="n">reading</span><span class="o">.</span><span class="n">sensor_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">reading</span><span class="o">.</span><span class="n">value</span>
 
-        print(&quot;-&quot; * 60)
-        print(&quot;Legend: 🟢 Normal | 🟡 Warning | 🔴 Alert | ↗ Rising | ↘ Falling | → Stable&quot;)
-        print(&quot;Press Ctrl+C to exit&quot;)
-        print(&quot;=&quot; * 60)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Legend: 🟢 Normal | 🟡 Warning | 🔴 Alert | ↗ Rising | ↘ Falling | → Stable&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press Ctrl+C to exit&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
 
-    def run_continuous(self, update_interval=5):
-        &quot;&quot;&quot;Run dashboard with automatic updates&quot;&quot;&quot;
-        try:
-            while True:
-                self.display_dashboard()
-                time.sleep(update_interval)
-        except KeyboardInterrupt:
-            print(&quot;\nDashboard stopped by user&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_continuous</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">update_interval</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run dashboard with automatic updates&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">display_dashboard</span><span class="p">()</span>
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">update_interval</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Dashboard stopped by user&quot;</span><span class="p">)</span>
 
-# Run the dashboard
-if __name__ == &quot;__main__&quot;:
-    # Create monitor and dashboard
-    monitor = GreenhouseMonitor(&quot;dashboard_demo.csv&quot;)
-    monitor.add_sensor(&quot;temp_01&quot;, &quot;temperature&quot;)
-    monitor.add_sensor(&quot;humid_01&quot;, &quot;humidity&quot;)
-    monitor.add_sensor(&quot;soil_bed_a&quot;, &quot;soil_moisture&quot;)
-    monitor.add_sensor(&quot;soil_bed_b&quot;, &quot;soil_moisture&quot;)
+<span class="c1"># Run the dashboard</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># Create monitor and dashboard</span>
+    <span class="n">monitor</span> <span class="o">=</span> <span class="n">GreenhouseMonitor</span><span class="p">(</span><span class="s2">&quot;dashboard_demo.csv&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;temp_01&quot;</span><span class="p">,</span> <span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;humid_01&quot;</span><span class="p">,</span> <span class="s2">&quot;humidity&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;soil_bed_a&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_moisture&quot;</span><span class="p">)</span>
+    <span class="n">monitor</span><span class="o">.</span><span class="n">add_sensor</span><span class="p">(</span><span class="s2">&quot;soil_bed_b&quot;</span><span class="p">,</span> <span class="s2">&quot;soil_moisture&quot;</span><span class="p">)</span>
 
-    dashboard = MonitoringDashboard(monitor)
+    <span class="n">dashboard</span> <span class="o">=</span> <span class="n">MonitoringDashboard</span><span class="p">(</span><span class="n">monitor</span><span class="p">)</span>
 
-    print(&quot;Starting greenhouse monitoring dashboard...&quot;)
-    print(&quot;The dashboard will update every 5 seconds.&quot;)
-    print(&quot;Press Ctrl+C to stop.&quot;)
-    time.sleep(2)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting greenhouse monitoring dashboard...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dashboard will update every 5 seconds.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Press Ctrl+C to stop.&quot;</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 
-    dashboard.run_continuous(update_interval=5)
+    <span class="n">dashboard</span><span class="o">.</span><span class="n">run_continuous</span><span class="p">(</span><span class="n">update_interval</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2398,6 +2398,8 @@ if __name__ == &quot;__main__&quot;:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

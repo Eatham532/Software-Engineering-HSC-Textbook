@@ -1510,56 +1510,56 @@
 <p><strong>Safety and protection</strong>: Systems prevent dangerous conditions or respond to emergencies. Examples include airbag deployment systems, fire suppression systems, or emergency shutdown mechanisms in industrial equipment.</p>
 <p>Let&rsquo;s model a simple automatic door system to see these use-cases in action:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class AutomaticDoor:
-    def __init__(self):
-        self.is_open = False
-        self.motion_detected = False
-        self.safety_sensor_blocked = False
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">AutomaticDoor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_detected</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor_blocked</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def check_motion_sensor(self):
-        &quot;&quot;&quot;Monitoring: detect if someone approaches&quot;&quot;&quot;
-        # In real system, would read from motion sensor
-        return self.motion_detected
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_motion_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Monitoring: detect if someone approaches&quot;&quot;&quot;</span>
+        <span class="c1"># In real system, would read from motion sensor</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_detected</span>
 
-    def check_safety_sensor(self):
-        &quot;&quot;&quot;Safety: ensure path is clear&quot;&quot;&quot;
-        # In real system, would read from infrared beam sensor
-        return not self.safety_sensor_blocked
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_safety_sensor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Safety: ensure path is clear&quot;&quot;&quot;</span>
+        <span class="c1"># In real system, would read from infrared beam sensor</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensor_blocked</span>
 
-    def open_door(self):
-        &quot;&quot;&quot;Control: activate door motor&quot;&quot;&quot;
-        if self.check_safety_sensor():
-            self.is_open = True
-            print(&quot;Door opening...&quot;)
-        else:
-            print(&quot;Safety sensor blocked - door cannot open&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">open_door</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Control: activate door motor&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_safety_sensor</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Door opening...&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Safety sensor blocked - door cannot open&quot;</span><span class="p">)</span>
 
-    def close_door(self):
-        &quot;&quot;&quot;Control: close door after delay&quot;&quot;&quot;
-        if self.check_safety_sensor():
-            self.is_open = False
-            print(&quot;Door closing...&quot;)
-        else:
-            print(&quot;Safety sensor blocked - door cannot close&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">close_door</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Control: close door after delay&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_safety_sensor</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Door closing...&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Safety sensor blocked - door cannot close&quot;</span><span class="p">)</span>
 
-    def update(self):
-        &quot;&quot;&quot;Automation: main control loop&quot;&quot;&quot;
-        if self.check_motion_sensor() and not self.is_open:
-            self.open_door()
-        elif not self.check_motion_sensor() and self.is_open:
-            # In real system, would wait a few seconds
-            self.close_door()
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Automation: main control loop&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_motion_sensor</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open_door</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_motion_sensor</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span><span class="p">:</span>
+            <span class="c1"># In real system, would wait a few seconds</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">close_door</span><span class="p">()</span>
 
-# Demonstrate the system
-door = AutomaticDoor()
+<span class="c1"># Demonstrate the system</span>
+<span class="n">door</span> <span class="o">=</span> <span class="n">AutomaticDoor</span><span class="p">()</span>
 
-# Someone approaches
-door.motion_detected = True
-door.update()  # Door opens
+<span class="c1"># Someone approaches</span>
+<span class="n">door</span><span class="o">.</span><span class="n">motion_detected</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">door</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>  <span class="c1"># Door opens</span>
 
-# Person moves through
-door.motion_detected = False
-door.update()  # Door closes
+<span class="c1"># Person moves through</span>
+<span class="n">door</span><span class="o">.</span><span class="n">motion_detected</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">door</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>  <span class="c1"># Door closes</span>
 </code></pre>
 </div>
 <h3 id="design-constraints">Design constraints<a class="headerlink" href="#design-constraints" title="Permanent link">&para;</a></h3>
@@ -1569,36 +1569,36 @@ door.update()  # Door closes
 <p><strong>Development costs</strong>: Custom software and hardware take time to develop. Using standard components and proven designs reduces costs but may limit performance.</p>
 <p><strong>Manufacturing costs</strong>: High-volume production reduces per-unit costs but requires large upfront investment. Low-volume systems must use more expensive components and assembly methods.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Simple cost analysis for a mechatronic system
-class ComponentCost:
-    def __init__(self, name, base_cost, precision_multiplier=1.0, safety_multiplier=1.0):
-        self.name = name
-        self.base_cost = base_cost
-        self.precision_multiplier = precision_multiplier
-        self.safety_multiplier = safety_multiplier
+<pre><code class="language-python"><span class="c1"># Simple cost analysis for a mechatronic system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ComponentCost</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">base_cost</span><span class="p">,</span> <span class="n">precision_multiplier</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">safety_multiplier</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_cost</span> <span class="o">=</span> <span class="n">base_cost</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">precision_multiplier</span> <span class="o">=</span> <span class="n">precision_multiplier</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">safety_multiplier</span> <span class="o">=</span> <span class="n">safety_multiplier</span>
 
-    def calculate_cost(self, precision_level, safety_level):
-        &quot;&quot;&quot;Calculate component cost based on requirements&quot;&quot;&quot;
-        cost = self.base_cost
-        cost *= (1 + precision_level * self.precision_multiplier)
-        cost *= (1 + safety_level * self.safety_multiplier)
-        return cost
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision_level</span><span class="p">,</span> <span class="n">safety_level</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate component cost based on requirements&quot;&quot;&quot;</span>
+        <span class="n">cost</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_cost</span>
+        <span class="n">cost</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">precision_level</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">precision_multiplier</span><span class="p">)</span>
+        <span class="n">cost</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">safety_level</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_multiplier</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cost</span>
 
-# Example: Temperature sensor costs
-temp_sensor = ComponentCost(&quot;Temperature Sensor&quot;, base_cost=5, 
-                           precision_multiplier=2.0, safety_multiplier=1.5)
+<span class="c1"># Example: Temperature sensor costs</span>
+<span class="n">temp_sensor</span> <span class="o">=</span> <span class="n">ComponentCost</span><span class="p">(</span><span class="s2">&quot;Temperature Sensor&quot;</span><span class="p">,</span> <span class="n">base_cost</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+                           <span class="n">precision_multiplier</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">safety_multiplier</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
 
-# Basic application (precision=0.1, safety=0.1)
-basic_cost = temp_sensor.calculate_cost(0.1, 0.1)
-print(f&quot;Basic sensor cost: ${basic_cost:.2f}&quot;)
+<span class="c1"># Basic application (precision=0.1, safety=0.1)</span>
+<span class="n">basic_cost</span> <span class="o">=</span> <span class="n">temp_sensor</span><span class="o">.</span><span class="n">calculate_cost</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Basic sensor cost: $</span><span class="si">{</span><span class="n">basic_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Medical application (precision=0.8, safety=0.9)
-medical_cost = temp_sensor.calculate_cost(0.8, 0.9)
-print(f&quot;Medical sensor cost: ${medical_cost:.2f}&quot;)
+<span class="c1"># Medical application (precision=0.8, safety=0.9)</span>
+<span class="n">medical_cost</span> <span class="o">=</span> <span class="n">temp_sensor</span><span class="o">.</span><span class="n">calculate_cost</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Medical sensor cost: $</span><span class="si">{</span><span class="n">medical_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Industrial application (precision=0.6, safety=0.7)
-industrial_cost = temp_sensor.calculate_cost(0.6, 0.7)
-print(f&quot;Industrial sensor cost: ${industrial_cost:.2f}&quot;)
+<span class="c1"># Industrial application (precision=0.6, safety=0.7)</span>
+<span class="n">industrial_cost</span> <span class="o">=</span> <span class="n">temp_sensor</span><span class="o">.</span><span class="n">calculate_cost</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Industrial sensor cost: $</span><span class="si">{</span><span class="n">industrial_cost</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h4 id="safety-constraints">Safety constraints<a class="headerlink" href="#safety-constraints" title="Permanent link">&para;</a></h4>
@@ -1631,96 +1631,96 @@ print(f&quot;Industrial sensor cost: ${industrial_cost:.2f}&quot;)
 </ul>
 <p><strong>Constraints analysis</strong>:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class GreenhouseSystem:
-    def __init__(self):
-        # Cost constraint: use affordable sensors
-        self.temp_sensor_cost = 15  # Basic digital sensor
-        self.humidity_sensor_cost = 20
-        self.soil_sensor_cost = 10
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">GreenhouseSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Cost constraint: use affordable sensors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor_cost</span> <span class="o">=</span> <span class="mi">15</span>  <span class="c1"># Basic digital sensor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity_sensor_cost</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_sensor_cost</span> <span class="o">=</span> <span class="mi">10</span>
 
-        # Safety constraint: prevent plant damage
-        self.min_temp = 10  # Celsius - protect from frost
-        self.max_temp = 35  # Celsius - prevent heat damage
-        self.min_humidity = 40  # Percent - prevent wilting
-        self.max_humidity = 80  # Percent - prevent fungal growth
+        <span class="c1"># Safety constraint: prevent plant damage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_temp</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Celsius - protect from frost</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_temp</span> <span class="o">=</span> <span class="mi">35</span>  <span class="c1"># Celsius - prevent heat damage</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_humidity</span> <span class="o">=</span> <span class="mi">40</span>  <span class="c1"># Percent - prevent wilting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_humidity</span> <span class="o">=</span> <span class="mi">80</span>  <span class="c1"># Percent - prevent fungal growth</span>
 
-        # Environmental constraint: outdoor installation
-        self.power_available = True  # Grid power available
-        self.weather_protection = True  # Sensors in enclosures
+        <span class="c1"># Environmental constraint: outdoor installation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_available</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Grid power available</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weather_protection</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Sensors in enclosures</span>
 
-        # Current readings (simulated)
-        self.temperature = 22
-        self.humidity = 60
-        self.soil_moisture = 45
+        <span class="c1"># Current readings (simulated)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">22</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">soil_moisture</span> <span class="o">=</span> <span class="mi">45</span>
 
-    def check_safety_limits(self):
-        &quot;&quot;&quot;Safety use-case: monitor for dangerous conditions&quot;&quot;&quot;
-        alerts = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_safety_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Safety use-case: monitor for dangerous conditions&quot;&quot;&quot;</span>
+        <span class="n">alerts</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if self.temperature &lt; self.min_temp:
-            alerts.append(&quot;ALERT: Temperature too low - risk of frost damage&quot;)
-        elif self.temperature &gt; self.max_temp:
-            alerts.append(&quot;ALERT: Temperature too high - risk of heat stress&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_temp</span><span class="p">:</span>
+            <span class="n">alerts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ALERT: Temperature too low - risk of frost damage&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_temp</span><span class="p">:</span>
+            <span class="n">alerts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ALERT: Temperature too high - risk of heat stress&quot;</span><span class="p">)</span>
 
-        if self.humidity &lt; self.min_humidity:
-            alerts.append(&quot;ALERT: Humidity too low - plants may wilt&quot;)
-        elif self.humidity &gt; self.max_humidity:
-            alerts.append(&quot;ALERT: Humidity too high - risk of fungal disease&quot;)
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_humidity</span><span class="p">:</span>
+            <span class="n">alerts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ALERT: Humidity too low - plants may wilt&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">humidity</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_humidity</span><span class="p">:</span>
+            <span class="n">alerts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ALERT: Humidity too high - risk of fungal disease&quot;</span><span class="p">)</span>
 
-        return alerts
+        <span class="k">return</span> <span class="n">alerts</span>
 
-    def calculate_total_cost(self):
-        &quot;&quot;&quot;Cost constraint: keep system affordable&quot;&quot;&quot;
-        sensor_cost = (self.temp_sensor_cost + 
-                      self.humidity_sensor_cost + 
-                      self.soil_sensor_cost)
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_total_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cost constraint: keep system affordable&quot;&quot;&quot;</span>
+        <span class="n">sensor_cost</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">temp_sensor_cost</span> <span class="o">+</span> 
+                      <span class="bp">self</span><span class="o">.</span><span class="n">humidity_sensor_cost</span> <span class="o">+</span> 
+                      <span class="bp">self</span><span class="o">.</span><span class="n">soil_sensor_cost</span><span class="p">)</span>
 
-        # Add controller and housing costs
-        controller_cost = 100  # Basic microcontroller system
-        housing_cost = 50      # Weather protection
+        <span class="c1"># Add controller and housing costs</span>
+        <span class="n">controller_cost</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Basic microcontroller system</span>
+        <span class="n">housing_cost</span> <span class="o">=</span> <span class="mi">50</span>      <span class="c1"># Weather protection</span>
 
-        total = sensor_cost + controller_cost + housing_cost
-        return total
+        <span class="n">total</span> <span class="o">=</span> <span class="n">sensor_cost</span> <span class="o">+</span> <span class="n">controller_cost</span> <span class="o">+</span> <span class="n">housing_cost</span>
+        <span class="k">return</span> <span class="n">total</span>
 
-    def environmental_considerations(self):
-        &quot;&quot;&quot;Environmental constraints: outdoor operation&quot;&quot;&quot;
-        considerations = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">environmental_considerations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Environmental constraints: outdoor operation&quot;&quot;&quot;</span>
+        <span class="n">considerations</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if not self.weather_protection:
-            considerations.append(&quot;Need weatherproof sensor housings&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">weather_protection</span><span class="p">:</span>
+            <span class="n">considerations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Need weatherproof sensor housings&quot;</span><span class="p">)</span>
 
-        if not self.power_available:
-            considerations.append(&quot;Need solar panel and battery backup&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_available</span><span class="p">:</span>
+            <span class="n">considerations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Need solar panel and battery backup&quot;</span><span class="p">)</span>
 
-        considerations.append(&quot;Sensors must handle temperature range -10°C to +50°C&quot;)
-        considerations.append(&quot;System must work reliably for months without maintenance&quot;)
+        <span class="n">considerations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Sensors must handle temperature range -10°C to +50°C&quot;</span><span class="p">)</span>
+        <span class="n">considerations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;System must work reliably for months without maintenance&quot;</span><span class="p">)</span>
 
-        return considerations
+        <span class="k">return</span> <span class="n">considerations</span>
 
-# Demonstrate the system
-greenhouse = GreenhouseSystem()
+<span class="c1"># Demonstrate the system</span>
+<span class="n">greenhouse</span> <span class="o">=</span> <span class="n">GreenhouseSystem</span><span class="p">()</span>
 
-print(&quot;=== Greenhouse Monitoring System ===&quot;)
-print(f&quot;Total system cost: ${greenhouse.calculate_total_cost()}&quot;)
-print()
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Greenhouse Monitoring System ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total system cost: $</span><span class="si">{</span><span class="n">greenhouse</span><span class="o">.</span><span class="n">calculate_total_cost</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 
-print(&quot;Current conditions:&quot;)
-print(f&quot;Temperature: {greenhouse.temperature}°C&quot;)
-print(f&quot;Humidity: {greenhouse.humidity}%&quot;)
-print(f&quot;Soil moisture: {greenhouse.soil_moisture}%&quot;)
-print()
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current conditions:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">greenhouse</span><span class="o">.</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Humidity: </span><span class="si">{</span><span class="n">greenhouse</span><span class="o">.</span><span class="n">humidity</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Soil moisture: </span><span class="si">{</span><span class="n">greenhouse</span><span class="o">.</span><span class="n">soil_moisture</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
 
-alerts = greenhouse.check_safety_limits()
-if alerts:
-    for alert in alerts:
-        print(alert)
-else:
-    print(&quot;All parameters within safe range&quot;)
+<span class="n">alerts</span> <span class="o">=</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">check_safety_limits</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">alerts</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">alerts</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">alert</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All parameters within safe range&quot;</span><span class="p">)</span>
 
-print()
-print(&quot;Environmental considerations:&quot;)
-for consideration in greenhouse.environmental_considerations():
-    print(f&quot;- {consideration}&quot;)
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Environmental considerations:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">consideration</span> <span class="ow">in</span> <span class="n">greenhouse</span><span class="o">.</span><span class="n">environmental_considerations</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">consideration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -1840,77 +1840,77 @@ for consideration in greenhouse.environmental_considerations():
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class SecurityCamera:
-    def __init__(self):
-        # Cost constraint: basic components
-        self.camera_cost = 80
-        self.motion_sensor_cost = 15
-        self.night_vision_cost = 25
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">SecurityCamera</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Cost constraint: basic components</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camera_cost</span> <span class="o">=</span> <span class="mi">80</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_sensor_cost</span> <span class="o">=</span> <span class="mi">15</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">night_vision_cost</span> <span class="o">=</span> <span class="mi">25</span>
 
-        # Safety constraint: reliable detection
-        self.motion_sensitivity = 0.7  # Balance false alarms vs missed events
-        self.recording_buffer_seconds = 10  # Capture before and after motion
+        <span class="c1"># Safety constraint: reliable detection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_sensitivity</span> <span class="o">=</span> <span class="mf">0.7</span>  <span class="c1"># Balance false alarms vs missed events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recording_buffer_seconds</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Capture before and after motion</span>
 
-        # Environmental constraint: outdoor operation
-        self.weather_resistant = True
-        self.temperature_range = (-20, 60)  # Celsius
+        <span class="c1"># Environmental constraint: outdoor operation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weather_resistant</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_range</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># Celsius</span>
 
-        # System state
-        self.motion_detected = False
-        self.night_mode = False
-        self.recording = False
-        self.alerts_sent = []
+        <span class="c1"># System state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_detected</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">night_mode</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recording</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alerts_sent</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def detect_motion(self, motion_level):
-        &quot;&quot;&quot;Monitor use-case: detect movement&quot;&quot;&quot;
-        self.motion_detected = motion_level &gt; self.motion_sensitivity
-        return self.motion_detected
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_motion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motion_level</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Monitor use-case: detect movement&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motion_detected</span> <span class="o">=</span> <span class="n">motion_level</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_sensitivity</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_detected</span>
 
-    def start_recording(self):
-        &quot;&quot;&quot;Control use-case: capture evidence&quot;&quot;&quot;
-        if not self.recording:
-            self.recording = True
-            print(&quot;Recording started&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_recording</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Control use-case: capture evidence&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">recording</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">recording</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recording started&quot;</span><span class="p">)</span>
 
-    def stop_recording(self):
-        &quot;&quot;&quot;Control use-case: save storage space&quot;&quot;&quot;
-        if self.recording:
-            self.recording = False
-            print(&quot;Recording stopped&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop_recording</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Control use-case: save storage space&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recording</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">recording</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recording stopped&quot;</span><span class="p">)</span>
 
-    def send_alert(self, message):
-        &quot;&quot;&quot;Safety use-case: notify security personnel&quot;&quot;&quot;
-        self.alerts_sent.append(message)
-        print(f&quot;ALERT: {message}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_alert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Safety use-case: notify security personnel&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">alerts_sent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ALERT: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def update(self, motion_level, light_level):
-        &quot;&quot;&quot;Main control loop&quot;&quot;&quot;
-        # Adjust for lighting conditions
-        self.night_mode = light_level &lt; 0.3
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motion_level</span><span class="p">,</span> <span class="n">light_level</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main control loop&quot;&quot;&quot;</span>
+        <span class="c1"># Adjust for lighting conditions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">night_mode</span> <span class="o">=</span> <span class="n">light_level</span> <span class="o">&lt;</span> <span class="mf">0.3</span>
 
-        # Check for motion
-        if self.detect_motion(motion_level):
-            self.start_recording()
-            self.send_alert(&quot;Motion detected in camera zone&quot;)
-        else:
-            self.stop_recording()
+        <span class="c1"># Check for motion</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_motion</span><span class="p">(</span><span class="n">motion_level</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_recording</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">send_alert</span><span class="p">(</span><span class="s2">&quot;Motion detected in camera zone&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stop_recording</span><span class="p">()</span>
 
-    def get_total_cost(self):
-        &quot;&quot;&quot;Cost analysis&quot;&quot;&quot;
-        return self.camera_cost + self.motion_sensor_cost + self.night_vision_cost
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_total_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cost analysis&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">camera_cost</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">motion_sensor_cost</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">night_vision_cost</span>
 
-# Test the system
-camera = SecurityCamera()
-print(f&quot;System cost: ${camera.get_total_cost()}&quot;)
+<span class="c1"># Test the system</span>
+<span class="n">camera</span> <span class="o">=</span> <span class="n">SecurityCamera</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;System cost: $</span><span class="si">{</span><span class="n">camera</span><span class="o">.</span><span class="n">get_total_cost</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Simulate day operation - no motion
-camera.update(motion_level=0.2, light_level=0.8)
+<span class="c1"># Simulate day operation - no motion</span>
+<span class="n">camera</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">motion_level</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">light_level</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
 
-# Simulate night operation - motion detected  
-camera.update(motion_level=0.9, light_level=0.1)
+<span class="c1"># Simulate night operation - motion detected  </span>
+<span class="n">camera</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">motion_level</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">light_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 
-# Motion stops
-camera.update(motion_level=0.1, light_level=0.1)
+<span class="c1"># Motion stops</span>
+<span class="n">camera</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">motion_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">light_level</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2154,6 +2154,8 @@ camera.update(motion_level=0.1, light_level=0.1)
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

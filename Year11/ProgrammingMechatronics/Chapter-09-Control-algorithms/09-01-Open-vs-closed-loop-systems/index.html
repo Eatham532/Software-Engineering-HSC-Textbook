@@ -1607,49 +1607,49 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class OpenLoopHeater:
-    &quot;&quot;&quot;Simple open loop heating system&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">OpenLoopHeater</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple open loop heating system&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.target_temperature = 20  # Desired temperature
-        self.current_power = 0        # Heater power (0-100%)
-        self.heating_time = 0         # How long we&#x27;ve been heating
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Desired temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="mi">0</span>        <span class="c1"># Heater power (0-100%)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heating_time</span> <span class="o">=</span> <span class="mi">0</span>         <span class="c1"># How long we&#39;ve been heating</span>
 
-    def set_target(self, temperature):
-        &quot;&quot;&quot;Set the desired temperature&quot;&quot;&quot;
-        self.target_temperature = temperature
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the desired temperature&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="n">temperature</span>
 
-    def calculate_heating_time(self):
-        &quot;&quot;&quot;Estimate heating time based on temperature difference&quot;&quot;&quot;
-        # Simple estimation: 1 minute per degree difference
-        temp_difference = self.target_temperature - 18  # Assume room starts at 18°C
-        return max(0, temp_difference * 60)  # seconds
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_heating_time</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Estimate heating time based on temperature difference&quot;&quot;&quot;</span>
+        <span class="c1"># Simple estimation: 1 minute per degree difference</span>
+        <span class="n">temp_difference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">-</span> <span class="mi">18</span>  <span class="c1"># Assume room starts at 18°C</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">temp_difference</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># seconds</span>
 
-    def start_heating(self):
-        &quot;&quot;&quot;Start the heating cycle&quot;&quot;&quot;
-        heating_duration = self.calculate_heating_time()
-        self.current_power = 100  # Full power
-        print(f&quot;Heating at 100% power for {heating_duration} seconds&quot;)
-        print(f&quot;Target: {self.target_temperature}°C&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_heating</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the heating cycle&quot;&quot;&quot;</span>
+        <span class="n">heating_duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_heating_time</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Full power</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Heating at 100% power for </span><span class="si">{</span><span class="n">heating_duration</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 
-        # Simulate the heating process
-        self.heating_time = heating_duration
-        self.current_power = 0  # Turn off after time expires
-        print(&quot;Heating cycle complete&quot;)
+        <span class="c1"># Simulate the heating process</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">heating_time</span> <span class="o">=</span> <span class="n">heating_duration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Turn off after time expires</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Heating cycle complete&quot;</span><span class="p">)</span>
 
-    def get_status(self):
-        &quot;&quot;&quot;Get current system status&quot;&quot;&quot;
-        return {
-            &#x27;target&#x27;: self.target_temperature,
-            &#x27;power&#x27;: self.current_power,
-            &#x27;heating_time&#x27;: self.heating_time
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current system status&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;target&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span><span class="p">,</span>
+            <span class="s1">&#39;power&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span><span class="p">,</span>
+            <span class="s1">&#39;heating_time&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">heating_time</span>
+        <span class="p">}</span>
 
-# Demonstrate open loop heating
-heater = OpenLoopHeater()
-heater.set_target(25)
-heater.start_heating()
-print(f&quot;Status: {heater.get_status()}&quot;)
+<span class="c1"># Demonstrate open loop heating</span>
+<span class="n">heater</span> <span class="o">=</span> <span class="n">OpenLoopHeater</span><span class="p">()</span>
+<span class="n">heater</span><span class="o">.</span><span class="n">set_target</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">heater</span><span class="o">.</span><span class="n">start_heating</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Status: </span><span class="si">{</span><span class="n">heater</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="429px" preserveAspectRatio="xMaxYMax meet" style="width:747px;height:429px;background:#FFFFFF;" version="1.1" viewBox="0 0 747 429" width="747px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="cluster" data-entity="Open Loop System" data-source-line="4" data-uid="ent0002" id="cluster_Open Loop System"><rect fill="none" height="416.19" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="303" x="7" y="7" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="147.6289" x="84.6855" y="21.9951">Open Loop System</text></g><g class="cluster" data-entity="Example: Microwave" data-source-line="12" data-uid="ent0013" id="cluster_Example: Microwave"><rect fill="none" height="416.19" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="407" x="334" y="7" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="161.9707" x="456.5146" y="21.9951">Example: Microwave</text></g><g class="entity" data-entity="Input Command" data-source-line="5" data-uid="ent0003" id="entity_Input Command"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="152.6563" x="81.67" y="42" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="214.3263" y="47" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="212.3263" y="49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="212.3263" y="53" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112.6563" x="96.67" y="74.9951">Input Command</text></g><g class="entity" data-entity="Controller" data-source-line="5" data-uid="ent0004" id="entity_Controller"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109.1729" x="103.41" y="148.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="192.5829" y="153.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="190.5829" y="155.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="190.5829" y="159.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69.1729" x="118.41" y="181.2951">Controller</text></g><g class="entity" data-entity="Process/Plant" data-source-line="6" data-uid="ent0006" id="entity_Process/Plant"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133.6523" x="23.17" y="254.6" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="136.8223" y="259.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="134.8223" y="261.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="134.8223" y="265.6" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93.6523" x="38.17" y="287.5951">Process/Plant</text></g><g class="entity" data-entity="Output" data-source-line="7" data-uid="ent0008" id="entity_Output"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="88.6309" x="45.68" y="360.89" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="114.3109" y="365.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="112.3109" y="367.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="112.3109" y="371.89" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48.6309" x="60.68" y="393.8851">Output</text></g><g class="entity" data-entity="GMN10" data-source-line="9" data-uid="ent0011" id="entity_GMN10"><path d="M191.74,257.61 L191.74,297.8756 A0,0 0 0 0 191.74,297.8756 L294.2693,297.8756 A0,0 0 0 0 294.2693,297.8756 L294.2693,267.61 L284.2693,257.61 L231.16,257.61 L176.44,195.08 L223.16,257.61 L191.74,257.61 A0,0 0 0 0 191.74,257.61" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M284.2693,257.61 L284.2693,267.61 L294.2693,267.61 L284.2693,257.61" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81.5293" x="197.74" y="274.6769">No feedback</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77.5493" x="197.74" y="289.8097">from output</text></g><g class="entity" data-entity="Time Setting" data-source-line="13" data-uid="ent0014" id="entity_Time Setting"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="129.2705" x="450.36" y="42" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="559.6305" y="47" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="557.6305" y="49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="557.6305" y="53" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89.2705" x="465.36" y="74.9951">Time Setting</text></g><g class="entity" data-entity="Timer Control" data-source-line="13" data-uid="ent0015" id="entity_Timer Control"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="135.8125" x="447.09" y="148.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="562.9025" y="153.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="560.9025" y="155.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="560.9025" y="159.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95.8125" x="462.09" y="181.2951">Timer Control</text></g><g class="entity" data-entity="Magnetron" data-source-line="14" data-uid="ent0017" id="entity_Magnetron"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="115.7148" x="350.14" y="254.6" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="445.8548" y="259.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="443.8548" y="261.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="443.8548" y="265.6" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75.7148" x="365.14" y="287.5951">Magnetron</text></g><g class="entity" data-entity="Heat Food" data-source-line="15" data-uid="ent0019" id="entity_Heat Food"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="111.7295" x="352.14" y="360.89" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="443.8695" y="365.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="441.8695" y="367.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="441.8695" y="371.89" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71.7295" x="367.14" y="393.8851">Heat Food</text></g><g class="entity" data-entity="GMN21" data-source-line="17" data-uid="ent0022" id="entity_GMN21"><path d="M500.51,257.61 L500.51,297.8756 A0,0 0 0 0 500.51,297.8756 L725.4856,297.8756 A0,0 0 0 0 725.4856,297.8756 L725.4856,267.61 L715.4856,257.61 L598.74,257.61 L536.26,195.08 L590.74,257.61 L500.51,257.61 A0,0 0 0 0 500.51,257.61" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M715.4856,257.61 L715.4856,267.61 L725.4856,267.61 L715.4856,257.61" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117.1206" x="506.51" y="274.6769">Heats for set time</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203.9756" x="506.51" y="289.8097">regardless of food temperature</text></g><g class="link" data-entity-1="Input Command" data-entity-2="Controller" data-source-line="5" data-uid="lnk5" id="link_Input Command_Controller"><path d="M158,88.78 C158,106.28 158,124.38 158,141.86" fill="none" id="Input Command-to-Controller" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="158,147.86,162,138.86,158,142.86,154,138.86,158,147.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Controller" data-entity-2="Process/Plant" data-source-line="6" data-uid="lnk7" id="link_Controller_Process/Plant"><path d="M143.25,195.08 C131.84,212.57 119.3956,231.653 108.0056,249.133" fill="none" id="Controller-to-Process/Plant" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="104.73,254.16,112.9947,248.8033,107.4597,249.9709,106.2921,244.4358,104.73,254.16" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Process/Plant" data-entity-2="Output" data-source-line="7" data-uid="lnk9" id="link_Process/Plant_Output"><path d="M90,301.38 C90,318.87 90,336.97 90,354.45" fill="none" id="Process/Plant-to-Output" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="90,360.45,94,351.45,90,355.45,86,351.45,90,360.45" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Time Setting" data-entity-2="Timer Control" data-source-line="13" data-uid="lnk16" id="link_Time Setting_Timer Control"><path d="M515,88.78 C515,106.28 515,124.38 515,141.86" fill="none" id="Time Setting-to-Timer Control" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="515,147.86,519,138.86,515,142.86,511,138.86,515,147.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Timer Control" data-entity-2="Magnetron" data-source-line="14" data-uid="lnk18" id="link_Timer Control_Magnetron"><path d="M491.78,195.08 C473.84,212.57 453.4074,232.4928 435.4674,249.9728" fill="none" id="Timer Control-to-Magnetron" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="431.17,254.16,440.4075,250.7441,434.7511,250.6707,434.8246,245.0143,431.17,254.16" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Magnetron" data-entity-2="Heat Food" data-source-line="15" data-uid="lnk20" id="link_Magnetron_Heat Food"><path d="M408,301.38 C408,318.87 408,336.97 408,354.45" fill="none" id="Magnetron-to-Heat Food" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="408,360.45,412,351.45,408,355.45,404,351.45,408,360.45" style="stroke:#181818;stroke-width:1;" /></g></g></svg></p></div></div>
@@ -1689,83 +1689,83 @@ print(f&quot;Status: {heater.get_status()}&quot;)
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ClosedLoopHeater:
-    &quot;&quot;&quot;Closed loop heating system with temperature feedback&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ClosedLoopHeater</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Closed loop heating system with temperature feedback&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.target_temperature = 20
-        self.current_temperature = 18  # Start at room temperature
-        self.current_power = 0
-        self.max_power = 100
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="mi">20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># Start at room temperature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_power</span> <span class="o">=</span> <span class="mi">100</span>
 
-        # Control parameters
-        self.tolerance = 0.5  # Acceptable error in degrees
-        self.power_per_degree = 20  # Power adjustment per degree of error
+        <span class="c1"># Control parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Acceptable error in degrees</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">power_per_degree</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Power adjustment per degree of error</span>
 
-    def read_temperature(self):
-        &quot;&quot;&quot;Simulate reading from temperature sensor&quot;&quot;&quot;
-        # In real system, this would read from actual sensor
-        return self.current_temperature
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate reading from temperature sensor&quot;&quot;&quot;</span>
+        <span class="c1"># In real system, this would read from actual sensor</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span>
 
-    def set_heater_power(self, power):
-        &quot;&quot;&quot;Set heater power (0-100%)&quot;&quot;&quot;
-        self.current_power = max(0, min(100, power))
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_heater_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">power</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set heater power (0-100%)&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">power</span><span class="p">))</span>
 
-    def calculate_error(self):
-        &quot;&quot;&quot;Calculate difference between target and actual temperature&quot;&quot;&quot;
-        return self.target_temperature - self.current_temperature
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate difference between target and actual temperature&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span>
 
-    def update_control(self):
-        &quot;&quot;&quot;Main control loop - adjusts power based on temperature error&quot;&quot;&quot;
-        error = self.calculate_error()
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main control loop - adjusts power based on temperature error&quot;&quot;&quot;</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_error</span><span class="p">()</span>
 
-        if abs(error) &lt;= self.tolerance:
-            # Close enough - maintain current power or turn off
-            self.set_heater_power(0)
-            status = &quot;TARGET REACHED&quot;
-        elif error &gt; 0:
-            # Too cold - increase power proportional to error
-            power = min(self.max_power, error * self.power_per_degree)
-            self.set_heater_power(power)
-            status = &quot;HEATING&quot;
-        else:
-            # Too hot - turn off heater
-            self.set_heater_power(0)
-            status = &quot;COOLING&quot;
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">:</span>
+            <span class="c1"># Close enough - maintain current power or turn off</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_heater_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;TARGET REACHED&quot;</span>
+        <span class="k">elif</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Too cold - increase power proportional to error</span>
+            <span class="n">power</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_power</span><span class="p">,</span> <span class="n">error</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">power_per_degree</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_heater_power</span><span class="p">(</span><span class="n">power</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;HEATING&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Too hot - turn off heater</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_heater_power</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;COOLING&quot;</span>
 
-        return status
+        <span class="k">return</span> <span class="n">status</span>
 
-    def simulate_temperature_change(self):
-        &quot;&quot;&quot;Simulate how temperature changes based on heater power&quot;&quot;&quot;
-        # Simplified physics: temperature rises with heater power, falls naturally
-        heating_effect = self.current_power * 0.01  # Power contributes to temperature
-        cooling_effect = (self.current_temperature - 18) * 0.02  # Natural cooling
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_temperature_change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate how temperature changes based on heater power&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified physics: temperature rises with heater power, falls naturally</span>
+        <span class="n">heating_effect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">*</span> <span class="mf">0.01</span>  <span class="c1"># Power contributes to temperature</span>
+        <span class="n">cooling_effect</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span> <span class="o">-</span> <span class="mi">18</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.02</span>  <span class="c1"># Natural cooling</span>
 
-        self.current_temperature += heating_effect - cooling_effect
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span> <span class="o">+=</span> <span class="n">heating_effect</span> <span class="o">-</span> <span class="n">cooling_effect</span>
 
-    def run_cycle(self, target, steps=10):
-        &quot;&quot;&quot;Run a complete heating cycle&quot;&quot;&quot;
-        self.target_temperature = target
-        print(f&quot;Target temperature: {target}°C&quot;)
-        print(&quot;Step | Temp  | Error | Power | Status&quot;)
-        print(&quot;-&quot; * 40)
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run a complete heating cycle&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target temperature: </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step | Temp  | Error | Power | Status&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 
-        for step in range(steps):
-            status = self.update_control()
-            error = self.calculate_error()
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_control</span><span class="p">()</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_error</span><span class="p">()</span>
 
-            print(f&quot;{step:4d} | {self.current_temperature:5.1f} | {error:5.1f} | {self.current_power:5.1f} | {status}&quot;)
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_power</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Simulate temperature change for next iteration
-            self.simulate_temperature_change()
+            <span class="c1"># Simulate temperature change for next iteration</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">simulate_temperature_change</span><span class="p">()</span>
 
-            # Stop if we&#x27;ve reached the target
-            if abs(error) &lt;= self.tolerance and status == &quot;TARGET REACHED&quot;:
-                break
+            <span class="c1"># Stop if we&#39;ve reached the target</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;TARGET REACHED&quot;</span><span class="p">:</span>
+                <span class="k">break</span>
 
-# Demonstrate closed loop heating
-heater = ClosedLoopHeater()
-heater.run_cycle(target=25)
+<span class="c1"># Demonstrate closed loop heating</span>
+<span class="n">heater</span> <span class="o">=</span> <span class="n">ClosedLoopHeater</span><span class="p">()</span>
+<span class="n">heater</span><span class="o">.</span><span class="n">run_cycle</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
 </code></pre>
 </div>
 <div class="diagram-container" data-container-id="kroki-diagram-1"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-1')">🔍 View Larger</button><div id="kroki-diagram-1" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="742px" preserveAspectRatio="xMaxYMax meet" style="width:634px;height:742px;background:#FFFFFF;" version="1.1" viewBox="0 0 634 742" width="634px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-1"><defs /><g><g class="cluster" data-entity="Closed Loop System" data-source-line="4" data-uid="ent0002" id="cluster_Closed Loop System"><rect fill="none" height="729.05" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="203" x="7" y="7" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="158.7852" x="29.1074" y="21.9951">Closed Loop System</text></g><g class="cluster" data-entity="Example: Thermostat" data-source-line="15" data-uid="ent0018" id="cluster_Example: Thermostat"><rect fill="none" height="628.78" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="394" x="234" y="7" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="168.7041" x="346.6479" y="21.9951">Example: Thermostat</text></g><g class="entity" data-entity="Input Command" data-source-line="5" data-uid="ent0003" id="entity_Input Command"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="152.6563" x="31.67" y="42" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="164.3263" y="47" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="162.3263" y="49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="162.3263" y="53" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112.6563" x="46.67" y="74.9951">Input Command</text></g><g class="entity" data-entity="Controller" data-source-line="5" data-uid="ent0004" id="entity_Controller"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109.1729" x="53.41" y="148.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="142.5829" y="153.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="140.5829" y="155.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="140.5829" y="159.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69.1729" x="68.41" y="181.2951">Controller</text></g><g class="entity" data-entity="Process/Plant" data-source-line="6" data-uid="ent0006" id="entity_Process/Plant"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="133.6523" x="23.17" y="254.6" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="136.8223" y="259.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="134.8223" y="261.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="134.8223" y="265.6" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93.6523" x="38.17" y="287.5951">Process/Plant</text></g><g class="entity" data-entity="Output" data-source-line="7" data-uid="ent0008" id="entity_Output"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="88.6309" x="49.68" y="360.89" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="118.3109" y="365.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="116.3109" y="367.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="116.3109" y="371.89" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48.6309" x="64.68" y="393.8851">Output</text></g><g class="entity" data-entity="Sensor" data-source-line="8" data-uid="ent0010" id="entity_Sensor"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="87.9883" x="55.01" y="467.19" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="122.9983" y="472.19" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="120.9983" y="474.19" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="120.9983" y="478.19" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47.9883" x="70.01" y="500.1851">Sensor</text></g><g class="entity" data-entity="Feedback" data-source-line="9" data-uid="ent0012" id="entity_Feedback"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="107.4365" x="54.28" y="573.49" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="141.7165" y="578.49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="139.7165" y="580.49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="139.7165" y="584.49" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67.4365" x="69.28" y="606.4851">Feedback</text></g><g class="entity" data-entity="GMN15" data-source-line="12" data-uid="ent0016" id="entity_GMN15"><path d="M23.24,679.78 L23.24,720.0456 A0,0 0 0 0 23.24,720.0456 L192.7625,720.0456 A0,0 0 0 0 192.7625,720.0456 L192.7625,689.78 L182.7625,679.78 L112,679.78 L108,620.11 L104,679.78 L23.24,679.78 A0,0 0 0 0 23.24,679.78" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M182.7625,679.78 L182.7625,689.78 L192.7625,689.78 L182.7625,679.78" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="148.5225" x="29.24" y="696.8469">Continuous monitoring</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="102.5273" x="29.24" y="711.9797">and adjustment</text></g><g class="entity" data-entity="Temperature Setting" data-source-line="16" data-uid="ent0019" id="entity_Temperature Setting"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="185.9473" x="381.03" y="42" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="546.9773" y="47" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="544.9773" y="49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="544.9773" y="53" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145.9473" x="396.03" y="74.9951">Temperature Setting</text></g><g class="entity" data-entity="Control Logic" data-source-line="16" data-uid="ent0020" id="entity_Control Logic"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="132.2031" x="407.9" y="148.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="520.1031" y="153.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="518.1031" y="155.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="518.1031" y="159.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92.2031" x="422.9" y="181.2951">Control Logic</text></g><g class="entity" data-entity="Heater" data-source-line="17" data-uid="ent0022" id="entity_Heater"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="87.5781" x="250.21" y="254.6" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="317.7881" y="259.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="315.7881" y="261.6" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="315.7881" y="265.6" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="47.5781" x="265.21" y="287.5951">Heater</text></g><g class="entity" data-entity="Room Temperature" data-source-line="18" data-uid="ent0024" id="entity_Room Temperature"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="176.3154" x="320.84" y="360.89" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="477.1554" y="365.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="475.1554" y="367.89" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="475.1554" y="371.89" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136.3154" x="335.84" y="393.8851">Room Temperature</text></g><g class="entity" data-entity="Temperature Sensor" data-source-line="19" data-uid="ent0026" id="entity_Temperature Sensor"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="183.8076" x="324.1" y="467.19" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="487.9076" y="472.19" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="485.9076" y="474.19" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="485.9076" y="478.19" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143.8076" x="339.1" y="500.1851">Temperature Sensor</text></g><g class="entity" data-entity="Measured Temperature" data-source-line="20" data-uid="ent0028" id="entity_Measured Temperature"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="204.5137" x="316.74" y="573.49" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="501.2537" y="578.49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="499.2537" y="580.49" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="499.2537" y="584.49" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164.5137" x="331.74" y="606.4851">Measured Temperature</text></g><g class="entity" data-entity="GMN31" data-source-line="23" data-uid="ent0032" id="entity_GMN31"><path d="M372.93,257.61 L372.93,297.8756 A0,0 0 0 0 372.93,297.8756 L575.0794,297.8756 A0,0 0 0 0 575.0794,297.8756 L575.0794,267.61 L565.0794,257.61 L478,257.61 L474,195.08 L470,257.61 L372.93,257.61 A0,0 0 0 0 372.93,257.61" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M565.0794,257.61 L565.0794,267.61 L575.0794,267.61 L565.0794,257.61" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="181.1494" x="378.93" y="274.6769">Compares desired vs actual</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="81.999" x="378.93" y="289.8097">temperature</text></g><g class="link" data-entity-1="Input Command" data-entity-2="Controller" data-source-line="5" data-uid="lnk5" id="link_Input Command_Controller"><path d="M108,88.78 C108,106.28 108,124.38 108,141.86" fill="none" id="Input Command-to-Controller" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="108,147.86,112,138.86,108,142.86,104,138.86,108,147.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Controller" data-entity-2="Process/Plant" data-source-line="6" data-uid="lnk7" id="link_Controller_Process/Plant"><path d="M104.09,195.08 C101.08,212.57 97.9415,230.7676 94.9215,248.2476" fill="none" id="Controller-to-Process/Plant" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="93.9,254.16,99.3738,245.9724,94.7512,249.233,91.4906,244.6104,93.9,254.16" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Process/Plant" data-entity-2="Output" data-source-line="7" data-uid="lnk9" id="link_Process/Plant_Output"><path d="M90.87,301.38 C91.54,318.87 92.2303,336.9744 92.9003,354.4644" fill="none" id="Process/Plant-to-Output" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="93.13,360.46,96.7826,351.3135,92.9386,355.4637,88.7884,351.6197,93.13,360.46" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Output" data-entity-2="Sensor" data-source-line="8" data-uid="lnk11" id="link_Output_Sensor"><path d="M95.08,407.67 C95.92,425.17 96.792,443.2769 97.632,460.7569" fill="none" id="Output-to-Sensor" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="97.92,466.75,101.4834,457.5684,97.68,461.7558,93.4926,457.9524,97.92,466.75" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Sensor" data-entity-2="Feedback" data-source-line="9" data-uid="lnk13" id="link_Sensor_Feedback"><path d="M100.95,513.97 C102.46,531.46 104.0236,549.5923 105.5336,567.0723" fill="none" id="Sensor-to-Feedback" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="106.05,573.05,109.2606,563.7391,105.6197,568.0686,101.2903,564.4276,106.05,573.05" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Feedback" data-entity-2="Controller" data-source-line="10" data-uid="lnk14" id="link_Feedback_Controller"><path d="M126.62,573.14 C138.45,557.45 152.83,535.47 160,513.49 C220.74,327.11 191.55,304.46 174,254.6 C165.86,231.47 152.3815,214.3137 137.3615,199.1437" fill="none" id="Feedback-to-Controller" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="133.14,194.88,136.6298,204.0898,136.6579,198.4331,142.3147,198.4612,133.14,194.88" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Temperature Setting" data-entity-2="Control Logic" data-source-line="16" data-uid="lnk21" id="link_Temperature Setting_Control Logic"><path d="M474,88.78 C474,106.28 474,124.38 474,141.86" fill="none" id="Temperature Setting-to-Control Logic" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="474,147.86,478,138.86,474,142.86,470,138.86,474,147.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Control Logic" data-entity-2="Heater" data-source-line="17" data-uid="lnk23" id="link_Control Logic_Heater"><path d="M434.94,195.08 C404.75,212.57 368.3416,233.6721 338.1716,251.1521" fill="none" id="Control Logic-to-Heater" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="332.98,254.16,342.7726,253.1092,337.3063,251.6534,338.7621,246.1871,332.98,254.16" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Heater" data-entity-2="Room Temperature" data-source-line="18" data-uid="lnk25" id="link_Heater_Room Temperature"><path d="M318.95,301.38 C338.24,318.87 360.3761,338.9387 379.6561,356.4287" fill="none" id="Heater-to-Room Temperature" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="384.1,360.46,380.1217,351.4504,380.3967,357.1006,374.7466,357.3756,384.1,360.46" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Room Temperature" data-entity-2="Temperature Sensor" data-source-line="19" data-uid="lnk27" id="link_Room Temperature_Temperature Sensor"><path d="M410.52,407.67 C411.69,425.17 412.9093,443.2834 414.0793,460.7634" fill="none" id="Room Temperature-to-Temperature Sensor" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="414.48,466.75,417.87,457.503,414.1461,461.7612,409.8879,458.0372,414.48,466.75" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Temperature Sensor" data-entity-2="Measured Temperature" data-source-line="20" data-uid="lnk29" id="link_Temperature Sensor_Measured Temperature"><path d="M416.65,513.97 C417.15,531.46 417.6784,549.5725 418.1784,567.0525" fill="none" id="Temperature Sensor-to-Measured Temperature" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="418.35,573.05,422.091,563.9393,418.207,568.052,414.0943,564.168,418.35,573.05" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Measured Temperature" data-entity-2="Control Logic" data-source-line="21" data-uid="lnk30" id="link_Measured Temperature_Control Logic"><path d="M458.93,573.04 C481.21,558.6 507.85,538 525,513.49 C581.87,432.21 577.71,398.91 593,300.89 C596.17,280.56 602.56,272.82 593,254.6 C579.06,228.03 557.4706,211.2371 532.8006,197.8171" fill="none" id="Measured Temperature-to-Control Logic" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="527.53,194.95,533.5245,202.7644,531.9222,197.3393,537.3474,195.7369,527.53,194.95" style="stroke:#181818;stroke-width:1;" /></g></g></svg></p></div></div>
@@ -1775,135 +1775,135 @@ heater.run_cycle(target=25)
 <p><strong>Negative feedback</strong>: The most common type in control systems. The feedback signal opposes changes, helping to maintain stability.</p>
 <p><strong>Positive feedback</strong>: The feedback signal reinforces changes. This can lead to instability but is useful in some applications like oscillators.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class FeedbackDemo:
-    &quot;&quot;&quot;Demonstrate different types of feedback&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">FeedbackDemo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate different types of feedback&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.value = 10  # Starting value
-        self.target = 20  # Desired value
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Starting value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Desired value</span>
 
-    def negative_feedback_step(self, gain=0.1):
-        &quot;&quot;&quot;Negative feedback: moves toward target&quot;&quot;&quot;
-        error = self.target - self.value
-        adjustment = error * gain
-        self.value += adjustment
-        return self.value
+    <span class="k">def</span><span class="w"> </span><span class="nf">negative_feedback_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Negative feedback: moves toward target&quot;&quot;&quot;</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">adjustment</span> <span class="o">=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">adjustment</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
-    def positive_feedback_step(self, gain=0.1):
-        &quot;&quot;&quot;Positive feedback: amplifies deviation&quot;&quot;&quot;
-        deviation = self.value - self.target
-        adjustment = deviation * gain
-        self.value += adjustment
-        return self.value
+    <span class="k">def</span><span class="w"> </span><span class="nf">positive_feedback_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Positive feedback: amplifies deviation&quot;&quot;&quot;</span>
+        <span class="n">deviation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span>
+        <span class="n">adjustment</span> <span class="o">=</span> <span class="n">deviation</span> <span class="o">*</span> <span class="n">gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+=</span> <span class="n">adjustment</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
-    def demonstrate_feedback_types(self):
-        &quot;&quot;&quot;Show how different feedback types behave&quot;&quot;&quot;
-        # Reset for negative feedback demo
-        self.value = 10
-        print(&quot;Negative Feedback (stabilizing):&quot;)
-        print(&quot;Step | Value | Error&quot;)
-        print(&quot;-&quot; * 20)
+    <span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_feedback_types</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show how different feedback types behave&quot;&quot;&quot;</span>
+        <span class="c1"># Reset for negative feedback demo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Negative Feedback (stabilizing):&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step | Value | Error&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">20</span><span class="p">)</span>
 
-        for step in range(8):
-            error = self.target - self.value
-            self.negative_feedback_step(gain=0.3)
-            print(f&quot;{step:4d} | {self.value:5.1f} | {error:5.1f}&quot;)
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">negative_feedback_step</span><span class="p">(</span><span class="n">gain</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        print(&quot;\nPositive Feedback (destabilizing):&quot;)
-        print(&quot;Step | Value | Deviation&quot;)
-        print(&quot;-&quot; * 22)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Positive Feedback (destabilizing):&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step | Value | Deviation&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">22</span><span class="p">)</span>
 
-        # Reset for positive feedback demo
-        self.value = 22  # Start slightly above target
+        <span class="c1"># Reset for positive feedback demo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="mi">22</span>  <span class="c1"># Start slightly above target</span>
 
-        for step in range(6):
-            deviation = self.value - self.target
-            self.positive_feedback_step(gain=0.2)
-            print(f&quot;{step:4d} | {self.value:5.1f} | {deviation:9.1f}&quot;)
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+            <span class="n">deviation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">positive_feedback_step</span><span class="p">(</span><span class="n">gain</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">deviation</span><span class="si">:</span><span class="s2">9.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Demonstrate feedback types
-demo = FeedbackDemo()
-demo.demonstrate_feedback_types()
+<span class="c1"># Demonstrate feedback types</span>
+<span class="n">demo</span> <span class="o">=</span> <span class="n">FeedbackDemo</span><span class="p">()</span>
+<span class="n">demo</span><span class="o">.</span><span class="n">demonstrate_feedback_types</span><span class="p">()</span>
 </code></pre>
 </div>
 <h4 id="feedback-loops-in-mechatronic-systems">Feedback loops in mechatronic systems<a class="headerlink" href="#feedback-loops-in-mechatronic-systems" title="Permanent link">&para;</a></h4>
 <p>Real mechatronic systems often have multiple feedback loops operating at different speeds and controlling different aspects of the system.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class RobotArmJoint:
-    &quot;&quot;&quot;Model of a robot arm joint with position and velocity control&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">RobotArmJoint</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model of a robot arm joint with position and velocity control&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.target_position = 0    # Desired angle in degrees
-        self.current_position = 0   # Actual angle in degrees
-        self.current_velocity = 0   # Angular velocity in degrees/second
-        self.motor_torque = 0       # Applied torque
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Desired angle in degrees</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># Actual angle in degrees</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_velocity</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># Angular velocity in degrees/second</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor_torque</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># Applied torque</span>
 
-        # Control gains
-        self.position_gain = 2.0    # Position control strength
-        self.velocity_gain = 0.5    # Velocity damping
-        self.max_torque = 100       # Maximum motor torque
+        <span class="c1"># Control gains</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_gain</span> <span class="o">=</span> <span class="mf">2.0</span>    <span class="c1"># Position control strength</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity_gain</span> <span class="o">=</span> <span class="mf">0.5</span>    <span class="c1"># Velocity damping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_torque</span> <span class="o">=</span> <span class="mi">100</span>       <span class="c1"># Maximum motor torque</span>
 
-    def position_control_loop(self):
-        &quot;&quot;&quot;Outer loop: controls position&quot;&quot;&quot;
-        position_error = self.target_position - self.current_position
-        desired_velocity = position_error * self.position_gain
-        return desired_velocity
+    <span class="k">def</span><span class="w"> </span><span class="nf">position_control_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Outer loop: controls position&quot;&quot;&quot;</span>
+        <span class="n">position_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span>
+        <span class="n">desired_velocity</span> <span class="o">=</span> <span class="n">position_error</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">position_gain</span>
+        <span class="k">return</span> <span class="n">desired_velocity</span>
 
-    def velocity_control_loop(self, desired_velocity):
-        &quot;&quot;&quot;Inner loop: controls velocity&quot;&quot;&quot;
-        velocity_error = desired_velocity - self.current_velocity
-        torque_command = velocity_error * self.velocity_gain
+    <span class="k">def</span><span class="w"> </span><span class="nf">velocity_control_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">desired_velocity</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inner loop: controls velocity&quot;&quot;&quot;</span>
+        <span class="n">velocity_error</span> <span class="o">=</span> <span class="n">desired_velocity</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_velocity</span>
+        <span class="n">torque_command</span> <span class="o">=</span> <span class="n">velocity_error</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity_gain</span>
 
-        # Limit torque to motor capabilities
-        self.motor_torque = max(-self.max_torque, 
-                               min(self.max_torque, torque_command))
-        return self.motor_torque
+        <span class="c1"># Limit torque to motor capabilities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">motor_torque</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">max_torque</span><span class="p">,</span> 
+                               <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_torque</span><span class="p">,</span> <span class="n">torque_command</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor_torque</span>
 
-    def simulate_physics(self, dt=0.1):
-        &quot;&quot;&quot;Simulate joint motion based on applied torque&quot;&quot;&quot;
-        # Simplified physics: torque affects acceleration
-        acceleration = self.motor_torque * 0.1  # Simplified dynamics
-        self.current_velocity += acceleration * dt
-        self.current_position += self.current_velocity * dt
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_physics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate joint motion based on applied torque&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified physics: torque affects acceleration</span>
+        <span class="n">acceleration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">motor_torque</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># Simplified dynamics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_velocity</span> <span class="o">+=</span> <span class="n">acceleration</span> <span class="o">*</span> <span class="n">dt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_velocity</span> <span class="o">*</span> <span class="n">dt</span>
 
-        # Add some damping
-        self.current_velocity *= 0.95
+        <span class="c1"># Add some damping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_velocity</span> <span class="o">*=</span> <span class="mf">0.95</span>
 
-    def update(self, dt=0.1):
-        &quot;&quot;&quot;Complete control update cycle&quot;&quot;&quot;
-        # Outer loop: position control
-        desired_velocity = self.position_control_loop()
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Complete control update cycle&quot;&quot;&quot;</span>
+        <span class="c1"># Outer loop: position control</span>
+        <span class="n">desired_velocity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position_control_loop</span><span class="p">()</span>
 
-        # Inner loop: velocity control
-        self.velocity_control_loop(desired_velocity)
+        <span class="c1"># Inner loop: velocity control</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity_control_loop</span><span class="p">(</span><span class="n">desired_velocity</span><span class="p">)</span>
 
-        # Physics simulation
-        self.simulate_physics(dt)
+        <span class="c1"># Physics simulation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">simulate_physics</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
 
-    def move_to(self, target_angle, steps=50):
-        &quot;&quot;&quot;Move joint to target angle and show the process&quot;&quot;&quot;
-        self.target_position = target_angle
+    <span class="k">def</span><span class="w"> </span><span class="nf">move_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_angle</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Move joint to target angle and show the process&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="n">target_angle</span>
 
-        print(f&quot;Moving to {target_angle}° from {self.current_position:.1f}°&quot;)
-        print(&quot;Step | Position | Velocity | Torque&quot;)
-        print(&quot;-&quot; * 35)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Moving to </span><span class="si">{</span><span class="n">target_angle</span><span class="si">}</span><span class="s2">° from </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_position</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step | Position | Velocity | Torque&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">35</span><span class="p">)</span>
 
-        for step in range(steps):
-            self.update()
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-            if step % 5 == 0:  # Print every 5th step
-                print(f&quot;{step:4d} | {self.current_position:8.1f} | &quot;
-                      f&quot;{self.current_velocity:8.1f} | {self.motor_torque:6.1f}&quot;)
+            <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Print every 5th step</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">step</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_position</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_velocity</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">motor_torque</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Stop if close enough to target
-            if abs(self.target_position - self.current_position) &lt; 0.1:
-                break
+            <span class="c1"># Stop if close enough to target</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>
+                <span class="k">break</span>
 
-        print(f&quot;Final position: {self.current_position:.1f}°&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final position: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_position</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
 
-# Demonstrate nested control loops
-joint = RobotArmJoint()
-joint.move_to(45)
+<span class="c1"># Demonstrate nested control loops</span>
+<span class="n">joint</span> <span class="o">=</span> <span class="n">RobotArmJoint</span><span class="p">()</span>
+<span class="n">joint</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="stability-concepts">Stability concepts<a class="headerlink" href="#stability-concepts" title="Permanent link">&para;</a></h3>
@@ -1913,230 +1913,230 @@ joint.move_to(45)
 <p><strong>System delays</strong>: Time between control action and system response. Delays make control more difficult.</p>
 <p><strong>Disturbances</strong>: External forces that push the system away from its target state.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class StabilityDemo:
-    &quot;&quot;&quot;Demonstrate how different factors affect system stability&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">StabilityDemo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate how different factors affect system stability&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.position = 0
-        self.velocity = 0
-        self.target = 10
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="mi">10</span>
 
-    def simulate_with_gain(self, gain, steps=20, disturbance=0):
-        &quot;&quot;&quot;Simulate system response with different control gains&quot;&quot;&quot;
-        self.position = 0
-        self.velocity = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_with_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gain</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">disturbance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate system response with different control gains&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="mi">0</span>
 
-        positions = []
+        <span class="n">positions</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for step in range(steps):
-            # Control law: proportional control
-            error = self.target - self.position
-            control_force = error * gain
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="c1"># Control law: proportional control</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
+            <span class="n">control_force</span> <span class="o">=</span> <span class="n">error</span> <span class="o">*</span> <span class="n">gain</span>
 
-            # Add disturbance
-            if step == 10:  # Disturbance at step 10
-                control_force += disturbance
+            <span class="c1"># Add disturbance</span>
+            <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>  <span class="c1"># Disturbance at step 10</span>
+                <span class="n">control_force</span> <span class="o">+=</span> <span class="n">disturbance</span>
 
-            # Simple physics simulation
-            acceleration = control_force - self.velocity * 0.1  # Damping
-            self.velocity += acceleration * 0.1
-            self.position += self.velocity * 0.1
+            <span class="c1"># Simple physics simulation</span>
+            <span class="n">acceleration</span> <span class="o">=</span> <span class="n">control_force</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># Damping</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">+=</span> <span class="n">acceleration</span> <span class="o">*</span> <span class="mf">0.1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">*</span> <span class="mf">0.1</span>
 
-            positions.append(self.position)
+            <span class="n">positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
 
-        return positions
+        <span class="k">return</span> <span class="n">positions</span>
 
-    def analyze_stability(self):
-        &quot;&quot;&quot;Compare system behavior with different gains&quot;&quot;&quot;
-        gains = [0.5, 2.0, 5.0, 10.0]
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_stability</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare system behavior with different gains&quot;&quot;&quot;</span>
+        <span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
 
-        print(&quot;Stability Analysis: Response to Step Input&quot;)
-        print(&quot;Gain | Final Position | Oscillation | Stable?&quot;)
-        print(&quot;-&quot; * 45)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stability Analysis: Response to Step Input&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gain | Final Position | Oscillation | Stable?&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
 
-        for gain in gains:
-            positions = self.simulate_with_gain(gain)
-            final_pos = positions[-1]
+        <span class="k">for</span> <span class="n">gain</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">:</span>
+            <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate_with_gain</span><span class="p">(</span><span class="n">gain</span><span class="p">)</span>
+            <span class="n">final_pos</span> <span class="o">=</span> <span class="n">positions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-            # Check for oscillation (position changes direction multiple times)
-            direction_changes = 0
-            for i in range(1, len(positions)-1):
-                if ((positions[i] - positions[i-1]) * 
-                    (positions[i+1] - positions[i]) &lt; 0):
-                    direction_changes += 1
+            <span class="c1"># Check for oscillation (position changes direction multiple times)</span>
+            <span class="n">direction_changes</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> 
+                    <span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">positions</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+                    <span class="n">direction_changes</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            oscillating = direction_changes &gt; 3
-            stable = abs(final_pos - self.target) &lt; 0.5 and not oscillating
+            <span class="n">oscillating</span> <span class="o">=</span> <span class="n">direction_changes</span> <span class="o">&gt;</span> <span class="mi">3</span>
+            <span class="n">stable</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final_pos</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">oscillating</span>
 
-            print(f&quot;{gain:4.1f} | {final_pos:13.1f} | &quot;
-                  f&quot;{&#x27;Yes&#x27; if oscillating else &#x27;No&#x27;:11} | &quot;
-                  f&quot;{&#x27;Yes&#x27; if stable else &#x27;No&#x27;}&quot;)
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">gain</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">final_pos</span><span class="si">:</span><span class="s2">13.1f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">oscillating</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;No&#39;</span><span class="si">:</span><span class="s2">11</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">stable</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;No&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        print(&quot;\nResponse with Disturbance:&quot;)
-        print(&quot;Gain | Recovery Time | Overshoot&quot;)
-        print(&quot;-&quot; * 30)
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Response with Disturbance:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gain | Recovery Time | Overshoot&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
 
-        for gain in [1.0, 3.0, 8.0]:
-            positions = self.simulate_with_gain(gain, steps=30, disturbance=5)
+        <span class="k">for</span> <span class="n">gain</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]:</span>
+            <span class="n">positions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">simulate_with_gain</span><span class="p">(</span><span class="n">gain</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">disturbance</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-            # Find recovery time (when system gets within 5% of target)
-            recovery_time = None
-            max_overshoot = 0
+            <span class="c1"># Find recovery time (when system gets within 5% of target)</span>
+            <span class="n">recovery_time</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">max_overshoot</span> <span class="o">=</span> <span class="mi">0</span>
 
-            for i, pos in enumerate(positions[10:], 10):  # After disturbance
-                if abs(pos - self.target) &lt; 0.5:
-                    if recovery_time is None:
-                        recovery_time = i - 10
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">positions</span><span class="p">[</span><span class="mi">10</span><span class="p">:],</span> <span class="mi">10</span><span class="p">):</span>  <span class="c1"># After disturbance</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">recovery_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">recovery_time</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">10</span>
 
-                overshoot = max(0, pos - self.target)
-                max_overshoot = max(max_overshoot, overshoot)
+                <span class="n">overshoot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">)</span>
+                <span class="n">max_overshoot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_overshoot</span><span class="p">,</span> <span class="n">overshoot</span><span class="p">)</span>
 
-            recovery_str = str(recovery_time) if recovery_time else &quot;No recovery&quot;
-            print(f&quot;{gain:4.1f} | {recovery_str:13} | {max_overshoot:8.1f}&quot;)
+            <span class="n">recovery_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">recovery_time</span><span class="p">)</span> <span class="k">if</span> <span class="n">recovery_time</span> <span class="k">else</span> <span class="s2">&quot;No recovery&quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">gain</span><span class="si">:</span><span class="s2">4.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">recovery_str</span><span class="si">:</span><span class="s2">13</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">max_overshoot</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Demonstrate stability analysis
-demo = StabilityDemo()
-demo.analyze_stability()
+<span class="c1"># Demonstrate stability analysis</span>
+<span class="n">demo</span> <span class="o">=</span> <span class="n">StabilityDemo</span><span class="p">()</span>
+<span class="n">demo</span><span class="o">.</span><span class="n">analyze_stability</span><span class="p">()</span>
 </code></pre>
 </div>
 <div class="diagram-container" data-container-id="kroki-diagram-2"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-2')">🔍 View Larger</button><div id="kroki-diagram-2" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="344px" preserveAspectRatio="xMaxYMax meet" style="width:2674px;height:344px;background:#FFFFFF;" version="1.1" viewBox="0 0 2674 344" width="2674px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-2"><defs /><g><g class="cluster" data-entity="System Stability Factors" data-source-line="4" data-uid="ent0002" id="cluster_System Stability Factors"><rect fill="none" height="270.59" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="1869" x="7" y="7" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="193.3818" x="844.8091" y="21.9951">System Stability Factors</text></g><g class="cluster" data-entity="Control Gain" data-source-line="5" data-uid="ent0003" id="cluster_Control Gain"><rect fill="none" height="203.59" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="645" x="1207" y="50" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="98.4512" x="1480.2744" y="64.9951">Control Gain</text></g><g class="cluster" data-entity="System Delays" data-source-line="12" data-uid="ent0016" id="cluster_System Delays"><rect fill="none" height="203.59" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="620" x="563" y="50" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="116.0127" x="814.9937" y="64.9951">System Delays</text></g><g class="cluster" data-entity="Disturbances" data-source-line="19" data-uid="ent0021" id="cluster_Disturbances"><rect fill="none" height="203.59" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="508" x="31" y="50" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="103.8789" x="233.0605" y="64.9951">Disturbances</text></g><g class="entity" data-entity="Low Gain" data-source-line="6" data-uid="ent0004" id="entity_Low Gain"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="104.4561" x="1585.77" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1670.2261" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1668.2261" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1668.2261" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="64.4561" x="1600.77" y="117.9951">Low Gain</text></g><g class="entity" data-entity="Slow Response" data-source-line="6" data-uid="ent0005" id="entity_Slow Response"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145.1094" x="1514.45" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1639.5594" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1637.5594" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1637.5594" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.1094" x="1529.45" y="224.2951">Slow Response</text></g><g class="entity" data-entity="High Gain" data-source-line="7" data-uid="ent0007" id="entity_High Gain"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="108.8174" x="1726.59" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1815.4074" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1813.4074" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1813.4074" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68.8174" x="1741.59" y="117.9951">High Gain</text></g><g class="entity" data-entity="Fast Response" data-source-line="7" data-uid="ent0008" id="entity_Fast Response"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="141.7324" x="1694.13" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1815.8624" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1813.8624" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1813.8624" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101.7324" x="1709.13" y="224.2951">Fast Response</text></g><g class="entity" data-entity="Very High Gain" data-source-line="8" data-uid="ent0010" id="entity_Very High Gain"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145.499" x="1403.25" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1528.749" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1526.749" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1526.749" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.499" x="1418.25" y="117.9951">Very High Gain</text></g><g class="entity" data-entity="Oscillation" data-source-line="8" data-uid="ent0011" id="entity_Oscillation"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="113.0762" x="1366.46" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1459.5362" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1457.5362" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1457.5362" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73.0762" x="1381.46" y="224.2951">Oscillation</text></g><g class="entity" data-entity="Excessive Gain" data-source-line="9" data-uid="ent0013" id="entity_Excessive Gain"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145.458" x="1223.27" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1348.728" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1346.728" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1346.728" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.458" x="1238.27" y="117.9951">Excessive Gain</text></g><g class="entity" data-entity="Instability" data-source-line="9" data-uid="ent0014" id="entity_Instability"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="108.6943" x="1222.65" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1311.3443" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1309.3443" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1309.3443" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68.6943" x="1237.65" y="224.2951">Instability</text></g><g class="entity" data-entity="Processing Delay" data-source-line="13" data-uid="ent0017" id="entity_Processing Delay"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159.9092" x="1007.05" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1146.9592" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1144.9592" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1144.9592" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119.9092" x="1022.05" y="117.9951">Processing Delay</text></g><g class="entity" data-entity="Communication Delay" data-source-line="14" data-uid="ent0018" id="entity_Communication Delay"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="194.9434" x="578.53" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="753.4734" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="751.4734" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="751.4734" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="154.9434" x="593.53" y="117.9951">Communication Delay</text></g><g class="entity" data-entity="Mechanical Delay" data-source-line="15" data-uid="ent0019" id="entity_Mechanical Delay"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="163.3682" x="808.32" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="951.6882" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="949.6882" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="949.6882" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123.3682" x="823.32" y="117.9951">Mechanical Delay</text></g><g class="entity" data-entity="Sensor Delay" data-source-line="16" data-uid="ent0020" id="entity_Sensor Delay"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="132.5859" x="609.71" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="722.2959" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="720.2959" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="720.2959" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92.5859" x="624.71" y="224.2951">Sensor Delay</text></g><g class="entity" data-entity="External Forces" data-source-line="20" data-uid="ent0022" id="entity_External Forces"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148.7598" x="374.62" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="503.3798" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="501.3798" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="501.3798" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108.7598" x="389.62" y="117.9951">External Forces</text></g><g class="entity" data-entity="Noise" data-source-line="21" data-uid="ent0023" id="entity_Noise"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="78.835" x="46.58" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="105.415" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="103.415" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="103.415" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38.835" x="61.58" y="117.9951">Noise</text></g><g class="entity" data-entity="Parameter Changes" data-source-line="22" data-uid="ent0024" id="entity_Parameter Changes"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178.8105" x="160.59" y="85" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="319.4005" y="90" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="317.4005" y="92" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="317.4005" y="96" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138.8105" x="175.59" y="117.9951">Parameter Changes</text></g><g class="entity" data-entity="Load Variations" data-source-line="23" data-uid="ent0025" id="entity_Load Variations"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="148.7734" x="46.61" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="175.3834" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="173.3834" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="173.3834" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108.7734" x="61.61" y="224.2951">Load Variations</text></g><g class="entity" data-entity="Stable but Slow" data-source-line="27" data-uid="ent0026" id="entity_Stable but Slow"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="149.2861" x="2242.36" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2371.6461" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2369.6461" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2369.6461" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109.2861" x="2257.36" y="224.2951">Stable but Slow</text></g><g class="entity" data-entity="Fast but Potentially Unstable" data-source-line="28" data-uid="ent0028" id="entity_Fast but Potentially Unstable"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="241.8926" x="2427.05" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2648.9426" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2646.9426" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2646.9426" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="201.8926" x="2442.05" y="224.2951">Fast but Potentially Unstable</text></g><g class="entity" data-entity="Phase Lag" data-source-line="29" data-uid="ent0030" id="entity_Phase Lag"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="111.5176" x="2096.24" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2187.7576" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2185.7576" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2185.7576" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71.5176" x="2111.24" y="224.2951">Phase Lag</text></g><g class="entity" data-entity="Steady State Error" data-source-line="30" data-uid="ent0032" id="entity_Steady State Error"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="169.377" x="1892.31" y="191.3" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2041.687" y="196.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2039.687" y="198.3" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2039.687" y="202.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129.377" x="1907.31" y="224.2951">Steady State Error</text></g><g class="entity" data-entity="GMN34" data-source-line="32" data-uid="ent0035" id="entity_GMN34"><path d="M1866.59,297.59 L1866.59,337.8556 A0,0 0 0 0 1866.59,337.8556 L2087.4015,337.8556 A0,0 0 0 0 2087.4015,337.8556 L2087.4015,307.59 L2077.4015,297.59 L1981,297.59 L1977,237.92 L1973,297.59 L1866.59,297.59 A0,0 0 0 0 1866.59,297.59" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M2077.4015,297.59 L2077.4015,307.59 L2087.4015,307.59 L2077.4015,297.59" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="199.8115" x="1872.59" y="314.6569">Balance between performance</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122.1733" x="1872.59" y="329.7897">and stability is key</text></g><g class="link" data-entity-1="Low Gain" data-entity-2="Slow Response" data-source-line="6" data-uid="lnk6" id="link_Low Gain_Slow Response"><path d="M1626.93,131.78 C1618.38,149.27 1609.2263,167.9902 1600.6763,185.4702" fill="none" id="Low Gain-to-Slow Response" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1598.04,190.86,1605.5877,184.5329,1600.2369,186.3685,1598.4013,181.0178,1598.04,190.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="High Gain" data-entity-2="Fast Response" data-source-line="7" data-uid="lnk9" id="link_High Gain_Fast Response"><path d="M1777.53,131.78 C1774.84,149.27 1772.0626,167.4498 1769.3726,184.9298" fill="none" id="High Gain-to-Fast Response" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1768.46,190.86,1773.7824,182.5731,1769.2205,185.9182,1765.8754,181.3563,1768.46,190.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Very High Gain" data-entity-2="Oscillation" data-source-line="8" data-uid="lnk12" id="link_Very High Gain_Oscillation"><path d="M1464.5,131.78 C1455.61,149.27 1446.0775,168.0307 1437.1975,185.5107" fill="none" id="Very High Gain-to-Oscillation" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1434.48,190.86,1442.1225,184.6477,1436.7446,186.4022,1434.99,181.0244,1434.48,190.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Excessive Gain" data-entity-2="Instability" data-source-line="9" data-uid="lnk15" id="link_Excessive Gain_Instability"><path d="M1291.88,131.78 C1288.69,149.27 1285.3772,167.4775 1282.1872,184.9575" fill="none" id="Excessive Gain-to-Instability" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1281.11,190.86,1286.6608,182.7243,1282.0076,185.9412,1278.7908,181.2881,1281.11,190.86" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Low Gain" data-entity-2="Stable but Slow" data-source-line="27" data-uid="lnk27" id="link_Low Gain_Stable but Slow"><path d="M1690.44,126.71 C1696.65,128.43 1702.94,130.01 1709,131.3 C1934.85,179.22 1997.69,150.87 2225,191.3 C2230.58,192.29 2230.4557,192.1983 2236.2257,193.3983" fill="none" id="Low Gain-to-Stable but Slow" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="2242.1,194.62,2234.103,188.8713,2237.2047,193.6019,2232.4741,196.7037,2242.1,194.62" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="High Gain" data-entity-2="Fast but Potentially Unstable" data-source-line="28" data-uid="lnk29" id="link_High Gain_Fast but Potentially Unstable"><path d="M1835.67,115.78 C1944.8,129.13 2197.35,160.6 2409,191.3 C2414.8,192.14 2414.8064,192.13 2420.8064,193.03" fill="none" id="High Gain-to-Fast but Potentially Unstable" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="2426.74,193.92,2418.4329,188.6292,2421.7953,193.1783,2417.2462,196.5407,2426.74,193.92" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="Processing Delay" data-entity-2="Phase Lag" data-source-line="29" data-uid="lnk31" id="link_Processing Delay_Phase Lag"><path d="M1167.17,125.25 C1180.43,127.54 1194.07,129.67 1207,131.3 C1592.41,179.96 1696.92,121.12 2079,191.3 C2084.6,192.33 2084.5676,192.1415 2090.3076,193.6115" fill="none" id="Processing Delay-to-Phase Lag" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="2096.12,195.1,2088.3937,188.9922,2091.2763,193.8595,2086.409,196.7421,2096.12,195.1" style="stroke:#181818;stroke-width:1;" /></g><g class="link" data-entity-1="External Forces" data-entity-2="Steady State Error" data-source-line="30" data-uid="lnk33" id="link_External Forces_Steady State Error"><path d="M523.87,125.3 C536.87,127.65 550.29,129.77 563,131.3 C1132.44,199.5 1282.02,127.8 1852,191.3 C1864.92,192.74 1872.607,193.7318 1885.897,195.8818" fill="none" id="External Forces-to-Steady State Error" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1891.82,196.84,1883.5743,191.454,1886.8842,196.0415,1882.2967,199.3514,1891.82,196.84" style="stroke:#181818;stroke-width:1;" /></g></g></svg></p></div></div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s design a simple cruise control system to see open and closed loop concepts in practice.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class CruiseControlSystem:
-    &quot;&quot;&quot;Complete cruise control system demonstration&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">CruiseControlSystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete cruise control system demonstration&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        # Vehicle state
-        self.current_speed = 0      # km/h
-        self.target_speed = 0       # km/h
-        self.throttle_position = 0  # 0-100%
-        self.brake_applied = False
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Vehicle state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_speed</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># km/h</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># km/h</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 0-100%</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brake_applied</span> <span class="o">=</span> <span class="kc">False</span>
 
-        # Control parameters
-        self.speed_gain = 2.0       # Throttle response to speed error
-        self.max_throttle = 100     # Maximum throttle position
-        self.speed_tolerance = 2    # Acceptable speed error (km/h)
+        <span class="c1"># Control parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_gain</span> <span class="o">=</span> <span class="mf">2.0</span>       <span class="c1"># Throttle response to speed error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_throttle</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c1"># Maximum throttle position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_tolerance</span> <span class="o">=</span> <span class="mi">2</span>    <span class="c1"># Acceptable speed error (km/h)</span>
 
-        # System state
-        self.cruise_active = False
-        self.control_mode = &quot;closed_loop&quot;  # or &quot;open_loop&quot;
+        <span class="c1"># System state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cruise_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">control_mode</span> <span class="o">=</span> <span class="s2">&quot;closed_loop&quot;</span>  <span class="c1"># or &quot;open_loop&quot;</span>
 
-    def set_cruise_speed(self, speed):
-        &quot;&quot;&quot;Activate cruise control at current speed&quot;&quot;&quot;
-        self.target_speed = speed
-        self.cruise_active = True
-        print(f&quot;Cruise control set to {speed} km/h&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_cruise_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">speed</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activate cruise control at current speed&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">=</span> <span class="n">speed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cruise_active</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cruise control set to </span><span class="si">{</span><span class="n">speed</span><span class="si">}</span><span class="s2"> km/h&quot;</span><span class="p">)</span>
 
-    def open_loop_control(self):
-        &quot;&quot;&quot;Simple open loop control - fixed throttle position&quot;&quot;&quot;
-        if self.cruise_active:
-            # Estimate throttle needed (very rough approximation)
-            estimated_throttle = self.target_speed * 0.8  # 0.8% per km/h
-            self.throttle_position = min(self.max_throttle, estimated_throttle)
-            return &quot;OPEN_LOOP&quot;
-        return &quot;INACTIVE&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">open_loop_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simple open loop control - fixed throttle position&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cruise_active</span><span class="p">:</span>
+            <span class="c1"># Estimate throttle needed (very rough approximation)</span>
+            <span class="n">estimated_throttle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">*</span> <span class="mf">0.8</span>  <span class="c1"># 0.8% per km/h</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_throttle</span><span class="p">,</span> <span class="n">estimated_throttle</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;OPEN_LOOP&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;INACTIVE&quot;</span>
 
-    def closed_loop_control(self):
-        &quot;&quot;&quot;Closed loop control with speed feedback&quot;&quot;&quot;
-        if not self.cruise_active:
-            self.throttle_position = 0
-            return &quot;INACTIVE&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">closed_loop_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closed loop control with speed feedback&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cruise_active</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="s2">&quot;INACTIVE&quot;</span>
 
-        # Calculate speed error
-        speed_error = self.target_speed - self.current_speed
+        <span class="c1"># Calculate speed error</span>
+        <span class="n">speed_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_speed</span>
 
-        if abs(speed_error) &lt;= self.speed_tolerance:
-            # Maintain current throttle
-            status = &quot;MAINTAINING&quot;
-        elif speed_error &gt; 0:
-            # Need to speed up
-            throttle_increase = speed_error * self.speed_gain
-            self.throttle_position = min(self.max_throttle, 
-                                       self.throttle_position + throttle_increase)
-            status = &quot;ACCELERATING&quot;
-        else:
-            # Need to slow down
-            self.throttle_position = max(0, self.throttle_position - abs(speed_error))
-            status = &quot;DECELERATING&quot;
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">speed_error</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_tolerance</span><span class="p">:</span>
+            <span class="c1"># Maintain current throttle</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;MAINTAINING&quot;</span>
+        <span class="k">elif</span> <span class="n">speed_error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Need to speed up</span>
+            <span class="n">throttle_increase</span> <span class="o">=</span> <span class="n">speed_error</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_gain</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_throttle</span><span class="p">,</span> 
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">+</span> <span class="n">throttle_increase</span><span class="p">)</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;ACCELERATING&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Need to slow down</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">speed_error</span><span class="p">))</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;DECELERATING&quot;</span>
 
-        return status
+        <span class="k">return</span> <span class="n">status</span>
 
-    def simulate_vehicle_dynamics(self, hill_grade=0, headwind=0):
-        &quot;&quot;&quot;Simulate how vehicle speed changes&quot;&quot;&quot;
-        # Simplified vehicle dynamics
-        throttle_force = self.throttle_position * 0.3  # Acceleration from throttle
-        drag_force = self.current_speed * 0.02         # Air resistance
-        hill_force = hill_grade * 2                    # Hill resistance
-        wind_force = headwind * 0.1                    # Wind resistance
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_vehicle_dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hill_grade</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">headwind</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate how vehicle speed changes&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified vehicle dynamics</span>
+        <span class="n">throttle_force</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">*</span> <span class="mf">0.3</span>  <span class="c1"># Acceleration from throttle</span>
+        <span class="n">drag_force</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_speed</span> <span class="o">*</span> <span class="mf">0.02</span>         <span class="c1"># Air resistance</span>
+        <span class="n">hill_force</span> <span class="o">=</span> <span class="n">hill_grade</span> <span class="o">*</span> <span class="mi">2</span>                    <span class="c1"># Hill resistance</span>
+        <span class="n">wind_force</span> <span class="o">=</span> <span class="n">headwind</span> <span class="o">*</span> <span class="mf">0.1</span>                    <span class="c1"># Wind resistance</span>
 
-        if self.brake_applied:
-            net_force = -5  # Braking force
-        else:
-            net_force = throttle_force - drag_force - hill_force - wind_force
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">brake_applied</span><span class="p">:</span>
+            <span class="n">net_force</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>  <span class="c1"># Braking force</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">net_force</span> <span class="o">=</span> <span class="n">throttle_force</span> <span class="o">-</span> <span class="n">drag_force</span> <span class="o">-</span> <span class="n">hill_force</span> <span class="o">-</span> <span class="n">wind_force</span>
 
-        # Update speed (simplified physics)
-        speed_change = net_force * 0.5
-        self.current_speed = max(0, self.current_speed + speed_change)
+        <span class="c1"># Update speed (simplified physics)</span>
+        <span class="n">speed_change</span> <span class="o">=</span> <span class="n">net_force</span> <span class="o">*</span> <span class="mf">0.5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_speed</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_speed</span> <span class="o">+</span> <span class="n">speed_change</span><span class="p">)</span>
 
-    def apply_brake(self):
-        &quot;&quot;&quot;Driver applies brake - deactivates cruise control&quot;&quot;&quot;
-        self.brake_applied = True
-        self.cruise_active = False
-        self.throttle_position = 0
-        print(&quot;Brake applied - cruise control deactivated&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_brake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Driver applies brake - deactivates cruise control&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brake_applied</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cruise_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Brake applied - cruise control deactivated&quot;</span><span class="p">)</span>
 
-    def release_brake(self):
-        &quot;&quot;&quot;Driver releases brake&quot;&quot;&quot;
-        self.brake_applied = False
+    <span class="k">def</span><span class="w"> </span><span class="nf">release_brake</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Driver releases brake&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brake_applied</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def simulate_drive(self, duration=20, hill_grade=0, headwind=0):
-        &quot;&quot;&quot;Simulate a driving scenario&quot;&quot;&quot;
-        print(f&quot;\nDriving simulation - Hill: {hill_grade:.1f}, Wind: {headwind:.1f}&quot;)
-        print(&quot;Time | Speed | Target | Throttle | Status&quot;)
-        print(&quot;-&quot; * 45)
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_drive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">hill_grade</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">headwind</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate a driving scenario&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Driving simulation - Hill: </span><span class="si">{</span><span class="n">hill_grade</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Wind: </span><span class="si">{</span><span class="n">headwind</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Time | Speed | Target | Throttle | Status&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">45</span><span class="p">)</span>
 
-        for time in range(duration):
-            # Choose control method
-            if self.control_mode == &quot;open_loop&quot;:
-                status = self.open_loop_control()
-            else:
-                status = self.closed_loop_control()
+        <span class="k">for</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">duration</span><span class="p">):</span>
+            <span class="c1"># Choose control method</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_mode</span> <span class="o">==</span> <span class="s2">&quot;open_loop&quot;</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">open_loop_control</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">status</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">closed_loop_control</span><span class="p">()</span>
 
-            # Simulate vehicle response
-            self.simulate_vehicle_dynamics(hill_grade, headwind)
+            <span class="c1"># Simulate vehicle response</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">simulate_vehicle_dynamics</span><span class="p">(</span><span class="n">hill_grade</span><span class="p">,</span> <span class="n">headwind</span><span class="p">)</span>
 
-            # Print status every few seconds
-            if time % 2 == 0:
-                print(f&quot;{time:4d} | {self.current_speed:5.1f} | &quot;
-                      f&quot;{self.target_speed:6.1f} | {self.throttle_position:8.1f} | &quot;
-                      f&quot;{status}&quot;)
+            <span class="c1"># Print status every few seconds</span>
+            <span class="k">if</span> <span class="n">time</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_speed</span><span class="si">:</span><span class="s2">5.1f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">throttle_position</span><span class="si">:</span><span class="s2">8.1f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Simulate driver brake input at time 15
-            if time == 15:
-                self.apply_brake()
-            elif time == 17:
-                self.release_brake()
-                self.set_cruise_speed(self.target_speed)  # Re-engage cruise
+            <span class="c1"># Simulate driver brake input at time 15</span>
+            <span class="k">if</span> <span class="n">time</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">apply_brake</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">time</span> <span class="o">==</span> <span class="mi">17</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">release_brake</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_cruise_speed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_speed</span><span class="p">)</span>  <span class="c1"># Re-engage cruise</span>
 
-# Demonstrate cruise control comparison
-print(&quot;=== Cruise Control Comparison ===&quot;)
+<span class="c1"># Demonstrate cruise control comparison</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Cruise Control Comparison ===&quot;</span><span class="p">)</span>
 
-# Test open loop control
-car1 = CruiseControlSystem()
-car1.control_mode = &quot;open_loop&quot;
-car1.current_speed = 50
-car1.set_cruise_speed(80)
-print(&quot;\nOpen Loop Control:&quot;)
-car1.simulate_drive(duration=10, hill_grade=0.5)  # Uphill
+<span class="c1"># Test open loop control</span>
+<span class="n">car1</span> <span class="o">=</span> <span class="n">CruiseControlSystem</span><span class="p">()</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">control_mode</span> <span class="o">=</span> <span class="s2">&quot;open_loop&quot;</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">current_speed</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">set_cruise_speed</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Open Loop Control:&quot;</span><span class="p">)</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">simulate_drive</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hill_grade</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Uphill</span>
 
-# Test closed loop control
-car2 = CruiseControlSystem()
-car2.control_mode = &quot;closed_loop&quot;
-car2.current_speed = 50
-car2.set_cruise_speed(80)
-print(&quot;\nClosed Loop Control:&quot;)
-car2.simulate_drive(duration=10, hill_grade=0.5)  # Same uphill
+<span class="c1"># Test closed loop control</span>
+<span class="n">car2</span> <span class="o">=</span> <span class="n">CruiseControlSystem</span><span class="p">()</span>
+<span class="n">car2</span><span class="o">.</span><span class="n">control_mode</span> <span class="o">=</span> <span class="s2">&quot;closed_loop&quot;</span>
+<span class="n">car2</span><span class="o">.</span><span class="n">current_speed</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">car2</span><span class="o">.</span><span class="n">set_cruise_speed</span><span class="p">(</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Closed Loop Control:&quot;</span><span class="p">)</span>
+<span class="n">car2</span><span class="o">.</span><span class="n">simulate_drive</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">hill_grade</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Same uphill</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2192,64 +2192,64 @@ car2.simulate_drive(duration=10, hill_grade=0.5)  # Same uphill
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class FishTankController:
-    def __init__(self):
-        self.current_level = 20  # cm
-        self.target_level = 20   # cm
-        self.min_level = 18      # cm
-        self.max_level = 22      # cm
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">FishTankController</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_level</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># cm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_level</span> <span class="o">=</span> <span class="mi">20</span>   <span class="c1"># cm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_level</span> <span class="o">=</span> <span class="mi">18</span>      <span class="c1"># cm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_level</span> <span class="o">=</span> <span class="mi">22</span>      <span class="c1"># cm</span>
 
-        self.pump_active = False
-        self.drain_active = False
-        self.tolerance = 0.5     # cm - prevents oscillation
+        <span class="bp">self</span><span class="o">.</span><span class="n">pump_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drain_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="mf">0.5</span>     <span class="c1"># cm - prevents oscillation</span>
 
-    def read_water_level(self):
-        &quot;&quot;&quot;Simulate ultrasonic sensor reading&quot;&quot;&quot;
-        return self.current_level
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_water_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate ultrasonic sensor reading&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_level</span>
 
-    def control_update(self):
-        &quot;&quot;&quot;Main control logic&quot;&quot;&quot;
-        level = self.read_water_level()
-        error = self.target_level - level
+    <span class="k">def</span><span class="w"> </span><span class="nf">control_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Main control logic&quot;&quot;&quot;</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_water_level</span><span class="p">()</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_level</span> <span class="o">-</span> <span class="n">level</span>
 
-        # Turn off both pump and drain first
-        self.pump_active = False
-        self.drain_active = False
+        <span class="c1"># Turn off both pump and drain first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pump_active</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drain_active</span> <span class="o">=</span> <span class="kc">False</span>
 
-        if level &lt; (self.target_level - self.tolerance):
-            # Water too low - turn on pump
-            self.pump_active = True
-            status = &quot;FILLING&quot;
-        elif level &gt; (self.target_level + self.tolerance):
-            # Water too high - open drain
-            self.drain_active = True
-            status = &quot;DRAINING&quot;
-        else:
-            # Level acceptable - do nothing
-            status = &quot;MAINTAINING&quot;
+        <span class="k">if</span> <span class="n">level</span> <span class="o">&lt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_level</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">):</span>
+            <span class="c1"># Water too low - turn on pump</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pump_active</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;FILLING&quot;</span>
+        <span class="k">elif</span> <span class="n">level</span> <span class="o">&gt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_level</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">):</span>
+            <span class="c1"># Water too high - open drain</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">drain_active</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;DRAINING&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Level acceptable - do nothing</span>
+            <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;MAINTAINING&quot;</span>
 
-        return status
+        <span class="k">return</span> <span class="n">status</span>
 
-    def simulate_water_change(self):
-        &quot;&quot;&quot;Simulate how water level changes&quot;&quot;&quot;
-        if self.pump_active:
-            self.current_level += 0.5  # Pump adds water
-        if self.drain_active:
-            self.current_level -= 0.3  # Drain removes water
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_water_change</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate how water level changes&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pump_active</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_level</span> <span class="o">+=</span> <span class="mf">0.5</span>  <span class="c1"># Pump adds water</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drain_active</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_level</span> <span class="o">-=</span> <span class="mf">0.3</span>  <span class="c1"># Drain removes water</span>
 
-        # Natural evaporation
-        self.current_level -= 0.05
+        <span class="c1"># Natural evaporation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_level</span> <span class="o">-=</span> <span class="mf">0.05</span>
 
-# Test the system
-tank = FishTankController()
-tank.current_level = 16  # Start with low water
+<span class="c1"># Test the system</span>
+<span class="n">tank</span> <span class="o">=</span> <span class="n">FishTankController</span><span class="p">()</span>
+<span class="n">tank</span><span class="o">.</span><span class="n">current_level</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1"># Start with low water</span>
 
-for step in range(15):
-    status = tank.control_update()
-    tank.simulate_water_change()
-    print(f&quot;Step {step}: Level={tank.current_level:.1f}cm, &quot;
-          f&quot;Pump={tank.pump_active}, Drain={tank.drain_active}, &quot;
-          f&quot;Status={status}&quot;)
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">tank</span><span class="o">.</span><span class="n">control_update</span><span class="p">()</span>
+    <span class="n">tank</span><span class="o">.</span><span class="n">simulate_water_change</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">: Level=</span><span class="si">{</span><span class="n">tank</span><span class="o">.</span><span class="n">current_level</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">cm, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Pump=</span><span class="si">{</span><span class="n">tank</span><span class="o">.</span><span class="n">pump_active</span><span class="si">}</span><span class="s2">, Drain=</span><span class="si">{</span><span class="n">tank</span><span class="o">.</span><span class="n">drain_active</span><span class="si">}</span><span class="s2">, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Status=</span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2271,43 +2271,43 @@ for step in range(15):
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class HeaterStabilityTest:
-    def __init__(self, gain):
-        self.target_temperature = 25
-        self.current_temperature = 18
-        self.current_power = 0
-        self.gain = gain  # Control gain parameter
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">HeaterStabilityTest</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gain</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">=</span> <span class="mi">25</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span> <span class="o">=</span> <span class="mi">18</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gain</span> <span class="o">=</span> <span class="n">gain</span>  <span class="c1"># Control gain parameter</span>
 
-    def update_control(self):
-        error = self.target_temperature - self.current_temperature
-        power = error * self.gain
-        self.current_power = max(0, min(100, power))
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_control</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_temperature</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">error</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">power</span><span class="p">))</span>
 
-    def simulate_temperature(self):
-        heating = self.current_power * 0.01
-        cooling = (self.current_temperature - 18) * 0.02
-        self.current_temperature += heating - cooling
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_temperature</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">heating</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_power</span> <span class="o">*</span> <span class="mf">0.01</span>
+        <span class="n">cooling</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span> <span class="o">-</span> <span class="mi">18</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.02</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span> <span class="o">+=</span> <span class="n">heating</span> <span class="o">-</span> <span class="n">cooling</span>
 
-    def test_response(self, steps=30):
-        temperatures = []
-        for step in range(steps):
-            self.update_control()
-            self.simulate_temperature()
-            temperatures.append(self.current_temperature)
-        return temperatures
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+        <span class="n">temperatures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_control</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">simulate_temperature</span><span class="p">()</span>
+            <span class="n">temperatures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_temperature</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temperatures</span>
 
-# Test different gains
-gains = [0.5, 2.0, 5.0, 10.0]
-for gain in gains:
-    heater = HeaterStabilityTest(gain)
-    temps = heater.test_response()
+<span class="c1"># Test different gains</span>
+<span class="n">gains</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">gain</span> <span class="ow">in</span> <span class="n">gains</span><span class="p">:</span>
+    <span class="n">heater</span> <span class="o">=</span> <span class="n">HeaterStabilityTest</span><span class="p">(</span><span class="n">gain</span><span class="p">)</span>
+    <span class="n">temps</span> <span class="o">=</span> <span class="n">heater</span><span class="o">.</span><span class="n">test_response</span><span class="p">()</span>
 
-    max_temp = max(temps)
-    final_temp = temps[-1]
-    overshoot = max(0, max_temp - 25)
+    <span class="n">max_temp</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">temps</span><span class="p">)</span>
+    <span class="n">final_temp</span> <span class="o">=</span> <span class="n">temps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">overshoot</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_temp</span> <span class="o">-</span> <span class="mi">25</span><span class="p">)</span>
 
-    print(f&quot;Gain {gain}: Final={final_temp:.1f}°C, &quot;
-          f&quot;Overshoot={overshoot:.1f}°C&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gain </span><span class="si">{</span><span class="n">gain</span><span class="si">}</span><span class="s2">: Final=</span><span class="si">{</span><span class="n">final_temp</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Overshoot=</span><span class="si">{</span><span class="n">overshoot</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <p><strong>Observations:</strong></p>
@@ -2570,6 +2570,8 @@ for gain in gains:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

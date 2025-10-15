@@ -1568,150 +1568,150 @@
 <p><strong>Symmetric encryption</strong> uses the same key for encryption and decryption. It&rsquo;s fast but requires secure key sharing.</p>
 <p><strong>Asymmetric encryption</strong> uses a pair of keys: public (shareable) and private (secret). It&rsquo;s slower but solves the key-sharing problem.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Conceptual example of encryption approaches
-class SymmetricEncryption:
-    &quot;&quot;&quot;Simplified symmetric encryption concept.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># Conceptual example of encryption approaches</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SymmetricEncryption</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplified symmetric encryption concept.&quot;&quot;&quot;</span>
 
-    def __init__(self, shared_key):
-        self.key = shared_key
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shared_key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">shared_key</span>
 
-    def encrypt(self, message):
-        &quot;&quot;&quot;Encrypt message with shared key.&quot;&quot;&quot;
-        # Simplified: XOR each character with key
-        encrypted = &quot;&quot;
-        for i, char in enumerate(message):
-            key_char = self.key[i % len(self.key)]
-            encrypted += chr(ord(char) ^ ord(key_char))
-        return encrypted
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Encrypt message with shared key.&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified: XOR each character with key</span>
+        <span class="n">encrypted</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+            <span class="n">key_char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)]</span>
+            <span class="n">encrypted</span> <span class="o">+=</span> <span class="nb">chr</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">char</span><span class="p">)</span> <span class="o">^</span> <span class="nb">ord</span><span class="p">(</span><span class="n">key_char</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">encrypted</span>
 
-    def decrypt(self, encrypted_message):
-        &quot;&quot;&quot;Decrypt with same key (XOR is reversible).&quot;&quot;&quot;
-        return self.encrypt(encrypted_message)  # XOR reverses itself
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encrypted_message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrypt with same key (XOR is reversible).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">encrypted_message</span><span class="p">)</span>  <span class="c1"># XOR reverses itself</span>
 
-class AsymmetricEncryption:
-    &quot;&quot;&quot;Simplified asymmetric encryption concept.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">AsymmetricEncryption</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplified asymmetric encryption concept.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        # In reality, these would be large mathematical key pairs
-        self.public_key = &quot;public_123&quot;
-        self.private_key = &quot;private_456&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># In reality, these would be large mathematical key pairs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="o">=</span> <span class="s2">&quot;public_123&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span> <span class="o">=</span> <span class="s2">&quot;private_456&quot;</span>
 
-    def encrypt_with_public(self, message):
-        &quot;&quot;&quot;Anyone can encrypt with public key.&quot;&quot;&quot;
-        print(f&quot;Encrypting &#x27;{message}&#x27; with public key: {self.public_key}&quot;)
-        return f&quot;encrypted_{message}_with_public&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">encrypt_with_public</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Anyone can encrypt with public key.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Encrypting &#39;</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&#39; with public key: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">public_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;encrypted_</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">_with_public&quot;</span>
 
-    def decrypt_with_private(self, encrypted_message):
-        &quot;&quot;&quot;Only private key holder can decrypt.&quot;&quot;&quot;
-        print(f&quot;Decrypting with private key: {self.private_key}&quot;)
-        return encrypted_message.replace(&quot;encrypted_&quot;, &quot;&quot;).replace(&quot;_with_public&quot;, &quot;&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">decrypt_with_private</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encrypted_message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Only private key holder can decrypt.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decrypting with private key: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">private_key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">encrypted_message</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;encrypted_&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_with_public&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-# Demonstration
-sym = SymmetricEncryption(&quot;secretkey&quot;)
-message = &quot;Hello&quot;
-encrypted = sym.encrypt(message)
-decrypted = sym.decrypt(encrypted)
-print(f&quot;Symmetric: {message} → {encrypted} → {decrypted}&quot;)
+<span class="c1"># Demonstration</span>
+<span class="n">sym</span> <span class="o">=</span> <span class="n">SymmetricEncryption</span><span class="p">(</span><span class="s2">&quot;secretkey&quot;</span><span class="p">)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="n">encrypted</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+<span class="n">decrypted</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">encrypted</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Symmetric: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">encrypted</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">decrypted</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-asym = AsymmetricEncryption()
-encrypted_asym = asym.encrypt_with_public(&quot;Hello&quot;)
-decrypted_asym = asym.decrypt_with_private(encrypted_asym)
-print(f&quot;Asymmetric: Hello → {encrypted_asym} → {decrypted_asym}&quot;)
+<span class="n">asym</span> <span class="o">=</span> <span class="n">AsymmetricEncryption</span><span class="p">()</span>
+<span class="n">encrypted_asym</span> <span class="o">=</span> <span class="n">asym</span><span class="o">.</span><span class="n">encrypt_with_public</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="n">decrypted_asym</span> <span class="o">=</span> <span class="n">asym</span><span class="o">.</span><span class="n">decrypt_with_private</span><span class="p">(</span><span class="n">encrypted_asym</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Asymmetric: Hello → </span><span class="si">{</span><span class="n">encrypted_asym</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">decrypted_asym</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="plain-text-vs-cipher-text">Plain text vs cipher text<a class="headerlink" href="#plain-text-vs-cipher-text" title="Permanent link">&para;</a></h3>
 <p><strong>Plain text</strong> is readable data. <strong>Cipher text</strong> is encrypted data that looks random. Encryption transforms plain text into cipher text to protect it during transmission.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def demonstrate_encryption_need():
-    &quot;&quot;&quot;Show why we encrypt sensitive data.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_encryption_need</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show why we encrypt sensitive data.&quot;&quot;&quot;</span>
 
-    # Sensitive data in plain text (dangerous!)
-    plain_text_data = {
-        &quot;credit_card&quot;: &quot;4532-1234-5678-9012&quot;,
-        &quot;password&quot;: &quot;myPassword123&quot;,
-        &quot;personal_id&quot;: &quot;123-45-6789&quot;
-    }
+    <span class="c1"># Sensitive data in plain text (dangerous!)</span>
+    <span class="n">plain_text_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;credit_card&quot;</span><span class="p">:</span> <span class="s2">&quot;4532-1234-5678-9012&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;myPassword123&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;personal_id&quot;</span><span class="p">:</span> <span class="s2">&quot;123-45-6789&quot;</span>
+    <span class="p">}</span>
 
-    print(&quot;Plain text (readable by anyone):&quot;)
-    for key, value in plain_text_data.items():
-        print(f&quot;  {key}: {value}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plain text (readable by anyone):&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">plain_text_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(&quot;\nCipher text (protected):&quot;)
-    # Simulated encrypted versions
-    encrypted_data = {
-        &quot;credit_card&quot;: &quot;8a4f2c9d1e5b7a3f...&quot;,
-        &quot;password&quot;: &quot;7f3e8d2a9c4b1f6e...&quot;,
-        &quot;personal_id&quot;: &quot;2b9f4e7a1c8d5f3a...&quot;
-    }
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cipher text (protected):&quot;</span><span class="p">)</span>
+    <span class="c1"># Simulated encrypted versions</span>
+    <span class="n">encrypted_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;credit_card&quot;</span><span class="p">:</span> <span class="s2">&quot;8a4f2c9d1e5b7a3f...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;7f3e8d2a9c4b1f6e...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;personal_id&quot;</span><span class="p">:</span> <span class="s2">&quot;2b9f4e7a1c8d5f3a...&quot;</span>
+    <span class="p">}</span>
 
-    for key, value in encrypted_data.items():
-        print(f&quot;  {key}: {value}&quot;)
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">encrypted_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    print(&quot;\nWhy encryption matters:&quot;)
-    print(&quot;- Protects data if intercepted during transmission&quot;)
-    print(&quot;- Prevents unauthorized access to stored data&quot;)
-    print(&quot;- Maintains user privacy and trust&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Why encryption matters:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Protects data if intercepted during transmission&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Prevents unauthorized access to stored data&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Maintains user privacy and trust&quot;</span><span class="p">)</span>
 
-demonstrate_encryption_need()
+<span class="n">demonstrate_encryption_need</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="authentication-and-authorisation">Authentication and authorisation<a class="headerlink" href="#authentication-and-authorisation" title="Permanent link">&para;</a></h3>
 <p><strong>Authentication</strong> answers &ldquo;Who are you?&rdquo; <strong>Authorisation</strong> answers &ldquo;What can you do?&rdquo;</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class WebSecuritySystem:
-    &quot;&quot;&quot;Simplified web authentication and authorisation.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">WebSecuritySystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplified web authentication and authorisation.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.users = {
-            &quot;alice&quot;: {&quot;password&quot;: &quot;hashed_pw_123&quot;, &quot;role&quot;: &quot;admin&quot;},
-            &quot;bob&quot;: {&quot;password&quot;: &quot;hashed_pw_456&quot;, &quot;role&quot;: &quot;user&quot;},
-            &quot;charlie&quot;: {&quot;password&quot;: &quot;hashed_pw_789&quot;, &quot;role&quot;: &quot;user&quot;}
-        }
-        self.permissions = {
-            &quot;admin&quot;: [&quot;read&quot;, &quot;write&quot;, &quot;delete&quot;, &quot;manage_users&quot;],
-            &quot;user&quot;: [&quot;read&quot;, &quot;write&quot;]
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;alice&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;hashed_pw_123&quot;</span><span class="p">,</span> <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;bob&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;hashed_pw_456&quot;</span><span class="p">,</span> <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;charlie&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;hashed_pw_789&quot;</span><span class="p">,</span> <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">}</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">permissions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;admin&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">,</span> <span class="s2">&quot;manage_users&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def authenticate(self, username, password):
-        &quot;&quot;&quot;Verify user identity (authentication).&quot;&quot;&quot;
-        if username in self.users:
-            # In reality, compare hashed passwords
-            stored_hash = self.users[username][&quot;password&quot;]
-            password_hash = f&quot;hashed_pw_{hash(password) % 1000}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">authenticate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify user identity (authentication).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">:</span>
+            <span class="c1"># In reality, compare hashed passwords</span>
+            <span class="n">stored_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">username</span><span class="p">][</span><span class="s2">&quot;password&quot;</span><span class="p">]</span>
+            <span class="n">password_hash</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;hashed_pw_</span><span class="si">{</span><span class="nb">hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="si">}</span><span class="s2">&quot;</span>
 
-            if stored_hash == password_hash:
-                print(f&quot;✓ Authentication successful for {username}&quot;)
-                return True
+            <span class="k">if</span> <span class="n">stored_hash</span> <span class="o">==</span> <span class="n">password_hash</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Authentication successful for </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
 
-        print(f&quot;✗ Authentication failed for {username}&quot;)
-        return False
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Authentication failed for </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def authorize(self, username, action):
-        &quot;&quot;&quot;Check if user can perform action (authorisation).&quot;&quot;&quot;
-        if username not in self.users:
-            return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">authorize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if user can perform action (authorisation).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        user_role = self.users[username][&quot;role&quot;]
-        user_permissions = self.permissions.get(user_role, [])
+        <span class="n">user_role</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">username</span><span class="p">][</span><span class="s2">&quot;role&quot;</span><span class="p">]</span>
+        <span class="n">user_permissions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_role</span><span class="p">,</span> <span class="p">[])</span>
 
-        if action in user_permissions:
-            print(f&quot;✓ {username} authorized for {action}&quot;)
-            return True
-        else:
-            print(f&quot;✗ {username} not authorized for {action}&quot;)
-            return False
+        <span class="k">if</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">user_permissions</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> authorized for </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> not authorized for </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-# Example usage
-security = WebSecuritySystem()
+<span class="c1"># Example usage</span>
+<span class="n">security</span> <span class="o">=</span> <span class="n">WebSecuritySystem</span><span class="p">()</span>
 
-# Authentication examples
-security.authenticate(&quot;alice&quot;, &quot;secret123&quot;)  # Would need correct password
-security.authenticate(&quot;eve&quot;, &quot;anypassword&quot;)   # Unknown user
+<span class="c1"># Authentication examples</span>
+<span class="n">security</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;secret123&quot;</span><span class="p">)</span>  <span class="c1"># Would need correct password</span>
+<span class="n">security</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="s2">&quot;eve&quot;</span><span class="p">,</span> <span class="s2">&quot;anypassword&quot;</span><span class="p">)</span>   <span class="c1"># Unknown user</span>
 
-# Authorisation examples  
-security.authorize(&quot;alice&quot;, &quot;delete&quot;)      # Admin can delete
-security.authorize(&quot;bob&quot;, &quot;delete&quot;)        # User cannot delete
-security.authorize(&quot;bob&quot;, &quot;read&quot;)          # User can read
+<span class="c1"># Authorisation examples  </span>
+<span class="n">security</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">)</span>      <span class="c1"># Admin can delete</span>
+<span class="n">security</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">,</span> <span class="s2">&quot;delete&quot;</span><span class="p">)</span>        <span class="c1"># User cannot delete</span>
+<span class="n">security</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s2">&quot;bob&quot;</span><span class="p">,</span> <span class="s2">&quot;read&quot;</span><span class="p">)</span>          <span class="c1"># User can read</span>
 </code></pre>
 </div>
 <h3 id="hash-values-for-integrity-and-passwords">Hash values for integrity and passwords<a class="headerlink" href="#hash-values-for-integrity-and-passwords" title="Permanent link">&para;</a></h3>
@@ -1759,65 +1759,65 @@ security.authorize(&quot;bob&quot;, &quot;read&quot;)          # User can read
 <h3 id="digital-signatures">Digital signatures<a class="headerlink" href="#digital-signatures" title="Permanent link">&para;</a></h3>
 <p>Digital signatures provide <strong>non-repudiation</strong> (can&rsquo;t deny you signed it) and <strong>verification</strong> (proves who signed it).</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class DigitalSignatureDemo:
-    &quot;&quot;&quot;Simplified digital signature concept.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">DigitalSignatureDemo</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplified digital signature concept.&quot;&quot;&quot;</span>
 
-    def __init__(self, signer_name):
-        self.signer_name = signer_name
-        # In reality, these would be cryptographic key pairs
-        self.private_key = f&quot;private_key_{signer_name}&quot;
-        self.public_key = f&quot;public_key_{signer_name}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signer_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signer_name</span> <span class="o">=</span> <span class="n">signer_name</span>
+        <span class="c1"># In reality, these would be cryptographic key pairs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">private_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;private_key_</span><span class="si">{</span><span class="n">signer_name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;public_key_</span><span class="si">{</span><span class="n">signer_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def sign_document(self, document):
-        &quot;&quot;&quot;Create digital signature for document.&quot;&quot;&quot;
-        # Simplified: combine document hash with private key
-        doc_hash = hash(document) % 10000
-        signature = f&quot;sig_{doc_hash}_{self.signer_name}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">sign_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create digital signature for document.&quot;&quot;&quot;</span>
+        <span class="c1"># Simplified: combine document hash with private key</span>
+        <span class="n">doc_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">document</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10000</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;sig_</span><span class="si">{</span><span class="n">doc_hash</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">signer_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        signed_document = {
-            &quot;content&quot;: document,
-            &quot;signature&quot;: signature,
-            &quot;signer&quot;: self.signer_name,
-            &quot;public_key&quot;: self.public_key
-        }
+        <span class="n">signed_document</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">document</span><span class="p">,</span>
+            <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="n">signature</span><span class="p">,</span>
+            <span class="s2">&quot;signer&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">signer_name</span><span class="p">,</span>
+            <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key</span>
+        <span class="p">}</span>
 
-        print(f&quot;{self.signer_name} signed document&quot;)
-        return signed_document
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">signer_name</span><span class="si">}</span><span class="s2"> signed document&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">signed_document</span>
 
-    def verify_signature(self, signed_document):
-        &quot;&quot;&quot;Verify document signature.&quot;&quot;&quot;
-        content = signed_document[&quot;content&quot;]
-        signature = signed_document[&quot;signature&quot;]
-        signer = signed_document[&quot;signer&quot;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_signature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signed_document</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify document signature.&quot;&quot;&quot;</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">signed_document</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="n">signed_document</span><span class="p">[</span><span class="s2">&quot;signature&quot;</span><span class="p">]</span>
+        <span class="n">signer</span> <span class="o">=</span> <span class="n">signed_document</span><span class="p">[</span><span class="s2">&quot;signer&quot;</span><span class="p">]</span>
 
-        # Recalculate expected signature
-        doc_hash = hash(content) % 10000
-        expected_sig = f&quot;sig_{doc_hash}_{signer}&quot;
+        <span class="c1"># Recalculate expected signature</span>
+        <span class="n">doc_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">content</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10000</span>
+        <span class="n">expected_sig</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;sig_</span><span class="si">{</span><span class="n">doc_hash</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">signer</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        if signature == expected_sig:
-            print(f&quot;✓ Signature valid - document signed by {signer}&quot;)
-            print(&quot;✓ Document has not been tampered with&quot;)
-            return True
-        else:
-            print(&quot;✗ Invalid signature - document may be forged or tampered&quot;)
-            return False
+        <span class="k">if</span> <span class="n">signature</span> <span class="o">==</span> <span class="n">expected_sig</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Signature valid - document signed by </span><span class="si">{</span><span class="n">signer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ Document has not been tampered with&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✗ Invalid signature - document may be forged or tampered&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-# Example usage
-alice = DigitalSignatureDemo(&quot;Alice&quot;)
-bob = DigitalSignatureDemo(&quot;Bob&quot;)
+<span class="c1"># Example usage</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="n">DigitalSignatureDemo</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+<span class="n">bob</span> <span class="o">=</span> <span class="n">DigitalSignatureDemo</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
 
-# Alice signs a contract
-contract = &quot;Agreement to develop web application for $10,000&quot;
-signed_contract = alice.sign_document(contract)
+<span class="c1"># Alice signs a contract</span>
+<span class="n">contract</span> <span class="o">=</span> <span class="s2">&quot;Agreement to develop web application for $10,000&quot;</span>
+<span class="n">signed_contract</span> <span class="o">=</span> <span class="n">alice</span><span class="o">.</span><span class="n">sign_document</span><span class="p">(</span><span class="n">contract</span><span class="p">)</span>
 
-# Bob verifies Alice&#x27;s signature
-print(f&quot;\nBob verifying contract:&quot;)
-alice.verify_signature(signed_contract)
+<span class="c1"># Bob verifies Alice&#39;s signature</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Bob verifying contract:&quot;</span><span class="p">)</span>
+<span class="n">alice</span><span class="o">.</span><span class="n">verify_signature</span><span class="p">(</span><span class="n">signed_contract</span><span class="p">)</span>
 
-# Tampering detection
-signed_contract[&quot;content&quot;] = &quot;Agreement to develop web application for $1,000&quot;
-print(f&quot;\nAfter tampering:&quot;)
-alice.verify_signature(signed_contract)
+<span class="c1"># Tampering detection</span>
+<span class="n">signed_contract</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Agreement to develop web application for $1,000&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">After tampering:&quot;</span><span class="p">)</span>
+<span class="n">alice</span><span class="o">.</span><span class="n">verify_signature</span><span class="p">(</span><span class="n">signed_contract</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="guided-example-https-connection-flow">Guided example: HTTPS connection flow<a class="headerlink" href="#guided-example-https-connection-flow" title="Permanent link">&para;</a></h3>
@@ -1906,104 +1906,104 @@ alice.verify_signature(signed_contract)
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import hashlib
-import secrets
-import re
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">secrets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
-class PasswordSecurity:
-    &quot;&quot;&quot;Secure password handling system.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">PasswordSecurity</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Secure password handling system.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.users = {}
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def generate_salt(self):
-        &quot;&quot;&quot;Generate random salt for password hashing.&quot;&quot;&quot;
-        return secrets.token_hex(16)
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_salt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate random salt for password hashing.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_hex</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
 
-    def hash_password(self, password, salt=None):
-        &quot;&quot;&quot;Hash password with salt.&quot;&quot;&quot;
-        if salt is None:
-            salt = self.generate_salt()
+    <span class="k">def</span><span class="w"> </span><span class="nf">hash_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Hash password with salt.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">salt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">salt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_salt</span><span class="p">()</span>
 
-        # Combine password and salt, then hash
-        combined = password + salt
-        hashed = hashlib.sha256(combined.encode()).hexdigest()
+        <span class="c1"># Combine password and salt, then hash</span>
+        <span class="n">combined</span> <span class="o">=</span> <span class="n">password</span> <span class="o">+</span> <span class="n">salt</span>
+        <span class="n">hashed</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">combined</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
-        return hashed, salt
+        <span class="k">return</span> <span class="n">hashed</span><span class="p">,</span> <span class="n">salt</span>
 
-    def check_password_strength(self, password):
-        &quot;&quot;&quot;Check password strength and return recommendations.&quot;&quot;&quot;
-        issues = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_password_strength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check password strength and return recommendations.&quot;&quot;&quot;</span>
+        <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if len(password) &lt; 8:
-            issues.append(&quot;Password should be at least 8 characters long&quot;)
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password should be at least 8 characters long&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;[a-z]&#x27;, password):
-            issues.append(&quot;Password should contain lowercase letters&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[a-z]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password should contain lowercase letters&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;[A-Z]&#x27;, password):
-            issues.append(&quot;Password should contain uppercase letters&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[A-Z]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password should contain uppercase letters&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;\d&#x27;, password):
-            issues.append(&quot;Password should contain numbers&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password should contain numbers&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;[!@#$%^&amp;*(),.?&quot;:{}|&lt;&gt;]&#x27;, password):
-            issues.append(&quot;Password should contain special characters&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[!@#$%^&amp;*(),.?&quot;:</span><span class="si">{}</span><span class="s1">|&lt;&gt;]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password should contain special characters&quot;</span><span class="p">)</span>
 
-        strength = &quot;Strong&quot; if not issues else &quot;Weak&quot;
-        return strength, issues
+        <span class="n">strength</span> <span class="o">=</span> <span class="s2">&quot;Strong&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">issues</span> <span class="k">else</span> <span class="s2">&quot;Weak&quot;</span>
+        <span class="k">return</span> <span class="n">strength</span><span class="p">,</span> <span class="n">issues</span>
 
-    def register_user(self, username, password):
-        &quot;&quot;&quot;Register new user with secure password storage.&quot;&quot;&quot;
-        strength, issues = self.check_password_strength(password)
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register new user with secure password storage.&quot;&quot;&quot;</span>
+        <span class="n">strength</span><span class="p">,</span> <span class="n">issues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_password_strength</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-        if issues:
-            print(f&quot;Password too weak for {username}:&quot;)
-            for issue in issues:
-                print(f&quot;  - {issue}&quot;)
-            return False
+        <span class="k">if</span> <span class="n">issues</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Password too weak for </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">issues</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">issue</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        hashed_password, salt = self.hash_password(password)
-        self.users[username] = {
-            &#x27;password_hash&#x27;: hashed_password,
-            &#x27;salt&#x27;: salt
-        }
+        <span class="n">hashed_password</span><span class="p">,</span> <span class="n">salt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">username</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;password_hash&#39;</span><span class="p">:</span> <span class="n">hashed_password</span><span class="p">,</span>
+            <span class="s1">&#39;salt&#39;</span><span class="p">:</span> <span class="n">salt</span>
+        <span class="p">}</span>
 
-        print(f&quot;✓ User {username} registered successfully&quot;)
-        return True
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ User </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> registered successfully&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def verify_login(self, username, password):
-        &quot;&quot;&quot;Verify user login credentials.&quot;&quot;&quot;
-        if username not in self.users:
-            print(f&quot;✗ User {username} not found&quot;)
-            return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify user login credentials.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">username</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ User </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        user_data = self.users[username]
-        stored_hash = user_data[&#x27;password_hash&#x27;]
-        salt = user_data[&#x27;salt&#x27;]
+        <span class="n">user_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">username</span><span class="p">]</span>
+        <span class="n">stored_hash</span> <span class="o">=</span> <span class="n">user_data</span><span class="p">[</span><span class="s1">&#39;password_hash&#39;</span><span class="p">]</span>
+        <span class="n">salt</span> <span class="o">=</span> <span class="n">user_data</span><span class="p">[</span><span class="s1">&#39;salt&#39;</span><span class="p">]</span>
 
-        # Hash provided password with stored salt
-        provided_hash, _ = self.hash_password(password, salt)
+        <span class="c1"># Hash provided password with stored salt</span>
+        <span class="n">provided_hash</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_password</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">salt</span><span class="p">)</span>
 
-        if provided_hash == stored_hash:
-            print(f&quot;✓ Login successful for {username}&quot;)
-            return True
-        else:
-            print(f&quot;✗ Invalid password for {username}&quot;)
-            return False
+        <span class="k">if</span> <span class="n">provided_hash</span> <span class="o">==</span> <span class="n">stored_hash</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✓ Login successful for </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✗ Invalid password for </span><span class="si">{</span><span class="n">username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-# Example usage
-auth_system = PasswordSecurity()
+<span class="c1"># Example usage</span>
+<span class="n">auth_system</span> <span class="o">=</span> <span class="n">PasswordSecurity</span><span class="p">()</span>
 
-# Test password registration
-print(&quot;=== Testing Password Registration ===&quot;)
-auth_system.register_user(&quot;alice&quot;, &quot;weak&quot;)  # Should fail
-auth_system.register_user(&quot;alice&quot;, &quot;StrongPass123!&quot;)  # Should succeed
+<span class="c1"># Test password registration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Testing Password Registration ===&quot;</span><span class="p">)</span>
+<span class="n">auth_system</span><span class="o">.</span><span class="n">register_user</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;weak&quot;</span><span class="p">)</span>  <span class="c1"># Should fail</span>
+<span class="n">auth_system</span><span class="o">.</span><span class="n">register_user</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;StrongPass123!&quot;</span><span class="p">)</span>  <span class="c1"># Should succeed</span>
 
-# Test login
-print(&quot;\n=== Testing Login ===&quot;)
-auth_system.verify_login(&quot;alice&quot;, &quot;wrongpassword&quot;)  # Should fail
-auth_system.verify_login(&quot;alice&quot;, &quot;StrongPass123!&quot;)  # Should succeed
+<span class="c1"># Test login</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Testing Login ===&quot;</span><span class="p">)</span>
+<span class="n">auth_system</span><span class="o">.</span><span class="n">verify_login</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;wrongpassword&quot;</span><span class="p">)</span>  <span class="c1"># Should fail</span>
+<span class="n">auth_system</span><span class="o">.</span><span class="n">verify_login</span><span class="p">(</span><span class="s2">&quot;alice&quot;</span><span class="p">,</span> <span class="s2">&quot;StrongPass123!&quot;</span><span class="p">)</span>  <span class="c1"># Should succeed</span>
 </code></pre>
 </div>
 </details>
@@ -2252,6 +2252,8 @@ auth_system.verify_login(&quot;alice&quot;, &quot;StrongPass123!&quot;)  # Shoul
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

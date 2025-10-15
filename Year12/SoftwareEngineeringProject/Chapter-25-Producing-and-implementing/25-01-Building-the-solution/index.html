@@ -1648,70 +1648,70 @@
 </li>
 </ol>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Example: Planning increments for a library management system
-project_increments = [
-    {
-        &quot;increment&quot;: 1,
-        &quot;duration_weeks&quot;: 2,
-        &quot;features&quot;: [
-            &quot;User registration and login&quot;,
-            &quot;Basic book catalog viewing&quot;,
-            &quot;Simple search functionality&quot;
-        ],
-        &quot;acceptance_criteria&quot;: [
-            &quot;Users can create accounts and log in&quot;,
-            &quot;Book list displays with basic information&quot;,
-            &quot;Search returns relevant results&quot;
-        ]
-    },
-    {
-        &quot;increment&quot;: 2,
-        &quot;duration_weeks&quot;: 3,
-        &quot;features&quot;: [
-            &quot;Book checkout and return&quot;,
-            &quot;Due date tracking&quot;,
-            &quot;User borrowing history&quot;
-        ],
-        &quot;acceptance_criteria&quot;: [
-            &quot;Books can be checked out and returned&quot;,
-            &quot;Due dates are calculated correctly&quot;,
-            &quot;Users can view their borrowing history&quot;
-        ]
-    },
-    {
-        &quot;increment&quot;: 3,
-        &quot;duration_weeks&quot;: 2,
-        &quot;features&quot;: [
-            &quot;Overdue notifications&quot;,
-            &quot;Book reservations&quot;,
-            &quot;Advanced search filters&quot;
-        ],
-        &quot;acceptance_criteria&quot;: [
-            &quot;Overdue books generate notifications&quot;,
-            &quot;Users can reserve books that are on loan&quot;,
-            &quot;Search supports multiple filters&quot;
-        ]
-    }
-]
+<pre><code class="language-python"><span class="c1"># Example: Planning increments for a library management system</span>
+<span class="n">project_increments</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;increment&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;duration_weeks&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;User registration and login&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Basic book catalog viewing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Simple search functionality&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;acceptance_criteria&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Users can create accounts and log in&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Book list displays with basic information&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Search returns relevant results&quot;</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;increment&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;duration_weeks&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Book checkout and return&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Due date tracking&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;User borrowing history&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;acceptance_criteria&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Books can be checked out and returned&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Due dates are calculated correctly&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Users can view their borrowing history&quot;</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;increment&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;duration_weeks&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Overdue notifications&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Book reservations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Advanced search filters&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;acceptance_criteria&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Overdue books generate notifications&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Users can reserve books that are on loan&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Search supports multiple filters&quot;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">]</span>
 
-def plan_increment(increment_number, available_weeks):
-    &quot;&quot;&quot;Plan the next development increment&quot;&quot;&quot;
-    if increment_number &lt;= len(project_increments):
-        increment = project_increments[increment_number - 1]
-        if increment[&quot;duration_weeks&quot;] &lt;= available_weeks:
-            return {
-                &quot;status&quot;: &quot;approved&quot;,
-                &quot;increment&quot;: increment,
-                &quot;start_date&quot;: &quot;Next Monday&quot;,
-                &quot;estimated_completion&quot;: f&quot;{increment[&#x27;duration_weeks&#x27;]} weeks&quot;
-            }
-        else:
-            return {
-                &quot;status&quot;: &quot;needs_adjustment&quot;,
-                &quot;reason&quot;: &quot;Insufficient time available&quot;,
-                &quot;suggested_action&quot;: &quot;Reduce scope or extend timeline&quot;
-            }
-    return {&quot;status&quot;: &quot;all_increments_planned&quot;}
+<span class="k">def</span><span class="w"> </span><span class="nf">plan_increment</span><span class="p">(</span><span class="n">increment_number</span><span class="p">,</span> <span class="n">available_weeks</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plan the next development increment&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">increment_number</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">project_increments</span><span class="p">):</span>
+        <span class="n">increment</span> <span class="o">=</span> <span class="n">project_increments</span><span class="p">[</span><span class="n">increment_number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">increment</span><span class="p">[</span><span class="s2">&quot;duration_weeks&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">available_weeks</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;approved&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;increment&quot;</span><span class="p">:</span> <span class="n">increment</span><span class="p">,</span>
+                <span class="s2">&quot;start_date&quot;</span><span class="p">:</span> <span class="s2">&quot;Next Monday&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;estimated_completion&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">increment</span><span class="p">[</span><span class="s1">&#39;duration_weeks&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> weeks&quot;</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;needs_adjustment&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Insufficient time available&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;suggested_action&quot;</span><span class="p">:</span> <span class="s2">&quot;Reduce scope or extend timeline&quot;</span>
+            <span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;all_increments_planned&quot;</span><span class="p">}</span>
 </code></pre>
 </div>
 <h3 id="quality-maintenance-strategies">Quality maintenance strategies<a class="headerlink" href="#quality-maintenance-strategies" title="Permanent link">&para;</a></h3>
@@ -1747,80 +1747,80 @@ def plan_increment(increment_number, available_weeks):
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Quality maintenance framework
-class QualityFramework:
-    def __init__(self):
-        self.coding_standards = {
-            &quot;naming_convention&quot;: &quot;snake_case for variables, PascalCase for classes&quot;,
-            &quot;max_function_length&quot;: 50,
-            &quot;max_line_length&quot;: 100,
-            &quot;documentation_required&quot;: True
-        }
-        self.review_checklist = []
-        self.test_coverage_target = 0.85
+<pre><code class="language-python"><span class="c1"># Example: Quality maintenance framework</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">QualityFramework</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coding_standards</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;naming_convention&quot;</span><span class="p">:</span> <span class="s2">&quot;snake_case for variables, PascalCase for classes&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;max_function_length&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="s2">&quot;max_line_length&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">&quot;documentation_required&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">review_checklist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_coverage_target</span> <span class="o">=</span> <span class="mf">0.85</span>
 
-    def submit_for_review(self, code_component, author):
-        &quot;&quot;&quot;Submit code component for peer review&quot;&quot;&quot;
-        review_item = {
-            &quot;component&quot;: code_component,
-            &quot;author&quot;: author,
-            &quot;reviewer&quot;: None,
-            &quot;status&quot;: &quot;pending_review&quot;,
-            &quot;checklist&quot;: [
-                &quot;Code follows naming conventions&quot;,
-                &quot;Functions are appropriately sized&quot;,
-                &quot;Code is adequately documented&quot;,
-                &quot;Tests are included and passing&quot;,
-                &quot;No obvious security vulnerabilities&quot;
-            ],
-            &quot;approved&quot;: False
-        }
-        self.review_checklist.append(review_item)
-        return review_item
+    <span class="k">def</span><span class="w"> </span><span class="nf">submit_for_review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_component</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Submit code component for peer review&quot;&quot;&quot;</span>
+        <span class="n">review_item</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="n">code_component</span><span class="p">,</span>
+            <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="n">author</span><span class="p">,</span>
+            <span class="s2">&quot;reviewer&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending_review&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;checklist&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;Code follows naming conventions&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Functions are appropriately sized&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Code is adequately documented&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Tests are included and passing&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;No obvious security vulnerabilities&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;approved&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">review_checklist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">review_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">review_item</span>
 
-    def conduct_review(self, review_item, reviewer, findings):
-        &quot;&quot;&quot;Complete code review process&quot;&quot;&quot;
-        review_item[&quot;reviewer&quot;] = reviewer
-        review_item[&quot;findings&quot;] = findings
+    <span class="k">def</span><span class="w"> </span><span class="nf">conduct_review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">review_item</span><span class="p">,</span> <span class="n">reviewer</span><span class="p">,</span> <span class="n">findings</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Complete code review process&quot;&quot;&quot;</span>
+        <span class="n">review_item</span><span class="p">[</span><span class="s2">&quot;reviewer&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reviewer</span>
+        <span class="n">review_item</span><span class="p">[</span><span class="s2">&quot;findings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">findings</span>
 
-        if len(findings) == 0:
-            review_item[&quot;status&quot;] = &quot;approved&quot;
-            review_item[&quot;approved&quot;] = True
-        else:
-            review_item[&quot;status&quot;] = &quot;requires_changes&quot;
-            review_item[&quot;approved&quot;] = False
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">findings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">review_item</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;approved&quot;</span>
+            <span class="n">review_item</span><span class="p">[</span><span class="s2">&quot;approved&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">review_item</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;requires_changes&quot;</span>
+            <span class="n">review_item</span><span class="p">[</span><span class="s2">&quot;approved&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
 
-        return review_item
+        <span class="k">return</span> <span class="n">review_item</span>
 
-    def check_test_coverage(self, module_name, coverage_percentage):
-        &quot;&quot;&quot;Verify test coverage meets quality standards&quot;&quot;&quot;
-        if coverage_percentage &gt;= self.test_coverage_target:
-            return {
-                &quot;status&quot;: &quot;meets_standard&quot;,
-                &quot;coverage&quot;: coverage_percentage,
-                &quot;target&quot;: self.test_coverage_target
-            }
-        else:
-            return {
-                &quot;status&quot;: &quot;below_standard&quot;,
-                &quot;coverage&quot;: coverage_percentage,
-                &quot;target&quot;: self.test_coverage_target,
-                &quot;action_required&quot;: &quot;Add more tests to increase coverage&quot;
-            }
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_test_coverage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">coverage_percentage</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify test coverage meets quality standards&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">coverage_percentage</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_coverage_target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;meets_standard&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;coverage&quot;</span><span class="p">:</span> <span class="n">coverage_percentage</span><span class="p">,</span>
+                <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_coverage_target</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;below_standard&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;coverage&quot;</span><span class="p">:</span> <span class="n">coverage_percentage</span><span class="p">,</span>
+                <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_coverage_target</span><span class="p">,</span>
+                <span class="s2">&quot;action_required&quot;</span><span class="p">:</span> <span class="s2">&quot;Add more tests to increase coverage&quot;</span>
+            <span class="p">}</span>
 
-# Example usage
-quality_system = QualityFramework()
+<span class="c1"># Example usage</span>
+<span class="n">quality_system</span> <span class="o">=</span> <span class="n">QualityFramework</span><span class="p">()</span>
 
-# Submit code for review
-review = quality_system.submit_for_review(&quot;user_authentication.py&quot;, &quot;developer_1&quot;)
+<span class="c1"># Submit code for review</span>
+<span class="n">review</span> <span class="o">=</span> <span class="n">quality_system</span><span class="o">.</span><span class="n">submit_for_review</span><span class="p">(</span><span class="s2">&quot;user_authentication.py&quot;</span><span class="p">,</span> <span class="s2">&quot;developer_1&quot;</span><span class="p">)</span>
 
-# Conduct review
-findings = [&quot;Add docstring to login() function&quot;, &quot;Consider input validation for username&quot;]
-completed_review = quality_system.conduct_review(review, &quot;senior_developer&quot;, findings)
+<span class="c1"># Conduct review</span>
+<span class="n">findings</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Add docstring to login() function&quot;</span><span class="p">,</span> <span class="s2">&quot;Consider input validation for username&quot;</span><span class="p">]</span>
+<span class="n">completed_review</span> <span class="o">=</span> <span class="n">quality_system</span><span class="o">.</span><span class="n">conduct_review</span><span class="p">(</span><span class="n">review</span><span class="p">,</span> <span class="s2">&quot;senior_developer&quot;</span><span class="p">,</span> <span class="n">findings</span><span class="p">)</span>
 
-# Check test coverage
-coverage_result = quality_system.check_test_coverage(&quot;user_auth&quot;, 0.92)
-print(f&quot;Test coverage status: {coverage_result[&#x27;status&#x27;]}&quot;)
+<span class="c1"># Check test coverage</span>
+<span class="n">coverage_result</span> <span class="o">=</span> <span class="n">quality_system</span><span class="o">.</span><span class="n">check_test_coverage</span><span class="p">(</span><span class="s2">&quot;user_auth&quot;</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test coverage status: </span><span class="si">{</span><span class="n">coverage_result</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="integration-and-deployment-practices">Integration and deployment practices<a class="headerlink" href="#integration-and-deployment-practices" title="Permanent link">&para;</a></h3>
@@ -1860,144 +1860,144 @@ print(f&quot;Test coverage status: {coverage_result[&#x27;status&#x27;]}&quot;)
 <p>Let&rsquo;s walk through building a student progress tracking system using incremental development:</p>
 <p><strong>Increment 1: Core functionality (Week 1-2)</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Basic student and grade tracking
-class Student:
-    def __init__(self, student_id, name):
-        self.student_id = student_id
-        self.name = name
-        self.grades = {}
+<pre><code class="language-python"><span class="c1"># Basic student and grade tracking</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def add_grade(self, subject, grade):
-        &quot;&quot;&quot;Add a grade for a specific subject&quot;&quot;&quot;
-        if subject not in self.grades:
-            self.grades[subject] = []
-        self.grades[subject].append(grade)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a grade for a specific subject&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">subject</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">subject</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
 
-    def get_average(self, subject=None):
-        &quot;&quot;&quot;Calculate average grade for a subject or overall&quot;&quot;&quot;
-        if subject:
-            if subject in self.grades and self.grades[subject]:
-                return sum(self.grades[subject]) / len(self.grades[subject])
-            return 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate average grade for a subject or overall&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">subject</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">subject</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">subject</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">subject</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="p">[</span><span class="n">subject</span><span class="p">])</span>
+            <span class="k">return</span> <span class="mi">0</span>
 
-        # Calculate overall average
-        all_grades = []
-        for subject_grades in self.grades.values():
-            all_grades.extend(subject_grades)
+        <span class="c1"># Calculate overall average</span>
+        <span class="n">all_grades</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">subject_grades</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grades</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">all_grades</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">subject_grades</span><span class="p">)</span>
 
-        return sum(all_grades) / len(all_grades) if all_grades else 0
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">all_grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_grades</span><span class="p">)</span> <span class="k">if</span> <span class="n">all_grades</span> <span class="k">else</span> <span class="mi">0</span>
 
-# Quality check for Increment 1
-def test_student_basic_functionality():
-    &quot;&quot;&quot;Test basic student grade tracking&quot;&quot;&quot;
-    student = Student(&quot;S001&quot;, &quot;Alice Johnson&quot;)
+<span class="c1"># Quality check for Increment 1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_student_basic_functionality</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test basic student grade tracking&quot;&quot;&quot;</span>
+    <span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;S001&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice Johnson&quot;</span><span class="p">)</span>
 
-    # Test adding grades
-    student.add_grade(&quot;Math&quot;, 85)
-    student.add_grade(&quot;Math&quot;, 92)
-    student.add_grade(&quot;Science&quot;, 88)
+    <span class="c1"># Test adding grades</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">92</span><span class="p">)</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Science&quot;</span><span class="p">,</span> <span class="mi">88</span><span class="p">)</span>
 
-    # Test average calculations
-    math_average = student.get_average(&quot;Math&quot;)
-    overall_average = student.get_average()
+    <span class="c1"># Test average calculations</span>
+    <span class="n">math_average</span> <span class="o">=</span> <span class="n">student</span><span class="o">.</span><span class="n">get_average</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">)</span>
+    <span class="n">overall_average</span> <span class="o">=</span> <span class="n">student</span><span class="o">.</span><span class="n">get_average</span><span class="p">()</span>
 
-    assert math_average == 88.5, f&quot;Expected 88.5, got {math_average}&quot;
-    assert abs(overall_average - 88.33) &lt; 0.01, f&quot;Expected ~88.33, got {overall_average}&quot;
+    <span class="k">assert</span> <span class="n">math_average</span> <span class="o">==</span> <span class="mf">88.5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected 88.5, got </span><span class="si">{</span><span class="n">math_average</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">overall_average</span> <span class="o">-</span> <span class="mf">88.33</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Expected ~88.33, got </span><span class="si">{</span><span class="n">overall_average</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    print(&quot;Increment 1 tests passed - Core functionality working&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Increment 1 tests passed - Core functionality working&quot;</span><span class="p">)</span>
 
-test_student_basic_functionality()
+<span class="n">test_student_basic_functionality</span><span class="p">()</span>
 </code></pre>
 </div>
 <p><strong>Increment 2: Progress tracking and reporting (Week 3-4)</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Enhanced system with progress tracking
-class ProgressTracker:
-    def __init__(self):
-        self.students = {}
-        self.grade_thresholds = {
-            &quot;A&quot;: 90,
-            &quot;B&quot;: 80,
-            &quot;C&quot;: 70,
-            &quot;D&quot;: 60,
-            &quot;F&quot;: 0
-        }
+<pre><code class="language-python"><span class="c1"># Enhanced system with progress tracking</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ProgressTracker</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grade_thresholds</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
 
-    def add_student(self, student):
-        &quot;&quot;&quot;Add student to tracking system&quot;&quot;&quot;
-        self.students[student.student_id] = student
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_student</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add student to tracking system&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student</span><span class="o">.</span><span class="n">student_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">student</span>
 
-    def generate_progress_report(self, student_id):
-        &quot;&quot;&quot;Generate detailed progress report for student&quot;&quot;&quot;
-        if student_id not in self.students:
-            return {&quot;error&quot;: &quot;Student not found&quot;}
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_progress_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate detailed progress report for student&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">student_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Student not found&quot;</span><span class="p">}</span>
 
-        student = self.students[student_id]
-        report = {
-            &quot;student_name&quot;: student.name,
-            &quot;student_id&quot;: student_id,
-            &quot;subjects&quot;: {},
-            &quot;overall_grade&quot;: self.calculate_letter_grade(student.get_average())
-        }
+        <span class="n">student</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;student_name&quot;</span><span class="p">:</span> <span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="s2">&quot;student_id&quot;</span><span class="p">:</span> <span class="n">student_id</span><span class="p">,</span>
+            <span class="s2">&quot;subjects&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;overall_grade&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_letter_grade</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">get_average</span><span class="p">())</span>
+        <span class="p">}</span>
 
-        for subject, grades in student.grades.items():
-            subject_average = student.get_average(subject)
-            report[&quot;subjects&quot;][subject] = {
-                &quot;grades&quot;: grades,
-                &quot;average&quot;: subject_average,
-                &quot;letter_grade&quot;: self.calculate_letter_grade(subject_average),
-                &quot;improvement_trend&quot;: self.analyze_trend(grades)
-            }
+        <span class="k">for</span> <span class="n">subject</span><span class="p">,</span> <span class="n">grades</span> <span class="ow">in</span> <span class="n">student</span><span class="o">.</span><span class="n">grades</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">subject_average</span> <span class="o">=</span> <span class="n">student</span><span class="o">.</span><span class="n">get_average</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span>
+            <span class="n">report</span><span class="p">[</span><span class="s2">&quot;subjects&quot;</span><span class="p">][</span><span class="n">subject</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;grades&quot;</span><span class="p">:</span> <span class="n">grades</span><span class="p">,</span>
+                <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="n">subject_average</span><span class="p">,</span>
+                <span class="s2">&quot;letter_grade&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_letter_grade</span><span class="p">(</span><span class="n">subject_average</span><span class="p">),</span>
+                <span class="s2">&quot;improvement_trend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">analyze_trend</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+            <span class="p">}</span>
 
-        return report
+        <span class="k">return</span> <span class="n">report</span>
 
-    def calculate_letter_grade(self, numeric_grade):
-        &quot;&quot;&quot;Convert numeric grade to letter grade&quot;&quot;&quot;
-        for letter, threshold in self.grade_thresholds.items():
-            if numeric_grade &gt;= threshold:
-                return letter
-        return &quot;F&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_letter_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numeric_grade</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert numeric grade to letter grade&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">letter</span><span class="p">,</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_thresholds</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">numeric_grade</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">letter</span>
+        <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-    def analyze_trend(self, grades):
-        &quot;&quot;&quot;Analyze if grades are improving, declining, or stable&quot;&quot;&quot;
-        if len(grades) &lt; 2:
-            return &quot;insufficient_data&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_trend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grades</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze if grades are improving, declining, or stable&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;insufficient_data&quot;</span>
 
-        recent_grades = grades[-3:] if len(grades) &gt;= 3 else grades
-        if len(recent_grades) &lt; 2:
-            return &quot;insufficient_data&quot;
+        <span class="n">recent_grades</span> <span class="o">=</span> <span class="n">grades</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="n">grades</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">recent_grades</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;insufficient_data&quot;</span>
 
-        trend = sum(recent_grades[-2:]) / 2 - sum(recent_grades[:-2]) / len(recent_grades[:-2])
+        <span class="n">trend</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">recent_grades</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">recent_grades</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">recent_grades</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
 
-        if trend &gt; 2:
-            return &quot;improving&quot;
-        elif trend &lt; -2:
-            return &quot;declining&quot;
-        else:
-            return &quot;stable&quot;
+        <span class="k">if</span> <span class="n">trend</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;improving&quot;</span>
+        <span class="k">elif</span> <span class="n">trend</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;declining&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;stable&quot;</span>
 
-# Quality check for Increment 2
-def test_progress_tracking():
-    &quot;&quot;&quot;Test enhanced progress tracking functionality&quot;&quot;&quot;
-    tracker = ProgressTracker()
-    student = Student(&quot;S001&quot;, &quot;Alice Johnson&quot;)
+<span class="c1"># Quality check for Increment 2</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_progress_tracking</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test enhanced progress tracking functionality&quot;&quot;&quot;</span>
+    <span class="n">tracker</span> <span class="o">=</span> <span class="n">ProgressTracker</span><span class="p">()</span>
+    <span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;S001&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice Johnson&quot;</span><span class="p">)</span>
 
-    # Add multiple grades to test trend analysis
-    student.add_grade(&quot;Math&quot;, 75)
-    student.add_grade(&quot;Math&quot;, 82)
-    student.add_grade(&quot;Math&quot;, 88)
-    student.add_grade(&quot;Math&quot;, 91)
+    <span class="c1"># Add multiple grades to test trend analysis</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">82</span><span class="p">)</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">88</span><span class="p">)</span>
+    <span class="n">student</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="s2">&quot;Math&quot;</span><span class="p">,</span> <span class="mi">91</span><span class="p">)</span>
 
-    tracker.add_student(student)
-    report = tracker.generate_progress_report(&quot;S001&quot;)
+    <span class="n">tracker</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">generate_progress_report</span><span class="p">(</span><span class="s2">&quot;S001&quot;</span><span class="p">)</span>
 
-    assert report[&quot;student_name&quot;] == &quot;Alice Johnson&quot;
-    assert report[&quot;subjects&quot;][&quot;Math&quot;][&quot;letter_grade&quot;] == &quot;A&quot;
-    assert report[&quot;subjects&quot;][&quot;Math&quot;][&quot;improvement_trend&quot;] == &quot;improving&quot;
+    <span class="k">assert</span> <span class="n">report</span><span class="p">[</span><span class="s2">&quot;student_name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Alice Johnson&quot;</span>
+    <span class="k">assert</span> <span class="n">report</span><span class="p">[</span><span class="s2">&quot;subjects&quot;</span><span class="p">][</span><span class="s2">&quot;Math&quot;</span><span class="p">][</span><span class="s2">&quot;letter_grade&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;A&quot;</span>
+    <span class="k">assert</span> <span class="n">report</span><span class="p">[</span><span class="s2">&quot;subjects&quot;</span><span class="p">][</span><span class="s2">&quot;Math&quot;</span><span class="p">][</span><span class="s2">&quot;improvement_trend&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;improving&quot;</span>
 
-    print(&quot;Increment 2 tests passed - Progress tracking working&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Increment 2 tests passed - Progress tracking working&quot;</span><span class="p">)</span>
 
-test_progress_tracking()
+<span class="n">test_progress_tracking</span><span class="p">()</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -2378,6 +2378,8 @@ test_progress_tracking()
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

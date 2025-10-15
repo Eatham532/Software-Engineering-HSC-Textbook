@@ -1560,47 +1560,47 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BankAccount:
-    def __init__(self, account_number, initial_balance=0):
-        self.account_number = account_number  # Public attribute
-        self._balance = initial_balance       # Protected attribute (convention)
-        self._transaction_count = 0           # Internal state
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>  <span class="c1"># Public attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">initial_balance</span>       <span class="c1"># Protected attribute (convention)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># Internal state</span>
 
-    # Public interface - what users can do
-    def deposit(self, amount):
-        if amount &gt; 0:
-            self._balance += amount
-            self._transaction_count += 1
-            return f&quot;Deposited ${amount}. Balance: ${self._balance}&quot;
-        return &quot;Invalid deposit amount&quot;
+    <span class="c1"># Public interface - what users can do</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deposited $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid deposit amount&quot;</span>
 
-    def withdraw(self, amount):
-        if 0 &lt; amount &lt;= self._balance:
-            self._balance -= amount
-            self._transaction_count += 1
-            return f&quot;Withdrew ${amount}. Balance: ${self._balance}&quot;
-        return &quot;Insufficient funds or invalid amount&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">-=</span> <span class="n">amount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Withdrew $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Insufficient funds or invalid amount&quot;</span>
 
-    def get_balance(self):
-        return self._balance
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
 
-    def get_transaction_count(self):
-        return self._transaction_count
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_transaction_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span>
 </code></pre>
 </div>
 <h3 id="public-interface-vs-internal-state">Public interface vs internal state<a class="headerlink" href="#public-interface-vs-internal-state" title="Permanent link">&para;</a></h3>
 <p>The <strong>public interface</strong> is what other parts of your program can see and use. The <strong>internal state</strong> is the data and implementation details that should be kept private.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Using the BankAccount class
-account = BankAccount(&quot;ACC001&quot;, 1000)
+<pre><code class="language-python"><span class="c1"># Using the BankAccount class</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC001&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
-# Public interface - these are the &quot;official&quot; ways to interact
-print(account.deposit(200))           # ✅ Good - using public method
-print(account.get_balance())          # ✅ Good - using public method
+<span class="c1"># Public interface - these are the &quot;official&quot; ways to interact</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>           <span class="c1"># ✅ Good - using public method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">get_balance</span><span class="p">())</span>          <span class="c1"># ✅ Good - using public method</span>
 
-# Direct access to internal state - avoid this!
-print(account._balance)               # ❌ Bad - accessing internal state directly
-account._balance = 999999             # ❌ Very bad - bypassing all controls!
+<span class="c1"># Direct access to internal state - avoid this!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">_balance</span><span class="p">)</span>               <span class="c1"># ❌ Bad - accessing internal state directly</span>
+<span class="n">account</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="mi">999999</span>             <span class="c1"># ❌ Very bad - bypassing all controls!</span>
 </code></pre>
 </div>
 <p><strong>Why keep internal state private?</strong></p>
@@ -1632,116 +1632,116 @@ account._balance = 999999             # ❌ Very bad - bypassing all controls!
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Student:
-    def __init__(self, name, student_id):
-        self.name = name                    # Public
-        self.student_id = student_id        # Public
-        self._grades = []                   # Protected - internal list
-        self._gpa = 0.0                     # Protected - calculated value
-        self.__secret_notes = &quot;Lazy student&quot;  # Name-mangled (private-ish)
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>                    <span class="c1"># Public</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>        <span class="c1"># Public</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span> <span class="o">=</span> <span class="p">[]</span>                   <span class="c1"># Protected - internal list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="mf">0.0</span>                     <span class="c1"># Protected - calculated value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__secret_notes</span> <span class="o">=</span> <span class="s2">&quot;Lazy student&quot;</span>  <span class="c1"># Name-mangled (private-ish)</span>
 
-    def add_grade(self, grade):
-        if 0 &lt;= grade &lt;= 100:
-            self._grades.append(grade)
-            self._calculate_gpa()           # Update internal state
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">grade</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_gpa</span><span class="p">()</span>           <span class="c1"># Update internal state</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def _calculate_gpa(self):               # Protected method
-        if self._grades:
-            self._gpa = sum(self._grades) / len(self._grades) / 25
-        else:
-            self._gpa = 0.0
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>               <span class="c1"># Protected method</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    def get_gpa(self):                      # Public method
-        return round(self._gpa, 2)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                      <span class="c1"># Public method</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-&quot;&quot;&quot;
-Note on double underscores:
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Note on double underscores:</span>
 
-- In Python, leading double underscores cause name-mangling: `__hidden` becomes `_ClassName__hidden`.
-- This is not true privacy but helps avoid accidental access/overrides in subclasses.
-- Most idiomatic Python code uses a single underscore for &quot;internal&quot; members and relies on conventions.
-&quot;&quot;&quot;
+<span class="sd">- In Python, leading double underscores cause name-mangling: `__hidden` becomes `_ClassName__hidden`.</span>
+<span class="sd">- This is not true privacy but helps avoid accidental access/overrides in subclasses.</span>
+<span class="sd">- Most idiomatic Python code uses a single underscore for &quot;internal&quot; members and relies on conventions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 </code></pre>
 </div>
 <h3 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h3>
 <p>An <strong>invariant</strong> is a condition that must always be true for an object to be in a valid state. Encapsulation helps maintain these invariants.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">class Rectangle:
-    def __init__(self, width, height):
-        self._width = 0
-        self._height = 0
-        # Use setters to enforce invariants from the start
-        self.set_width(width)
-        self.set_height(height)
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Use setters to enforce invariants from the start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_height</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
 
-    def set_width(self, width):
-        if width &gt; 0:  # Invariant: width must be positive
-            self._width = width
-        else:
-            raise ValueError(&quot;Width must be positive&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">width</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Invariant: width must be positive</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Width must be positive&quot;</span><span class="p">)</span>
 
-    def set_height(self, height):
-        if height &gt; 0:  # Invariant: height must be positive
-            self._height = height
-        else:
-            raise ValueError(&quot;Height must be positive&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">height</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Invariant: height must be positive</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Height must be positive&quot;</span><span class="p">)</span>
 
-    def get_width(self):
-        return self._width
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span>
 
-    def get_height(self):
-        return self._height
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_height</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_height</span>
 
-    def get_area(self):
-        return self._width * self._height  # Always valid due to invariants
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_height</span>  <span class="c1"># Always valid due to invariants</span>
 
-# Using the Rectangle class
-rect = Rectangle(5, 3)
-print(f&quot;Area: {rect.get_area()}&quot;)  # Area: 15
+<span class="c1"># Using the Rectangle class</span>
+<span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area: </span><span class="si">{</span><span class="n">rect</span><span class="o">.</span><span class="n">get_area</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Area: 15</span>
 
-# Invariants are protected
-try:
-    rect.set_width(-2)  # This will raise an error
-except ValueError as e:
-    print(f&quot;Error: {e}&quot;)  # Error: Width must be positive
+<span class="c1"># Invariants are protected</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">rect</span><span class="o">.</span><span class="n">set_width</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># This will raise an error</span>
+<span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Error: Width must be positive</span>
 </code></pre>
 </div>
 <h3 id="simple-getters-and-setters">Simple getters and setters<a class="headerlink" href="#simple-getters-and-setters" title="Permanent link">&para;</a></h3>
 <p><strong>Getters</strong> provide controlled access to internal data. <strong>Setters</strong> provide controlled modification of internal data.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">class Temperature:
-    def __init__(self, celsius=0):
-        self._celsius = 0
-        self.set_celsius(celsius)  # Use setter for validation
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Temperature</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">celsius</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_celsius</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_celsius</span><span class="p">(</span><span class="n">celsius</span><span class="p">)</span>  <span class="c1"># Use setter for validation</span>
 
-    # Getter for celsius
-    def get_celsius(self):
-        return self._celsius
+    <span class="c1"># Getter for celsius</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_celsius</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_celsius</span>
 
-    # Setter for celsius with validation
-    def set_celsius(self, celsius):
-        if celsius &lt; -273.15:  # Absolute zero limit
-            raise ValueError(&quot;Temperature cannot be below absolute zero&quot;)
-        self._celsius = celsius
+    <span class="c1"># Setter for celsius with validation</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_celsius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">celsius</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">celsius</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">273.15</span><span class="p">:</span>  <span class="c1"># Absolute zero limit</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Temperature cannot be below absolute zero&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_celsius</span> <span class="o">=</span> <span class="n">celsius</span>
 
-    # Getter for fahrenheit (calculated property)
-    def get_fahrenheit(self):
-        return (self._celsius * 9/5) + 32
+    <span class="c1"># Getter for fahrenheit (calculated property)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_fahrenheit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_celsius</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
 
-    # Setter for fahrenheit (converts and stores as celsius)
-    def set_fahrenheit(self, fahrenheit):
-        celsius = (fahrenheit - 32) * 5/9
-        self.set_celsius(celsius)  # Reuse validation logic
+    <span class="c1"># Setter for fahrenheit (converts and stores as celsius)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_fahrenheit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fahrenheit</span><span class="p">):</span>
+        <span class="n">celsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">fahrenheit</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_celsius</span><span class="p">(</span><span class="n">celsius</span><span class="p">)</span>  <span class="c1"># Reuse validation logic</span>
 
-# Using the Temperature class
-temp = Temperature(25)
-print(f&quot;Temperature: {temp.get_celsius()}°C&quot;)        # 25°C
-print(f&quot;Temperature: {temp.get_fahrenheit()}°F&quot;)     # 77°F
+<span class="c1"># Using the Temperature class</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">Temperature</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp</span><span class="o">.</span><span class="n">get_celsius</span><span class="p">()</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>        <span class="c1"># 25°C</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp</span><span class="o">.</span><span class="n">get_fahrenheit</span><span class="p">()</span><span class="si">}</span><span class="s2">°F&quot;</span><span class="p">)</span>     <span class="c1"># 77°F</span>
 
-temp.set_fahrenheit(86)
-print(f&quot;Temperature: {temp.get_celsius()}°C&quot;)        # 30°C
+<span class="n">temp</span><span class="o">.</span><span class="n">set_fahrenheit</span><span class="p">(</span><span class="mi">86</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temp</span><span class="o">.</span><span class="n">get_celsius</span><span class="p">()</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>        <span class="c1"># 30°C</span>
 </code></pre>
 </div>
 <h3 id="when-to-use-getters-and-setters">When to use getters and setters<a class="headerlink" href="#when-to-use-getters-and-setters" title="Permanent link">&para;</a></h3>
@@ -1772,32 +1772,32 @@ print(f&quot;Temperature: {temp.get_celsius()}°C&quot;)        # 30°C
 <p><strong>Keep it simple:</strong>
 For basic data access, Python&rsquo;s property decorator can make getters and setters look like regular attribute access:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">class Circle:
-    def __init__(self, radius):
-        self._radius = 0
-        self.radius = radius  # Use the property setter
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>  <span class="c1"># Use the property setter</span>
 
-    @property
-    def radius(self):
-        return self._radius
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">radius</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span>
 
-    @radius.setter
-    def radius(self, value):
-        if value &lt;= 0:
-            raise ValueError(&quot;Radius must be positive&quot;)
-        self._radius = value
+    <span class="nd">@radius</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">radius</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Radius must be positive&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="n">value</span>
 
-    @property
-    def area(self):
-        return 3.14159 * self._radius ** 2
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">3.14159</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">**</span> <span class="mi">2</span>
 
-# Usage looks like normal attribute access
-circle = Circle(5)
-print(circle.radius)  # 5
-print(circle.area)    # 78.53975
+<span class="c1"># Usage looks like normal attribute access</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>  <span class="c1"># 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>    <span class="c1"># 78.53975</span>
 
-circle.radius = 3     # Uses the setter with validation
-print(circle.area)    # 28.27431
+<span class="n">circle</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">3</span>     <span class="c1"># Uses the setter with validation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>    <span class="c1"># 28.27431</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -1805,15 +1805,15 @@ print(circle.area)    # 28.27431
 <summary>Exercise 1: Encapsulation Violations</summary>
 <p><strong>Scenario</strong>: Look at this code and identify what&rsquo;s wrong with the encapsulation:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">class Car:
-    def __init__(self, fuel_capacity):
-        self.fuel_level = fuel_capacity
-        self.engine_running = False
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuel_capacity</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fuel_level</span> <span class="o">=</span> <span class="n">fuel_capacity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">engine_running</span> <span class="o">=</span> <span class="kc">False</span>
 
-# Usage
-car = Car(50)
-car.fuel_level = -10        # Problem 1: What&#x27;s wrong here?
-car.engine_running = True   # Problem 2: What could go wrong?
+<span class="c1"># Usage</span>
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">car</span><span class="o">.</span><span class="n">fuel_level</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>        <span class="c1"># Problem 1: What&#39;s wrong here?</span>
+<span class="n">car</span><span class="o">.</span><span class="n">engine_running</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># Problem 2: What could go wrong?</span>
 </code></pre>
 </div>
 <p><strong>Task</strong>: Identify the encapsulation violations and explain why they&rsquo;re problematic.</p>
@@ -1866,35 +1866,35 @@ car.engine_running = True   # Problem 2: What could go wrong?
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class DigitalClock:
-    def __init__(self, hours=0, minutes=0):
-        self._hours = 0
-        self._minutes = 0
-        self.set_time(hours, minutes)
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">DigitalClock</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">)</span>
 
-    def set_time(self, hours, minutes):
-        if 0 &lt;= hours &lt;= 23:
-            self._hours = hours
-        else:
-            raise ValueError(&quot;Hours must be between 0 and 23&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">hours</span> <span class="o">&lt;=</span> <span class="mi">23</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">=</span> <span class="n">hours</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Hours must be between 0 and 23&quot;</span><span class="p">)</span>
 
-        if 0 &lt;= minutes &lt;= 59:
-            self._minutes = minutes
-        else:
-            raise ValueError(&quot;Minutes must be between 0 and 59&quot;)
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">minutes</span> <span class="o">&lt;=</span> <span class="mi">59</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span> <span class="o">=</span> <span class="n">minutes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Minutes must be between 0 and 59&quot;</span><span class="p">)</span>
 
-    def get_time_24h(self):
-        return f&quot;{self._hours:02d}:{self._minutes:02d}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_24h</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def get_time_12h(self):
-        if self._hours == 0:
-            return f&quot;12:{self._minutes:02d} AM&quot;
-        elif self._hours &lt; 12:
-            return f&quot;{self._hours}:{self._minutes:02d} AM&quot;
-        elif self._hours == 12:
-            return f&quot;12:{self._minutes:02d} PM&quot;
-        else:
-            return f&quot;{self._hours - 12}:{self._minutes:02d} PM&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_12h</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;12:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> AM&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> AM&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;12:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> PM&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">12</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> PM&quot;</span>
 </code></pre>
 </div>
 </details>
@@ -1903,11 +1903,11 @@ car.engine_running = True   # Problem 2: What could go wrong?
 <summary>Exercise 3: Game Score Encapsulation</summary>
 <p><strong>Scenario</strong>: Improve this class by adding proper encapsulation:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class GameScore:
-    def __init__(self):
-        self.score = 0
-        self.lives = 3
-        self.level = 1
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">GameScore</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre>
 </div>
 <p><strong>Task</strong>: Add proper encapsulation with:</p>
@@ -1928,46 +1928,46 @@ car.engine_running = True   # Problem 2: What could go wrong?
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class GameScore:
-    def __init__(self):
-        self._score = 0
-        self._lives = 3
-        self._level = 1
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">GameScore</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="mi">1</span>
 
-    def add_points(self, points):
-        &quot;&quot;&quot;Add points to score with validation&quot;&quot;&quot;
-        if points &gt; 0:
-            self._score += points
-            # Check for level up
-            new_level = (self._score // 1000) + 1
-            if new_level &gt; self._level:
-                self._level = new_level
-                print(f&quot;Level up! Now at level {self._level}&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add points to score with validation&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">points</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">+=</span> <span class="n">points</span>
+            <span class="c1"># Check for level up</span>
+            <span class="n">new_level</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">//</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">new_level</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="n">new_level</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Level up! Now at level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    def lose_life(self):
-        &quot;&quot;&quot;Lose a life, game over if no lives left&quot;&quot;&quot;
-        if self._lives &gt; 0:
-            self._lives -= 1
-            if self._lives == 0:
-                print(&quot;Game Over!&quot;)
-                return False
-        return True
+    <span class="k">def</span><span class="w"> </span><span class="nf">lose_life</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lose a life, game over if no lives left&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Game Over!&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
-    def get_score(self):
-        &quot;&quot;&quot;Get current score&quot;&quot;&quot;
-        return self._score
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current score&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span>
 
-    def get_lives(self):
-        &quot;&quot;&quot;Get remaining lives&quot;&quot;&quot;
-        return self._lives
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_lives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get remaining lives&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span>
 
-    def get_level(self):
-        &quot;&quot;&quot;Get current level&quot;&quot;&quot;
-        return self._level
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current level&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span>
 
-    def is_game_over(self):
-        &quot;&quot;&quot;Check if game is over&quot;&quot;&quot;
-        return self._lives &lt;= 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_game_over</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if game is over&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">&lt;=</span> <span class="mi">0</span>
 </code></pre>
 </div>
 </details>
@@ -2221,6 +2221,8 @@ car.engine_running = True   # Problem 2: What could go wrong?
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

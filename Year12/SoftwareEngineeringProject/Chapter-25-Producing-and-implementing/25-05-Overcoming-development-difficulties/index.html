@@ -1681,100 +1681,100 @@
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Blocker tracking and categorization system
-class DevelopmentBlocker:
-    def __init__(self, title, description, category, severity):
-        self.title = title
-        self.description = description
-        self.category = category  # technical, resource, process
-        self.severity = severity  # low, medium, high, critical
-        self.status = &quot;open&quot;
-        self.created_date = &quot;2024-03-20&quot;
-        self.assigned_to = None
-        self.resolution_steps = []
-        self.escalation_level = 0
+<pre><code class="language-python"><span class="c1"># Example: Blocker tracking and categorization system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DevelopmentBlocker</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">severity</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">category</span>  <span class="c1"># technical, resource, process</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">severity</span> <span class="o">=</span> <span class="n">severity</span>  <span class="c1"># low, medium, high, critical</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;open&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">created_date</span> <span class="o">=</span> <span class="s2">&quot;2024-03-20&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assigned_to</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution_steps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">escalation_level</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def add_resolution_step(self, step, responsible_person):
-        &quot;&quot;&quot;Add a step to resolve the blocker&quot;&quot;&quot;
-        resolution_step = {
-            &quot;step&quot;: step,
-            &quot;responsible&quot;: responsible_person,
-            &quot;status&quot;: &quot;pending&quot;,
-            &quot;date_added&quot;: &quot;2024-03-20&quot;
-        }
-        self.resolution_steps.append(resolution_step)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_resolution_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">responsible_person</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a step to resolve the blocker&quot;&quot;&quot;</span>
+        <span class="n">resolution_step</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="n">step</span><span class="p">,</span>
+            <span class="s2">&quot;responsible&quot;</span><span class="p">:</span> <span class="n">responsible_person</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;date_added&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resolution_step</span><span class="p">)</span>
 
-    def escalate(self, escalation_reason):
-        &quot;&quot;&quot;Escalate blocker to higher level&quot;&quot;&quot;
-        self.escalation_level += 1
-        escalation_info = {
-            &quot;level&quot;: self.escalation_level,
-            &quot;reason&quot;: escalation_reason,
-            &quot;date&quot;: &quot;2024-03-20&quot;,
-            &quot;previous_attempts&quot;: len(self.resolution_steps)
-        }
-        return escalation_info
+    <span class="k">def</span><span class="w"> </span><span class="nf">escalate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">escalation_reason</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Escalate blocker to higher level&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">escalation_level</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">escalation_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">escalation_level</span><span class="p">,</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">escalation_reason</span><span class="p">,</span>
+            <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;previous_attempts&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">resolution_steps</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">escalation_info</span>
 
-class BlockerManager:
-    def __init__(self):
-        self.blockers = []
-        self.resolution_strategies = {
-            &quot;technical&quot;: [&quot;research&quot;, &quot;peer_consultation&quot;, &quot;expert_assistance&quot;],
-            &quot;resource&quot;: [&quot;procurement&quot;, &quot;alternative_solutions&quot;, &quot;management_escalation&quot;],
-            &quot;process&quot;: [&quot;stakeholder_communication&quot;, &quot;process_improvement&quot;, &quot;priority_negotiation&quot;]
-        }
+<span class="k">class</span><span class="w"> </span><span class="nc">BlockerManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blockers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution_strategies</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;technical&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;research&quot;</span><span class="p">,</span> <span class="s2">&quot;peer_consultation&quot;</span><span class="p">,</span> <span class="s2">&quot;expert_assistance&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;procurement&quot;</span><span class="p">,</span> <span class="s2">&quot;alternative_solutions&quot;</span><span class="p">,</span> <span class="s2">&quot;management_escalation&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;process&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;stakeholder_communication&quot;</span><span class="p">,</span> <span class="s2">&quot;process_improvement&quot;</span><span class="p">,</span> <span class="s2">&quot;priority_negotiation&quot;</span><span class="p">]</span>
+        <span class="p">}</span>
 
-    def log_blocker(self, title, description, category, severity):
-        &quot;&quot;&quot;Log a new development blocker&quot;&quot;&quot;
-        blocker = DevelopmentBlocker(title, description, category, severity)
-        self.blockers.append(blocker)
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_blocker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">severity</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log a new development blocker&quot;&quot;&quot;</span>
+        <span class="n">blocker</span> <span class="o">=</span> <span class="n">DevelopmentBlocker</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">severity</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">blockers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">blocker</span><span class="p">)</span>
 
-        # Suggest initial resolution strategies
-        suggested_strategies = self.resolution_strategies.get(category, [])
+        <span class="c1"># Suggest initial resolution strategies</span>
+        <span class="n">suggested_strategies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution_strategies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="p">[])</span>
 
-        return {
-            &quot;blocker_id&quot;: len(self.blockers) - 1,
-            &quot;blocker&quot;: blocker,
-            &quot;suggested_strategies&quot;: suggested_strategies
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;blocker_id&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blockers</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;blocker&quot;</span><span class="p">:</span> <span class="n">blocker</span><span class="p">,</span>
+            <span class="s2">&quot;suggested_strategies&quot;</span><span class="p">:</span> <span class="n">suggested_strategies</span>
+        <span class="p">}</span>
 
-    def get_active_blockers(self, filter_by_severity=None):
-        &quot;&quot;&quot;Get list of unresolved blockers&quot;&quot;&quot;
-        active = [b for b in self.blockers if b.status == &quot;open&quot;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_active_blockers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filter_by_severity</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of unresolved blockers&quot;&quot;&quot;</span>
+        <span class="n">active</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blockers</span> <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;open&quot;</span><span class="p">]</span>
 
-        if filter_by_severity:
-            active = [b for b in active if b.severity == filter_by_severity]
+        <span class="k">if</span> <span class="n">filter_by_severity</span><span class="p">:</span>
+            <span class="n">active</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">active</span> <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">severity</span> <span class="o">==</span> <span class="n">filter_by_severity</span><span class="p">]</span>
 
-        return sorted(active, key=lambda x: [&quot;low&quot;, &quot;medium&quot;, &quot;high&quot;, &quot;critical&quot;].index(x.severity))
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">active</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">severity</span><span class="p">))</span>
 
-# Example usage
-blocker_mgr = BlockerManager()
+<span class="c1"># Example usage</span>
+<span class="n">blocker_mgr</span> <span class="o">=</span> <span class="n">BlockerManager</span><span class="p">()</span>
 
-# Log different types of blockers
-technical_blocker = blocker_mgr.log_blocker(
-    &quot;Database connection timeout&quot;,
-    &quot;Student records query takes too long, causing application timeouts&quot;,
-    &quot;technical&quot;,
-    &quot;high&quot;
-)
+<span class="c1"># Log different types of blockers</span>
+<span class="n">technical_blocker</span> <span class="o">=</span> <span class="n">blocker_mgr</span><span class="o">.</span><span class="n">log_blocker</span><span class="p">(</span>
+    <span class="s2">&quot;Database connection timeout&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Student records query takes too long, causing application timeouts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;technical&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;high&quot;</span>
+<span class="p">)</span>
 
-resource_blocker = blocker_mgr.log_blocker(
-    &quot;Missing API access credentials&quot;,
-    &quot;Cannot access school district&#x27;s authentication API for user login&quot;,
-    &quot;resource&quot;,
-    &quot;critical&quot;
-)
+<span class="n">resource_blocker</span> <span class="o">=</span> <span class="n">blocker_mgr</span><span class="o">.</span><span class="n">log_blocker</span><span class="p">(</span>
+    <span class="s2">&quot;Missing API access credentials&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Cannot access school district&#39;s authentication API for user login&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;resource&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;critical&quot;</span>
+<span class="p">)</span>
 
-process_blocker = blocker_mgr.log_blocker(
-    &quot;Unclear grading calculation requirements&quot;,
-    &quot;Stakeholders disagree on weighted vs unweighted GPA calculation&quot;,
-    &quot;process&quot;,
-    &quot;medium&quot;
-)
+<span class="n">process_blocker</span> <span class="o">=</span> <span class="n">blocker_mgr</span><span class="o">.</span><span class="n">log_blocker</span><span class="p">(</span>
+    <span class="s2">&quot;Unclear grading calculation requirements&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Stakeholders disagree on weighted vs unweighted GPA calculation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;process&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;medium&quot;</span>
+<span class="p">)</span>
 
-print(f&quot;Logged {len(blocker_mgr.blockers)} blockers&quot;)
-critical_blockers = blocker_mgr.get_active_blockers(&quot;critical&quot;)
-print(f&quot;Critical blockers requiring immediate attention: {len(critical_blockers)}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logged </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">blocker_mgr</span><span class="o">.</span><span class="n">blockers</span><span class="p">)</span><span class="si">}</span><span class="s2"> blockers&quot;</span><span class="p">)</span>
+<span class="n">critical_blockers</span> <span class="o">=</span> <span class="n">blocker_mgr</span><span class="o">.</span><span class="n">get_active_blockers</span><span class="p">(</span><span class="s2">&quot;critical&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Critical blockers requiring immediate attention: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">critical_blockers</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="research-and-information-gathering-strategies">Research and information gathering strategies<a class="headerlink" href="#research-and-information-gathering-strategies" title="Permanent link">&para;</a></h3>
@@ -1825,94 +1825,94 @@ print(f&quot;Critical blockers requiring immediate attention: {len(critical_bloc
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Research strategy framework
-class ResearchHelper:
-    def __init__(self):
-        self.documentation_sources = {
-            &quot;python&quot;: &quot;https://docs.python.org/&quot;,
-            &quot;django&quot;: &quot;https://docs.djangoproject.com/&quot;,
-            &quot;flask&quot;: &quot;https://flask.palletsprojects.com/&quot;,
-            &quot;react&quot;: &quot;https://reactjs.org/docs/&quot;
-        }
+<pre><code class="language-python"><span class="c1"># Example: Research strategy framework</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ResearchHelper</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">documentation_sources</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;python&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.python.org/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;django&quot;</span><span class="p">:</span> <span class="s2">&quot;https://docs.djangoproject.com/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;flask&quot;</span><span class="p">:</span> <span class="s2">&quot;https://flask.palletsprojects.com/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;react&quot;</span><span class="p">:</span> <span class="s2">&quot;https://reactjs.org/docs/&quot;</span>
+        <span class="p">}</span>
 
-        self.community_platforms = [
-            &quot;stackoverflow.com&quot;,
-            &quot;github.com&quot;,
-            &quot;reddit.com/r/programming&quot;,
-            &quot;dev.to&quot;
-        ]
+        <span class="bp">self</span><span class="o">.</span><span class="n">community_platforms</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;stackoverflow.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;github.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;reddit.com/r/programming&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dev.to&quot;</span>
+        <span class="p">]</span>
 
-        self.search_templates = {
-            &quot;error_search&quot;: &quot;{technology} {error_message} {version}&quot;,
-            &quot;how_to&quot;: &quot;how to {action} in {technology}&quot;,
-            &quot;best_practice&quot;: &quot;{technology} {feature} best practices&quot;,
-            &quot;comparison&quot;: &quot;{option1} vs {option2} {technology}&quot;
-        }
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_templates</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;error_search&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{technology}</span><span class="s2"> </span><span class="si">{error_message}</span><span class="s2"> </span><span class="si">{version}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;how_to&quot;</span><span class="p">:</span> <span class="s2">&quot;how to </span><span class="si">{action}</span><span class="s2"> in </span><span class="si">{technology}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;best_practice&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{technology}</span><span class="s2"> </span><span class="si">{feature}</span><span class="s2"> best practices&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;comparison&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{option1}</span><span class="s2"> vs </span><span class="si">{option2}</span><span class="s2"> </span><span class="si">{technology}</span><span class="s2">&quot;</span>
+        <span class="p">}</span>
 
-    def generate_search_queries(self, problem_description, technology, error_message=None):
-        &quot;&quot;&quot;Generate effective search queries for the problem&quot;&quot;&quot;
-        queries = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_search_queries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem_description</span><span class="p">,</span> <span class="n">technology</span><span class="p">,</span> <span class="n">error_message</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate effective search queries for the problem&quot;&quot;&quot;</span>
+        <span class="n">queries</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if error_message:
-            queries.append(self.search_templates[&quot;error_search&quot;].format(
-                technology=technology,
-                error_message=error_message,
-                version=&quot;2024&quot;
-            ))
+        <span class="k">if</span> <span class="n">error_message</span><span class="p">:</span>
+            <span class="n">queries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">search_templates</span><span class="p">[</span><span class="s2">&quot;error_search&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">technology</span><span class="o">=</span><span class="n">technology</span><span class="p">,</span>
+                <span class="n">error_message</span><span class="o">=</span><span class="n">error_message</span><span class="p">,</span>
+                <span class="n">version</span><span class="o">=</span><span class="s2">&quot;2024&quot;</span>
+            <span class="p">))</span>
 
-        # General problem search
-        queries.append(f&quot;{technology} {problem_description}&quot;)
+        <span class="c1"># General problem search</span>
+        <span class="n">queries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">technology</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">problem_description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Alternative phrasings
-        problem_words = problem_description.split()
-        if len(problem_words) &gt; 2:
-            alternative = &quot; &quot;.join(problem_words[1:] + [problem_words[0]])
-            queries.append(f&quot;{technology} {alternative}&quot;)
+        <span class="c1"># Alternative phrasings</span>
+        <span class="n">problem_words</span> <span class="o">=</span> <span class="n">problem_description</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">problem_words</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">alternative</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">problem_words</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="n">problem_words</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+            <span class="n">queries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">technology</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">alternative</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return queries
+        <span class="k">return</span> <span class="n">queries</span>
 
-    def evaluate_source_credibility(self, source_url, author_info):
-        &quot;&quot;&quot;Assess the credibility of information sources&quot;&quot;&quot;
-        credibility_score = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_source_credibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_url</span><span class="p">,</span> <span class="n">author_info</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assess the credibility of information sources&quot;&quot;&quot;</span>
+        <span class="n">credibility_score</span> <span class="o">=</span> <span class="mi">0</span>
 
-        # Check source domain
-        trusted_domains = [&quot;docs.&quot;, &quot;official&quot;, &quot;github.com&quot;, &quot;stackoverflow.com&quot;]
-        if any(domain in source_url for domain in trusted_domains):
-            credibility_score += 3
+        <span class="c1"># Check source domain</span>
+        <span class="n">trusted_domains</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;docs.&quot;</span><span class="p">,</span> <span class="s2">&quot;official&quot;</span><span class="p">,</span> <span class="s2">&quot;github.com&quot;</span><span class="p">,</span> <span class="s2">&quot;stackoverflow.com&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">domain</span> <span class="ow">in</span> <span class="n">source_url</span> <span class="k">for</span> <span class="n">domain</span> <span class="ow">in</span> <span class="n">trusted_domains</span><span class="p">):</span>
+            <span class="n">credibility_score</span> <span class="o">+=</span> <span class="mi">3</span>
 
-        # Check author reputation
-        if author_info.get(&quot;reputation&quot;, 0) &gt; 1000:
-            credibility_score += 2
+        <span class="c1"># Check author reputation</span>
+        <span class="k">if</span> <span class="n">author_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reputation&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+            <span class="n">credibility_score</span> <span class="o">+=</span> <span class="mi">2</span>
 
-        if author_info.get(&quot;badges&quot;, []):
-            credibility_score += 1
+        <span class="k">if</span> <span class="n">author_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;badges&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="n">credibility_score</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        # Check recency
-        if &quot;2023&quot; in source_url or &quot;2024&quot; in source_url:
-            credibility_score += 1
+        <span class="c1"># Check recency</span>
+        <span class="k">if</span> <span class="s2">&quot;2023&quot;</span> <span class="ow">in</span> <span class="n">source_url</span> <span class="ow">or</span> <span class="s2">&quot;2024&quot;</span> <span class="ow">in</span> <span class="n">source_url</span><span class="p">:</span>
+            <span class="n">credibility_score</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return {
-            &quot;score&quot;: credibility_score,
-            &quot;recommendation&quot;: &quot;highly_credible&quot; if credibility_score &gt;= 5 else 
-                           &quot;moderately_credible&quot; if credibility_score &gt;= 3 else &quot;verify_carefully&quot;
-        }
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">credibility_score</span><span class="p">,</span>
+            <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;highly_credible&quot;</span> <span class="k">if</span> <span class="n">credibility_score</span> <span class="o">&gt;=</span> <span class="mi">5</span> <span class="k">else</span> 
+                           <span class="s2">&quot;moderately_credible&quot;</span> <span class="k">if</span> <span class="n">credibility_score</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="s2">&quot;verify_carefully&quot;</span>
+        <span class="p">}</span>
 
-# Example usage
-research_helper = ResearchHelper()
+<span class="c1"># Example usage</span>
+<span class="n">research_helper</span> <span class="o">=</span> <span class="n">ResearchHelper</span><span class="p">()</span>
 
-# Generate search queries for a database problem
-problem = &quot;connection timeout when querying large tables&quot;
-queries = research_helper.generate_search_queries(problem, &quot;PostgreSQL&quot;, &quot;connection timeout&quot;)
-print(&quot;Suggested search queries:&quot;)
-for query in queries:
-    print(f&quot;  - {query}&quot;)
+<span class="c1"># Generate search queries for a database problem</span>
+<span class="n">problem</span> <span class="o">=</span> <span class="s2">&quot;connection timeout when querying large tables&quot;</span>
+<span class="n">queries</span> <span class="o">=</span> <span class="n">research_helper</span><span class="o">.</span><span class="n">generate_search_queries</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="s2">&quot;PostgreSQL&quot;</span><span class="p">,</span> <span class="s2">&quot;connection timeout&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Suggested search queries:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Evaluate source credibility
-source_evaluation = research_helper.evaluate_source_credibility(
-    &quot;https://stackoverflow.com/questions/database-timeout&quot;,
-    {&quot;reputation&quot;: 15000, &quot;badges&quot;: [&quot;gold&quot;, &quot;silver&quot;]}
-)
-print(f&quot;Source credibility: {source_evaluation}&quot;)
+<span class="c1"># Evaluate source credibility</span>
+<span class="n">source_evaluation</span> <span class="o">=</span> <span class="n">research_helper</span><span class="o">.</span><span class="n">evaluate_source_credibility</span><span class="p">(</span>
+    <span class="s2">&quot;https://stackoverflow.com/questions/database-timeout&quot;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s2">&quot;reputation&quot;</span><span class="p">:</span> <span class="mi">15000</span><span class="p">,</span> <span class="s2">&quot;badges&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;gold&quot;</span><span class="p">,</span> <span class="s2">&quot;silver&quot;</span><span class="p">]}</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Source credibility: </span><span class="si">{</span><span class="n">source_evaluation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="collaborative-problem-solving-approaches">Collaborative problem-solving approaches<a class="headerlink" href="#collaborative-problem-solving-approaches" title="Permanent link">&para;</a></h3>
@@ -1954,115 +1954,115 @@ print(f&quot;Source credibility: {source_evaluation}&quot;)
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Collaboration management system
-class CollaborationManager:
-    def __init__(self):
-        self.team_members = {}
-        self.expertise_map = {}
-        self.active_sessions = []
+<pre><code class="language-python"><span class="c1"># Example: Collaboration management system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CollaborationManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expertise_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_sessions</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def register_team_member(self, name, expertise_areas, experience_level):
-        &quot;&quot;&quot;Register team member with their expertise&quot;&quot;&quot;
-        self.team_members[name] = {
-            &quot;expertise&quot;: expertise_areas,
-            &quot;experience&quot;: experience_level,
-            &quot;availability&quot;: &quot;available&quot;,
-            &quot;current_load&quot;: 0
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">register_team_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expertise_areas</span><span class="p">,</span> <span class="n">experience_level</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register team member with their expertise&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;expertise&quot;</span><span class="p">:</span> <span class="n">expertise_areas</span><span class="p">,</span>
+            <span class="s2">&quot;experience&quot;</span><span class="p">:</span> <span class="n">experience_level</span><span class="p">,</span>
+            <span class="s2">&quot;availability&quot;</span><span class="p">:</span> <span class="s2">&quot;available&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;current_load&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
 
-        # Update expertise map
-        for area in expertise_areas:
-            if area not in self.expertise_map:
-                self.expertise_map[area] = []
-            self.expertise_map[area].append(name)
+        <span class="c1"># Update expertise map</span>
+        <span class="k">for</span> <span class="n">area</span> <span class="ow">in</span> <span class="n">expertise_areas</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">area</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expertise_map</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">expertise_map</span><span class="p">[</span><span class="n">area</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">expertise_map</span><span class="p">[</span><span class="n">area</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-    def find_expert(self, problem_area, exclude_person=None):
-        &quot;&quot;&quot;Find team member with relevant expertise&quot;&quot;&quot;
-        if problem_area not in self.expertise_map:
-            return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_expert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">problem_area</span><span class="p">,</span> <span class="n">exclude_person</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find team member with relevant expertise&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">problem_area</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expertise_map</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-        candidates = self.expertise_map[problem_area]
-        if exclude_person:
-            candidates = [c for c in candidates if c != exclude_person]
+        <span class="n">candidates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expertise_map</span><span class="p">[</span><span class="n">problem_area</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">exclude_person</span><span class="p">:</span>
+            <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="n">exclude_person</span><span class="p">]</span>
 
-        # Sort by experience and availability
-        available_experts = []
-        for candidate in candidates:
-            member_info = self.team_members[candidate]
-            if member_info[&quot;availability&quot;] == &quot;available&quot;:
-                available_experts.append({
-                    &quot;name&quot;: candidate,
-                    &quot;experience&quot;: member_info[&quot;experience&quot;],
-                    &quot;load&quot;: member_info[&quot;current_load&quot;]
-                })
+        <span class="c1"># Sort by experience and availability</span>
+        <span class="n">available_experts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">candidate</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+            <span class="n">member_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span><span class="p">[</span><span class="n">candidate</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">member_info</span><span class="p">[</span><span class="s2">&quot;availability&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;available&quot;</span><span class="p">:</span>
+                <span class="n">available_experts</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">candidate</span><span class="p">,</span>
+                    <span class="s2">&quot;experience&quot;</span><span class="p">:</span> <span class="n">member_info</span><span class="p">[</span><span class="s2">&quot;experience&quot;</span><span class="p">],</span>
+                    <span class="s2">&quot;load&quot;</span><span class="p">:</span> <span class="n">member_info</span><span class="p">[</span><span class="s2">&quot;current_load&quot;</span><span class="p">]</span>
+                <span class="p">})</span>
 
-        # Return expert with highest experience and lowest load
-        if available_experts:
-            return sorted(available_experts, 
-                         key=lambda x: (x[&quot;experience&quot;], -x[&quot;load&quot;]), 
-                         reverse=True)[0]
-        return None
+        <span class="c1"># Return expert with highest experience and lowest load</span>
+        <span class="k">if</span> <span class="n">available_experts</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">available_experts</span><span class="p">,</span> 
+                         <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;experience&quot;</span><span class="p">],</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]),</span> 
+                         <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    def schedule_pair_programming(self, developer1, developer2, problem_description):
-        &quot;&quot;&quot;Schedule a pair programming session&quot;&quot;&quot;
-        session = {
-            &quot;type&quot;: &quot;pair_programming&quot;,
-            &quot;participants&quot;: [developer1, developer2],
-            &quot;problem&quot;: problem_description,
-            &quot;start_time&quot;: &quot;2024-03-20 14:00&quot;,
-            &quot;duration_hours&quot;: 2,
-            &quot;roles&quot;: {
-                &quot;driver&quot;: developer1,
-                &quot;navigator&quot;: developer2
-            }
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">schedule_pair_programming</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">developer1</span><span class="p">,</span> <span class="n">developer2</span><span class="p">,</span> <span class="n">problem_description</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Schedule a pair programming session&quot;&quot;&quot;</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;pair_programming&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;participants&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">developer1</span><span class="p">,</span> <span class="n">developer2</span><span class="p">],</span>
+            <span class="s2">&quot;problem&quot;</span><span class="p">:</span> <span class="n">problem_description</span><span class="p">,</span>
+            <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20 14:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;duration_hours&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">developer1</span><span class="p">,</span>
+                <span class="s2">&quot;navigator&quot;</span><span class="p">:</span> <span class="n">developer2</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-        self.active_sessions.append(session)
+        <span class="bp">self</span><span class="o">.</span><span class="n">active_sessions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">session</span><span class="p">)</span>
 
-        # Update team member availability
-        for participant in [developer1, developer2]:
-            if participant in self.team_members:
-                self.team_members[participant][&quot;current_load&quot;] += 1
+        <span class="c1"># Update team member availability</span>
+        <span class="k">for</span> <span class="n">participant</span> <span class="ow">in</span> <span class="p">[</span><span class="n">developer1</span><span class="p">,</span> <span class="n">developer2</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">participant</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">team_members</span><span class="p">[</span><span class="n">participant</span><span class="p">][</span><span class="s2">&quot;current_load&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return session
+        <span class="k">return</span> <span class="n">session</span>
 
-    def request_code_review(self, code_author, code_description, expertise_needed):
-        &quot;&quot;&quot;Request code review from appropriate team member&quot;&quot;&quot;
-        expert = self.find_expert(expertise_needed, exclude_person=code_author)
+    <span class="k">def</span><span class="w"> </span><span class="nf">request_code_review</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code_author</span><span class="p">,</span> <span class="n">code_description</span><span class="p">,</span> <span class="n">expertise_needed</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Request code review from appropriate team member&quot;&quot;&quot;</span>
+        <span class="n">expert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_expert</span><span class="p">(</span><span class="n">expertise_needed</span><span class="p">,</span> <span class="n">exclude_person</span><span class="o">=</span><span class="n">code_author</span><span class="p">)</span>
 
-        if expert:
-            review_request = {
-                &quot;type&quot;: &quot;code_review&quot;,
-                &quot;author&quot;: code_author,
-                &quot;reviewer&quot;: expert[&quot;name&quot;],
-                &quot;code_description&quot;: code_description,
-                &quot;expertise_area&quot;: expertise_needed,
-                &quot;priority&quot;: &quot;normal&quot;,
-                &quot;requested_date&quot;: &quot;2024-03-20&quot;
-            }
-            return review_request
-        else:
-            return {&quot;error&quot;: &quot;No available expert found&quot;, &quot;suggestion&quot;: &quot;Consider external consultation&quot;}
+        <span class="k">if</span> <span class="n">expert</span><span class="p">:</span>
+            <span class="n">review_request</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;code_review&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="n">code_author</span><span class="p">,</span>
+                <span class="s2">&quot;reviewer&quot;</span><span class="p">:</span> <span class="n">expert</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;code_description&quot;</span><span class="p">:</span> <span class="n">code_description</span><span class="p">,</span>
+                <span class="s2">&quot;expertise_area&quot;</span><span class="p">:</span> <span class="n">expertise_needed</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;requested_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">review_request</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;No available expert found&quot;</span><span class="p">,</span> <span class="s2">&quot;suggestion&quot;</span><span class="p">:</span> <span class="s2">&quot;Consider external consultation&quot;</span><span class="p">}</span>
 
-# Example usage
-collab_mgr = CollaborationManager()
+<span class="c1"># Example usage</span>
+<span class="n">collab_mgr</span> <span class="o">=</span> <span class="n">CollaborationManager</span><span class="p">()</span>
 
-# Register team members
-collab_mgr.register_team_member(&quot;Alice&quot;, [&quot;Python&quot;, &quot;Database&quot;], &quot;senior&quot;)
-collab_mgr.register_team_member(&quot;Bob&quot;, [&quot;Frontend&quot;, &quot;UI/UX&quot;], &quot;junior&quot;)
-collab_mgr.register_team_member(&quot;Carol&quot;, [&quot;Security&quot;, &quot;API&quot;], &quot;senior&quot;)
+<span class="c1"># Register team members</span>
+<span class="n">collab_mgr</span><span class="o">.</span><span class="n">register_team_member</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;Database&quot;</span><span class="p">],</span> <span class="s2">&quot;senior&quot;</span><span class="p">)</span>
+<span class="n">collab_mgr</span><span class="o">.</span><span class="n">register_team_member</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Frontend&quot;</span><span class="p">,</span> <span class="s2">&quot;UI/UX&quot;</span><span class="p">],</span> <span class="s2">&quot;junior&quot;</span><span class="p">)</span>
+<span class="n">collab_mgr</span><span class="o">.</span><span class="n">register_team_member</span><span class="p">(</span><span class="s2">&quot;Carol&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Security&quot;</span><span class="p">,</span> <span class="s2">&quot;API&quot;</span><span class="p">],</span> <span class="s2">&quot;senior&quot;</span><span class="p">)</span>
 
-# Find expert for database problem
-db_expert = collab_mgr.find_expert(&quot;Database&quot;)
-print(f&quot;Database expert: {db_expert}&quot;)
+<span class="c1"># Find expert for database problem</span>
+<span class="n">db_expert</span> <span class="o">=</span> <span class="n">collab_mgr</span><span class="o">.</span><span class="n">find_expert</span><span class="p">(</span><span class="s2">&quot;Database&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Database expert: </span><span class="si">{</span><span class="n">db_expert</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Schedule pair programming session
-session = collab_mgr.schedule_pair_programming(&quot;Bob&quot;, &quot;Alice&quot;, &quot;Implementing user authentication&quot;)
-print(f&quot;Pair programming session scheduled: {session[&#x27;participants&#x27;]}&quot;)
+<span class="c1"># Schedule pair programming session</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">collab_mgr</span><span class="o">.</span><span class="n">schedule_pair_programming</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;Implementing user authentication&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pair programming session scheduled: </span><span class="si">{</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;participants&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Request code review
-review_request = collab_mgr.request_code_review(&quot;Bob&quot;, &quot;Login form validation&quot;, &quot;Security&quot;)
-print(f&quot;Code review requested: {review_request}&quot;)
+<span class="c1"># Request code review</span>
+<span class="n">review_request</span> <span class="o">=</span> <span class="n">collab_mgr</span><span class="o">.</span><span class="n">request_code_review</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;Login form validation&quot;</span><span class="p">,</span> <span class="s2">&quot;Security&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Code review requested: </span><span class="si">{</span><span class="n">review_request</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="escalation-and-external-assistance-strategies">Escalation and external assistance strategies<a class="headerlink" href="#escalation-and-external-assistance-strategies" title="Permanent link">&para;</a></h3>
@@ -2118,146 +2118,146 @@ print(f&quot;Code review requested: {review_request}&quot;)
 <p><strong>Problem</strong>: The school&rsquo;s new gradebook API returns data in a format that doesn&rsquo;t match our student system&rsquo;s database schema, causing import failures.</p>
 <p><strong>Step 1: Problem analysis and categorization</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Analyze the integration problem
-integration_problem = {
-    &quot;title&quot;: &quot;Gradebook API data format mismatch&quot;,
-    &quot;category&quot;: &quot;technical&quot;,
-    &quot;severity&quot;: &quot;high&quot;,
-    &quot;symptoms&quot;: [
-        &quot;Grade import process fails with schema errors&quot;,
-        &quot;Student records cannot sync properly&quot;,
-        &quot;Manual grade entry required as workaround&quot;
-    ],
-    &quot;impact&quot;: &quot;Teachers spending 2+ hours daily on manual grade entry&quot;,
-    &quot;deadline&quot;: &quot;Must resolve before quarter-end grade reports&quot;
-}
+<pre><code class="language-python"><span class="c1"># Analyze the integration problem</span>
+<span class="n">integration_problem</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gradebook API data format mismatch&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;technical&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;symptoms&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Grade import process fails with schema errors&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Student records cannot sync properly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Manual grade entry required as workaround&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;impact&quot;</span><span class="p">:</span> <span class="s2">&quot;Teachers spending 2+ hours daily on manual grade entry&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;deadline&quot;</span><span class="p">:</span> <span class="s2">&quot;Must resolve before quarter-end grade reports&quot;</span>
+<span class="p">}</span>
 
-def analyze_api_mismatch():
-    &quot;&quot;&quot;Analyze the specific data format differences&quot;&quot;&quot;
-    our_format = {
-        &quot;student_id&quot;: &quot;integer&quot;,
-        &quot;course_code&quot;: &quot;string(10)&quot;,
-        &quot;assignment_name&quot;: &quot;string(100)&quot;,
-        &quot;grade_value&quot;: &quot;decimal(5,2)&quot;,
-        &quot;date_recorded&quot;: &quot;date&quot;
-    }
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_api_mismatch</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze the specific data format differences&quot;&quot;&quot;</span>
+    <span class="n">our_format</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;student_id&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;course_code&quot;</span><span class="p">:</span> <span class="s2">&quot;string(10)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;assignment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;string(100)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;grade_value&quot;</span><span class="p">:</span> <span class="s2">&quot;decimal(5,2)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;date_recorded&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span>
+    <span class="p">}</span>
 
-    their_format = {
-        &quot;pupil_identifier&quot;: &quot;string&quot;,
-        &quot;class_id&quot;: &quot;string(20)&quot;,
-        &quot;task_description&quot;: &quot;string(255)&quot;,
-        &quot;score&quot;: &quot;string&quot;,  # includes letters like &quot;85%&quot; or &quot;B+&quot;
-        &quot;entry_timestamp&quot;: &quot;unix_timestamp&quot;
-    }
+    <span class="n">their_format</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;pupil_identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="s2">&quot;string(20)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;task_description&quot;</span><span class="p">:</span> <span class="s2">&quot;string(255)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>  <span class="c1"># includes letters like &quot;85%&quot; or &quot;B+&quot;</span>
+        <span class="s2">&quot;entry_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;unix_timestamp&quot;</span>
+    <span class="p">}</span>
 
-    return {
-        &quot;format_differences&quot;: [
-            &quot;Student ID type mismatch (int vs string)&quot;,
-            &quot;Course identifier length difference&quot;,
-            &quot;Grade format complexity (numeric vs mixed)&quot;,
-            &quot;Date format incompatibility&quot;
-        ],
-        &quot;conversion_needed&quot;: True,
-        &quot;estimated_effort&quot;: &quot;2-3 days&quot;
-    }
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;format_differences&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Student ID type mismatch (int vs string)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Course identifier length difference&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Grade format complexity (numeric vs mixed)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Date format incompatibility&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;conversion_needed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;2-3 days&quot;</span>
+    <span class="p">}</span>
 </code></pre>
 </div>
 <p><strong>Step 2: Research and information gathering</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Research potential solutions
-research_strategy = {
-    &quot;documentation_review&quot;: [
-        &quot;Gradebook API documentation for data transformation options&quot;,
-        &quot;Student system database schema documentation&quot;,
-        &quot;Data conversion library documentation&quot;
-    ],
-    &quot;community_search&quot;: [
-        &quot;Search: &#x27;API data format conversion Python&#x27;&quot;,
-        &quot;Search: &#x27;student information system integration&#x27;&quot;,
-        &quot;Check GitHub for similar integration projects&quot;
-    ],
-    &quot;vendor_consultation&quot;: [
-        &quot;Contact gradebook vendor technical support&quot;,
-        &quot;Ask about alternative API endpoints or formats&quot;,
-        &quot;Request integration examples or sample code&quot;
-    ]
-}
+<pre><code class="language-python"><span class="c1"># Research potential solutions</span>
+<span class="n">research_strategy</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;documentation_review&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Gradebook API documentation for data transformation options&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Student system database schema documentation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Data conversion library documentation&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;community_search&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Search: &#39;API data format conversion Python&#39;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Search: &#39;student information system integration&#39;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Check GitHub for similar integration projects&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;vendor_consultation&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Contact gradebook vendor technical support&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Ask about alternative API endpoints or formats&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Request integration examples or sample code&quot;</span>
+    <span class="p">]</span>
+<span class="p">}</span>
 
-def research_solutions():
-    &quot;&quot;&quot;Document research findings&quot;&quot;&quot;
-    return {
-        &quot;potential_solutions&quot;: [
-            &quot;Build custom data transformation layer&quot;,
-            &quot;Use vendor-provided data mapping tools&quot;,
-            &quot;Implement intermediate database for format conversion&quot;,
-            &quot;Request API format changes from vendor&quot;
-        ],
-        &quot;time_estimates&quot;: {
-            &quot;custom_transformation&quot;: &quot;3-4 days&quot;,
-            &quot;vendor_tools&quot;: &quot;1-2 days if available&quot;,
-            &quot;intermediate_database&quot;: &quot;5-7 days&quot;,
-            &quot;api_changes&quot;: &quot;2-8 weeks (vendor dependent)&quot;
-        }
-    }
+<span class="k">def</span><span class="w"> </span><span class="nf">research_solutions</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Document research findings&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;potential_solutions&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Build custom data transformation layer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Use vendor-provided data mapping tools&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Implement intermediate database for format conversion&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Request API format changes from vendor&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;time_estimates&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;custom_transformation&quot;</span><span class="p">:</span> <span class="s2">&quot;3-4 days&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;vendor_tools&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days if available&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;intermediate_database&quot;</span><span class="p">:</span> <span class="s2">&quot;5-7 days&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;api_changes&quot;</span><span class="p">:</span> <span class="s2">&quot;2-8 weeks (vendor dependent)&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 </code></pre>
 </div>
 <p><strong>Step 3: Collaborative problem-solving</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Engage team collaboration
-collaboration_plan = {
-    &quot;pair_programming&quot;: {
-        &quot;participants&quot;: [&quot;junior_dev&quot;, &quot;senior_dev&quot;],
-        &quot;focus&quot;: &quot;Data transformation logic development&quot;,
-        &quot;duration&quot;: &quot;2 days&quot;
-    },
-    &quot;code_review&quot;: {
-        &quot;reviewer&quot;: &quot;database_expert&quot;,
-        &quot;focus&quot;: &quot;Schema mapping and data integrity&quot;,
-        &quot;timeline&quot;: &quot;1 day&quot;
-    },
-    &quot;testing_support&quot;: {
-        &quot;tester&quot;: &quot;qa_specialist&quot;,
-        &quot;focus&quot;: &quot;Integration testing with sample data&quot;,
-        &quot;timeline&quot;: &quot;1 day&quot;
-    }
-}
+<pre><code class="language-python"><span class="c1"># Engage team collaboration</span>
+<span class="n">collaboration_plan</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;pair_programming&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;participants&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;junior_dev&quot;</span><span class="p">,</span> <span class="s2">&quot;senior_dev&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Data transformation logic development&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="s2">&quot;2 days&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;code_review&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;reviewer&quot;</span><span class="p">:</span> <span class="s2">&quot;database_expert&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Schema mapping and data integrity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 day&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;testing_support&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tester&quot;</span><span class="p">:</span> <span class="s2">&quot;qa_specialist&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Integration testing with sample data&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 day&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-def implement_solution_collaboratively():
-    &quot;&quot;&quot;Coordinate team effort for solution implementation&quot;&quot;&quot;
-    return {
-        &quot;development_approach&quot;: &quot;Pair programming for core logic&quot;,
-        &quot;quality_assurance&quot;: &quot;Peer review and testing&quot;,
-        &quot;knowledge_sharing&quot;: &quot;Document solution for future reference&quot;,
-        &quot;risk_mitigation&quot;: &quot;Parallel development of backup solution&quot;
-    }
+<span class="k">def</span><span class="w"> </span><span class="nf">implement_solution_collaboratively</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coordinate team effort for solution implementation&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;development_approach&quot;</span><span class="p">:</span> <span class="s2">&quot;Pair programming for core logic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;quality_assurance&quot;</span><span class="p">:</span> <span class="s2">&quot;Peer review and testing&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;knowledge_sharing&quot;</span><span class="p">:</span> <span class="s2">&quot;Document solution for future reference&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;risk_mitigation&quot;</span><span class="p">:</span> <span class="s2">&quot;Parallel development of backup solution&quot;</span>
+    <span class="p">}</span>
 </code></pre>
 </div>
 <p><strong>Step 4: Escalation if needed</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Escalation plan if initial approaches fail
-escalation_strategy = {
-    &quot;level_1&quot;: {
-        &quot;action&quot;: &quot;Consult senior architect&quot;,
-        &quot;purpose&quot;: &quot;Review technical approach and alternatives&quot;,
-        &quot;timeline&quot;: &quot;Same day&quot;
-    },
-    &quot;level_2&quot;: {
-        &quot;action&quot;: &quot;Engage vendor technical support&quot;,
-        &quot;purpose&quot;: &quot;Request priority assistance or API modifications&quot;,
-        &quot;timeline&quot;: &quot;1-2 days&quot;
-    },
-    &quot;level_3&quot;: {
-        &quot;action&quot;: &quot;Consider external consulting&quot;,
-        &quot;purpose&quot;: &quot;Bring in integration specialist&quot;,
-        &quot;cost_estimate&quot;: &quot;$5,000-10,000&quot;,
-        &quot;timeline&quot;: &quot;1 week&quot;
-    },
-    &quot;level_4&quot;: {
-        &quot;action&quot;: &quot;Management decision on alternative solutions&quot;,
-        &quot;purpose&quot;: &quot;Evaluate different gradebook vendors or manual processes&quot;,
-        &quot;timeline&quot;: &quot;2-4 weeks&quot;
-    }
-}
+<pre><code class="language-python"><span class="c1"># Escalation plan if initial approaches fail</span>
+<span class="n">escalation_strategy</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Consult senior architect&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Review technical approach and alternatives&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;Same day&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Engage vendor technical support&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Request priority assistance or API modifications&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Consider external consulting&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Bring in integration specialist&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;cost_estimate&quot;</span><span class="p">:</span> <span class="s2">&quot;$5,000-10,000&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 week&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Management decision on alternative solutions&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Evaluate different gradebook vendors or manual processes&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;2-4 weeks&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -2704,6 +2704,8 @@ escalation_strategy = {
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

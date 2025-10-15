@@ -1640,159 +1640,159 @@
 </ul>
 <p><strong>Example: Testing a BankAccount class</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">import unittest
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
 
-class BankAccount:
-    &quot;&quot;&quot;Simple bank account class for demonstration.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple bank account class for demonstration.&quot;&quot;&quot;</span>
 
-    def __init__(self, account_holder, initial_balance=0):
-        &quot;&quot;&quot;
-        Initialize a new bank account.
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_holder</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a new bank account.</span>
 
-        Args:
-            account_holder (str): Name of the account holder
-            initial_balance (float): Starting balance (default 0)
+<span class="sd">        Args:</span>
+<span class="sd">            account_holder (str): Name of the account holder</span>
+<span class="sd">            initial_balance (float): Starting balance (default 0)</span>
 
-        Raises:
-            ValueError: If initial_balance is negative
-        &quot;&quot;&quot;
-        if initial_balance &lt; 0:
-            raise ValueError(&quot;Initial balance cannot be negative&quot;)
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If initial_balance is negative</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">initial_balance</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Initial balance cannot be negative&quot;</span><span class="p">)</span>
 
-        self.account_holder = account_holder
-        self.balance = initial_balance
-        self.transaction_history = []
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_holder</span> <span class="o">=</span> <span class="n">account_holder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def deposit(self, amount):
-        &quot;&quot;&quot;
-        Deposit money into the account.
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deposit money into the account.</span>
 
-        Args:
-            amount (float): Amount to deposit
+<span class="sd">        Args:</span>
+<span class="sd">            amount (float): Amount to deposit</span>
 
-        Returns:
-            float: New balance
+<span class="sd">        Returns:</span>
+<span class="sd">            float: New balance</span>
 
-        Raises:
-            ValueError: If amount is not positive
-        &quot;&quot;&quot;
-        if amount &lt;= 0:
-            raise ValueError(&quot;Deposit amount must be positive&quot;)
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If amount is not positive</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Deposit amount must be positive&quot;</span><span class="p">)</span>
 
-        self.balance += amount
-        self.transaction_history.append(f&quot;Deposit: +${amount:.2f}&quot;)
-        return self.balance
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Deposit: +$</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
 
-    def withdraw(self, amount):
-        &quot;&quot;&quot;
-        Withdraw money from the account.
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Withdraw money from the account.</span>
 
-        Args:
-            amount (float): Amount to withdraw
+<span class="sd">        Args:</span>
+<span class="sd">            amount (float): Amount to withdraw</span>
 
-        Returns:
-            float: New balance
+<span class="sd">        Returns:</span>
+<span class="sd">            float: New balance</span>
 
-        Raises:
-            ValueError: If amount is invalid or insufficient funds
-        &quot;&quot;&quot;
-        if amount &lt;= 0:
-            raise ValueError(&quot;Withdrawal amount must be positive&quot;)
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If amount is invalid or insufficient funds</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Withdrawal amount must be positive&quot;</span><span class="p">)</span>
 
-        if amount &gt; self.balance:
-            raise ValueError(&quot;Insufficient funds&quot;)
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Insufficient funds&quot;</span><span class="p">)</span>
 
-        self.balance -= amount
-        self.transaction_history.append(f&quot;Withdrawal: -${amount:.2f}&quot;)
-        return self.balance
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Withdrawal: -$</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
 
-    def get_balance(self):
-        &quot;&quot;&quot;Get current account balance.&quot;&quot;&quot;
-        return self.balance
-
-
-class TestBankAccount(unittest.TestCase):
-    &quot;&quot;&quot;Unit tests for BankAccount class.&quot;&quot;&quot;
-
-    def setUp(self):
-        &quot;&quot;&quot;Set up test fixtures before each test method.&quot;&quot;&quot;
-        self.account = BankAccount(&quot;Alice Johnson&quot;, 100.0)
-
-    def test_initialization_with_valid_balance(self):
-        &quot;&quot;&quot;Test account creation with valid initial balance.&quot;&quot;&quot;
-        account = BankAccount(&quot;Bob Smith&quot;, 50.0)
-        self.assertEqual(account.account_holder, &quot;Bob Smith&quot;)
-        self.assertEqual(account.balance, 50.0)
-        self.assertEqual(len(account.transaction_history), 0)
-
-    def test_initialization_with_zero_balance(self):
-        &quot;&quot;&quot;Test account creation with zero initial balance.&quot;&quot;&quot;
-        account = BankAccount(&quot;Charlie Brown&quot;)
-        self.assertEqual(account.balance, 0.0)
-
-    def test_initialization_with_negative_balance_raises_error(self):
-        &quot;&quot;&quot;Test that negative initial balance raises ValueError.&quot;&quot;&quot;
-        with self.assertRaises(ValueError) as context:
-            BankAccount(&quot;Dave Wilson&quot;, -10.0)
-
-        self.assertIn(&quot;negative&quot;, str(context.exception).lower())
-
-    def test_deposit_positive_amount(self):
-        &quot;&quot;&quot;Test depositing a positive amount.&quot;&quot;&quot;
-        new_balance = self.account.deposit(25.0)
-        self.assertEqual(new_balance, 125.0)
-        self.assertEqual(self.account.get_balance(), 125.0)
-        self.assertIn(&quot;Deposit: +$25.00&quot;, self.account.transaction_history)
-
-    def test_deposit_zero_amount_raises_error(self):
-        &quot;&quot;&quot;Test that depositing zero raises ValueError.&quot;&quot;&quot;
-        with self.assertRaises(ValueError) as context:
-            self.account.deposit(0)
-
-        self.assertIn(&quot;positive&quot;, str(context.exception).lower())
-
-    def test_deposit_negative_amount_raises_error(self):
-        &quot;&quot;&quot;Test that depositing negative amount raises ValueError.&quot;&quot;&quot;
-        with self.assertRaises(ValueError):
-            self.account.deposit(-10.0)
-
-    def test_withdraw_valid_amount(self):
-        &quot;&quot;&quot;Test withdrawing a valid amount.&quot;&quot;&quot;
-        new_balance = self.account.withdraw(30.0)
-        self.assertEqual(new_balance, 70.0)
-        self.assertEqual(self.account.get_balance(), 70.0)
-        self.assertIn(&quot;Withdrawal: -$30.00&quot;, self.account.transaction_history)
-
-    def test_withdraw_entire_balance(self):
-        &quot;&quot;&quot;Test withdrawing the entire balance.&quot;&quot;&quot;
-        new_balance = self.account.withdraw(100.0)
-        self.assertEqual(new_balance, 0.0)
-
-    def test_withdraw_more_than_balance_raises_error(self):
-        &quot;&quot;&quot;Test that withdrawing more than balance raises ValueError.&quot;&quot;&quot;
-        with self.assertRaises(ValueError) as context:
-            self.account.withdraw(150.0)
-
-        self.assertIn(&quot;insufficient&quot;, str(context.exception).lower())
-
-    def test_withdraw_zero_amount_raises_error(self):
-        &quot;&quot;&quot;Test that withdrawing zero raises ValueError.&quot;&quot;&quot;
-        with self.assertRaises(ValueError):
-            self.account.withdraw(0)
-
-    def test_multiple_transactions(self):
-        &quot;&quot;&quot;Test multiple deposits and withdrawals.&quot;&quot;&quot;
-        self.account.deposit(50.0)  # Balance: 150
-        self.account.withdraw(25.0)  # Balance: 125
-        self.account.deposit(10.0)   # Balance: 135
-
-        self.assertEqual(self.account.get_balance(), 135.0)
-        self.assertEqual(len(self.account.transaction_history), 3)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current account balance.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
 
 
-# Running the tests
-if __name__ == &#x27;__main__&#x27;:
-    unittest.main()
+<span class="k">class</span><span class="w"> </span><span class="nc">TestBankAccount</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unit tests for BankAccount class.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up test fixtures before each test method.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_initialization_with_valid_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test account creation with valid initial balance.&quot;&quot;&quot;</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;Bob Smith&quot;</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">account_holder</span><span class="p">,</span> <span class="s2">&quot;Bob Smith&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_initialization_with_zero_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test account creation with zero initial balance.&quot;&quot;&quot;</span>
+        <span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;Charlie Brown&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_initialization_with_negative_balance_raises_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that negative initial balance raises ValueError.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;Dave Wilson&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;negative&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_deposit_positive_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test depositing a positive amount.&quot;&quot;&quot;</span>
+        <span class="n">new_balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">new_balance</span><span class="p">,</span> <span class="mf">125.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span> <span class="mf">125.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;Deposit: +$25.00&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_deposit_zero_amount_raises_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that depositing zero raises ValueError.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;positive&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_deposit_negative_amount_raises_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that depositing negative amount raises ValueError.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_withdraw_valid_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test withdrawing a valid amount.&quot;&quot;&quot;</span>
+        <span class="n">new_balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mf">30.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">new_balance</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span> <span class="mf">70.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;Withdrawal: -$30.00&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_withdraw_entire_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test withdrawing the entire balance.&quot;&quot;&quot;</span>
+        <span class="n">new_balance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mf">100.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">new_balance</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_withdraw_more_than_balance_raises_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that withdrawing more than balance raises ValueError.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mf">150.0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;insufficient&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_withdraw_zero_amount_raises_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that withdrawing zero raises ValueError.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_multiple_transactions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test multiple deposits and withdrawals.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mf">50.0</span><span class="p">)</span>  <span class="c1"># Balance: 150</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mf">25.0</span><span class="p">)</span>  <span class="c1"># Balance: 125</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>   <span class="c1"># Balance: 135</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">get_balance</span><span class="p">(),</span> <span class="mf">135.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+
+
+<span class="c1"># Running the tests</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="subsystem-testing">Subsystem Testing<a class="headerlink" href="#subsystem-testing" title="Permanent link">&para;</a></h3>
@@ -1800,167 +1800,167 @@ if __name__ == &#x27;__main__&#x27;:
 <p>Subsystem testing (also called integration testing) verifies that different components of your system work correctly when combined. It focuses on the interfaces and interactions between classes.</p>
 <p><strong>Example: Testing a Library Management System</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Book:
-    &quot;&quot;&quot;Represents a book in the library.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Book</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a book in the library.&quot;&quot;&quot;</span>
 
-    def __init__(self, isbn, title, author):
-        self.isbn = isbn
-        self.title = title
-        self.author = author
-        self.is_available = True
-        self.borrower = None
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrower</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def check_out(self, borrower_name):
-        &quot;&quot;&quot;Check out the book to a borrower.&quot;&quot;&quot;
-        if not self.is_available:
-            raise ValueError(f&quot;Book &#x27;{self.title}&#x27; is already checked out&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borrower_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check out the book to a borrower.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Book &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39; is already checked out&quot;</span><span class="p">)</span>
 
-        self.is_available = False
-        self.borrower = borrower_name
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrower</span> <span class="o">=</span> <span class="n">borrower_name</span>
 
-    def return_book(self):
-        &quot;&quot;&quot;Return the book to the library.&quot;&quot;&quot;
-        if self.is_available:
-            raise ValueError(f&quot;Book &#x27;{self.title}&#x27; is not currently checked out&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_book</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the book to the library.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Book &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39; is not currently checked out&quot;</span><span class="p">)</span>
 
-        self.is_available = True
-        self.borrower = None
-
-
-class Library:
-    &quot;&quot;&quot;Manages a collection of books and borrowing operations.&quot;&quot;&quot;
-
-    def __init__(self, name):
-        self.name = name
-        self.books = {}  # isbn -&gt; Book
-        self.borrower_records = {}  # borrower_name -&gt; [isbn_list]
-
-    def add_book(self, book):
-        &quot;&quot;&quot;Add a book to the library collection.&quot;&quot;&quot;
-        if book.isbn in self.books:
-            raise ValueError(f&quot;Book with ISBN {book.isbn} already exists&quot;)
-
-        self.books[book.isbn] = book
-
-    def find_book(self, isbn):
-        &quot;&quot;&quot;Find a book by ISBN.&quot;&quot;&quot;
-        return self.books.get(isbn)
-
-    def check_out_book(self, isbn, borrower_name):
-        &quot;&quot;&quot;Check out a book to a borrower.&quot;&quot;&quot;
-        book = self.find_book(isbn)
-        if not book:
-            raise ValueError(f&quot;Book with ISBN {isbn} not found&quot;)
-
-        book.check_out(borrower_name)
-
-        # Update borrower records
-        if borrower_name not in self.borrower_records:
-            self.borrower_records[borrower_name] = []
-        self.borrower_records[borrower_name].append(isbn)
-
-    def return_book(self, isbn, borrower_name):
-        &quot;&quot;&quot;Return a book from a borrower.&quot;&quot;&quot;
-        book = self.find_book(isbn)
-        if not book:
-            raise ValueError(f&quot;Book with ISBN {isbn} not found&quot;)
-
-        if book.borrower != borrower_name:
-            raise ValueError(f&quot;Book is not checked out to {borrower_name}&quot;)
-
-        book.return_book()
-
-        # Update borrower records
-        if borrower_name in self.borrower_records:
-            self.borrower_records[borrower_name].remove(isbn)
-
-    def get_books_by_borrower(self, borrower_name):
-        &quot;&quot;&quot;Get list of books currently borrowed by a person.&quot;&quot;&quot;
-        return self.borrower_records.get(borrower_name, [])
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrower</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-class TestLibrarySubsystem(unittest.TestCase):
-    &quot;&quot;&quot;Integration tests for Library and Book classes working together.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Library</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manages a collection of books and borrowing operations.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        &quot;&quot;&quot;Set up test fixtures.&quot;&quot;&quot;
-        self.library = Library(&quot;Central Library&quot;)
-        self.book1 = Book(&quot;978-0-13-110362-7&quot;, &quot;Clean Code&quot;, &quot;Robert Martin&quot;)
-        self.book2 = Book(&quot;978-0-13-235088-4&quot;, &quot;Clean Architecture&quot;, &quot;Robert Martin&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">books</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># isbn -&gt; Book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># borrower_name -&gt; [isbn_list]</span>
 
-        self.library.add_book(self.book1)
-        self.library.add_book(self.book2)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a book to the library collection.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">book</span><span class="o">.</span><span class="n">isbn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">books</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Book with ISBN </span><span class="si">{</span><span class="n">book</span><span class="o">.</span><span class="n">isbn</span><span class="si">}</span><span class="s2"> already exists&quot;</span><span class="p">)</span>
 
-    def test_complete_borrowing_workflow(self):
-        &quot;&quot;&quot;Test the complete process of borrowing and returning a book.&quot;&quot;&quot;
-        borrower = &quot;Alice Johnson&quot;
-        isbn = &quot;978-0-13-110362-7&quot;
+        <span class="bp">self</span><span class="o">.</span><span class="n">books</span><span class="p">[</span><span class="n">book</span><span class="o">.</span><span class="n">isbn</span><span class="p">]</span> <span class="o">=</span> <span class="n">book</span>
 
-        # Initially, book should be available
-        book = self.library.find_book(isbn)
-        self.assertTrue(book.is_available)
-        self.assertIsNone(book.borrower)
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find a book by ISBN.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">books</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
 
-        # Check out the book
-        self.library.check_out_book(isbn, borrower)
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_out_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">borrower_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check out a book to a borrower.&quot;&quot;&quot;</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">book</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Book with ISBN </span><span class="si">{</span><span class="n">isbn</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
 
-        # Verify book is checked out
-        self.assertFalse(book.is_available)
-        self.assertEqual(book.borrower, borrower)
+        <span class="n">book</span><span class="o">.</span><span class="n">check_out</span><span class="p">(</span><span class="n">borrower_name</span><span class="p">)</span>
 
-        # Verify borrower records are updated
-        borrowed_books = self.library.get_books_by_borrower(borrower)
-        self.assertIn(isbn, borrowed_books)
+        <span class="c1"># Update borrower records</span>
+        <span class="k">if</span> <span class="n">borrower_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span><span class="p">[</span><span class="n">borrower_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span><span class="p">[</span><span class="n">borrower_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
 
-        # Return the book
-        self.library.return_book(isbn, borrower)
+    <span class="k">def</span><span class="w"> </span><span class="nf">return_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">borrower_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a book from a borrower.&quot;&quot;&quot;</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">book</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Book with ISBN </span><span class="si">{</span><span class="n">isbn</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
 
-        # Verify book is available again
-        self.assertTrue(book.is_available)
-        self.assertIsNone(book.borrower)
+        <span class="k">if</span> <span class="n">book</span><span class="o">.</span><span class="n">borrower</span> <span class="o">!=</span> <span class="n">borrower_name</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Book is not checked out to </span><span class="si">{</span><span class="n">borrower_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Verify borrower records are updated
-        borrowed_books = self.library.get_books_by_borrower(borrower)
-        self.assertNotIn(isbn, borrowed_books)
+        <span class="n">book</span><span class="o">.</span><span class="n">return_book</span><span class="p">()</span>
 
-    def test_multiple_borrowers_different_books(self):
-        &quot;&quot;&quot;Test multiple people borrowing different books.&quot;&quot;&quot;
-        alice_isbn = &quot;978-0-13-110362-7&quot;
-        bob_isbn = &quot;978-0-13-235088-4&quot;
+        <span class="c1"># Update borrower records</span>
+        <span class="k">if</span> <span class="n">borrower_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span><span class="p">[</span><span class="n">borrower_name</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
 
-        # Both borrowers check out different books
-        self.library.check_out_book(alice_isbn, &quot;Alice&quot;)
-        self.library.check_out_book(bob_isbn, &quot;Bob&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_books_by_borrower</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borrower_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of books currently borrowed by a person.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">borrower_records</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">borrower_name</span><span class="p">,</span> <span class="p">[])</span>
 
-        # Verify both books are checked out to correct people
-        alice_book = self.library.find_book(alice_isbn)
-        bob_book = self.library.find_book(bob_isbn)
 
-        self.assertEqual(alice_book.borrower, &quot;Alice&quot;)
-        self.assertEqual(bob_book.borrower, &quot;Bob&quot;)
+<span class="k">class</span><span class="w"> </span><span class="nc">TestLibrarySubsystem</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integration tests for Library and Book classes working together.&quot;&quot;&quot;</span>
 
-        # Verify borrower records
-        self.assertIn(alice_isbn, self.library.get_books_by_borrower(&quot;Alice&quot;))
-        self.assertIn(bob_isbn, self.library.get_books_by_borrower(&quot;Bob&quot;))
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up test fixtures.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span> <span class="o">=</span> <span class="n">Library</span><span class="p">(</span><span class="s2">&quot;Central Library&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">book1</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">,</span> <span class="s2">&quot;Clean Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Robert Martin&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">book2</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="s2">&quot;978-0-13-235088-4&quot;</span><span class="p">,</span> <span class="s2">&quot;Clean Architecture&quot;</span><span class="p">,</span> <span class="s2">&quot;Robert Martin&quot;</span><span class="p">)</span>
 
-    def test_error_handling_integration(self):
-        &quot;&quot;&quot;Test error handling across subsystem boundaries.&quot;&quot;&quot;
-        isbn = &quot;978-0-13-110362-7&quot;
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">add_book</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">book1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">add_book</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">book2</span><span class="p">)</span>
 
-        # Check out book to Alice
-        self.library.check_out_book(isbn, &quot;Alice&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_complete_borrowing_workflow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the complete process of borrowing and returning a book.&quot;&quot;&quot;</span>
+        <span class="n">borrower</span> <span class="o">=</span> <span class="s2">&quot;Alice Johnson&quot;</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="s2">&quot;978-0-13-110362-7&quot;</span>
 
-        # Try to check out same book to Bob - should fail
-        with self.assertRaises(ValueError) as context:
-            self.library.check_out_book(isbn, &quot;Bob&quot;)
+        <span class="c1"># Initially, book should be available</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">find_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">is_available</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">borrower</span><span class="p">)</span>
 
-        self.assertIn(&quot;already checked out&quot;, str(context.exception))
+        <span class="c1"># Check out the book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="n">borrower</span><span class="p">)</span>
 
-        # Try to return book as wrong person - should fail
-        with self.assertRaises(ValueError) as context:
-            self.library.return_book(isbn, &quot;Bob&quot;)
+        <span class="c1"># Verify book is checked out</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">is_available</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">borrower</span><span class="p">,</span> <span class="n">borrower</span><span class="p">)</span>
 
-        self.assertIn(&quot;not checked out to Bob&quot;, str(context.exception))
+        <span class="c1"># Verify borrower records are updated</span>
+        <span class="n">borrowed_books</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="n">borrower</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="n">borrowed_books</span><span class="p">)</span>
+
+        <span class="c1"># Return the book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">return_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="n">borrower</span><span class="p">)</span>
+
+        <span class="c1"># Verify book is available again</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">is_available</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNone</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">borrower</span><span class="p">)</span>
+
+        <span class="c1"># Verify borrower records are updated</span>
+        <span class="n">borrowed_books</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="n">borrower</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotIn</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="n">borrowed_books</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_multiple_borrowers_different_books</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test multiple people borrowing different books.&quot;&quot;&quot;</span>
+        <span class="n">alice_isbn</span> <span class="o">=</span> <span class="s2">&quot;978-0-13-110362-7&quot;</span>
+        <span class="n">bob_isbn</span> <span class="o">=</span> <span class="s2">&quot;978-0-13-235088-4&quot;</span>
+
+        <span class="c1"># Both borrowers check out different books</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="n">alice_isbn</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="n">bob_isbn</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Verify both books are checked out to correct people</span>
+        <span class="n">alice_book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">find_book</span><span class="p">(</span><span class="n">alice_isbn</span><span class="p">)</span>
+        <span class="n">bob_book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">find_book</span><span class="p">(</span><span class="n">bob_isbn</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">alice_book</span><span class="o">.</span><span class="n">borrower</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">bob_book</span><span class="o">.</span><span class="n">borrower</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Verify borrower records</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">alice_isbn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">bob_isbn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_error_handling_integration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test error handling across subsystem boundaries.&quot;&quot;&quot;</span>
+        <span class="n">isbn</span> <span class="o">=</span> <span class="s2">&quot;978-0-13-110362-7&quot;</span>
+
+        <span class="c1"># Check out book to Alice</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Try to check out same book to Bob - should fail</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;already checked out&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">))</span>
+
+        <span class="c1"># Try to return book as wrong person - should fail</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">return_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;not checked out to Bob&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">))</span>
 </code></pre>
 </div>
 <h3 id="system-testing">System Testing<a class="headerlink" href="#system-testing" title="Permanent link">&para;</a></h3>
@@ -1968,57 +1968,57 @@ class TestLibrarySubsystem(unittest.TestCase):
 <p>System testing evaluates the system as a whole, testing complete user workflows and scenarios. It verifies that all components work together to meet business requirements.</p>
 <p><strong>Example: End-to-end Library System Test</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestLibrarySystem(unittest.TestCase):
-    &quot;&quot;&quot;System-level tests for complete library workflows.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestLibrarySystem</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;System-level tests for complete library workflows.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        &quot;&quot;&quot;Set up a complete library system.&quot;&quot;&quot;
-        self.library = Library(&quot;University Library&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up a complete library system.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span> <span class="o">=</span> <span class="n">Library</span><span class="p">(</span><span class="s2">&quot;University Library&quot;</span><span class="p">)</span>
 
-        # Add multiple books
-        books_data = [
-            (&quot;978-0-13-110362-7&quot;, &quot;Clean Code&quot;, &quot;Robert Martin&quot;),
-            (&quot;978-0-13-235088-4&quot;, &quot;Clean Architecture&quot;, &quot;Robert Martin&quot;),
-            (&quot;978-0-134-494162&quot;, &quot;Design Patterns&quot;, &quot;Gang of Four&quot;),
-        ]
+        <span class="c1"># Add multiple books</span>
+        <span class="n">books_data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">,</span> <span class="s2">&quot;Clean Code&quot;</span><span class="p">,</span> <span class="s2">&quot;Robert Martin&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;978-0-13-235088-4&quot;</span><span class="p">,</span> <span class="s2">&quot;Clean Architecture&quot;</span><span class="p">,</span> <span class="s2">&quot;Robert Martin&quot;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;978-0-134-494162&quot;</span><span class="p">,</span> <span class="s2">&quot;Design Patterns&quot;</span><span class="p">,</span> <span class="s2">&quot;Gang of Four&quot;</span><span class="p">),</span>
+        <span class="p">]</span>
 
-        for isbn, title, author in books_data:
-            book = Book(isbn, title, author)
-            self.library.add_book(book)
+        <span class="k">for</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span> <span class="ow">in</span> <span class="n">books_data</span><span class="p">:</span>
+            <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="p">(</span><span class="n">isbn</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">add_book</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
 
-    def test_library_daily_operations(self):
-        &quot;&quot;&quot;Test a typical day&#x27;s operations in the library.&quot;&quot;&quot;
-        # Morning: Students arrive and borrow books
-        self.library.check_out_book(&quot;978-0-13-110362-7&quot;, &quot;Alice&quot;)
-        self.library.check_out_book(&quot;978-0-13-235088-4&quot;, &quot;Bob&quot;)
-        self.library.check_out_book(&quot;978-0-134-494162&quot;, &quot;Charlie&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_library_daily_operations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test a typical day&#39;s operations in the library.&quot;&quot;&quot;</span>
+        <span class="c1"># Morning: Students arrive and borrow books</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="s2">&quot;978-0-13-235088-4&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="s2">&quot;978-0-134-494162&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">)</span>
 
-        # Check that all books are now unavailable
-        for isbn in [&quot;978-0-13-110362-7&quot;, &quot;978-0-13-235088-4&quot;, &quot;978-0-134-494162&quot;]:
-            book = self.library.find_book(isbn)
-            self.assertFalse(book.is_available)
+        <span class="c1"># Check that all books are now unavailable</span>
+        <span class="k">for</span> <span class="n">isbn</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">,</span> <span class="s2">&quot;978-0-13-235088-4&quot;</span><span class="p">,</span> <span class="s2">&quot;978-0-134-494162&quot;</span><span class="p">]:</span>
+            <span class="n">book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">find_book</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">book</span><span class="o">.</span><span class="n">is_available</span><span class="p">)</span>
 
-        # Afternoon: Some students return books
-        self.library.return_book(&quot;978-0-13-110362-7&quot;, &quot;Alice&quot;)
-        self.library.return_book(&quot;978-0-13-235088-4&quot;, &quot;Bob&quot;)
+        <span class="c1"># Afternoon: Some students return books</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">return_book</span><span class="p">(</span><span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">return_book</span><span class="p">(</span><span class="s2">&quot;978-0-13-235088-4&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
 
-        # New student borrows a returned book
-        self.library.check_out_book(&quot;978-0-13-110362-7&quot;, &quot;Diana&quot;)
+        <span class="c1"># New student borrows a returned book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">check_out_book</span><span class="p">(</span><span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">,</span> <span class="s2">&quot;Diana&quot;</span><span class="p">)</span>
 
-        # End of day verification
-        alice_books = self.library.get_books_by_borrower(&quot;Alice&quot;)
-        bob_books = self.library.get_books_by_borrower(&quot;Bob&quot;)
-        charlie_books = self.library.get_books_by_borrower(&quot;Charlie&quot;)
-        diana_books = self.library.get_books_by_borrower(&quot;Diana&quot;)
+        <span class="c1"># End of day verification</span>
+        <span class="n">alice_books</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
+        <span class="n">bob_books</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span>
+        <span class="n">charlie_books</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="s2">&quot;Charlie&quot;</span><span class="p">)</span>
+        <span class="n">diana_books</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">library</span><span class="o">.</span><span class="n">get_books_by_borrower</span><span class="p">(</span><span class="s2">&quot;Diana&quot;</span><span class="p">)</span>
 
-        self.assertEqual(len(alice_books), 0)  # Returned her book
-        self.assertEqual(len(bob_books), 0)    # Returned his book
-        self.assertEqual(len(charlie_books), 1)  # Still has one book
-        self.assertEqual(len(diana_books), 1)    # Borrowed Alice&#x27;s returned book
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alice_books</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Returned her book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bob_books</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>    <span class="c1"># Returned his book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">charlie_books</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Still has one book</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">diana_books</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># Borrowed Alice&#39;s returned book</span>
 
-        # Verify specific book locations
-        self.assertEqual(charlie_books[0], &quot;978-0-134-494162&quot;)
-        self.assertEqual(diana_books[0], &quot;978-0-13-110362-7&quot;)
+        <span class="c1"># Verify specific book locations</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">charlie_books</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;978-0-134-494162&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">diana_books</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;978-0-13-110362-7&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="quality-assurance-practices">Quality Assurance Practices<a class="headerlink" href="#quality-assurance-practices" title="Permanent link">&para;</a></h2>
@@ -2075,49 +2075,49 @@ class TestLibrarySubsystem(unittest.TestCase):
 <p><strong>1. Test-Driven Development (TDD) Basics</strong></p>
 <p>Write tests before implementing functionality:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestCalculator(unittest.TestCase):
-    &quot;&quot;&quot;Tests for Calculator class - written before implementation.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestCalculator</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests for Calculator class - written before implementation.&quot;&quot;&quot;</span>
 
-    def test_add_positive_numbers(self):
-        &quot;&quot;&quot;Test adding two positive numbers.&quot;&quot;&quot;
-        calc = Calculator()
-        result = calc.add(2, 3)
-        self.assertEqual(result, 5)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_add_positive_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test adding two positive numbers.&quot;&quot;&quot;</span>
+        <span class="n">calc</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-    def test_add_negative_numbers(self):
-        &quot;&quot;&quot;Test adding negative numbers.&quot;&quot;&quot;
-        calc = Calculator()
-        result = calc.add(-2, -3)
-        self.assertEqual(result, -5)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_add_negative_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test adding negative numbers.&quot;&quot;&quot;</span>
+        <span class="n">calc</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span>
 
-    def test_divide_by_zero_raises_error(self):
-        &quot;&quot;&quot;Test that division by zero raises appropriate error.&quot;&quot;&quot;
-        calc = Calculator()
-        with self.assertRaises(ZeroDivisionError):
-            calc.divide(10, 0)
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_divide_by_zero_raises_error</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that division by zero raises appropriate error.&quot;&quot;&quot;</span>
+        <span class="n">calc</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ZeroDivisionError</span><span class="p">):</span>
+            <span class="n">calc</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
 
-# Now implement the Calculator class to make tests pass
-class Calculator:
-    &quot;&quot;&quot;Simple calculator for basic arithmetic operations.&quot;&quot;&quot;
+<span class="c1"># Now implement the Calculator class to make tests pass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Calculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple calculator for basic arithmetic operations.&quot;&quot;&quot;</span>
 
-    def add(self, a, b):
-        &quot;&quot;&quot;Add two numbers.&quot;&quot;&quot;
-        return a + b
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add two numbers.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
 
-    def subtract(self, a, b):
-        &quot;&quot;&quot;Subtract second number from first.&quot;&quot;&quot;
-        return a - b
+    <span class="k">def</span><span class="w"> </span><span class="nf">subtract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subtract second number from first.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
 
-    def multiply(self, a, b):
-        &quot;&quot;&quot;Multiply two numbers.&quot;&quot;&quot;
-        return a * b
+    <span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Multiply two numbers.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
 
-    def divide(self, a, b):
-        &quot;&quot;&quot;Divide first number by second.&quot;&quot;&quot;
-        if b == 0:
-            raise ZeroDivisionError(&quot;Cannot divide by zero&quot;)
-        return a / b
+    <span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Divide first number by second.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;Cannot divide by zero&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
 </code></pre>
 </div>
 <p><strong>2. Regular Test Execution</strong></p>
@@ -2142,66 +2142,66 @@ class Calculator:
 <p>Define clear criteria for when features are considered complete and working:</p>
 <p><strong>Example: Student Management System Acceptance Criteria</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestStudentManagementAcceptance(unittest.TestCase):
-    &quot;&quot;&quot;Acceptance tests based on user requirements.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestStudentManagementAcceptance</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Acceptance tests based on user requirements.&quot;&quot;&quot;</span>
 
-    def setUp(self):
-        &quot;&quot;&quot;Set up test system.&quot;&quot;&quot;
-        self.student_mgr = StudentManager()
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up test system.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_mgr</span> <span class="o">=</span> <span class="n">StudentManager</span><span class="p">()</span>
 
-    def test_user_story_add_new_student(self):
-        &quot;&quot;&quot;
-        User Story: As a registrar, I want to add a new student
-        so that they can enroll in courses.
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_user_story_add_new_student</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        User Story: As a registrar, I want to add a new student</span>
+<span class="sd">        so that they can enroll in courses.</span>
 
-        Acceptance Criteria:
-        - Student must have unique ID
-        - Student must have name and email
-        - System generates confirmation
-        &quot;&quot;&quot;
-        # Given: A new student&#x27;s information
-        student_id = &quot;S001&quot;
-        name = &quot;Alice Johnson&quot;
-        email = &quot;alice@university.edu&quot;
+<span class="sd">        Acceptance Criteria:</span>
+<span class="sd">        - Student must have unique ID</span>
+<span class="sd">        - Student must have name and email</span>
+<span class="sd">        - System generates confirmation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Given: A new student&#39;s information</span>
+        <span class="n">student_id</span> <span class="o">=</span> <span class="s2">&quot;S001&quot;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice Johnson&quot;</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;alice@university.edu&quot;</span>
 
-        # When: I add the student to the system
-        result = self.student_mgr.add_student(student_id, name, email)
+        <span class="c1"># When: I add the student to the system</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">student_mgr</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">student_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
 
-        # Then: The student is successfully added
-        self.assertTrue(result.success)
-        self.assertEqual(result.student_id, student_id)
+        <span class="c1"># Then: The student is successfully added</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">student_id</span><span class="p">,</span> <span class="n">student_id</span><span class="p">)</span>
 
-        # And: I can retrieve the student information
-        student = self.student_mgr.find_student(student_id)
-        self.assertIsNotNone(student)
-        self.assertEqual(student.name, name)
-        self.assertEqual(student.email, email)
+        <span class="c1"># And: I can retrieve the student information</span>
+        <span class="n">student</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">student_mgr</span><span class="o">.</span><span class="n">find_student</span><span class="p">(</span><span class="n">student_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsNotNone</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">student</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
 
-    def test_user_story_prevent_duplicate_students(self):
-        &quot;&quot;&quot;
-        User Story: As a registrar, I want to prevent duplicate student IDs
-        so that each student has a unique identity.
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_user_story_prevent_duplicate_students</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        User Story: As a registrar, I want to prevent duplicate student IDs</span>
+<span class="sd">        so that each student has a unique identity.</span>
 
-        Acceptance Criteria:
-        - Adding student with existing ID fails
-        - Error message is clear and helpful
-        - Original student data is unchanged
-        &quot;&quot;&quot;
-        # Given: A student already exists in the system
-        original_id = &quot;S001&quot;
-        self.student_mgr.add_student(original_id, &quot;Alice&quot;, &quot;alice@uni.edu&quot;)
+<span class="sd">        Acceptance Criteria:</span>
+<span class="sd">        - Adding student with existing ID fails</span>
+<span class="sd">        - Error message is clear and helpful</span>
+<span class="sd">        - Original student data is unchanged</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Given: A student already exists in the system</span>
+        <span class="n">original_id</span> <span class="o">=</span> <span class="s2">&quot;S001&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_mgr</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">original_id</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;alice@uni.edu&quot;</span><span class="p">)</span>
 
-        # When: I try to add another student with the same ID
-        with self.assertRaises(ValueError) as context:
-            self.student_mgr.add_student(original_id, &quot;Bob&quot;, &quot;bob@uni.edu&quot;)
+        <span class="c1"># When: I try to add another student with the same ID</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">context</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">student_mgr</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">original_id</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;bob@uni.edu&quot;</span><span class="p">)</span>
 
-        # Then: The operation fails with clear error
-        self.assertIn(&quot;already exists&quot;, str(context.exception))
-        self.assertIn(original_id, str(context.exception))
+        <span class="c1"># Then: The operation fails with clear error</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;already exists&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="n">original_id</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">exception</span><span class="p">))</span>
 
-        # And: Original student data is unchanged
-        original_student = self.student_mgr.find_student(original_id)
-        self.assertEqual(original_student.name, &quot;Alice&quot;)
+        <span class="c1"># And: Original student data is unchanged</span>
+        <span class="n">original_student</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">student_mgr</span><span class="o">.</span><span class="n">find_student</span><span class="p">(</span><span class="n">original_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">original_student</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="practice-exercises">Practice Exercises<a class="headerlink" href="#practice-exercises" title="Permanent link">&para;</a></h2>
@@ -2209,55 +2209,55 @@ class Calculator:
 <summary>Exercise 1: Write Unit Tests for a Shopping Cart</summary>
 <p>Create unit tests for this shopping cart class:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class ShoppingCart:
-    &quot;&quot;&quot;Shopping cart for e-commerce application.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ShoppingCart</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shopping cart for e-commerce application.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.items = {}  # product_id -&gt; {&#x27;name&#x27;: str, &#x27;price&#x27;: float, &#x27;quantity&#x27;: int}
-        self.discount_rate = 0.0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># product_id -&gt; {&#39;name&#39;: str, &#39;price&#39;: float, &#39;quantity&#39;: int}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discount_rate</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    def add_item(self, product_id, name, price, quantity=1):
-        &quot;&quot;&quot;Add item to cart or increase quantity if already present.&quot;&quot;&quot;
-        if price &lt;= 0:
-            raise ValueError(&quot;Price must be positive&quot;)
-        if quantity &lt;= 0:
-            raise ValueError(&quot;Quantity must be positive&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add item to cart or increase quantity if already present.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Price must be positive&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">quantity</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Quantity must be positive&quot;</span><span class="p">)</span>
 
-        if product_id in self.items:
-            self.items[product_id][&#x27;quantity&#x27;] += quantity
-        else:
-            self.items[product_id] = {
-                &#x27;name&#x27;: name,
-                &#x27;price&#x27;: price,
-                &#x27;quantity&#x27;: quantity
-            }
+        <span class="k">if</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">product_id</span><span class="p">][</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">quantity</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span>
+                <span class="s1">&#39;quantity&#39;</span><span class="p">:</span> <span class="n">quantity</span>
+            <span class="p">}</span>
 
-    def remove_item(self, product_id):
-        &quot;&quot;&quot;Remove item completely from cart.&quot;&quot;&quot;
-        if product_id not in self.items:
-            raise ValueError(f&quot;Product {product_id} not in cart&quot;)
-        del self.items[product_id]
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove item completely from cart.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">product_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Product </span><span class="si">{</span><span class="n">product_id</span><span class="si">}</span><span class="s2"> not in cart&quot;</span><span class="p">)</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span>
 
-    def update_quantity(self, product_id, new_quantity):
-        &quot;&quot;&quot;Update quantity of existing item.&quot;&quot;&quot;
-        if product_id not in self.items:
-            raise ValueError(f&quot;Product {product_id} not in cart&quot;)
-        if new_quantity &lt;= 0:
-            raise ValueError(&quot;Quantity must be positive&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_quantity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">new_quantity</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update quantity of existing item.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">product_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Product </span><span class="si">{</span><span class="n">product_id</span><span class="si">}</span><span class="s2"> not in cart&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new_quantity</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Quantity must be positive&quot;</span><span class="p">)</span>
 
-        self.items[product_id][&#x27;quantity&#x27;] = new_quantity
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">product_id</span><span class="p">][</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_quantity</span>
 
-    def apply_discount(self, discount_rate):
-        &quot;&quot;&quot;Apply percentage discount to cart.&quot;&quot;&quot;
-        if not 0 &lt;= discount_rate &lt;= 1:
-            raise ValueError(&quot;Discount rate must be between 0 and 1&quot;)
-        self.discount_rate = discount_rate
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_discount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discount_rate</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply percentage discount to cart.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">discount_rate</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Discount rate must be between 0 and 1&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discount_rate</span> <span class="o">=</span> <span class="n">discount_rate</span>
 
-    def calculate_total(self):
-        &quot;&quot;&quot;Calculate total cost including discount.&quot;&quot;&quot;
-        subtotal = sum(item[&#x27;price&#x27;] * item[&#x27;quantity&#x27;] 
-                      for item in self.items.values())
-        return subtotal * (1 - self.discount_rate)
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate total cost including discount.&quot;&quot;&quot;</span>
+        <span class="n">subtotal</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span> 
+                      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">subtotal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">discount_rate</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2265,53 +2265,53 @@ class Calculator:
 <summary>Exercise 2: Create Integration Tests</summary>
 <p>Write integration tests for a simple order processing system with these classes:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Product:
-    def __init__(self, product_id, name, price, stock_quantity):
-        self.product_id = product_id
-        self.name = name
-        self.price = price
-        self.stock_quantity = stock_quantity
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Product</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">stock_quantity</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">product_id</span> <span class="o">=</span> <span class="n">product_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stock_quantity</span> <span class="o">=</span> <span class="n">stock_quantity</span>
 
-class Inventory:
-    def __init__(self):
-        self.products = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">Inventory</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">products</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def add_product(self, product):
-        self.products[product.product_id] = product
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">products</span><span class="p">[</span><span class="n">product</span><span class="o">.</span><span class="n">product_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">product</span>
 
-    def check_availability(self, product_id, quantity):
-        # Returns True if enough stock available
-        pass
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+        <span class="c1"># Returns True if enough stock available</span>
+        <span class="k">pass</span>
 
-    def reserve_items(self, product_id, quantity):
-        # Reduces stock when order is placed
-        pass
+    <span class="k">def</span><span class="w"> </span><span class="nf">reserve_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">):</span>
+        <span class="c1"># Reduces stock when order is placed</span>
+        <span class="k">pass</span>
 
-class Order:
-    def __init__(self, order_id):
-        self.order_id = order_id
-        self.items = []
-        self.status = &quot;pending&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">Order</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_id</span> <span class="o">=</span> <span class="n">order_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;pending&quot;</span>
 
-    def add_item(self, product_id, quantity, price):
-        self.items.append({
-            &#x27;product_id&#x27;: product_id,
-            &#x27;quantity&#x27;: quantity,
-            &#x27;price&#x27;: price
-        })
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;product_id&#39;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+            <span class="s1">&#39;quantity&#39;</span><span class="p">:</span> <span class="n">quantity</span><span class="p">,</span>
+            <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="n">price</span>
+        <span class="p">})</span>
 
-    def calculate_total(self):
-        # Calculate order total
-        pass
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_total</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Calculate order total</span>
+        <span class="k">pass</span>
 
-class OrderProcessor:
-    def __init__(self, inventory):
-        self.inventory = inventory
-        self.orders = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">OrderProcessor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inventory</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="n">inventory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orders</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def process_order(self, order):
-        # Check availability, reserve items, update order status
-        pass
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="c1"># Check availability, reserve items, update order status</span>
+        <span class="k">pass</span>
 </code></pre>
 </div>
 </details>
@@ -2575,6 +2575,8 @@ class OrderProcessor:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

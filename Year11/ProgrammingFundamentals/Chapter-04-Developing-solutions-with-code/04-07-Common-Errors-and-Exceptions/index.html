@@ -2191,199 +2191,199 @@
 <details class="note">
 <summary>Logic Errors in Conditions</summary>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def logic_condition_examples():
-    &quot;&quot;&quot;Common logic errors in conditional statements.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">logic_condition_examples</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common logic errors in conditional statements.&quot;&quot;&quot;</span>
 
-    print(&quot;=== Logic Condition Examples ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Logic Condition Examples ===&quot;</span><span class="p">)</span>
 
-    ## Problem 1: Wrong boolean logic
+    <span class="c1">## Problem 1: Wrong boolean logic</span>
 
-    def check_valid_age_buggy(age):
-        &quot;&quot;&quot;Check if age is valid (13-65) - with logic error.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_valid_age_buggy</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if age is valid (13-65) - with logic error.&quot;&quot;&quot;</span>
 
-        ## Bug: using OR instead of AND
+        <span class="c1">## Bug: using OR instead of AND</span>
 
-        if age &gt;= 13 or age &lt;= 65:  # This is always True!
-            return True
-        return False
+        <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="ow">or</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">65</span><span class="p">:</span>  <span class="c1"># This is always True!</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def check_valid_age_fixed(age):
-        &quot;&quot;&quot;Check if age is valid (13-65) - corrected.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_valid_age_fixed</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if age is valid (13-65) - corrected.&quot;&quot;&quot;</span>
 
-        ## Fix: use AND
+        <span class="c1">## Fix: use AND</span>
 
-        if age &gt;= 13 and age &lt;= 65:
-            return True
-        return False
+        <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">13</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">65</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    ## Even better: more Pythonic
+    <span class="c1">## Even better: more Pythonic</span>
 
-    def check_valid_age_pythonic(age):
-        &quot;&quot;&quot;Check if age is valid (13-65) - Pythonic way.&quot;&quot;&quot;
-        return 13 &lt;= age &lt;= 65
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_valid_age_pythonic</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if age is valid (13-65) - Pythonic way.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">13</span> <span class="o">&lt;=</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">65</span>
 
-    ## Test all versions
+    <span class="c1">## Test all versions</span>
 
-    test_ages = [5, 13, 25, 65, 70]
-    print(&quot;Testing age validation (should be valid for 13-65):&quot;)
+    <span class="n">test_ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing age validation (should be valid for 13-65):&quot;</span><span class="p">)</span>
 
-    for age in test_ages:
-        buggy = check_valid_age_buggy(age)
-        fixed = check_valid_age_fixed(age)
-        pythonic = check_valid_age_pythonic(age)
-        print(f&quot;  Age {age}: Buggy={buggy}, Fixed={fixed}, Pythonic={pythonic}&quot;)
+    <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">test_ages</span><span class="p">:</span>
+        <span class="n">buggy</span> <span class="o">=</span> <span class="n">check_valid_age_buggy</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+        <span class="n">fixed</span> <span class="o">=</span> <span class="n">check_valid_age_fixed</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+        <span class="n">pythonic</span> <span class="o">=</span> <span class="n">check_valid_age_pythonic</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Age </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">: Buggy=</span><span class="si">{</span><span class="n">buggy</span><span class="si">}</span><span class="s2">, Fixed=</span><span class="si">{</span><span class="n">fixed</span><span class="si">}</span><span class="s2">, Pythonic=</span><span class="si">{</span><span class="n">pythonic</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    ## Problem 2: Incorrect comparison
+    <span class="c1">## Problem 2: Incorrect comparison</span>
 
-    def grade_letter_buggy(score):
-        &quot;&quot;&quot;Convert score to letter grade - with logic errors.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">grade_letter_buggy</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert score to letter grade - with logic errors.&quot;&quot;&quot;</span>
 
-        ## Bug: wrong comparison operators and order
+        <span class="c1">## Bug: wrong comparison operators and order</span>
 
-        if score &gt; 90:
-            return &quot;A&quot;
-        elif score &gt; 80:
-            return &quot;B&quot;
-        elif score &gt; 70:
-            return &quot;C&quot;
-        elif score &gt; 60:
-            return &quot;D&quot;
-        else:
-            return &quot;F&quot;
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-        ## Problem: score of exactly 90 gets &quot;B&quot; instead of &quot;A&quot;
+        <span class="c1">## Problem: score of exactly 90 gets &quot;B&quot; instead of &quot;A&quot;</span>
 
-    def grade_letter_fixed(score):
-        &quot;&quot;&quot;Convert score to letter grade - corrected.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">grade_letter_fixed</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert score to letter grade - corrected.&quot;&quot;&quot;</span>
 
-        ## Fix: use &gt;= for inclusive boundaries
+        <span class="c1">## Fix: use &gt;= for inclusive boundaries</span>
 
-        if score &gt;= 90:
-            return &quot;A&quot;
-        elif score &gt;= 80:
-            return &quot;B&quot;
-        elif score &gt;= 70:
-            return &quot;C&quot;
-        elif score &gt;= 60:
-            return &quot;D&quot;
-        else:
-            return &quot;F&quot;
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-    ## Test both versions
+    <span class="c1">## Test both versions</span>
 
-    test_scores = [85, 90, 95, 79, 80]
-    print(f&quot;\nTesting grade conversion:&quot;)
+    <span class="n">test_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing grade conversion:&quot;</span><span class="p">)</span>
 
-    for score in test_scores:
-        buggy = grade_letter_buggy(score)
-        fixed = grade_letter_fixed(score)
-        print(f&quot;  Score {score}: Buggy=&#x27;{buggy}&#x27;, Fixed=&#x27;{fixed}&#x27;&quot;)
+    <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">test_scores</span><span class="p">:</span>
+        <span class="n">buggy</span> <span class="o">=</span> <span class="n">grade_letter_buggy</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        <span class="n">fixed</span> <span class="o">=</span> <span class="n">grade_letter_fixed</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Score </span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">: Buggy=&#39;</span><span class="si">{</span><span class="n">buggy</span><span class="si">}</span><span class="s2">&#39;, Fixed=&#39;</span><span class="si">{</span><span class="n">fixed</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 
-logic_condition_examples()
+<span class="n">logic_condition_examples</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>
 <details class="note">
 <summary>Infinite Loops</summary>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def infinite_loop_examples():
-    &quot;&quot;&quot;Examples of infinite loops and how to fix them.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">infinite_loop_examples</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Examples of infinite loops and how to fix them.&quot;&quot;&quot;</span>
 
-    print(&quot;=== Infinite Loop Examples ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Infinite Loop Examples ===&quot;</span><span class="p">)</span>
 
-    # Problem 1: Counter never reaches end condition
-    def count_down_buggy():
-        &quot;&quot;&quot;Count down from 5 - but creates infinite loop.&quot;&quot;&quot;
-        count = 5
-        print(&quot;Buggy countdown (would run forever):&quot;)
-        # Bug: incrementing instead of decrementing
-        # while count &gt; 0:
-        #     print(count)
-        #     count += 1  # Bug: should be count -= 1
-        print(&quot;(Code commented out to prevent infinite loop)&quot;)
+    <span class="c1"># Problem 1: Counter never reaches end condition</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_down_buggy</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count down from 5 - but creates infinite loop.&quot;&quot;&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Buggy countdown (would run forever):&quot;</span><span class="p">)</span>
+        <span class="c1"># Bug: incrementing instead of decrementing</span>
+        <span class="c1"># while count &gt; 0:</span>
+        <span class="c1">#     print(count)</span>
+        <span class="c1">#     count += 1  # Bug: should be count -= 1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Code commented out to prevent infinite loop)&quot;</span><span class="p">)</span>
 
-    def count_down_fixed():
-        &quot;&quot;&quot;Count down from 5 - corrected version.&quot;&quot;&quot;
-        count = 5
-        print(&quot;Fixed countdown:&quot;)
-        while count &gt; 0:
-            print(count, end=&quot; &quot;)
-            count -= 1  # Fix: decrement the counter
-        print(&quot;Done!&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">count_down_fixed</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count down from 5 - corrected version.&quot;&quot;&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fixed countdown:&quot;</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>  <span class="c1"># Fix: decrement the counter</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done!&quot;</span><span class="p">)</span>
 
-    count_down_buggy()
-    count_down_fixed()
+    <span class="n">count_down_buggy</span><span class="p">()</span>
+    <span class="n">count_down_fixed</span><span class="p">()</span>
 
-    # Problem 2: Condition never becomes false
-    def find_number_buggy():
-        &quot;&quot;&quot;Find a number in list - potential infinite loop.&quot;&quot;&quot;
-        numbers = [1, 3, 5, 7, 9]
-        target = 6  # This number is NOT in the list
-        i = 0
+    <span class="c1"># Problem 2: Condition never becomes false</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_number_buggy</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find a number in list - potential infinite loop.&quot;&quot;&quot;</span>
+        <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># This number is NOT in the list</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 
-        print(f&quot;\nSearching for {target} in {numbers}&quot;)
-        print(&quot;Buggy version (would run forever if target not found):&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Searching for </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> in </span><span class="si">{</span><span class="n">numbers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Buggy version (would run forever if target not found):&quot;</span><span class="p">)</span>
 
-        # Bug: no check for end of list
-        # while numbers[i] != target:
-        #     i += 1
-        # This would crash with IndexError when i &gt;= len(numbers)
-        print(&quot;(Code commented out to prevent error)&quot;)
+        <span class="c1"># Bug: no check for end of list</span>
+        <span class="c1"># while numbers[i] != target:</span>
+        <span class="c1">#     i += 1</span>
+        <span class="c1"># This would crash with IndexError when i &gt;= len(numbers)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Code commented out to prevent error)&quot;</span><span class="p">)</span>
 
-    def find_number_fixed():
-        &quot;&quot;&quot;Find a number in list - corrected version.&quot;&quot;&quot;
-        numbers = [1, 3, 5, 7, 9]
-        target = 6
-        i = 0
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_number_fixed</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find a number in list - corrected version.&quot;&quot;&quot;</span>
+        <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 
-        print(&quot;Fixed version:&quot;)
-        # Fix: check bounds AND condition
-        while i &lt; len(numbers) and numbers[i] != target:
-            i += 1
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fixed version:&quot;</span><span class="p">)</span>
+        <span class="c1"># Fix: check bounds AND condition</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="ow">and</span> <span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        if i &lt; len(numbers):
-            print(f&quot;Found {target} at index {i}&quot;)
-        else:
-            print(f&quot;{target} not found in list&quot;)
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> at index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2"> not found in list&quot;</span><span class="p">)</span>
 
-    find_number_buggy()
-    find_number_fixed()
+    <span class="n">find_number_buggy</span><span class="p">()</span>
+    <span class="n">find_number_fixed</span><span class="p">()</span>
 
-    # Problem 3: Wrong update in loop
-    def print_even_numbers_buggy():
-        &quot;&quot;&quot;Print even numbers 0-10 - with infinite loop bug.&quot;&quot;&quot;
-        print(&quot;\nBuggy even numbers (would run forever):&quot;)
-        # Bug: condition and increment don&#x27;t match
-        # i = 0
-        # while i &lt;= 10:
-        #     if i % 2 == 0:
-        #         print(i)
-        #     i += 3  # Bug: incrementing by 3, so condition never fails correctly
-        print(&quot;(Code commented out to prevent infinite loop)&quot;)
+    <span class="c1"># Problem 3: Wrong update in loop</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_even_numbers_buggy</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print even numbers 0-10 - with infinite loop bug.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Buggy even numbers (would run forever):&quot;</span><span class="p">)</span>
+        <span class="c1"># Bug: condition and increment don&#39;t match</span>
+        <span class="c1"># i = 0</span>
+        <span class="c1"># while i &lt;= 10:</span>
+        <span class="c1">#     if i % 2 == 0:</span>
+        <span class="c1">#         print(i)</span>
+        <span class="c1">#     i += 3  # Bug: incrementing by 3, so condition never fails correctly</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Code commented out to prevent infinite loop)&quot;</span><span class="p">)</span>
 
-    def print_even_numbers_fixed():
-        &quot;&quot;&quot;Print even numbers 0-10 - corrected version.&quot;&quot;&quot;
-        print(&quot;Fixed even numbers:&quot;)
-        i = 0
-        while i &lt;= 10:
-            if i % 2 == 0:
-                print(i, end=&quot; &quot;)
-            i += 1  # Fix: increment by 1, or use i += 2 and remove the if
-        print()
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_even_numbers_fixed</span><span class="p">():</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print even numbers 0-10 - corrected version.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fixed even numbers:&quot;</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Fix: increment by 1, or use i += 2 and remove the if</span>
+        <span class="nb">print</span><span class="p">()</span>
 
-        # Alternative fix: increment by 2 and start with even number
-        print(&quot;Alternative fix:&quot;)
-        i = 0
-        while i &lt;= 10:
-            print(i, end=&quot; &quot;)
-            i += 2  # Skip odd numbers entirely
-        print()
+        <span class="c1"># Alternative fix: increment by 2 and start with even number</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Alternative fix:&quot;</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">2</span>  <span class="c1"># Skip odd numbers entirely</span>
+        <span class="nb">print</span><span class="p">()</span>
 
-    print_even_numbers_buggy()
-    print_even_numbers_fixed()
+    <span class="n">print_even_numbers_buggy</span><span class="p">()</span>
+    <span class="n">print_even_numbers_fixed</span><span class="p">()</span>
 
-# Note: We don&#x27;t actually run the infinite loop examples to avoid hanging
-print(&quot;Infinite loop examples defined (safe to demonstrate concepts)&quot;)
+<span class="c1"># Note: We don&#39;t actually run the infinite loop examples to avoid hanging</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Infinite loop examples defined (safe to demonstrate concepts)&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2500,134 +2500,134 @@ print(&quot;Infinite loop examples defined (safe to demonstrate concepts)&quot;)
 <h2 id="debugging-strategies-for-common-errors">Debugging Strategies for Common Errors<a class="headerlink" href="#debugging-strategies-for-common-errors" title="Permanent link">&para;</a></h2>
 <h3 id="systematic-error-detection">Systematic Error Detection<a class="headerlink" href="#systematic-error-detection" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def debugging_strategies():
-    &quot;&quot;&quot;Demonstrate systematic approaches to finding errors.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">debugging_strategies</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate systematic approaches to finding errors.&quot;&quot;&quot;</span>
 
-    print(&quot;=== Debugging Strategies ===&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Debugging Strategies ===&quot;</span><span class="p">)</span>
 
-    # Example: Debugging a complex function
-    def process_grades_with_bugs(student_scores):
-        &quot;&quot;&quot;Process student grades - contains multiple types of errors.&quot;&quot;&quot;
+    <span class="c1"># Example: Debugging a complex function</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_grades_with_bugs</span><span class="p">(</span><span class="n">student_scores</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process student grades - contains multiple types of errors.&quot;&quot;&quot;</span>
 
-        # Add debug prints to trace execution
-        print(f&quot;DEBUG: Input scores: {student_scores}&quot;)
+        <span class="c1"># Add debug prints to trace execution</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Input scores: </span><span class="si">{</span><span class="n">student_scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Bug 1: Not handling empty input (will cause errors later)
-        total_score = 0
-        student_count = 0
-        grade_counts = {&quot;A&quot;: 0, &quot;B&quot;: 0, &quot;C&quot;: 0, &quot;D&quot;: 0, &quot;F&quot;: 0}
+        <span class="c1"># Bug 1: Not handling empty input (will cause errors later)</span>
+        <span class="n">total_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">student_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">grade_counts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-        for student_score in student_scores:
-            print(f&quot;DEBUG: Processing score: {student_score}&quot;)
+        <span class="k">for</span> <span class="n">student_score</span> <span class="ow">in</span> <span class="n">student_scores</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Processing score: </span><span class="si">{</span><span class="n">student_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Bug 2: Not validating score type/range
-            total_score += student_score
-            student_count += 1
+            <span class="c1"># Bug 2: Not validating score type/range</span>
+            <span class="n">total_score</span> <span class="o">+=</span> <span class="n">student_score</span>
+            <span class="n">student_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            # Bug 3: Logic error in grade assignment
-            if student_score &gt; 90:  # Should be &gt;= 90
-                grade_counts[&quot;A&quot;] += 1
-            elif student_score &gt; 80:  # Should be &gt;= 80
-                grade_counts[&quot;B&quot;] += 1
-            elif student_score &gt; 70:  # Should be &gt;= 70
-                grade_counts[&quot;C&quot;] += 1
-            elif student_score &gt; 60:  # Should be &gt;= 60
-                grade_counts[&quot;D&quot;] += 1
-            else:
-                grade_counts[&quot;F&quot;] += 1
+            <span class="c1"># Bug 3: Logic error in grade assignment</span>
+            <span class="k">if</span> <span class="n">student_score</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">:</span>  <span class="c1"># Should be &gt;= 90</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">student_score</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>  <span class="c1"># Should be &gt;= 80</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">student_score</span> <span class="o">&gt;</span> <span class="mi">70</span><span class="p">:</span>  <span class="c1"># Should be &gt;= 70</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">student_score</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">:</span>  <span class="c1"># Should be &gt;= 60</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        # Bug 4: Division by zero if no students
-        average_score = total_score / student_count
-        print(f&quot;DEBUG: Average calculated: {average_score}&quot;)
+        <span class="c1"># Bug 4: Division by zero if no students</span>
+        <span class="n">average_score</span> <span class="o">=</span> <span class="n">total_score</span> <span class="o">/</span> <span class="n">student_count</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Average calculated: </span><span class="si">{</span><span class="n">average_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Bug 5: Not returning the result
-        result = {
-            &quot;average&quot;: average_score,
-            &quot;total_students&quot;: student_count,
-            &quot;grade_distribution&quot;: grade_counts
-        }
-        print(f&quot;DEBUG: Final result: {result}&quot;)
-        # Missing return statement!
+        <span class="c1"># Bug 5: Not returning the result</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="n">average_score</span><span class="p">,</span>
+            <span class="s2">&quot;total_students&quot;</span><span class="p">:</span> <span class="n">student_count</span><span class="p">,</span>
+            <span class="s2">&quot;grade_distribution&quot;</span><span class="p">:</span> <span class="n">grade_counts</span>
+        <span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Missing return statement!</span>
 
-    def process_grades_debugged(student_scores):
-        &quot;&quot;&quot;Process student grades - debugged version.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_grades_debugged</span><span class="p">(</span><span class="n">student_scores</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process student grades - debugged version.&quot;&quot;&quot;</span>
 
-        print(f&quot;DEBUG: Input scores: {student_scores}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Input scores: </span><span class="si">{</span><span class="n">student_scores</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Fix 1: Handle empty input
-        if not student_scores:
-            print(&quot;DEBUG: No scores provided&quot;)
-            return {&quot;error&quot;: &quot;No student scores provided&quot;}
+        <span class="c1"># Fix 1: Handle empty input</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">student_scores</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: No scores provided&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;No student scores provided&quot;</span><span class="p">}</span>
 
-        total_score = 0
-        student_count = 0
-        grade_counts = {&quot;A&quot;: 0, &quot;B&quot;: 0, &quot;C&quot;: 0, &quot;D&quot;: 0, &quot;F&quot;: 0}
+        <span class="n">total_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">student_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">grade_counts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-        for student_score in student_scores:
-            print(f&quot;DEBUG: Processing score: {student_score}&quot;)
+        <span class="k">for</span> <span class="n">student_score</span> <span class="ow">in</span> <span class="n">student_scores</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Processing score: </span><span class="si">{</span><span class="n">student_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            # Fix 2: Validate score
-            if not isinstance(student_score, (int, float)) or student_score &lt; 0 or student_score &gt; 100:
-                print(f&quot;DEBUG: Invalid score {student_score}, skipping&quot;)
-                continue
+            <span class="c1"># Fix 2: Validate score</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">student_score</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="n">student_score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">student_score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Invalid score </span><span class="si">{</span><span class="n">student_score</span><span class="si">}</span><span class="s2">, skipping&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
 
-            total_score += student_score
-            student_count += 1
+            <span class="n">total_score</span> <span class="o">+=</span> <span class="n">student_score</span>
+            <span class="n">student_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-            # Fix 3: Correct grade boundaries
-            if student_score &gt;= 90:
-                grade_counts[&quot;A&quot;] += 1
-            elif student_score &gt;= 80:
-                grade_counts[&quot;B&quot;] += 1
-            elif student_score &gt;= 70:
-                grade_counts[&quot;C&quot;] += 1
-            elif student_score &gt;= 60:
-                grade_counts[&quot;D&quot;] += 1
-            else:
-                grade_counts[&quot;F&quot;] += 1
+            <span class="c1"># Fix 3: Correct grade boundaries</span>
+            <span class="k">if</span> <span class="n">student_score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">student_score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">student_score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">student_score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        # Fix 4: Handle case where all scores were invalid
-        if student_count == 0:
-            print(&quot;DEBUG: No valid scores found&quot;)
-            return {&quot;error&quot;: &quot;No valid scores found&quot;}
+        <span class="c1"># Fix 4: Handle case where all scores were invalid</span>
+        <span class="k">if</span> <span class="n">student_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEBUG: No valid scores found&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;No valid scores found&quot;</span><span class="p">}</span>
 
-        average_score = total_score / student_count
-        print(f&quot;DEBUG: Average calculated: {average_score}&quot;)
+        <span class="n">average_score</span> <span class="o">=</span> <span class="n">total_score</span> <span class="o">/</span> <span class="n">student_count</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Average calculated: </span><span class="si">{</span><span class="n">average_score</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Fix 5: Return the result
-        result = {
-            &quot;average&quot;: round(average_score, 2),
-            &quot;total_students&quot;: student_count,
-            &quot;grade_distribution&quot;: grade_counts
-        }
-        print(f&quot;DEBUG: Final result: {result}&quot;)
-        return result
+        <span class="c1"># Fix 5: Return the result</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;average&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">average_score</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="s2">&quot;total_students&quot;</span><span class="p">:</span> <span class="n">student_count</span><span class="p">,</span>
+            <span class="s2">&quot;grade_distribution&quot;</span><span class="p">:</span> <span class="n">grade_counts</span>
+        <span class="p">}</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;DEBUG: Final result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
 
-    # Test both versions
-    test_scores = [85, 90, 78, 92, 88]
+    <span class="c1"># Test both versions</span>
+    <span class="n">test_scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">]</span>
 
-    print(&quot;Testing buggy version:&quot;)
-    buggy_result = process_grades_with_bugs(test_scores)
-    print(f&quot;Buggy result: {buggy_result}&quot;)  # Will be None due to missing return
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Testing buggy version:&quot;</span><span class="p">)</span>
+    <span class="n">buggy_result</span> <span class="o">=</span> <span class="n">process_grades_with_bugs</span><span class="p">(</span><span class="n">test_scores</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Buggy result: </span><span class="si">{</span><span class="n">buggy_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Will be None due to missing return</span>
 
-    print(&quot;\nTesting debugged version:&quot;)
-    fixed_result = process_grades_debugged(test_scores)
-    print(f&quot;Fixed result: {fixed_result}&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing debugged version:&quot;</span><span class="p">)</span>
+    <span class="n">fixed_result</span> <span class="o">=</span> <span class="n">process_grades_debugged</span><span class="p">(</span><span class="n">test_scores</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fixed result: </span><span class="si">{</span><span class="n">fixed_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test edge cases
-    print(&quot;\nTesting edge cases:&quot;)
-    edge_cases = [
-        [],  # Empty list
-        [90, 80, 70, 60],  # Boundary scores
-        [105, -5, &quot;invalid&quot;, 85],  # Invalid data mixed with valid
-    ]
+    <span class="c1"># Test edge cases</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing edge cases:&quot;</span><span class="p">)</span>
+    <span class="n">edge_cases</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[],</span>  <span class="c1"># Empty list</span>
+        <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>  <span class="c1"># Boundary scores</span>
+        <span class="p">[</span><span class="mi">105</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">,</span> <span class="mi">85</span><span class="p">],</span>  <span class="c1"># Invalid data mixed with valid</span>
+    <span class="p">]</span>
 
-    for case in edge_cases:
-        print(f&quot;\nTesting {case}:&quot;)
-        result = process_grades_debugged(case)
-        print(f&quot;Result: {result}&quot;)
+    <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">edge_cases</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing </span><span class="si">{</span><span class="n">case</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">process_grades_debugged</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-debugging_strategies()
+<span class="n">debugging_strategies</span><span class="p">()</span>
 </code></pre>
 </div>
 <h2 id="error-prevention-best-practices">Error Prevention Best Practices<a class="headerlink" href="#error-prevention-best-practices" title="Permanent link">&para;</a></h2>
@@ -3035,6 +3035,8 @@ debugging_strategies()
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

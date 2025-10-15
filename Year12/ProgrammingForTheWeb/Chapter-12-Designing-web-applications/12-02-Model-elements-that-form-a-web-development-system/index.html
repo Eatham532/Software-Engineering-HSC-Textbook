@@ -1774,20 +1774,20 @@
 </span></code></pre></div>
 <p>The client-side JavaScript would then make requests to these endpoints:</p>
 <div class="highlight javascript-template" data-fence-type="template" data-language="javascript">
-<pre><code class="language-javascript">// Client-side code (runs in browser)
-async function loadBook(bookId) {
-    try {
-        const response = await fetch(`/api/books/${bookId}`);
-        const book = await response.json();
+<pre><code class="language-javascript"><span class="c1">// Client-side code (runs in browser)</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">loadBook</span><span class="p">(</span><span class="nx">bookId</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="sb">`/api/books/</span><span class="si">${</span><span class="nx">bookId</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">book</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 
-        // Update the webpage with book information
-        document.getElementById(&#x27;book-title&#x27;).textContent = book.title;
-        document.getElementById(&#x27;book-author&#x27;).textContent = book.author;
-        document.getElementById(&#x27;book-price&#x27;).textContent = `$${book.price}`;
-    } catch (error) {
-        console.error(&#x27;Error loading book:&#x27;, error);
-    }
-}
+<span class="w">        </span><span class="c1">// Update the webpage with book information</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;book-title&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">book</span><span class="p">.</span><span class="nx">title</span><span class="p">;</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;book-author&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">book</span><span class="p">.</span><span class="nx">author</span><span class="p">;</span>
+<span class="w">        </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;book-price&#39;</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`$</span><span class="si">${</span><span class="nx">book</span><span class="p">.</span><span class="nx">price</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error loading book:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 </details>
@@ -2138,6 +2138,8 @@ async function loadBook(bookId) {
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

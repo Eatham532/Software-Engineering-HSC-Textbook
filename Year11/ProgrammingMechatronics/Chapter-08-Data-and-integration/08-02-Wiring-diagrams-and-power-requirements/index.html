@@ -1530,40 +1530,40 @@
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>P = V × I    (Power equation)
 </span></code></pre></div>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Basic electrical calculations
-def calculate_power(voltage, current):
-    &quot;&quot;&quot;Calculate power consumption given voltage and current.&quot;&quot;&quot;
-    return voltage * current
+<pre><code class="language-python"><span class="c1"># Basic electrical calculations</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_power</span><span class="p">(</span><span class="n">voltage</span><span class="p">,</span> <span class="n">current</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate power consumption given voltage and current.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">voltage</span> <span class="o">*</span> <span class="n">current</span>
 
-def calculate_current(power, voltage):
-    &quot;&quot;&quot;Calculate current draw given power and voltage.&quot;&quot;&quot;
-    return power / voltage
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_current</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">voltage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate current draw given power and voltage.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">power</span> <span class="o">/</span> <span class="n">voltage</span>
 
-# Example: LED strip requiring 12V and consuming 24W
-voltage = 12  # volts
-power = 24    # watts
-current = calculate_current(power, voltage)
-print(f&quot;Current draw: {current:.2f} amps&quot;)  # Output: Current draw: 2.00 amps
+<span class="c1"># Example: LED strip requiring 12V and consuming 24W</span>
+<span class="n">voltage</span> <span class="o">=</span> <span class="mi">12</span>  <span class="c1"># volts</span>
+<span class="n">power</span> <span class="o">=</span> <span class="mi">24</span>    <span class="c1"># watts</span>
+<span class="n">current</span> <span class="o">=</span> <span class="n">calculate_current</span><span class="p">(</span><span class="n">power</span><span class="p">,</span> <span class="n">voltage</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current draw: </span><span class="si">{</span><span class="n">current</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> amps&quot;</span><span class="p">)</span>  <span class="c1"># Output: Current draw: 2.00 amps</span>
 </code></pre>
 </div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s calculate the power requirements for a simple robotic arm system:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Component power requirements (typical values)
-components = {
-    &quot;microcontroller&quot;: {&quot;voltage&quot;: 5, &quot;current&quot;: 0.5},    # 2.5W
-    &quot;servo_motor&quot;: {&quot;voltage&quot;: 6, &quot;current&quot;: 1.5},        # 9W
-    &quot;ultrasonic_sensor&quot;: {&quot;voltage&quot;: 5, &quot;current&quot;: 0.015}, # 0.075W
-    &quot;led_strip&quot;: {&quot;voltage&quot;: 12, &quot;current&quot;: 0.8}          # 9.6W
-}
+<pre><code class="language-python"><span class="c1"># Component power requirements (typical values)</span>
+<span class="n">components</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;microcontroller&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;voltage&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">},</span>    <span class="c1"># 2.5W</span>
+    <span class="s2">&quot;servo_motor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;voltage&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">},</span>        <span class="c1"># 9W</span>
+    <span class="s2">&quot;ultrasonic_sensor&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;voltage&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mf">0.015</span><span class="p">},</span> <span class="c1"># 0.075W</span>
+    <span class="s2">&quot;led_strip&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;voltage&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">}</span>          <span class="c1"># 9.6W</span>
+<span class="p">}</span>
 
-total_power = 0
-for component, specs in components.items():
-    power = specs[&quot;voltage&quot;] * specs[&quot;current&quot;]
-    total_power += power
-    print(f&quot;{component}: {power:.3f}W&quot;)
+<span class="n">total_power</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">component</span><span class="p">,</span> <span class="n">specs</span> <span class="ow">in</span> <span class="n">components</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="n">specs</span><span class="p">[</span><span class="s2">&quot;voltage&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">specs</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span>
+    <span class="n">total_power</span> <span class="o">+=</span> <span class="n">power</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">component</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">power</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">W&quot;</span><span class="p">)</span>
 
-print(f&quot;\nTotal system power: {total_power:.3f}W&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total system power: </span><span class="si">{</span><span class="n">total_power</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">W&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="safe-wiring-practices">Safe wiring practices<a class="headerlink" href="#safe-wiring-practices" title="Permanent link">&para;</a></h3>
@@ -1626,24 +1626,24 @@ print(f&quot;\nTotal system power: {total_power:.3f}W&quot;)
 <h3 id="runtime-estimation">Runtime estimation<a class="headerlink" href="#runtime-estimation" title="Permanent link">&para;</a></h3>
 <p>Estimate how long your system will operate on battery power:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def estimate_runtime(battery_capacity_ah, current_draw_a, discharge_factor=0.8):
-    &quot;&quot;&quot;
-    Estimate battery runtime.
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">estimate_runtime</span><span class="p">(</span><span class="n">battery_capacity_ah</span><span class="p">,</span> <span class="n">current_draw_a</span><span class="p">,</span> <span class="n">discharge_factor</span><span class="o">=</span><span class="mf">0.8</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Estimate battery runtime.</span>
 
-    Args:
-        battery_capacity_ah: battery capacity in amp-hours
-        current_draw_a: system current draw in amps
-        discharge_factor: usable battery capacity (80% for safety)
-    &quot;&quot;&quot;
-    usable_capacity = battery_capacity_ah * discharge_factor
-    runtime_hours = usable_capacity / current_draw_a
-    return runtime_hours
+<span class="sd">    Args:</span>
+<span class="sd">        battery_capacity_ah: battery capacity in amp-hours</span>
+<span class="sd">        current_draw_a: system current draw in amps</span>
+<span class="sd">        discharge_factor: usable battery capacity (80% for safety)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">usable_capacity</span> <span class="o">=</span> <span class="n">battery_capacity_ah</span> <span class="o">*</span> <span class="n">discharge_factor</span>
+    <span class="n">runtime_hours</span> <span class="o">=</span> <span class="n">usable_capacity</span> <span class="o">/</span> <span class="n">current_draw_a</span>
+    <span class="k">return</span> <span class="n">runtime_hours</span>
 
-# Example: 2Ah battery with 1.5A current draw
-battery_capacity = 2.0  # amp-hours
-current_draw = 1.5      # amps
-runtime = estimate_runtime(battery_capacity, current_draw)
-print(f&quot;Estimated runtime: {runtime:.1f} hours&quot;)
+<span class="c1"># Example: 2Ah battery with 1.5A current draw</span>
+<span class="n">battery_capacity</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># amp-hours</span>
+<span class="n">current_draw</span> <span class="o">=</span> <span class="mf">1.5</span>      <span class="c1"># amps</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="n">estimate_runtime</span><span class="p">(</span><span class="n">battery_capacity</span><span class="p">,</span> <span class="n">current_draw</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Estimated runtime: </span><span class="si">{</span><span class="n">runtime</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> hours&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2003,6 +2003,8 @@ print(f&quot;Estimated runtime: {runtime:.1f} hours&quot;)
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

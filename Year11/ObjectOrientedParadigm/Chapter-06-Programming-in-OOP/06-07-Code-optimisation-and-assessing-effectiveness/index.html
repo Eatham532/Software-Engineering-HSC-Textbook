@@ -1848,21 +1848,21 @@
 </ul>
 <p><strong>Example: Assessing Correctness</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BankAccount:
-    &quot;&quot;&quot;Bank account with correctness issues to identify.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bank account with correctness issues to identify.&quot;&quot;&quot;</span>
 
-    def __init__(self, account_holder, initial_balance=0):
-        self.account_holder = account_holder
-        self.balance = initial_balance  # Issue: doesn&#x27;t validate negative balance
-        self.transaction_history = []
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_holder</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_holder</span> <span class="o">=</span> <span class="n">account_holder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>  <span class="c1"># Issue: doesn&#39;t validate negative balance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def withdraw(self, amount):
-        &quot;&quot;&quot;Withdraw money from account.&quot;&quot;&quot;
-        if amount &gt; 0:  # Issue: doesn&#x27;t check if amount &gt; balance
-            self.balance -= amount
-            self.transaction_history.append(f&quot;Withdrawal: ${amount}&quot;)
-            return self.balance
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Withdraw money from account.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Issue: doesn&#39;t check if amount &gt; balance</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transaction_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Withdrawal: $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </code></pre>
 </div>
 <h2 id="improved-version-with-better-correctness">Improved version with better correctness<a class="headerlink" href="#improved-version-with-better-correctness" title="Permanent link">&para;</a></h2>
@@ -1999,151 +1999,150 @@ def withdraw(self, amount):
 </ul>
 <p><strong>Example: Performance Assessment and Improvement</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-import time
-from typing import List
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
-class StudentManager:
-    &quot;&quot;&quot;Manages student records with performance considerations.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">StudentManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manages student records with performance considerations.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.students = []  # List for simple implementation
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List for simple implementation</span>
 
-    def add_student(self, student_id: str, name: str, email: str):
-        &quot;&quot;&quot;Add a new student.&quot;&quot;&quot;
-        student = {
-            &#x27;id&#x27;: student_id,
-            &#x27;name&#x27;: name,
-            &#x27;email&#x27;: email,
-            &#x27;grades&#x27;: []
-        }
-        self.students.append(student)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_student</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a new student.&quot;&quot;&quot;</span>
+        <span class="n">student</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">student_id</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+            <span class="s1">&#39;grades&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 
-    def find_student_slow(self, student_id: str):
-        &quot;&quot;&quot;Find student by ID - O(n) linear search.&quot;&quot;&quot;
-        for student in self.students:
-            if student[&#x27;id&#x27;] == student_id:
-                return student
-        return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_student_slow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find student by ID - O(n) linear search.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">student_id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">student</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    def get_all_students_with_high_gpa_slow(self, min_gpa: float):
-        &quot;&quot;&quot;Get students with high GPA - inefficient implementation.&quot;&quot;&quot;
-        high_gpa_students = []
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_students_with_high_gpa_slow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_gpa</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get students with high GPA - inefficient implementation.&quot;&quot;&quot;</span>
+        <span class="n">high_gpa_students</span> <span class="o">=</span> <span class="p">[]</span>
 
-        for student in self.students:
-            if student[&#x27;grades&#x27;]:
+        <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">]:</span>
 
-                ## Recalculate GPA every time (inefficient)
+                <span class="c1">## Recalculate GPA every time (inefficient)</span>
 
-                total = sum(student[&#x27;grades&#x27;])
-                avg = total / len(student[&#x27;grades&#x27;])
-                if avg &gt;= min_gpa:
-                    high_gpa_students.append(student)
+                <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">])</span>
+                <span class="n">avg</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">avg</span> <span class="o">&gt;=</span> <span class="n">min_gpa</span><span class="p">:</span>
+                    <span class="n">high_gpa_students</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 
-        return high_gpa_students
-
-
-class OptimizedStudentManager:
-    &quot;&quot;&quot;Student manager with performance optimizations.&quot;&quot;&quot;
-
-    def __init__(self):
-        self.students = {}  # Dictionary for O(1) lookup
-        self.students_by_gpa = []  # Could be maintained sorted
-        self._gpa_cache = {}  # Cache calculated GPAs
-
-    def add_student(self, student_id: str, name: str, email: str):
-        &quot;&quot;&quot;Add a new student with optimized storage.&quot;&quot;&quot;
-        student = {
-            &#x27;id&#x27;: student_id,
-            &#x27;name&#x27;: name,
-            &#x27;email&#x27;: email,
-            &#x27;grades&#x27;: []
-        }
-        self.students[student_id] = student  # O(1) insertion
-
-    def find_student(self, student_id: str):
-        &quot;&quot;&quot;Find student by ID - O(1) hash table lookup.&quot;&quot;&quot;
-        return self.students.get(student_id)
-
-    def _calculate_gpa(self, student_id: str):
-        &quot;&quot;&quot;Calculate and cache GPA for a student.&quot;&quot;&quot;
-        if student_id in self._gpa_cache:
-            return self._gpa_cache[student_id]
-
-        student = self.students[student_id]
-        if not student[&#x27;grades&#x27;]:
-            gpa = 0.0
-        else:
-            gpa = sum(student[&#x27;grades&#x27;]) / len(student[&#x27;grades&#x27;])
-
-        self._gpa_cache[student_id] = gpa
-        return gpa
-
-    def add_grade(self, student_id: str, grade: float):
-        &quot;&quot;&quot;Add grade and invalidate GPA cache.&quot;&quot;&quot;
-        if student_id in self.students:
-            self.students[student_id][&#x27;grades&#x27;].append(grade)
-
-            ## Invalidate cached GPA since grades changed
-
-            self._gpa_cache.pop(student_id, None)
-
-    def get_students_with_high_gpa(self, min_gpa: float):
-        &quot;&quot;&quot;Get students with high GPA - optimized with caching.&quot;&quot;&quot;
-        high_gpa_students = []
-
-        for student_id, student in self.students.items():
-            if student[&#x27;grades&#x27;]:  # Only check students with grades
-                gpa = self._calculate_gpa(student_id)
-                if gpa &gt;= min_gpa:
-                    high_gpa_students.append(student)
-
-        return high_gpa_students
+        <span class="k">return</span> <span class="n">high_gpa_students</span>
 
 
-def performance_comparison():
-    &quot;&quot;&quot;Demonstrate performance difference between implementations.&quot;&quot;&quot;
-    import random
+<span class="k">class</span><span class="w"> </span><span class="nc">OptimizedStudentManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Student manager with performance optimizations.&quot;&quot;&quot;</span>
 
-    ## Create test data
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Dictionary for O(1) lookup</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students_by_gpa</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Could be maintained sorted</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpa_cache</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Cache calculated GPAs</span>
 
-    slow_manager = StudentManager()
-    fast_manager = OptimizedStudentManager()
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_student</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a new student with optimized storage.&quot;&quot;&quot;</span>
+        <span class="n">student</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">student_id</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+            <span class="s1">&#39;grades&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">student</span>  <span class="c1"># O(1) insertion</span>
 
-    ## Add 10,000 students
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_student</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find student by ID - O(1) hash table lookup.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">student_id</span><span class="p">)</span>
 
-    for i in range(10000):
-        student_id = f&quot;S{i:05d}&quot;
-        slow_manager.add_student(student_id, f&quot;Student {i}&quot;, f&quot;student{i}@uni.edu&quot;)
-        fast_manager.add_student(student_id, f&quot;Student {i}&quot;, f&quot;student{i}@uni.edu&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate and cache GPA for a student.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">student_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gpa_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gpa_cache</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span>
 
-        ## Add random grades
+        <span class="n">student</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">]:</span>
+            <span class="n">gpa</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gpa</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">])</span>
 
-        for _ in range(5):
-            grade = random.uniform(60, 100)
-            fast_manager.add_grade(student_id, grade)
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpa_cache</span><span class="p">[</span><span class="n">student_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpa</span>
+        <span class="k">return</span> <span class="n">gpa</span>
 
-    ## Test lookup performance
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">grade</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add grade and invalidate GPA cache.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">student_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="p">[</span><span class="n">student_id</span><span class="p">][</span><span class="s1">&#39;grades&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
 
-    search_id = &quot;S05000&quot;
+            <span class="c1">## Invalidate cached GPA since grades changed</span>
 
-    ## Time the slow version
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa_cache</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">student_id</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-    start_time = time.time()
-    for _ in range(1000):
-        slow_manager.find_student_slow(search_id)
-    slow_time = time.time() - start_time
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_students_with_high_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_gpa</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get students with high GPA - optimized with caching.&quot;&quot;&quot;</span>
+        <span class="n">high_gpa_students</span> <span class="o">=</span> <span class="p">[]</span>
 
-    ## Time the fast version
+        <span class="k">for</span> <span class="n">student_id</span><span class="p">,</span> <span class="n">student</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">students</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;grades&#39;</span><span class="p">]:</span>  <span class="c1"># Only check students with grades</span>
+                <span class="n">gpa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_gpa</span><span class="p">(</span><span class="n">student_id</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">gpa</span> <span class="o">&gt;=</span> <span class="n">min_gpa</span><span class="p">:</span>
+                    <span class="n">high_gpa_students</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">student</span><span class="p">)</span>
 
-    start_time = time.time()
-    for _ in range(1000):
-        fast_manager.find_student(search_id)
-    fast_time = time.time() - start_time
+        <span class="k">return</span> <span class="n">high_gpa_students</span>
 
-    print(f&quot;Slow lookup (linear search): {slow_time:.4f} seconds&quot;)
-    print(f&quot;Fast lookup (hash table): {fast_time:.4f} seconds&quot;)
-    print(f&quot;Speed improvement: {slow_time/fast_time:.1f}x faster&quot;)
+
+<span class="k">def</span><span class="w"> </span><span class="nf">performance_comparison</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate performance difference between implementations.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+    <span class="c1">## Create test data</span>
+
+    <span class="n">slow_manager</span> <span class="o">=</span> <span class="n">StudentManager</span><span class="p">()</span>
+    <span class="n">fast_manager</span> <span class="o">=</span> <span class="n">OptimizedStudentManager</span><span class="p">()</span>
+
+    <span class="c1">## Add 10,000 students</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="n">student_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;S</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s2">05d</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">slow_manager</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">student_id</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Student </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;student</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">@uni.edu&quot;</span><span class="p">)</span>
+        <span class="n">fast_manager</span><span class="o">.</span><span class="n">add_student</span><span class="p">(</span><span class="n">student_id</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Student </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;student</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">@uni.edu&quot;</span><span class="p">)</span>
+
+        <span class="c1">## Add random grades</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">grade</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="n">fast_manager</span><span class="o">.</span><span class="n">add_grade</span><span class="p">(</span><span class="n">student_id</span><span class="p">,</span> <span class="n">grade</span><span class="p">)</span>
+
+    <span class="c1">## Test lookup performance</span>
+
+    <span class="n">search_id</span> <span class="o">=</span> <span class="s2">&quot;S05000&quot;</span>
+
+    <span class="c1">## Time the slow version</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">slow_manager</span><span class="o">.</span><span class="n">find_student_slow</span><span class="p">(</span><span class="n">search_id</span><span class="p">)</span>
+    <span class="n">slow_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1">## Time the fast version</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">fast_manager</span><span class="o">.</span><span class="n">find_student</span><span class="p">(</span><span class="n">search_id</span><span class="p">)</span>
+    <span class="n">fast_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slow lookup (linear search): </span><span class="si">{</span><span class="n">slow_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fast lookup (hash table): </span><span class="si">{</span><span class="n">fast_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speed improvement: </span><span class="si">{</span><span class="n">slow_time</span><span class="o">/</span><span class="n">fast_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x faster&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="4-maintainability">4. Maintainability<a class="headerlink" href="#4-maintainability" title="Permanent link">&para;</a></h3>
@@ -2168,159 +2167,158 @@ def performance_comparison():
 </ul>
 <p><strong>Example: Maintainability Assessment</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-## Poor maintainability - tightly coupled, hard to modify
+<pre><code class="language-python"><span class="c1">## Poor maintainability - tightly coupled, hard to modify</span>
 
-class OrderProcessor:
-    &quot;&quot;&quot;Order processor with maintainability issues.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">OrderProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Order processor with maintainability issues.&quot;&quot;&quot;</span>
 
-    def process_order(self, order_data):
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_data</span><span class="p">):</span>
 
-        ## Validation logic mixed with business logic
+        <span class="c1">## Validation logic mixed with business logic</span>
 
-        if not order_data.get(&#x27;customer_id&#x27;):
-            print(&quot;Error: Missing customer ID&quot;)
-            return False
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Missing customer ID&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-        ## Database access mixed with calculation
+        <span class="c1">## Database access mixed with calculation</span>
 
-        total = 0
-        for item in order_data[&#x27;items&#x27;]:
+        <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
 
-            ## Hard-coded tax rate makes changes difficult
+            <span class="c1">## Hard-coded tax rate makes changes difficult</span>
 
-            item_total = item[&#x27;price&#x27;] * item[&#x27;quantity&#x27;] * 1.1  # 10% tax
-            total += item_total
+            <span class="n">item_total</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.1</span>  <span class="c1"># 10% tax</span>
+            <span class="n">total</span> <span class="o">+=</span> <span class="n">item_total</span>
 
-        ## Payment processing mixed with order logic
+        <span class="c1">## Payment processing mixed with order logic</span>
 
-        if total &gt; 1000:
+        <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
 
-            ## Hard-coded discount logic
+            <span class="c1">## Hard-coded discount logic</span>
 
-            total *= 0.9  # 10% discount
+            <span class="n">total</span> <span class="o">*=</span> <span class="mf">0.9</span>  <span class="c1"># 10% discount</span>
 
-        ## Email logic mixed with order processing
+        <span class="c1">## Email logic mixed with order processing</span>
 
-        print(f&quot;Sending email to customer {order_data[&#x27;customer_id&#x27;]}&quot;)
-        print(f&quot;Order total: ${total:.2f}&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending email to customer </span><span class="si">{</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Order total: $</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        return True
-
-
-## Improved maintainability - modular, configurable, testable
-
-class TaxCalculator:
-    &quot;&quot;&quot;Handles tax calculations with configurable rates.&quot;&quot;&quot;
-
-    def __init__(self, tax_rate=0.1):
-        self.tax_rate = tax_rate
-
-    def calculate_tax(self, amount):
-        &quot;&quot;&quot;Calculate tax for a given amount.&quot;&quot;&quot;
-        return amount * self.tax_rate
+        <span class="k">return</span> <span class="kc">True</span>
 
 
-class DiscountCalculator:
-    &quot;&quot;&quot;Handles discount calculations with configurable rules.&quot;&quot;&quot;
+<span class="c1">## Improved maintainability - modular, configurable, testable</span>
 
-    def __init__(self):
-        self.discount_rules = [
-            {&#x27;min_amount&#x27;: 1000, &#x27;discount_rate&#x27;: 0.1},
-            {&#x27;min_amount&#x27;: 500, &#x27;discount_rate&#x27;: 0.05}
-        ]
+<span class="k">class</span><span class="w"> </span><span class="nc">TaxCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles tax calculations with configurable rates.&quot;&quot;&quot;</span>
 
-    def calculate_discount(self, amount):
-        &quot;&quot;&quot;Calculate discount based on amount and rules.&quot;&quot;&quot;
-        for rule in self.discount_rules:
-            if amount &gt;= rule[&#x27;min_amount&#x27;]:
-                return amount * rule[&#x27;discount_rate&#x27;]
-        return 0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_rate</span><span class="o">=</span><span class="mf">0.1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tax_rate</span> <span class="o">=</span> <span class="n">tax_rate</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_tax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate tax for a given amount.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_rate</span>
 
 
-class OrderValidator:
-    &quot;&quot;&quot;Validates order data.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">DiscountCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles discount calculations with configurable rules.&quot;&quot;&quot;</span>
 
-    def validate_order(self, order_data):
-        &quot;&quot;&quot;
-        Validate order data.
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discount_rules</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;min_amount&#39;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="s1">&#39;discount_rate&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+            <span class="p">{</span><span class="s1">&#39;min_amount&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;discount_rate&#39;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">}</span>
+        <span class="p">]</span>
 
-        Returns:
-            tuple: (is_valid, error_messages)
-        &quot;&quot;&quot;
-        errors = []
-
-        if not order_data.get(&#x27;customer_id&#x27;):
-            errors.append(&quot;Missing customer ID&quot;)
-
-        if not order_data.get(&#x27;items&#x27;):
-            errors.append(&quot;Order must contain items&quot;)
-
-        for item in order_data.get(&#x27;items&#x27;, []):
-            if item.get(&#x27;price&#x27;, 0) &lt;= 0:
-                errors.append(f&quot;Invalid price for item {item.get(&#x27;name&#x27;, &#x27;unknown&#x27;)}&quot;)
-
-        return len(errors) == 0, errors
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate discount based on amount and rules.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">discount_rules</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;=</span> <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;min_amount&#39;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">rule</span><span class="p">[</span><span class="s1">&#39;discount_rate&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="mi">0</span>
 
 
-class NotificationService:
-    &quot;&quot;&quot;Handles order notifications.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">OrderValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validates order data.&quot;&quot;&quot;</span>
 
-    def send_order_confirmation(self, customer_id, order_total):
-        &quot;&quot;&quot;Send order confirmation to customer.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate order data.</span>
 
-        ## This could be extended to support different notification types
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: (is_valid, error_messages)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 
-        print(f&quot;Sending email to customer {customer_id}&quot;)
-        print(f&quot;Order total: ${order_total:.2f}&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customer_id&#39;</span><span class="p">):</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Missing customer ID&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">):</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Order must contain items&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid price for item </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;unknown&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">errors</span>
 
 
-class ImprovedOrderProcessor:
-    &quot;&quot;&quot;Order processor with improved maintainability.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">NotificationService</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles order notifications.&quot;&quot;&quot;</span>
 
-    def __init__(self, tax_calculator=None, discount_calculator=None, 
-                 validator=None, notification_service=None):
-        &quot;&quot;&quot;Initialize with dependency injection for testability.&quot;&quot;&quot;
-        self.tax_calculator = tax_calculator or TaxCalculator()
-        self.discount_calculator = discount_calculator or DiscountCalculator()
-        self.validator = validator or OrderValidator()
-        self.notification_service = notification_service or NotificationService()
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_order_confirmation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_id</span><span class="p">,</span> <span class="n">order_total</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send order confirmation to customer.&quot;&quot;&quot;</span>
 
-    def process_order(self, order_data):
-        &quot;&quot;&quot;
-        Process an order through validation, calculation, and notification.
+        <span class="c1">## This could be extended to support different notification types</span>
 
-        Args:
-            order_data (dict): Order information
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sending email to customer </span><span class="si">{</span><span class="n">customer_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Order total: $</span><span class="si">{</span><span class="n">order_total</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        Returns:
-            tuple: (success, total_amount, error_messages)
-        &quot;&quot;&quot;
 
-        ## Step 1: Validate order
+<span class="k">class</span><span class="w"> </span><span class="nc">ImprovedOrderProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Order processor with improved maintainability.&quot;&quot;&quot;</span>
 
-        is_valid, errors = self.validator.validate_order(order_data)
-        if not is_valid:
-            return False, 0, errors
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_calculator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">discount_calculator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                 <span class="n">validator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">notification_service</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with dependency injection for testability.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tax_calculator</span> <span class="o">=</span> <span class="n">tax_calculator</span> <span class="ow">or</span> <span class="n">TaxCalculator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discount_calculator</span> <span class="o">=</span> <span class="n">discount_calculator</span> <span class="ow">or</span> <span class="n">DiscountCalculator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span> <span class="ow">or</span> <span class="n">OrderValidator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notification_service</span> <span class="o">=</span> <span class="n">notification_service</span> <span class="ow">or</span> <span class="n">NotificationService</span><span class="p">()</span>
 
-        ## Step 2: Calculate totals
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Process an order through validation, calculation, and notification.</span>
 
-        subtotal = self._calculate_subtotal(order_data[&#x27;items&#x27;])
-        tax_amount = self.tax_calculator.calculate_tax(subtotal)
-        discount_amount = self.discount_calculator.calculate_discount(subtotal)
-        total = subtotal + tax_amount - discount_amount
+<span class="sd">        Args:</span>
+<span class="sd">            order_data (dict): Order information</span>
 
-        ## Step 3: Send notification
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: (success, total_amount, error_messages)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
-        self.notification_service.send_order_confirmation(
-            order_data[&#x27;customer_id&#x27;], total
-        )
+        <span class="c1">## Step 1: Validate order</span>
 
-        return True, total, []
+        <span class="n">is_valid</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate_order</span><span class="p">(</span><span class="n">order_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">errors</span>
 
-    def _calculate_subtotal(self, items):
-        &quot;&quot;&quot;Calculate subtotal for order items.&quot;&quot;&quot;
-        return sum(item[&#x27;price&#x27;] * item[&#x27;quantity&#x27;] for item in items)
+        <span class="c1">## Step 2: Calculate totals</span>
+
+        <span class="n">subtotal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_subtotal</span><span class="p">(</span><span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">])</span>
+        <span class="n">tax_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tax_calculator</span><span class="o">.</span><span class="n">calculate_tax</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span>
+        <span class="n">discount_amount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">discount_calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="n">subtotal</span><span class="p">)</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">subtotal</span> <span class="o">+</span> <span class="n">tax_amount</span> <span class="o">-</span> <span class="n">discount_amount</span>
+
+        <span class="c1">## Step 3: Send notification</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">notification_service</span><span class="o">.</span><span class="n">send_order_confirmation</span><span class="p">(</span>
+            <span class="n">order_data</span><span class="p">[</span><span class="s1">&#39;customer_id&#39;</span><span class="p">],</span> <span class="n">total</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_subtotal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate subtotal for order items.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="basic-optimization-techniques">Basic Optimization Techniques<a class="headerlink" href="#basic-optimization-techniques" title="Permanent link">&para;</a></h2>
@@ -2328,706 +2326,698 @@ class ImprovedOrderProcessor:
 <p>Choose algorithms with better time complexity for your specific use case.</p>
 <p><strong>Example: Search Algorithm Optimization</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-class ProductCatalog:
-    &quot;&quot;&quot;Product catalog with different search implementations.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ProductCatalog</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Product catalog with different search implementations.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.products = []
-        self._products_by_id = {}  # For fast lookup
-        self._products_by_category = {}  # For category searches
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">products</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_id</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># For fast lookup</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_category</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># For category searches</span>
 
-    def add_product(self, product_id, name, category, price):
-        &quot;&quot;&quot;Add product with multiple indexing for different search patterns.&quot;&quot;&quot;
-        product = {
-            &#x27;id&#x27;: product_id,
-            &#x27;name&#x27;: name,
-            &#x27;category&#x27;: category,
-            &#x27;price&#x27;: price
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add product with multiple indexing for different search patterns.&quot;&quot;&quot;</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">product_id</span><span class="p">,</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+            <span class="s1">&#39;category&#39;</span><span class="p">:</span> <span class="n">category</span><span class="p">,</span>
+            <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="n">price</span>
+        <span class="p">}</span>
 
-        ## Store in list (for iteration)
+        <span class="c1">## Store in list (for iteration)</span>
 
-        self.products.append(product)
+        <span class="bp">self</span><span class="o">.</span><span class="n">products</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
 
-        ## Store in hash table (for fast ID lookup)
+        <span class="c1">## Store in hash table (for fast ID lookup)</span>
 
-        self._products_by_id[product_id] = product
+        <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_id</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">product</span>
 
-        ## Store in category index (for fast category searches)
+        <span class="c1">## Store in category index (for fast category searches)</span>
 
-        if category not in self._products_by_category:
-            self._products_by_category[category] = []
-        self._products_by_category[category].append(product)
+        <span class="k">if</span> <span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_category</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_category</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_category</span><span class="p">[</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
 
-    def find_product_linear(self, product_id):
-        &quot;&quot;&quot;Linear search - O(n) time complexity.&quot;&quot;&quot;
-        for product in self.products:
-            if product[&#x27;id&#x27;] == product_id:
-                return product
-        return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_product_linear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Linear search - O(n) time complexity.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">product</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">products</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">product</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">product_id</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">product</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    def find_product_optimized(self, product_id):
-        &quot;&quot;&quot;Hash table lookup - O(1) time complexity.&quot;&quot;&quot;
-        return self._products_by_id.get(product_id)
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_product_optimized</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">product_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Hash table lookup - O(1) time complexity.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_id</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
 
-    def find_products_by_category_linear(self, category):
-        &quot;&quot;&quot;Linear search for category - O(n) time complexity.&quot;&quot;&quot;
-        return [p for p in self.products if p[&#x27;category&#x27;] == category]
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_products_by_category_linear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Linear search for category - O(n) time complexity.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">products</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">category</span><span class="p">]</span>
 
-    def find_products_by_category_optimized(self, category):
-        &quot;&quot;&quot;Index-based category search - O(1) to find category, O(k) to return results.&quot;&quot;&quot;
-        return self._products_by_category.get(category, [])
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_products_by_category_optimized</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Index-based category search - O(1) to find category, O(k) to return results.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_products_by_category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">category</span><span class="p">,</span> <span class="p">[])</span>
 </code></pre>
 </div>
 <h3 id="2-data-structure-selection">2. Data Structure Selection<a class="headerlink" href="#2-data-structure-selection" title="Permanent link">&para;</a></h3>
 <p>Choose the right data structure for your access patterns.</p>
 <p><strong>Example: Data Structure Optimization</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-class TaskManager:
-    &quot;&quot;&quot;Task manager demonstrating data structure choices.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TaskManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Task manager demonstrating data structure choices.&quot;&quot;&quot;</span>
 
-    def __init__(self):
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        ## Different data structures for different use cases
+        <span class="c1">## Different data structures for different use cases</span>
 
-        self.tasks_list = []  # For ordered iteration
-        self.tasks_dict = {}  # For fast lookup by ID
-        self.tasks_by_priority = {  # For priority-based access
-            &#x27;high&#x27;: [],
-            &#x27;medium&#x27;: [],
-            &#x27;low&#x27;: []
-        }
-        self.completed_tasks = set()  # For fast membership testing
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># For ordered iteration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_dict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># For fast lookup by ID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_by_priority</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># For priority-based access</span>
+            <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;medium&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">completed_tasks</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># For fast membership testing</span>
 
-    def add_task(self, task_id, description, priority=&#x27;medium&#x27;):
-        &quot;&quot;&quot;Add task with appropriate data structure updates.&quot;&quot;&quot;
-        task = {
-            &#x27;id&#x27;: task_id,
-            &#x27;description&#x27;: description,
-            &#x27;priority&#x27;: priority,
-            &#x27;created_at&#x27;: time.time()
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add task with appropriate data structure updates.&quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+            <span class="s1">&#39;priority&#39;</span><span class="p">:</span> <span class="n">priority</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">}</span>
 
-        ## Add to different structures for different access patterns
+        <span class="c1">## Add to different structures for different access patterns</span>
 
-        self.tasks_list.append(task)  # Ordered access
-        self.tasks_dict[task_id] = task  # Fast lookup
-        self.tasks_by_priority[priority].append(task)  # Priority access
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>  <span class="c1"># Ordered access</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_dict</span><span class="p">[</span><span class="n">task_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">task</span>  <span class="c1"># Fast lookup</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks_by_priority</span><span class="p">[</span><span class="n">priority</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>  <span class="c1"># Priority access</span>
 
-    def complete_task(self, task_id):
-        &quot;&quot;&quot;Mark task as completed using set for fast lookup.&quot;&quot;&quot;
-        if task_id in self.tasks_dict:
-            self.completed_tasks.add(task_id)  # O(1) set insertion
-            return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">complete_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark task as completed using set for fast lookup.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">task_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks_dict</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">completed_tasks</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>  <span class="c1"># O(1) set insertion</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-    def is_task_completed(self, task_id):
-        &quot;&quot;&quot;Check if task is completed - O(1) set membership test.&quot;&quot;&quot;
-        return task_id in self.completed_tasks
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_task_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if task is completed - O(1) set membership test.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">task_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">completed_tasks</span>
 
-    def get_high_priority_tasks(self):
-        &quot;&quot;&quot;Get high priority tasks - O(1) to access, O(k) to filter completed.&quot;&quot;&quot;
-        high_priority = self.tasks_by_priority[&#x27;high&#x27;]
-        return [task for task in high_priority 
-                if task[&#x27;id&#x27;] not in self.completed_tasks]
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_high_priority_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get high priority tasks - O(1) to access, O(k) to filter completed.&quot;&quot;&quot;</span>
+        <span class="n">high_priority</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tasks_by_priority</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">task</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">high_priority</span> 
+                <span class="k">if</span> <span class="n">task</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">completed_tasks</span><span class="p">]</span>
 
 
-## Demonstration of why data structure choice matters
+<span class="c1">## Demonstration of why data structure choice matters</span>
 
-def demonstrate_data_structure_performance():
-    &quot;&quot;&quot;Show performance difference between list and set for membership testing.&quot;&quot;&quot;
-    import random
-    import time
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_data_structure_performance</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show performance difference between list and set for membership testing.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-    ## Create large datasets
+    <span class="c1">## Create large datasets</span>
 
-    large_list = list(range(100000))
-    large_set = set(range(100000))
+    <span class="n">large_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+    <span class="n">large_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
 
-    ## Test values to search for
+    <span class="c1">## Test values to search for</span>
 
-    search_values = [random.randint(0, 99999) for _ in range(1000)]
+    <span class="n">search_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99999</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)]</span>
 
-    ## Time list searches (O(n) for each search)
+    <span class="c1">## Time list searches (O(n) for each search)</span>
 
-    start_time = time.time()
-    for value in search_values:
-        result = value in large_list
-    list_time = time.time() - start_time
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">search_values</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">large_list</span>
+    <span class="n">list_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    ## Time set searches (O(1) for each search)
+    <span class="c1">## Time set searches (O(1) for each search)</span>
 
-    start_time = time.time()
-    for value in search_values:
-        result = value in large_set
-    set_time = time.time() - start_time
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">search_values</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">large_set</span>
+    <span class="n">set_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    print(f&quot;List membership testing: {list_time:.4f} seconds&quot;)
-    print(f&quot;Set membership testing: {set_time:.4f} seconds&quot;)
-    print(f&quot;Set is {list_time/set_time:.1f}x faster&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List membership testing: </span><span class="si">{</span><span class="n">list_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set membership testing: </span><span class="si">{</span><span class="n">set_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Set is </span><span class="si">{</span><span class="n">list_time</span><span class="o">/</span><span class="n">set_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x faster&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="3-avoiding-premature-optimization">3. Avoiding Premature Optimization<a class="headerlink" href="#3-avoiding-premature-optimization" title="Permanent link">&para;</a></h3>
 <p><strong>The principle</strong>: Don&rsquo;t optimize until you know where the bottlenecks are.</p>
 <p><strong>Example: Premature vs. Appropriate Optimization</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-## Example of premature optimization (don&#x27;t do this initially)
+<pre><code class="language-python"><span class="c1">## Example of premature optimization (don&#39;t do this initially)</span>
 
-class PrematurelyOptimizedTextProcessor:
-    &quot;&quot;&quot;Text processor with premature micro-optimizations.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">PrematurelyOptimizedTextProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Text processor with premature micro-optimizations.&quot;&quot;&quot;</span>
 
-    def __init__(self):
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        ## Pre-allocating lists &quot;for performance&quot; - premature!
+        <span class="c1">## Pre-allocating lists &quot;for performance&quot; - premature!</span>
 
-        self._word_cache = [None] * 10000
-        self._cache_index = 0
+        <span class="bp">self</span><span class="o">.</span><span class="n">_word_cache</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10000</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache_index</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def process_text(self, text):
-        &quot;&quot;&quot;Process text with unnecessary optimizations.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process text with unnecessary optimizations.&quot;&quot;&quot;</span>
 
-        ## Using list comprehension instead of loops &quot;for speed&quot;
+        <span class="c1">## Using list comprehension instead of loops &quot;for speed&quot;</span>
 
-        ## But this sacrifices readability for minimal gain
+        <span class="c1">## But this sacrifices readability for minimal gain</span>
 
-        words = [w.strip().lower() for w in text.split() 
-                if len(w.strip()) &gt; 0 and w.strip().isalpha()]
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> 
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">w</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
 
-        ## Complex caching logic that probably isn&#x27;t needed
+        <span class="c1">## Complex caching logic that probably isn&#39;t needed</span>
 
-        for word in words:
-            if self._cache_index &lt; len(self._word_cache):
-                self._word_cache[self._cache_index] = word
-                self._cache_index += 1
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_word_cache</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_word_cache</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cache_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cache_index</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return words
-
-
-## Better approach: Write clear code first, optimize if needed
-
-class ClearTextProcessor:
-    &quot;&quot;&quot;Text processor focused on clarity and correctness first.&quot;&quot;&quot;
-
-    def __init__(self):
-        self.processed_words = []
-
-    def process_text(self, text):
-        &quot;&quot;&quot;
-        Process text into clean word list.
-
-        Args:
-            text (str): Input text to process
-
-        Returns:
-            list: Clean list of alphabetic words in lowercase
-        &quot;&quot;&quot;
-        words = []
-
-        ## Clear, readable logic
-
-        for word in text.split():
-            cleaned_word = word.strip().lower()
-
-            ## Only keep alphabetic words
-
-            if cleaned_word and cleaned_word.isalpha():
-                words.append(cleaned_word)
-
-        ## Store for potential analysis
-
-        self.processed_words.extend(words)
-
-        return words
+        <span class="k">return</span> <span class="n">words</span>
 
 
-## If profiling shows this is a bottleneck, then optimize:
+<span class="c1">## Better approach: Write clear code first, optimize if needed</span>
 
-class OptimizedTextProcessor:
-    &quot;&quot;&quot;Text processor optimized after profiling identified bottlenecks.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">ClearTextProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Text processor focused on clarity and correctness first.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.processed_words = []
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processed_words</span> <span class="o">=</span> <span class="p">[]</span>
 
-        ## Only add caching if profiling shows it helps
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Process text into clean word list.</span>
 
-    def process_text(self, text):
-        &quot;&quot;&quot;Optimized version based on actual performance data.&quot;&quot;&quot;
+<span class="sd">        Args:</span>
+<span class="sd">            text (str): Input text to process</span>
 
-        ## Use list comprehension only if it&#x27;s actually faster for your use case
+<span class="sd">        Returns:</span>
+<span class="sd">            list: Clean list of alphabetic words in lowercase</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
 
-        words = [word.strip().lower() for word in text.split()
-                if word.strip() and word.strip().isalpha()]
+        <span class="c1">## Clear, readable logic</span>
 
-        self.processed_words.extend(words)
-        return words
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="n">cleaned_word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+            <span class="c1">## Only keep alphabetic words</span>
+
+            <span class="k">if</span> <span class="n">cleaned_word</span> <span class="ow">and</span> <span class="n">cleaned_word</span><span class="o">.</span><span class="n">isalpha</span><span class="p">():</span>
+                <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cleaned_word</span><span class="p">)</span>
+
+        <span class="c1">## Store for potential analysis</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">processed_words</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">words</span>
+
+
+<span class="c1">## If profiling shows this is a bottleneck, then optimize:</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">OptimizedTextProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Text processor optimized after profiling identified bottlenecks.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processed_words</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1">## Only add caching if profiling shows it helps</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optimized version based on actual performance data.&quot;&quot;&quot;</span>
+
+        <span class="c1">## Use list comprehension only if it&#39;s actually faster for your use case</span>
+
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">and</span> <span class="n">word</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">processed_words</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">words</span>
 </code></pre>
 </div>
 <h2 id="simple-profiling-techniques">Simple Profiling Techniques<a class="headerlink" href="#simple-profiling-techniques" title="Permanent link">&para;</a></h2>
 <p>Understanding where your code spends time is essential for effective optimization.</p>
 <h3 id="time-based-profiling">Time-Based Profiling<a class="headerlink" href="#time-based-profiling" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-import time
-import functools
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
 
-def time_function(func):
-    &quot;&quot;&quot;Decorator to time function execution.&quot;&quot;&quot;
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        end_time = time.time()
-        print(f&quot;{func.__name__} took {end_time - start_time:.4f} seconds&quot;)
-        return result
-    return wrapper
-
-
-class ProfiledDataProcessor:
-    &quot;&quot;&quot;Data processor with timing for performance analysis.&quot;&quot;&quot;
-
-    @time_function
-    def load_data(self, filename):
-        &quot;&quot;&quot;Load data from file - timed for profiling.&quot;&quot;&quot;
-
-        ## Simulate file loading
-
-        time.sleep(0.1)
-        return [&quot;data&quot;] * 1000
-
-    @time_function
-    def process_data(self, data):
-        &quot;&quot;&quot;Process data - timed for profiling.&quot;&quot;&quot;
-
-        ## Simulate data processing
-
-        processed = []
-        for item in data:
-
-            ## Some processing work
-
-            processed.append(item.upper())
-        return processed
-
-    @time_function
-    def save_results(self, processed_data):
-        &quot;&quot;&quot;Save results - timed for profiling.&quot;&quot;&quot;
-
-        ## Simulate saving
-
-        time.sleep(0.05)
-        return True
+<span class="k">def</span><span class="w"> </span><span class="nf">time_function</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to time function execution.&quot;&quot;&quot;</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
 
 
-def profile_data_processing():
-    &quot;&quot;&quot;Demonstrate profiling to identify bottlenecks.&quot;&quot;&quot;
-    processor = ProfiledDataProcessor()
+<span class="k">class</span><span class="w"> </span><span class="nc">ProfiledDataProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data processor with timing for performance analysis.&quot;&quot;&quot;</span>
 
-    data = processor.load_data(&quot;sample.txt&quot;)
-    processed = processor.process_data(data)
-    processor.save_results(processed)
+    <span class="nd">@time_function</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load data from file - timed for profiling.&quot;&quot;&quot;</span>
 
-    ## Output will show which methods take the most time
+        <span class="c1">## Simulate file loading</span>
 
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1000</span>
 
-class DetailedProfiler:
-    &quot;&quot;&quot;More detailed profiling for complex analysis.&quot;&quot;&quot;
+    <span class="nd">@time_function</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process data - timed for profiling.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.timing_data = {}
+        <span class="c1">## Simulate data processing</span>
 
-    def time_operation(self, operation_name):
-        &quot;&quot;&quot;Context manager for timing operations.&quot;&quot;&quot;
-        return TimingContext(operation_name, self.timing_data)
+        <span class="n">processed</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
 
-    def print_profile_summary(self):
-        &quot;&quot;&quot;Print summary of all timed operations.&quot;&quot;&quot;
-        print(&quot;\nProfile Summary:&quot;)
-        print(&quot;-&quot; * 40)
+            <span class="c1">## Some processing work</span>
 
-        total_time = sum(self.timing_data.values())
+            <span class="n">processed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">processed</span>
 
-        for operation, duration in sorted(self.timing_data.items(), 
-                                        key=lambda x: x[1], reverse=True):
-            percentage = (duration / total_time) * 100
-            print(f&quot;{operation:20s}: {duration:.4f}s ({percentage:.1f}%)&quot;)
+    <span class="nd">@time_function</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">processed_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Save results - timed for profiling.&quot;&quot;&quot;</span>
 
+        <span class="c1">## Simulate saving</span>
 
-class TimingContext:
-    &quot;&quot;&quot;Context manager for timing code blocks.&quot;&quot;&quot;
-
-    def __init__(self, operation_name, timing_data):
-        self.operation_name = operation_name
-        self.timing_data = timing_data
-        self.start_time = None
-
-    def __enter__(self):
-        self.start_time = time.time()
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        duration = time.time() - self.start_time
-        self.timing_data[self.operation_name] = duration
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
 
-def demonstrate_detailed_profiling():
-    &quot;&quot;&quot;Show detailed profiling of a complex operation.&quot;&quot;&quot;
-    profiler = DetailedProfiler()
+<span class="k">def</span><span class="w"> </span><span class="nf">profile_data_processing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate profiling to identify bottlenecks.&quot;&quot;&quot;</span>
+    <span class="n">processor</span> <span class="o">=</span> <span class="n">ProfiledDataProcessor</span><span class="p">()</span>
 
-    ## Profile different parts of an operation
+    <span class="n">data</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;sample.txt&quot;</span><span class="p">)</span>
+    <span class="n">processed</span> <span class="o">=</span> <span class="n">processor</span><span class="o">.</span><span class="n">process_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">processor</span><span class="o">.</span><span class="n">save_results</span><span class="p">(</span><span class="n">processed</span><span class="p">)</span>
 
-    with profiler.time_operation(&quot;Data Loading&quot;):
+    <span class="c1">## Output will show which methods take the most time</span>
 
-        ## Simulate loading
 
-        data = list(range(10000))
+<span class="k">class</span><span class="w"> </span><span class="nc">DetailedProfiler</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;More detailed profiling for complex analysis.&quot;&quot;&quot;</span>
 
-    with profiler.time_operation(&quot;Data Transformation&quot;):
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timing_data</span> <span class="o">=</span> <span class="p">{}</span>
 
-        ## Simulate transformation
+    <span class="k">def</span><span class="w"> </span><span class="nf">time_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager for timing operations.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TimingContext</span><span class="p">(</span><span class="n">operation_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">timing_data</span><span class="p">)</span>
 
-        transformed = [x * 2 for x in data]
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_profile_summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print summary of all timed operations.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Profile Summary:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
 
-    with profiler.time_operation(&quot;Data Filtering&quot;):
+        <span class="n">total_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timing_data</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
-        ## Simulate filtering
+        <span class="k">for</span> <span class="n">operation</span><span class="p">,</span> <span class="n">duration</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timing_data</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> 
+                                        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">duration</span> <span class="o">/</span> <span class="n">total_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operation</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s (</span><span class="si">{</span><span class="n">percentage</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
 
-        filtered = [x for x in transformed if x % 3 == 0]
 
-    with profiler.time_operation(&quot;Data Aggregation&quot;):
+<span class="k">class</span><span class="w"> </span><span class="nc">TimingContext</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for timing code blocks.&quot;&quot;&quot;</span>
 
-        ## Simulate aggregation
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation_name</span><span class="p">,</span> <span class="n">timing_data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operation_name</span> <span class="o">=</span> <span class="n">operation_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timing_data</span> <span class="o">=</span> <span class="n">timing_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="kc">None</span>
 
-        total = sum(filtered)
-        average = total / len(filtered) if filtered else 0
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
 
-    profiler.print_profile_summary()
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timing_data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">operation_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">duration</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_detailed_profiling</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show detailed profiling of a complex operation.&quot;&quot;&quot;</span>
+    <span class="n">profiler</span> <span class="o">=</span> <span class="n">DetailedProfiler</span><span class="p">()</span>
+
+    <span class="c1">## Profile different parts of an operation</span>
+
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">time_operation</span><span class="p">(</span><span class="s2">&quot;Data Loading&quot;</span><span class="p">):</span>
+
+        <span class="c1">## Simulate loading</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">))</span>
+
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">time_operation</span><span class="p">(</span><span class="s2">&quot;Data Transformation&quot;</span><span class="p">):</span>
+
+        <span class="c1">## Simulate transformation</span>
+
+        <span class="n">transformed</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">time_operation</span><span class="p">(</span><span class="s2">&quot;Data Filtering&quot;</span><span class="p">):</span>
+
+        <span class="c1">## Simulate filtering</span>
+
+        <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">transformed</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">with</span> <span class="n">profiler</span><span class="o">.</span><span class="n">time_operation</span><span class="p">(</span><span class="s2">&quot;Data Aggregation&quot;</span><span class="p">):</span>
+
+        <span class="c1">## Simulate aggregation</span>
+
+        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span>
+        <span class="n">average</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span> <span class="k">if</span> <span class="n">filtered</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="n">profiler</span><span class="o">.</span><span class="n">print_profile_summary</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="memory-profiling">Memory Profiling<a class="headerlink" href="#memory-profiling" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-import sys
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-class MemoryProfiler:
-    &quot;&quot;&quot;Simple memory usage tracking.&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">MemoryProfiler</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple memory usage tracking.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.memory_snapshots = {}
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_snapshots</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def take_snapshot(self, label):
-        &quot;&quot;&quot;Take a memory usage snapshot.&quot;&quot;&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">take_snapshot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Take a memory usage snapshot.&quot;&quot;&quot;</span>
 
-        ## Note: This is a simplified example
+        <span class="c1">## Note: This is a simplified example</span>
 
-        ## In practice, you&#x27;d use tools like memory_profiler or tracemalloc
+        <span class="c1">## In practice, you&#39;d use tools like memory_profiler or tracemalloc</span>
 
-        import gc
-        gc.collect()  # Force garbage collection for more accurate reading
+        <span class="kn">import</span><span class="w"> </span><span class="nn">gc</span>
+        <span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>  <span class="c1"># Force garbage collection for more accurate reading</span>
 
-        ## This gives a rough estimate (not precise)
+        <span class="c1">## This gives a rough estimate (not precise)</span>
 
-        memory_usage = sys.getsizeof(gc.get_objects())
-        self.memory_snapshots[label] = memory_usage
-        print(f&quot;Memory snapshot &#x27;{label}&#x27;: ~{memory_usage:,} bytes&quot;)
+        <span class="n">memory_usage</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">getsizeof</span><span class="p">(</span><span class="n">gc</span><span class="o">.</span><span class="n">get_objects</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_snapshots</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">memory_usage</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memory snapshot &#39;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&#39;: ~</span><span class="si">{</span><span class="n">memory_usage</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
 
-    def compare_snapshots(self, label1, label2):
-        &quot;&quot;&quot;Compare memory usage between snapshots.&quot;&quot;&quot;
-        if label1 in self.memory_snapshots and label2 in self.memory_snapshots:
-            diff = self.memory_snapshots[label2] - self.memory_snapshots[label1]
-            print(f&quot;Memory change from {label1} to {label2}: {diff:,} bytes&quot;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_snapshots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label1</span><span class="p">,</span> <span class="n">label2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare memory usage between snapshots.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">label1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_snapshots</span> <span class="ow">and</span> <span class="n">label2</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_snapshots</span><span class="p">:</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_snapshots</span><span class="p">[</span><span class="n">label2</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory_snapshots</span><span class="p">[</span><span class="n">label1</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Memory change from </span><span class="si">{</span><span class="n">label1</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">label2</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">diff</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
 
 
-def demonstrate_memory_profiling():
-    &quot;&quot;&quot;Demonstrate memory usage tracking.&quot;&quot;&quot;
-    profiler = MemoryProfiler()
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_memory_profiling</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate memory usage tracking.&quot;&quot;&quot;</span>
+    <span class="n">profiler</span> <span class="o">=</span> <span class="n">MemoryProfiler</span><span class="p">()</span>
 
-    profiler.take_snapshot(&quot;Start&quot;)
+    <span class="n">profiler</span><span class="o">.</span><span class="n">take_snapshot</span><span class="p">(</span><span class="s2">&quot;Start&quot;</span><span class="p">)</span>
 
-    ## Create some data structures
+    <span class="c1">## Create some data structures</span>
 
-    large_list = list(range(100000))
-    profiler.take_snapshot(&quot;After creating large list&quot;)
+    <span class="n">large_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
+    <span class="n">profiler</span><span class="o">.</span><span class="n">take_snapshot</span><span class="p">(</span><span class="s2">&quot;After creating large list&quot;</span><span class="p">)</span>
 
-    large_dict = {i: f&quot;value_{i}&quot; for i in range(50000)}
-    profiler.take_snapshot(&quot;After creating large dict&quot;)
+    <span class="n">large_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;value_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50000</span><span class="p">)}</span>
+    <span class="n">profiler</span><span class="o">.</span><span class="n">take_snapshot</span><span class="p">(</span><span class="s2">&quot;After creating large dict&quot;</span><span class="p">)</span>
 
-    ## Clean up
+    <span class="c1">## Clean up</span>
 
-    del large_list
-    del large_dict
-    profiler.take_snapshot(&quot;After cleanup&quot;)
+    <span class="k">del</span> <span class="n">large_list</span>
+    <span class="k">del</span> <span class="n">large_dict</span>
+    <span class="n">profiler</span><span class="o">.</span><span class="n">take_snapshot</span><span class="p">(</span><span class="s2">&quot;After cleanup&quot;</span><span class="p">)</span>
 
-    profiler.compare_snapshots(&quot;Start&quot;, &quot;After creating large list&quot;)
-    profiler.compare_snapshots(&quot;After creating large dict&quot;, &quot;After cleanup&quot;)
+    <span class="n">profiler</span><span class="o">.</span><span class="n">compare_snapshots</span><span class="p">(</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="s2">&quot;After creating large list&quot;</span><span class="p">)</span>
+    <span class="n">profiler</span><span class="o">.</span><span class="n">compare_snapshots</span><span class="p">(</span><span class="s2">&quot;After creating large dict&quot;</span><span class="p">,</span> <span class="s2">&quot;After cleanup&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="trade-offs-between-readability-and-performance">Trade-offs Between Readability and Performance<a class="headerlink" href="#trade-offs-between-readability-and-performance" title="Permanent link">&para;</a></h2>
 <p>Understanding when to prioritize readability versus performance is crucial for maintainable code.</p>
 <h3 id="readability-first-approach">Readability-First Approach<a class="headerlink" href="#readability-first-approach" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-class ReadableGradeCalculator:
-    &quot;&quot;&quot;Grade calculator prioritizing clarity and maintainability.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ReadableGradeCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Grade calculator prioritizing clarity and maintainability.&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.grade_boundaries = {
-            &#x27;A&#x27;: 90,
-            &#x27;B&#x27;: 80,
-            &#x27;C&#x27;: 70,
-            &#x27;D&#x27;: 60,
-            &#x27;F&#x27;: 0
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grade_boundaries</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+            <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+            <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
+            <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
 
-    def calculate_letter_grade(self, numerical_score):
-        &quot;&quot;&quot;
-        Convert numerical score to letter grade.
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_letter_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numerical_score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert numerical score to letter grade.</span>
 
-        This method prioritizes clarity over performance.
-        For most applications, the performance difference is negligible
-        but the readability benefit is significant.
-        &quot;&quot;&quot;
-        if numerical_score &gt;= self.grade_boundaries[&#x27;A&#x27;]:
-            return &#x27;A&#x27;
-        elif numerical_score &gt;= self.grade_boundaries[&#x27;B&#x27;]:
-            return &#x27;B&#x27;
-        elif numerical_score &gt;= self.grade_boundaries[&#x27;C&#x27;]:
-            return &#x27;C&#x27;
-        elif numerical_score &gt;= self.grade_boundaries[&#x27;D&#x27;]:
-            return &#x27;D&#x27;
-        else:
-            return &#x27;F&#x27;
+<span class="sd">        This method prioritizes clarity over performance.</span>
+<span class="sd">        For most applications, the performance difference is negligible</span>
+<span class="sd">        but the readability benefit is significant.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">numerical_score</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_boundaries</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s1">&#39;A&#39;</span>
+        <span class="k">elif</span> <span class="n">numerical_score</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_boundaries</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s1">&#39;B&#39;</span>
+        <span class="k">elif</span> <span class="n">numerical_score</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_boundaries</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s1">&#39;C&#39;</span>
+        <span class="k">elif</span> <span class="n">numerical_score</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_boundaries</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s1">&#39;D&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;F&#39;</span>
 
-    def calculate_class_average(self, student_grades):
-        &quot;&quot;&quot;
-        Calculate average grade for a class.
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_class_average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_grades</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate average grade for a class.</span>
 
-        Uses clear, step-by-step logic that&#x27;s easy to verify and modify.
-        &quot;&quot;&quot;
-        if not student_grades:
-            return 0.0
+<span class="sd">        Uses clear, step-by-step logic that&#39;s easy to verify and modify.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">student_grades</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
 
-        total_points = 0
-        student_count = 0
+        <span class="n">total_points</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">student_count</span> <span class="o">=</span> <span class="mi">0</span>
 
-        for student_grade_list in student_grades.values():
-            if student_grade_list:  # Skip students with no grades
-                student_average = sum(student_grade_list) / len(student_grade_list)
-                total_points += student_average
-                student_count += 1
+        <span class="k">for</span> <span class="n">student_grade_list</span> <span class="ow">in</span> <span class="n">student_grades</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">student_grade_list</span><span class="p">:</span>  <span class="c1"># Skip students with no grades</span>
+                <span class="n">student_average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student_grade_list</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_grade_list</span><span class="p">)</span>
+                <span class="n">total_points</span> <span class="o">+=</span> <span class="n">student_average</span>
+                <span class="n">student_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        if student_count == 0:
-            return 0.0
+        <span class="k">if</span> <span class="n">student_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
 
-        class_average = total_points / student_count
-        return class_average
-
-
-class PerformanceOptimizedGradeCalculator:
-    &quot;&quot;&quot;Grade calculator optimized for performance-critical scenarios.&quot;&quot;&quot;
-
-    def __init__(self):
-
-        ## Pre-calculate grade boundaries for faster lookup
-
-        self.grade_thresholds = [
-            (90, &#x27;A&#x27;),
-            (80, &#x27;B&#x27;),
-            (70, &#x27;C&#x27;),
-            (60, &#x27;D&#x27;),
-            (0, &#x27;F&#x27;)
-        ]
-
-    def calculate_letter_grade(self, numerical_score):
-        &quot;&quot;&quot;
-        Optimized letter grade calculation.
-
-        Uses tuple lookup which is slightly faster than multiple if-elif statements
-        for very high-frequency calls. Only worth it if profiling shows this
-        is a bottleneck.
-        &quot;&quot;&quot;
-        for threshold, grade in self.grade_thresholds:
-            if numerical_score &gt;= threshold:
-                return grade
-        return &#x27;F&#x27;  # Fallback (shouldn&#x27;t reach here)
-
-    def calculate_class_average_optimized(self, student_grades):
-        &quot;&quot;&quot;
-        Optimized class average calculation.
-
-        Uses list comprehension and built-in functions for better performance
-        when processing large datasets.
-        &quot;&quot;&quot;
-
-        ## Filter out students with no grades and calculate averages in one pass
-
-        student_averages = [
-            sum(grades) / len(grades)
-            for grades in student_grades.values()
-            if grades  # Only students with grades
-        ]
-
-        return sum(student_averages) / len(student_averages) if student_averages else 0.0
+        <span class="n">class_average</span> <span class="o">=</span> <span class="n">total_points</span> <span class="o">/</span> <span class="n">student_count</span>
+        <span class="k">return</span> <span class="n">class_average</span>
 
 
-def compare_readability_vs_performance():
-    &quot;&quot;&quot;Demonstrate the trade-off between readability and performance.&quot;&quot;&quot;
-    import random
-    import time
+<span class="k">class</span><span class="w"> </span><span class="nc">PerformanceOptimizedGradeCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Grade calculator optimized for performance-critical scenarios.&quot;&quot;&quot;</span>
 
-    ## Create test data
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-    test_scores = [random.uniform(0, 100) for _ in range(10000)]
+        <span class="c1">## Pre-calculate grade boundaries for faster lookup</span>
 
-    readable_calc = ReadableGradeCalculator()
-    optimized_calc = PerformanceOptimizedGradeCalculator()
+        <span class="bp">self</span><span class="o">.</span><span class="n">grade_thresholds</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">)</span>
+        <span class="p">]</span>
 
-    ## Time the readable version
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_letter_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numerical_score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optimized letter grade calculation.</span>
 
-    start_time = time.time()
-    readable_results = [readable_calc.calculate_letter_grade(score) for score in test_scores]
-    readable_time = time.time() - start_time
+<span class="sd">        Uses tuple lookup which is slightly faster than multiple if-elif statements</span>
+<span class="sd">        for very high-frequency calls. Only worth it if profiling shows this</span>
+<span class="sd">        is a bottleneck.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">grade</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grade_thresholds</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">numerical_score</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">grade</span>
+        <span class="k">return</span> <span class="s1">&#39;F&#39;</span>  <span class="c1"># Fallback (shouldn&#39;t reach here)</span>
 
-    ## Time the optimized version
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_class_average_optimized</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">student_grades</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optimized class average calculation.</span>
 
-    start_time = time.time()
-    optimized_results = [optimized_calc.calculate_letter_grade(score) for score in test_scores]
-    optimized_time = time.time() - start_time
+<span class="sd">        Uses list comprehension and built-in functions for better performance</span>
+<span class="sd">        when processing large datasets.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
-    ## Verify results are the same
+        <span class="c1">## Filter out students with no grades and calculate averages in one pass</span>
 
-    assert readable_results == optimized_results
+        <span class="n">student_averages</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nb">sum</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">grades</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">grades</span> <span class="ow">in</span> <span class="n">student_grades</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">grades</span>  <span class="c1"># Only students with grades</span>
+        <span class="p">]</span>
 
-    print(f&quot;Readable version: {readable_time:.4f} seconds&quot;)
-    print(f&quot;Optimized version: {optimized_time:.4f} seconds&quot;)
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">student_averages</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_averages</span><span class="p">)</span> <span class="k">if</span> <span class="n">student_averages</span> <span class="k">else</span> <span class="mf">0.0</span>
 
-    if optimized_time &gt; 0:
-        speedup = readable_time / optimized_time
-        print(f&quot;Performance improvement: {speedup:.2f}x&quot;)
 
-        ## Show the trade-off
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_readability_vs_performance</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate the trade-off between readability and performance.&quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-        if speedup &lt; 2.0:
-            print(&quot;Recommendation: Stick with readable version - minimal performance gain&quot;)
-        else:
-            print(&quot;Recommendation: Consider optimized version if this is a bottleneck&quot;)
+    <span class="c1">## Create test data</span>
+
+    <span class="n">test_scores</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">)]</span>
+
+    <span class="n">readable_calc</span> <span class="o">=</span> <span class="n">ReadableGradeCalculator</span><span class="p">()</span>
+    <span class="n">optimized_calc</span> <span class="o">=</span> <span class="n">PerformanceOptimizedGradeCalculator</span><span class="p">()</span>
+
+    <span class="c1">## Time the readable version</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">readable_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">readable_calc</span><span class="o">.</span><span class="n">calculate_letter_grade</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">test_scores</span><span class="p">]</span>
+    <span class="n">readable_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1">## Time the optimized version</span>
+
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">optimized_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">optimized_calc</span><span class="o">.</span><span class="n">calculate_letter_grade</span><span class="p">(</span><span class="n">score</span><span class="p">)</span> <span class="k">for</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">test_scores</span><span class="p">]</span>
+    <span class="n">optimized_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1">## Verify results are the same</span>
+
+    <span class="k">assert</span> <span class="n">readable_results</span> <span class="o">==</span> <span class="n">optimized_results</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Readable version: </span><span class="si">{</span><span class="n">readable_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimized version: </span><span class="si">{</span><span class="n">optimized_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">optimized_time</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">speedup</span> <span class="o">=</span> <span class="n">readable_time</span> <span class="o">/</span> <span class="n">optimized_time</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Performance improvement: </span><span class="si">{</span><span class="n">speedup</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
+
+        <span class="c1">## Show the trade-off</span>
+
+        <span class="k">if</span> <span class="n">speedup</span> <span class="o">&lt;</span> <span class="mf">2.0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recommendation: Stick with readable version - minimal performance gain&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recommendation: Consider optimized version if this is a bottleneck&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="guidelines-for-effective-optimization">Guidelines for Effective Optimization<a class="headerlink" href="#guidelines-for-effective-optimization" title="Permanent link">&para;</a></h2>
 <h3 id="1-measure-first-optimize-second">1. Measure First, Optimize Second<a class="headerlink" href="#1-measure-first-optimize-second" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">
-def optimization_workflow_example():
-    &quot;&quot;&quot;Demonstrate proper optimization workflow.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">optimization_workflow_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate proper optimization workflow.&quot;&quot;&quot;</span>
 
-    ## Step 1: Write clear, correct code
+    <span class="c1">## Step 1: Write clear, correct code</span>
 
-    def initial_implementation(data):
-        &quot;&quot;&quot;Initial clear implementation.&quot;&quot;&quot;
-        results = []
-        for item in data:
-            if item &gt; 0:
-                processed = item * 2 + 1
-                results.append(processed)
-        return results
+    <span class="k">def</span><span class="w"> </span><span class="nf">initial_implementation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initial clear implementation.&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">processed</span> <span class="o">=</span> <span class="n">item</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">processed</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span>
 
-    ## Step 2: Profile to identify bottlenecks
+    <span class="c1">## Step 2: Profile to identify bottlenecks</span>
 
-    import time
-    test_data = list(range(-5000, 5000))
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">))</span>
 
-    start_time = time.time()
-    result1 = initial_implementation(test_data)
-    initial_time = time.time() - start_time
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result1</span> <span class="o">=</span> <span class="n">initial_implementation</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="n">initial_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    print(f&quot;Initial implementation: {initial_time:.4f} seconds&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial implementation: </span><span class="si">{</span><span class="n">initial_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
 
-    ## Step 3: Optimize only if necessary and beneficial
+    <span class="c1">## Step 3: Optimize only if necessary and beneficial</span>
 
-    def optimized_implementation(data):
-        &quot;&quot;&quot;Optimized version using list comprehension.&quot;&quot;&quot;
-        return [item * 2 + 1 for item in data if item &gt; 0]
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimized_implementation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Optimized version using list comprehension.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">item</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 
-    start_time = time.time()
-    result2 = optimized_implementation(test_data)
-    optimized_time = time.time() - start_time
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">result2</span> <span class="o">=</span> <span class="n">optimized_implementation</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="n">optimized_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    print(f&quot;Optimized implementation: {optimized_time:.4f} seconds&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimized implementation: </span><span class="si">{</span><span class="n">optimized_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
 
-    ## Verify correctness
+    <span class="c1">## Verify correctness</span>
 
-    assert result1 == result2
+    <span class="k">assert</span> <span class="n">result1</span> <span class="o">==</span> <span class="n">result2</span>
 
-    ## Evaluate trade-offs
+    <span class="c1">## Evaluate trade-offs</span>
 
-    if optimized_time &gt; 0:
-        speedup = initial_time / optimized_time
-        print(f&quot;Speedup: {speedup:.2f}x&quot;)
+    <span class="k">if</span> <span class="n">optimized_time</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">speedup</span> <span class="o">=</span> <span class="n">initial_time</span> <span class="o">/</span> <span class="n">optimized_time</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speedup: </span><span class="si">{</span><span class="n">speedup</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">x&quot;</span><span class="p">)</span>
 
-        if speedup &gt; 1.5 and optimized_time &lt; initial_time:
-            print(&quot;Optimization worthwhile: significant speed improvement&quot;)
-        else:
-            print(&quot;Optimization marginal: consider keeping readable version&quot;)
+        <span class="k">if</span> <span class="n">speedup</span> <span class="o">&gt;</span> <span class="mf">1.5</span> <span class="ow">and</span> <span class="n">optimized_time</span> <span class="o">&lt;</span> <span class="n">initial_time</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization worthwhile: significant speed improvement&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization marginal: consider keeping readable version&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="2-focus-on-algorithmic-improvements">2. Focus on Algorithmic Improvements<a class="headerlink" href="#2-focus-on-algorithmic-improvements" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">
-def algorithmic_optimization_example():
-    &quot;&quot;&quot;Show how algorithm choice has bigger impact than micro-optimizations.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">algorithmic_optimization_example</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show how algorithm choice has bigger impact than micro-optimizations.&quot;&quot;&quot;</span>
 
-    ## Poor algorithm: O(n²) for finding duplicates
+    <span class="c1">## Poor algorithm: O(n²) for finding duplicates</span>
 
-    def find_duplicates_slow(items):
-        &quot;&quot;&quot;Find duplicates using nested loops - O(n²).&quot;&quot;&quot;
-        duplicates = []
-        for i, item in enumerate(items):
-            for j, other_item in enumerate(items):
-                if i != j and item == other_item and item not in duplicates:
-                    duplicates.append(item)
-        return duplicates
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_duplicates_slow</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find duplicates using nested loops - O(n²).&quot;&quot;&quot;</span>
+        <span class="n">duplicates</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">other_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span> <span class="ow">and</span> <span class="n">item</span> <span class="o">==</span> <span class="n">other_item</span> <span class="ow">and</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">duplicates</span><span class="p">:</span>
+                    <span class="n">duplicates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">duplicates</span>
 
-    ## Better algorithm: O(n) using hash table
+    <span class="c1">## Better algorithm: O(n) using hash table</span>
 
-    def find_duplicates_fast(items):
-        &quot;&quot;&quot;Find duplicates using hash table - O(n).&quot;&quot;&quot;
-        seen = set()
-        duplicates = set()
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_duplicates_fast</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find duplicates using hash table - O(n).&quot;&quot;&quot;</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">duplicates</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
-        for item in items:
-            if item in seen:
-                duplicates.add(item)
-            else:
-                seen.add(item)
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">duplicates</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-        return list(duplicates)
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">duplicates</span><span class="p">)</span>
 
-    ## Test with large dataset
+    <span class="c1">## Test with large dataset</span>
 
-    import random
-    test_data = [random.randint(1, 1000) for _ in range(5000)]
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">)]</span>
 
-    import time
+    <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-    ## Time slow version
+    <span class="c1">## Time slow version</span>
 
-    start_time = time.time()
-    slow_result = find_duplicates_slow(test_data)
-    slow_time = time.time() - start_time
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">slow_result</span> <span class="o">=</span> <span class="n">find_duplicates_slow</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="n">slow_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    ## Time fast version
+    <span class="c1">## Time fast version</span>
 
-    start_time = time.time()
-    fast_result = find_duplicates_fast(test_data)
-    fast_time = time.time() - start_time
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">fast_result</span> <span class="o">=</span> <span class="n">find_duplicates_fast</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+    <span class="n">fast_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
 
-    print(f&quot;Slow algorithm (O(n²)): {slow_time:.4f} seconds&quot;)
-    print(f&quot;Fast algorithm (O(n)): {fast_time:.4f} seconds&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slow algorithm (O(n²)): </span><span class="si">{</span><span class="n">slow_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fast algorithm (O(n)): </span><span class="si">{</span><span class="n">fast_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
 
-    if fast_time &gt; 0:
-        print(f&quot;Algorithmic improvement: {slow_time/fast_time:.1f}x faster&quot;)
+    <span class="k">if</span> <span class="n">fast_time</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Algorithmic improvement: </span><span class="si">{</span><span class="n">slow_time</span><span class="o">/</span><span class="n">fast_time</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">x faster&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="practice-exercises">Practice Exercises<a class="headerlink" href="#practice-exercises" title="Permanent link">&para;</a></h2>
@@ -3035,31 +3025,30 @@ def algorithmic_optimization_example():
 <summary>Exercise 1: Code Effectiveness Assessment</summary>
 <p>Evaluate this code across all four dimensions (correctness, clarity, performance, maintainability) and identify improvements:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">
-class ShoppingCart:
-    def __init__(self):
-        self.i = []
-        self.t = 0
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">ShoppingCart</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def a(self, id, n, p, q=1):
-        for x in self.i:
-            if x[0] == id:
-                x[3] += q
-                return
-        self.i.append([id, n, p, q])
+    <span class="k">def</span><span class="w"> </span><span class="nf">a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">id</span><span class="p">:</span>
+                <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="n">q</span>
+                <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">id</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">])</span>
 
-    def c(self):
-        self.t = 0
-        for x in self.i:
-            self.t += x[2] * x[3]
-        return self.t
+    <span class="k">def</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span>
 
-    def r(self, id):
-        for j, x in enumerate(self.i):
-            if x[0] == id:
-                del self.i[j]
-                return True
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">r</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="nb">id</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </code></pre>
 </div>
 </details>
@@ -3067,34 +3056,33 @@ class ShoppingCart:
 <summary>Exercise 2: Performance Optimization</summary>
 <p>Profile and optimize this data processing function:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">
-def process_sales_data(sales_records):
-    &quot;&quot;&quot;Process sales data to find top products by revenue.&quot;&quot;&quot;
-    product_revenues = {}
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">process_sales_data</span><span class="p">(</span><span class="n">sales_records</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process sales data to find top products by revenue.&quot;&quot;&quot;</span>
+    <span class="n">product_revenues</span> <span class="o">=</span> <span class="p">{}</span>
 
-    for record in sales_records:
-        product_id = record[&#x27;product_id&#x27;]
-        revenue = record[&#x27;quantity&#x27;] * record[&#x27;price&#x27;]
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">sales_records</span><span class="p">:</span>
+        <span class="n">product_id</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;product_id&#39;</span><span class="p">]</span>
+        <span class="n">revenue</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">record</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
 
-        if product_id in product_revenues:
-            product_revenues[product_id] += revenue
-        else:
-            product_revenues[product_id] = revenue
+        <span class="k">if</span> <span class="n">product_id</span> <span class="ow">in</span> <span class="n">product_revenues</span><span class="p">:</span>
+            <span class="n">product_revenues</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">+=</span> <span class="n">revenue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">product_revenues</span><span class="p">[</span><span class="n">product_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">revenue</span>
 
-    ## Sort products by revenue
+    <span class="c1">## Sort products by revenue</span>
 
-    sorted_products = []
-    for product_id, revenue in product_revenues.items():
-        sorted_products.append((product_id, revenue))
+    <span class="n">sorted_products</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">revenue</span> <span class="ow">in</span> <span class="n">product_revenues</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">sorted_products</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">product_id</span><span class="p">,</span> <span class="n">revenue</span><span class="p">))</span>
 
-    ## Bubble sort (intentionally inefficient)
+    <span class="c1">## Bubble sort (intentionally inefficient)</span>
 
-    for i in range(len(sorted_products)):
-        for j in range(0, len(sorted_products) - i - 1):
-            if sorted_products[j][1] &lt; sorted_products[j + 1][1]:
-                sorted_products[j], sorted_products[j + 1] = sorted_products[j + 1], sorted_products[j]
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_products</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sorted_products</span><span class="p">)</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sorted_products</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">sorted_products</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">sorted_products</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">sorted_products</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sorted_products</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">sorted_products</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
 
-    return sorted_products[:10]  # Top 10 products
+    <span class="k">return</span> <span class="n">sorted_products</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># Top 10 products</span>
 </code></pre>
 </div>
 </details>
@@ -3356,6 +3344,8 @@ def process_sales_data(sales_records):
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

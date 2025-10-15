@@ -1990,14 +1990,14 @@
 <h3 id="analyzing-requirements">Analyzing requirements<a class="headerlink" href="#analyzing-requirements" title="Permanent link">&para;</a></h3>
 <p>Break down requirements into specific, testable statements:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># From &quot;Members can borrow books&quot; we derive:
-# - A member must be registered to borrow
-# - Books must be available (not already borrowed)
-# - System records who borrowed what and when
-# - Members have borrowing limits
-# - Books have due dates
+<pre><code class="language-python"><span class="c1"># From &quot;Members can borrow books&quot; we derive:</span>
+<span class="c1"># - A member must be registered to borrow</span>
+<span class="c1"># - Books must be available (not already borrowed)</span>
+<span class="c1"># - System records who borrowed what and when</span>
+<span class="c1"># - Members have borrowing limits</span>
+<span class="c1"># - Books have due dates</span>
 
-# This analysis reveals what our system needs to track and validate
+<span class="c1"># This analysis reveals what our system needs to track and validate</span>
 </code></pre>
 </div>
 <h2 id="step-2-identifying-responsibilities">Step 2: Identifying responsibilities<a class="headerlink" href="#step-2-identifying-responsibilities" title="Permanent link">&para;</a></h2>
@@ -2031,67 +2031,67 @@
 <details class="info">
 <summary>Responsibility assignment</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Member:
-    &quot;&quot;&quot;Responsible for member-related data and operations&quot;&quot;&quot;
-    def __init__(self, member_id, name, email):
-        self.member_id = member_id
-        self.name = name
-        self.email = email
-        self.borrowed_books = []
-        self.fines_owed = 0.0
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Member</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for member-related data and operations&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">member_id</span> <span class="o">=</span> <span class="n">member_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fines_owed</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    def can_borrow(self):
-        &quot;&quot;&quot;Responsibility: determine if member can borrow more books&quot;&quot;&quot;
-        return len(self.borrowed_books) &lt; 5 and self.fines_owed &lt; 10.0
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_borrow</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: determine if member can borrow more books&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">fines_owed</span> <span class="o">&lt;</span> <span class="mf">10.0</span>
 
-    def add_borrowed_book(self, book):
-        &quot;&quot;&quot;Responsibility: track borrowed books&quot;&quot;&quot;
-        self.borrowed_books.append(book)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_borrowed_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: track borrowed books&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_books</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
 
-class Book:
-    &quot;&quot;&quot;Responsible for book-related data and availability&quot;&quot;&quot;
-    def __init__(self, isbn, title, author, category):
-        self.isbn = isbn
-        self.title = title
-        self.author = author
-        self.category = category
-        self.is_available = True
-        self.borrowed_by = None
-        self.due_date = None
+<span class="k">class</span><span class="w"> </span><span class="nc">Book</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for book-related data and availability&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isbn</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isbn</span> <span class="o">=</span> <span class="n">isbn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">author</span> <span class="o">=</span> <span class="n">author</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">category</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">borrowed_by</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">due_date</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def is_overdue(self):
-        &quot;&quot;&quot;Responsibility: determine if book is overdue&quot;&quot;&quot;
-        if self.due_date:
-            return datetime.now() &gt; self.due_date
-        return False
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_overdue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: determine if book is overdue&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">due_date</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">due_date</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
-class Library:
-    &quot;&quot;&quot;Responsible for coordinating system operations&quot;&quot;&quot;
-    def __init__(self):
-        self.books = {}
-        self.members = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">Library</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for coordinating system operations&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">books</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def borrow_book(self, member_id, isbn):
-        &quot;&quot;&quot;Responsibility: coordinate the borrowing process&quot;&quot;&quot;
-        member = self.members.get(member_id)
-        book = self.books.get(isbn)
+    <span class="k">def</span><span class="w"> </span><span class="nf">borrow_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member_id</span><span class="p">,</span> <span class="n">isbn</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: coordinate the borrowing process&quot;&quot;&quot;</span>
+        <span class="n">member</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">member_id</span><span class="p">)</span>
+        <span class="n">book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">books</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">isbn</span><span class="p">)</span>
 
-        if not member or not book:
-            return False, &quot;Member or book not found&quot;
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">member</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">book</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Member or book not found&quot;</span>
 
-        if not member.can_borrow():
-            return False, &quot;Member cannot borrow more books&quot;
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">member</span><span class="o">.</span><span class="n">can_borrow</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Member cannot borrow more books&quot;</span>
 
-        if not book.is_available:
-            return False, &quot;Book is not available&quot;
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">book</span><span class="o">.</span><span class="n">is_available</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Book is not available&quot;</span>
 
-        # Execute the borrowing
-        book.is_available = False
-        book.borrowed_by = member_id
-        book.due_date = datetime.now() + timedelta(days=14)
-        member.add_borrowed_book(book)
+        <span class="c1"># Execute the borrowing</span>
+        <span class="n">book</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">book</span><span class="o">.</span><span class="n">borrowed_by</span> <span class="o">=</span> <span class="n">member_id</span>
+        <span class="n">book</span><span class="o">.</span><span class="n">due_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">member</span><span class="o">.</span><span class="n">add_borrowed_book</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
 
-        return True, &quot;Book borrowed successfully&quot;
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Book borrowed successfully&quot;</span>
 </code></pre>
 </div>
 </details>
@@ -2104,32 +2104,32 @@ class Library:
 </span></code></pre></div>
 <p><strong>2. Chain of responsibility:</strong> Objects pass requests along until one handles it</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class NotificationService:
-    def send_overdue_notice(self, member):
-        # Try email first, then SMS, then postal mail
-        if not self._send_email(member):
-            if not self._send_sms(member):
-                self._send_postal_mail(member)
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">NotificationService</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_overdue_notice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member</span><span class="p">):</span>
+        <span class="c1"># Try email first, then SMS, then postal mail</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_email</span><span class="p">(</span><span class="n">member</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_send_sms</span><span class="p">(</span><span class="n">member</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_send_postal_mail</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
 </code></pre>
 </div>
 <p><strong>3. Observer pattern:</strong> Objects notify others when their state changes</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Book:
-    def __init__(self):
-        self.observers = []  # List of objects interested in book status
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Book</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">observers</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List of objects interested in book status</span>
 
-    def set_available(self, available):
-        self.is_available = available
-        self._notify_observers()
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_available</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">available</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_available</span> <span class="o">=</span> <span class="n">available</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_notify_observers</span><span class="p">()</span>
 
-    def _notify_observers(self):
-        for observer in self.observers:
-            observer.book_status_changed(self)
+    <span class="k">def</span><span class="w"> </span><span class="nf">_notify_observers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">observer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">observers</span><span class="p">:</span>
+            <span class="n">observer</span><span class="o">.</span><span class="n">book_status_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-class WaitingList:
-    def book_status_changed(self, book):
-        if book.is_available and self.has_waiting_members(book):
-            self.notify_next_member(book)
+<span class="k">class</span><span class="w"> </span><span class="nc">WaitingList</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">book_status_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">book</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">book</span><span class="o">.</span><span class="n">is_available</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_waiting_members</span><span class="p">(</span><span class="n">book</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notify_next_member</span><span class="p">(</span><span class="n">book</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="collaboration-diagram">Collaboration diagram<a class="headerlink" href="#collaboration-diagram" title="Permanent link">&para;</a></h3>
@@ -2172,45 +2172,45 @@ class WaitingList:
 </span></code></pre></div>
 <h3 id="top-down-implementation">Top-down implementation<a class="headerlink" href="#top-down-implementation" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Level 1: Main system coordinator
-class OnlineShoppingSystem:
-    def __init__(self):
-        self.user_manager = UserManager()
-        self.catalog = ProductCatalog()
-        self.cart_manager = CartManager()
-        self.order_processor = OrderProcessor()
+<pre><code class="language-python"><span class="c1"># Level 1: Main system coordinator</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OnlineShoppingSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_manager</span> <span class="o">=</span> <span class="n">UserManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">catalog</span> <span class="o">=</span> <span class="n">ProductCatalog</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cart_manager</span> <span class="o">=</span> <span class="n">CartManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order_processor</span> <span class="o">=</span> <span class="n">OrderProcessor</span><span class="p">()</span>
 
-    def process_purchase(self, user_id, cart_items):
-        # Coordinate all subsystems
-        user = self.user_manager.get_user(user_id)
-        cart = self.cart_manager.get_cart(user_id)
-        return self.order_processor.process_order(user, cart)
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_purchase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">cart_items</span><span class="p">):</span>
+        <span class="c1"># Coordinate all subsystems</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_manager</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="n">cart</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cart_manager</span><span class="o">.</span><span class="n">get_cart</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_processor</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">cart</span><span class="p">)</span>
 
-# Level 2: Subsystem implementation
-class OrderProcessor:
-    def __init__(self):
-        self.payment_processor = PaymentProcessor()
-        self.inventory_manager = InventoryManager()
-        self.shipping_coordinator = ShippingCoordinator()
+<span class="c1"># Level 2: Subsystem implementation</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OrderProcessor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment_processor</span> <span class="o">=</span> <span class="n">PaymentProcessor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory_manager</span> <span class="o">=</span> <span class="n">InventoryManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shipping_coordinator</span> <span class="o">=</span> <span class="n">ShippingCoordinator</span><span class="p">()</span>
 
-    def process_order(self, user, cart):
-        # Break down into smaller tasks
-        if not self.inventory_manager.check_availability(cart.items):
-            return False, &quot;Items not available&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">cart</span><span class="p">):</span>
+        <span class="c1"># Break down into smaller tasks</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory_manager</span><span class="o">.</span><span class="n">check_availability</span><span class="p">(</span><span class="n">cart</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Items not available&quot;</span>
 
-        payment_success = self.payment_processor.process_payment(user, cart.total)
-        if payment_success:
-            self.inventory_manager.reserve_items(cart.items)
-            self.shipping_coordinator.schedule_shipment(user, cart.items)
-            return True, &quot;Order processed successfully&quot;
+        <span class="n">payment_success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_processor</span><span class="o">.</span><span class="n">process_payment</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">cart</span><span class="o">.</span><span class="n">total</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">payment_success</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inventory_manager</span><span class="o">.</span><span class="n">reserve_items</span><span class="p">(</span><span class="n">cart</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shipping_coordinator</span><span class="o">.</span><span class="n">schedule_shipment</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">cart</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Order processed successfully&quot;</span>
 
-        return False, &quot;Payment failed&quot;
+        <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Payment failed&quot;</span>
 
-# Level 3: Individual components
-class PaymentProcessor:
-    def process_payment(self, user, amount):
-        # Implement specific payment logic
-        return self._validate_payment(user, amount)
+<span class="c1"># Level 3: Individual components</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PaymentProcessor</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="c1"># Implement specific payment logic</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_payment</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">amount</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="advantages-of-top-down-design">Advantages of top-down design<a class="headerlink" href="#advantages-of-top-down-design" title="Permanent link">&para;</a></h3>
@@ -2262,75 +2262,75 @@ class PaymentProcessor:
 </ol>
 <h3 id="example-game-development">Example: Game Development<a class="headerlink" href="#example-game-development" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Level 1: Basic building blocks
-class Vector2D:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+<pre><code class="language-python"><span class="c1"># Level 1: Basic building blocks</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Vector2D</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
 
-    def add(self, other):
-        return Vector2D(self.x + other.x, self.y + other.y)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Vector2D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
-class Color:
-    def __init__(self, r, g, b):
-        self.r, self.g, self.b = r, g, b
+<span class="k">class</span><span class="w"> </span><span class="nc">Color</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span>
 
-# Level 2: Game entities using building blocks  
-class GameObject:
-    def __init__(self, position, color):
-        self.position = position  # Vector2D
-        self.color = color        # Color
-        self.velocity = Vector2D(0, 0)
+<span class="c1"># Level 2: Game entities using building blocks  </span>
+<span class="k">class</span><span class="w"> </span><span class="nc">GameObject</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>  <span class="c1"># Vector2D</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>        <span class="c1"># Color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">Vector2D</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    def update(self, delta_time):
-        self.position = self.position.add(
-            Vector2D(self.velocity.x * delta_time, 
-                    self.velocity.y * delta_time)
-        )
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">Vector2D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">delta_time</span><span class="p">,</span> 
+                    <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">delta_time</span><span class="p">)</span>
+        <span class="p">)</span>
 
-class Player(GameObject):
-    def __init__(self, position):
-        super().__init__(position, Color(0, 255, 0))  # Green player
-        self.health = 100
-        self.score = 0
+<span class="k">class</span><span class="w"> </span><span class="nc">Player</span><span class="p">(</span><span class="n">GameObject</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># Green player</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">health</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
 
-class Enemy(GameObject):
-    def __init__(self, position):
-        super().__init__(position, Color(255, 0, 0))  # Red enemy
-        self.damage = 10
+<span class="k">class</span><span class="w"> </span><span class="nc">Enemy</span><span class="p">(</span><span class="n">GameObject</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">Color</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># Red enemy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">damage</span> <span class="o">=</span> <span class="mi">10</span>
 
-# Level 3: Game systems using entities
-class CollisionSystem:
-    def check_collision(self, obj1, obj2):
-        # Use the position data from GameObjects
-        distance = ((obj1.position.x - obj2.position.x) ** 2 + 
-                   (obj1.position.y - obj2.position.y) ** 2) ** 0.5
-        return distance &lt; 32  # Collision threshold
+<span class="c1"># Level 3: Game systems using entities</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CollisionSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_collision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
+        <span class="c1"># Use the position data from GameObjects</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="p">((</span><span class="n">obj1</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">obj2</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> 
+                   <span class="p">(</span><span class="n">obj1</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">obj2</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+        <span class="k">return</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="mi">32</span>  <span class="c1"># Collision threshold</span>
 
-class GameWorld:
-    def __init__(self):
-        self.player = Player(Vector2D(100, 100))
-        self.enemies = []
-        self.collision_system = CollisionSystem()
+<span class="k">class</span><span class="w"> </span><span class="nc">GameWorld</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player</span> <span class="o">=</span> <span class="n">Player</span><span class="p">(</span><span class="n">Vector2D</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enemies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collision_system</span> <span class="o">=</span> <span class="n">CollisionSystem</span><span class="p">()</span>
 
-    def update(self, delta_time):
-        self.player.update(delta_time)
-        for enemy in self.enemies:
-            enemy.update(delta_time)
-            if self.collision_system.check_collision(self.player, enemy):
-                self.handle_collision(self.player, enemy)
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta_time</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">delta_time</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">enemy</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enemies</span><span class="p">:</span>
+            <span class="n">enemy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">delta_time</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collision_system</span><span class="o">.</span><span class="n">check_collision</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="n">enemy</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">handle_collision</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player</span><span class="p">,</span> <span class="n">enemy</span><span class="p">)</span>
 
-# Level 4: Complete game using all systems
-class Game:
-    def __init__(self):
-        self.world = GameWorld()
-        self.running = True
+<span class="c1"># Level 4: Complete game using all systems</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Game</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">world</span> <span class="o">=</span> <span class="n">GameWorld</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def run(self):
-        while self.running:
-            delta_time = self.calculate_delta_time()
-            self.world.update(delta_time)
-            self.render()
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="n">delta_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_delta_time</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">world</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">delta_time</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 </code></pre>
 </div>
 <h3 id="advantages-of-bottom-up-design">Advantages of bottom-up design<a class="headerlink" href="#advantages-of-bottom-up-design" title="Permanent link">&para;</a></h3>
@@ -2433,50 +2433,50 @@ class Game:
 <summary>Sample Solution</summary>
 <p><strong>Identified Classes and Responsibilities:</strong></p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class Task:
-    &quot;&quot;&quot;Responsible for individual task data and status&quot;&quot;&quot;
-    def __init__(self, title, description, due_date, priority):
-        self.title = title
-        self.description = description
-        self.due_date = due_date
-        self.priority = priority
-        self.is_completed = False
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Task</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for individual task data and status&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">due_date</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">due_date</span> <span class="o">=</span> <span class="n">due_date</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_completed</span> <span class="o">=</span> <span class="kc">False</span>
 
-    def mark_completed(self):
-        &quot;&quot;&quot;Responsibility: change task status&quot;&quot;&quot;
-        self.is_completed = True
+    <span class="k">def</span><span class="w"> </span><span class="nf">mark_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: change task status&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_completed</span> <span class="o">=</span> <span class="kc">True</span>
 
-    def is_overdue(self):
-        &quot;&quot;&quot;Responsibility: determine if task is overdue&quot;&quot;&quot;
-        return not self.is_completed and datetime.now() &gt; self.due_date
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_overdue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: determine if task is overdue&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_completed</span> <span class="ow">and</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">due_date</span>
 
-class User:
-    &quot;&quot;&quot;Responsible for user data and task ownership&quot;&quot;&quot;
-    def __init__(self, user_id, name):
-        self.user_id = user_id
-        self.name = name
-        self.tasks = []
+<span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for user data and task ownership&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def create_task(self, title, description, due_date, priority):
-        &quot;&quot;&quot;Responsibility: create and own tasks&quot;&quot;&quot;
-        task = Task(title, description, due_date, priority)
-        self.tasks.append(task)
-        return task
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">due_date</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: create and own tasks&quot;&quot;&quot;</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">Task</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">due_date</span><span class="p">,</span> <span class="n">priority</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">task</span>
 
-class TaskManager:
-    &quot;&quot;&quot;Responsible for task operations and filtering&quot;&quot;&quot;
-    def __init__(self):
-        self.users = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">TaskManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Responsible for task operations and filtering&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def filter_by_priority(self, user_id, priority):
-        &quot;&quot;&quot;Responsibility: filter tasks by criteria&quot;&quot;&quot;
-        user = self.users.get(user_id)
-        return [task for task in user.tasks if task.priority == priority]
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_by_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: filter tasks by criteria&quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">task</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">tasks</span> <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">priority</span> <span class="o">==</span> <span class="n">priority</span><span class="p">]</span>
 
-    def get_overdue_tasks(self, user_id):
-        &quot;&quot;&quot;Responsibility: identify overdue tasks&quot;&quot;&quot;
-        user = self.users.get(user_id)
-        return [task for task in user.tasks if task.is_overdue()]
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_overdue_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Responsibility: identify overdue tasks&quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">task</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">tasks</span> <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">is_overdue</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2538,57 +2538,57 @@ class TaskManager:
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class User:
-    def __init__(self, user_id, username):
-        self.user_id = user_id
-        self.username = username
-        self.current_rooms = []
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">username</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_rooms</span> <span class="o">=</span> <span class="p">[]</span>
 
-class Message:
-    def __init__(self, content, sender, timestamp):
-        self.content = content
-        self.sender = sender
-        self.timestamp = timestamp
+<span class="k">class</span><span class="w"> </span><span class="nc">Message</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">sender</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sender</span> <span class="o">=</span> <span class="n">sender</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span>
 
-class ChatRoom:
-    def __init__(self, room_id, name):
-        self.room_id = room_id
-        self.name = name
-        self.members = []
-        self.message_history = []
+<span class="k">class</span><span class="w"> </span><span class="nc">ChatRoom</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">room_id</span> <span class="o">=</span> <span class="n">room_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_history</span> <span class="o">=</span> <span class="p">[]</span>
 
-    def add_member(self, user):
-        self.members.append(user)
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 
-    def broadcast_message(self, message):
-        self.message_history.append(message)
-        for member in self.members:
-            # Notify each member of new message
-            self.notify_member(member, message)
+    <span class="k">def</span><span class="w"> </span><span class="nf">broadcast_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">:</span>
+            <span class="c1"># Notify each member of new message</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notify_member</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
 
-class ChatSystem:
-    def __init__(self):
-        self.rooms = {}
-        self.users = {}
+<span class="k">class</span><span class="w"> </span><span class="nc">ChatSystem</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">users</span> <span class="o">=</span> <span class="p">{}</span>
 
-    def send_message(self, user_id, room_id, content):
-        &quot;&quot;&quot;Collaboration: coordinate message sending&quot;&quot;&quot;
-        user = self.users[user_id]
-        room = self.rooms[room_id]
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">room_id</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Collaboration: coordinate message sending&quot;&quot;&quot;</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">users</span><span class="p">[</span><span class="n">user_id</span><span class="p">]</span>
+        <span class="n">room</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rooms</span><span class="p">[</span><span class="n">room_id</span><span class="p">]</span>
 
-        # Create message
-        message = Message(content, user, datetime.now())
+        <span class="c1"># Create message</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
 
-        # Room broadcasts to all members
-        room.broadcast_message(message)
+        <span class="c1"># Room broadcasts to all members</span>
+        <span class="n">room</span><span class="o">.</span><span class="n">broadcast_message</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
 
-        return message
+        <span class="k">return</span> <span class="n">message</span>
 
-# Collaboration flow:
-# 1. User requests to send message via ChatSystem
-# 2. ChatSystem creates Message object
-# 3. ChatSystem asks ChatRoom to broadcast
-# 4. ChatRoom adds to history and notifies all members
+<span class="c1"># Collaboration flow:</span>
+<span class="c1"># 1. User requests to send message via ChatSystem</span>
+<span class="c1"># 2. ChatSystem creates Message object</span>
+<span class="c1"># 3. ChatSystem asks ChatRoom to broadcast</span>
+<span class="c1"># 4. ChatRoom adds to history and notifies all members</span>
 </code></pre>
 </div>
 </details>
@@ -2845,6 +2845,8 @@ class ChatSystem:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

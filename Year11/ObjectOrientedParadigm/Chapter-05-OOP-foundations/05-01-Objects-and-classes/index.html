@@ -1531,44 +1531,44 @@
 <h2 id="what-are-classes">What are classes?<a class="headerlink" href="#what-are-classes" title="Permanent link">&para;</a></h2>
 <p>A <strong>class</strong> is like a blueprint or template for creating objects. Just as an architect&rsquo;s blueprint can be used to build many houses, a class can be used to create many objects of the same type.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class BankAccount:
-    &quot;&quot;&quot;A simple bank account class - this is the blueprint&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple bank account class - this is the blueprint&quot;&quot;&quot;</span>
 
-    def __init__(self, account_number, owner_name, initial_balance=0):
-        # These are attributes (data)
-        self.account_number = account_number
-        self.owner_name = owner_name
-        self.balance = initial_balance
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">owner_name</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># These are attributes (data)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">owner_name</span> <span class="o">=</span> <span class="n">owner_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
 
-    def deposit(self, amount):
-        &quot;&quot;&quot;This is a method (behaviour)&quot;&quot;&quot;
-        if amount &gt; 0:
-            self.balance += amount
-            return f&quot;Deposited ${amount}. New balance: ${self.balance}&quot;
-        return &quot;Invalid deposit amount&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is a method (behaviour)&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deposited $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. New balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid deposit amount&quot;</span>
 
-    def withdraw(self, amount):
-        &quot;&quot;&quot;Another method&quot;&quot;&quot;
-        if 0 &lt; amount &lt;= self.balance:
-            self.balance -= amount
-            return f&quot;Withdrew ${amount}. New balance: ${self.balance}&quot;
-        return &quot;Insufficient funds or invalid amount&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Another method&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Withdrew $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. New balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Insufficient funds or invalid amount&quot;</span>
 
-    def check_balance(self):
-        &quot;&quot;&quot;A simple getter method&quot;&quot;&quot;
-        return f&quot;Current balance: ${self.balance}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A simple getter method&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Current balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre>
 </div>
 <h2 id="instances-vs-classes">Instances vs Classes<a class="headerlink" href="#instances-vs-classes" title="Permanent link">&para;</a></h2>
 <p>The <strong>class</strong> is the blueprint, but an <strong>instance</strong> (or object) is what you create from that blueprint:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># BankAccount is the class (blueprint)
-# These are instances (actual objects created from the blueprint)
-alice_account = BankAccount(&quot;ACC001&quot;, &quot;Alice Smith&quot;, 1000)
-bob_account = BankAccount(&quot;ACC002&quot;, &quot;Bob Jones&quot;, 500)
+<pre><code class="language-python"><span class="c1"># BankAccount is the class (blueprint)</span>
+<span class="c1"># These are instances (actual objects created from the blueprint)</span>
+<span class="n">alice_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC001&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice Smith&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">bob_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC002&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob Jones&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 
-print(alice_account.check_balance())  # Current balance: $1000
-print(bob_account.check_balance())    # Current balance: $500
+<span class="nb">print</span><span class="p">(</span><span class="n">alice_account</span><span class="o">.</span><span class="n">check_balance</span><span class="p">())</span>  <span class="c1"># Current balance: $1000</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bob_account</span><span class="o">.</span><span class="n">check_balance</span><span class="p">())</span>    <span class="c1"># Current balance: $500</span>
 </code></pre>
 </div>
 <p>Key differences:</p>
@@ -1601,16 +1601,16 @@ print(bob_account.check_balance())    # Current balance: $500
 <h2 id="message-passing">Message passing<a class="headerlink" href="#message-passing" title="Permanent link">&para;</a></h2>
 <p>Objects don&rsquo;t work in isolation - they need to communicate with each other. This communication happens through <strong>message passing</strong>, which in Python means calling methods on objects.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Create two account objects
-alice_account = BankAccount(&quot;ACC001&quot;, &quot;Alice Smith&quot;, 1000)
-bob_account = BankAccount(&quot;ACC002&quot;, &quot;Bob Jones&quot;, 500)
+<pre><code class="language-python"><span class="c1"># Create two account objects</span>
+<span class="n">alice_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC001&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice Smith&quot;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">bob_account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;ACC002&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob Jones&quot;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 
-# Message passing: sending messages (calling methods) on objects
-result = alice_account.deposit(200)  # Alice receives a &quot;deposit&quot; message
-print(result)  # Deposited $200. New balance: $1200
+<span class="c1"># Message passing: sending messages (calling methods) on objects</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">alice_account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>  <span class="c1"># Alice receives a &quot;deposit&quot; message</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Deposited $200. New balance: $1200</span>
 
-result = bob_account.withdraw(100)   # Bob receives a &quot;withdraw&quot; message
-print(result)  # Withdrew $100. New balance: $400
+<span class="n">result</span> <span class="o">=</span> <span class="n">bob_account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>   <span class="c1"># Bob receives a &quot;withdraw&quot; message</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Withdrew $100. New balance: $400</span>
 </code></pre>
 </div>
 <p>When you write <code>alice_account.deposit(200)</code>, you&rsquo;re:</p>
@@ -1729,22 +1729,22 @@ print(result)  # Withdrew $100. New balance: $400
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">class Student:
-    def __init__(self, name, student_id, grade):
-        self.name = name
-        self.student_id = student_id
-        self.grade = grade
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="n">grade</span>
 
-    def introduce(self):
-        return f&quot;Hello, I&#x27;m {self.name} (ID: {self.student_id}) in grade {self.grade}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">introduce</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, I&#39;m </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (ID: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">student_id</span><span class="si">}</span><span class="s2">) in grade </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">grade</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    def study(self, subject):
-        return f&quot;{self.name} is studying {subject}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subject</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is studying </span><span class="si">{</span><span class="n">subject</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# Usage example
-student1 = Student(&quot;Alice&quot;, &quot;STU001&quot;, 11)
-print(student1.introduce())  # Hello, I&#x27;m Alice (ID: STU001) in grade 11
-print(student1.study(&quot;Mathematics&quot;))  # Alice is studying Mathematics
+<span class="c1"># Usage example</span>
+<span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;STU001&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student1</span><span class="o">.</span><span class="n">introduce</span><span class="p">())</span>  <span class="c1"># Hello, I&#39;m Alice (ID: STU001) in grade 11</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">student1</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s2">&quot;Mathematics&quot;</span><span class="p">))</span>  <span class="c1"># Alice is studying Mathematics</span>
 </code></pre>
 </div>
 </details>
@@ -1767,19 +1767,19 @@ print(student1.study(&quot;Mathematics&quot;))  # Alice is studying Mathematics
 <details class="success">
 <summary>Sample Solution</summary>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Create two student instances
-alice = Student(&quot;Alice Johnson&quot;, &quot;STU001&quot;, 11)
-bob = Student(&quot;Bob Smith&quot;, &quot;STU002&quot;, 11)
+<pre><code class="language-python"><span class="c1"># Create two student instances</span>
+<span class="n">alice</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Alice Johnson&quot;</span><span class="p">,</span> <span class="s2">&quot;STU001&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">bob</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Bob Smith&quot;</span><span class="p">,</span> <span class="s2">&quot;STU002&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
 
-# Message passing: calling methods on objects
-print(&quot;=== Student Introductions ===&quot;)
-print(alice.introduce())
-print(bob.introduce())
+<span class="c1"># Message passing: calling methods on objects</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Student Introductions ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alice</span><span class="o">.</span><span class="n">introduce</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bob</span><span class="o">.</span><span class="n">introduce</span><span class="p">())</span>
 
-print(&quot;\n=== Students Studying ===&quot;)
-print(alice.study(&quot;Computer Science&quot;))
-print(bob.study(&quot;Mathematics&quot;))
-print(alice.study(&quot;Physics&quot;))
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Students Studying ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alice</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s2">&quot;Computer Science&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bob</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s2">&quot;Mathematics&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alice</span><span class="o">.</span><span class="n">study</span><span class="p">(</span><span class="s2">&quot;Physics&quot;</span><span class="p">))</span>
 </code></pre>
 </div>
 <p><strong>Explanation</strong>: This demonstrates message passing where:</p>
@@ -2042,6 +2042,8 @@ print(alice.study(&quot;Physics&quot;))
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

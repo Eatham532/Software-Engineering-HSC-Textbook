@@ -1912,22 +1912,22 @@
 <h2 id="why-test-data-design-matters">Why Test Data Design Matters<a class="headerlink" href="#why-test-data-design-matters" title="Permanent link">&para;</a></h2>
 <h3 id="the-cost-of-poor-testing">The Cost of Poor Testing<a class="headerlink" href="#the-cost-of-poor-testing" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_discount(price, discount_percent):
-    &quot;&quot;&quot;Calculate discounted price - what could go wrong?&quot;&quot;&quot;
-    discounted_amount = price * (discount_percent / 100)
-    final_price = price - discounted_amount
-    return final_price
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount</span><span class="p">(</span><span class="n">price</span><span class="p">,</span> <span class="n">discount_percent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate discounted price - what could go wrong?&quot;&quot;&quot;</span>
+    <span class="n">discounted_amount</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="p">(</span><span class="n">discount_percent</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">final_price</span> <span class="o">=</span> <span class="n">price</span> <span class="o">-</span> <span class="n">discounted_amount</span>
+    <span class="k">return</span> <span class="n">final_price</span>
 
-# If we only test with &quot;normal&quot; data:
-print(calculate_discount(100, 10))  # 90.0 - looks good!
-print(calculate_discount(50, 20))   # 40.0 - works fine!
+<span class="c1"># If we only test with &quot;normal&quot; data:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>  <span class="c1"># 90.0 - looks good!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>   <span class="c1"># 40.0 - works fine!</span>
 
-# But what happens with edge cases?
-print(calculate_discount(100, 0))    # 100.0 - zero discount, okay
-print(calculate_discount(100, 100))  # 0.0 - 100% discount, hmm...
-print(calculate_discount(100, 150))  # -50.0 - customer gets money back?!
-print(calculate_discount(-10, 10))   # -9.0 - negative price?
-print(calculate_discount(100, -10))  # 110.0 - negative discount increases price?
+<span class="c1"># But what happens with edge cases?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>    <span class="c1"># 100.0 - zero discount, okay</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>  <span class="c1"># 0.0 - 100% discount, hmm...</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>  <span class="c1"># -50.0 - customer gets money back?!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>   <span class="c1"># -9.0 - negative price?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">calculate_discount</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># 110.0 - negative discount increases price?</span>
 </code></pre>
 </div>
 <p>Without proper test data design, bugs like these can make it into production!</p>
@@ -1950,113 +1950,113 @@ print(calculate_discount(100, -10))  # 110.0 - negative discount increases price
 <h3 id="normaltypical-data">Normal/Typical Data<a class="headerlink" href="#normaltypical-data" title="Permanent link">&para;</a></h3>
 <p><strong>Normal data</strong> represents the most common inputs your program will receive.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_bmi(weight_kg, height_m):
-    &quot;&quot;&quot;Calculate Body Mass Index.&quot;&quot;&quot;
-    if height_m &lt;= 0:
-        return None
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_bmi</span><span class="p">(</span><span class="n">weight_kg</span><span class="p">,</span> <span class="n">height_m</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate Body Mass Index.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">height_m</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    bmi = weight_kg / (height_m * height_m)
-    return round(bmi, 1)
+    <span class="n">bmi</span> <span class="o">=</span> <span class="n">weight_kg</span> <span class="o">/</span> <span class="p">(</span><span class="n">height_m</span> <span class="o">*</span> <span class="n">height_m</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">bmi</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-# Normal test data - typical adult values
-normal_test_cases = [
-    # (weight, height, expected_bmi)
-    (70, 1.75, 22.9),    # Average adult
-    (60, 1.60, 23.4),    # Petite adult
-    (85, 1.80, 26.2),    # Larger adult
-    (55, 1.65, 20.2),    # Light adult
-]
+<span class="c1"># Normal test data - typical adult values</span>
+<span class="n">normal_test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># (weight, height, expected_bmi)</span>
+    <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mf">1.75</span><span class="p">,</span> <span class="mf">22.9</span><span class="p">),</span>    <span class="c1"># Average adult</span>
+    <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mf">1.60</span><span class="p">,</span> <span class="mf">23.4</span><span class="p">),</span>    <span class="c1"># Petite adult</span>
+    <span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mf">1.80</span><span class="p">,</span> <span class="mf">26.2</span><span class="p">),</span>    <span class="c1"># Larger adult</span>
+    <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mf">1.65</span><span class="p">,</span> <span class="mf">20.2</span><span class="p">),</span>    <span class="c1"># Light adult</span>
+<span class="p">]</span>
 
-print(&quot;=== Normal Data Tests ===&quot;)
-for weight, height, expected in normal_test_cases:
-    result = calculate_bmi(weight, height)
-    status = &quot;✓ PASS&quot; if abs(result - expected) &lt; 0.1 else &quot;✗ FAIL&quot;
-    print(f&quot;BMI({weight}kg, {height}m) = {result} (expected {expected}) {status}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Normal Data Tests ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">weight</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">normal_test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_bmi</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓ PASS&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BMI(</span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">kg, </span><span class="si">{</span><span class="n">height</span><span class="si">}</span><span class="s2">m) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2"> (expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="boundaryedge-data">Boundary/Edge Data<a class="headerlink" href="#boundaryedge-data" title="Permanent link">&para;</a></h3>
 <p><strong>Boundary data</strong> tests the limits of what your program should handle.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def grade_assignment(score):
-    &quot;&quot;&quot;Convert numeric score to letter grade.&quot;&quot;&quot;
-    if score &lt; 0 or score &gt; 100:
-        return &quot;Invalid&quot;
-    elif score &gt;= 90:
-        return &quot;A&quot;
-    elif score &gt;= 80:
-        return &quot;B&quot;
-    elif score &gt;= 70:
-        return &quot;C&quot;
-    elif score &gt;= 60:
-        return &quot;D&quot;
-    else:
-        return &quot;F&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">grade_assignment</span><span class="p">(</span><span class="n">score</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert numeric score to letter grade.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+    <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-# Boundary test data - test the edges of ranges
-boundary_test_cases = [
-    # Test the boundaries of each grade range
-    (0, &quot;F&quot;),      # Bottom boundary
-    (59, &quot;F&quot;),     # Just below D
-    (60, &quot;D&quot;),     # Bottom of D range
-    (69, &quot;D&quot;),     # Top of D range
-    (70, &quot;C&quot;),     # Bottom of C range
-    (79, &quot;C&quot;),     # Top of C range
-    (80, &quot;B&quot;),     # Bottom of B range
-    (89, &quot;B&quot;),     # Top of B range
-    (90, &quot;A&quot;),     # Bottom of A range
-    (100, &quot;A&quot;),    # Top boundary
+<span class="c1"># Boundary test data - test the edges of ranges</span>
+<span class="n">boundary_test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Test the boundaries of each grade range</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">),</span>      <span class="c1"># Bottom boundary</span>
+    <span class="p">(</span><span class="mi">59</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">),</span>     <span class="c1"># Just below D</span>
+    <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">),</span>     <span class="c1"># Bottom of D range</span>
+    <span class="p">(</span><span class="mi">69</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">),</span>     <span class="c1"># Top of D range</span>
+    <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span>     <span class="c1"># Bottom of C range</span>
+    <span class="p">(</span><span class="mi">79</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span>     <span class="c1"># Top of C range</span>
+    <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span>     <span class="c1"># Bottom of B range</span>
+    <span class="p">(</span><span class="mi">89</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span>     <span class="c1"># Top of B range</span>
+    <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">),</span>     <span class="c1"># Bottom of A range</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">),</span>    <span class="c1"># Top boundary</span>
 
-    # Invalid boundaries
-    (-1, &quot;Invalid&quot;),   # Just below valid range
-    (101, &quot;Invalid&quot;),  # Just above valid range
-]
+    <span class="c1"># Invalid boundaries</span>
+    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">),</span>   <span class="c1"># Just below valid range</span>
+    <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">),</span>  <span class="c1"># Just above valid range</span>
+<span class="p">]</span>
 
-print(&quot;\n=== Boundary Data Tests ===&quot;)
-for score, expected in boundary_test_cases:
-    result = grade_assignment(score)
-    status = &quot;✓ PASS&quot; if result == expected else &quot;✗ FAIL&quot;
-    print(f&quot;grade({score}) = &#x27;{result}&#x27; (expected &#x27;{expected}&#x27;) {status}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Boundary Data Tests ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">score</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">boundary_test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">grade_assignment</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓ PASS&quot;</span> <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;grade(</span><span class="si">{</span><span class="n">score</span><span class="si">}</span><span class="s2">) = &#39;</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&#39; (expected &#39;</span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">&#39;) </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="extreme-data">Extreme Data<a class="headerlink" href="#extreme-data" title="Permanent link">&para;</a></h3>
 <p><strong>Extreme data</strong> tests very large, very small, or unusual values.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def calculate_compound_interest(principal, rate, years):
-    &quot;&quot;&quot;Calculate compound interest over time.&quot;&quot;&quot;
-    if principal &lt;= 0 or rate &lt; 0 or years &lt; 0:
-        return None
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_compound_interest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">years</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate compound interest over time.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">principal</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">rate</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">years</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
-    # A = P(1 + r)^t
-    final_amount = principal * ((1 + rate/100) ** years)
-    return round(final_amount, 2)
+    <span class="c1"># A = P(1 + r)^t</span>
+    <span class="n">final_amount</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span> <span class="o">**</span> <span class="n">years</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">final_amount</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-# Extreme test data
-extreme_test_cases = [
-    # Very small values
-    (0.01, 0.1, 1, 0.01),        # Tiny principal
-    (100, 0.001, 1, 100.001),    # Tiny interest rate
+<span class="c1"># Extreme test data</span>
+<span class="n">extreme_test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Very small values</span>
+    <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>        <span class="c1"># Tiny principal</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">100.001</span><span class="p">),</span>    <span class="c1"># Tiny interest rate</span>
 
-    # Very large values
-    (1000000, 5, 10, 1628894.63),  # Large principal
-    (100, 50, 5, 759.375),         # High interest rate
-    (100, 5, 50, 1146.74),         # Many years
+    <span class="c1"># Very large values</span>
+    <span class="p">(</span><span class="mi">1000000</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">1628894.63</span><span class="p">),</span>  <span class="c1"># Large principal</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">759.375</span><span class="p">),</span>         <span class="c1"># High interest rate</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">1146.74</span><span class="p">),</span>         <span class="c1"># Many years</span>
 
-    # Zero values
-    (100, 0, 10, 100),           # Zero interest
-    (100, 5, 0, 100),            # Zero years
+    <span class="c1"># Zero values</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>           <span class="c1"># Zero interest</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>            <span class="c1"># Zero years</span>
 
-    # Edge case: exactly 1 year, 1% interest
-    (100, 1, 1, 101),
-]
+    <span class="c1"># Edge case: exactly 1 year, 1% interest</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">),</span>
+<span class="p">]</span>
 
-print(&quot;\n=== Extreme Data Tests ===&quot;)
-for principal, rate, years, expected in extreme_test_cases:
-    result = calculate_compound_interest(principal, rate, years)
-    if result is not None:
-        status = &quot;✓ PASS&quot; if abs(result - expected) &lt; 0.01 else &quot;✗ FAIL&quot;
-        print(f&quot;compound_interest({principal}, {rate}%, {years}y) = {result} (expected {expected}) {status}&quot;)
-    else:
-        print(f&quot;compound_interest({principal}, {rate}%, {years}y) = None (invalid input)&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Extreme Data Tests ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">extreme_test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">calculate_compound_interest</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">years</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓ PASS&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;compound_interest(</span><span class="si">{</span><span class="n">principal</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2">%, </span><span class="si">{</span><span class="n">years</span><span class="si">}</span><span class="s2">y) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2"> (expected </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;compound_interest(</span><span class="si">{</span><span class="n">principal</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">rate</span><span class="si">}</span><span class="s2">%, </span><span class="si">{</span><span class="n">years</span><span class="si">}</span><span class="s2">y) = None (invalid input)&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="invaliderror-data">Invalid/Error Data<a class="headerlink" href="#invaliderror-data" title="Permanent link">&para;</a></h3>
@@ -2130,360 +2130,360 @@ for principal, rate, years, expected in extreme_test_cases:
 <h3 id="equivalence-partitioning">Equivalence Partitioning<a class="headerlink" href="#equivalence-partitioning" title="Permanent link">&para;</a></h3>
 <p><strong>Equivalence partitioning</strong> groups similar inputs together and tests one example from each group.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def categorize_age(age):
-    &quot;&quot;&quot;Categorize person by age group.&quot;&quot;&quot;
-    if age &lt; 0:
-        return &quot;Invalid&quot;
-    elif age &lt; 13:
-        return &quot;Child&quot;
-    elif age &lt; 20:
-        return &quot;Teenager&quot;
-    elif age &lt; 65:
-        return &quot;Adult&quot;
-    else:
-        return &quot;Senior&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">categorize_age</span><span class="p">(</span><span class="n">age</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Categorize person by age group.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Child&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Teenager&quot;</span>
+    <span class="k">elif</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">65</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Adult&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Senior&quot;</span>
 
-# Equivalence partitions:
-# 1. Invalid: age &lt; 0
-# 2. Child: 0 &lt;= age &lt; 13
-# 3. Teenager: 13 &lt;= age &lt; 20
-# 4. Adult: 20 &lt;= age &lt; 65
-# 5. Senior: age &gt;= 65
+<span class="c1"># Equivalence partitions:</span>
+<span class="c1"># 1. Invalid: age &lt; 0</span>
+<span class="c1"># 2. Child: 0 &lt;= age &lt; 13</span>
+<span class="c1"># 3. Teenager: 13 &lt;= age &lt; 20</span>
+<span class="c1"># 4. Adult: 20 &lt;= age &lt; 65</span>
+<span class="c1"># 5. Senior: age &gt;= 65</span>
 
-equivalence_test_cases = [
-    # Test one value from each partition
-    (-5, &quot;Invalid&quot;),    # Partition 1: Invalid ages
-    (7, &quot;Child&quot;),       # Partition 2: Children
-    (16, &quot;Teenager&quot;),   # Partition 3: Teenagers
-    (35, &quot;Adult&quot;),      # Partition 4: Adults
-    (70, &quot;Senior&quot;),     # Partition 5: Seniors
+<span class="n">equivalence_test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Test one value from each partition</span>
+    <span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">),</span>    <span class="c1"># Partition 1: Invalid ages</span>
+    <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Child&quot;</span><span class="p">),</span>       <span class="c1"># Partition 2: Children</span>
+    <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Teenager&quot;</span><span class="p">),</span>   <span class="c1"># Partition 3: Teenagers</span>
+    <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="s2">&quot;Adult&quot;</span><span class="p">),</span>      <span class="c1"># Partition 4: Adults</span>
+    <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="s2">&quot;Senior&quot;</span><span class="p">),</span>     <span class="c1"># Partition 5: Seniors</span>
 
-    # Test boundaries between partitions
-    (0, &quot;Child&quot;),       # Boundary: Invalid/Child
-    (12, &quot;Child&quot;),      # Boundary: Child/Teenager
-    (13, &quot;Teenager&quot;),   # Boundary: Child/Teenager
-    (19, &quot;Teenager&quot;),   # Boundary: Teenager/Adult
-    (20, &quot;Adult&quot;),      # Boundary: Teenager/Adult
-    (64, &quot;Adult&quot;),      # Boundary: Adult/Senior
-    (65, &quot;Senior&quot;),     # Boundary: Adult/Senior
-]
+    <span class="c1"># Test boundaries between partitions</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Child&quot;</span><span class="p">),</span>       <span class="c1"># Boundary: Invalid/Child</span>
+    <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;Child&quot;</span><span class="p">),</span>      <span class="c1"># Boundary: Child/Teenager</span>
+    <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;Teenager&quot;</span><span class="p">),</span>   <span class="c1"># Boundary: Child/Teenager</span>
+    <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="s2">&quot;Teenager&quot;</span><span class="p">),</span>   <span class="c1"># Boundary: Teenager/Adult</span>
+    <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;Adult&quot;</span><span class="p">),</span>      <span class="c1"># Boundary: Teenager/Adult</span>
+    <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="s2">&quot;Adult&quot;</span><span class="p">),</span>      <span class="c1"># Boundary: Adult/Senior</span>
+    <span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="s2">&quot;Senior&quot;</span><span class="p">),</span>     <span class="c1"># Boundary: Adult/Senior</span>
+<span class="p">]</span>
 
-print(&quot;\n=== Equivalence Partitioning Tests ===&quot;)
-for age, expected in equivalence_test_cases:
-    result = categorize_age(age)
-    status = &quot;✓ PASS&quot; if result == expected else &quot;✗ FAIL&quot;
-    print(f&quot;categorize_age({age}) = &#x27;{result}&#x27; (expected &#x27;{expected}&#x27;) {status}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Equivalence Partitioning Tests ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">age</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">equivalence_test_cases</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">categorize_age</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓ PASS&quot;</span> <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;categorize_age(</span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2">) = &#39;</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&#39; (expected &#39;</span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">&#39;) </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="decision-table-testing">Decision Table Testing<a class="headerlink" href="#decision-table-testing" title="Permanent link">&para;</a></h3>
 <p><strong>Decision table testing</strong> systematically tests all combinations of conditions.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def determine_shipping_cost(weight, distance, express, member):
-    &quot;&quot;&quot;
-    Determine shipping cost based on:
-    - weight: &lt;= 1kg or &gt; 1kg
-    - distance: &lt;= 100km or &gt; 100km  
-    - express: True or False
-    - member: True or False
-    &quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">determine_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">express</span><span class="p">,</span> <span class="n">member</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine shipping cost based on:</span>
+<span class="sd">    - weight: &lt;= 1kg or &gt; 1kg</span>
+<span class="sd">    - distance: &lt;= 100km or &gt; 100km  </span>
+<span class="sd">    - express: True or False</span>
+<span class="sd">    - member: True or False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    # Base cost
-    if weight &lt;= 1:
-        base_cost = 5
-    else:
-        base_cost = 10
+    <span class="c1"># Base cost</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mi">10</span>
 
-    # Distance modifier
-    if distance &gt; 100:
-        base_cost *= 1.5
+    <span class="c1"># Distance modifier</span>
+    <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">1.5</span>
 
-    # Express modifier
-    if express:
-        base_cost *= 2
+    <span class="c1"># Express modifier</span>
+    <span class="k">if</span> <span class="n">express</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mi">2</span>
 
-    # Member discount
-    if member:
-        base_cost *= 0.9  # 10% discount
+    <span class="c1"># Member discount</span>
+    <span class="k">if</span> <span class="n">member</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">0.9</span>  <span class="c1"># 10% discount</span>
 
-    return round(base_cost, 2)
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">base_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 
-# Decision table - all combinations of conditions
-# Weight | Distance | Express | Member | Expected Cost
-decision_table_tests = [
-    # Light weight (≤1kg)
-    (0.5, 50,  False, False, 5.0),     # Base case
-    (0.5, 50,  False, True,  4.5),     # + Member discount
-    (0.5, 50,  True,  False, 10.0),    # + Express
-    (0.5, 50,  True,  True,  9.0),     # + Express + Member
-    (0.5, 150, False, False, 7.5),     # + Long distance
-    (0.5, 150, False, True,  6.75),    # + Long distance + Member
-    (0.5, 150, True,  False, 15.0),    # + Long distance + Express
-    (0.5, 150, True,  True,  13.5),    # + Long distance + Express + Member
+<span class="c1"># Decision table - all combinations of conditions</span>
+<span class="c1"># Weight | Distance | Express | Member | Expected Cost</span>
+<span class="n">decision_table_tests</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Light weight (≤1kg)</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">),</span>     <span class="c1"># Base case</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="mf">4.5</span><span class="p">),</span>     <span class="c1"># + Member discount</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span>    <span class="c1"># + Express</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="mf">9.0</span><span class="p">),</span>     <span class="c1"># + Express + Member</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">),</span>     <span class="c1"># + Long distance</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="mf">6.75</span><span class="p">),</span>    <span class="c1"># + Long distance + Member</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">),</span>    <span class="c1"># + Long distance + Express</span>
+    <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="mf">13.5</span><span class="p">),</span>    <span class="c1"># + Long distance + Express + Member</span>
 
-    # Heavy weight (&gt;1kg)
-    (2.0, 50,  False, False, 10.0),    # Base case
-    (2.0, 50,  False, True,  9.0),     # + Member discount
-    (2.0, 50,  True,  False, 20.0),    # + Express
-    (2.0, 50,  True,  True,  18.0),    # + Express + Member
-    (2.0, 150, False, False, 15.0),    # + Long distance
-    (2.0, 150, False, True,  13.5),    # + Long distance + Member
-    (2.0, 150, True,  False, 30.0),    # + Long distance + Express
-    (2.0, 150, True,  True,  27.0),    # + Long distance + Express + Member
-]
+    <span class="c1"># Heavy weight (&gt;1kg)</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span>    <span class="c1"># Base case</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="mf">9.0</span><span class="p">),</span>     <span class="c1"># + Member discount</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">),</span>    <span class="c1"># + Express</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="mf">18.0</span><span class="p">),</span>    <span class="c1"># + Express + Member</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">),</span>    <span class="c1"># + Long distance</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="mf">13.5</span><span class="p">),</span>    <span class="c1"># + Long distance + Member</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="kc">False</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">),</span>    <span class="c1"># + Long distance + Express</span>
+    <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span>  <span class="kc">True</span><span class="p">,</span>  <span class="mf">27.0</span><span class="p">),</span>    <span class="c1"># + Long distance + Express + Member</span>
+<span class="p">]</span>
 
-print(&quot;\n=== Decision Table Tests ===&quot;)
-print(&quot;Weight | Distance | Express | Member | Result | Expected | Status&quot;)
-print(&quot;-&quot; * 65)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Decision Table Tests ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weight | Distance | Express | Member | Result | Expected | Status&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
 
-for weight, distance, express, member, expected in decision_table_tests:
-    result = determine_shipping_cost(weight, distance, express, member)
-    status = &quot;✓ PASS&quot; if abs(result - expected) &lt; 0.01 else &quot;✗ FAIL&quot;
-    print(f&quot;{weight:6.1f} | {distance:8.0f} | {express:7} | {member:6} | {result:6.2f} | {expected:8.2f} | {status}&quot;)
+<span class="k">for</span> <span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">express</span><span class="p">,</span> <span class="n">member</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">decision_table_tests</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">determine_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">express</span><span class="p">,</span> <span class="n">member</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓ PASS&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span> <span class="o">-</span> <span class="n">expected</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">weight</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">8.0f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">express</span><span class="si">:</span><span class="s2">7</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">member</span><span class="si">:</span><span class="s2">6</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s2">6.2f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">expected</span><span class="si">:</span><span class="s2">8.2f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="creating-comprehensive-test-suites">Creating Comprehensive Test Suites<a class="headerlink" href="#creating-comprehensive-test-suites" title="Permanent link">&para;</a></h2>
 <h3 id="student-grade-processing-example">Student Grade Processing Example<a class="headerlink" href="#student-grade-processing-example" title="Permanent link">&para;</a></h3>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def process_student_grades(student_data):
-    &quot;&quot;&quot;
-    Process student grade data and return summary.
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">process_student_grades</span><span class="p">(</span><span class="n">student_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Process student grade data and return summary.</span>
 
-    Input: List of dictionaries with &#x27;name&#x27; and &#x27;scores&#x27; keys
-    Output: Dictionary with statistics and grade distribution
-    &quot;&quot;&quot;
+<span class="sd">    Input: List of dictionaries with &#39;name&#39; and &#39;scores&#39; keys</span>
+<span class="sd">    Output: Dictionary with statistics and grade distribution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    if not student_data:
-        return {&quot;error&quot;: &quot;No student data provided&quot;}
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">student_data</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;No student data provided&quot;</span><span class="p">}</span>
 
-    total_students = len(student_data)
-    all_scores = []
-    grade_counts = {&quot;A&quot;: 0, &quot;B&quot;: 0, &quot;C&quot;: 0, &quot;D&quot;: 0, &quot;F&quot;: 0}
+    <span class="n">total_students</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">student_data</span><span class="p">)</span>
+    <span class="n">all_scores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">grade_counts</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-    for student in student_data:
-        # Validate student record
-        if not isinstance(student, dict):
-            continue
-        if &#x27;name&#x27; not in student or &#x27;scores&#x27; not in student:
-            continue
-        if not student[&#x27;scores&#x27;]:  # Empty scores list
-            continue
+    <span class="k">for</span> <span class="n">student</span> <span class="ow">in</span> <span class="n">student_data</span><span class="p">:</span>
+        <span class="c1"># Validate student record</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">student</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">student</span> <span class="ow">or</span> <span class="s1">&#39;scores&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">student</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]:</span>  <span class="c1"># Empty scores list</span>
+            <span class="k">continue</span>
 
-        # Calculate average
-        scores = student[&#x27;scores&#x27;]
-        average = sum(scores) / len(scores)
-        all_scores.append(average)
+        <span class="c1"># Calculate average</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="n">student</span><span class="p">[</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span>
+        <span class="n">average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+        <span class="n">all_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">average</span><span class="p">)</span>
 
-        # Assign letter grade
-        if average &gt;= 90:
-            grade_counts[&quot;A&quot;] += 1
-        elif average &gt;= 80:
-            grade_counts[&quot;B&quot;] += 1
-        elif average &gt;= 70:
-            grade_counts[&quot;C&quot;] += 1
-        elif average &gt;= 60:
-            grade_counts[&quot;D&quot;] += 1
-        else:
-            grade_counts[&quot;F&quot;] += 1
+        <span class="c1"># Assign letter grade</span>
+        <span class="k">if</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">average</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">grade_counts</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-    if not all_scores:
-        return {&quot;error&quot;: &quot;No valid student records found&quot;}
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">all_scores</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;No valid student records found&quot;</span><span class="p">}</span>
 
-    class_average = sum(all_scores) / len(all_scores)
+    <span class="n">class_average</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span>
 
-    return {
-        &quot;class_average&quot;: round(class_average, 2),
-        &quot;total_students&quot;: len(all_scores),
-        &quot;grade_distribution&quot;: grade_counts,
-        &quot;highest_average&quot;: max(all_scores),
-        &quot;lowest_average&quot;: min(all_scores)
-    }
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;class_average&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">class_average</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="s2">&quot;total_students&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_scores</span><span class="p">),</span>
+        <span class="s2">&quot;grade_distribution&quot;</span><span class="p">:</span> <span class="n">grade_counts</span><span class="p">,</span>
+        <span class="s2">&quot;highest_average&quot;</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="n">all_scores</span><span class="p">),</span>
+        <span class="s2">&quot;lowest_average&quot;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">all_scores</span><span class="p">)</span>
+    <span class="p">}</span>
 
-def test_student_grade_processing():
-    &quot;&quot;&quot;Comprehensive test suite for student grade processing.&quot;&quot;&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">test_student_grade_processing</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive test suite for student grade processing.&quot;&quot;&quot;</span>
 
-    print(&quot;=== Comprehensive Test Suite: Student Grade Processing ===\n&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Comprehensive Test Suite: Student Grade Processing ===</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test 1: Normal data
-    print(&quot;Test 1: Normal Data&quot;)
-    normal_data = [
-        {&quot;name&quot;: &quot;Alice&quot;, &quot;scores&quot;: [92, 88, 95]},
-        {&quot;name&quot;: &quot;Bob&quot;, &quot;scores&quot;: [87, 91, 84]},
-        {&quot;name&quot;: &quot;Charlie&quot;, &quot;scores&quot;: [76, 79, 73]}
-    ]
-    result = process_student_grades(normal_data)
-    expected_avg = (91.67 + 87.33 + 76.0) / 3  # Approximately 85
-    print(f&quot;Class average: {result[&#x27;class_average&#x27;]} (expected ~85)&quot;)
-    print(f&quot;Grade distribution: {result[&#x27;grade_distribution&#x27;]}&quot;)
-    print(&quot;✓ PASS\n&quot; if 84 &lt;= result[&#x27;class_average&#x27;] &lt;= 86 else &quot;✗ FAIL\n&quot;)
+    <span class="c1"># Test 1: Normal data</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test 1: Normal Data&quot;</span><span class="p">)</span>
+    <span class="n">normal_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">92</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">95</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">87</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">84</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">76</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">73</span><span class="p">]}</span>
+    <span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_student_grades</span><span class="p">(</span><span class="n">normal_data</span><span class="p">)</span>
+    <span class="n">expected_avg</span> <span class="o">=</span> <span class="p">(</span><span class="mf">91.67</span> <span class="o">+</span> <span class="mf">87.33</span> <span class="o">+</span> <span class="mf">76.0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1"># Approximately 85</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Class average: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;class_average&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (expected ~85)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grade distribution: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;grade_distribution&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PASS</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="mi">84</span> <span class="o">&lt;=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;class_average&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">86</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test 2: Boundary data - grade boundaries
-    print(&quot;Test 2: Boundary Data - Grade Boundaries&quot;)
-    boundary_data = [
-        {&quot;name&quot;: &quot;Student90&quot;, &quot;scores&quot;: [90, 90, 90]},  # Exactly A
-        {&quot;name&quot;: &quot;Student89&quot;, &quot;scores&quot;: [89, 89, 89]},  # Just below A
-        {&quot;name&quot;: &quot;Student80&quot;, &quot;scores&quot;: [80, 80, 80]},  # Exactly B
-        {&quot;name&quot;: &quot;Student79&quot;, &quot;scores&quot;: [79, 79, 79]},  # Just below B
-        {&quot;name&quot;: &quot;Student60&quot;, &quot;scores&quot;: [60, 60, 60]},  # Exactly D
-        {&quot;name&quot;: &quot;Student59&quot;, &quot;scores&quot;: [59, 59, 59]},  # Just below D (F)
-    ]
-    result = process_student_grades(boundary_data)
-    expected_grades = {&quot;A&quot;: 1, &quot;B&quot;: 1, &quot;C&quot;: 1, &quot;D&quot;: 1, &quot;F&quot;: 1}
-    print(f&quot;Grade distribution: {result[&#x27;grade_distribution&#x27;]}&quot;)
-    print(f&quot;Expected: {expected_grades}&quot;)
-    print(&quot;✓ PASS\n&quot; if result[&#x27;grade_distribution&#x27;] == expected_grades else &quot;✗ FAIL\n&quot;)
+    <span class="c1"># Test 2: Boundary data - grade boundaries</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test 2: Boundary Data - Grade Boundaries&quot;</span><span class="p">)</span>
+    <span class="n">boundary_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student90&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">]},</span>  <span class="c1"># Exactly A</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student89&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">89</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">89</span><span class="p">]},</span>  <span class="c1"># Just below A</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student80&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">]},</span>  <span class="c1"># Exactly B</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student79&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">79</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">79</span><span class="p">]},</span>  <span class="c1"># Just below B</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student60&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">]},</span>  <span class="c1"># Exactly D</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Student59&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">59</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">59</span><span class="p">]},</span>  <span class="c1"># Just below D (F)</span>
+    <span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_student_grades</span><span class="p">(</span><span class="n">boundary_data</span><span class="p">)</span>
+    <span class="n">expected_grades</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Grade distribution: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;grade_distribution&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="n">expected_grades</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PASS</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;grade_distribution&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_grades</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test 3: Edge cases - single student, single score
-    print(&quot;Test 3: Edge Cases - Single Student&quot;)
-    single_data = [{&quot;name&quot;: &quot;OnlyStudent&quot;, &quot;scores&quot;: [85]}]
-    result = process_student_grades(single_data)
-    print(f&quot;Single student average: {result[&#x27;class_average&#x27;]}&quot;)
-    print(&quot;✓ PASS\n&quot; if result[&#x27;class_average&#x27;] == 85 else &quot;✗ FAIL\n&quot;)
+    <span class="c1"># Test 3: Edge cases - single student, single score</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test 3: Edge Cases - Single Student&quot;</span><span class="p">)</span>
+    <span class="n">single_data</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;OnlyStudent&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">]}]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_student_grades</span><span class="p">(</span><span class="n">single_data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Single student average: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;class_average&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PASS</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;class_average&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">85</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test 4: Invalid data - empty list
-    print(&quot;Test 4: Invalid Data - Empty List&quot;)
-    result = process_student_grades([])
-    print(f&quot;Empty list result: {result}&quot;)
-    print(&quot;✓ PASS\n&quot; if &quot;error&quot; in result else &quot;✗ FAIL\n&quot;)
+    <span class="c1"># Test 4: Invalid data - empty list</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test 4: Invalid Data - Empty List&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_student_grades</span><span class="p">([])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Empty list result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PASS</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test 5: Invalid data - malformed records
-    print(&quot;Test 5: Invalid Data - Malformed Records&quot;)
-    invalid_data = [
-        {&quot;name&quot;: &quot;ValidStudent&quot;, &quot;scores&quot;: [85, 90]},
-        {&quot;name&quot;: &quot;NoScores&quot;},  # Missing scores
-        {&quot;wrong_key&quot;: &quot;value&quot;},  # Missing name and scores
-        {&quot;name&quot;: &quot;EmptyScores&quot;, &quot;scores&quot;: []},  # Empty scores
-        &quot;not_a_dict&quot;,  # Not even a dictionary
-    ]
-    result = process_student_grades(invalid_data)
-    print(f&quot;Malformed data result: {result}&quot;)
-    print(f&quot;Should only count 1 valid student&quot;)
-    print(&quot;✓ PASS\n&quot; if result[&#x27;total_students&#x27;] == 1 else &quot;✗ FAIL\n&quot;)
+    <span class="c1"># Test 5: Invalid data - malformed records</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test 5: Invalid Data - Malformed Records&quot;</span><span class="p">)</span>
+    <span class="n">invalid_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ValidStudent&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;NoScores&quot;</span><span class="p">},</span>  <span class="c1"># Missing scores</span>
+        <span class="p">{</span><span class="s2">&quot;wrong_key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">},</span>  <span class="c1"># Missing name and scores</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;EmptyScores&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[]},</span>  <span class="c1"># Empty scores</span>
+        <span class="s2">&quot;not_a_dict&quot;</span><span class="p">,</span>  <span class="c1"># Not even a dictionary</span>
+    <span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_student_grades</span><span class="p">(</span><span class="n">invalid_data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Malformed data result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Should only count 1 valid student&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PASS</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;total_students&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    # Test 6: Extreme data - very high/low scores
-    print(&quot;Test 6: Extreme Data - High and Low Scores&quot;)
-    extreme_data = [
-        {&quot;name&quot;: &quot;Perfect&quot;, &quot;scores&quot;: [100, 100, 100]},
-        {&quot;name&quot;: &quot;Failing&quot;, &quot;scores&quot;: [0, 5, 10]},
-        {&quot;name&quot;: &quot;Mixed&quot;, &quot;scores&quot;: [100, 0, 50]}
-    ]
-    result = process_student_grades(extreme_data)
-    print(f&quot;Extreme data class average: {result[&#x27;class_average&#x27;]}&quot;)
-    print(f&quot;Highest: {result[&#x27;highest_average&#x27;]}, Lowest: {result[&#x27;lowest_average&#x27;]}&quot;)
-    print(&quot;✓ PASS\n&quot; if result[&#x27;highest_average&#x27;] == 100 and result[&#x27;lowest_average&#x27;] == 5 else &quot;✗ FAIL\n&quot;)
+    <span class="c1"># Test 6: Extreme data - very high/low scores</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test 6: Extreme Data - High and Low Scores&quot;</span><span class="p">)</span>
+    <span class="n">extreme_data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Perfect&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Failing&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mixed&quot;</span><span class="p">,</span> <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">]}</span>
+    <span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">process_student_grades</span><span class="p">(</span><span class="n">extreme_data</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Extreme data class average: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;class_average&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Highest: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;highest_average&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Lowest: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;lowest_average&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✓ PASS</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;highest_average&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">100</span> <span class="ow">and</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;lowest_average&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span> <span class="k">else</span> <span class="s2">&quot;✗ FAIL</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Run the comprehensive test suite
-test_student_grade_processing()
+<span class="c1"># Run the comprehensive test suite</span>
+<span class="n">test_student_grade_processing</span><span class="p">()</span>
 </code></pre>
 </div>
 <h2 id="test-data-documentation">Test Data Documentation<a class="headerlink" href="#test-data-documentation" title="Permanent link">&para;</a></h2>
 <h3 id="creating-test-cases">Creating Test Cases<a class="headerlink" href="#creating-test-cases" title="Permanent link">&para;</a></h3>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python">class TestCase:
-    &quot;&quot;&quot;Structured test case documentation.&quot;&quot;&quot;
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">TestCase</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Structured test case documentation.&quot;&quot;&quot;</span>
 
-    def __init__(self, test_id, description, input_data, expected_output, category):
-        self.test_id = test_id
-        self.description = description
-        self.input_data = input_data
-        self.expected_output = expected_output
-        self.category = category
-        self.result = None
-        self.passed = None
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_id</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">input_data</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">,</span> <span class="n">category</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">test_id</span> <span class="o">=</span> <span class="n">test_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_data</span> <span class="o">=</span> <span class="n">input_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">expected_output</span> <span class="o">=</span> <span class="n">expected_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">category</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">passed</span> <span class="o">=</span> <span class="kc">None</span>
 
-    def __str__(self):
-        status = &quot;PASS&quot; if self.passed else &quot;FAIL&quot; if self.passed is False else &quot;NOT RUN&quot;
-        return f&quot;[{self.test_id}] {self.description} - {status}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;PASS&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">passed</span> <span class="k">else</span> <span class="s2">&quot;FAIL&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">passed</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">else</span> <span class="s2">&quot;NOT RUN&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">test_id</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span>
 
-def calculate_letter_grade(percentage):
-    &quot;&quot;&quot;Convert percentage to letter grade.&quot;&quot;&quot;
-    if percentage &lt; 0 or percentage &gt; 100:
-        return &quot;Invalid&quot;
-    elif percentage &gt;= 90:
-        return &quot;A&quot;
-    elif percentage &gt;= 80:
-        return &quot;B&quot;
-    elif percentage &gt;= 70:
-        return &quot;C&quot;
-    elif percentage &gt;= 60:
-        return &quot;D&quot;
-    else:
-        return &quot;F&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_letter_grade</span><span class="p">(</span><span class="n">percentage</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert percentage to letter grade.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">percentage</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">percentage</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid&quot;</span>
+    <span class="k">elif</span> <span class="n">percentage</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+    <span class="k">elif</span> <span class="n">percentage</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+    <span class="k">elif</span> <span class="n">percentage</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+    <span class="k">elif</span> <span class="n">percentage</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
 
-# Documented test cases
-test_cases = [
-    # Normal data tests
-    TestCase(&quot;TC001&quot;, &quot;Typical A grade&quot;, 95, &quot;A&quot;, &quot;normal&quot;),
-    TestCase(&quot;TC002&quot;, &quot;Typical B grade&quot;, 85, &quot;B&quot;, &quot;normal&quot;),
-    TestCase(&quot;TC003&quot;, &quot;Typical C grade&quot;, 75, &quot;C&quot;, &quot;normal&quot;),
-    TestCase(&quot;TC004&quot;, &quot;Typical D grade&quot;, 65, &quot;D&quot;, &quot;normal&quot;),
-    TestCase(&quot;TC005&quot;, &quot;Typical F grade&quot;, 45, &quot;F&quot;, &quot;normal&quot;),
+<span class="c1"># Documented test cases</span>
+<span class="n">test_cases</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Normal data tests</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC001&quot;</span><span class="p">,</span> <span class="s2">&quot;Typical A grade&quot;</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC002&quot;</span><span class="p">,</span> <span class="s2">&quot;Typical B grade&quot;</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC003&quot;</span><span class="p">,</span> <span class="s2">&quot;Typical C grade&quot;</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC004&quot;</span><span class="p">,</span> <span class="s2">&quot;Typical D grade&quot;</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC005&quot;</span><span class="p">,</span> <span class="s2">&quot;Typical F grade&quot;</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">),</span>
 
-    # Boundary tests
-    TestCase(&quot;TC006&quot;, &quot;A grade boundary&quot;, 90, &quot;A&quot;, &quot;boundary&quot;),
-    TestCase(&quot;TC007&quot;, &quot;Just below A&quot;, 89.9, &quot;B&quot;, &quot;boundary&quot;),
-    TestCase(&quot;TC008&quot;, &quot;B grade boundary&quot;, 80, &quot;B&quot;, &quot;boundary&quot;),
-    TestCase(&quot;TC009&quot;, &quot;Just below B&quot;, 79.9, &quot;C&quot;, &quot;boundary&quot;),
-    TestCase(&quot;TC010&quot;, &quot;Perfect score&quot;, 100, &quot;A&quot;, &quot;boundary&quot;),
-    TestCase(&quot;TC011&quot;, &quot;Minimum score&quot;, 0, &quot;F&quot;, &quot;boundary&quot;),
+    <span class="c1"># Boundary tests</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC006&quot;</span><span class="p">,</span> <span class="s2">&quot;A grade boundary&quot;</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;boundary&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC007&quot;</span><span class="p">,</span> <span class="s2">&quot;Just below A&quot;</span><span class="p">,</span> <span class="mf">89.9</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;boundary&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC008&quot;</span><span class="p">,</span> <span class="s2">&quot;B grade boundary&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;boundary&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC009&quot;</span><span class="p">,</span> <span class="s2">&quot;Just below B&quot;</span><span class="p">,</span> <span class="mf">79.9</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;boundary&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC010&quot;</span><span class="p">,</span> <span class="s2">&quot;Perfect score&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;boundary&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC011&quot;</span><span class="p">,</span> <span class="s2">&quot;Minimum score&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;boundary&quot;</span><span class="p">),</span>
 
-    # Invalid data tests
-    TestCase(&quot;TC012&quot;, &quot;Negative percentage&quot;, -10, &quot;Invalid&quot;, &quot;invalid&quot;),
-    TestCase(&quot;TC013&quot;, &quot;Over 100 percent&quot;, 110, &quot;Invalid&quot;, &quot;invalid&quot;),
-    TestCase(&quot;TC014&quot;, &quot;Just over 100&quot;, 100.1, &quot;Invalid&quot;, &quot;invalid&quot;),
-    TestCase(&quot;TC015&quot;, &quot;Just under 0&quot;, -0.1, &quot;Invalid&quot;, &quot;invalid&quot;),
-]
+    <span class="c1"># Invalid data tests</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC012&quot;</span><span class="p">,</span> <span class="s2">&quot;Negative percentage&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC013&quot;</span><span class="p">,</span> <span class="s2">&quot;Over 100 percent&quot;</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC014&quot;</span><span class="p">,</span> <span class="s2">&quot;Just over 100&quot;</span><span class="p">,</span> <span class="mf">100.1</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">),</span>
+    <span class="n">TestCase</span><span class="p">(</span><span class="s2">&quot;TC015&quot;</span><span class="p">,</span> <span class="s2">&quot;Just under 0&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="s2">&quot;Invalid&quot;</span><span class="p">,</span> <span class="s2">&quot;invalid&quot;</span><span class="p">),</span>
+<span class="p">]</span>
 
-def run_test_suite(test_cases, function_to_test):
-    &quot;&quot;&quot;Run a documented test suite.&quot;&quot;&quot;
+<span class="k">def</span><span class="w"> </span><span class="nf">run_test_suite</span><span class="p">(</span><span class="n">test_cases</span><span class="p">,</span> <span class="n">function_to_test</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a documented test suite.&quot;&quot;&quot;</span>
 
-    print(&quot;=== Test Suite Results ===&quot;)
-    print(f&quot;Testing function: {function_to_test.__name__}&quot;)
-    print(f&quot;Total test cases: {len(test_cases)}\n&quot;)
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test Suite Results ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing function: </span><span class="si">{</span><span class="n">function_to_test</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total test cases: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_cases</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    results_by_category = {}
+    <span class="n">results_by_category</span> <span class="o">=</span> <span class="p">{}</span>
 
-    for test_case in test_cases:
-        # Run the test
-        test_case.result = function_to_test(test_case.input_data)
-        test_case.passed = test_case.result == test_case.expected_output
+    <span class="k">for</span> <span class="n">test_case</span> <span class="ow">in</span> <span class="n">test_cases</span><span class="p">:</span>
+        <span class="c1"># Run the test</span>
+        <span class="n">test_case</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">function_to_test</span><span class="p">(</span><span class="n">test_case</span><span class="o">.</span><span class="n">input_data</span><span class="p">)</span>
+        <span class="n">test_case</span><span class="o">.</span><span class="n">passed</span> <span class="o">=</span> <span class="n">test_case</span><span class="o">.</span><span class="n">result</span> <span class="o">==</span> <span class="n">test_case</span><span class="o">.</span><span class="n">expected_output</span>
 
-        # Group by category
-        if test_case.category not in results_by_category:
-            results_by_category[test_case.category] = []
-        results_by_category[test_case.category].append(test_case)
+        <span class="c1"># Group by category</span>
+        <span class="k">if</span> <span class="n">test_case</span><span class="o">.</span><span class="n">category</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">results_by_category</span><span class="p">:</span>
+            <span class="n">results_by_category</span><span class="p">[</span><span class="n">test_case</span><span class="o">.</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">results_by_category</span><span class="p">[</span><span class="n">test_case</span><span class="o">.</span><span class="n">category</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_case</span><span class="p">)</span>
 
-    # Report results by category
-    total_passed = 0
-    total_tests = len(test_cases)
+    <span class="c1"># Report results by category</span>
+    <span class="n">total_passed</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_tests</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_cases</span><span class="p">)</span>
 
-    for category, tests in results_by_category.items():
-        print(f&quot;\n--- {category.upper()} TESTS ---&quot;)
-        category_passed = 0
+    <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">tests</span> <span class="ow">in</span> <span class="n">results_by_category</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- </span><span class="si">{</span><span class="n">category</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> TESTS ---&quot;</span><span class="p">)</span>
+        <span class="n">category_passed</span> <span class="o">=</span> <span class="mi">0</span>
 
-        for test in tests:
-            status_symbol = &quot;✓&quot; if test.passed else &quot;✗&quot;
-            print(f&quot;{status_symbol} {test.test_id}: {test.description}&quot;)
-            print(f&quot;   Input: {test.input_data}&quot;)
-            print(f&quot;   Expected: {test.expected_output}, Got: {test.result}&quot;)
+        <span class="k">for</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">tests</span><span class="p">:</span>
+            <span class="n">status_symbol</span> <span class="o">=</span> <span class="s2">&quot;✓&quot;</span> <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">passed</span> <span class="k">else</span> <span class="s2">&quot;✗&quot;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status_symbol</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">test_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Input: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">input_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Expected: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">expected_output</span><span class="si">}</span><span class="s2">, Got: </span><span class="si">{</span><span class="n">test</span><span class="o">.</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-            if test.passed:
-                category_passed += 1
-                total_passed += 1
+            <span class="k">if</span> <span class="n">test</span><span class="o">.</span><span class="n">passed</span><span class="p">:</span>
+                <span class="n">category_passed</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">total_passed</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        print(f&quot;\nCategory summary: {category_passed}/{len(tests)} passed&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Category summary: </span><span class="si">{</span><span class="n">category_passed</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tests</span><span class="p">)</span><span class="si">}</span><span class="s2"> passed&quot;</span><span class="p">)</span>
 
-    # Overall summary
-    print(f&quot;\n=== OVERALL RESULTS ===&quot;)
-    print(f&quot;Total passed: {total_passed}/{total_tests}&quot;)
-    print(f&quot;Success rate: {(total_passed/total_tests)*100:.1f}%&quot;)
+    <span class="c1"># Overall summary</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== OVERALL RESULTS ===&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total passed: </span><span class="si">{</span><span class="n">total_passed</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_tests</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Success rate: </span><span class="si">{</span><span class="p">(</span><span class="n">total_passed</span><span class="o">/</span><span class="n">total_tests</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
-    if total_passed == total_tests:
-        print(&quot;🎉 All tests passed!&quot;)
-    else:
-        print(&quot;⚠️  Some tests failed - check implementation&quot;)
+    <span class="k">if</span> <span class="n">total_passed</span> <span class="o">==</span> <span class="n">total_tests</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🎉 All tests passed!&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️  Some tests failed - check implementation&quot;</span><span class="p">)</span>
 
-# Run the documented test suite
-run_test_suite(test_cases, calculate_letter_grade)
+<span class="c1"># Run the documented test suite</span>
+<span class="n">run_test_suite</span><span class="p">(</span><span class="n">test_cases</span><span class="p">,</span> <span class="n">calculate_letter_grade</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
@@ -2773,6 +2773,8 @@ run_test_suite(test_cases, calculate_letter_grade)
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

@@ -1673,76 +1673,76 @@
 </ul>
 <p><strong>Basic Git workflow</strong>:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Simulating version control operations in Python
-class VersionControl:
-    def __init__(self, project_name):
-        self.project_name = project_name
-        self.commits = []
-        self.branches = {&quot;main&quot;: []}
-        self.current_branch = &quot;main&quot;
-        self.tags = {}
-        self.commit_counter = 0
+<pre><code class="language-python"><span class="c1"># Example: Simulating version control operations in Python</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VersionControl</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span> <span class="o">=</span> <span class="n">project_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commits</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branches</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_branch</span> <span class="o">=</span> <span class="s2">&quot;main&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commit_counter</span> <span class="o">=</span> <span class="mi">0</span>
 
-    def commit(self, message, files_changed):
-        &quot;&quot;&quot;Create a new commit with changes&quot;&quot;&quot;
-        self.commit_counter += 1
-        commit_data = {
-            &quot;id&quot;: f&quot;commit_{self.commit_counter}&quot;,
-            &quot;message&quot;: message,
-            &quot;files&quot;: files_changed,
-            &quot;timestamp&quot;: &quot;2024-03-20 14:30:00&quot;,
-            &quot;author&quot;: &quot;developer&quot;,
-            &quot;branch&quot;: self.current_branch
-        }
-        self.commits.append(commit_data)
-        self.branches[self.current_branch].append(commit_data[&quot;id&quot;])
-        return commit_data[&quot;id&quot;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">files_changed</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new commit with changes&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commit_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">commit_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;commit_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">commit_counter</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+            <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="n">files_changed</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20 14:30:00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;developer&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;branch&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_branch</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">commit_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_branch</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">commit_data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">commit_data</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
 
-    def create_branch(self, branch_name, from_branch=&quot;main&quot;):
-        &quot;&quot;&quot;Create a new branch from existing branch&quot;&quot;&quot;
-        if branch_name not in self.branches:
-            self.branches[branch_name] = self.branches[from_branch].copy()
-            return f&quot;Branch &#x27;{branch_name}&#x27; created from &#x27;{from_branch}&#x27;&quot;
-        return f&quot;Branch &#x27;{branch_name}&#x27; already exists&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">,</span> <span class="n">from_branch</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new branch from existing branch&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">branch_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">from_branch</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Branch &#39;</span><span class="si">{</span><span class="n">branch_name</span><span class="si">}</span><span class="s2">&#39; created from &#39;</span><span class="si">{</span><span class="n">from_branch</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Branch &#39;</span><span class="si">{</span><span class="n">branch_name</span><span class="si">}</span><span class="s2">&#39; already exists&quot;</span>
 
-    def switch_branch(self, branch_name):
-        &quot;&quot;&quot;Switch to a different branch&quot;&quot;&quot;
-        if branch_name in self.branches:
-            self.current_branch = branch_name
-            return f&quot;Switched to branch &#x27;{branch_name}&#x27;&quot;
-        return f&quot;Branch &#x27;{branch_name}&#x27; does not exist&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">switch_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">branch_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Switch to a different branch&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">branch_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current_branch</span> <span class="o">=</span> <span class="n">branch_name</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Switched to branch &#39;</span><span class="si">{</span><span class="n">branch_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Branch &#39;</span><span class="si">{</span><span class="n">branch_name</span><span class="si">}</span><span class="s2">&#39; does not exist&quot;</span>
 
-    def create_tag(self, tag_name, commit_id=None):
-        &quot;&quot;&quot;Create a tag for a specific commit&quot;&quot;&quot;
-        if commit_id is None and self.commits:
-            commit_id = self.commits[-1][&quot;id&quot;]
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag_name</span><span class="p">,</span> <span class="n">commit_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a tag for a specific commit&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">commit_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">commits</span><span class="p">:</span>
+            <span class="n">commit_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
 
-        if commit_id:
-            self.tags[tag_name] = commit_id
-            return f&quot;Tag &#x27;{tag_name}&#x27; created for commit {commit_id}&quot;
-        return &quot;No commits available for tagging&quot;
+        <span class="k">if</span> <span class="n">commit_id</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">commit_id</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Tag &#39;</span><span class="si">{</span><span class="n">tag_name</span><span class="si">}</span><span class="s2">&#39; created for commit </span><span class="si">{</span><span class="n">commit_id</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;No commits available for tagging&quot;</span>
 
-# Example usage
-project_vc = VersionControl(&quot;student_management_system&quot;)
+<span class="c1"># Example usage</span>
+<span class="n">project_vc</span> <span class="o">=</span> <span class="n">VersionControl</span><span class="p">(</span><span class="s2">&quot;student_management_system&quot;</span><span class="p">)</span>
 
-# Initial development
-project_vc.commit(&quot;Initial project setup&quot;, [&quot;main.py&quot;, &quot;requirements.txt&quot;])
-project_vc.commit(&quot;Add student class&quot;, [&quot;models/student.py&quot;])
-project_vc.commit(&quot;Implement basic CRUD operations&quot;, [&quot;controllers/student_controller.py&quot;])
+<span class="c1"># Initial development</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s2">&quot;Initial project setup&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;main.py&quot;</span><span class="p">,</span> <span class="s2">&quot;requirements.txt&quot;</span><span class="p">])</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s2">&quot;Add student class&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;models/student.py&quot;</span><span class="p">])</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s2">&quot;Implement basic CRUD operations&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;controllers/student_controller.py&quot;</span><span class="p">])</span>
 
-# Create feature branch
-project_vc.create_branch(&quot;feature/grade-tracking&quot;)
-project_vc.switch_branch(&quot;feature/grade-tracking&quot;)
-project_vc.commit(&quot;Add grade tracking functionality&quot;, [&quot;models/grade.py&quot;, &quot;controllers/grade_controller.py&quot;])
+<span class="c1"># Create feature branch</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">create_branch</span><span class="p">(</span><span class="s2">&quot;feature/grade-tracking&quot;</span><span class="p">)</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">switch_branch</span><span class="p">(</span><span class="s2">&quot;feature/grade-tracking&quot;</span><span class="p">)</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="s2">&quot;Add grade tracking functionality&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;models/grade.py&quot;</span><span class="p">,</span> <span class="s2">&quot;controllers/grade_controller.py&quot;</span><span class="p">])</span>
 
-# Tag a release
-project_vc.switch_branch(&quot;main&quot;)
-project_vc.create_tag(&quot;v1.0.0&quot;)
+<span class="c1"># Tag a release</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">switch_branch</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+<span class="n">project_vc</span><span class="o">.</span><span class="n">create_tag</span><span class="p">(</span><span class="s2">&quot;v1.0.0&quot;</span><span class="p">)</span>
 
-print(f&quot;Project: {project_vc.project_name}&quot;)
-print(f&quot;Total commits: {len(project_vc.commits)}&quot;)
-print(f&quot;Branches: {list(project_vc.branches.keys())}&quot;)
-print(f&quot;Tags: {list(project_vc.tags.keys())}&quot;)
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Project: </span><span class="si">{</span><span class="n">project_vc</span><span class="o">.</span><span class="n">project_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total commits: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">project_vc</span><span class="o">.</span><span class="n">commits</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Branches: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">project_vc</span><span class="o">.</span><span class="n">branches</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tags: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">project_vc</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="branching-strategies">Branching strategies<a class="headerlink" href="#branching-strategies" title="Permanent link">&para;</a></h3>
@@ -1781,88 +1781,88 @@ print(f&quot;Tags: {list(project_vc.tags.keys())}&quot;)
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Branch management system
-class BranchManager:
-    def __init__(self):
-        self.branches = {
-            &quot;main&quot;: {&quot;type&quot;: &quot;main&quot;, &quot;protected&quot;: True, &quot;last_commit&quot;: &quot;abc123&quot;},
-            &quot;develop&quot;: {&quot;type&quot;: &quot;develop&quot;, &quot;protected&quot;: True, &quot;last_commit&quot;: &quot;def456&quot;}
-        }
-        self.branch_rules = {
-            &quot;feature/&quot;: {&quot;base_branch&quot;: &quot;develop&quot;, &quot;merge_target&quot;: &quot;develop&quot;},
-            &quot;bugfix/&quot;: {&quot;base_branch&quot;: &quot;develop&quot;, &quot;merge_target&quot;: &quot;develop&quot;},
-            &quot;hotfix/&quot;: {&quot;base_branch&quot;: &quot;main&quot;, &quot;merge_target&quot;: &quot;main&quot;},
-            &quot;release/&quot;: {&quot;base_branch&quot;: &quot;develop&quot;, &quot;merge_target&quot;: &quot;main&quot;}
-        }
+<pre><code class="language-python"><span class="c1"># Example: Branch management system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BranchManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branches</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;last_commit&quot;</span><span class="p">:</span> <span class="s2">&quot;abc123&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;develop&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span> <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;last_commit&quot;</span><span class="p">:</span> <span class="s2">&quot;def456&quot;</span><span class="p">}</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">branch_rules</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;feature/&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span> <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;bugfix/&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span> <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;hotfix/&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;release/&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span> <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">}</span>
+        <span class="p">}</span>
 
-    def create_feature_branch(self, feature_name, developer):
-        &quot;&quot;&quot;Create a new feature branch following naming conventions&quot;&quot;&quot;
-        branch_name = f&quot;feature/{feature_name}&quot;
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_feature_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_name</span><span class="p">,</span> <span class="n">developer</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new feature branch following naming conventions&quot;&quot;&quot;</span>
+        <span class="n">branch_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;feature/</span><span class="si">{</span><span class="n">feature_name</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        if self.is_valid_branch_name(feature_name):
-            rule = self.branch_rules[&quot;feature/&quot;]
-            self.branches[branch_name] = {
-                &quot;type&quot;: &quot;feature&quot;,
-                &quot;base&quot;: rule[&quot;base_branch&quot;],
-                &quot;developer&quot;: developer,
-                &quot;created&quot;: &quot;2024-03-20&quot;,
-                &quot;status&quot;: &quot;active&quot;
-            }
-            return {
-                &quot;success&quot;: True,
-                &quot;branch&quot;: branch_name,
-                &quot;message&quot;: f&quot;Feature branch created for {developer}&quot;
-            }
-        else:
-            return {
-                &quot;success&quot;: False,
-                &quot;message&quot;: &quot;Invalid branch name format&quot;
-            }
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid_branch_name</span><span class="p">(</span><span class="n">feature_name</span><span class="p">):</span>
+            <span class="n">rule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branch_rules</span><span class="p">[</span><span class="s2">&quot;feature/&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">branch_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;feature&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="n">rule</span><span class="p">[</span><span class="s2">&quot;base_branch&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;developer&quot;</span><span class="p">:</span> <span class="n">developer</span><span class="p">,</span>
+                <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;branch&quot;</span><span class="p">:</span> <span class="n">branch_name</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Feature branch created for </span><span class="si">{</span><span class="n">developer</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Invalid branch name format&quot;</span>
+            <span class="p">}</span>
 
-    def is_valid_branch_name(self, name):
-        &quot;&quot;&quot;Validate branch naming conventions&quot;&quot;&quot;
-        # Branch names should be lowercase, hyphen-separated
-        return name.islower() and &quot;-&quot; in name and name.replace(&quot;-&quot;, &quot;&quot;).isalnum()
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid_branch_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate branch naming conventions&quot;&quot;&quot;</span>
+        <span class="c1"># Branch names should be lowercase, hyphen-separated</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;-&quot;</span> <span class="ow">in</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span>
 
-    def prepare_merge_request(self, source_branch, target_branch):
-        &quot;&quot;&quot;Prepare a merge request with validation&quot;&quot;&quot;
-        if source_branch not in self.branches:
-            return {&quot;error&quot;: &quot;Source branch does not exist&quot;}
+    <span class="k">def</span><span class="w"> </span><span class="nf">prepare_merge_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_branch</span><span class="p">,</span> <span class="n">target_branch</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Prepare a merge request with validation&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">source_branch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Source branch does not exist&quot;</span><span class="p">}</span>
 
-        if target_branch not in self.branches:
-            return {&quot;error&quot;: &quot;Target branch does not exist&quot;}
+        <span class="k">if</span> <span class="n">target_branch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Target branch does not exist&quot;</span><span class="p">}</span>
 
-        source_info = self.branches[source_branch]
-        target_info = self.branches[target_branch]
+        <span class="n">source_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">source_branch</span><span class="p">]</span>
+        <span class="n">target_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">branches</span><span class="p">[</span><span class="n">target_branch</span><span class="p">]</span>
 
-        merge_request = {
-            &quot;source&quot;: source_branch,
-            &quot;target&quot;: target_branch,
-            &quot;developer&quot;: source_info.get(&quot;developer&quot;, &quot;unknown&quot;),
-            &quot;type&quot;: source_info[&quot;type&quot;],
-            &quot;checks_required&quot;: [
-                &quot;code_review&quot;,
-                &quot;automated_tests&quot;,
-                &quot;integration_tests&quot;
-            ],
-            &quot;status&quot;: &quot;pending_review&quot;
-        }
+        <span class="n">merge_request</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">source_branch</span><span class="p">,</span>
+            <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">target_branch</span><span class="p">,</span>
+            <span class="s2">&quot;developer&quot;</span><span class="p">:</span> <span class="n">source_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;developer&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">source_info</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;checks_required&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;code_review&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;automated_tests&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;integration_tests&quot;</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;pending_review&quot;</span>
+        <span class="p">}</span>
 
-        if target_info.get(&quot;protected&quot;, False):
-            merge_request[&quot;checks_required&quot;].append(&quot;admin_approval&quot;)
+        <span class="k">if</span> <span class="n">target_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;protected&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">merge_request</span><span class="p">[</span><span class="s2">&quot;checks_required&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;admin_approval&quot;</span><span class="p">)</span>
 
-        return merge_request
+        <span class="k">return</span> <span class="n">merge_request</span>
 
-# Example usage
-branch_mgr = BranchManager()
+<span class="c1"># Example usage</span>
+<span class="n">branch_mgr</span> <span class="o">=</span> <span class="n">BranchManager</span><span class="p">()</span>
 
-# Create feature branches
-feature_result = branch_mgr.create_feature_branch(&quot;user-dashboard&quot;, &quot;alice&quot;)
-print(f&quot;Feature branch result: {feature_result}&quot;)
+<span class="c1"># Create feature branches</span>
+<span class="n">feature_result</span> <span class="o">=</span> <span class="n">branch_mgr</span><span class="o">.</span><span class="n">create_feature_branch</span><span class="p">(</span><span class="s2">&quot;user-dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;alice&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Feature branch result: </span><span class="si">{</span><span class="n">feature_result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Prepare merge request
-merge_request = branch_mgr.prepare_merge_request(&quot;feature/user-dashboard&quot;, &quot;develop&quot;)
-print(f&quot;Merge request: {merge_request}&quot;)
+<span class="c1"># Prepare merge request</span>
+<span class="n">merge_request</span> <span class="o">=</span> <span class="n">branch_mgr</span><span class="o">.</span><span class="n">prepare_merge_request</span><span class="p">(</span><span class="s2">&quot;feature/user-dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;develop&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Merge request: </span><span class="si">{</span><span class="n">merge_request</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="tagging-and-release-management">Tagging and release management<a class="headerlink" href="#tagging-and-release-management" title="Permanent link">&para;</a></h3>
@@ -1901,81 +1901,81 @@ print(f&quot;Merge request: {merge_request}&quot;)
 </li>
 </ol>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Release management system
-class ReleaseManager:
-    def __init__(self):
-        self.releases = []
-        self.current_version = {&quot;major&quot;: 1, &quot;minor&quot;: 0, &quot;patch&quot;: 0}
+<pre><code class="language-python"><span class="c1"># Example: Release management system</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReleaseManager</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">releases</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_version</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;major&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;minor&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;patch&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
-    def plan_release(self, release_type, features, bug_fixes):
-        &quot;&quot;&quot;Plan a new release based on changes&quot;&quot;&quot;
-        new_version = self.calculate_next_version(release_type, features, bug_fixes)
+    <span class="k">def</span><span class="w"> </span><span class="nf">plan_release</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">release_type</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">bug_fixes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plan a new release based on changes&quot;&quot;&quot;</span>
+        <span class="n">new_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_next_version</span><span class="p">(</span><span class="n">release_type</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">bug_fixes</span><span class="p">)</span>
 
-        release_plan = {
-            &quot;version&quot;: f&quot;{new_version[&#x27;major&#x27;]}.{new_version[&#x27;minor&#x27;]}.{new_version[&#x27;patch&#x27;]}&quot;,
-            &quot;type&quot;: release_type,
-            &quot;features&quot;: features,
-            &quot;bug_fixes&quot;: bug_fixes,
-            &quot;breaking_changes&quot;: release_type == &quot;major&quot;,
-            &quot;release_date&quot;: &quot;2024-04-01&quot;,
-            &quot;status&quot;: &quot;planned&quot;
-        }
+        <span class="n">release_plan</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">new_version</span><span class="p">[</span><span class="s1">&#39;major&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">new_version</span><span class="p">[</span><span class="s1">&#39;minor&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">new_version</span><span class="p">[</span><span class="s1">&#39;patch&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">release_type</span><span class="p">,</span>
+            <span class="s2">&quot;features&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
+            <span class="s2">&quot;bug_fixes&quot;</span><span class="p">:</span> <span class="n">bug_fixes</span><span class="p">,</span>
+            <span class="s2">&quot;breaking_changes&quot;</span><span class="p">:</span> <span class="n">release_type</span> <span class="o">==</span> <span class="s2">&quot;major&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;release_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-01&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;planned&quot;</span>
+        <span class="p">}</span>
 
-        return release_plan
+        <span class="k">return</span> <span class="n">release_plan</span>
 
-    def calculate_next_version(self, release_type, features, bug_fixes):
-        &quot;&quot;&quot;Calculate next version number based on changes&quot;&quot;&quot;
-        new_version = self.current_version.copy()
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_next_version</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">release_type</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">bug_fixes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate next version number based on changes&quot;&quot;&quot;</span>
+        <span class="n">new_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_version</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        if release_type == &quot;major&quot; or any(&quot;breaking&quot; in str(f).lower() for f in features):
-            new_version[&quot;major&quot;] += 1
-            new_version[&quot;minor&quot;] = 0
-            new_version[&quot;patch&quot;] = 0
-        elif release_type == &quot;minor&quot; or features:
-            new_version[&quot;minor&quot;] += 1
-            new_version[&quot;patch&quot;] = 0
-        elif release_type == &quot;patch&quot; or bug_fixes:
-            new_version[&quot;patch&quot;] += 1
+        <span class="k">if</span> <span class="n">release_type</span> <span class="o">==</span> <span class="s2">&quot;major&quot;</span> <span class="ow">or</span> <span class="nb">any</span><span class="p">(</span><span class="s2">&quot;breaking&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">features</span><span class="p">):</span>
+            <span class="n">new_version</span><span class="p">[</span><span class="s2">&quot;major&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">new_version</span><span class="p">[</span><span class="s2">&quot;minor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">new_version</span><span class="p">[</span><span class="s2">&quot;patch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">release_type</span> <span class="o">==</span> <span class="s2">&quot;minor&quot;</span> <span class="ow">or</span> <span class="n">features</span><span class="p">:</span>
+            <span class="n">new_version</span><span class="p">[</span><span class="s2">&quot;minor&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">new_version</span><span class="p">[</span><span class="s2">&quot;patch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">release_type</span> <span class="o">==</span> <span class="s2">&quot;patch&quot;</span> <span class="ow">or</span> <span class="n">bug_fixes</span><span class="p">:</span>
+            <span class="n">new_version</span><span class="p">[</span><span class="s2">&quot;patch&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        return new_version
+        <span class="k">return</span> <span class="n">new_version</span>
 
-    def create_release_tag(self, version, commit_hash, release_notes):
-        &quot;&quot;&quot;Create a release tag with metadata&quot;&quot;&quot;
-        tag_info = {
-            &quot;version&quot;: version,
-            &quot;commit&quot;: commit_hash,
-            &quot;date&quot;: &quot;2024-04-01&quot;,
-            &quot;notes&quot;: release_notes,
-            &quot;artifacts&quot;: [
-                f&quot;student-system-{version}.zip&quot;,
-                f&quot;student-system-{version}-docs.pdf&quot;
-            ]
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_release_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">commit_hash</span><span class="p">,</span> <span class="n">release_notes</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a release tag with metadata&quot;&quot;&quot;</span>
+        <span class="n">tag_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+            <span class="s2">&quot;commit&quot;</span><span class="p">:</span> <span class="n">commit_hash</span><span class="p">,</span>
+            <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-01&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="n">release_notes</span><span class="p">,</span>
+            <span class="s2">&quot;artifacts&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">&quot;student-system-</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">.zip&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">&quot;student-system-</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">-docs.pdf&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
 
-        self.releases.append(tag_info)
-        return tag_info
+        <span class="bp">self</span><span class="o">.</span><span class="n">releases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tag_info</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">tag_info</span>
 
-    def get_release_history(self):
-        &quot;&quot;&quot;Get formatted release history&quot;&quot;&quot;
-        return {
-            &quot;current_version&quot;: f&quot;{self.current_version[&#x27;major&#x27;]}.{self.current_version[&#x27;minor&#x27;]}.{self.current_version[&#x27;patch&#x27;]}&quot;,
-            &quot;total_releases&quot;: len(self.releases),
-            &quot;latest_releases&quot;: self.releases[-3:] if len(self.releases) &gt;= 3 else self.releases
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_release_history</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get formatted release history&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;current_version&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_version</span><span class="p">[</span><span class="s1">&#39;major&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_version</span><span class="p">[</span><span class="s1">&#39;minor&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_version</span><span class="p">[</span><span class="s1">&#39;patch&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;total_releases&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">releases</span><span class="p">),</span>
+            <span class="s2">&quot;latest_releases&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">releases</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">releases</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">3</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">releases</span>
+        <span class="p">}</span>
 
-# Example usage
-release_mgr = ReleaseManager()
+<span class="c1"># Example usage</span>
+<span class="n">release_mgr</span> <span class="o">=</span> <span class="n">ReleaseManager</span><span class="p">()</span>
 
-# Plan a minor release
-features = [&quot;User profile management&quot;, &quot;Grade export functionality&quot;]
-bug_fixes = [&quot;Fix login timeout issue&quot;, &quot;Correct grade calculation error&quot;]
+<span class="c1"># Plan a minor release</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;User profile management&quot;</span><span class="p">,</span> <span class="s2">&quot;Grade export functionality&quot;</span><span class="p">]</span>
+<span class="n">bug_fixes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fix login timeout issue&quot;</span><span class="p">,</span> <span class="s2">&quot;Correct grade calculation error&quot;</span><span class="p">]</span>
 
-release_plan = release_mgr.plan_release(&quot;minor&quot;, features, bug_fixes)
-print(f&quot;Release plan: {release_plan}&quot;)
+<span class="n">release_plan</span> <span class="o">=</span> <span class="n">release_mgr</span><span class="o">.</span><span class="n">plan_release</span><span class="p">(</span><span class="s2">&quot;minor&quot;</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">bug_fixes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Release plan: </span><span class="si">{</span><span class="n">release_plan</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-# Create release tag
-tag_info = release_mgr.create_release_tag(&quot;1.1.0&quot;, &quot;xyz789&quot;, &quot;Added user profiles and grade export&quot;)
-print(f&quot;Release tag created: {tag_info}&quot;)
+<span class="c1"># Create release tag</span>
+<span class="n">tag_info</span> <span class="o">=</span> <span class="n">release_mgr</span><span class="o">.</span><span class="n">create_release_tag</span><span class="p">(</span><span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span> <span class="s2">&quot;xyz789&quot;</span><span class="p">,</span> <span class="s2">&quot;Added user profiles and grade export&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Release tag created: </span><span class="si">{</span><span class="n">tag_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="data-backup-strategies">Data backup strategies<a class="headerlink" href="#data-backup-strategies" title="Permanent link">&para;</a></h3>
@@ -2053,164 +2053,164 @@ print(f&quot;Release tag created: {tag_info}&quot;)
 </li>
 </ul>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Example: Release hygiene checker
-class ReleaseHygiene:
-    def __init__(self):
-        self.checklist = {
-            &quot;code_review&quot;: False,
-            &quot;tests_passing&quot;: False,
-            &quot;documentation_updated&quot;: False,
-            &quot;version_incremented&quot;: False,
-            &quot;changelog_updated&quot;: False,
-            &quot;security_scan&quot;: False,
-            &quot;backup_verified&quot;: False
-        }
+<pre><code class="language-python"><span class="c1"># Example: Release hygiene checker</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReleaseHygiene</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checklist</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;code_review&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;tests_passing&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;documentation_updated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;version_incremented&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;changelog_updated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;security_scan&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;backup_verified&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">}</span>
 
-    def check_release_readiness(self, project_status):
-        &quot;&quot;&quot;Verify all release criteria are met&quot;&quot;&quot;
-        for check, status in project_status.items():
-            if check in self.checklist:
-                self.checklist[check] = status
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_release_readiness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_status</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify all release criteria are met&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">check</span><span class="p">,</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">project_status</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">check</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">checklist</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">checklist</span><span class="p">[</span><span class="n">check</span><span class="p">]</span> <span class="o">=</span> <span class="n">status</span>
 
-        passed_checks = sum(self.checklist.values())
-        total_checks = len(self.checklist)
+        <span class="n">passed_checks</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checklist</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">total_checks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checklist</span><span class="p">)</span>
 
-        result = {
-            &quot;ready_for_release&quot;: passed_checks == total_checks,
-            &quot;checks_passed&quot;: passed_checks,
-            &quot;total_checks&quot;: total_checks,
-            &quot;missing_requirements&quot;: [
-                check for check, status in self.checklist.items() if not status
-            ]
-        }
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;ready_for_release&quot;</span><span class="p">:</span> <span class="n">passed_checks</span> <span class="o">==</span> <span class="n">total_checks</span><span class="p">,</span>
+            <span class="s2">&quot;checks_passed&quot;</span><span class="p">:</span> <span class="n">passed_checks</span><span class="p">,</span>
+            <span class="s2">&quot;total_checks&quot;</span><span class="p">:</span> <span class="n">total_checks</span><span class="p">,</span>
+            <span class="s2">&quot;missing_requirements&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="n">check</span> <span class="k">for</span> <span class="n">check</span><span class="p">,</span> <span class="n">status</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">checklist</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">status</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
 
-        return result
+        <span class="k">return</span> <span class="n">result</span>
 
-    def generate_release_report(self, version, artifacts):
-        &quot;&quot;&quot;Generate comprehensive release report&quot;&quot;&quot;
-        report = {
-            &quot;version&quot;: version,
-            &quot;release_date&quot;: &quot;2024-04-01&quot;,
-            &quot;artifacts&quot;: artifacts,
-            &quot;quality_checks&quot;: self.checklist,
-            &quot;deployment_instructions&quot;: [
-                &quot;Download release artifacts&quot;,
-                &quot;Verify checksums&quot;,
-                &quot;Stop existing services&quot;,
-                &quot;Deploy new version&quot;,
-                &quot;Run post-deployment tests&quot;,
-                &quot;Monitor system health&quot;
-            ]
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_release_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">artifacts</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate comprehensive release report&quot;&quot;&quot;</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
+            <span class="s2">&quot;release_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-01&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;artifacts&quot;</span><span class="p">:</span> <span class="n">artifacts</span><span class="p">,</span>
+            <span class="s2">&quot;quality_checks&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">checklist</span><span class="p">,</span>
+            <span class="s2">&quot;deployment_instructions&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&quot;Download release artifacts&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Verify checksums&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Stop existing services&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Deploy new version&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Run post-deployment tests&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Monitor system health&quot;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
 
-        return report
+        <span class="k">return</span> <span class="n">report</span>
 
-# Example usage
-hygiene_checker = ReleaseHygiene()
+<span class="c1"># Example usage</span>
+<span class="n">hygiene_checker</span> <span class="o">=</span> <span class="n">ReleaseHygiene</span><span class="p">()</span>
 
-# Check project status
-project_status = {
-    &quot;code_review&quot;: True,
-    &quot;tests_passing&quot;: True,
-    &quot;documentation_updated&quot;: True,
-    &quot;version_incremented&quot;: True,
-    &quot;changelog_updated&quot;: False,
-    &quot;security_scan&quot;: True,
-    &quot;backup_verified&quot;: True
-}
+<span class="c1"># Check project status</span>
+<span class="n">project_status</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;code_review&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;tests_passing&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;documentation_updated&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;version_incremented&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;changelog_updated&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s2">&quot;security_scan&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">&quot;backup_verified&quot;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
 
-readiness = hygiene_checker.check_release_readiness(project_status)
-print(f&quot;Release readiness: {readiness}&quot;)
+<span class="n">readiness</span> <span class="o">=</span> <span class="n">hygiene_checker</span><span class="o">.</span><span class="n">check_release_readiness</span><span class="p">(</span><span class="n">project_status</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Release readiness: </span><span class="si">{</span><span class="n">readiness</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-if readiness[&quot;ready_for_release&quot;]:
-    artifacts = [&quot;app-v1.1.0.zip&quot;, &quot;docs-v1.1.0.pdf&quot;, &quot;installer-v1.1.0.exe&quot;]
-    report = hygiene_checker.generate_release_report(&quot;1.1.0&quot;, artifacts)
-    print(f&quot;Release report generated for version {report[&#x27;version&#x27;]}&quot;)
+<span class="k">if</span> <span class="n">readiness</span><span class="p">[</span><span class="s2">&quot;ready_for_release&quot;</span><span class="p">]:</span>
+    <span class="n">artifacts</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;app-v1.1.0.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;docs-v1.1.0.pdf&quot;</span><span class="p">,</span> <span class="s2">&quot;installer-v1.1.0.exe&quot;</span><span class="p">]</span>
+    <span class="n">report</span> <span class="o">=</span> <span class="n">hygiene_checker</span><span class="o">.</span><span class="n">generate_release_report</span><span class="p">(</span><span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span> <span class="n">artifacts</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Release report generated for version </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;version&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="guided-example-setting-up-version-control-for-a-school-project">Guided example: Setting up version control for a school project<a class="headerlink" href="#guided-example-setting-up-version-control-for-a-school-project" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s walk through establishing version control and backup procedures for a school management system:</p>
 <p><strong>Step 1: Repository setup</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Initialize project repository structure
-project_structure = {
-    &quot;student_management/&quot;: {
-        &quot;src/&quot;: [&quot;models/&quot;, &quot;controllers/&quot;, &quot;views/&quot;],
-        &quot;tests/&quot;: [&quot;unit/&quot;, &quot;integration/&quot;],
-        &quot;docs/&quot;: [&quot;api/&quot;, &quot;user_guide/&quot;],
-        &quot;scripts/&quot;: [&quot;deploy/&quot;, &quot;backup/&quot;],
-        &quot;config/&quot;: [&quot;development.py&quot;, &quot;production.py&quot;]
-    }
-}
+<pre><code class="language-python"><span class="c1"># Initialize project repository structure</span>
+<span class="n">project_structure</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;student_management/&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;src/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;models/&quot;</span><span class="p">,</span> <span class="s2">&quot;controllers/&quot;</span><span class="p">,</span> <span class="s2">&quot;views/&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;tests/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;unit/&quot;</span><span class="p">,</span> <span class="s2">&quot;integration/&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;docs/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;api/&quot;</span><span class="p">,</span> <span class="s2">&quot;user_guide/&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;scripts/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;deploy/&quot;</span><span class="p">,</span> <span class="s2">&quot;backup/&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;config/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;development.py&quot;</span><span class="p">,</span> <span class="s2">&quot;production.py&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-def setup_git_repository(project_name):
-    &quot;&quot;&quot;Set up Git repository with initial structure&quot;&quot;&quot;
-    repo_config = {
-        &quot;project&quot;: project_name,
-        &quot;initial_branch&quot;: &quot;main&quot;,
-        &quot;branches&quot;: [&quot;main&quot;, &quot;develop&quot;],
-        &quot;gitignore&quot;: [
-            &quot;*.pyc&quot;,
-            &quot;__pycache__/&quot;,
-            &quot;.env&quot;,
-            &quot;config/secrets.py&quot;,
-            &quot;logs/*.log&quot;
-        ],
-        &quot;initial_commit&quot;: &quot;Initial project structure&quot;
-    }
-    return repo_config
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_git_repository</span><span class="p">(</span><span class="n">project_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up Git repository with initial structure&quot;&quot;&quot;</span>
+    <span class="n">repo_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
+        <span class="s2">&quot;initial_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;branches&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;develop&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;gitignore&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;*.pyc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;__pycache__/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.env&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;config/secrets.py&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;logs/*.log&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;initial_commit&quot;</span><span class="p">:</span> <span class="s2">&quot;Initial project structure&quot;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">repo_config</span>
 </code></pre>
 </div>
 <p><strong>Step 2: Branching strategy implementation</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Define branching workflow
-branching_workflow = {
-    &quot;main&quot;: {
-        &quot;purpose&quot;: &quot;Production-ready code&quot;,
-        &quot;protection&quot;: &quot;Requires pull request and approval&quot;,
-        &quot;auto_deploy&quot;: True
-    },
-    &quot;develop&quot;: {
-        &quot;purpose&quot;: &quot;Integration of new features&quot;,
-        &quot;protection&quot;: &quot;Requires automated tests to pass&quot;,
-        &quot;auto_deploy&quot;: False
-    },
-    &quot;feature/*&quot;: {
-        &quot;purpose&quot;: &quot;Individual feature development&quot;,
-        &quot;base&quot;: &quot;develop&quot;,
-        &quot;merge_target&quot;: &quot;develop&quot;,
-        &quot;lifetime&quot;: &quot;Until feature complete&quot;
-    },
-    &quot;hotfix/*&quot;: {
-        &quot;purpose&quot;: &quot;Critical production fixes&quot;,
-        &quot;base&quot;: &quot;main&quot;,
-        &quot;merge_target&quot;: &quot;main&quot;,
-        &quot;lifetime&quot;: &quot;Until fix deployed&quot;
-    }
-}
+<pre><code class="language-python"><span class="c1"># Define branching workflow</span>
+<span class="n">branching_workflow</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Production-ready code&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;protection&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires pull request and approval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;auto_deploy&quot;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;develop&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Integration of new features&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;protection&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires automated tests to pass&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;auto_deploy&quot;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;feature/*&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Individual feature development&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="s2">&quot;Until feature complete&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;hotfix/*&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Critical production fixes&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="s2">&quot;Until fix deployed&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 </div>
 <p><strong>Step 3: Backup and release process</strong></p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"># Automated backup and release process
-def create_backup_strategy():
-    return {
-        &quot;frequency&quot;: {
-            &quot;code_backup&quot;: &quot;On every commit&quot;,
-            &quot;database_backup&quot;: &quot;Daily at 2 AM&quot;,
-            &quot;full_system_backup&quot;: &quot;Weekly on Sunday&quot;
-        },
-        &quot;locations&quot;: {
-            &quot;primary&quot;: &quot;GitHub repository&quot;,
-            &quot;secondary&quot;: &quot;School network drive&quot;,
-            &quot;tertiary&quot;: &quot;Cloud backup service&quot;
-        },
-        &quot;retention&quot;: {
-            &quot;daily_backups&quot;: &quot;30 days&quot;,
-            &quot;weekly_backups&quot;: &quot;6 months&quot;,
-            &quot;release_archives&quot;: &quot;Indefinite&quot;
-        }
-    }
+<pre><code class="language-python"><span class="c1"># Automated backup and release process</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_backup_strategy</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;code_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;On every commit&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;database_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;Daily at 2 AM&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;full_system_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;Weekly on Sunday&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;locations&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;GitHub repository&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;School network drive&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tertiary&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud backup service&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;retention&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;daily_backups&quot;</span><span class="p">:</span> <span class="s2">&quot;30 days&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weekly_backups&quot;</span><span class="p">:</span> <span class="s2">&quot;6 months&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;release_archives&quot;</span><span class="p">:</span> <span class="s2">&quot;Indefinite&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 </code></pre>
 </div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
@@ -2636,6 +2636,8 @@ def create_backup_strategy():
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

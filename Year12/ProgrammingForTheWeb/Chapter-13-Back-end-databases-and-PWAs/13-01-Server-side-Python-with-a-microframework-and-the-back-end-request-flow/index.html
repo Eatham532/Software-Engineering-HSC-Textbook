@@ -1674,191 +1674,191 @@
 <h3 id="safe-input-handling-patterns">Safe input handling patterns<a class="headerlink" href="#safe-input-handling-patterns" title="Permanent link">&para;</a></h3>
 <p>Proper input validation and sanitization prevents security vulnerabilities:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Advanced input handling and validation
-from flask import Flask, request, escape
-import re
-import html
-from werkzeug.security import generate_password_hash, check_password_hash
+<pre><code class="language-python"><span class="c1"># Advanced input handling and validation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">escape</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">html</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
 
-class InputValidator:
-    &quot;&quot;&quot;Centralized input validation and sanitization&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">InputValidator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Centralized input validation and sanitization&quot;&quot;&quot;</span>
 
-    @staticmethod
-    def validate_username(username):
-        &quot;&quot;&quot;Validate username format and length&quot;&quot;&quot;
-        if not username or not isinstance(username, str):
-            return False, &quot;Username is required&quot;
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_username</span><span class="p">(</span><span class="n">username</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate username format and length&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Username is required&quot;</span>
 
-        username = username.strip()
-        if len(username) &lt; 3 or len(username) &gt; 20:
-            return False, &quot;Username must be between 3 and 20 characters&quot;
+        <span class="n">username</span> <span class="o">=</span> <span class="n">username</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">username</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Username must be between 3 and 20 characters&quot;</span>
 
-        if not re.match(r&#x27;^[a-zA-Z0-9_]+$&#x27;, username):
-            return False, &quot;Username can only contain letters, numbers, and underscores&quot;
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9_]+$&#39;</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Username can only contain letters, numbers, and underscores&quot;</span>
 
-        return True, username
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">username</span>
 
-    @staticmethod
-    def validate_email(email):
-        &quot;&quot;&quot;Validate email format&quot;&quot;&quot;
-        if not email or not isinstance(email, str):
-            return False, &quot;Email is required&quot;
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate email format&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Email is required&quot;</span>
 
-        email = email.strip().lower()
-        email_pattern = r&#x27;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&#x27;
+        <span class="n">email</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">email_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$&#39;</span>
 
-        if not re.match(email_pattern, email):
-            return False, &quot;Please enter a valid email address&quot;
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">email_pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Please enter a valid email address&quot;</span>
 
-        if len(email) &gt; 254:  # RFC 5321 limit
-            return False, &quot;Email address is too long&quot;
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">254</span><span class="p">:</span>  <span class="c1"># RFC 5321 limit</span>
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Email address is too long&quot;</span>
 
-        return True, email
+        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="n">email</span>
 
-    @staticmethod
-    def sanitize_html_content(content):
-        &quot;&quot;&quot;Sanitize HTML content to prevent XSS&quot;&quot;&quot;
-        if not content:
-            return &quot;&quot;
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sanitize_html_content</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sanitize HTML content to prevent XSS&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">content</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
-        # Escape HTML characters
-        sanitized = html.escape(content)
+        <span class="c1"># Escape HTML characters</span>
+        <span class="n">sanitized</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
-        # Allow only specific tags (basic implementation)
-        allowed_tags = [&#x27;p&#x27;, &#x27;br&#x27;, &#x27;strong&#x27;, &#x27;em&#x27;, &#x27;ul&#x27;, &#x27;ol&#x27;, &#x27;li&#x27;]
-        # In production, use a library like bleach for proper HTML sanitization
+        <span class="c1"># Allow only specific tags (basic implementation)</span>
+        <span class="n">allowed_tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;br&#39;</span><span class="p">,</span> <span class="s1">&#39;strong&#39;</span><span class="p">,</span> <span class="s1">&#39;em&#39;</span><span class="p">,</span> <span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="s1">&#39;ol&#39;</span><span class="p">,</span> <span class="s1">&#39;li&#39;</span><span class="p">]</span>
+        <span class="c1"># In production, use a library like bleach for proper HTML sanitization</span>
 
-        return sanitized
+        <span class="k">return</span> <span class="n">sanitized</span>
 
-    @staticmethod
-    def validate_post_content(title, content):
-        &quot;&quot;&quot;Validate blog post content&quot;&quot;&quot;
-        errors = []
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_post_content</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate blog post content&quot;&quot;&quot;</span>
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if not title or len(title.strip()) &lt; 3:
-            errors.append(&quot;Title must be at least 3 characters&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">title</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Title must be at least 3 characters&quot;</span><span class="p">)</span>
 
-        if len(title.strip()) &gt; 200:
-            errors.append(&quot;Title cannot exceed 200 characters&quot;)
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Title cannot exceed 200 characters&quot;</span><span class="p">)</span>
 
-        if not content or len(content.strip()) &lt; 10:
-            errors.append(&quot;Content must be at least 10 characters&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">content</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Content must be at least 10 characters&quot;</span><span class="p">)</span>
 
-        if len(content.strip()) &gt; 10000:
-            errors.append(&quot;Content cannot exceed 10,000 characters&quot;)
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">10000</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Content cannot exceed 10,000 characters&quot;</span><span class="p">)</span>
 
-        return len(errors) == 0, errors
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">errors</span>
 
-# Enhanced Flask app with proper input handling
-app = Flask(__name__)
-validator = InputValidator()
+<span class="c1"># Enhanced Flask app with proper input handling</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">validator</span> <span class="o">=</span> <span class="n">InputValidator</span><span class="p">()</span>
 
-@app.route(&#x27;/secure-register&#x27;, methods=[&#x27;GET&#x27;, &#x27;POST&#x27;])
-def secure_register():
-    &quot;&quot;&quot;Demonstration of secure user registration&quot;&quot;&quot;
-    if request.method == &#x27;POST&#x27;:
-        # Get and validate input
-        username_valid, username_result = validator.validate_username(
-            request.form.get(&#x27;username&#x27;)
-        )
-        email_valid, email_result = validator.validate_email(
-            request.form.get(&#x27;email&#x27;)
-        )
-        password = request.form.get(&#x27;password&#x27;, &#x27;&#x27;)
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/secure-register&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">secure_register</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstration of secure user registration&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="c1"># Get and validate input</span>
+        <span class="n">username_valid</span><span class="p">,</span> <span class="n">username_result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_username</span><span class="p">(</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">email_valid</span><span class="p">,</span> <span class="n">email_result</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_email</span><span class="p">(</span>
+            <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
-        errors = []
+        <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 
-        if not username_valid:
-            errors.append(username_result)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">username_valid</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">username_result</span><span class="p">)</span>
 
-        if not email_valid:
-            errors.append(email_result)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email_valid</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">email_result</span><span class="p">)</span>
 
-        # Password validation
-        if len(password) &lt; 8:
-            errors.append(&quot;Password must be at least 8 characters&quot;)
+        <span class="c1"># Password validation</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password must be at least 8 characters&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;[A-Z]&#x27;, password):
-            errors.append(&quot;Password must contain at least one uppercase letter&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[A-Z]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password must contain at least one uppercase letter&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;[a-z]&#x27;, password):
-            errors.append(&quot;Password must contain at least one lowercase letter&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[a-z]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password must contain at least one lowercase letter&quot;</span><span class="p">)</span>
 
-        if not re.search(r&#x27;\d&#x27;, password):
-            errors.append(&quot;Password must contain at least one number&quot;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+            <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Password must contain at least one number&quot;</span><span class="p">)</span>
 
-        if errors:
-            flash(&#x27;Registration failed: &#x27; + &#x27;; &#x27;.join(errors), &#x27;error&#x27;)
-            return render_template(&#x27;secure_register.html&#x27;)
+        <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Registration failed: &#39;</span> <span class="o">+</span> <span class="s1">&#39;; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">errors</span><span class="p">),</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;secure_register.html&#39;</span><span class="p">)</span>
 
-        # Hash password securely
-        password_hash = generate_password_hash(password)
+        <span class="c1"># Hash password securely</span>
+        <span class="n">password_hash</span> <span class="o">=</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
 
-        # Database insertion with proper error handling
-        try:
-            conn = sqlite3.connect(DATABASE)
-            cursor = conn.cursor()
-            cursor.execute(
-                &#x27;INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)&#x27;,
-                (username_result, email_result, password_hash)
-            )
-            conn.commit()
-            conn.close()
+        <span class="c1"># Database insertion with proper error handling</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DATABASE</span><span class="p">)</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s1">&#39;INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">username_result</span><span class="p">,</span> <span class="n">email_result</span><span class="p">,</span> <span class="n">password_hash</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-            flash(&#x27;Registration successful!&#x27;, &#x27;success&#x27;)
-            return redirect(url_for(&#x27;index&#x27;))
+            <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Registration successful!&#39;</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
 
-        except sqlite3.IntegrityError as e:
-            flash(&#x27;Username or email already exists&#x27;, &#x27;error&#x27;)
-            return render_template(&#x27;secure_register.html&#x27;)
-        except Exception as e:
-            app.logger.error(f&#x27;Registration error: {e}&#x27;)
-            flash(&#x27;Registration failed. Please try again.&#x27;, &#x27;error&#x27;)
-            return render_template(&#x27;secure_register.html&#x27;)
+        <span class="k">except</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">IntegrityError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Username or email already exists&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;secure_register.html&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Registration error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Registration failed. Please try again.&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;secure_register.html&#39;</span><span class="p">)</span>
 
-    return render_template(&#x27;secure_register.html&#x27;)
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;secure_register.html&#39;</span><span class="p">)</span>
 
-@app.route(&#x27;/create-post&#x27;, methods=[&#x27;GET&#x27;, &#x27;POST&#x27;])
-def create_post():
-    &quot;&quot;&quot;Secure blog post creation with content sanitization&quot;&quot;&quot;
-    if &#x27;username&#x27; not in session:
-        flash(&#x27;Please log in to create posts&#x27;, &#x27;error&#x27;)
-        return redirect(url_for(&#x27;login&#x27;))
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/create-post&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_post</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Secure blog post creation with content sanitization&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s1">&#39;username&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Please log in to create posts&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">))</span>
 
-    if request.method == &#x27;POST&#x27;:
-        title = request.form.get(&#x27;title&#x27;, &#x27;&#x27;).strip()
-        content = request.form.get(&#x27;content&#x27;, &#x27;&#x27;).strip()
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
-        # Validate content
-        valid, errors = validator.validate_post_content(title, content)
+        <span class="c1"># Validate content</span>
+        <span class="n">valid</span><span class="p">,</span> <span class="n">errors</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">validate_post_content</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
 
-        if not valid:
-            for error in errors:
-                flash(error, &#x27;error&#x27;)
-            return render_template(&#x27;create_post.html&#x27;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                <span class="n">flash</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;create_post.html&#39;</span><span class="p">)</span>
 
-        # Sanitize content
-        safe_title = validator.sanitize_html_content(title)
-        safe_content = validator.sanitize_html_content(content)
+        <span class="c1"># Sanitize content</span>
+        <span class="n">safe_title</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">sanitize_html_content</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="n">safe_content</span> <span class="o">=</span> <span class="n">validator</span><span class="o">.</span><span class="n">sanitize_html_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
-        # Get user ID
-        conn = sqlite3.connect(DATABASE)
-        cursor = conn.cursor()
-        cursor.execute(&#x27;SELECT id FROM users WHERE username = ?&#x27;, (session[&#x27;username&#x27;],))
-        user = cursor.fetchone()
+        <span class="c1"># Get user ID</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">DATABASE</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT id FROM users WHERE username = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],))</span>
+        <span class="n">user</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 
-        if user:
-            cursor.execute(
-                &#x27;INSERT INTO posts (title, content, author_id) VALUES (?, ?, ?)&#x27;,
-                (safe_title, safe_content, user[0])
-            )
-            conn.commit()
-            flash(&#x27;Post created successfully!&#x27;, &#x27;success&#x27;)
+        <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+                <span class="s1">&#39;INSERT INTO posts (title, content, author_id) VALUES (?, ?, ?)&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">safe_title</span><span class="p">,</span> <span class="n">safe_content</span><span class="p">,</span> <span class="n">user</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="n">flash</span><span class="p">(</span><span class="s1">&#39;Post created successfully!&#39;</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">)</span>
 
-        conn.close()
-        return redirect(url_for(&#x27;index&#x27;))
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
 
-    return render_template(&#x27;create_post.html&#x27;)
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;create_post.html&#39;</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="the-complete-back-end-request-flow">The complete back-end request flow<a class="headerlink" href="#the-complete-back-end-request-flow" title="Permanent link">&para;</a></h3>
@@ -1867,118 +1867,118 @@ def create_post():
 <h4 id="role-of-web-server-software">Role of web server software<a class="headerlink" href="#role-of-web-server-software" title="Permanent link">&para;</a></h4>
 <p>Web servers handle different aspects of request processing:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Demonstration of web server concepts in Flask context
-import time
-import os
-from flask import Flask, send_from_directory, request, jsonify, make_response
+<pre><code class="language-python"><span class="c1"># Demonstration of web server concepts in Flask context</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">send_from_directory</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">make_response</span>
 
-app = Flask(__name__)
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-# Simulate web server static file handling
-@app.route(&#x27;/static/&lt;path:filename&gt;&#x27;)
-def serve_static(filename):
-    &quot;&quot;&quot;
-    Demonstrate static file serving
-    In production, web server (nginx/Apache) handles this directly
-    &quot;&quot;&quot;
-    static_dir = os.path.join(app.root_path, &#x27;static&#x27;)
+<span class="c1"># Simulate web server static file handling</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/static/&lt;path:filename&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">serve_static</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Demonstrate static file serving</span>
+<span class="sd">    In production, web server (nginx/Apache) handles this directly</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">static_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">&#39;static&#39;</span><span class="p">)</span>
 
-    # Simulate web server behavior
-    file_path = os.path.join(static_dir, filename)
+    <span class="c1"># Simulate web server behavior</span>
+    <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">static_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
 
-    if os.path.exists(file_path):
-        # Get file info for headers
-        stat = os.stat(file_path)
-        last_modified = time.strftime(&#x27;%a, %d %b %Y %H:%M:%S GMT&#x27;, 
-                                    time.gmtime(stat.st_mtime))
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+        <span class="c1"># Get file info for headers</span>
+        <span class="n">stat</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="n">last_modified</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%a</span><span class="s1">, </span><span class="si">%d</span><span class="s1"> %b %Y %H:%M:%S GMT&#39;</span><span class="p">,</span> 
+                                    <span class="n">time</span><span class="o">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">stat</span><span class="o">.</span><span class="n">st_mtime</span><span class="p">))</span>
 
-        # Create response with appropriate headers
-        response = make_response(send_from_directory(static_dir, filename))
-        response.headers[&#x27;Last-Modified&#x27;] = last_modified
-        response.headers[&#x27;Cache-Control&#x27;] = &#x27;public, max-age=31536000&#x27;  # 1 year
+        <span class="c1"># Create response with appropriate headers</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">send_from_directory</span><span class="p">(</span><span class="n">static_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">))</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Last-Modified&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">last_modified</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;public, max-age=31536000&#39;</span>  <span class="c1"># 1 year</span>
 
-        # Check for conditional requests (like browsers do)
-        if request.headers.get(&#x27;If-Modified-Since&#x27;) == last_modified:
-            return &#x27;&#x27;, 304  # Not Modified
+        <span class="c1"># Check for conditional requests (like browsers do)</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;If-Modified-Since&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">last_modified</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">304</span>  <span class="c1"># Not Modified</span>
 
-        return response
-    else:
-        return &#x27;File not found&#x27;, 404
+        <span class="k">return</span> <span class="n">response</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;File not found&#39;</span><span class="p">,</span> <span class="mi">404</span>
 
-# Simulate different types of content handling
-@app.route(&#x27;/api/server-info&#x27;)
-def server_info():
-    &quot;&quot;&quot;Demonstrate dynamic content generation&quot;&quot;&quot;
-    return jsonify({
-        &#x27;server_type&#x27;: &#x27;Flask Development Server&#x27;,
-        &#x27;static_handling&#x27;: &#x27;Application handles static files in development&#x27;,
-        &#x27;production_note&#x27;: &#x27;In production, web server handles static files directly&#x27;,
-        &#x27;request_info&#x27;: {
-            &#x27;method&#x27;: request.method,
-            &#x27;path&#x27;: request.path,
-            &#x27;user_agent&#x27;: request.headers.get(&#x27;User-Agent&#x27;),
-            &#x27;remote_addr&#x27;: request.remote_addr
-        },
-        &#x27;server_capabilities&#x27;: {
-            &#x27;static_files&#x27;: &#x27;Served by web server (nginx/Apache)&#x27;,
-            &#x27;dynamic_content&#x27;: &#x27;Forwarded to application server&#x27;,
-            &#x27;ssl_termination&#x27;: &#x27;Handled by web server&#x27;,
-            &#x27;compression&#x27;: &#x27;Gzip/Brotli by web server&#x27;,
-            &#x27;caching&#x27;: &#x27;Headers set by application, caching by web server&#x27;
-        }
-    })
+<span class="c1"># Simulate different types of content handling</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/server-info&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">server_info</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate dynamic content generation&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;server_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Flask Development Server&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;static_handling&#39;</span><span class="p">:</span> <span class="s1">&#39;Application handles static files in development&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;production_note&#39;</span><span class="p">:</span> <span class="s1">&#39;In production, web server handles static files directly&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;request_info&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+            <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+            <span class="s1">&#39;user_agent&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;remote_addr&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;server_capabilities&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;static_files&#39;</span><span class="p">:</span> <span class="s1">&#39;Served by web server (nginx/Apache)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dynamic_content&#39;</span><span class="p">:</span> <span class="s1">&#39;Forwarded to application server&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ssl_termination&#39;</span><span class="p">:</span> <span class="s1">&#39;Handled by web server&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;compression&#39;</span><span class="p">:</span> <span class="s1">&#39;Gzip/Brotli by web server&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;caching&#39;</span><span class="p">:</span> <span class="s1">&#39;Headers set by application, caching by web server&#39;</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
 
-# Demonstrate middleware concept
-class RequestLoggingMiddleware:
-    &quot;&quot;&quot;Simple middleware to log requests&quot;&quot;&quot;
+<span class="c1"># Demonstrate middleware concept</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RequestLoggingMiddleware</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simple middleware to log requests&quot;&quot;&quot;</span>
 
-    def __init__(self, app):
-        self.app = app
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
 
-    def __call__(self, environ, start_response):
-        # Pre-processing
-        start_time = time.time()
-        method = environ.get(&#x27;REQUEST_METHOD&#x27;)
-        path = environ.get(&#x27;PATH_INFO&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="c1"># Pre-processing</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;REQUEST_METHOD&#39;</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;PATH_INFO&#39;</span><span class="p">)</span>
 
-        print(f&quot;[{time.strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)}] {method} {path} - Processing...&quot;)
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> - Processing...&quot;</span><span class="p">)</span>
 
-        # Call the actual application
-        def new_start_response(status, headers):
-            # Post-processing
-            duration = time.time() - start_time
-            print(f&quot;[{time.strftime(&#x27;%Y-%m-%d %H:%M:%S&#x27;)}] {method} {path} - {status} - {duration:.3f}s&quot;)
-            return start_response(status, headers)
+        <span class="c1"># Call the actual application</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">new_start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">):</span>
+            <span class="c1"># Post-processing</span>
+            <span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">duration</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
 
-        return self.app(environ, new_start_response)
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">new_start_response</span><span class="p">)</span>
 
-# Apply middleware
-app.wsgi_app = RequestLoggingMiddleware(app.wsgi_app)
+<span class="c1"># Apply middleware</span>
+<span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">RequestLoggingMiddleware</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">)</span>
 
-# Demonstrate connection handling concepts
-@app.route(&#x27;/connection-info&#x27;)
-def connection_info():
-    &quot;&quot;&quot;Show information about the connection and request&quot;&quot;&quot;
-    return jsonify({
-        &#x27;connection_handling&#x27;: {
-            &#x27;socket_creation&#x27;: &#x27;Web server accepts TCP connections&#x27;,
-            &#x27;http_parsing&#x27;: &#x27;Web server parses HTTP request&#x27;,
-            &#x27;keep_alive&#x27;: &#x27;Web server manages connection reuse&#x27;,
-            &#x27;timeout_handling&#x27;: &#x27;Web server enforces request timeouts&#x27;
-        },
-        &#x27;request_processing&#x27;: {
-            &#x27;static_check&#x27;: &#x27;Web server checks if request is for static file&#x27;,
-            &#x27;proxy_decision&#x27;: &#x27;If dynamic, proxy to application server&#x27;,
-            &#x27;wsgi_interface&#x27;: &#x27;Application server uses WSGI to call Python app&#x27;,
-            &#x27;response_building&#x27;: &#x27;Application builds response, sent back through chain&#x27;
-        },
-        &#x27;current_request&#x27;: {
-            &#x27;headers&#x27;: dict(request.headers),
-            &#x27;method&#x27;: request.method,
-            &#x27;url&#x27;: request.url,
-            &#x27;remote_addr&#x27;: request.remote_addr
-        }
-    })
+<span class="c1"># Demonstrate connection handling concepts</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/connection-info&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">connection_info</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show information about the connection and request&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;connection_handling&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;socket_creation&#39;</span><span class="p">:</span> <span class="s1">&#39;Web server accepts TCP connections&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;http_parsing&#39;</span><span class="p">:</span> <span class="s1">&#39;Web server parses HTTP request&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;keep_alive&#39;</span><span class="p">:</span> <span class="s1">&#39;Web server manages connection reuse&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;timeout_handling&#39;</span><span class="p">:</span> <span class="s1">&#39;Web server enforces request timeouts&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;request_processing&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;static_check&#39;</span><span class="p">:</span> <span class="s1">&#39;Web server checks if request is for static file&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;proxy_decision&#39;</span><span class="p">:</span> <span class="s1">&#39;If dynamic, proxy to application server&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;wsgi_interface&#39;</span><span class="p">:</span> <span class="s1">&#39;Application server uses WSGI to call Python app&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;response_building&#39;</span><span class="p">:</span> <span class="s1">&#39;Application builds response, sent back through chain&#39;</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;current_request&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="p">),</span>
+            <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+            <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
+            <span class="s1">&#39;remote_addr&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
 </code></pre>
 </div>
 <h4 id="web-framework-request-handling">Web framework request handling<a class="headerlink" href="#web-framework-request-handling" title="Permanent link">&para;</a></h4>
@@ -2180,615 +2180,615 @@ def connection_info():
 <h3 id="objects-and-libraries-used-in-request-processing">Objects and libraries used in request processing<a class="headerlink" href="#objects-and-libraries-used-in-request-processing" title="Permanent link">&para;</a></h3>
 <p>Modern web applications rely on various objects and libraries for request handling:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Comprehensive example of request processing objects and libraries
-from flask import Flask, request, session, g, jsonify
-from werkzeug.middleware.proxy_fix import ProxyFix
-from werkzeug.security import generate_password_hash, check_password_hash
-import jwt
-import redis
-import logging
-from datetime import datetime, timedelta
-import os
+<pre><code class="language-python"><span class="c1"># Comprehensive example of request processing objects and libraries</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">jsonify</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.middleware.proxy_fix</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProxyFix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">werkzeug.security</span><span class="w"> </span><span class="kn">import</span> <span class="n">generate_password_hash</span><span class="p">,</span> <span class="n">check_password_hash</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jwt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">redis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-app = Flask(__name__)
-app.secret_key = os.environ.get(&#x27;SECRET_KEY&#x27;, &#x27;dev-secret-key&#x27;)
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;dev-secret-key&#39;</span><span class="p">)</span>
 
-# Configure for production behind proxy
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+<span class="c1"># Configure for production behind proxy</span>
+<span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span> <span class="o">=</span> <span class="n">ProxyFix</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">wsgi_app</span><span class="p">,</span> <span class="n">x_for</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_proto</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_host</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_prefix</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-# Session configuration for production
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE=&#x27;Lax&#x27;,
-    PERMANENT_SESSION_LIFETIME=timedelta(hours=24)
-)
+<span class="c1"># Session configuration for production</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="n">SESSION_COOKIE_SECURE</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">SESSION_COOKIE_HTTPONLY</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">SESSION_COOKIE_SAMESITE</span><span class="o">=</span><span class="s1">&#39;Lax&#39;</span><span class="p">,</span>
+    <span class="n">PERMANENT_SESSION_LIFETIME</span><span class="o">=</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="p">)</span>
 
-# Redis for session storage and caching
-try:
-    redis_client = redis.Redis(host=&#x27;localhost&#x27;, port=6379, db=0, decode_responses=True)
-    redis_available = True
-except:
-    redis_available = False
-    app.logger.warning(&#x27;Redis not available, using in-memory storage&#x27;)
+<span class="c1"># Redis for session storage and caching</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">redis_client</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">decode_responses</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">redis_available</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">redis_available</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Redis not available, using in-memory storage&#39;</span><span class="p">)</span>
 
-class SessionManager:
-    &quot;&quot;&quot;Enhanced session management with Redis backend&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">SessionManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced session management with Redis backend&quot;&quot;&quot;</span>
 
-    @staticmethod
-    def create_session(user_id, username):
-        &quot;&quot;&quot;Create a new user session&quot;&quot;&quot;
-        session_data = {
-            &#x27;user_id&#x27;: user_id,
-            &#x27;username&#x27;: username,
-            &#x27;created_at&#x27;: datetime.utcnow().isoformat(),
-            &#x27;last_activity&#x27;: datetime.utcnow().isoformat()
-        }
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_session</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new user session&quot;&quot;&quot;</span>
+        <span class="n">session_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+            <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;last_activity&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="p">}</span>
 
-        if redis_available:
-            # Store in Redis with expiration
-            session_key = f&#x27;session:{user_id}&#x27;
-            redis_client.hmset(session_key, session_data)
-            redis_client.expire(session_key, 86400)  # 24 hours
+        <span class="k">if</span> <span class="n">redis_available</span><span class="p">:</span>
+            <span class="c1"># Store in Redis with expiration</span>
+            <span class="n">session_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;session:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">redis_client</span><span class="o">.</span><span class="n">hmset</span><span class="p">(</span><span class="n">session_key</span><span class="p">,</span> <span class="n">session_data</span><span class="p">)</span>
+            <span class="n">redis_client</span><span class="o">.</span><span class="n">expire</span><span class="p">(</span><span class="n">session_key</span><span class="p">,</span> <span class="mi">86400</span><span class="p">)</span>  <span class="c1"># 24 hours</span>
 
-        # Also store in Flask session
-        session.update(session_data)
-        session.permanent = True
+        <span class="c1"># Also store in Flask session</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">session_data</span><span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">permanent</span> <span class="o">=</span> <span class="kc">True</span>
 
-    @staticmethod
-    def get_session(user_id):
-        &quot;&quot;&quot;Retrieve session data&quot;&quot;&quot;
-        if redis_available:
-            session_key = f&#x27;session:{user_id}&#x27;
-            return redis_client.hgetall(session_key)
-        return session
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_session</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve session data&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">redis_available</span><span class="p">:</span>
+            <span class="n">session_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;session:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">return</span> <span class="n">redis_client</span><span class="o">.</span><span class="n">hgetall</span><span class="p">(</span><span class="n">session_key</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">session</span>
 
-    @staticmethod
-    def update_activity(user_id):
-        &quot;&quot;&quot;Update last activity timestamp&quot;&quot;&quot;
-        if redis_available:
-            session_key = f&#x27;session:{user_id}&#x27;
-            redis_client.hset(session_key, &#x27;last_activity&#x27;, 
-                            datetime.utcnow().isoformat())
-        session[&#x27;last_activity&#x27;] = datetime.utcnow().isoformat()
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_activity</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update last activity timestamp&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">redis_available</span><span class="p">:</span>
+            <span class="n">session_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;session:</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">redis_client</span><span class="o">.</span><span class="n">hset</span><span class="p">(</span><span class="n">session_key</span><span class="p">,</span> <span class="s1">&#39;last_activity&#39;</span><span class="p">,</span> 
+                            <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">())</span>
+        <span class="n">session</span><span class="p">[</span><span class="s1">&#39;last_activity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 
-class AuthenticationHelper:
-    &quot;&quot;&quot;Authentication and authorization helper&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">AuthenticationHelper</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Authentication and authorization helper&quot;&quot;&quot;</span>
 
-    @staticmethod
-    def create_jwt_token(user_id, username):
-        &quot;&quot;&quot;Create JWT token for API authentication&quot;&quot;&quot;
-        payload = {
-            &#x27;user_id&#x27;: user_id,
-            &#x27;username&#x27;: username,
-            &#x27;iat&#x27;: datetime.utcnow(),
-            &#x27;exp&#x27;: datetime.utcnow() + timedelta(hours=24)
-        }
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_jwt_token</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create JWT token for API authentication&quot;&quot;&quot;</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+            <span class="s1">&#39;iat&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span>
+            <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+        <span class="p">}</span>
 
-        return jwt.encode(payload, app.secret_key, algorithm=&#x27;HS256&#x27;)
+        <span class="k">return</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">secret_key</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;HS256&#39;</span><span class="p">)</span>
 
-    @staticmethod
-    def verify_jwt_token(token):
-        &quot;&quot;&quot;Verify JWT token&quot;&quot;&quot;
-        try:
-            payload = jwt.decode(token, app.secret_key, algorithms=[&#x27;HS256&#x27;])
-            return payload
-        except jwt.ExpiredSignatureError:
-            return None
-        except jwt.InvalidTokenError:
-            return None
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_jwt_token</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify JWT token&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">payload</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">app</span><span class="o">.</span><span class="n">secret_key</span><span class="p">,</span> <span class="n">algorithms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;HS256&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">payload</span>
+        <span class="k">except</span> <span class="n">jwt</span><span class="o">.</span><span class="n">ExpiredSignatureError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="n">jwt</span><span class="o">.</span><span class="n">InvalidTokenError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-    @staticmethod
-    def hash_password(password):
-        &quot;&quot;&quot;Securely hash a password&quot;&quot;&quot;
-        return generate_password_hash(password, method=&#x27;pbkdf2:sha256&#x27;)
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">hash_password</span><span class="p">(</span><span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Securely hash a password&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">generate_password_hash</span><span class="p">(</span><span class="n">password</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;pbkdf2:sha256&#39;</span><span class="p">)</span>
 
-    @staticmethod
-    def verify_password(password_hash, password):
-        &quot;&quot;&quot;Verify a password against its hash&quot;&quot;&quot;
-        return check_password_hash(password_hash, password)
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">verify_password</span><span class="p">(</span><span class="n">password_hash</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Verify a password against its hash&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">check_password_hash</span><span class="p">(</span><span class="n">password_hash</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
 
-class RequestLogger:
-    &quot;&quot;&quot;Request logging and monitoring&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">RequestLogger</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Request logging and monitoring&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.logger = logging.getLogger(&#x27;request_logger&#x27;)
-        self.logger.setLevel(logging.INFO)
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;request_logger&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
-        # Create handler if not exists
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter(
-                &#x27;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#x27;
-            )
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
+        <span class="c1"># Create handler if not exists</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+            <span class="n">handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+            <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+            <span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
 
-    def log_request(self, request):
-        &quot;&quot;&quot;Log incoming request details&quot;&quot;&quot;
-        request_info = {
-            &#x27;method&#x27;: request.method,
-            &#x27;path&#x27;: request.path,
-            &#x27;remote_addr&#x27;: request.remote_addr,
-            &#x27;user_agent&#x27;: request.headers.get(&#x27;User-Agent&#x27;, &#x27;&#x27;),
-            &#x27;content_type&#x27;: request.content_type,
-            &#x27;content_length&#x27;: request.content_length
-        }
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Log incoming request details&quot;&quot;&quot;</span>
+        <span class="n">request_info</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="p">,</span>
+            <span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+            <span class="s1">&#39;remote_addr&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span><span class="p">,</span>
+            <span class="s1">&#39;user_agent&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;content_type&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span>
+            <span class="s1">&#39;content_length&#39;</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">content_length</span>
+        <span class="p">}</span>
 
-        self.logger.info(f&quot;Request: {request_info}&quot;)
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request: </span><span class="si">{</span><span class="n">request_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        # Store in Redis for analytics if available
-        if redis_available:
-            timestamp = datetime.utcnow().isoformat()
-            redis_client.lpush(&#x27;request_log&#x27;, f&quot;{timestamp}:{request_info}&quot;)
-            redis_client.ltrim(&#x27;request_log&#x27;, 0, 999)  # Keep last 1000 requests
+        <span class="c1"># Store in Redis for analytics if available</span>
+        <span class="k">if</span> <span class="n">redis_available</span><span class="p">:</span>
+            <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+            <span class="n">redis_client</span><span class="o">.</span><span class="n">lpush</span><span class="p">(</span><span class="s1">&#39;request_log&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">request_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">redis_client</span><span class="o">.</span><span class="n">ltrim</span><span class="p">(</span><span class="s1">&#39;request_log&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">999</span><span class="p">)</span>  <span class="c1"># Keep last 1000 requests</span>
 
-# Initialize helpers
-session_manager = SessionManager()
-auth_helper = AuthenticationHelper()
-request_logger = RequestLogger()
+<span class="c1"># Initialize helpers</span>
+<span class="n">session_manager</span> <span class="o">=</span> <span class="n">SessionManager</span><span class="p">()</span>
+<span class="n">auth_helper</span> <span class="o">=</span> <span class="n">AuthenticationHelper</span><span class="p">()</span>
+<span class="n">request_logger</span> <span class="o">=</span> <span class="n">RequestLogger</span><span class="p">()</span>
 
-# Request processing with all objects
-@app.before_request
-def process_request():
-    &quot;&quot;&quot;Comprehensive request processing&quot;&quot;&quot;
-    # Log the request
-    request_logger.log_request(request)
+<span class="c1"># Request processing with all objects</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_request</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Comprehensive request processing&quot;&quot;&quot;</span>
+    <span class="c1"># Log the request</span>
+    <span class="n">request_logger</span><span class="o">.</span><span class="n">log_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
-    # Store request start time
-    g.start_time = datetime.utcnow()
+    <span class="c1"># Store request start time</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
 
-    # Initialize database connection
-    g.db = get_db()
+    <span class="c1"># Initialize database connection</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span>
 
-    # Process authentication
-    g.current_user = None
+    <span class="c1"># Process authentication</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">current_user</span> <span class="o">=</span> <span class="kc">None</span>
 
-    # Check for JWT token in headers
-    auth_header = request.headers.get(&#x27;Authorization&#x27;)
-    if auth_header and auth_header.startswith(&#x27;Bearer &#x27;):
-        token = auth_header.split(&#x27; &#x27;)[1]
-        payload = auth_helper.verify_jwt_token(token)
-        if payload:
-            g.current_user = payload
+    <span class="c1"># Check for JWT token in headers</span>
+    <span class="n">auth_header</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Authorization&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">auth_header</span> <span class="ow">and</span> <span class="n">auth_header</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Bearer &#39;</span><span class="p">):</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">auth_header</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">auth_helper</span><span class="o">.</span><span class="n">verify_jwt_token</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">payload</span><span class="p">:</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">current_user</span> <span class="o">=</span> <span class="n">payload</span>
 
-    # Check for session-based auth
-    elif &#x27;user_id&#x27; in session:
-        session_manager.update_activity(session[&#x27;user_id&#x27;])
-        g.current_user = session
+    <span class="c1"># Check for session-based auth</span>
+    <span class="k">elif</span> <span class="s1">&#39;user_id&#39;</span> <span class="ow">in</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">session_manager</span><span class="o">.</span><span class="n">update_activity</span><span class="p">(</span><span class="n">session</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">])</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">current_user</span> <span class="o">=</span> <span class="n">session</span>
 
-    # Rate limiting (basic implementation)
-    if redis_available:
-        client_ip = request.remote_addr
-        rate_key = f&#x27;rate_limit:{client_ip}&#x27;
-        current_requests = redis_client.incr(rate_key)
+    <span class="c1"># Rate limiting (basic implementation)</span>
+    <span class="k">if</span> <span class="n">redis_available</span><span class="p">:</span>
+        <span class="n">client_ip</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">remote_addr</span>
+        <span class="n">rate_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;rate_limit:</span><span class="si">{</span><span class="n">client_ip</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="n">current_requests</span> <span class="o">=</span> <span class="n">redis_client</span><span class="o">.</span><span class="n">incr</span><span class="p">(</span><span class="n">rate_key</span><span class="p">)</span>
 
-        if current_requests == 1:
-            redis_client.expire(rate_key, 60)  # 1 minute window
+        <span class="k">if</span> <span class="n">current_requests</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">redis_client</span><span class="o">.</span><span class="n">expire</span><span class="p">(</span><span class="n">rate_key</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  <span class="c1"># 1 minute window</span>
 
-        if current_requests &gt; 100:  # 100 requests per minute
-            abort(429)  # Too Many Requests
+        <span class="k">if</span> <span class="n">current_requests</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>  <span class="c1"># 100 requests per minute</span>
+            <span class="n">abort</span><span class="p">(</span><span class="mi">429</span><span class="p">)</span>  <span class="c1"># Too Many Requests</span>
 
-@app.route(&#x27;/login&#x27;, methods=[&#x27;POST&#x27;])
-def login():
-    &quot;&quot;&quot;Enhanced login with proper session management&quot;&quot;&quot;
-    data = request.get_json()
-    username = data.get(&#x27;username&#x27;, &#x27;&#x27;).strip()
-    password = data.get(&#x27;password&#x27;, &#x27;&#x27;)
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">login</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced login with proper session management&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
-    if not username or not password:
-        return jsonify({&#x27;error&#x27;: &#x27;Username and password required&#x27;}), 400
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Username and password required&#39;</span><span class="p">}),</span> <span class="mi">400</span>
 
-    # Check user credentials
-    db = get_db()
-    user = db.execute(
-        &#x27;SELECT id, username, password_hash FROM users WHERE username = ?&#x27;,
-        (username,)
-    ).fetchone()
+    <span class="c1"># Check user credentials</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="s1">&#39;SELECT id, username, password_hash FROM users WHERE username = ?&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">username</span><span class="p">,)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 
-    if user and auth_helper.verify_password(user[&#x27;password_hash&#x27;], password):
-        # Create session
-        session_manager.create_session(user[&#x27;id&#x27;], user[&#x27;username&#x27;])
+    <span class="k">if</span> <span class="n">user</span> <span class="ow">and</span> <span class="n">auth_helper</span><span class="o">.</span><span class="n">verify_password</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;password_hash&#39;</span><span class="p">],</span> <span class="n">password</span><span class="p">):</span>
+        <span class="c1"># Create session</span>
+        <span class="n">session_manager</span><span class="o">.</span><span class="n">create_session</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span>
 
-        # Create JWT for API access
-        jwt_token = auth_helper.create_jwt_token(user[&#x27;id&#x27;], user[&#x27;username&#x27;])
+        <span class="c1"># Create JWT for API access</span>
+        <span class="n">jwt_token</span> <span class="o">=</span> <span class="n">auth_helper</span><span class="o">.</span><span class="n">create_jwt_token</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">])</span>
 
-        return jsonify({
-            &#x27;message&#x27;: &#x27;Login successful&#x27;,
-            &#x27;jwt_token&#x27;: jwt_token,
-            &#x27;user&#x27;: {
-                &#x27;id&#x27;: user[&#x27;id&#x27;],
-                &#x27;username&#x27;: user[&#x27;username&#x27;]
-            }
-        })
-    else:
-        return jsonify({&#x27;error&#x27;: &#x27;Invalid credentials&#x27;}), 401
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Login successful&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;jwt_token&#39;</span><span class="p">:</span> <span class="n">jwt_token</span><span class="p">,</span>
+            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Invalid credentials&#39;</span><span class="p">}),</span> <span class="mi">401</span>
 
-@app.route(&#x27;/profile&#x27;)
-def get_profile():
-    &quot;&quot;&quot;Protected route demonstrating session usage&quot;&quot;&quot;
-    if not g.current_user:
-        return jsonify({&#x27;error&#x27;: &#x27;Authentication required&#x27;}), 401
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/profile&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_profile</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Protected route demonstrating session usage&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="o">.</span><span class="n">current_user</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Authentication required&#39;</span><span class="p">}),</span> <span class="mi">401</span>
 
-    user_id = g.current_user[&#x27;user_id&#x27;]
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">current_user</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]</span>
 
-    # Get detailed user info
-    db = get_db()
-    user = db.execute(
-        &#x27;SELECT id, username, email, created_at FROM users WHERE id = ?&#x27;,
-        (user_id,)
-    ).fetchone()
+    <span class="c1"># Get detailed user info</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">get_db</span><span class="p">()</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+        <span class="s1">&#39;SELECT id, username, email, created_at FROM users WHERE id = ?&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="n">user_id</span><span class="p">,)</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 
-    if user:
-        # Get session info
-        session_data = session_manager.get_session(user_id)
+    <span class="k">if</span> <span class="n">user</span><span class="p">:</span>
+        <span class="c1"># Get session info</span>
+        <span class="n">session_data</span> <span class="o">=</span> <span class="n">session_manager</span><span class="o">.</span><span class="n">get_session</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
 
-        return jsonify({
-            &#x27;user&#x27;: dict(user),
-            &#x27;session_info&#x27;: {
-                &#x27;created_at&#x27;: session_data.get(&#x27;created_at&#x27;),
-                &#x27;last_activity&#x27;: session_data.get(&#x27;last_activity&#x27;)
-            }
-        })
-    else:
-        return jsonify({&#x27;error&#x27;: &#x27;User not found&#x27;}), 404
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">user</span><span class="p">),</span>
+            <span class="s1">&#39;session_info&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;created_at&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;last_activity&#39;</span><span class="p">:</span> <span class="n">session_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_activity&#39;</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;User not found&#39;</span><span class="p">}),</span> <span class="mi">404</span>
 
-if __name__ == &#x27;__main__&#x27;:
-    app.run(debug=True)
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre>
 </div>
 <h3 id="interfacing-with-databases-and-external-services">Interfacing with databases and external services<a class="headerlink" href="#interfacing-with-databases-and-external-services" title="Permanent link">&para;</a></h3>
 <p>Modern web applications integrate with multiple data sources and services:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Database and external service integration patterns
-import asyncio
-import aiohttp
-import asyncpg
-import psycopg2
-from psycopg2.extras import RealDictCursor
-import requests
-from flask import Flask, jsonify, request
-import json
-from datetime import datetime
-import os
+<pre><code class="language-python"><span class="c1"># Database and external service integration patterns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">aiohttp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncpg</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">psycopg2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">psycopg2.extras</span><span class="w"> </span><span class="kn">import</span> <span class="n">RealDictCursor</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-app = Flask(__name__)
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-class DatabaseManager:
-    &quot;&quot;&quot;Database connection and query management&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">DatabaseManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Database connection and query management&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.db_config = {
-            &#x27;host&#x27;: os.getenv(&#x27;DB_HOST&#x27;, &#x27;localhost&#x27;),
-            &#x27;database&#x27;: os.getenv(&#x27;DB_NAME&#x27;, &#x27;webapp&#x27;),
-            &#x27;user&#x27;: os.getenv(&#x27;DB_USER&#x27;, &#x27;webapp_user&#x27;),
-            &#x27;password&#x27;: os.getenv(&#x27;DB_PASSWORD&#x27;, &#x27;webapp_password&#x27;),
-            &#x27;port&#x27;: os.getenv(&#x27;DB_PORT&#x27;, 5432)
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db_config</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;localhost&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;database&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;webapp&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_USER&#39;</span><span class="p">,</span> <span class="s1">&#39;webapp_user&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;webapp_password&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;DB_PORT&#39;</span><span class="p">,</span> <span class="mi">5432</span><span class="p">)</span>
+        <span class="p">}</span>
 
-    def get_connection(self):
-        &quot;&quot;&quot;Get database connection with error handling&quot;&quot;&quot;
-        try:
-            conn = psycopg2.connect(**self.db_config)
-            conn.cursor_factory = RealDictCursor
-            return conn
-        except psycopg2.Error as e:
-            app.logger.error(f&#x27;Database connection failed: {e}&#x27;)
-            raise
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get database connection with error handling&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">db_config</span><span class="p">)</span>
+            <span class="n">conn</span><span class="o">.</span><span class="n">cursor_factory</span> <span class="o">=</span> <span class="n">RealDictCursor</span>
+            <span class="k">return</span> <span class="n">conn</span>
+        <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Database connection failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
 
-    def execute_query(self, query, params=None):
-        &quot;&quot;&quot;Execute query with proper error handling and connection management&quot;&quot;&quot;
-        conn = None
-        try:
-            conn = self.get_connection()
-            cursor = conn.cursor()
-            cursor.execute(query, params)
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute_query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute query with proper error handling and connection management&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_connection</span><span class="p">()</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-            if query.strip().upper().startswith(&#x27;SELECT&#x27;):
-                result = cursor.fetchall()
-                return [dict(row) for row in result]
-            else:
-                conn.commit()
-                return cursor.rowcount
+            <span class="k">if</span> <span class="n">query</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;SELECT&#39;</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+                <span class="k">return</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">cursor</span><span class="o">.</span><span class="n">rowcount</span>
 
-        except psycopg2.Error as e:
-            if conn:
-                conn.rollback()
-            app.logger.error(f&#x27;Query execution failed: {e}&#x27;)
-            raise
-        finally:
-            if conn:
-                conn.close()
+        <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Query execution failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    def execute_transaction(self, queries):
-        &quot;&quot;&quot;Execute multiple queries in a transaction&quot;&quot;&quot;
-        conn = None
-        try:
-            conn = self.get_connection()
-            cursor = conn.cursor()
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute_transaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queries</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute multiple queries in a transaction&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">conn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_connection</span><span class="p">()</span>
+            <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-            for query, params in queries:
-                cursor.execute(query, params)
+            <span class="k">for</span> <span class="n">query</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
 
-            conn.commit()
-            return True
+            <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
 
-        except psycopg2.Error as e:
-            if conn:
-                conn.rollback()
-            app.logger.error(f&#x27;Transaction failed: {e}&#x27;)
-            raise
-        finally:
-            if conn:
-                conn.close()
+        <span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Transaction failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">conn</span><span class="p">:</span>
+                <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-class ExternalServiceManager:
-    &quot;&quot;&quot;Manage external service integrations&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">ExternalServiceManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage external service integrations&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.session = requests.Session()
-        self.session.timeout = 10  # Default timeout
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Default timeout</span>
 
-        # API configuration
-        self.apis = {
-            &#x27;weather&#x27;: {
-                &#x27;base_url&#x27;: &#x27;https://api.openweathermap.org/data/2.5&#x27;,
-                &#x27;api_key&#x27;: os.getenv(&#x27;WEATHER_API_KEY&#x27;),
-                &#x27;timeout&#x27;: 5
-            },
-            &#x27;payment&#x27;: {
-                &#x27;base_url&#x27;: &#x27;https://api.stripe.com/v1&#x27;,
-                &#x27;api_key&#x27;: os.getenv(&#x27;STRIPE_API_KEY&#x27;),
-                &#x27;timeout&#x27;: 15
-            },
-            &#x27;email&#x27;: {
-                &#x27;base_url&#x27;: &#x27;https://api.sendgrid.com/v3&#x27;,
-                &#x27;api_key&#x27;: os.getenv(&#x27;SENDGRID_API_KEY&#x27;),
-                &#x27;timeout&#x27;: 10
-            }
-        }
+        <span class="c1"># API configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">apis</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;weather&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;base_url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.openweathermap.org/data/2.5&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;api_key&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;WEATHER_API_KEY&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">5</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;payment&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;base_url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.stripe.com/v1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;api_key&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;STRIPE_API_KEY&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">15</span>
+            <span class="p">},</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;base_url&#39;</span><span class="p">:</span> <span class="s1">&#39;https://api.sendgrid.com/v3&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;api_key&#39;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;SENDGRID_API_KEY&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">10</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
 
-    def call_external_api(self, service, endpoint, method=&#x27;GET&#x27;, data=None, headers=None):
-        &quot;&quot;&quot;Generic external API call with error handling&quot;&quot;&quot;
-        if service not in self.apis:
-            raise ValueError(f&#x27;Unknown service: {service}&#x27;)
+    <span class="k">def</span><span class="w"> </span><span class="nf">call_external_api</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">service</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generic external API call with error handling&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">service</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">apis</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown service: </span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-        config = self.apis[service]
-        url = f&quot;{config[&#x27;base_url&#x27;]}/{endpoint.lstrip(&#x27;/&#x27;)}&quot;
+        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="n">service</span><span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;base_url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">endpoint</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        # Prepare headers
-        request_headers = headers or {}
-        if config.get(&#x27;api_key&#x27;):
-            request_headers[&#x27;Authorization&#x27;] = f&quot;Bearer {config[&#x27;api_key&#x27;]}&quot;
+        <span class="c1"># Prepare headers</span>
+        <span class="n">request_headers</span> <span class="o">=</span> <span class="n">headers</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;api_key&#39;</span><span class="p">):</span>
+            <span class="n">request_headers</span><span class="p">[</span><span class="s1">&#39;Authorization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Bearer </span><span class="si">{</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;api_key&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        try:
-            response = self.session.request(
-                method=method,
-                url=url,
-                json=data,
-                headers=request_headers,
-                timeout=config[&#x27;timeout&#x27;]
-            )
-            response.raise_for_status()
-            return response.json()
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span>
+                <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span>
+                <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+                <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">headers</span><span class="o">=</span><span class="n">request_headers</span><span class="p">,</span>
+                <span class="n">timeout</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;timeout&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 
-        except requests.exceptions.Timeout:
-            app.logger.error(f&#x27;Timeout calling {service} API&#x27;)
-            raise
-        except requests.exceptions.RequestException as e:
-            app.logger.error(f&#x27;Error calling {service} API: {e}&#x27;)
-            raise
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">Timeout</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Timeout calling </span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s1"> API&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Error calling </span><span class="si">{</span><span class="n">service</span><span class="si">}</span><span class="s1"> API: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span>
 
-    def get_weather_data(self, city):
-        &quot;&quot;&quot;Get weather data for a city&quot;&quot;&quot;
-        try:
-            data = self.call_external_api(
-                &#x27;weather&#x27;,
-                f&#x27;weather?q={city}&amp;appid={self.apis[&quot;weather&quot;][&quot;api_key&quot;]}&amp;units=metric&#x27;
-            )
-            return {
-                &#x27;city&#x27;: data[&#x27;name&#x27;],
-                &#x27;temperature&#x27;: data[&#x27;main&#x27;][&#x27;temp&#x27;],
-                &#x27;description&#x27;: data[&#x27;weather&#x27;][0][&#x27;description&#x27;],
-                &#x27;humidity&#x27;: data[&#x27;main&#x27;][&#x27;humidity&#x27;]
-            }
-        except Exception as e:
-            app.logger.error(f&#x27;Weather API error: {e}&#x27;)
-            return None
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_weather_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get weather data for a city&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_external_api</span><span class="p">(</span>
+                <span class="s1">&#39;weather&#39;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s1">&#39;weather?q=</span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s1">&amp;appid=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">apis</span><span class="p">[</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="s2">&quot;api_key&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&amp;units=metric&#39;</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;temperature&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="s1">&#39;temp&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;weather&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;description&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;humidity&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="s1">&#39;humidity&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Weather API error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
-    def send_notification_email(self, to_email, subject, content):
-        &quot;&quot;&quot;Send notification email via SendGrid&quot;&quot;&quot;
-        try:
-            email_data = {
-                &#x27;personalizations&#x27;: [{
-                    &#x27;to&#x27;: [{&#x27;email&#x27;: to_email}]
-                }],
-                &#x27;from&#x27;: {&#x27;email&#x27;: &#x27;noreply@example.com&#x27;},
-                &#x27;subject&#x27;: subject,
-                &#x27;content&#x27;: [{
-                    &#x27;type&#x27;: &#x27;text/html&#x27;,
-                    &#x27;value&#x27;: content
-                }]
-            }
+    <span class="k">def</span><span class="w"> </span><span class="nf">send_notification_email</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to_email</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Send notification email via SendGrid&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">email_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;personalizations&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                    <span class="s1">&#39;to&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="n">to_email</span><span class="p">}]</span>
+                <span class="p">}],</span>
+                <span class="s1">&#39;from&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;noreply@example.com&#39;</span><span class="p">},</span>
+                <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="n">subject</span><span class="p">,</span>
+                <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/html&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">content</span>
+                <span class="p">}]</span>
+            <span class="p">}</span>
 
-            response = self.call_external_api(
-                &#x27;email&#x27;,
-                &#x27;mail/send&#x27;,
-                method=&#x27;POST&#x27;,
-                data=email_data
-            )
-            return True
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_external_api</span><span class="p">(</span>
+                <span class="s1">&#39;email&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;mail/send&#39;</span><span class="p">,</span>
+                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">email_data</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
 
-        except Exception as e:
-            app.logger.error(f&#x27;Email API error: {e}&#x27;)
-            return False
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Email API error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
 
-# Initialize managers
-db_manager = DatabaseManager()
-service_manager = ExternalServiceManager()
+<span class="c1"># Initialize managers</span>
+<span class="n">db_manager</span> <span class="o">=</span> <span class="n">DatabaseManager</span><span class="p">()</span>
+<span class="n">service_manager</span> <span class="o">=</span> <span class="n">ExternalServiceManager</span><span class="p">()</span>
 
-@app.route(&#x27;/users/&lt;int:user_id&gt;/dashboard&#x27;)
-def user_dashboard(user_id):
-    &quot;&quot;&quot;Complex route demonstrating database and external service integration&quot;&quot;&quot;
-    try:
-        # Get user data from database
-        user_query = &#x27;&#x27;&#x27;
-            SELECT u.id, u.username, u.email, u.city,
-                   COUNT(p.id) as post_count,
-                   MAX(p.created_at) as last_post
-            FROM users u
-            LEFT JOIN posts p ON u.id = p.author_id
-            WHERE u.id = %s
-            GROUP BY u.id, u.username, u.email, u.city
-        &#x27;&#x27;&#x27;
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/users/&lt;int:user_id&gt;/dashboard&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">user_dashboard</span><span class="p">(</span><span class="n">user_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complex route demonstrating database and external service integration&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Get user data from database</span>
+        <span class="n">user_query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT u.id, u.username, u.email, u.city,</span>
+<span class="s1">                   COUNT(p.id) as post_count,</span>
+<span class="s1">                   MAX(p.created_at) as last_post</span>
+<span class="s1">            FROM users u</span>
+<span class="s1">            LEFT JOIN posts p ON u.id = p.author_id</span>
+<span class="s1">            WHERE u.id = </span><span class="si">%s</span>
+<span class="s1">            GROUP BY u.id, u.username, u.email, u.city</span>
+<span class="s1">        &#39;&#39;&#39;</span>
 
-        user_data = db_manager.execute_query(user_query, (user_id,))
-        if not user_data:
-            return jsonify({&#x27;error&#x27;: &#x27;User not found&#x27;}), 404
+        <span class="n">user_data</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span><span class="n">user_query</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">user_data</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;User not found&#39;</span><span class="p">}),</span> <span class="mi">404</span>
 
-        user = user_data[0]
+        <span class="n">user</span> <span class="o">=</span> <span class="n">user_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-        # Get recent posts
-        posts_query = &#x27;&#x27;&#x27;
-            SELECT id, title, content, created_at
-            FROM posts
-            WHERE author_id = %s
-            ORDER BY created_at DESC
-            LIMIT 5
-        &#x27;&#x27;&#x27;
+        <span class="c1"># Get recent posts</span>
+        <span class="n">posts_query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT id, title, content, created_at</span>
+<span class="s1">            FROM posts</span>
+<span class="s1">            WHERE author_id = </span><span class="si">%s</span>
+<span class="s1">            ORDER BY created_at DESC</span>
+<span class="s1">            LIMIT 5</span>
+<span class="s1">        &#39;&#39;&#39;</span>
 
-        recent_posts = db_manager.execute_query(posts_query, (user_id,))
+        <span class="n">recent_posts</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span><span class="n">posts_query</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
 
-        # Get weather data if user has city set
-        weather_data = None
-        if user[&#x27;city&#x27;]:
-            weather_data = service_manager.get_weather_data(user[&#x27;city&#x27;])
+        <span class="c1"># Get weather data if user has city set</span>
+        <span class="n">weather_data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">user</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">]:</span>
+            <span class="n">weather_data</span> <span class="o">=</span> <span class="n">service_manager</span><span class="o">.</span><span class="n">get_weather_data</span><span class="p">(</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;city&#39;</span><span class="p">])</span>
 
-        # Get user statistics from multiple queries
-        stats_queries = [
-            (&#x27;SELECT COUNT(*) as friend_count FROM friendships WHERE user_id = %s&#x27;, (user_id,)),
-            (&#x27;SELECT COUNT(*) as notification_count FROM notifications WHERE user_id = %s AND read = false&#x27;, (user_id,))
-        ]
+        <span class="c1"># Get user statistics from multiple queries</span>
+        <span class="n">stats_queries</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) as friend_count FROM friendships WHERE user_id = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,)),</span>
+            <span class="p">(</span><span class="s1">&#39;SELECT COUNT(*) as notification_count FROM notifications WHERE user_id = </span><span class="si">%s</span><span class="s1"> AND read = false&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="p">]</span>
 
-        stats = {}
-        for query, params in stats_queries:
-            result = db_manager.execute_query(query, params)
-            stats.update(result[0] if result else {})
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">query</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">stats_queries</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            <span class="n">stats</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">result</span> <span class="k">else</span> <span class="p">{})</span>
 
-        dashboard_data = {
-            &#x27;user&#x27;: user,
-            &#x27;recent_posts&#x27;: recent_posts,
-            &#x27;weather&#x27;: weather_data,
-            &#x27;statistics&#x27;: stats,
-            &#x27;generated_at&#x27;: datetime.utcnow().isoformat()
-        }
+        <span class="n">dashboard_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="n">user</span><span class="p">,</span>
+            <span class="s1">&#39;recent_posts&#39;</span><span class="p">:</span> <span class="n">recent_posts</span><span class="p">,</span>
+            <span class="s1">&#39;weather&#39;</span><span class="p">:</span> <span class="n">weather_data</span><span class="p">,</span>
+            <span class="s1">&#39;statistics&#39;</span><span class="p">:</span> <span class="n">stats</span><span class="p">,</span>
+            <span class="s1">&#39;generated_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+        <span class="p">}</span>
 
-        return jsonify(dashboard_data)
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">(</span><span class="n">dashboard_data</span><span class="p">)</span>
 
-    except Exception as e:
-        app.logger.error(f&#x27;Dashboard error for user {user_id}: {e}&#x27;)
-        return jsonify({&#x27;error&#x27;: &#x27;Internal server error&#x27;}), 500
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Dashboard error for user </span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Internal server error&#39;</span><span class="p">}),</span> <span class="mi">500</span>
 
-@app.route(&#x27;/orders&#x27;, methods=[&#x27;POST&#x27;])
-def create_order():
-    &quot;&quot;&quot;Demonstrate transaction handling across multiple services&quot;&quot;&quot;
-    try:
-        order_data = request.get_json()
-        user_id = order_data.get(&#x27;user_id&#x27;)
-        items = order_data.get(&#x27;items&#x27;, [])
-        total_amount = order_data.get(&#x27;total_amount&#x27;)
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/orders&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_order</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate transaction handling across multiple services&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">order_data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+        <span class="n">user_id</span> <span class="o">=</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">total_amount</span> <span class="o">=</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;total_amount&#39;</span><span class="p">)</span>
 
-        # Start database transaction
-        transaction_queries = []
+        <span class="c1"># Start database transaction</span>
+        <span class="n">transaction_queries</span> <span class="o">=</span> <span class="p">[]</span>
 
-        # Create order record
-        order_query = &#x27;&#x27;&#x27;
-            INSERT INTO orders (user_id, total_amount, status, created_at)
-            VALUES (%s, %s, &#x27;pending&#x27;, %s)
-            RETURNING id
-        &#x27;&#x27;&#x27;
+        <span class="c1"># Create order record</span>
+        <span class="n">order_query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            INSERT INTO orders (user_id, total_amount, status, created_at)</span>
+<span class="s1">            VALUES (</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, &#39;pending&#39;, </span><span class="si">%s</span><span class="s1">)</span>
+<span class="s1">            RETURNING id</span>
+<span class="s1">        &#39;&#39;&#39;</span>
 
-        order_id = db_manager.execute_query(
-            order_query, 
-            (user_id, total_amount, datetime.utcnow())
-        )
+        <span class="n">order_id</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
+            <span class="n">order_query</span><span class="p">,</span> 
+            <span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">total_amount</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">())</span>
+        <span class="p">)</span>
 
-        if not order_id:
-            raise Exception(&#x27;Failed to create order&#x27;)
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">order_id</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;Failed to create order&#39;</span><span class="p">)</span>
 
-        order_id = order_id[0][&#x27;id&#x27;]
+        <span class="n">order_id</span> <span class="o">=</span> <span class="n">order_id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
-        # Add order items
-        for item in items:
-            item_query = &#x27;&#x27;&#x27;
-                INSERT INTO order_items (order_id, product_id, quantity, price)
-                VALUES (%s, %s, %s, %s)
-            &#x27;&#x27;&#x27;
-            transaction_queries.append((
-                item_query,
-                (order_id, item[&#x27;product_id&#x27;], item[&#x27;quantity&#x27;], item[&#x27;price&#x27;])
-            ))
+        <span class="c1"># Add order items</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">item_query</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                INSERT INTO order_items (order_id, product_id, quantity, price)</span>
+<span class="s1">                VALUES (</span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">, </span><span class="si">%s</span><span class="s1">)</span>
+<span class="s1">            &#39;&#39;&#39;</span>
+            <span class="n">transaction_queries</span><span class="o">.</span><span class="n">append</span><span class="p">((</span>
+                <span class="n">item_query</span><span class="p">,</span>
+                <span class="p">(</span><span class="n">order_id</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;product_id&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">])</span>
+            <span class="p">))</span>
 
-        # Execute all order-related queries in transaction
-        db_manager.execute_transaction(transaction_queries)
+        <span class="c1"># Execute all order-related queries in transaction</span>
+        <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_transaction</span><span class="p">(</span><span class="n">transaction_queries</span><span class="p">)</span>
 
-        # Process payment via external service
-        payment_data = {
-            &#x27;amount&#x27;: int(total_amount * 100),  # Stripe expects cents
-            &#x27;currency&#x27;: &#x27;usd&#x27;,
-            &#x27;description&#x27;: f&#x27;Order {order_id}&#x27;,
-            &#x27;source&#x27;: order_data.get(&#x27;payment_token&#x27;)
-        }
+        <span class="c1"># Process payment via external service</span>
+        <span class="n">payment_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_amount</span> <span class="o">*</span> <span class="mi">100</span><span class="p">),</span>  <span class="c1"># Stripe expects cents</span>
+            <span class="s1">&#39;currency&#39;</span><span class="p">:</span> <span class="s1">&#39;usd&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Order </span><span class="si">{</span><span class="n">order_id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">order_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;payment_token&#39;</span><span class="p">)</span>
+        <span class="p">}</span>
 
-        payment_result = service_manager.call_external_api(
-            &#x27;payment&#x27;,
-            &#x27;charges&#x27;,
-            method=&#x27;POST&#x27;,
-            data=payment_data
-        )
+        <span class="n">payment_result</span> <span class="o">=</span> <span class="n">service_manager</span><span class="o">.</span><span class="n">call_external_api</span><span class="p">(</span>
+            <span class="s1">&#39;payment&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;charges&#39;</span><span class="p">,</span>
+            <span class="n">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">payment_data</span>
+        <span class="p">)</span>
 
-        if payment_result.get(&#x27;status&#x27;) == &#x27;succeeded&#x27;:
-            # Update order status
-            db_manager.execute_query(
-                &#x27;UPDATE orders SET status = %s WHERE id = %s&#x27;,
-                (&#x27;paid&#x27;, order_id)
-            )
+        <span class="k">if</span> <span class="n">payment_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;succeeded&#39;</span><span class="p">:</span>
+            <span class="c1"># Update order status</span>
+            <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
+                <span class="s1">&#39;UPDATE orders SET status = </span><span class="si">%s</span><span class="s1"> WHERE id = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="s1">&#39;paid&#39;</span><span class="p">,</span> <span class="n">order_id</span><span class="p">)</span>
+            <span class="p">)</span>
 
-            # Send confirmation email
-            user_email_query = &#x27;SELECT email FROM users WHERE id = %s&#x27;
-            user_email = db_manager.execute_query(user_email_query, (user_id,))
+            <span class="c1"># Send confirmation email</span>
+            <span class="n">user_email_query</span> <span class="o">=</span> <span class="s1">&#39;SELECT email FROM users WHERE id = </span><span class="si">%s</span><span class="s1">&#39;</span>
+            <span class="n">user_email</span> <span class="o">=</span> <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span><span class="n">user_email_query</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
 
-            if user_email:
-                service_manager.send_notification_email(
-                    user_email[0][&#x27;email&#x27;],
-                    f&#x27;Order #{order_id} Confirmation&#x27;,
-                    f&#x27;Your order has been confirmed and payment processed.&#x27;
-                )
+            <span class="k">if</span> <span class="n">user_email</span><span class="p">:</span>
+                <span class="n">service_manager</span><span class="o">.</span><span class="n">send_notification_email</span><span class="p">(</span>
+                    <span class="n">user_email</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;email&#39;</span><span class="p">],</span>
+                    <span class="sa">f</span><span class="s1">&#39;Order #</span><span class="si">{</span><span class="n">order_id</span><span class="si">}</span><span class="s1"> Confirmation&#39;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s1">&#39;Your order has been confirmed and payment processed.&#39;</span>
+                <span class="p">)</span>
 
-            return jsonify({
-                &#x27;order_id&#x27;: order_id,
-                &#x27;status&#x27;: &#x27;success&#x27;,
-                &#x27;payment_id&#x27;: payment_result[&#x27;id&#x27;]
-            })
-        else:
-            # Payment failed, update order status
-            db_manager.execute_query(
-                &#x27;UPDATE orders SET status = %s WHERE id = %s&#x27;,
-                (&#x27;failed&#x27;, order_id)
-            )
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+                <span class="s1">&#39;order_id&#39;</span><span class="p">:</span> <span class="n">order_id</span><span class="p">,</span>
+                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;payment_id&#39;</span><span class="p">:</span> <span class="n">payment_result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+            <span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Payment failed, update order status</span>
+            <span class="n">db_manager</span><span class="o">.</span><span class="n">execute_query</span><span class="p">(</span>
+                <span class="s1">&#39;UPDATE orders SET status = </span><span class="si">%s</span><span class="s1"> WHERE id = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="p">(</span><span class="s1">&#39;failed&#39;</span><span class="p">,</span> <span class="n">order_id</span><span class="p">)</span>
+            <span class="p">)</span>
 
-            return jsonify({
-                &#x27;order_id&#x27;: order_id,
-                &#x27;status&#x27;: &#x27;payment_failed&#x27;,
-                &#x27;error&#x27;: &#x27;Payment processing failed&#x27;
-            }), 400
+            <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+                <span class="s1">&#39;order_id&#39;</span><span class="p">:</span> <span class="n">order_id</span><span class="p">,</span>
+                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;payment_failed&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Payment processing failed&#39;</span>
+            <span class="p">}),</span> <span class="mi">400</span>
 
-    except Exception as e:
-        app.logger.error(f&#x27;Order creation error: {e}&#x27;)
-        return jsonify({&#x27;error&#x27;: &#x27;Order processing failed&#x27;}), 500
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Order creation error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="s1">&#39;Order processing failed&#39;</span><span class="p">}),</span> <span class="mi">500</span>
 
-if __name__ == &#x27;__main__&#x27;:
-    app.run(debug=True)
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2890,31 +2890,31 @@ if __name__ == &#x27;__main__&#x27;:
 <summary>Sample Solution</summary>
 <p><strong>Input validation strategy</strong>:</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python">def validate_registration_input(data):
-    errors = []
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">validate_registration_input</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
 
-    # Username validation
-    username = data.get(&#x27;username&#x27;, &#x27;&#x27;).strip()
-    if not re.match(r&#x27;^[a-zA-Z0-9_]{3,20}$&#x27;, username):
-        errors.append(&#x27;Username must be 3-20 characters, letters/numbers/underscores only&#x27;)
+    <span class="c1"># Username validation</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[a-zA-Z0-9_]{3,20}$&#39;</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Username must be 3-20 characters, letters/numbers/underscores only&#39;</span><span class="p">)</span>
 
-    # Email validation
-    email = data.get(&#x27;email&#x27;, &#x27;&#x27;).strip().lower()
-    if not re.match(r&#x27;^[^@]+@[^@]+\.[^@]+$&#x27;, email):
-        errors.append(&#x27;Invalid email format&#x27;)
+    <span class="c1"># Email validation</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[^@]+@[^@]+\.[^@]+$&#39;</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Invalid email format&#39;</span><span class="p">)</span>
 
-    # Password validation
-    password = data.get(&#x27;password&#x27;, &#x27;&#x27;)
-    if len(password) &lt; 8:
-        errors.append(&#x27;Password must be at least 8 characters&#x27;)
-    if not re.search(r&#x27;[A-Z]&#x27;, password):
-        errors.append(&#x27;Password must contain uppercase letter&#x27;)
-    if not re.search(r&#x27;[a-z]&#x27;, password):
-        errors.append(&#x27;Password must contain lowercase letter&#x27;)
-    if not re.search(r&#x27;\d&#x27;, password):
-        errors.append(&#x27;Password must contain a number&#x27;)
+    <span class="c1"># Password validation</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">password</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Password must be at least 8 characters&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[A-Z]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Password must contain uppercase letter&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[a-z]&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Password must contain lowercase letter&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\d&#39;</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Password must contain a number&#39;</span><span class="p">)</span>
 
-    return errors
+    <span class="k">return</span> <span class="n">errors</span>
 </code></pre>
 </div>
 <p><strong>Password security measures</strong>:</p>
@@ -3199,6 +3199,8 @@ if __name__ == &#x27;__main__&#x27;:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       

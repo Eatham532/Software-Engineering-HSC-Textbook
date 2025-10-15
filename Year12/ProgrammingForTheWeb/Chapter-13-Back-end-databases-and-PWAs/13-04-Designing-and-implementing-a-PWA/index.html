@@ -1453,1152 +1453,1152 @@
 <h3 id="service-workers-and-offline-functionality">Service Workers and offline functionality<a class="headerlink" href="#service-workers-and-offline-functionality" title="Permanent link">&para;</a></h3>
 <p>Service Workers act as a proxy between web applications and the network, enabling offline functionality and background processing:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Flask backend for PWA with service worker registration
-from flask import Flask, render_template, jsonify, request, make_response
-import json
-import os
-from datetime import datetime, timedelta
-import sqlite3
-import threading
-import time
+<pre><code class="language-python"><span class="c1"># Flask backend for PWA with service worker registration</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">make_response</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-app = Flask(__name__)
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-# Database setup for offline sync
-def init_database():
-    &quot;&quot;&quot;Initialize SQLite database for PWA data&quot;&quot;&quot;
-    conn = sqlite3.connect(&#x27;pwa_data.db&#x27;)
-    cursor = conn.cursor()
+<span class="c1"># Database setup for offline sync</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">init_database</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize SQLite database for PWA data&quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;pwa_data.db&#39;</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-    # Create tables for offline sync
-    cursor.execute(&#x27;&#x27;&#x27;
-        CREATE TABLE IF NOT EXISTS sync_queue (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            action TEXT NOT NULL,
-            resource TEXT NOT NULL,
-            data TEXT,
-            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-            synced BOOLEAN DEFAULT FALSE
-        )
-    &#x27;&#x27;&#x27;)
+    <span class="c1"># Create tables for offline sync</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE IF NOT EXISTS sync_queue (</span>
+<span class="s1">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s1">            action TEXT NOT NULL,</span>
+<span class="s1">            resource TEXT NOT NULL,</span>
+<span class="s1">            data TEXT,</span>
+<span class="s1">            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,</span>
+<span class="s1">            synced BOOLEAN DEFAULT FALSE</span>
+<span class="s1">        )</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
 
-    cursor.execute(&#x27;&#x27;&#x27;
-        CREATE TABLE IF NOT EXISTS app_data (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            key TEXT UNIQUE NOT NULL,
-            value TEXT,
-            last_modified DATETIME DEFAULT CURRENT_TIMESTAMP
-        )
-    &#x27;&#x27;&#x27;)
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        CREATE TABLE IF NOT EXISTS app_data (</span>
+<span class="s1">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s1">            key TEXT UNIQUE NOT NULL,</span>
+<span class="s1">            value TEXT,</span>
+<span class="s1">            last_modified DATETIME DEFAULT CURRENT_TIMESTAMP</span>
+<span class="s1">        )</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
 
-    # Insert sample data
-    cursor.execute(&#x27;&#x27;&#x27;
-        INSERT OR REPLACE INTO app_data (key, value) VALUES 
-        (&#x27;app_version&#x27;, &#x27;1.0.0&#x27;),
-        (&#x27;last_sync&#x27;, ?),
-        (&#x27;user_preferences&#x27;, &#x27;{&quot;theme&quot;: &quot;light&quot;, &quot;notifications&quot;: true}&#x27;)
-    &#x27;&#x27;&#x27;, (datetime.now().isoformat(),))
+    <span class="c1"># Insert sample data</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        INSERT OR REPLACE INTO app_data (key, value) VALUES </span>
+<span class="s1">        (&#39;app_version&#39;, &#39;1.0.0&#39;),</span>
+<span class="s1">        (&#39;last_sync&#39;, ?),</span>
+<span class="s1">        (&#39;user_preferences&#39;, &#39;{&quot;theme&quot;: &quot;light&quot;, &quot;notifications&quot;: true}&#39;)</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),))</span>
 
-    conn.commit()
-    conn.close()
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-init_database()
+<span class="n">init_database</span><span class="p">()</span>
 
-class PWAManager:
-    &quot;&quot;&quot;Manage PWA functionality and offline capabilities&quot;&quot;&quot;
+<span class="k">class</span><span class="w"> </span><span class="nc">PWAManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage PWA functionality and offline capabilities&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.manifest_data = {
-            &quot;name&quot;: &quot;Python Web App&quot;,
-            &quot;short_name&quot;: &quot;PyWebApp&quot;,
-            &quot;description&quot;: &quot;A Progressive Web App built with Python&quot;,
-            &quot;start_url&quot;: &quot;/&quot;,
-            &quot;display&quot;: &quot;standalone&quot;,
-            &quot;theme_color&quot;: &quot;#000000&quot;,
-            &quot;background_color&quot;: &quot;#ffffff&quot;,
-            &quot;orientation&quot;: &quot;portrait-primary&quot;,
-            &quot;icons&quot;: [
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-72x72.png&quot;,
-                    &quot;sizes&quot;: &quot;72x72&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-96x96.png&quot;,
-                    &quot;sizes&quot;: &quot;96x96&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-128x128.png&quot;,
-                    &quot;sizes&quot;: &quot;128x128&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-144x144.png&quot;,
-                    &quot;sizes&quot;: &quot;144x144&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-152x152.png&quot;,
-                    &quot;sizes&quot;: &quot;152x152&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-192x192.png&quot;,
-                    &quot;sizes&quot;: &quot;192x192&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-384x384.png&quot;,
-                    &quot;sizes&quot;: &quot;384x384&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                },
-                {
-                    &quot;src&quot;: &quot;/static/icons/icon-512x512.png&quot;,
-                    &quot;sizes&quot;: &quot;512x512&quot;,
-                    &quot;type&quot;: &quot;image/png&quot;
-                }
-            ]
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">manifest_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python Web App&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;short_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PyWebApp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A Progressive Web App built with Python&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;start_url&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;display&quot;</span><span class="p">:</span> <span class="s2">&quot;standalone&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;theme_color&quot;</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;background_color&quot;</span><span class="p">:</span> <span class="s2">&quot;#ffffff&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;orientation&quot;</span><span class="p">:</span> <span class="s2">&quot;portrait-primary&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;icons&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-72x72.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;72x72&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-96x96.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;96x96&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-128x128.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;128x128&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-144x144.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;144x144&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-152x152.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;152x152&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-192x192.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;192x192&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-384x384.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;384x384&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;/static/icons/icon-512x512.png&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;sizes&quot;</span><span class="p">:</span> <span class="s2">&quot;512x512&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;image/png&quot;</span>
+                <span class="p">}</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
 
-    def generate_service_worker(self):
-        &quot;&quot;&quot;Generate service worker JavaScript code&quot;&quot;&quot;
-        service_worker_code = &#x27;&#x27;&#x27;
-// Service Worker for PWA functionality
-const CACHE_NAME = &#x27;pwa-cache-v1&#x27;;
-const API_CACHE_NAME = &#x27;pwa-api-cache-v1&#x27;;
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_service_worker</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate service worker JavaScript code&quot;&quot;&quot;</span>
+        <span class="n">service_worker_code</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">// Service Worker for PWA functionality</span>
+<span class="s1">const CACHE_NAME = &#39;pwa-cache-v1&#39;;</span>
+<span class="s1">const API_CACHE_NAME = &#39;pwa-api-cache-v1&#39;;</span>
 
-// Resources to cache for offline use
-const STATIC_CACHE_URLS = [
-    &#x27;/&#x27;,
-    &#x27;/static/css/app.css&#x27;,
-    &#x27;/static/js/app.js&#x27;,
-    &#x27;/static/icons/icon-192x192.png&#x27;,
-    &#x27;/offline.html&#x27;
-];
+<span class="s1">// Resources to cache for offline use</span>
+<span class="s1">const STATIC_CACHE_URLS = [</span>
+<span class="s1">    &#39;/&#39;,</span>
+<span class="s1">    &#39;/static/css/app.css&#39;,</span>
+<span class="s1">    &#39;/static/js/app.js&#39;,</span>
+<span class="s1">    &#39;/static/icons/icon-192x192.png&#39;,</span>
+<span class="s1">    &#39;/offline.html&#39;</span>
+<span class="s1">];</span>
 
-// API endpoints to cache
-const API_CACHE_URLS = [
-    &#x27;/api/data&#x27;,
-    &#x27;/api/sync&#x27;
-];
+<span class="s1">// API endpoints to cache</span>
+<span class="s1">const API_CACHE_URLS = [</span>
+<span class="s1">    &#39;/api/data&#39;,</span>
+<span class="s1">    &#39;/api/sync&#39;</span>
+<span class="s1">];</span>
 
-// Install event - cache essential resources
-self.addEventListener(&#x27;install&#x27;, event =&gt; {
-    console.log(&#x27;Service Worker installing...&#x27;);
-    event.waitUntil(
-        Promise.all([
-            caches.open(CACHE_NAME).then(cache =&gt; {
-                console.log(&#x27;Caching static resources&#x27;);
-                return cache.addAll(STATIC_CACHE_URLS);
-            }),
-            caches.open(API_CACHE_NAME).then(cache =&gt; {
-                console.log(&#x27;Pre-caching API endpoints&#x27;);
-                return Promise.all(
-                    API_CACHE_URLS.map(url =&gt; 
-                        fetch(url).then(response =&gt; {
-                            if (response.ok) {
-                                return cache.put(url, response);
-                            }
-                        }).catch(err =&gt; console.log(&#x27;Pre-cache failed for&#x27;, url))
-                    )
-                );
-            })
-        ])
-    );
-    self.skipWaiting();
-});
+<span class="s1">// Install event - cache essential resources</span>
+<span class="s1">self.addEventListener(&#39;install&#39;, event =&gt; {</span>
+<span class="s1">    console.log(&#39;Service Worker installing...&#39;);</span>
+<span class="s1">    event.waitUntil(</span>
+<span class="s1">        Promise.all([</span>
+<span class="s1">            caches.open(CACHE_NAME).then(cache =&gt; {</span>
+<span class="s1">                console.log(&#39;Caching static resources&#39;);</span>
+<span class="s1">                return cache.addAll(STATIC_CACHE_URLS);</span>
+<span class="s1">            }),</span>
+<span class="s1">            caches.open(API_CACHE_NAME).then(cache =&gt; {</span>
+<span class="s1">                console.log(&#39;Pre-caching API endpoints&#39;);</span>
+<span class="s1">                return Promise.all(</span>
+<span class="s1">                    API_CACHE_URLS.map(url =&gt; </span>
+<span class="s1">                        fetch(url).then(response =&gt; {</span>
+<span class="s1">                            if (response.ok) {</span>
+<span class="s1">                                return cache.put(url, response);</span>
+<span class="s1">                            }</span>
+<span class="s1">                        }).catch(err =&gt; console.log(&#39;Pre-cache failed for&#39;, url))</span>
+<span class="s1">                    )</span>
+<span class="s1">                );</span>
+<span class="s1">            })</span>
+<span class="s1">        ])</span>
+<span class="s1">    );</span>
+<span class="s1">    self.skipWaiting();</span>
+<span class="s1">});</span>
 
-// Activate event - clean up old caches
-self.addEventListener(&#x27;activate&#x27;, event =&gt; {
-    console.log(&#x27;Service Worker activating...&#x27;);
-    event.waitUntil(
-        caches.keys().then(cacheNames =&gt; {
-            return Promise.all(
-                cacheNames.map(cacheName =&gt; {
-                    if (cacheName !== CACHE_NAME &amp;&amp; cacheName !== API_CACHE_NAME) {
-                        console.log(&#x27;Deleting old cache:&#x27;, cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        })
-    );
-    self.clients.claim();
-});
+<span class="s1">// Activate event - clean up old caches</span>
+<span class="s1">self.addEventListener(&#39;activate&#39;, event =&gt; {</span>
+<span class="s1">    console.log(&#39;Service Worker activating...&#39;);</span>
+<span class="s1">    event.waitUntil(</span>
+<span class="s1">        caches.keys().then(cacheNames =&gt; {</span>
+<span class="s1">            return Promise.all(</span>
+<span class="s1">                cacheNames.map(cacheName =&gt; {</span>
+<span class="s1">                    if (cacheName !== CACHE_NAME &amp;&amp; cacheName !== API_CACHE_NAME) {</span>
+<span class="s1">                        console.log(&#39;Deleting old cache:&#39;, cacheName);</span>
+<span class="s1">                        return caches.delete(cacheName);</span>
+<span class="s1">                    }</span>
+<span class="s1">                })</span>
+<span class="s1">            );</span>
+<span class="s1">        })</span>
+<span class="s1">    );</span>
+<span class="s1">    self.clients.claim();</span>
+<span class="s1">});</span>
 
-// Fetch event - implement caching strategies
-self.addEventListener(&#x27;fetch&#x27;, event =&gt; {
-    const { request } = event;
-    const url = new URL(request.url);
+<span class="s1">// Fetch event - implement caching strategies</span>
+<span class="s1">self.addEventListener(&#39;fetch&#39;, event =&gt; {</span>
+<span class="s1">    const { request } = event;</span>
+<span class="s1">    const url = new URL(request.url);</span>
 
-    // Handle API requests with network-first strategy
-    if (url.pathname.startsWith(&#x27;/api/&#x27;)) {
-        event.respondWith(
-            fetch(request)
-                .then(response =&gt; {
-                    // Clone response for caching
-                    const responseClone = response.clone();
+<span class="s1">    // Handle API requests with network-first strategy</span>
+<span class="s1">    if (url.pathname.startsWith(&#39;/api/&#39;)) {</span>
+<span class="s1">        event.respondWith(</span>
+<span class="s1">            fetch(request)</span>
+<span class="s1">                .then(response =&gt; {</span>
+<span class="s1">                    // Clone response for caching</span>
+<span class="s1">                    const responseClone = response.clone();</span>
 
-                    // Cache successful responses
-                    if (response.ok) {
-                        caches.open(API_CACHE_NAME).then(cache =&gt; {
-                            cache.put(request, responseClone);
-                        });
-                    }
+<span class="s1">                    // Cache successful responses</span>
+<span class="s1">                    if (response.ok) {</span>
+<span class="s1">                        caches.open(API_CACHE_NAME).then(cache =&gt; {</span>
+<span class="s1">                            cache.put(request, responseClone);</span>
+<span class="s1">                        });</span>
+<span class="s1">                    }</span>
 
-                    return response;
-                })
-                .catch(() =&gt; {
-                    // Fallback to cache when network fails
-                    return caches.match(request).then(cachedResponse =&gt; {
-                        if (cachedResponse) {
-                            return cachedResponse;
-                        }
+<span class="s1">                    return response;</span>
+<span class="s1">                })</span>
+<span class="s1">                .catch(() =&gt; {</span>
+<span class="s1">                    // Fallback to cache when network fails</span>
+<span class="s1">                    return caches.match(request).then(cachedResponse =&gt; {</span>
+<span class="s1">                        if (cachedResponse) {</span>
+<span class="s1">                            return cachedResponse;</span>
+<span class="s1">                        }</span>
 
-                        // Return offline message for API calls
-                        return new Response(
-                            JSON.stringify({ 
-                                error: &#x27;Offline&#x27;, 
-                                message: &#x27;Data not available offline&#x27; 
-                            }),
-                            { 
-                                status: 503,
-                                headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; }
-                            }
-                        );
-                    });
-                })
-        );
-    }
-    // Handle static resources with cache-first strategy
-    else {
-        event.respondWith(
-            caches.match(request).then(cachedResponse =&gt; {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
+<span class="s1">                        // Return offline message for API calls</span>
+<span class="s1">                        return new Response(</span>
+<span class="s1">                            JSON.stringify({ </span>
+<span class="s1">                                error: &#39;Offline&#39;, </span>
+<span class="s1">                                message: &#39;Data not available offline&#39; </span>
+<span class="s1">                            }),</span>
+<span class="s1">                            { </span>
+<span class="s1">                                status: 503,</span>
+<span class="s1">                                headers: { &#39;Content-Type&#39;: &#39;application/json&#39; }</span>
+<span class="s1">                            }</span>
+<span class="s1">                        );</span>
+<span class="s1">                    });</span>
+<span class="s1">                })</span>
+<span class="s1">        );</span>
+<span class="s1">    }</span>
+<span class="s1">    // Handle static resources with cache-first strategy</span>
+<span class="s1">    else {</span>
+<span class="s1">        event.respondWith(</span>
+<span class="s1">            caches.match(request).then(cachedResponse =&gt; {</span>
+<span class="s1">                if (cachedResponse) {</span>
+<span class="s1">                    return cachedResponse;</span>
+<span class="s1">                }</span>
 
-                return fetch(request).then(response =&gt; {
-                    // Cache successful responses
-                    if (response.ok &amp;&amp; request.method === &#x27;GET&#x27;) {
-                        const responseClone = response.clone();
-                        caches.open(CACHE_NAME).then(cache =&gt; {
-                            cache.put(request, responseClone);
-                        });
-                    }
+<span class="s1">                return fetch(request).then(response =&gt; {</span>
+<span class="s1">                    // Cache successful responses</span>
+<span class="s1">                    if (response.ok &amp;&amp; request.method === &#39;GET&#39;) {</span>
+<span class="s1">                        const responseClone = response.clone();</span>
+<span class="s1">                        caches.open(CACHE_NAME).then(cache =&gt; {</span>
+<span class="s1">                            cache.put(request, responseClone);</span>
+<span class="s1">                        });</span>
+<span class="s1">                    }</span>
 
-                    return response;
-                }).catch(() =&gt; {
-                    // Fallback to offline page for navigation requests
-                    if (request.mode === &#x27;navigate&#x27;) {
-                        return caches.match(&#x27;/offline.html&#x27;);
-                    }
+<span class="s1">                    return response;</span>
+<span class="s1">                }).catch(() =&gt; {</span>
+<span class="s1">                    // Fallback to offline page for navigation requests</span>
+<span class="s1">                    if (request.mode === &#39;navigate&#39;) {</span>
+<span class="s1">                        return caches.match(&#39;/offline.html&#39;);</span>
+<span class="s1">                    }</span>
 
-                    return new Response(&#x27;Offline&#x27;, { status: 503 });
-                });
-            })
-        );
-    }
-});
+<span class="s1">                    return new Response(&#39;Offline&#39;, { status: 503 });</span>
+<span class="s1">                });</span>
+<span class="s1">            })</span>
+<span class="s1">        );</span>
+<span class="s1">    }</span>
+<span class="s1">});</span>
 
-// Background sync for offline actions
-self.addEventListener(&#x27;sync&#x27;, event =&gt; {
-    console.log(&#x27;Background sync triggered:&#x27;, event.tag);
+<span class="s1">// Background sync for offline actions</span>
+<span class="s1">self.addEventListener(&#39;sync&#39;, event =&gt; {</span>
+<span class="s1">    console.log(&#39;Background sync triggered:&#39;, event.tag);</span>
 
-    if (event.tag === &#x27;background-sync&#x27;) {
-        event.waitUntil(syncOfflineActions());
-    }
-});
+<span class="s1">    if (event.tag === &#39;background-sync&#39;) {</span>
+<span class="s1">        event.waitUntil(syncOfflineActions());</span>
+<span class="s1">    }</span>
+<span class="s1">});</span>
 
-// Sync offline actions when back online
-async function syncOfflineActions() {
-    try {
-        const response = await fetch(&#x27;/api/sync/process&#x27;);
-        if (response.ok) {
-            console.log(&#x27;Offline actions synced successfully&#x27;);
-        }
-    } catch (error) {
-        console.error(&#x27;Sync failed:&#x27;, error);
-        throw error; // Retry sync later
-    }
-}
+<span class="s1">// Sync offline actions when back online</span>
+<span class="s1">async function syncOfflineActions() {</span>
+<span class="s1">    try {</span>
+<span class="s1">        const response = await fetch(&#39;/api/sync/process&#39;);</span>
+<span class="s1">        if (response.ok) {</span>
+<span class="s1">            console.log(&#39;Offline actions synced successfully&#39;);</span>
+<span class="s1">        }</span>
+<span class="s1">    } catch (error) {</span>
+<span class="s1">        console.error(&#39;Sync failed:&#39;, error);</span>
+<span class="s1">        throw error; // Retry sync later</span>
+<span class="s1">    }</span>
+<span class="s1">}</span>
 
-// Push notification handling
-self.addEventListener(&#x27;push&#x27;, event =&gt; {
-    console.log(&#x27;Push notification received&#x27;);
+<span class="s1">// Push notification handling</span>
+<span class="s1">self.addEventListener(&#39;push&#39;, event =&gt; {</span>
+<span class="s1">    console.log(&#39;Push notification received&#39;);</span>
 
-    const options = {
-        body: event.data ? event.data.text() : &#x27;New update available&#x27;,
-        icon: &#x27;/static/icons/icon-192x192.png&#x27;,
-        badge: &#x27;/static/icons/badge-72x72.png&#x27;,
-        vibrate: [100, 50, 100],
-        data: {
-            dateOfArrival: Date.now(),
-            primaryKey: 1
-        },
-        actions: [
-            {
-                action: &#x27;explore&#x27;,
-                title: &#x27;View Details&#x27;,
-                icon: &#x27;/static/icons/checkmark.png&#x27;
-            },
-            {
-                action: &#x27;close&#x27;,
-                title: &#x27;Close&#x27;,
-                icon: &#x27;/static/icons/xmark.png&#x27;
-            }
-        ]
-    };
+<span class="s1">    const options = {</span>
+<span class="s1">        body: event.data ? event.data.text() : &#39;New update available&#39;,</span>
+<span class="s1">        icon: &#39;/static/icons/icon-192x192.png&#39;,</span>
+<span class="s1">        badge: &#39;/static/icons/badge-72x72.png&#39;,</span>
+<span class="s1">        vibrate: [100, 50, 100],</span>
+<span class="s1">        data: {</span>
+<span class="s1">            dateOfArrival: Date.now(),</span>
+<span class="s1">            primaryKey: 1</span>
+<span class="s1">        },</span>
+<span class="s1">        actions: [</span>
+<span class="s1">            {</span>
+<span class="s1">                action: &#39;explore&#39;,</span>
+<span class="s1">                title: &#39;View Details&#39;,</span>
+<span class="s1">                icon: &#39;/static/icons/checkmark.png&#39;</span>
+<span class="s1">            },</span>
+<span class="s1">            {</span>
+<span class="s1">                action: &#39;close&#39;,</span>
+<span class="s1">                title: &#39;Close&#39;,</span>
+<span class="s1">                icon: &#39;/static/icons/xmark.png&#39;</span>
+<span class="s1">            }</span>
+<span class="s1">        ]</span>
+<span class="s1">    };</span>
 
-    event.waitUntil(
-        self.registration.showNotification(&#x27;PWA Update&#x27;, options)
-    );
-});
+<span class="s1">    event.waitUntil(</span>
+<span class="s1">        self.registration.showNotification(&#39;PWA Update&#39;, options)</span>
+<span class="s1">    );</span>
+<span class="s1">});</span>
 
-// Notification click handling
-self.addEventListener(&#x27;notificationclick&#x27;, event =&gt; {
-    console.log(&#x27;Notification clicked:&#x27;, event.action);
+<span class="s1">// Notification click handling</span>
+<span class="s1">self.addEventListener(&#39;notificationclick&#39;, event =&gt; {</span>
+<span class="s1">    console.log(&#39;Notification clicked:&#39;, event.action);</span>
 
-    event.notification.close();
+<span class="s1">    event.notification.close();</span>
 
-    if (event.action === &#x27;explore&#x27;) {
-        event.waitUntil(
-            clients.openWindow(&#x27;/&#x27;)
-        );
-    }
-});
-&#x27;&#x27;&#x27;
-        return service_worker_code
+<span class="s1">    if (event.action === &#39;explore&#39;) {</span>
+<span class="s1">        event.waitUntil(</span>
+<span class="s1">            clients.openWindow(&#39;/&#39;)</span>
+<span class="s1">        );</span>
+<span class="s1">    }</span>
+<span class="s1">});</span>
+<span class="s1">&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">service_worker_code</span>
 
-    def get_manifest(self):
-        &quot;&quot;&quot;Get PWA manifest data&quot;&quot;&quot;
-        return self.manifest_data
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_manifest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get PWA manifest data&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">manifest_data</span>
 
-pwa_manager = PWAManager()
+<span class="n">pwa_manager</span> <span class="o">=</span> <span class="n">PWAManager</span><span class="p">()</span>
 
-@app.route(&#x27;/&#x27;)
-def index():
-    &quot;&quot;&quot;Main PWA application page&quot;&quot;&quot;
-    return render_template(&#x27;pwa_index.html&#x27;)
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">index</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main PWA application page&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;pwa_index.html&#39;</span><span class="p">)</span>
 
-@app.route(&#x27;/manifest.json&#x27;)
-def manifest():
-    &quot;&quot;&quot;Serve PWA manifest&quot;&quot;&quot;
-    response = make_response(jsonify(pwa_manager.get_manifest()))
-    response.headers[&#x27;Content-Type&#x27;] = &#x27;application/manifest+json&#x27;
-    return response
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/manifest.json&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">manifest</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serve PWA manifest&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">jsonify</span><span class="p">(</span><span class="n">pwa_manager</span><span class="o">.</span><span class="n">get_manifest</span><span class="p">()))</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/manifest+json&#39;</span>
+    <span class="k">return</span> <span class="n">response</span>
 
-@app.route(&#x27;/sw.js&#x27;)
-def service_worker():
-    &quot;&quot;&quot;Serve service worker&quot;&quot;&quot;
-    response = make_response(pwa_manager.generate_service_worker())
-    response.headers[&#x27;Content-Type&#x27;] = &#x27;application/javascript&#x27;
-    response.headers[&#x27;Service-Worker-Allowed&#x27;] = &#x27;/&#x27;
-    return response
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/sw.js&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">service_worker</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serve service worker&quot;&quot;&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">pwa_manager</span><span class="o">.</span><span class="n">generate_service_worker</span><span class="p">())</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;application/javascript&#39;</span>
+    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Service-Worker-Allowed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
+    <span class="k">return</span> <span class="n">response</span>
 
-@app.route(&#x27;/offline.html&#x27;)
-def offline_page():
-    &quot;&quot;&quot;Offline fallback page&quot;&quot;&quot;
-    return &#x27;&#x27;&#x27;
-    &lt;!DOCTYPE html&gt;
-    &lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Offline - PWA&lt;/title&gt;
-        &lt;meta charset=&quot;utf-8&quot;&gt;
-        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-        &lt;style&gt;
-            body { 
-                font-family: Arial, sans-serif; 
-                text-align: center; 
-                padding: 50px; 
-                background: #f5f5f5;
-            }
-            .offline-message {
-                background: white;
-                padding: 30px;
-                border-radius: 10px;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            .icon { font-size: 48px; margin-bottom: 20px; }
-            h1 { color: #333; margin-bottom: 10px; }
-            p { color: #666; line-height: 1.5; }
-            .retry-btn {
-                background: #007bff;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                margin-top: 20px;
-            }
-            .retry-btn:hover { background: #0056b3; }
-        &lt;/style&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;div class=&quot;offline-message&quot;&gt;
-            &lt;div class=&quot;icon&quot;&gt;📱&lt;/div&gt;
-            &lt;h1&gt;You&#x27;re Offline&lt;/h1&gt;
-            &lt;p&gt;It looks like you&#x27;re not connected to the internet. Some features may be limited, but you can still access cached content.&lt;/p&gt;
-            &lt;button class=&quot;retry-btn&quot; onclick=&quot;window.location.reload()&quot;&gt;
-                Try Again
-            &lt;/button&gt;
-        &lt;/div&gt;
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/offline.html&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">offline_page</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Offline fallback page&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">    &lt;!DOCTYPE html&gt;</span>
+<span class="s1">    &lt;html&gt;</span>
+<span class="s1">    &lt;head&gt;</span>
+<span class="s1">        &lt;title&gt;Offline - PWA&lt;/title&gt;</span>
+<span class="s1">        &lt;meta charset=&quot;utf-8&quot;&gt;</span>
+<span class="s1">        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;</span>
+<span class="s1">        &lt;style&gt;</span>
+<span class="s1">            body { </span>
+<span class="s1">                font-family: Arial, sans-serif; </span>
+<span class="s1">                text-align: center; </span>
+<span class="s1">                padding: 50px; </span>
+<span class="s1">                background: #f5f5f5;</span>
+<span class="s1">            }</span>
+<span class="s1">            .offline-message {</span>
+<span class="s1">                background: white;</span>
+<span class="s1">                padding: 30px;</span>
+<span class="s1">                border-radius: 10px;</span>
+<span class="s1">                box-shadow: 0 2px 10px rgba(0,0,0,0.1);</span>
+<span class="s1">                max-width: 400px;</span>
+<span class="s1">                margin: 0 auto;</span>
+<span class="s1">            }</span>
+<span class="s1">            .icon { font-size: 48px; margin-bottom: 20px; }</span>
+<span class="s1">            h1 { color: #333; margin-bottom: 10px; }</span>
+<span class="s1">            p { color: #666; line-height: 1.5; }</span>
+<span class="s1">            .retry-btn {</span>
+<span class="s1">                background: #007bff;</span>
+<span class="s1">                color: white;</span>
+<span class="s1">                border: none;</span>
+<span class="s1">                padding: 10px 20px;</span>
+<span class="s1">                border-radius: 5px;</span>
+<span class="s1">                cursor: pointer;</span>
+<span class="s1">                margin-top: 20px;</span>
+<span class="s1">            }</span>
+<span class="s1">            .retry-btn:hover { background: #0056b3; }</span>
+<span class="s1">        &lt;/style&gt;</span>
+<span class="s1">    &lt;/head&gt;</span>
+<span class="s1">    &lt;body&gt;</span>
+<span class="s1">        &lt;div class=&quot;offline-message&quot;&gt;</span>
+<span class="s1">            &lt;div class=&quot;icon&quot;&gt;📱&lt;/div&gt;</span>
+<span class="s1">            &lt;h1&gt;You&#39;re Offline&lt;/h1&gt;</span>
+<span class="s1">            &lt;p&gt;It looks like you&#39;re not connected to the internet. Some features may be limited, but you can still access cached content.&lt;/p&gt;</span>
+<span class="s1">            &lt;button class=&quot;retry-btn&quot; onclick=&quot;window.location.reload()&quot;&gt;</span>
+<span class="s1">                Try Again</span>
+<span class="s1">            &lt;/button&gt;</span>
+<span class="s1">        &lt;/div&gt;</span>
 
-        &lt;script&gt;
-            // Check for connectivity and reload when back online
-            window.addEventListener(&#x27;online&#x27;, () =&gt; {
-                window.location.reload();
-            });
-        &lt;/script&gt;
-    &lt;/body&gt;
-    &lt;/html&gt;
-    &#x27;&#x27;&#x27;
+<span class="s1">        &lt;script&gt;</span>
+<span class="s1">            // Check for connectivity and reload when back online</span>
+<span class="s1">            window.addEventListener(&#39;online&#39;, () =&gt; {</span>
+<span class="s1">                window.location.reload();</span>
+<span class="s1">            });</span>
+<span class="s1">        &lt;/script&gt;</span>
+<span class="s1">    &lt;/body&gt;</span>
+<span class="s1">    &lt;/html&gt;</span>
+<span class="s1">    &#39;&#39;&#39;</span>
 </code></pre>
 </div>
 <h3 id="installable-app-characteristics">Installable app characteristics<a class="headerlink" href="#installable-app-characteristics" title="Permanent link">&para;</a></h3>
 <p>Implementing PWA installation prompts and app-like behavior:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># PWA installation and app characteristics
-class PWAInstallManager:
-    &quot;&quot;&quot;Manage PWA installation and app-like features&quot;&quot;&quot;
+<pre><code class="language-python"><span class="c1"># PWA installation and app characteristics</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PWAInstallManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage PWA installation and app-like features&quot;&quot;&quot;</span>
 
-    def __init__(self):
-        self.install_criteria = {
-            &#x27;manifest&#x27;: True,
-            &#x27;service_worker&#x27;: True,
-            &#x27;https&#x27;: True,
-            &#x27;user_engagement&#x27;: False
-        }
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">install_criteria</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;manifest&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;service_worker&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;https&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;user_engagement&#39;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">}</span>
 
-    def generate_install_prompt_js(self):
-        &quot;&quot;&quot;Generate JavaScript for install prompt handling&quot;&quot;&quot;
-        return &#x27;&#x27;&#x27;
-// PWA Installation Management
-class PWAInstaller {
-    constructor() {
-        this.deferredPrompt = null;
-        this.installButton = document.getElementById(&#x27;install-btn&#x27;);
-        this.setupEventListeners();
-        this.checkInstallability();
-    }
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_install_prompt_js</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate JavaScript for install prompt handling&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">// PWA Installation Management</span>
+<span class="s1">class PWAInstaller {</span>
+<span class="s1">    constructor() {</span>
+<span class="s1">        this.deferredPrompt = null;</span>
+<span class="s1">        this.installButton = document.getElementById(&#39;install-btn&#39;);</span>
+<span class="s1">        this.setupEventListeners();</span>
+<span class="s1">        this.checkInstallability();</span>
+<span class="s1">    }</span>
 
-    setupEventListeners() {
-        // Listen for beforeinstallprompt event
-        window.addEventListener(&#x27;beforeinstallprompt&#x27;, (e) =&gt; {
-            console.log(&#x27;PWA install prompt available&#x27;);
+<span class="s1">    setupEventListeners() {</span>
+<span class="s1">        // Listen for beforeinstallprompt event</span>
+<span class="s1">        window.addEventListener(&#39;beforeinstallprompt&#39;, (e) =&gt; {</span>
+<span class="s1">            console.log(&#39;PWA install prompt available&#39;);</span>
 
-            // Prevent default mini-infobar from appearing
-            e.preventDefault();
+<span class="s1">            // Prevent default mini-infobar from appearing</span>
+<span class="s1">            e.preventDefault();</span>
 
-            // Store event for later use
-            this.deferredPrompt = e;
+<span class="s1">            // Store event for later use</span>
+<span class="s1">            this.deferredPrompt = e;</span>
 
-            // Show custom install button
-            this.showInstallButton();
-        });
+<span class="s1">            // Show custom install button</span>
+<span class="s1">            this.showInstallButton();</span>
+<span class="s1">        });</span>
 
-        // Handle install button click
-        if (this.installButton) {
-            this.installButton.addEventListener(&#x27;click&#x27;, () =&gt; {
-                this.promptInstall();
-            });
-        }
+<span class="s1">        // Handle install button click</span>
+<span class="s1">        if (this.installButton) {</span>
+<span class="s1">            this.installButton.addEventListener(&#39;click&#39;, () =&gt; {</span>
+<span class="s1">                this.promptInstall();</span>
+<span class="s1">            });</span>
+<span class="s1">        }</span>
 
-        // Listen for app installation
-        window.addEventListener(&#x27;appinstalled&#x27;, (e) =&gt; {
-            console.log(&#x27;PWA was installed successfully&#x27;);
-            this.hideInstallButton();
-            this.trackInstallation();
-        });
+<span class="s1">        // Listen for app installation</span>
+<span class="s1">        window.addEventListener(&#39;appinstalled&#39;, (e) =&gt; {</span>
+<span class="s1">            console.log(&#39;PWA was installed successfully&#39;);</span>
+<span class="s1">            this.hideInstallButton();</span>
+<span class="s1">            this.trackInstallation();</span>
+<span class="s1">        });</span>
 
-        // Check if already installed
-        if (window.matchMedia(&#x27;(display-mode: standalone)&#x27;).matches ||
-            window.navigator.standalone) {
-            console.log(&#x27;PWA is running in standalone mode&#x27;);
-            this.hideInstallButton();
-        }
-    }
+<span class="s1">        // Check if already installed</span>
+<span class="s1">        if (window.matchMedia(&#39;(display-mode: standalone)&#39;).matches ||</span>
+<span class="s1">            window.navigator.standalone) {</span>
+<span class="s1">            console.log(&#39;PWA is running in standalone mode&#39;);</span>
+<span class="s1">            this.hideInstallButton();</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
 
-    showInstallButton() {
-        if (this.installButton) {
-            this.installButton.style.display = &#x27;block&#x27;;
-            this.installButton.innerHTML = `
-                &lt;span class=&quot;icon&quot;&gt;📱&lt;/span&gt;
-                Install App
-            `;
-        }
-    }
+<span class="s1">    showInstallButton() {</span>
+<span class="s1">        if (this.installButton) {</span>
+<span class="s1">            this.installButton.style.display = &#39;block&#39;;</span>
+<span class="s1">            this.installButton.innerHTML = `</span>
+<span class="s1">                &lt;span class=&quot;icon&quot;&gt;📱&lt;/span&gt;</span>
+<span class="s1">                Install App</span>
+<span class="s1">            `;</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
 
-    hideInstallButton() {
-        if (this.installButton) {
-            this.installButton.style.display = &#x27;none&#x27;;
-        }
-    }
+<span class="s1">    hideInstallButton() {</span>
+<span class="s1">        if (this.installButton) {</span>
+<span class="s1">            this.installButton.style.display = &#39;none&#39;;</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
 
-    async promptInstall() {
-        if (!this.deferredPrompt) {
-            console.log(&#x27;No install prompt available&#x27;);
-            return;
-        }
+<span class="s1">    async promptInstall() {</span>
+<span class="s1">        if (!this.deferredPrompt) {</span>
+<span class="s1">            console.log(&#39;No install prompt available&#39;);</span>
+<span class="s1">            return;</span>
+<span class="s1">        }</span>
 
-        // Show install prompt
-        this.deferredPrompt.prompt();
+<span class="s1">        // Show install prompt</span>
+<span class="s1">        this.deferredPrompt.prompt();</span>
 
-        // Wait for user response
-        const { outcome } = await this.deferredPrompt.userChoice;
-        console.log(&#x27;Install prompt outcome:&#x27;, outcome);
+<span class="s1">        // Wait for user response</span>
+<span class="s1">        const { outcome } = await this.deferredPrompt.userChoice;</span>
+<span class="s1">        console.log(&#39;Install prompt outcome:&#39;, outcome);</span>
 
-        if (outcome === &#x27;accepted&#x27;) {
-            console.log(&#x27;User accepted install prompt&#x27;);
-        } else {
-            console.log(&#x27;User dismissed install prompt&#x27;);
-        }
+<span class="s1">        if (outcome === &#39;accepted&#39;) {</span>
+<span class="s1">            console.log(&#39;User accepted install prompt&#39;);</span>
+<span class="s1">        } else {</span>
+<span class="s1">            console.log(&#39;User dismissed install prompt&#39;);</span>
+<span class="s1">        }</span>
 
-        // Clear the deferred prompt
-        this.deferredPrompt = null;
-        this.hideInstallButton();
-    }
+<span class="s1">        // Clear the deferred prompt</span>
+<span class="s1">        this.deferredPrompt = null;</span>
+<span class="s1">        this.hideInstallButton();</span>
+<span class="s1">    }</span>
 
-    checkInstallability() {
-        // Check PWA install criteria
-        const criteria = {
-            manifest: this.hasManifest(),
-            serviceWorker: this.hasServiceWorker(),
-            https: this.isHTTPS(),
-            engagement: this.hasUserEngagement()
-        };
+<span class="s1">    checkInstallability() {</span>
+<span class="s1">        // Check PWA install criteria</span>
+<span class="s1">        const criteria = {</span>
+<span class="s1">            manifest: this.hasManifest(),</span>
+<span class="s1">            serviceWorker: this.hasServiceWorker(),</span>
+<span class="s1">            https: this.isHTTPS(),</span>
+<span class="s1">            engagement: this.hasUserEngagement()</span>
+<span class="s1">        };</span>
 
-        console.log(&#x27;PWA install criteria:&#x27;, criteria);
+<span class="s1">        console.log(&#39;PWA install criteria:&#39;, criteria);</span>
 
-        const installable = Object.values(criteria).every(Boolean);
-        if (installable) {
-            console.log(&#x27;PWA meets installation criteria&#x27;);
-        } else {
-            console.log(&#x27;PWA does not meet all installation criteria&#x27;);
-        }
+<span class="s1">        const installable = Object.values(criteria).every(Boolean);</span>
+<span class="s1">        if (installable) {</span>
+<span class="s1">            console.log(&#39;PWA meets installation criteria&#39;);</span>
+<span class="s1">        } else {</span>
+<span class="s1">            console.log(&#39;PWA does not meet all installation criteria&#39;);</span>
+<span class="s1">        }</span>
 
-        return installable;
-    }
+<span class="s1">        return installable;</span>
+<span class="s1">    }</span>
 
-    hasManifest() {
-        return document.querySelector(&#x27;link[rel=&quot;manifest&quot;]&#x27;) !== null;
-    }
+<span class="s1">    hasManifest() {</span>
+<span class="s1">        return document.querySelector(&#39;link[rel=&quot;manifest&quot;]&#39;) !== null;</span>
+<span class="s1">    }</span>
 
-    hasServiceWorker() {
-        return &#x27;serviceWorker&#x27; in navigator;
-    }
+<span class="s1">    hasServiceWorker() {</span>
+<span class="s1">        return &#39;serviceWorker&#39; in navigator;</span>
+<span class="s1">    }</span>
 
-    isHTTPS() {
-        return location.protocol === &#x27;https:&#x27; || location.hostname === &#x27;localhost&#x27;;
-    }
+<span class="s1">    isHTTPS() {</span>
+<span class="s1">        return location.protocol === &#39;https:&#39; || location.hostname === &#39;localhost&#39;;</span>
+<span class="s1">    }</span>
 
-    hasUserEngagement() {
-        // Check if user has interacted with the app
-        // This could be tracked via user actions, time spent, etc.
-        return localStorage.getItem(&#x27;user_engaged&#x27;) === &#x27;true&#x27;;
-    }
+<span class="s1">    hasUserEngagement() {</span>
+<span class="s1">        // Check if user has interacted with the app</span>
+<span class="s1">        // This could be tracked via user actions, time spent, etc.</span>
+<span class="s1">        return localStorage.getItem(&#39;user_engaged&#39;) === &#39;true&#39;;</span>
+<span class="s1">    }</span>
 
-    trackInstallation() {
-        // Track installation for analytics
-        fetch(&#x27;/api/analytics/install&#x27;, {
-            method: &#x27;POST&#x27;,
-            headers: {
-                &#x27;Content-Type&#x27;: &#x27;application/json&#x27;
-            },
-            body: JSON.stringify({
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                referrer: document.referrer
-            })
-        }).catch(err =&gt; console.log(&#x27;Install tracking failed:&#x27;, err));
-    }
-}
+<span class="s1">    trackInstallation() {</span>
+<span class="s1">        // Track installation for analytics</span>
+<span class="s1">        fetch(&#39;/api/analytics/install&#39;, {</span>
+<span class="s1">            method: &#39;POST&#39;,</span>
+<span class="s1">            headers: {</span>
+<span class="s1">                &#39;Content-Type&#39;: &#39;application/json&#39;</span>
+<span class="s1">            },</span>
+<span class="s1">            body: JSON.stringify({</span>
+<span class="s1">                timestamp: new Date().toISOString(),</span>
+<span class="s1">                userAgent: navigator.userAgent,</span>
+<span class="s1">                referrer: document.referrer</span>
+<span class="s1">            })</span>
+<span class="s1">        }).catch(err =&gt; console.log(&#39;Install tracking failed:&#39;, err));</span>
+<span class="s1">    }</span>
+<span class="s1">}</span>
 
-// App-like behavior enhancements
-class PWABehavior {
-    constructor() {
-        this.setupAppLikeBehavior();
-        this.setupStatusBar();
-        this.setupNavigationHandling();
-    }
+<span class="s1">// App-like behavior enhancements</span>
+<span class="s1">class PWABehavior {</span>
+<span class="s1">    constructor() {</span>
+<span class="s1">        this.setupAppLikeBehavior();</span>
+<span class="s1">        this.setupStatusBar();</span>
+<span class="s1">        this.setupNavigationHandling();</span>
+<span class="s1">    }</span>
 
-    setupAppLikeBehavior() {
-        // Prevent context menu on long press (mobile)
-        document.addEventListener(&#x27;contextmenu&#x27;, (e) =&gt; {
-            if (window.matchMedia(&#x27;(display-mode: standalone)&#x27;).matches) {
-                e.preventDefault();
-            }
-        });
+<span class="s1">    setupAppLikeBehavior() {</span>
+<span class="s1">        // Prevent context menu on long press (mobile)</span>
+<span class="s1">        document.addEventListener(&#39;contextmenu&#39;, (e) =&gt; {</span>
+<span class="s1">            if (window.matchMedia(&#39;(display-mode: standalone)&#39;).matches) {</span>
+<span class="s1">                e.preventDefault();</span>
+<span class="s1">            }</span>
+<span class="s1">        });</span>
 
-        // Prevent text selection in app mode
-        if (window.matchMedia(&#x27;(display-mode: standalone)&#x27;).matches) {
-            document.body.style.webkitUserSelect = &#x27;none&#x27;;
-            document.body.style.webkitTouchCallout = &#x27;none&#x27;;
-        }
+<span class="s1">        // Prevent text selection in app mode</span>
+<span class="s1">        if (window.matchMedia(&#39;(display-mode: standalone)&#39;).matches) {</span>
+<span class="s1">            document.body.style.webkitUserSelect = &#39;none&#39;;</span>
+<span class="s1">            document.body.style.webkitTouchCallout = &#39;none&#39;;</span>
+<span class="s1">        }</span>
 
-        // Handle pull-to-refresh
-        this.setupPullToRefresh();
-    }
+<span class="s1">        // Handle pull-to-refresh</span>
+<span class="s1">        this.setupPullToRefresh();</span>
+<span class="s1">    }</span>
 
-    setupStatusBar() {
-        // Set status bar style for iOS
-        const statusBarMeta = document.createElement(&#x27;meta&#x27;);
-        statusBarMeta.name = &#x27;apple-mobile-web-app-status-bar-style&#x27;;
-        statusBarMeta.content = &#x27;black-translucent&#x27;;
-        document.head.appendChild(statusBarMeta);
+<span class="s1">    setupStatusBar() {</span>
+<span class="s1">        // Set status bar style for iOS</span>
+<span class="s1">        const statusBarMeta = document.createElement(&#39;meta&#39;);</span>
+<span class="s1">        statusBarMeta.name = &#39;apple-mobile-web-app-status-bar-style&#39;;</span>
+<span class="s1">        statusBarMeta.content = &#39;black-translucent&#39;;</span>
+<span class="s1">        document.head.appendChild(statusBarMeta);</span>
 
-        // Adjust content for notch/safe areas
-        if (CSS.supports(&#x27;padding&#x27;, &#x27;env(safe-area-inset-top)&#x27;)) {
-            document.documentElement.style.setProperty(
-                &#x27;--safe-area-top&#x27;, 
-                &#x27;env(safe-area-inset-top)&#x27;
-            );
-            document.documentElement.style.setProperty(
-                &#x27;--safe-area-bottom&#x27;, 
-                &#x27;env(safe-area-inset-bottom)&#x27;
-            );
-        }
-    }
+<span class="s1">        // Adjust content for notch/safe areas</span>
+<span class="s1">        if (CSS.supports(&#39;padding&#39;, &#39;env(safe-area-inset-top)&#39;)) {</span>
+<span class="s1">            document.documentElement.style.setProperty(</span>
+<span class="s1">                &#39;--safe-area-top&#39;, </span>
+<span class="s1">                &#39;env(safe-area-inset-top)&#39;</span>
+<span class="s1">            );</span>
+<span class="s1">            document.documentElement.style.setProperty(</span>
+<span class="s1">                &#39;--safe-area-bottom&#39;, </span>
+<span class="s1">                &#39;env(safe-area-inset-bottom)&#39;</span>
+<span class="s1">            );</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
 
-    setupNavigationHandling() {
-        // Handle back button in standalone mode
-        window.addEventListener(&#x27;popstate&#x27;, (e) =&gt; {
-            if (window.matchMedia(&#x27;(display-mode: standalone)&#x27;).matches) {
-                // Custom back button handling
-                console.log(&#x27;Back navigation in standalone mode&#x27;);
-            }
-        });
-    }
+<span class="s1">    setupNavigationHandling() {</span>
+<span class="s1">        // Handle back button in standalone mode</span>
+<span class="s1">        window.addEventListener(&#39;popstate&#39;, (e) =&gt; {</span>
+<span class="s1">            if (window.matchMedia(&#39;(display-mode: standalone)&#39;).matches) {</span>
+<span class="s1">                // Custom back button handling</span>
+<span class="s1">                console.log(&#39;Back navigation in standalone mode&#39;);</span>
+<span class="s1">            }</span>
+<span class="s1">        });</span>
+<span class="s1">    }</span>
 
-    setupPullToRefresh() {
-        let startY = 0;
-        let currentY = 0;
-        let pulling = false;
+<span class="s1">    setupPullToRefresh() {</span>
+<span class="s1">        let startY = 0;</span>
+<span class="s1">        let currentY = 0;</span>
+<span class="s1">        let pulling = false;</span>
 
-        document.addEventListener(&#x27;touchstart&#x27;, (e) =&gt; {
-            if (window.scrollY === 0) {
-                startY = e.touches[0].clientY;
-                pulling = true;
-            }
-        });
+<span class="s1">        document.addEventListener(&#39;touchstart&#39;, (e) =&gt; {</span>
+<span class="s1">            if (window.scrollY === 0) {</span>
+<span class="s1">                startY = e.touches[0].clientY;</span>
+<span class="s1">                pulling = true;</span>
+<span class="s1">            }</span>
+<span class="s1">        });</span>
 
-        document.addEventListener(&#x27;touchmove&#x27;, (e) =&gt; {
-            if (pulling &amp;&amp; window.scrollY === 0) {
-                currentY = e.touches[0].clientY;
-                const pullDistance = currentY - startY;
+<span class="s1">        document.addEventListener(&#39;touchmove&#39;, (e) =&gt; {</span>
+<span class="s1">            if (pulling &amp;&amp; window.scrollY === 0) {</span>
+<span class="s1">                currentY = e.touches[0].clientY;</span>
+<span class="s1">                const pullDistance = currentY - startY;</span>
 
-                if (pullDistance &gt; 100) {
-                    // Show refresh indicator
-                    this.showRefreshIndicator();
-                }
-            }
-        });
+<span class="s1">                if (pullDistance &gt; 100) {</span>
+<span class="s1">                    // Show refresh indicator</span>
+<span class="s1">                    this.showRefreshIndicator();</span>
+<span class="s1">                }</span>
+<span class="s1">            }</span>
+<span class="s1">        });</span>
 
-        document.addEventListener(&#x27;touchend&#x27;, (e) =&gt; {
-            if (pulling &amp;&amp; currentY - startY &gt; 100) {
-                this.refreshApp();
-            }
-            pulling = false;
-            this.hideRefreshIndicator();
-        });
-    }
+<span class="s1">        document.addEventListener(&#39;touchend&#39;, (e) =&gt; {</span>
+<span class="s1">            if (pulling &amp;&amp; currentY - startY &gt; 100) {</span>
+<span class="s1">                this.refreshApp();</span>
+<span class="s1">            }</span>
+<span class="s1">            pulling = false;</span>
+<span class="s1">            this.hideRefreshIndicator();</span>
+<span class="s1">        });</span>
+<span class="s1">    }</span>
 
-    showRefreshIndicator() {
-        // Show visual refresh indicator
-        console.log(&#x27;Showing refresh indicator&#x27;);
-    }
+<span class="s1">    showRefreshIndicator() {</span>
+<span class="s1">        // Show visual refresh indicator</span>
+<span class="s1">        console.log(&#39;Showing refresh indicator&#39;);</span>
+<span class="s1">    }</span>
 
-    hideRefreshIndicator() {
-        // Hide visual refresh indicator
-        console.log(&#x27;Hiding refresh indicator&#x27;);
-    }
+<span class="s1">    hideRefreshIndicator() {</span>
+<span class="s1">        // Hide visual refresh indicator</span>
+<span class="s1">        console.log(&#39;Hiding refresh indicator&#39;);</span>
+<span class="s1">    }</span>
 
-    refreshApp() {
-        // Refresh app content
-        window.location.reload();
-    }
-}
+<span class="s1">    refreshApp() {</span>
+<span class="s1">        // Refresh app content</span>
+<span class="s1">        window.location.reload();</span>
+<span class="s1">    }</span>
+<span class="s1">}</span>
 
-// Initialize PWA features
-document.addEventListener(&#x27;DOMContentLoaded&#x27;, () =&gt; {
-    const installer = new PWAInstaller();
-    const behavior = new PWABehavior();
+<span class="s1">// Initialize PWA features</span>
+<span class="s1">document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {</span>
+<span class="s1">    const installer = new PWAInstaller();</span>
+<span class="s1">    const behavior = new PWABehavior();</span>
 
-    // Track user engagement
-    let engagementTimeout = setTimeout(() =&gt; {
-        localStorage.setItem(&#x27;user_engaged&#x27;, &#x27;true&#x27;);
-        console.log(&#x27;User engagement recorded&#x27;);
-    }, 30000); // 30 seconds
+<span class="s1">    // Track user engagement</span>
+<span class="s1">    let engagementTimeout = setTimeout(() =&gt; {</span>
+<span class="s1">        localStorage.setItem(&#39;user_engaged&#39;, &#39;true&#39;);</span>
+<span class="s1">        console.log(&#39;User engagement recorded&#39;);</span>
+<span class="s1">    }, 30000); // 30 seconds</span>
 
-    // Cancel engagement tracking if user leaves quickly
-    window.addEventListener(&#x27;beforeunload&#x27;, () =&gt; {
-        clearTimeout(engagementTimeout);
-    });
-});
-&#x27;&#x27;&#x27;
+<span class="s1">    // Cancel engagement tracking if user leaves quickly</span>
+<span class="s1">    window.addEventListener(&#39;beforeunload&#39;, () =&gt; {</span>
+<span class="s1">        clearTimeout(engagementTimeout);</span>
+<span class="s1">    });</span>
+<span class="s1">});</span>
+<span class="s1">&#39;&#39;&#39;</span>
 
-install_manager = PWAInstallManager()
+<span class="n">install_manager</span> <span class="o">=</span> <span class="n">PWAInstallManager</span><span class="p">()</span>
 
-@app.route(&#x27;/api/pwa/install-status&#x27;)
-def install_status():
-    &quot;&quot;&quot;Check PWA installation status and criteria&quot;&quot;&quot;
-    return jsonify({
-        &#x27;installable&#x27;: True,
-        &#x27;criteria&#x27;: install_manager.install_criteria,
-        &#x27;recommendations&#x27;: [
-            &#x27;Ensure HTTPS is enabled&#x27;,
-            &#x27;Add user engagement tracking&#x27;,
-            &#x27;Implement background sync&#x27;,
-            &#x27;Test on multiple devices&#x27;
-        ]
-    })
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/pwa/install-status&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">install_status</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check PWA installation status and criteria&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;installable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;criteria&#39;</span><span class="p">:</span> <span class="n">install_manager</span><span class="o">.</span><span class="n">install_criteria</span><span class="p">,</span>
+        <span class="s1">&#39;recommendations&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;Ensure HTTPS is enabled&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Add user engagement tracking&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Implement background sync&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Test on multiple devices&#39;</span>
+        <span class="p">]</span>
+    <span class="p">})</span>
 
-@app.route(&#x27;/api/analytics/install&#x27;, methods=[&#x27;POST&#x27;])
-def track_installation():
-    &quot;&quot;&quot;Track PWA installation analytics&quot;&quot;&quot;
-    data = request.get_json()
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/analytics/install&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">track_installation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Track PWA installation analytics&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
 
-    # Store installation data
-    conn = sqlite3.connect(&#x27;pwa_data.db&#x27;)
-    cursor = conn.cursor()
+    <span class="c1"># Store installation data</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;pwa_data.db&#39;</span><span class="p">)</span>
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-    cursor.execute(&#x27;&#x27;&#x27;
-        INSERT INTO sync_queue (action, resource, data) 
-        VALUES (?, ?, ?)
-    &#x27;&#x27;&#x27;, (&#x27;install_tracked&#x27;, &#x27;analytics&#x27;, json.dumps(data)))
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        INSERT INTO sync_queue (action, resource, data) </span>
+<span class="s1">        VALUES (?, ?, ?)</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;install_tracked&#39;</span><span class="p">,</span> <span class="s1">&#39;analytics&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
 
-    conn.commit()
-    conn.close()
+    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-    return jsonify({&#x27;status&#x27;: &#x27;tracked&#x27;})
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;tracked&#39;</span><span class="p">})</span>
 </code></pre>
 </div>
 <h3 id="syncing-strategies-and-background-sync">Syncing strategies and background sync<a class="headerlink" href="#syncing-strategies-and-background-sync" title="Permanent link">&para;</a></h3>
 <p>Implementing offline data synchronization:</p>
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="228px" preserveAspectRatio="xMaxYMax meet" style="width:2736px;height:228px;background:#FFFFFF;" version="1.1" viewBox="0 0 2736 228" width="2736px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="cluster" data-entity="PWA Sync Architecture" data-source-line="4" data-uid="ent0002" id="cluster_PWA Sync Architecture"><rect fill="none" height="183.3" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="2723" x="7" y="39.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="182.1094" x="1277.4453" y="54.561">PWA Sync Architecture</text></g><g class="cluster" data-entity="Client Side" data-source-line="6" data-uid="ent0003" id="cluster_Client Side"><rect fill="none" height="116.3" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="1076" x="1630" y="82.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="85.2988" x="2125.3506" y="97.561">Client Side</text></g><g class="cluster" data-entity="Network Layer" data-source-line="17" data-uid="ent0011" id="cluster_Network Layer"><rect fill="none" height="116.3" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="868" x="738" y="82.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="115.4385" x="1114.2808" y="97.561">Network Layer</text></g><g class="cluster" data-entity="Server Side" data-source-line="27" data-uid="ent0018" id="cluster_Server Side"><rect fill="none" height="116.3" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="683" x="31" y="82.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91.2803" x="326.8599" y="97.561">Server Side</text></g><g class="entity" data-entity="sw" data-source-line="7" data-uid="ent0004" id="entity_sw"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="146.832" x="2208.58" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2335.412" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2333.412" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2333.412" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106.832" x="2223.58" y="169.561">Service Worker</text></g><g class="entity" data-entity="idb" data-source-line="8" data-uid="ent0005" id="entity_idb"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="116.6719" x="1928.66" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2025.3319" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2023.3319" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2023.3319" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.6719" x="1943.66" y="169.561">IndexedDB</text></g><g class="entity" data-entity="bg_sync" data-source-line="9" data-uid="ent0006" id="entity_bg_sync"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="162.0215" x="2527.99" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="2670.0115" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2668.0115" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="2668.0115" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="122.0215" x="2542.99" y="169.561">Background Sync</text></g><g class="entity" data-entity="ui" data-source-line="10" data-uid="ent0007" id="entity_ui"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="134.4795" x="1645.76" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1760.2395" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1758.2395" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1758.2395" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="94.4795" x="1660.76" y="169.561">App Interface</text></g><g class="entity" data-entity="online" data-source-line="18" data-uid="ent0012" id="entity_online"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="157.6191" x="754.19" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="891.8091" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="889.8091" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="889.8091" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="117.6191" x="769.19" y="169.561">Online Detection</text></g><g class="entity" data-entity="retry" data-source-line="19" data-uid="ent0013" id="entity_retry"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="119.1602" x="1111.42" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1210.5802" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1208.5802" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1208.5802" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79.1602" x="1126.42" y="169.561">Retry Logic</text></g><g class="entity" data-entity="conflict" data-source-line="20" data-uid="ent0014" id="entity_conflict"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="171.3389" x="1418.33" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="1569.6689" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1567.6689" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="1567.6689" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131.3389" x="1433.33" y="169.561">Conflict Resolution</text></g><g class="entity" data-entity="sync_api" data-source-line="28" data-uid="ent0019" id="entity_sync_api"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="100.3408" x="46.83" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="127.1708" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="125.1708" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="125.1708" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60.3408" x="61.83" y="169.561">Sync API</text></g><g class="entity" data-entity="server_conflict" data-source-line="29" data-uid="ent0020" id="entity_server_conflict"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="152.6836" x="291.66" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="424.3436" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="422.3436" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="422.3436" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112.6836" x="306.66" y="169.561">Conflict Handler</text></g><g class="entity" data-entity="db" data-source-line="30" data-uid="ent0021" id="entity_db"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="115.1885" x="582.41" y="136.5659" /><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="677.5985" y="141.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="675.5985" y="143.5659" /><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="675.5985" y="147.5659" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75.1885" x="597.41" y="169.561">Data Store</text></g><g class="link" data-entity-1="ui" data-entity-2="idb" data-source-line="12" data-uid="lnk8" id="link_ui_idb"><path d="M1780.73,159.7159 C1826.05,159.7159 1879.1,159.7159 1922.4,159.7159" fill="none" id="ui-to-idb" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1928.4,159.7159,1919.4,155.7159,1923.4,159.7159,1919.4,163.7159,1928.4,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="112.7598" x="1798.45" y="152.7828">Store offline data</text></g><g class="link" data-entity-1="idb" data-entity-2="sw" data-source-line="13" data-uid="lnk9" id="link_idb_sw"><path d="M2045.64,159.7159 C2092.35,159.7159 2152.02,159.7159 2202.29,159.7159" fill="none" id="idb-to-sw" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="2208.29,159.7159,2199.29,155.7159,2203.29,159.7159,2199.29,163.7159,2208.29,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="127.6133" x="2063.46" y="152.7828">Queue sync actions</text></g><g class="link" data-entity-1="sw" data-entity-2="bg_sync" data-source-line="14" data-uid="lnk10" id="link_sw_bg_sync"><path d="M2355.79,159.7159 C2406.94,159.7159 2469.04,159.7159 2521.73,159.7159" fill="none" id="sw-to-bg_sync" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="2527.73,159.7159,2518.73,155.7159,2522.73,159.7159,2518.73,163.7159,2527.73,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="136.0239" x="2373.7" y="152.7828">Register sync events</text></g><g class="link" data-entity-1="bg_sync" data-entity-2="online" data-source-line="22" data-uid="lnk15" id="link_bg_sync_online"><path d="M2575.42,136.2459 C2531.36,107.0159 2450.51,58.6859 2373,40.1759 C2234.78,7.1659 1232.85,9.8959 1094,40.1759 C1009.52,58.6059 924.8155,103.8966 875.6855,133.1466" fill="none" id="bg_sync-to-online" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="870.53,136.2159,880.3095,135.0489,874.8262,133.6581,876.217,128.1749,870.53,136.2159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123.6523" x="912.5" y="19.6328">Check connectivity</text></g><g class="link" data-entity-1="online" data-entity-2="retry" data-source-line="23" data-uid="lnk16" id="link_online_retry"><path d="M912.25,159.7159 C973.03,159.7159 1049.63,159.7159 1105,159.7159" fill="none" id="online-to-retry" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1111,159.7159,1102,155.7159,1106,159.7159,1102,163.7159,1111,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="117.0889" x="953.11" y="152.7828">Network available</text></g><g class="link" data-entity-1="retry" data-entity-2="conflict" data-source-line="24" data-uid="lnk17" id="link_retry_conflict"><path d="M1230.92,159.7159 C1283.07,159.7159 1353.28,159.7159 1411.95,159.7159" fill="none" id="retry-to-conflict" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="1417.95,159.7159,1408.95,155.7159,1412.95,159.7159,1408.95,163.7159,1417.95,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="104.1333" x="1272.46" y="152.7828">Handle conflicts</text></g><g class="link" data-entity-1="conflict" data-entity-2="sync_api" data-source-line="32" data-uid="lnk22" id="link_conflict_sync_api"><path d="M1467.26,136.2159 C1419.14,106.9759 1331.08,58.6159 1248,40.1759 C1142.35,16.7259 377.48,8.5059 274,40.1759 C212.66,58.9459 157.825,102.9048 125.845,132.0448" fill="none" id="conflict-to-sync_api" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="121.41,136.0859,130.7566,132.9809,125.1058,132.7183,125.3684,127.0675,121.41,136.0859" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="119.2661" x="1298.5" y="19.6328">Send queued data</text></g><g class="link" data-entity-1="sync_api" data-entity-2="server_conflict" data-source-line="33" data-uid="lnk23" id="link_sync_api_server_conflict"><path d="M147.66,159.7159 C188.02,159.7159 239.2,159.7159 285.2,159.7159" fill="none" id="sync_api-to-server_conflict" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="291.2,159.7159,282.2,155.7159,286.2,159.7159,282.2,163.7159,291.2,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="108.1196" x="165.41" y="152.7828">Process conflicts</text></g><g class="link" data-entity-1="server_conflict" data-entity-2="db" data-source-line="34" data-uid="lnk24" id="link_server_conflict_db"><path d="M444.49,159.7159 C488.17,159.7159 536.06,159.7159 576.19,159.7159" fill="none" id="server_conflict-to-db" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="582.19,159.7159,573.19,155.7159,577.19,159.7159,573.19,163.7159,582.19,159.7159" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="102.1846" x="462.37" y="152.7828">Persist changes</text></g></g></svg></p></div></div>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
-<pre><code class="language-python"># Background sync and data synchronization
-class PWASyncManager:
-    &quot;&quot;&quot;Manage PWA background synchronization&quot;&quot;&quot;
-
-    def __init__(self):
-        self.sync_strategies = {
-            &#x27;immediate&#x27;: self.immediate_sync,
-            &#x27;background&#x27;: self.background_sync,
-            &#x27;conflict_resolution&#x27;: self.resolve_conflicts
-        }
-
-    def queue_sync_action(self, action, resource, data):
-        &quot;&quot;&quot;Queue an action for background synchronization&quot;&quot;&quot;
-        conn = sqlite3.connect(&#x27;pwa_data.db&#x27;)
-        cursor = conn.cursor()
-
-        cursor.execute(&#x27;&#x27;&#x27;
-            INSERT INTO sync_queue (action, resource, data) 
-            VALUES (?, ?, ?)
-        &#x27;&#x27;&#x27;, (action, resource, json.dumps(data)))
-
-        sync_id = cursor.lastrowid
-        conn.commit()
-        conn.close()
-
-        return sync_id
-
-    def get_pending_syncs(self):
-        &quot;&quot;&quot;Get all pending sync actions&quot;&quot;&quot;
-        conn = sqlite3.connect(&#x27;pwa_data.db&#x27;)
-        cursor = conn.cursor()
-
-        cursor.execute(&#x27;&#x27;&#x27;
-            SELECT id, action, resource, data, timestamp 
-            FROM sync_queue 
-            WHERE synced = FALSE 
-            ORDER BY timestamp ASC
-        &#x27;&#x27;&#x27;)
-
-        syncs = []
-        for row in cursor.fetchall():
-            syncs.append({
-                &#x27;id&#x27;: row[0],
-                &#x27;action&#x27;: row[1],
-                &#x27;resource&#x27;: row[2],
-                &#x27;data&#x27;: json.loads(row[3]) if row[3] else None,
-                &#x27;timestamp&#x27;: row[4]
-            })
-
-        conn.close()
-        return syncs
-
-    def mark_sync_completed(self, sync_id):
-        &quot;&quot;&quot;Mark a sync action as completed&quot;&quot;&quot;
-        conn = sqlite3.connect(&#x27;pwa_data.db&#x27;)
-        cursor = conn.cursor()
-
-        cursor.execute(&#x27;&#x27;&#x27;
-            UPDATE sync_queue 
-            SET synced = TRUE 
-            WHERE id = ?
-        &#x27;&#x27;&#x27;, (sync_id,))
-
-        conn.commit()
-        conn.close()
-
-    def immediate_sync(self, data):
-        &quot;&quot;&quot;Attempt immediate synchronization&quot;&quot;&quot;
-        try:
-            # Simulate network request
-            result = self.process_sync_data(data)
-            return {&#x27;success&#x27;: True, &#x27;result&#x27;: result}
-        except Exception as e:
-            # Queue for background sync if immediate fails
-            sync_id = self.queue_sync_action(&#x27;retry&#x27;, &#x27;data&#x27;, data)
-            return {&#x27;success&#x27;: False, &#x27;queued&#x27;: sync_id, &#x27;error&#x27;: str(e)}
-
-    def background_sync(self, sync_data):
-        &quot;&quot;&quot;Process background sync queue&quot;&quot;&quot;
-        results = []
-        pending_syncs = self.get_pending_syncs()
-
-        for sync in pending_syncs:
-            try:
-                result = self.process_sync_data(sync[&#x27;data&#x27;])
-                self.mark_sync_completed(sync[&#x27;id&#x27;])
-                results.append({
-                    &#x27;id&#x27;: sync[&#x27;id&#x27;],
-                    &#x27;success&#x27;: True,
-                    &#x27;result&#x27;: result
-                })
-            except Exception as e:
-                results.append({
-                    &#x27;id&#x27;: sync[&#x27;id&#x27;],
-                    &#x27;success&#x27;: False,
-                    &#x27;error&#x27;: str(e),
-                    &#x27;retry_later&#x27;: True
-                })
-
-        return results
-
-    def resolve_conflicts(self, local_data, server_data):
-        &quot;&quot;&quot;Resolve data conflicts during sync&quot;&quot;&quot;
-        resolution_strategy = &#x27;server_wins&#x27;  # Can be configurable
-
-        if resolution_strategy == &#x27;server_wins&#x27;:
-            return server_data
-        elif resolution_strategy == &#x27;client_wins&#x27;:
-            return local_data
-        elif resolution_strategy == &#x27;merge&#x27;:
-            # Implement merge logic based on data structure
-            return self.merge_data(local_data, server_data)
-        elif resolution_strategy == &#x27;timestamp&#x27;:
-            # Use most recent data based on timestamp
-            local_time = local_data.get(&#x27;last_modified&#x27;, 0)
-            server_time = server_data.get(&#x27;last_modified&#x27;, 0)
-            return server_data if server_time &gt; local_time else local_data
-
-    def merge_data(self, local_data, server_data):
-        &quot;&quot;&quot;Merge local and server data&quot;&quot;&quot;
-        # Simple merge strategy - can be customized per data type
-        merged = server_data.copy()
-
-        # Preserve local changes that don&#x27;t conflict
-        for key, value in local_data.items():
-            if key not in server_data:
-                merged[key] = value
-
-        return merged
-
-    def process_sync_data(self, data):
-        &quot;&quot;&quot;Process sync data - simulate server operation&quot;&quot;&quot;
-        # Simulate processing time
-        time.sleep(0.1)
-
-        # Return processed result
-        return {
-            &#x27;processed_at&#x27;: datetime.now().isoformat(),
-            &#x27;data_id&#x27;: data.get(&#x27;id&#x27;, &#x27;unknown&#x27;),
-            &#x27;status&#x27;: &#x27;processed&#x27;
-        }
-
-sync_manager = PWASyncManager()
-
-@app.route(&#x27;/api/sync/queue&#x27;, methods=[&#x27;POST&#x27;])
-def queue_sync():
-    &quot;&quot;&quot;Queue data for background synchronization&quot;&quot;&quot;
-    data = request.get_json()
-
-    sync_id = sync_manager.queue_sync_action(
-        data.get(&#x27;action&#x27;, &#x27;update&#x27;),
-        data.get(&#x27;resource&#x27;, &#x27;data&#x27;),
-        data.get(&#x27;payload&#x27;)
-    )
-
-    return jsonify({
-        &#x27;sync_id&#x27;: sync_id,
-        &#x27;queued&#x27;: True,
-        &#x27;message&#x27;: &#x27;Data queued for background sync&#x27;
-    })
-
-@app.route(&#x27;/api/sync/process&#x27;)
-def process_sync():
-    &quot;&quot;&quot;Process pending background sync queue&quot;&quot;&quot;
-    results = sync_manager.background_sync({})
-
-    return jsonify({
-        &#x27;processed&#x27;: len(results),
-        &#x27;successful&#x27;: len([r for r in results if r[&#x27;success&#x27;]]),
-        &#x27;failed&#x27;: len([r for r in results if not r[&#x27;success&#x27;]]),
-        &#x27;results&#x27;: results
-    })
-
-@app.route(&#x27;/api/sync/status&#x27;)
-def sync_status():
-    &quot;&quot;&quot;Get current sync status&quot;&quot;&quot;
-    pending_syncs = sync_manager.get_pending_syncs()
-
-    return jsonify({
-        &#x27;pending_count&#x27;: len(pending_syncs),
-        &#x27;last_sync&#x27;: datetime.now().isoformat(),
-        &#x27;pending_actions&#x27;: [
-            {
-                &#x27;id&#x27;: sync[&#x27;id&#x27;],
-                &#x27;action&#x27;: sync[&#x27;action&#x27;],
-                &#x27;resource&#x27;: sync[&#x27;resource&#x27;],
-                &#x27;timestamp&#x27;: sync[&#x27;timestamp&#x27;]
-            }
-            for sync in pending_syncs
-        ]
-    })
-
-# PWA accessibility considerations
-class PWAAccessibility:
-    &quot;&quot;&quot;Manage PWA accessibility features&quot;&quot;&quot;
-
-    def __init__(self):
-        self.a11y_features = {
-            &#x27;keyboard_navigation&#x27;: True,
-            &#x27;screen_reader_support&#x27;: True,
-            &#x27;high_contrast&#x27;: True,
-            &#x27;focus_management&#x27;: True,
-            &#x27;aria_labels&#x27;: True
-        }
-
-    def generate_accessibility_js(self):
-        &quot;&quot;&quot;Generate JavaScript for accessibility enhancements&quot;&quot;&quot;
-        return &#x27;&#x27;&#x27;
-// PWA Accessibility Enhancements
-class PWAAccessibility {
-    constructor() {
-        this.setupKeyboardNavigation();
-        this.setupFocusManagement();
-        this.setupHighContrast();
-        this.setupScreenReaderSupport();
-    }
-
-    setupKeyboardNavigation() {
-        // Ensure all interactive elements are keyboard accessible
-        document.addEventListener(&#x27;keydown&#x27;, (e) =&gt; {
-            // Handle tab navigation
-            if (e.key === &#x27;Tab&#x27;) {
-                this.manageFocusOrder(e);
-            }
-
-            // Handle escape key
-            if (e.key === &#x27;Escape&#x27;) {
-                this.handleEscape();
-            }
-
-            // Handle enter/space for custom controls
-            if (e.key === &#x27;Enter&#x27; || e.key === &#x27; &#x27;) {
-                this.handleActivation(e);
-            }
-        });
-    }
-
-    setupFocusManagement() {
-        // Track focus for skip links and modal dialogs
-        let focusStack = [];
-
-        window.pushFocus = (element) =&gt; {
-            focusStack.push(document.activeElement);
-            element.focus();
-        };
-
-        window.popFocus = () =&gt; {
-            const previousFocus = focusStack.pop();
-            if (previousFocus) {
-                previousFocus.focus();
-            }
-        };
-
-        // Focus trap for modals
-        window.trapFocus = (container) =&gt; {
-            const focusableElements = container.querySelectorAll(
-                &#x27;button, [href], input, select, textarea, [tabindex]:not([tabindex=&quot;-1&quot;])&#x27;
-            );
-
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-
-            container.addEventListener(&#x27;keydown&#x27;, (e) =&gt; {
-                if (e.key === &#x27;Tab&#x27;) {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstElement) {
-                            lastElement.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastElement) {
-                            firstElement.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-            });
-        };
-    }
-
-    setupHighContrast() {
-        // Detect and respond to high contrast preferences
-        const prefersHighContrast = window.matchMedia(&#x27;(prefers-contrast: high)&#x27;);
-
-        const updateContrast = (e) =&gt; {
-            if (e.matches) {
-                document.body.classList.add(&#x27;high-contrast&#x27;);
-            } else {
-                document.body.classList.remove(&#x27;high-contrast&#x27;);
-            }
-        };
-
-        prefersHighContrast.addListener(updateContrast);
-        updateContrast(prefersHighContrast);
-
-        // Manual contrast toggle
-        const contrastToggle = document.getElementById(&#x27;contrast-toggle&#x27;);
-        if (contrastToggle) {
-            contrastToggle.addEventListener(&#x27;click&#x27;, () =&gt; {
-                document.body.classList.toggle(&#x27;high-contrast&#x27;);
-                const isHighContrast = document.body.classList.contains(&#x27;high-contrast&#x27;);
-                localStorage.setItem(&#x27;high-contrast&#x27;, isHighContrast);
-                contrastToggle.setAttribute(&#x27;aria-pressed&#x27;, isHighContrast);
-            });
-        }
-    }
-
-    setupScreenReaderSupport() {
-        // Announce important changes to screen readers
-        const liveRegion = document.createElement(&#x27;div&#x27;);
-        liveRegion.setAttribute(&#x27;aria-live&#x27;, &#x27;polite&#x27;);
-        liveRegion.setAttribute(&#x27;aria-atomic&#x27;, &#x27;true&#x27;);
-        liveRegion.className = &#x27;sr-only&#x27;;
-        document.body.appendChild(liveRegion);
-
-        window.announceToScreenReader = (message) =&gt; {
-            liveRegion.textContent = message;
-            setTimeout(() =&gt; {
-                liveRegion.textContent = &#x27;&#x27;;
-            }, 1000);
-        };
-
-        // Announce app state changes
-        window.addEventListener(&#x27;online&#x27;, () =&gt; {
-            window.announceToScreenReader(&#x27;Connection restored. App is now online.&#x27;);
-        });
-
-        window.addEventListener(&#x27;offline&#x27;, () =&gt; {
-            window.announceToScreenReader(&#x27;Connection lost. App is now in offline mode.&#x27;);
-        });
-    }
-
-    manageFocusOrder(e) {
-        // Ensure logical focus order in complex layouts
-        const focusableElements = Array.from(document.querySelectorAll(
-            &#x27;button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex=&quot;-1&quot;])&#x27;
-        ));
-
-        const currentIndex = focusableElements.indexOf(document.activeElement);
-
-        if (e.shiftKey) {
-            // Backward navigation
-            if (currentIndex === 0) {
-                focusableElements[focusableElements.length - 1].focus();
-                e.preventDefault();
-            }
-        } else {
-            // Forward navigation
-            if (currentIndex === focusableElements.length - 1) {
-                focusableElements[0].focus();
-                e.preventDefault();
-            }
-        }
-    }
-
-    handleEscape() {
-        // Close modals/dropdowns with escape key
-        const openModal = document.querySelector(&#x27;.modal.open&#x27;);
-        const openDropdown = document.querySelector(&#x27;.dropdown.open&#x27;);
-
-        if (openModal) {
-            this.closeModal(openModal);
-        } else if (openDropdown) {
-            this.closeDropdown(openDropdown);
-        }
-    }
-
-    handleActivation(e) {
-        const target = e.target;
-
-        // Handle custom button-like elements
-        if (target.getAttribute(&#x27;role&#x27;) === &#x27;button&#x27;) {
-            target.click();
-            e.preventDefault();
-        }
-    }
-
-    closeModal(modal) {
-        modal.classList.remove(&#x27;open&#x27;);
-        modal.setAttribute(&#x27;aria-hidden&#x27;, &#x27;true&#x27;);
-        window.popFocus();
-    }
-
-    closeDropdown(dropdown) {
-        dropdown.classList.remove(&#x27;open&#x27;);
-        dropdown.setAttribute(&#x27;aria-expanded&#x27;, &#x27;false&#x27;);
-    }
-}
-
-// Initialize accessibility features
-document.addEventListener(&#x27;DOMContentLoaded&#x27;, () =&gt; {
-    const a11y = new PWAAccessibility();
-
-    // Load saved preferences
-    if (localStorage.getItem(&#x27;high-contrast&#x27;) === &#x27;true&#x27;) {
-        document.body.classList.add(&#x27;high-contrast&#x27;);
-    }
-});
-&#x27;&#x27;&#x27;
-
-accessibility_manager = PWAAccessibility()
-
-@app.route(&#x27;/api/pwa/accessibility&#x27;)
-def accessibility_status():
-    &quot;&quot;&quot;Get PWA accessibility features status&quot;&quot;&quot;
-    return jsonify({
-        &#x27;features&#x27;: accessibility_manager.a11y_features,
-        &#x27;guidelines_compliance&#x27;: [
-            &#x27;WCAG 2.1 AA level compliance&#x27;,
-            &#x27;Keyboard navigation support&#x27;,
-            &#x27;Screen reader compatibility&#x27;,
-            &#x27;High contrast mode&#x27;,
-            &#x27;Focus management&#x27;,
-            &#x27;ARIA labels and roles&#x27;
-        ]
-    })
-
-if __name__ == &#x27;__main__&#x27;:
-    app.run(debug=True, host=&#x27;0.0.0.0&#x27;, port=5000)
+<pre><code class="language-python"><span class="c1"># Background sync and data synchronization</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PWASyncManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage PWA background synchronization&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sync_strategies</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;immediate&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">immediate_sync</span><span class="p">,</span>
+            <span class="s1">&#39;background&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_sync</span><span class="p">,</span>
+            <span class="s1">&#39;conflict_resolution&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolve_conflicts</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">queue_sync_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Queue an action for background synchronization&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;pwa_data.db&#39;</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            INSERT INTO sync_queue (action, resource, data) </span>
+<span class="s1">            VALUES (?, ?, ?)</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+
+        <span class="n">sync_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">lastrowid</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">sync_id</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pending_syncs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all pending sync actions&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;pwa_data.db&#39;</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            SELECT id, action, resource, data, timestamp </span>
+<span class="s1">            FROM sync_queue </span>
+<span class="s1">            WHERE synced = FALSE </span>
+<span class="s1">            ORDER BY timestamp ASC</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">syncs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+            <span class="n">syncs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+            <span class="p">})</span>
+
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">syncs</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">mark_sync_completed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sync_id</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark a sync action as completed&quot;&quot;&quot;</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;pwa_data.db&#39;</span><span class="p">)</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            UPDATE sync_queue </span>
+<span class="s1">            SET synced = TRUE </span>
+<span class="s1">            WHERE id = ?</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">sync_id</span><span class="p">,))</span>
+
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">immediate_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Attempt immediate synchronization&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Simulate network request</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_sync_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span><span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="c1"># Queue for background sync if immediate fails</span>
+            <span class="n">sync_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue_sync_action</span><span class="p">(</span><span class="s1">&#39;retry&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;queued&#39;</span><span class="p">:</span> <span class="n">sync_id</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">background_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sync_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process background sync queue&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">pending_syncs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_pending_syncs</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">sync</span> <span class="ow">in</span> <span class="n">pending_syncs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_sync_data</span><span class="p">(</span><span class="n">sync</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mark_sync_completed</span><span class="p">(</span><span class="n">sync</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">sync</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">result</span>
+                <span class="p">})</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">sync</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
+                    <span class="s1">&#39;retry_later&#39;</span><span class="p">:</span> <span class="kc">True</span>
+                <span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">resolve_conflicts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_data</span><span class="p">,</span> <span class="n">server_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolve data conflicts during sync&quot;&quot;&quot;</span>
+        <span class="n">resolution_strategy</span> <span class="o">=</span> <span class="s1">&#39;server_wins&#39;</span>  <span class="c1"># Can be configurable</span>
+
+        <span class="k">if</span> <span class="n">resolution_strategy</span> <span class="o">==</span> <span class="s1">&#39;server_wins&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">server_data</span>
+        <span class="k">elif</span> <span class="n">resolution_strategy</span> <span class="o">==</span> <span class="s1">&#39;client_wins&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">local_data</span>
+        <span class="k">elif</span> <span class="n">resolution_strategy</span> <span class="o">==</span> <span class="s1">&#39;merge&#39;</span><span class="p">:</span>
+            <span class="c1"># Implement merge logic based on data structure</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">merge_data</span><span class="p">(</span><span class="n">local_data</span><span class="p">,</span> <span class="n">server_data</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">resolution_strategy</span> <span class="o">==</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span>
+            <span class="c1"># Use most recent data based on timestamp</span>
+            <span class="n">local_time</span> <span class="o">=</span> <span class="n">local_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_modified&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">server_time</span> <span class="o">=</span> <span class="n">server_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;last_modified&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">server_data</span> <span class="k">if</span> <span class="n">server_time</span> <span class="o">&gt;</span> <span class="n">local_time</span> <span class="k">else</span> <span class="n">local_data</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">merge_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_data</span><span class="p">,</span> <span class="n">server_data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Merge local and server data&quot;&quot;&quot;</span>
+        <span class="c1"># Simple merge strategy - can be customized per data type</span>
+        <span class="n">merged</span> <span class="o">=</span> <span class="n">server_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># Preserve local changes that don&#39;t conflict</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">local_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">server_data</span><span class="p">:</span>
+                <span class="n">merged</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">merged</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_sync_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process sync data - simulate server operation&quot;&quot;&quot;</span>
+        <span class="c1"># Simulate processing time</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+        <span class="c1"># Return processed result</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;processed_at&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;data_id&#39;</span><span class="p">:</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;processed&#39;</span>
+        <span class="p">}</span>
+
+<span class="n">sync_manager</span> <span class="o">=</span> <span class="n">PWASyncManager</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/sync/queue&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">queue_sync</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Queue data for background synchronization&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+
+    <span class="n">sync_id</span> <span class="o">=</span> <span class="n">sync_manager</span><span class="o">.</span><span class="n">queue_sync_action</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">,</span> <span class="s1">&#39;update&#39;</span><span class="p">),</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resource&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;payload&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;sync_id&#39;</span><span class="p">:</span> <span class="n">sync_id</span><span class="p">,</span>
+        <span class="s1">&#39;queued&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Data queued for background sync&#39;</span>
+    <span class="p">})</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/sync/process&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process_sync</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process pending background sync queue&quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">sync_manager</span><span class="o">.</span><span class="n">background_sync</span><span class="p">({})</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;processed&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">),</span>
+        <span class="s1">&#39;successful&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]]),</span>
+        <span class="s1">&#39;failed&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]]),</span>
+        <span class="s1">&#39;results&#39;</span><span class="p">:</span> <span class="n">results</span>
+    <span class="p">})</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/sync/status&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sync_status</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get current sync status&quot;&quot;&quot;</span>
+    <span class="n">pending_syncs</span> <span class="o">=</span> <span class="n">sync_manager</span><span class="o">.</span><span class="n">get_pending_syncs</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;pending_count&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">pending_syncs</span><span class="p">),</span>
+        <span class="s1">&#39;last_sync&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+        <span class="s1">&#39;pending_actions&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">sync</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">sync</span><span class="p">[</span><span class="s1">&#39;action&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;resource&#39;</span><span class="p">:</span> <span class="n">sync</span><span class="p">[</span><span class="s1">&#39;resource&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">sync</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">sync</span> <span class="ow">in</span> <span class="n">pending_syncs</span>
+        <span class="p">]</span>
+    <span class="p">})</span>
+
+<span class="c1"># PWA accessibility considerations</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PWAAccessibility</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manage PWA accessibility features&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a11y_features</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;keyboard_navigation&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;screen_reader_support&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;high_contrast&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;focus_management&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;aria_labels&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_accessibility_js</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate JavaScript for accessibility enhancements&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">// PWA Accessibility Enhancements</span>
+<span class="s1">class PWAAccessibility {</span>
+<span class="s1">    constructor() {</span>
+<span class="s1">        this.setupKeyboardNavigation();</span>
+<span class="s1">        this.setupFocusManagement();</span>
+<span class="s1">        this.setupHighContrast();</span>
+<span class="s1">        this.setupScreenReaderSupport();</span>
+<span class="s1">    }</span>
+
+<span class="s1">    setupKeyboardNavigation() {</span>
+<span class="s1">        // Ensure all interactive elements are keyboard accessible</span>
+<span class="s1">        document.addEventListener(&#39;keydown&#39;, (e) =&gt; {</span>
+<span class="s1">            // Handle tab navigation</span>
+<span class="s1">            if (e.key === &#39;Tab&#39;) {</span>
+<span class="s1">                this.manageFocusOrder(e);</span>
+<span class="s1">            }</span>
+
+<span class="s1">            // Handle escape key</span>
+<span class="s1">            if (e.key === &#39;Escape&#39;) {</span>
+<span class="s1">                this.handleEscape();</span>
+<span class="s1">            }</span>
+
+<span class="s1">            // Handle enter/space for custom controls</span>
+<span class="s1">            if (e.key === &#39;Enter&#39; || e.key === &#39; &#39;) {</span>
+<span class="s1">                this.handleActivation(e);</span>
+<span class="s1">            }</span>
+<span class="s1">        });</span>
+<span class="s1">    }</span>
+
+<span class="s1">    setupFocusManagement() {</span>
+<span class="s1">        // Track focus for skip links and modal dialogs</span>
+<span class="s1">        let focusStack = [];</span>
+
+<span class="s1">        window.pushFocus = (element) =&gt; {</span>
+<span class="s1">            focusStack.push(document.activeElement);</span>
+<span class="s1">            element.focus();</span>
+<span class="s1">        };</span>
+
+<span class="s1">        window.popFocus = () =&gt; {</span>
+<span class="s1">            const previousFocus = focusStack.pop();</span>
+<span class="s1">            if (previousFocus) {</span>
+<span class="s1">                previousFocus.focus();</span>
+<span class="s1">            }</span>
+<span class="s1">        };</span>
+
+<span class="s1">        // Focus trap for modals</span>
+<span class="s1">        window.trapFocus = (container) =&gt; {</span>
+<span class="s1">            const focusableElements = container.querySelectorAll(</span>
+<span class="s1">                &#39;button, [href], input, select, textarea, [tabindex]:not([tabindex=&quot;-1&quot;])&#39;</span>
+<span class="s1">            );</span>
+
+<span class="s1">            const firstElement = focusableElements[0];</span>
+<span class="s1">            const lastElement = focusableElements[focusableElements.length - 1];</span>
+
+<span class="s1">            container.addEventListener(&#39;keydown&#39;, (e) =&gt; {</span>
+<span class="s1">                if (e.key === &#39;Tab&#39;) {</span>
+<span class="s1">                    if (e.shiftKey) {</span>
+<span class="s1">                        if (document.activeElement === firstElement) {</span>
+<span class="s1">                            lastElement.focus();</span>
+<span class="s1">                            e.preventDefault();</span>
+<span class="s1">                        }</span>
+<span class="s1">                    } else {</span>
+<span class="s1">                        if (document.activeElement === lastElement) {</span>
+<span class="s1">                            firstElement.focus();</span>
+<span class="s1">                            e.preventDefault();</span>
+<span class="s1">                        }</span>
+<span class="s1">                    }</span>
+<span class="s1">                }</span>
+<span class="s1">            });</span>
+<span class="s1">        };</span>
+<span class="s1">    }</span>
+
+<span class="s1">    setupHighContrast() {</span>
+<span class="s1">        // Detect and respond to high contrast preferences</span>
+<span class="s1">        const prefersHighContrast = window.matchMedia(&#39;(prefers-contrast: high)&#39;);</span>
+
+<span class="s1">        const updateContrast = (e) =&gt; {</span>
+<span class="s1">            if (e.matches) {</span>
+<span class="s1">                document.body.classList.add(&#39;high-contrast&#39;);</span>
+<span class="s1">            } else {</span>
+<span class="s1">                document.body.classList.remove(&#39;high-contrast&#39;);</span>
+<span class="s1">            }</span>
+<span class="s1">        };</span>
+
+<span class="s1">        prefersHighContrast.addListener(updateContrast);</span>
+<span class="s1">        updateContrast(prefersHighContrast);</span>
+
+<span class="s1">        // Manual contrast toggle</span>
+<span class="s1">        const contrastToggle = document.getElementById(&#39;contrast-toggle&#39;);</span>
+<span class="s1">        if (contrastToggle) {</span>
+<span class="s1">            contrastToggle.addEventListener(&#39;click&#39;, () =&gt; {</span>
+<span class="s1">                document.body.classList.toggle(&#39;high-contrast&#39;);</span>
+<span class="s1">                const isHighContrast = document.body.classList.contains(&#39;high-contrast&#39;);</span>
+<span class="s1">                localStorage.setItem(&#39;high-contrast&#39;, isHighContrast);</span>
+<span class="s1">                contrastToggle.setAttribute(&#39;aria-pressed&#39;, isHighContrast);</span>
+<span class="s1">            });</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
+
+<span class="s1">    setupScreenReaderSupport() {</span>
+<span class="s1">        // Announce important changes to screen readers</span>
+<span class="s1">        const liveRegion = document.createElement(&#39;div&#39;);</span>
+<span class="s1">        liveRegion.setAttribute(&#39;aria-live&#39;, &#39;polite&#39;);</span>
+<span class="s1">        liveRegion.setAttribute(&#39;aria-atomic&#39;, &#39;true&#39;);</span>
+<span class="s1">        liveRegion.className = &#39;sr-only&#39;;</span>
+<span class="s1">        document.body.appendChild(liveRegion);</span>
+
+<span class="s1">        window.announceToScreenReader = (message) =&gt; {</span>
+<span class="s1">            liveRegion.textContent = message;</span>
+<span class="s1">            setTimeout(() =&gt; {</span>
+<span class="s1">                liveRegion.textContent = &#39;&#39;;</span>
+<span class="s1">            }, 1000);</span>
+<span class="s1">        };</span>
+
+<span class="s1">        // Announce app state changes</span>
+<span class="s1">        window.addEventListener(&#39;online&#39;, () =&gt; {</span>
+<span class="s1">            window.announceToScreenReader(&#39;Connection restored. App is now online.&#39;);</span>
+<span class="s1">        });</span>
+
+<span class="s1">        window.addEventListener(&#39;offline&#39;, () =&gt; {</span>
+<span class="s1">            window.announceToScreenReader(&#39;Connection lost. App is now in offline mode.&#39;);</span>
+<span class="s1">        });</span>
+<span class="s1">    }</span>
+
+<span class="s1">    manageFocusOrder(e) {</span>
+<span class="s1">        // Ensure logical focus order in complex layouts</span>
+<span class="s1">        const focusableElements = Array.from(document.querySelectorAll(</span>
+<span class="s1">            &#39;button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex=&quot;-1&quot;])&#39;</span>
+<span class="s1">        ));</span>
+
+<span class="s1">        const currentIndex = focusableElements.indexOf(document.activeElement);</span>
+
+<span class="s1">        if (e.shiftKey) {</span>
+<span class="s1">            // Backward navigation</span>
+<span class="s1">            if (currentIndex === 0) {</span>
+<span class="s1">                focusableElements[focusableElements.length - 1].focus();</span>
+<span class="s1">                e.preventDefault();</span>
+<span class="s1">            }</span>
+<span class="s1">        } else {</span>
+<span class="s1">            // Forward navigation</span>
+<span class="s1">            if (currentIndex === focusableElements.length - 1) {</span>
+<span class="s1">                focusableElements[0].focus();</span>
+<span class="s1">                e.preventDefault();</span>
+<span class="s1">            }</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
+
+<span class="s1">    handleEscape() {</span>
+<span class="s1">        // Close modals/dropdowns with escape key</span>
+<span class="s1">        const openModal = document.querySelector(&#39;.modal.open&#39;);</span>
+<span class="s1">        const openDropdown = document.querySelector(&#39;.dropdown.open&#39;);</span>
+
+<span class="s1">        if (openModal) {</span>
+<span class="s1">            this.closeModal(openModal);</span>
+<span class="s1">        } else if (openDropdown) {</span>
+<span class="s1">            this.closeDropdown(openDropdown);</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
+
+<span class="s1">    handleActivation(e) {</span>
+<span class="s1">        const target = e.target;</span>
+
+<span class="s1">        // Handle custom button-like elements</span>
+<span class="s1">        if (target.getAttribute(&#39;role&#39;) === &#39;button&#39;) {</span>
+<span class="s1">            target.click();</span>
+<span class="s1">            e.preventDefault();</span>
+<span class="s1">        }</span>
+<span class="s1">    }</span>
+
+<span class="s1">    closeModal(modal) {</span>
+<span class="s1">        modal.classList.remove(&#39;open&#39;);</span>
+<span class="s1">        modal.setAttribute(&#39;aria-hidden&#39;, &#39;true&#39;);</span>
+<span class="s1">        window.popFocus();</span>
+<span class="s1">    }</span>
+
+<span class="s1">    closeDropdown(dropdown) {</span>
+<span class="s1">        dropdown.classList.remove(&#39;open&#39;);</span>
+<span class="s1">        dropdown.setAttribute(&#39;aria-expanded&#39;, &#39;false&#39;);</span>
+<span class="s1">    }</span>
+<span class="s1">}</span>
+
+<span class="s1">// Initialize accessibility features</span>
+<span class="s1">document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {</span>
+<span class="s1">    const a11y = new PWAAccessibility();</span>
+
+<span class="s1">    // Load saved preferences</span>
+<span class="s1">    if (localStorage.getItem(&#39;high-contrast&#39;) === &#39;true&#39;) {</span>
+<span class="s1">        document.body.classList.add(&#39;high-contrast&#39;);</span>
+<span class="s1">    }</span>
+<span class="s1">});</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="n">accessibility_manager</span> <span class="o">=</span> <span class="n">PWAAccessibility</span><span class="p">()</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/api/pwa/accessibility&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">accessibility_status</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get PWA accessibility features status&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span>
+        <span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="n">accessibility_manager</span><span class="o">.</span><span class="n">a11y_features</span><span class="p">,</span>
+        <span class="s1">&#39;guidelines_compliance&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;WCAG 2.1 AA level compliance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Keyboard navigation support&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Screen reader compatibility&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;High contrast mode&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Focus management&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ARIA labels and roles&#39;</span>
+        <span class="p">]</span>
+    <span class="p">})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
 </code></pre>
 </div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -2908,6 +2908,8 @@ if __name__ == &#x27;__main__&#x27;:
         <script src="../../../../assets/diagram-modal.js"></script>
       
         <script src="../../../../assets/quiz.js"></script>
+      
+        <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
       
