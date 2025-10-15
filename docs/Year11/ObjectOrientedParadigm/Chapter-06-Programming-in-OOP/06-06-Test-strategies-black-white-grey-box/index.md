@@ -50,7 +50,7 @@ Black box testing focuses on the external behavior of a system without consideri
 
 **Specification**: "The grade calculator should convert numerical scores (0-100) to letter grades using the standard scale: A (90-100), B (80-89), C (70-79), D (60-69), F (0-59). Invalid inputs should raise appropriate errors."
 
-```python
+```python-template
 import unittest
 
 class GradeCalculator:
@@ -150,7 +150,7 @@ class TestGradeCalculatorBlackBox(unittest.TestCase):
 
 Black box testing often uses **boundary value analysis** to identify test cases at the edges of input domains:
 
-```python
+```python-template
 class TestPasswordValidatorBlackBox(unittest.TestCase):
     """Black box testing using boundary value analysis."""
     
@@ -197,7 +197,7 @@ class TestPasswordValidatorBlackBox(unittest.TestCase):
 
 **Equivalence partitioning** divides input data into groups that should be processed similarly:
 
-```python
+```python-template
 class TestEmailValidatorBlackBox(unittest.TestCase):
     """Black box testing using equivalence partitioning."""
     
@@ -255,7 +255,7 @@ White box testing examines the internal structure of code to design test cases. 
 
 Looking at the implementation to design comprehensive tests:
 
-```python
+```python-template
 class DiscountCalculator:
     """Calculates discounts based on customer type and order amount."""
     
@@ -381,7 +381,7 @@ class TestDiscountCalculatorWhiteBox(unittest.TestCase):
 
 White box testing aims for complete coverage:
 
-```python
+```python-template
 class TestBankAccountWhiteBox(unittest.TestCase):
     """White box testing ensuring statement and branch coverage."""
     
@@ -429,7 +429,7 @@ Grey box testing combines elements of both black box and white box testing. Test
 
 Knowing that the system uses password hashing and session management internally:
 
-```python
+```python-template
 class TestUserAuthenticationGreyBox(unittest.TestCase):
     """Grey box testing with knowledge of internal security mechanisms."""
     
@@ -500,7 +500,7 @@ class TestUserAuthenticationGreyBox(unittest.TestCase):
 
 ### Integration Testing with Grey Box Approach
 
-```python
+```python-template
 class TestOrderProcessingGreyBox(unittest.TestCase):
     """Grey box testing for order processing system integration."""
     
@@ -607,7 +607,7 @@ Design black box tests for a library fine calculator with this specification:
 
 Analyze this code and design white box tests to achieve 100% statement and branch coverage:
 
-```python
+```python-exec
 def calculate_shipping_cost(weight, distance, priority):
     """Calculate shipping cost based on weight, distance, and priority."""
     base_cost = 0.0

@@ -10,7 +10,7 @@ Modern web applications handle massive amounts of data and serve millions of use
 
 Data mining finds patterns and insights in large datasets. Web applications generate enormous amounts of data from user interactions, and mining this data helps improve services and make business decisions.
 
-```python
+```python-template
 import json
 from collections import Counter
 from datetime import datetime, timedelta
@@ -88,7 +88,7 @@ analytics.detect_browser_trends()
 
 Metadata describes and organizes data, making it easier to find, understand, and use. In web applications, metadata helps with search, categorization, and data management.
 
-```python
+```python-template
 class ContentMetadata:
     """Managing metadata for web content."""
     
@@ -220,7 +220,7 @@ content_system.generate_content_report()
 
 Streaming data arrives continuously and must be processed in real-time. This creates unique challenges for web applications handling live data feeds, real-time analytics, or user interactions.
 
-```python
+```python-template
 import time
 import threading
 from queue import Queue
@@ -333,7 +333,7 @@ stream.process_stream(duration=3)
 
 Different architectural patterns solve different scaling and complexity challenges. Each has trade-offs in terms of development complexity, scalability, and operational overhead.
 
-```python
+```python-template
 class ArchitecturePatterns:
     """Demonstrate different web architecture patterns."""
     
@@ -534,7 +534,7 @@ Create a simple data mining system for a fictional e-commerce website:
     type: success
     open: false
 
-```python
+```python-template
 import random
 from datetime import datetime, timedelta
 from collections import Counter, defaultdict
@@ -664,7 +664,7 @@ Build a simple tool that recommends architecture patterns based on project requi
     type: success
     open: false
 
-```python
+```python-template
 class ArchitectureAdvisor:
     """Tool to recommend web architecture patterns."""
     

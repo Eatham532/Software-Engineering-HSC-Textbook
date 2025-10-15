@@ -24,7 +24,7 @@ An interface abstraction defines what operations a device can perform without sp
 
 - **Flexibility**: Support different hardware configurations
 
-```python
+```python-template
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 import time
@@ -267,7 +267,7 @@ note top of Actuator : Abstract interface ensures\nall actuators work the same w
 
 A device manager coordinates multiple sensors and actuators, handling initialization, error recovery, and coordinated operations.
 
-```python
+```python-template
 class DeviceManager:
     """Manages a collection of sensors and actuators"""
     
@@ -399,7 +399,7 @@ demo_device_manager()
 
 Test harnesses allow you to develop and test control logic without physical hardware. They simulate device behavior and can inject faults to test error handling.
 
-```python
+```python-template
 class MockSensor(Sensor):
     """Simulated sensor for testing"""
     
@@ -695,7 +695,7 @@ note bottom of "Production Environment" : Same interfaces work\nwith real device
 
 Let's build a complete environmental monitoring system that demonstrates sensor/actuator integration with proper abstractions and testing.
 
-```python
+```python-template
 class EnvironmentalController:
     """Complete environmental control system"""
     
@@ -904,7 +904,7 @@ Then create concrete implementations that simulate the devices.
     type: success
     open: false
 
-```python
+```python-template
 class LightSensor(Sensor):
     """Light sensor interface"""
     
@@ -973,7 +973,7 @@ Create a test harness for a simple line-following robot with:
     type: success
     open: false
 
-```python
+```python-template
 class LineFollowingRobot:
     """Simple line following robot"""
     
@@ -1077,7 +1077,7 @@ Integrate the environmental controller with additional safety features:
     type: success
     open: false
 
-```python
+```python-template
 class SmokeSensor(MockSensor):
     """Smoke detector sensor"""
     

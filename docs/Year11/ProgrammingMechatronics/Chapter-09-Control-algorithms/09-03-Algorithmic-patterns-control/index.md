@@ -64,7 +64,7 @@ note left of Paused : Temporary halt\nwith state preservation
 
 A conveyor belt system has several operational states based on safety sensors and user commands.
 
-```python
+```python-template
 from enum import Enum
 import time
 
@@ -265,7 +265,7 @@ note right of [Plant/System] : The system being controlled\n(motor, heater, etc.
 
 A heating system needs to maintain a target temperature using PID control.
 
-```python
+```python-template
 import time
 import math
 
@@ -442,7 +442,7 @@ Scheduling algorithms determine when and in what order different control tasks e
 
 A greenhouse monitoring system must coordinate multiple sensors and control loops.
 
-```python
+```python-template
 import time
 from dataclasses import dataclass
 from enum import Enum

@@ -418,7 +418,7 @@ Build and compare different regression models to predict house prices:
     type: success
     open: false
 
-```python
+```python-exec
 # Create synthetic house data
 houses = [
     [120, 5, 3, 280],   # [size, age, bedrooms, price_k]

@@ -22,7 +22,7 @@ Good control interfaces provide clear information about what the system is doing
 
 Let's build a basic CLI for a robotic arm:
 
-```python
+```python-template
 class RoboticArmCLI:
     def __init__(self):
         self.arm_position = {"x": 0, "y": 0, "z": 0}
@@ -244,7 +244,7 @@ for cmd in test_commands:
 
 Let's create a text-based dashboard for a greenhouse monitoring system:
 
-```python
+```python-template
 import time
 import random
 from datetime import datetime
@@ -464,7 +464,7 @@ for i in range(3):
 
 Let's build a comprehensive messaging system:
 
-```python
+```python-template
 class SystemMessaging:
     def __init__(self):
         self.message_history = []
@@ -620,7 +620,7 @@ print(messaging.show_recent_messages())
 
 Let's put it all together by building a complete control interface for an automated sorting system:
 
-```python
+```python-template
 class SortingSystemInterface:
     def __init__(self):
         self.system = {
@@ -922,7 +922,7 @@ Create CLI interfaces for various mechatronic applications. Design commands for 
     type: success
     open: false
 
-```python
+```python-exec
 def design_cli_commands(system_type):
     """Design CLI commands for different mechatronic systems"""
     
@@ -1029,7 +1029,7 @@ Build visual status indicators for various system states. Create a status dashbo
     type: success
     open: false
 
-```python
+```python-template
 class StatusIndicators:
     def __init__(self):
         self.indicators = {

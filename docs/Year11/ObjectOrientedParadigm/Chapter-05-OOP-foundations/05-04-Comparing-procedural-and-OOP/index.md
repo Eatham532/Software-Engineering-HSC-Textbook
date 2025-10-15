@@ -20,7 +20,7 @@ By the end of this section, you will be able to:
 
 **Procedural programming** organizes code as a sequence of functions that operate on data. It follows a top-down approach where you break down a problem into smaller functions.
 
-```python
+```python-exec
 # Procedural approach: functions and data are separate
 def calculate_area(length, width):
     return length * width
@@ -46,7 +46,7 @@ display_info(rect_length, rect_width)
 
 **Object-oriented programming** organizes code around objects that combine data and the functions that work with that data.
 
-```python
+```python-template
 # OOP approach: data and methods are bundled together
 class Rectangle:
     def __init__(self, length, width):
@@ -87,7 +87,7 @@ Procedural programming works well when:
 
 ### 1. Simple, straightforward problems
 
-```python
+```python-exec
 # Simple calculation - procedural is fine
 def calculate_tax(income, tax_rate):
     return income * tax_rate
@@ -103,7 +103,7 @@ net = calculate_net_income(50000, 0.25)
 
 ### 2. Linear data processing
 
-```python
+```python-exec
 # Processing a list of data - procedural approach
 def clean_data(raw_data):
     return [item.strip().lower() for item in raw_data if item]
@@ -120,7 +120,7 @@ def process_user_data(raw_emails):
 
 ### 3. Mathematical or algorithmic problems
 
-```python
+```python-exec
 # Mathematical calculations work well procedurally
 def fibonacci(n):
     if n <= 1:
@@ -140,7 +140,7 @@ OOP works well when:
 
 ### 1. Modeling real-world entities
 
-```python
+```python-template
 # Real-world entities fit naturally into classes
 class Student:
     def __init__(self, name, student_id):
@@ -173,7 +173,7 @@ class Course:
 
 ### 2. Complex state management
 
-```python
+```python-template
 # Managing complex state is easier with OOP
 class GameCharacter:
     def __init__(self, name, health=100):
@@ -203,7 +203,7 @@ class GameCharacter:
 
 ### 3. Systems with multiple interacting components
 
-```python
+```python-template
 # Multiple components working together
 class BankAccount:
     def __init__(self, account_number, initial_balance=0):
@@ -245,7 +245,7 @@ Here's how to transform procedural code into object-oriented code:
 
 ### Step 1: Identify data that belongs together
 
-```python
+```python-exec
 # Procedural: scattered data and functions
 customer_name = "John Doe"
 customer_email = "john@email.com"
@@ -264,7 +264,7 @@ def send_email(email, message):
 
 ### Step 2: Group related data and functions into classes
 
-```python
+```python-template
 # OOP: related data and functions grouped together
 class Customer:
     def __init__(self, name, email):
@@ -291,7 +291,7 @@ customer.send_email(f"Your total spending: ${total}")
 
 ### Step 3: Look for opportunities to create hierarchies
 
-```python
+```python-template
 # Before: separate functions for different account types
 def calculate_savings_interest(balance, rate):
     return balance * rate
@@ -352,7 +352,7 @@ class CheckingAccount(Account):
 
 **Procedural struggles with:**
 
-```python
+```python-exec
 # Hard to maintain: scattered related data
 player_name = "Alice"
 player_health = 100
@@ -370,7 +370,7 @@ def battle(p_name, p_health, p_level, e_name, e_health, e_level):
 
 **OOP can be overkill for:**
 
-```python
+```python-template
 # Overly complex for simple calculations
 class Calculator:
     def add(self, a, b):
@@ -424,7 +424,7 @@ For each scenario, decide whether procedural or OOP would be better and explain 
 
 Convert this procedural code to object-oriented:
 
-```python
+```python-exec
 # Procedural library system
 books = []
 members = []
@@ -449,7 +449,7 @@ def borrow_book(member_id, isbn):
     type: success
     open: false
 
-```python
+```python-template
 class Book:
     def __init__(self, title, author, isbn):
         self.title = title
@@ -512,7 +512,7 @@ class Library:
 
 Analyze this code and suggest improvements using OOP principles:
 
-```python
+```python-exec
 # Current procedural approach
 def process_payment(amount, payment_type, card_number=None, bank_account=None):
     if payment_type == "credit":
@@ -535,7 +535,7 @@ def process_payment(amount, payment_type, card_number=None, bank_account=None):
     type: success
     open: false
 
-```python
+```python-template
 class Payment:
     def __init__(self, amount):
         self.amount = amount

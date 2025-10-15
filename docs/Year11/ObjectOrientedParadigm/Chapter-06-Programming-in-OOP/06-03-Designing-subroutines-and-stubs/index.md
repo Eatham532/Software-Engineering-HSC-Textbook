@@ -16,7 +16,7 @@ A method signature defines how other code can interact with your method. It incl
 
 - **Consistent**: similar operations follow similar patterns
 
-```python
+```python-template
 class BankAccount:
     def __init__(self, account_number, initial_balance):
         """Create a new bank account with the given number and balance."""
@@ -55,7 +55,7 @@ A stub is a temporary method implementation that focuses on the interface rather
 
 - Identify interface problems early
 
-```python
+```python-template
 class ShoppingCart:
     def __init__(self):
         """Create an empty shopping cart."""
@@ -94,7 +94,7 @@ class ShoppingCart:
 
 Let's design a gradebook system using stubs to plan our implementation:
 
-```python
+```python-template
 class Student:
     def __init__(self, student_id, name):
         """Create a student with ID and name."""
@@ -231,7 +231,7 @@ For each class, write:
     type: success
     open: false
 
-```python
+```python-template
 class Book:
     def __init__(self, isbn, title, author):
         """Create a book with ISBN, title, and author."""
@@ -322,7 +322,7 @@ Focus on clear method signatures and basic stub logic.
     type: success
     open: false
 
-```python
+```python-template
 from datetime import datetime
 
 class Task:

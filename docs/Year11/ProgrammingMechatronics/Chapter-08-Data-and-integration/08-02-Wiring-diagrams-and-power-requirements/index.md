@@ -26,7 +26,7 @@ P = V × I    (Power equation)
 
 ```
 
-```python
+```python-exec
 # Basic electrical calculations
 def calculate_power(voltage, current):
     """Calculate power consumption given voltage and current."""
@@ -48,7 +48,7 @@ print(f"Current draw: {current:.2f} amps")  # Output: Current draw: 2.00 amps
 
 Let's calculate the power requirements for a simple robotic arm system:
 
-```python
+```python-exec
 # Component power requirements (typical values)
 components = {
     "microcontroller": {"voltage": 5, "current": 0.5},    # 2.5W
@@ -162,7 +162,7 @@ print(f"Battery current draw: {requirements['current_draw']:.2f}A")
 
 Estimate how long your system will operate on battery power:
 
-```python
+```python-exec
 def estimate_runtime(battery_capacity_ah, current_draw_a, discharge_factor=0.8):
     """
     Estimate battery runtime.

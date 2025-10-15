@@ -105,7 +105,7 @@ Let's create a data dictionary for a Student record.
 
 Here's how we might implement validation based on our data dictionary:
 
-```python
+```python-exec
 def validate_student_data(name, age, grade_average, enrollment_status):
     """
     Validate student data against our data dictionary constraints.
@@ -189,7 +189,7 @@ print(validate_product_id("PRD123"))    # False
 
 Some constraints depend on other fields:
 
-```python
+```python-exec
 def validate_stock_rules(in_stock, stock_quantity):
     """Stock quantity must be > 0 if in_stock is True."""
     if in_stock and stock_quantity <= 0:

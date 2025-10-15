@@ -10,7 +10,7 @@ Think of test data like quality control in manufacturing - you wouldn't sell a p
 
 ### The Cost of Poor Testing
 
-```python
+```python-exec
 def calculate_discount(price, discount_percent):
     """Calculate discounted price - what could go wrong?"""
     discounted_amount = price * (discount_percent / 100)
@@ -48,7 +48,7 @@ Without proper test data design, bugs like these can make it into production!
 
 **Normal data** represents the most common inputs your program will receive.
 
-```python
+```python-exec
 def calculate_bmi(weight_kg, height_m):
     """Calculate Body Mass Index."""
     if height_m <= 0:
@@ -78,7 +78,7 @@ for weight, height, expected in normal_test_cases:
 
 **Boundary data** tests the limits of what your program should handle.
 
-```python
+```python-exec
 def grade_assignment(score):
     """Convert numeric score to letter grade."""
     if score < 0 or score > 100:
@@ -125,7 +125,7 @@ for score, expected in boundary_test_cases:
 
 **Extreme data** tests very large, very small, or unusual values.
 
-```python
+```python-exec
 def calculate_compound_interest(principal, rate, years):
     """Calculate compound interest over time."""
     if principal <= 0 or rate < 0 or years < 0:
@@ -243,7 +243,7 @@ for test_id in valid_test_cases:
 
 **Equivalence partitioning** groups similar inputs together and tests one example from each group.
 
-```python
+```python-exec
 def categorize_age(age):
     """Categorize person by age group."""
     if age < 0:
@@ -294,7 +294,7 @@ for age, expected in equivalence_test_cases:
 
 **Decision table testing** systematically tests all combinations of conditions.
 
-```python
+```python-exec
 def determine_shipping_cost(weight, distance, express, member):
     """
     Determine shipping cost based on:
@@ -363,7 +363,7 @@ for weight, distance, express, member, expected in decision_table_tests:
 
 ### Student Grade Processing Example
 
-```python
+```python-exec
 def process_student_grades(student_data):
     """
     Process student grade data and return summary.
@@ -500,7 +500,7 @@ test_student_grade_processing()
 
 ### Creating Test Cases
 
-```python
+```python-template
 class TestCase:
     """Structured test case documentation."""
     

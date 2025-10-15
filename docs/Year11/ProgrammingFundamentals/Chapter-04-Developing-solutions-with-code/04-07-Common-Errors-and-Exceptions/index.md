@@ -440,7 +440,7 @@ off_by_one_examples()
     type: note
     open: false
 
-```python
+```python-exec
 def logic_condition_examples():
     """Common logic errors in conditional statements."""
     
@@ -539,7 +539,7 @@ logic_condition_examples()
     type: note
     open: false
 
-```python
+```python-exec
 def infinite_loop_examples():
     """Examples of infinite loops and how to fix them."""
     
@@ -766,7 +766,7 @@ function_errors()
 
 ### Systematic Error Detection
 
-```python
+```python-exec
 def debugging_strategies():
     """Demonstrate systematic approaches to finding errors."""
     

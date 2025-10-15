@@ -26,7 +26,7 @@ Choosing the right data structure can make your program faster, use less memory,
 
 In Python, we use **lists** to represent single-dimensional arrays. A list is an ordered collection of items that can be accessed by their position (index).
 
-```python
+```python-exec
 # Creating a simple list
 grades = [85, 92, 78, 96, 88]
 names = ["Alice", "Bob", "Charlie", "Diana"]
@@ -41,7 +41,7 @@ print(grades[-1])   # Output: 88 (last element)
 
 ### Common Operations
 
-```python
+```python-exec
 student_scores = [75, 82, 91]
 
 # Adding elements
@@ -77,7 +77,7 @@ print(f"We have {length} scores")
 
 A **2D array** is like a table with rows and columns. In Python, we create them using lists of lists.
 
-```python
+```python-exec
 # Grade book: 3 students, 4 subjects
 # Each row is a student, each column is a subject
 grade_book = [
@@ -97,7 +97,7 @@ print(f"Bob's science grade: {bob_science}")
 
 ### Practical Example: Seating Chart
 
-```python
+```python-exec
 # Movie theater seating (3 rows, 5 seats each)
 # True = occupied, False = available
 seating_chart = [
@@ -127,7 +127,7 @@ print("Available seats:", find_available_seats())
 
 A **record** groups related information together. In Python, we use dictionaries to create records.
 
-```python
+```python-exec
 # Student record - grouping related information
 student = {
     "name": "Sarah Johnson",
@@ -146,7 +146,7 @@ print(f"Average: {student['grade_average']}%")
 
 ### Multiple Records
 
-```python
+```python-exec
 # Class roster - list of student records
 class_roster = [
     {"name": "Alice", "age": 16, "grade": 85},
@@ -170,7 +170,7 @@ print("High achievers:", high_achievers)
 
 A **tree** is a hierarchical data structure that starts with a root and branches out like a family tree or organization chart.
 
-```python
+```python-exec
 # Simple family tree using nested dictionaries
 family_tree = {
     "name": "Grandpa John",
@@ -220,7 +220,7 @@ print_family(family_tree)
 
 A **stack** works like a stack of plates - you can only add or remove from the top. This is called "Last In, First Out" (LIFO).
 
-```python
+```python-exec
 # Using a Python list as a stack
 browser_history = []
 
@@ -245,7 +245,7 @@ if browser_history:
 
 ### Practical Example: Undo Function
 
-```python
+```python-template
 class TextEditor:
     def __init__(self):
         self.text = ""
@@ -280,7 +280,7 @@ print(f"After undo: '{editor.text}'")
 
 A **hash table** allows instant lookup of values using keys. Python dictionaries are hash tables!
 
-```python
+```python-exec
 # Phone book - instant lookup by name
 phone_book = {
     "Alice": "555-0101",
@@ -312,7 +312,7 @@ if "Bob" in phone_book:
 
 - Database-like operations
 
-```python
+```python-exec
 # Counting letter frequencies
 def count_letters(text):
     """Count how many times each letter appears."""
@@ -412,7 +412,7 @@ with open("students_dict.csv", "r") as file:
 
 ### Performance Considerations (For Reference)
 
-```python
+```python-exec
 # Lists are good for:
 # - Accessing by index: very fast
 # - Adding to end: very fast
@@ -437,7 +437,7 @@ Create a 2D list representing a grade book for 4 students and 3 subjects. Calcul
     type: success
     open: false
 
-```python
+```python-exec
 # Create a 2D list for 4 students and 3 subjects
 # Format: [[student1_grades], [student2_grades], ...]
 grade_book = [
@@ -496,7 +496,7 @@ Use a dictionary to track inventory items with their quantities. Implement funct
     type: success
     open: false
 
-```python
+```python-exec
 def add_item(inventory, item_name, quantity):
     """Add quantity to existing item or create new item."""
     if item_name in inventory:
@@ -583,7 +583,7 @@ Implement a simple browser history using a stack. Add functions to visit a new p
     type: success
     open: false
 
-```python
+```python-template
 class BrowserHistory:
     def __init__(self):
         self.history = []  # Stack to store visited pages

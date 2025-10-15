@@ -10,7 +10,7 @@ Databases are the persistent storage layer of web applications, and SQL (Structu
 
 CRUD (Create, Read, Update, Delete) operations form the foundation of database interactions:
 
-```python
+```python-template
 # Database setup and CRUD operations with Python
 import sqlite3
 from flask import Flask, request, jsonify
@@ -208,7 +208,7 @@ def get_user(user_id):
 
 Understanding how to retrieve specific data efficiently:
 
-```python
+```python-template
 # Advanced SELECT operations
 class QueryBuilder:
     """Build complex SELECT queries safely"""
@@ -324,7 +324,7 @@ def query_examples():
 
 Grouping and summarizing data for insights:
 
-```python
+```python-template
 # GROUP BY and aggregation examples
 class AggregationQueries:
     """Demonstrate aggregation and grouping"""
@@ -472,7 +472,7 @@ posts ||--o{ comments : "post_id"
 
 ```
 
-```python
+```python-template
 # Table joins demonstration
 class JoinQueries:
     """Demonstrate different types of joins"""
@@ -594,7 +594,7 @@ if __name__ == '__main__':
     type: success
     open: false
 
-```python
+```python-exec
 def create_user_safe(username, email, password):
     """CREATE with duplicate prevention"""
     try:
@@ -662,7 +662,7 @@ Understanding these SQL fundamentals enables developers to build secure, efficie
 
 ORMs provide an abstraction layer that maps database tables to Python classes and rows to objects:
 
-```python
+```python-template
 # SQLAlchemy ORM example - setting up models
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -763,7 +763,7 @@ with app.app_context():
 
 Comparing the same operations using ORM and raw SQL approaches:
 
-```python
+```python-template
 # Direct comparison: ORM vs Raw SQL
 import sqlite3
 from sqlalchemy import text
@@ -979,7 +979,7 @@ note bottom of factor_perf : Standard CRUD → ORM\nHigh performance → Raw SQL
 
 ```
 
-```python
+```python-template
 # Trade-offs demonstration with practical examples
 class ORMTradeoffDemo:
     """Demonstrate ORM vs Raw SQL trade-offs"""
@@ -1135,7 +1135,7 @@ if __name__ == '__main__':
     type: success
     open: false
 
-```python
+```python-template
 # ORM Models
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

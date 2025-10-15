@@ -26,7 +26,7 @@ By the end of this section, you will be able to:
 
 Modern privacy laws like GDPR, CCPA, and PIPEDA create a complex global regulatory environment. Let's build a framework for managing privacy compliance:
 
-```python
+```python-template
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Dict, List, Optional, Set
@@ -340,7 +340,7 @@ if __name__ == "__main__":
 
 Security systems must protect data while respecting privacy rights. Let's implement privacy-preserving security techniques:
 
-```python
+```python-template
 import hashlib
 import hmac
 import secrets
@@ -559,7 +559,7 @@ This section establishes the foundation for privacy rights and data protection c
 
 Responsible disclosure balances the need to identify and fix security vulnerabilities with the need to avoid harm. Let's build a framework for ethical security research:
 
-```python
+```python-template
 import math
 
 from dataclasses import dataclass, field
@@ -1036,7 +1036,7 @@ if __name__ == "__main__":
 
 Security systems must be accessible to all users, including those with disabilities. Let's implement inclusive security design principles:
 
-```python
+```python-template
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Optional, Union
@@ -1534,7 +1534,7 @@ if __name__ == "__main__":
 
 Security automation and enhanced security practices significantly impact employment patterns, job roles, and required skills. Let's analyze these workforce implications:
 
-```python
+```python-template
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Optional, Set
@@ -1912,7 +1912,7 @@ if __name__ == "__main__":
 
 Security systems must navigate complex intellectual property landscapes, balancing protection with collaboration:
 
-```python
+```python-template
 from dataclasses import dataclass
 from enum import Enum
 from typing import Dict, List, Optional, Set

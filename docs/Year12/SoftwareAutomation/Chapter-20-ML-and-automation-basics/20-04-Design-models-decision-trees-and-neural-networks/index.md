@@ -83,7 +83,7 @@ rectangle "Email Classification Decision Tree" {
 
 ### Python Implementation: Building a Decision Tree from Scratch
 
-```python
+```python-template
 import random
 import math
 from typing import List, Dict, Any, Optional, Tuple
@@ -582,7 +582,7 @@ end note
 
 ### Python Implementation: Perceptron from Scratch
 
-```python
+```python-template
 
 import random
 import math

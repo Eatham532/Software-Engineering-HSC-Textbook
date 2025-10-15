@@ -22,7 +22,7 @@ A **class** is a blueprint that defines the structure and behavior of objects. I
 
 ### Basic class syntax
 
-```python
+```python-template
 class Student:
     """A class to represent a student"""
     
@@ -94,7 +94,7 @@ The **constructor** (`__init__`) is responsible for setting up a new object's in
 
 ### Constructor best practices
 
-```python
+```python-template
 class BankAccount:
     """A simple bank account class demonstrating good constructor practices"""
     
@@ -138,7 +138,7 @@ except ValueError as e:
 
 ### Constructor parameters and defaults
 
-```python
+```python-template
 class Rectangle:
     """Rectangle class showing different parameter patterns"""
     
@@ -185,7 +185,7 @@ print(f"Is rect2 a square? {rect2.is_square()}")  # True
 
 ### Instance methods
 
-```python
+```python-template
 class Counter:
     """A simple counter class demonstrating various method patterns"""
     
@@ -239,7 +239,7 @@ print(counter.get_history())  # [10, 15, 12, 13]
 
 **1. Single responsibility:** Each method should do one thing well
 
-```python
+```python-template
 class EmailValidator:
     """Class demonstrating single responsibility in methods"""
     
@@ -279,7 +279,7 @@ validator.test(email)      # Test what?
 
 **3. Consistent parameter patterns:** Similar methods should have similar signatures
 
-```python
+```python-template
 class MathOperations:
     """Consistent parameter patterns"""
     
@@ -329,7 +329,7 @@ class MathOperations:
     type: info
     open: false
 
-```python
+```python-template
 class Engine:
     """Simple engine component"""
     
@@ -409,7 +409,7 @@ print(sports_car.get_specs())    # Ferrari F40 - 400hp gasoline, 4 wheels, 18 in
 
 **1. Composition with dependency injection:**
 
-```python
+```python-template
 class FileLogger:
     """Logs messages to a file"""
     
@@ -460,7 +460,7 @@ cart2.add_item("Phone", 699.99)  # Writes to cart.log file
 
 **2. Complex composition with multiple components:**
 
-```python
+```python-template
 class Display:
     """Display component for devices"""
     
@@ -571,7 +571,7 @@ print(macbook.power_off())
     type: example
     open: false
 
-```python
+```python-template
 class PasswordValidator:
     """Highly cohesive class - everything relates to password validation"""
     
@@ -624,7 +624,7 @@ print(validator.get_requirements())         # List of requirements
     type: example
     open: false
 
-```python
+```python-template
 class UserAccount:
     """Low cohesion - too many unrelated responsibilities"""
     
@@ -661,7 +661,7 @@ class UserAccount:
 
 **Better approach with high cohesion:**
 
-```python
+```python-template
 class User:
     """High cohesion - focused on user data and basic operations"""
     
@@ -721,7 +721,7 @@ Create a `Book` class with the following requirements:
     type: success
     open: false
 
-```python
+```python-template
 class Book:
     """Represents a book with basic information and operations"""
     
@@ -809,7 +809,7 @@ The `Computer` should be able to:
     type: success
     open: false
 
-```python
+```python-template
 class Processor:
     """CPU component"""
     
@@ -921,7 +921,7 @@ print(gaming_pc.can_run_program("Video Editor", 4.0, 32))  # Should fail
 
 You have this inheritance-based design. Refactor it to use composition instead:
 
-```python
+```python-template
 class Vehicle:
     def __init__(self, make, model):
         self.make = make
@@ -952,7 +952,7 @@ class Motorcycle(Vehicle):
     type: success
     open: false
 
-```python
+```python-template
 class VehicleInfo:
     """Component for basic vehicle information"""
     

@@ -40,7 +40,7 @@ Successful feedback analysis begins with comprehensive collection from diverse s
 
 - **User journey tracking**: Data on how users navigate through the application
 
-```python
+```python-template
 # Example: Comprehensive feedback collection system
 class FeedbackCollector:
     def __init__(self):
@@ -221,7 +221,7 @@ Raw feedback requires systematic analysis to identify meaningful patterns and ac
 
 - **Representative sampling**: Ensuring feedback represents the full user base
 
-```python
+```python-template
 # Example: Feedback synthesis and pattern analysis system
 class FeedbackAnalyzer:
     def __init__(self):
@@ -494,7 +494,7 @@ Let's walk through a complete feedback analysis process for a school gradebook a
 
 **Step 1: Feedback collection summary**
 
-```python
+```python-template
 # Gradebook feedback analysis example
 class GradebookFeedbackAnalysis:
     def __init__(self):

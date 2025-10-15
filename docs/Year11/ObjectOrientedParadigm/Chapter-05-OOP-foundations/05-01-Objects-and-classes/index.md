@@ -24,7 +24,8 @@ In the real world, we interact with objects every day. Your phone, your car, you
 
 Object-oriented programming takes this natural way of thinking about the world and applies it to software. In programming, an **object** is a software entity that combines data (attributes) and code (methods) together.
 
-```python
+```text
+
 # Think of a simple bank account object
 # Attributes: account_number, balance, owner_name
 # Behaviours: deposit, withdraw, check_balance
@@ -35,7 +36,7 @@ Object-oriented programming takes this natural way of thinking about the world a
 
 A **class** is like a blueprint or template for creating objects. Just as an architect's blueprint can be used to build many houses, a class can be used to create many objects of the same type.
 
-```python
+```python-template
 class BankAccount:
     """A simple bank account class - this is the blueprint"""
     
@@ -69,7 +70,7 @@ class BankAccount:
 
 The **class** is the blueprint, but an **instance** (or object) is what you create from that blueprint:
 
-```python
+```python-template
 # BankAccount is the class (blueprint)
 # These are instances (actual objects created from the blueprint)
 alice_account = BankAccount("ACC001", "Alice Smith", 1000)
@@ -93,7 +94,7 @@ Key differences:
 
 Objects don't work in isolation - they need to communicate with each other. This communication happens through **message passing**, which in Python means calling methods on objects.
 
-```python
+```python-exec
 # Create two account objects
 alice_account = BankAccount("ACC001", "Alice Smith", 1000)
 bob_account = BankAccount("ACC002", "Bob Jones", 500)
@@ -120,6 +121,7 @@ When you write `alice_account.deposit(200)`, you're:
 When you call a method on an object, several things happen behind the scenes:
 
 ```python
+
 alice_account.deposit(200)
 
 ```
@@ -210,7 +212,7 @@ Create a `Student` class with:
     type: success
     open: false
 
-```python
+```python-exec
 class Student:
     def __init__(self, name, student_id, grade):
         self.name = name
@@ -251,7 +253,7 @@ Using your `Student` class:
     type: success
     open: false
 
-```python
+```python-template
 # Create two student instances
 alice = Student("Alice Johnson", "STU001", 11)
 bob = Student("Bob Smith", "STU002", 11)

@@ -26,7 +26,7 @@ In programming, abstraction helps us:
 
 - Create simple interfaces for complex operations
 
-```python
+```python-template
 class FileManager:
     """Abstract file operations - users don't need to know about
     file handles, buffer sizes, or error codes"""
@@ -68,7 +68,7 @@ content = file_manager.load_data("notes.txt")
 
 Think about vehicles: cars, motorcycles, trucks, and bicycles are all different, but they share common characteristics (wheels, steering, movement) and behaviors (start, stop, turn).
 
-```python
+```python-template
 # Before generalisation: separate, similar classes
 class Car:
     def __init__(self, make, model):
@@ -123,7 +123,7 @@ class Vehicle:
 
 **Inheritance** allows us to create new classes based on existing ones, inheriting their attributes and methods while adding new features or modifying existing ones.
 
-```python
+```python-template
 class Vehicle:
     """Base class for all vehicles"""
     
@@ -203,7 +203,7 @@ print(motorcycle.wheelie())  # Motorcycle-specific method
 
 **Polymorphism** means "many forms." It allows different objects to respond to the same message (method call) in their own way. In Python, this often works through "duck typing" - if it walks like a duck and quacks like a duck, treat it like a duck.
 
-```python
+```python-template
 class Dog:
     def __init__(self, name):
         self.name = name
@@ -270,7 +270,7 @@ pet_interaction(Cat("Fluffy"))
 
 These four concepts work together to create powerful, flexible code:
 
-```python
+```python-template
 # Abstract base for all shapes
 class Shape:
     """Abstract shape class demonstrating all four concepts"""
@@ -348,7 +348,7 @@ print(f"Total area of all shapes: {calculate_total_area(shapes)}")
 
 Look at this code and identify examples of abstraction, generalisation, inheritance, and polymorphism:
 
-```python
+```python-template
 class MediaPlayer:
     def __init__(self, name):
         self.name = name
@@ -411,7 +411,7 @@ Design a class hierarchy for different types of employees in a company:
     type: success
     open: false
 
-```python
+```python-template
 class Employee:
     """Base class for all employees"""
     
@@ -481,7 +481,7 @@ Create three different classes that don't inherit from each other but can all be
     type: success
     open: false
 
-```python
+```python-template
 class WashingMachine:
     def __init__(self, brand):
         self.brand = brand

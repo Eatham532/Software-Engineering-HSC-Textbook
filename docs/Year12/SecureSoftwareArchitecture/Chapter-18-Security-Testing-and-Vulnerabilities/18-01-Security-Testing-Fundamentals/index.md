@@ -57,7 +57,7 @@ Security testing should be integrated throughout the development lifecycle, not 
 
 ### Python SAST Implementation
 
-```python
+```python-template
 import ast
 import re
 from pathlib import Path
@@ -328,7 +328,7 @@ def check_admin_secure(user):
 
 ### DAST Implementation
 
-```python
+```python-template
 import requests
 import time
 import json
@@ -596,7 +596,7 @@ if __name__ == "__main__":
 
 Manual code review remains one of the most effective ways to find complex security vulnerabilities that automated tools miss.
 
-```python
+```python-template
 class SecurityCodeReviewGuide:
     def __init__(self):
         self.review_checklist = {
@@ -727,7 +727,7 @@ print(reviewer.review_function(example_code, "login"))
 
 ### Vulnerability Scanner Implementation
 
-```python
+```python-template
 import re
 import hashlib
 from pathlib import Path
@@ -959,7 +959,7 @@ if __name__ == "__main__":
 
 ### Automated Security Test Suite
 
-```python
+```python-template
 import unittest
 import requests
 import time
@@ -1229,7 +1229,7 @@ if __name__ == "__main__":
 
 ### Security Pipeline Example
 
-```python
+```python-template
 #!/usr/bin/env python3
 """
 Security testing pipeline script

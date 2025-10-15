@@ -71,7 +71,7 @@ note bottom : Wireframing is an iterative process\nthat refines through user fee
 
 ```
 
-```python
+```python-template
 class WireframeDesigner:
     """
     Framework for creating and managing wireframes for software solutions.
@@ -545,7 +545,7 @@ Usability determines how effectively and efficiently users can accomplish their 
 
 10. **Help and documentation**: Offer easily searchable assistance
 
-```python
+```python-template
 class UsabilityEvaluator:
     """
     Framework for evaluating and improving interface usability using established principles.
@@ -1026,7 +1026,7 @@ Accessibility ensures that software interfaces can be used by people with divers
 
 4. **Robust**: Content must be robust enough for various assistive technologies
 
-```python
+```python-template
 class AccessibilityAuditor:
     """
     Framework for auditing and implementing accessibility features in software interfaces.

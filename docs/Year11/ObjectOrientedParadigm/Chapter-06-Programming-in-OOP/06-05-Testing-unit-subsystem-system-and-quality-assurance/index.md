@@ -46,7 +46,7 @@ Unit tests focus on the smallest testable parts of an application—typically in
 
 **Example: Testing a BankAccount class**
 
-```python
+```python-template
 import unittest
 
 class BankAccount:
@@ -211,7 +211,7 @@ Subsystem testing (also called integration testing) verifies that different comp
 
 **Example: Testing a Library Management System**
 
-```python
+```python-template
 class Book:
     """Represents a book in the library."""
     
@@ -384,7 +384,7 @@ System testing evaluates the system as a whole, testing complete user workflows 
 
 **Example: End-to-end Library System Test**
 
-```python
+```python-template
 class TestLibrarySystem(unittest.TestCase):
     """System-level tests for complete library workflows."""
     
@@ -485,7 +485,7 @@ Adopt practices that make testing a natural part of development:
 
 Write tests before implementing functionality:
 
-```python
+```python-template
 class TestCalculator(unittest.TestCase):
     """Tests for Calculator class - written before implementation."""
     
@@ -561,7 +561,7 @@ Define clear criteria for when features are considered complete and working:
 
 **Example: Student Management System Acceptance Criteria**
 
-```python
+```python-template
 class TestStudentManagementAcceptance(unittest.TestCase):
     """Acceptance tests based on user requirements."""
     
@@ -633,7 +633,7 @@ class TestStudentManagementAcceptance(unittest.TestCase):
 
 Create unit tests for this shopping cart class:
 
-```python
+```python-template
 class ShoppingCart:
     """Shopping cart for e-commerce application."""
     
@@ -694,7 +694,7 @@ class ShoppingCart:
 
 Write integration tests for a simple order processing system with these classes:
 
-```python
+```python-template
 class Product:
     def __init__(self, product_id, name, price, stock_quantity):
         self.product_id = product_id

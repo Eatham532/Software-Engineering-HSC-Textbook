@@ -35,7 +35,7 @@ data --> state : updates state
 
 ```
 
-```python
+```python-template
 # Example: Python backend supporting framework-based front-end
 from flask import Flask, jsonify, render_template, request
 import json
@@ -110,7 +110,7 @@ def framework_app():
 
 Example HTML template for framework integration (`templates/framework_app.html`):
 
-```html
+```html-template
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,7 +226,7 @@ Example HTML template for framework integration (`templates/framework_app.html`)
 
 Template engines allow dynamic HTML generation on the server, providing a bridge between back-end data and front-end presentation:
 
-```python
+```python-template
 # Example: Python template engine integration
 from flask import Flask, render_template, request
 import datetime
@@ -338,7 +338,7 @@ def get_template_data(user_role):
 
 Component libraries provide pre-designed, reusable UI elements that ensure consistency and speed up development:
 
-```python
+```python-template
 # Example: Python backend serving component library assets
 from flask import Flask, jsonify, render_template
 
@@ -562,7 +562,7 @@ maintenance --> build_custom : full control
 
 ```
 
-```python
+```python-template
 # Example: Decision framework for library adoption
 from flask import Flask, jsonify, request
 
@@ -876,7 +876,7 @@ Using the decision criteria:
 
 **Component library structure**:
 
-```python
+```python-exec
 component_library = {
     'foundation': {
         'colors': ['primary', 'secondary', 'success', 'warning', 'error'],

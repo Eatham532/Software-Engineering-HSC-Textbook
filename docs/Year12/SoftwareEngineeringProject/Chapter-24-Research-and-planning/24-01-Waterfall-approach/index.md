@@ -97,7 +97,7 @@ note bottom : Each phase has formal review\nand approval before progression
 
 - Requirements traceability matrix
 
-```python
+```python-template
 class WaterfallRequirementsPhase:
     """
     Framework for managing the Requirements Analysis phase in Waterfall methodology.
@@ -490,7 +490,7 @@ Understanding when Waterfall is appropriate requires careful analysis of project
 
 - Early defect detection through structured review processes
 
-```python
+```python-template
 class WaterfallBenefitsAnalysis:
     """
     Framework for evaluating the benefits of Waterfall methodology
@@ -827,7 +827,7 @@ For each project, use the `WaterfallBenefitsAnalysis` class to:
 
 Here's a framework for completing the practice tasks:
 
-```python
+```python-exec
 # Task completion template
 def complete_waterfall_analysis(project_name, project_type):
     """Template for comprehensive Waterfall methodology analysis."""

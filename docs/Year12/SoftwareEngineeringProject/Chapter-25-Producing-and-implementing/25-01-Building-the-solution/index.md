@@ -30,7 +30,7 @@ Incremental implementation means breaking down the complete solution into smalle
 
 4. **Keep increments small**: Aim for 1-4 week development cycles
 
-```python
+```python-exec
 # Example: Planning increments for a library management system
 project_increments = [
     {
@@ -122,7 +122,7 @@ Maintaining quality throughout incremental development requires systematic appro
 
 - **User acceptance testing**: Validate features against original requirements
 
-```python
+```python-template
 # Example: Quality maintenance framework
 class QualityFramework:
     def __init__(self):
@@ -276,7 +276,7 @@ Let's walk through building a student progress tracking system using incremental
 
 **Increment 1: Core functionality (Week 1-2)**
 
-```python
+```python-template
 # Basic student and grade tracking
 class Student:
     def __init__(self, student_id, name):
@@ -329,7 +329,7 @@ test_student_basic_functionality()
 
 **Increment 2: Progress tracking and reporting (Week 3-4)**
 
-```python
+```python-template
 # Enhanced system with progress tracking
 class ProgressTracker:
     def __init__(self):

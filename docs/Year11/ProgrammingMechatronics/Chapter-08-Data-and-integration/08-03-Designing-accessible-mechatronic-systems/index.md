@@ -56,7 +56,7 @@ Physical disabilities affect how users can reach, grasp, and operate controls. M
 
 **Force limitations** affect the maximum pressure users can apply to buttons, levers, or touch interfaces. Many users cannot apply more than 5 pounds (22 Newtons) of force. Some users may have tremors or involuntary movements that require larger target areas and stable activation methods.
 
-```python
+```python-template
 # Example: Force-sensitive control with accessibility considerations
 class AccessibleControl:
     def __init__(self, max_force_newtons=22):
@@ -104,7 +104,7 @@ Traditional interfaces like buttons and joysticks may not work for all users. Me
 
 **Eye tracking** enables control through gaze direction, useful for users with severe mobility limitations.
 
-```python
+```python-template
 # Example: Multi-modal input system
 class MultiModalInput:
     def __init__(self):
@@ -210,7 +210,7 @@ AccessibleRobotController --> MultimodalFeedback
 
 ```
 
-```python
+```python-template
 # Accessible robotic arm controller implementation
 class AccessibleRobotController:
     def __init__(self):
@@ -312,7 +312,7 @@ Safety systems are critical for accessible mechatronic designs. Users with disab
 
 **Automatic shutdown** activates when the system detects unusual conditions like loss of user input, sensor failures, or boundary violations.
 
-```python
+```python-template
 # Safety system implementation
 class EmergencyStopSystem:
     def __init__(self):
@@ -472,7 +472,7 @@ Each method should provide audio, visual, and haptic confirmation of stop activa
     type: success
     open: false
 
-```python
+```python-template
 class AdaptiveForceControl:
     def __init__(self):
         self.sensitivity = 0.3  # Start at 30% of max force

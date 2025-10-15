@@ -12,7 +12,7 @@ Bias in machine learning systems represents one of the most critical challenges 
 
 Bias in ML systems manifests through multiple pathways, each requiring specific identification and mitigation strategies.
 
-```python
+```python-template
 import numpy as np
 import pandas as pd
 from typing import Dict, List, Tuple, Any
@@ -347,7 +347,7 @@ if __name__ == "__main__":
 
 ### 1.2 Bias Detection Workflow
 
-```python
+```python-template
 def create_bias_detection_pipeline():
     """Create a systematic pipeline for bias detection in ML workflows"""
     
@@ -487,7 +487,7 @@ if __name__ == "__main__":
 
 Now I'll implement comprehensive tools for investigating bias through dataset provenance, missing groups detection, and measurement bias assessment.
 
-```python
+```python-template
 class DatasetProvenanceAnalyzer:
     """Tools for analyzing dataset provenance and potential bias introduction points"""
     
@@ -968,7 +968,7 @@ if __name__ == "__main__":
 
 This section implements comprehensive frameworks for mitigating bias through diverse data collection, reweighting techniques, and fairness-aware metrics.
 
-```python
+```python-template
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
@@ -1518,7 +1518,7 @@ if __name__ == "__main__":
 
 This section implements comprehensive frameworks for documentation, model cards, and reproducibility checks to ensure transparency in bias mitigation efforts.
 
-```python
+```python-template
 import json
 from datetime import datetime
 from typing import Optional

@@ -41,7 +41,7 @@ result = calculate_average([])  # ZeroDivisionError
 
 Code that runs without crashing but produces incorrect results.
 
-```python
+```python-exec
 # Logic error - off-by-one error
 def get_last_element(my_list):
     return my_list[len(my_list)]  # Should be len(my_list) - 1
@@ -60,7 +60,7 @@ def get_last_element_wrong(my_list):
 
 The simplest debugging technique is adding `print()` statements to see what your code is doing.
 
-```python
+```python-exec
 def calculate_grade_average(assignments, tests, final_exam):
     """Calculate student's final grade with weighted averages."""
     
@@ -106,7 +106,7 @@ print(f"Final result: {result}")
 
 ### Strategic Print Placement
 
-```python
+```python-exec
 def find_maximum_value(numbers):
     """Find the maximum value in a list - with debugging."""
     
@@ -144,7 +144,7 @@ Let's work through debugging a factorial function that returns wrong results for
 
 ### The Buggy Factorial Function
 
-```python
+```python-exec
 def factorial_buggy(n):
     """Calculate factorial of n - but has bugs!"""
     
@@ -166,7 +166,7 @@ print(f"factorial(5) = {factorial_buggy(5)} (should be 120)")
 
 ### Debugging with Print Statements
 
-```python
+```python-exec
 def factorial_debug_v1(n):
     """Debug the factorial function with print statements."""
     
@@ -196,7 +196,7 @@ print(f"factorial_debug_v1(3) = {factorial_debug_v1(3)}")
 
 ### Identifying and Fixing the Bug
 
-```python
+```python-exec
 def factorial_debug_v2(n):
     """Second attempt at fixing factorial - still debugging."""
     
@@ -233,7 +233,7 @@ for test_value in [0, 1, 3, 5]:
 
 ### Clean Final Version
 
-```python
+```python-exec
 def factorial_clean(n):
     """Calculate factorial of n - clean final version."""
     
@@ -269,7 +269,7 @@ Modern IDEs provide powerful debugging tools that go beyond print statements.
 
 **Breakpoints** are markers that pause your program's execution at specific lines, allowing you to inspect the program's state.
 
-```python
+```python-exec
 def calculate_compound_interest(principal, rate, time):
     """Calculate compound interest - demonstrates breakpoint usage."""
     
@@ -303,7 +303,7 @@ def calculate_compound_interest(principal, rate, time):
 
 **Single line stepping** lets you execute your program one line at a time.
 
-```python
+```python-exec
 def bubble_sort_debug(arr):
     """Bubble sort with comments for stepping through."""
     
@@ -337,7 +337,7 @@ def bubble_sort_debug(arr):
 
 **Watches** let you monitor specific variables or expressions during debugging.
 
-```python
+```python-exec
 def analyze_student_grades(students_data):
     """Analyze grades - good for watching variables."""
     
@@ -405,7 +405,7 @@ Understanding how functions interact is crucial for debugging larger programs.
 
 ### Debugging Function Parameters
 
-```python
+```python-exec
 def calculate_shipping_cost(weight, distance, shipping_type):
     """Calculate shipping cost - debug parameter passing."""
     
@@ -470,7 +470,7 @@ print(f"Result 3: {cost3}\n")
 
 ### Debugging Return Values
 
-```python
+```python-exec
 def process_student_record(student_data):
     """Process student record - debug return values."""
     
@@ -608,7 +608,7 @@ except AssertionError as e:
 
 ### Debugging with Try-Except Blocks
 
-```python
+```python-exec
 def robust_division_calculator():
     """Calculator that handles and debugs errors gracefully."""
     
@@ -666,7 +666,7 @@ def robust_division_calculator():
 
 ### 1. Systematic Debugging Approach
 
-```python
+```python-exec
 def debug_systematically():
     """Demonstrate systematic debugging approach."""
     
@@ -721,7 +721,7 @@ for test in test_cases:
 
 ### 2. Debugging Checklist
 
-```python
+```python-exec
 def debugging_checklist():
     """Checklist for effective debugging."""
     

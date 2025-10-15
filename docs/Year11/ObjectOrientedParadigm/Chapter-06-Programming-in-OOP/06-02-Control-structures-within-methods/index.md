@@ -22,7 +22,7 @@ By the end of this section, you will be able to:
 
 ### Basic selection in methods
 
-```python
+```python-template
 class BankAccount:
     """Bank account demonstrating selection structures in methods"""
     
@@ -87,7 +87,7 @@ print(account.apply_fees())         # Applied low balance fee: $5
 
 ### Complex selection with multiple conditions
 
-```python
+```python-template
 class Student:
     """Student class demonstrating complex selection logic"""
     
@@ -182,7 +182,7 @@ print(student.can_graduate())              # (True, 'Eligible for graduation')
 
 ### For loops in methods
 
-```python
+```python-template
 class Inventory:
     """Inventory management demonstrating for loops in methods"""
     
@@ -263,7 +263,7 @@ print(inventory.generate_report())
 
 ### While loops in methods
 
-```python
+```python-template
 class NumberProcessor:
     """Demonstrating while loops in methods"""
     
@@ -368,7 +368,7 @@ print(first_multiple)  # 21
 
 ### Breaking down complex methods
 
-```python
+```python-template
 class OrderProcessor:
     """Demonstrating how to break down complex methods"""
     
@@ -508,7 +508,7 @@ class OrderProcessor:
 
 **1. Single Responsibility Principle:**
 
-```python
+```python-template
 class TextAnalyzer:
     """Example of methods with single responsibilities"""
     
@@ -557,7 +557,7 @@ class TextAnalyzer:
 
 **2. Keep methods short (generally under 20 lines):**
 
-```python
+```python-template
 class Calculator:
     """Examples of appropriately sized methods"""
     
@@ -609,7 +609,7 @@ class Calculator:
 
 ### Method extraction techniques
 
-```python
+```python-template
 class ReportGenerator:
     """Demonstrating method extraction techniques"""
     
@@ -742,7 +742,7 @@ Use appropriate selection structures in each method.
     type: success
     open: false
 
-```python
+```python-template
 class GradeCalculator:
     """Grade calculator demonstrating selection structures"""
     
@@ -859,7 +859,7 @@ Use appropriate iteration structures in each method.
     type: success
     open: false
 
-```python
+```python-template
 class WordProcessor:
     """Word processor demonstrating iteration structures"""
     
@@ -996,7 +996,7 @@ print("Removed 'the':", processor.remove_words_containing("the"))
 
 This method does too much. Refactor it into smaller, focused methods:
 
-```python
+```python-template
 class StudentManager:
     def process_student_data(self, student_data):
         # Validate student data
@@ -1042,7 +1042,7 @@ class StudentManager:
     type: success
     open: false
 
-```python
+```python-template
 class StudentManager:
     """Refactored version with focused methods"""
     

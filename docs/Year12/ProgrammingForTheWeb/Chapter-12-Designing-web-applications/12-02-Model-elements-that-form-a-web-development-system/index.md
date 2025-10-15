@@ -209,7 +209,7 @@ def create_order():
 
 The client-side JavaScript would then make requests to these endpoints:
 
-```javascript
+```javascript-template
 // Client-side code (runs in browser)
 async function loadBook(bookId) {
     try {

@@ -38,7 +38,7 @@ Effective solution presentations begin with deep understanding of who you're pre
 
 Understanding your audience's context, concerns, and priorities is essential for crafting presentations that resonate and persuade.
 
-```python
+```python-template
 class AudienceAnalysis:
     """
     Framework for analyzing presentation audiences and tailoring content accordingly.
@@ -402,7 +402,7 @@ note bottom : Narrative follows problem-solution-benefit flow\nwith concrete dem
 
 ```
 
-```python
+```python-template
 class PresentationNarrative:
     """
     Framework for developing compelling narratives for software solution presentations.
@@ -797,7 +797,7 @@ Live demonstrations are often the most persuasive part of a solution presentatio
 
 ### Demonstration planning framework
 
-```python
+```python-template
 class DemonstrationPlanner:
     """
     Framework for planning and executing engaging software demonstrations.

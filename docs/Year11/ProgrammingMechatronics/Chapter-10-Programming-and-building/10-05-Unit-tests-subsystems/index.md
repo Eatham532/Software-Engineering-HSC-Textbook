@@ -68,7 +68,7 @@ note left of [Control Logic] : Same logic tested\nin both environments
 
 Let's test a temperature control system that manages heating based on sensor readings and safety limits.
 
-```python
+```python-template
 # temperature_controller.py - The system under test
 class TemperatureController:
     def __init__(self, sensor, heater, safety_limit=80.0):
@@ -133,7 +133,7 @@ class SafetyException(Exception):
 
 Now let's create test fixtures for the sensor and heater:
 
-```python
+```python-template
 # test_fixtures.py - Mock devices for testing
 class MockTemperatureSensor:
     def __init__(self, initial_temperature=20.0):
@@ -206,7 +206,7 @@ class MockHeater:
 
 ### Comprehensive unit tests
 
-```python
+```python-template
 # test_temperature_controller.py - Unit tests using fixtures
 import unittest
 from temperature_controller import TemperatureController, SafetyException
@@ -388,7 +388,7 @@ Designing systems for testability requires specific architectural patterns that 
 
 #### Dependency injection pattern
 
-```python
+```python-template
 class RobotArm:
     """Example of dependency injection for testability"""
     
@@ -484,7 +484,7 @@ def test_robot_arm_movement():
 
 ### Integration testing with fixture orchestration
 
-```python
+```python-template
 # test_system_integration.py - Testing multiple subsystems together
 class GreenhouseIntegrationTest(unittest.TestCase):
     """Integration tests using multiple coordinated fixtures"""
@@ -623,7 +623,7 @@ Requirements:
     type: success
     open: false
 
-```python
+```python-template
 class PressureSensor:
     def __init__(self, min_pressure=0, max_pressure=1000):
         self.min_pressure = min_pressure
@@ -709,7 +709,7 @@ Requirements:
     type: success
     open: false
 
-```python
+```python-template
 class ServoController:
     def __init__(self, min_angle=-180, max_angle=180, max_speed=90):
         self.min_angle = min_angle
@@ -791,7 +791,7 @@ Components:
     type: success
     open: false
 
-```python
+```python-template
 class ConveyorSystem:
     def __init__(self, speed_sensor, safety_sensor, motor, estop_button):
         self.speed_sensor = speed_sensor

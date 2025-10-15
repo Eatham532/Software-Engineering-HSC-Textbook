@@ -42,7 +42,7 @@ The **CIA Triad** (Confidentiality, Integrity, Availability) defines what we're 
 
 **Confidentiality implementation strategies:**
 
-```python
+```python-template
 import os
 from cryptography.fernet import Fernet
 import getpass
@@ -145,7 +145,7 @@ def is_authorized(user, student_id):
 
 **Integrity implementation strategies:**
 
-```python
+```python-template
 import hashlib
 import hmac
 import json
@@ -292,7 +292,7 @@ def demonstrate_tampering_detection():
 
 **Availability implementation strategies:**
 
-```python
+```python-template
 import time
 import threading
 from datetime import datetime, timedelta
@@ -454,7 +454,7 @@ def demonstrate_availability_protection():
 
 Let's build a comprehensive example that demonstrates all three CIA principles working together.
 
-```python
+```python-template
 import sqlite3
 import hashlib
 import hmac
@@ -555,7 +555,7 @@ These principles work together to create comprehensive security. Now let's explo
 
 **Authentication implementation strategies:**
 
-```python
+```python-template
 import hashlib
 import secrets
 import time
@@ -774,7 +774,7 @@ def demonstrate_authentication():
 
 - **Mandatory Access Control (MAC)**: System-enforced access based on security clearances
 
-```python
+```python-template
 from enum import Enum
 from typing import List, Dict, Any
 import json
@@ -976,7 +976,7 @@ def demonstrate_authorization():
 
 - **Compliance reporting**: Meeting regulatory requirements
 
-```python
+```python-template
 import logging
 import json
 from datetime import datetime
@@ -1278,7 +1278,7 @@ Design and implement a secure document management system that demonstrates all t
     type: success
     open: false
 
-```python
+```python-template
 import os
 import hashlib
 import json
@@ -1480,7 +1480,7 @@ Build a complete Authentication, Authorization, and Accountability system for a 
     type: success
     open: false
 
-```python
+```python-template
 import secrets
 import time
 from datetime import datetime, timedelta

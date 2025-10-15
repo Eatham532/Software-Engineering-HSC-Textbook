@@ -75,7 +75,7 @@ note bottom : Evaluation is an iterative process that informs\ncontinuous soluti
 
 ```
 
-```python
+```python-template
 class SolutionEvaluator:
     """
     Framework for systematically evaluating software solution effectiveness.
@@ -1089,7 +1089,7 @@ Effective evaluation requires systematic testing that produces reliable evidence
 
 - **Performance baselines**: Establish metrics for non-functional requirements
 
-```python
+```python-template
 class EvaluationTestPlanner:
     """
     Framework for developing test plans specifically focused on solution evaluation.

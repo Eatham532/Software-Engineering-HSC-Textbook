@@ -50,7 +50,7 @@ maintainers --> servers : maintain
 
 Open-source projects operate through collaborative community models:
 
-```python
+```python-template
 # Example: Python tools for working with open-source projects
 import requests
 import json
@@ -213,7 +213,7 @@ def get_contribution_workflow():
 
 Understanding open-source licenses is crucial for web development:
 
-```python
+```python-template
 # Example: License compatibility checker
 class LicenseManager:
     """Manage and analyze open-source licenses"""
@@ -380,7 +380,7 @@ templates --> public : generates pages
 
 Understanding the trade-offs between hosted and self-hosted solutions:
 
-```python
+```python-template
 # Example: CMS comparison and recommendation system
 class CMSEvaluator:
     """Evaluate and compare CMS options"""
@@ -582,7 +582,7 @@ def get_cms_platforms():
 
 Modern CMS platforms rely heavily on plugin ecosystems:
 
-```python
+```python-template
 # Example: Plugin management and security analysis
 class PluginManager:
     """Manage and analyze CMS plugins"""

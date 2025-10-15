@@ -50,7 +50,7 @@ The work breakdown structure forms the foundation of effective project planning 
 
 4. **Deliverable-oriented**: Focus on what will be produced, not how it will be done
 
-```python
+```python-template
 class WorkBreakdownStructure:
     """
     Framework for creating and managing work breakdown structures in software projects.
@@ -425,7 +425,7 @@ printscale weekly
 
 ```
 
-```python
+```python-template
 class GanttChart:
     """
     Framework for creating and managing Gantt charts for software development projects.
@@ -790,7 +790,7 @@ Effective project tracking involves regularly monitoring progress against planne
 
 - **Capacity planning**: Forecasting future resource needs
 
-```python
+```python-template
 class ProjectTracker:
     """
     Framework for tracking and monitoring software development project progress.
@@ -1204,7 +1204,7 @@ Various software tools are available to support project management activities, e
 
 **Evaluation framework for tool selection:**
 
-```python
+```python-template
 class ProjectManagementToolEvaluator:
     """
     Framework for evaluating and selecting appropriate project management tools
@@ -1461,7 +1461,7 @@ Implement project monitoring and evaluate appropriate tools:
 
 Here's a framework for completing the practice tasks:
 
-```python
+```python-exec
 # Task completion template
 def complete_project_management_analysis(project_name):
     """Template for comprehensive project management analysis."""

@@ -40,7 +40,7 @@ Development blockers are obstacles that prevent progress on software projects. U
 
 - **Timeline conflicts**: Competing priorities or unrealistic deadlines
 
-```python
+```python-template
 # Example: Blocker tracking and categorization system
 class DevelopmentBlocker:
     def __init__(self, title, description, category, severity):
@@ -172,7 +172,7 @@ Modern software development benefits from vast online resources and communities.
 
 - **Date filtering**: Focus on recent solutions for current technology versions
 
-```python
+```python-template
 # Example: Research strategy framework
 class ResearchHelper:
     def __init__(self):
@@ -292,7 +292,7 @@ Team collaboration multiplies problem-solving capabilities and reduces individua
 
 - **Problem escalation**: Clear path from junior to senior expertise
 
-```python
+```python-template
 # Example: Collaboration management system
 class CollaborationManager:
     def __init__(self):
@@ -494,7 +494,7 @@ Let's walk through resolving a challenging integration between a student informa
 
 **Step 1: Problem analysis and categorization**
 
-```python
+```python-exec
 # Analyze the integration problem
 integration_problem = {
     "title": "Gradebook API data format mismatch",
@@ -542,7 +542,7 @@ def analyze_api_mismatch():
 
 **Step 2: Research and information gathering**
 
-```python
+```python-exec
 # Research potential solutions
 research_strategy = {
     "documentation_review": [
@@ -583,7 +583,7 @@ def research_solutions():
 
 **Step 3: Collaborative problem-solving**
 
-```python
+```python-exec
 # Engage team collaboration
 collaboration_plan = {
     "pair_programming": {
@@ -616,7 +616,7 @@ def implement_solution_collaboratively():
 
 **Step 4: Escalation if needed**
 
-```python
+```python-exec
 # Escalation plan if initial approaches fail
 escalation_strategy = {
     "level_1": {

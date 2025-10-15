@@ -50,7 +50,7 @@ Effective requirements analysis begins with identifying all stakeholders and und
 
 **Methods for gathering stakeholder needs:**
 
-```python
+```python-template
 class StakeholderAnalysis:
     """
     Framework for systematic stakeholder identification and needs assessment.
@@ -359,7 +359,7 @@ Financial feasibility examines whether the project can be completed within budge
 
 - **Return on investment**: Expected benefits compared to total investment
 
-```python
+```python-template
 class FinancialFeasibilityAnalysis:
     """
     Framework for systematic financial feasibility assessment.
@@ -674,7 +674,7 @@ Functional requirements describe what the system must do - the specific behaviou
 
 **Examples of functional requirements:**
 
-```python
+```python-template
 class FunctionalRequirement:
     """
     Template for documenting functional requirements with clear acceptance criteria.
@@ -835,7 +835,7 @@ Non-functional requirements specify how the system should perform - the quality 
 
 6. **Maintainability**: Ease of updates, bug fixes, and system changes
 
-```python
+```python-template
 class NonFunctionalRequirement:
     """
     Template for documenting non-functional requirements with measurable criteria.
@@ -1034,7 +1034,7 @@ Choosing the right data structures requires understanding the operations your sy
 
 - **Relationships**: How different pieces of data connect to each other
 
-```python
+```python-template
 class DataStructureAnalysis:
     """
     Framework for analyzing data requirements and selecting appropriate structures.
@@ -1321,7 +1321,7 @@ end note
 
 ```
 
-```python
+```python-template
 class ScopeDefinition:
     """
     Framework for defining and documenting project scope and boundaries.
@@ -1703,7 +1703,7 @@ For your chosen project, create detailed functional and non-functional requireme
 
 Here's a framework you can adapt for any project:
 
-```python
+```python-exec
 # Task completion template
 def complete_requirements_analysis(project_name):
     """Template for completing comprehensive requirements analysis."""

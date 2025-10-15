@@ -10,7 +10,7 @@ Progressive Web Apps (PWAs) bridge the gap between web and native mobile applica
 
 Service Workers act as a proxy between web applications and the network, enabling offline functionality and background processing:
 
-```python
+```python-template
 # Flask backend for PWA with service worker registration
 from flask import Flask, render_template, jsonify, request, make_response
 import json
@@ -421,7 +421,7 @@ def offline_page():
 
 Implementing PWA installation prompts and app-like behavior:
 
-```python
+```python-template
 # PWA installation and app characteristics
 class PWAInstallManager:
     """Manage PWA installation and app-like features"""
@@ -784,7 +784,7 @@ rectangle "PWA Sync Architecture" {
 
 ```
 
-```python
+```python-template
 # Background sync and data synchronization
 class PWASyncManager:
     """Manage PWA background synchronization"""

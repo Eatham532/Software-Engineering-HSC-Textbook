@@ -124,7 +124,7 @@ For **movement detection** (pest monitoring):
 
 - Accelerometer: better for detecting vibrations from smaller pests
 
-```python
+```python-template
 # Simulating sensor readings for greenhouse monitoring
 import random
 import time
@@ -313,7 +313,7 @@ An electronics assembly line needs to pick up circuit boards and place them in t
 
 **Gripper comparison**:
 
-```python
+```python-template
 class RoboticGripper:
     def __init__(self, gripper_type, max_force, precision, cycle_time, cost):
         self.gripper_type = gripper_type

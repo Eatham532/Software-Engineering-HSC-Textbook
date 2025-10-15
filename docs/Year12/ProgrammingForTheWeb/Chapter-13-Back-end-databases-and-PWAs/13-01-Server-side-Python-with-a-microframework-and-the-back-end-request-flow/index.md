@@ -152,7 +152,7 @@ if __name__ == '__main__':
 
 Proper input validation and sanitization prevents security vulnerabilities:
 
-```python
+```python-template
 # Advanced input handling and validation
 from flask import Flask, request, escape
 import re
@@ -410,7 +410,7 @@ note right : Complete response\nwith headers
 
 Web servers handle different aspects of request processing:
 
-```python
+```python-template
 # Demonstration of web server concepts in Flask context
 import time
 import os
@@ -731,7 +731,7 @@ def after_request(response):
 
 Modern web applications rely on various objects and libraries for request handling:
 
-```python
+```python-template
 # Comprehensive example of request processing objects and libraries
 from flask import Flask, request, session, g, jsonify
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -994,7 +994,7 @@ if __name__ == '__main__':
 
 Modern web applications integrate with multiple data sources and services:
 
-```python
+```python-template
 # Database and external service integration patterns
 import asyncio
 import aiohttp
@@ -1429,7 +1429,7 @@ if __name__ == '__main__':
 
 **Input validation strategy**:
 
-```python
+```python-exec
 def validate_registration_input(data):
     errors = []
     

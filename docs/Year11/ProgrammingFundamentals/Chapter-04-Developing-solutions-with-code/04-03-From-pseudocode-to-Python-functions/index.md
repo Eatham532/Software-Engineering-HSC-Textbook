@@ -28,7 +28,7 @@ In Python, you've already used built-in functions like `print()`, `len()`, and `
 
 ### Function anatomy
 
-```python
+```python-exec
 def function_name(parameter1, parameter2):
     """Documentation string explaining what the function does."""
     # Function body - the code that does the work
@@ -65,7 +65,7 @@ In Python, everything is technically a function, but we use the same terminology
 
 - Functions that don't return a value (or return `None`) act like **procedures**
 
-```python
+```python-exec
 # Function - returns a value
 def calculate_average(score1, score2, score3):
     """Calculate the average of three scores."""
@@ -99,7 +99,7 @@ END FUNCTION
 
 **Python**:
 
-```python
+```python-exec
 def calculate_area(length, width):
     """Calculate the area of a rectangle."""
     area = length * width
@@ -109,7 +109,7 @@ def calculate_area(length, width):
 
 Even simpler, you can return directly:
 
-```python
+```python-exec
 def calculate_area(length, width):
     """Calculate the area of a rectangle."""
     return length * width
@@ -139,7 +139,7 @@ END FUNCTION
 
 **Python**:
 
-```python
+```python-exec
 def find_maximum(num1, num2, num3):
     """Find the largest of three numbers."""
     max_value = num1
@@ -160,7 +160,7 @@ print(result)  # Output: 89
 
 **Python shortcut** (using built-in `max` function):
 
-```python
+```python-exec
 def find_maximum(num1, num2, num3):
     """Find the largest of three numbers."""
     return max(num1, num2, num3)
@@ -181,7 +181,7 @@ END PROCEDURE
 
 **Python**:
 
-```python
+```python-exec
 def display_welcome_message(user_name):
     """Display a personalized welcome message."""
     print(f"Welcome, {user_name}!")
@@ -203,7 +203,7 @@ Parameters are how functions receive information. Understanding how they work is
 
 The most common way to pass parameters—order matters!
 
-```python
+```python-exec
 def format_name(first_name, last_name):
     """Format a full name."""
     return f"{first_name} {last_name}"
@@ -218,7 +218,7 @@ print(format_name("Smith", "Alice"))    # Smith Alice (wrong!)
 
 You can provide default values for parameters:
 
-```python
+```python-exec
 def greet(name, greeting="Hello"):
     """Greet someone with a customizable greeting."""
     return f"{greeting}, {name}!"
@@ -245,7 +245,7 @@ def example(b, a=1):
 
 You can specify parameters by name when calling functions:
 
-```python
+```python-exec
 def create_student_record(name, age, grade):
     """Create a student record dictionary."""
     return {
@@ -271,7 +271,7 @@ Good functions do **one thing well**. This is called the **Single Responsibility
 
 ### ❌ Bad: Function does too much
 
-```python
+```python-exec
 def process_student_data(name, test1, test2, test3):
     """Process student data and display report."""
     # Calculating average
@@ -664,7 +664,7 @@ Test with: weight=70kg, height=1.75m (expected BMI: 22.9)
     type: success
     open: false
 
-```python
+```python-exec
 def calculate_bmi(weight_kg, height_m):
     """Calculate Body Mass Index from weight and height.
     
@@ -711,7 +711,7 @@ Test with: `[45, 67, 89, 34, 56, 78, 90, 23, 67, 81]`
     type: success
     open: false
 
-```python
+```python-exec
 def is_passing_grade(score):
     """Check if a score is a passing grade (>= 50)."""
     return score >= 50
@@ -930,7 +930,7 @@ if __name__ == '__main__':
 
 ### 1. Forgetting to return a value
 
-```python
+```python-exec
 # ❌ Wrong - function doesn't return anything
 def calculate_total(price, tax):
     """Calculate total price including tax."""
@@ -950,7 +950,7 @@ def calculate_total(price, tax):
 
 ### 2. Using print instead of return
 
-```python
+```python-exec
 # ❌ Wrong - prints but doesn't return
 def double(number):
     """Double a number."""
@@ -973,7 +973,7 @@ print(result)  # 10
 
 ### 3. Modifying parameters (mutation)
 
-```python
+```python-exec
 # ⚠️ Be careful with mutable parameters
 def add_item(shopping_list, item):
     """Add item to shopping list."""
@@ -997,7 +997,7 @@ new_list = add_item(my_list, 'eggs')
 
 ### 4. Too many responsibilities
 
-```python
+```python-exec
 # ❌ Function does too much
 def process_everything(data):
     """Process, validate, calculate, format, and save data."""

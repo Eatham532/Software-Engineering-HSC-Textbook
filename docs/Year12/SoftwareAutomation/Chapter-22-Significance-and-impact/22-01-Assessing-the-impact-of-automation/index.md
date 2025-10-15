@@ -110,7 +110,7 @@ Automation fundamentally changes workplace safety dynamics. Rather than simply m
 
 ### Safety Assessment Framework
 
-```python
+```python-template
 class WorkplaceSafetyAssessment:
     """
     Framework for systematically evaluating automation's impact on workplace safety.
@@ -420,7 +420,7 @@ Automation can dramatically improve accessibility for people with disabilities b
 
 ### Accessibility Assessment Framework
 
-```python
+```python-template
 class AccessibilityImpactAssessment:
     """
     Framework for evaluating automation's impact on accessibility for people with disabilities.
@@ -927,7 +927,7 @@ Automation doesn't simply eliminate jobs—it transforms the nature of work itse
 
 ### Employment Impact Assessment Framework
 
-```python
+```python-template
 class EmploymentTransformationAssessment:
     """
     Framework for analyzing automation's impact on employment patterns and skill requirements.
@@ -1122,7 +1122,7 @@ Automation systems have complex environmental implications, ranging from energy 
 
 ### Environmental Impact Assessment Framework
 
-```python
+```python-template
 class EnvironmentalImpactAssessment:
     """
     Framework for analyzing environmental impacts of automation systems.
@@ -1538,7 +1538,7 @@ Automation affects economic structures and wealth distribution patterns across s
 
 ### Economic Impact Assessment Framework
 
-```python
+```python-template
 class EconomicDistributionAssessment:
     """
     Framework for analyzing economic and wealth distribution impacts of automation.

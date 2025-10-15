@@ -64,7 +64,7 @@ Here are the common levels of autonomy in mechatronic systems:
 
 Let's see how this works in code:
 
-```python
+```python-template
 class AutonomousSystem:
     def __init__(self, autonomy_level):
         self.autonomy_level = autonomy_level
@@ -132,7 +132,7 @@ system.demonstrate_autonomy_levels()
 
 Think of these as the "safety equipment" of autonomous systems:
 
-```python
+```python-template
 class SafeAutonomousSystem:
     def __init__(self):
         self.emergency_stop_active = False
@@ -271,7 +271,7 @@ safe_system.safe_operation_cycle("navigate_to_target")
 
 Let's build a comprehensive autonomous cleaning robot that demonstrates different autonomy levels and safety features:
 
-```python
+```python-template
 import random
 import time
 
@@ -518,7 +518,7 @@ for level in [1, 2, 4]:
 
 Consider how autonomy levels might work for different mechatronic systems:
 
-```python
+```python-exec
 def design_autonomy_system(system_type):
     """Design appropriate autonomy levels for different systems"""
     
@@ -574,7 +574,7 @@ design_autonomy_system("delivery_drone")
 
 Create a comprehensive safety system for an industrial robot:
 
-```python
+```python-template
 class IndustrialRobotSafety:
     def __init__(self):
         self.safety_zones = {

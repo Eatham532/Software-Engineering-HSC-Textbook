@@ -54,7 +54,7 @@ check_certificate('github.com')
 
 **Asymmetric encryption** uses a pair of keys: public (shareable) and private (secret). It's slower but solves the key-sharing problem.
 
-```python
+```python-template
 # Conceptual example of encryption approaches
 class SymmetricEncryption:
     """Simplified symmetric encryption concept."""
@@ -111,7 +111,7 @@ print(f"Asymmetric: Hello → {encrypted_asym} → {decrypted_asym}")
 
 **Plain text** is readable data. **Cipher text** is encrypted data that looks random. Encryption transforms plain text into cipher text to protect it during transmission.
 
-```python
+```python-exec
 def demonstrate_encryption_need():
     """Show why we encrypt sensitive data."""
     
@@ -150,7 +150,7 @@ demonstrate_encryption_need()
 
 **Authentication** answers "Who are you?" **Authorisation** answers "What can you do?"
 
-```python
+```python-template
 class WebSecuritySystem:
     """Simplified web authentication and authorisation."""
     
@@ -259,7 +259,7 @@ demonstrate_hashing()
 
 Digital signatures provide **non-repudiation** (can't deny you signed it) and **verification** (proves who signed it).
 
-```python
+```python-template
 class DigitalSignatureDemo:
     """Simplified digital signature concept."""
     
@@ -449,7 +449,7 @@ Include functions to hash passwords, verify them, and check strength.
     type: success
     open: false
 
-```python
+```python-template
 import hashlib
 import secrets
 import re

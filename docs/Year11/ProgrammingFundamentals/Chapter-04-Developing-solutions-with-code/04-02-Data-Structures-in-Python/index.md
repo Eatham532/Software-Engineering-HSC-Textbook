@@ -24,7 +24,7 @@ The required data structures are:
 
 Python lists are our implementation of single-dimensional arrays. They store multiple values in a single variable, accessible by index.
 
-```python
+```python-exec
 # Creating and using 1D arrays (lists)
 student_grades = [85, 92, 78, 96, 88]
 student_names = ["Alice", "Bob", "Charlie", "Diana", "Eve"]
@@ -44,7 +44,7 @@ print(f"Average grade: {sum(student_grades) / len(student_grades):.1f}")
 
 ### Array Processing Patterns
 
-```python
+```python-exec
 def process_exam_scores(scores):
     """Demonstrate common array processing patterns."""
     
@@ -94,7 +94,7 @@ print("Letter grades:", grades)
 
 Two-dimensional arrays represent tables, grids, or matrices using lists of lists.
 
-```python
+```python-exec
 # Creating a 2D array - grade book for 4 students, 3 subjects
 # Each row represents a student, each column represents a subject
 grade_book = [
@@ -160,7 +160,7 @@ analyze_grade_book(grade_book, student_names, subject_names)
 
 ### Dynamic 2D Array Creation
 
-```python
+```python-exec
 def create_seating_chart(rows, seats_per_row):
     """Create a dynamic seating chart for a theater."""
     
@@ -226,7 +226,7 @@ display_seating_chart(theater)
 
 ### Essential List Operations
 
-```python
+```python-exec
 # Creating lists
 numbers = [10, 20, 30, 40, 50]
 fruits = ["apple", "banana", "cherry"]
@@ -260,7 +260,7 @@ print(f"Number of apples: {count_a}")
 
 ### List Manipulation Techniques
 
-```python
+```python-exec
 def manage_shopping_list():
     """Interactive shopping list manager."""
     
@@ -330,7 +330,7 @@ def manage_shopping_list():
 
 ### List Sorting and Searching
 
-```python
+```python-exec
 def demonstrate_list_algorithms():
     """Show sorting and searching algorithms with lists."""
     
@@ -382,7 +382,7 @@ demonstrate_list_algorithms()
 
 ### Tree Structures Using Nested Dictionaries
 
-```python
+```python-exec
 # Simple family tree using nested dictionaries
 family_tree = {
     "name": "John (Grandfather)",
@@ -452,7 +452,7 @@ else:
 
 ### File System Tree Structure
 
-```python
+```python-exec
 # File system representation using nested structure
 file_system = {
     "name": "root",
@@ -519,7 +519,7 @@ print(f"\nTotal size: {calculate_folder_size(file_system)} bytes")
 
 ### Stack Implementation Using Lists
 
-```python
+```python-template
 class SimpleStack:
     """Stack implementation using Python list."""
     
@@ -590,7 +590,7 @@ print(f"Stack size: {stack.size()}")
 
 ### Practical Stack Applications
 
-```python
+```python-exec
 def bracket_checker(expression):
     """Check if brackets are properly matched using a stack."""
     
@@ -684,7 +684,7 @@ undo_redo_system()
 
 ### Dictionary Fundamentals
 
-```python
+```python-exec
 # Creating and using dictionaries
 student_grades = {
     "Alice": 92,
@@ -715,7 +715,7 @@ print("Student-grade pairs:", list(student_grades.items()))
 
 ### Advanced Dictionary Applications
 
-```python
+```python-exec
 def create_word_frequency_counter():
     """Count word frequencies in text using a dictionary."""
     
@@ -991,7 +991,7 @@ csv_analysis_tools()
 
 ### Complete Student Management System
 
-```python
+```python-template
 import csv
 
 class StudentManagementSystem:

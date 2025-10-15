@@ -29,7 +29,7 @@ Think of it like running a restaurant kitchen:
 
 A **buffer overflow** occurs when a program writes more data to a buffer than it can hold, potentially overwriting adjacent memory. While Python manages memory automatically, understanding these concepts helps you write more secure code.
 
-```python
+```python-exec
 # Dangerous pattern that could cause issues
 def unsafe_string_handling():
     # This could be problematic with very large inputs
@@ -57,7 +57,7 @@ def safe_string_handling():
 
 ### Memory-Safe Coding Practices
 
-```python
+```python-template
 import sys
 import tracemalloc
 
@@ -112,7 +112,7 @@ def create_safe_data_structure(user_requested_size):
 
 **Denial of Service (DoS)** attacks attempt to make your application unavailable by exhausting system resources like CPU, memory, disk space, or network bandwidth.
 
-```python
+```python-template
 import time
 import threading
 from collections import defaultdict
@@ -213,7 +213,7 @@ def process_file_with_timeout(file_data, timeout_seconds):
 
 ### CPU and Memory Protection
 
-```python
+```python-template
 import resource
 import psutil
 import os
@@ -284,7 +284,7 @@ def secure_computation(data):
 
 File operations are common attack vectors. Always validate paths, check file sizes, and limit file types.
 
-```python
+```python-template
 import os
 import tempfile
 import mimetypes
@@ -424,7 +424,7 @@ def handle_user_upload(filename, file_data):
 
 ### Implementing Robust Timeouts
 
-```python
+```python-template
 import time
 import random
 from functools import wraps
@@ -542,7 +542,7 @@ def safe_database_call(query):
 
 ### Secure Error Handling
 
-```python
+```python-template
 import logging
 import traceback
 import sys
@@ -663,7 +663,7 @@ def validate_user_input(data):
 
 Let's build a complete secure file upload system that demonstrates all these concepts:
 
-```python
+```python-template
 import os
 import hashlib
 import time

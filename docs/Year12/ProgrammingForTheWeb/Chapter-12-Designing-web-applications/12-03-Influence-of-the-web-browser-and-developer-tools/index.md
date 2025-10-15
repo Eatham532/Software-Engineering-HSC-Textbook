@@ -336,7 +336,7 @@ if __name__ == '__main__':
 
 HTML template for testing (`templates/debug_demo.html`):
 
-```html
+```html-exec
 <!DOCTYPE html>
 <html>
 <head>
@@ -523,7 +523,6 @@ HTML template for testing (`templates/debug_demo.html`):
 - Remove or optimize slow-running JavaScript functions
 ///
 ///
-
 
 ## Recap
 

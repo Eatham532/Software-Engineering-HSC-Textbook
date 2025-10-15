@@ -10,7 +10,7 @@ The World Wide Web Consortium (W3C) develops the standards that make the web wor
 
 The W3C is an international community that develops open standards to ensure the long-term growth of the Web. Founded by Tim Berners-Lee in 1994, it brings together organizations, developers, and users to create guidelines that help the web remain accessible, interoperable, and useful.
 
-```python
+```python-template
 class WebStandardsDemo:
     """Demonstrate how web standards affect development decisions."""
     
@@ -79,7 +79,7 @@ standards_demo.show_standards_evolution()
 
 The WAI develops guidelines and resources to make the web accessible to people with disabilities. The Web Content Accessibility Guidelines (WCAG) provide the foundation for web accessibility standards worldwide.
 
-```python
+```python-template
 class AccessibilityChecker:
     """Tools for checking and implementing web accessibility."""
     
@@ -236,7 +236,7 @@ accessibility.check_color_contrast("#767676", "#ffffff")
 
 Internationalisation prepares software to support multiple languages and regions, while localisation adapts software for specific markets. These practices make web applications usable worldwide.
 
-```python
+```python-template
 import datetime
 from decimal import Decimal
 
@@ -385,7 +385,7 @@ i18n_demo.demonstrate_text_direction()
 
 The W3C develops security standards and recommends patterns that help protect web applications and users from various threats.
 
-```python
+```python-template
 import hashlib
 import secrets
 import base64
@@ -516,7 +516,7 @@ security.show_input_validation_patterns()
 
 Privacy-by-design builds privacy protection into web applications from the start, rather than adding it as an afterthought.
 
-```python
+```python-template
 class PrivacyByDesign:
     """Implement privacy-by-design principles for web applications."""
     
@@ -664,7 +664,7 @@ privacy.create_privacy_dashboard()
 
 Standards like ARIA, microdata, and JSON-LD help machines understand web content, improving accessibility and search engine optimization.
 
-```python
+```python-template
 import json
 
 class MachineReadableData:
@@ -904,7 +904,7 @@ Create a simple accessibility audit tool that checks a webpage structure for com
     type: success
     open: false
 
-```python
+```python-template
 class AccessibilityAuditor:
     def __init__(self):
         self.issues = []
@@ -1074,7 +1074,7 @@ Build a GDPR-compliant cookie consent manager:
     type: success
     open: false
 
-```python
+```python-template
 import json
 import datetime
 from typing import Dict, List

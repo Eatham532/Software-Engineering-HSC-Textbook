@@ -95,7 +95,7 @@ else:
 
 ### If-Elif-Else (Multiple Conditions)
 
-```python
+```python-exec
 # Multiple conditions with elif
 def get_letter_grade(score):
     """Convert a numerical score to a letter grade."""
@@ -164,7 +164,7 @@ if not (age >= 18):
 
 **For loops** are used when you know how many times you want to repeat something.
 
-```python
+```python-exec
 # Simple for loop with range
 print("Counting to 5:")
 for i in range(1, 6):
@@ -186,7 +186,7 @@ for letter in word:
 
 ### Range Function Variations
 
-```python
+```python-exec
 # Different ways to use range()
 
 # range(stop) - starts at 0
@@ -216,7 +216,7 @@ print("Blast off!")
 
 **While loops** continue until a condition becomes false.
 
-```python
+```python-exec
 # Simple while loop
 count = 1
 print("Counting while count <= 5:")
@@ -385,7 +385,7 @@ END
 
 /// tab | Python Implementation
 
-```python
+```python-exec
 # Grade classifier for multiple students
 students = ["Alice", "Bob", "Charlie"]
 scores = [92, 78, 85]
@@ -416,7 +416,7 @@ for i in range(len(students)):
 
 ### Password Strength Checker
 
-```python
+```python-exec
 def check_password_strength(password):
     """Check if password meets security requirements."""
     
@@ -540,7 +540,7 @@ score = get_valid_integer("Enter test score (0-100): ", 0, 100)
 
 ### Flag-Controlled Loop Pattern
 
-```python
+```python-exec
 def find_target_in_list(target_list, target_value):
     """Search for a value in a list using a flag pattern."""
     

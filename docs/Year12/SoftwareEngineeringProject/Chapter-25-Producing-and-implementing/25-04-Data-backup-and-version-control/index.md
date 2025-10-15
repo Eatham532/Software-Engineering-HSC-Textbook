@@ -24,7 +24,7 @@ Version control systems track changes to files over time, allowing multiple deve
 
 **Basic Git workflow**:
 
-```python
+```python-template
 # Example: Simulating version control operations in Python
 class VersionControl:
     def __init__(self, project_name):
@@ -124,7 +124,7 @@ Effective branching strategies help teams organize development work, isolate fea
 
 - `release/v2.1.0`
 
-```python
+```python-template
 # Example: Branch management system
 class BranchManager:
     def __init__(self):
@@ -236,7 +236,7 @@ Tags mark specific points in repository history, typically used to identify rele
 
 6. Merge back to develop
 
-```python
+```python-template
 # Example: Release management system
 class ReleaseManager:
     def __init__(self):
@@ -404,7 +404,7 @@ Release hygiene ensures consistent, reliable software deployments:
 
 - Release notes
 
-```python
+```python-template
 # Example: Release hygiene checker
 class ReleaseHygiene:
     def __init__(self):
@@ -487,7 +487,7 @@ Let's walk through establishing version control and backup procedures for a scho
 
 **Step 1: Repository setup**
 
-```python
+```python-exec
 # Initialize project repository structure
 project_structure = {
     "student_management/": {
@@ -520,7 +520,7 @@ def setup_git_repository(project_name):
 
 **Step 2: Branching strategy implementation**
 
-```python
+```python-exec
 # Define branching workflow
 branching_workflow = {
     "main": {
@@ -551,7 +551,7 @@ branching_workflow = {
 
 **Step 3: Backup and release process**
 
-```python
+```python-exec
 # Automated backup and release process
 def create_backup_strategy():
     return {

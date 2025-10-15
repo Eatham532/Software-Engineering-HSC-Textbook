@@ -284,7 +284,7 @@ def get_student_grades(student_id, user_id):
 
 **Sample Security Test:**
 
-```python
+```python-exec
 def test_grade_access_authorization():
     """Test that students can't access other students' grades"""
     # Setup: Create two student accounts

@@ -34,7 +34,7 @@ An open loop system executes a predetermined sequence of actions without monitor
 
 - 3D printers (follow predetermined paths regardless of actual position)
 
-```python
+```python-template
 class OpenLoopHeater:
     """Simple open loop heating system"""
     
@@ -131,7 +131,7 @@ A closed loop system continuously monitors its output and adjusts its actions to
 
 - Robotic arms (adjust motor positions to reach target coordinates)
 
-```python
+```python-template
 class ClosedLoopHeater:
     """Closed loop heating system with temperature feedback"""
     
@@ -252,7 +252,7 @@ Feedback is the key difference between open and closed loop systems. It provides
 
 **Positive feedback**: The feedback signal reinforces changes. This can lead to instability but is useful in some applications like oscillators.
 
-```python
+```python-template
 class FeedbackDemo:
     """Demonstrate different types of feedback"""
     
@@ -309,7 +309,7 @@ demo.demonstrate_feedback_types()
 
 Real mechatronic systems often have multiple feedback loops operating at different speeds and controlling different aspects of the system.
 
-```python
+```python-template
 class RobotArmJoint:
     """Model of a robot arm joint with position and velocity control"""
     
@@ -400,7 +400,7 @@ Stability is a crucial concern in closed loop systems. A stable system returns t
 
 **Disturbances**: External forces that push the system away from its target state.
 
-```python
+```python-template
 class StabilityDemo:
     """Demonstrate how different factors affect system stability"""
     
@@ -530,7 +530,7 @@ note bottom : Balance between performance\nand stability is key
 
 Let's design a simple cruise control system to see open and closed loop concepts in practice.
 
-```python
+```python-template
 class CruiseControlSystem:
     """Complete cruise control system demonstration"""
     
@@ -714,7 +714,7 @@ Design a simple water level control system for a fish tank. Create Python code t
     type: success
     open: false
 
-```python
+```python-template
 class FishTankController:
     def __init__(self):
         self.current_level = 20  # cm
@@ -795,7 +795,7 @@ Modify the closed loop heater example to investigate what happens with different
     type: success
     open: false
 
-```python
+```python-template
 class HeaterStabilityTest:
     def __init__(self, gain):
         self.target_temperature = 25

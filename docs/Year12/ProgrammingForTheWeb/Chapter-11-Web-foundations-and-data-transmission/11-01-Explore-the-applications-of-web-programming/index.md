@@ -362,7 +362,7 @@ package "E-commerce Platform Architecture" {
 
 #### Python Example: E-commerce Core Functionality
 
-```python
+```python-template
 from flask import Flask, request, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -750,7 +750,7 @@ package "Progressive Web App Architecture" {
 
 #### Python Example: PWA Backend with Offline Support
 
-```python
+```python-template
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import json
 import datetime

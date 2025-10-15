@@ -50,7 +50,7 @@ Proportional control adjusts the control output in direct proportion to the erro
 
 Higher gain provides faster response but can cause instability. Lower gain is more stable but slower to reach the setpoint.
 
-```python
+```python-template
 # Basic proportional controller implementation
 class ProportionalController:
     def __init__(self, kp, output_min=-100, output_max=100):
@@ -98,7 +98,7 @@ PID (Proportional-Integral-Derivative) control combines three components to achi
 
 **Control equation**: `output = Kp×error + Ki×∫error×dt + Kd×(derror/dt)`
 
-```python
+```python-template
 import time
 
 class PIDController:
@@ -237,7 +237,7 @@ RobotArmController ..> Disturbance : affected by
 
 ```
 
-```python
+```python-template
 import math
 import random
 import time
@@ -407,7 +407,7 @@ if __name__ == "__main__":
 
 Real control systems require careful parameter management for different operating modes, environmental conditions, and performance requirements.
 
-```python
+```python-template
 class ControlParameters:
     """Manages PID parameters and operating modes"""
     
@@ -560,7 +560,7 @@ Starting conditions:
     type: success
     open: false
 
-```python
+```python-template
 class HeatingController:
     def __init__(self, kp):
         self.kp = kp
@@ -687,7 +687,7 @@ Identify potential problems and suggest debugging steps.
 
 **Debugging code:**
 
-```python
+```python-exec
 def debug_pid_output(self, setpoint, measured_value):
     output, p, i, d = self.calculate_output(setpoint, measured_value)
     

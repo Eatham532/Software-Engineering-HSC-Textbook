@@ -50,7 +50,7 @@ Every processor understands a specific set of instructions called an **instructi
 
 Here are some common types of instructions that processors understand:
 
-```python
+```python-exec
 # These Python operations correspond to basic processor instructions:
 
 # Arithmetic operations
@@ -113,7 +113,7 @@ stop
 
 Let's trace through a simple example:
 
-```python
+```python-exec
 # This Python code: x = 5 + 3
 # Might translate to these processor steps:
 
@@ -137,7 +137,7 @@ This cycle repeats millions or billions of times per second, depending on the pr
 
 Let's simulate how a simple microcontroller might process instructions for a mechatronic system:
 
-```python
+```python-template
 class SimpleProcessor:
     """A simplified model of how a microcontroller processes instructions"""
     
@@ -281,7 +281,7 @@ Test your program with different sensor readings to see how the motor control ch
     type: success
     open: false
 
-```python
+```python-template
 # Extend our processor to handle motor control
 class MechatronicProcessor(SimpleProcessor):
     def __init__(self):
@@ -370,7 +370,7 @@ Compare the timing of two approaches to calculate `5 * 4`:
     type: success
     open: false
 
-```python
+```python-template
 class TimedProcessor(SimpleProcessor):
     def __init__(self):
         super().__init__()

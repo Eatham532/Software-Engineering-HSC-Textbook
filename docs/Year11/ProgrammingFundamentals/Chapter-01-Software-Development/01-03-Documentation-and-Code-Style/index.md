@@ -81,7 +81,7 @@ Docstrings explain what a function does, its parameters, and return value. They 
 
 **Format**: Brief description, then parameters and returns if not obvious.
 
-```python
+```python-exec
 def calculate_average(grades):
     """Calculate the arithmetic mean of a list of grades.
     
@@ -196,7 +196,7 @@ def validate_grade(grade):
 
 - Use blank lines to separate logical sections
 
-```python
+```python-exec
 def process_student_grades():
     """Process all student grades and generate report."""
     
@@ -381,7 +381,7 @@ Enter temperature in Celsius: 25
 
 Add appropriate docstrings to this function:
 
-```python
+```python-exec
 def calculate_compound_interest(principal, rate, time, compounds_per_year):
     amount = principal * (1 + rate/compounds_per_year) ** (compounds_per_year * time)
     return round(amount - principal, 2)
@@ -392,7 +392,7 @@ def calculate_compound_interest(principal, rate, time, compounds_per_year):
     type: success
     open: false
 
-```python
+```python-exec
 def calculate_compound_interest(principal, rate, time, compounds_per_year):
     """Calculate compound interest earned on an investment.
     
@@ -422,7 +422,7 @@ def calculate_compound_interest(principal, rate, time, compounds_per_year):
 
 Improve the naming and style of this code:
 
-```python
+```python-exec
 def calc(x,y,z):
     a=x+y+z
     r=a/3
@@ -440,7 +440,7 @@ def calc(x,y,z):
     type: success
     open: false
 
-```python
+```python-exec
 def calculate_grade_average(test1_score, test2_score, test3_score):
     """Calculate average of three test scores and assign letter grade."""
     total_points = test1_score + test2_score + test3_score

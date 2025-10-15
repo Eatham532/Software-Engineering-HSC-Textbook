@@ -370,7 +370,7 @@ feedback --> accessibility : includes
 
 ```
 
-```python
+```python-template
 # Example: Python backend implementing UI/UX principles
 from flask import Flask, request, jsonify, render_template
 import time
@@ -463,7 +463,7 @@ def ui_demo():
 
 Building accessible web interfaces ensures usability for people with disabilities:
 
-```python
+```python-template
 # Example: Python backend supporting accessibility features
 from flask import Flask, request, jsonify
 
@@ -555,7 +555,6 @@ def get_accessible_form():
     return jsonify(accessible_form)
 
 ```
-
 
 /// details | Building an accessible, responsive design system
     type: example
@@ -771,7 +770,7 @@ if __name__ == '__main__':
 
 **Design tokens**:
 
-```python
+```python-exec
 design_tokens = {
     'colors': {
         'primary': '#1e40af',      # School blue
@@ -803,7 +802,7 @@ design_tokens = {
 
 **Responsive CSS**:
 
-```css
+```css-exec
 /* Mobile-first approach */
 .container {
     padding: 1rem;
@@ -840,7 +839,7 @@ design_tokens = {
 
 **Accessibility features**:
 
-```css
+```css-exec
 /* Focus indicators */
 .interactive-element:focus {
     outline: 2px solid #1e40af;
@@ -906,7 +905,7 @@ design_tokens = {
 
 **Consistent feedback patterns**:
 
-```python
+```python-exec
 feedback_system = {
     'loading': {
         'message': 'Processing your request...',

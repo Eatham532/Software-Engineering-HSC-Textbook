@@ -58,7 +58,7 @@ This section explores each training paradigm with practical Python examples, hel
 
 ### Python Example: Supervised Learning
 
-```python
+```python-template
 import numpy as np
 import random
 import statistics
@@ -341,7 +341,7 @@ if __name__ == "__main__":
 
 ### Python Example: Unsupervised Learning
 
-```python
+```python-template
 import math
 import random
 from typing import List, Dict, Tuple
@@ -657,7 +657,7 @@ if __name__ == "__main__":
 
 ### Python Example: Semi-Supervised Learning
 
-```python
+```python-template
 import random
 import statistics
 from typing import List, Tuple, Optional
@@ -971,7 +971,7 @@ if __name__ == "__main__":
 
 ### Python Example: Reinforcement Learning
 
-```python
+```python-template
 import random
 import statistics
 from typing import Dict, List, Tuple
