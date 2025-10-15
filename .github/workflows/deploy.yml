@@ -281,15 +281,15 @@ jobs:
             commit_range="${previous_tag}..HEAD"
           fi
           
-          # Generate commit log
+          # Generate commit log (exclude version bump commits)
           echo "## 📋 Changes" > release_notes.md
           echo "" >> release_notes.md
-          git log ${commit_range} --pretty=format:"- %s (%h)" --no-merges | grep -v "\[skip deploy\]" >> release_notes.md || true
+          git log ${commit_range} --pretty=format:"- %s (%h)" --no-merges | grep -v "\[skip deploy\]" | grep -v "^- chore: bump version to" >> release_notes.md || true
           echo "" >> release_notes.md
           
           # Get contributors since last tag
           if [ -n "$previous_tag" ]; then
-            contributors=$(git log ${commit_range} --format='%an' | sort -u | grep -v "github-actions\[bot\]" || true)
+            contributors=$(git log ${commit_range} --format='%an' | sort -u)
             if [ -n "$contributors" ]; then
               echo "" >> release_notes.md
               echo "## 👥 Contributors" >> release_notes.md
