@@ -17,6 +17,10 @@ These formatters integrate with the code runner and IDE features.
 
 import html
 import re
+from pygments import highlight
+from pygments.lexers import get_lexer_by_name, guess_lexer
+from pygments.formatters import HtmlFormatter
+from pygments.util import ClassNotFound
 
 
 def _extract_language_from_fence(language):
@@ -65,29 +69,46 @@ def _format_code_fence(source, language, css_class, options, md, **kwargs):
     id_value = kwargs.get('id_value', '')
     attrs = kwargs.get('attrs', {})
     
-    # Build class list
+    # Get syntax highlighting from Pygments
+    try:
+        lexer = get_lexer_by_name(base_lang)
+    except ClassNotFound:
+        # Fallback to plain text if language not found
+        try:
+            lexer = guess_lexer(source)
+        except Exception:
+            lexer = get_lexer_by_name('text')
+    
+    # Use Pygments to highlight the code
+    # Configure formatter to not wrap in extra divs - we'll add our own wrapper
+    formatter = HtmlFormatter(
+        noclasses=False,  # Use CSS classes instead of inline styles
+        nowrap=True,      # Don't wrap in <div class="highlight"><pre>...</pre></div>
+    )
+    highlighted_code = highlight(source, lexer, formatter)
+    
+    # Build class list for outer container
     class_list = ['highlight', css_class]
     if classes:
         class_list.extend(classes)
     
-    # Escape the source code for HTML
-    escaped_source = html.escape(source)
-    
-    # Build the code block with data attributes for JavaScript
-    code_attrs = f'class="language-{html.escape(base_lang)}"'
-    if id_value:
-        code_attrs += f' id="{html.escape(id_value)}"'
-    
-    # Add custom data attributes for the code runner
-    data_attrs = f'data-fence-type="{fence_type}" data-language="{html.escape(base_lang)}"'
+    # Build data attributes for the code runner
+    data_attrs = [
+        f'data-fence-type="{fence_type}"',
+        f'data-language="{html.escape(base_lang)}"'
+    ]
     
     # Add any custom attributes from the fence header
     for key, value in attrs.items():
-        data_attrs += f' data-{html.escape(key)}="{html.escape(str(value))}"'
+        data_attrs.append(f'data-{html.escape(key)}="{html.escape(str(value))}"')
+    
+    # Add id if present
+    id_attr = f' id="{html.escape(id_value)}"' if id_value else ''
     
     # Build the complete HTML structure
-    html_output = f'''<div class="{' '.join(class_list)}" {data_attrs}>
-<pre><code {code_attrs}>{escaped_source}</code></pre>
+    # Wrap highlighted code in <pre><code> with our custom attributes on the container div
+    html_output = f'''<div class="{' '.join(class_list)}" {' '.join(data_attrs)}{id_attr}>
+<pre><code class="language-{html.escape(base_lang)}">{highlighted_code}</code></pre>
 </div>'''
     
     return html_output
