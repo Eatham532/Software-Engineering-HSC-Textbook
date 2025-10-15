@@ -1718,72 +1718,74 @@
 <h2 id="psychological-responses-to-automated-systems">Psychological Responses to Automated Systems<a class="headerlink" href="#psychological-responses-to-automated-systems" title="Permanent link">&para;</a></h2>
 <h3 id="understanding-user-psychology">Understanding User Psychology<a class="headerlink" href="#understanding-user-psychology" title="Permanent link">&para;</a></h3>
 <p>People&rsquo;s reactions to automated decisions and interfaces are deeply rooted in psychological principles. These responses can significantly impact system adoption and effectiveness.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">UserPsychologyModel</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Model user psychological responses to automation&quot;&quot;&quot;</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Initial neutral trust (0-100)</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">=</span> <span class="mi">30</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">=</span> <span class="mi">70</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">=</span> <span class="mi">20</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_automation_interaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction_type</span><span class="p">,</span> <span class="n">outcome_success</span><span class="p">):</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate psychological response to automation interaction&quot;&quot;&quot;</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">if</span> <span class="n">interaction_type</span> <span class="o">==</span> <span class="s2">&quot;transparent_decision&quot;</span><span class="p">:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            <span class="c1"># Users respond better to explainable decisions</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">+=</span> <span class="mi">5</span> <span class="k">if</span> <span class="n">outcome_success</span> <span class="k">else</span> <span class="o">-</span><span class="mi">3</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">+=</span> <span class="mi">3</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">-=</span> <span class="mi">2</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="k">elif</span> <span class="n">interaction_type</span> <span class="o">==</span> <span class="s2">&quot;black_box_decision&quot;</span><span class="p">:</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="c1"># Mysterious decisions create anxiety</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">+=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">outcome_success</span> <span class="k">else</span> <span class="o">-</span><span class="mi">8</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">-=</span> <span class="mi">5</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">+=</span> <span class="mi">4</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="k">elif</span> <span class="n">interaction_type</span> <span class="o">==</span> <span class="s2">&quot;collaborative_decision&quot;</span><span class="p">:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="c1"># Human-AI collaboration feels more comfortable</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">+=</span> <span class="mi">4</span> <span class="k">if</span> <span class="n">outcome_success</span> <span class="k">else</span> <span class="o">-</span><span class="mi">2</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">+=</span> <span class="mi">3</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">+=</span> <span class="mi">2</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="c1"># Clamp values to realistic ranges</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span><span class="p">))</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span><span class="p">))</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span><span class="p">))</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span><span class="p">))</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_acceptance_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate likelihood of system acceptance&quot;&quot;&quot;</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="c1"># Weighted combination of psychological factors</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="n">acceptance</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">trust_level</span> <span class="o">*</span> <span class="mf">0.4</span> <span class="o">+</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">comfort_with_automation</span> <span class="o">*</span> <span class="mf">0.3</span> <span class="o">+</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">perceived_control</span> <span class="o">*</span> <span class="mf">0.2</span> <span class="o">+</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>            <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">anxiety_level</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="p">)</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">acceptance</span><span class="p">))</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c1"># Demonstrate psychological response patterns</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="n">user</span> <span class="o">=</span> <span class="n">UserPsychologyModel</span><span class="p">()</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial acceptance likelihood: </span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_acceptance_likelihood</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="c1"># Simulate different interaction patterns</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="n">interactions</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="p">(</span><span class="s2">&quot;transparent_decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="p">(</span><span class="s2">&quot;transparent_decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="p">(</span><span class="s2">&quot;black_box_decision&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    <span class="p">(</span><span class="s2">&quot;collaborative_decision&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>    <span class="p">(</span><span class="s2">&quot;transparent_decision&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="p">]</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="k">for</span> <span class="n">interaction_type</span><span class="p">,</span> <span class="n">success</span> <span class="ow">in</span> <span class="n">interactions</span><span class="p">:</span>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    <span class="n">user</span><span class="o">.</span><span class="n">process_automation_interaction</span><span class="p">(</span><span class="n">interaction_type</span><span class="p">,</span> <span class="n">success</span><span class="p">)</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;After </span><span class="si">{</span><span class="n">interaction_type</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="s1">&#39;success&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">success</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;failure&#39;</span><span class="si">}</span><span class="s2">): &quot;</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>          <span class="sa">f</span><span class="s2">&quot;Trust=</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">trust_level</span><span class="si">}</span><span class="s2">, Control=</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">perceived_control</span><span class="si">}</span><span class="s2">, &quot;</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>          <span class="sa">f</span><span class="s2">&quot;Acceptance=</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">get_acceptance_likelihood</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class UserPsychologyModel:
+    &quot;&quot;&quot;Model user psychological responses to automation&quot;&quot;&quot;
+
+    def __init__(self):
+        self.trust_level = 50  # Initial neutral trust (0-100)
+        self.comfort_with_automation = 30
+        self.perceived_control = 70
+        self.anxiety_level = 20
+
+    def process_automation_interaction(self, interaction_type, outcome_success):
+        &quot;&quot;&quot;Simulate psychological response to automation interaction&quot;&quot;&quot;
+
+        if interaction_type == &quot;transparent_decision&quot;:
+            # Users respond better to explainable decisions
+            self.trust_level += 5 if outcome_success else -3
+            self.perceived_control += 3
+            self.anxiety_level -= 2
+
+        elif interaction_type == &quot;black_box_decision&quot;:
+            # Mysterious decisions create anxiety
+            self.trust_level += 2 if outcome_success else -8
+            self.perceived_control -= 5
+            self.anxiety_level += 4
+
+        elif interaction_type == &quot;collaborative_decision&quot;:
+            # Human-AI collaboration feels more comfortable
+            self.trust_level += 4 if outcome_success else -2
+            self.comfort_with_automation += 3
+            self.perceived_control += 2
+
+        # Clamp values to realistic ranges
+        self.trust_level = max(0, min(100, self.trust_level))
+        self.comfort_with_automation = max(0, min(100, self.comfort_with_automation))
+        self.perceived_control = max(0, min(100, self.perceived_control))
+        self.anxiety_level = max(0, min(100, self.anxiety_level))
+
+    def get_acceptance_likelihood(self):
+        &quot;&quot;&quot;Calculate likelihood of system acceptance&quot;&quot;&quot;
+        # Weighted combination of psychological factors
+        acceptance = (
+            self.trust_level * 0.4 +
+            self.comfort_with_automation * 0.3 +
+            self.perceived_control * 0.2 +
+            (100 - self.anxiety_level) * 0.1
+        )
+        return min(100, max(0, acceptance))
+
+# Demonstrate psychological response patterns
+user = UserPsychologyModel()
+print(f&quot;Initial acceptance likelihood: {user.get_acceptance_likelihood():.1f}%&quot;)
+
+# Simulate different interaction patterns
+interactions = [
+    (&quot;transparent_decision&quot;, True),
+    (&quot;transparent_decision&quot;, True),
+    (&quot;black_box_decision&quot;, False),
+    (&quot;collaborative_decision&quot;, True),
+    (&quot;transparent_decision&quot;, False)
+]
+
+for interaction_type, success in interactions:
+    user.process_automation_interaction(interaction_type, success)
+    print(f&quot;After {interaction_type} ({&#x27;success&#x27; if success else &#x27;failure&#x27;}): &quot;
+          f&quot;Trust={user.trust_level}, Control={user.perceived_control}, &quot;
+          f&quot;Acceptance={user.get_acceptance_likelihood():.1f}%&quot;)
+</code></pre>
+</div>
 <h3 id="key-psychological-factors">Key Psychological Factors<a class="headerlink" href="#key-psychological-factors" title="Permanent link">&para;</a></h3>
 <p><strong>Trust and Transparency</strong>: Users need to understand why an AI system makes specific decisions. Lack of transparency breeds mistrust and resistance.</p>
 <p><strong>Perceived Control</strong>: People need to feel they can influence or override automated decisions when necessary. Complete automation without human oversight often faces resistance.</p>
@@ -1792,90 +1794,92 @@
 <h2 id="acute-stress-response-and-data-patterns">Acute Stress Response and Data Patterns<a class="headerlink" href="#acute-stress-response-and-data-patterns" title="Permanent link">&para;</a></h2>
 <h3 id="how-stress-affects-behaviour">How Stress Affects Behaviour<a class="headerlink" href="#how-stress-affects-behaviour" title="Permanent link">&para;</a></h3>
 <p>Acute stress significantly alters human behaviour patterns, which can impact both data collection and system performance.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">StressResponseSimulator</span><span class="p">:</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate how acute stress affects user behaviour and data patterns&quot;&quot;&quot;</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_accuracy</span> <span class="o">=</span> <span class="mf">0.92</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_response_time</span> <span class="o">=</span> <span class="mf">2.5</span>  <span class="c1"># seconds</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">baseline_decision_consistency</span> <span class="o">=</span> <span class="mf">0.88</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">generate_user_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stress_level</span><span class="p">,</span> <span class="n">num_interactions</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate user interaction data under different stress levels</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="sd">        Args:</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="sd">            stress_level: 0-100, where 0 is no stress, 100 is extreme stress</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="c1"># Stress impacts on behaviour</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="n">stress_factor</span> <span class="o">=</span> <span class="n">stress_level</span> <span class="o">/</span> <span class="mf">100.0</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="c1"># Accuracy decreases with stress</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="n">accuracy_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_accuracy</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">stress_factor</span><span class="p">)</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="c1"># Response time increases with stress (rushed or frozen responses)</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">response_time_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_response_time</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">stress_factor</span><span class="p">)</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="c1"># Decision consistency decreases with stress</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>        <span class="n">consistency_impact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">baseline_decision_consistency</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.4</span> <span class="o">*</span> <span class="n">stress_factor</span><span class="p">)</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="n">interactions</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_interactions</span><span class="p">):</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="c1"># Add random variation</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            <span class="n">accuracy</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">accuracy_impact</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)))</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>            <span class="n">response_time</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">response_time_impact</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>            <span class="c1"># Stress makes decisions less consistent</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">consistency_impact</span><span class="p">:</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>                <span class="c1"># Inconsistent decision - flip accuracy</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>                <span class="n">accuracy</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">accuracy</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>            <span class="n">interactions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mi">10</span><span class="p">),</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>                <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>                <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="n">response_time</span><span class="p">,</span>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>                <span class="s1">&#39;stress_level&#39;</span><span class="p">:</span> <span class="n">stress_level</span><span class="p">,</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>                <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;user_</span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">9999</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>            <span class="p">})</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>        <span class="k">return</span> <span class="n">interactions</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_stress_impact</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze how different stress levels affect data quality&quot;&quot;&quot;</span>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>        <span class="n">stress_levels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>        <span class="k">for</span> <span class="n">stress</span> <span class="ow">in</span> <span class="n">stress_levels</span><span class="p">:</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>            <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_user_data</span><span class="p">(</span><span class="n">stress</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>            <span class="n">avg_accuracy</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>            <span class="n">avg_response_time</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;response_time&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>            <span class="n">results</span><span class="p">[</span><span class="n">stress</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>                <span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="n">avg_accuracy</span><span class="p">,</span>
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>                <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="n">avg_response_time</span><span class="p">,</span>
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>                <span class="s1">&#39;data_quality_score&#39;</span><span class="p">:</span> <span class="n">avg_accuracy</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">avg_response_time</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>            <span class="p">}</span>
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>
-</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>        <span class="k">return</span> <span class="n">results</span>
-</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>
-</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a><span class="c1"># Demonstrate stress impact on data patterns</span>
-</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="n">simulator</span> <span class="o">=</span> <span class="n">StressResponseSimulator</span><span class="p">()</span>
-</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="n">stress_analysis</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">analyze_stress_impact</span><span class="p">()</span>
-</span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>
-</span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stress Impact on User Data:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stress% | Accuracy | Response Time | Data Quality&quot;</span><span class="p">)</span>
-</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
-</span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a><span class="k">for</span> <span class="n">stress</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">stress_analysis</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stress</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">8.3f</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;response_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">11.1f</span><span class="si">}</span><span class="s2">s | &quot;</span>
-</span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;data_quality_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">10.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">import random
+import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
+
+class StressResponseSimulator:
+    &quot;&quot;&quot;Simulate how acute stress affects user behaviour and data patterns&quot;&quot;&quot;
+
+    def __init__(self):
+        self.baseline_accuracy = 0.92
+        self.baseline_response_time = 2.5  # seconds
+        self.baseline_decision_consistency = 0.88
+
+    def generate_user_data(self, stress_level, num_interactions=100):
+        &quot;&quot;&quot;Generate user interaction data under different stress levels
+
+        Args:
+            stress_level: 0-100, where 0 is no stress, 100 is extreme stress
+        &quot;&quot;&quot;
+
+        # Stress impacts on behaviour
+        stress_factor = stress_level / 100.0
+
+        # Accuracy decreases with stress
+        accuracy_impact = self.baseline_accuracy * (1 - 0.3 * stress_factor)
+
+        # Response time increases with stress (rushed or frozen responses)
+        response_time_impact = self.baseline_response_time * (1 + 0.8 * stress_factor)
+
+        # Decision consistency decreases with stress
+        consistency_impact = self.baseline_decision_consistency * (1 - 0.4 * stress_factor)
+
+        interactions = []
+
+        for i in range(num_interactions):
+            # Add random variation
+            accuracy = max(0, min(1, accuracy_impact + random.gauss(0, 0.1)))
+            response_time = max(0.5, response_time_impact + random.gauss(0, 0.5))
+
+            # Stress makes decisions less consistent
+            if random.random() &gt; consistency_impact:
+                # Inconsistent decision - flip accuracy
+                accuracy = 1 - accuracy
+
+            interactions.append({
+                &#x27;timestamp&#x27;: datetime.now() + timedelta(seconds=i*10),
+                &#x27;accuracy&#x27;: accuracy,
+                &#x27;response_time&#x27;: response_time,
+                &#x27;stress_level&#x27;: stress_level,
+                &#x27;user_id&#x27;: f&#x27;user_{random.randint(1000, 9999)}&#x27;
+            })
+
+        return interactions
+
+    def analyze_stress_impact(self):
+        &quot;&quot;&quot;Analyze how different stress levels affect data quality&quot;&quot;&quot;
+
+        stress_levels = [0, 25, 50, 75, 100]
+        results = {}
+
+        for stress in stress_levels:
+            data = self.generate_user_data(stress, 50)
+
+            avg_accuracy = sum(d[&#x27;accuracy&#x27;] for d in data) / len(data)
+            avg_response_time = sum(d[&#x27;response_time&#x27;] for d in data) / len(data)
+
+            results[stress] = {
+                &#x27;accuracy&#x27;: avg_accuracy,
+                &#x27;response_time&#x27;: avg_response_time,
+                &#x27;data_quality_score&#x27;: avg_accuracy * (1 / (1 + avg_response_time/10))
+            }
+
+        return results
+
+# Demonstrate stress impact on data patterns
+simulator = StressResponseSimulator()
+stress_analysis = simulator.analyze_stress_impact()
+
+print(&quot;Stress Impact on User Data:&quot;)
+print(&quot;Stress% | Accuracy | Response Time | Data Quality&quot;)
+print(&quot;-&quot; * 50)
+for stress, metrics in stress_analysis.items():
+    print(f&quot;{stress:5d} | {metrics[&#x27;accuracy&#x27;]:8.3f} | {metrics[&#x27;response_time&#x27;]:11.1f}s | &quot;
+          f&quot;{metrics[&#x27;data_quality_score&#x27;]:10.3f}&quot;)
+</code></pre>
+</div>
 <h3 id="implications-for-ml-systems">Implications for ML Systems<a class="headerlink" href="#implications-for-ml-systems" title="Permanent link">&para;</a></h3>
 <p><strong>Data Quality</strong>: Training data collected during high-stress periods may not represent normal user behaviour, leading to biased models.</p>
 <p><strong>Model Performance</strong>: Systems trained on &ldquo;calm&rdquo; data may perform poorly when users are stressed, which is often when they need the system most.</p>
@@ -1884,379 +1888,385 @@
 <h2 id="cultural-protocols-and-design-considerations">Cultural Protocols and Design Considerations<a class="headerlink" href="#cultural-protocols-and-design-considerations" title="Permanent link">&para;</a></h2>
 <h3 id="understanding-cultural-differences">Understanding Cultural Differences<a class="headerlink" href="#understanding-cultural-differences" title="Permanent link">&para;</a></h3>
 <p>Cultural background significantly influences how people interact with technology and what they expect from automated systems.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">CulturalContext</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Model cultural factors affecting AI system design&quot;&quot;&quot;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">culture_profile</span><span class="p">):</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span> <span class="o">=</span> <span class="n">culture_profile</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_design_acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_design</span><span class="p">):</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate how well a system design fits cultural expectations&quot;&quot;&quot;</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="n">acceptance_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="n">max_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="c1"># Authority and hierarchy preferences</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="k">if</span> <span class="s1">&#39;authority_acceptance&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            <span class="k">if</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;shows_confidence&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;authority_acceptance&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>  <span class="c1"># High authority cultures like confident systems</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">5</span>   <span class="c1"># Low authority cultures prefer collaborative tone</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>            <span class="k">if</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;allows_questioning&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;authority_acceptance&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>  <span class="c1"># Low authority cultures want to question decisions</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">8</span>   <span class="c1"># High authority cultures still value some input</span>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>        <span class="c1"># Privacy expectations</span>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="k">if</span> <span class="s1">&#39;privacy_sensitivity&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">25</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>            <span class="n">data_collection</span> <span class="o">=</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_collection_level&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">)</span>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>            <span class="n">privacy_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">]</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>            <span class="k">if</span> <span class="n">privacy_level</span> <span class="o">==</span> <span class="s1">&#39;high&#39;</span> <span class="ow">and</span> <span class="n">data_collection</span> <span class="o">==</span> <span class="s1">&#39;minimal&#39;</span><span class="p">:</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">25</span>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>            <span class="k">elif</span> <span class="n">privacy_level</span> <span class="o">==</span> <span class="s1">&#39;medium&#39;</span> <span class="ow">and</span> <span class="n">data_collection</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;minimal&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">]:</span>
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>            <span class="k">elif</span> <span class="n">privacy_level</span> <span class="o">==</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>  <span class="c1"># Less concerned about data collection</span>
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>        <span class="c1"># Communication style</span>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>        <span class="k">if</span> <span class="s1">&#39;communication_style&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>            <span class="n">explanation_style</span> <span class="o">=</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;explanation_style&#39;</span><span class="p">,</span> <span class="s1">&#39;direct&#39;</span><span class="p">)</span>
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;communication_style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;direct&#39;</span> <span class="ow">and</span> 
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>                <span class="n">explanation_style</span> <span class="o">==</span> <span class="s1">&#39;direct&#39;</span><span class="p">):</span>
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>            <span class="k">elif</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;communication_style&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;indirect&#39;</span> <span class="ow">and</span> 
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>                  <span class="n">explanation_style</span> <span class="o">==</span> <span class="s1">&#39;contextual&#39;</span><span class="p">):</span>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>                <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">10</span>  <span class="c1"># Partial match</span>
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>        <span class="c1"># Decision-making style</span>
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>        <span class="k">if</span> <span class="s1">&#39;decision_making&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">:</span>
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>            <span class="n">max_score</span> <span class="o">+=</span> <span class="mi">15</span>
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>            <span class="k">if</span> <span class="n">system_design</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">culture_profile</span><span class="p">[</span><span class="s1">&#39;decision_making&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;collective&#39;</span><span class="p">:</span>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">15</span>
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>                    <span class="n">acceptance_score</span> <span class="o">+=</span> <span class="mi">8</span>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>        <span class="k">return</span> <span class="p">(</span><span class="n">acceptance_score</span> <span class="o">/</span> <span class="n">max_score</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">max_score</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a><span class="c1"># Define different cultural profiles</span>
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a><span class="n">cultures</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>    <span class="s1">&#39;scandinavian&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>        <span class="s1">&#39;authority_acceptance&#39;</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span>
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>        <span class="s1">&#39;communication_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>        <span class="s1">&#39;decision_making&#39;</span><span class="p">:</span> <span class="s1">&#39;individual&#39;</span>
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>    <span class="p">},</span>
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>    <span class="s1">&#39;east_asian&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>        <span class="s1">&#39;authority_acceptance&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
-</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>        <span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
-</span><span id="__span-2-77"><a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>        <span class="s1">&#39;communication_style&#39;</span><span class="p">:</span> <span class="s1">&#39;indirect&#39;</span><span class="p">,</span>
-</span><span id="__span-2-78"><a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a>        <span class="s1">&#39;decision_making&#39;</span><span class="p">:</span> <span class="s1">&#39;collective&#39;</span>
-</span><span id="__span-2-79"><a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>    <span class="p">},</span>
-</span><span id="__span-2-80"><a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>    <span class="s1">&#39;american&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-81"><a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>        <span class="s1">&#39;authority_acceptance&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
-</span><span id="__span-2-82"><a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a>        <span class="s1">&#39;privacy_sensitivity&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
-</span><span id="__span-2-83"><a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>        <span class="s1">&#39;communication_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
-</span><span id="__span-2-84"><a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>        <span class="s1">&#39;decision_making&#39;</span><span class="p">:</span> <span class="s1">&#39;individual&#39;</span>
-</span><span id="__span-2-85"><a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>    <span class="p">}</span>
-</span><span id="__span-2-86"><a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a><span class="p">}</span>
-</span><span id="__span-2-87"><a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>
-</span><span id="__span-2-88"><a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a><span class="c1"># Test different system designs</span>
-</span><span id="__span-2-89"><a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a><span class="n">system_designs</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-90"><a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>    <span class="s1">&#39;authoritative&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>        <span class="s1">&#39;shows_confidence&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-2-92"><a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a>        <span class="s1">&#39;allows_questioning&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-2-93"><a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>        <span class="s1">&#39;data_collection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span>
-</span><span id="__span-2-94"><a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>        <span class="s1">&#39;explanation_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
-</span><span id="__span-2-95"><a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>        <span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">:</span> <span class="kc">False</span>
-</span><span id="__span-2-96"><a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a>    <span class="p">},</span>
-</span><span id="__span-2-97"><a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a>    <span class="s1">&#39;collaborative&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-98"><a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>        <span class="s1">&#39;shows_confidence&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-2-99"><a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a>        <span class="s1">&#39;allows_questioning&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-2-100"><a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>        <span class="s1">&#39;data_collection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;minimal&#39;</span><span class="p">,</span>
-</span><span id="__span-2-101"><a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>        <span class="s1">&#39;explanation_style&#39;</span><span class="p">:</span> <span class="s1">&#39;contextual&#39;</span><span class="p">,</span>
-</span><span id="__span-2-102"><a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a>        <span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">:</span> <span class="kc">True</span>
-</span><span id="__span-2-103"><a id="__codelineno-2-103" name="__codelineno-2-103" href="#__codelineno-2-103"></a>    <span class="p">},</span>
-</span><span id="__span-2-104"><a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a>    <span class="s1">&#39;balanced&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-105"><a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a>        <span class="s1">&#39;shows_confidence&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-2-106"><a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a>        <span class="s1">&#39;allows_questioning&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-2-107"><a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>        <span class="s1">&#39;data_collection_level&#39;</span><span class="p">:</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span>
-</span><span id="__span-2-108"><a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>        <span class="s1">&#39;explanation_style&#39;</span><span class="p">:</span> <span class="s1">&#39;direct&#39;</span><span class="p">,</span>
-</span><span id="__span-2-109"><a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>        <span class="s1">&#39;supports_group_decisions&#39;</span><span class="p">:</span> <span class="kc">False</span>
-</span><span id="__span-2-110"><a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>    <span class="p">}</span>
-</span><span id="__span-2-111"><a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a><span class="p">}</span>
-</span><span id="__span-2-112"><a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a>
-</span><span id="__span-2-113"><a id="__codelineno-2-113" name="__codelineno-2-113" href="#__codelineno-2-113"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cultural Acceptance Analysis:&quot;</span><span class="p">)</span>
-</span><span id="__span-2-114"><a id="__codelineno-2-114" name="__codelineno-2-114" href="#__codelineno-2-114"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Culture       | Authoritative | Collaborative | Balanced&quot;</span><span class="p">)</span>
-</span><span id="__span-2-115"><a id="__codelineno-2-115" name="__codelineno-2-115" href="#__codelineno-2-115"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
-</span><span id="__span-2-116"><a id="__codelineno-2-116" name="__codelineno-2-116" href="#__codelineno-2-116"></a>
-</span><span id="__span-2-117"><a id="__codelineno-2-117" name="__codelineno-2-117" href="#__codelineno-2-117"></a><span class="k">for</span> <span class="n">culture_name</span><span class="p">,</span> <span class="n">culture_data</span> <span class="ow">in</span> <span class="n">cultures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-2-118"><a id="__codelineno-2-118" name="__codelineno-2-118" href="#__codelineno-2-118"></a>    <span class="n">context</span> <span class="o">=</span> <span class="n">CulturalContext</span><span class="p">(</span><span class="n">culture_data</span><span class="p">)</span>
-</span><span id="__span-2-119"><a id="__codelineno-2-119" name="__codelineno-2-119" href="#__codelineno-2-119"></a>    <span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-2-120"><a id="__codelineno-2-120" name="__codelineno-2-120" href="#__codelineno-2-120"></a>
-</span><span id="__span-2-121"><a id="__codelineno-2-121" name="__codelineno-2-121" href="#__codelineno-2-121"></a>    <span class="k">for</span> <span class="n">design_name</span><span class="p">,</span> <span class="n">design</span> <span class="ow">in</span> <span class="n">system_designs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-2-122"><a id="__codelineno-2-122" name="__codelineno-2-122" href="#__codelineno-2-122"></a>        <span class="n">scores</span><span class="p">[</span><span class="n">design_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">evaluate_design_acceptance</span><span class="p">(</span><span class="n">design</span><span class="p">)</span>
-</span><span id="__span-2-123"><a id="__codelineno-2-123" name="__codelineno-2-123" href="#__codelineno-2-123"></a>
-</span><span id="__span-2-124"><a id="__codelineno-2-124" name="__codelineno-2-124" href="#__codelineno-2-124"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">culture_name</span><span class="si">:</span><span class="s2">12</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;authoritative&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">11.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
-</span><span id="__span-2-125"><a id="__codelineno-2-125" name="__codelineno-2-125" href="#__codelineno-2-125"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;collaborative&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">11.1f</span><span class="si">}</span><span class="s2">% | </span><span class="si">{</span><span class="n">scores</span><span class="p">[</span><span class="s1">&#39;balanced&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">6.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class CulturalContext:
+    &quot;&quot;&quot;Model cultural factors affecting AI system design&quot;&quot;&quot;
+
+    def __init__(self, culture_profile):
+        self.culture_profile = culture_profile
+
+    def evaluate_design_acceptance(self, system_design):
+        &quot;&quot;&quot;Evaluate how well a system design fits cultural expectations&quot;&quot;&quot;
+
+        acceptance_score = 0
+        max_score = 0
+
+        # Authority and hierarchy preferences
+        if &#x27;authority_acceptance&#x27; in self.culture_profile:
+            max_score += 20
+            if system_design.get(&#x27;shows_confidence&#x27;, False):
+                if self.culture_profile[&#x27;authority_acceptance&#x27;] == &#x27;high&#x27;:
+                    acceptance_score += 15  # High authority cultures like confident systems
+                else:
+                    acceptance_score += 5   # Low authority cultures prefer collaborative tone
+
+            if system_design.get(&#x27;allows_questioning&#x27;, False):
+                if self.culture_profile[&#x27;authority_acceptance&#x27;] == &#x27;low&#x27;:
+                    acceptance_score += 15  # Low authority cultures want to question decisions
+                else:
+                    acceptance_score += 8   # High authority cultures still value some input
+
+        # Privacy expectations
+        if &#x27;privacy_sensitivity&#x27; in self.culture_profile:
+            max_score += 25
+            data_collection = system_design.get(&#x27;data_collection_level&#x27;, &#x27;medium&#x27;)
+            privacy_level = self.culture_profile[&#x27;privacy_sensitivity&#x27;]
+
+            if privacy_level == &#x27;high&#x27; and data_collection == &#x27;minimal&#x27;:
+                acceptance_score += 25
+            elif privacy_level == &#x27;medium&#x27; and data_collection in [&#x27;minimal&#x27;, &#x27;medium&#x27;]:
+                acceptance_score += 20
+            elif privacy_level == &#x27;low&#x27;:
+                acceptance_score += 15  # Less concerned about data collection
+
+        # Communication style
+        if &#x27;communication_style&#x27; in self.culture_profile:
+            max_score += 20
+            explanation_style = system_design.get(&#x27;explanation_style&#x27;, &#x27;direct&#x27;)
+
+            if (self.culture_profile[&#x27;communication_style&#x27;] == &#x27;direct&#x27; and 
+                explanation_style == &#x27;direct&#x27;):
+                acceptance_score += 20
+            elif (self.culture_profile[&#x27;communication_style&#x27;] == &#x27;indirect&#x27; and 
+                  explanation_style == &#x27;contextual&#x27;):
+                acceptance_score += 20
+            else:
+                acceptance_score += 10  # Partial match
+
+        # Decision-making style
+        if &#x27;decision_making&#x27; in self.culture_profile:
+            max_score += 15
+            if system_design.get(&#x27;supports_group_decisions&#x27;, False):
+                if self.culture_profile[&#x27;decision_making&#x27;] == &#x27;collective&#x27;:
+                    acceptance_score += 15
+                else:
+                    acceptance_score += 8
+
+        return (acceptance_score / max_score * 100) if max_score &gt; 0 else 0
+
+# Define different cultural profiles
+cultures = {
+    &#x27;scandinavian&#x27;: {
+        &#x27;authority_acceptance&#x27;: &#x27;low&#x27;,
+        &#x27;privacy_sensitivity&#x27;: &#x27;high&#x27;,
+        &#x27;communication_style&#x27;: &#x27;direct&#x27;,
+        &#x27;decision_making&#x27;: &#x27;individual&#x27;
+    },
+    &#x27;east_asian&#x27;: {
+        &#x27;authority_acceptance&#x27;: &#x27;high&#x27;,
+        &#x27;privacy_sensitivity&#x27;: &#x27;medium&#x27;,
+        &#x27;communication_style&#x27;: &#x27;indirect&#x27;,
+        &#x27;decision_making&#x27;: &#x27;collective&#x27;
+    },
+    &#x27;american&#x27;: {
+        &#x27;authority_acceptance&#x27;: &#x27;medium&#x27;,
+        &#x27;privacy_sensitivity&#x27;: &#x27;medium&#x27;,
+        &#x27;communication_style&#x27;: &#x27;direct&#x27;,
+        &#x27;decision_making&#x27;: &#x27;individual&#x27;
+    }
+}
+
+# Test different system designs
+system_designs = {
+    &#x27;authoritative&#x27;: {
+        &#x27;shows_confidence&#x27;: True,
+        &#x27;allows_questioning&#x27;: False,
+        &#x27;data_collection_level&#x27;: &#x27;high&#x27;,
+        &#x27;explanation_style&#x27;: &#x27;direct&#x27;,
+        &#x27;supports_group_decisions&#x27;: False
+    },
+    &#x27;collaborative&#x27;: {
+        &#x27;shows_confidence&#x27;: False,
+        &#x27;allows_questioning&#x27;: True,
+        &#x27;data_collection_level&#x27;: &#x27;minimal&#x27;,
+        &#x27;explanation_style&#x27;: &#x27;contextual&#x27;,
+        &#x27;supports_group_decisions&#x27;: True
+    },
+    &#x27;balanced&#x27;: {
+        &#x27;shows_confidence&#x27;: True,
+        &#x27;allows_questioning&#x27;: True,
+        &#x27;data_collection_level&#x27;: &#x27;medium&#x27;,
+        &#x27;explanation_style&#x27;: &#x27;direct&#x27;,
+        &#x27;supports_group_decisions&#x27;: False
+    }
+}
+
+print(&quot;Cultural Acceptance Analysis:&quot;)
+print(&quot;Culture       | Authoritative | Collaborative | Balanced&quot;)
+print(&quot;-&quot; * 60)
+
+for culture_name, culture_data in cultures.items():
+    context = CulturalContext(culture_data)
+    scores = {}
+
+    for design_name, design in system_designs.items():
+        scores[design_name] = context.evaluate_design_acceptance(design)
+
+    print(f&quot;{culture_name:12} | {scores[&#x27;authoritative&#x27;]:11.1f}% | &quot;
+          f&quot;{scores[&#x27;collaborative&#x27;]:11.1f}% | {scores[&#x27;balanced&#x27;]:6.1f}%&quot;)
+</code></pre>
+</div>
 <hr />
 <h2 id="belief-systems-and-user-interaction">Belief Systems and User Interaction<a class="headerlink" href="#belief-systems-and-user-interaction" title="Permanent link">&para;</a></h2>
 <h3 id="how-beliefs-shape-technology-acceptance">How Beliefs Shape Technology Acceptance<a class="headerlink" href="#how-beliefs-shape-technology-acceptance" title="Permanent link">&para;</a></h3>
 <p>Personal belief systems significantly influence how users interact with and accept AI technologies.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">BeliefSystemAnalyzer</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze how belief systems affect AI acceptance&quot;&quot;&quot;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">belief_dimensions</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="s1">&#39;technology_optimism&#39;</span><span class="p">,</span>      <span class="c1"># Trust in technology benefits</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">,</span>  <span class="c1"># Belief in human control/responsibility</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">,</span>   <span class="c1"># Privacy as basic right vs convenience</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">,</span>     <span class="c1"># Expectation of fair treatment</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="s1">&#39;transparency_requirement&#39;</span>  <span class="c1"># Need to understand decisions</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="p">]</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">create_user_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beliefs</span><span class="p">):</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a user profile based on belief system&quot;&quot;&quot;</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="k">return</span> <span class="p">{</span><span class="n">dimension</span><span class="p">:</span> <span class="n">beliefs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dimension</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="k">for</span> <span class="n">dimension</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">belief_dimensions</span><span class="p">}</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">predict_feature_acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_profile</span><span class="p">,</span> <span class="n">ai_features</span><span class="p">):</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Predict acceptance of AI features based on beliefs&quot;&quot;&quot;</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="n">acceptance_predictions</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="k">for</span> <span class="n">feature_name</span><span class="p">,</span> <span class="n">feature_props</span> <span class="ow">in</span> <span class="n">ai_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            <span class="n">weight_sum</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>            <span class="c1"># Technology optimism affects overall acceptance</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>            <span class="k">if</span> <span class="s1">&#39;automation_level&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.3</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>                <span class="n">automation_bonus</span> <span class="o">=</span> <span class="p">(</span><span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;technology_optimism&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;automation_level&#39;</span><span class="p">]</span>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>                <span class="n">score</span> <span class="o">+=</span> <span class="n">automation_bonus</span> <span class="o">*</span> <span class="n">weight</span>
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>            <span class="c1"># Human agency importance</span>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>            <span class="k">if</span> <span class="s1">&#39;human_override&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.25</span>
-</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>                <span class="k">if</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;human_override&#39;</span><span class="p">]:</span>
-</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>                    <span class="n">agency_score</span> <span class="o">=</span> <span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;human_agency_importance&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>                    <span class="n">agency_score</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span> <span class="o">-</span> <span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;human_agency_importance&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span>
-</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>                <span class="n">score</span> <span class="o">+=</span> <span class="n">agency_score</span> <span class="o">*</span> <span class="n">weight</span>
-</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>
-</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>            <span class="c1"># Privacy considerations</span>
-</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>            <span class="k">if</span> <span class="s1">&#39;data_usage&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
-</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.2</span>
-</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>                <span class="n">privacy_concern</span> <span class="o">=</span> <span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
-</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>                <span class="n">data_invasiveness</span> <span class="o">=</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;data_usage&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
-</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>                <span class="n">privacy_score</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">privacy_concern</span> <span class="o">*</span> <span class="n">data_invasiveness</span><span class="p">)</span>
-</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>                <span class="n">score</span> <span class="o">+=</span> <span class="n">privacy_score</span> <span class="o">*</span> <span class="n">weight</span>
-</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
-</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>
-</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>            <span class="c1"># Fairness expectations</span>
-</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>            <span class="k">if</span> <span class="s1">&#39;fairness_measures&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
-</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.15</span>
-</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>                <span class="n">fairness_score</span> <span class="o">=</span> <span class="p">(</span><span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;fairness_measures&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>                <span class="n">score</span> <span class="o">+=</span> <span class="n">fairness_score</span> <span class="o">*</span> <span class="n">weight</span>
-</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
-</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>
-</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>            <span class="c1"># Transparency requirements</span>
-</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>            <span class="k">if</span> <span class="s1">&#39;explainability&#39;</span> <span class="ow">in</span> <span class="n">feature_props</span><span class="p">:</span>
-</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>                <span class="n">weight</span> <span class="o">=</span> <span class="mf">0.1</span>
-</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>                <span class="n">transparency_match</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">user_profile</span><span class="p">[</span><span class="s1">&#39;transparency_requirement&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">feature_props</span><span class="p">[</span><span class="s1">&#39;explainability&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100</span>
-</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>                <span class="n">score</span> <span class="o">+=</span> <span class="n">transparency_match</span> <span class="o">*</span> <span class="n">weight</span>
-</span><span id="__span-3-64"><a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>                <span class="n">weight_sum</span> <span class="o">+=</span> <span class="n">weight</span>
-</span><span id="__span-3-65"><a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>
-</span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>            <span class="n">acceptance_predictions</span><span class="p">[</span><span class="n">feature_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">score</span> <span class="o">/</span> <span class="n">weight_sum</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">weight_sum</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
-</span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>
-</span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>        <span class="k">return</span> <span class="n">acceptance_predictions</span>
-</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>
-</span><span id="__span-3-70"><a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a><span class="c1"># Define different belief profiles</span>
-</span><span id="__span-3-71"><a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a><span class="n">belief_profiles</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-3-72"><a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>    <span class="s1">&#39;tech_enthusiast&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-73"><a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>        <span class="s1">&#39;technology_optimism&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
-</span><span id="__span-3-74"><a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>        <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="__span-3-75"><a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>        <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
-</span><span id="__span-3-76"><a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>        <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
-</span><span id="__span-3-77"><a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>        <span class="s1">&#39;transparency_requirement&#39;</span><span class="p">:</span> <span class="mi">50</span>
-</span><span id="__span-3-78"><a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a>    <span class="p">},</span>
-</span><span id="__span-3-79"><a id="__codelineno-3-79" name="__codelineno-3-79" href="#__codelineno-3-79"></a>    <span class="s1">&#39;privacy_advocate&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-80"><a id="__codelineno-3-80" name="__codelineno-3-80" href="#__codelineno-3-80"></a>        <span class="s1">&#39;technology_optimism&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
-</span><span id="__span-3-81"><a id="__codelineno-3-81" name="__codelineno-3-81" href="#__codelineno-3-81"></a>        <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-</span><span id="__span-3-82"><a id="__codelineno-3-82" name="__codelineno-3-82" href="#__codelineno-3-82"></a>        <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
-</span><span id="__span-3-83"><a id="__codelineno-3-83" name="__codelineno-3-83" href="#__codelineno-3-83"></a>        <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
-</span><span id="__span-3-84"><a id="__codelineno-3-84" name="__codelineno-3-84" href="#__codelineno-3-84"></a>        <span class="s1">&#39;transparency_requirement&#39;</span><span class="p">:</span> <span class="mi">95</span>
-</span><span id="__span-3-85"><a id="__codelineno-3-85" name="__codelineno-3-85" href="#__codelineno-3-85"></a>    <span class="p">},</span>
-</span><span id="__span-3-86"><a id="__codelineno-3-86" name="__codelineno-3-86" href="#__codelineno-3-86"></a>    <span class="s1">&#39;pragmatic_user&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-87"><a id="__codelineno-3-87" name="__codelineno-3-87" href="#__codelineno-3-87"></a>        <span class="s1">&#39;technology_optimism&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span>
-</span><span id="__span-3-88"><a id="__codelineno-3-88" name="__codelineno-3-88" href="#__codelineno-3-88"></a>        <span class="s1">&#39;human_agency_importance&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-</span><span id="__span-3-89"><a id="__codelineno-3-89" name="__codelineno-3-89" href="#__codelineno-3-89"></a>        <span class="s1">&#39;privacy_as_fundamental&#39;</span><span class="p">:</span> <span class="mi">55</span><span class="p">,</span>
-</span><span id="__span-3-90"><a id="__codelineno-3-90" name="__codelineno-3-90" href="#__codelineno-3-90"></a>        <span class="s1">&#39;algorithmic_fairness&#39;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
-</span><span id="__span-3-91"><a id="__codelineno-3-91" name="__codelineno-3-91" href="#__codelineno-3-91"></a>        <span class="s1">&#39;transparency_requirement&#39;</span><span class="p">:</span> <span class="mi">70</span>
-</span><span id="__span-3-92"><a id="__codelineno-3-92" name="__codelineno-3-92" href="#__codelineno-3-92"></a>    <span class="p">}</span>
-</span><span id="__span-3-93"><a id="__codelineno-3-93" name="__codelineno-3-93" href="#__codelineno-3-93"></a><span class="p">}</span>
-</span><span id="__span-3-94"><a id="__codelineno-3-94" name="__codelineno-3-94" href="#__codelineno-3-94"></a>
-</span><span id="__span-3-95"><a id="__codelineno-3-95" name="__codelineno-3-95" href="#__codelineno-3-95"></a><span class="c1"># Define AI features with different characteristics</span>
-</span><span id="__span-3-96"><a id="__codelineno-3-96" name="__codelineno-3-96" href="#__codelineno-3-96"></a><span class="n">ai_features</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-3-97"><a id="__codelineno-3-97" name="__codelineno-3-97" href="#__codelineno-3-97"></a>    <span class="s1">&#39;auto_decision_making&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-98"><a id="__codelineno-3-98" name="__codelineno-3-98" href="#__codelineno-3-98"></a>        <span class="s1">&#39;automation_level&#39;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
-</span><span id="__span-3-99"><a id="__codelineno-3-99" name="__codelineno-3-99" href="#__codelineno-3-99"></a>        <span class="s1">&#39;human_override&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-3-100"><a id="__codelineno-3-100" name="__codelineno-3-100" href="#__codelineno-3-100"></a>        <span class="s1">&#39;data_usage&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
-</span><span id="__span-3-101"><a id="__codelineno-3-101" name="__codelineno-3-101" href="#__codelineno-3-101"></a>        <span class="s1">&#39;fairness_measures&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-</span><span id="__span-3-102"><a id="__codelineno-3-102" name="__codelineno-3-102" href="#__codelineno-3-102"></a>        <span class="s1">&#39;explainability&#39;</span><span class="p">:</span> <span class="mi">30</span>
-</span><span id="__span-3-103"><a id="__codelineno-3-103" name="__codelineno-3-103" href="#__codelineno-3-103"></a>    <span class="p">},</span>
-</span><span id="__span-3-104"><a id="__codelineno-3-104" name="__codelineno-3-104" href="#__codelineno-3-104"></a>    <span class="s1">&#39;recommendation_system&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-105"><a id="__codelineno-3-105" name="__codelineno-3-105" href="#__codelineno-3-105"></a>        <span class="s1">&#39;automation_level&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-</span><span id="__span-3-106"><a id="__codelineno-3-106" name="__codelineno-3-106" href="#__codelineno-3-106"></a>        <span class="s1">&#39;human_override&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-3-107"><a id="__codelineno-3-107" name="__codelineno-3-107" href="#__codelineno-3-107"></a>        <span class="s1">&#39;data_usage&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-</span><span id="__span-3-108"><a id="__codelineno-3-108" name="__codelineno-3-108" href="#__codelineno-3-108"></a>        <span class="s1">&#39;fairness_measures&#39;</span><span class="p">:</span> <span class="mi">70</span><span class="p">,</span>
-</span><span id="__span-3-109"><a id="__codelineno-3-109" name="__codelineno-3-109" href="#__codelineno-3-109"></a>        <span class="s1">&#39;explainability&#39;</span><span class="p">:</span> <span class="mi">70</span>
-</span><span id="__span-3-110"><a id="__codelineno-3-110" name="__codelineno-3-110" href="#__codelineno-3-110"></a>    <span class="p">},</span>
-</span><span id="__span-3-111"><a id="__codelineno-3-111" name="__codelineno-3-111" href="#__codelineno-3-111"></a>    <span class="s1">&#39;transparent_assistant&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-112"><a id="__codelineno-3-112" name="__codelineno-3-112" href="#__codelineno-3-112"></a>        <span class="s1">&#39;automation_level&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
-</span><span id="__span-3-113"><a id="__codelineno-3-113" name="__codelineno-3-113" href="#__codelineno-3-113"></a>        <span class="s1">&#39;human_override&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-3-114"><a id="__codelineno-3-114" name="__codelineno-3-114" href="#__codelineno-3-114"></a>        <span class="s1">&#39;data_usage&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-</span><span id="__span-3-115"><a id="__codelineno-3-115" name="__codelineno-3-115" href="#__codelineno-3-115"></a>        <span class="s1">&#39;fairness_measures&#39;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
-</span><span id="__span-3-116"><a id="__codelineno-3-116" name="__codelineno-3-116" href="#__codelineno-3-116"></a>        <span class="s1">&#39;explainability&#39;</span><span class="p">:</span> <span class="mi">95</span>
-</span><span id="__span-3-117"><a id="__codelineno-3-117" name="__codelineno-3-117" href="#__codelineno-3-117"></a>    <span class="p">}</span>
-</span><span id="__span-3-118"><a id="__codelineno-3-118" name="__codelineno-3-118" href="#__codelineno-3-118"></a><span class="p">}</span>
-</span><span id="__span-3-119"><a id="__codelineno-3-119" name="__codelineno-3-119" href="#__codelineno-3-119"></a>
-</span><span id="__span-3-120"><a id="__codelineno-3-120" name="__codelineno-3-120" href="#__codelineno-3-120"></a><span class="n">analyzer</span> <span class="o">=</span> <span class="n">BeliefSystemAnalyzer</span><span class="p">()</span>
-</span><span id="__span-3-121"><a id="__codelineno-3-121" name="__codelineno-3-121" href="#__codelineno-3-121"></a>
-</span><span id="__span-3-122"><a id="__codelineno-3-122" name="__codelineno-3-122" href="#__codelineno-3-122"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Belief-Based Feature Acceptance Predictions:&quot;</span><span class="p">)</span>
-</span><span id="__span-3-123"><a id="__codelineno-3-123" name="__codelineno-3-123" href="#__codelineno-3-123"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;User Type        | Auto Decisions | Recommendations | Transparent Assistant&quot;</span><span class="p">)</span>
-</span><span id="__span-3-124"><a id="__codelineno-3-124" name="__codelineno-3-124" href="#__codelineno-3-124"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
-</span><span id="__span-3-125"><a id="__codelineno-3-125" name="__codelineno-3-125" href="#__codelineno-3-125"></a>
-</span><span id="__span-3-126"><a id="__codelineno-3-126" name="__codelineno-3-126" href="#__codelineno-3-126"></a><span class="k">for</span> <span class="n">profile_name</span><span class="p">,</span> <span class="n">beliefs</span> <span class="ow">in</span> <span class="n">belief_profiles</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-3-127"><a id="__codelineno-3-127" name="__codelineno-3-127" href="#__codelineno-3-127"></a>    <span class="n">user_profile</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">create_user_profile</span><span class="p">(</span><span class="n">beliefs</span><span class="p">)</span>
-</span><span id="__span-3-128"><a id="__codelineno-3-128" name="__codelineno-3-128" href="#__codelineno-3-128"></a>    <span class="n">predictions</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">predict_feature_acceptance</span><span class="p">(</span><span class="n">user_profile</span><span class="p">,</span> <span class="n">ai_features</span><span class="p">)</span>
-</span><span id="__span-3-129"><a id="__codelineno-3-129" name="__codelineno-3-129" href="#__codelineno-3-129"></a>
-</span><span id="__span-3-130"><a id="__codelineno-3-130" name="__codelineno-3-130" href="#__codelineno-3-130"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">profile_name</span><span class="si">:</span><span class="s2">15</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;auto_decision_making&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">12.1f</span><span class="si">}</span><span class="s2">% | &quot;</span>
-</span><span id="__span-3-131"><a id="__codelineno-3-131" name="__codelineno-3-131" href="#__codelineno-3-131"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;recommendation_system&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">13.1f</span><span class="si">}</span><span class="s2">% | </span><span class="si">{</span><span class="n">predictions</span><span class="p">[</span><span class="s1">&#39;transparent_assistant&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">15.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class BeliefSystemAnalyzer:
+    &quot;&quot;&quot;Analyze how belief systems affect AI acceptance&quot;&quot;&quot;
+
+    def __init__(self):
+        self.belief_dimensions = [
+            &#x27;technology_optimism&#x27;,      # Trust in technology benefits
+            &#x27;human_agency_importance&#x27;,  # Belief in human control/responsibility
+            &#x27;privacy_as_fundamental&#x27;,   # Privacy as basic right vs convenience
+            &#x27;algorithmic_fairness&#x27;,     # Expectation of fair treatment
+            &#x27;transparency_requirement&#x27;  # Need to understand decisions
+        ]
+
+    def create_user_profile(self, beliefs):
+        &quot;&quot;&quot;Create a user profile based on belief system&quot;&quot;&quot;
+        return {dimension: beliefs.get(dimension, 50) for dimension in self.belief_dimensions}
+
+    def predict_feature_acceptance(self, user_profile, ai_features):
+        &quot;&quot;&quot;Predict acceptance of AI features based on beliefs&quot;&quot;&quot;
+
+        acceptance_predictions = {}
+
+        for feature_name, feature_props in ai_features.items():
+            score = 0
+            weight_sum = 0
+
+            # Technology optimism affects overall acceptance
+            if &#x27;automation_level&#x27; in feature_props:
+                weight = 0.3
+                automation_bonus = (user_profile[&#x27;technology_optimism&#x27;] / 100) * feature_props[&#x27;automation_level&#x27;]
+                score += automation_bonus * weight
+                weight_sum += weight
+
+            # Human agency importance
+            if &#x27;human_override&#x27; in feature_props:
+                weight = 0.25
+                if feature_props[&#x27;human_override&#x27;]:
+                    agency_score = user_profile[&#x27;human_agency_importance&#x27;] / 100
+                else:
+                    agency_score = (100 - user_profile[&#x27;human_agency_importance&#x27;]) / 100
+                score += agency_score * weight
+                weight_sum += weight
+
+            # Privacy considerations
+            if &#x27;data_usage&#x27; in feature_props:
+                weight = 0.2
+                privacy_concern = user_profile[&#x27;privacy_as_fundamental&#x27;] / 100
+                data_invasiveness = feature_props[&#x27;data_usage&#x27;] / 100
+                privacy_score = 1 - (privacy_concern * data_invasiveness)
+                score += privacy_score * weight
+                weight_sum += weight
+
+            # Fairness expectations
+            if &#x27;fairness_measures&#x27; in feature_props:
+                weight = 0.15
+                fairness_score = (user_profile[&#x27;algorithmic_fairness&#x27;] / 100) * (feature_props[&#x27;fairness_measures&#x27;] / 100)
+                score += fairness_score * weight
+                weight_sum += weight
+
+            # Transparency requirements
+            if &#x27;explainability&#x27; in feature_props:
+                weight = 0.1
+                transparency_match = 1 - abs(user_profile[&#x27;transparency_requirement&#x27;] - feature_props[&#x27;explainability&#x27;]) / 100
+                score += transparency_match * weight
+                weight_sum += weight
+
+            acceptance_predictions[feature_name] = (score / weight_sum * 100) if weight_sum &gt; 0 else 0
+
+        return acceptance_predictions
+
+# Define different belief profiles
+belief_profiles = {
+    &#x27;tech_enthusiast&#x27;: {
+        &#x27;technology_optimism&#x27;: 85,
+        &#x27;human_agency_importance&#x27;: 30,
+        &#x27;privacy_as_fundamental&#x27;: 40,
+        &#x27;algorithmic_fairness&#x27;: 70,
+        &#x27;transparency_requirement&#x27;: 50
+    },
+    &#x27;privacy_advocate&#x27;: {
+        &#x27;technology_optimism&#x27;: 45,
+        &#x27;human_agency_importance&#x27;: 80,
+        &#x27;privacy_as_fundamental&#x27;: 90,
+        &#x27;algorithmic_fairness&#x27;: 85,
+        &#x27;transparency_requirement&#x27;: 95
+    },
+    &#x27;pragmatic_user&#x27;: {
+        &#x27;technology_optimism&#x27;: 65,
+        &#x27;human_agency_importance&#x27;: 60,
+        &#x27;privacy_as_fundamental&#x27;: 55,
+        &#x27;algorithmic_fairness&#x27;: 75,
+        &#x27;transparency_requirement&#x27;: 70
+    }
+}
+
+# Define AI features with different characteristics
+ai_features = {
+    &#x27;auto_decision_making&#x27;: {
+        &#x27;automation_level&#x27;: 90,
+        &#x27;human_override&#x27;: False,
+        &#x27;data_usage&#x27;: 70,
+        &#x27;fairness_measures&#x27;: 60,
+        &#x27;explainability&#x27;: 30
+    },
+    &#x27;recommendation_system&#x27;: {
+        &#x27;automation_level&#x27;: 60,
+        &#x27;human_override&#x27;: True,
+        &#x27;data_usage&#x27;: 80,
+        &#x27;fairness_measures&#x27;: 70,
+        &#x27;explainability&#x27;: 70
+    },
+    &#x27;transparent_assistant&#x27;: {
+        &#x27;automation_level&#x27;: 40,
+        &#x27;human_override&#x27;: True,
+        &#x27;data_usage&#x27;: 30,
+        &#x27;fairness_measures&#x27;: 85,
+        &#x27;explainability&#x27;: 95
+    }
+}
+
+analyzer = BeliefSystemAnalyzer()
+
+print(&quot;Belief-Based Feature Acceptance Predictions:&quot;)
+print(&quot;User Type        | Auto Decisions | Recommendations | Transparent Assistant&quot;)
+print(&quot;-&quot; * 75)
+
+for profile_name, beliefs in belief_profiles.items():
+    user_profile = analyzer.create_user_profile(beliefs)
+    predictions = analyzer.predict_feature_acceptance(user_profile, ai_features)
+
+    print(f&quot;{profile_name:15} | {predictions[&#x27;auto_decision_making&#x27;]:12.1f}% | &quot;
+          f&quot;{predictions[&#x27;recommendation_system&#x27;]:13.1f}% | {predictions[&#x27;transparent_assistant&#x27;]:15.1f}%&quot;)
+</code></pre>
+</div>
 <hr />
 <h2 id="design-implications-and-best-practices">Design Implications and Best Practices<a class="headerlink" href="#design-implications-and-best-practices" title="Permanent link">&para;</a></h2>
 <h3 id="accounting-for-human-behaviour-in-mlai-design">Accounting for Human Behaviour in ML/AI Design<a class="headerlink" href="#accounting-for-human-behaviour-in-mlai-design" title="Permanent link">&para;</a></h3>
 <p>Understanding human behaviour patterns should directly inform system design decisions:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">HumanCenteredAIDesigner</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Framework for incorporating human behaviour insights into AI design&quot;&quot;&quot;</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">design_principles</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="s1">&#39;transparency&#39;</span><span class="p">:</span> <span class="s2">&quot;Provide clear explanations for AI decisions&quot;</span><span class="p">,</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>            <span class="s1">&#39;control&#39;</span><span class="p">:</span> <span class="s2">&quot;Allow meaningful human oversight and intervention&quot;</span><span class="p">,</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="s1">&#39;fairness&#39;</span><span class="p">:</span> <span class="s2">&quot;Ensure equitable treatment across user groups&quot;</span><span class="p">,</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>            <span class="s1">&#39;cultural_sensitivity&#39;</span><span class="p">:</span> <span class="s2">&quot;Adapt to local cultural norms and expectations&quot;</span><span class="p">,</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="s1">&#39;stress_awareness&#39;</span><span class="p">:</span> <span class="s2">&quot;Recognize and adapt to user stress levels&quot;</span><span class="p">,</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="s1">&#39;trust_building&#39;</span><span class="p">:</span> <span class="s2">&quot;Build confidence through consistent, reliable performance&quot;</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="p">}</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">design_evaluation_framework</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_specs</span><span class="p">):</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate system design against human behaviour principles&quot;&quot;&quot;</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="n">evaluation</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="c1"># Transparency evaluation</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="n">transparency_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;provides_explanations&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>            <span class="n">transparency_score</span> <span class="o">+=</span> <span class="mi">40</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;shows_confidence_levels&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="n">transparency_score</span> <span class="o">+=</span> <span class="mi">30</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reveals_data_sources&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="n">transparency_score</span> <span class="o">+=</span> <span class="mi">30</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;transparency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">transparency_score</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>        <span class="c1"># Control evaluation</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>        <span class="n">control_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;human_override_available&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>            <span class="n">control_score</span> <span class="o">+=</span> <span class="mi">50</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;customizable_thresholds&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>            <span class="n">control_score</span> <span class="o">+=</span> <span class="mi">30</span>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;feedback_incorporation&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>            <span class="n">control_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;control&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">control_score</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>
-</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>        <span class="c1"># Cultural sensitivity</span>
-</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>        <span class="n">cultural_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;localization_support&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>            <span class="n">cultural_score</span> <span class="o">+=</span> <span class="mi">40</span>
-</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cultural_testing&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>            <span class="n">cultural_score</span> <span class="o">+=</span> <span class="mi">35</span>
-</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;diverse_team_design&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>            <span class="n">cultural_score</span> <span class="o">+=</span> <span class="mi">25</span>
-</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;cultural_sensitivity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cultural_score</span>
-</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>
-</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>        <span class="c1"># Stress awareness</span>
-</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>        <span class="n">stress_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;stress_detection&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>            <span class="n">stress_score</span> <span class="o">+=</span> <span class="mi">50</span>
-</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;adaptive_interface&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>            <span class="n">stress_score</span> <span class="o">+=</span> <span class="mi">30</span>
-</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>        <span class="k">if</span> <span class="n">system_specs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;calm_design_principles&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>            <span class="n">stress_score</span> <span class="o">+=</span> <span class="mi">20</span>
-</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>        <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;stress_awareness&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stress_score</span>
-</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>
-</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>        <span class="k">return</span> <span class="n">evaluation</span>
-</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>
-</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">recommend_improvements</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">evaluation</span><span class="p">):</span>
-</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Recommend improvements based on evaluation results&quot;&quot;&quot;</span>
-</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a>        <span class="n">recommendations</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-64"><a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>
-</span><span id="__span-4-65"><a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a>        <span class="k">for</span> <span class="n">principle</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">evaluation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-4-66"><a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a>            <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">:</span>
-</span><span id="__span-4-67"><a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>                <span class="k">if</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;transparency&#39;</span><span class="p">:</span>
-</span><span id="__span-4-68"><a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a>                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Add explanation features and confidence indicators&quot;</span><span class="p">)</span>
-</span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a>                <span class="k">elif</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;control&#39;</span><span class="p">:</span>
-</span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a>                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Implement human override and customization options&quot;</span><span class="p">)</span>
-</span><span id="__span-4-71"><a id="__codelineno-4-71" name="__codelineno-4-71" href="#__codelineno-4-71"></a>                <span class="k">elif</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;cultural_sensitivity&#39;</span><span class="p">:</span>
-</span><span id="__span-4-72"><a id="__codelineno-4-72" name="__codelineno-4-72" href="#__codelineno-4-72"></a>                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Conduct cultural research and diverse user testing&quot;</span><span class="p">)</span>
-</span><span id="__span-4-73"><a id="__codelineno-4-73" name="__codelineno-4-73" href="#__codelineno-4-73"></a>                <span class="k">elif</span> <span class="n">principle</span> <span class="o">==</span> <span class="s1">&#39;stress_awareness&#39;</span><span class="p">:</span>
-</span><span id="__span-4-74"><a id="__codelineno-4-74" name="__codelineno-4-74" href="#__codelineno-4-74"></a>                    <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Add stress detection and adaptive interface elements&quot;</span><span class="p">)</span>
-</span><span id="__span-4-75"><a id="__codelineno-4-75" name="__codelineno-4-75" href="#__codelineno-4-75"></a>
-</span><span id="__span-4-76"><a id="__codelineno-4-76" name="__codelineno-4-76" href="#__codelineno-4-76"></a>        <span class="k">return</span> <span class="n">recommendations</span>
-</span><span id="__span-4-77"><a id="__codelineno-4-77" name="__codelineno-4-77" href="#__codelineno-4-77"></a>
-</span><span id="__span-4-78"><a id="__codelineno-4-78" name="__codelineno-4-78" href="#__codelineno-4-78"></a><span class="c1"># Example system evaluation</span>
-</span><span id="__span-4-79"><a id="__codelineno-4-79" name="__codelineno-4-79" href="#__codelineno-4-79"></a><span class="n">example_system</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-80"><a id="__codelineno-4-80" name="__codelineno-4-80" href="#__codelineno-4-80"></a>    <span class="s1">&#39;provides_explanations&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-4-81"><a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>    <span class="s1">&#39;shows_confidence_levels&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-4-82"><a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a>    <span class="s1">&#39;reveals_data_sources&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-4-83"><a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a>    <span class="s1">&#39;human_override_available&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-4-84"><a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a>    <span class="s1">&#39;customizable_thresholds&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-4-85"><a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a>    <span class="s1">&#39;feedback_incorporation&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-4-86"><a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a>    <span class="s1">&#39;localization_support&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-4-87"><a id="__codelineno-4-87" name="__codelineno-4-87" href="#__codelineno-4-87"></a>    <span class="s1">&#39;cultural_testing&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-4-88"><a id="__codelineno-4-88" name="__codelineno-4-88" href="#__codelineno-4-88"></a>    <span class="s1">&#39;diverse_team_design&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="__span-4-89"><a id="__codelineno-4-89" name="__codelineno-4-89" href="#__codelineno-4-89"></a>    <span class="s1">&#39;stress_detection&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-4-90"><a id="__codelineno-4-90" name="__codelineno-4-90" href="#__codelineno-4-90"></a>    <span class="s1">&#39;adaptive_interface&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="__span-4-91"><a id="__codelineno-4-91" name="__codelineno-4-91" href="#__codelineno-4-91"></a>    <span class="s1">&#39;calm_design_principles&#39;</span><span class="p">:</span> <span class="kc">True</span>
-</span><span id="__span-4-92"><a id="__codelineno-4-92" name="__codelineno-4-92" href="#__codelineno-4-92"></a><span class="p">}</span>
-</span><span id="__span-4-93"><a id="__codelineno-4-93" name="__codelineno-4-93" href="#__codelineno-4-93"></a>
-</span><span id="__span-4-94"><a id="__codelineno-4-94" name="__codelineno-4-94" href="#__codelineno-4-94"></a><span class="n">designer</span> <span class="o">=</span> <span class="n">HumanCenteredAIDesigner</span><span class="p">()</span>
-</span><span id="__span-4-95"><a id="__codelineno-4-95" name="__codelineno-4-95" href="#__codelineno-4-95"></a><span class="n">eval_results</span> <span class="o">=</span> <span class="n">designer</span><span class="o">.</span><span class="n">design_evaluation_framework</span><span class="p">(</span><span class="n">example_system</span><span class="p">)</span>
-</span><span id="__span-4-96"><a id="__codelineno-4-96" name="__codelineno-4-96" href="#__codelineno-4-96"></a><span class="n">improvements</span> <span class="o">=</span> <span class="n">designer</span><span class="o">.</span><span class="n">recommend_improvements</span><span class="p">(</span><span class="n">eval_results</span><span class="p">)</span>
-</span><span id="__span-4-97"><a id="__codelineno-4-97" name="__codelineno-4-97" href="#__codelineno-4-97"></a>
-</span><span id="__span-4-98"><a id="__codelineno-4-98" name="__codelineno-4-98" href="#__codelineno-4-98"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Human-Centered AI Design Evaluation:&quot;</span><span class="p">)</span>
-</span><span id="__span-4-99"><a id="__codelineno-4-99" name="__codelineno-4-99" href="#__codelineno-4-99"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-</span><span id="__span-4-100"><a id="__codelineno-4-100" name="__codelineno-4-100" href="#__codelineno-4-100"></a><span class="k">for</span> <span class="n">principle</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">eval_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-4-101"><a id="__codelineno-4-101" name="__codelineno-4-101" href="#__codelineno-4-101"></a>    <span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;✓&quot;</span> <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span> <span class="k">else</span> <span class="s2">&quot;⚠&quot;</span>
-</span><span id="__span-4-102"><a id="__codelineno-4-102" name="__codelineno-4-102" href="#__codelineno-4-102"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">principle</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</span><span id="__span-4-103"><a id="__codelineno-4-103" name="__codelineno-4-103" href="#__codelineno-4-103"></a>
-</span><span id="__span-4-104"><a id="__codelineno-4-104" name="__codelineno-4-104" href="#__codelineno-4-104"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Recommended Improvements:&quot;</span><span class="p">)</span>
-</span><span id="__span-4-105"><a id="__codelineno-4-105" name="__codelineno-4-105" href="#__codelineno-4-105"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">recommendation</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">improvements</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-</span><span id="__span-4-106"><a id="__codelineno-4-106" name="__codelineno-4-106" href="#__codelineno-4-106"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">recommendation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class HumanCenteredAIDesigner:
+    &quot;&quot;&quot;Framework for incorporating human behaviour insights into AI design&quot;&quot;&quot;
+
+    def __init__(self):
+        self.design_principles = {
+            &#x27;transparency&#x27;: &quot;Provide clear explanations for AI decisions&quot;,
+            &#x27;control&#x27;: &quot;Allow meaningful human oversight and intervention&quot;,
+            &#x27;fairness&#x27;: &quot;Ensure equitable treatment across user groups&quot;,
+            &#x27;cultural_sensitivity&#x27;: &quot;Adapt to local cultural norms and expectations&quot;,
+            &#x27;stress_awareness&#x27;: &quot;Recognize and adapt to user stress levels&quot;,
+            &#x27;trust_building&#x27;: &quot;Build confidence through consistent, reliable performance&quot;
+        }
+
+    def design_evaluation_framework(self, system_specs):
+        &quot;&quot;&quot;Evaluate system design against human behaviour principles&quot;&quot;&quot;
+
+        evaluation = {}
+
+        # Transparency evaluation
+        transparency_score = 0
+        if system_specs.get(&#x27;provides_explanations&#x27;, False):
+            transparency_score += 40
+        if system_specs.get(&#x27;shows_confidence_levels&#x27;, False):
+            transparency_score += 30
+        if system_specs.get(&#x27;reveals_data_sources&#x27;, False):
+            transparency_score += 30
+        evaluation[&#x27;transparency&#x27;] = transparency_score
+
+        # Control evaluation
+        control_score = 0
+        if system_specs.get(&#x27;human_override_available&#x27;, False):
+            control_score += 50
+        if system_specs.get(&#x27;customizable_thresholds&#x27;, False):
+            control_score += 30
+        if system_specs.get(&#x27;feedback_incorporation&#x27;, False):
+            control_score += 20
+        evaluation[&#x27;control&#x27;] = control_score
+
+        # Cultural sensitivity
+        cultural_score = 0
+        if system_specs.get(&#x27;localization_support&#x27;, False):
+            cultural_score += 40
+        if system_specs.get(&#x27;cultural_testing&#x27;, False):
+            cultural_score += 35
+        if system_specs.get(&#x27;diverse_team_design&#x27;, False):
+            cultural_score += 25
+        evaluation[&#x27;cultural_sensitivity&#x27;] = cultural_score
+
+        # Stress awareness
+        stress_score = 0
+        if system_specs.get(&#x27;stress_detection&#x27;, False):
+            stress_score += 50
+        if system_specs.get(&#x27;adaptive_interface&#x27;, False):
+            stress_score += 30
+        if system_specs.get(&#x27;calm_design_principles&#x27;, False):
+            stress_score += 20
+        evaluation[&#x27;stress_awareness&#x27;] = stress_score
+
+        return evaluation
+
+    def recommend_improvements(self, evaluation):
+        &quot;&quot;&quot;Recommend improvements based on evaluation results&quot;&quot;&quot;
+        recommendations = []
+
+        for principle, score in evaluation.items():
+            if score &lt; 70:
+                if principle == &#x27;transparency&#x27;:
+                    recommendations.append(&quot;Add explanation features and confidence indicators&quot;)
+                elif principle == &#x27;control&#x27;:
+                    recommendations.append(&quot;Implement human override and customization options&quot;)
+                elif principle == &#x27;cultural_sensitivity&#x27;:
+                    recommendations.append(&quot;Conduct cultural research and diverse user testing&quot;)
+                elif principle == &#x27;stress_awareness&#x27;:
+                    recommendations.append(&quot;Add stress detection and adaptive interface elements&quot;)
+
+        return recommendations
+
+# Example system evaluation
+example_system = {
+    &#x27;provides_explanations&#x27;: True,
+    &#x27;shows_confidence_levels&#x27;: False,
+    &#x27;reveals_data_sources&#x27;: True,
+    &#x27;human_override_available&#x27;: True,
+    &#x27;customizable_thresholds&#x27;: False,
+    &#x27;feedback_incorporation&#x27;: True,
+    &#x27;localization_support&#x27;: False,
+    &#x27;cultural_testing&#x27;: False,
+    &#x27;diverse_team_design&#x27;: True,
+    &#x27;stress_detection&#x27;: False,
+    &#x27;adaptive_interface&#x27;: False,
+    &#x27;calm_design_principles&#x27;: True
+}
+
+designer = HumanCenteredAIDesigner()
+eval_results = designer.design_evaluation_framework(example_system)
+improvements = designer.recommend_improvements(eval_results)
+
+print(&quot;Human-Centered AI Design Evaluation:&quot;)
+print(&quot;-&quot; * 40)
+for principle, score in eval_results.items():
+    status = &quot;✓&quot; if score &gt;= 70 else &quot;⚠&quot;
+    print(f&quot;{principle:20} {status} {score:3d}%&quot;)
+
+print(&quot;\nRecommended Improvements:&quot;)
+for i, recommendation in enumerate(improvements, 1):
+    print(f&quot;{i}. {recommendation}&quot;)
+</code></pre>
+</div>
 <hr />
 <h2 id="plantuml-diagram-human-behaviour-influence-on-ai-systems">PlantUML Diagram: Human Behaviour Influence on AI Systems<a class="headerlink" href="#plantuml-diagram-human-behaviour-influence-on-ai-systems" title="Permanent link">&para;</a></h2>
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS" height="829px" preserveAspectRatio="xMaxYMax meet" style="width:669px;height:829px;background:#FFFFFF;" version="1.1" viewBox="0 0 669 829" width="669px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="entity" data-entity="patterns" data-source-line="4" data-uid="ent0002" id="entity_patterns"><rect fill="#F1F1F1" height="113.1875" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="220.9658" x="199.42" y="7" /><ellipse cx="214.42" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M217.3888,28.6406 Q216.8106,28.9375 216.17,29.0781 Q215.5294,29.2344 214.8263,29.2344 Q212.3263,29.2344 210.9981,27.5938 Q209.6856,25.9375 209.6856,22.8125 Q209.6856,19.6875 210.9981,18.0313 Q212.3263,16.375 214.8263,16.375 Q215.5294,16.375 216.17,16.5313 Q216.8263,16.6875 217.3888,16.9844 L217.3888,19.7031 Q216.7638,19.125 216.17,18.8594 Q215.5763,18.5781 214.9513,18.5781 Q213.6075,18.5781 212.92,19.6563 Q212.2325,20.7188 212.2325,22.8125 Q212.2325,24.9063 212.92,25.9844 Q213.6075,27.0469 214.9513,27.0469 Q215.5763,27.0469 216.17,26.7813 Q216.7638,26.5 217.3888,25.9219 L217.3888,28.6406 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="188.9658" x="228.42" y="27.8467">Human Behaviour Patterns</text><line style="stroke:#181818;stroke-width:0.5;" x1="200.42" x2="419.3858" y1="39" y2="39" /><ellipse cx="210.42" cy="52.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="174.166" x="219.42" y="55.9951">Psychological Responses</text><ellipse cx="210.42" cy="68.9453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116.5117" x="219.42" y="72.292">Stress Reactions</text><ellipse cx="210.42" cy="85.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123.8398" x="219.42" y="88.5889">Cultural Protocols</text><ellipse cx="210.42" cy="101.5391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103.4893" x="219.42" y="104.8857">Belief Systems</text><line style="stroke:#181818;stroke-width:0.5;" x1="200.42" x2="419.3858" y1="112.1875" y2="112.1875" /></g><g class="entity" data-entity="design" data-source-line="11" data-uid="ent0003" id="entity_design"><rect fill="#F1F1F1" height="113.1875" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="185.7969" x="7" y="197.19" /><ellipse cx="35.7914" cy="213.19" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M38.7601,218.8306 Q38.182,219.1275 37.5414,219.2681 Q36.9007,219.4244 36.1976,219.4244 Q33.6976,219.4244 32.3695,217.7837 Q31.057,216.1275 31.057,213.0025 Q31.057,209.8775 32.3695,208.2212 Q33.6976,206.565 36.1976,206.565 Q36.9007,206.565 37.5414,206.7212 Q38.1976,206.8775 38.7601,207.1744 L38.7601,209.8931 Q38.1351,209.315 37.5414,209.0494 Q36.9476,208.7681 36.3226,208.7681 Q34.9789,208.7681 34.2914,209.8462 Q33.6039,210.9087 33.6039,213.0025 Q33.6039,215.0962 34.2914,216.1744 Q34.9789,217.2369 36.3226,217.2369 Q36.9476,217.2369 37.5414,216.9712 Q38.1351,216.69 38.7601,216.1119 L38.7601,218.8306 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123.1494" x="52.8561" y="218.0367">AI System Design</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="191.7969" y1="229.19" y2="229.19" /><ellipse cx="18" cy="242.8384" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115.4658" x="27" y="246.1851">Interface Design</text><ellipse cx="18" cy="259.1353" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.7969" x="27" y="262.482">Decision Transparency</text><ellipse cx="18" cy="275.4322" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142.1943" x="27" y="278.7789">Control Mechanisms</text><ellipse cx="18" cy="291.7291" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="131.3867" x="27" y="295.0757">Feedback Systems</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="191.7969" y1="302.3775" y2="302.3775" /></g><g class="entity" data-entity="data" data-source-line="18" data-uid="ent0004" id="entity_data"><rect fill="#F1F1F1" height="113.1875" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="164.7764" x="227.51" y="197.19" /><ellipse cx="254.0527" cy="213.19" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M257.0214,218.8306 Q256.4433,219.1275 255.8027,219.2681 Q255.1621,219.4244 254.4589,219.4244 Q251.9589,219.4244 250.6308,217.7837 Q249.3183,216.1275 249.3183,213.0025 Q249.3183,209.8775 250.6308,208.2212 Q251.9589,206.565 254.4589,206.565 Q255.1621,206.565 255.8027,206.7212 Q256.4589,206.8775 257.0214,207.1744 L257.0214,209.8931 Q256.3964,209.315 255.8027,209.0494 Q255.2089,208.7681 254.5839,208.7681 Q253.2402,208.7681 252.5527,209.8462 Q251.8652,210.9087 251.8652,213.0025 Q251.8652,215.0962 252.5527,216.1744 Q253.2402,217.2369 254.5839,217.2369 Q255.2089,217.2369 255.8027,216.9712 Q256.3964,216.69 257.0214,216.1119 L257.0214,218.8306 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107.126" x="270.6177" y="218.0367">Data Collection</text><line style="stroke:#181818;stroke-width:0.5;" x1="228.51" x2="391.2864" y1="229.19" y2="229.19" /><ellipse cx="238.51" cy="242.8384" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119.6084" x="247.51" y="246.1851">User Interactions</text><ellipse cx="238.51" cy="259.1353" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138.7764" x="247.51" y="262.482">Behavioural Metrics</text><ellipse cx="238.51" cy="275.4322" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="114.666" x="247.51" y="278.7789">Cultural Context</text><ellipse cx="238.51" cy="291.7291" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="116.9424" x="247.51" y="295.0757">Stress Indicators</text><line style="stroke:#181818;stroke-width:0.5;" x1="228.51" x2="391.2864" y1="302.3775" y2="302.3775" /></g><g class="entity" data-entity="training" data-source-line="25" data-uid="ent0005" id="entity_training"><rect fill="#F1F1F1" height="113.1875" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="172.1387" x="220.83" y="387.37" /><ellipse cx="252.19" cy="403.37" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M255.1587,409.0106 Q254.5806,409.3075 253.94,409.4481 Q253.2993,409.6044 252.5962,409.6044 Q250.0962,409.6044 248.7681,407.9637 Q247.4556,406.3075 247.4556,403.1825 Q247.4556,400.0575 248.7681,398.4012 Q250.0962,396.745 252.5962,396.745 Q253.2993,396.745 253.94,396.9012 Q254.5962,397.0575 255.1587,397.3544 L255.1587,400.0731 Q254.5337,399.495 253.94,399.2294 Q253.3462,398.9481 252.7212,398.9481 Q251.3775,398.9481 250.69,400.0262 Q250.0025,401.0887 250.0025,403.1825 Q250.0025,405.2762 250.69,406.3544 Q251.3775,407.4169 252.7212,407.4169 Q253.3462,407.4169 253.94,407.1512 Q254.5337,406.87 255.1587,406.2919 L255.1587,409.0106 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="103.7832" x="269.8255" y="408.2167">Model Training</text><line style="stroke:#181818;stroke-width:0.5;" x1="221.83" x2="391.9687" y1="419.37" y2="419.37" /><ellipse cx="231.83" cy="433.0184" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130.8672" x="240.83" y="436.3651">Bias Consideration</text><ellipse cx="231.83" cy="449.3153" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136.3906" x="240.83" y="452.662">Cultural Adaptation</text><ellipse cx="231.83" cy="465.6122" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146.1387" x="240.83" y="468.9589">Stress-Aware Models</text><ellipse cx="231.83" cy="481.9091" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113.6201" x="240.83" y="485.2557">Fairness Metrics</text><line style="stroke:#181818;stroke-width:0.5;" x1="221.83" x2="391.9687" y1="492.5575" y2="492.5575" /></g><g class="entity" data-entity="adaptation" data-source-line="32" data-uid="ent0006" id="entity_adaptation"><rect fill="#F1F1F1" height="113.1875" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="168.7412" x="292.53" y="577.56" /><ellipse cx="309.0013" cy="593.56" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M311.97,599.2006 Q311.3919,599.4975 310.7513,599.6381 Q310.1107,599.7944 309.4075,599.7944 Q306.9075,599.7944 305.5794,598.1538 Q304.2669,596.4975 304.2669,593.3725 Q304.2669,590.2475 305.5794,588.5913 Q306.9075,586.935 309.4075,586.935 Q310.1107,586.935 310.7513,587.0913 Q311.4075,587.2475 311.97,587.5444 L311.97,590.2631 Q311.345,589.685 310.7513,589.4194 Q310.1575,589.1381 309.5325,589.1381 Q308.1888,589.1381 307.5013,590.2163 Q306.8138,591.2788 306.8138,593.3725 Q306.8138,595.4663 307.5013,596.5444 Q308.1888,597.6069 309.5325,597.6069 Q310.1575,597.6069 310.7513,597.3413 Q311.345,597.06 311.97,596.4819 L311.97,599.2006 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133.4717" x="323.3282" y="598.4067">System Adaptation</text><line style="stroke:#181818;stroke-width:0.5;" x1="293.53" x2="460.2712" y1="609.56" y2="609.56" /><ellipse cx="303.53" cy="623.2084" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128.8711" x="312.53" y="626.5551">Dynamic Interface</text><ellipse cx="303.53" cy="639.5053" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="142.7412" x="312.53" y="642.852">Cultural Localization</text><ellipse cx="303.53" cy="655.8022" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115.6504" x="312.53" y="659.1489">Stress Response</text><ellipse cx="303.53" cy="672.0991" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97.207" x="312.53" y="675.4457">Trust Building</text><line style="stroke:#181818;stroke-width:0.5;" x1="293.53" x2="460.2712" y1="682.7475" y2="682.7475" /></g><g class="entity" data-entity="GMN12" data-source-line="46" data-uid="ent0013" id="entity_GMN12"><path d="M455.15,28.33 L455.15,59.59 L420.78,63.59 L455.15,67.59 L455.15,98.8612 A0,0 0 0 0 455.15,98.8612 L662.6505,98.8612 A0,0 0 0 0 662.6505,98.8612 L662.6505,38.33 L652.6505,28.33 L455.15,28.33 A0,0 0 0 0 455.15,28.33" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;" /><path d="M652.6505,28.33 L652.6505,38.33 L662.6505,38.33 L652.6505,28.33" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="175.2144" x="461.15" y="45.3969">Human behaviour patterns</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="174.0464" x="461.15" y="60.5297">are complex and culturally</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="186.5005" x="461.15" y="75.6625">dependent, requiring careful</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="156.9648" x="461.15" y="90.7953">study and consideration</text></g><g class="entity" data-entity="GMN15" data-source-line="53" data-uid="ent0016" id="entity_GMN15"><path d="M273.81,751.75 L273.81,822.2813 A0,0 0 0 0 273.81,822.2813 L479.9965,822.2813 A0,0 0 0 0 479.9965,822.2813 L479.9965,761.75 L469.9965,751.75 L380.9,751.75 L376.9,690.9 L372.9,751.75 L273.81,751.75 A0,0 0 0 0 273.81,751.75" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;" /><path d="M469.9965,751.75 L469.9965,761.75 L479.9965,761.75 L469.9965,751.75" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="185.1865" x="279.81" y="768.8169">Successful AI systems adapt</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="176.084" x="279.81" y="783.9497">to human behaviour rather</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="152.2358" x="279.81" y="799.0825">than forcing humans to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="131.0347" x="279.81" y="814.2153">adapt to technology</text></g><g class="link" data-entity-1="patterns" data-entity-2="design" data-source-line="39" data-uid="lnk7" id="link_patterns_design"><path codeLine="39" d="M247.46,120.55 C220.62,144.6 193.7776,168.645 166.9276,192.715" fill="none" id="patterns-to-design" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="162.46,196.72,171.8315,193.6908,166.183,193.3825,166.4914,187.734,162.46,196.72" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49.3848" x="212.9" y="163.2569">Informs</text></g><g class="link" data-entity-1="patterns" data-entity-2="data" data-source-line="40" data-uid="lnk8" id="link_patterns_data"><path codeLine="40" d="M309.9,120.55 C309.9,144.6 309.9,166.65 309.9,190.72" fill="none" id="patterns-to-data" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="309.9,196.72,313.9,187.72,309.9,191.72,305.9,187.72,309.9,196.72" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66.6567" x="310.9" y="163.2569">Influences</text></g><g class="link" data-entity-1="data" data-entity-2="training" data-source-line="41" data-uid="lnk9" id="link_data_training"><path codeLine="41" d="M309.01,310.73 C308.62,334.79 308.2772,356.8408 307.8872,380.9108" fill="none" id="data-to-training" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="307.79,386.91,311.9353,377.976,307.871,381.9107,303.9363,377.8464,307.79,386.91" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67.7549" x="309.9" y="353.4369">Feeds Into</text></g><g class="link" data-entity-1="training" data-entity-2="adaptation" data-source-line="42" data-uid="lnk10" id="link_training_adaptation"><path codeLine="42" d="M327.71,500.92 C336.66,524.97 344.9981,547.4065 353.9481,571.4665" fill="none" id="training-to-adaptation" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="356.04,577.09,356.6512,567.2601,354.2968,572.4037,349.1532,570.0493,356.04,577.09" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="51.0542" x="345.9" y="543.6269">Enables</text></g><g class="link" data-entity-1="adaptation" data-entity-2="patterns" data-source-line="43" data-uid="lnk11" id="link_adaptation_patterns"><path codeLine="43" d="M397.73,577.49 C400.85,567.62 403.74,557.37 405.9,547.56 C439.33,395.46 446.72,348.5 409.9,197.19 C403.01,168.89 389.8274,146.9008 371.7374,125.0608" fill="none" id="adaptation-to-patterns" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="367.91,120.44,370.5705,129.9227,371.0995,124.2906,376.7315,124.8196,367.91,120.44" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83.3003" x="435.9" y="353.4369">Responds To</text></g></g></svg></p></div></div>
@@ -2315,7 +2325,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2025 00:19:57 UTC">September 30, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

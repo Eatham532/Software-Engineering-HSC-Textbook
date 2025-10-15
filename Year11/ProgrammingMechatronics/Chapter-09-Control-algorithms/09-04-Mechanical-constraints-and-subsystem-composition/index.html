@@ -1561,407 +1561,421 @@
 <h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
 <h3 id="degrees-of-freedom-and-motion-constraints">Degrees of freedom and motion constraints<a class="headerlink" href="#degrees-of-freedom-and-motion-constraints" title="Permanent link">&para;</a></h3>
 <p><strong>Degrees of freedom (DOF)</strong> represent the number of independent ways a mechanical system can move. Understanding DOF helps determine what movements are possible and how to control them.</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Example: analyzing degrees of freedom for common mechanisms</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">MechanicalSystem</span><span class="p">:</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">constraints</span><span class="p">):</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dof</span> <span class="o">=</span> <span class="n">dof</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">constraints</span> <span class="o">=</span> <span class="n">constraints</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">describe_motion</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dof</span><span class="si">}</span><span class="s2"> DOF - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">constraints</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Common mechanical systems</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">systems</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">MechanicalSystem</span><span class="p">(</span><span class="s2">&quot;Door hinge&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Rotation around single axis&quot;</span><span class="p">),</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">MechanicalSystem</span><span class="p">(</span><span class="s2">&quot;2D robot arm (2 joints)&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;X-Y positioning in plane&quot;</span><span class="p">),</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">MechanicalSystem</span><span class="p">(</span><span class="s2">&quot;3D printer head&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;X, Y, Z translation&quot;</span><span class="p">),</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="n">MechanicalSystem</span><span class="p">(</span><span class="s2">&quot;Robot gripper&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Open/close parallel jaws&quot;</span><span class="p">),</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">MechanicalSystem</span><span class="p">(</span><span class="s2">&quot;6-axis robot arm&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Full 3D position + orientation&quot;</span><span class="p">)</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">]</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="k">for</span> <span class="n">system</span> <span class="ow">in</span> <span class="n">systems</span><span class="p">:</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">describe_motion</span><span class="p">())</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"># Example: analyzing degrees of freedom for common mechanisms
+class MechanicalSystem:
+    def __init__(self, name, dof, constraints):
+        self.name = name
+        self.dof = dof
+        self.constraints = constraints
+
+    def describe_motion(self):
+        return f&quot;{self.name}: {self.dof} DOF - {self.constraints}&quot;
+
+# Common mechanical systems
+systems = [
+    MechanicalSystem(&quot;Door hinge&quot;, 1, &quot;Rotation around single axis&quot;),
+    MechanicalSystem(&quot;2D robot arm (2 joints)&quot;, 2, &quot;X-Y positioning in plane&quot;),
+    MechanicalSystem(&quot;3D printer head&quot;, 3, &quot;X, Y, Z translation&quot;),
+    MechanicalSystem(&quot;Robot gripper&quot;, 1, &quot;Open/close parallel jaws&quot;),
+    MechanicalSystem(&quot;6-axis robot arm&quot;, 6, &quot;Full 3D position + orientation&quot;)
+]
+
+for system in systems:
+    print(system.describe_motion())
+</code></pre>
+</div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s analyze a robotic arm subsystem and its motion constraints:</p>
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="676px" preserveAspectRatio="xMaxYMax meet" style="width:355px;height:676px;background:#FFFFFF;" version="1.1" viewBox="0 0 355 676" width="355px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="entity" data-entity="Base" data-source-line="6" data-uid="ent0002" id="entity_Base"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="107.1924" x="12.27" y="30.68" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87.1924" x="22.27" y="53.6751">Base (Fixed)</text></g><g class="entity" data-entity="Shoulder" data-source-line="7" data-uid="ent0003" id="entity_Shoulder"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="117.7402" x="7" y="183.66" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="97.7402" x="17" y="206.6551">Shoulder Joint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70.1025" x="17" y="222.952">(Rotation)</text></g><g class="entity" data-entity="Elbow" data-source-line="8" data-uid="ent0004" id="entity_Elbow"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="97.0342" x="17.35" y="328.26" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77.0342" x="27.35" y="351.2551">Elbow Joint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70.1025" x="27.35" y="367.552">(Rotation)</text></g><g class="entity" data-entity="Wrist" data-source-line="9" data-uid="ent0005" id="entity_Wrist"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="91.668" x="20.04" y="472.85" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71.668" x="30.04" y="495.8451">Wrist Joint</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70.1025" x="30.04" y="512.142">(Rotation)</text></g><g class="entity" data-entity="Gripper" data-source-line="10" data-uid="ent0006" id="entity_Gripper"><rect fill="#F1F1F1" height="52.5938" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="105.8799" x="12.93" y="617.45" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85.8799" x="22.93" y="640.4451">End Effector</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="63.5605" x="22.93" y="656.742">(Gripper)</text></g><g class="entity" data-entity="GMN11" data-source-line="18" data-uid="ent0012" id="entity_GMN11"><path d="M154.83,6 L154.83,44.83 L119.64,48.83 L154.83,52.83 L154.83,91.6641 A0,0 0 0 0 154.83,91.6641 L348.9115,91.6641 A0,0 0 0 0 348.9115,91.6641 L348.9115,16 L338.9115,6 L154.83,6 A0,0 0 0 0 154.83,6" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M338.9115,6 L338.9115,16 L348.9115,16 L338.9115,6" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="173.0815" x="160.83" y="23.0669">Workspace constraints:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="172.3579" x="160.83" y="38.1997">- Maximum reach: 800mm</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="168.5493" x="160.83" y="53.3325">- Minimum reach: 150mm</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="125.3979" x="160.83" y="68.4653">- Payload limit: 2kg</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="140.1563" x="160.83" y="83.5981">- Speed limit: 50&#176;/sec</text></g><g class="link" data-entity-1="Base" data-entity-2="Shoulder" data-source-line="12" data-uid="lnk7" id="link_Base_Shoulder"><path d="M65.87,67.47 C65.87,95.63 65.87,144.88 65.87,177.38" fill="none" id="Base-to-Shoulder" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="65.87,183.38,69.87,174.38,65.87,178.38,61.87,174.38,65.87,183.38" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="135.6875" x="66.87" y="134.7269">DOF 1: Base rotation</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77.543" x="95.9423" y="149.8597">(0&#176; to 360&#176;)</text></g><g class="link" data-entity-1="Shoulder" data-entity-2="Elbow" data-source-line="13" data-uid="lnk8" id="link_Shoulder_Elbow"><path d="M65.87,236.45 C65.87,262.25 65.87,295.92 65.87,321.8" fill="none" id="Shoulder-to-Elbow" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="65.87,327.8,69.87,318.8,65.87,322.8,61.87,318.8,65.87,327.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="143.0063" x="66.87" y="279.3269">DOF 2: Shoulder pitch</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="93.1265" x="91.8099" y="294.4597">(-90&#176; to +90&#176;)</text></g><g class="link" data-entity-1="Elbow" data-entity-2="Wrist" data-source-line="14" data-uid="lnk9" id="link_Elbow_Wrist"><path d="M65.87,381.05 C65.87,406.84 65.87,440.51 65.87,466.4" fill="none" id="Elbow-to-Wrist" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="65.87,472.4,69.87,463.4,65.87,467.4,61.87,463.4,65.87,472.4" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="124.1729" x="66.87" y="423.9169">DOF 3: Elbow bend</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77.543" x="90.1849" y="439.0497">(0&#176; to 135&#176;)</text></g><g class="link" data-entity-1="Wrist" data-entity-2="Gripper" data-source-line="15" data-uid="lnk10" id="link_Wrist_Gripper"><path d="M65.87,525.64 C65.87,551.44 65.87,585.1 65.87,610.99" fill="none" id="Wrist-to-Gripper" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="65.87,616.99,69.87,607.99,65.87,611.99,61.87,607.99,65.87,616.99" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="137.7124" x="66.87" y="568.5169">DOF 4: Wrist rotation</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="109.6685" x="80.892" y="583.6497">(-180&#176; to +180&#176;)</text></g></g></svg></p></div></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">RobotArmConstraints</span><span class="p">:</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="c1"># Joint limits (degrees)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">joint_limits</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="s2">&quot;shoulder&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="mi">90</span><span class="p">),</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>            <span class="s2">&quot;elbow&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">135</span><span class="p">),</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>            <span class="s2">&quot;wrist&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">)</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="p">}</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="c1"># Physical constraints</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">max_reach</span> <span class="o">=</span> <span class="mi">800</span>  <span class="c1"># mm</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">min_reach</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># mm</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">max_payload</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># kg</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">max_speed</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># degrees/second</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_joint_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">joint_name</span><span class="p">,</span> <span class="n">angle</span><span class="p">):</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if joint angle is within safe limits.&quot;&quot;&quot;</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="k">if</span> <span class="n">joint_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint_limits</span><span class="p">:</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="n">min_angle</span><span class="p">,</span> <span class="n">max_angle</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">joint_limits</span><span class="p">[</span><span class="n">joint_name</span><span class="p">]</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="k">return</span> <span class="n">min_angle</span> <span class="o">&lt;=</span> <span class="n">angle</span> <span class="o">&lt;=</span> <span class="n">max_angle</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_reach</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shoulder_angle</span><span class="p">,</span> <span class="n">elbow_angle</span><span class="p">):</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate end effector reach given joint angles.&quot;&quot;&quot;</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="c1"># Simplified calculation for 2-segment arm</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="n">upper_arm</span> <span class="o">=</span> <span class="mi">400</span>  <span class="c1"># mm</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>        <span class="n">forearm</span> <span class="o">=</span> <span class="mi">400</span>   <span class="c1"># mm</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="c1"># Convert to radians</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>        <span class="n">shoulder_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">shoulder_angle</span><span class="p">)</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="n">elbow_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">elbow_angle</span><span class="p">)</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>        <span class="c1"># Calculate end effector position</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">upper_arm</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">shoulder_rad</span><span class="p">)</span> <span class="o">+</span> <span class="n">forearm</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">shoulder_rad</span> <span class="o">+</span> <span class="n">elbow_rad</span><span class="p">)</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>        <span class="n">y</span> <span class="o">=</span> <span class="n">upper_arm</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">shoulder_rad</span><span class="p">)</span> <span class="o">+</span> <span class="n">forearm</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">shoulder_rad</span> <span class="o">+</span> <span class="n">elbow_rad</span><span class="p">)</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>        <span class="n">reach</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="k">return</span> <span class="n">reach</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_position_reachable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shoulder_angle</span><span class="p">,</span> <span class="n">elbow_angle</span><span class="p">):</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if position is within workspace constraints.&quot;&quot;&quot;</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_joint_limits</span><span class="p">(</span><span class="s2">&quot;shoulder&quot;</span><span class="p">,</span> <span class="n">shoulder_angle</span><span class="p">):</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Shoulder angle out of range&quot;</span>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_joint_limits</span><span class="p">(</span><span class="s2">&quot;elbow&quot;</span><span class="p">,</span> <span class="n">elbow_angle</span><span class="p">):</span>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Elbow angle out of range&quot;</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>        <span class="n">reach</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_reach</span><span class="p">(</span><span class="n">shoulder_angle</span><span class="p">,</span> <span class="n">elbow_angle</span><span class="p">)</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>        <span class="k">if</span> <span class="n">reach</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_reach</span><span class="p">:</span>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Position too far: </span><span class="si">{</span><span class="n">reach</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">mm &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_reach</span><span class="si">}</span><span class="s2">mm&quot;</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>        <span class="k">if</span> <span class="n">reach</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_reach</span><span class="p">:</span>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Position too close: </span><span class="si">{</span><span class="n">reach</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">mm &lt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min_reach</span><span class="si">}</span><span class="s2">mm&quot;</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Position reachable: </span><span class="si">{</span><span class="n">reach</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">mm&quot;</span>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="c1"># Example usage</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a><span class="n">arm</span> <span class="o">=</span> <span class="n">RobotArmConstraints</span><span class="p">()</span>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="n">result</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">arm</span><span class="o">.</span><span class="n">is_position_reachable</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target position: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">import math
+
+class RobotArmConstraints:
+    def __init__(self):
+        # Joint limits (degrees)
+        self.joint_limits = {
+            &quot;base&quot;: (-180, 180),
+            &quot;shoulder&quot;: (-90, 90),
+            &quot;elbow&quot;: (0, 135),
+            &quot;wrist&quot;: (-180, 180)
+        }
+
+        # Physical constraints
+        self.max_reach = 800  # mm
+        self.min_reach = 150  # mm
+        self.max_payload = 2.0  # kg
+        self.max_speed = 50  # degrees/second
+
+    def check_joint_limits(self, joint_name, angle):
+        &quot;&quot;&quot;Check if joint angle is within safe limits.&quot;&quot;&quot;
+        if joint_name not in self.joint_limits:
+            return False
+        min_angle, max_angle = self.joint_limits[joint_name]
+        return min_angle &lt;= angle &lt;= max_angle
+
+    def calculate_reach(self, shoulder_angle, elbow_angle):
+        &quot;&quot;&quot;Calculate end effector reach given joint angles.&quot;&quot;&quot;
+        # Simplified calculation for 2-segment arm
+        upper_arm = 400  # mm
+        forearm = 400   # mm
+
+        # Convert to radians
+        shoulder_rad = math.radians(shoulder_angle)
+        elbow_rad = math.radians(elbow_angle)
+
+        # Calculate end effector position
+        x = upper_arm * math.cos(shoulder_rad) + forearm * math.cos(shoulder_rad + elbow_rad)
+        y = upper_arm * math.sin(shoulder_rad) + forearm * math.sin(shoulder_rad + elbow_rad)
+
+        reach = math.sqrt(x**2 + y**2)
+        return reach
+
+    def is_position_reachable(self, shoulder_angle, elbow_angle):
+        &quot;&quot;&quot;Check if position is within workspace constraints.&quot;&quot;&quot;
+        if not self.check_joint_limits(&quot;shoulder&quot;, shoulder_angle):
+            return False, &quot;Shoulder angle out of range&quot;
+        if not self.check_joint_limits(&quot;elbow&quot;, elbow_angle):
+            return False, &quot;Elbow angle out of range&quot;
+
+        reach = self.calculate_reach(shoulder_angle, elbow_angle)
+        if reach &gt; self.max_reach:
+            return False, f&quot;Position too far: {reach:.1f}mm &gt; {self.max_reach}mm&quot;
+        if reach &lt; self.min_reach:
+            return False, f&quot;Position too close: {reach:.1f}mm &lt; {self.min_reach}mm&quot;
+
+        return True, f&quot;Position reachable: {reach:.1f}mm&quot;
+
+# Example usage
+arm = RobotArmConstraints()
+result, message = arm.is_position_reachable(45, 90)
+print(f&quot;Target position: {message}&quot;)
+</code></pre>
+</div>
 <h3 id="subsystem-composition-strategies">Subsystem composition strategies<a class="headerlink" href="#subsystem-composition-strategies" title="Permanent link">&para;</a></h3>
 <p>Effective mechatronic systems combine multiple subsystems with clear interfaces and responsibilities:</p>
 <div class="diagram-container" data-container-id="kroki-diagram-1"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-1')">🔍 View Larger</button><div id="kroki-diagram-1" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION" height="634px" preserveAspectRatio="xMaxYMax meet" style="width:1762px;height:634px;background:#FFFFFF;" version="1.1" viewBox="0 0 1762 634" width="1762px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-1"><defs /><g><g class="cluster" data-entity="Mobile Robot System" data-source-line="6" data-uid="ent0002" id="cluster_Mobile Robot System"><path d="M8.5,6 L176.96,6 A3.75,3.75 0 0 1 179.46,8.5 L186.46,28.2969 L1504.5,28.2969 A2.5,2.5 0 0 1 1507,30.7969 L1507,625.37 A2.5,2.5 0 0 1 1504.5,627.87 L8.5,627.87 A2.5,2.5 0 0 1 6,625.37 L6,8.5 A2.5,2.5 0 0 1 8.5,6" fill="none" style="stroke:#000000;stroke-width:1.5;" /><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="186.46" y1="28.2969" y2="28.2969" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="167.46" x="10" y="20.9951">Mobile Robot System</text></g><g class="cluster" data-entity="Nav" data-source-line="7" data-uid="ent0003" id="cluster_Nav"><rect fill="none" height="232.59" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="358" x="1117" y="57" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="85.6338" x="1253.1831" y="71.9951">Navigation</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="86.6387" x="1252.6807" y="88.292">Subsystem</text></g><g class="cluster" data-entity="Mobility" data-source-line="13" data-uid="ent0007" id="cluster_Mobility"><rect fill="none" height="232.59" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="376" x="576" y="57" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="63.7861" x="732.1069" y="71.9951">Mobility</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="86.6387" x="720.6807" y="88.292">Subsystem</text></g><g class="cluster" data-entity="Manip" data-source-line="19" data-uid="ent0011" id="cluster_Manip"><rect fill="none" height="241.28" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="270" x="644" y="354.59" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="103.4551" x="727.2725" y="369.5851">Manipulation</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="86.6387" x="735.6807" y="385.882">Subsystem</text></g><g class="cluster" data-entity="Control" data-source-line="25" data-uid="ent0015" id="cluster_Control"><rect fill="none" height="198.8" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1;" width="498" x="38" y="57" /><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="57.873" x="258.0635" y="71.9951">Control</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="86.6387" x="243.6807" y="88.292">Subsystem</text></g><g class="entity" data-entity="NavSensors" data-source-line="8" data-uid="ent0004" id="entity_NavSensors"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="139.082" x="1160.46" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119.082" x="1170.46" y="138.9951">GPS/IMU Sensors</text></g><g class="entity" data-entity="PathPlan" data-source-line="9" data-uid="ent0005" id="entity_PathPlan"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="116.1406" x="1334.93" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96.1406" x="1344.93" y="138.9951">Path Planning</text></g><g class="entity" data-entity="ObstAvoid" data-source-line="10" data-uid="ent0006" id="entity_ObstAvoid"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158.8857" x="1159.56" y="229.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138.8857" x="1169.56" y="252.2951">Obstacle Avoidance</text></g><g class="entity" data-entity="Motors" data-source-line="14" data-uid="ent0008" id="entity_Motors"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="141.3721" x="619.31" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="121.3721" x="629.31" y="138.9951">Motor Controllers</text></g><g class="entity" data-entity="Encoders" data-source-line="15" data-uid="ent0009" id="entity_Encoders"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="132.8135" x="795.59" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112.8135" x="805.59" y="138.9951">Wheel Encoders</text></g><g class="entity" data-entity="Drive" data-source-line="16" data-uid="ent0010" id="entity_Drive"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="98.6133" x="640.69" y="229.3" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78.6133" x="650.69" y="252.2951">Drive Logic</text></g><g class="entity" data-entity="Arm" data-source-line="20" data-uid="ent0012" id="entity_Arm"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="94.6553" x="687.67" y="413.59" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="74.6553" x="697.67" y="436.5851">Robot Arm</text></g><g class="entity" data-entity="Grip" data-source-line="21" data-uid="ent0013" id="entity_Grip"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="72.6367" x="817.68" y="413.59" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="52.6367" x="827.68" y="436.5851">Gripper</text></g><g class="entity" data-entity="Vision" data-source-line="22" data-uid="ent0014" id="entity_Vision"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="118.7451" x="687.63" y="535.57" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98.7451" x="697.63" y="558.5651">Vision System</text></g><g class="entity" data-entity="MainCtrl" data-source-line="26" data-uid="ent0016" id="entity_MainCtrl"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="127.0439" x="384.48" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="107.0439" x="394.48" y="138.9951">Main Controller</text></g><g class="entity" data-entity="Safety" data-source-line="27" data-uid="ent0017" id="entity_Safety"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="122.4502" x="226.77" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="102.4502" x="236.77" y="138.9951">Safety Monitor</text></g><g class="entity" data-entity="Comm" data-source-line="28" data-uid="ent0018" id="entity_Comm"><rect fill="#F1F1F1" height="36.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="130.3457" x="61.83" y="116" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.3457" x="71.83" y="138.9951">Communication</text></g><g class="entity" data-entity="GMN25" data-source-line="40" data-uid="ent0026" id="entity_GMN25"><path d="M1522.65,388.91 L1522.65,474.5741 L1755.357,474.5741 L1755.357,398.91 L1745.357,388.91 L1522.65,388.91" fill="#FAFAFA" style="stroke:#181818;stroke-width:0.5;" /><path d="M1745.357,388.91 L1745.357,398.91 L1755.357,398.91 L1745.357,388.91" fill="#FAFAFA" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="176.0903" x="1528.65" y="405.9769">Coordination principles:</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="161.6431" x="1528.65" y="421.1097">- Single control authority</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="211.707" x="1528.65" y="436.2425">- Clear communication protocols</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="208.4951" x="1528.65" y="451.3753">- Failure detection and recovery</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="130.292" x="1528.65" y="466.5081">- Modular interfaces</text></g><g class="link" data-entity-1="Nav" data-entity-2="Control" data-source-line="32" data-uid="lnk19" id="link_Nav_Control"><path d="M1116.9363,136.6597 C1115.9953,136.8358 1114.9785,137.0261 1113.8895,137.2297 C1111.7114,137.637 1109.2443,138.0979 1106.5161,138.607 C1095.6034,140.6434 1080.5144,143.4506 1063.0438,146.6788 C1028.1025,153.135 983.635,161.275 944,168.3 C843.56,186.1 730.55,205.47 642.1613,220.4725 C620.0641,224.2231 599.5057,227.7008 581.0673,230.8127 C571.8481,232.3687 563.1589,233.8332 555.0723,235.1947 C551.029,235.8754 547.1363,236.5304 543.4034,237.1582 C541.5369,237.4721 539.7104,237.7792 537.925,238.0793 C537.4786,238.1543 542.9518,237.2345 542.5106,237.3086" fill="none" id="Nav-to-Control" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="536.5936,238.303,546.1321,240.7561,541.5245,237.4743,544.8062,232.8667,536.5936,238.303" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="123.0684" x="857" y="195.3669">Target coordinates</text></g><g class="link" data-entity-1="Control" data-entity-2="Mobility" data-source-line="33" data-uid="lnk20" id="link_Control_Mobility"><path d="M536.0039,164.926 C536.2091,164.8318 536.4142,164.7372 536.6192,164.6421 C537.0293,164.4518 537.439,164.2595 537.8484,164.0653 C541.1232,162.5119 544.3716,160.8375 547.5389,159.105 C553.8734,155.64 559.8831,151.9425 565.1288,148.515 C567.7516,146.8012 570.1834,145.155 572.3692,143.6391 C573.4622,142.8811 574.4936,142.1557 575.4568,141.4707 C575.5771,141.3851 575.6965,141.3001 575.8147,141.2158 C575.8738,141.1736 571.0504,144.6193 571.109,144.5774" fill="none" id="Control-to-Mobility" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="575.9913,141.0898,566.3428,143.0664,571.9227,143.9961,570.993,149.5761,575.9913,141.0898" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="144.6504" x="458" y="195.3669">Movement commands</text></g><g class="link" data-entity-1="Mobility" data-entity-2="Control" data-source-line="35" data-uid="lnk22" id="link_Mobility_Control"><path d="M575.9428,141.5873 C575.826,141.6759 575.7082,141.7652 575.5893,141.8551 C574.6381,142.5743 573.6186,143.3339 572.5371,144.1249 C570.3742,145.707 567.9638,147.4147 565.3575,149.1762 C560.145,152.6994 554.1494,156.4378 547.785,159.8167 C544.6028,161.5062 541.3284,163.1057 538.0137,164.5436 C537.5993,164.7233 537.1843,164.9005 536.7688,165.075 C536.5611,165.1623 541.8988,162.9583 541.6908,163.0443" fill="none" id="Mobility-to-Control" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="536.1452,165.3348,545.9906,165.596,540.7665,163.426,542.9365,158.2019,536.1452,165.3348" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114.9307" x="329" y="195.3669">Position feedback</text></g><g class="link" data-entity-1="Control" data-entity-2="Manip" data-source-line="34" data-uid="lnk21" id="link_Control_Manip"><path d="M485.2891,255.9275 C485.2394,256.0782 485.1893,256.2308 485.1389,256.3853 C484.9372,257.0033 484.7295,257.6521 484.5177,258.3298 C482.8228,263.7516 480.8581,271.0219 479.4763,279.1613 C476.7125,295.44 476.28,315.195 485,330.59 C505.99,367.655 546.7725,392.495 582.78,408.165 C600.7838,416 617.5938,421.5425 630.1391,425.1744 C633.2754,426.0823 636.1452,426.8709 638.7004,427.546 C639.9781,427.8836 641.1771,428.1928 642.2914,428.4743 C642.8486,428.6151 637.5599,427.3093 638.074,427.4364" fill="none" id="Control-to-Manip" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="643.8988,428.8761,636.1215,422.8334,639.0448,427.6763,634.2019,430.5997,643.8988,428.8761" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122.2749" x="486" y="326.6569">Manipulation tasks</text></g><g class="link" data-entity-1="Manip" data-entity-2="Control" data-source-line="36" data-uid="lnk23" id="link_Manip_Control"><path d="M643.9744,379.8691 C643.7804,379.099 643.582,378.3253 643.3788,377.5484 C642.5661,374.4411 641.6785,371.2834 640.7093,368.1006 C638.7708,361.7351 636.5059,355.2695 633.8608,348.9067 C628.5706,336.1813 621.76,323.8675 613,313.59 C608,307.725 577.64,291.8525 548.095,277.2438 C533.3225,269.9394 518.7538,262.9509 507.6606,257.6873 C506.9673,257.3584 506.2876,257.0361 505.6222,256.721 C505.2895,256.5634 504.9604,256.4076 504.635,256.2536 C504.4723,256.1766 509.7343,258.6658 509.5735,258.5897" fill="none" id="Manip-to-Control" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="504.1497,256.024,510.5749,263.4884,508.6695,258.1621,513.9958,256.2567,504.1497,256.024" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74.2866" x="625" y="326.6569">Task status</text></g><g class="link" data-entity-1="Safety" data-entity-2="Control" data-source-line="37" data-uid="lnk24" id="link_Safety_Control"><path d="M237.8,152.68 C212.18,164.35 189.4,180.88 205,199.3 C245.89,247.56 478.2301,246.4922 481.9601,246.4722" fill="none" id="Safety-to-Control" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="487.96,246.44,478.9387,242.4883,482.9601,246.4668,478.9816,250.4882,487.96,246.44" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="105.7583" x="206" y="195.3669">Emergency stop</text></g><g class="link" data-entity-1="Control" data-entity-2="GMN25" data-source-line="40" data-uid="lnk27" id="link_Control_GMN25"><path d="M499.1569,255.8383 C505.7881,260.0884 515.0225,265.7906 525.8925,271.9188 C547.6325,284.175 575.915,298.135 603,305.59 C648.12,318.01 661.43,308.89 708,313.59 C1001.77,343.25 1346.25,389.64 1522.37,414.2" fill="none" id="Control-GMN25" style="stroke:#181818;stroke-width:1;stroke-dasharray:7.0,7.0;" /></g></g></svg></p></div></div>
 <h3 id="coordination-and-communication-patterns">Coordination and communication patterns<a class="headerlink" href="#coordination-and-communication-patterns" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">SubsystemInterface</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;idle&quot;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">error_state</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_state</span><span class="p">}</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Subclasses must implement send_command&quot;</span><span class="p">)</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">emergency_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;emergency_stop&quot;</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: Emergency stop activated&quot;</span><span class="p">)</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="k">class</span><span class="w"> </span><span class="nc">NavigationSubsystem</span><span class="p">(</span><span class="n">SubsystemInterface</span><span class="p">):</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Navigation&quot;</span><span class="p">)</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;goto&quot;</span><span class="p">:</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;coordinates&quot;</span><span class="p">]</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;navigating&quot;</span>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Navigating to </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">target_position</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>        <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;stop&quot;</span><span class="p">:</span>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;idle&quot;</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>            <span class="k">return</span> <span class="s2">&quot;Navigation stopped&quot;</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>        <span class="c1"># Check if target reached</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span><span class="p">:</span>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>            <span class="n">distance</span> <span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_position</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">:</span>  <span class="c1"># Close enough</span>
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;target_reached&quot;</span>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="k">class</span><span class="w"> </span><span class="nc">MobilitySubsystem</span><span class="p">(</span><span class="n">SubsystemInterface</span><span class="p">):</span>
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Mobility&quot;</span><span class="p">)</span>
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">wheel_speeds</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>        <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;move&quot;</span><span class="p">:</span>
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wheel_speeds</span> <span class="o">=</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;speeds&quot;</span><span class="p">]</span>
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;moving&quot;</span>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Moving: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheel_speeds</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>        <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;stop&quot;</span><span class="p">:</span>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">wheel_speeds</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;idle&quot;</span>
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>            <span class="k">return</span> <span class="s2">&quot;Mobility stopped&quot;</span>
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="k">class</span><span class="w"> </span><span class="nc">SystemCoordinator</span><span class="p">:</span>
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_state</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">register_subsystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subsystem</span><span class="p">):</span>
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="p">[</span><span class="n">subsystem</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">subsystem</span>
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">coordinate_movement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_x</span><span class="p">,</span> <span class="n">target_y</span><span class="p">):</span>
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Coordinate navigation and mobility subsystems.&quot;&quot;&quot;</span>
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_state</span><span class="p">:</span>
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>            <span class="k">return</span> <span class="s2">&quot;System in emergency state&quot;</span>
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="n">nav</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Navigation&quot;</span><span class="p">)</span>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>        <span class="n">mobility</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Mobility&quot;</span><span class="p">)</span>
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">nav</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">mobility</span><span class="p">:</span>
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>            <span class="k">return</span> <span class="s2">&quot;Required subsystems not available&quot;</span>
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>        <span class="c1"># Send navigation command</span>
-</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>        <span class="n">nav_result</span> <span class="o">=</span> <span class="n">nav</span><span class="o">.</span><span class="n">send_command</span><span class="p">({</span>
-</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;goto&quot;</span><span class="p">,</span>
-</span><span id="__span-2-77"><a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>            <span class="s2">&quot;coordinates&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">target_x</span><span class="p">,</span> <span class="n">target_y</span><span class="p">)</span>
-</span><span id="__span-2-78"><a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a>        <span class="p">})</span>
-</span><span id="__span-2-79"><a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>
-</span><span id="__span-2-80"><a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>        <span class="c1"># Calculate initial movement</span>
-</span><span id="__span-2-81"><a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>        <span class="n">mobility_result</span> <span class="o">=</span> <span class="n">mobility</span><span class="o">.</span><span class="n">send_command</span><span class="p">({</span>
-</span><span id="__span-2-82"><a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a>            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;move&quot;</span><span class="p">,</span>
-</span><span id="__span-2-83"><a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>            <span class="s2">&quot;speeds&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;left&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>  <span class="c1"># Forward movement</span>
-</span><span id="__span-2-84"><a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>        <span class="p">})</span>
-</span><span id="__span-2-85"><a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>
-</span><span id="__span-2-86"><a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Coordination started: </span><span class="si">{</span><span class="n">nav_result</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mobility_result</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-2-87"><a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>
-</span><span id="__span-2-88"><a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">emergency_stop_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-89"><a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop all subsystems immediately.&quot;&quot;&quot;</span>
-</span><span id="__span-2-90"><a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_state</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>        <span class="k">for</span> <span class="n">subsystem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-</span><span id="__span-2-92"><a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a>            <span class="n">subsystem</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">()</span>
-</span><span id="__span-2-93"><a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>        <span class="k">return</span> <span class="s2">&quot;All subsystems stopped&quot;</span>
-</span><span id="__span-2-94"><a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>
-</span><span id="__span-2-95"><a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_system_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-96"><a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get status of all subsystems.&quot;&quot;&quot;</span>
-</span><span id="__span-2-97"><a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a>        <span class="n">status</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;emergency&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_state</span><span class="p">,</span> <span class="s2">&quot;subsystems&quot;</span><span class="p">:</span> <span class="p">{}}</span>
-</span><span id="__span-2-98"><a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">subsystem</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-2-99"><a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a>            <span class="n">status</span><span class="p">[</span><span class="s2">&quot;subsystems&quot;</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">subsystem</span><span class="o">.</span><span class="n">get_status</span><span class="p">()</span>
-</span><span id="__span-2-100"><a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>        <span class="k">return</span> <span class="n">status</span>
-</span><span id="__span-2-101"><a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>
-</span><span id="__span-2-102"><a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a><span class="c1"># Example usage</span>
-</span><span id="__span-2-103"><a id="__codelineno-2-103" name="__codelineno-2-103" href="#__codelineno-2-103"></a><span class="n">coordinator</span> <span class="o">=</span> <span class="n">SystemCoordinator</span><span class="p">()</span>
-</span><span id="__span-2-104"><a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a><span class="n">coordinator</span><span class="o">.</span><span class="n">register_subsystem</span><span class="p">(</span><span class="n">NavigationSubsystem</span><span class="p">())</span>
-</span><span id="__span-2-105"><a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a><span class="n">coordinator</span><span class="o">.</span><span class="n">register_subsystem</span><span class="p">(</span><span class="n">MobilitySubsystem</span><span class="p">())</span>
-</span><span id="__span-2-106"><a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a>
-</span><span id="__span-2-107"><a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== System Coordination Example ===&quot;</span><span class="p">)</span>
-</span><span id="__span-2-108"><a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a><span class="n">result</span> <span class="o">=</span> <span class="n">coordinator</span><span class="o">.</span><span class="n">coordinate_movement</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
-</span><span id="__span-2-109"><a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Movement command: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-110"><a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>
-</span><span id="__span-2-111"><a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a><span class="n">status</span> <span class="o">=</span> <span class="n">coordinator</span><span class="o">.</span><span class="n">get_system_status</span><span class="p">()</span>
-</span><span id="__span-2-112"><a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;System status: </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class SubsystemInterface:
+    def __init__(self, name):
+        self.name = name
+        self.status = &quot;idle&quot;
+        self.error_state = None
+
+    def get_status(self):
+        return {&quot;name&quot;: self.name, &quot;status&quot;: self.status, &quot;error&quot;: self.error_state}
+
+    def send_command(self, command):
+        raise NotImplementedError(&quot;Subclasses must implement send_command&quot;)
+
+    def emergency_stop(self):
+        self.status = &quot;emergency_stop&quot;
+        print(f&quot;{self.name}: Emergency stop activated&quot;)
+
+class NavigationSubsystem(SubsystemInterface):
+    def __init__(self):
+        super().__init__(&quot;Navigation&quot;)
+        self.current_position = (0, 0)
+        self.target_position = None
+
+    def send_command(self, command):
+        if command[&quot;type&quot;] == &quot;goto&quot;:
+            self.target_position = command[&quot;coordinates&quot;]
+            self.status = &quot;navigating&quot;
+            return f&quot;Navigating to {self.target_position}&quot;
+        elif command[&quot;type&quot;] == &quot;stop&quot;:
+            self.status = &quot;idle&quot;
+            return &quot;Navigation stopped&quot;
+
+    def update_position(self, x, y):
+        self.current_position = (x, y)
+        # Check if target reached
+        if self.target_position:
+            distance = ((x - self.target_position[0])**2 + (y - self.target_position[1])**2)**0.5
+            if distance &lt; 0.1:  # Close enough
+                self.status = &quot;target_reached&quot;
+
+class MobilitySubsystem(SubsystemInterface):
+    def __init__(self):
+        super().__init__(&quot;Mobility&quot;)
+        self.wheel_speeds = {&quot;left&quot;: 0, &quot;right&quot;: 0}
+
+    def send_command(self, command):
+        if command[&quot;type&quot;] == &quot;move&quot;:
+            self.wheel_speeds = command[&quot;speeds&quot;]
+            self.status = &quot;moving&quot;
+            return f&quot;Moving: {self.wheel_speeds}&quot;
+        elif command[&quot;type&quot;] == &quot;stop&quot;:
+            self.wheel_speeds = {&quot;left&quot;: 0, &quot;right&quot;: 0}
+            self.status = &quot;idle&quot;
+            return &quot;Mobility stopped&quot;
+
+class SystemCoordinator:
+    def __init__(self):
+        self.subsystems = {}
+        self.emergency_state = False
+
+    def register_subsystem(self, subsystem):
+        self.subsystems[subsystem.name] = subsystem
+
+    def coordinate_movement(self, target_x, target_y):
+        &quot;&quot;&quot;Coordinate navigation and mobility subsystems.&quot;&quot;&quot;
+        if self.emergency_state:
+            return &quot;System in emergency state&quot;
+
+        nav = self.subsystems.get(&quot;Navigation&quot;)
+        mobility = self.subsystems.get(&quot;Mobility&quot;)
+
+        if not nav or not mobility:
+            return &quot;Required subsystems not available&quot;
+
+        # Send navigation command
+        nav_result = nav.send_command({
+            &quot;type&quot;: &quot;goto&quot;,
+            &quot;coordinates&quot;: (target_x, target_y)
+        })
+
+        # Calculate initial movement
+        mobility_result = mobility.send_command({
+            &quot;type&quot;: &quot;move&quot;,
+            &quot;speeds&quot;: {&quot;left&quot;: 50, &quot;right&quot;: 50}  # Forward movement
+        })
+
+        return f&quot;Coordination started: {nav_result}, {mobility_result}&quot;
+
+    def emergency_stop_all(self):
+        &quot;&quot;&quot;Stop all subsystems immediately.&quot;&quot;&quot;
+        self.emergency_state = True
+        for subsystem in self.subsystems.values():
+            subsystem.emergency_stop()
+        return &quot;All subsystems stopped&quot;
+
+    def get_system_status(self):
+        &quot;&quot;&quot;Get status of all subsystems.&quot;&quot;&quot;
+        status = {&quot;emergency&quot;: self.emergency_state, &quot;subsystems&quot;: {}}
+        for name, subsystem in self.subsystems.items():
+            status[&quot;subsystems&quot;][name] = subsystem.get_status()
+        return status
+
+# Example usage
+coordinator = SystemCoordinator()
+coordinator.register_subsystem(NavigationSubsystem())
+coordinator.register_subsystem(MobilitySubsystem())
+
+print(&quot;=== System Coordination Example ===&quot;)
+result = coordinator.coordinate_movement(5.0, 3.0)
+print(f&quot;Movement command: {result}&quot;)
+
+status = coordinator.get_system_status()
+print(f&quot;System status: {status}&quot;)
+</code></pre>
+</div>
 <h3 id="mechanical-interference-and-collision-avoidance">Mechanical interference and collision avoidance<a class="headerlink" href="#mechanical-interference-and-collision-avoidance" title="Permanent link">&para;</a></h3>
 <p>When composing subsystems, it&rsquo;s crucial to prevent mechanical interference:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">CollisionChecker</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="c1"># Define collision zones for different subsystems</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">collision_zones</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="s2">&quot;robot_arm&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                <span class="s2">&quot;base_radius&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>  <span class="c1"># mm</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                <span class="s2">&quot;max_reach&quot;</span><span class="p">:</span> <span class="mi">800</span><span class="p">,</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                <span class="s2">&quot;height_range&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="p">},</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="s2">&quot;mobile_base&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>  <span class="c1"># mm</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>                <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">200</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            <span class="p">}</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="p">}</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_arm_base_collision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arm_position</span><span class="p">,</span> <span class="n">base_position</span><span class="p">):</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if robot arm conflicts with mobile base movement.&quot;&quot;&quot;</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="n">arm_x</span><span class="p">,</span> <span class="n">arm_y</span> <span class="o">=</span> <span class="n">arm_position</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="n">base_x</span><span class="p">,</span> <span class="n">base_y</span> <span class="o">=</span> <span class="n">base_position</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="c1"># Calculate distance between arm and base</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="n">distance</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">arm_x</span> <span class="o">-</span> <span class="n">base_x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">arm_y</span> <span class="o">-</span> <span class="n">base_y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>        <span class="c1"># Check if arm is within base collision zone</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="n">base_half_length</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">collision_zones</span><span class="p">[</span><span class="s2">&quot;mobile_base&quot;</span><span class="p">][</span><span class="s2">&quot;length&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">base_half_length</span> <span class="o">+</span> <span class="mi">100</span><span class="p">:</span>  <span class="c1"># 100mm safety margin</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Arm too close to mobile base&quot;</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;No collision detected&quot;</span>
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_safe_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return safe operating zones for each subsystem.&quot;&quot;&quot;</span>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>            <span class="s2">&quot;arm_safe_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;Outside mobile base + 100mm margin&quot;</span><span class="p">,</span>
-</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>            <span class="s2">&quot;base_safe_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;Clear of arm swing radius + margin&quot;</span><span class="p">,</span>
-</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>            <span class="s2">&quot;coordination_required&quot;</span><span class="p">:</span> <span class="s2">&quot;When both systems operate simultaneously&quot;</span>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="p">}</span>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
-</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="c1"># Example usage</span>
-</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="n">checker</span> <span class="o">=</span> <span class="n">CollisionChecker</span><span class="p">()</span>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="n">safe</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">checker</span><span class="o">.</span><span class="n">check_arm_base_collision</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collision check: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class CollisionChecker:
+    def __init__(self):
+        # Define collision zones for different subsystems
+        self.collision_zones = {
+            &quot;robot_arm&quot;: {
+                &quot;base_radius&quot;: 200,  # mm
+                &quot;max_reach&quot;: 800,
+                &quot;height_range&quot;: (0, 1000)
+            },
+            &quot;mobile_base&quot;: {
+                &quot;length&quot;: 600,  # mm
+                &quot;width&quot;: 400,
+                &quot;height&quot;: 200
+            }
+        }
+
+    def check_arm_base_collision(self, arm_position, base_position):
+        &quot;&quot;&quot;Check if robot arm conflicts with mobile base movement.&quot;&quot;&quot;
+        arm_x, arm_y = arm_position
+        base_x, base_y = base_position
+
+        # Calculate distance between arm and base
+        distance = math.sqrt((arm_x - base_x)**2 + (arm_y - base_y)**2)
+
+        # Check if arm is within base collision zone
+        base_half_length = self.collision_zones[&quot;mobile_base&quot;][&quot;length&quot;] / 2
+        if distance &lt; base_half_length + 100:  # 100mm safety margin
+            return False, &quot;Arm too close to mobile base&quot;
+
+        return True, &quot;No collision detected&quot;
+
+    def get_safe_zones(self):
+        &quot;&quot;&quot;Return safe operating zones for each subsystem.&quot;&quot;&quot;
+        return {
+            &quot;arm_safe_zone&quot;: &quot;Outside mobile base + 100mm margin&quot;,
+            &quot;base_safe_zone&quot;: &quot;Clear of arm swing radius + margin&quot;,
+            &quot;coordination_required&quot;: &quot;When both systems operate simultaneously&quot;
+        }
+
+# Example usage
+checker = CollisionChecker()
+safe, message = checker.check_arm_base_collision((300, 200), (0, 0))
+print(f&quot;Collision check: {message}&quot;)
+</code></pre>
+</div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
 <h3 id="exercise-1-degrees-of-freedom-analysis">Exercise 1: Degrees of freedom analysis<a class="headerlink" href="#exercise-1-degrees-of-freedom-analysis" title="Permanent link">&para;</a></h3>
 <p>Analyze the degrees of freedom for a 3-axis CNC machine with X, Y, and Z movement capabilities.</p>
 <details class="success">
 <summary>Exercise 1: Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">CNCMachine</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">axes</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>            <span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>  <span class="c1"># mm</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>  <span class="c1"># mm</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>   <span class="c1"># mm</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">total_dof</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">)</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">describe_dof</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CNC Machine has </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">total_dof</span><span class="si">}</span><span class="s2"> degrees of freedom:&quot;</span><span class="p">)</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="k">for</span> <span class="n">axis</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="n">range_min</span><span class="p">,</span> <span class="n">range_max</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;range&quot;</span><span class="p">]</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2">-axis: </span><span class="si">{</span><span class="n">range_min</span><span class="si">}</span><span class="s2">mm to </span><span class="si">{</span><span class="n">range_max</span><span class="si">}</span><span class="s2">mm&quot;</span><span class="p">)</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Motion capabilities:&quot;</span><span class="p">)</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Point-to-point positioning in 3D space&quot;</span><span class="p">)</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Linear interpolation between points&quot;</span><span class="p">)</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Complex 3D toolpaths&quot;</span><span class="p">)</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_position_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="n">positions</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">z</span><span class="p">}</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="k">for</span> <span class="n">axis</span><span class="p">,</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">positions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="n">range_min</span><span class="p">,</span> <span class="n">range_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="n">axis</span><span class="p">][</span><span class="s2">&quot;range&quot;</span><span class="p">]</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">range_min</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;=</span> <span class="n">range_max</span><span class="p">):</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>                <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">axis</span><span class="si">}</span><span class="s2"> position </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2"> outside range </span><span class="si">{</span><span class="n">range_min</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">range_max</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Position within workspace&quot;</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="n">cnc</span> <span class="o">=</span> <span class="n">CNCMachine</span><span class="p">()</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="n">cnc</span><span class="o">.</span><span class="n">describe_dof</span><span class="p">()</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class CNCMachine:
+    def __init__(self):
+        self.axes = {
+            &quot;X&quot;: {&quot;range&quot;: (0, 300), &quot;current&quot;: 0},  # mm
+            &quot;Y&quot;: {&quot;range&quot;: (0, 200), &quot;current&quot;: 0},  # mm
+            &quot;Z&quot;: {&quot;range&quot;: (0, 100), &quot;current&quot;: 0}   # mm
+        }
+        self.total_dof = len(self.axes)
+
+    def describe_dof(self):
+        print(f&quot;CNC Machine has {self.total_dof} degrees of freedom:&quot;)
+        for axis, config in self.axes.items():
+            range_min, range_max = config[&quot;range&quot;]
+            print(f&quot;  {axis}-axis: {range_min}mm to {range_max}mm&quot;)
+
+        print(&quot;\nMotion capabilities:&quot;)
+        print(&quot;  - Point-to-point positioning in 3D space&quot;)
+        print(&quot;  - Linear interpolation between points&quot;)
+        print(&quot;  - Complex 3D toolpaths&quot;)
+
+    def check_position_valid(self, x, y, z):
+        positions = {&quot;X&quot;: x, &quot;Y&quot;: y, &quot;Z&quot;: z}
+        for axis, pos in positions.items():
+            range_min, range_max = self.axes[axis][&quot;range&quot;]
+            if not (range_min &lt;= pos &lt;= range_max):
+                return False, f&quot;{axis} position {pos} outside range {range_min}-{range_max}&quot;
+        return True, &quot;Position within workspace&quot;
+
+cnc = CNCMachine()
+cnc.describe_dof()
+</code></pre>
+</div>
 <p>Output shows 3 DOF system with independent linear axes, enabling full 3D positioning within workspace.</p>
 </details>
 <h3 id="exercise-2-subsystem-composition">Exercise 2: Subsystem composition<a class="headerlink" href="#exercise-2-subsystem-composition" title="Permanent link">&para;</a></h3>
 <p>Design a pick-and-place robot system with separate vision, arm, and gripper subsystems.</p>
 <details class="success">
 <summary>Exercise 2: Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">VisionSubsystem</span><span class="p">(</span><span class="n">SubsystemInterface</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Vision&quot;</span><span class="p">)</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">detected_objects</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;scan&quot;</span><span class="p">:</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="c1"># Simulate object detection</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">detected_objects</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>                <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;cube&quot;</span><span class="p">},</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>                <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;cylinder&quot;</span><span class="p">}</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="p">]</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;objects_detected&quot;</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">detected_objects</span><span class="p">)</span><span class="si">}</span><span class="s2"> objects&quot;</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="k">class</span><span class="w"> </span><span class="nc">GripperSubsystem</span><span class="p">(</span><span class="n">SubsystemInterface</span><span class="p">):</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;Gripper&quot;</span><span class="p">)</span>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">holding_object</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">send_command</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        <span class="k">if</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;grip&quot;</span><span class="p">:</span>
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">holding_object</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;gripping&quot;</span>
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>            <span class="k">return</span> <span class="s2">&quot;Object gripped&quot;</span>
-</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>        <span class="k">elif</span> <span class="n">command</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;release&quot;</span><span class="p">:</span>
-</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">is_open</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">holding_object</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;released&quot;</span>
-</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>            <span class="k">return</span> <span class="s2">&quot;Object released&quot;</span>
-</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>
-</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="k">class</span><span class="w"> </span><span class="nc">PickPlaceCoordinator</span><span class="p">(</span><span class="n">SystemCoordinator</span><span class="p">):</span>
-</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">execute_pick_and_place</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Coordinate vision, arm, and gripper for pick-and-place task.&quot;&quot;&quot;</span>
-</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>        <span class="n">vision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Vision&quot;</span><span class="p">)</span>
-</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>        <span class="n">gripper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsystems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Gripper&quot;</span><span class="p">)</span>
-</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>
-</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>        <span class="c1"># Step 1: Vision scan</span>
-</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>        <span class="n">vision</span><span class="o">.</span><span class="n">send_command</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;scan&quot;</span><span class="p">})</span>
-</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>        <span class="n">objects</span> <span class="o">=</span> <span class="n">vision</span><span class="o">.</span><span class="n">detected_objects</span>
-</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>
-</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">objects</span><span class="p">:</span>
-</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>            <span class="k">return</span> <span class="s2">&quot;No objects detected&quot;</span>
-</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>
-</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>        <span class="c1"># Step 2: Pick first object</span>
-</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>        <span class="n">target</span> <span class="o">=</span> <span class="n">objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>        <span class="n">gripper</span><span class="o">.</span><span class="n">send_command</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;grip&quot;</span><span class="p">})</span>
-</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>
-</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>        <span class="c1"># Step 3: Move to place location (simplified)</span>
-</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>        <span class="n">place_location</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>
-</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>        <span class="c1"># Step 4: Release object</span>
-</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>        <span class="n">gripper</span><span class="o">.</span><span class="n">send_command</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;release&quot;</span><span class="p">})</span>
-</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>
-</span><span id="__span-5-57"><a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Pick and place completed: </span><span class="si">{</span><span class="n">target</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> moved to </span><span class="si">{</span><span class="n">place_location</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-5-58"><a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a>
-</span><span id="__span-5-59"><a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a><span class="c1"># Usage example</span>
-</span><span id="__span-5-60"><a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a><span class="n">coordinator</span> <span class="o">=</span> <span class="n">PickPlaceCoordinator</span><span class="p">()</span>
-</span><span id="__span-5-61"><a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a><span class="n">coordinator</span><span class="o">.</span><span class="n">register_subsystem</span><span class="p">(</span><span class="n">VisionSubsystem</span><span class="p">())</span>
-</span><span id="__span-5-62"><a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a><span class="n">coordinator</span><span class="o">.</span><span class="n">register_subsystem</span><span class="p">(</span><span class="n">GripperSubsystem</span><span class="p">())</span>
-</span><span id="__span-5-63"><a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a>
-</span><span id="__span-5-64"><a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a><span class="n">result</span> <span class="o">=</span> <span class="n">coordinator</span><span class="o">.</span><span class="n">execute_pick_and_place</span><span class="p">()</span>
-</span><span id="__span-5-65"><a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Task result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class VisionSubsystem(SubsystemInterface):
+    def __init__(self):
+        super().__init__(&quot;Vision&quot;)
+        self.detected_objects = []
+
+    def send_command(self, command):
+        if command[&quot;type&quot;] == &quot;scan&quot;:
+            # Simulate object detection
+            self.detected_objects = [
+                {&quot;id&quot;: 1, &quot;position&quot;: (100, 150), &quot;type&quot;: &quot;cube&quot;},
+                {&quot;id&quot;: 2, &quot;position&quot;: (200, 300), &quot;type&quot;: &quot;cylinder&quot;}
+            ]
+            self.status = &quot;objects_detected&quot;
+            return f&quot;Found {len(self.detected_objects)} objects&quot;
+
+class GripperSubsystem(SubsystemInterface):
+    def __init__(self):
+        super().__init__(&quot;Gripper&quot;)
+        self.is_open = True
+        self.holding_object = False
+
+    def send_command(self, command):
+        if command[&quot;type&quot;] == &quot;grip&quot;:
+            self.is_open = False
+            self.holding_object = True
+            self.status = &quot;gripping&quot;
+            return &quot;Object gripped&quot;
+        elif command[&quot;type&quot;] == &quot;release&quot;:
+            self.is_open = True
+            self.holding_object = False
+            self.status = &quot;released&quot;
+            return &quot;Object released&quot;
+
+class PickPlaceCoordinator(SystemCoordinator):
+    def execute_pick_and_place(self):
+        &quot;&quot;&quot;Coordinate vision, arm, and gripper for pick-and-place task.&quot;&quot;&quot;
+        vision = self.subsystems.get(&quot;Vision&quot;)
+        gripper = self.subsystems.get(&quot;Gripper&quot;)
+
+        # Step 1: Vision scan
+        vision.send_command({&quot;type&quot;: &quot;scan&quot;})
+        objects = vision.detected_objects
+
+        if not objects:
+            return &quot;No objects detected&quot;
+
+        # Step 2: Pick first object
+        target = objects[0]
+        gripper.send_command({&quot;type&quot;: &quot;grip&quot;})
+
+        # Step 3: Move to place location (simplified)
+        place_location = (400, 400)
+
+        # Step 4: Release object
+        gripper.send_command({&quot;type&quot;: &quot;release&quot;})
+
+        return f&quot;Pick and place completed: {target[&#x27;type&#x27;]} moved to {place_location}&quot;
+
+# Usage example
+coordinator = PickPlaceCoordinator()
+coordinator.register_subsystem(VisionSubsystem())
+coordinator.register_subsystem(GripperSubsystem())
+
+result = coordinator.execute_pick_and_place()
+print(f&quot;Task result: {result}&quot;)
+</code></pre>
+</div>
 <p>This demonstrates coordinated operation between subsystems with clear command flow and status tracking.</p>
 </details>
 <h3 id="exercise-3-collision-avoidance">Exercise 3: Collision avoidance<a class="headerlink" href="#exercise-3-collision-avoidance" title="Permanent link">&para;</a></h3>
 <p>Implement collision checking for a dual-arm robot system where both arms share a workspace.</p>
 <details class="success">
 <summary>Exercise 3: Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DualArmCollisionChecker</span><span class="p">:</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">arm_configs</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>            <span class="s2">&quot;left_arm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base_position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;reach&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">},</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>            <span class="s2">&quot;right_arm&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;base_position&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;reach&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">}</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="p">}</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">safety_margin</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># mm</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_arm_collision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">left_pos</span><span class="p">,</span> <span class="n">right_pos</span><span class="p">):</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if two arm end effectors are too close.&quot;&quot;&quot;</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="n">distance</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">left_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">right_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> 
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>                           <span class="p">(</span><span class="n">left_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">right_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_margin</span><span class="p">:</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Arms too close: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">mm &lt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">safety_margin</span><span class="si">}</span><span class="s2">mm&quot;</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Safe distance: </span><span class="si">{</span><span class="n">distance</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">mm&quot;</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_safe_workspace_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Define safe operating zones for each arm.&quot;&quot;&quot;</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>            <span class="s2">&quot;left_arm_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;X &lt; -50, avoid right workspace&quot;</span><span class="p">,</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>            <span class="s2">&quot;right_arm_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;X &gt; 50, avoid left workspace&quot;</span><span class="p">,</span> 
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>            <span class="s2">&quot;shared_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;-50 ≤ X ≤ 50, coordination required&quot;</span><span class="p">,</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>            <span class="s2">&quot;safety_protocols&quot;</span><span class="p">:</span> <span class="p">[</span>
-</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>                <span class="s2">&quot;Coordinate movement in shared zone&quot;</span><span class="p">,</span>
-</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>                <span class="s2">&quot;Monitor minimum separation distance&quot;</span><span class="p">,</span>
-</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>                <span class="s2">&quot;Emergency stop if collision imminent&quot;</span>
-</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>            <span class="p">]</span>
-</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>        <span class="p">}</span>
-</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
-</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="n">checker</span> <span class="o">=</span> <span class="n">DualArmCollisionChecker</span><span class="p">()</span>
-</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="n">safe</span><span class="p">,</span> <span class="n">message</span> <span class="o">=</span> <span class="n">checker</span><span class="o">.</span><span class="n">check_arm_collision</span><span class="p">((</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collision check: </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>
-</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="n">zones</span> <span class="o">=</span> <span class="n">checker</span><span class="o">.</span><span class="n">get_safe_workspace_zones</span><span class="p">()</span>
-</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Safe zones:&quot;</span><span class="p">,</span> <span class="n">zones</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class DualArmCollisionChecker:
+    def __init__(self):
+        self.arm_configs = {
+            &quot;left_arm&quot;: {&quot;base_position&quot;: (-300, 0), &quot;reach&quot;: 600},
+            &quot;right_arm&quot;: {&quot;base_position&quot;: (300, 0), &quot;reach&quot;: 600}
+        }
+        self.safety_margin = 100  # mm
+
+    def check_arm_collision(self, left_pos, right_pos):
+        &quot;&quot;&quot;Check if two arm end effectors are too close.&quot;&quot;&quot;
+        distance = math.sqrt((left_pos[0] - right_pos[0])**2 + 
+                           (left_pos[1] - right_pos[1])**2)
+
+        if distance &lt; self.safety_margin:
+            return False, f&quot;Arms too close: {distance:.1f}mm &lt; {self.safety_margin}mm&quot;
+        return True, f&quot;Safe distance: {distance:.1f}mm&quot;
+
+    def get_safe_workspace_zones(self):
+        &quot;&quot;&quot;Define safe operating zones for each arm.&quot;&quot;&quot;
+        return {
+            &quot;left_arm_zone&quot;: &quot;X &lt; -50, avoid right workspace&quot;,
+            &quot;right_arm_zone&quot;: &quot;X &gt; 50, avoid left workspace&quot;, 
+            &quot;shared_zone&quot;: &quot;-50 ≤ X ≤ 50, coordination required&quot;,
+            &quot;safety_protocols&quot;: [
+                &quot;Coordinate movement in shared zone&quot;,
+                &quot;Monitor minimum separation distance&quot;,
+                &quot;Emergency stop if collision imminent&quot;
+            ]
+        }
+
+checker = DualArmCollisionChecker()
+safe, message = checker.check_arm_collision((-100, 200), (150, 200))
+print(f&quot;Collision check: {message}&quot;)
+
+zones = checker.get_safe_workspace_zones()
+print(&quot;Safe zones:&quot;, zones)
+</code></pre>
+</div>
 <p>This ensures both arms can operate safely without mechanical interference.</p>
 </details>
 <h2 id="recap">Recap<a class="headerlink" href="#recap" title="Permanent link">&para;</a></h2>
@@ -2008,7 +2022,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2025 23:34:36 UTC">October 7, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

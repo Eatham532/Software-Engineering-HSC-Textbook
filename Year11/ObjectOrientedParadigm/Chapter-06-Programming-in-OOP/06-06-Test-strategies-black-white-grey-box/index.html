@@ -1835,180 +1835,186 @@
 </ul>
 <h3 id="example-testing-a-grade-calculator-black-box-approach">Example: Testing a Grade Calculator (Black Box Approach)<a class="headerlink" href="#example-testing-a-grade-calculator-black-box-approach" title="Permanent link">&para;</a></h3>
 <p><strong>Specification</strong>: &ldquo;The grade calculator should convert numerical scores (0-100) to letter grades using the standard scale: A (90-100), B (80-89), C (70-79), D (60-69), F (0-59). Invalid inputs should raise appropriate errors.&rdquo;</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">GradeCalculator</span><span class="p">:</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts numerical scores to letter grades.&quot;&quot;&quot;</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">        Convert numerical score to letter grade.</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">            score (float): Numerical score between 0 and 100</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">            str: Letter grade (A, B, C, D, or F)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">        Raises:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">            ValueError: If score is not between 0 and 100</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be a number&quot;</span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be between 0 and 100&quot;</span><span class="p">)</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestGradeCalculatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box tests based on specification only.&quot;&quot;&quot;</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">GradeCalculator</span><span class="p">()</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_a_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test A grade range (90-100) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="c1"># Test boundary values and middle values</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">95</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="c1"># Upper boundary</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_b_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test B grade range (80-89) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">89</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_c_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test C grade range (70-79) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">70</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">75</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">79</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_d_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test D grade range (60-69) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">65</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
-</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">69</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
-</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>
-</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_f_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test F grade range (0-59) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>   <span class="c1"># Lower boundary</span>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
-</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">59</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
-</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_inputs_based_on_specification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test error handling based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>        <span class="c1"># Negative numbers should raise error</span>
-</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>
-</span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>        <span class="c1"># Numbers above 100 should raise error</span>
-</span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
-</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>
-</span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>        <span class="c1"># Non-numeric inputs should raise error</span>
-</span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="s2">&quot;85&quot;</span><span class="p">)</span>
-</span><span id="__span-0-87"><a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>
-</span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_decimal_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test decimal scores based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">89.5</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">79.9</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">59.9</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">import unittest
+
+class GradeCalculator:
+    &quot;&quot;&quot;Converts numerical scores to letter grades.&quot;&quot;&quot;
+
+    def calculate_grade(self, score):
+        &quot;&quot;&quot;
+        Convert numerical score to letter grade.
+
+        Args:
+            score (float): Numerical score between 0 and 100
+
+        Returns:
+            str: Letter grade (A, B, C, D, or F)
+
+        Raises:
+            ValueError: If score is not between 0 and 100
+        &quot;&quot;&quot;
+        if not isinstance(score, (int, float)):
+            raise ValueError(&quot;Score must be a number&quot;)
+
+        if score &lt; 0 or score &gt; 100:
+            raise ValueError(&quot;Score must be between 0 and 100&quot;)
+
+        if score &gt;= 90:
+            return &quot;A&quot;
+        elif score &gt;= 80:
+            return &quot;B&quot;
+        elif score &gt;= 70:
+            return &quot;C&quot;
+        elif score &gt;= 60:
+            return &quot;D&quot;
+        else:
+            return &quot;F&quot;
+
+
+class TestGradeCalculatorBlackBox(unittest.TestCase):
+    &quot;&quot;&quot;Black box tests based on specification only.&quot;&quot;&quot;
+
+    def setUp(self):
+        self.calculator = GradeCalculator()
+
+    def test_a_grade_range(self):
+        &quot;&quot;&quot;Test A grade range (90-100) based on specification.&quot;&quot;&quot;
+        # Test boundary values and middle values
+        self.assertEqual(self.calculator.calculate_grade(90), &quot;A&quot;)  # Lower boundary
+        self.assertEqual(self.calculator.calculate_grade(95), &quot;A&quot;)  # Middle value
+        self.assertEqual(self.calculator.calculate_grade(100), &quot;A&quot;) # Upper boundary
+
+    def test_b_grade_range(self):
+        &quot;&quot;&quot;Test B grade range (80-89) based on specification.&quot;&quot;&quot;
+        self.assertEqual(self.calculator.calculate_grade(80), &quot;B&quot;)  # Lower boundary
+        self.assertEqual(self.calculator.calculate_grade(85), &quot;B&quot;)  # Middle value
+        self.assertEqual(self.calculator.calculate_grade(89), &quot;B&quot;)  # Upper boundary
+
+    def test_c_grade_range(self):
+        &quot;&quot;&quot;Test C grade range (70-79) based on specification.&quot;&quot;&quot;
+        self.assertEqual(self.calculator.calculate_grade(70), &quot;C&quot;)
+        self.assertEqual(self.calculator.calculate_grade(75), &quot;C&quot;)
+        self.assertEqual(self.calculator.calculate_grade(79), &quot;C&quot;)
+
+    def test_d_grade_range(self):
+        &quot;&quot;&quot;Test D grade range (60-69) based on specification.&quot;&quot;&quot;
+        self.assertEqual(self.calculator.calculate_grade(60), &quot;D&quot;)
+        self.assertEqual(self.calculator.calculate_grade(65), &quot;D&quot;)
+        self.assertEqual(self.calculator.calculate_grade(69), &quot;D&quot;)
+
+    def test_f_grade_range(self):
+        &quot;&quot;&quot;Test F grade range (0-59) based on specification.&quot;&quot;&quot;
+        self.assertEqual(self.calculator.calculate_grade(0), &quot;F&quot;)   # Lower boundary
+        self.assertEqual(self.calculator.calculate_grade(30), &quot;F&quot;)  # Middle value
+        self.assertEqual(self.calculator.calculate_grade(59), &quot;F&quot;)  # Upper boundary
+
+    def test_invalid_inputs_based_on_specification(self):
+        &quot;&quot;&quot;Test error handling based on specification.&quot;&quot;&quot;
+        # Negative numbers should raise error
+        with self.assertRaises(ValueError):
+            self.calculator.calculate_grade(-1)
+
+        # Numbers above 100 should raise error
+        with self.assertRaises(ValueError):
+            self.calculator.calculate_grade(101)
+
+        # Non-numeric inputs should raise error
+        with self.assertRaises(ValueError):
+            self.calculator.calculate_grade(&quot;85&quot;)
+
+    def test_decimal_scores(self):
+        &quot;&quot;&quot;Test decimal scores based on specification.&quot;&quot;&quot;
+        self.assertEqual(self.calculator.calculate_grade(89.5), &quot;B&quot;)
+        self.assertEqual(self.calculator.calculate_grade(79.9), &quot;C&quot;)
+        self.assertEqual(self.calculator.calculate_grade(59.9), &quot;F&quot;)
+</code></pre>
+</div>
 <h3 id="boundary-value-analysis">Boundary Value Analysis<a class="headerlink" href="#boundary-value-analysis" title="Permanent link">&para;</a></h3>
 <p>Black box testing often uses <strong>boundary value analysis</strong> to identify test cases at the edges of input domains:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestPasswordValidatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box testing using boundary value analysis.&quot;&quot;&quot;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="c1"># Specification: Password must be 8-20 characters, contain at least</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="c1"># one uppercase, one lowercase, one digit, and one special character</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">PasswordValidator</span><span class="p">()</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_length_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test password length boundaries.&quot;&quot;&quot;</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="c1"># Just below minimum (7 chars) - should fail</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!&quot;</span><span class="p">)</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="c1"># Minimum length (8 chars) - should pass</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc1234!&quot;</span><span class="p">))</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="c1"># Maximum length (20 chars) - should pass</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!@#$%^&amp;*()1234&quot;</span><span class="p">))</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="c1"># Just above maximum (21 chars) - should fail</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!@#$%^&amp;*()12345&quot;</span><span class="p">)</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_character_requirements_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test character requirement boundaries.&quot;&quot;&quot;</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="c1"># No uppercase - should fail</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;abc123!@&quot;</span><span class="p">)</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>        <span class="c1"># Exactly one uppercase - should pass</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abc123!@&quot;</span><span class="p">))</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="c1"># No digits - should fail</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abcdef!@&quot;</span><span class="p">)</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>        <span class="c1"># Exactly one digit - should pass</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s2">&quot;Abcdef1!&quot;</span><span class="p">))</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class TestPasswordValidatorBlackBox(unittest.TestCase):
+    &quot;&quot;&quot;Black box testing using boundary value analysis.&quot;&quot;&quot;
+
+    def setUp(self):
+        # Specification: Password must be 8-20 characters, contain at least
+        # one uppercase, one lowercase, one digit, and one special character
+        self.validator = PasswordValidator()
+
+    def test_length_boundaries(self):
+        &quot;&quot;&quot;Test password length boundaries.&quot;&quot;&quot;
+        # Just below minimum (7 chars) - should fail
+        with self.assertRaises(ValueError):
+            self.validator.validate(&quot;Abc123!&quot;)
+
+        # Minimum length (8 chars) - should pass
+        self.assertTrue(self.validator.validate(&quot;Abc1234!&quot;))
+
+        # Maximum length (20 chars) - should pass
+        self.assertTrue(self.validator.validate(&quot;Abc123!@#$%^&amp;*()1234&quot;))
+
+        # Just above maximum (21 chars) - should fail
+        with self.assertRaises(ValueError):
+            self.validator.validate(&quot;Abc123!@#$%^&amp;*()12345&quot;)
+
+    def test_character_requirements_boundaries(self):
+        &quot;&quot;&quot;Test character requirement boundaries.&quot;&quot;&quot;
+        # No uppercase - should fail
+        with self.assertRaises(ValueError):
+            self.validator.validate(&quot;abc123!@&quot;)
+
+        # Exactly one uppercase - should pass
+        self.assertTrue(self.validator.validate(&quot;Abc123!@&quot;))
+
+        # No digits - should fail
+        with self.assertRaises(ValueError):
+            self.validator.validate(&quot;Abcdef!@&quot;)
+
+        # Exactly one digit - should pass
+        self.assertTrue(self.validator.validate(&quot;Abcdef1!&quot;))
+</code></pre>
+</div>
 <h3 id="equivalence-partitioning">Equivalence Partitioning<a class="headerlink" href="#equivalence-partitioning" title="Permanent link">&para;</a></h3>
 <p><strong>Equivalence partitioning</strong> divides input data into groups that should be processed similarly:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestEmailValidatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box testing using equivalence partitioning.&quot;&quot;&quot;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">EmailValidator</span><span class="p">()</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_valid_email_equivalence_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test different types of valid emails.&quot;&quot;&quot;</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="c1"># Standard email format</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="c1"># Email with numbers</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user123@domain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="c1"># Email with dots in username</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;first.last@domain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="c1"># Email with subdomain</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@mail.domain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_email_equivalence_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test different types of invalid emails.&quot;&quot;&quot;</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="c1"># Missing @ symbol</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;userdomain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="c1"># Missing domain</span>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@&quot;</span><span class="p">))</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="c1"># Missing username</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;@domain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>        <span class="c1"># Multiple @ symbols</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user@@domain.com&quot;</span><span class="p">))</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>        <span class="c1"># Invalid characters</span>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="s2">&quot;user name@domain.com&quot;</span><span class="p">))</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class TestEmailValidatorBlackBox(unittest.TestCase):
+    &quot;&quot;&quot;Black box testing using equivalence partitioning.&quot;&quot;&quot;
+
+    def setUp(self):
+        self.validator = EmailValidator()
+
+    def test_valid_email_equivalence_classes(self):
+        &quot;&quot;&quot;Test different types of valid emails.&quot;&quot;&quot;
+        # Standard email format
+        self.assertTrue(self.validator.is_valid(&quot;user@domain.com&quot;))
+
+        # Email with numbers
+        self.assertTrue(self.validator.is_valid(&quot;user123@domain.com&quot;))
+
+        # Email with dots in username
+        self.assertTrue(self.validator.is_valid(&quot;first.last@domain.com&quot;))
+
+        # Email with subdomain
+        self.assertTrue(self.validator.is_valid(&quot;user@mail.domain.com&quot;))
+
+    def test_invalid_email_equivalence_classes(self):
+        &quot;&quot;&quot;Test different types of invalid emails.&quot;&quot;&quot;
+        # Missing @ symbol
+        self.assertFalse(self.validator.is_valid(&quot;userdomain.com&quot;))
+
+        # Missing domain
+        self.assertFalse(self.validator.is_valid(&quot;user@&quot;))
+
+        # Missing username
+        self.assertFalse(self.validator.is_valid(&quot;@domain.com&quot;))
+
+        # Multiple @ symbols
+        self.assertFalse(self.validator.is_valid(&quot;user@@domain.com&quot;))
+
+        # Invalid characters
+        self.assertFalse(self.validator.is_valid(&quot;user name@domain.com&quot;))
+</code></pre>
+</div>
 <h2 id="white-box-testing">White Box Testing<a class="headerlink" href="#white-box-testing" title="Permanent link">&para;</a></h2>
 <p>White box testing examines the internal structure of code to design test cases. It focuses on testing all paths, conditions, and statements within the implementation.</p>
 <h3 id="characteristics-of-white-box-testing">Characteristics of White Box Testing<a class="headerlink" href="#characteristics-of-white-box-testing" title="Permanent link">&para;</a></h3>
@@ -2028,154 +2034,158 @@
 </ul>
 <h3 id="example-testing-a-discount-calculator-white-box-approach">Example: Testing a Discount Calculator (White Box Approach)<a class="headerlink" href="#example-testing-a-discount-calculator-white-box-approach" title="Permanent link">&para;</a></h3>
 <p>Looking at the implementation to design comprehensive tests:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DiscountCalculator</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates discounts based on customer type and order amount.&quot;&quot;&quot;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_discount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">customer_type</span><span class="p">,</span> <span class="n">order_amount</span><span class="p">,</span> <span class="n">is_holiday_season</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">        Calculate discount percentage based on customer and order details.</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="sd">        Args:</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="sd">            customer_type (str): &quot;regular&quot;, &quot;premium&quot;, or &quot;vip&quot;</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="sd">            order_amount (float): Order total amount</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="sd">            is_holiday_season (bool): Whether it&#39;s holiday season</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="sd">        Returns:</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="sd">            float: Discount percentage (0.0 to 0.5)</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="c1"># Base discount by customer type</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="k">if</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;premium&quot;</span><span class="p">:</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.1</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="k">elif</span> <span class="n">customer_type</span> <span class="o">==</span> <span class="s2">&quot;vip&quot;</span><span class="p">:</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.2</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid customer type: </span><span class="si">{</span><span class="n">customer_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="c1"># Additional discount for large orders</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>        <span class="k">if</span> <span class="n">order_amount</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>            <span class="n">discount</span> <span class="o">+=</span> <span class="mf">0.1</span>
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>        <span class="k">elif</span> <span class="n">order_amount</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>            <span class="n">discount</span> <span class="o">+=</span> <span class="mf">0.05</span>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="c1"># Holiday season bonus</span>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="k">if</span> <span class="n">is_holiday_season</span><span class="p">:</span>
-</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>            <span class="n">discount</span> <span class="o">+=</span> <span class="mf">0.05</span>
-</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>        <span class="c1"># Cap maximum discount</span>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        <span class="k">if</span> <span class="n">discount</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
-</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>            <span class="n">discount</span> <span class="o">=</span> <span class="mf">0.5</span>
-</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>        <span class="k">return</span> <span class="n">discount</span>
-</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>
-</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
-</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestDiscountCalculatorWhiteBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;White box tests ensuring all code paths are covered.&quot;&quot;&quot;</span>
-</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>
-</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">DiscountCalculator</span><span class="p">()</span>
-</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>
-</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_all_customer_type_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all customer type code paths.&quot;&quot;&quot;</span>
-</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>        <span class="c1"># Path 1: Regular customer (discount = 0.0)</span>
-</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>
-</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>        <span class="c1"># Path 2: Premium customer (discount = 0.1)</span>
-</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>
-</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>        <span class="c1"># Path 3: VIP customer (discount = 0.2)</span>
-</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
-</span><span id="__span-3-64"><a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>
-</span><span id="__span-3-65"><a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>        <span class="c1"># Path 4: Invalid customer type (exception path)</span>
-</span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;invalid&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>
-</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_all_order_amount_conditions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-70"><a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all order amount condition branches.&quot;&quot;&quot;</span>
-</span><span id="__span-3-71"><a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>        <span class="c1"># Amount &lt;= 500: no additional discount</span>
-</span><span id="__span-3-72"><a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-</span><span id="__span-3-73"><a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-</span><span id="__span-3-74"><a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>
-</span><span id="__span-3-75"><a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>        <span class="c1"># 500 &lt; amount &lt;= 1000: +0.05 discount</span>
-</span><span id="__span-3-76"><a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
-</span><span id="__span-3-77"><a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
-</span><span id="__span-3-78"><a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a>
-</span><span id="__span-3-79"><a id="__codelineno-3-79" name="__codelineno-3-79" href="#__codelineno-3-79"></a>        <span class="c1"># Amount &gt; 1000: +0.1 discount</span>
-</span><span id="__span-3-80"><a id="__codelineno-3-80" name="__codelineno-3-80" href="#__codelineno-3-80"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
-</span><span id="__span-3-81"><a id="__codelineno-3-81" name="__codelineno-3-81" href="#__codelineno-3-81"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-</span><span id="__span-3-82"><a id="__codelineno-3-82" name="__codelineno-3-82" href="#__codelineno-3-82"></a>
-</span><span id="__span-3-83"><a id="__codelineno-3-83" name="__codelineno-3-83" href="#__codelineno-3-83"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_holiday_season_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-84"><a id="__codelineno-3-84" name="__codelineno-3-84" href="#__codelineno-3-84"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test holiday season condition branch.&quot;&quot;&quot;</span>
-</span><span id="__span-3-85"><a id="__codelineno-3-85" name="__codelineno-3-85" href="#__codelineno-3-85"></a>        <span class="c1"># Without holiday season</span>
-</span><span id="__span-3-86"><a id="__codelineno-3-86" name="__codelineno-3-86" href="#__codelineno-3-86"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-3-87"><a id="__codelineno-3-87" name="__codelineno-3-87" href="#__codelineno-3-87"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>  <span class="c1"># 0.1 + 0.05</span>
-</span><span id="__span-3-88"><a id="__codelineno-3-88" name="__codelineno-3-88" href="#__codelineno-3-88"></a>
-</span><span id="__span-3-89"><a id="__codelineno-3-89" name="__codelineno-3-89" href="#__codelineno-3-89"></a>        <span class="c1"># With holiday season</span>
-</span><span id="__span-3-90"><a id="__codelineno-3-90" name="__codelineno-3-90" href="#__codelineno-3-90"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-3-91"><a id="__codelineno-3-91" name="__codelineno-3-91" href="#__codelineno-3-91"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>   <span class="c1"># 0.1 + 0.05 + 0.05</span>
-</span><span id="__span-3-92"><a id="__codelineno-3-92" name="__codelineno-3-92" href="#__codelineno-3-92"></a>
-</span><span id="__span-3-93"><a id="__codelineno-3-93" name="__codelineno-3-93" href="#__codelineno-3-93"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_maximum_discount_cap_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-94"><a id="__codelineno-3-94" name="__codelineno-3-94" href="#__codelineno-3-94"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test the discount cap condition.&quot;&quot;&quot;</span>
-</span><span id="__span-3-95"><a id="__codelineno-3-95" name="__codelineno-3-95" href="#__codelineno-3-95"></a>        <span class="c1"># Test case that would exceed 0.5 limit</span>
-</span><span id="__span-3-96"><a id="__codelineno-3-96" name="__codelineno-3-96" href="#__codelineno-3-96"></a>        <span class="c1"># VIP (0.2) + large order (0.1) + holiday (0.05) + more = would be &gt; 0.5</span>
-</span><span id="__span-3-97"><a id="__codelineno-3-97" name="__codelineno-3-97" href="#__codelineno-3-97"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-3-98"><a id="__codelineno-3-98" name="__codelineno-3-98" href="#__codelineno-3-98"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">)</span>  <span class="c1"># 0.2 + 0.1 + 0.05 = 0.35 (under cap)</span>
-</span><span id="__span-3-99"><a id="__codelineno-3-99" name="__codelineno-3-99" href="#__codelineno-3-99"></a>
-</span><span id="__span-3-100"><a id="__codelineno-3-100" name="__codelineno-3-100" href="#__codelineno-3-100"></a>        <span class="c1"># Create scenario that hits the cap</span>
-</span><span id="__span-3-101"><a id="__codelineno-3-101" name="__codelineno-3-101" href="#__codelineno-3-101"></a>        <span class="c1"># Need to modify method or create extreme case that would exceed 0.5</span>
-</span><span id="__span-3-102"><a id="__codelineno-3-102" name="__codelineno-3-102" href="#__codelineno-3-102"></a>
-</span><span id="__span-3-103"><a id="__codelineno-3-103" name="__codelineno-3-103" href="#__codelineno-3-103"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_complex_path_combinations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-104"><a id="__codelineno-3-104" name="__codelineno-3-104" href="#__codelineno-3-104"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test combinations of conditions to ensure all paths work together.&quot;&quot;&quot;</span>
-</span><span id="__span-3-105"><a id="__codelineno-3-105" name="__codelineno-3-105" href="#__codelineno-3-105"></a>        <span class="c1"># VIP customer + large order + holiday season</span>
-</span><span id="__span-3-106"><a id="__codelineno-3-106" name="__codelineno-3-106" href="#__codelineno-3-106"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;vip&quot;</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-3-107"><a id="__codelineno-3-107" name="__codelineno-3-107" href="#__codelineno-3-107"></a>        <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.35</span>  <span class="c1"># 0.2 (vip) + 0.1 (large order) + 0.05 (holiday)</span>
-</span><span id="__span-3-108"><a id="__codelineno-3-108" name="__codelineno-3-108" href="#__codelineno-3-108"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
-</span><span id="__span-3-109"><a id="__codelineno-3-109" name="__codelineno-3-109" href="#__codelineno-3-109"></a>
-</span><span id="__span-3-110"><a id="__codelineno-3-110" name="__codelineno-3-110" href="#__codelineno-3-110"></a>        <span class="c1"># Premium customer + medium order + no holiday</span>
-</span><span id="__span-3-111"><a id="__codelineno-3-111" name="__codelineno-3-111" href="#__codelineno-3-111"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;premium&quot;</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-3-112"><a id="__codelineno-3-112" name="__codelineno-3-112" href="#__codelineno-3-112"></a>        <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 0.1 (premium) + 0.05 (medium order)</span>
-</span><span id="__span-3-113"><a id="__codelineno-3-113" name="__codelineno-3-113" href="#__codelineno-3-113"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
-</span><span id="__span-3-114"><a id="__codelineno-3-114" name="__codelineno-3-114" href="#__codelineno-3-114"></a>
-</span><span id="__span-3-115"><a id="__codelineno-3-115" name="__codelineno-3-115" href="#__codelineno-3-115"></a>        <span class="c1"># Regular customer + large order + holiday</span>
-</span><span id="__span-3-116"><a id="__codelineno-3-116" name="__codelineno-3-116" href="#__codelineno-3-116"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_discount</span><span class="p">(</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-3-117"><a id="__codelineno-3-117" name="__codelineno-3-117" href="#__codelineno-3-117"></a>        <span class="n">expected</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># 0.0 (regular) + 0.1 (large order) + 0.05 (holiday)</span>
-</span><span id="__span-3-118"><a id="__codelineno-3-118" name="__codelineno-3-118" href="#__codelineno-3-118"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">expected</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class DiscountCalculator:
+    &quot;&quot;&quot;Calculates discounts based on customer type and order amount.&quot;&quot;&quot;
+
+    def calculate_discount(self, customer_type, order_amount, is_holiday_season=False):
+        &quot;&quot;&quot;
+        Calculate discount percentage based on customer and order details.
+
+        Args:
+            customer_type (str): &quot;regular&quot;, &quot;premium&quot;, or &quot;vip&quot;
+            order_amount (float): Order total amount
+            is_holiday_season (bool): Whether it&#x27;s holiday season
+
+        Returns:
+            float: Discount percentage (0.0 to 0.5)
+        &quot;&quot;&quot;
+        discount = 0.0
+
+        # Base discount by customer type
+        if customer_type == &quot;regular&quot;:
+            discount = 0.0
+        elif customer_type == &quot;premium&quot;:
+            discount = 0.1
+        elif customer_type == &quot;vip&quot;:
+            discount = 0.2
+        else:
+            raise ValueError(f&quot;Invalid customer type: {customer_type}&quot;)
+
+        # Additional discount for large orders
+        if order_amount &gt; 1000:
+            discount += 0.1
+        elif order_amount &gt; 500:
+            discount += 0.05
+
+        # Holiday season bonus
+        if is_holiday_season:
+            discount += 0.05
+
+        # Cap maximum discount
+        if discount &gt; 0.5:
+            discount = 0.5
+
+        return discount
+
+
+class TestDiscountCalculatorWhiteBox(unittest.TestCase):
+    &quot;&quot;&quot;White box tests ensuring all code paths are covered.&quot;&quot;&quot;
+
+    def setUp(self):
+        self.calculator = DiscountCalculator()
+
+    def test_all_customer_type_paths(self):
+        &quot;&quot;&quot;Test all customer type code paths.&quot;&quot;&quot;
+        # Path 1: Regular customer (discount = 0.0)
+        result = self.calculator.calculate_discount(&quot;regular&quot;, 100)
+        self.assertEqual(result, 0.0)
+
+        # Path 2: Premium customer (discount = 0.1)
+        result = self.calculator.calculate_discount(&quot;premium&quot;, 100)
+        self.assertEqual(result, 0.1)
+
+        # Path 3: VIP customer (discount = 0.2)
+        result = self.calculator.calculate_discount(&quot;vip&quot;, 100)
+        self.assertEqual(result, 0.2)
+
+        # Path 4: Invalid customer type (exception path)
+        with self.assertRaises(ValueError):
+            self.calculator.calculate_discount(&quot;invalid&quot;, 100)
+
+    def test_all_order_amount_conditions(self):
+        &quot;&quot;&quot;Test all order amount condition branches.&quot;&quot;&quot;
+        # Amount &lt;= 500: no additional discount
+        result = self.calculator.calculate_discount(&quot;regular&quot;, 400)
+        self.assertEqual(result, 0.0)
+
+        # 500 &lt; amount &lt;= 1000: +0.05 discount
+        result = self.calculator.calculate_discount(&quot;regular&quot;, 600)
+        self.assertEqual(result, 0.05)
+
+        # Amount &gt; 1000: +0.1 discount
+        result = self.calculator.calculate_discount(&quot;regular&quot;, 1200)
+        self.assertEqual(result, 0.1)
+
+    def test_holiday_season_condition(self):
+        &quot;&quot;&quot;Test holiday season condition branch.&quot;&quot;&quot;
+        # Without holiday season
+        result = self.calculator.calculate_discount(&quot;premium&quot;, 600, False)
+        self.assertEqual(result, 0.15)  # 0.1 + 0.05
+
+        # With holiday season
+        result = self.calculator.calculate_discount(&quot;premium&quot;, 600, True)
+        self.assertEqual(result, 0.2)   # 0.1 + 0.05 + 0.05
+
+    def test_maximum_discount_cap_condition(self):
+        &quot;&quot;&quot;Test the discount cap condition.&quot;&quot;&quot;
+        # Test case that would exceed 0.5 limit
+        # VIP (0.2) + large order (0.1) + holiday (0.05) + more = would be &gt; 0.5
+        result = self.calculator.calculate_discount(&quot;vip&quot;, 1500, True)
+        self.assertEqual(result, 0.35)  # 0.2 + 0.1 + 0.05 = 0.35 (under cap)
+
+        # Create scenario that hits the cap
+        # Need to modify method or create extreme case that would exceed 0.5
+
+    def test_complex_path_combinations(self):
+        &quot;&quot;&quot;Test combinations of conditions to ensure all paths work together.&quot;&quot;&quot;
+        # VIP customer + large order + holiday season
+        result = self.calculator.calculate_discount(&quot;vip&quot;, 1200, True)
+        expected = 0.35  # 0.2 (vip) + 0.1 (large order) + 0.05 (holiday)
+        self.assertEqual(result, expected)
+
+        # Premium customer + medium order + no holiday
+        result = self.calculator.calculate_discount(&quot;premium&quot;, 750, False)
+        expected = 0.15  # 0.1 (premium) + 0.05 (medium order)
+        self.assertEqual(result, expected)
+
+        # Regular customer + large order + holiday
+        result = self.calculator.calculate_discount(&quot;regular&quot;, 1100, True)
+        expected = 0.15  # 0.0 (regular) + 0.1 (large order) + 0.05 (holiday)
+        self.assertEqual(result, expected)
+</code></pre>
+</div>
 <h3 id="statement-and-branch-coverage">Statement and Branch Coverage<a class="headerlink" href="#statement-and-branch-coverage" title="Permanent link">&para;</a></h3>
 <p>White box testing aims for complete coverage:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestBankAccountWhiteBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;White box testing ensuring statement and branch coverage.&quot;&quot;&quot;</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_withdraw_method_all_branches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test all branches in withdraw method.&quot;&quot;&quot;</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="c1"># Branch 1: amount &lt;= 0 (first if condition true)</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="c1"># Branch 2: amount &gt; balance (second if condition true)</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>            <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">150</span><span class="p">)</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>        <span class="c1"># Branch 3: valid withdrawal (both if conditions false)</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">balance</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>        <span class="c1"># Ensure transaction history is updated (statement coverage)</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertIn</span><span class="p">(</span><span class="s2">&quot;Withdrawal&quot;</span><span class="p">,</span> <span class="n">account</span><span class="o">.</span><span class="n">transaction_history</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class TestBankAccountWhiteBox(unittest.TestCase):
+    &quot;&quot;&quot;White box testing ensuring statement and branch coverage.&quot;&quot;&quot;
+
+    def test_withdraw_method_all_branches(self):
+        &quot;&quot;&quot;Test all branches in withdraw method.&quot;&quot;&quot;
+        account = BankAccount(&quot;Test&quot;, 100)
+
+        # Branch 1: amount &lt;= 0 (first if condition true)
+        with self.assertRaises(ValueError):
+            account.withdraw(-10)
+
+        with self.assertRaises(ValueError):
+            account.withdraw(0)
+
+        # Branch 2: amount &gt; balance (second if condition true)
+        with self.assertRaises(ValueError):
+            account.withdraw(150)
+
+        # Branch 3: valid withdrawal (both if conditions false)
+        result = account.withdraw(50)
+        self.assertEqual(result, 50)
+        self.assertEqual(account.balance, 50)
+
+        # Ensure transaction history is updated (statement coverage)
+        self.assertEqual(len(account.transaction_history), 1)
+        self.assertIn(&quot;Withdrawal&quot;, account.transaction_history[0])
+</code></pre>
+</div>
 <h2 id="grey-box-testing">Grey Box Testing<a class="headerlink" href="#grey-box-testing" title="Permanent link">&para;</a></h2>
 <p>Grey box testing combines elements of both black box and white box testing. Testers have partial knowledge of the internal implementation, which helps design more targeted test cases.</p>
 <h3 id="characteristics-of-grey-box-testing">Characteristics of Grey Box Testing<a class="headerlink" href="#characteristics-of-grey-box-testing" title="Permanent link">&para;</a></h3>
@@ -2195,125 +2205,129 @@
 </ul>
 <h3 id="example-testing-a-user-authentication-system-grey-box-approach">Example: Testing a User Authentication System (Grey Box Approach)<a class="headerlink" href="#example-testing-a-user-authentication-system-grey-box-approach" title="Permanent link">&para;</a></h3>
 <p>Knowing that the system uses password hashing and session management internally:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestUserAuthenticationGreyBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Grey box testing with knowledge of internal security mechanisms.&quot;&quot;&quot;</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span> <span class="o">=</span> <span class="n">UserAuthenticationSystem</span><span class="p">()</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_password_storage_security</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test that passwords are not stored in plain text (internal knowledge).&quot;&quot;&quot;</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;testuser&quot;</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecurePass123!&quot;</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="c1"># Create user</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        <span class="c1"># Grey box knowledge: passwords should be hashed, not stored plainly</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        <span class="c1"># We can&#39;t see the implementation, but we know hashing is used</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        <span class="n">user_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">_get_user_data</span><span class="p">(</span><span class="n">username</span><span class="p">)</span>  <span class="c1"># Internal method</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>        <span class="c1"># The stored password should not match the original</span>
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotEqual</span><span class="p">(</span><span class="n">user_data</span><span class="p">[</span><span class="s1">&#39;password_hash&#39;</span><span class="p">],</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>        <span class="c1"># But authentication should still work</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
-</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_session_timeout_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test session timeout (knowing sessions are used internally).&quot;&quot;&quot;</span>
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;testuser&quot;</span>
-</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecurePass123!&quot;</span>
-</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>
-</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        <span class="c1"># Create and login user</span>
-</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>        <span class="n">session_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>
-</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>        <span class="c1"># Initially, session should be valid</span>
-</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">is_session_valid</span><span class="p">(</span><span class="n">session_id</span><span class="p">))</span>
-</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
-</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>        <span class="c1"># Grey box knowledge: sessions have timeout mechanism</span>
-</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>        <span class="c1"># Simulate time passing (if system has time-based expiry)</span>
-</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">_advance_time</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Internal method</span>
-</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>
-</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>        <span class="c1"># Session should now be invalid</span>
-</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">is_session_valid</span><span class="p">(</span><span class="n">session_id</span><span class="p">))</span>
-</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>
-</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_rate_limiting_mechanism</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test login rate limiting (knowing it exists internally).&quot;&quot;&quot;</span>
-</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s2">&quot;testuser&quot;</span>
-</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>        <span class="n">password</span> <span class="o">=</span> <span class="s2">&quot;SecurePass123!&quot;</span>
-</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>        <span class="n">wrong_password</span> <span class="o">=</span> <span class="s2">&quot;WrongPassword&quot;</span>
-</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>
-</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>
-</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>        <span class="c1"># Grey box knowledge: system has rate limiting after failed attempts</span>
-</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>        <span class="c1"># Make multiple failed login attempts</span>
-</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>  <span class="c1"># Assuming 5 is the limit</span>
-</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">wrong_password</span><span class="p">)</span>
-</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-</span><span id="__span-5-57"><a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a>
-</span><span id="__span-5-58"><a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a>        <span class="c1"># Now even correct password should be temporarily blocked</span>
-</span><span id="__span-5-59"><a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-60"><a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Should be blocked due to rate limiting</span>
-</span><span id="__span-5-61"><a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a>
-</span><span id="__span-5-62"><a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a>        <span class="c1"># Verify the blocking is temporary (wait for cooldown)</span>
-</span><span id="__span-5-63"><a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">_advance_time</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>  <span class="c1"># Internal time advancement</span>
-</span><span id="__span-5-64"><a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a>        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_system</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
-</span><span id="__span-5-65"><a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Should work again after cooldown</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class TestUserAuthenticationGreyBox(unittest.TestCase):
+    &quot;&quot;&quot;Grey box testing with knowledge of internal security mechanisms.&quot;&quot;&quot;
+
+    def setUp(self):
+        self.auth_system = UserAuthenticationSystem()
+
+    def test_password_storage_security(self):
+        &quot;&quot;&quot;Test that passwords are not stored in plain text (internal knowledge).&quot;&quot;&quot;
+        username = &quot;testuser&quot;
+        password = &quot;SecurePass123!&quot;
+
+        # Create user
+        self.auth_system.create_user(username, password)
+
+        # Grey box knowledge: passwords should be hashed, not stored plainly
+        # We can&#x27;t see the implementation, but we know hashing is used
+        user_data = self.auth_system._get_user_data(username)  # Internal method
+
+        # The stored password should not match the original
+        self.assertNotEqual(user_data[&#x27;password_hash&#x27;], password)
+
+        # But authentication should still work
+        self.assertTrue(self.auth_system.authenticate(username, password))
+
+    def test_session_timeout_behavior(self):
+        &quot;&quot;&quot;Test session timeout (knowing sessions are used internally).&quot;&quot;&quot;
+        username = &quot;testuser&quot;
+        password = &quot;SecurePass123!&quot;
+
+        # Create and login user
+        self.auth_system.create_user(username, password)
+        session_id = self.auth_system.login(username, password)
+
+        # Initially, session should be valid
+        self.assertTrue(self.auth_system.is_session_valid(session_id))
+
+        # Grey box knowledge: sessions have timeout mechanism
+        # Simulate time passing (if system has time-based expiry)
+        self.auth_system._advance_time(hours=25)  # Internal method
+
+        # Session should now be invalid
+        self.assertFalse(self.auth_system.is_session_valid(session_id))
+
+    def test_rate_limiting_mechanism(self):
+        &quot;&quot;&quot;Test login rate limiting (knowing it exists internally).&quot;&quot;&quot;
+        username = &quot;testuser&quot;
+        password = &quot;SecurePass123!&quot;
+        wrong_password = &quot;WrongPassword&quot;
+
+        self.auth_system.create_user(username, password)
+
+        # Grey box knowledge: system has rate limiting after failed attempts
+        # Make multiple failed login attempts
+        for i in range(5):  # Assuming 5 is the limit
+            result = self.auth_system.authenticate(username, wrong_password)
+            self.assertFalse(result)
+
+        # Now even correct password should be temporarily blocked
+        result = self.auth_system.authenticate(username, password)
+        self.assertFalse(result)  # Should be blocked due to rate limiting
+
+        # Verify the blocking is temporary (wait for cooldown)
+        self.auth_system._advance_time(minutes=15)  # Internal time advancement
+        result = self.auth_system.authenticate(username, password)
+        self.assertTrue(result)  # Should work again after cooldown
+</code></pre>
+</div>
 <h3 id="integration-testing-with-grey-box-approach">Integration Testing with Grey Box Approach<a class="headerlink" href="#integration-testing-with-grey-box-approach" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestOrderProcessingGreyBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Grey box testing for order processing system integration.&quot;&quot;&quot;</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="c1"># Grey box knowledge: system uses database transactions</span>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span> <span class="o">=</span> <span class="n">OrderProcessingSystem</span><span class="p">()</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="n">InventorySystem</span><span class="p">()</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">payment</span> <span class="o">=</span> <span class="n">PaymentSystem</span><span class="p">()</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="c1"># Set up test data knowing internal structure</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">add_product</span><span class="p">(</span><span class="s2">&quot;PROD001&quot;</span><span class="p">,</span> <span class="s2">&quot;Widget&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">payment</span><span class="o">.</span><span class="n">add_test_account</span><span class="p">(</span><span class="s2">&quot;CUST001&quot;</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">)</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_order_rollback_on_payment_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test transaction rollback behavior (grey box knowledge).&quot;&quot;&quot;</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="n">customer_id</span> <span class="o">=</span> <span class="s2">&quot;CUST001&quot;</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        <span class="n">product_id</span> <span class="o">=</span> <span class="s2">&quot;PROD001&quot;</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        <span class="n">quantity</span> <span class="o">=</span> <span class="mi">5</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        <span class="c1"># Grey box knowledge: system uses transactions that can rollback</span>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>        <span class="n">original_inventory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>        <span class="c1"># Simulate payment failure by removing customer funds</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">payment</span><span class="o">.</span><span class="n">set_account_balance</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Not enough for order</span>
-</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>
-</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>        <span class="c1"># Attempt to place order</span>
-</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">PaymentFailureError</span><span class="p">):</span>
-</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="n">customer_id</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="n">quantity</span><span class="p">)</span>
-</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>
-</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>        <span class="c1"># Grey box expectation: inventory should be unchanged due to rollback</span>
-</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>        <span class="n">current_inventory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
-</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">current_inventory</span><span class="p">,</span> <span class="n">original_inventory</span><span class="p">)</span>
-</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
-</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_concurrent_order_handling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test concurrent order processing (knowing internal locking).&quot;&quot;&quot;</span>
-</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>        <span class="c1"># Grey box knowledge: system has concurrency controls</span>
-</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>        <span class="n">product_id</span> <span class="o">=</span> <span class="s2">&quot;PROD001&quot;</span>
-</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>        <span class="n">initial_stock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
-</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>
-</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>        <span class="c1"># Simulate concurrent orders for same product</span>
-</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>        <span class="n">order1_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="s2">&quot;CUST001&quot;</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span id="__span-6-42"><a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>        <span class="n">order2_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order_system</span><span class="o">.</span><span class="n">process_order</span><span class="p">(</span><span class="s2">&quot;CUST002&quot;</span><span class="p">,</span> <span class="n">product_id</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-</span><span id="__span-6-43"><a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>
-</span><span id="__span-6-44"><a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>        <span class="c1"># Both orders should succeed (enough stock)</span>
-</span><span id="__span-6-45"><a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">order1_result</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
-</span><span id="__span-6-46"><a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">order2_result</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
-</span><span id="__span-6-47"><a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a>
-</span><span id="__span-6-48"><a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a>        <span class="c1"># Stock should be correctly decremented</span>
-</span><span id="__span-6-49"><a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>        <span class="n">final_stock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">get_stock</span><span class="p">(</span><span class="n">product_id</span><span class="p">)</span>
-</span><span id="__span-6-50"><a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a>        <span class="n">expected_stock</span> <span class="o">=</span> <span class="n">initial_stock</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">-</span> <span class="mi">4</span>
-</span><span id="__span-6-51"><a id="__codelineno-6-51" name="__codelineno-6-51" href="#__codelineno-6-51"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">final_stock</span><span class="p">,</span> <span class="n">expected_stock</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class TestOrderProcessingGreyBox(unittest.TestCase):
+    &quot;&quot;&quot;Grey box testing for order processing system integration.&quot;&quot;&quot;
+
+    def setUp(self):
+        # Grey box knowledge: system uses database transactions
+        self.order_system = OrderProcessingSystem()
+        self.inventory = InventorySystem()
+        self.payment = PaymentSystem()
+
+        # Set up test data knowing internal structure
+        self.inventory.add_product(&quot;PROD001&quot;, &quot;Widget&quot;, 10.0, 100)
+        self.payment.add_test_account(&quot;CUST001&quot;, 1000.0)
+
+    def test_order_rollback_on_payment_failure(self):
+        &quot;&quot;&quot;Test transaction rollback behavior (grey box knowledge).&quot;&quot;&quot;
+        customer_id = &quot;CUST001&quot;
+        product_id = &quot;PROD001&quot;
+        quantity = 5
+
+        # Grey box knowledge: system uses transactions that can rollback
+        original_inventory = self.inventory.get_stock(product_id)
+
+        # Simulate payment failure by removing customer funds
+        self.payment.set_account_balance(customer_id, 1.0)  # Not enough for order
+
+        # Attempt to place order
+        with self.assertRaises(PaymentFailureError):
+            self.order_system.process_order(customer_id, product_id, quantity)
+
+        # Grey box expectation: inventory should be unchanged due to rollback
+        current_inventory = self.inventory.get_stock(product_id)
+        self.assertEqual(current_inventory, original_inventory)
+
+    def test_concurrent_order_handling(self):
+        &quot;&quot;&quot;Test concurrent order processing (knowing internal locking).&quot;&quot;&quot;
+        # Grey box knowledge: system has concurrency controls
+        product_id = &quot;PROD001&quot;
+        initial_stock = self.inventory.get_stock(product_id)
+
+        # Simulate concurrent orders for same product
+        order1_result = self.order_system.process_order(&quot;CUST001&quot;, product_id, 3)
+        order2_result = self.order_system.process_order(&quot;CUST002&quot;, product_id, 4)
+
+        # Both orders should succeed (enough stock)
+        self.assertTrue(order1_result.success)
+        self.assertTrue(order2_result.success)
+
+        # Stock should be correctly decremented
+        final_stock = self.inventory.get_stock(product_id)
+        expected_stock = initial_stock - 3 - 4
+        self.assertEqual(final_stock, expected_stock)
+</code></pre>
+</div>
 <h2 id="choosing-the-right-testing-strategy">Choosing the Right Testing Strategy<a class="headerlink" href="#choosing-the-right-testing-strategy" title="Permanent link">&para;</a></h2>
 <p>Different scenarios call for different testing strategies:</p>
 <h3 id="when-to-use-black-box-testing">When to Use Black Box Testing<a class="headerlink" href="#when-to-use-black-box-testing" title="Permanent link">&para;</a></h3>
@@ -2371,34 +2385,36 @@
 <details class="question">
 <summary>Exercise 2: White Box Test Design</summary>
 <p>Analyze this code and design white box tests to achieve 100% statement and branch coverage:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate shipping cost based on weight, distance, and priority.&quot;&quot;&quot;</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="c1"># Weight-based cost</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">5.0</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">elif</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">10.0</span>
-</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">15.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">weight</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.0</span>
-</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
-</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="c1"># Distance multiplier</span>
-</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
-</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
-</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    <span class="k">elif</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
-</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">1.5</span>
-</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
-</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="c1"># Priority adjustment</span>
-</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>    <span class="k">if</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;express&quot;</span><span class="p">:</span>
-</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
-</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a>    <span class="k">elif</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;overnight&quot;</span><span class="p">:</span>
-</span><span id="__span-7-23"><a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">3.0</span>
-</span><span id="__span-7-24"><a id="__codelineno-7-24" name="__codelineno-7-24" href="#__codelineno-7-24"></a>    <span class="k">elif</span> <span class="n">priority</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
-</span><span id="__span-7-25"><a id="__codelineno-7-25" name="__codelineno-7-25" href="#__codelineno-7-25"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid priority level&quot;</span><span class="p">)</span>
-</span><span id="__span-7-26"><a id="__codelineno-7-26" name="__codelineno-7-26" href="#__codelineno-7-26"></a>
-</span><span id="__span-7-27"><a id="__codelineno-7-27" name="__codelineno-7-27" href="#__codelineno-7-27"></a>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">base_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
+<pre><code class="language-python">def calculate_shipping_cost(weight, distance, priority):
+    &quot;&quot;&quot;Calculate shipping cost based on weight, distance, and priority.&quot;&quot;&quot;
+    base_cost = 0.0
+
+    # Weight-based cost
+    if weight &lt;= 1:
+        base_cost = 5.0
+    elif weight &lt;= 5:
+        base_cost = 10.0
+    else:
+        base_cost = 15.0 + (weight - 5) * 2.0
+
+    # Distance multiplier
+    if distance &gt; 1000:
+        base_cost *= 2.0
+    elif distance &gt; 500:
+        base_cost *= 1.5
+
+    # Priority adjustment
+    if priority == &quot;express&quot;:
+        base_cost *= 2.0
+    elif priority == &quot;overnight&quot;:
+        base_cost *= 3.0
+    elif priority != &quot;standard&quot;:
+        raise ValueError(&quot;Invalid priority level&quot;)
+
+    return round(base_cost, 2)
+</code></pre>
+</div>
 </details>
 <p>///</p>
 <details class="question">
@@ -2458,7 +2474,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 30, 2025 00:30:07 UTC">September 30, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

@@ -2351,24 +2351,26 @@
 </li>
 </ul>
 <p><strong>Sample Security Test:</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_grade_access_authorization</span><span class="p">():</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Test that students can&#39;t access other students&#39; grades&quot;&quot;&quot;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="c1"># Setup: Create two student accounts</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">student1</span> <span class="o">=</span> <span class="n">create_test_user</span><span class="p">(</span><span class="s2">&quot;student1&quot;</span><span class="p">)</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">student2</span> <span class="o">=</span> <span class="n">create_test_user</span><span class="p">(</span><span class="s2">&quot;student2&quot;</span><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="c1"># Test: Student1 tries to access Student2&#39;s grades</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="n">login_as</span><span class="p">(</span><span class="n">student1</span><span class="p">)</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/grades/</span><span class="si">{</span><span class="n">student2</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="c1"># Verify: Access should be denied</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">403</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">assert</span> <span class="s2">&quot;Access denied&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="c1"># Verify: Security event should be logged</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="n">logs</span> <span class="o">=</span> <span class="n">get_security_logs</span><span class="p">()</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="k">assert</span> <span class="sa">f</span><span class="s2">&quot;Unauthorized grade access attempt by </span><span class="si">{</span><span class="n">student1</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">logs</span>
-</span></code></pre></div>
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
+<pre><code class="language-python">def test_grade_access_authorization():
+    &quot;&quot;&quot;Test that students can&#x27;t access other students&#x27; grades&quot;&quot;&quot;
+    # Setup: Create two student accounts
+    student1 = create_test_user(&quot;student1&quot;)
+    student2 = create_test_user(&quot;student2&quot;)
+
+    # Test: Student1 tries to access Student2&#x27;s grades
+    login_as(student1)
+    response = client.get(f&quot;/grades/{student2.id}&quot;)
+
+    # Verify: Access should be denied
+    assert response.status_code == 403
+    assert &quot;Access denied&quot; in response.text
+
+    # Verify: Security event should be logged
+    logs = get_security_logs()
+    assert f&quot;Unauthorized grade access attempt by {student1.id}&quot; in logs
+</code></pre>
+</div>
 <h3 id="deployment-phase-production-security">Deployment Phase: Production Security<a class="headerlink" href="#deployment-phase-production-security" title="Permanent link">&para;</a></h3>
 <p><strong>Security Hardening Applied:</strong></p>
 <ul>
@@ -2511,9 +2513,9 @@
 <details class="success">
 <summary>Sample Solution</summary>
 <h3 id="system-architecture">System Architecture<a class="headerlink" href="#system-architecture" title="Permanent link">&para;</a></h3>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>[Students] ---&gt; [Web App] ---&gt; [Database]
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>[Teachers] ---&gt; [Web App] ---&gt; [Quiz Engine]
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>               [Auth System]
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[Students] ---&gt; [Web App] ---&gt; [Database]
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[Teachers] ---&gt; [Web App] ---&gt; [Quiz Engine]
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>               [Auth System]
 </span></code></pre></div>
 <h3 id="stride-analysis">STRIDE Analysis<a class="headerlink" href="#stride-analysis" title="Permanent link">&para;</a></h3>
 <p><strong>Student Interface:</strong></p>
@@ -2703,7 +2705,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2025 23:34:36 UTC">October 7, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

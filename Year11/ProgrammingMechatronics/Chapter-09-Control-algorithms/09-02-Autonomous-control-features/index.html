@@ -1581,623 +1581,633 @@
 </li>
 </ul>
 <p>Let&rsquo;s see how this works in code:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">AutonomousSystem</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autonomy_level</span><span class="p">):</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">=</span> <span class="n">autonomy_level</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">human_override</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">system_status</span> <span class="o">=</span> <span class="s2">&quot;operational&quot;</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_data</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">process_sensor_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process incoming sensor data&quot;&quot;&quot;</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_data</span><span class="p">[</span><span class="n">sensor_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sensor update: </span><span class="si">{</span><span class="n">sensor_type</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">make_decision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">situation</span><span class="p">):</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">human_override</span><span class="p">:</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="k">return</span> <span class="s2">&quot;waiting_for_human&quot;</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="k">return</span> <span class="s2">&quot;request_human_input&quot;</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="c1"># Basic assistance - only handle simple cases</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="k">if</span> <span class="n">situation</span> <span class="o">==</span> <span class="s2">&quot;routine_task&quot;</span><span class="p">:</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                <span class="k">return</span> <span class="s2">&quot;execute_automatically&quot;</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>                <span class="k">return</span> <span class="s2">&quot;request_human_input&quot;</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>            <span class="c1"># Partial autonomy and above - handle more situations</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            <span class="k">if</span> <span class="n">situation</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;routine_task&quot;</span><span class="p">,</span> <span class="s2">&quot;minor_obstacle&quot;</span><span class="p">,</span> <span class="s2">&quot;pattern_deviation&quot;</span><span class="p">]:</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>                <span class="k">return</span> <span class="s2">&quot;execute_automatically&quot;</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>                <span class="k">return</span> <span class="s2">&quot;request_human_assistance&quot;</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>            <span class="c1"># High autonomy - handle most situations</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>            <span class="k">if</span> <span class="n">situation</span> <span class="o">==</span> <span class="s2">&quot;critical_failure&quot;</span><span class="p">:</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>                <span class="k">return</span> <span class="s2">&quot;emergency_shutdown&quot;</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>                <span class="k">return</span> <span class="s2">&quot;execute_automatically&quot;</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_autonomy_levels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Show how different autonomy levels respond to situations&quot;&quot;&quot;</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="n">situations</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;routine_task&quot;</span><span class="p">,</span> <span class="s2">&quot;minor_obstacle&quot;</span><span class="p">,</span> <span class="s2">&quot;unexpected_object&quot;</span><span class="p">,</span> <span class="s2">&quot;critical_failure&quot;</span><span class="p">]</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Autonomy Level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">=</span> <span class="n">level</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>            <span class="k">for</span> <span class="n">situation</span> <span class="ow">in</span> <span class="n">situations</span><span class="p">:</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>                <span class="n">decision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_decision</span><span class="p">(</span><span class="n">situation</span><span class="p">)</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Situation: </span><span class="si">{</span><span class="n">situation</span><span class="si">:</span><span class="s2">20</span><span class="si">}</span><span class="s2"> → Decision: </span><span class="si">{</span><span class="n">decision</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="c1"># Demonstrate different autonomy levels</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="n">system</span> <span class="o">=</span> <span class="n">AutonomousSystem</span><span class="p">(</span><span class="n">autonomy_level</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="n">system</span><span class="o">.</span><span class="n">demonstrate_autonomy_levels</span><span class="p">()</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class AutonomousSystem:
+    def __init__(self, autonomy_level):
+        self.autonomy_level = autonomy_level
+        self.human_override = False
+        self.system_status = &quot;operational&quot;
+        self.sensor_data = {}
+
+    def process_sensor_input(self, sensor_type, value):
+        &quot;&quot;&quot;Process incoming sensor data&quot;&quot;&quot;
+        self.sensor_data[sensor_type] = value
+        print(f&quot;Sensor update: {sensor_type} = {value}&quot;)
+
+    def make_decision(self, situation):
+        &quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;
+        if self.human_override:
+            return &quot;waiting_for_human&quot;
+
+        if self.autonomy_level == 0:
+            return &quot;request_human_input&quot;
+
+        elif self.autonomy_level == 1:
+            # Basic assistance - only handle simple cases
+            if situation == &quot;routine_task&quot;:
+                return &quot;execute_automatically&quot;
+            else:
+                return &quot;request_human_input&quot;
+
+        elif self.autonomy_level &gt;= 2:
+            # Partial autonomy and above - handle more situations
+            if situation in [&quot;routine_task&quot;, &quot;minor_obstacle&quot;, &quot;pattern_deviation&quot;]:
+                return &quot;execute_automatically&quot;
+            else:
+                return &quot;request_human_assistance&quot;
+
+        elif self.autonomy_level &gt;= 4:
+            # High autonomy - handle most situations
+            if situation == &quot;critical_failure&quot;:
+                return &quot;emergency_shutdown&quot;
+            else:
+                return &quot;execute_automatically&quot;
+
+    def demonstrate_autonomy_levels(self):
+        &quot;&quot;&quot;Show how different autonomy levels respond to situations&quot;&quot;&quot;
+        situations = [&quot;routine_task&quot;, &quot;minor_obstacle&quot;, &quot;unexpected_object&quot;, &quot;critical_failure&quot;]
+
+        for level in range(0, 6):
+            print(f&quot;\n--- Autonomy Level {level} ---&quot;)
+            self.autonomy_level = level
+
+            for situation in situations:
+                decision = self.make_decision(situation)
+                print(f&quot;Situation: {situation:20} → Decision: {decision}&quot;)
+
+# Demonstrate different autonomy levels
+system = AutonomousSystem(autonomy_level=2)
+system.demonstrate_autonomy_levels()
+</code></pre>
+</div>
 <h3 id="safety-interlocks-and-fallbacks">Safety interlocks and fallbacks<a class="headerlink" href="#safety-interlocks-and-fallbacks" title="Permanent link">&para;</a></h3>
 <p><strong>Safety interlocks</strong> are automatic systems that prevent dangerous operations. They act like safety nets that catch problems before they cause harm.</p>
 <p><strong>Fallback systems</strong> are backup plans that kick in when the main system fails or encounters something it can&rsquo;t handle.</p>
 <p>Think of these as the &ldquo;safety equipment&rdquo; of autonomous systems:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">SafeAutonomousSystem</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop_active</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            <span class="s2">&quot;pressure&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">},</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;safe_zone&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="p">}</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">fallback_actions</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_safety_interlocks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check all safety conditions before allowing operation&quot;&quot;&quot;</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="c1"># Temperature check</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">temp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>        <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">temp</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]:</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature too high: </span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C &gt; </span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="c1"># Pressure check</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>        <span class="n">pressure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;pressure&quot;</span><span class="p">]</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="k">if</span> <span class="n">pressure</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">pressure</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]:</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pressure too high: </span><span class="si">{</span><span class="n">pressure</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">pressure</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="c1"># Speed check</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="n">speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">]</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="k">if</span> <span class="n">speed</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">speed</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]:</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speed too high: </span><span class="si">{</span><span class="n">speed</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="n">speed</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>        <span class="c1"># Position check</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>        <span class="n">safe_min</span><span class="p">,</span> <span class="n">safe_max</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="s2">&quot;safe_zone&quot;</span><span class="p">]</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">safe_min</span> <span class="o">&lt;=</span> <span class="n">pos</span><span class="p">[</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">safe_max</span><span class="p">):</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position unsafe: </span><span class="si">{</span><span class="n">pos</span><span class="p">[</span><span class="s1">&#39;current&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> not in range </span><span class="si">{</span><span class="n">safe_min</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">safe_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>        <span class="k">return</span> <span class="n">violations</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">execute_emergency_stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reason</span><span class="p">):</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Immediate shutdown for safety&quot;&quot;&quot;</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop_active</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🚨 EMERGENCY STOP: </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- All motion stopped&quot;</span><span class="p">)</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Power reduced to safe levels&quot;</span><span class="p">)</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Human operator notified&quot;</span><span class="p">)</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">try_fallback_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primary_action</span><span class="p">):</span>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Attempt fallback when primary action fails&quot;&quot;&quot;</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Primary action &#39;</span><span class="si">{</span><span class="n">primary_action</span><span class="si">}</span><span class="s2">&#39; failed. Trying fallbacks...&quot;</span><span class="p">)</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>        <span class="n">fallback_plans</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>            <span class="s2">&quot;move_forward&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;reduce_speed&quot;</span><span class="p">,</span> <span class="s2">&quot;find_alternate_path&quot;</span><span class="p">,</span> <span class="s2">&quot;stop_and_wait&quot;</span><span class="p">],</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>            <span class="s2">&quot;pick_up_object&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;adjust_grip&quot;</span><span class="p">,</span> <span class="s2">&quot;change_approach_angle&quot;</span><span class="p">,</span> <span class="s2">&quot;request_human_help&quot;</span><span class="p">],</span>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>            <span class="s2">&quot;navigate_to_target&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;recalculate_route&quot;</span><span class="p">,</span> <span class="s2">&quot;use_backup_sensors&quot;</span><span class="p">,</span> <span class="s2">&quot;return_to_safe_position&quot;</span><span class="p">]</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>        <span class="p">}</span>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>        <span class="k">if</span> <span class="n">primary_action</span> <span class="ow">in</span> <span class="n">fallback_plans</span><span class="p">:</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>            <span class="k">for</span> <span class="n">fallback</span> <span class="ow">in</span> <span class="n">fallback_plans</span><span class="p">[</span><span class="n">primary_action</span><span class="p">]:</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Trying fallback: </span><span class="si">{</span><span class="n">fallback</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attempt_action</span><span class="p">(</span><span class="n">fallback</span><span class="p">):</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ✅ Fallback &#39;</span><span class="si">{</span><span class="n">fallback</span><span class="si">}</span><span class="s2">&#39; succeeded!&quot;</span><span class="p">)</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>                    <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  ❌ Fallback &#39;</span><span class="si">{</span><span class="n">fallback</span><span class="si">}</span><span class="s2">&#39; failed.&quot;</span><span class="p">)</span>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  All fallbacks exhausted. Requesting human assistance.&quot;</span><span class="p">)</span>
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">attempt_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate attempting an action (simplified for demo)&quot;&quot;&quot;</span>
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>        <span class="c1"># Simulate success/failure for different actions</span>
-</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>        <span class="n">success_rates</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>            <span class="s2">&quot;reduce_speed&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
-</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>            <span class="s2">&quot;find_alternate_path&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
-</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>            <span class="s2">&quot;stop_and_wait&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Always succeeds</span>
-</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>            <span class="s2">&quot;adjust_grip&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-</span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>            <span class="s2">&quot;change_approach_angle&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-</span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>            <span class="s2">&quot;request_human_help&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># Always succeeds</span>
-</span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>            <span class="s2">&quot;recalculate_route&quot;</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
-</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>            <span class="s2">&quot;use_backup_sensors&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
-</span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>            <span class="s2">&quot;return_to_safe_position&quot;</span><span class="p">:</span> <span class="mf">0.95</span>
-</span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>        <span class="p">}</span>
-</span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>
-</span><span id="__span-1-84"><a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-</span><span id="__span-1-85"><a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>        <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">success_rates</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-</span><span id="__span-1-86"><a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>
-</span><span id="__span-1-87"><a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">safe_operation_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requested_action</span><span class="p">):</span>
-</span><span id="__span-1-88"><a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform an action safely with all checks&quot;&quot;&quot;</span>
-</span><span id="__span-1-89"><a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🔍 Safety check for action: </span><span class="si">{</span><span class="n">requested_action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-90"><a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>
-</span><span id="__span-1-91"><a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>        <span class="c1"># Step 1: Check safety interlocks</span>
-</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>        <span class="n">violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_safety_interlocks</span><span class="p">()</span>
-</span><span id="__span-1-93"><a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>        <span class="k">if</span> <span class="n">violations</span><span class="p">:</span>
-</span><span id="__span-1-94"><a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Safety violations detected:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-95"><a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>            <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">violations</span><span class="p">:</span>
-</span><span id="__span-1-96"><a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   - </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-97"><a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">execute_emergency_stop</span><span class="p">(</span><span class="s2">&quot;Safety interlock violation&quot;</span><span class="p">)</span>
-</span><span id="__span-1-98"><a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-1-99"><a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>
-</span><span id="__span-1-100"><a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a>        <span class="c1"># Step 2: Check if emergency stop is active</span>
-</span><span id="__span-1-101"><a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop_active</span><span class="p">:</span>
-</span><span id="__span-1-102"><a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Emergency stop is active. Cannot proceed.&quot;</span><span class="p">)</span>
-</span><span id="__span-1-103"><a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-1-104"><a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a>
-</span><span id="__span-1-105"><a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a>        <span class="c1"># Step 3: Attempt the action</span>
-</span><span id="__span-1-106"><a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Safety checks passed. Attempting action...&quot;</span><span class="p">)</span>
-</span><span id="__span-1-107"><a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">attempt_action</span><span class="p">(</span><span class="n">requested_action</span><span class="p">):</span>
-</span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Action &#39;</span><span class="si">{</span><span class="n">requested_action</span><span class="si">}</span><span class="s2">&#39; completed successfully!&quot;</span><span class="p">)</span>
-</span><span id="__span-1-109"><a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-1-110"><a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Action &#39;</span><span class="si">{</span><span class="n">requested_action</span><span class="si">}</span><span class="s2">&#39; failed.&quot;</span><span class="p">)</span>
-</span><span id="__span-1-112"><a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>            <span class="c1"># Step 4: Try fallback actions</span>
-</span><span id="__span-1-113"><a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">try_fallback_action</span><span class="p">(</span><span class="n">requested_action</span><span class="p">)</span>
-</span><span id="__span-1-114"><a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>
-</span><span id="__span-1-115"><a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a><span class="c1"># Demonstrate safety system</span>
-</span><span id="__span-1-116"><a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a><span class="n">safe_system</span> <span class="o">=</span> <span class="n">SafeAutonomousSystem</span><span class="p">()</span>
-</span><span id="__span-1-117"><a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>
-</span><span id="__span-1-118"><a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a><span class="c1"># Simulate some operations</span>
-</span><span id="__span-1-119"><a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Safe Operation Demonstration ===&quot;</span><span class="p">)</span>
-</span><span id="__span-1-120"><a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a><span class="n">safe_system</span><span class="o">.</span><span class="n">safe_operation_cycle</span><span class="p">(</span><span class="s2">&quot;move_forward&quot;</span><span class="p">)</span>
-</span><span id="__span-1-121"><a id="__codelineno-1-121" name="__codelineno-1-121" href="#__codelineno-1-121"></a>
-</span><span id="__span-1-122"><a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a><span class="c1"># Simulate a safety violation</span>
-</span><span id="__span-1-123"><a id="__codelineno-1-123" name="__codelineno-1-123" href="#__codelineno-1-123"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Safety Violation Simulation ===&quot;</span><span class="p">)</span>
-</span><span id="__span-1-124"><a id="__codelineno-1-124" name="__codelineno-1-124" href="#__codelineno-1-124"></a><span class="n">safe_system</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">][</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">95</span>  <span class="c1"># Exceed safe temperature</span>
-</span><span id="__span-1-125"><a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a><span class="n">safe_system</span><span class="o">.</span><span class="n">safe_operation_cycle</span><span class="p">(</span><span class="s2">&quot;pick_up_object&quot;</span><span class="p">)</span>
-</span><span id="__span-1-126"><a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>
-</span><span id="__span-1-127"><a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a><span class="c1"># Reset and try again</span>
-</span><span id="__span-1-128"><a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== After Safety Reset ===&quot;</span><span class="p">)</span>
-</span><span id="__span-1-129"><a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a><span class="n">safe_system</span><span class="o">.</span><span class="n">safety_interlocks</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">][</span><span class="s2">&quot;current&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">25</span>  <span class="c1"># Back to safe temperature</span>
-</span><span id="__span-1-130"><a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a><span class="n">safe_system</span><span class="o">.</span><span class="n">emergency_stop_active</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Reset emergency stop</span>
-</span><span id="__span-1-131"><a id="__codelineno-1-131" name="__codelineno-1-131" href="#__codelineno-1-131"></a><span class="n">safe_system</span><span class="o">.</span><span class="n">safe_operation_cycle</span><span class="p">(</span><span class="s2">&quot;navigate_to_target&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class SafeAutonomousSystem:
+    def __init__(self):
+        self.emergency_stop_active = False
+        self.safety_interlocks = {
+            &quot;temperature&quot;: {&quot;max&quot;: 80, &quot;current&quot;: 25},
+            &quot;pressure&quot;: {&quot;max&quot;: 100, &quot;current&quot;: 45},
+            &quot;speed&quot;: {&quot;max&quot;: 50, &quot;current&quot;: 0},
+            &quot;position&quot;: {&quot;safe_zone&quot;: (0, 100), &quot;current&quot;: 50}
+        }
+        self.fallback_actions = []
+
+    def check_safety_interlocks(self):
+        &quot;&quot;&quot;Check all safety conditions before allowing operation&quot;&quot;&quot;
+        violations = []
+
+        # Temperature check
+        temp = self.safety_interlocks[&quot;temperature&quot;]
+        if temp[&quot;current&quot;] &gt; temp[&quot;max&quot;]:
+            violations.append(f&quot;Temperature too high: {temp[&#x27;current&#x27;]}°C &gt; {temp[&#x27;max&#x27;]}°C&quot;)
+
+        # Pressure check
+        pressure = self.safety_interlocks[&quot;pressure&quot;]
+        if pressure[&quot;current&quot;] &gt; pressure[&quot;max&quot;]:
+            violations.append(f&quot;Pressure too high: {pressure[&#x27;current&#x27;]} &gt; {pressure[&#x27;max&#x27;]}&quot;)
+
+        # Speed check
+        speed = self.safety_interlocks[&quot;speed&quot;]
+        if speed[&quot;current&quot;] &gt; speed[&quot;max&quot;]:
+            violations.append(f&quot;Speed too high: {speed[&#x27;current&#x27;]} &gt; {speed[&#x27;max&#x27;]}&quot;)
+
+        # Position check
+        pos = self.safety_interlocks[&quot;position&quot;]
+        safe_min, safe_max = pos[&quot;safe_zone&quot;]
+        if not (safe_min &lt;= pos[&quot;current&quot;] &lt;= safe_max):
+            violations.append(f&quot;Position unsafe: {pos[&#x27;current&#x27;]} not in range {safe_min}-{safe_max}&quot;)
+
+        return violations
+
+    def execute_emergency_stop(self, reason):
+        &quot;&quot;&quot;Immediate shutdown for safety&quot;&quot;&quot;
+        self.emergency_stop_active = True
+        print(f&quot;🚨 EMERGENCY STOP: {reason}&quot;)
+        print(&quot;- All motion stopped&quot;)
+        print(&quot;- Power reduced to safe levels&quot;)
+        print(&quot;- Human operator notified&quot;)
+
+    def try_fallback_action(self, primary_action):
+        &quot;&quot;&quot;Attempt fallback when primary action fails&quot;&quot;&quot;
+        print(f&quot;Primary action &#x27;{primary_action}&#x27; failed. Trying fallbacks...&quot;)
+
+        fallback_plans = {
+            &quot;move_forward&quot;: [&quot;reduce_speed&quot;, &quot;find_alternate_path&quot;, &quot;stop_and_wait&quot;],
+            &quot;pick_up_object&quot;: [&quot;adjust_grip&quot;, &quot;change_approach_angle&quot;, &quot;request_human_help&quot;],
+            &quot;navigate_to_target&quot;: [&quot;recalculate_route&quot;, &quot;use_backup_sensors&quot;, &quot;return_to_safe_position&quot;]
+        }
+
+        if primary_action in fallback_plans:
+            for fallback in fallback_plans[primary_action]:
+                print(f&quot;  Trying fallback: {fallback}&quot;)
+                if self.attempt_action(fallback):
+                    print(f&quot;  ✅ Fallback &#x27;{fallback}&#x27; succeeded!&quot;)
+                    return True
+                else:
+                    print(f&quot;  ❌ Fallback &#x27;{fallback}&#x27; failed.&quot;)
+
+        print(&quot;  All fallbacks exhausted. Requesting human assistance.&quot;)
+        return False
+
+    def attempt_action(self, action):
+        &quot;&quot;&quot;Simulate attempting an action (simplified for demo)&quot;&quot;&quot;
+        # Simulate success/failure for different actions
+        success_rates = {
+            &quot;reduce_speed&quot;: 0.9,
+            &quot;find_alternate_path&quot;: 0.7,
+            &quot;stop_and_wait&quot;: 1.0,  # Always succeeds
+            &quot;adjust_grip&quot;: 0.6,
+            &quot;change_approach_angle&quot;: 0.8,
+            &quot;request_human_help&quot;: 1.0,  # Always succeeds
+            &quot;recalculate_route&quot;: 0.8,
+            &quot;use_backup_sensors&quot;: 0.7,
+            &quot;return_to_safe_position&quot;: 0.95
+        }
+
+        import random
+        return random.random() &lt; success_rates.get(action, 0.5)
+
+    def safe_operation_cycle(self, requested_action):
+        &quot;&quot;&quot;Perform an action safely with all checks&quot;&quot;&quot;
+        print(f&quot;\n🔍 Safety check for action: {requested_action}&quot;)
+
+        # Step 1: Check safety interlocks
+        violations = self.check_safety_interlocks()
+        if violations:
+            print(&quot;❌ Safety violations detected:&quot;)
+            for violation in violations:
+                print(f&quot;   - {violation}&quot;)
+            self.execute_emergency_stop(&quot;Safety interlock violation&quot;)
+            return False
+
+        # Step 2: Check if emergency stop is active
+        if self.emergency_stop_active:
+            print(&quot;❌ Emergency stop is active. Cannot proceed.&quot;)
+            return False
+
+        # Step 3: Attempt the action
+        print(&quot;✅ Safety checks passed. Attempting action...&quot;)
+        if self.attempt_action(requested_action):
+            print(f&quot;✅ Action &#x27;{requested_action}&#x27; completed successfully!&quot;)
+            return True
+        else:
+            print(f&quot;❌ Action &#x27;{requested_action}&#x27; failed.&quot;)
+            # Step 4: Try fallback actions
+            return self.try_fallback_action(requested_action)
+
+# Demonstrate safety system
+safe_system = SafeAutonomousSystem()
+
+# Simulate some operations
+print(&quot;=== Safe Operation Demonstration ===&quot;)
+safe_system.safe_operation_cycle(&quot;move_forward&quot;)
+
+# Simulate a safety violation
+print(&quot;\n=== Safety Violation Simulation ===&quot;)
+safe_system.safety_interlocks[&quot;temperature&quot;][&quot;current&quot;] = 95  # Exceed safe temperature
+safe_system.safe_operation_cycle(&quot;pick_up_object&quot;)
+
+# Reset and try again
+print(&quot;\n=== After Safety Reset ===&quot;)
+safe_system.safety_interlocks[&quot;temperature&quot;][&quot;current&quot;] = 25  # Back to safe temperature
+safe_system.emergency_stop_active = False  # Reset emergency stop
+safe_system.safe_operation_cycle(&quot;navigate_to_target&quot;)
+</code></pre>
+</div>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s build a comprehensive autonomous cleaning robot that demonstrates different autonomy levels and safety features:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">AutonomousCleaningRobot</span><span class="p">:</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">autonomy_level</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="c1"># Robot state</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">=</span> <span class="n">autonomy_level</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>  <span class="c1"># x, y coordinates</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">=</span> <span class="mi">100</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_pattern</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="c1"># Safety systems</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">max_stuck_attempts</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="c1"># Autonomous features</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_mode</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">home_position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_schedule</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;09:00&quot;</span><span class="p">}</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="c1"># Environmental awareness</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_room_map</span><span class="p">()</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">obstacles</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">80</span><span class="p">)]</span>  <span class="c1"># Known obstacles</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">generate_room_map</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a simple room map (100x100 grid)&quot;&quot;&quot;</span>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>            <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>            <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>            <span class="s2">&quot;cleaned_areas&quot;</span><span class="p">:</span> <span class="nb">set</span><span class="p">(),</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>            <span class="s2">&quot;dirty_areas&quot;</span><span class="p">:</span> <span class="p">{(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.3</span><span class="p">}</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>        <span class="p">}</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">detect_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate obstacle detection&quot;&quot;&quot;</span>
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>        <span class="n">current_pos</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>        <span class="k">return</span> <span class="n">current_pos</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obstacles</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.1</span>  <span class="c1"># 10% chance of random obstacle</span>
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">autonomous_decision_making</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;</span>
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🤖 Robot thinking (Autonomy Level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>        <span class="c1"># Level 0: No autonomy - wait for commands</span>
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Waiting for human command...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>            <span class="k">return</span> <span class="s2">&quot;wait_for_command&quot;</span>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>        <span class="c1"># Check critical conditions first (all levels)</span>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Low battery detected. Returning to charging station.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>                <span class="k">return</span> <span class="s2">&quot;return_to_charge&quot;</span>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Low battery. Requesting human assistance.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>                <span class="k">return</span> <span class="s2">&quot;request_help&quot;</span>
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>        <span class="c1"># Level 1: Basic assistance</span>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_obstacle</span><span class="p">():</span>
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Obstacle detected. Stopping and requesting help.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>                <span class="k">return</span> <span class="s2">&quot;request_help&quot;</span>
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Continuing basic cleaning pattern.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>                <span class="k">return</span> <span class="s2">&quot;clean_forward&quot;</span>
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="c1"># Level 2+: Partial autonomy and above</span>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">detect_obstacle</span><span class="p">():</span>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_stuck_attempts</span><span class="p">:</span>
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Obstacle detected. Trying to navigate around it.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>                    <span class="k">return</span> <span class="s2">&quot;navigate_around_obstacle&quot;</span>
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>                <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Stuck too many times. Requesting human help.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>                    <span class="k">return</span> <span class="s2">&quot;request_help&quot;</span>
-</span><span id="__span-2-77"><a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>
-</span><span id="__span-2-78"><a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a>            <span class="c1"># Check if cleaning is complete</span>
-</span><span id="__span-2-79"><a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-2-80"><a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Room appears clean. Returning home.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-81"><a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>                <span class="k">return</span> <span class="s2">&quot;return_home&quot;</span>
-</span><span id="__span-2-82"><a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a>
-</span><span id="__span-2-83"><a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>            <span class="c1"># Continue autonomous cleaning</span>
-</span><span id="__span-2-84"><a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Continuing autonomous cleaning pattern.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-85"><a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>            <span class="k">return</span> <span class="s2">&quot;autonomous_clean&quot;</span>
-</span><span id="__span-2-86"><a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>
-</span><span id="__span-2-87"><a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>        <span class="c1"># Level 4+: High autonomy</span>
-</span><span id="__span-2-88"><a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
-</span><span id="__span-2-89"><a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a>            <span class="c1"># Advanced features like scheduling</span>
-</span><span id="__span-2-90"><a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_schedule</span><span class="p">[</span><span class="s2">&quot;enabled&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>                <span class="n">current_time</span> <span class="o">=</span> <span class="s2">&quot;09:00&quot;</span>  <span class="c1"># Simplified time check</span>
-</span><span id="__span-2-92"><a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a>                <span class="k">if</span> <span class="n">current_time</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cleaning_schedule</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-93"><a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Scheduled cleaning time. Starting automatic session.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-94"><a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>                    <span class="k">return</span> <span class="s2">&quot;start_scheduled_clean&quot;</span>
-</span><span id="__span-2-95"><a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>
-</span><span id="__span-2-96"><a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a>        <span class="k">return</span> <span class="s2">&quot;autonomous_clean&quot;</span>
-</span><span id="__span-2-97"><a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a>
-</span><span id="__span-2-98"><a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">execute_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">):</span>
-</span><span id="__span-2-99"><a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute the decided action with safety checks&quot;&quot;&quot;</span>
-</span><span id="__span-2-100"><a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Executing: </span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-101"><a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>
-</span><span id="__span-2-102"><a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a>        <span class="c1"># Safety interlock: Emergency stop check</span>
-</span><span id="__span-2-103"><a id="__codelineno-2-103" name="__codelineno-2-103" href="#__codelineno-2-103"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">:</span>
-</span><span id="__span-2-104"><a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ❌ Emergency stop active. All actions halted.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-105"><a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-2-106"><a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a>
-</span><span id="__span-2-107"><a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>        <span class="c1"># Safety interlock: Battery check</span>
-</span><span id="__span-2-108"><a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
-</span><span id="__span-2-109"><a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ❌ Critical battery level. Emergency shutdown.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-110"><a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="__span-2-111"><a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-2-112"><a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a>
-</span><span id="__span-2-113"><a id="__codelineno-2-113" name="__codelineno-2-113" href="#__codelineno-2-113"></a>        <span class="c1"># Execute specific actions</span>
-</span><span id="__span-2-114"><a id="__codelineno-2-114" name="__codelineno-2-114" href="#__codelineno-2-114"></a>        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;clean_forward&quot;</span><span class="p">:</span>
-</span><span id="__span-2-115"><a id="__codelineno-2-115" name="__codelineno-2-115" href="#__codelineno-2-115"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">move_and_clean</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
-</span><span id="__span-2-116"><a id="__codelineno-2-116" name="__codelineno-2-116" href="#__codelineno-2-116"></a>
-</span><span id="__span-2-117"><a id="__codelineno-2-117" name="__codelineno-2-117" href="#__codelineno-2-117"></a>        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;navigate_around_obstacle&quot;</span><span class="p">:</span>
-</span><span id="__span-2-118"><a id="__codelineno-2-118" name="__codelineno-2-118" href="#__codelineno-2-118"></a>            <span class="c1"># Try different directions</span>
-</span><span id="__span-2-119"><a id="__codelineno-2-119" name="__codelineno-2-119" href="#__codelineno-2-119"></a>            <span class="n">directions</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-</span><span id="__span-2-120"><a id="__codelineno-2-120" name="__codelineno-2-120" href="#__codelineno-2-120"></a>            <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">directions</span><span class="p">:</span>
-</span><span id="__span-2-121"><a id="__codelineno-2-121" name="__codelineno-2-121" href="#__codelineno-2-121"></a>                <span class="n">new_pos</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">direction</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">direction</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-</span><span id="__span-2-122"><a id="__codelineno-2-122" name="__codelineno-2-122" href="#__codelineno-2-122"></a>                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">would_hit_obstacle</span><span class="p">(</span><span class="n">new_pos</span><span class="p">):</span>
-</span><span id="__span-2-123"><a id="__codelineno-2-123" name="__codelineno-2-123" href="#__codelineno-2-123"></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">move_and_clean</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-</span><span id="__span-2-124"><a id="__codelineno-2-124" name="__codelineno-2-124" href="#__codelineno-2-124"></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Reset stuck counter</span>
-</span><span id="__span-2-125"><a id="__codelineno-2-125" name="__codelineno-2-125" href="#__codelineno-2-125"></a>                    <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-2-126"><a id="__codelineno-2-126" name="__codelineno-2-126" href="#__codelineno-2-126"></a>
-</span><span id="__span-2-127"><a id="__codelineno-2-127" name="__codelineno-2-127" href="#__codelineno-2-127"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-128"><a id="__codelineno-2-128" name="__codelineno-2-128" href="#__codelineno-2-128"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Still stuck (attempt </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stuck_counter</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span id="__span-2-129"><a id="__codelineno-2-129" name="__codelineno-2-129" href="#__codelineno-2-129"></a>            <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-2-130"><a id="__codelineno-2-130" name="__codelineno-2-130" href="#__codelineno-2-130"></a>
-</span><span id="__span-2-131"><a id="__codelineno-2-131" name="__codelineno-2-131" href="#__codelineno-2-131"></a>        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;autonomous_clean&quot;</span><span class="p">:</span>
-</span><span id="__span-2-132"><a id="__codelineno-2-132" name="__codelineno-2-132" href="#__codelineno-2-132"></a>            <span class="c1"># Smart cleaning pattern</span>
-</span><span id="__span-2-133"><a id="__codelineno-2-133" name="__codelineno-2-133" href="#__codelineno-2-133"></a>            <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_nearest_dirty_spot</span><span class="p">()</span>
-</span><span id="__span-2-134"><a id="__codelineno-2-134" name="__codelineno-2-134" href="#__codelineno-2-134"></a>            <span class="k">if</span> <span class="n">target</span><span class="p">:</span>
-</span><span id="__span-2-135"><a id="__codelineno-2-135" name="__codelineno-2-135" href="#__codelineno-2-135"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">move_and_clean</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
-</span><span id="__span-2-136"><a id="__codelineno-2-136" name="__codelineno-2-136" href="#__codelineno-2-136"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-137"><a id="__codelineno-2-137" name="__codelineno-2-137" href="#__codelineno-2-137"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   No more dirty spots found.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-138"><a id="__codelineno-2-138" name="__codelineno-2-138" href="#__codelineno-2-138"></a>
-</span><span id="__span-2-139"><a id="__codelineno-2-139" name="__codelineno-2-139" href="#__codelineno-2-139"></a>        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;return_to_charge&quot;</span><span class="p">:</span>
-</span><span id="__span-2-140"><a id="__codelineno-2-140" name="__codelineno-2-140" href="#__codelineno-2-140"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Navigating to charging station...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-141"><a id="__codelineno-2-141" name="__codelineno-2-141" href="#__codelineno-2-141"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Simplified - instant return</span>
-</span><span id="__span-2-142"><a id="__codelineno-2-142" name="__codelineno-2-142" href="#__codelineno-2-142"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">=</span> <span class="mi">100</span>
-</span><span id="__span-2-143"><a id="__codelineno-2-143" name="__codelineno-2-143" href="#__codelineno-2-143"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   ✅ Charging complete!&quot;</span><span class="p">)</span>
-</span><span id="__span-2-144"><a id="__codelineno-2-144" name="__codelineno-2-144" href="#__codelineno-2-144"></a>
-</span><span id="__span-2-145"><a id="__codelineno-2-145" name="__codelineno-2-145" href="#__codelineno-2-145"></a>        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;return_home&quot;</span><span class="p">:</span>
-</span><span id="__span-2-146"><a id="__codelineno-2-146" name="__codelineno-2-146" href="#__codelineno-2-146"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Returning to home position...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-147"><a id="__codelineno-2-147" name="__codelineno-2-147" href="#__codelineno-2-147"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">home_position</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="__span-2-148"><a id="__codelineno-2-148" name="__codelineno-2-148" href="#__codelineno-2-148"></a>
-</span><span id="__span-2-149"><a id="__codelineno-2-149" name="__codelineno-2-149" href="#__codelineno-2-149"></a>        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;request_help&quot;</span><span class="p">:</span>
-</span><span id="__span-2-150"><a id="__codelineno-2-150" name="__codelineno-2-150" href="#__codelineno-2-150"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   📱 Notifying human operator for assistance...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-151"><a id="__codelineno-2-151" name="__codelineno-2-151" href="#__codelineno-2-151"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Robot status sent to mobile app.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-152"><a id="__codelineno-2-152" name="__codelineno-2-152" href="#__codelineno-2-152"></a>
-</span><span id="__span-2-153"><a id="__codelineno-2-153" name="__codelineno-2-153" href="#__codelineno-2-153"></a>        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;wait_for_command&quot;</span><span class="p">:</span>
-</span><span id="__span-2-154"><a id="__codelineno-2-154" name="__codelineno-2-154" href="#__codelineno-2-154"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Idle - waiting for manual control...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-155"><a id="__codelineno-2-155" name="__codelineno-2-155" href="#__codelineno-2-155"></a>
-</span><span id="__span-2-156"><a id="__codelineno-2-156" name="__codelineno-2-156" href="#__codelineno-2-156"></a>        <span class="c1"># Update battery (cleaning uses energy)</span>
-</span><span id="__span-2-157"><a id="__codelineno-2-157" name="__codelineno-2-157" href="#__codelineno-2-157"></a>        <span class="k">if</span> <span class="n">action</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;clean_forward&quot;</span><span class="p">,</span> <span class="s2">&quot;navigate_around_obstacle&quot;</span><span class="p">,</span> <span class="s2">&quot;autonomous_clean&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-158"><a id="__codelineno-2-158" name="__codelineno-2-158" href="#__codelineno-2-158"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span> <span class="o">-=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span id="__span-2-159"><a id="__codelineno-2-159" name="__codelineno-2-159" href="#__codelineno-2-159"></a>
-</span><span id="__span-2-160"><a id="__codelineno-2-160" name="__codelineno-2-160" href="#__codelineno-2-160"></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-2-161"><a id="__codelineno-2-161" name="__codelineno-2-161" href="#__codelineno-2-161"></a>
-</span><span id="__span-2-162"><a id="__codelineno-2-162" name="__codelineno-2-162" href="#__codelineno-2-162"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">move_and_clean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_position</span><span class="p">):</span>
-</span><span id="__span-2-163"><a id="__codelineno-2-163" name="__codelineno-2-163" href="#__codelineno-2-163"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Move to new position and clean if there&#39;s dirt&quot;&quot;&quot;</span>
-</span><span id="__span-2-164"><a id="__codelineno-2-164" name="__codelineno-2-164" href="#__codelineno-2-164"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">new_position</span>
-</span><span id="__span-2-165"><a id="__codelineno-2-165" name="__codelineno-2-165" href="#__codelineno-2-165"></a>        <span class="n">pos_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">new_position</span><span class="p">)</span>
-</span><span id="__span-2-166"><a id="__codelineno-2-166" name="__codelineno-2-166" href="#__codelineno-2-166"></a>
-</span><span id="__span-2-167"><a id="__codelineno-2-167" name="__codelineno-2-167" href="#__codelineno-2-167"></a>        <span class="k">if</span> <span class="n">pos_tuple</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-168"><a id="__codelineno-2-168" name="__codelineno-2-168" href="#__codelineno-2-168"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">pos_tuple</span><span class="p">)</span>
-</span><span id="__span-2-169"><a id="__codelineno-2-169" name="__codelineno-2-169" href="#__codelineno-2-169"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;cleaned_areas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pos_tuple</span><span class="p">)</span>
-</span><span id="__span-2-170"><a id="__codelineno-2-170" name="__codelineno-2-170" href="#__codelineno-2-170"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-171"><a id="__codelineno-2-171" name="__codelineno-2-171" href="#__codelineno-2-171"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   🧹 Cleaned dirt at </span><span class="si">{</span><span class="n">new_position</span><span class="si">}</span><span class="s2">. Total dirt collected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-172"><a id="__codelineno-2-172" name="__codelineno-2-172" href="#__codelineno-2-172"></a>
-</span><span id="__span-2-173"><a id="__codelineno-2-173" name="__codelineno-2-173" href="#__codelineno-2-173"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Moved to position </span><span class="si">{</span><span class="n">new_position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-174"><a id="__codelineno-2-174" name="__codelineno-2-174" href="#__codelineno-2-174"></a>
-</span><span id="__span-2-175"><a id="__codelineno-2-175" name="__codelineno-2-175" href="#__codelineno-2-175"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">find_nearest_dirty_spot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-176"><a id="__codelineno-2-176" name="__codelineno-2-176" href="#__codelineno-2-176"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Find the closest dirty area to clean&quot;&quot;&quot;</span>
-</span><span id="__span-2-177"><a id="__codelineno-2-177" name="__codelineno-2-177" href="#__codelineno-2-177"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-178"><a id="__codelineno-2-178" name="__codelineno-2-178" href="#__codelineno-2-178"></a>            <span class="k">return</span> <span class="kc">None</span>
-</span><span id="__span-2-179"><a id="__codelineno-2-179" name="__codelineno-2-179" href="#__codelineno-2-179"></a>
-</span><span id="__span-2-180"><a id="__codelineno-2-180" name="__codelineno-2-180" href="#__codelineno-2-180"></a>        <span class="n">min_distance</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
-</span><span id="__span-2-181"><a id="__codelineno-2-181" name="__codelineno-2-181" href="#__codelineno-2-181"></a>        <span class="n">nearest_spot</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-2-182"><a id="__codelineno-2-182" name="__codelineno-2-182" href="#__codelineno-2-182"></a>
-</span><span id="__span-2-183"><a id="__codelineno-2-183" name="__codelineno-2-183" href="#__codelineno-2-183"></a>        <span class="k">for</span> <span class="n">dirty_spot</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s2">&quot;dirty_areas&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-184"><a id="__codelineno-2-184" name="__codelineno-2-184" href="#__codelineno-2-184"></a>            <span class="n">distance</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dirty_spot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dirty_spot</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-185"><a id="__codelineno-2-185" name="__codelineno-2-185" href="#__codelineno-2-185"></a>            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">min_distance</span><span class="p">:</span>
-</span><span id="__span-2-186"><a id="__codelineno-2-186" name="__codelineno-2-186" href="#__codelineno-2-186"></a>                <span class="n">min_distance</span> <span class="o">=</span> <span class="n">distance</span>
-</span><span id="__span-2-187"><a id="__codelineno-2-187" name="__codelineno-2-187" href="#__codelineno-2-187"></a>                <span class="n">nearest_spot</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dirty_spot</span><span class="p">)</span>
-</span><span id="__span-2-188"><a id="__codelineno-2-188" name="__codelineno-2-188" href="#__codelineno-2-188"></a>
-</span><span id="__span-2-189"><a id="__codelineno-2-189" name="__codelineno-2-189" href="#__codelineno-2-189"></a>        <span class="k">return</span> <span class="n">nearest_spot</span>
-</span><span id="__span-2-190"><a id="__codelineno-2-190" name="__codelineno-2-190" href="#__codelineno-2-190"></a>
-</span><span id="__span-2-191"><a id="__codelineno-2-191" name="__codelineno-2-191" href="#__codelineno-2-191"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">would_hit_obstacle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
-</span><span id="__span-2-192"><a id="__codelineno-2-192" name="__codelineno-2-192" href="#__codelineno-2-192"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a position would hit an obstacle&quot;&quot;&quot;</span>
-</span><span id="__span-2-193"><a id="__codelineno-2-193" name="__codelineno-2-193" href="#__codelineno-2-193"></a>        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">position</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">obstacles</span>
-</span><span id="__span-2-194"><a id="__codelineno-2-194" name="__codelineno-2-194" href="#__codelineno-2-194"></a>
-</span><span id="__span-2-195"><a id="__codelineno-2-195" name="__codelineno-2-195" href="#__codelineno-2-195"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_cleaning_cycle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
-</span><span id="__span-2-196"><a id="__codelineno-2-196" name="__codelineno-2-196" href="#__codelineno-2-196"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run an autonomous cleaning cycle&quot;&quot;&quot;</span>
-</span><span id="__span-2-197"><a id="__codelineno-2-197" name="__codelineno-2-197" href="#__codelineno-2-197"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🏠 Starting cleaning cycle (Autonomy Level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">autonomy_level</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span id="__span-2-198"><a id="__codelineno-2-198" name="__codelineno-2-198" href="#__codelineno-2-198"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Initial status: Battery </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span><span class="si">}</span><span class="s2">%, Position </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-199"><a id="__codelineno-2-199" name="__codelineno-2-199" href="#__codelineno-2-199"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Dirty areas remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s1">&#39;dirty_areas&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-200"><a id="__codelineno-2-200" name="__codelineno-2-200" href="#__codelineno-2-200"></a>
-</span><span id="__span-2-201"><a id="__codelineno-2-201" name="__codelineno-2-201" href="#__codelineno-2-201"></a>        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-</span><span id="__span-2-202"><a id="__codelineno-2-202" name="__codelineno-2-202" href="#__codelineno-2-202"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- Step </span><span class="si">{</span><span class="n">step</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> ---&quot;</span><span class="p">)</span>
-</span><span id="__span-2-203"><a id="__codelineno-2-203" name="__codelineno-2-203" href="#__codelineno-2-203"></a>
-</span><span id="__span-2-204"><a id="__codelineno-2-204" name="__codelineno-2-204" href="#__codelineno-2-204"></a>            <span class="c1"># Make autonomous decision</span>
-</span><span id="__span-2-205"><a id="__codelineno-2-205" name="__codelineno-2-205" href="#__codelineno-2-205"></a>            <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">autonomous_decision_making</span><span class="p">()</span>
-</span><span id="__span-2-206"><a id="__codelineno-2-206" name="__codelineno-2-206" href="#__codelineno-2-206"></a>
-</span><span id="__span-2-207"><a id="__codelineno-2-207" name="__codelineno-2-207" href="#__codelineno-2-207"></a>            <span class="c1"># Execute with safety checks</span>
-</span><span id="__span-2-208"><a id="__codelineno-2-208" name="__codelineno-2-208" href="#__codelineno-2-208"></a>            <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-</span><span id="__span-2-209"><a id="__codelineno-2-209" name="__codelineno-2-209" href="#__codelineno-2-209"></a>
-</span><span id="__span-2-210"><a id="__codelineno-2-210" name="__codelineno-2-210" href="#__codelineno-2-210"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span> <span class="ow">and</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;request_help&quot;</span><span class="p">:</span>
-</span><span id="__span-2-211"><a id="__codelineno-2-211" name="__codelineno-2-211" href="#__codelineno-2-211"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Human intervention required. Pausing autonomous operation.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-212"><a id="__codelineno-2-212" name="__codelineno-2-212" href="#__codelineno-2-212"></a>                <span class="k">break</span>
-</span><span id="__span-2-213"><a id="__codelineno-2-213" name="__codelineno-2-213" href="#__codelineno-2-213"></a>
-</span><span id="__span-2-214"><a id="__codelineno-2-214" name="__codelineno-2-214" href="#__codelineno-2-214"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">emergency_stop</span><span class="p">:</span>
-</span><span id="__span-2-215"><a id="__codelineno-2-215" name="__codelineno-2-215" href="#__codelineno-2-215"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Emergency stop activated. Cleaning cycle halted.&quot;</span><span class="p">)</span>
-</span><span id="__span-2-216"><a id="__codelineno-2-216" name="__codelineno-2-216" href="#__codelineno-2-216"></a>                <span class="k">break</span>
-</span><span id="__span-2-217"><a id="__codelineno-2-217" name="__codelineno-2-217" href="#__codelineno-2-217"></a>
-</span><span id="__span-2-218"><a id="__codelineno-2-218" name="__codelineno-2-218" href="#__codelineno-2-218"></a>            <span class="c1"># Show current status</span>
-</span><span id="__span-2-219"><a id="__codelineno-2-219" name="__codelineno-2-219" href="#__codelineno-2-219"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Status: Battery </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span><span class="si">}</span><span class="s2">%, Position </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">, Dirt collected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-220"><a id="__codelineno-2-220" name="__codelineno-2-220" href="#__codelineno-2-220"></a>
-</span><span id="__span-2-221"><a id="__codelineno-2-221" name="__codelineno-2-221" href="#__codelineno-2-221"></a>            <span class="c1"># Brief pause for readability</span>
-</span><span id="__span-2-222"><a id="__codelineno-2-222" name="__codelineno-2-222" href="#__codelineno-2-222"></a>            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-</span><span id="__span-2-223"><a id="__codelineno-2-223" name="__codelineno-2-223" href="#__codelineno-2-223"></a>
-</span><span id="__span-2-224"><a id="__codelineno-2-224" name="__codelineno-2-224" href="#__codelineno-2-224"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🏁 Cleaning cycle complete!&quot;</span><span class="p">)</span>
-</span><span id="__span-2-225"><a id="__codelineno-2-225" name="__codelineno-2-225" href="#__codelineno-2-225"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Final status: Battery </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">battery_level</span><span class="si">}</span><span class="s2">%, Dirt collected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">dirt_collected</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-226"><a id="__codelineno-2-226" name="__codelineno-2-226" href="#__codelineno-2-226"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Dirty areas remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">room_map</span><span class="p">[</span><span class="s1">&#39;dirty_areas&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-227"><a id="__codelineno-2-227" name="__codelineno-2-227" href="#__codelineno-2-227"></a>
-</span><span id="__span-2-228"><a id="__codelineno-2-228" name="__codelineno-2-228" href="#__codelineno-2-228"></a><span class="c1"># Demonstrate different autonomy levels</span>
-</span><span id="__span-2-229"><a id="__codelineno-2-229" name="__codelineno-2-229" href="#__codelineno-2-229"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Autonomy Level Comparison ===&quot;</span><span class="p">)</span>
-</span><span id="__span-2-230"><a id="__codelineno-2-230" name="__codelineno-2-230" href="#__codelineno-2-230"></a>
-</span><span id="__span-2-231"><a id="__codelineno-2-231" name="__codelineno-2-231" href="#__codelineno-2-231"></a><span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
-</span><span id="__span-2-232"><a id="__codelineno-2-232" name="__codelineno-2-232" href="#__codelineno-2-232"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-233"><a id="__codelineno-2-233" name="__codelineno-2-233" href="#__codelineno-2-233"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing Autonomy Level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-234"><a id="__codelineno-2-234" name="__codelineno-2-234" href="#__codelineno-2-234"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">50</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-235"><a id="__codelineno-2-235" name="__codelineno-2-235" href="#__codelineno-2-235"></a>
-</span><span id="__span-2-236"><a id="__codelineno-2-236" name="__codelineno-2-236" href="#__codelineno-2-236"></a>    <span class="n">robot</span> <span class="o">=</span> <span class="n">AutonomousCleaningRobot</span><span class="p">(</span><span class="n">autonomy_level</span><span class="o">=</span><span class="n">level</span><span class="p">)</span>
-</span><span id="__span-2-237"><a id="__codelineno-2-237" name="__codelineno-2-237" href="#__codelineno-2-237"></a>    <span class="n">robot</span><span class="o">.</span><span class="n">run_cleaning_cycle</span><span class="p">(</span><span class="n">steps</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">import random
+import time
+
+class AutonomousCleaningRobot:
+    def __init__(self, autonomy_level=2):
+        # Robot state
+        self.autonomy_level = autonomy_level
+        self.position = [50, 50]  # x, y coordinates
+        self.battery_level = 100
+        self.dirt_collected = 0
+        self.cleaning_pattern = &quot;random&quot;
+
+        # Safety systems
+        self.emergency_stop = False
+        self.stuck_counter = 0
+        self.max_stuck_attempts = 3
+
+        # Autonomous features
+        self.cleaning_mode = &quot;auto&quot;
+        self.home_position = [0, 0]
+        self.cleaning_schedule = {&quot;enabled&quot;: False, &quot;time&quot;: &quot;09:00&quot;}
+
+        # Environmental awareness
+        self.room_map = self.generate_room_map()
+        self.obstacles = [(30, 40), (70, 20), (10, 80)]  # Known obstacles
+
+    def generate_room_map(self):
+        &quot;&quot;&quot;Create a simple room map (100x100 grid)&quot;&quot;&quot;
+        return {
+            &quot;width&quot;: 100,
+            &quot;height&quot;: 100,
+            &quot;cleaned_areas&quot;: set(),
+            &quot;dirty_areas&quot;: {(x, y) for x in range(20, 80) for y in range(20, 80) if random.random() &lt; 0.3}
+        }
+
+    def detect_obstacle(self):
+        &quot;&quot;&quot;Simulate obstacle detection&quot;&quot;&quot;
+        current_pos = tuple(self.position)
+        return current_pos in self.obstacles or random.random() &lt; 0.1  # 10% chance of random obstacle
+
+    def autonomous_decision_making(self):
+        &quot;&quot;&quot;Make decisions based on autonomy level&quot;&quot;&quot;
+        print(f&quot;\n🤖 Robot thinking (Autonomy Level {self.autonomy_level})...&quot;)
+
+        # Level 0: No autonomy - wait for commands
+        if self.autonomy_level == 0:
+            print(&quot;   Waiting for human command...&quot;)
+            return &quot;wait_for_command&quot;
+
+        # Check critical conditions first (all levels)
+        if self.battery_level &lt; 20:
+            if self.autonomy_level &gt;= 2:
+                print(&quot;   Low battery detected. Returning to charging station.&quot;)
+                return &quot;return_to_charge&quot;
+            else:
+                print(&quot;   Low battery. Requesting human assistance.&quot;)
+                return &quot;request_help&quot;
+
+        # Level 1: Basic assistance
+        if self.autonomy_level == 1:
+            if self.detect_obstacle():
+                print(&quot;   Obstacle detected. Stopping and requesting help.&quot;)
+                return &quot;request_help&quot;
+            else:
+                print(&quot;   Continuing basic cleaning pattern.&quot;)
+                return &quot;clean_forward&quot;
+
+        # Level 2+: Partial autonomy and above
+        if self.autonomy_level &gt;= 2:
+            if self.detect_obstacle():
+                if self.stuck_counter &lt; self.max_stuck_attempts:
+                    print(&quot;   Obstacle detected. Trying to navigate around it.&quot;)
+                    return &quot;navigate_around_obstacle&quot;
+                else:
+                    print(&quot;   Stuck too many times. Requesting human help.&quot;)
+                    return &quot;request_help&quot;
+
+            # Check if cleaning is complete
+            if len(self.room_map[&quot;dirty_areas&quot;]) == 0:
+                print(&quot;   Room appears clean. Returning home.&quot;)
+                return &quot;return_home&quot;
+
+            # Continue autonomous cleaning
+            print(&quot;   Continuing autonomous cleaning pattern.&quot;)
+            return &quot;autonomous_clean&quot;
+
+        # Level 4+: High autonomy
+        if self.autonomy_level &gt;= 4:
+            # Advanced features like scheduling
+            if self.cleaning_schedule[&quot;enabled&quot;]:
+                current_time = &quot;09:00&quot;  # Simplified time check
+                if current_time == self.cleaning_schedule[&quot;time&quot;]:
+                    print(&quot;   Scheduled cleaning time. Starting automatic session.&quot;)
+                    return &quot;start_scheduled_clean&quot;
+
+        return &quot;autonomous_clean&quot;
+
+    def execute_action(self, action):
+        &quot;&quot;&quot;Execute the decided action with safety checks&quot;&quot;&quot;
+        print(f&quot;   Executing: {action}&quot;)
+
+        # Safety interlock: Emergency stop check
+        if self.emergency_stop:
+            print(&quot;   ❌ Emergency stop active. All actions halted.&quot;)
+            return False
+
+        # Safety interlock: Battery check
+        if self.battery_level &lt; 5:
+            print(&quot;   ❌ Critical battery level. Emergency shutdown.&quot;)
+            self.emergency_stop = True
+            return False
+
+        # Execute specific actions
+        if action == &quot;clean_forward&quot;:
+            self.move_and_clean([self.position[0] + 5, self.position[1]])
+
+        elif action == &quot;navigate_around_obstacle&quot;:
+            # Try different directions
+            directions = [[0, 5], [5, 0], [0, -5], [-5, 0]]
+            for direction in directions:
+                new_pos = [self.position[0] + direction[0], self.position[1] + direction[1]]
+                if not self.would_hit_obstacle(new_pos):
+                    self.move_and_clean(new_pos)
+                    self.stuck_counter = 0  # Reset stuck counter
+                    return True
+
+            self.stuck_counter += 1
+            print(f&quot;   Still stuck (attempt {self.stuck_counter})&quot;)
+            return False
+
+        elif action == &quot;autonomous_clean&quot;:
+            # Smart cleaning pattern
+            target = self.find_nearest_dirty_spot()
+            if target:
+                self.move_and_clean(target)
+            else:
+                print(&quot;   No more dirty spots found.&quot;)
+
+        elif action == &quot;return_to_charge&quot;:
+            print(&quot;   Navigating to charging station...&quot;)
+            self.position = [0, 0]  # Simplified - instant return
+            self.battery_level = 100
+            print(&quot;   ✅ Charging complete!&quot;)
+
+        elif action == &quot;return_home&quot;:
+            print(&quot;   Returning to home position...&quot;)
+            self.position = self.home_position.copy()
+
+        elif action == &quot;request_help&quot;:
+            print(&quot;   📱 Notifying human operator for assistance...&quot;)
+            print(&quot;   Robot status sent to mobile app.&quot;)
+
+        elif action == &quot;wait_for_command&quot;:
+            print(&quot;   Idle - waiting for manual control...&quot;)
+
+        # Update battery (cleaning uses energy)
+        if action in [&quot;clean_forward&quot;, &quot;navigate_around_obstacle&quot;, &quot;autonomous_clean&quot;]:
+            self.battery_level -= random.randint(1, 3)
+
+        return True
+
+    def move_and_clean(self, new_position):
+        &quot;&quot;&quot;Move to new position and clean if there&#x27;s dirt&quot;&quot;&quot;
+        self.position = new_position
+        pos_tuple = tuple(new_position)
+
+        if pos_tuple in self.room_map[&quot;dirty_areas&quot;]:
+            self.room_map[&quot;dirty_areas&quot;].remove(pos_tuple)
+            self.room_map[&quot;cleaned_areas&quot;].add(pos_tuple)
+            self.dirt_collected += 1
+            print(f&quot;   🧹 Cleaned dirt at {new_position}. Total dirt collected: {self.dirt_collected}&quot;)
+
+        print(f&quot;   Moved to position {new_position}&quot;)
+
+    def find_nearest_dirty_spot(self):
+        &quot;&quot;&quot;Find the closest dirty area to clean&quot;&quot;&quot;
+        if not self.room_map[&quot;dirty_areas&quot;]:
+            return None
+
+        min_distance = float(&#x27;inf&#x27;)
+        nearest_spot = None
+
+        for dirty_spot in self.room_map[&quot;dirty_areas&quot;]:
+            distance = abs(dirty_spot[0] - self.position[0]) + abs(dirty_spot[1] - self.position[1])
+            if distance &lt; min_distance:
+                min_distance = distance
+                nearest_spot = list(dirty_spot)
+
+        return nearest_spot
+
+    def would_hit_obstacle(self, position):
+        &quot;&quot;&quot;Check if a position would hit an obstacle&quot;&quot;&quot;
+        return tuple(position) in self.obstacles
+
+    def run_cleaning_cycle(self, steps=5):
+        &quot;&quot;&quot;Run an autonomous cleaning cycle&quot;&quot;&quot;
+        print(f&quot;🏠 Starting cleaning cycle (Autonomy Level {self.autonomy_level})&quot;)
+        print(f&quot;   Initial status: Battery {self.battery_level}%, Position {self.position}&quot;)
+        print(f&quot;   Dirty areas remaining: {len(self.room_map[&#x27;dirty_areas&#x27;])}&quot;)
+
+        for step in range(steps):
+            print(f&quot;\n--- Step {step + 1} ---&quot;)
+
+            # Make autonomous decision
+            action = self.autonomous_decision_making()
+
+            # Execute with safety checks
+            success = self.execute_action(action)
+
+            if not success and action == &quot;request_help&quot;:
+                print(&quot;   Human intervention required. Pausing autonomous operation.&quot;)
+                break
+
+            if self.emergency_stop:
+                print(&quot;   Emergency stop activated. Cleaning cycle halted.&quot;)
+                break
+
+            # Show current status
+            print(f&quot;   Status: Battery {self.battery_level}%, Position {self.position}, Dirt collected: {self.dirt_collected}&quot;)
+
+            # Brief pause for readability
+            time.sleep(0.5)
+
+        print(f&quot;\n🏁 Cleaning cycle complete!&quot;)
+        print(f&quot;   Final status: Battery {self.battery_level}%, Dirt collected: {self.dirt_collected}&quot;)
+        print(f&quot;   Dirty areas remaining: {len(self.room_map[&#x27;dirty_areas&#x27;])}&quot;)
+
+# Demonstrate different autonomy levels
+print(&quot;=== Autonomy Level Comparison ===&quot;)
+
+for level in [1, 2, 4]:
+    print(f&quot;\n{&#x27;=&#x27;*50}&quot;)
+    print(f&quot;Testing Autonomy Level {level}&quot;)
+    print(f&quot;{&#x27;=&#x27;*50}&quot;)
+
+    robot = AutonomousCleaningRobot(autonomy_level=level)
+    robot.run_cleaning_cycle(steps=3)
+</code></pre>
+</div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
 <h3 id="exercise-1-design-autonomy-levels-for-different-systems">Exercise 1: Design autonomy levels for different systems<a class="headerlink" href="#exercise-1-design-autonomy-levels-for-different-systems" title="Permanent link">&para;</a></h3>
 <p>Consider how autonomy levels might work for different mechatronic systems:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">design_autonomy_system</span><span class="p">(</span><span class="n">system_type</span><span class="p">):</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Design appropriate autonomy levels for different systems&quot;&quot;&quot;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">autonomy_designs</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="s2">&quot;smart_thermostat&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>            <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="s2">&quot;Respond to manual temperature changes&quot;</span><span class="p">,</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>            <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="s2">&quot;Learn daily patterns and adjust automatically&quot;</span><span class="p">,</span> 
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="s2">&quot;Optimize for energy efficiency and comfort&quot;</span><span class="p">,</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="s2">&quot;Coordinate with other smart home devices&quot;</span><span class="p">,</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="s2">&quot;safety_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Temperature limits&quot;</span><span class="p">,</span> <span class="s2">&quot;Frost protection&quot;</span><span class="p">,</span> <span class="s2">&quot;Equipment monitoring&quot;</span><span class="p">]</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="p">},</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="s2">&quot;automated_greenhouse&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="s2">&quot;Monitor sensors and alert on issues&quot;</span><span class="p">,</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>            <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="s2">&quot;Automatic watering based on soil moisture&quot;</span><span class="p">,</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>            <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="s2">&quot;Climate control with weather forecast integration&quot;</span><span class="p">,</span> 
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>            <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="s2">&quot;Full crop management with growth optimization&quot;</span><span class="p">,</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>            <span class="s2">&quot;safety_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Water flow limits&quot;</span><span class="p">,</span> <span class="s2">&quot;Temperature boundaries&quot;</span><span class="p">,</span> <span class="s2">&quot;Chemical safety locks&quot;</span><span class="p">]</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="p">},</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="s2">&quot;delivery_drone&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>            <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="s2">&quot;Remote pilot control with automated stability&quot;</span><span class="p">,</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="s2">&quot;Waypoint navigation with obstacle avoidance&quot;</span><span class="p">,</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="s2">&quot;Route planning with weather adaptation&quot;</span><span class="p">,</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>            <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="s2">&quot;Fleet coordination and dynamic rerouting&quot;</span><span class="p">,</span> 
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>            <span class="s2">&quot;safety_features&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Geofencing&quot;</span><span class="p">,</span> <span class="s2">&quot;Emergency landing&quot;</span><span class="p">,</span> <span class="s2">&quot;Battery monitoring&quot;</span><span class="p">,</span> <span class="s2">&quot;Collision avoidance&quot;</span><span class="p">]</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>        <span class="p">}</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="p">}</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    <span class="k">if</span> <span class="n">system_type</span> <span class="ow">in</span> <span class="n">autonomy_designs</span><span class="p">:</span>
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>        <span class="n">design</span> <span class="o">=</span> <span class="n">autonomy_designs</span><span class="p">[</span><span class="n">system_type</span><span class="p">]</span>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Autonomy Design for </span><span class="si">{</span><span class="n">system_type</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Autonomy Levels:&quot;</span><span class="p">)</span>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;level_</span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">design</span><span class="p">:</span>
-</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Level </span><span class="si">{</span><span class="n">level</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">design</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   Safety Features:&quot;</span><span class="p">)</span>
-</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>        <span class="k">for</span> <span class="n">safety_feature</span> <span class="ow">in</span> <span class="n">design</span><span class="p">[</span><span class="s2">&quot;safety_features&quot;</span><span class="p">]:</span>
-</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   • </span><span class="si">{</span><span class="n">safety_feature</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Design not available for </span><span class="si">{</span><span class="n">system_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
-</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="c1"># Try different systems</span>
-</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a><span class="n">design_autonomy_system</span><span class="p">(</span><span class="s2">&quot;smart_thermostat&quot;</span><span class="p">)</span>
-</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="n">design_autonomy_system</span><span class="p">(</span><span class="s2">&quot;automated_greenhouse&quot;</span><span class="p">)</span> 
-</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="n">design_autonomy_system</span><span class="p">(</span><span class="s2">&quot;delivery_drone&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
+<pre><code class="language-python">def design_autonomy_system(system_type):
+    &quot;&quot;&quot;Design appropriate autonomy levels for different systems&quot;&quot;&quot;
+
+    autonomy_designs = {
+        &quot;smart_thermostat&quot;: {
+            &quot;level_1&quot;: &quot;Respond to manual temperature changes&quot;,
+            &quot;level_2&quot;: &quot;Learn daily patterns and adjust automatically&quot;, 
+            &quot;level_3&quot;: &quot;Optimize for energy efficiency and comfort&quot;,
+            &quot;level_4&quot;: &quot;Coordinate with other smart home devices&quot;,
+            &quot;safety_features&quot;: [&quot;Temperature limits&quot;, &quot;Frost protection&quot;, &quot;Equipment monitoring&quot;]
+        },
+
+        &quot;automated_greenhouse&quot;: {
+            &quot;level_1&quot;: &quot;Monitor sensors and alert on issues&quot;,
+            &quot;level_2&quot;: &quot;Automatic watering based on soil moisture&quot;,
+            &quot;level_3&quot;: &quot;Climate control with weather forecast integration&quot;, 
+            &quot;level_4&quot;: &quot;Full crop management with growth optimization&quot;,
+            &quot;safety_features&quot;: [&quot;Water flow limits&quot;, &quot;Temperature boundaries&quot;, &quot;Chemical safety locks&quot;]
+        },
+
+        &quot;delivery_drone&quot;: {
+            &quot;level_1&quot;: &quot;Remote pilot control with automated stability&quot;,
+            &quot;level_2&quot;: &quot;Waypoint navigation with obstacle avoidance&quot;,
+            &quot;level_3&quot;: &quot;Route planning with weather adaptation&quot;,
+            &quot;level_4&quot;: &quot;Fleet coordination and dynamic rerouting&quot;, 
+            &quot;safety_features&quot;: [&quot;Geofencing&quot;, &quot;Emergency landing&quot;, &quot;Battery monitoring&quot;, &quot;Collision avoidance&quot;]
+        }
+    }
+
+    if system_type in autonomy_designs:
+        design = autonomy_designs[system_type]
+        print(f&quot;\n🎯 Autonomy Design for {system_type.replace(&#x27;_&#x27;, &#x27; &#x27;).title()}:&quot;)
+        print(&quot;   Autonomy Levels:&quot;)
+        for level in range(1, 5):
+            key = f&quot;level_{level}&quot;
+            if key in design:
+                print(f&quot;   Level {level}: {design[key]}&quot;)
+
+        print(&quot;   Safety Features:&quot;)
+        for safety_feature in design[&quot;safety_features&quot;]:
+            print(f&quot;   • {safety_feature}&quot;)
+    else:
+        print(f&quot;Design not available for {system_type}&quot;)
+
+# Try different systems
+design_autonomy_system(&quot;smart_thermostat&quot;)
+design_autonomy_system(&quot;automated_greenhouse&quot;) 
+design_autonomy_system(&quot;delivery_drone&quot;)
+</code></pre>
+</div>
 <h3 id="exercise-2-build-a-safety-interlock-system">Exercise 2: Build a safety interlock system<a class="headerlink" href="#exercise-2-build-a-safety-interlock-system" title="Permanent link">&para;</a></h3>
 <p>Create a comprehensive safety system for an industrial robot:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">IndustrialRobotSafety</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">safety_zones</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>            <span class="s2">&quot;red_zone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;No humans allowed during operation&quot;</span><span class="p">,</span> <span class="s2">&quot;violation_response&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate_stop&quot;</span><span class="p">},</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>            <span class="s2">&quot;yellow_zone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Reduced speed when humans present&quot;</span><span class="p">,</span> <span class="s2">&quot;violation_response&quot;</span><span class="p">:</span> <span class="s2">&quot;slow_operation&quot;</span><span class="p">},</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>            <span class="s2">&quot;green_zone&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Safe for human interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;violation_response&quot;</span><span class="p">:</span> <span class="s2">&quot;normal_operation&quot;</span><span class="p">}</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="p">}</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensors</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="s2">&quot;light_curtain&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;clear&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>            <span class="s2">&quot;pressure_mat&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;clear&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span> 
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>            <span class="s2">&quot;motion_detector&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;clear&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>            <span class="s2">&quot;emergency_button&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="p">}</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>            <span class="s2">&quot;max_speed&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>  <span class="c1"># cm/second</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>            <span class="s2">&quot;max_force&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>   <span class="c1"># Newtons</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>            <span class="s2">&quot;max_reach&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>  <span class="c1"># cm from base</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            <span class="s2">&quot;temperature_limit&quot;</span><span class="p">:</span> <span class="mi">70</span>  <span class="c1"># Celsius</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="p">}</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="s2">&quot;speed&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>            <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>            <span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>            <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="mi">25</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>        <span class="p">}</span>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_safety_zones</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detected_humans</span><span class="p">):</span>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if humans are in safe zones&quot;&quot;&quot;</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>        <span class="k">for</span> <span class="n">location</span><span class="p">,</span> <span class="n">zone_type</span> <span class="ow">in</span> <span class="n">detected_humans</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>            <span class="n">zone_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_zones</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">zone_type</span><span class="p">,</span> <span class="p">{})</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>            <span class="k">if</span> <span class="n">zone_type</span> <span class="o">==</span> <span class="s2">&quot;red_zone&quot;</span><span class="p">:</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Human detected in red zone at </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2"> - CRITICAL&quot;</span><span class="p">)</span>
-</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>            <span class="k">elif</span> <span class="n">zone_type</span> <span class="o">==</span> <span class="s2">&quot;yellow_zone&quot;</span><span class="p">:</span>
-</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Human detected in yellow zone at </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2"> - CAUTION&quot;</span><span class="p">)</span>
-</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>
-</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>        <span class="k">return</span> <span class="n">violations</span>
-</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>
-</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_sensor_status</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check all safety sensor status&quot;&quot;&quot;</span>
-</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>
-</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>        <span class="k">for</span> <span class="n">sensor</span><span class="p">,</span> <span class="n">info</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">safety_sensors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>            <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;clear&quot;</span> <span class="ow">and</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;normal&quot;</span><span class="p">:</span>
-</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>                <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;CRITICAL&quot;</span> <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;critical&quot;</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;WARNING&quot;</span>
-</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>                <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sensor</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">severity</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>
-</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>        <span class="k">return</span> <span class="n">violations</span>
-</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>
-</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">check_operational_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if robot is operating within safe limits&quot;&quot;&quot;</span>
-</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>        <span class="n">violations</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>
-</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;max_speed&quot;</span><span class="p">]:</span>
-</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Speed exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;max_speed&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>
-</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;force&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;max_force&quot;</span><span class="p">]:</span>
-</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Force exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;force&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;max_force&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-64"><a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>
-</span><span id="__span-4-65"><a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;max_reach&quot;</span><span class="p">]:</span>
-</span><span id="__span-4-66"><a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reach exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;position&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;max_reach&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-67"><a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>
-</span><span id="__span-4-68"><a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s2">&quot;temperature_limit&quot;</span><span class="p">]:</span>
-</span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a>            <span class="n">violations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature exceeded: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operational_limits</span><span class="p">[</span><span class="s1">&#39;temperature_limit&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a>
-</span><span id="__span-4-71"><a id="__codelineno-4-71" name="__codelineno-4-71" href="#__codelineno-4-71"></a>        <span class="k">return</span> <span class="n">violations</span>
-</span><span id="__span-4-72"><a id="__codelineno-4-72" name="__codelineno-4-72" href="#__codelineno-4-72"></a>
-</span><span id="__span-4-73"><a id="__codelineno-4-73" name="__codelineno-4-73" href="#__codelineno-4-73"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">comprehensive_safety_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detected_humans</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-4-74"><a id="__codelineno-4-74" name="__codelineno-4-74" href="#__codelineno-4-74"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform complete safety assessment&quot;&quot;&quot;</span>
-</span><span id="__span-4-75"><a id="__codelineno-4-75" name="__codelineno-4-75" href="#__codelineno-4-75"></a>        <span class="k">if</span> <span class="n">detected_humans</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-4-76"><a id="__codelineno-4-76" name="__codelineno-4-76" href="#__codelineno-4-76"></a>            <span class="n">detected_humans</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-4-77"><a id="__codelineno-4-77" name="__codelineno-4-77" href="#__codelineno-4-77"></a>
-</span><span id="__span-4-78"><a id="__codelineno-4-78" name="__codelineno-4-78" href="#__codelineno-4-78"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔒 Comprehensive Safety Check&quot;</span><span class="p">)</span>
-</span><span id="__span-4-79"><a id="__codelineno-4-79" name="__codelineno-4-79" href="#__codelineno-4-79"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-</span><span id="__span-4-80"><a id="__codelineno-4-80" name="__codelineno-4-80" href="#__codelineno-4-80"></a>
-</span><span id="__span-4-81"><a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>        <span class="n">all_violations</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-4-82"><a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a>
-</span><span id="__span-4-83"><a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a>        <span class="c1"># Check each safety system</span>
-</span><span id="__span-4-84"><a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a>        <span class="n">zone_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_safety_zones</span><span class="p">(</span><span class="n">detected_humans</span><span class="p">)</span>
-</span><span id="__span-4-85"><a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a>        <span class="n">sensor_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_sensor_status</span><span class="p">()</span>
-</span><span id="__span-4-86"><a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a>        <span class="n">limit_violations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_operational_limits</span><span class="p">()</span>
-</span><span id="__span-4-87"><a id="__codelineno-4-87" name="__codelineno-4-87" href="#__codelineno-4-87"></a>
-</span><span id="__span-4-88"><a id="__codelineno-4-88" name="__codelineno-4-88" href="#__codelineno-4-88"></a>        <span class="n">all_violations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">zone_violations</span><span class="p">)</span>
-</span><span id="__span-4-89"><a id="__codelineno-4-89" name="__codelineno-4-89" href="#__codelineno-4-89"></a>        <span class="n">all_violations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sensor_violations</span><span class="p">)</span> 
-</span><span id="__span-4-90"><a id="__codelineno-4-90" name="__codelineno-4-90" href="#__codelineno-4-90"></a>        <span class="n">all_violations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">limit_violations</span><span class="p">)</span>
-</span><span id="__span-4-91"><a id="__codelineno-4-91" name="__codelineno-4-91" href="#__codelineno-4-91"></a>
-</span><span id="__span-4-92"><a id="__codelineno-4-92" name="__codelineno-4-92" href="#__codelineno-4-92"></a>        <span class="c1"># Report results</span>
-</span><span id="__span-4-93"><a id="__codelineno-4-93" name="__codelineno-4-93" href="#__codelineno-4-93"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">all_violations</span><span class="p">:</span>
-</span><span id="__span-4-94"><a id="__codelineno-4-94" name="__codelineno-4-94" href="#__codelineno-4-94"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ All safety checks passed - Operation authorized&quot;</span><span class="p">)</span>
-</span><span id="__span-4-95"><a id="__codelineno-4-95" name="__codelineno-4-95" href="#__codelineno-4-95"></a>            <span class="k">return</span> <span class="s2">&quot;safe_to_operate&quot;</span>
-</span><span id="__span-4-96"><a id="__codelineno-4-96" name="__codelineno-4-96" href="#__codelineno-4-96"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-4-97"><a id="__codelineno-4-97" name="__codelineno-4-97" href="#__codelineno-4-97"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;❌ Safety violations detected:&quot;</span><span class="p">)</span>
-</span><span id="__span-4-98"><a id="__codelineno-4-98" name="__codelineno-4-98" href="#__codelineno-4-98"></a>            <span class="n">critical_violations</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_violations</span> <span class="k">if</span> <span class="s2">&quot;CRITICAL&quot;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
-</span><span id="__span-4-99"><a id="__codelineno-4-99" name="__codelineno-4-99" href="#__codelineno-4-99"></a>            <span class="n">warning_violations</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_violations</span> <span class="k">if</span> <span class="s2">&quot;WARNING&quot;</span> <span class="ow">in</span> <span class="n">v</span> <span class="ow">or</span> <span class="s2">&quot;CAUTION&quot;</span> <span class="ow">in</span> <span class="n">v</span><span class="p">]</span>
-</span><span id="__span-4-100"><a id="__codelineno-4-100" name="__codelineno-4-100" href="#__codelineno-4-100"></a>
-</span><span id="__span-4-101"><a id="__codelineno-4-101" name="__codelineno-4-101" href="#__codelineno-4-101"></a>            <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">critical_violations</span><span class="p">:</span>
-</span><span id="__span-4-102"><a id="__codelineno-4-102" name="__codelineno-4-102" href="#__codelineno-4-102"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   🚨 </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-103"><a id="__codelineno-4-103" name="__codelineno-4-103" href="#__codelineno-4-103"></a>            <span class="k">for</span> <span class="n">violation</span> <span class="ow">in</span> <span class="n">warning_violations</span><span class="p">:</span>
-</span><span id="__span-4-104"><a id="__codelineno-4-104" name="__codelineno-4-104" href="#__codelineno-4-104"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   ⚠️  </span><span class="si">{</span><span class="n">violation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-105"><a id="__codelineno-4-105" name="__codelineno-4-105" href="#__codelineno-4-105"></a>
-</span><span id="__span-4-106"><a id="__codelineno-4-106" name="__codelineno-4-106" href="#__codelineno-4-106"></a>            <span class="k">if</span> <span class="n">critical_violations</span><span class="p">:</span>
-</span><span id="__span-4-107"><a id="__codelineno-4-107" name="__codelineno-4-107" href="#__codelineno-4-107"></a>                <span class="k">return</span> <span class="s2">&quot;emergency_stop&quot;</span>
-</span><span id="__span-4-108"><a id="__codelineno-4-108" name="__codelineno-4-108" href="#__codelineno-4-108"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-4-109"><a id="__codelineno-4-109" name="__codelineno-4-109" href="#__codelineno-4-109"></a>                <span class="k">return</span> <span class="s2">&quot;restricted_operation&quot;</span>
-</span><span id="__span-4-110"><a id="__codelineno-4-110" name="__codelineno-4-110" href="#__codelineno-4-110"></a>
-</span><span id="__span-4-111"><a id="__codelineno-4-111" name="__codelineno-4-111" href="#__codelineno-4-111"></a><span class="c1"># Test the safety system</span>
-</span><span id="__span-4-112"><a id="__codelineno-4-112" name="__codelineno-4-112" href="#__codelineno-4-112"></a><span class="n">safety_system</span> <span class="o">=</span> <span class="n">IndustrialRobotSafety</span><span class="p">()</span>
-</span><span id="__span-4-113"><a id="__codelineno-4-113" name="__codelineno-4-113" href="#__codelineno-4-113"></a>
-</span><span id="__span-4-114"><a id="__codelineno-4-114" name="__codelineno-4-114" href="#__codelineno-4-114"></a><span class="c1"># Test 1: Normal operation</span>
-</span><span id="__span-4-115"><a id="__codelineno-4-115" name="__codelineno-4-115" href="#__codelineno-4-115"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test 1: Normal Operation ===&quot;</span><span class="p">)</span>
-</span><span id="__span-4-116"><a id="__codelineno-4-116" name="__codelineno-4-116" href="#__codelineno-4-116"></a><span class="n">result</span> <span class="o">=</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">comprehensive_safety_check</span><span class="p">()</span>
-</span><span id="__span-4-117"><a id="__codelineno-4-117" name="__codelineno-4-117" href="#__codelineno-4-117"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-118"><a id="__codelineno-4-118" name="__codelineno-4-118" href="#__codelineno-4-118"></a>
-</span><span id="__span-4-119"><a id="__codelineno-4-119" name="__codelineno-4-119" href="#__codelineno-4-119"></a><span class="c1"># Test 2: Human in yellow zone</span>
-</span><span id="__span-4-120"><a id="__codelineno-4-120" name="__codelineno-4-120" href="#__codelineno-4-120"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test 2: Human in Caution Zone ===&quot;</span><span class="p">)</span>
-</span><span id="__span-4-121"><a id="__codelineno-4-121" name="__codelineno-4-121" href="#__codelineno-4-121"></a><span class="n">result</span> <span class="o">=</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">comprehensive_safety_check</span><span class="p">({</span><span class="s2">&quot;area_B&quot;</span><span class="p">:</span> <span class="s2">&quot;yellow_zone&quot;</span><span class="p">})</span>
-</span><span id="__span-4-122"><a id="__codelineno-4-122" name="__codelineno-4-122" href="#__codelineno-4-122"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-123"><a id="__codelineno-4-123" name="__codelineno-4-123" href="#__codelineno-4-123"></a>
-</span><span id="__span-4-124"><a id="__codelineno-4-124" name="__codelineno-4-124" href="#__codelineno-4-124"></a><span class="c1"># Test 3: Critical violations</span>
-</span><span id="__span-4-125"><a id="__codelineno-4-125" name="__codelineno-4-125" href="#__codelineno-4-125"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Test 3: Critical Safety Violation ===&quot;</span><span class="p">)</span>
-</span><span id="__span-4-126"><a id="__codelineno-4-126" name="__codelineno-4-126" href="#__codelineno-4-126"></a><span class="n">safety_system</span><span class="o">.</span><span class="n">safety_sensors</span><span class="p">[</span><span class="s2">&quot;emergency_button&quot;</span><span class="p">][</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;pressed&quot;</span>
-</span><span id="__span-4-127"><a id="__codelineno-4-127" name="__codelineno-4-127" href="#__codelineno-4-127"></a><span class="n">safety_system</span><span class="o">.</span><span class="n">current_state</span><span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">150</span>  <span class="c1"># Exceed speed limit</span>
-</span><span id="__span-4-128"><a id="__codelineno-4-128" name="__codelineno-4-128" href="#__codelineno-4-128"></a><span class="n">result</span> <span class="o">=</span> <span class="n">safety_system</span><span class="o">.</span><span class="n">comprehensive_safety_check</span><span class="p">({</span><span class="s2">&quot;area_A&quot;</span><span class="p">:</span> <span class="s2">&quot;red_zone&quot;</span><span class="p">})</span>
-</span><span id="__span-4-129"><a id="__codelineno-4-129" name="__codelineno-4-129" href="#__codelineno-4-129"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class IndustrialRobotSafety:
+    def __init__(self):
+        self.safety_zones = {
+            &quot;red_zone&quot;: {&quot;description&quot;: &quot;No humans allowed during operation&quot;, &quot;violation_response&quot;: &quot;immediate_stop&quot;},
+            &quot;yellow_zone&quot;: {&quot;description&quot;: &quot;Reduced speed when humans present&quot;, &quot;violation_response&quot;: &quot;slow_operation&quot;},
+            &quot;green_zone&quot;: {&quot;description&quot;: &quot;Safe for human interaction&quot;, &quot;violation_response&quot;: &quot;normal_operation&quot;}
+        }
+
+        self.safety_sensors = {
+            &quot;light_curtain&quot;: {&quot;status&quot;: &quot;clear&quot;, &quot;critical&quot;: True},
+            &quot;pressure_mat&quot;: {&quot;status&quot;: &quot;clear&quot;, &quot;critical&quot;: True}, 
+            &quot;motion_detector&quot;: {&quot;status&quot;: &quot;clear&quot;, &quot;critical&quot;: False},
+            &quot;emergency_button&quot;: {&quot;status&quot;: &quot;normal&quot;, &quot;critical&quot;: True}
+        }
+
+        self.operational_limits = {
+            &quot;max_speed&quot;: 100,  # cm/second
+            &quot;max_force&quot;: 50,   # Newtons
+            &quot;max_reach&quot;: 200,  # cm from base
+            &quot;temperature_limit&quot;: 70  # Celsius
+        }
+
+        self.current_state = {
+            &quot;speed&quot;: 0,
+            &quot;force&quot;: 0, 
+            &quot;position&quot;: 0,
+            &quot;temperature&quot;: 25
+        }
+
+    def check_safety_zones(self, detected_humans):
+        &quot;&quot;&quot;Check if humans are in safe zones&quot;&quot;&quot;
+        violations = []
+
+        for location, zone_type in detected_humans.items():
+            zone_info = self.safety_zones.get(zone_type, {})
+
+            if zone_type == &quot;red_zone&quot;:
+                violations.append(f&quot;Human detected in red zone at {location} - CRITICAL&quot;)
+            elif zone_type == &quot;yellow_zone&quot;:
+                violations.append(f&quot;Human detected in yellow zone at {location} - CAUTION&quot;)
+
+        return violations
+
+    def check_sensor_status(self):
+        &quot;&quot;&quot;Check all safety sensor status&quot;&quot;&quot;
+        violations = []
+
+        for sensor, info in self.safety_sensors.items():
+            if info[&quot;status&quot;] != &quot;clear&quot; and info[&quot;status&quot;] != &quot;normal&quot;:
+                severity = &quot;CRITICAL&quot; if info[&quot;critical&quot;] else &quot;WARNING&quot;
+                violations.append(f&quot;{sensor}: {info[&#x27;status&#x27;]} - {severity}&quot;)
+
+        return violations
+
+    def check_operational_limits(self):
+        &quot;&quot;&quot;Check if robot is operating within safe limits&quot;&quot;&quot;
+        violations = []
+
+        if self.current_state[&quot;speed&quot;] &gt; self.operational_limits[&quot;max_speed&quot;]:
+            violations.append(f&quot;Speed exceeded: {self.current_state[&#x27;speed&#x27;]} &gt; {self.operational_limits[&#x27;max_speed&#x27;]}&quot;)
+
+        if self.current_state[&quot;force&quot;] &gt; self.operational_limits[&quot;max_force&quot;]:
+            violations.append(f&quot;Force exceeded: {self.current_state[&#x27;force&#x27;]} &gt; {self.operational_limits[&#x27;max_force&#x27;]}&quot;)
+
+        if self.current_state[&quot;position&quot;] &gt; self.operational_limits[&quot;max_reach&quot;]:
+            violations.append(f&quot;Reach exceeded: {self.current_state[&#x27;position&#x27;]} &gt; {self.operational_limits[&#x27;max_reach&#x27;]}&quot;)
+
+        if self.current_state[&quot;temperature&quot;] &gt; self.operational_limits[&quot;temperature_limit&quot;]:
+            violations.append(f&quot;Temperature exceeded: {self.current_state[&#x27;temperature&#x27;]} &gt; {self.operational_limits[&#x27;temperature_limit&#x27;]}&quot;)
+
+        return violations
+
+    def comprehensive_safety_check(self, detected_humans=None):
+        &quot;&quot;&quot;Perform complete safety assessment&quot;&quot;&quot;
+        if detected_humans is None:
+            detected_humans = {}
+
+        print(&quot;🔒 Comprehensive Safety Check&quot;)
+        print(&quot;-&quot; * 40)
+
+        all_violations = []
+
+        # Check each safety system
+        zone_violations = self.check_safety_zones(detected_humans)
+        sensor_violations = self.check_sensor_status()
+        limit_violations = self.check_operational_limits()
+
+        all_violations.extend(zone_violations)
+        all_violations.extend(sensor_violations) 
+        all_violations.extend(limit_violations)
+
+        # Report results
+        if not all_violations:
+            print(&quot;✅ All safety checks passed - Operation authorized&quot;)
+            return &quot;safe_to_operate&quot;
+        else:
+            print(&quot;❌ Safety violations detected:&quot;)
+            critical_violations = [v for v in all_violations if &quot;CRITICAL&quot; in v]
+            warning_violations = [v for v in all_violations if &quot;WARNING&quot; in v or &quot;CAUTION&quot; in v]
+
+            for violation in critical_violations:
+                print(f&quot;   🚨 {violation}&quot;)
+            for violation in warning_violations:
+                print(f&quot;   ⚠️  {violation}&quot;)
+
+            if critical_violations:
+                return &quot;emergency_stop&quot;
+            else:
+                return &quot;restricted_operation&quot;
+
+# Test the safety system
+safety_system = IndustrialRobotSafety()
+
+# Test 1: Normal operation
+print(&quot;=== Test 1: Normal Operation ===&quot;)
+result = safety_system.comprehensive_safety_check()
+print(f&quot;Result: {result}\n&quot;)
+
+# Test 2: Human in yellow zone
+print(&quot;=== Test 2: Human in Caution Zone ===&quot;)
+result = safety_system.comprehensive_safety_check({&quot;area_B&quot;: &quot;yellow_zone&quot;})
+print(f&quot;Result: {result}\n&quot;)
+
+# Test 3: Critical violations
+print(&quot;=== Test 3: Critical Safety Violation ===&quot;)
+safety_system.safety_sensors[&quot;emergency_button&quot;][&quot;status&quot;] = &quot;pressed&quot;
+safety_system.current_state[&quot;speed&quot;] = 150  # Exceed speed limit
+result = safety_system.comprehensive_safety_check({&quot;area_A&quot;: &quot;red_zone&quot;})
+print(f&quot;Result: {result}&quot;)
+</code></pre>
+</div>
 <h2 id="recap">Recap<a class="headerlink" href="#recap" title="Permanent link">&para;</a></h2>
 <p>In this section, you learned about autonomous control features in mechatronic systems:</p>
 <p><strong>Key concepts:</strong></p>
@@ -2269,7 +2279,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2025 23:34:36 UTC">October 7, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

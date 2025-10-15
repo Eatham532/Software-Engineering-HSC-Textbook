@@ -1521,150 +1521,152 @@
 <p><strong>User journey tracking</strong>: Data on how users navigate through the application</p>
 </li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Example: Comprehensive feedback collection system</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">FeedbackCollector</span><span class="p">:</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_sources</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            <span class="s2">&quot;user_surveys&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            <span class="s2">&quot;interviews&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>            <span class="s2">&quot;support_tickets&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>            <span class="s2">&quot;beta_testing&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            <span class="s2">&quot;analytics&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="s2">&quot;error_logs&quot;</span><span class="p">:</span> <span class="p">[]</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="p">}</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collect_survey_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">survey_data</span><span class="p">):</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process structured survey responses&quot;&quot;&quot;</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="k">for</span> <span class="n">response</span> <span class="ow">in</span> <span class="n">survey_data</span><span class="p">:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="n">feedback_item</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_survey&quot;</span><span class="p">,</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_id&quot;</span><span class="p">),</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span><span class="p">,</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>                <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_categorize_survey_response</span><span class="p">(</span><span class="n">response</span><span class="p">),</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>                <span class="s2">&quot;satisfaction_score&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>                <span class="s2">&quot;feedback_text&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comments&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feature_discussed&quot;</span><span class="p">),</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                <span class="s2">&quot;priority_indicator&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_priority</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="p">}</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback_item</span><span class="p">)</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">survey_data</span><span class="p">)</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collect_interview_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interview_notes</span><span class="p">):</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process qualitative interview data&quot;&quot;&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="n">feedback_item</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_interview&quot;</span><span class="p">,</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>            <span class="s2">&quot;participant_id&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;participant&quot;</span><span class="p">],</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">],</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;qualitative&quot;</span><span class="p">,</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>            <span class="s2">&quot;key_insights&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;insights&quot;</span><span class="p">],</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>            <span class="s2">&quot;pain_points&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;pain_points&quot;</span><span class="p">],</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>            <span class="s2">&quot;feature_requests&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;requests&quot;</span><span class="p">],</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>            <span class="s2">&quot;user_journey_feedback&quot;</span><span class="p">:</span> <span class="n">interview_notes</span><span class="p">[</span><span class="s2">&quot;journey_notes&quot;</span><span class="p">]</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="p">}</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback_item</span><span class="p">)</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="k">return</span> <span class="n">feedback_item</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">collect_analytics_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">analytics_report</span><span class="p">):</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Process usage analytics and behavioral data&quot;&quot;&quot;</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="n">analytics_feedback</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;analytics&quot;</span><span class="p">,</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>            <span class="s2">&quot;report_period&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;period&quot;</span><span class="p">],</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>            <span class="s2">&quot;user_engagement&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>                <span class="s2">&quot;daily_active_users&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;dau&quot;</span><span class="p">],</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>                <span class="s2">&quot;session_duration&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;avg_session&quot;</span><span class="p">],</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>                <span class="s2">&quot;feature_usage&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;feature_stats&quot;</span><span class="p">],</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>                <span class="s2">&quot;drop_off_points&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;abandonment_data&quot;</span><span class="p">]</span>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>            <span class="p">},</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>            <span class="s2">&quot;performance_metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>                <span class="s2">&quot;page_load_times&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;performance&quot;</span><span class="p">],</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>                <span class="s2">&quot;error_rates&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>                <span class="s2">&quot;conversion_rates&quot;</span><span class="p">:</span> <span class="n">analytics_report</span><span class="p">[</span><span class="s2">&quot;conversions&quot;</span><span class="p">]</span>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>            <span class="p">}</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>        <span class="p">}</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">feedback_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">analytics_feedback</span><span class="p">)</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>
-</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>        <span class="k">return</span> <span class="n">analytics_feedback</span>
-</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>
-</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_categorize_survey_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Automatically categorize survey feedback&quot;&quot;&quot;</span>
-</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>        <span class="n">keywords</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>            <span class="s2">&quot;usability&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;confusing&quot;</span><span class="p">,</span> <span class="s2">&quot;difficult&quot;</span><span class="p">,</span> <span class="s2">&quot;hard to use&quot;</span><span class="p">,</span> <span class="s2">&quot;intuitive&quot;</span><span class="p">],</span>
-</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>            <span class="s2">&quot;performance&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="s2">&quot;responsive&quot;</span><span class="p">,</span> <span class="s2">&quot;loading&quot;</span><span class="p">],</span>
-</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>            <span class="s2">&quot;functionality&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;capability&quot;</span><span class="p">,</span> <span class="s2">&quot;works&quot;</span><span class="p">],</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>            <span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;looks&quot;</span><span class="p">,</span> <span class="s2">&quot;appearance&quot;</span><span class="p">,</span> <span class="s2">&quot;layout&quot;</span><span class="p">,</span> <span class="s2">&quot;visual&quot;</span><span class="p">]</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>        <span class="p">}</span>
-</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>
-</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>        <span class="n">text</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;comments&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>
-</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>        <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">category_keywords</span> <span class="ow">in</span> <span class="n">keywords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">keyword</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">category_keywords</span><span class="p">):</span>
-</span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>                <span class="k">return</span> <span class="n">category</span>
-</span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>
-</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>        <span class="k">return</span> <span class="s2">&quot;general&quot;</span>
-</span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>
-</span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-</span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate feedback priority based on multiple factors&quot;&quot;&quot;</span>
-</span><span id="__span-0-87"><a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>        <span class="n">priority_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>
-</span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a>        <span class="c1"># Satisfaction score impact</span>
-</span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>        <span class="n">satisfaction</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>        <span class="k">if</span> <span class="n">satisfaction</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
-</span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">3</span>
-</span><span id="__span-0-93"><a id="__codelineno-0-93" name="__codelineno-0-93" href="#__codelineno-0-93"></a>        <span class="k">elif</span> <span class="n">satisfaction</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
-</span><span id="__span-0-94"><a id="__codelineno-0-94" name="__codelineno-0-94" href="#__codelineno-0-94"></a>            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">2</span>
-</span><span id="__span-0-95"><a id="__codelineno-0-95" name="__codelineno-0-95" href="#__codelineno-0-95"></a>
-</span><span id="__span-0-96"><a id="__codelineno-0-96" name="__codelineno-0-96" href="#__codelineno-0-96"></a>        <span class="c1"># Frequency of mention</span>
-</span><span id="__span-0-97"><a id="__codelineno-0-97" name="__codelineno-0-97" href="#__codelineno-0-97"></a>        <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mentions_count&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-</span><span id="__span-0-98"><a id="__codelineno-0-98" name="__codelineno-0-98" href="#__codelineno-0-98"></a>            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">2</span>
-</span><span id="__span-0-99"><a id="__codelineno-0-99" name="__codelineno-0-99" href="#__codelineno-0-99"></a>
-</span><span id="__span-0-100"><a id="__codelineno-0-100" name="__codelineno-0-100" href="#__codelineno-0-100"></a>        <span class="c1"># Critical feature areas</span>
-</span><span id="__span-0-101"><a id="__codelineno-0-101" name="__codelineno-0-101" href="#__codelineno-0-101"></a>        <span class="n">critical_areas</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;login&quot;</span><span class="p">,</span> <span class="s2">&quot;payment&quot;</span><span class="p">,</span> <span class="s2">&quot;data_loss&quot;</span><span class="p">,</span> <span class="s2">&quot;security&quot;</span><span class="p">]</span>
-</span><span id="__span-0-102"><a id="__codelineno-0-102" name="__codelineno-0-102" href="#__codelineno-0-102"></a>        <span class="n">feature</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feature_discussed&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span id="__span-0-103"><a id="__codelineno-0-103" name="__codelineno-0-103" href="#__codelineno-0-103"></a>        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">area</span> <span class="ow">in</span> <span class="n">feature</span> <span class="k">for</span> <span class="n">area</span> <span class="ow">in</span> <span class="n">critical_areas</span><span class="p">):</span>
-</span><span id="__span-0-104"><a id="__codelineno-0-104" name="__codelineno-0-104" href="#__codelineno-0-104"></a>            <span class="n">priority_score</span> <span class="o">+=</span> <span class="mi">3</span>
-</span><span id="__span-0-105"><a id="__codelineno-0-105" name="__codelineno-0-105" href="#__codelineno-0-105"></a>
-</span><span id="__span-0-106"><a id="__codelineno-0-106" name="__codelineno-0-106" href="#__codelineno-0-106"></a>        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">priority_score</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Cap at 5</span>
-</span><span id="__span-0-107"><a id="__codelineno-0-107" name="__codelineno-0-107" href="#__codelineno-0-107"></a>
-</span><span id="__span-0-108"><a id="__codelineno-0-108" name="__codelineno-0-108" href="#__codelineno-0-108"></a><span class="c1"># Example usage</span>
-</span><span id="__span-0-109"><a id="__codelineno-0-109" name="__codelineno-0-109" href="#__codelineno-0-109"></a><span class="n">feedback_collector</span> <span class="o">=</span> <span class="n">FeedbackCollector</span><span class="p">()</span>
-</span><span id="__span-0-110"><a id="__codelineno-0-110" name="__codelineno-0-110" href="#__codelineno-0-110"></a>
-</span><span id="__span-0-111"><a id="__codelineno-0-111" name="__codelineno-0-111" href="#__codelineno-0-111"></a><span class="c1"># Collect survey feedback</span>
-</span><span id="__span-0-112"><a id="__codelineno-0-112" name="__codelineno-0-112" href="#__codelineno-0-112"></a><span class="n">survey_responses</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-0-113"><a id="__codelineno-0-113" name="__codelineno-0-113" href="#__codelineno-0-113"></a>    <span class="p">{</span>
-</span><span id="__span-0-114"><a id="__codelineno-0-114" name="__codelineno-0-114" href="#__codelineno-0-114"></a>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;U001&quot;</span><span class="p">,</span>
-</span><span id="__span-0-115"><a id="__codelineno-0-115" name="__codelineno-0-115" href="#__codelineno-0-115"></a>        <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span id="__span-0-116"><a id="__codelineno-0-116" name="__codelineno-0-116" href="#__codelineno-0-116"></a>        <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;The login process is confusing and takes too long&quot;</span><span class="p">,</span>
-</span><span id="__span-0-117"><a id="__codelineno-0-117" name="__codelineno-0-117" href="#__codelineno-0-117"></a>        <span class="s2">&quot;feature_discussed&quot;</span><span class="p">:</span> <span class="s2">&quot;authentication&quot;</span><span class="p">,</span>
-</span><span id="__span-0-118"><a id="__codelineno-0-118" name="__codelineno-0-118" href="#__codelineno-0-118"></a>        <span class="s2">&quot;mentions_count&quot;</span><span class="p">:</span> <span class="mi">8</span>
-</span><span id="__span-0-119"><a id="__codelineno-0-119" name="__codelineno-0-119" href="#__codelineno-0-119"></a>    <span class="p">},</span>
-</span><span id="__span-0-120"><a id="__codelineno-0-120" name="__codelineno-0-120" href="#__codelineno-0-120"></a>    <span class="p">{</span>
-</span><span id="__span-0-121"><a id="__codelineno-0-121" name="__codelineno-0-121" href="#__codelineno-0-121"></a>        <span class="s2">&quot;user_id&quot;</span><span class="p">:</span> <span class="s2">&quot;U002&quot;</span><span class="p">,</span> 
-</span><span id="__span-0-122"><a id="__codelineno-0-122" name="__codelineno-0-122" href="#__codelineno-0-122"></a>        <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span id="__span-0-123"><a id="__codelineno-0-123" name="__codelineno-0-123" href="#__codelineno-0-123"></a>        <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="s2">&quot;Overall good but page loading is slow&quot;</span><span class="p">,</span>
-</span><span id="__span-0-124"><a id="__codelineno-0-124" name="__codelineno-0-124" href="#__codelineno-0-124"></a>        <span class="s2">&quot;feature_discussed&quot;</span><span class="p">:</span> <span class="s2">&quot;performance&quot;</span><span class="p">,</span>
-</span><span id="__span-0-125"><a id="__codelineno-0-125" name="__codelineno-0-125" href="#__codelineno-0-125"></a>        <span class="s2">&quot;mentions_count&quot;</span><span class="p">:</span> <span class="mi">3</span>
-</span><span id="__span-0-126"><a id="__codelineno-0-126" name="__codelineno-0-126" href="#__codelineno-0-126"></a>    <span class="p">}</span>
-</span><span id="__span-0-127"><a id="__codelineno-0-127" name="__codelineno-0-127" href="#__codelineno-0-127"></a><span class="p">]</span>
-</span><span id="__span-0-128"><a id="__codelineno-0-128" name="__codelineno-0-128" href="#__codelineno-0-128"></a>
-</span><span id="__span-0-129"><a id="__codelineno-0-129" name="__codelineno-0-129" href="#__codelineno-0-129"></a><span class="n">collected_surveys</span> <span class="o">=</span> <span class="n">feedback_collector</span><span class="o">.</span><span class="n">collect_survey_feedback</span><span class="p">(</span><span class="n">survey_responses</span><span class="p">)</span>
-</span><span id="__span-0-130"><a id="__codelineno-0-130" name="__codelineno-0-130" href="#__codelineno-0-130"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Collected </span><span class="si">{</span><span class="n">collected_surveys</span><span class="si">}</span><span class="s2"> survey responses&quot;</span><span class="p">)</span>
-</span><span id="__span-0-131"><a id="__codelineno-0-131" name="__codelineno-0-131" href="#__codelineno-0-131"></a>
-</span><span id="__span-0-132"><a id="__codelineno-0-132" name="__codelineno-0-132" href="#__codelineno-0-132"></a><span class="c1"># Collect interview feedback</span>
-</span><span id="__span-0-133"><a id="__codelineno-0-133" name="__codelineno-0-133" href="#__codelineno-0-133"></a><span class="n">interview_data</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-0-134"><a id="__codelineno-0-134" name="__codelineno-0-134" href="#__codelineno-0-134"></a>    <span class="s2">&quot;participant&quot;</span><span class="p">:</span> <span class="s2">&quot;Teacher_Mary&quot;</span><span class="p">,</span>
-</span><span id="__span-0-135"><a id="__codelineno-0-135" name="__codelineno-0-135" href="#__codelineno-0-135"></a>    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-03-20&quot;</span><span class="p">,</span>
-</span><span id="__span-0-136"><a id="__codelineno-0-136" name="__codelineno-0-136" href="#__codelineno-0-136"></a>    <span class="s2">&quot;insights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Students struggle with grade entry workflow&quot;</span><span class="p">,</span> <span class="s2">&quot;Need bulk operations&quot;</span><span class="p">],</span>
-</span><span id="__span-0-137"><a id="__codelineno-0-137" name="__codelineno-0-137" href="#__codelineno-0-137"></a>    <span class="s2">&quot;pain_points&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Too many clicks for simple tasks&quot;</span><span class="p">,</span> <span class="s2">&quot;No undo functionality&quot;</span><span class="p">],</span>
-</span><span id="__span-0-138"><a id="__codelineno-0-138" name="__codelineno-0-138" href="#__codelineno-0-138"></a>    <span class="s2">&quot;requests&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Keyboard shortcuts&quot;</span><span class="p">,</span> <span class="s2">&quot;Better error messages&quot;</span><span class="p">],</span>
-</span><span id="__span-0-139"><a id="__codelineno-0-139" name="__codelineno-0-139" href="#__codelineno-0-139"></a>    <span class="s2">&quot;journey_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Users get lost between grade entry and student management sections&quot;</span>
-</span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140" href="#__codelineno-0-140"></a><span class="p">}</span>
-</span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141" href="#__codelineno-0-141"></a>
-</span><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142" href="#__codelineno-0-142"></a><span class="n">interview_feedback</span> <span class="o">=</span> <span class="n">feedback_collector</span><span class="o">.</span><span class="n">collect_interview_feedback</span><span class="p">(</span><span class="n">interview_data</span><span class="p">)</span>
-</span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143" href="#__codelineno-0-143"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interview feedback collected for </span><span class="si">{</span><span class="n">interview_feedback</span><span class="p">[</span><span class="s1">&#39;participant_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"># Example: Comprehensive feedback collection system
+class FeedbackCollector:
+    def __init__(self):
+        self.feedback_sources = {
+            &quot;user_surveys&quot;: [],
+            &quot;interviews&quot;: [],
+            &quot;support_tickets&quot;: [],
+            &quot;beta_testing&quot;: [],
+            &quot;analytics&quot;: [],
+            &quot;error_logs&quot;: []
+        }
+        self.feedback_items = []
+
+    def collect_survey_feedback(self, survey_data):
+        &quot;&quot;&quot;Process structured survey responses&quot;&quot;&quot;
+        for response in survey_data:
+            feedback_item = {
+                &quot;source&quot;: &quot;user_survey&quot;,
+                &quot;user_id&quot;: response.get(&quot;user_id&quot;),
+                &quot;timestamp&quot;: &quot;2024-03-20&quot;,
+                &quot;category&quot;: self._categorize_survey_response(response),
+                &quot;satisfaction_score&quot;: response.get(&quot;satisfaction&quot;, 0),
+                &quot;feedback_text&quot;: response.get(&quot;comments&quot;, &quot;&quot;),
+                &quot;feature_area&quot;: response.get(&quot;feature_discussed&quot;),
+                &quot;priority_indicator&quot;: self._calculate_priority(response)
+            }
+            self.feedback_items.append(feedback_item)
+
+        return len(survey_data)
+
+    def collect_interview_feedback(self, interview_notes):
+        &quot;&quot;&quot;Process qualitative interview data&quot;&quot;&quot;
+        feedback_item = {
+            &quot;source&quot;: &quot;user_interview&quot;,
+            &quot;participant_id&quot;: interview_notes[&quot;participant&quot;],
+            &quot;timestamp&quot;: interview_notes[&quot;date&quot;],
+            &quot;category&quot;: &quot;qualitative&quot;,
+            &quot;key_insights&quot;: interview_notes[&quot;insights&quot;],
+            &quot;pain_points&quot;: interview_notes[&quot;pain_points&quot;],
+            &quot;feature_requests&quot;: interview_notes[&quot;requests&quot;],
+            &quot;user_journey_feedback&quot;: interview_notes[&quot;journey_notes&quot;]
+        }
+        self.feedback_items.append(feedback_item)
+
+        return feedback_item
+
+    def collect_analytics_data(self, analytics_report):
+        &quot;&quot;&quot;Process usage analytics and behavioral data&quot;&quot;&quot;
+        analytics_feedback = {
+            &quot;source&quot;: &quot;analytics&quot;,
+            &quot;report_period&quot;: analytics_report[&quot;period&quot;],
+            &quot;user_engagement&quot;: {
+                &quot;daily_active_users&quot;: analytics_report[&quot;dau&quot;],
+                &quot;session_duration&quot;: analytics_report[&quot;avg_session&quot;],
+                &quot;feature_usage&quot;: analytics_report[&quot;feature_stats&quot;],
+                &quot;drop_off_points&quot;: analytics_report[&quot;abandonment_data&quot;]
+            },
+            &quot;performance_metrics&quot;: {
+                &quot;page_load_times&quot;: analytics_report[&quot;performance&quot;],
+                &quot;error_rates&quot;: analytics_report[&quot;errors&quot;],
+                &quot;conversion_rates&quot;: analytics_report[&quot;conversions&quot;]
+            }
+        }
+        self.feedback_items.append(analytics_feedback)
+
+        return analytics_feedback
+
+    def _categorize_survey_response(self, response):
+        &quot;&quot;&quot;Automatically categorize survey feedback&quot;&quot;&quot;
+        keywords = {
+            &quot;usability&quot;: [&quot;confusing&quot;, &quot;difficult&quot;, &quot;hard to use&quot;, &quot;intuitive&quot;],
+            &quot;performance&quot;: [&quot;slow&quot;, &quot;fast&quot;, &quot;responsive&quot;, &quot;loading&quot;],
+            &quot;functionality&quot;: [&quot;feature&quot;, &quot;function&quot;, &quot;capability&quot;, &quot;works&quot;],
+            &quot;design&quot;: [&quot;looks&quot;, &quot;appearance&quot;, &quot;layout&quot;, &quot;visual&quot;]
+        }
+
+        text = response.get(&quot;comments&quot;, &quot;&quot;).lower()
+
+        for category, category_keywords in keywords.items():
+            if any(keyword in text for keyword in category_keywords):
+                return category
+
+        return &quot;general&quot;
+
+    def _calculate_priority(self, response):
+        &quot;&quot;&quot;Calculate feedback priority based on multiple factors&quot;&quot;&quot;
+        priority_score = 0
+
+        # Satisfaction score impact
+        satisfaction = response.get(&quot;satisfaction&quot;, 5)
+        if satisfaction &lt;= 2:
+            priority_score += 3
+        elif satisfaction &lt;= 3:
+            priority_score += 2
+
+        # Frequency of mention
+        if response.get(&quot;mentions_count&quot;, 1) &gt; 5:
+            priority_score += 2
+
+        # Critical feature areas
+        critical_areas = [&quot;login&quot;, &quot;payment&quot;, &quot;data_loss&quot;, &quot;security&quot;]
+        feature = response.get(&quot;feature_discussed&quot;, &quot;&quot;).lower()
+        if any(area in feature for area in critical_areas):
+            priority_score += 3
+
+        return min(priority_score, 5)  # Cap at 5
+
+# Example usage
+feedback_collector = FeedbackCollector()
+
+# Collect survey feedback
+survey_responses = [
+    {
+        &quot;user_id&quot;: &quot;U001&quot;,
+        &quot;satisfaction&quot;: 2,
+        &quot;comments&quot;: &quot;The login process is confusing and takes too long&quot;,
+        &quot;feature_discussed&quot;: &quot;authentication&quot;,
+        &quot;mentions_count&quot;: 8
+    },
+    {
+        &quot;user_id&quot;: &quot;U002&quot;, 
+        &quot;satisfaction&quot;: 4,
+        &quot;comments&quot;: &quot;Overall good but page loading is slow&quot;,
+        &quot;feature_discussed&quot;: &quot;performance&quot;,
+        &quot;mentions_count&quot;: 3
+    }
+]
+
+collected_surveys = feedback_collector.collect_survey_feedback(survey_responses)
+print(f&quot;Collected {collected_surveys} survey responses&quot;)
+
+# Collect interview feedback
+interview_data = {
+    &quot;participant&quot;: &quot;Teacher_Mary&quot;,
+    &quot;date&quot;: &quot;2024-03-20&quot;,
+    &quot;insights&quot;: [&quot;Students struggle with grade entry workflow&quot;, &quot;Need bulk operations&quot;],
+    &quot;pain_points&quot;: [&quot;Too many clicks for simple tasks&quot;, &quot;No undo functionality&quot;],
+    &quot;requests&quot;: [&quot;Keyboard shortcuts&quot;, &quot;Better error messages&quot;],
+    &quot;journey_notes&quot;: &quot;Users get lost between grade entry and student management sections&quot;
+}
+
+interview_feedback = feedback_collector.collect_interview_feedback(interview_data)
+print(f&quot;Interview feedback collected for {interview_feedback[&#x27;participant_id&#x27;]}&quot;)
+</code></pre>
+</div>
 <h3 id="feedback-synthesis-and-pattern-identification">Feedback synthesis and pattern identification<a class="headerlink" href="#feedback-synthesis-and-pattern-identification" title="Permanent link">&para;</a></h3>
 <p>Raw feedback requires systematic analysis to identify meaningful patterns and actionable insights:</p>
 <p><strong>Quantitative analysis techniques</strong>:</p>
@@ -1712,182 +1714,184 @@
 <p><strong>Representative sampling</strong>: Ensuring feedback represents the full user base</p>
 </li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Example: Feedback synthesis and pattern analysis system</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">FeedbackAnalyzer</span><span class="p">:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sentiment_keywords</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>            <span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;good&quot;</span><span class="p">,</span> <span class="s2">&quot;great&quot;</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">,</span> <span class="s2">&quot;excellent&quot;</span><span class="p">,</span> <span class="s2">&quot;helpful&quot;</span><span class="p">,</span> <span class="s2">&quot;easy&quot;</span><span class="p">],</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>            <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;bad&quot;</span><span class="p">,</span> <span class="s2">&quot;terrible&quot;</span><span class="p">,</span> <span class="s2">&quot;hate&quot;</span><span class="p">,</span> <span class="s2">&quot;awful&quot;</span><span class="p">,</span> <span class="s2">&quot;confusing&quot;</span><span class="p">,</span> <span class="s2">&quot;difficult&quot;</span><span class="p">],</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="s2">&quot;neutral&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;okay&quot;</span><span class="p">,</span> <span class="s2">&quot;fine&quot;</span><span class="p">,</span> <span class="s2">&quot;average&quot;</span><span class="p">,</span> <span class="s2">&quot;normal&quot;</span><span class="p">]</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="p">}</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="s2">&quot;usability&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;user interface&quot;</span><span class="p">,</span> <span class="s2">&quot;navigation&quot;</span><span class="p">,</span> <span class="s2">&quot;intuitive&quot;</span><span class="p">,</span> <span class="s2">&quot;confusing&quot;</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">],</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="s2">&quot;performance&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;speed&quot;</span><span class="p">,</span> <span class="s2">&quot;slow&quot;</span><span class="p">,</span> <span class="s2">&quot;fast&quot;</span><span class="p">,</span> <span class="s2">&quot;loading&quot;</span><span class="p">,</span> <span class="s2">&quot;responsive&quot;</span><span class="p">,</span> <span class="s2">&quot;timeout&quot;</span><span class="p">],</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="s2">&quot;functionality&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;feature&quot;</span><span class="p">,</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;capability&quot;</span><span class="p">,</span> <span class="s2">&quot;missing&quot;</span><span class="p">,</span> <span class="s2">&quot;broken&quot;</span><span class="p">],</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>            <span class="s2">&quot;accessibility&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;screen reader&quot;</span><span class="p">,</span> <span class="s2">&quot;keyboard&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="s2">&quot;contrast&quot;</span><span class="p">,</span> <span class="s2">&quot;disability&quot;</span><span class="p">],</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>            <span class="s2">&quot;mobile&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;mobile&quot;</span><span class="p">,</span> <span class="s2">&quot;phone&quot;</span><span class="p">,</span> <span class="s2">&quot;tablet&quot;</span><span class="p">,</span> <span class="s2">&quot;responsive&quot;</span><span class="p">,</span> <span class="s2">&quot;touch&quot;</span><span class="p">]</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="p">}</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_sentiment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_text</span><span class="p">):</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Analyze sentiment of feedback text&quot;&quot;&quot;</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="n">text_lower</span> <span class="o">=</span> <span class="n">feedback_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="n">sentiment_scores</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;positive&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;negative&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;neutral&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="k">for</span> <span class="n">sentiment</span><span class="p">,</span> <span class="n">keywords</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentiment_keywords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>            <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span><span class="p">:</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>                <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">text_lower</span><span class="p">:</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>                    <span class="n">sentiment_scores</span><span class="p">[</span><span class="n">sentiment</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="c1"># Determine overall sentiment</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="n">max_sentiment</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">sentiment_scores</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">sentiment_scores</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>        <span class="n">confidence</span> <span class="o">=</span> <span class="n">sentiment_scores</span><span class="p">[</span><span class="n">max_sentiment</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sentiment_scores</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">sentiment_scores</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>            <span class="s2">&quot;sentiment&quot;</span><span class="p">:</span> <span class="n">max_sentiment</span><span class="p">,</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>            <span class="s2">&quot;scores&quot;</span><span class="p">:</span> <span class="n">sentiment_scores</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>        <span class="p">}</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">identify_themes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_collection</span><span class="p">):</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Identify common themes across feedback items&quot;&quot;&quot;</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>        <span class="n">theme_frequency</span> <span class="o">=</span> <span class="p">{</span><span class="n">theme</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="n">theme_examples</span> <span class="o">=</span> <span class="p">{</span><span class="n">theme</span><span class="p">:</span> <span class="p">[]</span> <span class="k">for</span> <span class="n">theme</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">feedback_collection</span><span class="p">:</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>            <span class="n">feedback_text</span> <span class="o">=</span> <span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;key_insights&quot;</span><span class="p">,</span> <span class="p">[]))</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>            <span class="n">text_lower</span> <span class="o">=</span> <span class="n">feedback_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>            <span class="k">for</span> <span class="n">theme</span><span class="p">,</span> <span class="n">keywords</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">theme_patterns</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>                <span class="n">theme_score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">keywords</span> <span class="k">if</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">text_lower</span><span class="p">)</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>                <span class="k">if</span> <span class="n">theme_score</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>                    <span class="n">theme_frequency</span><span class="p">[</span><span class="n">theme</span><span class="p">]</span> <span class="o">+=</span> <span class="n">theme_score</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>                    <span class="n">theme_examples</span><span class="p">[</span><span class="n">theme</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>                        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">),</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>                        <span class="s2">&quot;text_snippet&quot;</span><span class="p">:</span> <span class="n">feedback_text</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>                        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="n">theme_score</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>                    <span class="p">})</span>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>        <span class="c1"># Sort themes by frequency</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>        <span class="n">sorted_themes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">theme_frequency</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>            <span class="s2">&quot;theme_rankings&quot;</span><span class="p">:</span> <span class="n">sorted_themes</span><span class="p">,</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>            <span class="s2">&quot;theme_examples&quot;</span><span class="p">:</span> <span class="n">theme_examples</span><span class="p">,</span>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>            <span class="s2">&quot;total_feedback_items&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">feedback_collection</span><span class="p">)</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>        <span class="p">}</span>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">prioritize_issues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_collection</span><span class="p">):</span>
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Prioritize issues based on frequency, severity, and impact&quot;&quot;&quot;</span>
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>        <span class="n">issue_tracker</span> <span class="o">=</span> <span class="p">{}</span>
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">feedback_collection</span><span class="p">:</span>
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>            <span class="c1"># Extract issues from feedback</span>
-</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>            <span class="n">issues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_issues</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
-</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>
-</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>            <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">issues</span><span class="p">:</span>
-</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>                <span class="n">issue_key</span> <span class="o">=</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span>
-</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>
-</span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>                <span class="k">if</span> <span class="n">issue_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">issue_tracker</span><span class="p">:</span>
-</span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>                    <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>                        <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>                        <span class="s2">&quot;total_severity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-</span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>                        <span class="s2">&quot;sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>                        <span class="s2">&quot;examples&quot;</span><span class="p">:</span> <span class="p">[]</span>
-</span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>                    <span class="p">}</span>
-</span><span id="__span-1-84"><a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>
-</span><span id="__span-1-85"><a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-1-86"><a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;total_severity&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;severity&quot;</span><span class="p">]</span>
-</span><span id="__span-1-87"><a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a>                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;sources&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">))</span>
-</span><span id="__span-1-88"><a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a>                <span class="n">issue_tracker</span><span class="p">[</span><span class="n">issue_key</span><span class="p">][</span><span class="s2">&quot;examples&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)[:</span><span class="mi">100</span><span class="p">])</span>
-</span><span id="__span-1-89"><a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a>
-</span><span id="__span-1-90"><a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a>        <span class="c1"># Calculate priority scores</span>
-</span><span id="__span-1-91"><a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a>        <span class="n">prioritized_issues</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a>        <span class="k">for</span> <span class="n">issue_desc</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">issue_tracker</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-1-93"><a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a>            <span class="n">avg_severity</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;total_severity&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span>
-</span><span id="__span-1-94"><a id="__codelineno-1-94" name="__codelineno-1-94" href="#__codelineno-1-94"></a>            <span class="n">unique_sources</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sources&quot;</span><span class="p">]))</span>
-</span><span id="__span-1-95"><a id="__codelineno-1-95" name="__codelineno-1-95" href="#__codelineno-1-95"></a>
-</span><span id="__span-1-96"><a id="__codelineno-1-96" name="__codelineno-1-96" href="#__codelineno-1-96"></a>            <span class="n">priority_score</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">avg_severity</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">unique_sources</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-1-97"><a id="__codelineno-1-97" name="__codelineno-1-97" href="#__codelineno-1-97"></a>
-</span><span id="__span-1-98"><a id="__codelineno-1-98" name="__codelineno-1-98" href="#__codelineno-1-98"></a>            <span class="n">prioritized_issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-1-99"><a id="__codelineno-1-99" name="__codelineno-1-99" href="#__codelineno-1-99"></a>                <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">issue_desc</span><span class="p">,</span>
-</span><span id="__span-1-100"><a id="__codelineno-1-100" name="__codelineno-1-100" href="#__codelineno-1-100"></a>                <span class="s2">&quot;priority_score&quot;</span><span class="p">:</span> <span class="n">priority_score</span><span class="p">,</span>
-</span><span id="__span-1-101"><a id="__codelineno-1-101" name="__codelineno-1-101" href="#__codelineno-1-101"></a>                <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">],</span>
-</span><span id="__span-1-102"><a id="__codelineno-1-102" name="__codelineno-1-102" href="#__codelineno-1-102"></a>                <span class="s2">&quot;average_severity&quot;</span><span class="p">:</span> <span class="n">avg_severity</span><span class="p">,</span>
-</span><span id="__span-1-103"><a id="__codelineno-1-103" name="__codelineno-1-103" href="#__codelineno-1-103"></a>                <span class="s2">&quot;source_diversity&quot;</span><span class="p">:</span> <span class="n">unique_sources</span><span class="p">,</span>
-</span><span id="__span-1-104"><a id="__codelineno-1-104" name="__codelineno-1-104" href="#__codelineno-1-104"></a>                <span class="s2">&quot;examples&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;examples&quot;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># Top 3 examples</span>
-</span><span id="__span-1-105"><a id="__codelineno-1-105" name="__codelineno-1-105" href="#__codelineno-1-105"></a>            <span class="p">})</span>
-</span><span id="__span-1-106"><a id="__codelineno-1-106" name="__codelineno-1-106" href="#__codelineno-1-106"></a>
-</span><span id="__span-1-107"><a id="__codelineno-1-107" name="__codelineno-1-107" href="#__codelineno-1-107"></a>        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">prioritized_issues</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;priority_score&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>
-</span><span id="__span-1-109"><a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_issues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feedback_item</span><span class="p">):</span>
-</span><span id="__span-1-110"><a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract specific issues from feedback&quot;&quot;&quot;</span>
-</span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>        <span class="c1"># Simplified issue extraction - in practice would use NLP</span>
-</span><span id="__span-1-112"><a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>        <span class="n">issues</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-1-113"><a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>
-</span><span id="__span-1-114"><a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>        <span class="n">text</span> <span class="o">=</span> <span class="n">feedback_item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;feedback_text&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-</span><span id="__span-1-115"><a id="__codelineno-1-115" name="__codelineno-1-115" href="#__codelineno-1-115"></a>        <span class="n">pain_points</span> <span class="o">=</span> <span class="n">feedback_item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pain_points&quot;</span><span class="p">,</span> <span class="p">[])</span>
-</span><span id="__span-1-116"><a id="__codelineno-1-116" name="__codelineno-1-116" href="#__codelineno-1-116"></a>
-</span><span id="__span-1-117"><a id="__codelineno-1-117" name="__codelineno-1-117" href="#__codelineno-1-117"></a>        <span class="c1"># Extract from pain points</span>
-</span><span id="__span-1-118"><a id="__codelineno-1-118" name="__codelineno-1-118" href="#__codelineno-1-118"></a>        <span class="k">for</span> <span class="n">pain_point</span> <span class="ow">in</span> <span class="n">pain_points</span><span class="p">:</span>
-</span><span id="__span-1-119"><a id="__codelineno-1-119" name="__codelineno-1-119" href="#__codelineno-1-119"></a>            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-1-120"><a id="__codelineno-1-120" name="__codelineno-1-120" href="#__codelineno-1-120"></a>                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">pain_point</span><span class="p">,</span>
-</span><span id="__span-1-121"><a id="__codelineno-1-121" name="__codelineno-1-121" href="#__codelineno-1-121"></a>                <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>  <span class="c1"># Default medium severity</span>
-</span><span id="__span-1-122"><a id="__codelineno-1-122" name="__codelineno-1-122" href="#__codelineno-1-122"></a>                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;pain_point&quot;</span>
-</span><span id="__span-1-123"><a id="__codelineno-1-123" name="__codelineno-1-123" href="#__codelineno-1-123"></a>            <span class="p">})</span>
-</span><span id="__span-1-124"><a id="__codelineno-1-124" name="__codelineno-1-124" href="#__codelineno-1-124"></a>
-</span><span id="__span-1-125"><a id="__codelineno-1-125" name="__codelineno-1-125" href="#__codelineno-1-125"></a>        <span class="c1"># Extract from negative sentiment feedback</span>
-</span><span id="__span-1-126"><a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>        <span class="k">if</span> <span class="s2">&quot;confusing&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-</span><span id="__span-1-127"><a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a>            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-1-128"><a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;User interface confusion&quot;</span><span class="p">,</span>
-</span><span id="__span-1-129"><a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a>                <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-</span><span id="__span-1-130"><a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a>                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;usability&quot;</span>
-</span><span id="__span-1-131"><a id="__codelineno-1-131" name="__codelineno-1-131" href="#__codelineno-1-131"></a>            <span class="p">})</span>
-</span><span id="__span-1-132"><a id="__codelineno-1-132" name="__codelineno-1-132" href="#__codelineno-1-132"></a>
-</span><span id="__span-1-133"><a id="__codelineno-1-133" name="__codelineno-1-133" href="#__codelineno-1-133"></a>        <span class="k">if</span> <span class="s2">&quot;slow&quot;</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
-</span><span id="__span-1-134"><a id="__codelineno-1-134" name="__codelineno-1-134" href="#__codelineno-1-134"></a>            <span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-1-135"><a id="__codelineno-1-135" name="__codelineno-1-135" href="#__codelineno-1-135"></a>                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Performance issues&quot;</span><span class="p">,</span>
-</span><span id="__span-1-136"><a id="__codelineno-1-136" name="__codelineno-1-136" href="#__codelineno-1-136"></a>                <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-</span><span id="__span-1-137"><a id="__codelineno-1-137" name="__codelineno-1-137" href="#__codelineno-1-137"></a>                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;performance&quot;</span>
-</span><span id="__span-1-138"><a id="__codelineno-1-138" name="__codelineno-1-138" href="#__codelineno-1-138"></a>            <span class="p">})</span>
-</span><span id="__span-1-139"><a id="__codelineno-1-139" name="__codelineno-1-139" href="#__codelineno-1-139"></a>
-</span><span id="__span-1-140"><a id="__codelineno-1-140" name="__codelineno-1-140" href="#__codelineno-1-140"></a>        <span class="k">return</span> <span class="n">issues</span>
-</span><span id="__span-1-141"><a id="__codelineno-1-141" name="__codelineno-1-141" href="#__codelineno-1-141"></a>
-</span><span id="__span-1-142"><a id="__codelineno-1-142" name="__codelineno-1-142" href="#__codelineno-1-142"></a><span class="c1"># Example usage</span>
-</span><span id="__span-1-143"><a id="__codelineno-1-143" name="__codelineno-1-143" href="#__codelineno-1-143"></a><span class="n">analyzer</span> <span class="o">=</span> <span class="n">FeedbackAnalyzer</span><span class="p">()</span>
-</span><span id="__span-1-144"><a id="__codelineno-1-144" name="__codelineno-1-144" href="#__codelineno-1-144"></a>
-</span><span id="__span-1-145"><a id="__codelineno-1-145" name="__codelineno-1-145" href="#__codelineno-1-145"></a><span class="c1"># Sample feedback collection</span>
-</span><span id="__span-1-146"><a id="__codelineno-1-146" name="__codelineno-1-146" href="#__codelineno-1-146"></a><span class="n">sample_feedback</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-1-147"><a id="__codelineno-1-147" name="__codelineno-1-147" href="#__codelineno-1-147"></a>    <span class="p">{</span>
-</span><span id="__span-1-148"><a id="__codelineno-1-148" name="__codelineno-1-148" href="#__codelineno-1-148"></a>        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_survey&quot;</span><span class="p">,</span>
-</span><span id="__span-1-149"><a id="__codelineno-1-149" name="__codelineno-1-149" href="#__codelineno-1-149"></a>        <span class="s2">&quot;feedback_text&quot;</span><span class="p">:</span> <span class="s2">&quot;The interface is confusing and navigation is slow&quot;</span><span class="p">,</span>
-</span><span id="__span-1-150"><a id="__codelineno-1-150" name="__codelineno-1-150" href="#__codelineno-1-150"></a>        <span class="s2">&quot;satisfaction_score&quot;</span><span class="p">:</span> <span class="mi">2</span>
-</span><span id="__span-1-151"><a id="__codelineno-1-151" name="__codelineno-1-151" href="#__codelineno-1-151"></a>    <span class="p">},</span>
-</span><span id="__span-1-152"><a id="__codelineno-1-152" name="__codelineno-1-152" href="#__codelineno-1-152"></a>    <span class="p">{</span>
-</span><span id="__span-1-153"><a id="__codelineno-1-153" name="__codelineno-1-153" href="#__codelineno-1-153"></a>        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;user_interview&quot;</span><span class="p">,</span> 
-</span><span id="__span-1-154"><a id="__codelineno-1-154" name="__codelineno-1-154" href="#__codelineno-1-154"></a>        <span class="s2">&quot;key_insights&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Interface navigation needs improvement&quot;</span><span class="p">],</span>
-</span><span id="__span-1-155"><a id="__codelineno-1-155" name="__codelineno-1-155" href="#__codelineno-1-155"></a>        <span class="s2">&quot;pain_points&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Too many steps to complete simple tasks&quot;</span><span class="p">,</span> <span class="s2">&quot;Buttons are not intuitive&quot;</span><span class="p">]</span>
-</span><span id="__span-1-156"><a id="__codelineno-1-156" name="__codelineno-1-156" href="#__codelineno-1-156"></a>    <span class="p">},</span>
-</span><span id="__span-1-157"><a id="__codelineno-1-157" name="__codelineno-1-157" href="#__codelineno-1-157"></a>    <span class="p">{</span>
-</span><span id="__span-1-158"><a id="__codelineno-1-158" name="__codelineno-1-158" href="#__codelineno-1-158"></a>        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;support_ticket&quot;</span><span class="p">,</span>
-</span><span id="__span-1-159"><a id="__codelineno-1-159" name="__codelineno-1-159" href="#__codelineno-1-159"></a>        <span class="s2">&quot;feedback_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Cannot find the save button, very frustrating experience&quot;</span><span class="p">,</span>
-</span><span id="__span-1-160"><a id="__codelineno-1-160" name="__codelineno-1-160" href="#__codelineno-1-160"></a>        <span class="s2">&quot;satisfaction_score&quot;</span><span class="p">:</span> <span class="mi">1</span>
-</span><span id="__span-1-161"><a id="__codelineno-1-161" name="__codelineno-1-161" href="#__codelineno-1-161"></a>    <span class="p">}</span>
-</span><span id="__span-1-162"><a id="__codelineno-1-162" name="__codelineno-1-162" href="#__codelineno-1-162"></a><span class="p">]</span>
-</span><span id="__span-1-163"><a id="__codelineno-1-163" name="__codelineno-1-163" href="#__codelineno-1-163"></a>
-</span><span id="__span-1-164"><a id="__codelineno-1-164" name="__codelineno-1-164" href="#__codelineno-1-164"></a><span class="c1"># Analyze themes</span>
-</span><span id="__span-1-165"><a id="__codelineno-1-165" name="__codelineno-1-165" href="#__codelineno-1-165"></a><span class="n">theme_analysis</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">identify_themes</span><span class="p">(</span><span class="n">sample_feedback</span><span class="p">)</span>
-</span><span id="__span-1-166"><a id="__codelineno-1-166" name="__codelineno-1-166" href="#__codelineno-1-166"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top themes identified:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-167"><a id="__codelineno-1-167" name="__codelineno-1-167" href="#__codelineno-1-167"></a><span class="k">for</span> <span class="n">theme</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">theme_analysis</span><span class="p">[</span><span class="s2">&quot;theme_rankings&quot;</span><span class="p">][:</span><span class="mi">3</span><span class="p">]:</span>
-</span><span id="__span-1-168"><a id="__codelineno-1-168" name="__codelineno-1-168" href="#__codelineno-1-168"></a>    <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-1-169"><a id="__codelineno-1-169" name="__codelineno-1-169" href="#__codelineno-1-169"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">theme</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> mentions&quot;</span><span class="p">)</span>
-</span><span id="__span-1-170"><a id="__codelineno-1-170" name="__codelineno-1-170" href="#__codelineno-1-170"></a>
-</span><span id="__span-1-171"><a id="__codelineno-1-171" name="__codelineno-1-171" href="#__codelineno-1-171"></a><span class="c1"># Prioritize issues</span>
-</span><span id="__span-1-172"><a id="__codelineno-1-172" name="__codelineno-1-172" href="#__codelineno-1-172"></a><span class="n">priority_analysis</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">prioritize_issues</span><span class="p">(</span><span class="n">sample_feedback</span><span class="p">)</span>
-</span><span id="__span-1-173"><a id="__codelineno-1-173" name="__codelineno-1-173" href="#__codelineno-1-173"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Top priority issues:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-174"><a id="__codelineno-1-174" name="__codelineno-1-174" href="#__codelineno-1-174"></a><span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">priority_analysis</span><span class="p">[:</span><span class="mi">3</span><span class="p">]:</span>
-</span><span id="__span-1-175"><a id="__codelineno-1-175" name="__codelineno-1-175" href="#__codelineno-1-175"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;issue&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (Score: </span><span class="si">{</span><span class="n">issue</span><span class="p">[</span><span class="s1">&#39;priority_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"># Example: Feedback synthesis and pattern analysis system
+class FeedbackAnalyzer:
+    def __init__(self):
+        self.sentiment_keywords = {
+            &quot;positive&quot;: [&quot;good&quot;, &quot;great&quot;, &quot;love&quot;, &quot;excellent&quot;, &quot;helpful&quot;, &quot;easy&quot;],
+            &quot;negative&quot;: [&quot;bad&quot;, &quot;terrible&quot;, &quot;hate&quot;, &quot;awful&quot;, &quot;confusing&quot;, &quot;difficult&quot;],
+            &quot;neutral&quot;: [&quot;okay&quot;, &quot;fine&quot;, &quot;average&quot;, &quot;normal&quot;]
+        }
+
+        self.theme_patterns = {
+            &quot;usability&quot;: [&quot;user interface&quot;, &quot;navigation&quot;, &quot;intuitive&quot;, &quot;confusing&quot;, &quot;workflow&quot;],
+            &quot;performance&quot;: [&quot;speed&quot;, &quot;slow&quot;, &quot;fast&quot;, &quot;loading&quot;, &quot;responsive&quot;, &quot;timeout&quot;],
+            &quot;functionality&quot;: [&quot;feature&quot;, &quot;function&quot;, &quot;capability&quot;, &quot;missing&quot;, &quot;broken&quot;],
+            &quot;accessibility&quot;: [&quot;screen reader&quot;, &quot;keyboard&quot;, &quot;color&quot;, &quot;contrast&quot;, &quot;disability&quot;],
+            &quot;mobile&quot;: [&quot;mobile&quot;, &quot;phone&quot;, &quot;tablet&quot;, &quot;responsive&quot;, &quot;touch&quot;]
+        }
+
+    def analyze_sentiment(self, feedback_text):
+        &quot;&quot;&quot;Analyze sentiment of feedback text&quot;&quot;&quot;
+        text_lower = feedback_text.lower()
+        sentiment_scores = {&quot;positive&quot;: 0, &quot;negative&quot;: 0, &quot;neutral&quot;: 0}
+
+        for sentiment, keywords in self.sentiment_keywords.items():
+            for keyword in keywords:
+                if keyword in text_lower:
+                    sentiment_scores[sentiment] += 1
+
+        # Determine overall sentiment
+        max_sentiment = max(sentiment_scores, key=sentiment_scores.get)
+        confidence = sentiment_scores[max_sentiment] / sum(sentiment_scores.values()) if sum(sentiment_scores.values()) &gt; 0 else 0
+
+        return {
+            &quot;sentiment&quot;: max_sentiment,
+            &quot;confidence&quot;: confidence,
+            &quot;scores&quot;: sentiment_scores
+        }
+
+    def identify_themes(self, feedback_collection):
+        &quot;&quot;&quot;Identify common themes across feedback items&quot;&quot;&quot;
+        theme_frequency = {theme: 0 for theme in self.theme_patterns.keys()}
+        theme_examples = {theme: [] for theme in self.theme_patterns.keys()}
+
+        for feedback in feedback_collection:
+            feedback_text = feedback.get(&quot;feedback_text&quot;, &quot;&quot;) + &quot; &quot; + str(feedback.get(&quot;key_insights&quot;, []))
+            text_lower = feedback_text.lower()
+
+            for theme, keywords in self.theme_patterns.items():
+                theme_score = sum(1 for keyword in keywords if keyword in text_lower)
+                if theme_score &gt; 0:
+                    theme_frequency[theme] += theme_score
+                    theme_examples[theme].append({
+                        &quot;source&quot;: feedback.get(&quot;source&quot;),
+                        &quot;text_snippet&quot;: feedback_text[:100] + &quot;...&quot;,
+                        &quot;score&quot;: theme_score
+                    })
+
+        # Sort themes by frequency
+        sorted_themes = sorted(theme_frequency.items(), key=lambda x: x[1], reverse=True)
+
+        return {
+            &quot;theme_rankings&quot;: sorted_themes,
+            &quot;theme_examples&quot;: theme_examples,
+            &quot;total_feedback_items&quot;: len(feedback_collection)
+        }
+
+    def prioritize_issues(self, feedback_collection):
+        &quot;&quot;&quot;Prioritize issues based on frequency, severity, and impact&quot;&quot;&quot;
+        issue_tracker = {}
+
+        for feedback in feedback_collection:
+            # Extract issues from feedback
+            issues = self._extract_issues(feedback)
+
+            for issue in issues:
+                issue_key = issue[&quot;description&quot;]
+
+                if issue_key not in issue_tracker:
+                    issue_tracker[issue_key] = {
+                        &quot;frequency&quot;: 0,
+                        &quot;total_severity&quot;: 0,
+                        &quot;sources&quot;: [],
+                        &quot;examples&quot;: []
+                    }
+
+                issue_tracker[issue_key][&quot;frequency&quot;] += 1
+                issue_tracker[issue_key][&quot;total_severity&quot;] += issue[&quot;severity&quot;]
+                issue_tracker[issue_key][&quot;sources&quot;].append(feedback.get(&quot;source&quot;))
+                issue_tracker[issue_key][&quot;examples&quot;].append(feedback.get(&quot;feedback_text&quot;, &quot;&quot;)[:100])
+
+        # Calculate priority scores
+        prioritized_issues = []
+        for issue_desc, data in issue_tracker.items():
+            avg_severity = data[&quot;total_severity&quot;] / data[&quot;frequency&quot;]
+            unique_sources = len(set(data[&quot;sources&quot;]))
+
+            priority_score = (data[&quot;frequency&quot;] * 2) + (avg_severity * 3) + (unique_sources * 1)
+
+            prioritized_issues.append({
+                &quot;issue&quot;: issue_desc,
+                &quot;priority_score&quot;: priority_score,
+                &quot;frequency&quot;: data[&quot;frequency&quot;],
+                &quot;average_severity&quot;: avg_severity,
+                &quot;source_diversity&quot;: unique_sources,
+                &quot;examples&quot;: data[&quot;examples&quot;][:3]  # Top 3 examples
+            })
+
+        return sorted(prioritized_issues, key=lambda x: x[&quot;priority_score&quot;], reverse=True)
+
+    def _extract_issues(self, feedback_item):
+        &quot;&quot;&quot;Extract specific issues from feedback&quot;&quot;&quot;
+        # Simplified issue extraction - in practice would use NLP
+        issues = []
+
+        text = feedback_item.get(&quot;feedback_text&quot;, &quot;&quot;)
+        pain_points = feedback_item.get(&quot;pain_points&quot;, [])
+
+        # Extract from pain points
+        for pain_point in pain_points:
+            issues.append({
+                &quot;description&quot;: pain_point,
+                &quot;severity&quot;: 3,  # Default medium severity
+                &quot;type&quot;: &quot;pain_point&quot;
+            })
+
+        # Extract from negative sentiment feedback
+        if &quot;confusing&quot; in text.lower():
+            issues.append({
+                &quot;description&quot;: &quot;User interface confusion&quot;,
+                &quot;severity&quot;: 4,
+                &quot;type&quot;: &quot;usability&quot;
+            })
+
+        if &quot;slow&quot; in text.lower():
+            issues.append({
+                &quot;description&quot;: &quot;Performance issues&quot;,
+                &quot;severity&quot;: 3,
+                &quot;type&quot;: &quot;performance&quot;
+            })
+
+        return issues
+
+# Example usage
+analyzer = FeedbackAnalyzer()
+
+# Sample feedback collection
+sample_feedback = [
+    {
+        &quot;source&quot;: &quot;user_survey&quot;,
+        &quot;feedback_text&quot;: &quot;The interface is confusing and navigation is slow&quot;,
+        &quot;satisfaction_score&quot;: 2
+    },
+    {
+        &quot;source&quot;: &quot;user_interview&quot;, 
+        &quot;key_insights&quot;: [&quot;Interface navigation needs improvement&quot;],
+        &quot;pain_points&quot;: [&quot;Too many steps to complete simple tasks&quot;, &quot;Buttons are not intuitive&quot;]
+    },
+    {
+        &quot;source&quot;: &quot;support_ticket&quot;,
+        &quot;feedback_text&quot;: &quot;Cannot find the save button, very frustrating experience&quot;,
+        &quot;satisfaction_score&quot;: 1
+    }
+]
+
+# Analyze themes
+theme_analysis = analyzer.identify_themes(sample_feedback)
+print(&quot;Top themes identified:&quot;)
+for theme, count in theme_analysis[&quot;theme_rankings&quot;][:3]:
+    if count &gt; 0:
+        print(f&quot;  {theme}: {count} mentions&quot;)
+
+# Prioritize issues
+priority_analysis = analyzer.prioritize_issues(sample_feedback)
+print(f&quot;\nTop priority issues:&quot;)
+for issue in priority_analysis[:3]:
+    print(f&quot;  {issue[&#x27;issue&#x27;]} (Score: {issue[&#x27;priority_score&#x27;]:.1f})&quot;)
+</code></pre>
+</div>
 <h3 id="decision-making-frameworks-for-next-steps">Decision-making frameworks for next steps<a class="headerlink" href="#decision-making-frameworks-for-next-steps" title="Permanent link">&para;</a></h3>
 <p>Effective feedback analysis culminates in clear decisions about what actions to take:</p>
 <p><strong>Action categorization</strong>:</p>
@@ -1939,214 +1943,216 @@
 <h3 id="guided-example-analyzing-feedback-for-a-student-gradebook-system">Guided example: Analyzing feedback for a student gradebook system<a class="headerlink" href="#guided-example-analyzing-feedback-for-a-student-gradebook-system" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s walk through a complete feedback analysis process for a school gradebook application:</p>
 <p><strong>Step 1: Feedback collection summary</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Gradebook feedback analysis example</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">GradebookFeedbackAnalysis</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">collected_feedback</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="s2">&quot;teacher_surveys&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="s2">&quot;student_interviews&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="s2">&quot;parent_feedback&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="s2">&quot;admin_reviews&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>            <span class="s2">&quot;support_tickets&quot;</span><span class="p">:</span> <span class="mi">67</span><span class="p">,</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="s2">&quot;usage_analytics&quot;</span><span class="p">:</span> <span class="s2">&quot;3 months data&quot;</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="p">}</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            <span class="p">{</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;teacher_survey&quot;</span><span class="p">,</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;High School Math Teacher&quot;</span><span class="p">,</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Grade entry takes too long - need bulk operations&quot;</span><span class="p">,</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;grade_entry&quot;</span><span class="p">,</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>            <span class="p">},</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>            <span class="p">{</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;student_interview&quot;</span><span class="p">,</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;Year 11 Student&quot;</span><span class="p">,</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Can&#39;t see detailed feedback on assignments, just grades&quot;</span><span class="p">,</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;student_view&quot;</span><span class="p">,</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>            <span class="p">},</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>            <span class="p">{</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;parent_feedback&quot;</span><span class="p">,</span>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent via email&quot;</span><span class="p">,</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Notification system is excellent, helps me stay informed&quot;</span><span class="p">,</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;notifications&quot;</span><span class="p">,</span>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span>
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>            <span class="p">},</span>
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>            <span class="p">{</span>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;admin_review&quot;</span><span class="p">,</span>
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;School Principal&quot;</span><span class="p">,</span>
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Reports generation is slow during peak times&quot;</span><span class="p">,</span>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;reporting&quot;</span><span class="p">,</span>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>            <span class="p">},</span>
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>            <span class="p">{</span>
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;support_ticket&quot;</span><span class="p">,</span>
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>                <span class="s2">&quot;respondent&quot;</span><span class="p">:</span> <span class="s2">&quot;Multiple users&quot;</span><span class="p">,</span>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>                <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;Gradebook crashes when uploading large files&quot;</span><span class="p">,</span>
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>                <span class="s2">&quot;satisfaction&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="s2">&quot;file_upload&quot;</span><span class="p">,</span>
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;critical&quot;</span>
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>            <span class="p">}</span>
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>        <span class="p">]</span>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">analyze_by_stakeholder_group</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Group feedback by stakeholder type for targeted analysis&quot;&quot;&quot;</span>
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>        <span class="n">stakeholder_analysis</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>            <span class="s2">&quot;teachers&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]},</span>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>            <span class="s2">&quot;students&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]},</span>
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>            <span class="s2">&quot;parents&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]},</span>
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>            <span class="s2">&quot;administrators&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;top_issues&quot;</span><span class="p">:</span> <span class="p">[]}</span>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>        <span class="p">}</span>
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>        <span class="n">stakeholder_mapping</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>            <span class="s2">&quot;teacher_survey&quot;</span><span class="p">:</span> <span class="s2">&quot;teachers&quot;</span><span class="p">,</span>
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>            <span class="s2">&quot;student_interview&quot;</span><span class="p">:</span> <span class="s2">&quot;students&quot;</span><span class="p">,</span> 
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>            <span class="s2">&quot;parent_feedback&quot;</span><span class="p">:</span> <span class="s2">&quot;parents&quot;</span><span class="p">,</span>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>            <span class="s2">&quot;admin_review&quot;</span><span class="p">:</span> <span class="s2">&quot;administrators&quot;</span>
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="p">}</span>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span><span class="p">:</span>
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>            <span class="n">source</span> <span class="o">=</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span>
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>            <span class="k">if</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">stakeholder_mapping</span><span class="p">:</span>
-</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>                <span class="n">group</span> <span class="o">=</span> <span class="n">stakeholder_mapping</span><span class="p">[</span><span class="n">source</span><span class="p">]</span>
-</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>                <span class="n">stakeholder_analysis</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">]</span>
-</span><span id="__span-2-77"><a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>                <span class="n">stakeholder_analysis</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-78"><a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a>                <span class="n">stakeholder_analysis</span><span class="p">[</span><span class="n">group</span><span class="p">][</span><span class="s2">&quot;top_issues&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-2-79"><a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>                    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
-</span><span id="__span-2-80"><a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>                    <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">],</span>
-</span><span id="__span-2-81"><a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>                    <span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">]</span>
-</span><span id="__span-2-82"><a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a>                <span class="p">})</span>
-</span><span id="__span-2-83"><a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>
-</span><span id="__span-2-84"><a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>        <span class="c1"># Calculate averages</span>
-</span><span id="__span-2-85"><a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>        <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">stakeholder_analysis</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-2-86"><a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-2-87"><a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;satisfaction_avg&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span>
-</span><span id="__span-2-88"><a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>
-</span><span id="__span-2-89"><a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a>        <span class="k">return</span> <span class="n">stakeholder_analysis</span>
-</span><span id="__span-2-90"><a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>
-</span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">generate_action_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stakeholder_analysis</span><span class="p">):</span>
-</span><span id="__span-2-92"><a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Create prioritized action plan based on feedback analysis&quot;&quot;&quot;</span>
-</span><span id="__span-2-93"><a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>        <span class="n">action_plan</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-94"><a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>            <span class="s2">&quot;immediate_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-2-95"><a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>            <span class="s2">&quot;short_term_improvements&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-2-96"><a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a>            <span class="s2">&quot;long_term_enhancements&quot;</span><span class="p">:</span> <span class="p">[],</span>
-</span><span id="__span-2-97"><a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a>            <span class="s2">&quot;monitoring_areas&quot;</span><span class="p">:</span> <span class="p">[]</span>
-</span><span id="__span-2-98"><a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>        <span class="p">}</span>
-</span><span id="__span-2-99"><a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a>
-</span><span id="__span-2-100"><a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>        <span class="c1"># Identify critical issues (satisfaction &lt;= 2, high/critical priority)</span>
-</span><span id="__span-2-101"><a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>        <span class="n">critical_issues</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-2-102"><a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a>        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span><span class="p">:</span>
-</span><span id="__span-2-103"><a id="__codelineno-2-103" name="__codelineno-2-103" href="#__codelineno-2-103"></a>            <span class="k">if</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;high&quot;</span><span class="p">,</span> <span class="s2">&quot;critical&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-104"><a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a>                <span class="n">critical_issues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">feedback</span><span class="p">)</span>
-</span><span id="__span-2-105"><a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a>
-</span><span id="__span-2-106"><a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a>        <span class="c1"># Categorize actions</span>
-</span><span id="__span-2-107"><a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>        <span class="k">for</span> <span class="n">issue</span> <span class="ow">in</span> <span class="n">critical_issues</span><span class="p">:</span>
-</span><span id="__span-2-108"><a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>            <span class="k">if</span> <span class="s2">&quot;crash&quot;</span> <span class="ow">in</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;priority&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span><span class="p">:</span>
-</span><span id="__span-2-109"><a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>                <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;immediate_actions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-2-110"><a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>                    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
-</span><span id="__span-2-111"><a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a>                    <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">],</span>
-</span><span id="__span-2-112"><a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a>                    <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days&quot;</span><span class="p">,</span>
-</span><span id="__span-2-113"><a id="__codelineno-2-113" name="__codelineno-2-113" href="#__codelineno-2-113"></a>                    <span class="s2">&quot;responsible_team&quot;</span><span class="p">:</span> <span class="s2">&quot;Backend/Infrastructure&quot;</span>
-</span><span id="__span-2-114"><a id="__codelineno-2-114" name="__codelineno-2-114" href="#__codelineno-2-114"></a>                <span class="p">})</span>
-</span><span id="__span-2-115"><a id="__codelineno-2-115" name="__codelineno-2-115" href="#__codelineno-2-115"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-2-116"><a id="__codelineno-2-116" name="__codelineno-2-116" href="#__codelineno-2-116"></a>                <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;short_term_improvements&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-2-117"><a id="__codelineno-2-117" name="__codelineno-2-117" href="#__codelineno-2-117"></a>                    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
-</span><span id="__span-2-118"><a id="__codelineno-2-118" name="__codelineno-2-118" href="#__codelineno-2-118"></a>                    <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">issue</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">],</span>
-</span><span id="__span-2-119"><a id="__codelineno-2-119" name="__codelineno-2-119" href="#__codelineno-2-119"></a>                    <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 weeks&quot;</span><span class="p">,</span>
-</span><span id="__span-2-120"><a id="__codelineno-2-120" name="__codelineno-2-120" href="#__codelineno-2-120"></a>                    <span class="s2">&quot;responsible_team&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature Development&quot;</span>
-</span><span id="__span-2-121"><a id="__codelineno-2-121" name="__codelineno-2-121" href="#__codelineno-2-121"></a>                <span class="p">})</span>
-</span><span id="__span-2-122"><a id="__codelineno-2-122" name="__codelineno-2-122" href="#__codelineno-2-122"></a>
-</span><span id="__span-2-123"><a id="__codelineno-2-123" name="__codelineno-2-123" href="#__codelineno-2-123"></a>        <span class="c1"># Add positive feedback areas to monitoring</span>
-</span><span id="__span-2-124"><a id="__codelineno-2-124" name="__codelineno-2-124" href="#__codelineno-2-124"></a>        <span class="n">positive_feedback</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_feedback_data</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;satisfaction&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">]</span>
-</span><span id="__span-2-125"><a id="__codelineno-2-125" name="__codelineno-2-125" href="#__codelineno-2-125"></a>        <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">positive_feedback</span><span class="p">:</span>
-</span><span id="__span-2-126"><a id="__codelineno-2-126" name="__codelineno-2-126" href="#__codelineno-2-126"></a>            <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;monitoring_areas&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-2-127"><a id="__codelineno-2-127" name="__codelineno-2-127" href="#__codelineno-2-127"></a>                <span class="s2">&quot;strength&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
-</span><span id="__span-2-128"><a id="__codelineno-2-128" name="__codelineno-2-128" href="#__codelineno-2-128"></a>                <span class="s2">&quot;feature_area&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">],</span>
-</span><span id="__span-2-129"><a id="__codelineno-2-129" name="__codelineno-2-129" href="#__codelineno-2-129"></a>                <span class="s2">&quot;recommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;Maintain current functionality&quot;</span>
-</span><span id="__span-2-130"><a id="__codelineno-2-130" name="__codelineno-2-130" href="#__codelineno-2-130"></a>            <span class="p">})</span>
-</span><span id="__span-2-131"><a id="__codelineno-2-131" name="__codelineno-2-131" href="#__codelineno-2-131"></a>
-</span><span id="__span-2-132"><a id="__codelineno-2-132" name="__codelineno-2-132" href="#__codelineno-2-132"></a>        <span class="k">return</span> <span class="n">action_plan</span>
-</span><span id="__span-2-133"><a id="__codelineno-2-133" name="__codelineno-2-133" href="#__codelineno-2-133"></a>
-</span><span id="__span-2-134"><a id="__codelineno-2-134" name="__codelineno-2-134" href="#__codelineno-2-134"></a><span class="c1"># Example usage</span>
-</span><span id="__span-2-135"><a id="__codelineno-2-135" name="__codelineno-2-135" href="#__codelineno-2-135"></a><span class="n">gradebook_analysis</span> <span class="o">=</span> <span class="n">GradebookFeedbackAnalysis</span><span class="p">()</span>
-</span><span id="__span-2-136"><a id="__codelineno-2-136" name="__codelineno-2-136" href="#__codelineno-2-136"></a>
-</span><span id="__span-2-137"><a id="__codelineno-2-137" name="__codelineno-2-137" href="#__codelineno-2-137"></a><span class="c1"># Analyze by stakeholder groups</span>
-</span><span id="__span-2-138"><a id="__codelineno-2-138" name="__codelineno-2-138" href="#__codelineno-2-138"></a><span class="n">stakeholder_results</span> <span class="o">=</span> <span class="n">gradebook_analysis</span><span class="o">.</span><span class="n">analyze_by_stakeholder_group</span><span class="p">()</span>
-</span><span id="__span-2-139"><a id="__codelineno-2-139" name="__codelineno-2-139" href="#__codelineno-2-139"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stakeholder Satisfaction Analysis:&quot;</span><span class="p">)</span>
-</span><span id="__span-2-140"><a id="__codelineno-2-140" name="__codelineno-2-140" href="#__codelineno-2-140"></a><span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">stakeholder_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-</span><span id="__span-2-141"><a id="__codelineno-2-141" name="__codelineno-2-141" href="#__codelineno-2-141"></a>    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-2-142"><a id="__codelineno-2-142" name="__codelineno-2-142" href="#__codelineno-2-142"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;satisfaction_avg&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">/5 satisfaction (</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> responses)&quot;</span><span class="p">)</span>
-</span><span id="__span-2-143"><a id="__codelineno-2-143" name="__codelineno-2-143" href="#__codelineno-2-143"></a>
-</span><span id="__span-2-144"><a id="__codelineno-2-144" name="__codelineno-2-144" href="#__codelineno-2-144"></a><span class="c1"># Generate action plan</span>
-</span><span id="__span-2-145"><a id="__codelineno-2-145" name="__codelineno-2-145" href="#__codelineno-2-145"></a><span class="n">action_plan</span> <span class="o">=</span> <span class="n">gradebook_analysis</span><span class="o">.</span><span class="n">generate_action_plan</span><span class="p">(</span><span class="n">stakeholder_results</span><span class="p">)</span>
-</span><span id="__span-2-146"><a id="__codelineno-2-146" name="__codelineno-2-146" href="#__codelineno-2-146"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Action Plan:&quot;</span><span class="p">)</span>
-</span><span id="__span-2-147"><a id="__codelineno-2-147" name="__codelineno-2-147" href="#__codelineno-2-147"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Immediate Actions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">action_plan</span><span class="p">[</span><span class="s1">&#39;immediate_actions&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-148"><a id="__codelineno-2-148" name="__codelineno-2-148" href="#__codelineno-2-148"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Short-term Improvements: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">action_plan</span><span class="p">[</span><span class="s1">&#39;short_term_improvements&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-149"><a id="__codelineno-2-149" name="__codelineno-2-149" href="#__codelineno-2-149"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Areas to Monitor: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">action_plan</span><span class="p">[</span><span class="s1">&#39;monitoring_areas&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-150"><a id="__codelineno-2-150" name="__codelineno-2-150" href="#__codelineno-2-150"></a>
-</span><span id="__span-2-151"><a id="__codelineno-2-151" name="__codelineno-2-151" href="#__codelineno-2-151"></a><span class="c1"># Display immediate actions</span>
-</span><span id="__span-2-152"><a id="__codelineno-2-152" name="__codelineno-2-152" href="#__codelineno-2-152"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Immediate Actions Required:&quot;</span><span class="p">)</span>
-</span><span id="__span-2-153"><a id="__codelineno-2-153" name="__codelineno-2-153" href="#__codelineno-2-153"></a><span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">action_plan</span><span class="p">[</span><span class="s2">&quot;immediate_actions&quot;</span><span class="p">]:</span>
-</span><span id="__span-2-154"><a id="__codelineno-2-154" name="__codelineno-2-154" href="#__codelineno-2-154"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">action</span><span class="p">[</span><span class="s1">&#39;issue&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">action</span><span class="p">[</span><span class="s1">&#39;feature_area&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"># Gradebook feedback analysis example
+class GradebookFeedbackAnalysis:
+    def __init__(self):
+        self.collected_feedback = {
+            &quot;teacher_surveys&quot;: 45,
+            &quot;student_interviews&quot;: 12,
+            &quot;parent_feedback&quot;: 23,
+            &quot;admin_reviews&quot;: 8,
+            &quot;support_tickets&quot;: 67,
+            &quot;usage_analytics&quot;: &quot;3 months data&quot;
+        }
+
+        self.raw_feedback_data = [
+            {
+                &quot;source&quot;: &quot;teacher_survey&quot;,
+                &quot;respondent&quot;: &quot;High School Math Teacher&quot;,
+                &quot;feedback&quot;: &quot;Grade entry takes too long - need bulk operations&quot;,
+                &quot;satisfaction&quot;: 2,
+                &quot;feature_area&quot;: &quot;grade_entry&quot;,
+                &quot;priority&quot;: &quot;high&quot;
+            },
+            {
+                &quot;source&quot;: &quot;student_interview&quot;,
+                &quot;respondent&quot;: &quot;Year 11 Student&quot;,
+                &quot;feedback&quot;: &quot;Can&#x27;t see detailed feedback on assignments, just grades&quot;,
+                &quot;satisfaction&quot;: 3,
+                &quot;feature_area&quot;: &quot;student_view&quot;,
+                &quot;priority&quot;: &quot;medium&quot;
+            },
+            {
+                &quot;source&quot;: &quot;parent_feedback&quot;,
+                &quot;respondent&quot;: &quot;Parent via email&quot;,
+                &quot;feedback&quot;: &quot;Notification system is excellent, helps me stay informed&quot;,
+                &quot;satisfaction&quot;: 5,
+                &quot;feature_area&quot;: &quot;notifications&quot;,
+                &quot;priority&quot;: &quot;low&quot;
+            },
+            {
+                &quot;source&quot;: &quot;admin_review&quot;,
+                &quot;respondent&quot;: &quot;School Principal&quot;,
+                &quot;feedback&quot;: &quot;Reports generation is slow during peak times&quot;,
+                &quot;satisfaction&quot;: 2,
+                &quot;feature_area&quot;: &quot;reporting&quot;,
+                &quot;priority&quot;: &quot;high&quot;
+            },
+            {
+                &quot;source&quot;: &quot;support_ticket&quot;,
+                &quot;respondent&quot;: &quot;Multiple users&quot;,
+                &quot;feedback&quot;: &quot;Gradebook crashes when uploading large files&quot;,
+                &quot;satisfaction&quot;: 1,
+                &quot;feature_area&quot;: &quot;file_upload&quot;,
+                &quot;priority&quot;: &quot;critical&quot;
+            }
+        ]
+
+    def analyze_by_stakeholder_group(self):
+        &quot;&quot;&quot;Group feedback by stakeholder type for targeted analysis&quot;&quot;&quot;
+        stakeholder_analysis = {
+            &quot;teachers&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []},
+            &quot;students&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []},
+            &quot;parents&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []},
+            &quot;administrators&quot;: {&quot;satisfaction_avg&quot;: 0, &quot;count&quot;: 0, &quot;top_issues&quot;: []}
+        }
+
+        stakeholder_mapping = {
+            &quot;teacher_survey&quot;: &quot;teachers&quot;,
+            &quot;student_interview&quot;: &quot;students&quot;, 
+            &quot;parent_feedback&quot;: &quot;parents&quot;,
+            &quot;admin_review&quot;: &quot;administrators&quot;
+        }
+
+        for feedback in self.raw_feedback_data:
+            source = feedback[&quot;source&quot;]
+            if source in stakeholder_mapping:
+                group = stakeholder_mapping[source]
+                stakeholder_analysis[group][&quot;satisfaction_avg&quot;] += feedback[&quot;satisfaction&quot;]
+                stakeholder_analysis[group][&quot;count&quot;] += 1
+                stakeholder_analysis[group][&quot;top_issues&quot;].append({
+                    &quot;issue&quot;: feedback[&quot;feedback&quot;],
+                    &quot;priority&quot;: feedback[&quot;priority&quot;],
+                    &quot;feature&quot;: feedback[&quot;feature_area&quot;]
+                })
+
+        # Calculate averages
+        for group, data in stakeholder_analysis.items():
+            if data[&quot;count&quot;] &gt; 0:
+                data[&quot;satisfaction_avg&quot;] = data[&quot;satisfaction_avg&quot;] / data[&quot;count&quot;]
+
+        return stakeholder_analysis
+
+    def generate_action_plan(self, stakeholder_analysis):
+        &quot;&quot;&quot;Create prioritized action plan based on feedback analysis&quot;&quot;&quot;
+        action_plan = {
+            &quot;immediate_actions&quot;: [],
+            &quot;short_term_improvements&quot;: [],
+            &quot;long_term_enhancements&quot;: [],
+            &quot;monitoring_areas&quot;: []
+        }
+
+        # Identify critical issues (satisfaction &lt;= 2, high/critical priority)
+        critical_issues = []
+        for feedback in self.raw_feedback_data:
+            if feedback[&quot;satisfaction&quot;] &lt;= 2 and feedback[&quot;priority&quot;] in [&quot;high&quot;, &quot;critical&quot;]:
+                critical_issues.append(feedback)
+
+        # Categorize actions
+        for issue in critical_issues:
+            if &quot;crash&quot; in issue[&quot;feedback&quot;].lower() or issue[&quot;priority&quot;] == &quot;critical&quot;:
+                action_plan[&quot;immediate_actions&quot;].append({
+                    &quot;issue&quot;: issue[&quot;feedback&quot;],
+                    &quot;feature_area&quot;: issue[&quot;feature_area&quot;],
+                    &quot;estimated_effort&quot;: &quot;1-2 days&quot;,
+                    &quot;responsible_team&quot;: &quot;Backend/Infrastructure&quot;
+                })
+            else:
+                action_plan[&quot;short_term_improvements&quot;].append({
+                    &quot;issue&quot;: issue[&quot;feedback&quot;],
+                    &quot;feature_area&quot;: issue[&quot;feature_area&quot;],
+                    &quot;estimated_effort&quot;: &quot;1-2 weeks&quot;,
+                    &quot;responsible_team&quot;: &quot;Feature Development&quot;
+                })
+
+        # Add positive feedback areas to monitoring
+        positive_feedback = [f for f in self.raw_feedback_data if f[&quot;satisfaction&quot;] &gt;= 4]
+        for feedback in positive_feedback:
+            action_plan[&quot;monitoring_areas&quot;].append({
+                &quot;strength&quot;: feedback[&quot;feedback&quot;],
+                &quot;feature_area&quot;: feedback[&quot;feature_area&quot;],
+                &quot;recommendation&quot;: &quot;Maintain current functionality&quot;
+            })
+
+        return action_plan
+
+# Example usage
+gradebook_analysis = GradebookFeedbackAnalysis()
+
+# Analyze by stakeholder groups
+stakeholder_results = gradebook_analysis.analyze_by_stakeholder_group()
+print(&quot;Stakeholder Satisfaction Analysis:&quot;)
+for group, data in stakeholder_results.items():
+    if data[&quot;count&quot;] &gt; 0:
+        print(f&quot;  {group}: {data[&#x27;satisfaction_avg&#x27;]:.1f}/5 satisfaction ({data[&#x27;count&#x27;]} responses)&quot;)
+
+# Generate action plan
+action_plan = gradebook_analysis.generate_action_plan(stakeholder_results)
+print(f&quot;\nAction Plan:&quot;)
+print(f&quot;  Immediate Actions: {len(action_plan[&#x27;immediate_actions&#x27;])}&quot;)
+print(f&quot;  Short-term Improvements: {len(action_plan[&#x27;short_term_improvements&#x27;])}&quot;)
+print(f&quot;  Areas to Monitor: {len(action_plan[&#x27;monitoring_areas&#x27;])}&quot;)
+
+# Display immediate actions
+print(&quot;\nImmediate Actions Required:&quot;)
+for action in action_plan[&quot;immediate_actions&quot;]:
+    print(f&quot;  - {action[&#x27;issue&#x27;]} ({action[&#x27;feature_area&#x27;]})&quot;)
+</code></pre>
+</div>
 <p><strong>Step 2: Impact vs effort analysis</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_impact_effort_matrix</span><span class="p">(</span><span class="n">feedback_items</span><span class="p">):</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot feedback-driven improvements on impact vs effort matrix&quot;&quot;&quot;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">matrix_items</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">effort_estimation</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="s2">&quot;file_upload&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bug fix - moderate effort&quot;</span><span class="p">},</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="s2">&quot;grade_entry&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;UI redesign - high effort&quot;</span><span class="p">},</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="s2">&quot;reporting&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Performance optimization - medium effort&quot;</span><span class="p">},</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="s2">&quot;student_view&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;New feature - low-medium effort&quot;</span><span class="p">},</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="s2">&quot;notifications&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Configuration change - low effort&quot;</span><span class="p">}</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="p">}</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">impact_assessment</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="s2">&quot;file_upload&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>    <span class="c1"># Affects all users, critical functionality</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="s2">&quot;grade_entry&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>    <span class="c1"># High frequency use, teacher productivity</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="s2">&quot;reporting&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>      <span class="c1"># Admin efficiency, compliance needs</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="s2">&quot;student_view&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>   <span class="c1"># Student engagement, learning outcomes</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="s2">&quot;notifications&quot;</span><span class="p">:</span> <span class="mi">4</span>   <span class="c1"># Already working well, minor improvements</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="p">}</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">feedback_items</span><span class="p">:</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="n">feature</span> <span class="o">=</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">]</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>        <span class="k">if</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">effort_estimation</span> <span class="ow">and</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">impact_assessment</span><span class="p">:</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>            <span class="n">matrix_items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>                <span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="n">feature</span><span class="p">,</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>                <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>                <span class="s2">&quot;impact_score&quot;</span><span class="p">:</span> <span class="n">impact_assessment</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>                <span class="s2">&quot;effort_score&quot;</span><span class="p">:</span> <span class="n">effort_estimation</span><span class="p">[</span><span class="n">feature</span><span class="p">][</span><span class="s2">&quot;effort&quot;</span><span class="p">],</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>                <span class="s2">&quot;priority_quadrant&quot;</span><span class="p">:</span> <span class="n">_determine_quadrant</span><span class="p">(</span>
-</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>                    <span class="n">impact_assessment</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span> 
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>                    <span class="n">effort_estimation</span><span class="p">[</span><span class="n">feature</span><span class="p">][</span><span class="s2">&quot;effort&quot;</span><span class="p">]</span>
-</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>                <span class="p">)</span>
-</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>            <span class="p">})</span>
-</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>
-</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">matrix_items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;impact_score&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;effort_score&quot;</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>
-</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">_determine_quadrant</span><span class="p">(</span><span class="n">impact</span><span class="p">,</span> <span class="n">effort</span><span class="p">):</span>
-</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine which quadrant of impact/effort matrix&quot;&quot;&quot;</span>
-</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="k">if</span> <span class="n">impact</span> <span class="o">&gt;=</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">effort</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
-</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>        <span class="k">return</span> <span class="s2">&quot;Quick Wins&quot;</span>
-</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>    <span class="k">elif</span> <span class="n">impact</span> <span class="o">&gt;=</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">effort</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
-</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>        <span class="k">return</span> <span class="s2">&quot;Major Projects&quot;</span>
-</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>    <span class="k">elif</span> <span class="n">impact</span> <span class="o">&lt;</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">effort</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
-</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>        <span class="k">return</span> <span class="s2">&quot;Fill-ins&quot;</span>
-</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>        <span class="k">return</span> <span class="s2">&quot;Questionable&quot;</span>
-</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>
-</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="c1"># Create impact/effort analysis</span>
-</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="n">matrix_analysis</span> <span class="o">=</span> <span class="n">create_impact_effort_matrix</span><span class="p">(</span><span class="n">gradebook_analysis</span><span class="o">.</span><span class="n">raw_feedback_data</span><span class="p">)</span>
-</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Impact vs Effort Analysis:&quot;</span><span class="p">)</span>
-</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">matrix_analysis</span><span class="p">:</span>
-</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;priority_quadrant&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (Impact: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;impact_score&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Effort: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;effort_score&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_impact_effort_matrix</span><span class="p">(</span><span class="n">feedback_items</span><span class="p">):</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot feedback-driven improvements on impact vs effort matrix&quot;&quot;&quot;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">matrix_items</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">effort_estimation</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="s2">&quot;file_upload&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Bug fix - moderate effort&quot;</span><span class="p">},</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="s2">&quot;grade_entry&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;UI redesign - high effort&quot;</span><span class="p">},</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">&quot;reporting&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Performance optimization - medium effort&quot;</span><span class="p">},</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="s2">&quot;student_view&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;New feature - low-medium effort&quot;</span><span class="p">},</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="s2">&quot;notifications&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;effort&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Configuration change - low effort&quot;</span><span class="p">}</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="p">}</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="n">impact_assessment</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="s2">&quot;file_upload&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>    <span class="c1"># Affects all users, critical functionality</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="s2">&quot;grade_entry&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>    <span class="c1"># High frequency use, teacher productivity</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="s2">&quot;reporting&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>      <span class="c1"># Admin efficiency, compliance needs</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="s2">&quot;student_view&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>   <span class="c1"># Student engagement, learning outcomes</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="s2">&quot;notifications&quot;</span><span class="p">:</span> <span class="mi">4</span>   <span class="c1"># Already working well, minor improvements</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="p">}</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">for</span> <span class="n">feedback</span> <span class="ow">in</span> <span class="n">feedback_items</span><span class="p">:</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="n">feature</span> <span class="o">=</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feature_area&quot;</span><span class="p">]</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="k">if</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">effort_estimation</span> <span class="ow">and</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">impact_assessment</span><span class="p">:</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>            <span class="n">matrix_items</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>                <span class="s2">&quot;feature&quot;</span><span class="p">:</span> <span class="n">feature</span><span class="p">,</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>                <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="n">feedback</span><span class="p">[</span><span class="s2">&quot;feedback&quot;</span><span class="p">],</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>                <span class="s2">&quot;impact_score&quot;</span><span class="p">:</span> <span class="n">impact_assessment</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>                <span class="s2">&quot;effort_score&quot;</span><span class="p">:</span> <span class="n">effort_estimation</span><span class="p">[</span><span class="n">feature</span><span class="p">][</span><span class="s2">&quot;effort&quot;</span><span class="p">],</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>                <span class="s2">&quot;priority_quadrant&quot;</span><span class="p">:</span> <span class="n">_determine_quadrant</span><span class="p">(</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>                    <span class="n">impact_assessment</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span> 
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>                    <span class="n">effort_estimation</span><span class="p">[</span><span class="n">feature</span><span class="p">][</span><span class="s2">&quot;effort&quot;</span><span class="p">]</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>                <span class="p">)</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>            <span class="p">})</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">matrix_items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;impact_score&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;effort_score&quot;</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">_determine_quadrant</span><span class="p">(</span><span class="n">impact</span><span class="p">,</span> <span class="n">effort</span><span class="p">):</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine which quadrant of impact/effort matrix&quot;&quot;&quot;</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="k">if</span> <span class="n">impact</span> <span class="o">&gt;=</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">effort</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="k">return</span> <span class="s2">&quot;Quick Wins&quot;</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>    <span class="k">elif</span> <span class="n">impact</span> <span class="o">&gt;=</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">effort</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="k">return</span> <span class="s2">&quot;Major Projects&quot;</span>
+</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="k">elif</span> <span class="n">impact</span> <span class="o">&lt;</span> <span class="mi">7</span> <span class="ow">and</span> <span class="n">effort</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="k">return</span> <span class="s2">&quot;Fill-ins&quot;</span>
+</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="k">return</span> <span class="s2">&quot;Questionable&quot;</span>
+</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c1"># Create impact/effort analysis</span>
+</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="n">matrix_analysis</span> <span class="o">=</span> <span class="n">create_impact_effort_matrix</span><span class="p">(</span><span class="n">gradebook_analysis</span><span class="o">.</span><span class="n">raw_feedback_data</span><span class="p">)</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Impact vs Effort Analysis:&quot;</span><span class="p">)</span>
+</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">matrix_analysis</span><span class="p">:</span>
+</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;feature&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;priority_quadrant&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (Impact: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;impact_score&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Effort: </span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="s1">&#39;effort_score&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
 <details class="question">
@@ -2425,7 +2431,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2025 23:34:36 UTC">October 7, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

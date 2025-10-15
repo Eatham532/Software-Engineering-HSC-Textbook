@@ -1501,25 +1501,27 @@
 <p>Every processor understands a specific set of instructions called an <strong>instruction set</strong>. These instructions are the basic operations the processor can perform.</p>
 <p><strong>Opcodes</strong> (operation codes) are the numerical codes that represent these instructions. Think of them as the processor&rsquo;s vocabulary—each opcode tells the processor to do something specific.</p>
 <p>Here are some common types of instructions that processors understand:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># These Python operations correspond to basic processor instructions:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Arithmetic operations</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">result</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span>        <span class="c1"># ADD opcode</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">difference</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">4</span>   <span class="c1"># SUBTRACT opcode</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">product</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">7</span>       <span class="c1"># MULTIPLY opcode</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Data movement</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">42</span>               <span class="c1"># LOAD opcode (move value to memory)</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>                <span class="c1"># COPY opcode (copy value between locations)</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Comparison and branching</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>           <span class="c1"># COMPARE opcode followed by BRANCH opcode</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Large&quot;</span><span class="p">)</span>   <span class="c1"># CALL opcode (call a function)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># Logical operations</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span> <span class="ow">and</span> <span class="kc">False</span>  <span class="c1"># AND opcode</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">flag</span>      <span class="c1"># NOT opcode</span>
-</span></code></pre></div>
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
+<pre><code class="language-python"># These Python operations correspond to basic processor instructions:
+
+# Arithmetic operations
+result = 5 + 3        # ADD opcode
+difference = 10 - 4   # SUBTRACT opcode
+product = 6 * 7       # MULTIPLY opcode
+
+# Data movement
+x = 42               # LOAD opcode (move value to memory)
+y = x                # COPY opcode (copy value between locations)
+
+# Comparison and branching
+if x &gt; 10:           # COMPARE opcode followed by BRANCH opcode
+    print(&quot;Large&quot;)   # CALL opcode (call a function)
+
+# Logical operations
+flag = True and False  # AND opcode
+result = not flag      # NOT opcode
+</code></pre>
+</div>
 <p>Different processor families have different instruction sets:</p>
 <ul>
 <li>
@@ -1550,138 +1552,142 @@
 <p>The <strong>fetch-decode-execute cycle</strong> is how processors work through their instructions:</p>
 <div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="ACTIVITY" height="298px" preserveAspectRatio="xMaxYMax meet" style="width:311px;height:298px;background:#FFFFFF;" version="1.1" viewBox="0 0 311 298" width="311px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><ellipse cx="155.8389" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;" /><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="206.9844" x="52.3467" y="50" /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="186.9844" x="62.3467" y="71.1387">Fetch instruction from memory</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="289.6777" x="11" y="103.9688" /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="269.6777" x="21" y="125.1074">Decode instruction to understand what to do</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="159.6992" x="75.9893" y="157.9375" /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="139.6992" x="85.9893" y="179.0762">Execute the instruction</text><rect fill="#F1F1F1" height="33.9688" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="283.0508" x="14.3135" y="211.9063" /><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="263.0508" x="24.3135" y="233.0449">Update program counter to next instruction</text><ellipse cx="155.8389" cy="276.875" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;" /><ellipse cx="155.8389" cy="276.875" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="155.8389" x2="155.8389" y1="30" y2="50" /><polygon fill="#181818" points="151.8389,40,155.8389,50,159.8389,40,155.8389,44" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="155.8389" x2="155.8389" y1="83.9688" y2="103.9688" /><polygon fill="#181818" points="151.8389,93.9688,155.8389,103.9688,159.8389,93.9688,155.8389,97.9688" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="155.8389" x2="155.8389" y1="137.9375" y2="157.9375" /><polygon fill="#181818" points="151.8389,147.9375,155.8389,157.9375,159.8389,147.9375,155.8389,151.9375" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="155.8389" x2="155.8389" y1="191.9063" y2="211.9063" /><polygon fill="#181818" points="151.8389,201.9063,155.8389,211.9063,159.8389,201.9063,155.8389,205.9063" style="stroke:#181818;stroke-width:1;" /><line style="stroke:#181818;stroke-width:1;" x1="155.8389" x2="155.8389" y1="245.875" y2="265.875" /><polygon fill="#181818" points="151.8389,255.875,155.8389,265.875,159.8389,255.875,155.8389,259.875" style="stroke:#181818;stroke-width:1;" /></g></svg></p></div></div>
 <p>Let&rsquo;s trace through a simple example:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># This Python code: x = 5 + 3</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># Might translate to these processor steps:</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># 1. FETCH: Get &quot;LOAD 5&quot; instruction from memory</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># 2. DECODE: Understand this means &quot;put 5 in accumulator&quot;</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># 3. EXECUTE: Move 5 into accumulator register</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 4. FETCH: Get &quot;ADD 3&quot; instruction from memory  </span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># 5. DECODE: Understand this means &quot;add 3 to accumulator&quot;</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># 6. EXECUTE: Add 3 to the value in accumulator (5 + 3 = 8)</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1"># 7. FETCH: Get &quot;STORE x&quot; instruction from memory</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># 8. DECODE: Understand this means &quot;save accumulator to variable x&quot;</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># 9. EXECUTE: Copy 8 from accumulator to memory location for x</span>
-</span></code></pre></div>
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
+<pre><code class="language-python"># This Python code: x = 5 + 3
+# Might translate to these processor steps:
+
+# 1. FETCH: Get &quot;LOAD 5&quot; instruction from memory
+# 2. DECODE: Understand this means &quot;put 5 in accumulator&quot;
+# 3. EXECUTE: Move 5 into accumulator register
+
+# 4. FETCH: Get &quot;ADD 3&quot; instruction from memory  
+# 5. DECODE: Understand this means &quot;add 3 to accumulator&quot;
+# 6. EXECUTE: Add 3 to the value in accumulator (5 + 3 = 8)
+
+# 7. FETCH: Get &quot;STORE x&quot; instruction from memory
+# 8. DECODE: Understand this means &quot;save accumulator to variable x&quot;
+# 9. EXECUTE: Copy 8 from accumulator to memory location for x
+</code></pre>
+</div>
 <p>This cycle repeats millions or billions of times per second, depending on the processor&rsquo;s speed (measured in MHz or GHz).</p>
 <h3 id="guided-example">Guided example<a class="headerlink" href="#guided-example" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s simulate how a simple microcontroller might process instructions for a mechatronic system:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">SimpleProcessor</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;A simplified model of how a microcontroller processes instructions&quot;&quot;&quot;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="c1"># Registers (processor&#39;s internal memory)</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Main working register</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Which instruction we&#39;re on</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">status_flags</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;zero&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;negative&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="c1"># Memory (where our program and data live)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># 100 memory locations</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List of instructions</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">load_program</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instructions</span><span class="p">):</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Load a program into memory&quot;&quot;&quot;</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">instructions</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the next instruction&quot;&quot;&quot;</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="p">):</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>            <span class="n">instruction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span><span class="p">]</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>            <span class="k">return</span> <span class="n">instruction</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="k">return</span> <span class="kc">None</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode_and_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">):</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Decode and execute an instruction&quot;&quot;&quot;</span>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="n">parts</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="n">opcode</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>        <span class="k">if</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;LOAD&quot;</span><span class="p">:</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>            <span class="c1"># Load a value into the accumulator</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="n">value</span>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LOAD </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">: Accumulator = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>        <span class="k">elif</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;ADD&quot;</span><span class="p">:</span>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>            <span class="c1"># Add a value to the accumulator</span>
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">+=</span> <span class="n">value</span>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ADD </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">: Accumulator = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>        <span class="k">elif</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;STORE&quot;</span><span class="p">:</span>
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>            <span class="c1"># Store accumulator value to memory</span>
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>            <span class="n">address</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">[</span><span class="n">address</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span>
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;STORE </span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">: Memory[</span><span class="si">{</span><span class="n">address</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>        <span class="k">elif</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;COMPARE&quot;</span><span class="p">:</span>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>            <span class="c1"># Compare accumulator with a value</span>
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status_flags</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">==</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">status_flags</span><span class="p">[</span><span class="s1">&#39;negative&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">&lt;</span> <span class="n">value</span><span class="p">)</span>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;COMPARE </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">: Zero=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">status_flags</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Negative=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">status_flags</span><span class="p">[</span><span class="s1">&#39;negative&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">run_program</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the loaded program&quot;&quot;&quot;</span>
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting program execution...&quot;</span><span class="p">)</span>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial state: Accumulator = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>        <span class="nb">print</span><span class="p">()</span>
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>            <span class="n">instruction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>            <span class="k">if</span> <span class="n">instruction</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>                <span class="k">break</span>
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">decode_and_execute</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>            <span class="nb">print</span><span class="p">()</span>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Program completed!&quot;</span><span class="p">)</span>
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final accumulator value: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>
-</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a><span class="c1"># Example: Calculate the sum of sensor readings</span>
-</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a><span class="n">processor</span> <span class="o">=</span> <span class="n">SimpleProcessor</span><span class="p">()</span>
-</span><span id="__span-2-77"><a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>
-</span><span id="__span-2-78"><a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a><span class="c1"># Program to add three sensor readings: 25, 30, 15</span>
-</span><span id="__span-2-79"><a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a><span class="n">sensor_program</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-2-80"><a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>    <span class="s2">&quot;LOAD 25&quot;</span><span class="p">,</span>      <span class="c1"># Load first sensor reading</span>
-</span><span id="__span-2-81"><a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>    <span class="s2">&quot;ADD 30&quot;</span><span class="p">,</span>       <span class="c1"># Add second sensor reading  </span>
-</span><span id="__span-2-82"><a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a>    <span class="s2">&quot;ADD 15&quot;</span><span class="p">,</span>       <span class="c1"># Add third sensor reading</span>
-</span><span id="__span-2-83"><a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>    <span class="s2">&quot;STORE 10&quot;</span><span class="p">,</span>     <span class="c1"># Store total in memory location 10</span>
-</span><span id="__span-2-84"><a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a>    <span class="s2">&quot;COMPARE 70&quot;</span>    <span class="c1"># Check if total equals expected value</span>
-</span><span id="__span-2-85"><a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a><span class="p">]</span>
-</span><span id="__span-2-86"><a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>
-</span><span id="__span-2-87"><a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a><span class="n">processor</span><span class="o">.</span><span class="n">load_program</span><span class="p">(</span><span class="n">sensor_program</span><span class="p">)</span>
-</span><span id="__span-2-88"><a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a><span class="n">processor</span><span class="o">.</span><span class="n">run_program</span><span class="p">()</span>
-</span><span id="__span-2-89"><a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a>
-</span><span id="__span-2-90"><a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a><span class="c1"># Check what we stored in memory</span>
-</span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total sensor reading stored in memory: </span><span class="si">{</span><span class="n">processor</span><span class="o">.</span><span class="n">memory</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class SimpleProcessor:
+    &quot;&quot;&quot;A simplified model of how a microcontroller processes instructions&quot;&quot;&quot;
+
+    def __init__(self):
+        # Registers (processor&#x27;s internal memory)
+        self.accumulator = 0  # Main working register
+        self.program_counter = 0  # Which instruction we&#x27;re on
+        self.status_flags = {&#x27;zero&#x27;: False, &#x27;negative&#x27;: False}
+
+        # Memory (where our program and data live)
+        self.memory = [0] * 100  # 100 memory locations
+        self.program = []  # List of instructions
+
+    def load_program(self, instructions):
+        &quot;&quot;&quot;Load a program into memory&quot;&quot;&quot;
+        self.program = instructions
+        self.program_counter = 0
+
+    def fetch(self):
+        &quot;&quot;&quot;Fetch the next instruction&quot;&quot;&quot;
+        if self.program_counter &lt; len(self.program):
+            instruction = self.program[self.program_counter]
+            self.program_counter += 1
+            return instruction
+        return None
+
+    def decode_and_execute(self, instruction):
+        &quot;&quot;&quot;Decode and execute an instruction&quot;&quot;&quot;
+        parts = instruction.split()
+        opcode = parts[0]
+
+        if opcode == &quot;LOAD&quot;:
+            # Load a value into the accumulator
+            value = int(parts[1])
+            self.accumulator = value
+            print(f&quot;LOAD {value}: Accumulator = {self.accumulator}&quot;)
+
+        elif opcode == &quot;ADD&quot;:
+            # Add a value to the accumulator
+            value = int(parts[1])
+            self.accumulator += value
+            print(f&quot;ADD {value}: Accumulator = {self.accumulator}&quot;)
+
+        elif opcode == &quot;STORE&quot;:
+            # Store accumulator value to memory
+            address = int(parts[1])
+            self.memory[address] = self.accumulator
+            print(f&quot;STORE {address}: Memory[{address}] = {self.accumulator}&quot;)
+
+        elif opcode == &quot;COMPARE&quot;:
+            # Compare accumulator with a value
+            value = int(parts[1])
+            self.status_flags[&#x27;zero&#x27;] = (self.accumulator == value)
+            self.status_flags[&#x27;negative&#x27;] = (self.accumulator &lt; value)
+            print(f&quot;COMPARE {value}: Zero={self.status_flags[&#x27;zero&#x27;]}, Negative={self.status_flags[&#x27;negative&#x27;]}&quot;)
+
+    def run_program(self):
+        &quot;&quot;&quot;Run the loaded program&quot;&quot;&quot;
+        print(&quot;Starting program execution...&quot;)
+        print(f&quot;Initial state: Accumulator = {self.accumulator}&quot;)
+        print()
+
+        while True:
+            instruction = self.fetch()
+            if instruction is None:
+                break
+
+            print(f&quot;Step {self.program_counter}: {instruction}&quot;)
+            self.decode_and_execute(instruction)
+            print()
+
+        print(&quot;Program completed!&quot;)
+        print(f&quot;Final accumulator value: {self.accumulator}&quot;)
+
+# Example: Calculate the sum of sensor readings
+processor = SimpleProcessor()
+
+# Program to add three sensor readings: 25, 30, 15
+sensor_program = [
+    &quot;LOAD 25&quot;,      # Load first sensor reading
+    &quot;ADD 30&quot;,       # Add second sensor reading  
+    &quot;ADD 15&quot;,       # Add third sensor reading
+    &quot;STORE 10&quot;,     # Store total in memory location 10
+    &quot;COMPARE 70&quot;    # Check if total equals expected value
+]
+
+processor.load_program(sensor_program)
+processor.run_program()
+
+# Check what we stored in memory
+print(f&quot;Total sensor reading stored in memory: {processor.memory[10]}&quot;)
+</code></pre>
+</div>
 <p>When you run this simulation, you&rsquo;ll see exactly how the processor moves through each instruction:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Starting program execution...
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Initial state: Accumulator = 0
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Step 1: LOAD 25
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>LOAD 25: Accumulator = 25
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Step 2: ADD 30
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>ADD 30: Accumulator = 55
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Step 3: ADD 15
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>ADD 15: Accumulator = 70
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>Step 4: STORE 10
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>STORE 10: Memory[10] = 70
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>Step 5: COMPARE 70
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>COMPARE 70: Zero=True, Negative=False
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>Program completed!
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>Final accumulator value: 70
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>Total sensor reading stored in memory: 70
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Starting program execution...
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Initial state: Accumulator = 0
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>Step 1: LOAD 25
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>LOAD 25: Accumulator = 25
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Step 2: ADD 30
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>ADD 30: Accumulator = 55
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>Step 3: ADD 15
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>ADD 15: Accumulator = 70
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>Step 4: STORE 10
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>STORE 10: Memory[10] = 70
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>Step 5: COMPARE 70
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>COMPARE 70: Zero=True, Negative=False
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>Program completed!
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>Final accumulator value: 70
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>Total sensor reading stored in memory: 70
 </span></code></pre></div>
 <p>This shows how even a simple calculation like adding sensor readings involves multiple fetch-decode-execute cycles.</p>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
@@ -1702,63 +1708,65 @@
 <p>Test your program with different sensor readings to see how the motor control changes.</p>
 <details class="success">
 <summary>Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Extend our processor to handle motor control</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">MechatronicProcessor</span><span class="p">(</span><span class="n">SimpleProcessor</span><span class="p">):</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">motor_speed</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_value</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode_and_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">):</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Extended instruction set for mechatronics&quot;&quot;&quot;</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">parts</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">opcode</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="c1"># Handle basic instructions from parent class</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        <span class="k">if</span> <span class="n">opcode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;LOAD&quot;</span><span class="p">,</span> <span class="s2">&quot;ADD&quot;</span><span class="p">,</span> <span class="s2">&quot;STORE&quot;</span><span class="p">,</span> <span class="s2">&quot;COMPARE&quot;</span><span class="p">]:</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">decode_and_execute</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>        <span class="c1"># New mechatronic instructions</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        <span class="k">elif</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;READ_SENSOR&quot;</span><span class="p">:</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>            <span class="c1"># Simulate reading from a sensor</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>            <span class="n">sensor_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>            <span class="c1"># In real hardware, this would read from actual sensor</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>            <span class="n">test_values</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">23</span><span class="p">}</span>  <span class="c1"># Simulated sensor readings</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">=</span> <span class="n">test_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sensor_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;READ_SENSOR </span><span class="si">{</span><span class="n">sensor_id</span><span class="si">}</span><span class="s2">: Accumulator = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>        <span class="k">elif</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;SET_MOTOR&quot;</span><span class="p">:</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>            <span class="c1"># Set motor speed based on accumulator value</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">motor_speed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span>
-</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SET_MOTOR: Motor speed = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">motor_speed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>
-</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>        <span class="k">elif</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;JUMP_IF_ZERO&quot;</span><span class="p">:</span>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>            <span class="c1"># Conditional jump based on status flags</span>
-</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">status_flags</span><span class="p">[</span><span class="s1">&#39;zero&#39;</span><span class="p">]:</span>
-</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>                <span class="n">target</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">program_counter</span> <span class="o">=</span> <span class="n">target</span>
-</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;JUMP_IF_ZERO </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">: Jumping to instruction </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>            <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;JUMP_IF_ZERO </span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">: Not jumping (zero flag is False)&quot;</span><span class="p">)</span>
-</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>
-</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="c1"># Create a motor control program</span>
-</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="n">mechatronic_processor</span> <span class="o">=</span> <span class="n">MechatronicProcessor</span><span class="p">()</span>
-</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>
-</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="c1"># Program: Read temperature sensor, set motor speed accordingly</span>
-</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="n">motor_program</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>    <span class="s2">&quot;READ_SENSOR 1&quot;</span><span class="p">,</span>    <span class="c1"># Read temperature sensor (sensor ID 1)</span>
-</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>    <span class="s2">&quot;COMPARE 50&quot;</span><span class="p">,</span>       <span class="c1"># Compare with threshold of 50 degrees</span>
-</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>    <span class="s2">&quot;JUMP_IF_ZERO 6&quot;</span><span class="p">,</span>   <span class="c1"># If temp equals 50, jump to instruction 6</span>
-</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>    <span class="s2">&quot;LOAD 100&quot;</span><span class="p">,</span>         <span class="c1"># If temp != 50, set high motor speed</span>
-</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>    <span class="s2">&quot;SET_MOTOR&quot;</span><span class="p">,</span>        <span class="c1"># Apply motor speed</span>
-</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>    <span class="s2">&quot;STORE 20&quot;</span><span class="p">,</span>         <span class="c1"># Store speed value in memory</span>
-</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>    <span class="s2">&quot;LOAD 0&quot;</span><span class="p">,</span>           <span class="c1"># If temp == 50, set motor speed to 0</span>
-</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>    <span class="s2">&quot;SET_MOTOR&quot;</span>         <span class="c1"># Apply motor speed</span>
-</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a><span class="p">]</span>
-</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>
-</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="n">mechatronic_processor</span><span class="o">.</span><span class="n">load_program</span><span class="p">(</span><span class="n">motor_program</span><span class="p">)</span>
-</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a><span class="n">mechatronic_processor</span><span class="o">.</span><span class="n">run_program</span><span class="p">()</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"># Extend our processor to handle motor control
+class MechatronicProcessor(SimpleProcessor):
+    def __init__(self):
+        super().__init__()
+        self.motor_speed = 0
+        self.sensor_value = 0
+
+    def decode_and_execute(self, instruction):
+        &quot;&quot;&quot;Extended instruction set for mechatronics&quot;&quot;&quot;
+        parts = instruction.split()
+        opcode = parts[0]
+
+        # Handle basic instructions from parent class
+        if opcode in [&quot;LOAD&quot;, &quot;ADD&quot;, &quot;STORE&quot;, &quot;COMPARE&quot;]:
+            super().decode_and_execute(instruction)
+
+        # New mechatronic instructions
+        elif opcode == &quot;READ_SENSOR&quot;:
+            # Simulate reading from a sensor
+            sensor_id = int(parts[1])
+            # In real hardware, this would read from actual sensor
+            test_values = {1: 45, 2: 78, 3: 23}  # Simulated sensor readings
+            self.accumulator = test_values.get(sensor_id, 0)
+            print(f&quot;READ_SENSOR {sensor_id}: Accumulator = {self.accumulator}&quot;)
+
+        elif opcode == &quot;SET_MOTOR&quot;:
+            # Set motor speed based on accumulator value
+            self.motor_speed = self.accumulator
+            print(f&quot;SET_MOTOR: Motor speed = {self.motor_speed}&quot;)
+
+        elif opcode == &quot;JUMP_IF_ZERO&quot;:
+            # Conditional jump based on status flags
+            if self.status_flags[&#x27;zero&#x27;]:
+                target = int(parts[1])
+                self.program_counter = target
+                print(f&quot;JUMP_IF_ZERO {target}: Jumping to instruction {target}&quot;)
+            else:
+                print(f&quot;JUMP_IF_ZERO {target}: Not jumping (zero flag is False)&quot;)
+
+# Create a motor control program
+mechatronic_processor = MechatronicProcessor()
+
+# Program: Read temperature sensor, set motor speed accordingly
+motor_program = [
+    &quot;READ_SENSOR 1&quot;,    # Read temperature sensor (sensor ID 1)
+    &quot;COMPARE 50&quot;,       # Compare with threshold of 50 degrees
+    &quot;JUMP_IF_ZERO 6&quot;,   # If temp equals 50, jump to instruction 6
+    &quot;LOAD 100&quot;,         # If temp != 50, set high motor speed
+    &quot;SET_MOTOR&quot;,        # Apply motor speed
+    &quot;STORE 20&quot;,         # Store speed value in memory
+    &quot;LOAD 0&quot;,           # If temp == 50, set motor speed to 0
+    &quot;SET_MOTOR&quot;         # Apply motor speed
+]
+
+mechatronic_processor.load_program(motor_program)
+mechatronic_processor.run_program()
+</code></pre>
+</div>
 <p>Try modifying the sensor readings in the <code>test_values</code> dictionary and see how the program flow changes.</p>
 </details>
 <details class="question">
@@ -1792,62 +1800,64 @@
 </ol>
 <details class="success">
 <summary>Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">TimedProcessor</span><span class="p">(</span><span class="n">SimpleProcessor</span><span class="p">):</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">clock_cycles</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="c1"># Different instructions take different amounts of time</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">instruction_timing</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="s1">&#39;LOAD&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>      <span class="c1"># 1 clock cycle</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>            <span class="s1">&#39;ADD&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>       <span class="c1"># 1 clock cycle  </span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="s1">&#39;STORE&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>     <span class="c1"># 2 clock cycles (memory access is slower)</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="s1">&#39;COMPARE&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1"># 1 clock cycle</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="s1">&#39;MULTIPLY&#39;</span><span class="p">:</span> <span class="mi">4</span>   <span class="c1"># 4 clock cycles (multiplication is complex)</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="p">}</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">decode_and_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instruction</span><span class="p">):</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute instruction and track timing&quot;&quot;&quot;</span>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>        <span class="n">parts</span> <span class="o">=</span> <span class="n">instruction</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>        <span class="n">opcode</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        <span class="c1"># Execute the instruction</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        <span class="k">if</span> <span class="n">opcode</span> <span class="o">==</span> <span class="s2">&quot;MULTIPLY&quot;</span><span class="p">:</span>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>            <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span> <span class="o">*=</span> <span class="n">value</span>
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MULTIPLY </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">: Accumulator = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">accumulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">decode_and_execute</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
-</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>        <span class="c1"># Add timing cost</span>
-</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        <span class="n">cycles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instruction_timing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">opcode</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">clock_cycles</span> <span class="o">+=</span> <span class="n">cycles</span>
-</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  (Took </span><span class="si">{</span><span class="n">cycles</span><span class="si">}</span><span class="s2"> clock cycles, total: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clock_cycles</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>
-</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="c1"># Compare execution times of different approaches</span>
-</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="n">timed_processor</span> <span class="o">=</span> <span class="n">TimedProcessor</span><span class="p">()</span>
-</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>
-</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="c1"># Approach 1: Multiple additions</span>
-</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approach 1: Adding repeatedly&quot;</span><span class="p">)</span>
-</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="n">program1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LOAD 5&quot;</span><span class="p">,</span> <span class="s2">&quot;ADD 5&quot;</span><span class="p">,</span> <span class="s2">&quot;ADD 5&quot;</span><span class="p">,</span> <span class="s2">&quot;ADD 5&quot;</span><span class="p">,</span> <span class="s2">&quot;STORE 10&quot;</span><span class="p">]</span>
-</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="n">timed_processor</span><span class="o">.</span><span class="n">load_program</span><span class="p">(</span><span class="n">program1</span><span class="p">)</span>
-</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="n">timed_processor</span><span class="o">.</span><span class="n">run_program</span><span class="p">()</span>
-</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="n">time1</span> <span class="o">=</span> <span class="n">timed_processor</span><span class="o">.</span><span class="n">clock_cycles</span>
-</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>
-</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Approach 1 took </span><span class="si">{</span><span class="n">time1</span><span class="si">}</span><span class="s2"> clock cycles&quot;</span><span class="p">)</span>
-</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>
-</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="c1"># Approach 2: Using multiplication</span>
-</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a><span class="n">timed_processor</span> <span class="o">=</span> <span class="n">TimedProcessor</span><span class="p">()</span>  <span class="c1"># Reset processor</span>
-</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Approach 2: Using multiplication&quot;</span><span class="p">)</span>
-</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a><span class="n">program2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LOAD 5&quot;</span><span class="p">,</span> <span class="s2">&quot;MULTIPLY 4&quot;</span><span class="p">,</span> <span class="s2">&quot;STORE 10&quot;</span><span class="p">]</span>
-</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a><span class="n">timed_processor</span><span class="o">.</span><span class="n">load_program</span><span class="p">(</span><span class="n">program2</span><span class="p">)</span>
-</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="n">timed_processor</span><span class="o">.</span><span class="n">run_program</span><span class="p">()</span>
-</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a><span class="n">time2</span> <span class="o">=</span> <span class="n">timed_processor</span><span class="o">.</span><span class="n">clock_cycles</span>
-</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>
-</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Approach 2 took </span><span class="si">{</span><span class="n">time2</span><span class="si">}</span><span class="s2"> clock cycles&quot;</span><span class="p">)</span>
-</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Difference: </span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">time1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">time2</span><span class="p">)</span><span class="si">}</span><span class="s2"> clock cycles&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class TimedProcessor(SimpleProcessor):
+    def __init__(self):
+        super().__init__()
+        self.clock_cycles = 0
+
+        # Different instructions take different amounts of time
+        self.instruction_timing = {
+            &#x27;LOAD&#x27;: 1,      # 1 clock cycle
+            &#x27;ADD&#x27;: 1,       # 1 clock cycle  
+            &#x27;STORE&#x27;: 2,     # 2 clock cycles (memory access is slower)
+            &#x27;COMPARE&#x27;: 1,   # 1 clock cycle
+            &#x27;MULTIPLY&#x27;: 4   # 4 clock cycles (multiplication is complex)
+        }
+
+    def decode_and_execute(self, instruction):
+        &quot;&quot;&quot;Execute instruction and track timing&quot;&quot;&quot;
+        parts = instruction.split()
+        opcode = parts[0]
+
+        # Execute the instruction
+        if opcode == &quot;MULTIPLY&quot;:
+            value = int(parts[1])
+            self.accumulator *= value
+            print(f&quot;MULTIPLY {value}: Accumulator = {self.accumulator}&quot;)
+        else:
+            super().decode_and_execute(instruction)
+
+        # Add timing cost
+        cycles = self.instruction_timing.get(opcode, 1)
+        self.clock_cycles += cycles
+        print(f&quot;  (Took {cycles} clock cycles, total: {self.clock_cycles})&quot;)
+
+# Compare execution times of different approaches
+timed_processor = TimedProcessor()
+
+# Approach 1: Multiple additions
+print(&quot;Approach 1: Adding repeatedly&quot;)
+program1 = [&quot;LOAD 5&quot;, &quot;ADD 5&quot;, &quot;ADD 5&quot;, &quot;ADD 5&quot;, &quot;STORE 10&quot;]
+timed_processor.load_program(program1)
+timed_processor.run_program()
+time1 = timed_processor.clock_cycles
+
+print(f&quot;\nApproach 1 took {time1} clock cycles&quot;)
+print(&quot;=&quot; * 40)
+
+# Approach 2: Using multiplication
+timed_processor = TimedProcessor()  # Reset processor
+print(&quot;Approach 2: Using multiplication&quot;)
+program2 = [&quot;LOAD 5&quot;, &quot;MULTIPLY 4&quot;, &quot;STORE 10&quot;]
+timed_processor.load_program(program2)
+timed_processor.run_program()
+time2 = timed_processor.clock_cycles
+
+print(f&quot;\nApproach 2 took {time2} clock cycles&quot;)
+print(f&quot;Difference: {abs(time1 - time2)} clock cycles&quot;)
+</code></pre>
+</div>
 <p>This demonstrates why understanding instruction timing is important for real-time mechatronic systems.</p>
 </details>
 <h2 id="recap">Recap<a class="headerlink" href="#recap" title="Permanent link">&para;</a></h2>
@@ -1905,7 +1915,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 7, 2025 23:34:36 UTC">October 7, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     

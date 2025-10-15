@@ -1720,47 +1720,49 @@
 <p>Accelerometer: better for detecting vibrations from smaller pests</p>
 </li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Simulating sensor readings for greenhouse monitoring</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">GreenhouseSensor</span><span class="p">:</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sensor_type</span><span class="p">,</span> <span class="n">min_range</span><span class="p">,</span> <span class="n">max_range</span><span class="p">,</span> <span class="n">response_time</span><span class="p">):</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">sensor_type</span> <span class="o">=</span> <span class="n">sensor_type</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">min_range</span> <span class="o">=</span> <span class="n">min_range</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">max_range</span> <span class="o">=</span> <span class="n">max_range</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">response_time</span> <span class="o">=</span> <span class="n">response_time</span>  <span class="c1"># in seconds</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">read_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate reading a sensor value&quot;&quot;&quot;</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="c1"># Add some realistic noise to the reading</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="n">base_value</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min_range</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_range</span><span class="p">)</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="n">noise</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">*</span> <span class="n">base_value</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="k">return</span> <span class="n">base_value</span> <span class="o">+</span> <span class="n">noise</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_characteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">sensor_type</span><span class="p">,</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="s1">&#39;range&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">min_range</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_range</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="s1">&#39;response_time&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">response_time</span><span class="si">}</span><span class="s2">s&quot;</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="p">}</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="c1"># Create different sensor types</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="n">photocell</span> <span class="o">=</span> <span class="n">GreenhouseSensor</span><span class="p">(</span><span class="s2">&quot;Photocell&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># 0-1000 lux</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">photodiode</span> <span class="o">=</span> <span class="n">GreenhouseSensor</span><span class="p">(</span><span class="s2">&quot;Photodiode&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">,</span> <span class="mf">0.000001</span><span class="p">)</span>  <span class="c1"># 0-10000 lux</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="n">pir_sensor</span> <span class="o">=</span> <span class="n">GreenhouseSensor</span><span class="p">(</span><span class="s2">&quot;PIR&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># binary detection</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="c1"># Compare sensor readings</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Greenhouse Sensor Comparison:&quot;</span><span class="p">)</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Photocell: </span><span class="si">{</span><span class="n">photocell</span><span class="o">.</span><span class="n">get_characteristics</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading: </span><span class="si">{</span><span class="n">photocell</span><span class="o">.</span><span class="n">read_value</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> lux&quot;</span><span class="p">)</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Photodiode: </span><span class="si">{</span><span class="n">photodiode</span><span class="o">.</span><span class="n">get_characteristics</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reading: </span><span class="si">{</span><span class="n">photodiode</span><span class="o">.</span><span class="n">read_value</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> lux&quot;</span><span class="p">)</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PIR: </span><span class="si">{</span><span class="n">pir_sensor</span><span class="o">.</span><span class="n">get_characteristics</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Motion detected: </span><span class="si">{</span><span class="n">pir_sensor</span><span class="o">.</span><span class="n">read_value</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"># Simulating sensor readings for greenhouse monitoring
+import random
+import time
+
+class GreenhouseSensor:
+    def __init__(self, sensor_type, min_range, max_range, response_time):
+        self.sensor_type = sensor_type
+        self.min_range = min_range
+        self.max_range = max_range
+        self.response_time = response_time  # in seconds
+
+    def read_value(self):
+        &quot;&quot;&quot;Simulate reading a sensor value&quot;&quot;&quot;
+        # Add some realistic noise to the reading
+        base_value = random.uniform(self.min_range, self.max_range)
+        noise = random.uniform(-0.05, 0.05) * base_value
+        return base_value + noise
+
+    def get_characteristics(self):
+        return {
+            &#x27;type&#x27;: self.sensor_type,
+            &#x27;range&#x27;: f&quot;{self.min_range} - {self.max_range}&quot;,
+            &#x27;response_time&#x27;: f&quot;{self.response_time}s&quot;
+        }
+
+# Create different sensor types
+photocell = GreenhouseSensor(&quot;Photocell&quot;, 0, 1000, 0.05)  # 0-1000 lux
+photodiode = GreenhouseSensor(&quot;Photodiode&quot;, 0, 10000, 0.000001)  # 0-10000 lux
+pir_sensor = GreenhouseSensor(&quot;PIR&quot;, 0, 1, 2.0)  # binary detection
+
+# Compare sensor readings
+print(&quot;Greenhouse Sensor Comparison:&quot;)
+print(f&quot;Photocell: {photocell.get_characteristics()}&quot;)
+print(f&quot;Reading: {photocell.read_value():.1f} lux&quot;)
+
+print(f&quot;\nPhotodiode: {photodiode.get_characteristics()}&quot;)
+print(f&quot;Reading: {photodiode.read_value():.1f} lux&quot;)
+
+print(f&quot;\nPIR: {pir_sensor.get_characteristics()}&quot;)
+print(f&quot;Motion detected: {pir_sensor.read_value() &gt; 0.5}&quot;)
+</code></pre>
+</div>
 <h3 id="actuators-creating-movement-and-force">Actuators: creating movement and force<a class="headerlink" href="#actuators-creating-movement-and-force" title="Permanent link">&para;</a></h3>
 <p>Actuators convert electrical signals into physical motion or force. They enable mechatronic systems to interact with and modify their environment.</p>
 <p>Key characteristics:</p>
@@ -1920,81 +1922,83 @@
 </li>
 </ul>
 <p><strong>Gripper comparison</strong>:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">RoboticGripper</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gripper_type</span><span class="p">,</span> <span class="n">max_force</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">cycle_time</span><span class="p">,</span> <span class="n">cost</span><span class="p">):</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gripper_type</span> <span class="o">=</span> <span class="n">gripper_type</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">=</span> <span class="n">max_force</span>  <span class="c1"># in Newtons</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">precision</span> <span class="o">=</span> <span class="n">precision</span>  <span class="c1"># in mm</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_time</span> <span class="o">=</span> <span class="n">cycle_time</span>  <span class="c1"># in seconds</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="n">cost</span>  <span class="c1"># relative cost 1-10</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">evaluate_suitability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">required_force</span><span class="p">,</span> <span class="n">required_precision</span><span class="p">,</span> <span class="n">required_speed</span><span class="p">):</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate how well this gripper meets requirements&quot;&quot;&quot;</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">force_ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_force</span> <span class="o">&gt;=</span> <span class="n">required_force</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="n">precision_ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">precision</span> <span class="o">&lt;=</span> <span class="n">required_precision</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">speed_ok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cycle_time</span> <span class="o">&lt;=</span> <span class="n">required_speed</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">force_ok</span><span class="p">,</span> <span class="n">precision_ok</span><span class="p">,</span> <span class="n">speed_ok</span><span class="p">])</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>            <span class="s1">&#39;suitable&#39;</span><span class="p">:</span> <span class="n">score</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="s1">&#39;score&#39;</span><span class="p">:</span> <span class="n">score</span><span class="p">,</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>            <span class="s1">&#39;details&#39;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>                <span class="s1">&#39;force&#39;</span><span class="p">:</span> <span class="n">force_ok</span><span class="p">,</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>                <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="n">precision_ok</span><span class="p">,</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>                <span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">speed_ok</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>            <span class="p">}</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>        <span class="p">}</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_characteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="k">return</span> <span class="p">{</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>            <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gripper_type</span><span class="p">,</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>            <span class="s1">&#39;max_force&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_force</span><span class="si">}</span><span class="s2">N&quot;</span><span class="p">,</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            <span class="s1">&#39;precision&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;±</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="si">}</span><span class="s2">mm&quot;</span><span class="p">,</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            <span class="s1">&#39;cycle_time&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cycle_time</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">,</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>            <span class="s1">&#39;relative_cost&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>        <span class="p">}</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="c1"># Define gripper options for PCB handling</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">grippers</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="n">RoboticGripper</span><span class="p">(</span><span class="s2">&quot;Parallel Jaw&quot;</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="n">RoboticGripper</span><span class="p">(</span><span class="s2">&quot;Angular&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="n">RoboticGripper</span><span class="p">(</span><span class="s2">&quot;Vacuum&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>    <span class="n">RoboticGripper</span><span class="p">(</span><span class="s2">&quot;Magnetic&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="p">]</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="c1"># Requirements for PCB handling</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="n">required_force</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Light grip needed (50g PCB)</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="n">required_precision</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># ±0.5mm positioning</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="n">required_speed</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># 2 second cycle time</span>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Gripper Selection Analysis for PCB Assembly:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Requirements: Force ≥</span><span class="si">{</span><span class="n">required_force</span><span class="si">}</span><span class="s2">N, Precision ≤</span><span class="si">{</span><span class="n">required_precision</span><span class="si">}</span><span class="s2">mm, Speed ≤</span><span class="si">{</span><span class="n">required_speed</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="nb">print</span><span class="p">()</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="k">for</span> <span class="n">gripper</span> <span class="ow">in</span> <span class="n">grippers</span><span class="p">:</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>    <span class="n">evaluation</span> <span class="o">=</span> <span class="n">gripper</span><span class="o">.</span><span class="n">evaluate_suitability</span><span class="p">(</span><span class="n">required_force</span><span class="p">,</span> <span class="n">required_precision</span><span class="p">,</span> <span class="n">required_speed</span><span class="p">)</span>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>    <span class="n">characteristics</span> <span class="o">=</span> <span class="n">gripper</span><span class="o">.</span><span class="n">get_characteristics</span><span class="p">()</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">gripper</span><span class="o">.</span><span class="n">gripper_type</span><span class="si">}</span><span class="s2"> Gripper:&quot;</span><span class="p">)</span>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Characteristics: </span><span class="si">{</span><span class="n">characteristics</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Suitability Score: </span><span class="si">{</span><span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">/3&quot;</span><span class="p">)</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Suitable: </span><span class="si">{</span><span class="s1">&#39;Yes&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;suitable&#39;</span><span class="p">]</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;No&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;suitable&#39;</span><span class="p">]:</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>        <span class="n">failed_requirements</span> <span class="o">=</span> <span class="p">[</span><span class="n">req</span> <span class="k">for</span> <span class="n">req</span><span class="p">,</span> <span class="n">ok</span> <span class="ow">in</span> <span class="n">evaluation</span><span class="p">[</span><span class="s1">&#39;details&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">ok</span><span class="p">]</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Failed requirements: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">failed_requirements</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>    <span class="nb">print</span><span class="p">()</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="c1"># Recommendation logic</span>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="n">suitable_grippers</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grippers</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">evaluate_suitability</span><span class="p">(</span><span class="n">required_force</span><span class="p">,</span> <span class="n">required_precision</span><span class="p">,</span> <span class="n">required_speed</span><span class="p">)[</span><span class="s1">&#39;suitable&#39;</span><span class="p">]]</span>
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="k">if</span> <span class="n">suitable_grippers</span><span class="p">:</span>
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>    <span class="c1"># Choose based on best precision for delicate PCBs</span>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>    <span class="n">best_gripper</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">suitable_grippers</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="o">.</span><span class="n">precision</span><span class="p">)</span>
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommendation: </span><span class="si">{</span><span class="n">best_gripper</span><span class="o">.</span><span class="n">gripper_type</span><span class="si">}</span><span class="s2"> gripper&quot;</span><span class="p">)</span>
-</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reason: Best precision (±</span><span class="si">{</span><span class="n">best_gripper</span><span class="o">.</span><span class="n">precision</span><span class="si">}</span><span class="s2">mm) among suitable options&quot;</span><span class="p">)</span>
-</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a><span class="k">else</span><span class="p">:</span>
-</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No grippers meet all requirements - specifications need revision&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python">class RoboticGripper:
+    def __init__(self, gripper_type, max_force, precision, cycle_time, cost):
+        self.gripper_type = gripper_type
+        self.max_force = max_force  # in Newtons
+        self.precision = precision  # in mm
+        self.cycle_time = cycle_time  # in seconds
+        self.cost = cost  # relative cost 1-10
+
+    def evaluate_suitability(self, required_force, required_precision, required_speed):
+        &quot;&quot;&quot;Evaluate how well this gripper meets requirements&quot;&quot;&quot;
+        force_ok = self.max_force &gt;= required_force
+        precision_ok = self.precision &lt;= required_precision
+        speed_ok = self.cycle_time &lt;= required_speed
+
+        score = sum([force_ok, precision_ok, speed_ok])
+        return {
+            &#x27;suitable&#x27;: score == 3,
+            &#x27;score&#x27;: score,
+            &#x27;details&#x27;: {
+                &#x27;force&#x27;: force_ok,
+                &#x27;precision&#x27;: precision_ok,
+                &#x27;speed&#x27;: speed_ok
+            }
+        }
+
+    def get_characteristics(self):
+        return {
+            &#x27;type&#x27;: self.gripper_type,
+            &#x27;max_force&#x27;: f&quot;{self.max_force}N&quot;,
+            &#x27;precision&#x27;: f&quot;±{self.precision}mm&quot;,
+            &#x27;cycle_time&#x27;: f&quot;{self.cycle_time}s&quot;,
+            &#x27;relative_cost&#x27;: self.cost
+        }
+
+# Define gripper options for PCB handling
+grippers = [
+    RoboticGripper(&quot;Parallel Jaw&quot;, 50, 0.1, 1.5, 6),
+    RoboticGripper(&quot;Angular&quot;, 30, 0.05, 2.0, 8),
+    RoboticGripper(&quot;Vacuum&quot;, 20, 0.3, 1.0, 4),
+    RoboticGripper(&quot;Magnetic&quot;, 100, 0.5, 1.2, 3)
+]
+
+# Requirements for PCB handling
+required_force = 5  # Light grip needed (50g PCB)
+required_precision = 0.5  # ±0.5mm positioning
+required_speed = 2.0  # 2 second cycle time
+
+print(&quot;Gripper Selection Analysis for PCB Assembly:&quot;)
+print(f&quot;Requirements: Force ≥{required_force}N, Precision ≤{required_precision}mm, Speed ≤{required_speed}s&quot;)
+print()
+
+for gripper in grippers:
+    evaluation = gripper.evaluate_suitability(required_force, required_precision, required_speed)
+    characteristics = gripper.get_characteristics()
+
+    print(f&quot;{gripper.gripper_type} Gripper:&quot;)
+    print(f&quot;  Characteristics: {characteristics}&quot;)
+    print(f&quot;  Suitability Score: {evaluation[&#x27;score&#x27;]}/3&quot;)
+    print(f&quot;  Suitable: {&#x27;Yes&#x27; if evaluation[&#x27;suitable&#x27;] else &#x27;No&#x27;}&quot;)
+    if not evaluation[&#x27;suitable&#x27;]:
+        failed_requirements = [req for req, ok in evaluation[&#x27;details&#x27;].items() if not ok]
+        print(f&quot;  Failed requirements: {&#x27;, &#x27;.join(failed_requirements)}&quot;)
+    print()
+
+# Recommendation logic
+suitable_grippers = [g for g in grippers if g.evaluate_suitability(required_force, required_precision, required_speed)[&#x27;suitable&#x27;]]
+
+if suitable_grippers:
+    # Choose based on best precision for delicate PCBs
+    best_gripper = min(suitable_grippers, key=lambda g: g.precision)
+    print(f&quot;Recommendation: {best_gripper.gripper_type} gripper&quot;)
+    print(f&quot;Reason: Best precision (±{best_gripper.precision}mm) among suitable options&quot;)
+else:
+    print(&quot;No grippers meet all requirements - specifications need revision&quot;)
+</code></pre>
+</div>
 <h3 id="trade-offs-in-component-selection">Trade-offs in component selection<a class="headerlink" href="#trade-offs-in-component-selection" title="Permanent link">&para;</a></h3>
 <p>Real-world component selection involves balancing competing requirements:</p>
 <p><strong>Performance vs Cost</strong>:</p>
@@ -2248,7 +2252,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 1, 2025 05:39:02 UTC">October 1, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2025 07:03:58 UTC">October 15, 2025</span>
   </span>
 
     
