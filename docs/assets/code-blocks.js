@@ -483,13 +483,17 @@ builtins.input = _original_input
         // Get reference element (insert before first child to appear at the front)
         const firstChild = codeBlock.firstChild;
 
-        // Open in Editor button (for all types)
-        const editorBtn = document.createElement('button');
-        editorBtn.className = 'code-action-btn code-editor-btn md-icon';
-        editorBtn.title = isWebLang ? 'Open in Web Editor' : 'Open in Editor';
         
-        editorBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
-        codeBlock.insertBefore(editorBtn, firstChild);
+        
+        if (isExecutable || fenceType === 'template' || fenceType === 'error') {
+            // Open in Editor button (for all types except Web languages which get Preview button)
+            const editorBtn = document.createElement('button');
+            editorBtn.className = 'code-action-btn code-editor-btn md-icon';
+            editorBtn.title = isWebLang ? 'Open in Web Editor' : 'Open in Editor';
+
+            editorBtn.addEventListener('click', () => handleOpenInEditor(code, language, fenceType));
+            codeBlock.insertBefore(editorBtn, firstChild);
+        }
 
         // Run/Preview button (only for exec type)
         if (fenceType === 'exec') {
