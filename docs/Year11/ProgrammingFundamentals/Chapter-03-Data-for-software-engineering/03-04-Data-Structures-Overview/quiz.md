@@ -1,3 +1,7 @@
+---
+title: "03.04 Data Structures Overview - Quiz"
+---
+
 # 03.04 Data Structures Overview - Quiz
 
 !!! quiz "Check your understanding"

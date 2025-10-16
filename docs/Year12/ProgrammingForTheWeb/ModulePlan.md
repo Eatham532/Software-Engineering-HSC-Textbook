@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Programming for the Web: Module Plan"
+---
+
 # Year 12 — Programming for the Web: Module Plan
 
 Focus on back-end Python examples and standards-based front-end. Keep security and accessibility in scope.

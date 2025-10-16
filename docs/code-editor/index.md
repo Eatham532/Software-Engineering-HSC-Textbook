@@ -1,5 +1,5 @@
 ---
-title: Python Code Editor
+title: Code Editor
 hide:
 
   - navigation

@@ -1,3 +1,7 @@
+---
+title: "Section 22.1: Assessing the Impact of Automation"
+---
+
 # Section 22.1: Assessing the Impact of Automation
 
 Understanding automation's far-reaching consequences requires systematic evaluation across multiple dimensions that affect individuals, society, and the environment. This section provides practical frameworks and tools for assessing automation's impacts, enabling informed decision-making about technology implementation and policy responses.

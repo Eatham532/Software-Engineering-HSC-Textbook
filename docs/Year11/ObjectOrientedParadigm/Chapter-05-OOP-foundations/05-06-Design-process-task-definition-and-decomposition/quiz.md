@@ -1,3 +1,7 @@
+---
+title: "05.06 Design Process Task Definition And Decomposition - Quiz"
+---
+
 # 05.06 Design Process Task Definition And Decomposition - Quiz
 
 !!! quiz "Check your understanding"

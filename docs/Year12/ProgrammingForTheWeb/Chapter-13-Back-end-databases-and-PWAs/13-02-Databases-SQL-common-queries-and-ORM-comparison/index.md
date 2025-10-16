@@ -1,3 +1,7 @@
+---
+title: "13.2 Databases: SQL, common queries and ORM comparison"
+---
+
 # 13.2 Databases: SQL, common queries and ORM comparison
 
 ## Why it matters

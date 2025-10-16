@@ -1,3 +1,7 @@
+---
+title: "Structure Charts; Abstraction and Refinement"
+---
+
 # Structure Charts; Abstraction and Refinement
 
 !!! abstract "Learning Objectives"

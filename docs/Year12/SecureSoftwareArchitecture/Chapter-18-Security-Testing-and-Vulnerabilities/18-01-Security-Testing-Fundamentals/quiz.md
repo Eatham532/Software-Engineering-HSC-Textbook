@@ -1,3 +1,7 @@
+---
+title: "18.01 Security Testing Fundamentals - Quiz"
+---
+
 # 18.01 Security Testing Fundamentals - Quiz
 
 !!! quiz "Section 18.1 Quiz: Security Testing Fundamentals"

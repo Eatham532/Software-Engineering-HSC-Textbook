@@ -1,3 +1,7 @@
+---
+title: "Year 11 — The Object-Oriented Paradigm: Module Plan"
+---
+
 # Year 11 — The Object-Oriented Paradigm: Module Plan
 
 Audience: beginners. Language: Python only. Diagrams: PlantUML.## Folder naming (mapping to numbered sections)

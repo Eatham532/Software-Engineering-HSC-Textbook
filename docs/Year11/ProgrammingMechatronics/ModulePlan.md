@@ -1,3 +1,7 @@
+---
+title: "Year 11 — Programming Mechatronics: Module Plan"
+---
+
 # Year 11 — Programming Mechatronics: Module Plan
 
 Begin with concepts, data, and simulations. Postpone hardware-specific coding until a platform ## Folder naming (mapping to numbered sections)

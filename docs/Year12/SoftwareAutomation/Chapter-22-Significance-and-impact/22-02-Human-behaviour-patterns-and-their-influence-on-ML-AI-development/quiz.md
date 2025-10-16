@@ -1,3 +1,7 @@
+---
+title: "22.02 Human Behaviour Patterns And Their Influence On Ml Ai Development - Quiz"
+---
+
 # 22.02 Human Behaviour Patterns And Their Influence On Ml Ai Development - Quiz
 
 !!! quiz "Section 22.02 Quiz: Human Behaviour Patterns And Their Influence On Ml Ai Development"

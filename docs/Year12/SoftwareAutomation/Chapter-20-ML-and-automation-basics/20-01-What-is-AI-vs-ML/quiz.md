@@ -1,3 +1,7 @@
+---
+title: "20.01 What is AI vs ML - Quiz"
+---
+
 # 20.01 What is AI vs ML - Quiz
 
 !!! quiz "Section 20.01 Quiz: What is AI vs ML"

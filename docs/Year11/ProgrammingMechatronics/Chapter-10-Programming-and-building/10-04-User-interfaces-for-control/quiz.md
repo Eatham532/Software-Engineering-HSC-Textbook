@@ -1,3 +1,7 @@
+---
+title: "10.04 User Interfaces For Control - Quiz"
+---
+
 # 10.04 User Interfaces For Control - Quiz
 
 !!! quiz "Section 10.4 Quiz: User interfaces for control"

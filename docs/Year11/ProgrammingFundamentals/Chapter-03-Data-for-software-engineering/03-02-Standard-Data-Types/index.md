@@ -1,3 +1,7 @@
+---
+title: "3.2 Standard data types"
+---
+
 # 3.2 Standard data types
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "5.2 Encapsulation and state"
+---
+
 # 5.2 Encapsulation and state
 
 ## Why it matters

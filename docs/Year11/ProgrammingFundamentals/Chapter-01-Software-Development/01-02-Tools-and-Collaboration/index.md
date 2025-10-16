@@ -1,3 +1,7 @@
+---
+title: "1.2 Tools and collaboration (IDE + Git)"
+---
+
 # 1.2 Tools and collaboration (IDE + Git)
 
 ## Why it matters

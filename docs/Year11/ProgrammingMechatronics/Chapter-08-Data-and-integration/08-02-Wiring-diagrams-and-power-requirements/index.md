@@ -1,3 +1,7 @@
+---
+title: "8.2 Wiring diagrams and power requirements"
+---
+
 # 8.2 Wiring diagrams and power requirements
 
 ## Why it matters

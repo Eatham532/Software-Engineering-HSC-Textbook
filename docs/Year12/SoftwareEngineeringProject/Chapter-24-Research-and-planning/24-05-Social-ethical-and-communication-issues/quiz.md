@@ -1,3 +1,7 @@
+---
+title: "24.05 Social Ethical And Communication Issues - Quiz"
+---
+
 # 24.05 Social Ethical And Communication Issues - Quiz
 
 !!! quiz "Check your understanding"

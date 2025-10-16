@@ -1,3 +1,7 @@
+---
+title: "13.4 Designing and implementing a PWA"
+---
+
 # 13.4 Designing and implementing a PWA
 
 ## Why it matters

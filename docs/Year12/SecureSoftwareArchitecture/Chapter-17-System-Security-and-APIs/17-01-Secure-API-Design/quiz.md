@@ -1,3 +1,7 @@
+---
+title: "17.01 Secure Api Design - Quiz"
+---
+
 # 17.01 Secure Api Design - Quiz
 
 !!! quiz "Check your understanding"

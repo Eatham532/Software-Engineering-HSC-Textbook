@@ -1,3 +1,7 @@
+---
+title: "04.06 Designing Suitable Test Data - Quiz"
+---
+
 # 04.06 Designing Suitable Test Data - Quiz
 
 !!! quiz "Check your understanding"

@@ -1,3 +1,7 @@
+---
+title: "25.06 Prototype And Ui Design - Quiz"
+---
+
 # 25.06 Prototype And Ui Design - Quiz
 
 !!! quiz "Section 25.6 Quiz: Prototype and UI Design"

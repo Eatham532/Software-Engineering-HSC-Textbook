@@ -1,3 +1,7 @@
+---
+title: "02.06 Analysing Written Algorithms - Quiz"
+---
+
 # 02.06 Analysing Written Algorithms - Quiz
 
 !!! quiz "Check your understanding"

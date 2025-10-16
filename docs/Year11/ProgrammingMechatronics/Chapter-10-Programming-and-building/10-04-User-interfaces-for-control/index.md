@@ -1,3 +1,7 @@
+---
+title: "10.4 User interfaces for control"
+---
+
 # 10.4 User interfaces for control
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "15.02 Cryptography And Data Protection - Quiz"
+---
+
 # 15.02 Cryptography And Data Protection - Quiz
 
 !!! quiz "Check your understanding"

@@ -1,3 +1,7 @@
+---
+title: "12.06 Open Source And Content Management Systems - Quiz"
+---
+
 # 12.06 Open Source And Content Management Systems - Quiz
 
 !!! quiz "Check your understanding"

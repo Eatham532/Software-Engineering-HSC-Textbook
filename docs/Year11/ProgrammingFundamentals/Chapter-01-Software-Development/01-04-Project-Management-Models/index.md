@@ -1,3 +1,7 @@
+---
+title: "1.4 Project management models (Waterfall vs Agile)"
+---
+
 # 1.4 Project management models (Waterfall vs Agile)
 
 ## Why it matters

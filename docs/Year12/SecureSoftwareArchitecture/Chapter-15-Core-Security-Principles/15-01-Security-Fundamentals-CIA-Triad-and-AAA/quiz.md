@@ -1,3 +1,7 @@
+---
+title: "15.01 Security Fundamentals CIA Triad and AAA - Quiz"
+---
+
 # 15.01 Security Fundamentals CIA Triad and AAA - Quiz
 
 !!! quiz "Section 15.01 Quiz: CIA Triad and AAA"

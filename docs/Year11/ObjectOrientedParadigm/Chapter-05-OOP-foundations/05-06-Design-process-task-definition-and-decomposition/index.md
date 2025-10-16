@@ -1,3 +1,7 @@
+---
+title: "5.6 Design process: task definition and decomposition"
+---
+
 # 5.6 Design process: task definition and decomposition
 
 ## Learning objectives

@@ -1,3 +1,7 @@
+---
+title: "04.05 Debugging Tools And Techniques - Quiz"
+---
+
 # 04.05 Debugging Tools And Techniques - Quiz
 
 !!! quiz "Check your understanding"

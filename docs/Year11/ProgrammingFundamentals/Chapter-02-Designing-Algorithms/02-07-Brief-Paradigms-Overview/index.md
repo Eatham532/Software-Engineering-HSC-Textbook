@@ -1,3 +1,7 @@
+---
+title: "Brief Paradigms Overview"
+---
+
 # Brief Paradigms Overview
 
 !!! abstract "Learning Objectives"

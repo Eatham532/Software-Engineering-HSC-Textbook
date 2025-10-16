@@ -1,3 +1,7 @@
+---
+title: "16.02 Privacy By Design - Quiz"
+---
+
 # 16.02 Privacy By Design - Quiz
 
 !!! quiz "Check your understanding"

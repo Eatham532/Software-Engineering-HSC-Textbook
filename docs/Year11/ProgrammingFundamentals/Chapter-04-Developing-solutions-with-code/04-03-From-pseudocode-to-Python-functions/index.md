@@ -1,3 +1,7 @@
+---
+title: "4.3 From pseudocode to Python functions"
+---
+
 # 4.3 From pseudocode to Python functions
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "25.04 Data Backup And Version Control - Quiz"
+---
+
 # 25.04 Data Backup And Version Control - Quiz
 
 !!! quiz "Check your understanding of version control, branching, and backup strategies"

@@ -1,3 +1,7 @@
+---
+title: "09.02 Autonomous Control Features - Quiz"
+---
+
 # 09.02 Autonomous Control Features - Quiz
 
 !!! quiz "Section 9.2 Quiz: Autonomous control features"

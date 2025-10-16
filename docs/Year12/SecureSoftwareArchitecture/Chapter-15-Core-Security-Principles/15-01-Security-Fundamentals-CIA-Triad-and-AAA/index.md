@@ -1,3 +1,7 @@
+---
+title: "Section 15.1: Security Fundamentals (CIA Triad & AAA)"
+---
+
 # Section 15.1: Security Fundamentals (CIA Triad & AAA)
 
 ## Learning Objectives

@@ -1,3 +1,7 @@
+---
+title: "6.3 Designing subroutines and stubs"
+---
+
 # 6.3 Designing subroutines and stubs
 
 ## Why it matters

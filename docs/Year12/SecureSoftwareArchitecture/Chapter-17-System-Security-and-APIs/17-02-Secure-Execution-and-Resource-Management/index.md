@@ -1,3 +1,7 @@
+---
+title: "17.2 Secure Execution & Resource Management"
+---
+
 # 17.2 Secure Execution & Resource Management
 
 !!! abstract "Learning Objectives"

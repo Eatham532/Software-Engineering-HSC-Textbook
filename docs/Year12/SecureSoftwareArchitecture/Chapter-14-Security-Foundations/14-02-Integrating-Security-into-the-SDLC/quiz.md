@@ -1,3 +1,7 @@
+---
+title: "14.02 Integrating Security Into The Sdlc - Quiz"
+---
+
 # 14.02 Integrating Security Into The Sdlc - Quiz
 
 !!! quiz "Check your understanding"

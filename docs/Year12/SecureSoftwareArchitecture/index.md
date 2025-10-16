@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Secure Software Architecture"
+---
+
 # Year 12 — Secure Software Architecture
 
 This module teaches students to build secure software systems from the ground up, integrating security principles throughout the software development lifecycle. Through practical Python examples, students learn to identify vulnerabilities, implement security controls, and create systems that protect user data and maintain system integrity.

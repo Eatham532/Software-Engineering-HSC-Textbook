@@ -1,3 +1,7 @@
+---
+title: "06.06 Test Strategies Black White Grey Box - Quiz"
+---
+
 # 06.06 Test Strategies Black White Grey Box - Quiz
 
 !!! quiz "Check your understanding"

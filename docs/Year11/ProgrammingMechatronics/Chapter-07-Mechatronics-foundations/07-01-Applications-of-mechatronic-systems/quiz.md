@@ -1,3 +1,7 @@
+---
+title: "07.01 Applications Of Mechatronic Systems - Quiz"
+---
+
 # 07.01 Applications Of Mechatronic Systems - Quiz
 
 !!! quiz "Section 7.1 Quiz: Applications of mechatronic systems"

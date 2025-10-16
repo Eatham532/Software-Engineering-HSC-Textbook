@@ -1,3 +1,7 @@
+---
+title: "24.2 Agile approach"
+---
+
 # 24.2 Agile approach
 
 ## Why it matters

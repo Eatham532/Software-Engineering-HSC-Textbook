@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Software Automation: Module Plan"
+---
+
 # Year 12 — Software Automation: Module Plan
 
 Build intuition for ML and automation with simple, reproducible Python examples. Prefer from-scratch## Folder naming (mapping to numbered sections)

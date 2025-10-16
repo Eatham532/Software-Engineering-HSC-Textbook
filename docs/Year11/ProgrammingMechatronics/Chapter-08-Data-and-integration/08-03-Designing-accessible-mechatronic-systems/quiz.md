@@ -1,3 +1,7 @@
+---
+title: "08.03 Designing Accessible Mechatronic Systems - Quiz"
+---
+
 # 08.03 Designing Accessible Mechatronic Systems - Quiz
 
 !!! quiz "Section 8.3 Quiz: Designing accessible mechatronic systems"

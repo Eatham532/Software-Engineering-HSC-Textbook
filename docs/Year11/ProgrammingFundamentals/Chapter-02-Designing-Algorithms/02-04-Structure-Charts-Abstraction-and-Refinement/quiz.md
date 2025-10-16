@@ -1,3 +1,7 @@
+---
+title: "02.04 Structure Charts Abstraction And Refinement - Quiz"
+---
+
 # 02.04 Structure Charts Abstraction And Refinement - Quiz
 
 !!! quiz "Check your understanding"

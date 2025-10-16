@@ -1,3 +1,7 @@
+---
+title: "20.3 Common ML applications"
+---
+
 # 20.3 Common ML applications
 
 ## Why Understanding ML Applications Matters

@@ -1,3 +1,7 @@
+---
+title: "25.01 Building The Solution - Quiz"
+---
+
 # 25.01 Building The Solution - Quiz
 
 !!! quiz "Check your understanding of incremental implementation and quality maintenance"

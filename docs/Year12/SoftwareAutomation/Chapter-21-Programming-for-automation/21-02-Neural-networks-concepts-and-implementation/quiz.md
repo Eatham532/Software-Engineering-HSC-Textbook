@@ -1,3 +1,7 @@
+---
+title: "21.02 Neural Networks Concepts And Implementation - Quiz"
+---
+
 # 21.02 Neural Networks Concepts And Implementation - Quiz
 
 !!! quiz "Section 21.02 Quiz: Neural Networks Concepts And Implementation"

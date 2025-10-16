@@ -1,3 +1,7 @@
+---
+title: "Year 11 — Programming Fundamentals"
+---
+
 # Year 11 — Programming Fundamentals
 
 This module establishes the essential foundations of software engineering through practical Python programming. Designed for absolute beginners, it builds programming confidence by starting with software development processes before diving into code, ensuring students understand both the "why" and "how" of programming.

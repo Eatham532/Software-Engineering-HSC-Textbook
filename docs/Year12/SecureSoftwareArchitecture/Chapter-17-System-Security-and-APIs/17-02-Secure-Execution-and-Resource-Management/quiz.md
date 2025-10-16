@@ -1,3 +1,7 @@
+---
+title: "17.02 Secure Execution And Resource Management - Quiz"
+---
+
 # 17.02 Secure Execution And Resource Management - Quiz
 
 !!! quiz "Section 17.2 Quiz: Secure Execution and Resource Management"# 17.2 Secure Execution & Resource Management — Quiz

@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Secure Software Architecture: Module Plan"
+---
+
 # Year 12 — Secure Software Architecture: Module Plan
 
 **Focus**: Practical security implementation with Python examples. Students learn to build secure systems from the ground up.

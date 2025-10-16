@@ -1,3 +1,7 @@
+---
+title: "19.01 Security In Development Teams - Quiz"
+---
+
 # 19.01 Security In Development Teams - Quiz
 
 !!! quiz "Section 19.01 Quiz: Security In Development Teams"

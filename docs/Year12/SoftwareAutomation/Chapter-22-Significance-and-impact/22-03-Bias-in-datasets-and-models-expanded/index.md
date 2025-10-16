@@ -1,3 +1,7 @@
+---
+title: "Section 22.3: Bias in Datasets and Models (Expanded)"
+---
+
 # Section 22.3: Bias in Datasets and Models (Expanded)
 
 **Learning Outcome**: SE-12-05 - Investigate the effect of human and dataset source bias in the development of ML and AI solutions

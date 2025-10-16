@@ -1,3 +1,7 @@
+---
+title: "05.02 Encapsulation And State - Quiz"
+---
+
 # 05.02 Encapsulation And State - Quiz
 
 !!! quiz "Check your understanding"

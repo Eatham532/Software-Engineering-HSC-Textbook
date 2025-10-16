@@ -1,3 +1,7 @@
+---
+title: "Section 14.2: Integrating Security into the SDLC"
+---
+
 # Section 14.2: Integrating Security into the SDLC
 
 ## Learning Objectives

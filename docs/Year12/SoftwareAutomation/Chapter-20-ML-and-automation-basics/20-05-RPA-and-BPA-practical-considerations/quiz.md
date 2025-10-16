@@ -1,3 +1,7 @@
+---
+title: "20.05 Rpa And Bpa Practical Considerations - Quiz"
+---
+
 # 20.05 Rpa And Bpa Practical Considerations - Quiz
 
 !!! quiz "Section 20.05 Quiz: Rpa And Bpa Practical Considerations"

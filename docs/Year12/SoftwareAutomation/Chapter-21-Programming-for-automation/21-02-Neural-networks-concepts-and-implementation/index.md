@@ -1,3 +1,7 @@
+---
+title: "21.2 Neural Networks: Concepts and Implementation"
+---
+
 # 21.2 Neural Networks: Concepts and Implementation
 
 - Outcomes: SE-12-02

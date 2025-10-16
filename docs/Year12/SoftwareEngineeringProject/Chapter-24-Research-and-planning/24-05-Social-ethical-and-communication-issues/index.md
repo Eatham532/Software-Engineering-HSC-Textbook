@@ -1,3 +1,7 @@
+---
+title: "24.5 Social/ethical and communication issues"
+---
+
 # 24.5 Social/ethical and communication issues
 
 ## Why it matters

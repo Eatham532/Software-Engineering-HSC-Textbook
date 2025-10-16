@@ -1,3 +1,7 @@
+---
+title: "06.04 Code Quality And Maintainability - Quiz"
+---
+
 # 06.04 Code Quality And Maintainability - Quiz
 
 !!! quiz "Check your understanding"

@@ -1,3 +1,7 @@
+---
+title: "26.02 Feedback Analysis - Quiz"
+---
+
 # 26.02 Feedback Analysis - Quiz
 
 !!! quiz "Section 26.2 Quiz: Feedback Analysis"

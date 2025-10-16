@@ -1,3 +1,7 @@
+---
+title: "9.3 Algorithmic patterns for control"
+---
+
 # 9.3 Algorithmic patterns for control
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Programming for the Web"
+---
+
 # Year 12 — Programming for the Web
 
 This module explores modern web development through full-stack Python applications, teaching students how to build secure, accessible, and scalable web systems. From client-server architecture to database design, it covers the complete web development lifecycle with emphasis on standards, security, and user experience.

@@ -1,3 +1,7 @@
+---
+title: "09.04 Mechanical Constraints And Subsystem Composition - Quiz"
+---
+
 # 09.04 Mechanical Constraints And Subsystem Composition - Quiz
 
 !!! quiz "Section 9.4 Quiz: Mechanical constraints and subsystem composition"

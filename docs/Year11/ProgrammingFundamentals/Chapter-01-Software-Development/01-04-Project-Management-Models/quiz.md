@@ -1,3 +1,7 @@
+---
+title: "01.04 Project Management Models - Quiz"
+---
+
 # 01.04 Project Management Models - Quiz
 
 !!! quiz "Check your understanding"

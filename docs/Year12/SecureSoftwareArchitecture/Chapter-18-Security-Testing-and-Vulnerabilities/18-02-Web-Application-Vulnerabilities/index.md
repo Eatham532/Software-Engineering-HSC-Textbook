@@ -1,3 +1,7 @@
+---
+title: "18.2 Web Application Vulnerabilities"
+---
+
 # 18.2 Web Application Vulnerabilities
 
 !!! abstract "Learning Objectives"

@@ -1,3 +1,7 @@
+---
+title: "04.01 Control Structures In Python - Quiz"
+---
+
 # 04.01 Control Structures In Python - Quiz
 
 !!! quiz "Check your understanding"

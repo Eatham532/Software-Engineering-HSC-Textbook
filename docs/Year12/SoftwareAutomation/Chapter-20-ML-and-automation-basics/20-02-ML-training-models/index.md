@@ -1,3 +1,7 @@
+---
+title: "20.2 ML training models: supervised, unsupervised, semi, reinforcement"
+---
+
 # 20.2 ML training models: supervised, unsupervised, semi, reinforcement
 
 ## Understanding ML Training Paradigms

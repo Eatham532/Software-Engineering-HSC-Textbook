@@ -1,3 +1,7 @@
+---
+title: "05.01 Objects And Classes - Quiz"
+---
+
 # 05.01 Objects And Classes - Quiz
 
 !!! quiz "Check your understanding"

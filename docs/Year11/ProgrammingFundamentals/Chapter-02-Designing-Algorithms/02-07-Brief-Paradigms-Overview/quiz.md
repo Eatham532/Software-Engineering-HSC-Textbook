@@ -1,3 +1,7 @@
+---
+title: "02.07 Brief Paradigms Overview - Quiz"
+---
+
 # 02.07 Brief Paradigms Overview - Quiz
 
 !!! quiz "Check your understanding"

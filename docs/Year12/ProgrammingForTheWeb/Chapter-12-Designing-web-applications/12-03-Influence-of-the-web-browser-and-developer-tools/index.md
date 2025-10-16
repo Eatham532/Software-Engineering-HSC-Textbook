@@ -1,3 +1,7 @@
+---
+title: "12.3 Influence of the web browser and developer tools"
+---
+
 # 12.3 Influence of the web browser and developer tools
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "7.2 Computing hardware: CPU, instruction sets, registers"
+---
+
 # 7.2 Computing hardware: CPU, instruction sets, registers
 
 ## Why it matters

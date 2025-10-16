@@ -1,3 +1,7 @@
+---
+title: "26.01 Testing Methodologies And Optimisation - Quiz"
+---
+
 # 26.01 Testing Methodologies And Optimisation - Quiz
 
 !!! quiz "Section 26.1 Quiz: Testing methodologies and optimisation"

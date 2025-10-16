@@ -1,3 +1,7 @@
+---
+title: "10.3 Integrating sensors and actuators"
+---
+
 # 10.3 Integrating sensors and actuators
 
 Real mechatronic systems combine multiple sensors and actuators that must work together seamlessly. The key to successful integration is creating clean interfaces that hide the complexity of individual devices while providing a consistent way to interact with them. This section shows how to build flexible, testable systems using interface abstractions.

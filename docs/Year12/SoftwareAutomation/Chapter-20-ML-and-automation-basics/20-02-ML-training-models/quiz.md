@@ -1,3 +1,7 @@
+---
+title: "20.02 Ml Training Models - Quiz"
+---
+
 # 20.02 Ml Training Models - Quiz
 
 !!! quiz "Section 20.02 Quiz: Ml Training Models"

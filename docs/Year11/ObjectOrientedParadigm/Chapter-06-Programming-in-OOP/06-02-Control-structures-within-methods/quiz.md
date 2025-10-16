@@ -1,3 +1,7 @@
+---
+title: "06.02 Control Structures Within Methods - Quiz"
+---
+
 # 06.02 Control Structures Within Methods - Quiz
 
 !!! quiz "Check your understanding"

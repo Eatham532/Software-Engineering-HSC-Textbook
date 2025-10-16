@@ -1,3 +1,7 @@
+---
+title: "Subprograms: Procedures and Functions"
+---
+
 # Subprograms: Procedures and Functions
 
 !!! abstract "Learning Objectives"

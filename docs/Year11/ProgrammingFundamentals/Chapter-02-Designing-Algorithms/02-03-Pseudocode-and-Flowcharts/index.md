@@ -1,3 +1,7 @@
+---
+title: "Pseudocode and Flowcharts"
+---
+
 # Pseudocode and Flowcharts
 
 !!! abstract "Learning Objectives"

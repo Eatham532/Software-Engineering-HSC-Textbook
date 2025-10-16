@@ -1,3 +1,7 @@
+---
+title: "02.02 Io And Purpose Desk And Peer Checking - Quiz"
+---
+
 # 02.02 Io And Purpose Desk And Peer Checking - Quiz
 
 !!! quiz "Check your understanding"

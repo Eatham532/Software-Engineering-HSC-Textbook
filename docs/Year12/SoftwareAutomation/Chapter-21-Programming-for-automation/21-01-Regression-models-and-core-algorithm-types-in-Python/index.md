@@ -1,3 +1,7 @@
+---
+title: "21.1 Regression models and core algorithm types in Python"
+---
+
 # 21.1 Regression models and core algorithm types in Python
 
 ## Why it matters

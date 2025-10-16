@@ -1,3 +1,7 @@
+---
+title: "9.2 Autonomous control features"
+---
+
 # 9.2 Autonomous control features
 
 ## Why it matters

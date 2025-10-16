@@ -1,3 +1,7 @@
+---
+title: "6.2 Control structures within methods"
+---
+
 # 6.2 Control structures within methods
 
 ## Learning objectives

@@ -1,3 +1,7 @@
+---
+title: "26.03 Evaluating The Software Solution - Quiz"
+---
+
 # 26.03 Evaluating The Software Solution - Quiz
 
 !!! quiz "Section 26.3 Quiz: Evaluating the software solution"

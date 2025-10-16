@@ -1,3 +1,7 @@
+---
+title: "09.01 Open Vs Closed Loop Systems - Quiz"
+---
+
 # 09.01 Open Vs Closed Loop Systems - Quiz
 
 !!! quiz "Section 9.1 Quiz: Open vs closed loop systems"

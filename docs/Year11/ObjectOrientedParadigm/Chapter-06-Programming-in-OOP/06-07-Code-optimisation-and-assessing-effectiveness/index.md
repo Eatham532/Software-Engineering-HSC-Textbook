@@ -1,3 +1,7 @@
+---
+title: "Section 6.7: Code Optimisation and Assessing Effectiveness"
+---
+
 # Section 6.7: Code Optimisation and Assessing Effectiveness
 
 ## Learning Objectives

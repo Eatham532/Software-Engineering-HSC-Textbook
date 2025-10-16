@@ -1,3 +1,7 @@
+---
+title: "24.02 Agile Approach - Quiz"
+---
+
 # 24.02 Agile Approach - Quiz
 
 !!! quiz "Check your understanding"

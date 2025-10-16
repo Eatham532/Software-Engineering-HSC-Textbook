@@ -1,3 +1,7 @@
+---
+title: "3.1 Number systems and two's complement"
+---
+
 # 3.1 Number systems and two's complement
 
 /// admonition | Learning objectives

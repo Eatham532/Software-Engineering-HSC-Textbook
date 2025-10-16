@@ -1,3 +1,7 @@
+---
+title: "24.06 Quality Assurance - Quiz"
+---
+
 # 24.06 Quality Assurance - Quiz
 
 !!! quiz "Check your understanding of quality assurance"

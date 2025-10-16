@@ -1,3 +1,7 @@
+---
+title: "25.5 Overcoming development difficulties"
+---
+
 # 25.5 Overcoming development difficulties
 
 ## Why it matters

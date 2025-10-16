@@ -1,3 +1,7 @@
+---
+title: "Section 15.2: Cryptography & Data Protection"
+---
+
 # Section 15.2: Cryptography & Data Protection
 
 ## Learning Objectives

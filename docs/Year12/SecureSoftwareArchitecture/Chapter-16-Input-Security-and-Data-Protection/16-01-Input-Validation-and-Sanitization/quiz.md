@@ -1,3 +1,7 @@
+---
+title: "16.01 Input Validation And Sanitization - Quiz"
+---
+
 # 16.01 Input Validation And Sanitization - Quiz
 
 !!! quiz "Check your understanding"

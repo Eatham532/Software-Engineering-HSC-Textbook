@@ -1,3 +1,7 @@
+---
+title: "02.03 Pseudocode And Flowcharts - Quiz"
+---
+
 # 02.03 Pseudocode And Flowcharts - Quiz
 
 !!! quiz "Check your understanding"

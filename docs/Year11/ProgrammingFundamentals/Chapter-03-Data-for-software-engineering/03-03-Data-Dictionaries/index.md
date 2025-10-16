@@ -1,3 +1,7 @@
+---
+title: "3.3 Data Dictionaries"
+---
+
 # 3.3 Data Dictionaries
 
 ## What is a Data Dictionary?

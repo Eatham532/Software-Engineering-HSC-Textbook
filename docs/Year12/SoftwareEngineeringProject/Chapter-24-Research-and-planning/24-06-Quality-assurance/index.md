@@ -1,3 +1,7 @@
+---
+title: "24.6 Quality assurance"
+---
+
 # 24.6 Quality assurance
 
 ## Why it matters

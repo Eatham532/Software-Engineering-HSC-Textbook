@@ -1,3 +1,7 @@
+---
+title: "02.01 Control Structures - Quiz"
+---
+
 # 02.01 Control Structures - Quiz
 
 !!! quiz "Check your understanding"

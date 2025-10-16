@@ -1,3 +1,7 @@
+---
+title: "8.3 Designing accessible mechatronic systems"
+---
+
 # 8.3 Designing accessible mechatronic systems
 
 ## Why it matters

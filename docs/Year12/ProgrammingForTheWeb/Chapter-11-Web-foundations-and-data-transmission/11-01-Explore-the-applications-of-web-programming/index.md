@@ -1,3 +1,7 @@
+---
+title: "Section 11.1: Explore the Applications of Web Programming"
+---
+
 # Section 11.1: Explore the Applications of Web Programming
 
 ## Learning Objectives

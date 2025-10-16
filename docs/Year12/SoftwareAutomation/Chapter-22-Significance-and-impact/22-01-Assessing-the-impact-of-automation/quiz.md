@@ -1,3 +1,7 @@
+---
+title: "22.01 Assessing The Impact Of Automation - Quiz"
+---
+
 # 22.01 Assessing The Impact Of Automation - Quiz
 
 !!! quiz "Section 22.01 Quiz: Assessing The Impact Of Automation"

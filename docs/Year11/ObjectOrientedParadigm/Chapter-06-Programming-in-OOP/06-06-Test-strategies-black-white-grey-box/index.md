@@ -1,3 +1,7 @@
+---
+title: "Section 6.6: Test Strategies - Black/White/Grey Box"
+---
+
 # Section 6.6: Test Strategies - Black/White/Grey Box
 
 ## Learning Objectives

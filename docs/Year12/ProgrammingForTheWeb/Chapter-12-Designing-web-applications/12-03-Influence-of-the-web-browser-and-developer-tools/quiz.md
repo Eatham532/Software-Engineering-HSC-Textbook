@@ -1,3 +1,7 @@
+---
+title: "12.03 Influence Of The Web Browser And Developer Tools - Quiz"
+---
+
 # 12.03 Influence Of The Web Browser And Developer Tools - Quiz
 
 !!! quiz "Check your understanding"

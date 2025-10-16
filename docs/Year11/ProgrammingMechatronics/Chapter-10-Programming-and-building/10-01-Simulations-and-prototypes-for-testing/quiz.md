@@ -1,3 +1,7 @@
+---
+title: "10.01 Simulations And Prototypes For Testing - Quiz"
+---
+
 # 10.01 Simulations And Prototypes For Testing - Quiz
 
 !!! quiz "Section 10.1 Quiz: Simulations and prototypes for testing"

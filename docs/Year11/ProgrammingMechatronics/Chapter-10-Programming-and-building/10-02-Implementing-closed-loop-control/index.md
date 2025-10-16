@@ -1,3 +1,7 @@
+---
+title: "10.2 Implementing closed loop control"
+---
+
 # 10.2 Implementing closed loop control
 
 ## Why it matters

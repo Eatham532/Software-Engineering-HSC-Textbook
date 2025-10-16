@@ -1,3 +1,7 @@
+---
+title: "07.03 Sensors Actuators End Effectors - Quiz"
+---
+
 # 07.03 Sensors Actuators End Effectors - Quiz
 
 !!! quiz "Section 7.3 Quiz: Sensors, Actuators, and End Effectors"

@@ -1,3 +1,7 @@
+---
+title: "25.1 Building the solution"
+---
+
 # 25.1 Building the solution
 
 ## Why it matters

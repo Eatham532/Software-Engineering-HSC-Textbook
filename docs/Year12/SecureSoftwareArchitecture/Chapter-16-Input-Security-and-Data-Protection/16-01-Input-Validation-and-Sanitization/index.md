@@ -1,3 +1,7 @@
+---
+title: "Section 16.1: Input Validation & Sanitization"
+---
+
 # Section 16.1: Input Validation & Sanitization
 
 ## Learning Objectives

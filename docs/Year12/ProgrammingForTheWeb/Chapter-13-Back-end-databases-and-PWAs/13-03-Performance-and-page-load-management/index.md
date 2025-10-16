@@ -1,3 +1,7 @@
+---
+title: "13.3 Performance and page-load management"
+---
+
 # 13.3 Performance and page-load management
 
 ## Why it matters

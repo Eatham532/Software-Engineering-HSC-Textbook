@@ -1,3 +1,7 @@
+---
+title: "08.01 Working With Device Data And Diagnostics - Quiz"
+---
+
 # 08.01 Working With Device Data And Diagnostics - Quiz
 
 !!! quiz "Section 8.1 Quiz: Working with device data and diagnostics"

@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Software Engineering Project: Module Plan"
+---
+
 # Year 12 — Software Engineering Project: Module Plan
 
 Define clear artefacts, checkpoints, and rubrics. Emphasise process, documentation, and testing.

@@ -1,3 +1,7 @@
+---
+title: "06.01 Building Classes And Composition - Quiz"
+---
+
 # 06.01 Building Classes And Composition - Quiz
 
 !!! quiz "Check your understanding"

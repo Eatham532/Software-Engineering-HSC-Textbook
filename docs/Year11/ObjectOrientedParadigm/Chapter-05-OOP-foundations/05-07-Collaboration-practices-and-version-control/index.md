@@ -1,3 +1,7 @@
+---
+title: "5.7 Collaboration practices and version control"
+---
+
 # 5.7 Collaboration practices and version control
 
 ## Learning objectives

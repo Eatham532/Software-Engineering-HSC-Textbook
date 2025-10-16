@@ -1,3 +1,7 @@
+---
+title: "20.04 Design Models Decision Trees And Neural Networks - Quiz"
+---
+
 # 20.04 Design Models Decision Trees And Neural Networks - Quiz
 
 !!! quiz "Section 20.04 Quiz: Design Models Decision Trees And Neural Networks"

@@ -1,3 +1,7 @@
+---
+title: "4.5 Debugging Tools and Techniques"
+---
+
 # 4.5 Debugging Tools and Techniques
 
 ## What is Debugging?

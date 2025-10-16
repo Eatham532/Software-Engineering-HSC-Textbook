@@ -1,3 +1,7 @@
+---
+title: "04.04 Using Standard Modules - Quiz"
+---
+
 # 04.04 Using Standard Modules - Quiz
 
 !!! quiz "Check your understanding"

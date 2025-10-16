@@ -1,3 +1,7 @@
+---
+title: "13.04 Designing And Implementing A Pwa - Quiz"
+---
+
 # 13.04 Designing And Implementing A Pwa - Quiz
 
 !!! quiz "Check your understanding"

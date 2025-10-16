@@ -1,3 +1,7 @@
+---
+title: "4.7 Common Errors and Exceptions"
+---
+
 # 4.7 Common Errors and Exceptions
 
 ## Understanding Programming Errors

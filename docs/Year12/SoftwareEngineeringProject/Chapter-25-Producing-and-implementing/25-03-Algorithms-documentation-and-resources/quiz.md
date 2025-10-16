@@ -1,3 +1,7 @@
+---
+title: "25.03 Algorithms Documentation And Resources - Quiz"
+---
+
 # 25.03 Algorithms Documentation And Resources - Quiz
 
 !!! quiz "Section 25.3 Quiz: Algorithms, documentation, and resources"

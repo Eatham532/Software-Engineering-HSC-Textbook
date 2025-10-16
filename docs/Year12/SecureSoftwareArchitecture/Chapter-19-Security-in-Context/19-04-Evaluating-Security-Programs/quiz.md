@@ -1,3 +1,7 @@
+---
+title: "19.04 Evaluating Security Programs - Quiz"
+---
+
 # 19.04 Evaluating Security Programs - Quiz
 
 !!! quiz "Section 19.04 Quiz: Evaluating Security Programs"

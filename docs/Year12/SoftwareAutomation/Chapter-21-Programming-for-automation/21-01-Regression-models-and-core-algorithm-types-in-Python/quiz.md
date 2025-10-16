@@ -1,3 +1,7 @@
+---
+title: "21.01 Regression Models And Core Algorithm Types In Python - Quiz"
+---
+
 # 21.01 Regression Models And Core Algorithm Types In Python - Quiz
 
 !!! quiz "Section 21.01 Quiz: Regression Models And Core Algorithm Types In Python"

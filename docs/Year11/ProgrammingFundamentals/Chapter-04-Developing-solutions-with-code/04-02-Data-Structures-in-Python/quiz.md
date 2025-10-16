@@ -1,3 +1,7 @@
+---
+title: "04.02 Data Structures In Python - Quiz"
+---
+
 # 04.02 Data Structures In Python - Quiz
 
 !!! quiz "Check your understanding"

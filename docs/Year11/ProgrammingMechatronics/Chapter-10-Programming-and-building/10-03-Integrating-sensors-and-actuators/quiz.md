@@ -1,3 +1,7 @@
+---
+title: "10.03 Integrating Sensors And Actuators - Quiz"
+---
+
 # 10.03 Integrating Sensors And Actuators - Quiz
 
 !!! quiz "Section 10.3 Quiz: Integrating sensors and actuators"

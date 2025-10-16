@@ -1,3 +1,7 @@
+---
+title: "Section 22.2: Human Behaviour Patterns and Their Influence on ML/AI Development"
+---
+
 # Section 22.2: Human Behaviour Patterns and Their Influence on ML/AI Development
 
 Understanding how human behaviour patterns influence ML and AI software development is crucial for creating systems that are not only technically sound but also socially acceptable and ethically responsible. This section explores the psychological, cultural, and social factors that shape how people interact with automated systems and how these interactions should inform design decisions.

@@ -1,3 +1,7 @@
+---
+title: "19.3 Security Ethics & Legal Considerations"
+---
+
 # 19.3 Security Ethics & Legal Considerations
 
 ## Why Security Ethics and Legal Considerations Matter

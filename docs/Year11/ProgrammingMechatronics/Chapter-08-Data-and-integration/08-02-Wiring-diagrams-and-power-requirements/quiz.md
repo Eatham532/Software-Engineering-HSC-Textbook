@@ -1,3 +1,7 @@
+---
+title: "08.02 Wiring Diagrams And Power Requirements - Quiz"
+---
+
 # 08.02 Wiring Diagrams And Power Requirements - Quiz
 
 !!! quiz "Section 8.2 Quiz: Wiring diagrams and power requirements"

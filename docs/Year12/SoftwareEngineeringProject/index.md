@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Software Engineering Project"
+---
+
 # Year 12 — Software Engineering Project
 
 This capstone module guides students through the complete software engineering lifecycle, from project conception to delivery and evaluation. Students apply all their learning to create a substantial software project, developing professional skills in project management, documentation, testing, and stakeholder communication.

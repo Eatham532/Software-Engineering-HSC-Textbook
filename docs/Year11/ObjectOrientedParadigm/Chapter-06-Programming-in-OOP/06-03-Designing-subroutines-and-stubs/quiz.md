@@ -1,3 +1,7 @@
+---
+title: "06.03 Designing Subroutines And Stubs - Quiz"
+---
+
 # 06.03 Designing Subroutines And Stubs - Quiz
 
 !!! quiz "Check your understanding"

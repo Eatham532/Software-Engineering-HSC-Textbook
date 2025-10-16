@@ -1,3 +1,7 @@
+---
+title: "05.04 Comparing Procedural And Oop - Quiz"
+---
+
 # 05.04 Comparing Procedural And Oop - Quiz
 
 !!! quiz "Check your understanding"

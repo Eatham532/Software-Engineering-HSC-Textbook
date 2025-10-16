@@ -1,3 +1,7 @@
+---
+title: "Year 11 — Programming Mechatronics"
+---
+
 # Year 11 — Programming Mechatronics
 
 This module explores the integration of mechanical, electrical, and software systems through mechatronics, teaching students how to design and program intelligent systems that interact with the physical world. Using Python simulations and conceptual understanding, it prepares students for real-world hardware integration.

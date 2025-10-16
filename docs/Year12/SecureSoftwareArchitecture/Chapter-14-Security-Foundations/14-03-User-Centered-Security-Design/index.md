@@ -1,3 +1,7 @@
+---
+title: "Section 14.3: User-Centered Security Design"
+---
+
 # Section 14.3: User-Centered Security Design
 
 ## Learning Objectives

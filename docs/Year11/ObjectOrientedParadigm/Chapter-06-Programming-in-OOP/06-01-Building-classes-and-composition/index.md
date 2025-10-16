@@ -1,3 +1,7 @@
+---
+title: "6.1 Building classes and composition"
+---
+
 # 6.1 Building classes and composition
 
 ## Learning objectives

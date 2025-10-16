@@ -1,3 +1,7 @@
+---
+title: "2.1 Control structures (sequence, selection, iteration)"
+---
+
 # 2.1 Control structures (sequence, selection, iteration)
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "12.02 Model Elements That Form A Web Development System - Quiz"
+---
+
 # 12.02 Model Elements That Form A Web Development System - Quiz
 
 !!! quiz "Check your understanding"

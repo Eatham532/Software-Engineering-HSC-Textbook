@@ -1,3 +1,7 @@
+---
+title: "03.03 Data Dictionaries - Quiz"
+---
+
 # 03.03 Data Dictionaries - Quiz
 
 !!! quiz "Check your understanding"

@@ -1,3 +1,7 @@
+---
+title: "5.4 Comparing procedural and OOP"
+---
+
 # 5.4 Comparing procedural and OOP
 
 ## Learning objectives

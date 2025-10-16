@@ -1,3 +1,7 @@
+---
+title: "Year 11 — The Object-Oriented Paradigm"
+---
+
 # Year 11 — The Object-Oriented Paradigm
 
 This module introduces object-oriented programming (OOP) concepts through practical Python implementation, teaching students how to think in objects and design systems that model real-world relationships. Building on Programming Fundamentals, it shows how OOP enables better code organization, reusability, and maintainability.

@@ -1,3 +1,7 @@
+---
+title: "Section 16.2: Privacy by Design"
+---
+
 # Section 16.2: Privacy by Design
 
 ## Learning Objectives

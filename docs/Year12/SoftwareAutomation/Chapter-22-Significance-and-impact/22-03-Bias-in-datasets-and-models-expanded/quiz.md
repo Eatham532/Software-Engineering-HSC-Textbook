@@ -1,3 +1,7 @@
+---
+title: "22.03 Bias In Datasets And Models Expanded - Quiz"
+---
+
 # 22.03 Bias In Datasets And Models Expanded - Quiz
 
 !!! quiz "Section 22.03 Quiz: Bias In Datasets And Models Expanded"

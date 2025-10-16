@@ -1,3 +1,7 @@
+---
+title: "24.3 WAgile hybrid approach"
+---
+
 # 24.3 WAgile hybrid approach
 
 ## Why it matters

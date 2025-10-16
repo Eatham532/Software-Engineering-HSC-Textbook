@@ -1,3 +1,7 @@
+---
+title: "24.01 Waterfall Approach - Quiz"
+---
+
 # 24.01 Waterfall Approach - Quiz
 
 !!! quiz "Section 24.1 Quiz: Waterfall Approach"

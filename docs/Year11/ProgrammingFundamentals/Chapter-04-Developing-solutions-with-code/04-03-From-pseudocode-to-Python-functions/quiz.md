@@ -1,3 +1,7 @@
+---
+title: "4.3 From pseudocode to Python functions - Quiz"
+---
+
 # 4.3 From pseudocode to Python functions - Quiz
 
 !!! quiz "Section 4.3 Quiz: From pseudocode to Python functions"

@@ -1,3 +1,7 @@
+---
+title: "23.3 Implementation methods: direct, phased, parallel, pilot"
+---
+
 # 23.3 Implementation methods: direct, phased, parallel, pilot
 
 ## Why it matters

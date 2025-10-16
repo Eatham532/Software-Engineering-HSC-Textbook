@@ -1,3 +1,7 @@
+---
+title: "24.03 Wagile Hybrid Approach - Quiz"
+---
+
 # 24.03 Wagile Hybrid Approach - Quiz
 
 !!! quiz "Check your understanding"

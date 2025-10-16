@@ -1,3 +1,7 @@
+---
+title: "14.01 The Business Case For Security - Quiz"
+---
+
 # 14.01 The Business Case For Security - Quiz
 
 !!! quiz "Check your understanding"

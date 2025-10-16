@@ -1,3 +1,7 @@
+---
+title: "7.3 Sensors, actuators, and end effectors"
+---
+
 # 7.3 Sensors, actuators, and end effectors
 
 ## Why it matters

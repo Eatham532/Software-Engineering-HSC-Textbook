@@ -1,3 +1,7 @@
+---
+title: "20.4 Design models: decision trees and neural networks"
+---
+
 # 20.4 Design models: decision trees and neural networks
 
 ## Introduction to Model Design

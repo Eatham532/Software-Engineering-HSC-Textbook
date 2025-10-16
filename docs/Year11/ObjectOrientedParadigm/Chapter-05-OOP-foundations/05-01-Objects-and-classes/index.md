@@ -1,3 +1,7 @@
+---
+title: "5.1 Objects and classes"
+---
+
 # 5.1 Objects and classes
 
 ## Learning objectives

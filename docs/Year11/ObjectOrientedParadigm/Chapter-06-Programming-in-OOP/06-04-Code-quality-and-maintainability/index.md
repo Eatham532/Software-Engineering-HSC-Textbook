@@ -1,3 +1,7 @@
+---
+title: "Section 6.4: Code Quality and Maintainability"
+---
+
 # Section 6.4: Code Quality and Maintainability
 
 ## Learning Objectives

@@ -1,3 +1,7 @@
+---
+title: "25.02 Presenting The Solution - Quiz"
+---
+
 # 25.02 Presenting The Solution - Quiz
 
 !!! quiz "Section 25.2 Quiz: Presenting the Solution"

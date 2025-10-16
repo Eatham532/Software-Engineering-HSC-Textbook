@@ -1,3 +1,7 @@
+---
+title: "04.07 Common Errors And Exceptions - Quiz"
+---
+
 # 04.07 Common Errors And Exceptions - Quiz
 
 !!! quiz "Check your understanding"

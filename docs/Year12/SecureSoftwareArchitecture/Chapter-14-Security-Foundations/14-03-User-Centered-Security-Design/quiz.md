@@ -1,3 +1,7 @@
+---
+title: "14.03 User Centered Security Design - Quiz"
+---
+
 # 14.03 User Centered Security Design - Quiz
 
 !!! quiz "Check your understanding"

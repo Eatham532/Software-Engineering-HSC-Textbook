@@ -1,3 +1,7 @@
+---
+title: "17.1 Secure API Design"
+---
+
 # 17.1 Secure API Design
 
 ## Why It Matters

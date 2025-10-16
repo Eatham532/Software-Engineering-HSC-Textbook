@@ -1,3 +1,7 @@
+---
+title: "05.05 Modelling With Class Diagrams Structure Charts And Dfds - Quiz"
+---
+
 # 05.05 Modelling With Class Diagrams Structure Charts And Dfds - Quiz
 
 !!! quiz "Check your understanding"

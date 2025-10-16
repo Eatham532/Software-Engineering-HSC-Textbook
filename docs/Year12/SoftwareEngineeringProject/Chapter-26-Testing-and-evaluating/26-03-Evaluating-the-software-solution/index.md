@@ -1,3 +1,7 @@
+---
+title: "26.3 Evaluating the software solution"
+---
+
 # 26.3 Evaluating the software solution
 
 **Outcomes**: SE-12-06

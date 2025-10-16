@@ -1,3 +1,7 @@
+---
+title: "05.07 Collaboration Practices And Version Control - Quiz"
+---
+
 # 05.07 Collaboration Practices And Version Control - Quiz
 
 !!! quiz "Check your understanding"

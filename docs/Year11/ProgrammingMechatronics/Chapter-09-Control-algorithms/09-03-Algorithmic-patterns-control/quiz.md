@@ -1,3 +1,7 @@
+---
+title: "09.03 Algorithmic Patterns Control - Quiz"
+---
+
 # 09.03 Algorithmic Patterns Control - Quiz
 
 !!! quiz "Section 9.3 Quiz: Algorithmic Patterns for Control"

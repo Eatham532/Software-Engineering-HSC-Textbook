@@ -1,3 +1,7 @@
+---
+title: "19.2 Enterprise Security Benefits"
+---
+
 # 19.2 Enterprise Security Benefits
 
 ## Why Enterprise Security Benefits Matter

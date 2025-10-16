@@ -1,3 +1,7 @@
+---
+title: "07.02 Computing Hardware - Quiz"
+---
+
 # 07.02 Computing Hardware - Quiz
 
 !!! quiz "Section 7.2 Quiz: Computing hardware"

@@ -1,3 +1,7 @@
+---
+title: "23.02 Ideation And Modelling Tools - Quiz"
+---
+
 # 23.02 Ideation And Modelling Tools - Quiz
 
 !!! quiz "Check your understanding"

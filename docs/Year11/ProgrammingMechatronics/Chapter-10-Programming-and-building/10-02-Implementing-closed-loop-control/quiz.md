@@ -1,3 +1,7 @@
+---
+title: "10.02 Implementing Closed Loop Control - Quiz"
+---
+
 # 10.02 Implementing Closed Loop Control - Quiz
 
 !!! quiz "Section 10.2 Quiz: Implementing closed loop control"

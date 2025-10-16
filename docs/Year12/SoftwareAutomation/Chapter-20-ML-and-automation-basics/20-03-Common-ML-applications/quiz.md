@@ -1,3 +1,7 @@
+---
+title: "20.03 Common Ml Applications - Quiz"
+---
+
 # 20.03 Common Ml Applications - Quiz
 
 !!! quiz "Section 20.03 Quiz: Common Ml Applications"

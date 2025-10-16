@@ -1,3 +1,7 @@
+---
+title: "3.4 Data Structures Overview"
+---
+
 # 3.4 Data Structures Overview
 
 ## What Are Data Structures?

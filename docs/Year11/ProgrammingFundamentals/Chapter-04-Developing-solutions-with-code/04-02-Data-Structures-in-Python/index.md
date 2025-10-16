@@ -1,3 +1,7 @@
+---
+title: "4.2 Data Structures in Python (Required Set)"
+---
+
 # 4.2 Data Structures in Python (Required Set)
 
 ## From Theory to Implementation

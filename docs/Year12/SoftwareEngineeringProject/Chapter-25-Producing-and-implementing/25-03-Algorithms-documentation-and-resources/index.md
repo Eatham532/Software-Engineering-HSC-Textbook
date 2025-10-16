@@ -1,3 +1,7 @@
+---
+title: "25.3 Algorithms, documentation, and resources"
+---
+
 # 25.3 Algorithms, documentation, and resources
 
 ## Why it matters

@@ -1,3 +1,7 @@
+---
+title: "24.4 Project management tools and Gantt"
+---
+
 # 24.4 Project management tools and Gantt
 
 **Outcomes**: SE-12-09

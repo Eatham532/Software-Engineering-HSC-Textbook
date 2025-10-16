@@ -1,3 +1,7 @@
+---
+title: "01.02 Tools And Collaboration - Quiz"
+---
+
 # 01.02 Tools And Collaboration - Quiz
 
 !!! quiz "Quick check — Tools and collaboration"

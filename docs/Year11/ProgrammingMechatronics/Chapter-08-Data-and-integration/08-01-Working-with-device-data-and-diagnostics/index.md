@@ -1,3 +1,7 @@
+---
+title: "8.1 Working with device data and diagnostics"
+---
+
 # 8.1 Working with device data and diagnostics
 
 ## Why it matters

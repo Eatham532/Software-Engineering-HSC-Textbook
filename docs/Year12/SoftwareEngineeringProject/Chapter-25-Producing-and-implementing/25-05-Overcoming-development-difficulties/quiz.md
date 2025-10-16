@@ -1,3 +1,7 @@
+---
+title: "25.05 Overcoming Development Difficulties - Quiz"
+---
+
 # 25.05 Overcoming Development Difficulties - Quiz
 
 !!! quiz "Section 25.5 Quiz: Overcoming Development Difficulties"

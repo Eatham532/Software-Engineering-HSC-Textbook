@@ -1,3 +1,7 @@
+---
+title: "25.2 Presenting the solution"
+---
+
 # 25.2 Presenting the solution
 
 **Outcomes**: SE-12-09

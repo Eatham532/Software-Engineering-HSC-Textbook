@@ -1,3 +1,7 @@
+---
+title: "7.1 Applications of mechatronic systems"
+---
+
 # 7.1 Applications of mechatronic systems
 
 Mechatronics combines mechanical engineering, electronics, computer science, and control engineering to create intelligent systems that can sense, think, and act. These systems are everywhere in modern life, from the automatic doors at shopping centres to the robotic arms assembling cars.

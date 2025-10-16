@@ -1,3 +1,7 @@
+---
+title: "9.4 Mechanical constraints and subsystem composition"
+---
+
 # 9.4 Mechanical constraints and subsystem composition
 
 ## Why it matters

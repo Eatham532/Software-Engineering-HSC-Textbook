@@ -1,3 +1,7 @@
+---
+title: "1.3 Documentation and code style"
+---
+
 # 1.3 Documentation and code style
 
 ## Why it matters

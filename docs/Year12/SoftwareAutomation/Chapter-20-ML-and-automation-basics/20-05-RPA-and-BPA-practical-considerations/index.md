@@ -1,3 +1,7 @@
+---
+title: "20.5 RPA and BPA: Practical Considerations"
+---
+
 # 20.5 RPA and BPA: Practical Considerations
 
 ## Why Understanding Automation Approaches Matters

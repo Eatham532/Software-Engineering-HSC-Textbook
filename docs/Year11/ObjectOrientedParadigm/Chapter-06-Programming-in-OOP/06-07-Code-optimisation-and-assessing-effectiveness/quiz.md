@@ -1,3 +1,7 @@
+---
+title: "06.07 Code Optimisation And Assessing Effectiveness - Quiz"
+---
+
 # 06.07 Code Optimisation And Assessing Effectiveness - Quiz
 
 !!! quiz "Check your understanding"

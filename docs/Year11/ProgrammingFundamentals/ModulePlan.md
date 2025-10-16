@@ -1,3 +1,7 @@
+---
+title: "Year 11 — Programming Fundamentals: Module Plan"
+---
+
 # Year 11 — Programming Fundamentals: Module Plan
 
 Audience: absolute beginners. Language: Python only. Diagrams: PlantUML (fallback to static SVG if plugin not enabled). Mechatronics code is deferred to its module.

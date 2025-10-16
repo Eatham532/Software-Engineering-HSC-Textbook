@@ -1,3 +1,7 @@
+---
+title: "23.03 Implementation Methods - Quiz"
+---
+
 # 23.03 Implementation Methods - Quiz
 
 !!! quiz "Check your understanding"

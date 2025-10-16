@@ -1,3 +1,7 @@
+---
+title: "Year 12 — Software Automation"
+---
+
 # Year 12 — Software Automation
 
 This module builds intuition for machine learning and automation through simple, reproducible Python examples, with a focus on from-scratch implementations to develop deep understanding of core algorithms and concepts.

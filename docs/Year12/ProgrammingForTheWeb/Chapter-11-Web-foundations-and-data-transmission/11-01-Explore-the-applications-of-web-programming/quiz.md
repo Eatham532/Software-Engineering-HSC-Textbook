@@ -1,3 +1,7 @@
+---
+title: "11.01 Explore The Applications Of Web Programming - Quiz"
+---
+
 # 11.01 Explore The Applications Of Web Programming - Quiz
 
 !!! quiz "Check your understanding"

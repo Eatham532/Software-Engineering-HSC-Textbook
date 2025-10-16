@@ -1,3 +1,7 @@
+---
+title: "12.6 Open-source and content management systems (CMS)"
+---
+
 # 12.6 Open-source and content management systems (CMS)
 
 ## Why it matters

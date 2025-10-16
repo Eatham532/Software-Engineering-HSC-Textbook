@@ -1,3 +1,7 @@
+---
+title: "19.02 Enterprise Security Benefits - Quiz"
+---
+
 # 19.02 Enterprise Security Benefits - Quiz
 
 !!! quiz "Section 19.02 Quiz: Enterprise Security Benefits"

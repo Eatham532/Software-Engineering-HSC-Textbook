@@ -1,3 +1,7 @@
+---
+title: "9.1 Open vs closed loop systems"
+---
+
 # 9.1 Open vs closed loop systems
 
 Control systems are the brains of mechatronic systems. They decide what actions to take based on the current situation and desired outcomes. Understanding the difference between open and closed loop systems is fundamental to designing effective control strategies.

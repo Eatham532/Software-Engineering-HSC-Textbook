@@ -1,3 +1,7 @@
+---
+title: "11.04 Big Data And Web Architectures - Quiz"
+---
+
 # 11.04 Big Data And Web Architectures - Quiz
 
 !!! quiz "Check your understanding"

@@ -1,3 +1,7 @@
+---
+title: "19.03 Security Ethics And Legal Considerations - Quiz"
+---
+
 # 19.03 Security Ethics And Legal Considerations - Quiz
 
 !!! quiz "Section 19.03 Quiz: Security Ethics And Legal Considerations"

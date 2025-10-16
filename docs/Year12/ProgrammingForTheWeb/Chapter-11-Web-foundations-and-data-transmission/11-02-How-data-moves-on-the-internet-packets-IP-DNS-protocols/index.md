@@ -1,3 +1,7 @@
+---
+title: "11.2 How data moves on the internet (packets, IP, DNS, protocols)"
+---
+
 # 11.2 How data moves on the internet (packets, IP, DNS, protocols)
 
 In this section, you will trace a web request end-to-end: from typing a URL to receiving a web page. You'll see how DNS resolves names, how TCP establishes a connection, how TLS secures it, and how HTTP delivers content. We'll also map core protocols to their typical ports and show how to inspect and reason about all this with developer tools.

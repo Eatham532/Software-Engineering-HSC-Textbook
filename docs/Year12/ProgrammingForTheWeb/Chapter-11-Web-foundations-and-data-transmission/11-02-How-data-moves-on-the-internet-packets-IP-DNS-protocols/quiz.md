@@ -1,3 +1,7 @@
+---
+title: "11.02 How Data Moves On The Internet Packets Ip Dns Protocols - Quiz"
+---
+
 # 11.02 How Data Moves On The Internet Packets Ip Dns Protocols - Quiz
 
 !!! quiz "Check your understanding"

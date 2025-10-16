@@ -1,3 +1,7 @@
+---
+title: "25.6 Prototype and UI design"
+---
+
 # 25.6 Prototype and UI design
 
 **Outcomes**: SE-12-06

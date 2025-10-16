@@ -1,3 +1,7 @@
+---
+title: "13.02 Databases Sql Common Queries And Orm Comparison - Quiz"
+---
+
 # 13.02 Databases Sql Common Queries And Orm Comparison - Quiz
 
 !!! quiz "Check your understanding"

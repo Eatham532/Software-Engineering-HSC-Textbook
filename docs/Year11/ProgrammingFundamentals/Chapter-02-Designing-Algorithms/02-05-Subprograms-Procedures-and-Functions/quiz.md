@@ -1,3 +1,7 @@
+---
+title: "02.05 Subprograms Procedures And Functions - Quiz"
+---
+
 # 02.05 Subprograms Procedures And Functions - Quiz
 
 !!! quiz "Check your understanding"

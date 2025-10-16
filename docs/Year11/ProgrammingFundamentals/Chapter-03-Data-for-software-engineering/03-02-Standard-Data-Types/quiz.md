@@ -1,3 +1,7 @@
+---
+title: "03.02 Standard Data Types - Quiz"
+---
+
 # 03.02 Standard Data Types - Quiz
 
 !!! quiz "Check your understanding"

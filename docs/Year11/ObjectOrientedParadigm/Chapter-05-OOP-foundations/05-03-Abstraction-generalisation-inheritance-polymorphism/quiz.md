@@ -1,3 +1,7 @@
+---
+title: "05.03 Abstraction Generalisation Inheritance Polymorphism - Quiz"
+---
+
 # 05.03 Abstraction Generalisation Inheritance Polymorphism - Quiz
 
 !!! quiz "Check your understanding"

@@ -1,3 +1,7 @@
+---
+title: "Analysing Written Algorithms (Logic and Structure)"
+---
+
 # Analysing Written Algorithms (Logic and Structure)
 
 !!! abstract "Learning Objectives"

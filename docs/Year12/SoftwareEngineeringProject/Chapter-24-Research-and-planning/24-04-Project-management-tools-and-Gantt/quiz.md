@@ -1,3 +1,7 @@
+---
+title: "24.04 Project Management Tools and Gantt - Quiz"
+---
+
 # 24.04 Project Management Tools and Gantt - Quiz
 
 !!! quiz "Section 24.4 Quiz: Project Management Tools and Gantt"

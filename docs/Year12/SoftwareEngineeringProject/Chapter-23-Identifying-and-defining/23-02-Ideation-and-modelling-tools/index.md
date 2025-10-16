@@ -1,3 +1,7 @@
+---
+title: "23.2 Ideation and modelling tools"
+---
+
 # 23.2 Ideation and modelling tools
 
 ## Why it matters
