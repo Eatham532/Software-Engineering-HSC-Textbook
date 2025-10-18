@@ -1368,7 +1368,7 @@ if __name__ == "__main__":
 
 Create a simple function that determines whether a given automation scenario is better suited for traditional AI (rule-based) or ML (learning-based) approaches:
 
-```python
+```python-template
 def recommend_approach(scenario_description):
     # Analyze the scenario and recommend AI or ML
     # Consider factors like:

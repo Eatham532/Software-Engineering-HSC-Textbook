@@ -831,7 +831,7 @@ For each project, use the `WaterfallBenefitsAnalysis` class to:
 
 Here's a framework for completing the practice tasks:
 
-```python
+```python-template
 # Task completion template
 def complete_waterfall_analysis(project_name, project_type):
     """Template for comprehensive Waterfall methodology analysis."""

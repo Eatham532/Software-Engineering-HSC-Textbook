@@ -32,7 +32,7 @@ In Python, you've already used built-in functions like `print()`, `len()`, and `
 
 ### Function anatomy
 
-```python
+```python-template
 def function_name(parameter1, parameter2):
     """Documentation string explaining what the function does."""
     # Function body - the code that does the work
@@ -69,7 +69,7 @@ In Python, everything is technically a function, but we use the same terminology
 
 - Functions that don't return a value (or return `None`) act like **procedures**
 
-```python
+```python-template
 # Function - returns a value
 def calculate_average(score1, score2, score3):
     """Calculate the average of three scores."""
@@ -103,7 +103,7 @@ END FUNCTION
 
 **Python**:
 
-```python
+```python-template
 def calculate_area(length, width):
     """Calculate the area of a rectangle."""
     area = length * width
@@ -113,7 +113,7 @@ def calculate_area(length, width):
 
 Even simpler, you can return directly:
 
-```python
+```python-template
 def calculate_area(length, width):
     """Calculate the area of a rectangle."""
     return length * width
@@ -164,7 +164,7 @@ print(result)  # Output: 89
 
 **Python shortcut** (using built-in `max` function):
 
-```python
+```python-template
 def find_maximum(num1, num2, num3):
     """Find the largest of three numbers."""
     return max(num1, num2, num3)
@@ -275,7 +275,7 @@ Good functions do **one thing well**. This is called the **Single Responsibility
 
 ### ❌ Bad: Function does too much
 
-```python
+```python-template
 def process_student_data(name, test1, test2, test3):
     """Process student data and display report."""
     # Calculating average
@@ -1001,7 +1001,7 @@ new_list = add_item(my_list, 'eggs')
 
 ### 4. Too many responsibilities
 
-```python
+```python-template
 # ❌ Function does too much
 def process_everything(data):
     """Process, validate, calculate, format, and save data."""

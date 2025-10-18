@@ -555,7 +555,7 @@ branching_workflow = {
 
 **Step 3: Backup and release process**
 
-```python
+```python-template
 # Automated backup and release process
 def create_backup_strategy():
     return {

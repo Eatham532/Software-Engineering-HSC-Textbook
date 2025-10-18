@@ -691,7 +691,7 @@ Identify potential problems and suggest debugging steps.
 
 **Debugging code:**
 
-```python
+```python-template
 def debug_pid_output(self, setpoint, measured_value):
     output, p, i, d = self.calculate_output(setpoint, measured_value)
     

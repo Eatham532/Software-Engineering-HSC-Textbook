@@ -858,7 +858,7 @@ Security audits provide independent assessment of security programs through syst
 
 ### Python Implementation: Security Audit Management System
 
-```python
+```python-template
 import json
 import datetime
 from typing import Dict, List, Optional, Tuple

@@ -1707,7 +1707,7 @@ For your chosen project, create detailed functional and non-functional requireme
 
 Here's a framework you can adapt for any project:
 
-```python
+```python-template
 # Task completion template
 def complete_requirements_analysis(project_name):
     """Template for completing comprehensive requirements analysis."""

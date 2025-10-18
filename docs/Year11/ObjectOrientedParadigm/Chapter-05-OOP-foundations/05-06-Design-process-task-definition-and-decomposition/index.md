@@ -121,7 +121,7 @@ From "Members can borrow books and librarians can add books":
     type: info
     open: false
 
-```python
+```python-template
 class Member:
     """Responsible for member-related data and operations"""
     def __init__(self, member_id, name, email):
@@ -204,7 +204,7 @@ success, message = library.borrow_book(member.member_id, book.isbn)
 
 **2. Chain of responsibility:** Objects pass requests along until one handles it
 
-```python
+```python-template
 class NotificationService:
     def send_overdue_notice(self, member):
         # Try email first, then SMS, then postal mail
@@ -216,7 +216,7 @@ class NotificationService:
 
 **3. Observer pattern:** Objects notify others when their state changes
 
-```python
+```python-template
 class Book:
     def __init__(self):
         self.observers = []  # List of objects interested in book status
@@ -297,7 +297,7 @@ Level 3: Payment Processing
 
 ### Top-down implementation
 
-```python
+```python-template
 # Level 1: Main system coordinator
 class OnlineShoppingSystem:
     def __init__(self):
@@ -376,7 +376,7 @@ class PaymentProcessor:
 
 ### Example: Game Development
 
-```python
+```python-template
 # Level 1: Basic building blocks
 class Vector2D:
     def __init__(self, x, y):
@@ -527,7 +527,7 @@ Given these requirements for a simple task management system:
 
 **Identified Classes and Responsibilities:**
 
-```python
+```python-template
 class Task:
     """Responsible for individual task data and status"""
     def __init__(self, title, description, due_date, priority):
@@ -629,7 +629,7 @@ Design the collaborations for a simple chat application where:
     type: success
     open: false
 
-```python
+```python-template
 class User:
     def __init__(self, user_id, username):
         self.user_id = user_id

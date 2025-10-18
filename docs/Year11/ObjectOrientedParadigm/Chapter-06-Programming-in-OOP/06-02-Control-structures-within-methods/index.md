@@ -372,7 +372,7 @@ print(first_multiple)  # 21
 
 ### Breaking down complex methods
 
-```python
+```python-template
 class OrderProcessor:
     """Demonstrating how to break down complex methods"""
     
@@ -512,7 +512,7 @@ class OrderProcessor:
 
 **1. Single Responsibility Principle:**
 
-```python
+```python-template
 class TextAnalyzer:
     """Example of methods with single responsibilities"""
     
@@ -561,7 +561,7 @@ class TextAnalyzer:
 
 **2. Keep methods short (generally under 20 lines):**
 
-```python
+```python-template
 class Calculator:
     """Examples of appropriately sized methods"""
     
@@ -613,7 +613,7 @@ class Calculator:
 
 ### Method extraction techniques
 
-```python
+```python-template
 class ReportGenerator:
     """Demonstrating method extraction techniques"""
     
@@ -1000,7 +1000,7 @@ print("Removed 'the':", processor.remove_words_containing("the"))
 
 This method does too much. Refactor it into smaller, focused methods:
 
-```python
+```python-template
 class StudentManager:
     def process_student_data(self, student_data):
         # Validate student data
@@ -1046,7 +1046,7 @@ class StudentManager:
     type: success
     open: false
 
-```python
+```python-template
 class StudentManager:
     """Refactored version with focused methods"""
     

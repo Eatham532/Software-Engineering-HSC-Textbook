@@ -99,7 +99,7 @@ Web applications need to store and retrieve data efficiently:
 
 - **Strengths**: Schema flexibility, horizontal scaling, performance
 
-```python
+```python-template
 # Example: Python database interaction
 import sqlite3
 

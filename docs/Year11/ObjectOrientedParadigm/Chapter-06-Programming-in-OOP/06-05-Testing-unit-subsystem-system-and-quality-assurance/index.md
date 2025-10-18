@@ -637,7 +637,7 @@ class TestStudentManagementAcceptance(unittest.TestCase):
 
 Create unit tests for this shopping cart class:
 
-```python
+```python-template
 class ShoppingCart:
     """Shopping cart for e-commerce application."""
     
@@ -698,7 +698,7 @@ class ShoppingCart:
 
 Write integration tests for a simple order processing system with these classes:
 
-```python
+```python-template
 class Product:
     def __init__(self, product_id, name, price, stock_quantity):
         self.product_id = product_id

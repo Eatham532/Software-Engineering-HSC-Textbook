@@ -54,7 +54,7 @@ Black box testing focuses on the external behavior of a system without consideri
 
 **Specification**: "The grade calculator should convert numerical scores (0-100) to letter grades using the standard scale: A (90-100), B (80-89), C (70-79), D (60-69), F (0-59). Invalid inputs should raise appropriate errors."
 
-```python
+```python-template
 import unittest
 
 class GradeCalculator:
@@ -611,7 +611,7 @@ Design black box tests for a library fine calculator with this specification:
 
 Analyze this code and design white box tests to achieve 100% statement and branch coverage:
 
-```python
+```python-template
 def calculate_shipping_cost(weight, distance, priority):
     """Calculate shipping cost based on weight, distance, and priority."""
     base_cost = 0.0

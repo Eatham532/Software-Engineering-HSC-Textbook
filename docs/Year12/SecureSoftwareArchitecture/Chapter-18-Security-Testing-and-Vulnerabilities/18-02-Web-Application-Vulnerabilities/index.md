@@ -235,7 +235,7 @@ secure_form_template = '''
 
 ### SameSite Cookie Protection
 
-```python
+```python-template
 # Enhanced session configuration for CSRF protection
 @app.after_request
 def set_secure_headers(response):
@@ -531,7 +531,7 @@ def protected_resource():
 
 Security misconfigurations are among the most common vulnerabilities, often resulting from default settings, incomplete configurations, or overly permissive setups.
 
-```python
+```python-template
 import os
 from flask import Flask
 from flask_talisman import Talisman
@@ -679,7 +679,7 @@ def create_secure_app():
 
 ### Environment-Specific Security
 
-```python
+```python-template
 import os
 import json
 from pathlib import Path
@@ -978,7 +978,7 @@ if __name__ == "__main__":
 
 ### Database-Level Race Condition Prevention
 
-```python
+```python-template
 import sqlite3
 import threading
 from contextlib import contextmanager

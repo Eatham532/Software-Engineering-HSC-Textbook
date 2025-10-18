@@ -97,7 +97,7 @@ For mechatronic systems, consider:
 
 - **Backup strategies**: Multiple copies of critical calibration and configuration data
 
-```python
+```python-template
 import json
 import os
 

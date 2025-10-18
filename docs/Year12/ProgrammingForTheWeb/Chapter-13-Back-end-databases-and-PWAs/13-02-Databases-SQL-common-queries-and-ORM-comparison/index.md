@@ -598,7 +598,7 @@ if __name__ == '__main__':
     type: success
     open: false
 
-```python
+```python-template
 def create_user_safe(username, email, password):
     """CREATE with duplicate prevention"""
     try:
@@ -767,7 +767,7 @@ with app.app_context():
 
 Comparing the same operations using ORM and raw SQL approaches:
 
-```python
+```python-template
 # Direct comparison: ORM vs Raw SQL
 import sqlite3
 from sqlalchemy import text

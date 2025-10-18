@@ -107,7 +107,7 @@ net = calculate_net_income(50000, 0.25)
 
 ### 2. Linear data processing
 
-```python
+```python-template
 # Processing a list of data - procedural approach
 def clean_data(raw_data):
     return [item.strip().lower() for item in raw_data if item]
@@ -124,7 +124,7 @@ def process_user_data(raw_emails):
 
 ### 3. Mathematical or algorithmic problems
 
-```python
+```python-template
 # Mathematical calculations work well procedurally
 def fibonacci(n):
     if n <= 1:
@@ -144,7 +144,7 @@ OOP works well when:
 
 ### 1. Modeling real-world entities
 
-```python
+```python-template
 # Real-world entities fit naturally into classes
 class Student:
     def __init__(self, name, student_id):
@@ -177,7 +177,7 @@ class Course:
 
 ### 2. Complex state management
 
-```python
+```python-template
 # Managing complex state is easier with OOP
 class GameCharacter:
     def __init__(self, name, health=100):
@@ -207,7 +207,7 @@ class GameCharacter:
 
 ### 3. Systems with multiple interacting components
 
-```python
+```python-template
 # Multiple components working together
 class BankAccount:
     def __init__(self, account_number, initial_balance=0):
@@ -295,7 +295,7 @@ customer.send_email(f"Your total spending: ${total}")
 
 ### Step 3: Look for opportunities to create hierarchies
 
-```python
+```python-template
 # Before: separate functions for different account types
 def calculate_savings_interest(balance, rate):
     return balance * rate
@@ -374,7 +374,7 @@ def battle(p_name, p_health, p_level, e_name, e_health, e_level):
 
 **OOP can be overkill for:**
 
-```python
+```python-template
 # Overly complex for simple calculations
 class Calculator:
     def add(self, a, b):
@@ -453,7 +453,7 @@ def borrow_book(member_id, isbn):
     type: success
     open: false
 
-```python
+```python-template
 class Book:
     def __init__(self, title, author, isbn):
         self.title = title
@@ -516,7 +516,7 @@ class Library:
 
 Analyze this code and suggest improvements using OOP principles:
 
-```python
+```python-template
 # Current procedural approach
 def process_payment(amount, payment_type, card_number=None, bank_account=None):
     if payment_type == "credit":
@@ -539,7 +539,7 @@ def process_payment(amount, payment_type, card_number=None, bank_account=None):
     type: success
     open: false
 
-```python
+```python-template
 class Payment:
     def __init__(self, amount):
         self.amount = amount

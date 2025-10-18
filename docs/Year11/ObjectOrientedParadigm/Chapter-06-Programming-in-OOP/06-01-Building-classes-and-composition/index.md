@@ -243,7 +243,7 @@ print(counter.get_history())  # [10, 15, 12, 13]
 
 **1. Single responsibility:** Each method should do one thing well
 
-```python
+```python-template
 class EmailValidator:
     """Class demonstrating single responsibility in methods"""
     
@@ -283,7 +283,7 @@ validator.test(email)      # Test what?
 
 **3. Consistent parameter patterns:** Similar methods should have similar signatures
 
-```python
+```python-template
 class MathOperations:
     """Consistent parameter patterns"""
     
@@ -628,7 +628,7 @@ print(validator.get_requirements())         # List of requirements
     type: example
     open: false
 
-```python
+```python-template
 class UserAccount:
     """Low cohesion - too many unrelated responsibilities"""
     
@@ -665,7 +665,7 @@ class UserAccount:
 
 **Better approach with high cohesion:**
 
-```python
+```python-template
 class User:
     """High cohesion - focused on user data and basic operations"""
     
@@ -925,7 +925,7 @@ print(gaming_pc.can_run_program("Video Editor", 4.0, 32))  # Should fail
 
 You have this inheritance-based design. Refactor it to use composition instead:
 
-```python
+```python-template
 class Vehicle:
     def __init__(self, make, model):
         self.make = make

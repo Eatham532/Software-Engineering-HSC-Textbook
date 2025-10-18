@@ -46,7 +46,7 @@ This section focuses on practical techniques for evaluating and improving code q
 
 **Example: Assessing Correctness**
 
-```python
+```python-template
 class BankAccount:
     """Bank account with correctness issues to identify."""
     
@@ -119,7 +119,7 @@ class ImprovedBankAccount:
 
 **Example: Improving Code Clarity**
 
-```python
+```python-template
 
 ## Poor clarity
 
@@ -202,7 +202,7 @@ class OrderCalculator:
 
 **Example: Performance Assessment and Improvement**
 
-```python
+```python-template
 
 import time
 from typing import List
@@ -369,7 +369,7 @@ def performance_comparison():
 
 **Example: Maintainability Assessment**
 
-```python
+```python-template
 
 ## Poor maintainability - tightly coupled, hard to modify
 
@@ -534,7 +534,7 @@ Choose algorithms with better time complexity for your specific use case.
 
 **Example: Search Algorithm Optimization**
 
-```python
+```python-template
 
 class ProductCatalog:
     """Product catalog with different search implementations."""
@@ -594,7 +594,7 @@ Choose the right data structure for your access patterns.
 
 **Example: Data Structure Optimization**
 
-```python
+```python-template
 
 class TaskManager:
     """Task manager demonstrating data structure choices."""
@@ -687,7 +687,7 @@ def demonstrate_data_structure_performance():
 
 **Example: Premature vs. Appropriate Optimization**
 
-```python
+```python-template
 
 ## Example of premature optimization (don't do this initially)
 
@@ -787,7 +787,7 @@ Understanding where your code spends time is essential for effective optimizatio
 
 ### Time-Based Profiling
 
-```python
+```python-template
 
 import time
 import functools
@@ -928,7 +928,7 @@ def demonstrate_detailed_profiling():
 
 ### Memory Profiling
 
-```python
+```python-template
 
 import sys
 
@@ -1203,7 +1203,7 @@ def optimization_workflow_example():
 
 ### 2. Focus on Algorithmic Improvements
 
-```python
+```python-template
 
 def algorithmic_optimization_example():
     """Show how algorithm choice has bigger impact than micro-optimizations."""
@@ -1269,7 +1269,7 @@ def algorithmic_optimization_example():
 
 Evaluate this code across all four dimensions (correctness, clarity, performance, maintainability) and identify improvements:
 
-```python
+```python-template
 
 class ShoppingCart:
     def __init__(self):
@@ -1306,7 +1306,7 @@ class ShoppingCart:
 
 Profile and optimize this data processing function:
 
-```python
+```python-template
 
 def process_sales_data(sales_records):
     """Process sales data to find top products by revenue."""

@@ -92,7 +92,7 @@ Follow these standard Python naming conventions:
 
 **Example of consistent naming:**
 
-```python
+```python-template
 class LibraryBook:
     MAX_LOAN_DAYS = 14  # Constant
     
@@ -128,7 +128,7 @@ Docstrings are the primary way to document Python classes and methods. They shou
 
 **Structure of a good docstring:**
 
-```python
+```python-template
 def method_name(parameter1, parameter2):
     """
     Brief description of what the method does.
@@ -148,7 +148,7 @@ def method_name(parameter1, parameter2):
 
 **Example with comprehensive docstrings:**
 
-```python
+```python-template
 class Student:
     """
     Represents a student with academic records and grade calculations.
@@ -272,7 +272,7 @@ Long methods are harder to:
 
 **Example of a method that's too long:**
 
-```python
+```python-template
 def process_order(self, order_items, customer_info, payment_info):
     """Process a customer order - this method is too long!"""
     # Validate customer information
@@ -323,7 +323,7 @@ def process_order(self, order_items, customer_info, payment_info):
 
 Break the long method into smaller, focused methods:
 
-```python
+```python-template
 class OrderProcessor:
     """Handles order processing with clean, focused methods."""
     
@@ -425,7 +425,7 @@ When you see a block of code that performs a specific task, extract it into its 
 
 **Before:**
 
-```python
+```python-template
 def generate_report(self, students):
     # Calculate statistics
     total_students = len(students)
@@ -453,7 +453,7 @@ def generate_report(self, students):
 
 **After:**
 
-```python
+```python-template
 def generate_report(self, students):
     """Generate a comprehensive student report."""
     stats = self._calculate_statistics(students)
@@ -497,7 +497,7 @@ def _format_student_section(self, student):
 
 **Before:**
 
-```python
+```python-template
 def calculate_late_fee(self, days_late):
     if days_late <= 7:
         return days_late * 0.5
@@ -510,7 +510,7 @@ def calculate_late_fee(self, days_late):
 
 **After:**
 
-```python
+```python-template
 class LibraryFeeCalculator:
     # Named constants make the logic clear
     GRACE_PERIOD_DAYS = 7
@@ -605,7 +605,7 @@ Use this checklist to assess and improve your code quality:
 
 Refactor this poorly named and documented class:
 
-```python
+```python-template
 class C:
     def __init__(self, n, p, r):
         self.n = n
@@ -628,7 +628,7 @@ class C:
 
 Break down this long method into focused, single-purpose methods:
 
-```python
+```python-template
 def analyze_exam_results(self, exam_scores):
     # Find highest and lowest scores
     highest = max(exam_scores)

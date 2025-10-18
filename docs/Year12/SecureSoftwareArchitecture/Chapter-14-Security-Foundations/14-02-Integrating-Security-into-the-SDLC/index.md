@@ -233,7 +233,7 @@ Let's trace security integration through the SDLC for a student portal system.
 
 **Secure Coding Practices Applied:**
 
-```python
+```python-template
 # Secure password handling
 import bcrypt
 from flask_limiter import Limiter

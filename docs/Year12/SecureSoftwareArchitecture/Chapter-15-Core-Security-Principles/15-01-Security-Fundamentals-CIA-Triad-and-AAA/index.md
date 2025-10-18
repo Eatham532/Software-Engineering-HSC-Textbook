@@ -46,7 +46,7 @@ The **CIA Triad** (Confidentiality, Integrity, Availability) defines what we're 
 
 **Confidentiality implementation strategies:**
 
-```python
+```python-template
 import os
 from cryptography.fernet import Fernet
 import getpass
@@ -149,7 +149,7 @@ def is_authorized(user, student_id):
 
 **Integrity implementation strategies:**
 
-```python
+```python-template
 import hashlib
 import hmac
 import json
@@ -458,7 +458,7 @@ def demonstrate_availability_protection():
 
 Let's build a comprehensive example that demonstrates all three CIA principles working together.
 
-```python
+```python-template
 import sqlite3
 import hashlib
 import hmac
@@ -778,7 +778,7 @@ def demonstrate_authentication():
 
 - **Mandatory Access Control (MAC)**: System-enforced access based on security clearances
 
-```python
+```python-template
 from enum import Enum
 from typing import List, Dict, Any
 import json
@@ -980,7 +980,7 @@ def demonstrate_authorization():
 
 - **Compliance reporting**: Meeting regulatory requirements
 
-```python
+```python-template
 import logging
 import json
 from datetime import datetime

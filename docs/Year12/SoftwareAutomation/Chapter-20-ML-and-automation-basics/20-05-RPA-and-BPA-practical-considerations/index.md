@@ -2280,7 +2280,7 @@ Learning Curve: Higher, more technical approach
 
 **Python + Selenium**:
 
-```python
+```python-template
 
 ## Web automation example
 
@@ -2316,7 +2316,7 @@ def automate_web_form():
 
 **Python + API Integration**:
 
-```python
+```python-template
 
 ## API-based integration example
 
@@ -3638,7 +3638,7 @@ Categorize each task and recommend appropriate automation approach.
 
 **Question 14**: Examine this code snippet from the BPA orchestration engine:
 
-```python
+```python-template
 async def execute_workflow_step(self, instance_id: str, step_name: str):
     instance = self.process_instances.get(instance_id)
     if not instance:

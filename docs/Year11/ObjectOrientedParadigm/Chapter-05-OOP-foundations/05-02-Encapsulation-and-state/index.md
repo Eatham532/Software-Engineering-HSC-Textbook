@@ -22,7 +22,7 @@ Think of it like a remote control for your TV:
 
 - **Controlled access**: You interact with the TV only through the buttons, not by rewiring the circuits
 
-```python
+```python-template
 class BankAccount:
     def __init__(self, account_number, initial_balance=0):
         self.account_number = account_number  # Public attribute
@@ -90,7 +90,7 @@ Python uses naming conventions to indicate access levels:
 
 - **Private (name-mangled)**: `__attribute` or `__method()` - triggers name-mangling to `_ClassName__attribute`; still accessible but signals strong non-public intent
 
-```python
+```python-template
 class Student:
     def __init__(self, name, student_id):
         self.name = name                    # Public
@@ -326,7 +326,7 @@ car.engine_running = True   # Problem 2: What could go wrong?
     type: success
     open: false
 
-```python
+```python-template
 class DigitalClock:
     def __init__(self, hours=0, minutes=0):
         self._hours = 0
@@ -368,7 +368,7 @@ class DigitalClock:
 
 **Scenario**: Improve this class by adding proper encapsulation:
 
-```python
+```python-template
 class GameScore:
     def __init__(self):
         self.score = 0
@@ -391,7 +391,7 @@ class GameScore:
     type: success
     open: false
 
-```python
+```python-template
 class GameScore:
     def __init__(self):
         self._score = 0

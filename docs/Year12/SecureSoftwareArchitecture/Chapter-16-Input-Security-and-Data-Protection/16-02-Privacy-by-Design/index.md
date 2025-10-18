@@ -40,7 +40,7 @@ Privacy by Design is a framework that embeds privacy considerations into the des
 
 **Data minimization** means collecting, processing, and storing only the personal data that is necessary for the specific purpose.
 
-```python
+```python-template
 from typing import Dict, List, Optional, Set
 from datetime import datetime, timedelta
 from enum import Enum
@@ -287,7 +287,7 @@ def demonstrate_data_minimization():
 
 **Consent management** ensures users have control over how their personal data is collected and used.
 
-```python
+```python-template
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 import uuid
@@ -689,7 +689,7 @@ def demonstrate_consent_management():
 
 **Purpose limitation** ensures data is only used for the purposes it was collected for, and **data retention** policies ensure data is not kept longer than necessary.
 
-```python
+```python-template
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 from enum import Enum
@@ -1069,7 +1069,7 @@ def demonstrate_purpose_limitation_and_retention():
 
 **Privacy Impact Assessments (PIAs)** systematically evaluate how personal data processing activities affect individual privacy.
 
-```python
+```python-template
 from typing import Dict, List, Optional, Set
 from datetime import datetime
 from enum import Enum
@@ -1581,7 +1581,7 @@ def demonstrate_privacy_impact_assessment():
 
 The General Data Protection Regulation (GDPR) provides a comprehensive framework for data protection that influences privacy design worldwide.
 
-```python
+```python-template
 from typing import Dict, List, Optional
 from datetime import datetime, timedelta
 from enum import Enum

@@ -734,7 +734,7 @@ if __name__ == '__main__':
     type: success
     open: false
 
-```python
+```python-template
 def cache_with_invalidation(cache_keys, ttl=300):
     """Cache decorator with invalidation support"""
     def decorator(f):

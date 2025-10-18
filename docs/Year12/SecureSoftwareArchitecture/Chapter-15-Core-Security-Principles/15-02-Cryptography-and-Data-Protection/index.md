@@ -58,7 +58,7 @@ Cryptography is the foundation of modern digital security, protecting data wheth
 
 - **Avalanche effect**: Small input changes produce completely different hashes
 
-```python
+```python-template
 import hashlib
 import secrets
 import time
@@ -219,7 +219,7 @@ def demonstrate_secure_password_hashing():
 
 - **Variable output size**: Encrypted data is usually larger than original
 
-```python
+```python-template
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
@@ -415,7 +415,7 @@ def demonstrate_encryption_scenarios():
 
 Proper key management is crucial for cryptographic security. Keys must be generated securely, stored safely, and rotated regularly.
 
-```python
+```python-template
 import json
 import os
 from datetime import datetime, timedelta
@@ -629,7 +629,7 @@ def demonstrate_key_management():
 
 Let's build a complete password manager that demonstrates all cryptographic concepts.
 
-```python
+```python-template
 import json
 import getpass
 from datetime import datetime

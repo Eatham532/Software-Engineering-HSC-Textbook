@@ -1433,7 +1433,7 @@ if __name__ == '__main__':
 
 **Input validation strategy**:
 
-```python
+```python-template
 def validate_registration_input(data):
     errors = []
     

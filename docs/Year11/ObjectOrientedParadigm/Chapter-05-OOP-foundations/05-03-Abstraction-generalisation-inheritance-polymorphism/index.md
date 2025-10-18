@@ -72,7 +72,7 @@ content = file_manager.load_data("notes.txt")
 
 Think about vehicles: cars, motorcycles, trucks, and bicycles are all different, but they share common characteristics (wheels, steering, movement) and behaviors (start, stop, turn).
 
-```python
+```python-template
 # Before generalisation: separate, similar classes
 class Car:
     def __init__(self, make, model):
@@ -352,7 +352,7 @@ print(f"Total area of all shapes: {calculate_total_area(shapes)}")
 
 Look at this code and identify examples of abstraction, generalisation, inheritance, and polymorphism:
 
-```python
+```python-template
 class MediaPlayer:
     def __init__(self, name):
         self.name = name
@@ -415,7 +415,7 @@ Design a class hierarchy for different types of employees in a company:
     type: success
     open: false
 
-```python
+```python-template
 class Employee:
     """Base class for all employees"""
     
