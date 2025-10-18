@@ -161,7 +161,7 @@ jobs:
   notify-indexnow:
     name: 🔔 Notify Search Engines
     runs-on: ubuntu-latest
-    needs: deploy  # Only run after deployment succeeds
+    needs: [deploy, create-release]  # Only run after deployment and release creation succeed
     if: success() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.skip_indexnow != 'true') || (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip indexnow]')))
     
     steps:
@@ -192,8 +192,8 @@ jobs:
   create-release:
     name: 📦 Create GitHub Release
     runs-on: ubuntu-latest
-    needs: [deploy, notify-indexnow]  # Run after deployment and notification
-    if: success() && ((github.event_name == 'workflow_dispatch' && github.event.inputs.skip_release != 'true') || (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip deploy]')))
+    needs: deploy  # Run after deployment succeeds
+    if: success() && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip deploy]')))
     permissions:
       contents: write
     
@@ -210,6 +210,7 @@ jobs:
           python-version: '3.13'
       
       - name: 📊 Get current version
+        if: github.event_name == 'push' || github.event.inputs.skip_release != 'true'
         id: get_version
         shell: bash
         run: |
@@ -218,6 +219,7 @@ jobs:
           echo "📌 Current version: ${current_version}"
       
       - name: 🔼 Determine new version
+        if: github.event_name == 'push' || github.event.inputs.skip_release != 'true'
         id: bump_version
         shell: bash
         run: |
@@ -251,7 +253,7 @@ jobs:
           echo "should_commit=${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && (github.event.inputs.version_bump != 'none' || github.event.inputs.custom_version != '')) }}" >> $GITHUB_OUTPUT
       
       - name: 💾 Commit version bump
-        if: steps.bump_version.outputs.should_commit == 'true'
+        if: steps.bump_version.outputs.should_commit == 'true' && (github.event_name == 'push' || github.event.inputs.skip_release != 'true')
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -262,11 +264,13 @@ jobs:
           echo "✅ Version committed and pushed"
       
       - name: 📥 Download site artifact
+        if: github.event_name == 'push' || github.event.inputs.skip_release != 'true'
         uses: actions/download-artifact@v4
         with:
           name: site-build
       
       - name: 📝 Generate release notes
+        if: github.event_name == 'push' || github.event.inputs.skip_release != 'true'
         id: release_notes
         shell: bash
         run: |
@@ -304,6 +308,7 @@ jobs:
           cat release_notes.md
       
       - name: 🏷️ Create Release
+        if: github.event_name == 'push' || github.event.inputs.skip_release != 'true'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ steps.bump_version.outputs.new_version }}
