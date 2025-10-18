@@ -1680,7 +1680,7 @@
 <p><strong>Timeline conflicts</strong>: Competing priorities or unrealistic deadlines</p>
 </li>
 </ul>
-<div class="highlight python-template" data-fence-type="template" data-language="python">
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
 <pre><code class="language-python"><span class="c1"># Example: Blocker tracking and categorization system</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">DevelopmentBlocker</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">severity</span><span class="p">):</span>
@@ -1953,7 +1953,7 @@
 <p><strong>Problem escalation</strong>: Clear path from junior to senior expertise</p>
 </li>
 </ul>
-<div class="highlight python-template" data-fence-type="template" data-language="python">
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
 <pre><code class="language-python"><span class="c1"># Example: Collaboration management system</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">CollaborationManager</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2117,149 +2117,141 @@
 <p>Let&rsquo;s walk through resolving a challenging integration between a student information system and a third-party gradebook:</p>
 <p><strong>Problem</strong>: The school&rsquo;s new gradebook API returns data in a format that doesn&rsquo;t match our student system&rsquo;s database schema, causing import failures.</p>
 <p><strong>Step 1: Problem analysis and categorization</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Analyze the integration problem</span>
-<span class="n">integration_problem</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gradebook API data format mismatch&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;technical&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;symptoms&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Grade import process fails with schema errors&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Student records cannot sync properly&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Manual grade entry required as workaround&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;impact&quot;</span><span class="p">:</span> <span class="s2">&quot;Teachers spending 2+ hours daily on manual grade entry&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;deadline&quot;</span><span class="p">:</span> <span class="s2">&quot;Must resolve before quarter-end grade reports&quot;</span>
-<span class="p">}</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">analyze_api_mismatch</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze the specific data format differences&quot;&quot;&quot;</span>
-    <span class="n">our_format</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;student_id&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;course_code&quot;</span><span class="p">:</span> <span class="s2">&quot;string(10)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;assignment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;string(100)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;grade_value&quot;</span><span class="p">:</span> <span class="s2">&quot;decimal(5,2)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;date_recorded&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span>
-    <span class="p">}</span>
-
-    <span class="n">their_format</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;pupil_identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="s2">&quot;string(20)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;task_description&quot;</span><span class="p">:</span> <span class="s2">&quot;string(255)&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>  <span class="c1"># includes letters like &quot;85%&quot; or &quot;B+&quot;</span>
-        <span class="s2">&quot;entry_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;unix_timestamp&quot;</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;format_differences&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;Student ID type mismatch (int vs string)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Course identifier length difference&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Grade format complexity (numeric vs mixed)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Date format incompatibility&quot;</span>
-        <span class="p">],</span>
-        <span class="s2">&quot;conversion_needed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;2-3 days&quot;</span>
-    <span class="p">}</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Analyze the integration problem</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">integration_problem</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Gradebook API data format mismatch&quot;</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;technical&quot;</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="s2">&quot;symptoms&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="s2">&quot;Grade import process fails with schema errors&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">&quot;Student records cannot sync properly&quot;</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="s2">&quot;Manual grade entry required as workaround&quot;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="p">],</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="s2">&quot;impact&quot;</span><span class="p">:</span> <span class="s2">&quot;Teachers spending 2+ hours daily on manual grade entry&quot;</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="s2">&quot;deadline&quot;</span><span class="p">:</span> <span class="s2">&quot;Must resolve before quarter-end grade reports&quot;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">}</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">def</span><span class="w"> </span><span class="nf">analyze_api_mismatch</span><span class="p">():</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyze the specific data format differences&quot;&quot;&quot;</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">our_format</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="s2">&quot;student_id&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="s2">&quot;course_code&quot;</span><span class="p">:</span> <span class="s2">&quot;string(10)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="s2">&quot;assignment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;string(100)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="s2">&quot;grade_value&quot;</span><span class="p">:</span> <span class="s2">&quot;decimal(5,2)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="s2">&quot;date_recorded&quot;</span><span class="p">:</span> <span class="s2">&quot;date&quot;</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="p">}</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">their_format</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="s2">&quot;pupil_identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="s2">&quot;string(20)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>        <span class="s2">&quot;task_description&quot;</span><span class="p">:</span> <span class="s2">&quot;string(255)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>  <span class="c1"># includes letters like &quot;85%&quot; or &quot;B+&quot;</span>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>        <span class="s2">&quot;entry_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;unix_timestamp&quot;</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="p">}</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="s2">&quot;format_differences&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>            <span class="s2">&quot;Student ID type mismatch (int vs string)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>            <span class="s2">&quot;Course identifier length difference&quot;</span><span class="p">,</span>
+</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>            <span class="s2">&quot;Grade format complexity (numeric vs mixed)&quot;</span><span class="p">,</span>
+</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>            <span class="s2">&quot;Date format incompatibility&quot;</span>
+</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="p">],</span>
+</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="s2">&quot;conversion_needed&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="s2">&quot;estimated_effort&quot;</span><span class="p">:</span> <span class="s2">&quot;2-3 days&quot;</span>
+</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>    <span class="p">}</span>
+</span></code></pre></div>
 <p><strong>Step 2: Research and information gathering</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Research potential solutions</span>
-<span class="n">research_strategy</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;documentation_review&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Gradebook API documentation for data transformation options&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Student system database schema documentation&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Data conversion library documentation&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;community_search&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Search: &#39;API data format conversion Python&#39;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Search: &#39;student information system integration&#39;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Check GitHub for similar integration projects&quot;</span>
-    <span class="p">],</span>
-    <span class="s2">&quot;vendor_consultation&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Contact gradebook vendor technical support&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Ask about alternative API endpoints or formats&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Request integration examples or sample code&quot;</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">research_solutions</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Document research findings&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;potential_solutions&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;Build custom data transformation layer&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Use vendor-provided data mapping tools&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Implement intermediate database for format conversion&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;Request API format changes from vendor&quot;</span>
-        <span class="p">],</span>
-        <span class="s2">&quot;time_estimates&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;custom_transformation&quot;</span><span class="p">:</span> <span class="s2">&quot;3-4 days&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;vendor_tools&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days if available&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;intermediate_database&quot;</span><span class="p">:</span> <span class="s2">&quot;5-7 days&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;api_changes&quot;</span><span class="p">:</span> <span class="s2">&quot;2-8 weeks (vendor dependent)&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Research potential solutions</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">research_strategy</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;documentation_review&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="s2">&quot;Gradebook API documentation for data transformation options&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="s2">&quot;Student system database schema documentation&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="s2">&quot;Data conversion library documentation&quot;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="p">],</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="s2">&quot;community_search&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="s2">&quot;Search: &#39;API data format conversion Python&#39;&quot;</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="s2">&quot;Search: &#39;student information system integration&#39;&quot;</span><span class="p">,</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="s2">&quot;Check GitHub for similar integration projects&quot;</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="p">],</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="s2">&quot;vendor_consultation&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="s2">&quot;Contact gradebook vendor technical support&quot;</span><span class="p">,</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="s2">&quot;Ask about alternative API endpoints or formats&quot;</span><span class="p">,</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="s2">&quot;Request integration examples or sample code&quot;</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="p">]</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="p">}</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">research_solutions</span><span class="p">():</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Document research findings&quot;&quot;&quot;</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="s2">&quot;potential_solutions&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>            <span class="s2">&quot;Build custom data transformation layer&quot;</span><span class="p">,</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>            <span class="s2">&quot;Use vendor-provided data mapping tools&quot;</span><span class="p">,</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>            <span class="s2">&quot;Implement intermediate database for format conversion&quot;</span><span class="p">,</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>            <span class="s2">&quot;Request API format changes from vendor&quot;</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="p">],</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="s2">&quot;time_estimates&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>            <span class="s2">&quot;custom_transformation&quot;</span><span class="p">:</span> <span class="s2">&quot;3-4 days&quot;</span><span class="p">,</span>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>            <span class="s2">&quot;vendor_tools&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days if available&quot;</span><span class="p">,</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>            <span class="s2">&quot;intermediate_database&quot;</span><span class="p">:</span> <span class="s2">&quot;5-7 days&quot;</span><span class="p">,</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>            <span class="s2">&quot;api_changes&quot;</span><span class="p">:</span> <span class="s2">&quot;2-8 weeks (vendor dependent)&quot;</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>        <span class="p">}</span>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>    <span class="p">}</span>
+</span></code></pre></div>
 <p><strong>Step 3: Collaborative problem-solving</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Engage team collaboration</span>
-<span class="n">collaboration_plan</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;pair_programming&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;participants&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;junior_dev&quot;</span><span class="p">,</span> <span class="s2">&quot;senior_dev&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Data transformation logic development&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="s2">&quot;2 days&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;code_review&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;reviewer&quot;</span><span class="p">:</span> <span class="s2">&quot;database_expert&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Schema mapping and data integrity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 day&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;testing_support&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;tester&quot;</span><span class="p">:</span> <span class="s2">&quot;qa_specialist&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Integration testing with sample data&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 day&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">implement_solution_collaboratively</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Coordinate team effort for solution implementation&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;development_approach&quot;</span><span class="p">:</span> <span class="s2">&quot;Pair programming for core logic&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;quality_assurance&quot;</span><span class="p">:</span> <span class="s2">&quot;Peer review and testing&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;knowledge_sharing&quot;</span><span class="p">:</span> <span class="s2">&quot;Document solution for future reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;risk_mitigation&quot;</span><span class="p">:</span> <span class="s2">&quot;Parallel development of backup solution&quot;</span>
-    <span class="p">}</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Engage team collaboration</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">collaboration_plan</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;pair_programming&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="s2">&quot;participants&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;junior_dev&quot;</span><span class="p">,</span> <span class="s2">&quot;senior_dev&quot;</span><span class="p">],</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Data transformation logic development&quot;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="s2">&quot;2 days&quot;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="p">},</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="s2">&quot;code_review&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="s2">&quot;reviewer&quot;</span><span class="p">:</span> <span class="s2">&quot;database_expert&quot;</span><span class="p">,</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Schema mapping and data integrity&quot;</span><span class="p">,</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 day&quot;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="p">},</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="s2">&quot;testing_support&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="s2">&quot;tester&quot;</span><span class="p">:</span> <span class="s2">&quot;qa_specialist&quot;</span><span class="p">,</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="s2">&quot;focus&quot;</span><span class="p">:</span> <span class="s2">&quot;Integration testing with sample data&quot;</span><span class="p">,</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 day&quot;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="p">}</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="p">}</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">implement_solution_collaboratively</span><span class="p">():</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Coordinate team effort for solution implementation&quot;&quot;&quot;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>    <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="s2">&quot;development_approach&quot;</span><span class="p">:</span> <span class="s2">&quot;Pair programming for core logic&quot;</span><span class="p">,</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="s2">&quot;quality_assurance&quot;</span><span class="p">:</span> <span class="s2">&quot;Peer review and testing&quot;</span><span class="p">,</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="s2">&quot;knowledge_sharing&quot;</span><span class="p">:</span> <span class="s2">&quot;Document solution for future reference&quot;</span><span class="p">,</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="s2">&quot;risk_mitigation&quot;</span><span class="p">:</span> <span class="s2">&quot;Parallel development of backup solution&quot;</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="p">}</span>
+</span></code></pre></div>
 <p><strong>Step 4: Escalation if needed</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Escalation plan if initial approaches fail</span>
-<span class="n">escalation_strategy</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Consult senior architect&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Review technical approach and alternatives&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;Same day&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Engage vendor technical support&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Request priority assistance or API modifications&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Consider external consulting&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Bring in integration specialist&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cost_estimate&quot;</span><span class="p">:</span> <span class="s2">&quot;$5,000-10,000&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 week&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Management decision on alternative solutions&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Evaluate different gradebook vendors or manual processes&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;2-4 weeks&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Escalation plan if initial approaches fail</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">escalation_strategy</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;level_1&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Consult senior architect&quot;</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Review technical approach and alternatives&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;Same day&quot;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="p">},</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="s2">&quot;level_2&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Engage vendor technical support&quot;</span><span class="p">,</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Request priority assistance or API modifications&quot;</span><span class="p">,</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1-2 days&quot;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="p">},</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="s2">&quot;level_3&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Consider external consulting&quot;</span><span class="p">,</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Bring in integration specialist&quot;</span><span class="p">,</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="s2">&quot;cost_estimate&quot;</span><span class="p">:</span> <span class="s2">&quot;$5,000-10,000&quot;</span><span class="p">,</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;1 week&quot;</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="p">},</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="s2">&quot;level_4&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Management decision on alternative solutions&quot;</span><span class="p">,</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Evaluate different gradebook vendors or manual processes&quot;</span><span class="p">,</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="s2">&quot;timeline&quot;</span><span class="p">:</span> <span class="s2">&quot;2-4 weeks&quot;</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    <span class="p">}</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="p">}</span>
+</span></code></pre></div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>Exercise 1: Blocker Analysis and Resolution Planning</summary>
@@ -2500,7 +2492,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 16, 2025 05:58:30 UTC">October 16, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 03:10:27 UTC">October 18, 2025</span>
   </span>
 
     

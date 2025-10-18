@@ -3333,86 +3333,88 @@
 <details class="success">
 <summary>Sample Solution</summary>
 <p><strong>Wireframe Creation Approach:</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Create wireframe designer for mobile app</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">designer</span> <span class="o">=</span> <span class="n">WireframeDesigner</span><span class="p">(</span><span class="s2">&quot;Student Info Mobile App&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;mobile&quot;</span><span class="p">])</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Define design requirements</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">designer</span><span class="o">.</span><span class="n">define_design_requirements</span><span class="p">(</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">user_personas</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="s2">&quot;High school students (ages 14-18) using school-provided tablets&quot;</span><span class="p">,</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">&quot;Students with varying technical abilities and disabilities&quot;</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">],</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">business_goals</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="s2">&quot;Increase student engagement with academic progress&quot;</span><span class="p">,</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="s2">&quot;Reduce teacher workload for routine communications&quot;</span><span class="p">,</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="s2">&quot;Improve parent-student communication about school&quot;</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="p">],</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="n">technical_constraints</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="s2">&quot;Must work on iOS and Android tablets&quot;</span><span class="p">,</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="s2">&quot;Must function with limited internet connectivity&quot;</span><span class="p">,</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="s2">&quot;Must meet education accessibility standards&quot;</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="p">],</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>    <span class="n">content_requirements</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>        <span class="s2">&quot;Real-time grade information with trend indicators&quot;</span><span class="p">,</span>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="s2">&quot;Assignment details with submission capabilities&quot;</span><span class="p">,</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="s2">&quot;Teacher contact information and messaging&quot;</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="p">]</span>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="p">)</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="c1"># Create user flow</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="n">designer</span><span class="o">.</span><span class="n">create_user_flow</span><span class="p">(</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="s2">&quot;Check Assignment Status&quot;</span><span class="p">,</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>    <span class="s2">&quot;Home screen&quot;</span><span class="p">,</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>    <span class="s2">&quot;Understand what assignments are due and submitted&quot;</span><span class="p">,</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="p">[</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;Login with school credentials&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;login&quot;</span><span class="p">},</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;View dashboard with grade summary&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;dashboard&quot;</span><span class="p">},</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;Navigate to assignments section&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;assignments&quot;</span><span class="p">},</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;Filter by due date or subject&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;assignments&quot;</span><span class="p">},</span>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;View assignment details&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;assignment_detail&quot;</span><span class="p">}</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>    <span class="p">],</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="p">[</span>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="s2">&quot;Choose between all assignments or specific subject&quot;</span><span class="p">,</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="s2">&quot;Filter by status (submitted, pending, overdue)&quot;</span><span class="p">,</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="s2">&quot;Decide whether to submit assignment or contact teacher&quot;</span>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="p">],</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="p">[</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="s2">&quot;Assignment details fail to load&quot;</span><span class="p">,</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="s2">&quot;Submission deadline has passed&quot;</span><span class="p">,</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="s2">&quot;No internet connection for submission&quot;</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>    <span class="p">]</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="p">)</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="c1"># Create dashboard wireframe</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="n">designer</span><span class="o">.</span><span class="n">create_wireframe</span><span class="p">(</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>    <span class="s2">&quot;dashboard&quot;</span><span class="p">,</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="s2">&quot;medium_fidelity&quot;</span><span class="p">,</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="p">{</span>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="s1">&#39;Single column mobile layout with card-based design&#39;</span><span class="p">,</span>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>        <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="s1">&#39;Fixed header with student name and notifications&#39;</span><span class="p">,</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>        <span class="s1">&#39;navigation&#39;</span><span class="p">:</span> <span class="s1">&#39;Bottom tab bar with 4 main sections&#39;</span><span class="p">,</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>        <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Scrollable cards showing different information types&#39;</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>    <span class="p">},</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>    <span class="p">[</span>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;grade_summary_card&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Current GPA with trend arrow and color indicator&#39;</span><span class="p">},</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;urgent_assignments&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Next 3 assignments due with countdown timers&#39;</span><span class="p">},</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;recent_grades&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Last 5 grades received with subject and date&#39;</span><span class="p">},</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;schedule_preview&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Today</span><span class="se">\&#39;</span><span class="s1">s classes with room numbers and times&#39;</span><span class="p">}</span>
-</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    <span class="p">],</span>
-</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="p">[</span>
-</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;bottom_navigation&#39;</span><span class="p">,</span> <span class="s1">&#39;tabs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Home&#39;</span><span class="p">,</span> <span class="s1">&#39;Grades&#39;</span><span class="p">,</span> <span class="s1">&#39;Assignments&#39;</span><span class="p">,</span> <span class="s1">&#39;Messages&#39;</span><span class="p">]},</span>
-</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;notification_badge&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Top right showing unread count&#39;</span><span class="p">},</span>
-</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pull_to_refresh&#39;</span><span class="p">,</span> <span class="s1">&#39;behavior&#39;</span><span class="p">:</span> <span class="s1">&#39;Refresh all dashboard data&#39;</span><span class="p">},</span>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;quick_actions&#39;</span><span class="p">,</span> <span class="s1">&#39;buttons&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Submit Assignment&#39;</span><span class="p">,</span> <span class="s1">&#39;Check Schedule&#39;</span><span class="p">]}</span>
-</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>    <span class="p">],</span>
-</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>    <span class="p">[</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>        <span class="s1">&#39;Cards use high contrast colors for readability&#39;</span><span class="p">,</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a>        <span class="s1">&#39;Assignment due dates show visual urgency (red = overdue, yellow = due soon)&#39;</span><span class="p">,</span>
-</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>        <span class="s1">&#39;Touch targets are minimum 44px for accessibility&#39;</span><span class="p">,</span>
-</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>        <span class="s1">&#39;Swipe gestures reveal additional card actions&#39;</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>    <span class="p">]</span>
-</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="c1"># Create wireframe designer for mobile app</span>
+<span class="n">designer</span> <span class="o">=</span> <span class="n">WireframeDesigner</span><span class="p">(</span><span class="s2">&quot;Student Info Mobile App&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;mobile&quot;</span><span class="p">])</span>
+
+<span class="c1"># Define design requirements</span>
+<span class="n">designer</span><span class="o">.</span><span class="n">define_design_requirements</span><span class="p">(</span>
+    <span class="n">user_personas</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;High school students (ages 14-18) using school-provided tablets&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Students with varying technical abilities and disabilities&quot;</span>
+    <span class="p">],</span>
+    <span class="n">business_goals</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Increase student engagement with academic progress&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Reduce teacher workload for routine communications&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Improve parent-student communication about school&quot;</span>
+    <span class="p">],</span>
+    <span class="n">technical_constraints</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Must work on iOS and Android tablets&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Must function with limited internet connectivity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Must meet education accessibility standards&quot;</span>
+    <span class="p">],</span>
+    <span class="n">content_requirements</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Real-time grade information with trend indicators&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Assignment details with submission capabilities&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Teacher contact information and messaging&quot;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Create user flow</span>
+<span class="n">designer</span><span class="o">.</span><span class="n">create_user_flow</span><span class="p">(</span>
+    <span class="s2">&quot;Check Assignment Status&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Home screen&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Understand what assignments are due and submitted&quot;</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;Login with school credentials&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;login&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;View dashboard with grade summary&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;dashboard&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;Navigate to assignments section&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;assignments&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;Filter by due date or subject&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;assignments&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;step&quot;</span><span class="p">:</span> <span class="s2">&quot;View assignment details&quot;</span><span class="p">,</span> <span class="s2">&quot;screen&quot;</span><span class="p">:</span> <span class="s2">&quot;assignment_detail&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;Choose between all assignments or specific subject&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Filter by status (submitted, pending, overdue)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Decide whether to submit assignment or contact teacher&quot;</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;Assignment details fail to load&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Submission deadline has passed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;No internet connection for submission&quot;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Create dashboard wireframe</span>
+<span class="n">designer</span><span class="o">.</span><span class="n">create_wireframe</span><span class="p">(</span>
+    <span class="s2">&quot;dashboard&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;medium_fidelity&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="s1">&#39;Single column mobile layout with card-based design&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="s1">&#39;Fixed header with student name and notifications&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;navigation&#39;</span><span class="p">:</span> <span class="s1">&#39;Bottom tab bar with 4 main sections&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Scrollable cards showing different information types&#39;</span>
+    <span class="p">},</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;grade_summary_card&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Current GPA with trend arrow and color indicator&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;urgent_assignments&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Next 3 assignments due with countdown timers&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;recent_grades&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Last 5 grades received with subject and date&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;schedule_preview&#39;</span><span class="p">,</span> <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Today</span><span class="se">\&#39;</span><span class="s1">s classes with room numbers and times&#39;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;bottom_navigation&#39;</span><span class="p">,</span> <span class="s1">&#39;tabs&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Home&#39;</span><span class="p">,</span> <span class="s1">&#39;Grades&#39;</span><span class="p">,</span> <span class="s1">&#39;Assignments&#39;</span><span class="p">,</span> <span class="s1">&#39;Messages&#39;</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;notification_badge&#39;</span><span class="p">,</span> <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Top right showing unread count&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;pull_to_refresh&#39;</span><span class="p">,</span> <span class="s1">&#39;behavior&#39;</span><span class="p">:</span> <span class="s1">&#39;Refresh all dashboard data&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;quick_actions&#39;</span><span class="p">,</span> <span class="s1">&#39;buttons&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Submit Assignment&#39;</span><span class="p">,</span> <span class="s1">&#39;Check Schedule&#39;</span><span class="p">]}</span>
+    <span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;Cards use high contrast colors for readability&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Assignment due dates show visual urgency (red = overdue, yellow = due soon)&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Touch targets are minimum 44px for accessibility&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Swipe gestures reveal additional card actions&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre>
+</div>
 <p><strong>Key Design Decisions:</strong></p>
 <ul>
 <li>
@@ -3456,82 +3458,84 @@
 <details class="success">
 <summary>Sample Solution</summary>
 <p><strong>Usability Evaluation Approach:</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Create usability evaluator for library system</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">evaluator</span> <span class="o">=</span> <span class="n">UsabilityEvaluator</span><span class="p">(</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;Digital Library Management System&quot;</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="p">[</span><span class="s2">&quot;Adult library patrons&quot;</span><span class="p">,</span> <span class="s2">&quot;Students&quot;</span><span class="p">,</span> <span class="s2">&quot;Senior citizens&quot;</span><span class="p">,</span> <span class="s2">&quot;Library staff&quot;</span><span class="p">]</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Evaluate visibility of system status</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_heuristic</span><span class="p">(</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="s1">&#39;visibility_of_system_status&#39;</span><span class="p">,</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="p">[</span><span class="s1">&#39;Search results page&#39;</span><span class="p">,</span> <span class="s1">&#39;Book checkout process&#39;</span><span class="p">,</span> <span class="s1">&#39;Hold request system&#39;</span><span class="p">,</span> <span class="s1">&#39;Account page&#39;</span><span class="p">],</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="p">[</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="s1">&#39;Search shows &quot;Searching...&quot; message but no progress indicator&#39;</span><span class="p">,</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="s1">&#39;Book availability status clearly shown with color coding&#39;</span><span class="p">,</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="s1">&#39;Hold queue position displayed prominently&#39;</span><span class="p">,</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="s1">&#39;Account page shows checked out items with due dates&#39;</span><span class="p">,</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="s1">&#39;No feedback when adding items to reading list&#39;</span><span class="p">,</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="s1">&#39;System timeout warnings not provided before session ends&#39;</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="p">]</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="p">)</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1"># Evaluate error prevention</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_heuristic</span><span class="p">(</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="s1">&#39;error_prevention&#39;</span><span class="p">,</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="p">[</span><span class="s1">&#39;Search forms&#39;</span><span class="p">,</span> <span class="s1">&#39;Account management&#39;</span><span class="p">,</span> <span class="s1">&#39;Digital resource access&#39;</span><span class="p">,</span> <span class="s1">&#39;Hold system&#39;</span><span class="p">],</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="p">[</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>        <span class="s1">&#39;Search autocomplete helps prevent spelling errors&#39;</span><span class="p">,</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>        <span class="s1">&#39;System warns before deleting reading list items&#39;</span><span class="p">,</span>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>        <span class="s1">&#39;Hold limits clearly displayed before exceeding&#39;</span><span class="p">,</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>        <span class="s1">&#39;No confirmation required for potentially destructive actions&#39;</span><span class="p">,</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>        <span class="s1">&#39;Digital resource links sometimes lead to access errors&#39;</span><span class="p">,</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>        <span class="s1">&#39;Password requirements not shown until after failed attempt&#39;</span>
-</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="p">]</span>
-</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="p">)</span>
-</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
-</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="c1"># Evaluate recognition rather than recall</span>
-</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_heuristic</span><span class="p">(</span>
-</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="s1">&#39;recognition_vs_recall&#39;</span><span class="p">,</span>
-</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="p">[</span><span class="s1">&#39;Navigation menu&#39;</span><span class="p">,</span> <span class="s1">&#39;Search interface&#39;</span><span class="p">,</span> <span class="s1">&#39;User account&#39;</span><span class="p">,</span> <span class="s1">&#39;Help system&#39;</span><span class="p">],</span>
-</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="p">[</span>
-</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>        <span class="s1">&#39;Main navigation always visible and consistent&#39;</span><span class="p">,</span>
-</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>        <span class="s1">&#39;Search history available in dropdown menu&#39;</span><span class="p">,</span>
-</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>        <span class="s1">&#39;Recently viewed items shown on account page&#39;</span><span class="p">,</span>
-</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>        <span class="s1">&#39;Breadcrumb navigation shows current location&#39;</span><span class="p">,</span>
-</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>        <span class="s1">&#39;Advanced search options hidden until needed&#39;</span><span class="p">,</span>
-</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>        <span class="s1">&#39;Help context not related to current user task&#39;</span>
-</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>    <span class="p">]</span>
-</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="p">)</span>
-</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>
-</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="c1"># Conduct usability testing</span>
-</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="n">test_scenarios</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>    <span class="p">{</span>
-</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Find and Reserve Book&#39;</span><span class="p">,</span>
-</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Search for a specific book and place it on hold&#39;</span><span class="p">,</span>
-</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>        <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Search for book&#39;</span><span class="p">,</span> <span class="s1">&#39;Review results&#39;</span><span class="p">,</span> <span class="s1">&#39;Check availability&#39;</span><span class="p">,</span> <span class="s1">&#39;Place hold&#39;</span><span class="p">],</span>
-</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>        <span class="s1">&#39;success_criteria&#39;</span><span class="p">:</span> <span class="s1">&#39;Complete task in under 3 minutes with high confidence&#39;</span>
-</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>    <span class="p">},</span>
-</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>    <span class="p">{</span>
-</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Manage Account Items&#39;</span><span class="p">,</span>
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Renew checked out books and review hold status&#39;</span><span class="p">,</span>
-</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>        <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Access account&#39;</span><span class="p">,</span> <span class="s1">&#39;View checked out items&#39;</span><span class="p">,</span> <span class="s1">&#39;Renew items&#39;</span><span class="p">,</span> <span class="s1">&#39;Check holds&#39;</span><span class="p">],</span>
-</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>        <span class="s1">&#39;success_criteria&#39;</span><span class="p">:</span> <span class="s1">&#39;Successfully renew items and understand hold status&#39;</span>
-</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>    <span class="p">}</span>
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="p">]</span>
-</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="n">usability_test</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">conduct_usability_test</span><span class="p">(</span>
-</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>    <span class="s2">&quot;Core Library Functions Test&quot;</span><span class="p">,</span>
-</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>    <span class="n">test_scenarios</span><span class="p">,</span>
-</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>    <span class="p">[</span>
-</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>        <span class="p">{</span><span class="s1">&#39;age_group&#39;</span><span class="p">:</span> <span class="s1">&#39;25-40&#39;</span><span class="p">,</span> <span class="s1">&#39;tech_experience&#39;</span><span class="p">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;library_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">},</span>
-</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>        <span class="p">{</span><span class="s1">&#39;age_group&#39;</span><span class="p">:</span> <span class="s1">&#39;60+&#39;</span><span class="p">,</span> <span class="s1">&#39;tech_experience&#39;</span><span class="p">:</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;library_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;Frequent&#39;</span><span class="p">},</span>
-</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>        <span class="p">{</span><span class="s1">&#39;age_group&#39;</span><span class="p">:</span> <span class="s1">&#39;18-25&#39;</span><span class="p">,</span> <span class="s1">&#39;tech_experience&#39;</span><span class="p">:</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;library_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;Occasional&#39;</span><span class="p">}</span>
-</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>    <span class="p">],</span>
-</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>    <span class="p">[</span><span class="s1">&#39;Task completion &gt; 85%&#39;</span><span class="p">,</span> <span class="s1">&#39;User satisfaction &gt; 4.0&#39;</span><span class="p">,</span> <span class="s1">&#39;Error rate &lt; 10%&#39;</span><span class="p">],</span>
-</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>    <span class="p">{</span><span class="s1">&#39;device&#39;</span><span class="p">:</span> <span class="s1">&#39;Mixed (desktop/tablet)&#39;</span><span class="p">,</span> <span class="s1">&#39;environment&#39;</span><span class="p">:</span> <span class="s1">&#39;Remote testing&#39;</span><span class="p">}</span>
-</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="c1"># Create usability evaluator for library system</span>
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">UsabilityEvaluator</span><span class="p">(</span>
+    <span class="s2">&quot;Digital Library Management System&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s2">&quot;Adult library patrons&quot;</span><span class="p">,</span> <span class="s2">&quot;Students&quot;</span><span class="p">,</span> <span class="s2">&quot;Senior citizens&quot;</span><span class="p">,</span> <span class="s2">&quot;Library staff&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Evaluate visibility of system status</span>
+<span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_heuristic</span><span class="p">(</span>
+    <span class="s1">&#39;visibility_of_system_status&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;Search results page&#39;</span><span class="p">,</span> <span class="s1">&#39;Book checkout process&#39;</span><span class="p">,</span> <span class="s1">&#39;Hold request system&#39;</span><span class="p">,</span> <span class="s1">&#39;Account page&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;Search shows &quot;Searching...&quot; message but no progress indicator&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Book availability status clearly shown with color coding&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Hold queue position displayed prominently&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Account page shows checked out items with due dates&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;No feedback when adding items to reading list&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;System timeout warnings not provided before session ends&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Evaluate error prevention</span>
+<span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_heuristic</span><span class="p">(</span>
+    <span class="s1">&#39;error_prevention&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;Search forms&#39;</span><span class="p">,</span> <span class="s1">&#39;Account management&#39;</span><span class="p">,</span> <span class="s1">&#39;Digital resource access&#39;</span><span class="p">,</span> <span class="s1">&#39;Hold system&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;Search autocomplete helps prevent spelling errors&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;System warns before deleting reading list items&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Hold limits clearly displayed before exceeding&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;No confirmation required for potentially destructive actions&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Digital resource links sometimes lead to access errors&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Password requirements not shown until after failed attempt&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Evaluate recognition rather than recall</span>
+<span class="n">evaluator</span><span class="o">.</span><span class="n">evaluate_heuristic</span><span class="p">(</span>
+    <span class="s1">&#39;recognition_vs_recall&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;Navigation menu&#39;</span><span class="p">,</span> <span class="s1">&#39;Search interface&#39;</span><span class="p">,</span> <span class="s1">&#39;User account&#39;</span><span class="p">,</span> <span class="s1">&#39;Help system&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;Main navigation always visible and consistent&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Search history available in dropdown menu&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Recently viewed items shown on account page&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Breadcrumb navigation shows current location&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Advanced search options hidden until needed&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Help context not related to current user task&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Conduct usability testing</span>
+<span class="n">test_scenarios</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Find and Reserve Book&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Search for a specific book and place it on hold&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Search for book&#39;</span><span class="p">,</span> <span class="s1">&#39;Review results&#39;</span><span class="p">,</span> <span class="s1">&#39;Check availability&#39;</span><span class="p">,</span> <span class="s1">&#39;Place hold&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;success_criteria&#39;</span><span class="p">:</span> <span class="s1">&#39;Complete task in under 3 minutes with high confidence&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Manage Account Items&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Renew checked out books and review hold status&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;steps&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Access account&#39;</span><span class="p">,</span> <span class="s1">&#39;View checked out items&#39;</span><span class="p">,</span> <span class="s1">&#39;Renew items&#39;</span><span class="p">,</span> <span class="s1">&#39;Check holds&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;success_criteria&#39;</span><span class="p">:</span> <span class="s1">&#39;Successfully renew items and understand hold status&#39;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">usability_test</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">conduct_usability_test</span><span class="p">(</span>
+    <span class="s2">&quot;Core Library Functions Test&quot;</span><span class="p">,</span>
+    <span class="n">test_scenarios</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;age_group&#39;</span><span class="p">:</span> <span class="s1">&#39;25-40&#39;</span><span class="p">,</span> <span class="s1">&#39;tech_experience&#39;</span><span class="p">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="s1">&#39;library_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;age_group&#39;</span><span class="p">:</span> <span class="s1">&#39;60+&#39;</span><span class="p">,</span> <span class="s1">&#39;tech_experience&#39;</span><span class="p">:</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="s1">&#39;library_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;Frequent&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;age_group&#39;</span><span class="p">:</span> <span class="s1">&#39;18-25&#39;</span><span class="p">,</span> <span class="s1">&#39;tech_experience&#39;</span><span class="p">:</span> <span class="s1">&#39;High&#39;</span><span class="p">,</span> <span class="s1">&#39;library_usage&#39;</span><span class="p">:</span> <span class="s1">&#39;Occasional&#39;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Task completion &gt; 85%&#39;</span><span class="p">,</span> <span class="s1">&#39;User satisfaction &gt; 4.0&#39;</span><span class="p">,</span> <span class="s1">&#39;Error rate &lt; 10%&#39;</span><span class="p">],</span>
+    <span class="p">{</span><span class="s1">&#39;device&#39;</span><span class="p">:</span> <span class="s1">&#39;Mixed (desktop/tablet)&#39;</span><span class="p">,</span> <span class="s1">&#39;environment&#39;</span><span class="p">:</span> <span class="s1">&#39;Remote testing&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre>
+</div>
 <p><strong>Key Recommendations:</strong></p>
 <ol>
 <li>
@@ -3575,122 +3579,124 @@
 <details class="success">
 <summary>Sample Solution</summary>
 <p><strong>Accessibility Implementation Plan:</strong></p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Create accessibility auditor for e-commerce checkout</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">auditor</span> <span class="o">=</span> <span class="n">AccessibilityAuditor</span><span class="p">(</span><span class="s2">&quot;E-commerce Checkout Process&quot;</span><span class="p">,</span> <span class="s2">&quot;AA&quot;</span><span class="p">)</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Audit checkout form sections</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">auditor</span><span class="o">.</span><span class="n">audit_interface_section</span><span class="p">(</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="s2">&quot;Shopping Cart&quot;</span><span class="p">,</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="p">[</span><span class="s1">&#39;Product list&#39;</span><span class="p">,</span> <span class="s1">&#39;Quantity controls&#39;</span><span class="p">,</span> <span class="s1">&#39;Remove buttons&#39;</span><span class="p">,</span> <span class="s1">&#39;Total calculation&#39;</span><span class="p">],</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="p">[</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="s1">&#39;Product images have alt text describing items&#39;</span><span class="p">,</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="s1">&#39;Quantity controls are labeled properly&#39;</span><span class="p">,</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="s1">&#39;Remove buttons have confirmation dialogs&#39;</span><span class="p">,</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="s1">&#39;Total updates are not announced to screen readers&#39;</span><span class="p">,</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="s1">&#39;Keyboard navigation works for all controls&#39;</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="p">]</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="p">)</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">auditor</span><span class="o">.</span><span class="n">audit_interface_section</span><span class="p">(</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="s2">&quot;Shipping Information Form&quot;</span><span class="p">,</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="p">[</span><span class="s1">&#39;Address fields&#39;</span><span class="p">,</span> <span class="s1">&#39;Country selection&#39;</span><span class="p">,</span> <span class="s1">&#39;Shipping options&#39;</span><span class="p">,</span> <span class="s1">&#39;Form validation&#39;</span><span class="p">],</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="p">[</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="s1">&#39;All form fields have proper labels&#39;</span><span class="p">,</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>        <span class="s1">&#39;Required fields are marked with asterisks only&#39;</span><span class="p">,</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>        <span class="s1">&#39;Address autocomplete is keyboard accessible&#39;</span><span class="p">,</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="s1">&#39;Error messages appear after field validation&#39;</span><span class="p">,</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="s1">&#39;Shipping options use radio buttons with proper grouping&#39;</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="p">]</span>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="p">)</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="n">auditor</span><span class="o">.</span><span class="n">audit_interface_section</span><span class="p">(</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>    <span class="s2">&quot;Payment Processing&quot;</span><span class="p">,</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>    <span class="p">[</span><span class="s1">&#39;Credit card fields&#39;</span><span class="p">,</span> <span class="s1">&#39;Security code input&#39;</span><span class="p">,</span> <span class="s1">&#39;Billing address&#39;</span><span class="p">,</span> <span class="s1">&#39;Submit button&#39;</span><span class="p">],</span>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>    <span class="p">[</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>        <span class="s1">&#39;Credit card fields have proper input types&#39;</span><span class="p">,</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>        <span class="s1">&#39;Security code field shows help text&#39;</span><span class="p">,</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>        <span class="s1">&#39;Billing address can be same as shipping&#39;</span><span class="p">,</span>
-</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>        <span class="s1">&#39;Submit button is clearly labeled and prominent&#39;</span><span class="p">,</span>
-</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>        <span class="s1">&#39;Payment errors are displayed clearly but sensitively&#39;</span>
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>    <span class="p">]</span>
-</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="p">)</span>
-</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
-</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="c1"># Implement critical accessibility features</span>
-</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="n">auditor</span><span class="o">.</span><span class="n">implement_accessibility_feature</span><span class="p">(</span>
-</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>    <span class="s2">&quot;Enhanced Form Accessibility&quot;</span><span class="p">,</span>
-</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>    <span class="s2">&quot;cognitive&quot;</span><span class="p">,</span>
-</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>    <span class="p">{</span>
-</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>        <span class="s1">&#39;field_grouping&#39;</span><span class="p">:</span> <span class="s1">&#39;Group related fields with fieldset and legend elements&#39;</span><span class="p">,</span>
-</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>        <span class="s1">&#39;error_association&#39;</span><span class="p">:</span> <span class="s1">&#39;Associate error messages with form fields using aria-describedby&#39;</span><span class="p">,</span>
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>        <span class="s1">&#39;progress_indication&#39;</span><span class="p">:</span> <span class="s1">&#39;Show checkout progress and current step clearly&#39;</span><span class="p">,</span>
-</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>        <span class="s1">&#39;required_field_indication&#39;</span><span class="p">:</span> <span class="s1">&#39;Use both visual and text indicators for required fields&#39;</span>
-</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>    <span class="p">},</span>
-</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>    <span class="p">{</span>
-</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>        <span class="s1">&#39;screen_reader_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test form completion with NVDA and VoiceOver&#39;</span><span class="p">,</span>
-</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>        <span class="s1">&#39;keyboard_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Complete entire checkout using only keyboard&#39;</span><span class="p">,</span>
-</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>        <span class="s1">&#39;cognitive_load_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test with users who have cognitive disabilities&#39;</span>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>    <span class="p">},</span>
-</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>    <span class="p">{</span>
-</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>        <span class="s1">&#39;form_validation_rules&#39;</span><span class="p">:</span> <span class="s1">&#39;Maintain consistent validation and error messaging&#39;</span><span class="p">,</span>
-</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>        <span class="s1">&#39;regular_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test form accessibility with each update&#39;</span><span class="p">,</span>
-</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>        <span class="s1">&#39;user_feedback_collection&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular feedback from users with disabilities&#39;</span>
-</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>    <span class="p">}</span>
-</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a><span class="p">)</span>
-</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>
-</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a><span class="n">auditor</span><span class="o">.</span><span class="n">implement_accessibility_feature</span><span class="p">(</span>
-</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>    <span class="s2">&quot;Dynamic Content Management&quot;</span><span class="p">,</span>
-</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>    <span class="s2">&quot;visual&quot;</span><span class="p">,</span>
-</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>    <span class="p">{</span>
-</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>        <span class="s1">&#39;cart_updates&#39;</span><span class="p">:</span> <span class="s1">&#39;Announce cart total changes to screen readers&#39;</span><span class="p">,</span>
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="s1">&#39;shipping_calculation&#39;</span><span class="p">:</span> <span class="s1">&#39;Announce shipping cost updates&#39;</span><span class="p">,</span>
-</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>        <span class="s1">&#39;error_announcements&#39;</span><span class="p">:</span> <span class="s1">&#39;Use aria-live regions for validation errors&#39;</span><span class="p">,</span>
-</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>        <span class="s1">&#39;success_confirmation&#39;</span><span class="p">:</span> <span class="s1">&#39;Clearly announce successful form submissions&#39;</span>
-</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>    <span class="p">},</span>
-</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>    <span class="p">{</span>
-</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>        <span class="s1">&#39;announcement_timing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test that announcements are not too frequent&#39;</span><span class="p">,</span>
-</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a>        <span class="s1">&#39;content_clarity&#39;</span><span class="p">:</span> <span class="s1">&#39;Verify announcement text is clear and helpful&#39;</span><span class="p">,</span>
-</span><span id="__span-2-75"><a id="__codelineno-2-75" name="__codelineno-2-75" href="#__codelineno-2-75"></a>        <span class="s1">&#39;multiple_screen_readers&#39;</span><span class="p">:</span> <span class="s1">&#39;Test with different assistive technologies&#39;</span>
-</span><span id="__span-2-76"><a id="__codelineno-2-76" name="__codelineno-2-76" href="#__codelineno-2-76"></a>    <span class="p">},</span>
-</span><span id="__span-2-77"><a id="__codelineno-2-77" name="__codelineno-2-77" href="#__codelineno-2-77"></a>    <span class="p">{</span>
-</span><span id="__span-2-78"><a id="__codelineno-2-78" name="__codelineno-2-78" href="#__codelineno-2-78"></a>        <span class="s1">&#39;live_region_guidelines&#39;</span><span class="p">:</span> <span class="s1">&#39;Document when and how to use live regions&#39;</span><span class="p">,</span>
-</span><span id="__span-2-79"><a id="__codelineno-2-79" name="__codelineno-2-79" href="#__codelineno-2-79"></a>        <span class="s1">&#39;announcement_standards&#39;</span><span class="p">:</span> <span class="s1">&#39;Maintain consistent announcement patterns&#39;</span><span class="p">,</span>
-</span><span id="__span-2-80"><a id="__codelineno-2-80" name="__codelineno-2-80" href="#__codelineno-2-80"></a>        <span class="s1">&#39;testing_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular testing of dynamic content updates&#39;</span>
-</span><span id="__span-2-81"><a id="__codelineno-2-81" name="__codelineno-2-81" href="#__codelineno-2-81"></a>    <span class="p">}</span>
-</span><span id="__span-2-82"><a id="__codelineno-2-82" name="__codelineno-2-82" href="#__codelineno-2-82"></a><span class="p">)</span>
-</span><span id="__span-2-83"><a id="__codelineno-2-83" name="__codelineno-2-83" href="#__codelineno-2-83"></a>
-</span><span id="__span-2-84"><a id="__codelineno-2-84" name="__codelineno-2-84" href="#__codelineno-2-84"></a><span class="n">auditor</span><span class="o">.</span><span class="n">implement_accessibility_feature</span><span class="p">(</span>
-</span><span id="__span-2-85"><a id="__codelineno-2-85" name="__codelineno-2-85" href="#__codelineno-2-85"></a>    <span class="s2">&quot;Motor Accessibility Enhancements&quot;</span><span class="p">,</span>
-</span><span id="__span-2-86"><a id="__codelineno-2-86" name="__codelineno-2-86" href="#__codelineno-2-86"></a>    <span class="s2">&quot;motor&quot;</span><span class="p">,</span>
-</span><span id="__span-2-87"><a id="__codelineno-2-87" name="__codelineno-2-87" href="#__codelineno-2-87"></a>    <span class="p">{</span>
-</span><span id="__span-2-88"><a id="__codelineno-2-88" name="__codelineno-2-88" href="#__codelineno-2-88"></a>        <span class="s1">&#39;large_click_targets&#39;</span><span class="p">:</span> <span class="s1">&#39;Ensure all interactive elements are at least 44px&#39;</span><span class="p">,</span>
-</span><span id="__span-2-89"><a id="__codelineno-2-89" name="__codelineno-2-89" href="#__codelineno-2-89"></a>        <span class="s1">&#39;keyboard_shortcuts&#39;</span><span class="p">:</span> <span class="s1">&#39;Provide shortcuts for common checkout actions&#39;</span><span class="p">,</span>
-</span><span id="__span-2-90"><a id="__codelineno-2-90" name="__codelineno-2-90" href="#__codelineno-2-90"></a>        <span class="s1">&#39;timeout_management&#39;</span><span class="p">:</span> <span class="s1">&#39;Allow users to extend session timeouts&#39;</span><span class="p">,</span>
-</span><span id="__span-2-91"><a id="__codelineno-2-91" name="__codelineno-2-91" href="#__codelineno-2-91"></a>        <span class="s1">&#39;error_recovery&#39;</span><span class="p">:</span> <span class="s1">&#39;Provide easy ways to fix form errors without losing data&#39;</span>
-</span><span id="__span-2-92"><a id="__codelineno-2-92" name="__codelineno-2-92" href="#__codelineno-2-92"></a>    <span class="p">},</span>
-</span><span id="__span-2-93"><a id="__codelineno-2-93" name="__codelineno-2-93" href="#__codelineno-2-93"></a>    <span class="p">{</span>
-</span><span id="__span-2-94"><a id="__codelineno-2-94" name="__codelineno-2-94" href="#__codelineno-2-94"></a>        <span class="s1">&#39;target_size_measurement&#39;</span><span class="p">:</span> <span class="s1">&#39;Verify all touch targets meet size requirements&#39;</span><span class="p">,</span>
-</span><span id="__span-2-95"><a id="__codelineno-2-95" name="__codelineno-2-95" href="#__codelineno-2-95"></a>        <span class="s1">&#39;keyboard_efficiency&#39;</span><span class="p">:</span> <span class="s1">&#39;Test keyboard navigation efficiency&#39;</span><span class="p">,</span>
-</span><span id="__span-2-96"><a id="__codelineno-2-96" name="__codelineno-2-96" href="#__codelineno-2-96"></a>        <span class="s1">&#39;timeout_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test timeout extensions with real users&#39;</span>
-</span><span id="__span-2-97"><a id="__codelineno-2-97" name="__codelineno-2-97" href="#__codelineno-2-97"></a>    <span class="p">},</span>
-</span><span id="__span-2-98"><a id="__codelineno-2-98" name="__codelineno-2-98" href="#__codelineno-2-98"></a>    <span class="p">{</span>
-</span><span id="__span-2-99"><a id="__codelineno-2-99" name="__codelineno-2-99" href="#__codelineno-2-99"></a>        <span class="s1">&#39;design_system_integration&#39;</span><span class="p">:</span> <span class="s1">&#39;Build target size requirements into design system&#39;</span><span class="p">,</span>
-</span><span id="__span-2-100"><a id="__codelineno-2-100" name="__codelineno-2-100" href="#__codelineno-2-100"></a>        <span class="s1">&#39;timeout_monitoring&#39;</span><span class="p">:</span> <span class="s1">&#39;Monitor and adjust timeout durations based on usage&#39;</span><span class="p">,</span>
-</span><span id="__span-2-101"><a id="__codelineno-2-101" name="__codelineno-2-101" href="#__codelineno-2-101"></a>        <span class="s1">&#39;keyboard_documentation&#39;</span><span class="p">:</span> <span class="s1">&#39;Document all available keyboard interactions&#39;</span>
-</span><span id="__span-2-102"><a id="__codelineno-2-102" name="__codelineno-2-102" href="#__codelineno-2-102"></a>    <span class="p">}</span>
-</span><span id="__span-2-103"><a id="__codelineno-2-103" name="__codelineno-2-103" href="#__codelineno-2-103"></a><span class="p">)</span>
-</span><span id="__span-2-104"><a id="__codelineno-2-104" name="__codelineno-2-104" href="#__codelineno-2-104"></a>
-</span><span id="__span-2-105"><a id="__codelineno-2-105" name="__codelineno-2-105" href="#__codelineno-2-105"></a><span class="c1"># Create implementation priority checklist</span>
-</span><span id="__span-2-106"><a id="__codelineno-2-106" name="__codelineno-2-106" href="#__codelineno-2-106"></a><span class="n">priority_features</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-2-107"><a id="__codelineno-2-107" name="__codelineno-2-107" href="#__codelineno-2-107"></a>    <span class="s2">&quot;Enhanced Form Accessibility&quot;</span><span class="p">,</span>
-</span><span id="__span-2-108"><a id="__codelineno-2-108" name="__codelineno-2-108" href="#__codelineno-2-108"></a>    <span class="s2">&quot;Dynamic Content Management&quot;</span><span class="p">,</span> 
-</span><span id="__span-2-109"><a id="__codelineno-2-109" name="__codelineno-2-109" href="#__codelineno-2-109"></a>    <span class="s2">&quot;Motor Accessibility Enhancements&quot;</span><span class="p">,</span>
-</span><span id="__span-2-110"><a id="__codelineno-2-110" name="__codelineno-2-110" href="#__codelineno-2-110"></a>    <span class="s2">&quot;Color Contrast Compliance&quot;</span><span class="p">,</span>
-</span><span id="__span-2-111"><a id="__codelineno-2-111" name="__codelineno-2-111" href="#__codelineno-2-111"></a>    <span class="s2">&quot;Focus Management System&quot;</span><span class="p">,</span>
-</span><span id="__span-2-112"><a id="__codelineno-2-112" name="__codelineno-2-112" href="#__codelineno-2-112"></a>    <span class="s2">&quot;Alternative Text Optimization&quot;</span>
-</span><span id="__span-2-113"><a id="__codelineno-2-113" name="__codelineno-2-113" href="#__codelineno-2-113"></a><span class="p">]</span>
-</span><span id="__span-2-114"><a id="__codelineno-2-114" name="__codelineno-2-114" href="#__codelineno-2-114"></a>
-</span><span id="__span-2-115"><a id="__codelineno-2-115" name="__codelineno-2-115" href="#__codelineno-2-115"></a><span class="n">checklist</span> <span class="o">=</span> <span class="n">auditor</span><span class="o">.</span><span class="n">create_implementation_checklist</span><span class="p">(</span><span class="n">priority_features</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="c1"># Create accessibility auditor for e-commerce checkout</span>
+<span class="n">auditor</span> <span class="o">=</span> <span class="n">AccessibilityAuditor</span><span class="p">(</span><span class="s2">&quot;E-commerce Checkout Process&quot;</span><span class="p">,</span> <span class="s2">&quot;AA&quot;</span><span class="p">)</span>
+
+<span class="c1"># Audit checkout form sections</span>
+<span class="n">auditor</span><span class="o">.</span><span class="n">audit_interface_section</span><span class="p">(</span>
+    <span class="s2">&quot;Shopping Cart&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;Product list&#39;</span><span class="p">,</span> <span class="s1">&#39;Quantity controls&#39;</span><span class="p">,</span> <span class="s1">&#39;Remove buttons&#39;</span><span class="p">,</span> <span class="s1">&#39;Total calculation&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;Product images have alt text describing items&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Quantity controls are labeled properly&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Remove buttons have confirmation dialogs&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Total updates are not announced to screen readers&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Keyboard navigation works for all controls&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">auditor</span><span class="o">.</span><span class="n">audit_interface_section</span><span class="p">(</span>
+    <span class="s2">&quot;Shipping Information Form&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;Address fields&#39;</span><span class="p">,</span> <span class="s1">&#39;Country selection&#39;</span><span class="p">,</span> <span class="s1">&#39;Shipping options&#39;</span><span class="p">,</span> <span class="s1">&#39;Form validation&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;All form fields have proper labels&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Required fields are marked with asterisks only&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Address autocomplete is keyboard accessible&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Error messages appear after field validation&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Shipping options use radio buttons with proper grouping&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">auditor</span><span class="o">.</span><span class="n">audit_interface_section</span><span class="p">(</span>
+    <span class="s2">&quot;Payment Processing&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;Credit card fields&#39;</span><span class="p">,</span> <span class="s1">&#39;Security code input&#39;</span><span class="p">,</span> <span class="s1">&#39;Billing address&#39;</span><span class="p">,</span> <span class="s1">&#39;Submit button&#39;</span><span class="p">],</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;Credit card fields have proper input types&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Security code field shows help text&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Billing address can be same as shipping&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Submit button is clearly labeled and prominent&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Payment errors are displayed clearly but sensitively&#39;</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Implement critical accessibility features</span>
+<span class="n">auditor</span><span class="o">.</span><span class="n">implement_accessibility_feature</span><span class="p">(</span>
+    <span class="s2">&quot;Enhanced Form Accessibility&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cognitive&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;field_grouping&#39;</span><span class="p">:</span> <span class="s1">&#39;Group related fields with fieldset and legend elements&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;error_association&#39;</span><span class="p">:</span> <span class="s1">&#39;Associate error messages with form fields using aria-describedby&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;progress_indication&#39;</span><span class="p">:</span> <span class="s1">&#39;Show checkout progress and current step clearly&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;required_field_indication&#39;</span><span class="p">:</span> <span class="s1">&#39;Use both visual and text indicators for required fields&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;screen_reader_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test form completion with NVDA and VoiceOver&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;keyboard_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Complete entire checkout using only keyboard&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cognitive_load_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test with users who have cognitive disabilities&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;form_validation_rules&#39;</span><span class="p">:</span> <span class="s1">&#39;Maintain consistent validation and error messaging&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;regular_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test form accessibility with each update&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;user_feedback_collection&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular feedback from users with disabilities&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">auditor</span><span class="o">.</span><span class="n">implement_accessibility_feature</span><span class="p">(</span>
+    <span class="s2">&quot;Dynamic Content Management&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;visual&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;cart_updates&#39;</span><span class="p">:</span> <span class="s1">&#39;Announce cart total changes to screen readers&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;shipping_calculation&#39;</span><span class="p">:</span> <span class="s1">&#39;Announce shipping cost updates&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;error_announcements&#39;</span><span class="p">:</span> <span class="s1">&#39;Use aria-live regions for validation errors&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;success_confirmation&#39;</span><span class="p">:</span> <span class="s1">&#39;Clearly announce successful form submissions&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;announcement_timing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test that announcements are not too frequent&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;content_clarity&#39;</span><span class="p">:</span> <span class="s1">&#39;Verify announcement text is clear and helpful&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;multiple_screen_readers&#39;</span><span class="p">:</span> <span class="s1">&#39;Test with different assistive technologies&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;live_region_guidelines&#39;</span><span class="p">:</span> <span class="s1">&#39;Document when and how to use live regions&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;announcement_standards&#39;</span><span class="p">:</span> <span class="s1">&#39;Maintain consistent announcement patterns&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;testing_protocol&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular testing of dynamic content updates&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">auditor</span><span class="o">.</span><span class="n">implement_accessibility_feature</span><span class="p">(</span>
+    <span class="s2">&quot;Motor Accessibility Enhancements&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;motor&quot;</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;large_click_targets&#39;</span><span class="p">:</span> <span class="s1">&#39;Ensure all interactive elements are at least 44px&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;keyboard_shortcuts&#39;</span><span class="p">:</span> <span class="s1">&#39;Provide shortcuts for common checkout actions&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;timeout_management&#39;</span><span class="p">:</span> <span class="s1">&#39;Allow users to extend session timeouts&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;error_recovery&#39;</span><span class="p">:</span> <span class="s1">&#39;Provide easy ways to fix form errors without losing data&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;target_size_measurement&#39;</span><span class="p">:</span> <span class="s1">&#39;Verify all touch targets meet size requirements&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;keyboard_efficiency&#39;</span><span class="p">:</span> <span class="s1">&#39;Test keyboard navigation efficiency&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;timeout_testing&#39;</span><span class="p">:</span> <span class="s1">&#39;Test timeout extensions with real users&#39;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;design_system_integration&#39;</span><span class="p">:</span> <span class="s1">&#39;Build target size requirements into design system&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;timeout_monitoring&#39;</span><span class="p">:</span> <span class="s1">&#39;Monitor and adjust timeout durations based on usage&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;keyboard_documentation&#39;</span><span class="p">:</span> <span class="s1">&#39;Document all available keyboard interactions&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Create implementation priority checklist</span>
+<span class="n">priority_features</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Enhanced Form Accessibility&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Dynamic Content Management&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;Motor Accessibility Enhancements&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Color Contrast Compliance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Focus Management System&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Alternative Text Optimization&quot;</span>
+<span class="p">]</span>
+
+<span class="n">checklist</span> <span class="o">=</span> <span class="n">auditor</span><span class="o">.</span><span class="n">create_implementation_checklist</span><span class="p">(</span><span class="n">priority_features</span><span class="p">)</span>
+</code></pre>
+</div>
 <p><strong>Implementation Timeline:</strong></p>
 <ul>
 <li>
@@ -3775,7 +3781,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 16, 2025 05:58:30 UTC">October 16, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 02:48:38 UTC">October 18, 2025</span>
   </span>
 
     

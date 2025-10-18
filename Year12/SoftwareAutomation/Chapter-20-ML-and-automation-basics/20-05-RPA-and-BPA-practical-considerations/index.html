@@ -3033,7 +3033,7 @@
 </span><span id="__span-0-841"><a id="__codelineno-0-841" name="__codelineno-0-841" href="#__codelineno-0-841"></a>
 </span><span id="__span-0-842"><a id="__codelineno-0-842" name="__codelineno-0-842" href="#__codelineno-0-842"></a><span class="o">**</span><span class="n">Business</span> <span class="n">Challenge</span><span class="o">**</span><span class="p">:</span> <span class="n">Employees</span> <span class="n">spend</span> <span class="n">hours</span> <span class="n">on</span> <span class="n">routine</span> <span class="n">administrative</span> <span class="n">tasks</span> <span class="n">like</span> <span class="n">report</span> <span class="n">generation</span><span class="p">,</span> <span class="n">data</span> <span class="n">entry</span><span class="p">,</span> <span class="ow">and</span> <span class="n">file</span> <span class="n">organization</span><span class="o">.</span>
 </span><span id="__span-0-843"><a id="__codelineno-0-843" name="__codelineno-0-843" href="#__codelineno-0-843"></a>
-</span><span id="__span-0-844"><a id="__codelineno-0-844" name="__codelineno-0-844" href="#__codelineno-0-844"></a><span class="err">```</span><span class="n">python</span><span class="o">-</span><span class="n">template</span>
+</span><span id="__span-0-844"><a id="__codelineno-0-844" name="__codelineno-0-844" href="#__codelineno-0-844"></a><span class="err">```</span><span class="n">python</span>
 </span><span id="__span-0-845"><a id="__codelineno-0-845" name="__codelineno-0-845" href="#__codelineno-0-845"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </span><span id="__span-0-846"><a id="__codelineno-0-846" name="__codelineno-0-846" href="#__codelineno-0-846"></a><span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
 </span><span id="__span-0-847"><a id="__codelineno-0-847" name="__codelineno-0-847" href="#__codelineno-0-847"></a><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
@@ -5623,25 +5623,23 @@ d) Random task distribution</p>
 </ul>
 <h3 id="section-d-code-analysis">Section D: Code Analysis<a class="headerlink" href="#section-d-code-analysis" title="Permanent link">&para;</a></h3>
 <p><strong>Question 14</strong>: Examine this code snippet from the BPA orchestration engine:</p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">execute_workflow_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_instances</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instance_id</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">instance</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Process instance </span><span class="si">{</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
-
-    <span class="n">step</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">step_name</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">step</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step_name</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">execute_workflow_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">step_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_instances</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instance_id</span><span class="p">)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">instance</span><span class="p">:</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Process instance </span><span class="si">{</span><span class="n">instance_id</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">step</span> <span class="o">=</span> <span class="n">instance</span><span class="o">.</span><span class="n">workflow</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">step_name</span><span class="p">)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">step</span><span class="p">:</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Step </span><span class="si">{</span><span class="n">step_name</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+</span></code></pre></div>
 <p>a) What design pattern is being used for error handling?
 b) Why is this approach better than silently failing?
 c) How could you extend this to provide more detailed error information?</p>
 <p><strong>Question 15</strong>: In the secure data manager implementation:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">password_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> 
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>                                  <span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> 
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>                                  <span class="n">salt</span><span class="p">,</span> 
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>                                  <span class="mi">100000</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">password_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">pbkdf2_hmac</span><span class="p">(</span><span class="s1">&#39;sha256&#39;</span><span class="p">,</span> 
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>                                  <span class="n">password</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> 
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>                                  <span class="n">salt</span><span class="p">,</span> 
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>                                  <span class="mi">100000</span><span class="p">)</span>
 </span></code></pre></div>
 <p>a) Why is PBKDF2 used instead of simple SHA256 hashing?
 b) What is the purpose of the 100,000 iterations parameter?
@@ -5747,7 +5745,7 @@ c) How does the salt contribute to security?</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 16, 2025 05:58:30 UTC">October 16, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 02:48:38 UTC">October 18, 2025</span>
   </span>
 
     

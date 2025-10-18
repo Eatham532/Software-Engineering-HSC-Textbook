@@ -1672,7 +1672,7 @@
 </li>
 </ul>
 <p><strong>Basic Git workflow</strong>:</p>
-<div class="highlight python-template" data-fence-type="template" data-language="python">
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
 <pre><code class="language-python"><span class="c1"># Example: Simulating version control operations in Python</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">VersionControl</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_name</span><span class="p">):</span>
@@ -1780,7 +1780,7 @@
 <p><code>release/v2.1.0</code></p>
 </li>
 </ul>
-<div class="highlight python-template" data-fence-type="template" data-language="python">
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
 <pre><code class="language-python"><span class="c1"># Example: Branch management system</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">BranchManager</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2052,7 +2052,7 @@
 <p>Release notes</p>
 </li>
 </ul>
-<div class="highlight python-template" data-fence-type="template" data-language="python">
+<div class="highlight python-exec" data-fence-type="exec" data-language="python">
 <pre><code class="language-python"><span class="c1"># Example: Release hygiene checker</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">ReleaseHygiene</span><span class="p">:</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2131,88 +2131,82 @@
 <h3 id="guided-example-setting-up-version-control-for-a-school-project">Guided example: Setting up version control for a school project<a class="headerlink" href="#guided-example-setting-up-version-control-for-a-school-project" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s walk through establishing version control and backup procedures for a school management system:</p>
 <p><strong>Step 1: Repository setup</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Initialize project repository structure</span>
-<span class="n">project_structure</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;student_management/&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;src/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;models/&quot;</span><span class="p">,</span> <span class="s2">&quot;controllers/&quot;</span><span class="p">,</span> <span class="s2">&quot;views/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;tests/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;unit/&quot;</span><span class="p">,</span> <span class="s2">&quot;integration/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;docs/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;api/&quot;</span><span class="p">,</span> <span class="s2">&quot;user_guide/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;scripts/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;deploy/&quot;</span><span class="p">,</span> <span class="s2">&quot;backup/&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;config/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;development.py&quot;</span><span class="p">,</span> <span class="s2">&quot;production.py&quot;</span><span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">setup_git_repository</span><span class="p">(</span><span class="n">project_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up Git repository with initial structure&quot;&quot;&quot;</span>
-    <span class="n">repo_config</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
-        <span class="s2">&quot;initial_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;branches&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;develop&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;gitignore&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;*.pyc&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;__pycache__/&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;.env&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;config/secrets.py&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;logs/*.log&quot;</span>
-        <span class="p">],</span>
-        <span class="s2">&quot;initial_commit&quot;</span><span class="p">:</span> <span class="s2">&quot;Initial project structure&quot;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">repo_config</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Initialize project repository structure</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">project_structure</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="s2">&quot;student_management/&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="s2">&quot;src/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;models/&quot;</span><span class="p">,</span> <span class="s2">&quot;controllers/&quot;</span><span class="p">,</span> <span class="s2">&quot;views/&quot;</span><span class="p">],</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="s2">&quot;tests/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;unit/&quot;</span><span class="p">,</span> <span class="s2">&quot;integration/&quot;</span><span class="p">],</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="s2">&quot;docs/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;api/&quot;</span><span class="p">,</span> <span class="s2">&quot;user_guide/&quot;</span><span class="p">],</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="s2">&quot;scripts/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;deploy/&quot;</span><span class="p">,</span> <span class="s2">&quot;backup/&quot;</span><span class="p">],</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="s2">&quot;config/&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;development.py&quot;</span><span class="p">,</span> <span class="s2">&quot;production.py&quot;</span><span class="p">]</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="p">}</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">}</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">setup_git_repository</span><span class="p">(</span><span class="n">project_name</span><span class="p">):</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up Git repository with initial structure&quot;&quot;&quot;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">repo_config</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project_name</span><span class="p">,</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="s2">&quot;initial_branch&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="s2">&quot;branches&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">,</span> <span class="s2">&quot;develop&quot;</span><span class="p">],</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="s2">&quot;gitignore&quot;</span><span class="p">:</span> <span class="p">[</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="s2">&quot;*.pyc&quot;</span><span class="p">,</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="s2">&quot;__pycache__/&quot;</span><span class="p">,</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>            <span class="s2">&quot;.env&quot;</span><span class="p">,</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>            <span class="s2">&quot;config/secrets.py&quot;</span><span class="p">,</span>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="s2">&quot;logs/*.log&quot;</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>        <span class="p">],</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="s2">&quot;initial_commit&quot;</span><span class="p">:</span> <span class="s2">&quot;Initial project structure&quot;</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="p">}</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="k">return</span> <span class="n">repo_config</span>
+</span></code></pre></div>
 <p><strong>Step 2: Branching strategy implementation</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Define branching workflow</span>
-<span class="n">branching_workflow</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Production-ready code&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;protection&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires pull request and approval&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;auto_deploy&quot;</span><span class="p">:</span> <span class="kc">True</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;develop&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Integration of new features&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;protection&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires automated tests to pass&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;auto_deploy&quot;</span><span class="p">:</span> <span class="kc">False</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;feature/*&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Individual feature development&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="s2">&quot;Until feature complete&quot;</span>
-    <span class="p">},</span>
-    <span class="s2">&quot;hotfix/*&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Critical production fixes&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="s2">&quot;Until fix deployed&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Define branching workflow</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">branching_workflow</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s2">&quot;main&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Production-ready code&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="s2">&quot;protection&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires pull request and approval&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="s2">&quot;auto_deploy&quot;</span><span class="p">:</span> <span class="kc">True</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="p">},</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="s2">&quot;develop&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Integration of new features&quot;</span><span class="p">,</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="s2">&quot;protection&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires automated tests to pass&quot;</span><span class="p">,</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="s2">&quot;auto_deploy&quot;</span><span class="p">:</span> <span class="kc">False</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="p">},</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="s2">&quot;feature/*&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Individual feature development&quot;</span><span class="p">,</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;develop&quot;</span><span class="p">,</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="s2">&quot;Until feature complete&quot;</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="p">},</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="s2">&quot;hotfix/*&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="s2">&quot;purpose&quot;</span><span class="p">:</span> <span class="s2">&quot;Critical production fixes&quot;</span><span class="p">,</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="s2">&quot;base&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>        <span class="s2">&quot;merge_target&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">,</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="s2">&quot;lifetime&quot;</span><span class="p">:</span> <span class="s2">&quot;Until fix deployed&quot;</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="p">}</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="p">}</span>
+</span></code></pre></div>
 <p><strong>Step 3: Backup and release process</strong></p>
-<div class="highlight python-exec" data-fence-type="exec" data-language="python">
-<pre><code class="language-python"><span class="c1"># Automated backup and release process</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">create_backup_strategy</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;code_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;On every commit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;database_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;Daily at 2 AM&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;full_system_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;Weekly on Sunday&quot;</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;locations&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;GitHub repository&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;School network drive&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tertiary&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud backup service&quot;</span>
-        <span class="p">},</span>
-        <span class="s2">&quot;retention&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;daily_backups&quot;</span><span class="p">:</span> <span class="s2">&quot;30 days&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;weekly_backups&quot;</span><span class="p">:</span> <span class="s2">&quot;6 months&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;release_archives&quot;</span><span class="p">:</span> <span class="s2">&quot;Indefinite&quot;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-</code></pre>
-</div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Automated backup and release process</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">create_backup_strategy</span><span class="p">():</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">return</span> <span class="p">{</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>            <span class="s2">&quot;code_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;On every commit&quot;</span><span class="p">,</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>            <span class="s2">&quot;database_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;Daily at 2 AM&quot;</span><span class="p">,</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            <span class="s2">&quot;full_system_backup&quot;</span><span class="p">:</span> <span class="s2">&quot;Weekly on Sunday&quot;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="p">},</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="s2">&quot;locations&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>            <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="s2">&quot;GitHub repository&quot;</span><span class="p">,</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>            <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="s2">&quot;School network drive&quot;</span><span class="p">,</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>            <span class="s2">&quot;tertiary&quot;</span><span class="p">:</span> <span class="s2">&quot;Cloud backup service&quot;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>        <span class="p">},</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="s2">&quot;retention&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>            <span class="s2">&quot;daily_backups&quot;</span><span class="p">:</span> <span class="s2">&quot;30 days&quot;</span><span class="p">,</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            <span class="s2">&quot;weekly_backups&quot;</span><span class="p">:</span> <span class="s2">&quot;6 months&quot;</span><span class="p">,</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>            <span class="s2">&quot;release_archives&quot;</span><span class="p">:</span> <span class="s2">&quot;Indefinite&quot;</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="p">}</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="p">}</span>
+</span></code></pre></div>
 <h2 id="practice">Practice<a class="headerlink" href="#practice" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>Exercise 1: Git Workflow Design</summary>
@@ -2432,7 +2426,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 16, 2025 05:58:30 UTC">October 16, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 03:10:27 UTC">October 18, 2025</span>
   </span>
 
     
