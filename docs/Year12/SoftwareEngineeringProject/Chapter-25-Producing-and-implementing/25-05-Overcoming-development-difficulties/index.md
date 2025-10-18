@@ -44,7 +44,7 @@ Development blockers are obstacles that prevent progress on software projects. U
 
 - **Timeline conflicts**: Competing priorities or unrealistic deadlines
 
-```python-template
+```python-exec
 # Example: Blocker tracking and categorization system
 class DevelopmentBlocker:
     def __init__(self, title, description, category, severity):
@@ -296,7 +296,7 @@ Team collaboration multiplies problem-solving capabilities and reduces individua
 
 - **Problem escalation**: Clear path from junior to senior expertise
 
-```python-template
+```python-exec
 # Example: Collaboration management system
 class CollaborationManager:
     def __init__(self):

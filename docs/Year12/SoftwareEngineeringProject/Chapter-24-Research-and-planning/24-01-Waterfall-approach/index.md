@@ -101,7 +101,7 @@ note bottom : Each phase has formal review\nand approval before progression
 
 - Requirements traceability matrix
 
-```python-template
+```python-exec
 class WaterfallRequirementsPhase:
     """
     Framework for managing the Requirements Analysis phase in Waterfall methodology.
@@ -494,7 +494,7 @@ Understanding when Waterfall is appropriate requires careful analysis of project
 
 - Early defect detection through structured review processes
 
-```python-template
+```python-exec
 class WaterfallBenefitsAnalysis:
     """
     Framework for evaluating the benefits of Waterfall methodology

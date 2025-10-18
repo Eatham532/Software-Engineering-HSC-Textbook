@@ -40,7 +40,7 @@ Object-oriented programming takes this natural way of thinking about the world a
 
 A **class** is like a blueprint or template for creating objects. Just as an architect's blueprint can be used to build many houses, a class can be used to create many objects of the same type.
 
-```python-template
+```python
 class BankAccount:
     """A simple bank account class - this is the blueprint"""
     
@@ -216,7 +216,7 @@ Create a `Student` class with:
     type: success
     open: false
 
-```python-template
+```python-exec
 class Student:
     def __init__(self, name, student_id, grade):
         self.name = name

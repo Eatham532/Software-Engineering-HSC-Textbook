@@ -72,7 +72,7 @@ note left of [Control Logic] : Same logic tested\nin both environments
 
 Let's test a temperature control system that manages heating based on sensor readings and safety limits.
 
-```python-template
+```python
 # temperature_controller.py - The system under test
 class TemperatureController:
     def __init__(self, sensor, heater, safety_limit=80.0):
@@ -137,7 +137,7 @@ class SafetyException(Exception):
 
 Now let's create test fixtures for the sensor and heater:
 
-```python-template
+```python
 # test_fixtures.py - Mock devices for testing
 class MockTemperatureSensor:
     def __init__(self, initial_temperature=20.0):
@@ -392,7 +392,7 @@ Designing systems for testability requires specific architectural patterns that 
 
 #### Dependency injection pattern
 
-```python-template
+```python-exec
 class RobotArm:
     """Example of dependency injection for testability"""
     

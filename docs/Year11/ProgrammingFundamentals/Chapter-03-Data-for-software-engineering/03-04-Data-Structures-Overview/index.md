@@ -249,7 +249,7 @@ if browser_history:
 
 ### Practical Example: Undo Function
 
-```python-template
+```python-exec
 class TextEditor:
     def __init__(self):
         self.text = ""

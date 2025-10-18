@@ -28,7 +28,7 @@ By the end of this section, you will be able to:
 
 People's reactions to automated decisions and interfaces are deeply rooted in psychological principles. These responses can significantly impact system adoption and effectiveness.
 
-```python-template
+```python-exec
 class UserPsychologyModel:
     """Model user psychological responses to automation"""
     
@@ -113,7 +113,7 @@ for interaction_type, success in interactions:
 
 Acute stress significantly alters human behaviour patterns, which can impact both data collection and system performance.
 
-```python-template
+```python
 import random
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
@@ -216,7 +216,7 @@ for stress, metrics in stress_analysis.items():
 
 Cultural background significantly influences how people interact with technology and what they expect from automated systems.
 
-```python-template
+```python-exec
 class CulturalContext:
     """Model cultural factors affecting AI system design"""
     
@@ -353,7 +353,7 @@ for culture_name, culture_data in cultures.items():
 
 Personal belief systems significantly influence how users interact with and accept AI technologies.
 
-```python-template
+```python-exec
 class BeliefSystemAnalyzer:
     """Analyze how belief systems affect AI acceptance"""
     
@@ -496,7 +496,7 @@ for profile_name, beliefs in belief_profiles.items():
 
 Understanding human behaviour patterns should directly inform system design decisions:
 
-```python-template
+```python-exec
 class HumanCenteredAIDesigner:
     """Framework for incorporating human behaviour insights into AI design"""
     

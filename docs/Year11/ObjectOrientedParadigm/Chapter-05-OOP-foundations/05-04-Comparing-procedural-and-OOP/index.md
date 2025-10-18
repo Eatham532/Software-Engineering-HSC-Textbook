@@ -50,7 +50,7 @@ display_info(rect_length, rect_width)
 
 **Object-oriented programming** organizes code around objects that combine data and the functions that work with that data.
 
-```python-template
+```python-exec
 # OOP approach: data and methods are bundled together
 class Rectangle:
     def __init__(self, length, width):
@@ -144,7 +144,7 @@ OOP works well when:
 
 ### 1. Modeling real-world entities
 
-```python-template
+```python
 # Real-world entities fit naturally into classes
 class Student:
     def __init__(self, name, student_id):
@@ -177,7 +177,7 @@ class Course:
 
 ### 2. Complex state management
 
-```python-template
+```python
 # Managing complex state is easier with OOP
 class GameCharacter:
     def __init__(self, name, health=100):
@@ -207,7 +207,7 @@ class GameCharacter:
 
 ### 3. Systems with multiple interacting components
 
-```python-template
+```python
 # Multiple components working together
 class BankAccount:
     def __init__(self, account_number, initial_balance=0):
@@ -268,7 +268,7 @@ def send_email(email, message):
 
 ### Step 2: Group related data and functions into classes
 
-```python-template
+```python-exec
 # OOP: related data and functions grouped together
 class Customer:
     def __init__(self, name, email):
@@ -295,7 +295,7 @@ customer.send_email(f"Your total spending: ${total}")
 
 ### Step 3: Look for opportunities to create hierarchies
 
-```python-template
+```python
 # Before: separate functions for different account types
 def calculate_savings_interest(balance, rate):
     return balance * rate
@@ -374,7 +374,7 @@ def battle(p_name, p_health, p_level, e_name, e_health, e_level):
 
 **OOP can be overkill for:**
 
-```python-template
+```python
 # Overly complex for simple calculations
 class Calculator:
     def add(self, a, b):
@@ -453,7 +453,7 @@ def borrow_book(member_id, isbn):
     type: success
     open: false
 
-```python-template
+```python
 class Book:
     def __init__(self, title, author, isbn):
         self.title = title
@@ -539,7 +539,7 @@ def process_payment(amount, payment_type, card_number=None, bank_account=None):
     type: success
     open: false
 
-```python-template
+```python
 class Payment:
     def __init__(self, amount):
         self.amount = amount

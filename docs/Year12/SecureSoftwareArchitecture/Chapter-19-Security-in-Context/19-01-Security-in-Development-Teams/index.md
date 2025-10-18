@@ -27,7 +27,7 @@ Think of security in development teams like safety protocols in a medical teamâ€
 
 **Security code reviews** go beyond checking for bugs and style issuesâ€”they specifically look for security vulnerabilities, design flaws, and opportunities to strengthen the system's security posture.
 
-```python-template
+```python
 # Example: Security-focused code review checklist implementation
 class SecurityCodeReviewChecklist:
     """Automated security review checklist for development teams"""
@@ -248,7 +248,7 @@ class GitSecurityHooks:
 
 **Security-focused pair programming** involves two developers working together with one specifically focused on security considerations while the other focuses on functionality.
 
-```python-template
+```python
 # Example: Pair programming security guidelines
 class SecurityPairProgramming:
     """Guidelines and tools for security-focused pair programming"""
@@ -428,7 +428,7 @@ class SecurityReviewTemplates:
 
 **Agile security integration** means weaving security considerations into every aspect of the agile development process, from sprint planning to retrospectives.
 
-```python-template
+```python
 # Example: Agile security integration tools
 class AgileSecurityIntegration:
     """Tools for integrating security into agile development workflows"""
@@ -681,7 +681,7 @@ class SecurityDefinitionOfDone:
 
 **Team-based threat modeling** brings together diverse perspectives to identify security threats and design appropriate countermeasures.
 
-```python-template
+```python
 # Example: Collaborative threat modeling tools
 class TeamThreatModeling:
     """Tools for conducting threat modeling with development teams"""
@@ -1018,7 +1018,7 @@ class ThreatModelingWorkshop:
 
 **Security documentation** ensures that security knowledge is preserved, shared, and accessible to all team members. Good security documentation serves as both a reference and a training tool.
 
-```python-template
+```python
 # Example: Security documentation management system
 class SecurityDocumentationManager:
     """System for managing team security documentation"""
@@ -1432,7 +1432,7 @@ class SecurityKnowledgeSharing:
 
 **Security-velocity balance** requires integrating security practices that enhance rather than hinder development productivity. The goal is to make security enablers, not blockers.
 
-```python-template
+```python
 # Example: DevSecOps integration for velocity
 class DevSecOpsVelocityOptimizer:
     """Tools for optimizing security integration without slowing development"""

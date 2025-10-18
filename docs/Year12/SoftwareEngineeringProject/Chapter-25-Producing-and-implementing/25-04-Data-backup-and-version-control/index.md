@@ -28,7 +28,7 @@ Version control systems track changes to files over time, allowing multiple deve
 
 **Basic Git workflow**:
 
-```python-template
+```python-exec
 # Example: Simulating version control operations in Python
 class VersionControl:
     def __init__(self, project_name):
@@ -128,7 +128,7 @@ Effective branching strategies help teams organize development work, isolate fea
 
 - `release/v2.1.0`
 
-```python-template
+```python-exec
 # Example: Branch management system
 class BranchManager:
     def __init__(self):
@@ -408,7 +408,7 @@ Release hygiene ensures consistent, reliable software deployments:
 
 - Release notes
 
-```python-template
+```python-exec
 # Example: Release hygiene checker
 class ReleaseHygiene:
     def __init__(self):

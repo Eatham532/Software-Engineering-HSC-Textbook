@@ -523,7 +523,7 @@ print(f"\nTotal size: {calculate_folder_size(file_system)} bytes")
 
 ### Stack Implementation Using Lists
 
-```python-template
+```python-exec
 class SimpleStack:
     """Stack implementation using Python list."""
     

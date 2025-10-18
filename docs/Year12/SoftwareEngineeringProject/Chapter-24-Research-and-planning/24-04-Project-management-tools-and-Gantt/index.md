@@ -429,7 +429,7 @@ printscale weekly
 
 ```
 
-```python-template
+```python
 class GanttChart:
     """
     Framework for creating and managing Gantt charts for software development projects.
@@ -794,7 +794,7 @@ Effective project tracking involves regularly monitoring progress against planne
 
 - **Capacity planning**: Forecasting future resource needs
 
-```python-template
+```python-exec
 class ProjectTracker:
     """
     Framework for tracking and monitoring software development project progress.
@@ -1208,7 +1208,7 @@ Various software tools are available to support project management activities, e
 
 **Evaluation framework for tool selection:**
 
-```python-template
+```python-exec
 class ProjectManagementToolEvaluator:
     """
     Framework for evaluating and selecting appropriate project management tools

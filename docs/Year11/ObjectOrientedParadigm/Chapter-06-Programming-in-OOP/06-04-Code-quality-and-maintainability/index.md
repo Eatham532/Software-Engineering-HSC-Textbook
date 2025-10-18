@@ -44,7 +44,7 @@ Good variable, method, and class names make code self-documenting. Consider thes
 
 **Poor naming:**
 
-```python-template
+```python
 class C:
     def __init__(self, n, a, b):
         self.n = n
@@ -62,7 +62,7 @@ result = c.calc()
 
 **Good naming:**
 
-```python-template
+```python
 class BankAccount:
     def __init__(self, account_holder, opening_balance, current_balance):
         self.account_holder = account_holder
@@ -92,7 +92,7 @@ Follow these standard Python naming conventions:
 
 **Example of consistent naming:**
 
-```python-template
+```python
 class LibraryBook:
     MAX_LOAN_DAYS = 14  # Constant
     
@@ -148,7 +148,7 @@ def method_name(parameter1, parameter2):
 
 **Example with comprehensive docstrings:**
 
-```python-template
+```python
 class Student:
     """
     Represents a student with academic records and grade calculations.
@@ -323,7 +323,7 @@ def process_order(self, order_items, customer_info, payment_info):
 
 Break the long method into smaller, focused methods:
 
-```python-template
+```python
 class OrderProcessor:
     """Handles order processing with clean, focused methods."""
     
@@ -510,7 +510,7 @@ def calculate_late_fee(self, days_late):
 
 **After:**
 
-```python-template
+```python
 class LibraryFeeCalculator:
     # Named constants make the logic clear
     GRACE_PERIOD_DAYS = 7
@@ -605,7 +605,7 @@ Use this checklist to assess and improve your code quality:
 
 Refactor this poorly named and documented class:
 
-```python-template
+```python
 class C:
     def __init__(self, n, p, r):
         self.n = n

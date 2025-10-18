@@ -22,7 +22,7 @@ Think of it like a remote control for your TV:
 
 - **Controlled access**: You interact with the TV only through the buttons, not by rewiring the circuits
 
-```python-template
+```python
 class BankAccount:
     def __init__(self, account_number, initial_balance=0):
         self.account_number = account_number  # Public attribute
@@ -90,7 +90,7 @@ Python uses naming conventions to indicate access levels:
 
 - **Private (name-mangled)**: `__attribute` or `__method()` - triggers name-mangling to `_ClassName__attribute`; still accessible but signals strong non-public intent
 
-```python-template
+```python
 class Student:
     def __init__(self, name, student_id):
         self.name = name                    # Public
@@ -129,7 +129,7 @@ Note on double underscores:
 
 An **invariant** is a condition that must always be true for an object to be in a valid state. Encapsulation helps maintain these invariants.
 
-```python-template
+```python-exec
 class Rectangle:
     def __init__(self, width, height):
         self._width = 0
@@ -175,7 +175,7 @@ except ValueError as e:
 
 **Getters** provide controlled access to internal data. **Setters** provide controlled modification of internal data.
 
-```python-template
+```python-exec
 class Temperature:
     def __init__(self, celsius=0):
         self._celsius = 0
@@ -231,7 +231,7 @@ print(f"Temperature: {temp.get_celsius()}°C")        # 30°C
 **Keep it simple:**
 For basic data access, Python's property decorator can make getters and setters look like regular attribute access:
 
-```python-template
+```python-exec
 class Circle:
     def __init__(self, radius):
         self._radius = 0
@@ -269,7 +269,7 @@ print(circle.area)    # 28.27431
 
 **Scenario**: Look at this code and identify what's wrong with the encapsulation:
 
-```python-template
+```python
 class Car:
     def __init__(self, fuel_capacity):
         self.fuel_level = fuel_capacity
@@ -326,7 +326,7 @@ car.engine_running = True   # Problem 2: What could go wrong?
     type: success
     open: false
 
-```python-template
+```python
 class DigitalClock:
     def __init__(self, hours=0, minutes=0):
         self._hours = 0
@@ -368,7 +368,7 @@ class DigitalClock:
 
 **Scenario**: Improve this class by adding proper encapsulation:
 
-```python-template
+```python
 class GameScore:
     def __init__(self):
         self.score = 0
@@ -391,7 +391,7 @@ class GameScore:
     type: success
     open: false
 
-```python-template
+```python
 class GameScore:
     def __init__(self):
         self._score = 0

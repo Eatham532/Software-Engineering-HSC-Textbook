@@ -252,7 +252,7 @@ Let's design user-friendly authentication for a student financial aid applicatio
 
 ### Implementation with User-Centered Features
 
-```python-template
+```python
 class ProgressiveAuth:
     def __init__(self):
         self.security_levels = {

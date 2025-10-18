@@ -16,7 +16,7 @@ Poor subsystem design can lead to mechanical interference, reduced precision, or
 
 **Degrees of freedom (DOF)** represent the number of independent ways a mechanical system can move. Understanding DOF helps determine what movements are possible and how to control them.
 
-```python-template
+```python-exec
 # Example: analyzing degrees of freedom for common mechanisms
 class MechanicalSystem:
     def __init__(self, name, dof, constraints):
@@ -198,7 +198,7 @@ end note
 
 ### Coordination and communication patterns
 
-```python-template
+```python-exec
 class SubsystemInterface:
     def __init__(self, name):
         self.name = name
@@ -375,7 +375,7 @@ Analyze the degrees of freedom for a 3-axis CNC machine with X, Y, and Z movemen
     type: success
     open: false
 
-```python-template
+```python-exec
 class CNCMachine:
     def __init__(self):
         self.axes = {

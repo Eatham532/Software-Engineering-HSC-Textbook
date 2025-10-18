@@ -14,7 +14,7 @@ The World Wide Web Consortium (W3C) develops the standards that make the web wor
 
 The W3C is an international community that develops open standards to ensure the long-term growth of the Web. Founded by Tim Berners-Lee in 1994, it brings together organizations, developers, and users to create guidelines that help the web remain accessible, interoperable, and useful.
 
-```python-template
+```python-exec
 class WebStandardsDemo:
     """Demonstrate how web standards affect development decisions."""
     
@@ -83,7 +83,7 @@ standards_demo.show_standards_evolution()
 
 The WAI develops guidelines and resources to make the web accessible to people with disabilities. The Web Content Accessibility Guidelines (WCAG) provide the foundation for web accessibility standards worldwide.
 
-```python-template
+```python-exec
 class AccessibilityChecker:
     """Tools for checking and implementing web accessibility."""
     
@@ -520,7 +520,7 @@ security.show_input_validation_patterns()
 
 Privacy-by-design builds privacy protection into web applications from the start, rather than adding it as an afterthought.
 
-```python-template
+```python-exec
 class PrivacyByDesign:
     """Implement privacy-by-design principles for web applications."""
     
@@ -908,7 +908,7 @@ Create a simple accessibility audit tool that checks a webpage structure for com
     type: success
     open: false
 
-```python-template
+```python-exec
 class AccessibilityAuditor:
     def __init__(self):
         self.issues = []

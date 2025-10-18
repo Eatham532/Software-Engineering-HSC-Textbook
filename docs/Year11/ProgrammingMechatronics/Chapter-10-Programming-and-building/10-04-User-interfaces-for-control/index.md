@@ -1033,7 +1033,7 @@ Build visual status indicators for various system states. Create a status dashbo
     type: success
     open: false
 
-```python-template
+```python-exec
 class StatusIndicators:
     def __init__(self):
         self.indicators = {

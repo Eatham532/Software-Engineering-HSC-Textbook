@@ -113,7 +113,7 @@ def fixed_function():
     type: note
     open: false
 
-```python
+```python-exec
 def safe_division_example():
     """Examples of division by zero errors and fixes."""
     
@@ -172,7 +172,7 @@ safe_division_example()
     type: note
     open: false
 
-```python
+```python-exec
 def index_error_examples():
     """Common index errors and how to avoid them."""
     
@@ -230,7 +230,7 @@ index_error_examples()
     type: note
     open: false
 
-```python
+```python-exec
 def key_error_examples():
     """Common dictionary key errors and solutions."""
     
@@ -295,7 +295,7 @@ key_error_examples()
     type: note
     open: false
 
-```python-template
+```python-exec
 def type_error_examples():
     """Common type errors and how to prevent them."""
     
@@ -372,7 +372,7 @@ type_error_examples()
     type: note
     open: false
 
-```python
+```python-exec
 def off_by_one_examples():
     """Common off-by-one errors and corrections."""
     
@@ -705,7 +705,7 @@ variable_name_errors()
 
 ### Function Definition and Call Errors
 
-```python
+```python-exec
 def function_errors():
     """Common function-related errors."""
     

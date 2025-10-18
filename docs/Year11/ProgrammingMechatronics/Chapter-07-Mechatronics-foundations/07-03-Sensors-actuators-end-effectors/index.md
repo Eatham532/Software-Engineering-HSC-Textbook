@@ -317,7 +317,7 @@ An electronics assembly line needs to pick up circuit boards and place them in t
 
 **Gripper comparison**:
 
-```python-template
+```python-exec
 class RoboticGripper:
     def __init__(self, gripper_type, max_force, precision, cycle_time, cost):
         self.gripper_type = gripper_type

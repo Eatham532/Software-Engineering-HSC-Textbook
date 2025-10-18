@@ -262,8 +262,7 @@ class WorkplaceSafetyAssessment:
         }
         
         for group, susceptible_hazards in population_factors.items():
-            if (group in worker_population and 
-                any(hazard in introduced_hazards for hazard in susceptible_hazards)):
+            if group in worker_population and any(hazard in introduced_hazards for hazard in susceptible_hazards):
                 vulnerable_groups.append(group)
         
         return vulnerable_groups
@@ -424,7 +423,7 @@ Automation can dramatically improve accessibility for people with disabilities b
 
 ### Accessibility Assessment Framework
 
-```python-template
+```python-exec
 class AccessibilityImpactAssessment:
     """
     Framework for evaluating automation's impact on accessibility for people with disabilities.
@@ -931,7 +930,7 @@ Automation doesn't simply eliminate jobs—it transforms the nature of work itse
 
 ### Employment Impact Assessment Framework
 
-```python-template
+```python-exec
 class EmploymentTransformationAssessment:
     """
     Framework for analyzing automation's impact on employment patterns and skill requirements.
@@ -1126,7 +1125,7 @@ Automation systems have complex environmental implications, ranging from energy 
 
 ### Environmental Impact Assessment Framework
 
-```python-template
+```python-exec
 class EnvironmentalImpactAssessment:
     """
     Framework for analyzing environmental impacts of automation systems.
@@ -1542,7 +1541,7 @@ Automation affects economic structures and wealth distribution patterns across s
 
 ### Economic Impact Assessment Framework
 
-```python-template
+```python-exec
 class EconomicDistributionAssessment:
     """
     Framework for analyzing economic and wealth distribution impacts of automation.

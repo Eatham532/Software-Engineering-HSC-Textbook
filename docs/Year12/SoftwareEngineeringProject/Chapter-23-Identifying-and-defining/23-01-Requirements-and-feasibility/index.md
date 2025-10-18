@@ -54,7 +54,7 @@ Effective requirements analysis begins with identifying all stakeholders and und
 
 **Methods for gathering stakeholder needs:**
 
-```python-template
+```python-exec
 class StakeholderAnalysis:
     """
     Framework for systematic stakeholder identification and needs assessment.
@@ -363,7 +363,7 @@ Financial feasibility examines whether the project can be completed within budge
 
 - **Return on investment**: Expected benefits compared to total investment
 
-```python-template
+```python-exec
 class FinancialFeasibilityAnalysis:
     """
     Framework for systematic financial feasibility assessment.
@@ -678,7 +678,7 @@ Functional requirements describe what the system must do - the specific behaviou
 
 **Examples of functional requirements:**
 
-```python-template
+```python-exec
 class FunctionalRequirement:
     """
     Template for documenting functional requirements with clear acceptance criteria.
@@ -839,7 +839,7 @@ Non-functional requirements specify how the system should perform - the quality 
 
 6. **Maintainability**: Ease of updates, bug fixes, and system changes
 
-```python-template
+```python-exec
 class NonFunctionalRequirement:
     """
     Template for documenting non-functional requirements with measurable criteria.
@@ -1038,7 +1038,7 @@ Choosing the right data structures requires understanding the operations your sy
 
 - **Relationships**: How different pieces of data connect to each other
 
-```python-template
+```python-exec
 class DataStructureAnalysis:
     """
     Framework for analyzing data requirements and selecting appropriate structures.
@@ -1325,7 +1325,7 @@ end note
 
 ```
 
-```python-template
+```python-exec
 class ScopeDefinition:
     """
     Framework for defining and documenting project scope and boundaries.

@@ -141,7 +141,7 @@ This cycle repeats millions or billions of times per second, depending on the pr
 
 Let's simulate how a simple microcontroller might process instructions for a mechatronic system:
 
-```python-template
+```python-exec
 class SimpleProcessor:
     """A simplified model of how a microcontroller processes instructions"""
     

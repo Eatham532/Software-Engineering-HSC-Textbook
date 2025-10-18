@@ -388,7 +388,7 @@ END MAIN
 
 /// tab | Python
 
-```python
+```python-exec
 def celsius_to_fahrenheit(celsius):
     """Convert temperature from Celsius to Fahrenheit."""
     fahrenheit = celsius * 9 / 5 + 32
@@ -551,7 +551,7 @@ END MAIN
 
 /// tab | Python
 
-```python
+```python-exec
 def calculate_subtotal(price, quantity):
     """Calculate subtotal for an item."""
     return price * quantity

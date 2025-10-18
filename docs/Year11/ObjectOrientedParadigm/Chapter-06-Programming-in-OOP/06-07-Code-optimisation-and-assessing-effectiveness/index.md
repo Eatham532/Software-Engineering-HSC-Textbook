@@ -46,7 +46,7 @@ This section focuses on practical techniques for evaluating and improving code q
 
 **Example: Assessing Correctness**
 
-```python-template
+```python
 class BankAccount:
     """Bank account with correctness issues to identify."""
     
@@ -119,7 +119,7 @@ class ImprovedBankAccount:
 
 **Example: Improving Code Clarity**
 
-```python-template
+```python
 
 ## Poor clarity
 
@@ -369,7 +369,7 @@ def performance_comparison():
 
 **Example: Maintainability Assessment**
 
-```python-template
+```python
 
 ## Poor maintainability - tightly coupled, hard to modify
 
@@ -534,7 +534,7 @@ Choose algorithms with better time complexity for your specific use case.
 
 **Example: Search Algorithm Optimization**
 
-```python-template
+```python
 
 class ProductCatalog:
     """Product catalog with different search implementations."""
@@ -594,7 +594,7 @@ Choose the right data structure for your access patterns.
 
 **Example: Data Structure Optimization**
 
-```python-template
+```python
 
 class TaskManager:
     """Task manager demonstrating data structure choices."""
@@ -687,7 +687,7 @@ def demonstrate_data_structure_performance():
 
 **Example: Premature vs. Appropriate Optimization**
 
-```python-template
+```python
 
 ## Example of premature optimization (don't do this initially)
 
@@ -992,7 +992,7 @@ Understanding when to prioritize readability versus performance is crucial for m
 
 ### Readability-First Approach
 
-```python-template
+```python-exec
 
 class ReadableGradeCalculator:
     """Grade calculator prioritizing clarity and maintainability."""
@@ -1269,7 +1269,7 @@ def algorithmic_optimization_example():
 
 Evaluate this code across all four dimensions (correctness, clarity, performance, maintainability) and identify improvements:
 
-```python-template
+```python
 
 class ShoppingCart:
     def __init__(self):

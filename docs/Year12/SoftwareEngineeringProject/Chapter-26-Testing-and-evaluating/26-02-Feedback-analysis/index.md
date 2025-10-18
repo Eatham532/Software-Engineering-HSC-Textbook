@@ -225,7 +225,7 @@ Raw feedback requires systematic analysis to identify meaningful patterns and ac
 
 - **Representative sampling**: Ensuring feedback represents the full user base
 
-```python-template
+```python-exec
 # Example: Feedback synthesis and pattern analysis system
 class FeedbackAnalyzer:
     def __init__(self):
@@ -498,7 +498,7 @@ Let's walk through a complete feedback analysis process for a school gradebook a
 
 **Step 1: Feedback collection summary**
 
-```python-template
+```python-exec
 # Gradebook feedback analysis example
 class GradebookFeedbackAnalysis:
     def __init__(self):

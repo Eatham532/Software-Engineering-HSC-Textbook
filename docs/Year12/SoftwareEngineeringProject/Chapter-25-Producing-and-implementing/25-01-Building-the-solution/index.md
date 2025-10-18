@@ -126,7 +126,7 @@ Maintaining quality throughout incremental development requires systematic appro
 
 - **User acceptance testing**: Validate features against original requirements
 
-```python-template
+```python-exec
 # Example: Quality maintenance framework
 class QualityFramework:
     def __init__(self):
@@ -280,7 +280,7 @@ Let's walk through building a student progress tracking system using incremental
 
 **Increment 1: Core functionality (Week 1-2)**
 
-```python-template
+```python-exec
 # Basic student and grade tracking
 class Student:
     def __init__(self, student_id, name):

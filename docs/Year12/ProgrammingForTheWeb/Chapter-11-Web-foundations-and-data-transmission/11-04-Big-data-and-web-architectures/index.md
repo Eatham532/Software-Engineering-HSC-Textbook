@@ -337,7 +337,7 @@ stream.process_stream(duration=3)
 
 Different architectural patterns solve different scaling and complexity challenges. Each has trade-offs in terms of development complexity, scalability, and operational overhead.
 
-```python-template
+```python-exec
 class ArchitecturePatterns:
     """Demonstrate different web architecture patterns."""
     

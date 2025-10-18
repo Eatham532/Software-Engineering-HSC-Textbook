@@ -76,7 +76,7 @@ Mechatronic systems typically perform one or more of these functions:
 
 Let's model a simple automatic door system to see these use-cases in action:
 
-```python-template
+```python-exec
 class AutomaticDoor:
     def __init__(self):
         self.is_open = False
@@ -142,7 +142,7 @@ Every mechatronic system must balance competing requirements. These constraints 
 
 **Manufacturing costs**: High-volume production reduces per-unit costs but requires large upfront investment. Low-volume systems must use more expensive components and assembly methods.
 
-```python-template
+```python-exec
 # Simple cost analysis for a mechatronic system
 class ComponentCost:
     def __init__(self, name, base_cost, precision_multiplier=1.0, safety_multiplier=1.0):
@@ -248,7 +248,7 @@ Let's design a simple greenhouse monitoring system to see how domains, use-cases
 
 **Constraints analysis**:
 
-```python-template
+```python-exec
 class GreenhouseSystem:
     def __init__(self):
         # Cost constraint: use affordable sensors
@@ -442,7 +442,7 @@ Consider cost, safety, and environmental constraints in your design.
     type: success
     open: false
 
-```python-template
+```python-exec
 class SecurityCamera:
     def __init__(self):
         # Cost constraint: basic components

@@ -54,7 +54,7 @@ Proportional control adjusts the control output in direct proportion to the erro
 
 Higher gain provides faster response but can cause instability. Lower gain is more stable but slower to reach the setpoint.
 
-```python-template
+```python-exec
 # Basic proportional controller implementation
 class ProportionalController:
     def __init__(self, kp, output_min=-100, output_max=100):
@@ -564,7 +564,7 @@ Starting conditions:
     type: success
     open: false
 
-```python-template
+```python-exec
 class HeatingController:
     def __init__(self, kp):
         self.kp = kp

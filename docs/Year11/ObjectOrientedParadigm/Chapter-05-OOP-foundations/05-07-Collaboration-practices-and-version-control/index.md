@@ -30,7 +30,7 @@ Object-oriented programming is particularly well-suited for team development bec
 
 OOP encourages creating distinct classes with specific responsibilities, which naturally creates module boundaries that different team members can work on independently.
 
-```python-template
+```python
 # Team Member A works on user management
 class UserManager:
     """Handles all user-related operations"""
@@ -87,7 +87,7 @@ class BlogApplication:
 
 Classes provide clear contracts (interfaces) that specify what methods are available and what they do, without exposing how they work internally.
 
-```python-template
+```python
 class PaymentProcessor:
     """Interface contract for payment processing"""
     
@@ -128,7 +128,7 @@ This interface allows team members to:
 
 OOP encourages creating focused classes that do one thing well, making it easier for team members to understand, test, and modify specific functionality.
 
-```python-template
+```python
 # Instead of one large class that's hard to work on together:
 class MonolithicSystem:
     def create_user(self): pass
@@ -400,7 +400,7 @@ The system is organized into several main components:
 
 ### Class documentation
 
-```python-template
+```python
 class PostService:
     """
     Manages blog post operations including creation, editing, and retrieval.
@@ -459,7 +459,7 @@ class PostService:
 
 When building systems with clear interfaces, document the contracts:
 
-```python-template
+```python
 class EmailService:
     """
     Email service contract - any implementation must provide these methods.
@@ -502,7 +502,7 @@ Here's a typical workflow for a team using OOP and version control:
 
 ### 1. Planning and design phase
 
-```python-template
+```python
 # Team creates shared interfaces/contracts first
 class UserServiceInterface:
     """Contract that all team members can depend on"""
@@ -537,7 +537,7 @@ git checkout -b feature/main-application
 
 ### 3. Integration and testing
 
-```python-template
+```python-exec
 # Integration testing ensures components work together
 class TestUserPostIntegration:
     def test_user_can_create_post(self):
@@ -579,7 +579,7 @@ You're building an e-commerce system with a team of 4 developers. The system nee
 
 **Team Member A - User Management:**
 
-```python-template
+```python
 class UserService:
     def register_user(self, username, email, password): pass
     def authenticate_user(self, email, password): pass
@@ -593,7 +593,7 @@ class User:
 
 **Team Member B - Product Catalog:**
 
-```python-template
+```python
 class ProductService:
     def add_product(self, name, price, description, category): pass
     def search_products(self, query, filters): pass
@@ -607,7 +607,7 @@ class Product:
 
 **Team Member C - Shopping Cart:**
 
-```python-template
+```python
 class CartService:
     def add_to_cart(self, user_id, product_id, quantity): pass
     def remove_from_cart(self, user_id, product_id): pass
@@ -621,7 +621,7 @@ class ShoppingCart:
 
 **Team Member D - Order Processing:**
 
-```python-template
+```python
 class OrderService:
     def __init__(self, user_service, product_service, cart_service):
         # Dependencies injected
@@ -732,7 +732,7 @@ git push origin feature/user-profile-editing
 
 Review this pull request and provide constructive feedback:
 
-```python-template
+```python
 class UserManager:
     def __init__(self):
         self.users = []
@@ -808,7 +808,7 @@ class UserManager:
 
 **Suggested refactor:**
 
-```python-template
+```python
 class UserManager:
     """Manages user accounts and authentication"""
     

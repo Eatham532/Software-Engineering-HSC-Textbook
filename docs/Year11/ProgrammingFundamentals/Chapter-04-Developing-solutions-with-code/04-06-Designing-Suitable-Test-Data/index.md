@@ -504,7 +504,7 @@ test_student_grade_processing()
 
 ### Creating Test Cases
 
-```python-template
+```python-exec
 class TestCase:
     """Structured test case documentation."""
     

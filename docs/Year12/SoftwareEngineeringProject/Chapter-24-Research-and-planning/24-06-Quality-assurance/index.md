@@ -73,7 +73,7 @@ Quality assurance requires ongoing verification that requirements are being met 
 
 **Acceptance criteria**: Clear, measurable conditions that define when a feature or system component is considered complete and acceptable. These criteria are established during requirements gathering and validated throughout development.
 
-```python-template
+```python
 # Example: QA process tracking system
 class QAProcess:
     def __init__(self):

@@ -26,7 +26,7 @@ A **class** is a blueprint that defines the structure and behavior of objects. I
 
 ### Basic class syntax
 
-```python-template
+```python-exec
 class Student:
     """A class to represent a student"""
     
@@ -98,7 +98,7 @@ The **constructor** (`__init__`) is responsible for setting up a new object's in
 
 ### Constructor best practices
 
-```python-template
+```python-exec
 class BankAccount:
     """A simple bank account class demonstrating good constructor practices"""
     
@@ -142,7 +142,7 @@ except ValueError as e:
 
 ### Constructor parameters and defaults
 
-```python-template
+```python-exec
 class Rectangle:
     """Rectangle class showing different parameter patterns"""
     
@@ -189,7 +189,7 @@ print(f"Is rect2 a square? {rect2.is_square()}")  # True
 
 ### Instance methods
 
-```python-template
+```python-exec
 class Counter:
     """A simple counter class demonstrating various method patterns"""
     
@@ -243,7 +243,7 @@ print(counter.get_history())  # [10, 15, 12, 13]
 
 **1. Single responsibility:** Each method should do one thing well
 
-```python-template
+```python
 class EmailValidator:
     """Class demonstrating single responsibility in methods"""
     
@@ -283,7 +283,7 @@ validator.test(email)      # Test what?
 
 **3. Consistent parameter patterns:** Similar methods should have similar signatures
 
-```python-template
+```python
 class MathOperations:
     """Consistent parameter patterns"""
     
@@ -333,7 +333,7 @@ class MathOperations:
     type: info
     open: false
 
-```python-template
+```python-exec
 class Engine:
     """Simple engine component"""
     
@@ -464,7 +464,7 @@ cart2.add_item("Phone", 699.99)  # Writes to cart.log file
 
 **2. Complex composition with multiple components:**
 
-```python-template
+```python-exec
 class Display:
     """Display component for devices"""
     
@@ -628,7 +628,7 @@ print(validator.get_requirements())         # List of requirements
     type: example
     open: false
 
-```python-template
+```python
 class UserAccount:
     """Low cohesion - too many unrelated responsibilities"""
     
@@ -665,7 +665,7 @@ class UserAccount:
 
 **Better approach with high cohesion:**
 
-```python-template
+```python
 class User:
     """High cohesion - focused on user data and basic operations"""
     
@@ -725,7 +725,7 @@ Create a `Book` class with the following requirements:
     type: success
     open: false
 
-```python-template
+```python-exec
 class Book:
     """Represents a book with basic information and operations"""
     
@@ -813,7 +813,7 @@ The `Computer` should be able to:
     type: success
     open: false
 
-```python-template
+```python-exec
 class Processor:
     """CPU component"""
     
@@ -925,7 +925,7 @@ print(gaming_pc.can_run_program("Video Editor", 4.0, 32))  # Should fail
 
 You have this inheritance-based design. Refactor it to use composition instead:
 
-```python-template
+```python
 class Vehicle:
     def __init__(self, make, model):
         self.make = make
@@ -956,7 +956,7 @@ class Motorcycle(Vehicle):
     type: success
     open: false
 
-```python-template
+```python-exec
 class VehicleInfo:
     """Component for basic vehicle information"""
     
