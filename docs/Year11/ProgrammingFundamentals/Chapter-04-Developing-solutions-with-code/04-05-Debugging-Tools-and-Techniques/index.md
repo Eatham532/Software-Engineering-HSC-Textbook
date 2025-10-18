@@ -45,7 +45,7 @@ result = calculate_average([])  # ZeroDivisionError
 
 Code that runs without crashing but produces incorrect results.
 
-```python-exec
+```python
 # Logic error - off-by-one error
 def get_last_element(my_list):
     return my_list[len(my_list)]  # Should be len(my_list) - 1
@@ -273,7 +273,7 @@ Modern IDEs provide powerful debugging tools that go beyond print statements.
 
 **Breakpoints** are markers that pause your program's execution at specific lines, allowing you to inspect the program's state.
 
-```python-exec
+```python
 def calculate_compound_interest(principal, rate, time):
     """Calculate compound interest - demonstrates breakpoint usage."""
     
@@ -307,7 +307,7 @@ def calculate_compound_interest(principal, rate, time):
 
 **Single line stepping** lets you execute your program one line at a time.
 
-```python-exec
+```python
 def bubble_sort_debug(arr):
     """Bubble sort with comments for stepping through."""
     
@@ -612,7 +612,7 @@ except AssertionError as e:
 
 ### Debugging with Try-Except Blocks
 
-```python-exec
+```python
 def robust_division_calculator():
     """Calculator that handles and debugs errors gracefully."""
     

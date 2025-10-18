@@ -20,7 +20,7 @@ Sensor simulation involves creating Python functions or classes that mimic the b
 
 Real sensors have limitations and quirks that affect system design:
 
-```python-template
+```python
 import random
 import time
 import math
@@ -82,7 +82,7 @@ Key aspects of realistic sensor simulation:
 
 Actuator simulation models how motors, servos, and other output devices respond to control signals. Unlike sensors (which provide data), actuators change the physical world, so simulation must track position, velocity, and state changes over time.
 
-```python-template
+```python
 import math
 import time
 
@@ -220,7 +220,7 @@ note right of SystemSimulation : Coordinates all components\nand runs control lo
 
 Here's a practical example - a temperature control system:
 
-```python-template
+```python
 import time
 import threading
 from datetime import datetime
@@ -331,7 +331,7 @@ control_system.stop_control_loop()
 
 Let's build a comprehensive simulation of a simple 2-axis robotic arm. This example demonstrates how to combine multiple actuators with position feedback and coordinate system transformations.
 
-```python-template
+```python
 import math
 import matplotlib.pyplot as plt
 
@@ -519,7 +519,7 @@ Build a greenhouse environment simulator that includes:
     type: success
     open: false
 
-```python-template
+```python
 import math
 import random
 import time
@@ -782,7 +782,7 @@ Create a pick-and-place robot simulation with:
     type: success
     open: false
 
-```python-template
+```python
 import math
 import time
 import random
@@ -1111,7 +1111,7 @@ Build a real-time pendulum balance control system with:
     type: success
     open: false
 
-```python-template
+```python
 import math
 import time
 import matplotlib.pyplot as plt

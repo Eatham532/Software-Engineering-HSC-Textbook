@@ -295,7 +295,7 @@ key_error_examples()
     type: note
     open: false
 
-```python
+```python-template
 def type_error_examples():
     """Common type errors and how to prevent them."""
     
@@ -906,7 +906,7 @@ debugging_strategies()
 
 ### Writing Defensive Code
 
-```python
+```python-template
 def defensive_programming():
     """Examples of defensive programming techniques."""
     

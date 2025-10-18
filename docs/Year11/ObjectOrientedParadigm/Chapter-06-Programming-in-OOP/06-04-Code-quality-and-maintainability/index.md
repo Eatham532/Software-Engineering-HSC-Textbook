@@ -128,7 +128,7 @@ Docstrings are the primary way to document Python classes and methods. They shou
 
 **Structure of a good docstring:**
 
-```python-exec
+```python
 def method_name(parameter1, parameter2):
     """
     Brief description of what the method does.
@@ -243,7 +243,7 @@ if self.balance > amount:
 
 **Good commenting:**
 
-```python
+```python-template
 # Apply compound interest calculation using the standard formula
 # A = P(1 + r/n)^(nt) where P=principal, r=rate, n=compounds/year, t=time
 final_amount = principal * (1 + annual_rate / compounds_per_year) ** (compounds_per_year * years)
@@ -272,7 +272,7 @@ Long methods are harder to:
 
 **Example of a method that's too long:**
 
-```python-exec
+```python
 def process_order(self, order_items, customer_info, payment_info):
     """Process a customer order - this method is too long!"""
     # Validate customer information
@@ -425,7 +425,7 @@ When you see a block of code that performs a specific task, extract it into its 
 
 **Before:**
 
-```python-exec
+```python
 def generate_report(self, students):
     # Calculate statistics
     total_students = len(students)
@@ -453,7 +453,7 @@ def generate_report(self, students):
 
 **After:**
 
-```python-exec
+```python
 def generate_report(self, students):
     """Generate a comprehensive student report."""
     stats = self._calculate_statistics(students)
@@ -497,7 +497,7 @@ def _format_student_section(self, student):
 
 **Before:**
 
-```python-exec
+```python
 def calculate_late_fee(self, days_late):
     if days_late <= 7:
         return days_late * 0.5
@@ -628,7 +628,7 @@ class C:
 
 Break down this long method into focused, single-purpose methods:
 
-```python-exec
+```python
 def analyze_exam_results(self, exam_scores):
     # Find highest and lowest scores
     highest = max(exam_scores)
@@ -682,7 +682,6 @@ def analyze_exam_results(self, exam_scores):
 
 Review your solution to Exercise 2 using the practical code quality checklist. Identify any remaining improvements needed.
 ///
-
 
 ## Section Recap
 

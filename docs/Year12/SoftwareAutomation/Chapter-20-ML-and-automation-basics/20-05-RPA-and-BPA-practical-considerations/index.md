@@ -956,7 +956,7 @@ class DataMigrationRPA:
 
 **Business Challenge**: Employees spend hours on routine administrative tasks like report generation, data entry, and file organization.
 
-```python-template
+```python
 import os
 import shutil
 from datetime import datetime, timedelta
@@ -3638,7 +3638,7 @@ Categorize each task and recommend appropriate automation approach.
 
 **Question 14**: Examine this code snippet from the BPA orchestration engine:
 
-```python-exec
+```python
 async def execute_workflow_step(self, instance_id: str, step_name: str):
     instance = self.process_instances.get(instance_id)
     if not instance:

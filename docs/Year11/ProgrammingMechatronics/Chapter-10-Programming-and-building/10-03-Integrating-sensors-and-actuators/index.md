@@ -28,7 +28,7 @@ An interface abstraction defines what operations a device can perform without sp
 
 - **Flexibility**: Support different hardware configurations
 
-```python-template
+```python
 from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional
 import time

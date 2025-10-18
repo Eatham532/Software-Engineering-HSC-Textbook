@@ -1643,7 +1643,7 @@ Design wireframes for three key screens using the `WireframeDesigner` class. Con
 
 **Wireframe Creation Approach:**
 
-```python
+```python-template
 # Create wireframe designer for mobile app
 designer = WireframeDesigner("Student Info Mobile App", ["mobile"])
 
@@ -1766,7 +1766,7 @@ Use the `UsabilityEvaluator` class to structure your evaluation and provide spec
 
 **Usability Evaluation Approach:**
 
-```python
+```python-template
 # Create usability evaluator for library system
 evaluator = UsabilityEvaluator(
     "Digital Library Management System",
@@ -1885,7 +1885,7 @@ Focus on ensuring the checkout process is usable by people with visual, motor, a
 
 **Accessibility Implementation Plan:**
 
-```python
+```python-template
 # Create accessibility auditor for e-commerce checkout
 auditor = AccessibilityAuditor("E-commerce Checkout Process", "AA")
 

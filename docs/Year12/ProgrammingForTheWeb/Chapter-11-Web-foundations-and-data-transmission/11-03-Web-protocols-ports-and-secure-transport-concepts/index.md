@@ -453,7 +453,7 @@ Include functions to hash passwords, verify them, and check strength.
     type: success
     open: false
 
-```python-template
+```python
 import hashlib
 import secrets
 import re

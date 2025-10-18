@@ -248,7 +248,7 @@ for cmd in test_commands:
 
 Let's create a text-based dashboard for a greenhouse monitoring system:
 
-```python-template
+```python
 import time
 import random
 from datetime import datetime

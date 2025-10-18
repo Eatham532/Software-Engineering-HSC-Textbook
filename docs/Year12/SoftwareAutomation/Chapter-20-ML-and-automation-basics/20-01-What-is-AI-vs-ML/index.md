@@ -72,7 +72,7 @@ This section provides clear definitions, practical examples, and Python implemen
 
 ### Python Example: AI vs ML Distinction
 
-```python-template
+```python
 import random
 import statistics
 from typing import List, Dict, Tuple
@@ -365,7 +365,7 @@ if __name__ == "__main__":
 
 ### Python Example: RPA Simulation
 
-```python-template
+```python
 import time
 import random
 from typing import Dict, List, Any
@@ -611,7 +611,7 @@ if __name__ == "__main__":
 
 ### Python Example: BPA System
 
-```python-template
+```python
 import json
 from typing import Dict, List, Optional, Callable
 from dataclasses import dataclass, field
@@ -1009,7 +1009,7 @@ Machine Learning can augment automation by adding:
 
 ### Python Example: ML-Enhanced Automation
 
-```python-template
+```python
 import re
 import random
 import statistics
@@ -1368,7 +1368,7 @@ if __name__ == "__main__":
 
 Create a simple function that determines whether a given automation scenario is better suited for traditional AI (rule-based) or ML (learning-based) approaches:
 
-```python-exec
+```python
 def recommend_approach(scenario_description):
     # Analyze the scenario and recommend AI or ML
     # Consider factors like:

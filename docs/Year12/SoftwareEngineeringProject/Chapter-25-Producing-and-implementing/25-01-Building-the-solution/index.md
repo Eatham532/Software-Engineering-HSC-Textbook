@@ -34,7 +34,7 @@ Incremental implementation means breaking down the complete solution into smalle
 
 4. **Keep increments small**: Aim for 1-4 week development cycles
 
-```python-exec
+```python
 # Example: Planning increments for a library management system
 project_increments = [
     {

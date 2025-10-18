@@ -129,7 +129,7 @@ Note on double underscores:
 
 An **invariant** is a condition that must always be true for an object to be in a valid state. Encapsulation helps maintain these invariants.
 
-```python-exec
+```python-template
 class Rectangle:
     def __init__(self, width, height):
         self._width = 0
@@ -175,7 +175,7 @@ except ValueError as e:
 
 **Getters** provide controlled access to internal data. **Setters** provide controlled modification of internal data.
 
-```python-exec
+```python-template
 class Temperature:
     def __init__(self, celsius=0):
         self._celsius = 0
@@ -231,7 +231,7 @@ print(f"Temperature: {temp.get_celsius()}°C")        # 30°C
 **Keep it simple:**
 For basic data access, Python's property decorator can make getters and setters look like regular attribute access:
 
-```python-exec
+```python-template
 class Circle:
     def __init__(self, radius):
         self._radius = 0
@@ -269,7 +269,7 @@ print(circle.area)    # 28.27431
 
 **Scenario**: Look at this code and identify what's wrong with the encapsulation:
 
-```python-exec
+```python-template
 class Car:
     def __init__(self, fuel_capacity):
         self.fuel_level = fuel_capacity

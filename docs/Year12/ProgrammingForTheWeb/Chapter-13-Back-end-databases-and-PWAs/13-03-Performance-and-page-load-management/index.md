@@ -14,7 +14,7 @@ Web performance directly impacts user experience, search engine rankings, and bu
 
 Caching stores frequently accessed data in faster storage locations to reduce load times:
 
-```python-template
+```python
 # Server-side caching implementation with Flask
 from flask import Flask, request, jsonify, make_response
 import redis
@@ -178,7 +178,7 @@ def popular_posts():
 
 Content Delivery Networks distribute static assets globally for faster access:
 
-```python-template
+```python
 # CDN and static asset management
 import os
 from flask import url_for
@@ -299,7 +299,7 @@ def inject_asset_helpers():
 
 Implementing compression to reduce transfer sizes:
 
-```python-template
+```python
 # Compression middleware and techniques
 import gzip
 import io

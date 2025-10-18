@@ -16,7 +16,7 @@ Bias in machine learning systems represents one of the most critical challenges 
 
 Bias in ML systems manifests through multiple pathways, each requiring specific identification and mitigation strategies.
 
-```python-template
+```python
 import numpy as np
 import pandas as pd
 from typing import Dict, List, Tuple, Any
@@ -972,7 +972,7 @@ if __name__ == "__main__":
 
 This section implements comprehensive frameworks for mitigating bias through diverse data collection, reweighting techniques, and fairness-aware metrics.
 
-```python-template
+```python
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
@@ -1522,7 +1522,7 @@ if __name__ == "__main__":
 
 This section implements comprehensive frameworks for documentation, model cards, and reproducibility checks to ensure transparency in bias mitigation efforts.
 
-```python-template
+```python
 import json
 from datetime import datetime
 from typing import Optional

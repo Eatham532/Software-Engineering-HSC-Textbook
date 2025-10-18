@@ -128,7 +128,7 @@ For **movement detection** (pest monitoring):
 
 - Accelerometer: better for detecting vibrations from smaller pests
 
-```python-template
+```python
 # Simulating sensor readings for greenhouse monitoring
 import random
 import time

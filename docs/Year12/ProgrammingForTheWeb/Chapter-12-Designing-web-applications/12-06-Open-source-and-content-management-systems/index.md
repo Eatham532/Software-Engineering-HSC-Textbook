@@ -54,7 +54,7 @@ maintainers --> servers : maintain
 
 Open-source projects operate through collaborative community models:
 
-```python-template
+```python
 # Example: Python tools for working with open-source projects
 import requests
 import json
@@ -759,7 +759,7 @@ def get_plugin_best_practices():
 
 Let's evaluate a practical scenario for a school website:
 
-```python
+```python-template
 # Example: School website CMS evaluation
 def evaluate_school_website_cms():
     """Comprehensive evaluation for school website CMS needs"""

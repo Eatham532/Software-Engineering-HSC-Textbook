@@ -248,7 +248,7 @@ print(f"Thank you! You entered age: {age}")
 
 ### Menu System Example
 
-```python
+```python-exec
 # Interactive menu using while loop
 def show_menu():
     print("\n=== Student Grade System ===")
@@ -460,7 +460,7 @@ for password in test_passwords:
 
 ### Shopping Cart Calculator
 
-```python
+```python-exec
 def shopping_cart():
     """Simple shopping cart with discount logic."""
     
@@ -762,7 +762,6 @@ This program demonstrates:
 - **String formatting** for currency display
 ///
 ///
-
 
 /// details | Exercise 3: Grade Book Manager
     type: question

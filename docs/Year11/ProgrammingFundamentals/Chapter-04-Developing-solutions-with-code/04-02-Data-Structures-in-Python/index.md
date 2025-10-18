@@ -264,7 +264,7 @@ print(f"Number of apples: {count_a}")
 
 ### List Manipulation Techniques
 
-```python-exec
+```python
 def manage_shopping_list():
     """Interactive shopping list manager."""
     
@@ -995,7 +995,7 @@ csv_analysis_tools()
 
 ### Complete Student Management System
 
-```python-template
+```python
 import csv
 
 class StudentManagementSystem:

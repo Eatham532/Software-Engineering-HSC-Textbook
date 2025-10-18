@@ -416,7 +416,7 @@ with open("students_dict.csv", "r") as file:
 
 ### Performance Considerations (For Reference)
 
-```python-exec
+```python
 # Lists are good for:
 # - Accessing by index: very fast
 # - Adding to end: very fast

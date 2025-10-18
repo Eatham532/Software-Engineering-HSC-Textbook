@@ -498,7 +498,7 @@ Let's walk through resolving a challenging integration between a student informa
 
 **Step 1: Problem analysis and categorization**
 
-```python-exec
+```python
 # Analyze the integration problem
 integration_problem = {
     "title": "Gradebook API data format mismatch",
@@ -546,7 +546,7 @@ def analyze_api_mismatch():
 
 **Step 2: Research and information gathering**
 
-```python-exec
+```python
 # Research potential solutions
 research_strategy = {
     "documentation_review": [
@@ -587,7 +587,7 @@ def research_solutions():
 
 **Step 3: Collaborative problem-solving**
 
-```python-exec
+```python
 # Engage team collaboration
 collaboration_plan = {
     "pair_programming": {
@@ -620,7 +620,7 @@ def implement_solution_collaboratively():
 
 **Step 4: Escalation if needed**
 
-```python-exec
+```python
 # Escalation plan if initial approaches fail
 escalation_strategy = {
     "level_1": {

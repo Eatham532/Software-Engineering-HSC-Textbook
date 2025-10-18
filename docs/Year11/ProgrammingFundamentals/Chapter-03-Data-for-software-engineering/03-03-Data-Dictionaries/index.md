@@ -193,7 +193,7 @@ print(validate_product_id("PRD123"))    # False
 
 Some constraints depend on other fields:
 
-```python-exec
+```python
 def validate_stock_rules(in_stock, stock_quantity):
     """Stock quantity must be > 0 if in_stock is True."""
     if in_stock and stock_quantity <= 0:

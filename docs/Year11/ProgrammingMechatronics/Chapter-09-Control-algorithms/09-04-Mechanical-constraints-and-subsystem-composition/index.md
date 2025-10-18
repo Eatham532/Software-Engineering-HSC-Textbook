@@ -75,7 +75,7 @@ end note
 
 ```
 
-```python-template
+```python
 import math
 
 class RobotArmConstraints:

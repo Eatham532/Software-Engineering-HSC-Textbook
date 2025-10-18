@@ -102,7 +102,7 @@ PID (Proportional-Integral-Derivative) control combines three components to achi
 
 **Control equation**: `output = Kp×error + Ki×∫error×dt + Kd×(derror/dt)`
 
-```python-template
+```python
 import time
 
 class PIDController:
@@ -241,7 +241,7 @@ RobotArmController ..> Disturbance : affected by
 
 ```
 
-```python-template
+```python
 import math
 import random
 import time
@@ -629,7 +629,7 @@ Tune a PID controller to meet these requirements. Start with Kp=1.0, Ki=0.1, Kd=
 
 4. **Fine-tune**: Adjust all parameters to meet performance requirements
 
-```python
+```python-template
 # Recommended parameters for high-inertia system:
 controller = PIDController(
     kp=8.0,   # Strong proportional response
@@ -691,7 +691,7 @@ Identify potential problems and suggest debugging steps.
 
 **Debugging code:**
 
-```python-exec
+```python
 def debug_pid_output(self, setpoint, measured_value):
     output, p, i, d = self.calculate_output(setpoint, measured_value)
     

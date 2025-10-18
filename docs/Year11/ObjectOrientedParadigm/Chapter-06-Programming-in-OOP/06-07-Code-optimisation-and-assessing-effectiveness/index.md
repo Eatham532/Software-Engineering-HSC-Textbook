@@ -202,7 +202,7 @@ class OrderCalculator:
 
 **Example: Performance Assessment and Improvement**
 
-```python-template
+```python
 
 import time
 from typing import List
@@ -787,7 +787,7 @@ Understanding where your code spends time is essential for effective optimizatio
 
 ### Time-Based Profiling
 
-```python-template
+```python
 
 import time
 import functools
@@ -928,7 +928,7 @@ def demonstrate_detailed_profiling():
 
 ### Memory Profiling
 
-```python-template
+```python
 
 import sys
 
@@ -1203,7 +1203,7 @@ def optimization_workflow_example():
 
 ### 2. Focus on Algorithmic Improvements
 
-```python-exec
+```python
 
 def algorithmic_optimization_example():
     """Show how algorithm choice has bigger impact than micro-optimizations."""
@@ -1306,7 +1306,7 @@ class ShoppingCart:
 
 Profile and optimize this data processing function:
 
-```python-exec
+```python
 
 def process_sales_data(sales_records):
     """Process sales data to find top products by revenue."""

@@ -275,7 +275,7 @@ safe_system.safe_operation_cycle("navigate_to_target")
 
 Let's build a comprehensive autonomous cleaning robot that demonstrates different autonomy levels and safety features:
 
-```python-template
+```python
 import random
 import time
 

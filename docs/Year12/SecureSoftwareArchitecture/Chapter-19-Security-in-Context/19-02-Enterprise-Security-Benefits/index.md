@@ -30,7 +30,7 @@ By the end of this section, you will be able to:
 
 Security ROI isn't just about preventing losses—it's about enabling business value. Let's build a comprehensive framework for calculating security benefits:
 
-```python-template
+```python
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 from decimal import Decimal
@@ -292,7 +292,7 @@ if __name__ == "__main__":
 
 ### Security Investment Portfolio Optimization
 
-```python-template
+```python
 from typing import List, Tuple
 import numpy as np
 from scipy.optimize import minimize
@@ -466,7 +466,7 @@ if __name__ == "__main__":
 
 Security investments often pay for themselves through simplified compliance processes and reduced audit costs:
 
-```python-template
+```python
 from enum import Enum
 from datetime import datetime, timedelta
 import pandas as pd

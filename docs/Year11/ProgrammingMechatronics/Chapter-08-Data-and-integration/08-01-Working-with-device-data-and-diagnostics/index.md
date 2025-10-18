@@ -49,7 +49,7 @@ Key characteristics of good device logs:
 
 Mechatronic systems work with diverse measurements: temperature in Celsius, distance in millimetres, pressure in pascals, electrical current in amperes. Mixing units or losing track of what units you're using leads to serious errors.
 
-```python-exec
+```python
 # Bad: unclear units
 motor_speed = 1500  # RPM? degrees per second? unclear!
 
@@ -97,7 +97,7 @@ For mechatronic systems, consider:
 
 - **Backup strategies**: Multiple copies of critical calibration and configuration data
 
-```python-template
+```python
 import json
 import os
 
@@ -172,7 +172,7 @@ GreenhouseMonitor --> CSVLogger : uses
 
 Here's the implementation:
 
-```python-template
+```python
 import csv
 import datetime
 import random
@@ -449,7 +449,7 @@ Create functions to:
     type: success
     open: false
 
-```python-template
+```python
 import pandas as pd
 from datetime import datetime, timedelta
 
@@ -600,7 +600,7 @@ Build a dashboard that:
     type: success
     open: false
 
-```python-template
+```python
 import time
 import os
 from datetime import datetime, timedelta

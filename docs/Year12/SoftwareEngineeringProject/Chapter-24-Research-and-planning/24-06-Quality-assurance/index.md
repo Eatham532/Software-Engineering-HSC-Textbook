@@ -22,7 +22,7 @@ Quality assurance begins with clearly defined criteria for judging software qual
 
 **Security**: The software protects data and systems from unauthorized access, manipulation, or destruction. Security criteria cover authentication, authorization, data encryption, input validation, and vulnerability management.
 
-```python-exec
+```python
 # Example: Quality criteria checklist for a student management system
 quality_criteria = {
     "correctness": [
@@ -189,7 +189,7 @@ Let's walk through implementing quality assurance for a digital library manageme
 
 **Step 1: Define quality criteria**
 
-```python-exec
+```python
 library_qa_criteria = {
     "correctness": {
         "Book checkout/return calculations are accurate",
@@ -217,7 +217,7 @@ library_qa_criteria = {
 
 **Step 2: Establish review checkpoints**
 
-```python-exec
+```python
 review_schedule = [
     {"phase": "Requirements", "reviewers": ["librarian", "IT_admin", "student_rep"]},
     {"phase": "Design", "reviewers": ["senior_developer", "UX_designer"]},
@@ -229,7 +229,7 @@ review_schedule = [
 
 **Step 3: Compliance checklist**
 
-```python-exec
+```python
 compliance_requirements = {
     "privacy": [
         "Student borrowing history is confidential",

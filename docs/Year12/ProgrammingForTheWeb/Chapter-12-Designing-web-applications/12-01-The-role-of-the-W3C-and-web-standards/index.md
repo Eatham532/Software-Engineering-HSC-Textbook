@@ -240,7 +240,7 @@ accessibility.check_color_contrast("#767676", "#ffffff")
 
 Internationalisation prepares software to support multiple languages and regions, while localisation adapts software for specific markets. These practices make web applications usable worldwide.
 
-```python-template
+```python
 import datetime
 from decimal import Decimal
 
@@ -389,7 +389,7 @@ i18n_demo.demonstrate_text_direction()
 
 The W3C develops security standards and recommends patterns that help protect web applications and users from various threats.
 
-```python-template
+```python
 import hashlib
 import secrets
 import base64
@@ -668,7 +668,7 @@ privacy.create_privacy_dashboard()
 
 Standards like ARIA, microdata, and JSON-LD help machines understand web content, improving accessibility and search engine optimization.
 
-```python-template
+```python
 import json
 
 class MachineReadableData:
@@ -1078,7 +1078,7 @@ Build a GDPR-compliant cookie consent manager:
     type: success
     open: false
 
-```python-template
+```python
 import json
 import datetime
 from typing import Dict, List

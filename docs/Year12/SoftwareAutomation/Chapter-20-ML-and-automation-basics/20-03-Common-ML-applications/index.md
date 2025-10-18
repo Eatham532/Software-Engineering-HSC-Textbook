@@ -52,7 +52,7 @@ Python's ecosystem makes it ideal for data analysis ML applications:
 
 ### Python Example: Customer Behavior Analysis
 
-```python-template
+```python
 import random
 import statistics
 import math
@@ -398,7 +398,7 @@ Python's forecasting advantages:
 
 ### Python Example: Sales Forecasting System
 
-```python-template
+```python
 import random
 import statistics
 import math
@@ -758,7 +758,7 @@ Python's assistant development advantages:
 
 ### Python Example: Smart Study Assistant
 
-```python-template
+```python
 
 import random
 import re
@@ -1310,7 +1310,7 @@ Python's image recognition advantages:
 
 ### Python Example: Document Scanner with OCR
 
-```python-template
+```python
 
 import random
 import string

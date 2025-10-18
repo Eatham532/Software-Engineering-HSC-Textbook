@@ -1296,7 +1296,7 @@ Create an audience analysis using the framework provided. Consider their differe
 
 **Audience Analysis Approach:**
 
-```python
+```python-template
 # Create analysis instance
 analysis = AudienceAnalysis("Student Information System Presentation")
 
@@ -1400,7 +1400,7 @@ Use the `PresentationNarrative` class to structure your story and generate a pre
 
 **Narrative Development Approach:**
 
-```python
+```python-template
 # Create narrative instance
 narrative = PresentationNarrative(
     "Smart Library Management System",
@@ -1522,7 +1522,7 @@ Use the `DemonstrationPlanner` class to create a comprehensive demo plan.
 
 **Demonstration Planning Approach:**
 
-```python
+```python-template
 # Create demonstration planner
 demo = DemonstrationPlanner("Restaurant POS System", 20)
 

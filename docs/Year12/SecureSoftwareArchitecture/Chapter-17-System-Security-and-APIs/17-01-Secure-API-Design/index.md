@@ -82,7 +82,7 @@ API keys are simple tokens that identify and authenticate API consumers. While e
 
 #### Basic API Key Implementation
 
-```python-template
+```python
 import secrets
 import hashlib
 import time
@@ -328,7 +328,7 @@ JWTs provide a stateless authentication mechanism that can carry user informatio
 
 #### JWT Implementation
 
-```python-template
+```python
 import jwt
 import json
 from datetime import datetime, timedelta
@@ -496,7 +496,7 @@ if __name__ == "__main__":
 
 OAuth 2.0 is an authorization framework that enables applications to obtain limited access to user accounts.
 
-```python-template
+```python
 import urllib.parse
 import requests
 from typing import Dict, Optional
@@ -671,7 +671,7 @@ Rate limiting is crucial for preventing abuse and ensuring fair resource allocat
 
 ### Token Bucket Algorithm Implementation
 
-```python-template
+```python
 import time
 from threading import Lock
 from typing import Dict, Optional
@@ -994,7 +994,7 @@ note over Gateway: - CSRF Protection\n- Secure Cookies\n- Session Rotation\n- Ti
 
 ### Comprehensive Session Manager Implementation
 
-```python-template
+```python
 import hashlib
 import secrets
 import json
@@ -1432,7 +1432,7 @@ end
 
 ### Comprehensive CORS Implementation
 
-```python-template
+```python
 from typing import Dict, List, Optional, Union
 import re
 from urllib.parse import urlparse
@@ -1828,7 +1828,7 @@ stop
 
 ### Automated Security Testing Framework
 
-```python-template
+```python
 import requests
 import json
 import time
@@ -2691,7 +2691,7 @@ Validator --> [File Controller]
 
 ### Complete Secure API Implementation
 
-```python-template
+```python
 from flask import Flask, request, jsonify, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps

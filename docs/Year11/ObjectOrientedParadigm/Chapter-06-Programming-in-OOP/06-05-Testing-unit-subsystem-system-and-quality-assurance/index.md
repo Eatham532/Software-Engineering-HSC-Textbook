@@ -50,7 +50,7 @@ Unit tests focus on the smallest testable parts of an application—typically in
 
 **Example: Testing a BankAccount class**
 
-```python-template
+```python
 import unittest
 
 class BankAccount:
@@ -540,7 +540,7 @@ class Calculator:
 
 Make running tests easy and habitual:
 
-```python
+```python-template
 # Simple test runner script
 if __name__ == '__main__':
     # Discover and run all tests

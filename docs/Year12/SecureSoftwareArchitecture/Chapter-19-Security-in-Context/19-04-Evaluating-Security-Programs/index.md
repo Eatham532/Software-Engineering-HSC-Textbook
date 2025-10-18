@@ -40,7 +40,7 @@ Security metrics transform complex security activities into measurable data that
 
 ### Python Implementation: Security Metrics Dashboard
 
-```python-template
+```python
 import json
 import datetime
 from typing import Dict, List, Optional
@@ -387,7 +387,7 @@ Effective risk assessment combines quantitative analysis with qualitative judgme
 
 ### Python Implementation: Risk Assessment Framework
 
-```python-template
+```python
 import json
 import datetime
 from typing import Dict, List, Optional, Tuple
@@ -858,7 +858,7 @@ Security audits provide independent assessment of security programs through syst
 
 ### Python Implementation: Security Audit Management System
 
-```python-template
+```python
 import json
 import datetime
 from typing import Dict, List, Optional, Tuple
@@ -1229,7 +1229,7 @@ Executives evaluate security through business lenses, focusing on:
 
 ### Python Implementation: Executive Communication Framework
 
-```python-template
+```python
 import json
 import datetime
 from typing import Dict, List, Optional, Tuple

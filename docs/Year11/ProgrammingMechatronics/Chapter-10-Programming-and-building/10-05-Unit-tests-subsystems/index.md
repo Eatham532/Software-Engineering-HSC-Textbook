@@ -210,7 +210,7 @@ class MockHeater:
 
 ### Comprehensive unit tests
 
-```python-template
+```python
 # test_temperature_controller.py - Unit tests using fixtures
 import unittest
 from temperature_controller import TemperatureController, SafetyException

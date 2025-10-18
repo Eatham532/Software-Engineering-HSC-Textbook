@@ -326,7 +326,7 @@ Focus on clear method signatures and basic stub logic.
     type: success
     open: false
 
-```python-template
+```python
 from datetime import datetime
 
 class Task:

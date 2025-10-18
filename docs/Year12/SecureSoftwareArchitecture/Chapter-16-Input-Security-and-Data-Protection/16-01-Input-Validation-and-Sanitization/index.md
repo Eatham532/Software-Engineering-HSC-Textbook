@@ -71,7 +71,7 @@ def get_user_vulnerable(username, password):
 
 ### Secure Implementation with Parameterized Queries
 
-```python-template
+```python
 import sqlite3
 import hashlib
 import secrets
@@ -427,7 +427,7 @@ XSS attacks inject malicious scripts into web applications that execute in other
 
 ### Secure Input Sanitization and Output Encoding
 
-```python-template
+```python
 import html
 import re
 import bleach
@@ -759,7 +759,7 @@ Understanding when and how to use whitelist (allow-list) and blacklist (deny-lis
 
 - API parameters with known formats
 
-```python-template
+```python
 import re
 from typing import List, Dict, Any, Optional
 from enum import Enum
@@ -1134,7 +1134,7 @@ def demonstrate_blacklist_limitations():
 
 Error messages must be informative for legitimate users while avoiding information disclosure to attackers.
 
-```python-template
+```python
 from datetime import datetime
 import logging
 from typing import Dict, Any
@@ -1233,7 +1233,7 @@ class SafeErrorHandler:
 
 File uploads are a common attack vector that require comprehensive security measures.
 
-```python-template
+```python
 import os
 import magic
 import hashlib

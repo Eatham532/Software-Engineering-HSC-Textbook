@@ -491,7 +491,7 @@ Let's walk through establishing version control and backup procedures for a scho
 
 **Step 1: Repository setup**
 
-```python-exec
+```python
 # Initialize project repository structure
 project_structure = {
     "student_management/": {
@@ -524,7 +524,7 @@ def setup_git_repository(project_name):
 
 **Step 2: Branching strategy implementation**
 
-```python-exec
+```python
 # Define branching workflow
 branching_workflow = {
     "main": {
@@ -555,7 +555,7 @@ branching_workflow = {
 
 **Step 3: Backup and release process**
 
-```python-exec
+```python
 # Automated backup and release process
 def create_backup_strategy():
     return {

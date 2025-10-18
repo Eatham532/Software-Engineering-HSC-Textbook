@@ -96,6 +96,7 @@ Before you start coding, you need to clearly understand the problem you're solvi
 **Problem statement structure** - A clear way to describe the problem:
 
 ```
+
 For [who has the problem]
 Who [their situation and challenges]
 The [your solution name] is a [type of solution]
@@ -535,6 +536,7 @@ if __name__ == '__main__':
 /// tab | Pseudocode
 
 ```
+
 ALGORITHM GradeCalculator
 
 FUNCTION validate_grade(grade)

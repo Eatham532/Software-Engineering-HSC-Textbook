@@ -81,7 +81,7 @@ Let's work through this process with a practical example.
 
 Break down requirements into specific, testable statements:
 
-```python-exec
+```python
 # From "Members can borrow books" we derive:
 # - A member must be registered to borrow
 # - Books must be available (not already borrowed)

@@ -98,7 +98,7 @@ Key differences:
 
 Objects don't work in isolation - they need to communicate with each other. This communication happens through **message passing**, which in Python means calling methods on objects.
 
-```python-exec
+```python-template
 # Create two account objects
 alice_account = BankAccount("ACC001", "Alice Smith", 1000)
 bob_account = BankAccount("ACC002", "Bob Jones", 500)
@@ -216,7 +216,7 @@ Create a `Student` class with:
     type: success
     open: false
 
-```python-exec
+```python-template
 class Student:
     def __init__(self, name, student_id, grade):
         self.name = name

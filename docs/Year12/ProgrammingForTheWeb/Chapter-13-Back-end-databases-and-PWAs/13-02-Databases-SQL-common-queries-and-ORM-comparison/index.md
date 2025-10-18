@@ -14,7 +14,7 @@ Databases are the persistent storage layer of web applications, and SQL (Structu
 
 CRUD (Create, Read, Update, Delete) operations form the foundation of database interactions:
 
-```python-template
+```python
 # Database setup and CRUD operations with Python
 import sqlite3
 from flask import Flask, request, jsonify
@@ -598,7 +598,7 @@ if __name__ == '__main__':
     type: success
     open: false
 
-```python-exec
+```python
 def create_user_safe(username, email, password):
     """CREATE with duplicate prevention"""
     try:
@@ -666,7 +666,7 @@ Understanding these SQL fundamentals enables developers to build secure, efficie
 
 ORMs provide an abstraction layer that maps database tables to Python classes and rows to objects:
 
-```python-template
+```python
 # SQLAlchemy ORM example - setting up models
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -767,7 +767,7 @@ with app.app_context():
 
 Comparing the same operations using ORM and raw SQL approaches:
 
-```python-template
+```python
 # Direct comparison: ORM vs Raw SQL
 import sqlite3
 from sqlalchemy import text

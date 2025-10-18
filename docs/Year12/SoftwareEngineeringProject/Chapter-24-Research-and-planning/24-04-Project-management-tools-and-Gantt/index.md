@@ -1465,7 +1465,7 @@ Implement project monitoring and evaluate appropriate tools:
 
 Here's a framework for completing the practice tasks:
 
-```python-exec
+```python
 # Task completion template
 def complete_project_management_analysis(project_name):
     """Template for comprehensive project management analysis."""

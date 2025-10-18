@@ -14,7 +14,7 @@ Modern web applications handle massive amounts of data and serve millions of use
 
 Data mining finds patterns and insights in large datasets. Web applications generate enormous amounts of data from user interactions, and mining this data helps improve services and make business decisions.
 
-```python-template
+```python
 import json
 from collections import Counter
 from datetime import datetime, timedelta
@@ -224,7 +224,7 @@ content_system.generate_content_report()
 
 Streaming data arrives continuously and must be processed in real-time. This creates unique challenges for web applications handling live data feeds, real-time analytics, or user interactions.
 
-```python-template
+```python
 import time
 import threading
 from queue import Queue
@@ -538,7 +538,7 @@ Create a simple data mining system for a fictional e-commerce website:
     type: success
     open: false
 
-```python-template
+```python
 import random
 from datetime import datetime, timedelta
 from collections import Counter, defaultdict

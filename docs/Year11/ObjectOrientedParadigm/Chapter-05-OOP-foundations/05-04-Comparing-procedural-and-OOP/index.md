@@ -91,7 +91,7 @@ Procedural programming works well when:
 
 ### 1. Simple, straightforward problems
 
-```python-exec
+```python
 # Simple calculation - procedural is fine
 def calculate_tax(income, tax_rate):
     return income * tax_rate
@@ -107,7 +107,7 @@ net = calculate_net_income(50000, 0.25)
 
 ### 2. Linear data processing
 
-```python-exec
+```python
 # Processing a list of data - procedural approach
 def clean_data(raw_data):
     return [item.strip().lower() for item in raw_data if item]
@@ -124,7 +124,7 @@ def process_user_data(raw_emails):
 
 ### 3. Mathematical or algorithmic problems
 
-```python-exec
+```python
 # Mathematical calculations work well procedurally
 def fibonacci(n):
     if n <= 1:
@@ -249,7 +249,7 @@ Here's how to transform procedural code into object-oriented code:
 
 ### Step 1: Identify data that belongs together
 
-```python-exec
+```python
 # Procedural: scattered data and functions
 customer_name = "John Doe"
 customer_email = "john@email.com"
@@ -356,7 +356,7 @@ class CheckingAccount(Account):
 
 **Procedural struggles with:**
 
-```python-exec
+```python
 # Hard to maintain: scattered related data
 player_name = "Alice"
 player_health = 100
@@ -428,7 +428,7 @@ For each scenario, decide whether procedural or OOP would be better and explain 
 
 Convert this procedural code to object-oriented:
 
-```python-exec
+```python
 # Procedural library system
 books = []
 members = []
@@ -516,7 +516,7 @@ class Library:
 
 Analyze this code and suggest improvements using OOP principles:
 
-```python-exec
+```python
 # Current procedural approach
 def process_payment(amount, payment_type, card_number=None, bank_account=None):
     if payment_type == "credit":

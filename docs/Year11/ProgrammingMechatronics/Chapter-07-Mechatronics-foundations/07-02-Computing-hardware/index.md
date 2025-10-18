@@ -117,7 +117,7 @@ stop
 
 Let's trace through a simple example:
 
-```python-exec
+```python
 # This Python code: x = 5 + 3
 # Might translate to these processor steps:
 

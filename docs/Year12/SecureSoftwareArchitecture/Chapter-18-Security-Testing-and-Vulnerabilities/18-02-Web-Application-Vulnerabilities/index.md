@@ -83,7 +83,7 @@ malicious_html = '''
 
 ### CSRF Prevention Implementation
 
-```python-template
+```python
 import secrets
 import hmac
 import hashlib
@@ -270,7 +270,7 @@ def set_secure_headers(response):
 
 Broken authentication encompasses various vulnerabilities that compromise user identity verification and session management.
 
-```python-template
+```python
 import bcrypt
 import jwt
 import time
@@ -531,7 +531,7 @@ def protected_resource():
 
 Security misconfigurations are among the most common vulnerabilities, often resulting from default settings, incomplete configurations, or overly permissive setups.
 
-```python-template
+```python
 import os
 from flask import Flask
 from flask_talisman import Talisman
@@ -679,7 +679,7 @@ def create_secure_app():
 
 ### Environment-Specific Security
 
-```python-template
+```python
 import os
 import json
 from pathlib import Path
@@ -792,7 +792,7 @@ class EnvironmentSecurityValidator:
 
 **Race conditions** occur when the behavior of software depends on the relative timing of events, such as the order in which threads execute. In web applications, this can lead to data corruption, privilege escalation, or business logic bypasses.
 
-```python-template
+```python
 import threading
 import time
 import uuid
@@ -978,7 +978,7 @@ if __name__ == "__main__":
 
 ### Database-Level Race Condition Prevention
 
-```python-template
+```python
 import sqlite3
 import threading
 from contextlib import contextmanager
@@ -1057,7 +1057,7 @@ class DatabaseTransactionManager:
 
 **Side-channel attacks** exploit information leaked through implementation details rather than vulnerabilities in the algorithm itself. Common side-channels include timing, power consumption, and electromagnetic radiation.
 
-```python-template
+```python
 import time
 import hmac
 import hashlib
@@ -1288,7 +1288,7 @@ if __name__ == "__main__":
 
 Let's create a complete secure web application that addresses all the vulnerabilities discussed:
 
-```python-template
+```python
 from flask import Flask, request, session, jsonify, render_template_string
 from flask_talisman import Talisman
 import secrets
