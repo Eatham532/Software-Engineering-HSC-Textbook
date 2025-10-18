@@ -1559,33 +1559,35 @@
 <p><strong>Controlled access</strong>: You interact with the TV only through the buttons, not by rewiring the circuits</p>
 </li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>  <span class="c1"># Public attribute</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">initial_balance</span>       <span class="c1"># Protected attribute (convention)</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># Internal state</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="c1"># Public interface - what users can do</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">+=</span> <span class="n">amount</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deposited $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="k">return</span> <span class="s2">&quot;Invalid deposit amount&quot;</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="p">:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">-=</span> <span class="n">amount</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">+=</span> <span class="mi">1</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Withdrew $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="k">return</span> <span class="s2">&quot;Insufficient funds or invalid amount&quot;</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_transaction_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">account_number</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">account_number</span> <span class="o">=</span> <span class="n">account_number</span>  <span class="c1"># Public attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">=</span> <span class="n">initial_balance</span>       <span class="c1"># Protected attribute (convention)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">=</span> <span class="mi">0</span>           <span class="c1"># Internal state</span>
+
+    <span class="c1"># Public interface - what users can do</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">+=</span> <span class="n">amount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Deposited $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Invalid deposit amount&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span> <span class="o">-=</span> <span class="n">amount</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Withdrew $</span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2">. Balance: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_balance</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;Insufficient funds or invalid amount&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_balance</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_transaction_count</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transaction_count</span>
+</code></pre>
+</div>
 <h3 id="public-interface-vs-internal-state">Public interface vs internal state<a class="headerlink" href="#public-interface-vs-internal-state" title="Permanent link">&para;</a></h3>
 <p>The <strong>public interface</strong> is what other parts of your program can see and use. The <strong>internal state</strong> is the data and implementation details that should be kept private.</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
@@ -1629,38 +1631,40 @@
 <p><strong>Private (name-mangled)</strong>: <code>__attribute</code> or <code>__method()</code> - triggers name-mangling to <code>_ClassName__attribute</code>; still accessible but signals strong non-public intent</p>
 </li>
 </ul>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>                    <span class="c1"># Public</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>        <span class="c1"># Public</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span> <span class="o">=</span> <span class="p">[]</span>                   <span class="c1"># Protected - internal list</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="mf">0.0</span>                     <span class="c1"># Protected - calculated value</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">__secret_notes</span> <span class="o">=</span> <span class="s2">&quot;Lazy student&quot;</span>  <span class="c1"># Name-mangled (private-ish)</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">grade</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_gpa</span><span class="p">()</span>           <span class="c1"># Update internal state</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>               <span class="c1"># Protected method</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">:</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                      <span class="c1"># Public method</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="sd">Note on double underscores:</span>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>
-</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="sd">- In Python, leading double underscores cause name-mangling: `__hidden` becomes `_ClassName__hidden`.</span>
-</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="sd">- This is not true privacy but helps avoid accidental access/overrides in subclasses.</span>
-</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="sd">- Most idiomatic Python code uses a single underscore for &quot;internal&quot; members and relies on conventions.</span>
-</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="sd">&quot;&quot;&quot;</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">student_id</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>                    <span class="c1"># Public</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student_id</span> <span class="o">=</span> <span class="n">student_id</span>        <span class="c1"># Public</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span> <span class="o">=</span> <span class="p">[]</span>                   <span class="c1"># Protected - internal list</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="mf">0.0</span>                     <span class="c1"># Protected - calculated value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__secret_notes</span> <span class="o">=</span> <span class="s2">&quot;Lazy student&quot;</span>  <span class="c1"># Name-mangled (private-ish)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grade</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">grade</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grade</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_gpa</span><span class="p">()</span>           <span class="c1"># Update internal state</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>               <span class="c1"># Protected method</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grades</span><span class="p">)</span> <span class="o">/</span> <span class="mi">25</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_gpa</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>                      <span class="c1"># Public method</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gpa</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Note on double underscores:</span>
+
+<span class="sd">- In Python, leading double underscores cause name-mangling: `__hidden` becomes `_ClassName__hidden`.</span>
+<span class="sd">- This is not true privacy but helps avoid accidental access/overrides in subclasses.</span>
+<span class="sd">- Most idiomatic Python code uses a single underscore for &quot;internal&quot; members and relies on conventions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre>
+</div>
 <h3 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h3>
 <p>An <strong>invariant</strong> is a condition that must always be true for an object to be in a valid state. Encapsulation helps maintain these invariants.</p>
 <div class="highlight python-exec" data-fence-type="exec" data-language="python">
@@ -1800,15 +1804,15 @@ For basic data access, Python&rsquo;s property decorator can make getters and se
 <details class="question">
 <summary>Exercise 1: Encapsulation Violations</summary>
 <p><strong>Scenario</strong>: Look at this code and identify what&rsquo;s wrong with the encapsulation:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuel_capacity</span><span class="p">):</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">fuel_level</span> <span class="o">=</span> <span class="n">fuel_capacity</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine_running</span> <span class="o">=</span> <span class="kc">False</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># Usage</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">car</span><span class="o">.</span><span class="n">fuel_level</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>        <span class="c1"># Problem 1: What&#39;s wrong here?</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">car</span><span class="o">.</span><span class="n">engine_running</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># Problem 2: What could go wrong?</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuel_capacity</span><span class="p">):</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">fuel_level</span> <span class="o">=</span> <span class="n">fuel_capacity</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">engine_running</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Usage</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">car</span><span class="o">.</span><span class="n">fuel_level</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span>        <span class="c1"># Problem 1: What&#39;s wrong here?</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">car</span><span class="o">.</span><span class="n">engine_running</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># Problem 2: What could go wrong?</span>
 </span></code></pre></div>
 <p><strong>Task</strong>: Identify the encapsulation violations and explain why they&rsquo;re problematic.</p>
 <details class="success">
@@ -1859,47 +1863,51 @@ For basic data access, Python&rsquo;s property decorator can make getters and se
 <p><strong>Task</strong>: Implement the <code>DigitalClock</code> class with proper encapsulation.</p>
 <details class="success">
 <summary>Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">DigitalClock</span><span class="p">:</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">)</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">):</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">hours</span> <span class="o">&lt;=</span> <span class="mi">23</span><span class="p">:</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">=</span> <span class="n">hours</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Hours must be between 0 and 23&quot;</span><span class="p">)</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">minutes</span> <span class="o">&lt;=</span> <span class="mi">59</span><span class="p">:</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span> <span class="o">=</span> <span class="n">minutes</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Minutes must be between 0 and 59&quot;</span><span class="p">)</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_24h</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
-</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_12h</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;12:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> AM&quot;</span>
-</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
-</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> AM&quot;</span>
-</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
-</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;12:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> PM&quot;</span>
-</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">12</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> PM&quot;</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">DigitalClock</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">minutes</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_time</span><span class="p">(</span><span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hours</span><span class="p">,</span> <span class="n">minutes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">hours</span> <span class="o">&lt;=</span> <span class="mi">23</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">=</span> <span class="n">hours</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Hours must be between 0 and 23&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">minutes</span> <span class="o">&lt;=</span> <span class="mi">59</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span> <span class="o">=</span> <span class="n">minutes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Minutes must be between 0 and 59&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_24h</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_time_12h</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;12:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> AM&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> AM&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hours</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;12:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> PM&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_hours</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">12</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_minutes</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2"> PM&quot;</span>
+</code></pre>
+</div>
 </details>
 </details>
 <details class="question">
 <summary>Exercise 3: Game Score Encapsulation</summary>
 <p><strong>Scenario</strong>: Improve this class by adding proper encapsulation:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">GameScore</span><span class="p">:</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">1</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">GameScore</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lives</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">1</span>
+</code></pre>
+</div>
 <p><strong>Task</strong>: Add proper encapsulation with:</p>
 <ul>
 <li>
@@ -1917,47 +1925,49 @@ For basic data access, Python&rsquo;s property decorator can make getters and se
 </ul>
 <details class="success">
 <summary>Sample Solution</summary>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">GameScore</span><span class="p">:</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">=</span> <span class="mi">0</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">=</span> <span class="mi">3</span>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="mi">1</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">add_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Add points to score with validation&quot;&quot;&quot;</span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">if</span> <span class="n">points</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">+=</span> <span class="n">points</span>
-</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>            <span class="c1"># Check for level up</span>
-</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="n">new_level</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">//</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>            <span class="k">if</span> <span class="n">new_level</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="p">:</span>
-</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="n">new_level</span>
-</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Level up! Now at level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>
-</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">lose_life</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Lose a life, game over if no lives left&quot;&quot;&quot;</span>
-</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">-=</span> <span class="mi">1</span>
-</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Game Over!&quot;</span><span class="p">)</span>
-</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>                <span class="k">return</span> <span class="kc">False</span>
-</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>        <span class="k">return</span> <span class="kc">True</span>
-</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
-</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current score&quot;&quot;&quot;</span>
-</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span>
-</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>
-</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_lives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get remaining lives&quot;&quot;&quot;</span>
-</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span>
-</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>
-</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">get_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current level&quot;&quot;&quot;</span>
-</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span>
-</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>
-</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">is_game_over</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if game is over&quot;&quot;&quot;</span>
-</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="k">class</span><span class="w"> </span><span class="nc">GameScore</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add points to score with validation&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">points</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">+=</span> <span class="n">points</span>
+            <span class="c1"># Check for level up</span>
+            <span class="n">new_level</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_score</span> <span class="o">//</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">new_level</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="n">new_level</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Level up! Now at level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">lose_life</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lose a life, game over if no lives left&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Game Over!&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current score&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_score</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_lives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get remaining lives&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current level&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_game_over</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if game is over&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lives</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+</code></pre>
+</div>
 </details>
 </details>
 <h2 id="recap">Recap<a class="headerlink" href="#recap" title="Permanent link">&para;</a></h2>
@@ -2005,7 +2015,7 @@ For basic data access, Python&rsquo;s property decorator can make getters and se
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 03:10:27 UTC">October 18, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 03:48:47 UTC">October 18, 2025</span>
   </span>
 
     

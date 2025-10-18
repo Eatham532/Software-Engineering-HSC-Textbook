@@ -1835,99 +1835,101 @@
 </ul>
 <h3 id="example-testing-a-grade-calculator-black-box-approach">Example: Testing a Grade Calculator (Black Box Approach)<a class="headerlink" href="#example-testing-a-grade-calculator-black-box-approach" title="Permanent link">&para;</a></h3>
 <p><strong>Specification</strong>: &ldquo;The grade calculator should convert numerical scores (0-100) to letter grades using the standard scale: A (90-100), B (80-89), C (70-79), D (60-69), F (0-59). Invalid inputs should raise appropriate errors.&rdquo;</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">GradeCalculator</span><span class="p">:</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts numerical scores to letter grades.&quot;&quot;&quot;</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">        Convert numerical score to letter grade.</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">            score (float): Numerical score between 0 and 100</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="sd">        Returns:</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">            str: Letter grade (A, B, C, D, or F)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">        Raises:</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">            ValueError: If score is not between 0 and 100</span>
-</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
-</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be a number&quot;</span><span class="p">)</span>
-</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>
-</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
-</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be between 0 and 100&quot;</span><span class="p">)</span>
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
-</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
-</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
-</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
-</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
-</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
-</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
-</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
-</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a>
-</span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="k">class</span><span class="w"> </span><span class="nc">TestGradeCalculatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
-</span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box tests based on specification only.&quot;&quot;&quot;</span>
-</span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
-</span><span id="__span-0-40"><a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">GradeCalculator</span><span class="p">()</span>
-</span><span id="__span-0-42"><a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>
-</span><span id="__span-0-43"><a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_a_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-44"><a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test A grade range (90-100) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-45"><a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="c1"># Test boundary values and middle values</span>
-</span><span id="__span-0-46"><a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
-</span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">95</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
-</span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="c1"># Upper boundary</span>
-</span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_b_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test B grade range (80-89) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
-</span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
-</span><span id="__span-0-54"><a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">89</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
-</span><span id="__span-0-55"><a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>
-</span><span id="__span-0-56"><a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_c_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-57"><a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test C grade range (70-79) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">70</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">75</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">79</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_d_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test D grade range (60-69) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
-</span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">65</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
-</span><span id="__span-0-66"><a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">69</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
-</span><span id="__span-0-67"><a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>
-</span><span id="__span-0-68"><a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_f_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-69"><a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test F grade range (0-59) based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>   <span class="c1"># Lower boundary</span>
-</span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71" href="#__codelineno-0-71"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
-</span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72" href="#__codelineno-0-72"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">59</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
-</span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73" href="#__codelineno-0-73"></a>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74" href="#__codelineno-0-74"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_inputs_based_on_specification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75" href="#__codelineno-0-75"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test error handling based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76" href="#__codelineno-0-76"></a>        <span class="c1"># Negative numbers should raise error</span>
-</span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77" href="#__codelineno-0-77"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78" href="#__codelineno-0-78"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79" href="#__codelineno-0-79"></a>
-</span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80" href="#__codelineno-0-80"></a>        <span class="c1"># Numbers above 100 should raise error</span>
-</span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81" href="#__codelineno-0-81"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-0-82"><a id="__codelineno-0-82" name="__codelineno-0-82" href="#__codelineno-0-82"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
-</span><span id="__span-0-83"><a id="__codelineno-0-83" name="__codelineno-0-83" href="#__codelineno-0-83"></a>
-</span><span id="__span-0-84"><a id="__codelineno-0-84" name="__codelineno-0-84" href="#__codelineno-0-84"></a>        <span class="c1"># Non-numeric inputs should raise error</span>
-</span><span id="__span-0-85"><a id="__codelineno-0-85" name="__codelineno-0-85" href="#__codelineno-0-85"></a>        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-</span><span id="__span-0-86"><a id="__codelineno-0-86" name="__codelineno-0-86" href="#__codelineno-0-86"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="s2">&quot;85&quot;</span><span class="p">)</span>
-</span><span id="__span-0-87"><a id="__codelineno-0-87" name="__codelineno-0-87" href="#__codelineno-0-87"></a>
-</span><span id="__span-0-88"><a id="__codelineno-0-88" name="__codelineno-0-88" href="#__codelineno-0-88"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">test_decimal_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-89"><a id="__codelineno-0-89" name="__codelineno-0-89" href="#__codelineno-0-89"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Test decimal scores based on specification.&quot;&quot;&quot;</span>
-</span><span id="__span-0-90"><a id="__codelineno-0-90" name="__codelineno-0-90" href="#__codelineno-0-90"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">89.5</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
-</span><span id="__span-0-91"><a id="__codelineno-0-91" name="__codelineno-0-91" href="#__codelineno-0-91"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">79.9</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
-</span><span id="__span-0-92"><a id="__codelineno-0-92" name="__codelineno-0-92" href="#__codelineno-0-92"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">59.9</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">GradeCalculator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts numerical scores to letter grades.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_grade</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">score</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert numerical score to letter grade.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            score (float): Numerical score between 0 and 100</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Letter grade (A, B, C, D, or F)</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: If score is not between 0 and 100</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be a number&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Score must be between 0 and 100&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;A&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;B&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;C&quot;</span>
+        <span class="k">elif</span> <span class="n">score</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;D&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;F&quot;</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TestGradeCalculatorBlackBox</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Black box tests based on specification only.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span> <span class="o">=</span> <span class="n">GradeCalculator</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_a_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test A grade range (90-100) based on specification.&quot;&quot;&quot;</span>
+        <span class="c1"># Test boundary values and middle values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">90</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">95</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="c1"># Upper boundary</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_b_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test B grade range (80-89) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">80</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Lower boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">85</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">89</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_c_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test C grade range (70-79) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">70</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">75</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">79</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_d_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test D grade range (60-69) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">65</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">69</span><span class="p">),</span> <span class="s2">&quot;D&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_f_grade_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test F grade range (0-59) based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>   <span class="c1"># Lower boundary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">30</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Middle value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">59</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Upper boundary</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_inputs_based_on_specification</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test error handling based on specification.&quot;&quot;&quot;</span>
+        <span class="c1"># Negative numbers should raise error</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Numbers above 100 should raise error</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
+
+        <span class="c1"># Non-numeric inputs should raise error</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="s2">&quot;85&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">test_decimal_scores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test decimal scores based on specification.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">89.5</span><span class="p">),</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">79.9</span><span class="p">),</span> <span class="s2">&quot;C&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">calculator</span><span class="o">.</span><span class="n">calculate_grade</span><span class="p">(</span><span class="mf">59.9</span><span class="p">),</span> <span class="s2">&quot;F&quot;</span><span class="p">)</span>
+</code></pre>
+</div>
 <h3 id="boundary-value-analysis">Boundary Value Analysis<a class="headerlink" href="#boundary-value-analysis" title="Permanent link">&para;</a></h3>
 <p>Black box testing often uses <strong>boundary value analysis</strong> to identify test cases at the edges of input domains:</p>
 <div class="highlight python-template" data-fence-type="template" data-language="python">
@@ -2383,34 +2385,36 @@
 <details class="question">
 <summary>Exercise 2: White Box Test Design</summary>
 <p>Analyze this code and design white box tests to achieve 100% statement and branch coverage:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculate_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate shipping cost based on weight, distance, and priority.&quot;&quot;&quot;</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="c1"># Weight-based cost</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">5.0</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">elif</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">10.0</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">15.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">weight</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.0</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="c1"># Distance multiplier</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">elif</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">1.5</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
-</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="c1"># Priority adjustment</span>
-</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="k">if</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;express&quot;</span><span class="p">:</span>
-</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
-</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="k">elif</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;overnight&quot;</span><span class="p">:</span>
-</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">3.0</span>
-</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="k">elif</span> <span class="n">priority</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
-</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid priority level&quot;</span><span class="p">)</span>
-</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
-</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">base_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</span></code></pre></div>
+<div class="highlight python-template" data-fence-type="template" data-language="python">
+<pre><code class="language-python"><span class="k">def</span><span class="w"> </span><span class="nf">calculate_shipping_cost</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">distance</span><span class="p">,</span> <span class="n">priority</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate shipping cost based on weight, distance, and priority.&quot;&quot;&quot;</span>
+    <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># Weight-based cost</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="k">elif</span> <span class="n">weight</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">=</span> <span class="mf">15.0</span> <span class="o">+</span> <span class="p">(</span><span class="n">weight</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.0</span>
+
+    <span class="c1"># Distance multiplier</span>
+    <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
+    <span class="k">elif</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">1.5</span>
+
+    <span class="c1"># Priority adjustment</span>
+    <span class="k">if</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;express&quot;</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">2.0</span>
+    <span class="k">elif</span> <span class="n">priority</span> <span class="o">==</span> <span class="s2">&quot;overnight&quot;</span><span class="p">:</span>
+        <span class="n">base_cost</span> <span class="o">*=</span> <span class="mf">3.0</span>
+    <span class="k">elif</span> <span class="n">priority</span> <span class="o">!=</span> <span class="s2">&quot;standard&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid priority level&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">base_cost</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre>
+</div>
 </details>
 <p>///</p>
 <details class="question">
@@ -2470,7 +2474,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 02:48:38 UTC">October 18, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2025 03:48:47 UTC">October 18, 2025</span>
   </span>
 
     
