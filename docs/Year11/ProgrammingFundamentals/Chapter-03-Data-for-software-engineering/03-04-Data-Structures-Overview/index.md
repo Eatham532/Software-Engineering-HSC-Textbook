@@ -488,7 +488,6 @@ This demonstrates:
 - **Formatted output** for readability
 ///
 ///
-///
 
 /// details | Exercise 2: Inventory Management
     type: question
@@ -573,7 +572,6 @@ This demonstrates:
 - **Iteration** over dictionary items
 
 - **Modular design** with separate functions
-///
 ///
 ///
 
@@ -676,7 +674,6 @@ This demonstrates:
 - **Iteration** and display formatting
 
 - **State management** for current position
-///
 ///
 ///
 
@@ -816,7 +813,6 @@ This demonstrates:
 - **Modular function design** for data operations
 ///
 ///
-///
 
 ## Common Mistakes to Avoid
 
@@ -827,7 +823,6 @@ This demonstrates:
 3. **Forgetting CSV file modes**: Use "w" for writing, "r" for reading
 
 4. **Not handling empty data structures**: Check if lists/dictionaries are empty before accessing
-
 
 ## Summary
 

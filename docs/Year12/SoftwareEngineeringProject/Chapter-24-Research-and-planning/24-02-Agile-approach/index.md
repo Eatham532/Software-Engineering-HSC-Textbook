@@ -402,7 +402,8 @@ Essential components of good User Stories:
 **Well-written User Stories**:
 
 **Student Portal Login**:
-///
+
+```
 As a high school student,
 I want to log into the school portal with my student ID,
 So that I can access my grades and assignment information securely.
@@ -429,8 +430,9 @@ So that I can stay informed about their academic progress.
 
 ```
 
-/// tab | Python Story Management
 ///
+
+/// tab | Python Story Management
 
 ```py
 
@@ -501,6 +503,7 @@ print(login_story.format_story())
 print(f"Ready for development: {login_story.is_ready_for_development()}")
 
 ```
+
 ///
 
 ## Practice
@@ -768,6 +771,7 @@ I want to register for sports day events online,
 So that I can easily sign up for activities I'm interested in and avoid lost paper forms.
 
 ```
+
 **Acceptance Criteria**:
 
 - Student can view available events with descriptions and time slots
@@ -789,6 +793,7 @@ I want to view my child's sports day results on my phone,
 So that I can celebrate their achievements and stay informed throughout the day.
 
 ```
+
 **Acceptance Criteria**:
 
 - Parent can search for their child by name or student ID
@@ -810,6 +815,7 @@ I want to enter event results directly on a tablet,
 So that I can quickly record outcomes and make them available to parents immediately.
 
 ```
+
 **Acceptance Criteria**:
 
 - Teacher can select event and enter participant placements
@@ -831,6 +837,7 @@ I want to see equipment scheduling conflicts when planning events,
 So that I can ensure all events have necessary resources available.
 
 ```
+
 **Acceptance Criteria**:
 
 - System highlights when same equipment is needed for concurrent events
@@ -852,6 +859,7 @@ I want to see which students haven't registered for any events,
 So that I can encourage participation and ensure all students are included.
 
 ```
+
 **Acceptance Criteria**:
 
 - Teacher can view class lists with registration status

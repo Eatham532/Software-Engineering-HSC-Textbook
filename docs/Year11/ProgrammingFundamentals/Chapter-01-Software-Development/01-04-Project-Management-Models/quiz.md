@@ -61,4 +61,3 @@ title: "01.04 Project Management Models - Quiz"
         - Projects finish too quickly
         - Problems are discovered late in the development cycle { data-correct }
         - Too much flexibility in requirements
-///

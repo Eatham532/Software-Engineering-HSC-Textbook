@@ -1430,7 +1430,6 @@ END
 *Note: This algorithm performs binary multiplication - it multiplies x and y using binary representation of x.*
 ///
 ///
-///
 
 /// tab | Intermediate
 
@@ -1495,7 +1494,6 @@ END
 - **Selection:** Check for sentinel value (-1), validate positive numbers, check if any valid numbers entered
 
 - **Iteration:** REPEAT-UNTIL loop to continue getting input until -1 is entered
-///
 ///
 ///
 
@@ -1588,7 +1586,6 @@ This is a **Selection Sort** algorithm. It sorts an array in ascending order by:
 - Swap array[1] and array[3]: [11, 12, 25, 34, 22, 64, 90]
 
 The algorithm continues until the entire array is sorted: [11, 12, 22, 25, 34, 64, 90]
-///
 ///
 ///
 

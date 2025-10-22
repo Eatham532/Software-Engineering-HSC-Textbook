@@ -145,7 +145,7 @@ The **purpose** is the problem the algorithm is designed to solve. To identify i
 
 4. **Summarize in one clear sentence**
 
-### Example Purposes:
+### Example Purposes
 
 | Algorithm | Purpose |
 |-----------|---------|
@@ -158,7 +158,7 @@ The **purpose** is the problem the algorithm is designed to solve. To identify i
 
 **Desk checking** means manually tracing through an algorithm step-by-step using specific input values to verify it works correctly.
 
-### How to Desk Check:
+### How to Desk Check
 
 1. **Choose test inputs** (including edge cases)
 
@@ -231,7 +231,7 @@ It's important to test different paths through selection structures:
 
 **Peer checking** involves having another person review your algorithm to catch errors you might miss.
 
-### Benefits of Peer Checking:
+### Benefits of Peer Checking
 
 - **Fresh eyes** spot problems you've become blind to
 
@@ -241,42 +241,27 @@ It's important to test different paths through selection structures:
 
 - **Better algorithms** through collaborative improvement
 
-### How to Conduct Peer Checking:
+### How to Conduct Peer Checking
 
-/// details | As the Author:
-    type: note
-    open: false
+/// tab | As the Author
 
 1. **Explain the purpose** of your algorithm
-
 2. **Walk through the logic** step by step
-
 3. **Show your desk check results**
-
 4. **Ask specific questions** about unclear parts
-
 5. **Listen to feedback** without being defensive
-
-///
 ///
 
-/// details | As the Reviewer:
-    type: note
-    open: false
+/// tab | As the Reviewer
 
 1. **Ask about the purpose** - is it clear?
-
 2. **Check the logic flow** - does it make sense?
-
 3. **Look for edge cases** - what could go wrong?
-
 4. **Verify the desk check** - do you get the same results?
-
 5. **Suggest improvements** constructively
-
 ///
 
-### Peer Checking Checklist:
+### Peer Checking Checklist
 
 | Check | Question | ✓ |
 |-------|----------|---|
@@ -385,7 +370,7 @@ Complete trace tables for both test cases and record the expected outputs:
 
 ## Common Issues Found Through Checking
 
-### Logic Errors:
+### Logic Errors
 
 - **Wrong conditions** in IF statements
 
@@ -395,7 +380,7 @@ Complete trace tables for both test cases and record the expected outputs:
 
 - **Wrong order** of operations
 
-### Input/Output Errors:
+### Input/Output Errors
 
 - **Missing inputs** needed for calculations
 
@@ -405,7 +390,7 @@ Complete trace tables for both test cases and record the expected outputs:
 
 - **No validation** of input ranges
 
-### Edge Case Problems:
+### Edge Case Problems
 
 - **Division by zero** not handled
 
@@ -414,7 +399,6 @@ Complete trace tables for both test cases and record the expected outputs:
 - **Boundary values** give unexpected results
 
 - **Very large or small numbers** cause overflow
-
 
 ## Summary
 

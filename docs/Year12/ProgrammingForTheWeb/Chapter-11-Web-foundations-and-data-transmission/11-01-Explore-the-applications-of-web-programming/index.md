@@ -1527,8 +1527,6 @@ Design a high-level architecture for a collaborative document editing platform t
 - WebRTC for peer-to-peer synchronization when possible
 
 - Event sourcing for reliable version history
-///
-
 
 ## Section Recap
 

@@ -244,7 +244,8 @@ For each external library, document:
 - Security considerations and update schedule
 
 **Sample dependency documentation**:
-///
+
+```
 React v18.2.0
 Purpose: Frontend user interface framework
 License: MIT License
@@ -254,8 +255,9 @@ Installation: npm install react@18.2.0
 
 ```
 
-/// tab | Python Dependency Tracker
 ///
+
+/// tab | Python Dependency Tracker
 
 ```py
 
@@ -429,6 +431,7 @@ print("Generated attribution text:")
 print(attribution[:200] + "...")  # Show first 200 characters
 
 ```
+
 ///
 
 ### Back-end engineering contributions
@@ -487,21 +490,25 @@ package "Infrastructure" {
 
 /// tab | Technology Stack
 **Web Servers**:
+
 - **Purpose**: Handle HTTP requests and serve responses
 - **Examples**: Apache, Nginx, Express.js, Django
 - **Considerations**: Performance, security, scalability
 
 **Databases**:
+
 - **Relational**: MySQL, PostgreSQL, SQL Server
 - **NoSQL**: MongoDB, Redis, Cassandra
 - **Selection factors**: Data structure, scalability needs, consistency requirements
 
 **API Frameworks**:
+
 - **REST APIs**: Express.js, Django REST Framework, Spring Boot
 - **GraphQL**: Apollo Server, GraphQL Yoga
 - **Real-time**: Socket.io, WebSocket APIs
 
 **CI/CD Infrastructure**:
+
 - **Version control**: Git, GitHub, GitLab
 - **Build automation**: Jenkins, GitHub Actions, GitLab CI
 - **Deployment**: Docker, Kubernetes, cloud platforms
@@ -750,6 +757,7 @@ print(f"Database Query Result: {query_result}")
 print(f"Backup Result: {backup_result}")
 
 ```
+
 ///
 
 ## Practice
@@ -823,6 +831,7 @@ audit_manager = ArtefactManager()
 report = audit_manager.generate_documentation_report()
 
 ```
+
 ///
 ///
 
@@ -884,9 +893,9 @@ security_risks = dep_manager.find_security_risks()
 outdated_deps = dep_manager.find_outdated_dependencies()
 
 ```
-///
-///
 
+///
+///
 
 ## Recap
 
