@@ -71,7 +71,7 @@
 
     // Re-init on resize
     window.addEventListener('resize', debounce(() => {
-      location.reload(); // Simple approach: reload on resize to re-init
+      // Navigation and tooltip re-initialization handled elsewhere; no reload needed.
     }, 300));
   }
 
@@ -240,8 +240,9 @@
     const sections = Array.from(document.querySelectorAll('.glossary-section'));
     if (!sections.length) return;
 
-    const TOTAL_DOTS = 20;
-    const MAX_WAVE_DISPLACEMENT = 50; // Max horizontal displacement in pixels
+  const TOTAL_DOTS = 20;
+  const MAX_WAVE_DISPLACEMENT = 50; // Max horizontal displacement in pixels
+  const MIN_VIEWPORT_TOP = 112; // px: keep nav/circle below header & top UI
 
     // Safety: remove any pre-existing desktop nav before creating a new one
     const preExisting = document.querySelectorAll('.glossary-vertical-nav');
@@ -301,8 +302,8 @@
     let isHovering = false;
     let rafId = null;
     let circleHideTimeout = null;
-  let isScrolling = false;
-  let scrollEndTimeout = null;
+    let isScrolling = false;
+    let scrollEndTimeout = null;
 
     // Helper: Get letter for a given scroll progress (0-1) based on term counts
     function getLetterAtProgress(progress) {
@@ -469,8 +470,8 @@
           const navRect = nav.getBoundingClientRect();
           const dotRect = activeDot.el.getBoundingClientRect();
             let y = dotRect.top + dotRect.height / 2 - navRect.top;
-            // Clamp circle so it doesn't go above 112px from viewport top
-            const minY = 112 - navRect.top;
+            // Clamp circle so it doesn't go above configured viewport offset
+            const minY = MIN_VIEWPORT_TOP - navRect.top;
             y = Math.max(minY, Math.min(navRect.height, y));
           
           const letter = getLetterAtProgress(scrollProgress);
@@ -501,7 +502,7 @@
       scrollEndTimeout = setTimeout(() => {
         isScrolling = false;
         scheduleCircleHide();
-      }, 1000);
+  }, 150);
     }, { passive: true });
 
     // Mouse hover
@@ -525,8 +526,8 @@
       if (letter) {
         const navRect = nav.getBoundingClientRect();
           let y = e.clientY - navRect.top;
-          // Clamp circle so it doesn't go above 112px from viewport top
-          const minY = 112 - navRect.top; // relative to nav top
+          // Clamp circle so it doesn't go above configured viewport offset
+          const minY = MIN_VIEWPORT_TOP - navRect.top; // relative to nav top
           y = Math.max(minY, Math.min(navRect.height, y));
         
         circle.querySelector('.hover-letter').textContent = letter;
@@ -607,7 +608,7 @@
         }
         
         // Clamp nav position to viewport with padding
-        const minTop = navHeight / 2 + 112; // Keep at least 112px from top
+  const minTop = navHeight / 2 + MIN_VIEWPORT_TOP; // Keep at least MIN_VIEWPORT_TOP from top
         const maxTop = viewportHeight - navHeight / 2 - 20;
         newNavTop = Math.max(minTop, Math.min(maxTop, newNavTop));
         
@@ -630,8 +631,8 @@
         // Update circle position relative to nav
         const updatedNavRect = nav.getBoundingClientRect();
           let y = mouseY - updatedNavRect.top;
-          // Clamp circle so it doesn't go above 112px from viewport top
-          const minY = 112 - updatedNavRect.top;
+          // Clamp circle so it doesn't go above configured viewport offset
+          const minY = MIN_VIEWPORT_TOP - updatedNavRect.top;
           y = Math.max(minY, Math.min(updatedNavRect.height, y));
         
         circle.querySelector('.hover-letter').textContent = letter;
@@ -1121,10 +1122,12 @@
   // Listen for both the navigation event and location change
   document.addEventListener('DOMContentLoaded', () => {
     // MkDocs Material emits this event when instant loading completes
-    document$.subscribe(() => {
-      cleanup();
-      setTimeout(init, 100); // Small delay to ensure DOM is ready
-    });
+    if (typeof document$ !== 'undefined' && document$ && typeof document$.subscribe === 'function') {
+      document$.subscribe(() => {
+        cleanup();
+        setTimeout(init, 100); // Small delay to ensure DOM is ready
+      });
+    }
   });
 
   // Fallback: Also listen for location changes
