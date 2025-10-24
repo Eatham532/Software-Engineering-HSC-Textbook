@@ -974,7 +974,108 @@
   function initExport() {
     const exportBtn = document.getElementById('glossary-export-pdf');
     if (exportBtn) {
-      exportBtn.addEventListener('click', () => window.print());
+      exportBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Collect glossary data from current page
+        const pageTitle = (document.querySelector('.md-content h1')?.innerText || document.title || 'Glossary').trim();
+        const sections = Array.from(document.querySelectorAll('.glossary-section'));
+        if (!sections.length) return;
+
+        const data = sections.map(sec => {
+          const letter = sec.dataset.letter || '';
+          const entries = Array.from(sec.querySelectorAll('.glossary-entry')).map(entry => ({
+            term: (entry.querySelector('h3')?.innerText || '').trim(),
+            full: (entry.querySelector('.glossary-full-form')?.innerText || '').trim(),
+            def: (entry.querySelector('.glossary-definition')?.innerText || '').trim(),
+            cat: (entry.querySelector('.term-category-pill')?.innerText || '').trim(),
+          }));
+          return { letter, entries };
+        }).filter(s => s.entries.length > 0);
+
+        // Build a beautiful print view HTML (self-contained)
+        const now = new Date();
+        const dateStr = now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        const totalTerms = data.reduce((sum, s) => sum + s.entries.length, 0);
+
+        const html = `<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${pageTitle} – Printable</title>
+  <style>
+    @page { size: A4; margin: 16mm 14mm; }
+    html, body { background: #fff; color: #111; font: 12pt/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif; }
+    .toolbar.no-print { position: sticky; top: 0; background: #f7f7f7; border-bottom: 1px solid #ddd; padding: 8px 12px; display: flex; gap: 8px; z-index: 10; }
+    .toolbar.no-print button { padding: 6px 12px; border-radius: 6px; border: 1px solid #bbb; background: white; cursor: pointer; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 6mm 12mm; }
+    .cover { page-break-after: always; text-align: center; margin-top: 25vh; }
+    .cover h1 { font-size: 28pt; margin: 0 0 10mm; font-weight: 700; letter-spacing: 0.5px; }
+    .cover .meta { color: #666; font-size: 12pt; }
+    .toc { page-break-after: always; }
+    .toc h2 { font-size: 18pt; margin: 0 0 6mm; border-bottom: 2px solid #eee; padding-bottom: 3mm; }
+    .toc-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px 16px; }
+    .toc-item { color: #333; }
+    .toc-item .letter { font-weight: 700; font-size: 12pt; margin-right: 6px; }
+    .toc-item .count { color: #777; font-size: 10pt; }
+    .section { page-break-before: always; }
+    .section:first-of-type { page-break-before: auto; }
+    .letter-heading { font-size: 22pt; font-weight: 700; margin: 0 0 6mm; border-bottom: 2px solid #eee; padding-bottom: 3mm; }
+    .entry { page-break-inside: avoid; margin: 0 0 5mm; }
+    .entry h3 { margin: 0; font-size: 13pt; font-weight: 700; }
+    .entry .full { font-style: italic; color: #555; margin: 1mm 0 2mm; }
+    .entry .def { margin: 0 0 2mm; }
+    .entry .cat { display: inline-block; background: #eef3ff; color: #1b3a8a; font-size: 9pt; padding: 1px 8px; border-radius: 999px; border: 1px solid #d6e3ff; }
+    .footer { position: fixed; bottom: 6mm; left: 0; right: 0; text-align: center; color: #888; font-size: 9pt; }
+    @media print { .no-print { display: none !important; } .container { padding: 0; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar no-print">
+    <button onclick="window.print()">Print</button>
+    <button onclick="window.close()">Close</button>
+    <div style="margin-left:auto;color:#666">${totalTerms} terms • ${dateStr}</div>
+  </div>
+  <div class="container">
+    <section class="cover">
+      <h1>${pageTitle}</h1>
+      <div class="meta">${totalTerms} terms • Generated ${dateStr}</div>
+    </section>
+
+    <section class="toc">
+      <h2>Contents</h2>
+      <div class="toc-list">
+        ${data.map(s => `<div class="toc-item"><span class="letter">${s.letter}</span><span class="count">(${s.entries.length})</span></div>`).join('')}
+      </div>
+    </section>
+
+    ${data.map(s => `
+      <section class="section" id="letter-${s.letter}">
+        <h2 class="letter-heading">${s.letter}</h2>
+        ${s.entries.map(en => `
+          <article class="entry">
+            <h3>${en.term || ''}</h3>
+            ${en.full ? `<div class="full">${en.full}</div>` : ''}
+            ${en.def ? `<div class="def">${en.def}</div>` : ''}
+            ${en.cat ? `<div class="cat">${en.cat}</div>` : ''}
+          </article>
+        `).join('')}
+      </section>
+    `).join('')}
+
+    <div class="footer no-print">Tip: Use your browser's Print dialog to save as PDF.</div>
+  </div>
+  <script>/* Optional: auto-print on open? Disabled to allow preview */</script>
+</body>
+</html>`;
+
+        const win = window.open('', '_blank');
+        if (!win) return;
+        win.document.open();
+        win.document.write(html);
+        win.document.close();
+      });
     }
   }
 
