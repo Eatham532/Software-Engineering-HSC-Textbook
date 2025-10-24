@@ -21,7 +21,7 @@ exclude_docs: |
 plugins:
   - search
   - macros:
-      module_name: glossary_macros
+      module_name: macros/glossary_macros
   - include-markdown
   - git-revision-date-localized
   - kroki:
@@ -85,8 +85,8 @@ markdown_extensions:
   - attr_list
   - def_list
   - footnotes
-  - glossary_extension
-  - kroki_wrapper
+  - extensions.glossary_extension
+  - extensions.kroki_wrapper
   - md_in_html
   - smarty
   - tables
@@ -102,49 +102,49 @@ markdown_extensions:
         # Python
         - name: python-exec
           class: python-exec
-          format: !!python/name:code_fence_formatter.format_exec
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: python-template
           class: python-template
-          format: !!python/name:code_fence_formatter.format_template
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: python-error
           class: python-error
-          format: !!python/name:code_fence_formatter.format_error
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_error
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         # Web Languages
         - name: html-exec
           class: html-exec
-          format: !!python/name:code_fence_formatter.format_exec
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: html-template
           class: html-template
-          format: !!python/name:code_fence_formatter.format_template
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: css-exec
           class: css-exec
-          format: !!python/name:code_fence_formatter.format_exec
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: css-template
           class: css-template
-          format: !!python/name:code_fence_formatter.format_template
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: javascript-exec
           class: javascript-exec
-          format: !!python/name:code_fence_formatter.format_exec
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: javascript-template
           class: javascript-template
-          format: !!python/name:code_fence_formatter.format_template
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: js-exec
           class: js-exec
-          format: !!python/name:code_fence_formatter.format_exec
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
         - name: js-template
           class: js-template
-          format: !!python/name:code_fence_formatter.format_template
-          validator: !!python/name:code_fence_formatter.fence_validator
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
   - pymdownx.escapeall
   - toc:
       permalink: true
@@ -181,50 +181,50 @@ extra_javascript:
   - assets/glossary.js
 
 extra:
-    generator: false
-    domain: auto
-    # Site-wide alert banner configuration
-    site_banner:
-      enabled: true
-      text: "This textbook is in <strong>beta</strong> – content is actively being refined."
-      link_text: "Report issues or suggestions"
-      link_url: "/issues/new/choose"  # Relative to repo_url
-      variant: "warning"  # Options: info, warning, error, success
-      version: "1"  # Increment this to force re-show after dismissal
-    # Footer configuration
-    footer:
-      show_beta_badge: true  # Set to false to hide the BETA badge in footer
-    # IndexNow configuration - Now handled by GitHub Actions workflow
-    # The API key file in docs/ is still used by scripts/indexnow_notify.py
-    # indexnow:
-    #   enabled: true
-    #   production_url: "https://eatham532.github.io/Software-Engineering-HSC-Textbook/"
-    consent:
-      title: Cookie consent
-      actions:
-        - accept
-        - manage
-      cookies:
-        analytics: Google Analytics
-      description: >- 
-        We use cookies to recognize your repeated visits and preferences, as well
-        as to measure the effectiveness of the textbook. With your consent, you're helping us to
-        make software engineering education better for everyone.
-    analytics:
-      provider: google
-      property: G-58275RL1P9
-      feedback:
-        title: Was this page helpful?
-        ratings:
-          - icon: material/emoticon-happy-outline
-            name: This page was helpful
-            data: 1
-            note: >-
-              Thanks for your feedback!
-          - icon: material/emoticon-sad-outline
-            name: This page could be improved
-            data: 0
-            note: >- 
-              Thanks for your feedback! Help us improve this page by creating an
-              <a href="https://github.com/Eatham532/Software-Engineering-HSC-Textbook/issues/new/choose" target="_blank" rel="noopener">issue</a>
-              on github.
+  generator: false
+  domain: auto
+  # Site-wide alert banner configuration
+  site_banner:
+    enabled: true
+    text: "This textbook is in <strong>beta</strong> – content is actively being refined."
+    link_text: "Report issues or suggestions"
+    link_url: "/issues/new/choose"  # Relative to repo_url
+    variant: "warning"  # Options: info, warning, error, success
+    version: "1"  # Increment this to force re-show after dismissal
+  # Footer configuration
+  footer:
+    show_beta_badge: true  # Set to false to hide the BETA badge in footer
+  # IndexNow configuration - Now handled by GitHub Actions workflow
+  # The API key file in docs/ is still used by scripts/indexnow_notify.py
+  # indexnow:
+  #   enabled: true
+  #   production_url: "https://eatham532.github.io/Software-Engineering-HSC-Textbook/"
+  consent:
+    title: Cookie consent
+    actions:
+      - accept
+      - manage
+    cookies:
+      analytics: Google Analytics
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of the textbook. With your consent, you're helping us to
+      make software engineering education better for everyone.
+  analytics:
+    provider: google
+    property: G-58275RL1P9
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >- 
+            Thanks for your feedback! Help us improve this page by creating an
+            <a href="https://github.com/Eatham532/Software-Engineering-HSC-Textbook/issues/new/choose" target="_blank" rel="noopener">issue</a>
+            on github.
