@@ -1,0 +1,532 @@
+/**
+ * Glossary Styling
+ * Integrates with Material for MkDocs theme
+ */
+
+/* ============================================================================
+   GLOSSARY TERM LINKS (in content)
+   ============================================================================ */
+
+.glossary-term {
+  border-bottom: 1px dotted var(--md-typeset-color);
+  cursor: help;
+  text-decoration: none;
+  transition: border-color 0.2s ease;
+  color: inherit;
+}
+
+.glossary-term:hover {
+  border-bottom-color: var(--md-accent-fg-color);
+}
+
+/* ============================================================================
+   TOOLTIP (Desktop)
+   ============================================================================ */
+
+.glossary-tooltip {
+  position: absolute;
+  z-index: 1000;
+  max-width: 480px; /* Increased from 320px */
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 18px 24px; /* Increased padding */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
+}
+
+.glossary-tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto; /* Allow interaction with tooltip */
+  cursor: text; /* Show text cursor for selection */
+}
+
+.glossary-tooltip-term {
+  font-weight: 600;
+  font-size: 1.6em; /* 150% larger (1.05 * 1.5) */
+  /* color: var(--md-primary-fg-color); */
+  color: var(--md-default-fg-color);
+  margin-bottom: 6px;
+  user-select: text; /* Allow text selection */
+}
+
+.glossary-tooltip-full-form {
+  font-style: italic;
+  font-size: 1.35em; /* 150% larger (0.9 * 1.5) */
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 12px;
+  user-select: text;
+}
+
+.glossary-tooltip-definition {
+  font-size: 1.4em;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  user-select: text;
+}
+
+.glossary-tooltip-category {
+  margin-top: 8px;
+}
+
+.glossary-tooltip .category-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.9em;
+  border-radius: 12px;
+  background: var(--md-primary-fg-color);
+  color: #ffffff; /* Always white */
+}
+
+/* ============================================================================
+   MOBILE TRAY (Tap to open on mobile)
+   ============================================================================ */
+
+.glossary-mobile-tray {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--md-default-bg-color);
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.glossary-mobile-tray.visible {
+  transform: translateY(0);
+}
+
+.mobile-tray-handle {
+  height: 4px;
+  width: 40px;
+  background: var(--md-default-fg-color--lighter);
+  border-radius: 2px;
+  margin: 8px auto;
+}
+
+.mobile-tray-content {
+  padding: 16px 20px 24px;
+  position: relative;
+}
+
+.mobile-tray-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--md-default-fg-color--light);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-tray-term {
+  font-weight: 600;
+  font-size: 1.2em;
+  /* color: var(--md-primary-fg-color); */
+  color: var(--md-default-fg-color);
+  margin-bottom: 8px;
+}
+
+.mobile-tray-full-form {
+  font-style: italic;
+  font-size: 0.95em;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 12px;
+}
+
+.mobile-tray-definition {
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.mobile-tray-category {
+  margin-top: 12px;
+}
+
+/* ============================================================================
+   GLOSSARY PAGE
+   ============================================================================ */
+
+.glossary-filters {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--md-code-bg-color);
+  border-radius: 4px;
+}
+
+.glossary-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.filter-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.category-filter-btn {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85em;
+  border-radius: 16px;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.category-filter-btn:hover {
+  background: var(--md-accent-fg-color--transparent);
+  border-color: var(--md-accent-fg-color);
+}
+
+.glossary-categories .category-filter-btn.active {
+  background: var(--md-primary-fg-color);
+  color: #ffffff; /* Always white */
+  border-color: var(--md-primary-fg-color);
+}
+
+.glossary-actions {
+  margin-bottom: 2rem;
+  text-align: right;
+}
+
+#glossary-export-pdf {
+  background: var(--md-primary-fg-color);
+  color: #ffffff; /* Always white */
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9em;
+  transition: opacity 0.2s ease;
+}
+
+#glossary-export-pdf:hover {
+  opacity: 0.9;
+}
+
+#glossary-export-pdf::before {
+  content: "⬇ "; /* Universal download arrow */
+}
+
+.glossary-section {
+  margin-bottom: 3rem;
+}
+
+.glossary-letter-heading {
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--md-typeset-color); /* Use typeset color instead of primary */
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--md-default-fg-color--lighter);
+  padding-bottom: 0.5rem;
+}
+
+.glossary-entry {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.glossary-entry:last-child {
+  border-bottom: none;
+}
+
+.glossary-entry h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.glossary-full-form {
+  font-style: italic;
+  color: var(--md-default-fg-color--light);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.glossary-definition {
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+}
+
+.glossary-entry .term-category-pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8em;
+  border-radius: 12px;
+  background: var(--md-primary-fg-color--light);
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.glossary-entry .term-category-pill:hover {
+  background: var(--md-primary-fg-color);
+  color: #ffffff; /* Always white */
+}
+
+/* ============================================================================
+   WAVE NAVIGATION (Desktop)
+   ============================================================================ */
+
+.glossary-vertical-nav {
+  position: fixed;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 100;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  cursor: grab;
+  transition: top 0.15s ease-out;
+}
+
+/* Wider hover area using pseudo-element */
+.glossary-vertical-nav::before {
+  content: '';
+  position: absolute;
+  left: -40px; /* Extend 40px to the left */
+  right: -40px; /* Extend 40px to the right */
+  top: -20px;
+  bottom: -20px;
+  z-index: -1; /* Behind the dots */
+  pointer-events: auto; /* Allow hover events */
+}
+
+.glossary-vertical-nav.dragging {
+  cursor: grabbing !important;
+  transition: none; /* Disable transition when dragging for immediate response */
+}
+
+.nav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--md-default-fg-color--lighter);
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.4;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none; /* Prevent image-like dragging */
+}
+
+.nav-dot.active {
+  opacity: 1;
+  background: var(--md-primary-fg-color);
+}
+
+.nav-hover-circle {
+  position: absolute;
+  width: 48px; /* Smaller circle */
+  height: 48px;
+  border-radius: 50%;
+  background: var(--md-primary-fg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--md-default-bg-color); /* Border for contrast */
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  z-index: 1000; /* Above everything */
+}
+
+.nav-hover-circle.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.nav-hover-circle .hover-letter {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff; /* Always white */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Better readability */
+}
+
+/* ============================================================================
+   MOBILE NAVIGATION (Horizontal swipeable slider)
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .glossary-vertical-nav {
+    display: none !important;
+  }
+
+  .glossary-mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px; /* Increased to prevent clipping */
+    background: var(--md-default-bg-color);
+    border-top: 1px solid var(--md-default-fg-color--lightest);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    overflow: visible; /* Allow circle to appear above */
+  }
+
+  .mobile-nav-track {
+    display: flex;
+    gap: 0;
+    align-items: center;
+    justify-content: space-evenly; /* Evenly space dots across full width */
+    padding: 0 1rem; /* Small padding on edges */
+    overflow: visible; /* Allow circle to show */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    height: 100%;
+    touch-action: none; /* Prevent default touch actions */
+    position: relative;
+  }
+
+  .mobile-nav-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-nav-dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    max-width: 12px; /* Prevent stretching */
+    border-radius: 50%;
+    background: var(--md-default-fg-color--lighter);
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.4;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-drag: none; /* Prevent image-like dragging */
+    pointer-events: auto;
+  }
+
+  .mobile-nav-dot.active {
+    opacity: 1;
+    background: var(--md-primary-fg-color);
+  }
+
+  .mobile-hover-circle {
+    position: fixed; /* Fixed to viewport */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--md-primary-fg-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid var(--md-default-bg-color); /* Border for contrast */
+    bottom: 80px; /* Above mobile nav */
+    z-index: 1000; /* Above everything */
+    transform: translate(-50%, 0) scale(0.8);
+  }
+
+  .mobile-hover-circle.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .mobile-hover-circle .hover-letter {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff; /* Always white */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Better readability */
+  }
+
+  .md-content__inner {
+    padding-bottom: 90px; /* Increased for larger mobile nav */
+  }
+}
+
+/* ============================================================================
+   PRINT STYLES (for PDF export)
+   ============================================================================ */
+
+@media print {
+  .glossary-vertical-nav,
+  .glossary-mobile-nav,
+  .glossary-mobile-tray,
+  .glossary-filters,
+  .glossary-actions,
+  .md-sidebar,
+  .md-header,
+  .md-footer {
+    display: none !important;
+  }
+
+  .glossary-entry {
+    page-break-inside: avoid;
+  }
+
+  .glossary-section {
+    page-break-after: avoid;
+  }
+}
+
+/* ============================================================================
+   DARK MODE ADJUSTMENTS
+   ============================================================================ */
+
+[data-md-color-scheme="slate"] .glossary-tooltip,
+[data-md-color-scheme="slate"] .glossary-mobile-tray {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+[data-md-color-scheme="slate"] .nav-hover-circle,
+[data-md-color-scheme="slate"] .mobile-hover-circle {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  border: 3px solid rgba(255, 255, 255, 0.1); /* Lighter border in dark mode */
+}
+
+[data-md-color-scheme="slate"] .nav-hover-circle,
+[data-md-color-scheme="slate"] .mobile-hover-circle {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
