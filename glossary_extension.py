@@ -162,7 +162,7 @@ class GlossaryExtension(Extension):
         )
         # Priority 100 - before links (priority 120) but after code (priority 190)
         md.inlinePatterns.register(glossary_processor, 'glossary', 100)
-        print(f"✓ Glossary extension registered with pattern matching {len(glossary_config.terms)} term variants")
+        # print(f"✓ Glossary extension registered with pattern matching {len(glossary_config.terms)} term variants")
 
 
 def makeExtension(**kwargs):

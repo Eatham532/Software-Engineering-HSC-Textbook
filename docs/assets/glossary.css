@@ -8,7 +8,7 @@
    ============================================================================ */
 
 .glossary-term {
-  border-bottom: 1px dotted var(--md-primary-fg-color);
+  border-bottom: 1px dotted var(--md-typeset-color);
   cursor: help;
   text-decoration: none;
   transition: border-color 0.2s ease;
@@ -47,8 +47,9 @@
 
 .glossary-tooltip-term {
   font-weight: 600;
-  font-size: 1.58em; /* 150% larger (1.05 * 1.5) */
-  color: var(--md-primary-fg-color);
+  font-size: 1.6em; /* 150% larger (1.05 * 1.5) */
+  /* color: var(--md-primary-fg-color); */
+  color: var(--md-default-fg-color);
   margin-bottom: 6px;
   user-select: text; /* Allow text selection */
 }
@@ -62,7 +63,7 @@
 }
 
 .glossary-tooltip-definition {
-  font-size: 1.43em; /* 150% larger (0.95 * 1.5) */
+  font-size: 1.4em;
   line-height: 1.6;
   margin-bottom: 12px;
   user-select: text;
@@ -75,7 +76,7 @@
 .category-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  font-size: 0.85em;
+  font-size: 0.9em;
   border-radius: 12px;
   background: var(--md-primary-fg-color);
   color: #ffffff !important; /* Always white */
@@ -137,7 +138,8 @@
 .mobile-tray-term {
   font-weight: 600;
   font-size: 1.2em;
-  color: var(--md-primary-fg-color);
+  /* color: var(--md-primary-fg-color); */
+  color: var(--md-default-fg-color);
   margin-bottom: 8px;
 }
 
@@ -277,7 +279,7 @@
   font-size: 0.8em;
   border-radius: 12px;
   background: var(--md-primary-fg-color--light);
-  color: var(--md-default-fg-color);
+  color: #ffffff !important;
   text-decoration: none;
   transition: all 0.2s ease;
 }
@@ -294,17 +296,19 @@
 .glossary-vertical-nav {
   position: fixed;
   right: 2rem;
-  top: 50vh; /* Use vh instead of % for true viewport centering */
-  margin-top: -200px; /* Approximate half of nav height, adjust as needed */
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   z-index: 100;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  cursor: grab;
+  transition: top 0.15s ease-out;
 }
 
 /* Wider hover area using pseudo-element */
@@ -313,14 +317,15 @@
   position: absolute;
   left: -40px; /* Extend 40px to the left */
   right: -40px; /* Extend 40px to the right */
-  top: 0;
-  bottom: 0;
+  top: -20px;
+  bottom: -20px;
   z-index: -1; /* Behind the dots */
   pointer-events: auto; /* Allow hover events */
 }
 
 .glossary-vertical-nav.dragging {
-  cursor: grabbing;
+  cursor: grabbing !important;
+  transition: none; /* Disable transition when dragging for immediate response */
 }
 
 .nav-dot {

@@ -204,6 +204,13 @@
     const toc = document.querySelector('.md-sidebar--secondary');
     if (toc) toc.style.display = 'none';
 
+    // Ensure we never create duplicate navs
+    // Remove any existing instances before building anew
+    const existingDesktopNav = document.querySelectorAll('.glossary-vertical-nav');
+    const existingMobileNavs = document.querySelectorAll('.glossary-mobile-nav');
+    if (existingDesktopNav.length > 0) existingDesktopNav.forEach(el => el.remove());
+    if (existingMobileNavs.length > 0) existingMobileNavs.forEach(el => el.remove());
+
     if (isMobile()) {
       buildMobileNav();
     } else {
@@ -225,222 +232,465 @@
     }, 300));
   }
 
+  // ============================================================================
+  // VERTICAL NAVIGATION (Desktop sidebar with wave effect)
+  // ============================================================================
+
   function buildWaveNav() {
     const sections = Array.from(document.querySelectorAll('.glossary-section'));
     if (!sections.length) return;
 
+    const TOTAL_DOTS = 20;
+    const MAX_WAVE_DISPLACEMENT = 50; // Max horizontal displacement in pixels
+
+    // Safety: remove any pre-existing desktop nav before creating a new one
+    const preExisting = document.querySelectorAll('.glossary-vertical-nav');
+    if (preExisting.length) preExisting.forEach(el => el.remove());
+
+    // Calculate proportional mapping based on term counts
+    const sectionData = sections.map(section => ({
+      letter: section.dataset.letter,
+      element: section,
+      termCount: section.querySelectorAll('.glossary-entry').length,
+      offsetTop: section.offsetTop
+    }));
+    
+    const totalTerms = sectionData.reduce((sum, s) => sum + s.termCount, 0);
+    
+    // Build cumulative distribution for proportional mapping
+    let cumulativeTerms = 0;
+    const letterRanges = sectionData.map(section => {
+      const startRatio = cumulativeTerms / totalTerms;
+      cumulativeTerms += section.termCount;
+      const endRatio = cumulativeTerms / totalTerms;
+      return {
+        letter: section.letter,
+        element: section.element,
+        startRatio,
+        endRatio,
+        offsetTop: section.offsetTop
+      };
+    });
+
+    // Create navigation container
     const nav = document.createElement('div');
     nav.className = 'glossary-vertical-nav';
     
-    // Hover circle
-    const hoverCircle = document.createElement('div');
-    hoverCircle.className = 'nav-hover-circle';
-    hoverCircle.innerHTML = '<span class="hover-letter"></span>';
-    nav.appendChild(hoverCircle);
+    // Create hover circle indicator
+    const circle = document.createElement('div');
+    circle.className = 'nav-hover-circle';
+    circle.innerHTML = '<span class="hover-letter"></span>';
+    nav.appendChild(circle);
     
-    // Calculate proportional spacing
-    const totalTerms = document.querySelectorAll('.glossary-entry').length;
-    const avgTermsPerLetter = totalTerms / sections.length;
-    
-    let allDots = [];
-    sections.forEach((section) => {
-      const letter = section.dataset.letter;
-      const termsCount = section.querySelectorAll('.glossary-entry').length;
-      const dotCount = Math.max(1, Math.round((termsCount / avgTermsPerLetter) * 3));
-
-      for (let i = 0; i < dotCount; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'nav-dot';
-        dot.dataset.letter = letter;
-        
-        // Prevent dots from being dragged like images
-        dot.addEventListener('dragstart', (e) => e.preventDefault());
-        dot.addEventListener('drag', (e) => e.preventDefault());
-        
-        nav.appendChild(dot);
-        allDots.push({ el: dot, letter });
-      }
-    });
+    // Create fixed 20 dots
+    const dots = [];
+    for (let i = 0; i < TOTAL_DOTS; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'nav-dot';
+      nav.appendChild(dot);
+      dots.push({ 
+        el: dot, 
+        index: i
+      });
+    }
 
     document.body.appendChild(nav);
 
+  // State
     let isDragging = false;
-    let lastMouseY = 0;
+    let isHovering = false;
+    let rafId = null;
+    let circleHideTimeout = null;
+  let isScrolling = false;
+  let scrollEndTimeout = null;
 
-    // Mouse tracking for wave effect
-    nav.addEventListener('mousemove', (e) => {
-      lastMouseY = e.clientY;
-      updateWaveEffect(nav, allDots, e.clientY);
-      showHoverCircle(nav, e, getLetterAtPosition(allDots, e.clientY, nav));
-    });
-
-    nav.addEventListener('mouseleave', () => {
-      resetWaveEffect(allDots);
-      hideHoverCircle(nav);
-    });
-
-    nav.addEventListener('mousedown', (e) => {
-      // Check if click is within the nav area (including wider hover zone)
-      isDragging = true;
-      nav.classList.add('dragging');
+    // Helper: Get letter for a given scroll progress (0-1) based on term counts
+    function getLetterAtProgress(progress) {
+      const clampedProgress = Math.max(0, Math.min(1, progress));
       
-      // Find the letter at the clicked position
-      const letter = getLetterAtPosition(allDots, e.clientY, nav);
+      for (const range of letterRanges) {
+        if (clampedProgress >= range.startRatio && clampedProgress <= range.endRatio) {
+          return range.letter;
+        }
+      }
+      return letterRanges[letterRanges.length - 1]?.letter || null;
+    }
+
+    // Helper: Get scroll position for a given progress
+    function getScrollForProgress(progress) {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      return progress * docHeight;
+    }
+
+    // Helper: Get current scroll progress (0-1)
+    function getCurrentScrollProgress() {
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      return docHeight > 0 ? scrollTop / docHeight : 0;
+    }
+
+    // Helper: Get dot index at Y position relative to nav
+    function getDotIndexAtY(clientY) {
+      const navRect = nav.getBoundingClientRect();
+      const relativeY = Math.max(0, Math.min(navRect.height, clientY - navRect.top));
+      const progress = relativeY / navRect.height;
+      return Math.round(progress * (TOTAL_DOTS - 1));
+    }
+
+    // Helper: Scroll based on dot index
+    function scrollToDotIndex(index) {
+      const progress = index / (TOTAL_DOTS - 1);
+      const targetScroll = getScrollForProgress(progress);
+      window.scrollTo({ top: targetScroll, behavior: 'instant' });
+    }
+
+    // Helper: Apply wave displacement to dots based on mouse position
+    function applyWaveDrag(mouseX, mouseY) {
+      const navRect = nav.getBoundingClientRect();
+      const navCenterX = navRect.left + navRect.width / 2;
+      const relativeY = mouseY - navRect.top;
+      
+      // Calculate horizontal displacement based on mouse X distance from nav
+      const distanceFromNav = mouseX - navCenterX;
+      const maxDistance = 200;
+      
+      // Calculate base shift for entire nav to keep hovered dot under cursor
+      const hoveredDotIndex = getDotIndexAtY(mouseY);
+      const baseShift = Math.max(-MAX_WAVE_DISPLACEMENT, Math.min(MAX_WAVE_DISPLACEMENT, distanceFromNav * 0.3));
+      
+      dots.forEach(({ el, index }) => {
+        const dotRect = el.getBoundingClientRect();
+        const dotY = dotRect.top + dotRect.height / 2 - navRect.top;
+        const verticalDistance = Math.abs(relativeY - dotY);
+        
+        // Calculate wave displacement
+        const verticalFactor = Math.max(0, 1 - (verticalDistance / 120));
+        const horizontalFactor = Math.max(0, Math.min(1, Math.abs(distanceFromNav) / maxDistance));
+        
+        // Combine factors for smooth wave
+        const waveFactor = verticalFactor * verticalFactor; // Quadratic for smoother falloff
+        const waveDisplacement = waveFactor * Math.min(Math.abs(distanceFromNav) * 0.5, MAX_WAVE_DISPLACEMENT);
+        
+        // Total displacement = base shift + wave displacement
+        const xOffset = baseShift + (distanceFromNav < 0 ? -waveDisplacement : waveDisplacement);
+        
+        // Scale effect: larger when closer to mouse Y
+        const scale = 1 + (verticalFactor * 2);
+        const opacity = 0.4 + (verticalFactor * 0.6);
+        
+        el.style.transform = `translateX(${xOffset}px) scale(${scale})`;
+        el.style.opacity = opacity;
+        el.style.transition = 'transform 0.08s ease-out, opacity 0.08s ease-out';
+      });
+      
+      // Move circle horizontally with the wave
+      const hoveredDot = dots[hoveredDotIndex];
+      if (hoveredDot) {
+        const hoveredDotRect = hoveredDot.el.getBoundingClientRect();
+        const dotCenterX = hoveredDotRect.left + hoveredDotRect.width / 2 - navRect.left;
+        circle.style.left = `${dotCenterX}px`;
+        circle.style.transform = 'translate(-50%, -50%)';
+      }
+    }
+
+    // Helper: Apply hover scale effect (no horizontal displacement)
+    function applyHoverScale(centerY) {
+      const navRect = nav.getBoundingClientRect();
+      const relativeY = centerY - navRect.top;
+
+      dots.forEach(({ el }) => {
+        const dotRect = el.getBoundingClientRect();
+        const dotY = dotRect.top + dotRect.height / 2 - navRect.top;
+        const distance = Math.abs(relativeY - dotY);
+        
+        const maxDistance = 100;
+        if (distance < maxDistance) {
+          const factor = 1 - (distance / maxDistance);
+          const scale = 1 + (factor * factor * 2);
+          const opacity = 1;
+          el.style.transform = `translateX(0) scale(${scale})`;
+          el.style.opacity = opacity;
+        } else {
+          el.style.transform = 'translateX(0) scale(1)';
+          el.style.opacity = '0.4';
+        }
+      });
+      
+      // Reset circle X position
+      circle.style.left = '50%';
+      circle.style.transform = 'translate(-50%, -50%)';
+    }
+
+    // Helper: Reset dots to default state
+    function resetDots() {
+      dots.forEach(({ el }) => {
+        el.style.transform = 'translateX(0) scale(1)';
+        el.style.opacity = '0.4';
+        el.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+      });
+      
+      // Reset circle position
+      circle.style.left = '50%';
+      circle.style.transform = 'translate(-50%, -50%)';
+    }
+
+    // Helper: Auto-hide circle after delay
+    function scheduleCircleHide() {
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+      circleHideTimeout = setTimeout(() => {
+        if (!isDragging && !isHovering) {
+          circle.classList.remove('visible');
+        }
+      }, 2000);
+    }
+
+    // Helper: Update active dot and circle based on scroll
+    function updateActive() {
+      const scrollProgress = getCurrentScrollProgress();
+      
+      // Find which dot should be active based on scroll progress
+      const activeDotIndex = Math.round(scrollProgress * (TOTAL_DOTS - 1));
+      
+      dots.forEach(({ el, index }) => {
+        if (index === activeDotIndex) {
+          el.classList.add('active');
+          if (!isDragging && !isHovering) {
+            el.style.opacity = '1';
+          }
+        } else {
+          el.classList.remove('active');
+        }
+      });
+
+      // Update circle position and letter ONLY when scrolling (not hovering/dragging)
+      if (isScrolling && !isDragging && !isHovering) {
+        const activeDot = dots[activeDotIndex];
+        if (activeDot) {
+          const navRect = nav.getBoundingClientRect();
+          const dotRect = activeDot.el.getBoundingClientRect();
+            let y = dotRect.top + dotRect.height / 2 - navRect.top;
+            // Clamp circle so it doesn't go above 112px from viewport top
+            const minY = 112 - navRect.top;
+            y = Math.max(minY, Math.min(navRect.height, y));
+          
+          const letter = getLetterAtProgress(scrollProgress);
+          if (letter) {
+            circle.querySelector('.hover-letter').textContent = letter;
+            circle.classList.add('visible');
+            circle.style.top = `${y}px`;
+            circle.style.left = '50%';
+            circle.style.transform = 'translate(-50%, -50%)';
+            circle.style.transition = 'top 0.2s ease-out, left 0.2s ease-out';
+            scheduleCircleHide();
+          }
+        }
+      } else if (!isHovering && !isDragging && !isScrolling) {
+        // No interaction: keep hidden
+        circle.classList.remove('visible');
+      }
+    }
+
+    // Show circle while scrolling; auto-hide after scrolling stops
+    window.addEventListener('scroll', () => {
+      isScrolling = true;
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+      if (scrollEndTimeout) clearTimeout(scrollEndTimeout);
+      // Update immediately to reflect current position
+      updateActive();
+      // Consider scroll ended shortly after last event
+      scrollEndTimeout = setTimeout(() => {
+        isScrolling = false;
+        scheduleCircleHide();
+      }, 1000);
+    }, { passive: true });
+
+    // Mouse hover
+    nav.addEventListener('mouseenter', () => {
+      isHovering = true;
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+    });
+
+    nav.addEventListener('mousemove', (e) => {
+      if (isDragging) return;
+      
+      isHovering = true;
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+      
+      applyHoverScale(e.clientY);
+      
+      const dotIndex = getDotIndexAtY(e.clientY);
+      const progress = dotIndex / (TOTAL_DOTS - 1);
+      const letter = getLetterAtProgress(progress);
+      
       if (letter) {
-        scrollToLetter(letter);
+        const navRect = nav.getBoundingClientRect();
+          let y = e.clientY - navRect.top;
+          // Clamp circle so it doesn't go above 112px from viewport top
+          const minY = 112 - navRect.top; // relative to nav top
+          y = Math.max(minY, Math.min(navRect.height, y));
+        
+        circle.querySelector('.hover-letter').textContent = letter;
+        circle.classList.add('visible');
+        circle.style.top = `${y}px`;
+        circle.style.transition = 'top 0.05s linear';
       }
     });
 
+    nav.addEventListener('mouseleave', () => {
+      isHovering = false;
+      if (!isDragging) {
+        resetDots();
+        updateActive();
+        scheduleCircleHide();
+      }
+    });
+
+    // Click
+    nav.addEventListener('click', (e) => {
+      if (isDragging) return;
+      const dotIndex = getDotIndexAtY(e.clientY);
+      scrollToDotIndex(dotIndex);
+    });
+
+    // Drag
+    nav.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      isDragging = true;
+      nav.classList.add('dragging');
+      nav.style.cursor = 'grabbing';
+      
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+      
+      const dotIndex = getDotIndexAtY(e.clientY);
+      scrollToDotIndex(dotIndex);
+    });
+
     document.addEventListener('mousemove', (e) => {
-      if (isDragging) {
-        // Find letter at current position during drag
-        const nav = document.querySelector('.glossary-vertical-nav');
-        if (nav) {
-          const letter = getLetterAtPosition(allDots, e.clientY, nav);
-          if (letter) {
-            scrollToLetter(letter);
-          }
+      if (!isDragging) return;
+      
+      const mouseY = e.clientY;
+      const mouseX = e.clientX;
+      
+      const viewportHeight = window.innerHeight;
+      
+      // Get current nav dimensions and position
+      const currentNavRect = nav.getBoundingClientRect();
+      const navHeight = currentNavRect.height;
+      
+      let targetDotIndex;
+      let shouldMoveNav = false;
+      
+      if (mouseY < currentNavRect.top) {
+        // Mouse above current nav bounds - move nav to follow
+        shouldMoveNav = true;
+        targetDotIndex = 0;
+      } else if (mouseY > currentNavRect.bottom) {
+        // Mouse below current nav bounds - move nav to follow
+        shouldMoveNav = true;
+        targetDotIndex = TOTAL_DOTS - 1;
+      } else {
+        // Mouse within current nav bounds - don't move nav, just track the dot
+        shouldMoveNav = false;
+        targetDotIndex = getDotIndexAtY(mouseY);
+      }
+      
+      // Only update nav position if we need to follow the mouse
+      if (shouldMoveNav) {
+        let newNavTop;
+        
+        if (mouseY < currentNavRect.top) {
+          // Position nav so first dot is under mouse
+          newNavTop = mouseY + (navHeight / 2);
+        } else {
+          // Position nav so last dot is under mouse
+          newNavTop = mouseY - (navHeight / 2);
         }
+        
+        // Clamp nav position to viewport with padding
+        const minTop = navHeight / 2 + 112; // Keep at least 112px from top
+        const maxTop = viewportHeight - navHeight / 2 - 20;
+        newNavTop = Math.max(minTop, Math.min(maxTop, newNavTop));
+        
+        // Apply nav position (no transition for immediate response)
+        nav.style.top = `${newNavTop}px`;
+        nav.style.transform = 'translateY(-50%)';
+        nav.style.transition = 'none';
+      }
+      
+      // Apply wave displacement
+      applyWaveDrag(mouseX, mouseY);
+      
+      // Scroll based on the target dot
+      scrollToDotIndex(targetDotIndex);
+      
+      const progress = targetDotIndex / (TOTAL_DOTS - 1);
+      const letter = getLetterAtProgress(progress);
+      
+      if (letter) {
+        // Update circle position relative to nav
+        const updatedNavRect = nav.getBoundingClientRect();
+          let y = mouseY - updatedNavRect.top;
+          // Clamp circle so it doesn't go above 112px from viewport top
+          const minY = 112 - updatedNavRect.top;
+          y = Math.max(minY, Math.min(updatedNavRect.height, y));
+        
+        circle.querySelector('.hover-letter').textContent = letter;
+        circle.classList.add('visible');
+        circle.style.top = `${y}px`;
+        circle.style.transition = 'top 0.05s linear, left 0.05s linear';
       }
     });
 
     document.addEventListener('mouseup', () => {
-      isDragging = false;
-      nav.classList.remove('dragging');
-    });
-
-    nav.addEventListener('click', (e) => {
-      // Click anywhere in the nav area (including wider hover zone)
-      const letter = getLetterAtPosition(allDots, e.clientY, nav);
-      if (letter) {
-        scrollToLetter(letter);
-      }
-    });
-
-    // Scroll highlighting
-    updateActiveNavOnScroll(allDots);
-    window.addEventListener('scroll', () => updateActiveNavOnScroll(allDots), { passive: true });
-  }
-
-  function updateWaveEffect(nav, dots, mouseY) {
-    const navRect = nav.getBoundingClientRect();
-    const relativeY = mouseY - navRect.top;
-
-    dots.forEach(({ el }) => {
-      const dotRect = el.getBoundingClientRect();
-      const dotY = dotRect.top + dotRect.height / 2 - navRect.top;
-      const distance = Math.abs(relativeY - dotY);
-      
-      // Wave effect: closer = larger, max scale 2.5, min scale 0.6
-      const maxDistance = 100;
-      const scale = distance < maxDistance 
-        ? 0.6 + (1.9 * (1 - distance / maxDistance))
-        : 0.6;
-      
-      el.style.transform = `scale(${scale})`;
-      el.style.opacity = distance < maxDistance ? 1 : 0.4;
-    });
-  }
-
-  function resetWaveEffect(dots) {
-    dots.forEach(({ el }) => {
-      el.style.transform = 'scale(1)';
-      el.style.opacity = '0.4';
-    });
-  }
-
-  function getLetterAtPosition(dots, mouseY, nav) {
-    const navRect = nav.getBoundingClientRect();
-    const relativeY = mouseY - navRect.top;
-
-    for (const { el, letter } of dots) {
-      const dotRect = el.getBoundingClientRect();
-      const dotY = dotRect.top + dotRect.height / 2 - navRect.top;
-      if (Math.abs(relativeY - dotY) < 20) {
-        return letter;
-      }
-    }
-    return null;
-  }
-
-  function showHoverCircle(nav, event, letter) {
-    if (!letter) return;
-
-    const circle = nav.querySelector('.nav-hover-circle');
-    const letterSpan = circle.querySelector('.hover-letter');
-    
-    letterSpan.textContent = letter;
-    circle.classList.add('visible');
-    circle.classList.remove('scroll-active'); // Remove scroll-active when hovering
-    
-    // Position at mouse
-    const navRect = nav.getBoundingClientRect();
-    const y = event.clientY - navRect.top;
-    circle.style.top = `${y}px`;
-  }
-
-  function hideHoverCircle(nav) {
-    const circle = nav.querySelector('.nav-hover-circle');
-    // Only hide if not in scroll-active mode
-    if (!circle.classList.contains('scroll-active')) {
-      circle.classList.remove('visible');
-    }
-  }
-
-  function updateActiveNavOnScroll(dots) {
-    const sections = Array.from(document.querySelectorAll('.glossary-section'));
-    let currentLetter = null;
-
-    for (const section of sections) {
-      const rect = section.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom > 100) {
-        currentLetter = section.dataset.letter;
-        break;
-      }
-    }
-
-    dots.forEach(({ el, letter }) => {
-      el.classList.toggle('active', letter === currentLetter);
-    });
-
-    // Issue #4: Show hover circle with current letter when scrolling
-    if (currentLetter) {
-      const nav = document.querySelector('.glossary-vertical-nav');
-      if (nav) {
-        const circle = nav.querySelector('.nav-hover-circle');
-        const letterSpan = circle.querySelector('.hover-letter');
+      if (isDragging) {
+        isDragging = false;
+        nav.classList.remove('dragging');
+        nav.style.cursor = 'grab';
         
-        letterSpan.textContent = currentLetter;
-        circle.classList.add('visible', 'scroll-active');
+        // Reset nav position to center
+        nav.style.top = '50%';
+        nav.style.transition = 'top 0.3s ease';
         
-        // Position at the active dot
-        const activeDot = dots.find(d => d.letter === currentLetter && d.el.classList.contains('active'));
-        if (activeDot) {
-          const navRect = nav.getBoundingClientRect();
-          const dotRect = activeDot.el.getBoundingClientRect();
-          const y = dotRect.top + dotRect.height / 2 - navRect.top;
-          circle.style.top = `${y}px`;
-        }
+        setTimeout(() => {
+          resetDots();
+          updateActive();
+          scheduleCircleHide();
+        }, 100);
       }
-    }
-  }
+    });
 
-  function scrollToLetter(letter) {
-    const section = document.querySelector(`.glossary-section[data-letter="${letter}"]`);
-    if (section) {
-      // Check if this is the first section - if so, scroll to top of page
-      const firstSection = document.querySelector('.glossary-section');
-      if (section === firstSection) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Scroll tracking
+    function scrollUpdate() {
+      if (!isDragging && !isHovering) {
+        updateActive();
       }
+      rafId = requestAnimationFrame(scrollUpdate);
     }
+    scrollUpdate();
+
+    // Cleanup
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+    };
   }
 
   // ============================================================================
   // MOBILE NAVIGATION (Swipeable horizontal slider)
   // ============================================================================
+
+  // Shared helper function for scrolling to a letter section
+  function scrollToLetter(letter) {
+    const section = document.querySelector(`.glossary-section[data-letter="${letter}"]`);
+    if (!section) return;
+    
+    const firstSection = document.querySelector('.glossary-section');
+    if (section === firstSection) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    } else {
+      window.scrollTo({ top: section.offsetTop - 20, behavior: 'instant' });
+    }
+  }
 
   function buildMobileNav() {
     const sections = Array.from(document.querySelectorAll('.glossary-section'));
@@ -751,10 +1001,39 @@
     initExport();
   }
 
+  function cleanup() {
+    // Remove any existing navigation elements
+    const existingNav = document.querySelector('.glossary-vertical-nav');
+    const existingMobileNav = document.querySelector('.glossary-mobile-nav');
+    if (existingNav) existingNav.remove();
+    if (existingMobileNav) existingMobileNav.remove();
+  }
+
+  // Initial load
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  // Handle MkDocs Material instant loading (navigation without full page reload)
+  // Listen for both the navigation event and location change
+  document.addEventListener('DOMContentLoaded', () => {
+    // MkDocs Material emits this event when instant loading completes
+    document$.subscribe(() => {
+      cleanup();
+      setTimeout(init, 100); // Small delay to ensure DOM is ready
+    });
+  });
+
+  // Fallback: Also listen for location changes
+  let lastPath = location.pathname;
+  setInterval(() => {
+    if (location.pathname !== lastPath) {
+      lastPath = location.pathname;
+      cleanup();
+      setTimeout(init, 100);
+    }
+  }, 500);
 
 })();
