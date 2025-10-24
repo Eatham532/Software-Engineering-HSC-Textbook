@@ -23,6 +23,7 @@ Security controls that frustrate users create bigger security problems than the 
 ### The Security-Usability Paradox
 
 **Traditional security thinking**: "More security steps = more secure system"
+
 **Reality**: Difficult security = bypassed security = less secure system
 
 Consider these real-world examples:
@@ -54,8 +55,11 @@ Consider these real-world examples:
 ### The Cost of Poor Security UX
 
 **Productivity losses**: Workers spend 30% more time on security tasks when systems are poorly designed
+
 **Support costs**: 70% of IT help desk tickets relate to security issues (passwords, access problems, system lockouts)
+
 **Shadow IT**: Users adopt unauthorized tools and services when official secure options are too difficult
+
 **Security fatigue**: Overloaded users make poor security decisions, ignore warnings, and develop risky habits
 
 ## User-Centered Security Design Principles
@@ -65,6 +69,7 @@ Consider these real-world examples:
 **Make security status visible**: Users should understand when they're protected and what protection they have.
 
 **Good example**: A banking app that shows "Secure connection established" with a lock icon
+
 **Poor example**: Security running invisibly with no user feedback about protection status
 
 ### 2. Progressive Security
@@ -72,6 +77,7 @@ Consider these real-world examples:
 **Match security to risk levels**: Apply stronger security only when needed, lighter security for routine tasks.
 
 **Good example**: Simple PIN for checking account balance, biometric authentication for large transfers
+
 **Poor example**: Complex authentication required for every single action regardless of risk
 
 ### 3. Contextual Guidance
@@ -79,6 +85,7 @@ Consider these real-world examples:
 **Provide security help when and where users need it**: Explain security requirements at the point of interaction.
 
 **Good example**: Password requirements shown dynamically as users type
+
 **Poor example**: Generic security policy document that users must find and read separately
 
 ### 4. Recoverable Security
@@ -86,6 +93,7 @@ Consider these real-world examples:
 **Design for human error**: Assume users will make mistakes and provide safe recovery paths.
 
 **Good example**: Account recovery via multiple methods (email, SMS, security questions)
+
 **Poor example**: Permanent account lockout after failed attempts with no recovery option
 
 ### 5. Inclusive Security
@@ -93,6 +101,7 @@ Consider these real-world examples:
 **Design for diverse users**: Consider different technical skills, devices, disabilities, and contexts.
 
 **Good example**: Multiple authentication methods (SMS, app-based, phone call) for different user needs
+
 **Poor example**: Smartphone-only authentication that excludes users without compatible devices
 
 ## User Personas and Abuse Cases
@@ -102,6 +111,7 @@ Understanding both legitimate users and potential attackers helps design securit
 ### Creating Security-Focused User Personas
 
 **Traditional user persona**: Focuses on goals, motivations, and workflows
+
 **Security-enhanced persona**: Adds security context, risks, and threat scenarios
 
 **Example: Student Portal User Personas**

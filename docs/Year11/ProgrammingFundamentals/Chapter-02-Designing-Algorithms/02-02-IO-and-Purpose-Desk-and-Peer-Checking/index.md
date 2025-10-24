@@ -246,18 +246,26 @@ It's important to test different paths through selection structures:
 /// tab | As the Author
 
 1. **Explain the purpose** of your algorithm
+
 2. **Walk through the logic** step by step
+
 3. **Show your desk check results**
+
 4. **Ask specific questions** about unclear parts
+
 5. **Listen to feedback** without being defensive
 ///
 
 /// tab | As the Reviewer
 
 1. **Ask about the purpose** - is it clear?
+
 2. **Check the logic flow** - does it make sense?
+
 3. **Look for edge cases** - what could go wrong?
+
 4. **Verify the desk check** - do you get the same results?
+
 5. **Suggest improvements** constructively
 ///
 

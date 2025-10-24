@@ -492,25 +492,33 @@ package "Infrastructure" {
 **Web Servers**:
 
 - **Purpose**: Handle HTTP requests and serve responses
+
 - **Examples**: Apache, Nginx, Express.js, Django
+
 - **Considerations**: Performance, security, scalability
 
 **Databases**:
 
 - **Relational**: MySQL, PostgreSQL, SQL Server
+
 - **NoSQL**: MongoDB, Redis, Cassandra
+
 - **Selection factors**: Data structure, scalability needs, consistency requirements
 
 **API Frameworks**:
 
 - **REST APIs**: Express.js, Django REST Framework, Spring Boot
+
 - **GraphQL**: Apollo Server, GraphQL Yoga
+
 - **Real-time**: Socket.io, WebSocket APIs
 
 **CI/CD Infrastructure**:
 
 - **Version control**: Git, GitHub, GitLab
+
 - **Build automation**: Jenkins, GitHub Actions, GitLab CI
+
 - **Deployment**: Docker, Kubernetes, cloud platforms
 ///
 

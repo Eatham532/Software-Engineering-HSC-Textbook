@@ -3,6 +3,9 @@
 - ensures blank line before and after headings (not inside code fences)
 - ensures blank line before and after code blocks
 - ensures blank line before list items
+- ensures blank line between consecutive "label:value" lines of the form
+    "**Label**: Value" so they render as separate paragraphs (CommonMark soft
+    breaks collapse otherwise)
 
 This is conservative: it preserves code fences and won't touch lines inside them.
 """
@@ -19,6 +22,12 @@ def fix_file(p: Path):
     in_fence = False
     first_h1_seen = False
     i = 0
+
+    # helper: detect "**Label**: Value" style lines (trimmed)
+    def is_label_value(s: str) -> bool:
+        stripped = s.lstrip()
+        # Match **Something**: followed by space or end
+        return re.match(r"^\*\*[^*]+\*\*\s*:\s*", stripped) is not None
     while i < len(lines):
         line = lines[i]
         stripped = line.lstrip()
@@ -114,6 +123,14 @@ def fix_file(p: Path):
         # list item: if previous output line not blank, insert blank
         if re.match(r'^([-*+]\s|\d+\.\s)', stripped):
             if out and out[-1].strip() != '':
+                out.append('')
+            out.append(line)
+            i += 1
+            continue
+        # label:value lines like "**High-impact**: text" often need hard separation.
+        # If there are consecutive such lines, ensure a blank line between them
+        if is_label_value(line):
+            if out and out[-1].strip() != '' and is_label_value(out[-1]):
                 out.append('')
             out.append(line)
             i += 1

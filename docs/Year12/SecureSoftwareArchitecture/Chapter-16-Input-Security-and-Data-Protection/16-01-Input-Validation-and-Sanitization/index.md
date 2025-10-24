@@ -422,7 +422,9 @@ XSS attacks inject malicious scripts into web applications that execute in other
 ### Types of XSS Attacks
 
 **Stored XSS**: Malicious script stored in database and executed when data is displayed
+
 **Reflected XSS**: Malicious script reflected back from server in response
+
 **DOM-based XSS**: Client-side script modifies page DOM in unsafe way
 
 ### Secure Input Sanitization and Output Encoding

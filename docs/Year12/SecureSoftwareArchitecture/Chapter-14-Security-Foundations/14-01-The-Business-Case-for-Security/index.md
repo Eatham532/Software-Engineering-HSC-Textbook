@@ -87,8 +87,11 @@ Not all risks are equal—focus on the most critical:
 Risk = Likelihood × Impact
 
 **High-impact, high-likelihood**: Address immediately
+
 **High-impact, low-likelihood**: Prepare contingency plans
+
 **Low-impact, high-likelihood**: Monitor and manage
+
 **Low-impact, low-likelihood**: Accept the risk
 
 ### Communicating security to stakeholders
@@ -96,8 +99,11 @@ Risk = Likelihood × Impact
 Different audiences need different messages:
 
 **Executives**: Focus on business impact, ROI, and competitive advantage
+
 **Developers**: Emphasize practical implementation and development efficiency
+
 **Users**: Highlight privacy protection and ease of use
+
 **Customers**: Demonstrate commitment to protecting their data
 
 ## Guided example: Security breach analysis
@@ -107,7 +113,9 @@ Let's examine a realistic scenario to understand security's business impact.
 ### Scenario: E-commerce data breach
 
 **Company**: Online retailer with 50,000 customers
+
 **Incident**: SQL injection attack exposes customer data
+
 **Data compromised**: Names, emails, addresses, hashed passwords
 
 ### Timeline and costs
