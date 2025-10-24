@@ -66,6 +66,8 @@
     
       <link rel="stylesheet" href="../../../../assets/code-editor.css">
     
+      <link rel="stylesheet" href="../../../../assets/glossary.css">
+    
     <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -390,6 +392,25 @@
     
   
   Code Editor
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../glossary/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Glossary
 
       </a>
     </li>
@@ -1320,6 +1341,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../glossary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1491,12 +1534,12 @@
 
 <h1 id="81-working-with-device-data-and-diagnostics">8.1 Working with device data and diagnostics<a class="headerlink" href="#81-working-with-device-data-and-diagnostics" title="Permanent link">&para;</a></h1>
 <h2 id="why-it-matters">Why it matters<a class="headerlink" href="#why-it-matters" title="Permanent link">&para;</a></h2>
-<p>Mechatronic systems generate continuous streams of data from sensors, actuators, and controllers. This data tells us what&rsquo;s happening in real-time and provides a historical record for troubleshooting, maintenance, and performance optimisation. Without proper data handling, even the most sophisticated robotic arm or automated production line becomes a &ldquo;black box&rdquo; when problems occur.</p>
+<p>Mechatronic systems generate continuous streams of data from <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensors</span>, <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A component that converts electrical signals into physical motion or action, such as motors or servos." data-glossary-term="Actuator">actuators</span>, and controllers. This data tells us what&rsquo;s happening in real-time and provides a historical record for troubleshooting, <span class="glossary-term" data-glossary-category="Project Management" data-glossary-definition="The ease with which software can be modified to correct faults, improve performance, or adapt to a changed environment." data-glossary-term="Maintainability">maintenance</span>, and performance optimisation. Without proper data handling, even the most sophisticated robotic arm or automated production line becomes a &ldquo;<span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A testing method that examines program functionality without knowledge of internal code structure or implementation details." data-glossary-term="Black Box Testing">black box</span>&rdquo; when problems occur.</p>
 <p>Understanding how to collect, store, and analyse device data is essential for building reliable mechatronic systems. Whether you&rsquo;re monitoring temperature in a greenhouse automation system or tracking motor performance in a robotic vehicle, the ability to work with device data separates hobby projects from professional engineering solutions.</p>
 <h2 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h2>
-<h3 id="device-logs-and-telemetry">Device logs and telemetry<a class="headerlink" href="#device-logs-and-telemetry" title="Permanent link">&para;</a></h3>
-<p>Device logs are timestamped records of system events, sensor readings, and operational status. They capture both routine operations (sensor readings every second) and significant events (motor overheating, emergency stops).</p>
-<p>Telemetry refers to the automated collection and transmission of data from remote devices. In mechatronics, this might include sending motor speed data from a robot to a central monitoring system, or transmitting greenhouse sensor readings to a farm management application.</p>
+<h3 id="device-logs-and-telemetry">Device logs and <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="The automated process of collecting and transmitting data from remote sources to receiving equipment for monitoring and analysis." data-glossary-term="Telemetry">telemetry</span><a class="headerlink" href="#device-logs-and-telemetry" title="Permanent link">&para;</a></h3>
+<p>Device logs are timestamped records of system events, <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> readings, and operational status. They capture both routine operations (<span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> readings every second) and significant events (motor overheating, emergency stops).</p>
+<p><span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="The automated process of collecting and transmitting data from remote sources to receiving equipment for monitoring and analysis." data-glossary-term="Telemetry">Telemetry</span> refers to the automated collection and transmission of data from remote devices. In mechatronics, this might include sending motor speed data from a robot to a central monitoring system, or transmitting greenhouse <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> readings to a farm management application.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Simple logging example</span>
@@ -1514,10 +1557,10 @@
 <p>Key characteristics of good device logs:</p>
 <ul>
 <li>
-<p><strong>Timestamps</strong>: Every entry needs a precise time reference</p>
+<p><strong><span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A sequence of characters or encoded information identifying when a certain event occurred, recording date and time." data-glossary-term="Timestamp"><span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A sequence of characters or encoded information identifying when a certain event occurred, recording date and time." data-glossary-term="Timestamp">Timestamps</span></span></strong>: Every entry needs a precise time reference</p>
 </li>
 <li>
-<p><strong>Clear identification</strong>: Which sensor or component generated the data</p>
+<p><strong>Clear identification</strong>: Which <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> or component generated the data</p>
 </li>
 <li>
 <p><strong>Units</strong>: Always specify measurement units to avoid confusion</p>
@@ -1607,7 +1650,7 @@
 </div>
 <h3 id="guided-example-greenhouse-monitoring-system">Guided example: greenhouse monitoring system<a class="headerlink" href="#guided-example-greenhouse-monitoring-system" title="Permanent link">&para;</a></h3>
 <p>Let&rsquo;s build a simple greenhouse monitoring system that demonstrates proper device data handling. Our system will track temperature, humidity, and soil moisture, logging everything to CSV files for later analysis.</p>
-<div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS" height="382px" preserveAspectRatio="xMaxYMax meet" style="width:528px;height:382px;background:#FFFFFF;" version="1.1" viewBox="0 0 528 382" width="528px" zoomAndPan="magnify" id="Kroki" data-diagram-id="kroki-svg-0"><defs /><g><g class="entity" data-entity="GreenhouseMonitor" data-source-line="4" data-uid="ent0002" id="entity_GreenhouseMonitor"><rect fill="#F1F1F1" height="162.0781" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="276.4141" x="133.43" y="7" /><ellipse cx="198.3167" cy="23" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M201.2855,28.6406 Q200.7073,28.9375 200.0667,29.0781 Q199.4261,29.2344 198.723,29.2344 Q196.223,29.2344 194.8948,27.5938 Q193.5823,25.9375 193.5823,22.8125 Q193.5823,19.6875 194.8948,18.0313 Q196.223,16.375 198.723,16.375 Q199.4261,16.375 200.0667,16.5313 Q200.723,16.6875 201.2855,16.9844 L201.2855,19.7031 Q200.6605,19.125 200.0667,18.8594 Q199.473,18.5781 198.848,18.5781 Q197.5042,18.5781 196.8167,19.6563 Q196.1292,20.7188 196.1292,22.8125 Q196.1292,24.9063 196.8167,25.9844 Q197.5042,27.0469 198.848,27.0469 Q199.473,27.0469 200.0667,26.7813 Q200.6605,26.5 201.2855,25.9219 L201.2855,28.6406 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138.1406" x="218.8167" y="27.8467">GreenhouseMonitor</text><line style="stroke:#181818;stroke-width:0.5;" x1="134.43" x2="408.8441" y1="39" y2="39" /><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="141.43" y="49.6484" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88.8193" x="153.43" y="55.9951">sensors: dict</text><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="141.43" y="65.9453" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99.0186" x="153.43" y="72.292">log_file: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="134.43" x2="408.8441" y1="79.5938" y2="79.5938" /><ellipse cx="144.43" cy="93.2422" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129.5957" x="153.43" y="96.5889">__init__(log_file)</text><ellipse cx="144.43" cy="109.5391" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="250.4141" x="153.43" y="112.8857">add_sensor(sensor_id, sensor_type)</text><ellipse cx="144.43" cy="125.8359" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161.9365" x="153.43" y="129.1826">read_all_sensors(): dict</text><ellipse cx="144.43" cy="142.1328" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160.8223" x="153.43" y="145.4795">log_readings(readings)</text><ellipse cx="144.43" cy="158.4297" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247.543" x="153.43" y="161.7764">get_latest_reading(sensor_id): float</text></g><g class="entity" data-entity="SensorReading" data-source-line="14" data-uid="ent0003" id="entity_SensorReading"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255.2705" x="7" y="246.08" /><ellipse cx="77.6631" cy="262.08" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M80.6318,267.7206 Q80.0537,268.0175 79.4131,268.1581 Q78.7725,268.3144 78.0693,268.3144 Q75.5693,268.3144 74.2412,266.6738 Q72.9287,265.0175 72.9287,261.8925 Q72.9287,258.7675 74.2412,257.1113 Q75.5693,255.455 78.0693,255.455 Q78.7725,255.455 79.4131,255.6113 Q80.0693,255.7675 80.6318,256.0644 L80.6318,258.7831 Q80.0068,258.205 79.4131,257.9394 Q78.8193,257.6581 78.1943,257.6581 Q76.8506,257.6581 76.1631,258.7363 Q75.4756,259.7988 75.4756,261.8925 Q75.4756,263.9863 76.1631,265.0644 Q76.8506,266.1269 78.1943,266.1269 Q78.8193,266.1269 79.4131,265.8613 Q80.0068,265.58 80.6318,265.0019 L80.6318,267.7206 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.4443" x="98.1631" y="266.9267">SensorReading</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="261.2705" y1="278.08" y2="278.08" /><ellipse cx="18" cy="291.7284" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147.8818" x="27" y="295.0751">timestamp: datetime</text><ellipse cx="18" cy="308.0253" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115.5273" x="27" y="311.372">sensor_id: string</text><ellipse cx="18" cy="324.3222" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78.8594" x="27" y="327.6689">value: float</text><ellipse cx="18" cy="340.6191" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.4805" x="27" y="343.9657">unit: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="261.2705" y1="351.2675" y2="351.2675" /><ellipse cx="18" cy="364.9159" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="229.2705" x="27" y="368.2626">__init__(sensor_id, value, unit)</text></g><g class="entity" data-entity="CSVLogger" data-source-line="22" data-uid="ent0004" id="entity_CSVLogger"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="224.625" x="297.32" y="246.08" /><ellipse cx="367.009" cy="262.08" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M369.9777,267.7206 Q369.3996,268.0175 368.759,268.1581 Q368.1183,268.3144 367.4152,268.3144 Q364.9152,268.3144 363.5871,266.6738 Q362.2746,265.0175 362.2746,261.8925 Q362.2746,258.7675 363.5871,257.1113 Q364.9152,255.455 367.4152,255.455 Q368.1183,255.455 368.759,255.6113 Q369.4152,255.7675 369.9777,256.0644 L369.9777,258.7831 Q369.3527,258.205 368.759,257.9394 Q368.1652,257.6581 367.5402,257.6581 Q366.1965,257.6581 365.509,258.7363 Q364.8215,259.7988 364.8215,261.8925 Q364.8215,263.9863 365.509,265.0644 Q366.1965,266.1269 367.5402,266.1269 Q368.1652,266.1269 368.759,265.8613 Q369.3527,265.58 369.9777,265.0019 L369.9777,267.7206 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.7471" x="387.509" y="266.9267">CSVLogger</text><line style="stroke:#181818;stroke-width:0.5;" x1="298.32" x2="520.945" y1="278.08" y2="278.08" /><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="305.32" y="288.7284" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.3799" x="317.32" y="295.0751">filename: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="298.32" x2="520.945" y1="302.3769" y2="302.3769" /><ellipse cx="308.32" cy="316.0253" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140.957" x="317.32" y="319.372">__init__(filename)</text><ellipse cx="308.32" cy="332.3222" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.0586" x="317.32" y="335.6689">write_header(headers)</text><ellipse cx="308.32" cy="348.6191" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198.625" x="317.32" y="351.9657">write_reading(reading_data)</text><ellipse cx="308.32" cy="364.9159" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134.3809" x="317.32" y="368.2626">read_all_data(): list</text></g><g class="link" data-entity-1="GreenhouseMonitor" data-entity-2="SensorReading" data-source-line="30" data-uid="lnk5" id="link_GreenhouseMonitor_SensorReading"><path codeLine="30" d="M221.79,169.37 C206.18,194.52 192.3333,216.8316 177.5233,240.7016" fill="none" id="GreenhouseMonitor-to-SensorReading" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="174.36,245.8,182.5038,240.2612,176.9961,241.5513,175.706,236.0435,174.36,245.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48.3247" x="204.64" y="212.1469">creates</text></g><g class="link" data-entity-1="GreenhouseMonitor" data-entity-2="CSVLogger" data-source-line="31" data-uid="lnk6" id="link_GreenhouseMonitor_CSVLogger"><path codeLine="31" d="M321.85,169.37 C337.57,194.52 351.5198,216.8421 366.4398,240.7121" fill="none" id="GreenhouseMonitor-to-CSVLogger" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="369.62,245.8,368.2416,236.0481,366.9698,241.5601,361.4578,240.2883,369.62,245.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29.7832" x="349.64" y="212.1469">uses</text></g></g></svg></p></div></div>
+<div class="diagram-container" data-container-id="kroki-diagram-0"><button class="diagram-expand-btn" onclick="openDiagramModal('kroki-diagram-0')">🔍 View Larger</button><div id="kroki-diagram-0" class="diagram-content"><p><svg xmlns="<span class="glossary-term" data-glossary-category="Web Development" data-glossary-definition="The foundation protocol for data communication on the World Wide Web. HTTPS is the secure version using encryption." data-glossary-full-form="Hypertext Transfer Protocol (Secure)" data-glossary-term="HTTP" data-diagram-id="kroki-svg-0">http</span>://www.w3.org/2000/svg" contentStyleType="text/<span class="glossary-term" data-glossary-category="Web Development" data-glossary-definition="The standard markup language for creating web pages. CSS is used for styling and layout." data-glossary-full-form="HyperText Markup Language / Cascading Style Sheets" data-glossary-term="HTML">css</span>" data-diagram-type="<span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A blueprint or template for creating objects that defines attributes and methods common to all objects of that type." data-glossary-term="Class">CLASS</span>" height="382px" preserveAspectRatio="xMaxYMax meet" style="width:528px;height:382px;background:#FFFFFF;" version="1.1" viewBox="0 0 528 382" width="528px" zoomAndPan="magnify" id="Kroki"><defs /><g><g <span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A blueprint or template for creating objects that defines attributes and methods common to all objects of that type." data-glossary-term="Class">class</span>="entity" data-entity="GreenhouseMonitor" data-source-line="4" data-uid="ent0002" id="entity_GreenhouseMonitor"><rect fill="#F1F1F1" height="162.0781" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="276.4141" x="133.43" y="7" /><ellipse cx="198.3167" cy="23" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M201.2855,28.6406 Q200.7073,28.9375 200.0667,29.0781 Q199.4261,29.2344 198.723,29.2344 Q196.223,29.2344 194.8948,27.5938 Q193.5823,25.9375 193.5823,22.8125 Q193.5823,19.6875 194.8948,18.0313 Q196.223,16.375 198.723,16.375 Q199.4261,16.375 200.0667,16.5313 Q200.723,16.6875 201.2855,16.9844 L201.2855,19.7031 Q200.6605,19.125 200.0667,18.8594 Q199.473,18.5781 198.848,18.5781 Q197.5042,18.5781 196.8167,19.6563 Q196.1292,20.7188 196.1292,22.8125 Q196.1292,24.9063 196.8167,25.9844 Q197.5042,27.0469 198.848,27.0469 Q199.473,27.0469 200.0667,26.7813 Q200.6605,26.5 201.2855,25.9219 L201.2855,28.6406 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="138.1406" x="218.8167" y="27.8467">GreenhouseMonitor</text><line style="stroke:#181818;stroke-width:0.5;" x1="134.43" x2="408.8441" y1="39" y2="39" /><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="141.43" y="49.6484" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88.8193" x="153.43" y="55.9951"><span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensors</span>: dict</text><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="141.43" y="65.9453" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="99.0186" x="153.43" y="72.292">log_file: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="134.43" x2="408.8441" y1="79.5938" y2="79.5938" /><ellipse cx="144.43" cy="93.2422" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129.5957" x="153.43" y="96.5889">__init__(log_file)</text><ellipse cx="144.43" cy="109.5391" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="250.4141" x="153.43" y="112.8857">add_sensor(sensor_id, sensor_type)</text><ellipse cx="144.43" cy="125.8359" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="161.9365" x="153.43" y="129.1826">read_all_sensors(): dict</text><ellipse cx="144.43" cy="142.1328" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="160.8223" x="153.43" y="145.4795">log_readings(readings)</text><ellipse cx="144.43" cy="158.4297" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="247.543" x="153.43" y="161.7764">get_latest_reading(sensor_id): float</text></g><g <span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A blueprint or template for creating objects that defines attributes and methods common to all objects of that type." data-glossary-term="Class">class</span>="entity" data-entity="SensorReading" data-source-line="14" data-uid="ent0003" id="entity_SensorReading"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="255.2705" x="7" y="246.08" /><ellipse cx="77.6631" cy="262.08" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M80.6318,267.7206 Q80.0537,268.0175 79.4131,268.1581 Q78.7725,268.3144 78.0693,268.3144 Q75.5693,268.3144 74.2412,266.6738 Q72.9287,265.0175 72.9287,261.8925 Q72.9287,258.7675 74.2412,257.1113 Q75.5693,255.455 78.0693,255.455 Q78.7725,255.455 79.4131,255.6113 Q80.0693,255.7675 80.6318,256.0644 L80.6318,258.7831 Q80.0068,258.205 79.4131,257.9394 Q78.8193,257.6581 78.1943,257.6581 Q76.8506,257.6581 76.1631,258.7363 Q75.4756,259.7988 75.4756,261.8925 Q75.4756,263.9863 76.1631,265.0644 Q76.8506,266.1269 78.1943,266.1269 Q78.8193,266.1269 79.4131,265.8613 Q80.0068,265.58 80.6318,265.0019 L80.6318,267.7206 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="105.4443" x="98.1631" y="266.9267">SensorReading</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="261.2705" y1="278.08" y2="278.08" /><ellipse cx="18" cy="291.7284" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="147.8818" x="27" y="295.0751"><span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A sequence of characters or encoded information identifying when a certain event occurred, recording date and time." data-glossary-term="Timestamp">timestamp</span>: datetime</text><ellipse cx="18" cy="308.0253" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115.5273" x="27" y="311.372">sensor_id: string</text><ellipse cx="18" cy="324.3222" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78.8594" x="27" y="327.6689">value: float</text><ellipse cx="18" cy="340.6191" fill="none" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.4805" x="27" y="343.9657">unit: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="261.2705" y1="351.2675" y2="351.2675" /><ellipse cx="18" cy="364.9159" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="229.2705" x="27" y="368.2626">__init__(sensor_id, value, unit)</text></g><g <span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A blueprint or template for creating objects that defines attributes and methods common to all objects of that type." data-glossary-term="Class">class</span>="entity" data-entity="CSVLogger" data-source-line="22" data-uid="ent0004" id="entity_CSVLogger"><rect fill="#F1F1F1" height="129.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="224.625" x="297.32" y="246.08" /><ellipse cx="367.009" cy="262.08" fill="#C2C2C2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;" /><path d="M369.9777,267.7206 Q369.3996,268.0175 368.759,268.1581 Q368.1183,268.3144 367.4152,268.3144 Q364.9152,268.3144 363.5871,266.6738 Q362.2746,265.0175 362.2746,261.8925 Q362.2746,258.7675 363.5871,257.1113 Q364.9152,255.455 367.4152,255.455 Q368.1183,255.455 368.759,255.6113 Q369.4152,255.7675 369.9777,256.0644 L369.9777,258.7831 Q369.3527,258.205 368.759,257.9394 Q368.1652,257.6581 367.5402,257.6581 Q366.1965,257.6581 365.509,258.7363 Q364.8215,259.7988 364.8215,261.8925 Q364.8215,263.9863 365.509,265.0644 Q366.1965,266.1269 367.5402,266.1269 Q368.1652,266.1269 368.759,265.8613 Q369.3527,265.58 369.9777,265.0019 L369.9777,267.7206 Z " fill="#000000" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="76.7471" x="387.509" y="266.9267">CSVLogger</text><line style="stroke:#181818;stroke-width:0.5;" x1="298.32" x2="520.945" y1="278.08" y2="278.08" /><rect fill="none" height="6" style="stroke:#595959;stroke-width:1;" width="6" x="305.32" y="288.7284" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.3799" x="317.32" y="295.0751">filename: string</text><line style="stroke:#181818;stroke-width:0.5;" x1="298.32" x2="520.945" y1="302.3769" y2="302.3769" /><ellipse cx="308.32" cy="316.0253" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="140.957" x="317.32" y="319.372">__init__(filename)</text><ellipse cx="308.32" cy="332.3222" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.0586" x="317.32" y="335.6689">write_header(headers)</text><ellipse cx="308.32" cy="348.6191" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198.625" x="317.32" y="351.9657">write_reading(reading_data)</text><ellipse cx="308.32" cy="364.9159" fill="#A6A6A6" rx="3" ry="3" style="stroke:#545454;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134.3809" x="317.32" y="368.2626">read_all_data(): list</text></g><g <span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A blueprint or template for creating objects that defines attributes and methods common to all objects of that type." data-glossary-term="Class">class</span>="link" data-entity-1="GreenhouseMonitor" data-entity-2="SensorReading" data-source-line="30" data-uid="lnk5" id="link_GreenhouseMonitor_SensorReading"><path codeLine="30" d="M221.79,169.37 C206.18,194.52 192.3333,216.8316 177.5233,240.7016" fill="none" id="GreenhouseMonitor-to-SensorReading" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="174.36,245.8,182.5038,240.2612,176.9961,241.5513,175.706,236.0435,174.36,245.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48.3247" x="204.64" y="212.1469">creates</text></g><g <span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A blueprint or template for creating objects that defines attributes and methods common to all objects of that type." data-glossary-term="Class">class</span>="link" data-entity-1="GreenhouseMonitor" data-entity-2="CSVLogger" data-source-line="31" data-uid="lnk6" id="link_GreenhouseMonitor_CSVLogger"><path codeLine="31" d="M321.85,169.37 C337.57,194.52 351.5198,216.8421 366.4398,240.7121" fill="none" id="GreenhouseMonitor-to-CSVLogger" style="stroke:#181818;stroke-width:1;" /><polygon fill="#181818" points="369.62,245.8,368.2416,236.0481,366.9698,241.5601,361.4578,240.2883,369.62,245.8" style="stroke:#181818;stroke-width:1;" /><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="29.7832" x="349.64" y="212.1469">uses</text></g></g></svg></p></div></div>
 <p>Here&rsquo;s the implementation:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
@@ -1748,19 +1791,19 @@
 </span></code></pre></div>
 <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
 <h3 id="exercise-1-data-logging-expansion">Exercise 1: Data logging expansion<a class="headerlink" href="#exercise-1-data-logging-expansion" title="Permanent link">&para;</a></h3>
-<p>Extend the greenhouse monitoring system to include additional sensor types and improve the data analysis capabilities.</p>
+<p>Extend the greenhouse monitoring system to include additional <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> types and improve the data analysis capabilities.</p>
 <details class="question">
 <summary>Task requirements</summary>
 <p>Add support for:</p>
 <ol>
 <li>
-<p>Light intensity sensors (measured in lux)</p>
+<p>Light intensity <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensors</span> (measured in lux)</p>
 </li>
 <li>
-<p>CO2 concentration sensors (measured in ppm)</p>
+<p>CO2 concentration <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensors</span> (measured in ppm)</p>
 </li>
 <li>
-<p>A method to calculate hourly averages for each sensor</p>
+<p>A <span class="glossary-term" data-glossary-category="OOP" data-glossary-definition="A function defined within a class that describes the behaviors of objects created from that class." data-glossary-term="Method">method</span> to calculate hourly averages for each <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span></p>
 </li>
 <li>
 <p>Alert detection for out-of-range values</p>
@@ -1858,19 +1901,19 @@
 </details>
 </details>
 <h3 id="exercise-2-csv-data-analysis">Exercise 2: CSV data analysis<a class="headerlink" href="#exercise-2-csv-data-analysis" title="Permanent link">&para;</a></h3>
-<p>Write functions to analyse the collected greenhouse data and generate summary reports.</p>
+<p>Write <span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A reusable block of code that performs a specific task and returns a value to the caller." data-glossary-term="Function">functions</span> to analyse the collected greenhouse data and generate summary reports.</p>
 <details class="question">
 <summary>Task requirements</summary>
-<p>Create functions to:</p>
+<p>Create <span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A reusable block of code that performs a specific task and returns a value to the caller." data-glossary-term="Function">functions</span> to:</p>
 <ol>
 <li>
-<p>Find the minimum and maximum values for each sensor over a time period</p>
+<p>Find the minimum and maximum values for each <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> over a time period</p>
 </li>
 <li>
 <p>Identify time periods when values were outside normal ranges</p>
 </li>
 <li>
-<p>Calculate daily summaries (min, max, average) for each sensor type</p>
+<p>Calculate daily summaries (min, max, average) for each <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> type</p>
 </li>
 <li>
 <p>Export summary data to a new CSV file</p>
@@ -2002,13 +2045,13 @@
 </details>
 </details>
 <h3 id="exercise-3-real-time-monitoring-dashboard">Exercise 3: Real-time monitoring dashboard<a class="headerlink" href="#exercise-3-real-time-monitoring-dashboard" title="Permanent link">&para;</a></h3>
-<p>Create a simple text-based dashboard that displays current sensor readings and recent trends.</p>
+<p>Create a simple text-based dashboard that displays current <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> readings and recent trends.</p>
 <details class="question">
 <summary>Task requirements</summary>
 <p>Build a dashboard that:</p>
 <ol>
 <li>
-<p>Shows current readings from all sensors</p>
+<p>Shows current readings from all <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensors</span></p>
 </li>
 <li>
 <p>Displays colour-coded status (normal/warning/alert)</p>
@@ -2020,7 +2063,7 @@
 <p>Updates every few seconds</p>
 </li>
 <li>
-<p>Includes timestamp of last update</p>
+<p>Includes <span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A sequence of characters or encoded information identifying when a certain event occurred, recording date and time." data-glossary-term="Timestamp">timestamp</span> of last update</p>
 </li>
 </ol>
 <details class="success">
@@ -2131,10 +2174,10 @@
 <p>Device data forms the foundation of intelligent mechatronic systems. In this section, you learned how to:</p>
 <ul>
 <li>
-<p><strong>Capture device data</strong> with proper timestamps, units, and identification</p>
+<p><strong>Capture device data</strong> with proper <span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A sequence of characters or encoded information identifying when a certain event occurred, recording date and time." data-glossary-term="Timestamp">timestamps</span>, units, and identification</p>
 </li>
 <li>
-<p><strong>Implement logging systems</strong> that safely store sensor readings and system events</p>
+<p><strong>Implement logging systems</strong> that safely store <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensor</span> readings and system events</p>
 </li>
 <li>
 <p><strong>Work with CSV files</strong> for data persistence and analysis</p>
@@ -2149,10 +2192,10 @@
 <p>Key principles for device data management:</p>
 <ol>
 <li>
-<p>Always include timestamps and units with every measurement</p>
+<p>Always include <span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="A sequence of characters or encoded information identifying when a certain event occurred, recording date and time." data-glossary-term="Timestamp">timestamps</span> and units with every measurement</p>
 </li>
 <li>
-<p>Use consistent, descriptive naming for sensors and data fields</p>
+<p>Use consistent, descriptive naming for <span class="glossary-term" data-glossary-category="Mechatronics" data-glossary-definition="A device that detects and measures physical properties from the environment and converts them into signals for processing." data-glossary-term="Sensor">sensors</span> and data fields</p>
 </li>
 <li>
 <p>Implement safe file operations to prevent data corruption</p>
@@ -2165,7 +2208,7 @@
 </li>
 </ol>
 <p>The greenhouse monitoring example demonstrated how these concepts work together in a practical system. The exercises explored data analysis, real-time monitoring, and system expansion - all essential skills for building robust mechatronic systems.</p>
-<p>Next, you&rsquo;ll learn about wiring diagrams and power requirements, where proper documentation becomes critical for safe system construction and maintenance.</p>
+<p>Next, you&rsquo;ll learn about wiring diagrams and power requirements, where proper <span class="glossary-term" data-glossary-category="Programming Fundamentals" data-glossary-definition="Written text or illustrations that accompany software, explaining how it works and how to use it, including comments, docstrings, and user guides." data-glossary-term="Documentation">documentation</span> becomes critical for safe system construction and <span class="glossary-term" data-glossary-category="Project Management" data-glossary-definition="The ease with which software can be modified to correct faults, improve performance, or adapt to a changed environment." data-glossary-term="Maintainability">maintenance</span>.</p>
 
 
 
@@ -2394,6 +2437,8 @@
         <script src="../../../../assets/ide-utils.js"></script>
       
         <script src="../../../../assets/code-blocks.js"></script>
+      
+        <script src="../../../../assets/glossary.js"></script>
       
     
   </body>
