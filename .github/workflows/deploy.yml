@@ -293,7 +293,7 @@ jobs:
           
           # Get contributors since last tag
           if [ -n "$previous_tag" ]; then
-            contributors=$(git log ${commit_range} --format='%an' | sort -u)
+            contributors=$(git log ${commit_range} --format='%an' | grep -v "github-actions\[bot\]" | sort -u)
             if [ -n "$contributors" ]; then
               echo "" >> release_notes.md
               echo "## 👥 Contributors" >> release_notes.md
