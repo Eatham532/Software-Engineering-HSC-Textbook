@@ -65,7 +65,7 @@ class BankAccount:
 
 ```
 
-## Improved version with better correctness
+#### Improved version with better correctness
 
 ```python-template
 class ImprovedBankAccount:
@@ -120,9 +120,7 @@ class ImprovedBankAccount:
 
 **Example: Improving Code Clarity**
 
-```python-template
-
-## Poor clarity
+#### Poor clarity
 
 ```python-template
 
@@ -144,7 +142,7 @@ class Calculate:
 
 ```
 
-## Improved clarity
+#### Improved clarity
 
 ```python-template
 
@@ -377,7 +375,7 @@ def performance_comparison():
 
 ```python-template
 
-## Poor maintainability - tightly coupled, hard to modify
+#### Poor maintainability - tightly coupled, hard to modify
 
 class OrderProcessor:
     """Order processor with maintainability issues."""
@@ -416,7 +414,7 @@ class OrderProcessor:
         return True
 
 
-## Improved maintainability - modular, configurable, testable
+#### Improved maintainability - modular, configurable, testable
 
 class TaxCalculator:
     """Handles tax calculations with configurable rates."""
@@ -727,7 +725,7 @@ class PrematurelyOptimizedTextProcessor:
         return words
 
 
-## Better approach: Write clear code first, optimize if needed
+#### Better approach: Write clear code first, optimize if needed
 
 class ClearTextProcessor:
     """Text processor focused on clarity and correctness first."""
