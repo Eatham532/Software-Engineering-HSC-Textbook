@@ -461,7 +461,7 @@ Try tracing the same algorithm with these inputs:
 
 - score = 95 → Should output "Grade: A"
 
-- score = 45 → Should output "Grade: F" 
+- score = 45 → Should output "Grade: F"
 
 - score = 70 → Should output "Grade: C"
 
@@ -1430,6 +1430,7 @@ END
 *Note: This algorithm performs binary multiplication - it multiplies x and y using binary representation of x.*
 ///
 ///
+///
 
 /// tab | Intermediate
 
@@ -1494,6 +1495,7 @@ END
 - **Selection:** Check for sentinel value (-1), validate positive numbers, check if any valid numbers entered
 
 - **Iteration:** REPEAT-UNTIL loop to continue getting input until -1 is entered
+///
 ///
 ///
 
@@ -1588,13 +1590,9 @@ This is a **Selection Sort** algorithm. It sorts an array in ascending order by:
 The algorithm continues until the entire array is sorted: [11, 12, 22, 25, 34, 64, 90]
 ///
 ///
+///
 
-
-
-
-
-
-## Recap**Control structures are the building blocks of all algorithms:**
+## Recap **Control structures are the building blocks of all algorithms:**
 
 **Sequence** - Do things in order:
 
