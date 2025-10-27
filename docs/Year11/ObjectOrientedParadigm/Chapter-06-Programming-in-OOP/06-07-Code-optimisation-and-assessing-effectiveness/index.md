@@ -67,6 +67,7 @@ class BankAccount:
 
 ## Improved version with better correctness
 
+```python-template
 class ImprovedBankAccount:
     """Bank account with improved correctness."""
 
@@ -123,7 +124,8 @@ class ImprovedBankAccount:
 
 ## Poor clarity
 
-class C:
+```python-template
+class Calculate:
     def __init__(self, d):
         self.d = d
         self.r = []
@@ -138,10 +140,11 @@ class C:
                 z += i['a'] * y
         self.r.append(z)
         return z
-
+```
 
 ## Improved clarity
 
+```python-template
 class OrderCalculator:
     """Calculates order totals based on product catalog and quantities."""
     
