@@ -1,6 +1,6 @@
 """
 IndexNow Notification Script for GitHub Actions
-Detects changed and deleted markdown files and submits corresponding URLs to IndexNow API.
+Detects changed and deleted HTML pages and submits corresponding URLs to IndexNow API.
 
 This script is called as the final step in the GitHub Actions deployment workflow.
 It only notifies IndexNow about pages that were actually changed or deleted between deployments,
@@ -8,19 +8,17 @@ rather than submitting all pages on every build.
 
 How it works:
 1. Fetches the gh-pages branch which contains deployment history
-2. Examines the last 2 commits on gh-pages (each represents a deployment)
-3. Extracts source commit SHAs from commit messages (format: "Deployed abc123 with MkDocs...")
-4. Compares those two source commits on main branch using git diff --name-status
-5. Detects both changed/added files AND deleted files
-6. Converts all affected markdown file paths to their deployed URLs
-7. Submits all URLs to the IndexNow API (search engines will verify and handle dead links)
-8. Uses the existing API key file from docs/
+2. Compares the last 2 commits on gh-pages directly using git diff
+3. Detects changed, added, and deleted HTML files (the actual deployed pages)
+4. Converts all affected HTML file paths to their deployed URLs
+5. Submits all URLs to the IndexNow API (search engines will verify and handle dead links)
+6. Uses the existing API key file from docs/
 
 This approach correctly handles:
-- Single commits
-- Multiple commits pushed together (compares last deployment to current)
+- Single commits or multiple commits pushed together
 - First deployment (gracefully skips if only 1 gh-pages commit exists)
 - Deleted pages (notifies search engines to remove from index)
+- Any changes to the built site regardless of source changes
 
 The script always exits with code 0 to prevent deployment failures if IndexNow
 has issues (network problems, API errors, etc.).
@@ -63,21 +61,13 @@ class IndexNowNotifier:
         
         return key_file.read_text().strip()
     
-    def get_changed_files(self, base_sha: str | None = None) -> tuple[Set[str], Set[str]]:
+    def get_changed_files(self) -> tuple[Set[str], Set[str]]:
         """
-        Get list of changed and deleted markdown files from git diff.
-        Compares the last two deployments on gh-pages branch.
-        
-        Each commit on gh-pages has a message like "Deployed abc123 with MkDocs version: X.Y.Z"
-        where abc123 is the source commit SHA from main branch.
-        
-        We extract the last 2 source SHAs and compare those commits to find changed .md files.
-        
-        Args:
-            base_sha: Optional override for base commit SHA (for testing)
+        Get list of changed and deleted HTML files from gh-pages branch.
+        Compares the last two commits on gh-pages branch directly.
         
         Returns:
-            Tuple of (changed_files, deleted_files) - both are sets of relative paths to .md files
+            Tuple of (changed_files, deleted_files) - both are sets of relative paths to .html files
         """
         try:
             # Fetch gh-pages to get latest deployment info
@@ -89,45 +79,31 @@ class IndexNowNotifier:
                 check=True
             )
             
-            # Get last 2 commit messages from gh-pages
+            # Get last 2 commit SHAs from gh-pages
             result = subprocess.run(
-                ['git', 'log', 'origin/gh-pages', '--oneline', '-2', '--format=%s'],
+                ['git', 'log', 'origin/gh-pages', '--oneline', '-2', '--format=%H'],
                 capture_output=True,
                 text=True,
                 check=True
             )
             
-            commit_messages = result.stdout.strip().split('\n')
+            commit_shas = result.stdout.strip().split('\n')
             
-            if len(commit_messages) < 2:
+            if len(commit_shas) < 2:
                 print("[IndexNow] Not enough gh-pages commits for comparison")
                 print("[IndexNow] This might be the first deployment")
                 return set(), set()
             
-            # Extract source SHAs from commit messages
-            # Format: "Deployed abc123 with MkDocs version: X.Y.Z"
-            import re
-            sha_pattern = r'Deployed\s+([a-f0-9]+)\s+with'
+            current_sha = commit_shas[0]
+            previous_sha = commit_shas[1]
             
-            current_sha = re.search(sha_pattern, commit_messages[0])
-            previous_sha = re.search(sha_pattern, commit_messages[1])
+            print("[IndexNow] Comparing gh-pages commits:")
+            print(f"  Previous: {previous_sha[:8]}")
+            print(f"  Current:  {current_sha[:8]}")
             
-            if not current_sha or not previous_sha:
-                print("[IndexNow] WARNING: Could not extract SHAs from gh-pages commits")
-                print(f"[IndexNow] Current message: {commit_messages[0]}")
-                print(f"[IndexNow] Previous message: {commit_messages[1]}")
-                return set(), set()
-            
-            current = current_sha.group(1)
-            previous = previous_sha.group(1)
-            
-            print("[IndexNow] Comparing deployments:")
-            print(f"  Previous: {previous}")
-            print(f"  Current:  {current}")
-            
-            # Compare the two source commits with --name-status to detect deletions
+            # Compare the two gh-pages commits with --name-status to detect changes and deletions
             result = subprocess.run(
-                ['git', 'diff', '--name-status', f'{previous}...{current}'],
+                ['git', 'diff', '--name-status', f'{previous_sha}...{current_sha}'],
                 capture_output=True,
                 text=True,
                 check=True
@@ -146,8 +122,12 @@ class IndexNowNotifier:
                     
                 status, filepath = parts
                 
-                # Only process markdown files in docs/
-                if not filepath.endswith('.md') or not filepath.startswith('docs/'):
+                # Only process HTML files (skip assets, CSS, JS, etc.)
+                if not filepath.endswith('.html'):
+                    continue
+                
+                # Skip search index and other non-content HTML
+                if any(skip in filepath for skip in ['search/', '404.html', 'sitemap.xml']):
                     continue
                 
                 # D = deleted, A = added, M = modified, R = renamed
@@ -163,18 +143,18 @@ class IndexNowNotifier:
             print(f"[IndexNow] stderr: {e.stderr}")
             return set(), set()
     
-    def markdown_to_url(self, md_path: str) -> str:
+    def html_to_url(self, html_path: str) -> str:
         """
-        Convert a markdown file path to its deployed URL.
+        Convert an HTML file path from gh-pages to its deployed URL.
         
         Args:
-            md_path: Path to markdown file (e.g., 'docs/Year11/Module/Chapter/Section/index.md')
+            html_path: Path to HTML file in gh-pages (e.g., 'Year11/Module/Chapter/Section/index.html')
             
         Returns:
             Full URL to the deployed page
         """
-        # Remove 'docs/' prefix and '.md' suffix
-        path = md_path.replace('docs/', '', 1).replace('.md', '')
+        # Remove '.html' suffix
+        path = html_path.replace('.html', '')
         
         # Convert index files to directory URLs
         if path.endswith('/index'):
@@ -259,22 +239,22 @@ class IndexNowNotifier:
             print("[IndexNow] 🧪 DRY RUN MODE - No actual API calls will be made")
         print("="*60)
         
-        # Get changed and deleted markdown files by comparing last 2 gh-pages deployments
+        # Get changed and deleted HTML files by comparing last 2 gh-pages commits
         changed_files, deleted_files = self.get_changed_files()
         
         if not changed_files and not deleted_files:
-            print("[IndexNow] No markdown files changed or deleted in this deployment")
+            print("[IndexNow] No HTML pages changed or deleted in this deployment")
             print("[IndexNow] Skipping IndexNow notification")
             return True
         
         # Report changes
         if changed_files:
-            print(f"[IndexNow] Found {len(changed_files)} changed/added markdown file(s):")
+            print(f"[IndexNow] Found {len(changed_files)} changed/added HTML page(s):")
             for file in sorted(changed_files):
                 print(f"  ✏️  {file}")
         
         if deleted_files:
-            print(f"[IndexNow] Found {len(deleted_files)} deleted markdown file(s):")
+            print(f"[IndexNow] Found {len(deleted_files)} deleted HTML page(s):")
             for file in sorted(deleted_files):
                 print(f"  🗑️  {file}")
         
@@ -282,10 +262,10 @@ class IndexNowNotifier:
         all_urls = []
         
         if changed_files:
-            all_urls.extend([self.markdown_to_url(file) for file in changed_files])
+            all_urls.extend([self.html_to_url(file) for file in changed_files])
         
         if deleted_files:
-            all_urls.extend([self.markdown_to_url(file) for file in deleted_files])
+            all_urls.extend([self.html_to_url(file) for file in deleted_files])
         
         # Submit to IndexNow (search engines will check and remove dead links)
         success = self.submit_urls(all_urls, dry_run=dry_run)
