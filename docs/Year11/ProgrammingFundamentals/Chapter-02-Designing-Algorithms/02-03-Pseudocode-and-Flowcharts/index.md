@@ -299,15 +299,15 @@ Loops show repeated work and must always include an exit condition. The loop bel
 
 ```kroki-mermaid
 flowchart TD
-   Start([Start]):::terminator --> Init[Set attempts = 0]
-   Init --> Limit[Set maxAttempts = 3]
-   Limit --> Guess[/Ask for guess/]
-   Guess --> Check{Is guess correct?}:::decision
-   Check -->|Yes| Celebrate([Display "Correct!"]):::terminator
-   Check -->|No| Update[attempts = attempts + 1]
-   Update --> TryAgain{attempts < maxAttempts?}
-   TryAgain -->|Yes| Guess
-   TryAgain -->|No| End([Reveal answer]):::terminator
+    Start([Start]):::terminator --> Init[Set attempts = 0]
+    Init --> Limit[Set maxAttempts = 3]
+    Limit --> Guess[/Ask for guess/]
+    Guess --> Check{Is guess correct?}:::decision
+    Check -->|Yes| Celebrate(["Display 'Correct!'"]):::terminator
+    Check -->|No| Update[attempts = attempts + 1]
+    Update --> TryAgain{attempts < maxAttempts?}
+    TryAgain -->|Yes| Guess
+    TryAgain -->|No| End([Reveal answer]):::terminator
 
 ```
 
