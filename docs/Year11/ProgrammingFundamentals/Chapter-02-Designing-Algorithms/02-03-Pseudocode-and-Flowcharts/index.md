@@ -770,14 +770,4 @@ stop
 
 **Flowcharts visualize algorithm flow using standard shapes:**
 
-**PlantUML Activity Diagrams:**
-
-- start/stop for beginning and end
-
-- :action; for process steps
-
-- if/then/else for decisions
-
-- while/endwhile for loops
-
 **Both methods help bridge the gap between human thinking and computer code, making algorithms easier to understand, verify, and implement.**
