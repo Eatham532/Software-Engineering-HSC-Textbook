@@ -209,7 +209,7 @@ class GlossaryTreeprocessor(Treeprocessor):
                 else:
                     prev_elem.tail = (prev_elem.tail or '') + part
             else:
-                insert_index = element.index(prev_elem) + 1 if prev_elem is not None else len(element)
+                insert_index = list(element).index(prev_elem) + 1 if prev_elem is not None else len(element)
                 element.insert(insert_index, part)
                 prev_elem = part
 
