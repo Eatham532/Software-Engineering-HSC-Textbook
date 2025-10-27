@@ -230,8 +230,11 @@ Flowcharts translate algorithm steps into diagrams that show the order of action
 ### Why Flowcharts Matter
 
 - Highlight the sequence of work, including where an algorithm branches or repeats
+
 - Provide a quick checkpoint for peers or stakeholders who prefer visuals over code
+
 - Reveal missing cases (for example, the "no" path on a decision) before coding begins
+
 - Support testing and debugging because each arrow represents a path that must be validated
 
 ### Core Symbols in Context
@@ -244,12 +247,17 @@ flowchart LR
    Decision -->|Yes| Connector((Connector)):::connector
    Decision -->|No| End([End]):::terminator
    Connector --> End
+
 ```
 
 - **Terminator (rounded rectangle)** marks the start or end of a flow.
+
 - **Parallelogram** handles input or output.
+
 - **Rectangle** holds a processing step.
+
 - **Diamond** asks a question that splits the flow.
+
 - **Connector** reunites a branch or links to another page.
 
 ### Following a Simple Flow
@@ -262,6 +270,7 @@ flowchart TD
    Prompt --> PromptPw[/Ask for password/]
    PromptPw --> Validate[Check details against database]
    Validate --> Success([Login success])
+
 ```
 
 ### Handling Decisions
@@ -279,6 +288,7 @@ else (no)
 endif
 stop
 @enduml
+
 ```
 
 This flow makes it clear that the system always produces exactly one message, even though different rules apply.
@@ -298,14 +308,19 @@ flowchart TD
    Update --> TryAgain{attempts < maxAttempts?}
    TryAgain -->|Yes| Guess
    TryAgain -->|No| End([Reveal answer]):::terminator
+
 ```
 
 ### Flowchart Tips
 
 - Make every decision branch lead to a follow-up step; never leave an arrow dangling.
+
 - Keep text short inside each shape—use verbs for actions and questions for decisions.
+
 - Check that every terminator is reachable; otherwise, you have a logical dead end.
+
 - Use connectors or sub-flowcharts when the diagram no longer fits comfortably on the page.
+
 - Align flowchart shapes with your pseudocode: each IF, loop, or assignment should appear in both representations.
 
 ## Complete Example: Password Strength Checker

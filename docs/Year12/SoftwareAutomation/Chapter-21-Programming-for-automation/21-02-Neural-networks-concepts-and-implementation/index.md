@@ -477,6 +477,7 @@ def demonstrate_perceptron():
         print(f"  Point {point}: {class_pred} (confidence: {pred:.3f})")
     
     return perceptron_and, perceptron_or, perceptron_xor, perceptron_2d
+
 ```
 
 ---
@@ -937,6 +938,7 @@ def demonstrate_tiny_mlp():
         print(f"  x = {x_actual[0]:.2f}: predicted = {pred[0]:.3f}, actual ≈ {actual_y[0]:.3f} (error: {error:.3f})")
     
     return mlp_xor, mlp_circle, mlp_func
+
 ```
 
 ---
@@ -1292,6 +1294,7 @@ def demonstrate_training_loop_intuition():
     print(f"  Diagnosis: {'Insufficient capacity' if small_stats['final_accuracy'] < 0.8 else 'Adequate'}")
     
     return mlp_analyzed, lr_results, size_results
+
 ```
 
 ---
@@ -1721,13 +1724,17 @@ def run_all_neural_network_demonstrations():
 
 if __name__ == "__main__":
     all_results = run_all_neural_network_demonstrations()
+
 ```
 
 ## Recap
 
 - Perceptron experiments show how linear decision boundaries work and why XOR highlights the need for hidden layers.
+
 - Multi-layer perceptrons add hidden units, non-linear activations, and backpropagation to solve complex patterns.
+
 - Training loop instrumentation demonstrates how learning rate, capacity, and gradient updates influence convergence.
+
 - Behaviour analysis techniques (activations, weight norms, decision boundaries) reveal what a trained network pays attention to and how robust it is.
 
 ## Summary

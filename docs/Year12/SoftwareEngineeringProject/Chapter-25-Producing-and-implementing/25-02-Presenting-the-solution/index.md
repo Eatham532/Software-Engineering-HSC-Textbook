@@ -25,21 +25,25 @@ The same presentation won't work for everyone. Your school principal cares about
 **Technical stakeholders** (developers, IT staff, system administrators)
 
 - What they care about: Implementation details, architecture decisions, security, maintenance requirements, integration points
+
 - What they'll ask: "How does it handle authentication?" "What database did you use?" "How will we maintain this?"
 
 **Business stakeholders** (principals, managers, department heads)
 
 - What they care about: Cost, efficiency gains, ROI, strategic alignment, implementation timeline
+
 - What they'll ask: "How much will this cost?" "What's the payback period?" "Will this disrupt current operations?"
 
 **End users** (students, teachers, staff who'll use the system daily)
 
 - What they care about: Ease of use, time savings, solving their specific problems, learning curve
+
 - What they'll ask: "Is this easier than what we have now?" "How long does it take to learn?" "Will this make my job harder?"
 
 **Decision makers** (school board, executives, funding bodies)
 
 - What they care about: Strategic fit, risk, compliance, long-term value, competitive advantage
+
 - What they'll ask: "Why this solution over alternatives?" "What are the risks?" "How does this align with our goals?"
 
 ### Tailoring your message
@@ -106,6 +110,7 @@ solution -down-> demo
 demo -down-> benefits
 benefits -down-> next
 @enduml
+
 ```
 
 **1. The Problem (2-3 minutes)**
@@ -123,7 +128,9 @@ Quantify the problem. Use real numbers. Make it concrete.
 Now introduce what you built. Keep it high-level for mixed audiences.
 
 - What is it? (One sentence description)
+
 - How does it work? (High-level architecture)
+
 - What makes it different? (Key innovation or advantage)
 
 Use visuals. A simple diagram beats paragraphs of explanation:
@@ -149,6 +156,7 @@ note right of db
   No manual entry
 end note
 @enduml
+
 ```
 
 **3. The Demo (8-12 minutes)**
@@ -161,7 +169,9 @@ Plan your demo around user scenarios, not features:
 **What NOT to do:**
 
 - "First I'll show you the database schema..."
+
 - "Let me explain how the authentication works..."
+
 - "Here's the code that handles validation..."
 
 This loses your audience immediately.
@@ -171,7 +181,9 @@ This loses your audience immediately.
 **What TO do:**
 
 - "Let's follow Sarah, a Year 10 teacher, on Monday morning..."
+
 - "She opens the app, sees her class list, taps three names—done."
+
 - "Meanwhile, the office staff can already see the data..."
 
 Show real workflows. Use realistic data. Make it relatable.
@@ -180,9 +192,13 @@ Show real workflows. Use realistic data. Make it relatable.
 **Demo preparation checklist:**
 
 - [ ] Test your demo at least twice beforehand
+
 - [ ] Use realistic sample data (real names, real classes)
+
 - [ ] Have a backup plan if technology fails
+
 - [ ] Keep each scenario under 2 minutes
+
 - [ ] Highlight benefits as you go, not just features
 
 **4. The Benefits (3-5 minutes)**
@@ -194,8 +210,11 @@ Connect your solution back to the original problem. Use the same metrics.
 Break benefits into categories your audience cares about:
 
 - **Time savings**: Specific hours recovered
+
 - **Cost reduction**: Dollar amounts, not percentages
+
 - **Quality improvements**: Error rates, accuracy gains
+
 - **Risk mitigation**: Compliance, security, reliability
 
 **5. Next Steps (2-3 minutes)**
@@ -205,8 +224,11 @@ End with a clear path forward. No decision-making audience wants to be left wond
 Be specific:
 
 - Implementation timeline with milestones
+
 - Resource requirements (people, equipment, budget)
+
 - Training needs and support plan
+
 - Success metrics to track
 
 "If we proceed, we can pilot this with Year 7 next term, expand to Year 8 the following term, and have full school rollout by Term 3. Training takes 15 minutes per teacher. Total setup cost is $500 for hosting, with ongoing costs of $50 per month."
@@ -220,31 +242,41 @@ Questions aren't attacks—they're engagement. Good questions mean your audience
 **Technical questions** ("What database are you using?")
 
 - Answer directly and briefly
+
 - Offer to provide technical documentation afterward
+
 - Don't derail the presentation into technical details
 
 **Feasibility questions** ("How long will this take to implement?")
 
 - Give realistic timelines with contingency
+
 - Reference your project plan or Gantt chart
+
 - Acknowledge risks and mitigation strategies
 
 **Cost questions** ("How much will this cost?")
 
 - Provide total cost of ownership, not just initial cost
+
 - Compare to current costs or alternatives
+
 - Frame as investment with ROI timeline
 
 **Risk questions** ("What if the server goes down?")
 
 - Acknowledge the risk
+
 - Explain your mitigation strategy
+
 - Provide data if available (uptime statistics, backup procedures)
 
 **Skeptical questions** ("Will teachers actually use this?")
 
 - Share user testing feedback if available
+
 - Demonstrate ease of use
+
 - Propose pilot program to prove adoption
 
 **If you don't know the answer:**
@@ -272,6 +304,7 @@ ATTENDANCE TRACKING SYSTEM FEATURES
 • Multi-language support (English, Mandarin, Arabic)
 • Backup and disaster recovery systems
 • [... continues for 15 more bullet points]
+
 ```
 
 Good slide:
@@ -280,6 +313,7 @@ Good slide:
 Teachers mark attendance in 30 seconds
 
 [Large, clear screenshot of the 3-tap process]
+
 ```
 
 **One idea per slide.** Use visuals, not walls of text.
@@ -313,8 +347,11 @@ For a library book checkout system:
 "Alex needs to borrow three books for a history assignment."
 
 1. Scan student ID
+
 2. Scan three books
+
 3. Receipt prints with due dates
+
 4. Total time: 45 seconds
 
 **Highlight:** Speed, simplicity, no training needed
@@ -327,8 +364,11 @@ For a library book checkout system:
 "End of day: need to see which books are overdue."
 
 1. Open dashboard
+
 2. Click "Overdue Items" report
+
 3. Shows list with student contacts
+
 4. Send reminder emails with one click
 
 **Highlight:** Time saved, automated communication
@@ -341,8 +381,11 @@ For a library book checkout system:
 "Monthly report for library committee."
 
 1. Navigate to Reports
+
 2. Select date range
+
 3. Generate PDF with checkout stats, popular books, trends
+
 4. Download takes 3 seconds
 
 **Highlight:** Data-driven decisions, compliance
@@ -353,8 +396,11 @@ For a library book checkout system:
 Technology fails. Plan for it.
 
 - **Backup laptop/device:** Always
+
 - **Screenshots/video:** Prepare a walkthrough video as fallback
+
 - **Offline mode:** If your app has it, use it
+
 - **Acknowledge and move on:** "The server's not responding—let me show you the video walkthrough instead"
 
 Don't spend 5 minutes trying to fix connectivity during a presentation. Move to your backup immediately.
@@ -370,8 +416,11 @@ Don't spend 5 minutes trying to fix connectivity during a presentation. Move to 
 Evidence builds trust:
 
 - User testing results
+
 - Pilot program data
+
 - Expert validation (teacher supervisor, IT department)
+
 - Before/after comparisons with real metrics
 
 **Addressing limitations honestly:**
@@ -395,8 +444,11 @@ Showing you understand limitations demonstrates maturity and realistic thinking.
 You've built a homework submission and grading system for your school. Write a 2-3 sentence pitch for each of these audiences:
 
 1. Year 9 students who will submit homework through it
+
 2. Teachers who will grade submissions
+
 3. The school principal making the approval decision
+
 4. The IT manager who will maintain it
 
 Consider what each audience cares about most.
@@ -438,8 +490,11 @@ Write an opening paragraph (3-4 sentences) that makes the current problem concre
 **Why this works:**
 
 - Specific numbers (400 students, 12 minutes, 80 hours)
+
 - Multiple stakeholder impacts (students, canteen staff)
+
 - Emotional element (Year 7s missing lunch entirely)
+
 - Clear inefficiency that a solution could address
 ///
 ///
@@ -455,8 +510,11 @@ You're demonstrating a sports fixtures management system to coaches and the spor
 Plan three scenarios (with timing) that show the most important workflows. For each scenario:
 
 - State the user role
+
 - List the steps (keep it under 5 steps)
+
 - Identify what benefit you'll highlight
+
 - Allocate time (must total 8 minutes)
 
 /// details | Sample Solution
@@ -470,9 +528,13 @@ User: Basketball coach
 Steps:
 
 1. Open calendar view
+
 2. Click "Add Practice"
+
 3. Select team, date, venue, time
+
 4. Send notification to all players
+
 5. Practice appears on team calendar
 
 Benefit highlighted: "Takes 30 seconds instead of 15 minutes of emails"
@@ -486,8 +548,11 @@ User: Student playing netball and swimming
 Steps:
 
 1. Login shows personalised calendar
+
 2. See all upcoming games/practices for both sports
+
 3. Click fixture to see location, time, opponent
+
 4. Add to phone calendar with one tap
 
 Benefit highlighted: "Never miss a game—everything in one place"
@@ -501,8 +566,11 @@ User: Director of Sport
 Steps:
 
 1. Navigate to Reports dashboard
+
 2. View participation stats by sport and year level
+
 3. Generate "Upcoming Week" fixture list
+
 4. Export to PDF and email to all parents
 
 Benefit highlighted: "Complete oversight in seconds, not hours of spreadsheet work"
@@ -548,8 +616,11 @@ During your presentation of a student mentoring matching system, stakeholders as
 **Why these work:**
 
 - Acknowledge the concern legitimately
+
 - Provide specific mechanism/solution
+
 - Offer evidence or offer to provide detail
+
 - Show you've thought deeply about the issue
 ///
 ///
@@ -563,11 +634,17 @@ Presenting your solution effectively means understanding your audience, structur
 **Key principles:**
 
 - **Tailor to your audience:** Technical stakeholders need implementation details, business stakeholders need ROI, end users need simplicity, decision makers need strategic fit
+
 - **Follow the narrative arc:** Problem → Solution → Demo → Benefits → Next Steps
+
 - **Show, don't tell:** Live demonstrations proving real workflows beat feature lists
+
 - **Quantify everything:** Use specific numbers for problems, savings, and impacts
+
 - **Prepare for failure:** Always have backup plans for technical difficulties
+
 - **Handle objections honestly:** Acknowledge concerns and provide evidence-based responses
+
 - **End with clarity:** Give clear next steps and decision points
 
 Your presentation isn't about showing how clever you are. It's about making your audience confident that your solution solves their problem and is worth implementing. Keep them at the centre of every slide, every demo scenario, and every response to questions.

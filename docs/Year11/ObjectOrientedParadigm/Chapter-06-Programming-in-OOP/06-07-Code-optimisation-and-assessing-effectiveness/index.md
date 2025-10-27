@@ -125,6 +125,7 @@ class ImprovedBankAccount:
 ## Poor clarity
 
 ```python-template
+
 class Calculate:
     def __init__(self, d):
         self.d = d
@@ -140,11 +141,13 @@ class Calculate:
                 z += i['a'] * y
         self.r.append(z)
         return z
+
 ```
 
 ## Improved clarity
 
 ```python-template
+
 class OrderCalculator:
     """Calculates order totals based on product catalog and quantities."""
     
