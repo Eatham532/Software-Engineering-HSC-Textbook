@@ -2356,9 +2356,3 @@ This section provided comprehensive frameworks for investigating and mitigating 
 - **Transparency and Accountability**: Model cards, documentation frameworks, and reproducibility checks
 
 The frameworks and tools presented enable practitioners to systematically identify, analyze, and address bias throughout the ML development lifecycle, ensuring more fair and reliable AI systems.
-
----
-
-*Next: Continue to quiz assessment for comprehensive evaluation of bias investigation concepts.*
-
-Now let me complete the section with mitigation strategies and transparency tools.
