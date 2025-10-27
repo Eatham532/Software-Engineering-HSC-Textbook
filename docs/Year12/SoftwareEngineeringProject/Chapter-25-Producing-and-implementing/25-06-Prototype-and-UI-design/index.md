@@ -4,8 +4,6 @@ title: "25.6 Prototype and UI design"
 
 # 25.6 Prototype and UI design
 
-**Outcomes**: SE-12-06
-
 ## Learning objectives
 
 By the end of this section, you will be able to:

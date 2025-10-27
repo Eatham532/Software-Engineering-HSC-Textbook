@@ -4,8 +4,6 @@ title: "24.4 Project management tools and Gantt"
 
 # 24.4 Project management tools and Gantt
 
-**Outcomes**: SE-12-09
-
 ## Learning objectives
 
 By the end of this section, you will be able to:

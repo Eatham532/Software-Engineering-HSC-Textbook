@@ -4,8 +4,6 @@ title: "25.2 Presenting the solution"
 
 # 25.2 Presenting the solution
 
-**Outcomes**: SE-12-09
-
 ## Learning objectives
 
 By the end of this section, you will be able to:

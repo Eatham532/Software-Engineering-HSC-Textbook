@@ -4,8 +4,6 @@ title: "23.1 Requirements and feasibility"
 
 # 23.1 Requirements and feasibility
 
-**Outcomes**: SE-12-01
-
 ## Learning objectives
 
 By the end of this section, you will be able to:

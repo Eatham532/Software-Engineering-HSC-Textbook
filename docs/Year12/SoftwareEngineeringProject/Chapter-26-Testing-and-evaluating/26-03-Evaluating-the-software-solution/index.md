@@ -4,8 +4,6 @@ title: "26.3 Evaluating the software solution"
 
 # 26.3 Evaluating the software solution
 
-**Outcomes**: SE-12-06
-
 ## Learning objectives
 
 By the end of this section, you will be able to:
