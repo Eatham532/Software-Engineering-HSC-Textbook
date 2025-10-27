@@ -60,7 +60,7 @@ title: "NSW HSC Software Engineering"
 
     ---
 
-    PlantUML diagrams, flowcharts, and system models help you understand complex concepts at a glance.
+    Diagrams, flowcharts, and system models help you understand complex concepts at a glance.
 
 - :material-book-open-page-variant:{ .lg .middle } __HSC-Aligned Content__
 

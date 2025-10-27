@@ -551,7 +551,37 @@
       if (isDragging) return;
       const dotIndex = getDotIndexAtY(e.clientY);
       scrollToDotIndex(dotIndex);
+      
+      // Add ripple to clicked dot
+      const clickedDot = dots[dotIndex];
+      if (clickedDot) addDesktopRipple(clickedDot.el);
     });
+
+    // Touch tap (for tablets - quick tap without drag)
+    let touchStartY = null;
+    nav.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    
+    nav.addEventListener('touchend', (e) => {
+      if (isDragging) return;
+      if (!touchStartY) return;
+      
+      const touchEndY = e.changedTouches[0].clientY;
+      const distance = Math.abs(touchEndY - touchStartY);
+      
+      // If movement was minimal, treat as a tap
+      if (distance < 10) {
+        const dotIndex = getDotIndexAtY(touchEndY);
+        scrollToDotIndex(dotIndex);
+        
+        // Add ripple to tapped dot
+        const tappedDot = dots[dotIndex];
+        if (tappedDot) addDesktopRipple(tappedDot.el);
+      }
+      
+      touchStartY = null;
+    }, { passive: true });
 
     // Drag
     nav.addEventListener('mousedown', (e) => {
@@ -564,13 +594,51 @@
       
       const dotIndex = getDotIndexAtY(e.clientY);
       scrollToDotIndex(dotIndex);
+      
+      // Add ripple to nearest dot
+      const nearestDot = dots[dotIndex];
+      if (nearestDot) addDesktopRipple(nearestDot.el);
     });
+
+    // Touch support for tablets
+    nav.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      isDragging = true;
+      nav.classList.add('dragging');
+      
+      if (circleHideTimeout) clearTimeout(circleHideTimeout);
+      
+      const touch = e.touches[0];
+      const dotIndex = getDotIndexAtY(touch.clientY);
+      scrollToDotIndex(dotIndex);
+      
+      // Add ripple to nearest dot
+      const nearestDot = dots[dotIndex];
+      if (nearestDot) addDesktopRipple(nearestDot.el);
+    }, { passive: false });
 
     document.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
       
       const mouseY = e.clientY;
       const mouseX = e.clientX;
+      
+      handleDesktopDrag(mouseY, mouseX);
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      
+      const touch = e.touches[0];
+      const touchY = touch.clientY;
+      const touchX = touch.clientX;
+      
+      handleDesktopDrag(touchY, touchX);
+    }, { passive: false });
+
+    // Shared drag handler for mouse and touch
+    function handleDesktopDrag(yPos, xPos) {
       
       const viewportHeight = window.innerHeight;
       
@@ -581,30 +649,30 @@
       let targetDotIndex;
       let shouldMoveNav = false;
       
-      if (mouseY < currentNavRect.top) {
-        // Mouse above current nav bounds - move nav to follow
+      if (yPos < currentNavRect.top) {
+        // Position above current nav bounds - move nav to follow
         shouldMoveNav = true;
         targetDotIndex = 0;
-      } else if (mouseY > currentNavRect.bottom) {
-        // Mouse below current nav bounds - move nav to follow
+      } else if (yPos > currentNavRect.bottom) {
+        // Position below current nav bounds - move nav to follow
         shouldMoveNav = true;
         targetDotIndex = TOTAL_DOTS - 1;
       } else {
-        // Mouse within current nav bounds - don't move nav, just track the dot
+        // Position within current nav bounds - don't move nav, just track the dot
         shouldMoveNav = false;
-        targetDotIndex = getDotIndexAtY(mouseY);
+        targetDotIndex = getDotIndexAtY(yPos);
       }
       
-      // Only update nav position if we need to follow the mouse
+      // Only update nav position if we need to follow the pointer
       if (shouldMoveNav) {
         let newNavTop;
         
-        if (mouseY < currentNavRect.top) {
-          // Position nav so first dot is under mouse
-          newNavTop = mouseY + (navHeight / 2);
+        if (yPos < currentNavRect.top) {
+          // Position nav so first dot is under pointer
+          newNavTop = yPos + (navHeight / 2);
         } else {
-          // Position nav so last dot is under mouse
-          newNavTop = mouseY - (navHeight / 2);
+          // Position nav so last dot is under pointer
+          newNavTop = yPos - (navHeight / 2);
         }
         
         // Clamp nav position to viewport with padding
@@ -619,7 +687,7 @@
       }
       
       // Apply wave displacement
-      applyWaveDrag(mouseX, mouseY);
+      applyWaveDrag(xPos, yPos);
       
       // Scroll based on the target dot
       scrollToDotIndex(targetDotIndex);
@@ -630,7 +698,7 @@
       if (letter) {
         // Update circle position relative to nav
         const updatedNavRect = nav.getBoundingClientRect();
-          let y = mouseY - updatedNavRect.top;
+          let y = yPos - updatedNavRect.top;
           // Clamp circle so it doesn't go above configured viewport offset
           const minY = MIN_VIEWPORT_TOP - updatedNavRect.top;
           y = Math.max(minY, Math.min(updatedNavRect.height, y));
@@ -640,7 +708,7 @@
         circle.style.top = `${y}px`;
         circle.style.transition = 'top 0.05s linear, left 0.05s linear';
       }
-    });
+    }
 
     document.addEventListener('mouseup', () => {
       if (isDragging) {
@@ -659,6 +727,44 @@
         }, 100);
       }
     });
+
+    document.addEventListener('touchend', () => {
+      if (isDragging) {
+        isDragging = false;
+        nav.classList.remove('dragging');
+        
+        // Reset nav position to center
+        nav.style.top = '50%';
+        nav.style.transition = 'top 0.3s ease';
+        
+        // Clean up all ripples
+        dots.forEach(({ el }) => removeDesktopRipple(el));
+        
+        setTimeout(() => {
+          resetDots();
+          updateActive();
+          scheduleCircleHide();
+        }, 100);
+      }
+    }, { passive: true });
+
+    document.addEventListener('touchcancel', () => {
+      if (isDragging) {
+        isDragging = false;
+        nav.classList.remove('dragging');
+        
+        // Reset nav position immediately
+        nav.style.top = '50%';
+        nav.style.transition = 'top 0.3s ease';
+        
+        // Force clean up all ripples
+        dots.forEach(({ el }) => removeDesktopRipple(el));
+        
+        resetDots();
+        updateActive();
+        circle.classList.remove('visible');
+      }
+    }, { passive: true });
 
     // Scroll tracking
     function scrollUpdate() {
@@ -681,15 +787,17 @@
   // ============================================================================
 
   // Shared helper function for scrolling to a letter section
-  function scrollToLetter(letter) {
+  function scrollToLetter(letter, smooth = false) {
     const section = document.querySelector(`.glossary-section[data-letter="${letter}"]`);
     if (!section) return;
     
     const firstSection = document.querySelector('.glossary-section');
+    const behavior = smooth ? 'smooth' : 'instant';
+    
     if (section === firstSection) {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.scrollTo({ top: 0, behavior });
     } else {
-      window.scrollTo({ top: section.offsetTop - 20, behavior: 'instant' });
+      window.scrollTo({ top: section.offsetTop - 20, behavior });
     }
   }
 
@@ -730,10 +838,17 @@
 
     // Swipe/drag handling - work on entire track area
     let isDragging = false;
+    let wasDragging = false; // Track if user actually dragged
     let startX = 0;
 
     // Add click handler to entire track
     track.addEventListener('click', (e) => {
+      // Prevent click if user was dragging
+      if (wasDragging) {
+        wasDragging = false;
+        return;
+      }
+      
       const trackRect = track.getBoundingClientRect();
       const trackStart = trackRect.left;
       const trackWidth = trackRect.width;
@@ -751,24 +866,114 @@
     track.addEventListener('touchstart', (e) => {
       isDragging = true;
       startX = e.touches[0].clientX;
+      
+      // Add ripple effect to nearest dot
+      const touch = e.touches[0];
+      const trackRect = track.getBoundingClientRect();
+      const trackStart = trackRect.left;
+      const trackWidth = trackRect.width;
+      const relativeX = Math.max(0, Math.min(trackWidth, touch.clientX - trackStart));
+      const progress = relativeX / trackWidth;
+      const letterIndex = Math.floor(progress * allDots.length);
+      const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
+      const targetDot = allDots[clampedIndex];
+      
+      if (targetDot) {
+        addRipple(targetDot.el);
+      }
+      
       handleTouchMove(e, track, allDots, hoverCircle, navContainer);
+    }, { passive: false });
+
+    // Mouse drag support
+    track.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      track.style.cursor = 'grabbing';
+      
+      // Add ripple effect to nearest dot
+      const trackRect = track.getBoundingClientRect();
+      const trackStart = trackRect.left;
+      const trackWidth = trackRect.width;
+      const relativeX = Math.max(0, Math.min(trackWidth, e.clientX - trackStart));
+      const progress = relativeX / trackWidth;
+      const letterIndex = Math.floor(progress * allDots.length);
+      const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
+      const targetDot = allDots[clampedIndex];
+      
+      if (targetDot) {
+        addRipple(targetDot.el);
+      }
+      
+      handleMouseMove(e, track, allDots, hoverCircle, navContainer);
     });
 
     track.addEventListener('touchmove', (e) => {
       if (isDragging) {
+        wasDragging = true; // Mark that user is dragging
+        e.preventDefault(); // Prevent scrolling while dragging
         handleTouchMove(e, track, allDots, hoverCircle, navContainer);
+      }
+    }, { passive: false });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        wasDragging = true; // Mark that user is dragging
+        handleMouseMove(e, track, allDots, hoverCircle, navContainer);
       }
     });
 
-    track.addEventListener('touchend', () => {
+    track.addEventListener('touchend', (e) => {
       isDragging = false;
       hideMobileHoverCircle(navContainer);
+      track.style.cursor = 'grab';
       // Reset wave effect
       allDots.forEach(({ el }) => {
         el.style.transform = 'scale(1)';
         el.style.opacity = '0.4';
+        // Remove ripple class after animation
+        removeRipple(el);
       });
+      
+      // Reset wasDragging after a small delay to allow click handler to check it
+      setTimeout(() => {
+        wasDragging = false;
+      }, 50);
+    }, { passive: true });
+
+    document.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        hideMobileHoverCircle(navContainer);
+        track.style.cursor = 'grab';
+        // Reset wave effect
+        allDots.forEach(({ el }) => {
+          el.style.transform = 'scale(1)';
+          el.style.opacity = '0.4';
+          // Remove ripple class after animation
+          removeRipple(el);
+        });
+        
+        // Reset wasDragging after a small delay to allow click handler to check it
+        setTimeout(() => {
+          wasDragging = false;
+        }, 50);
+      }
     });
+
+    // Handle touch cancellation (e.g., scrolling interrupts touch)
+    track.addEventListener('touchcancel', (e) => {
+      isDragging = false;
+      hideMobileHoverCircle(navContainer);
+      track.style.cursor = 'grab';
+      // Reset all visual effects immediately
+      allDots.forEach(({ el }) => {
+        el.style.transform = 'scale(1)';
+        el.style.opacity = '0.4';
+        // Force remove ripple class
+        removeRipple(el);
+      });
+    }, { passive: true });
 
     // Mouse hover support (for hybrid devices)
     track.addEventListener('mousemove', (e) => {
@@ -858,6 +1063,28 @@
     }
   }
 
+  function handleMouseMove(e, track, allDots, hoverCircle, container) {
+    const mouseX = e.clientX;
+
+    // Apply wave effect
+    applyMobileWaveEffect(allDots, mouseX);
+
+    // Interpolate position across full track width
+    const trackRect = track.getBoundingClientRect();
+    const trackStart = trackRect.left;
+    const trackWidth = trackRect.width;
+    const relativeX = Math.max(0, Math.min(trackWidth, mouseX - trackStart)); // Clamp to track bounds
+    const progress = relativeX / trackWidth; // 0 to 1
+    const letterIndex = Math.floor(progress * allDots.length);
+    const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
+
+    const targetDot = allDots[clampedIndex];
+    if (targetDot) {
+      scrollToLetter(targetDot.letter);
+      showMobileHoverCircle(e, targetDot.letter, container);
+    }
+  }
+
   function applyMobileWaveEffect(dots, touchX) {
     const maxScale = 2.5;
     const minScale = 1.0;
@@ -891,6 +1118,60 @@
   function hideMobileHoverCircle(container) {
     const circle = container.querySelector('.mobile-hover-circle');
     circle.classList.remove('visible');
+  }
+
+  /**
+   * Add ripple effect to mobile nav dot
+   * @param {HTMLElement} dotEl - The dot element to apply ripple to
+   */
+  function addRipple(dotEl) {
+    if (!dotEl) return;
+    // Remove any existing ripple first to prevent stacking
+    dotEl.classList.remove('ripple');
+    // Force reflow to restart animation
+    void dotEl.offsetWidth;
+    // Add ripple class
+    dotEl.classList.add('ripple');
+    // Auto-remove after animation completes (300ms from CSS)
+    setTimeout(() => {
+      removeRipple(dotEl);
+    }, 300);
+  }
+
+  /**
+   * Remove ripple effect from mobile nav dot
+   * @param {HTMLElement} dotEl - The dot element to remove ripple from
+   */
+  function removeRipple(dotEl) {
+    if (!dotEl) return;
+    dotEl.classList.remove('ripple');
+  }
+
+  /**
+   * Add ripple effect to desktop nav dot
+   * @param {HTMLElement} dotEl - The dot element to apply ripple to
+   */
+  function addDesktopRipple(dotEl) {
+    if (!dotEl) return;
+    // Remove any existing ripple first to prevent stacking
+    dotEl.classList.remove('ripple');
+    // Force reflow to restart animation
+    void dotEl.offsetWidth;
+    // Add ripple class
+    dotEl.classList.add('ripple');
+    // Auto-remove after animation completes (300ms from CSS)
+    setTimeout(() => {
+      removeDesktopRipple(dotEl);
+    }, 300);
+  }
+
+  /**
+   * Remove ripple effect from desktop nav dot
+   * @param {HTMLElement} dotEl - The dot element to remove ripple from
+   */
+  function removeDesktopRipple(dotEl) {
+    if (!dotEl) return;
+    dotEl.classList.remove('ripple');
   }
 
   // ============================================================================

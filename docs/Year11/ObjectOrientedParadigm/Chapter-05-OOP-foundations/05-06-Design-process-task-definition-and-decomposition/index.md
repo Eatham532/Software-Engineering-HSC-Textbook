@@ -26,8 +26,7 @@ Good software design follows a systematic process that transforms user needs int
 
 Requirements → Responsibilities → Collaborations → Implementation
 
-
-```
+```kroki-plantuml
 @startuml
 [1. Requirements] as req
 [2. Responsibilities] as resp

@@ -44,7 +44,7 @@ Successful feedback analysis begins with comprehensive collection from diverse s
 
 - **User journey tracking**: Data on how users navigate through the application
 
-```python-template
+```python-exec
 # Example: Comprehensive feedback collection system
 class FeedbackCollector:
     def __init__(self):

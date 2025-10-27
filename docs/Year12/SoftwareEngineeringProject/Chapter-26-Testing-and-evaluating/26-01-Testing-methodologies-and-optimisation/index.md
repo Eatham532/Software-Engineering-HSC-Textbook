@@ -75,35 +75,36 @@ package "Test Techniques" {
 
 1. **Introduction and Scope**
 
-   - Project overview and testing objectives
+    - Project overview and testing objectives
 
-   - Features to be tested and excluded
+    - Features to be tested and excluded
 
-   - Test environment requirements
+    - Test environment requirements
 
 2. **Test Strategy**
 
-   - Testing approach and methodologies
+    - Testing approach and methodologies
 
-   - Entry and exit criteria for testing phases
+    - Entry and exit criteria for testing phases
 
-   - Risk assessment and mitigation strategies
+    - Risk assessment and mitigation strategies
 
 3. **Test Cases and Procedures**
 
-   - Detailed test cases with expected results
+    - Detailed test cases with expected results
 
-   - Test data requirements and setup procedures
+    - Test data requirements and setup procedures
 
-   - Manual and automated test procedures
+    - Manual and automated test procedures
 
 4. **Resources and Schedule**
 
-   - Testing team roles and responsibilities
+    - Testing team roles and responsibilities
 
-   - Testing timeline and milestones
+    - Testing timeline and milestones
 
-   - Tools and infrastructure requirements
+    - Tools and infrastructure requirements
+///
 ///
 
 /// tab | Python Test Plan Generator

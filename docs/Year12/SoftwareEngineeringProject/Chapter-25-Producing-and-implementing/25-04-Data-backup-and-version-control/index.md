@@ -240,7 +240,7 @@ Tags mark specific points in repository history, typically used to identify rele
 
 6. Merge back to develop
 
-```python-template
+```python-exec
 # Example: Release management system
 class ReleaseManager:
     def __init__(self):

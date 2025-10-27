@@ -33,7 +33,7 @@ Think of it like running a restaurant kitchen:
 
 A **buffer overflow** occurs when a program writes more data to a buffer than it can hold, potentially overwriting adjacent memory. While Python manages memory automatically, understanding these concepts helps you write more secure code.
 
-```python
+```python-template
 # Dangerous pattern that could cause issues
 def unsafe_string_handling():
     # This could be problematic with very large inputs

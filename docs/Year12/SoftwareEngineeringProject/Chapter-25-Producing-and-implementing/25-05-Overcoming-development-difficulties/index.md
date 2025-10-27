@@ -176,7 +176,7 @@ Modern software development benefits from vast online resources and communities.
 
 - **Date filtering**: Focus on recent solutions for current technology versions
 
-```python-template
+```python-exec
 # Example: Research strategy framework
 class ResearchHelper:
     def __init__(self):

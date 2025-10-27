@@ -8,7 +8,7 @@ title: "5.5 Modelling with class diagrams, structure charts and DFDs"
 
 By the end of this section, you will be able to:
 
-- Create class diagrams using PlantUML to represent object-oriented systems
+- Create class diagrams to represent object-oriented systems
 
 - Design structure charts to show hierarchical decomposition of functions
 
@@ -32,9 +32,9 @@ When designing software systems, we need different perspectives to understand th
 
 Think of it like designing a house - you need floor plans (structure), electrical diagrams (connections), and plumbing diagrams (flow). Each shows a different but essential view.
 
-## Class diagrams with PlantUML
+## Class diagrams
 
-**Class diagrams** visualize the classes in your system, their attributes, methods, and relationships.
+**Class diagrams** a diagram to visualize the classes in your system, their attributes, methods, and relationships.
 
 ### Basic class representation
 
@@ -423,7 +423,7 @@ Design a class diagram for a simple blog system with:
 
 - Categories that posts can be assigned to
 
-**Task**: Create a PlantUML class diagram showing classes, attributes, methods, and relationships.
+**Task**: Create a class diagram showing classes, attributes, methods, and relationships.
 
 /// details | Sample Solution
     type: success
@@ -598,8 +598,6 @@ db2 --> bank : "audit trail"
 ## Recap
 
 - **Class diagrams** visualize static structure using classes, attributes, methods, and relationships
-
-- **PlantUML** provides a text-based way to create professional class diagrams
 
 - **Structure charts** show hierarchical functional decomposition from complex to simple tasks
 

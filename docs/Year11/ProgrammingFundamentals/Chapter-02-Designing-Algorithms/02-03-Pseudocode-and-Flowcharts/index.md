@@ -8,7 +8,7 @@ title: "Pseudocode and Flowcharts"
     By the end of this section, you will be able to:
 
     - Write clear, readable pseudocode using standard patterns
-    - Create flowcharts using PlantUML activity diagrams
+    - Create flowcharts
     - Convert between algorithms, pseudocode, and flowcharts
     - Use proper conventions for documenting algorithm logic
     - Represent complex control structures visually
@@ -223,119 +223,105 @@ END
 
 ///
 
-## Flowcharts with PlantUML Activity Diagrams
+## Flowcharts
 
-**Flowcharts** use standardized shapes connected by arrows to show algorithm flow visually. PlantUML activity diagrams provide a text-based way to create professional flowcharts.
+Flowcharts translate algorithm steps into diagrams that show the order of actions, decision points, and possible paths. They give teams a shared visual language before code is written.
 
-### Basic PlantUML Activity Syntax
+### Why Flowcharts Matter
 
-```kroki-plantuml
-@startuml
-start
-:Step 1;
-:Step 2;
-:Step 3;
-stop
-@enduml
+- Highlight the sequence of work, including where an algorithm branches or repeats
 
-```
+- Provide a quick checkpoint for peers or stakeholders who prefer visuals over code
 
-### Input/Output Shapes
+- Reveal missing cases (for example, the "no" path on a decision) before coding begins
 
-```kroki-plantuml
-@startuml
-start
-:INPUT username;
-:Calculate result;
-:OUTPUT result;
-stop
-@enduml
+- Support testing and debugging because each arrow represents a path that must be validated
+
+### Core Symbols in Context
+
+```kroki-mermaid
+flowchart LR
+   Start([Start/End]):::terminator --> Input[/Input or Output/]:::io
+   Input --> Process[Process]:::process
+   Process --> Decision{Decision}:::decision
+   Decision -->|Yes| Connector((Connector)):::connector
+   Decision -->|No| End([End]):::terminator
+   Connector --> End
 
 ```
 
-### Decision (Selection) Shapes
+- **Terminator (rounded rectangle)** marks the start or end of a flow.
+
+- **Parallelogram** handles input or output.
+
+- **Rectangle** holds a processing step.
+
+- **Diamond** asks a question that splits the flow.
+
+- **Connector** reunites a branch or links to another page.
+
+### Following a Simple Flow
+
+The example below shows the straight-line logic for logging into a system. Each arrow represents what happens next.
+
+```kroki-mermaid
+flowchart TD
+   Start([Start]):::terminator --> Prompt[/Ask for username/]
+   Prompt --> PromptPw[/Ask for password/]
+   PromptPw --> Validate[Check details against database]
+   Validate --> Success([Login success])
+
+```
+
+### Handling Decisions
+
+Decisions turn a single path into multiple outcomes. Use meaningful labels for each branch so the reader knows what the answer means.
 
 ```kroki-plantuml
 @startuml
 start
-:INPUT age;
+:Enter age;
 if (age >= 18?) then (yes)
-  :OUTPUT "You can vote";
+  :Output "Adult ticket";
 else (no)
-  :OUTPUT "Too young to vote";
+  :Output "Student ticket";
 endif
 stop
 @enduml
 
 ```
 
-### Multiple Conditions
+This flow makes it clear that the system always produces exactly one message, even though different rules apply.
 
-```kroki-plantuml
-@startuml
-start
-:INPUT score;
-if (score >= 90?) then (yes)
-  :grade = "A";
-elseif (score >= 80?) then (yes)
-  :grade = "B";
-elseif (score >= 70?) then (yes)
-  :grade = "C";
-elseif (score >= 60?) then (yes)
-  :grade = "D";
-else (no)
-  :grade = "F";
-endif
-:OUTPUT grade;
-stop
-@enduml
+### Representing Loops
+
+Loops show repeated work and must always include an exit condition. The loop below keeps asking for guesses until the answer is correct or attempts run out.
+
+```kroki-mermaid
+flowchart TD
+   Start([Start]):::terminator --> Init[Set attempts = 0]
+   Init --> Limit[Set maxAttempts = 3]
+   Limit --> Guess[/Ask for guess/]
+   Guess --> Check{Is guess correct?}:::decision
+   Check -->|Yes| Celebrate([Display "Correct!"]):::terminator
+   Check -->|No| Update[attempts = attempts + 1]
+   Update --> TryAgain{attempts < maxAttempts?}
+   TryAgain -->|Yes| Guess
+   TryAgain -->|No| End([Reveal answer]):::terminator
 
 ```
 
-### Loops in Flowcharts
+### Flowchart Tips
 
-/// details | WHILE Loop
-    type: note
-    open: false
+- Make every decision branch lead to a follow-up step; never leave an arrow dangling.
 
-```kroki-plantuml
-@startuml
-start
-:SET count = 1;
-while (count <= 5?) is (yes)
-  :OUTPUT count;
-  :SET count = count + 1;
-endwhile (no)
-stop
-@enduml
+- Keep text short inside each shape—use verbs for actions and questions for decisions.
 
-```
+- Check that every terminator is reachable; otherwise, you have a logical dead end.
 
-///
+- Use connectors or sub-flowcharts when the diagram no longer fits comfortably on the page.
 
-/// details | FOR Loop
-    type: note
-    open: false
-
-```kroki-plantuml
-@startuml
-start
-:INPUT numbers (list);
-:SET maximum = first number;
-:SET i = 1;
-while (i < length of numbers?) is (yes)
-  if (numbers[i] > maximum?) then (yes)
-    :SET maximum = numbers[i];
-  endif
-  :SET i = i + 1;
-endwhile (no)
-:OUTPUT maximum;
-stop
-@enduml
-
-```
-
-///
+- Align flowchart shapes with your pseudocode: each IF, loop, or assignment should appear in both representations.
 
 ## Complete Example: Password Strength Checker
 
@@ -734,7 +720,7 @@ stop
 
 ## When to Use Each Representation
 
-### Use Pseudocode When:
+### Use Pseudocode When
 
 - Planning algorithm logic before coding
 
@@ -746,7 +732,7 @@ stop
 
 - Teaching algorithmic thinking
 
-### Use Flowcharts When:
+### Use Flowcharts When
 
 - Visualizing decision paths
 
@@ -758,7 +744,7 @@ stop
 
 - Documenting system processes
 
-### Use Both When:
+### Use Both When
 
 - Complex algorithms need multiple perspectives
 
@@ -767,7 +753,6 @@ stop
 - Formal documentation requirements
 
 - Peer review and collaboration
-
 
 ## Summary
 

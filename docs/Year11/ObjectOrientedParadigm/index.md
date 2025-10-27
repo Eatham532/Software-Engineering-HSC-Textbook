@@ -50,7 +50,7 @@ This module emphasizes **design-first thinking with objects**:
 
 - Progressive complexity from concepts to implementation
 
-- Visual modeling with PlantUML diagrams
+- Visual modeling with diagrams
 
 - Emphasis on code maintainability and collaboration
 

@@ -4,8 +4,6 @@ title: "24.4 Project management tools and Gantt"
 
 # 24.4 Project management tools and Gantt
 
-**Outcomes**: SE-12-09
-
 ## Learning objectives
 
 By the end of this section, you will be able to:
@@ -54,7 +52,7 @@ The work breakdown structure forms the foundation of effective project planning 
 
 4. **Deliverable-oriented**: Focus on what will be produced, not how it will be done
 
-```python-template
+```python-exec
 class WorkBreakdownStructure:
     """
     Framework for creating and managing work breakdown structures in software projects.

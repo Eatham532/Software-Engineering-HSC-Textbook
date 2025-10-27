@@ -11,7 +11,7 @@ title: "Structure Charts; Abstraction and Refinement"
     - Create structure charts to break complex problems into manageable parts
     - Apply stepwise refinement to develop solutions systematically
     - Use abstraction to hide complexity and focus on essential details
-    - Create PlantUML package/component diagrams for module breakdown
+    - Create component diagrams for module breakdown
 
 ## Introduction
 

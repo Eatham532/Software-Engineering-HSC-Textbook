@@ -4,8 +4,6 @@ title: "25.6 Prototype and UI design"
 
 # 25.6 Prototype and UI design
 
-**Outcomes**: SE-12-06
-
 ## Learning objectives
 
 By the end of this section, you will be able to:
@@ -75,7 +73,7 @@ note bottom : Wireframing is an iterative process\nthat refines through user fee
 
 ```
 
-```python-template
+```python-exec
 class WireframeDesigner:
     """
     Framework for creating and managing wireframes for software solutions.
@@ -549,7 +547,7 @@ Usability determines how effectively and efficiently users can accomplish their 
 
 10. **Help and documentation**: Offer easily searchable assistance
 
-```python-template
+```python-exec
 class UsabilityEvaluator:
     """
     Framework for evaluating and improving interface usability using established principles.
@@ -1030,7 +1028,7 @@ Accessibility ensures that software interfaces can be used by people with divers
 
 4. **Robust**: Content must be robust enough for various assistive technologies
 
-```python-template
+```python-exec
 class AccessibilityAuditor:
     """
     Framework for auditing and implementing accessibility features in software interfaces.
