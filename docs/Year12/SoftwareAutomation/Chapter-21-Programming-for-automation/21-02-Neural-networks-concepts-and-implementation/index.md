@@ -4,8 +4,6 @@ title: "21.2 Neural Networks: Concepts and Implementation"
 
 # 21.2 Neural Networks: Concepts and Implementation
 
-- Outcomes: SE-12-02
-
 ## Introduction
 
 Neural networks form the foundation of modern AI systems by mimicking how biological neurons process information. This section implements neural networks from scratch, starting with the simple perceptron and progressing to multi-layer perceptrons (MLPs) with backpropagation training.
@@ -130,7 +128,7 @@ The perceptron is the simplest neural network, consisting of a single neuron tha
 
 ### From-Scratch Implementation
 
-```python
+```python-template
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Tuple, List, Dict, Any
@@ -479,6 +477,7 @@ def demonstrate_perceptron():
         print(f"  Point {point}: {class_pred} (confidence: {pred:.3f})")
     
     return perceptron_and, perceptron_or, perceptron_xor, perceptron_2d
+```
 
 ---
 
@@ -492,7 +491,7 @@ Multi-layer perceptrons extend single perceptrons by adding hidden layers, enabl
 
 - **Input Layer**: Receives features
 
-- **Hidden Layer(s)**: Process and transform features 
+- **Hidden Layer(s)**: Process and transform features
 
 - **Output Layer**: Produces final predictions
 
@@ -520,7 +519,7 @@ Multi-layer perceptrons extend single perceptrons by adding hidden layers, enabl
 
 ### From-Scratch Implementation
 
-```python
+```python-template
 
 class TinyMLP:
     """
@@ -938,6 +937,7 @@ def demonstrate_tiny_mlp():
         print(f"  x = {x_actual[0]:.2f}: predicted = {pred[0]:.3f}, actual ≈ {actual_y[0]:.3f} (error: {error:.3f})")
     
     return mlp_xor, mlp_circle, mlp_func
+```
 
 ---
 
@@ -963,7 +963,7 @@ The training loop is the heart of neural network learning. Understanding how wei
 
 ### Training Analysis Tools
 
-```python
+```python-template
 class TrainingAnalyzer:
     """
     Tools for analyzing and visualizing neural network training.
@@ -1292,6 +1292,7 @@ def demonstrate_training_loop_intuition():
     print(f"  Diagnosis: {'Insufficient capacity' if small_stats['final_accuracy'] < 0.8 else 'Adequate'}")
     
     return mlp_analyzed, lr_results, size_results
+```
 
 ---
 
@@ -1313,7 +1314,7 @@ To effectively use neural networks in automation systems, we must understand how
 
 ### Behavior Analysis Tools
 
-```python
+```python-template
 
 class NetworkBehaviorAnalyzer:
     """
@@ -1720,5 +1721,15 @@ def run_all_neural_network_demonstrations():
 
 if __name__ == "__main__":
     all_results = run_all_neural_network_demonstrations()
- 
- 
+```
+
+## Recap
+
+- Perceptron experiments show how linear decision boundaries work and why XOR highlights the need for hidden layers.
+- Multi-layer perceptrons add hidden units, non-linear activations, and backpropagation to solve complex patterns.
+- Training loop instrumentation demonstrates how learning rate, capacity, and gradient updates influence convergence.
+- Behaviour analysis techniques (activations, weight norms, decision boundaries) reveal what a trained network pays attention to and how robust it is.
+
+## Summary
+
+Neural networks power modern automation by stacking simple units into layered systems that learn from data. Building perceptrons and tiny MLPs from scratch demystifies forward passes, loss functions, and gradient-based updates. With careful training analysis and behaviour interpretation, developers can tune architectures confidently and explain how their automation models reach decisions.
