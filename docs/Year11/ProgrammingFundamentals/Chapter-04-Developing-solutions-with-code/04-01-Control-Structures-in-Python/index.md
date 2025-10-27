@@ -674,7 +674,7 @@ Create an ATM simulation with:
     type: success
     open: false
 
-```python
+```python-exec
 def main():
     # Initialize account
     correct_pin = "1234"

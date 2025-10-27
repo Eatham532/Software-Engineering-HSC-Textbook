@@ -264,7 +264,7 @@ print(f"Number of apples: {count_a}")
 
 ### List Manipulation Techniques
 
-```python
+```python-template
 def manage_shopping_list():
     """Interactive shopping list manager."""
     

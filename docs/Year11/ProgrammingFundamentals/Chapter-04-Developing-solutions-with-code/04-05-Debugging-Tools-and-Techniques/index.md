@@ -612,7 +612,7 @@ except AssertionError as e:
 
 ### Debugging with Try-Except Blocks
 
-```python
+```python-template
 def robust_division_calculator():
     """Calculator that handles and debugs errors gracefully."""
     

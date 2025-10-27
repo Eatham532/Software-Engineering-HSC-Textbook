@@ -1216,7 +1216,7 @@ END
 
 /// tab | Python Implementation
 
-```python
+```python-template
 def process_student_grades():
     total = 0
     count = 0

@@ -832,7 +832,7 @@ Create a complete program that uses all functions together.
     type: success
     open: false
 
-```python
+```python-exec
 def calculate_weighted_average(assignments, tests, exam):
     """Calculate weighted average from three components.
     

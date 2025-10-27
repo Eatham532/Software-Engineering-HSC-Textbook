@@ -668,7 +668,7 @@ Build a simple tool that recommends architecture patterns based on project requi
     type: success
     open: false
 
-```python-template
+```python-exec
 class ArchitectureAdvisor:
     """Tool to recommend web architecture patterns."""
     

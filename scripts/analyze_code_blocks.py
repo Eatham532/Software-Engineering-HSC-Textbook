@@ -8,7 +8,8 @@ Analyzes Python code blocks in index.md files and updates their fence types:
 - ```python otherwise (plain Python)
 
 This script now processes ALL Python code blocks (python, python-exec, python-template)
-and re-evaluates their classification. Blocks with input() calls are skipped to avoid blocking.
+and re-evaluates their classification. Code blocks are executed with a 2-second timeout.
+Blocks with input() calls that complete before timeout are classified as python-exec if they produce output.
 
 Usage: python scripts/analyze_code_blocks.py
 """
@@ -330,26 +331,19 @@ def process_file(file_path: Path, timeouts_accumulator: list[tuple[Path, int]] |
         if not code.strip():
             continue
 
-        # Check for input() calls first - skip these without timeout
-        if contains_input_call(code):
-            if timeouts_accumulator is not None:
-                timeouts_accumulator.append((file_path, start_line + 1))
-            print(f"  Line {start_line+1}: ⏭ Contains input() call → skipped (would block)")
-            continue
-
         # Heuristics
         has_classes = contains_class_definitions(code)
         has_class_refs = has_class_references(code)
         has_asserts = has_asserts_or_tests(code)
         only_definitions = has_only_definitions(code)
         # Actual execution check
-        exec_ok, stdout_text, err_type, timed_out, err_msg = can_execute_code(code, timeout_sec=10.0)
+        exec_ok, stdout_text, err_type, timed_out, err_msg = can_execute_code(code, timeout_sec=2.0)
 
         if timed_out:
             # Skip modification and record timeout
             if timeouts_accumulator is not None:
                 timeouts_accumulator.append((file_path, start_line + 1))
-            print(f"  Line {start_line+1}: ⏱ Timed out (>10s) → unchanged (flagged)")
+            print(f"  Line {start_line+1}: ⏱ Timed out (>2s) → unchanged (flagged)")
             continue
 
         new_fence = current_fence
@@ -431,7 +425,7 @@ def main():
         print("\n  Note: All Python blocks (including previously tagged) were re-evaluated.")
 
     if timed_out_blocks:
-        print("\n⏱ Skipped blocks (input() calls or timeouts):")
+        print("\n⏱ Timed out blocks (execution took >2 seconds):")
         for path, line_no in timed_out_blocks:
             try:
                 rel = path.relative_to(repo_root)

@@ -26,7 +26,7 @@ Good control interfaces provide clear information about what the system is doing
 
 Let's build a basic CLI for a robotic arm:
 
-```python-template
+```python-exec
 class RoboticArmCLI:
     def __init__(self):
         self.arm_position = {"x": 0, "y": 0, "z": 0}
