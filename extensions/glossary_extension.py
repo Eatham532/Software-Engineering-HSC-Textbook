@@ -8,15 +8,15 @@ Respects page-level opt-out via frontmatter and excludes code blocks.
 import re
 import xml.etree.ElementTree as etree
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List, Optional, Union
 
 try:
     import tomllib as tomli  # Python 3.11+
-except ImportError:
-    import tomli  # Fallback for older Python
+except ImportError:  # pragma: no cover - fallback for older Python
+    import tomli  # type: ignore[import-any]
 
 from markdown import Extension
-from markdown.inlinepatterns import InlineProcessor
+from markdown.treeprocessors import Treeprocessor
 
 
 class GlossaryConfig:
@@ -26,7 +26,7 @@ class GlossaryConfig:
     _terms: Dict[str, dict] = {}
     _pattern_str = None
     
-    def __new__(cls, config_path: str = None):
+    def __new__(cls, config_path: Optional[str] = None):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             if config_path:
@@ -84,54 +84,182 @@ class GlossaryConfig:
         return self._pattern_str
 
 
-class GlossaryInlineProcessor(InlineProcessor):
-    """Inline processor to wrap glossary terms in spans."""
-    
-    def __init__(self, pattern, md, config):
-        super().__init__(pattern, md)
-        self.config_path = config.get('config_path', 'docs/glossary.toml')
+class GlossaryTreeprocessor(Treeprocessor):
+    """Treeprocessor that wraps glossary terms while skipping code/diagram blocks."""
+
+    _SKIP_TAGS = {"code", "pre", "kbd", "samp", "script", "style"}
+    _SKIP_CLASS_KEYS = {
+        "glossary-term",
+        "no-glossary",
+        "codehilite",
+        "highlight",
+        "mermaid",
+        "plantuml",
+        "kroki",
+    }
+
+    def __init__(self, md, glossary_config: GlossaryConfig, config: Dict[str, Union[str, bool]]):
+        super().__init__(md)
+        self.glossary_config = glossary_config
         self.enabled = config.get('enabled', True)
-        self.glossary_config = GlossaryConfig(self.config_path)
-        # Override compiled pattern to be case-insensitive
-        self.compiled_re = re.compile(self.pattern, re.IGNORECASE)
-    
-    def handleMatch(self, m, data):
-        if not self.enabled:
-            return None, None, None
-        
-        # Check page meta for opt-out
-        if hasattr(self.md, 'Meta'):
-            meta_glossary = self.md.Meta.get('glossary', [])
+        self.pattern_str = glossary_config.pattern
+        self.pattern = re.compile(self.pattern_str, re.IGNORECASE) if self.pattern_str else None
+        self.config = config
+
+    def run(self, root):
+        if not self.enabled or not self.pattern:
+            return
+
+        # Check page-level opt-out via metadata
+        meta = getattr(self.md, 'Meta', None)
+        if isinstance(meta, dict):
+            meta_glossary = meta.get('glossary', [])
             if meta_glossary and meta_glossary[0] == 'false':
-                return None, None, None
-        
-        term = m.group(1)
-        term_lower = term.lower()
-        
-        if term_lower not in self.glossary_config.terms:
-            return None, None, None
-        
-        term_data = self.glossary_config.terms[term_lower]
-        canonical = term_data['canonical']
-        
-        # Create span element
+                return
+
+        self._process_element(root, parent=None)
+
+    def _process_element(self, element, parent):
+        if self._should_skip_element(element):
+            return
+
+        # Process element text
+        self._process_text_node(element, parent, is_text=True)
+
+        # Recursively process children
+        for child in list(element):
+            self._process_element(child, parent=element)
+            # Process tail text after child
+            self._process_text_node(child, parent=element, is_text=False)
+
+    def _should_skip_element(self, element) -> bool:
+        tag = element.tag.lower() if hasattr(element.tag, 'lower') else element.tag
+        if tag in self._SKIP_TAGS:
+            return True
+
+        classes = element.get('class') or ''
+        if classes:
+            class_list = classes.split()
+            if any(cls in self._SKIP_CLASS_KEYS for cls in class_list):
+                return True
+            if any(cls.startswith('language-') for cls in class_list):
+                return True
+
+        if element.get('data-glossary-skip') == 'true':
+            return True
+
+        return False
+
+    def _process_text_node(self, element, parent, is_text: bool):
+        pattern = self.pattern
+        if pattern is None:
+            return
+
+        text = element.text if is_text else element.tail
+        if not text:
+            return
+
+        matches = list(pattern.finditer(text))
+        if not matches:
+            return
+
+        parts: List[Union[str, etree.Element]] = []
+        last_index = 0
+        for match in matches:
+            start, end = match.start(), match.end()
+            if start > last_index:
+                parts.append(text[last_index:start])
+
+            term = match.group(0)
+            term_data = self.glossary_config.terms.get(term.lower())
+            if not term_data:
+                parts.append(term)
+            else:
+                parts.append(self._build_span(term, term_data))
+
+            last_index = end
+
+        if last_index < len(text):
+            parts.append(text[last_index:])
+
+        if is_text:
+            self._apply_to_text(element, parts)
+        else:
+            self._apply_to_tail(element, parent, parts)
+
+    def _apply_to_text(self, element, parts: List[Union[str, etree.Element]]):
+        if not parts:
+            return
+
+        iterator = iter(parts)
+        first = next(iterator)
+
+        if isinstance(first, str):
+            element.text = first
+            prev_elem: Optional[etree.Element] = None
+        else:
+            element.text = ''
+            element.insert(0, first)
+            prev_elem = first
+
+        for part in iterator:
+            if isinstance(part, str):
+                if prev_elem is None:
+                    element.text = (element.text or '') + part
+                else:
+                    prev_elem.tail = (prev_elem.tail or '') + part
+            else:
+                insert_index = element.index(prev_elem) + 1 if prev_elem is not None else len(element)
+                element.insert(insert_index, part)
+                prev_elem = part
+
+    def _apply_to_tail(self, element, parent, parts: List[Union[str, etree.Element]]):
+        if parent is None or not parts:
+            return
+
+        iterator = iter(parts)
+        first = next(iterator)
+
+        if isinstance(first, str):
+            element.tail = first
+            prev_elem: Union[etree.Element, str] = 'SENTINEL'
+        else:
+            element.tail = ''
+            insert_index = list(parent).index(element) + 1
+            parent.insert(insert_index, first)
+            prev_elem = first
+
+        for part in iterator:
+            if isinstance(part, str):
+                if isinstance(prev_elem, etree.Element):
+                    prev_elem.tail = (prev_elem.tail or '') + part
+                else:
+                    element.tail = (element.tail or '') + part
+            else:
+                if isinstance(prev_elem, etree.Element):
+                    insert_index = list(parent).index(prev_elem) + 1
+                else:
+                    insert_index = list(parent).index(element) + 1
+                parent.insert(insert_index, part)
+                prev_elem = part
+
+    def _build_span(self, term: str, term_data: Dict[str, str]) -> etree.Element:
         span = etree.Element('span')
         span.set('class', 'glossary-term')
-        span.set('data-glossary-term', canonical)
+        span.set('data-glossary-term', term_data['canonical'])
         span.set('data-glossary-definition', self._escape_attr(term_data['definition']))
-        
-        if term_data['category']:
+
+        if term_data.get('category'):
             span.set('data-glossary-category', term_data['category'])
-        
-        if term_data['full_form']:
+
+        if term_data.get('full_form'):
             span.set('data-glossary-full-form', term_data['full_form'])
-        
+
         span.text = term
-        
-        return span, m.start(0), m.end(0)
-    
-    def _escape_attr(self, text: str) -> str:
-        """Escape text for HTML attribute."""
+        return span
+
+    @staticmethod
+    def _escape_attr(text: str) -> str:
         return text.replace('"', '&quot;').replace("'", '&#39;')
 
 
@@ -154,15 +282,9 @@ class GlossaryExtension(Extension):
             print("⚠️  No glossary pattern found - terms will not be linked")
             return  # No terms loaded
         
-        # Register inline processor
-        glossary_processor = GlossaryInlineProcessor(
-            glossary_config.pattern,
-            md,
-            self.getConfigs()
-        )
-        # Priority 100 - before links (priority 120) but after code (priority 190)
-        md.inlinePatterns.register(glossary_processor, 'glossary', 100)
-        # print(f"✓ Glossary extension registered with pattern matching {len(glossary_config.terms)} term variants")
+        glossary_processor = GlossaryTreeprocessor(md, glossary_config, self.getConfigs())
+        # Register before typographic post-processing but after reference resolution
+        md.treeprocessors.register(glossary_processor, 'glossary', 15)
 
 
 def makeExtension(**kwargs):
