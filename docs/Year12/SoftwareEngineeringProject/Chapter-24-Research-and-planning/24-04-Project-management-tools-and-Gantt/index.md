@@ -52,7 +52,7 @@ The work breakdown structure forms the foundation of effective project planning 
 
 4. **Deliverable-oriented**: Focus on what will be produced, not how it will be done
 
-```python-template
+```python-exec
 class WorkBreakdownStructure:
     """
     Framework for creating and managing work breakdown structures in software projects.

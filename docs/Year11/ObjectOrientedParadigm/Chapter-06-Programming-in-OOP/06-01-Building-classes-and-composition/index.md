@@ -575,7 +575,7 @@ print(macbook.power_off())
     type: example
     open: false
 
-```python-template
+```python-exec
 class PasswordValidator:
     """Highly cohesive class - everything relates to password validation"""
     

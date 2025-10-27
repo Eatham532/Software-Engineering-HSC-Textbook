@@ -143,7 +143,10 @@ def has_only_definitions(code: str) -> bool:
     Returns True if:
     - Code contains at least one function or class definition
     - All top-level statements are either function defs, class defs, imports, or docstrings
-    - No executable code exists outside of definitions
+    - No executable code exists outside of definitions (except if __name__ == "__main__" blocks)
+    
+    Note: if __name__ == "__main__" blocks are IGNORED for this check, as they indicate
+    the code is meant to be executable and should likely be python-exec.
     """
     try:
         tree = ast.parse(code)
@@ -162,11 +165,39 @@ def has_only_definitions(code: str) -> bool:
         # Docstrings are allowed
         elif isinstance(node, ast.Expr) and isinstance(node.value, ast.Constant) and isinstance(node.value.value, str):
             continue
+        # Check for if __name__ == "__main__": blocks - these indicate executable code
+        elif isinstance(node, ast.If):
+            # Check if this is an if __name__ == "__main__" pattern
+            if _is_main_guard(node):
+                # This is a main guard - code is meant to be executed
+                return False
         # Any other statement means there's executable code
         else:
             return False
     
     return has_definitions
+
+def _is_main_guard(node: ast.If) -> bool:
+    """Check if an If node is a __name__ == "__main__" guard pattern."""
+    if not isinstance(node.test, ast.Compare):
+        return False
+    
+    comp = node.test
+    # Check for __name__ == "__main__" or "__main__" == __name__
+    if isinstance(comp.left, ast.Name) and comp.left.id == '__name__':
+        if len(comp.ops) == 1 and isinstance(comp.ops[0], ast.Eq):
+            if len(comp.comparators) == 1:
+                comparator = comp.comparators[0]
+                if isinstance(comparator, ast.Constant) and comparator.value == "__main__":
+                    return True
+    elif isinstance(comp.left, ast.Constant) and comp.left.value == "__main__":
+        if len(comp.ops) == 1 and isinstance(comp.ops[0], ast.Eq):
+            if len(comp.comparators) == 1:
+                comparator = comp.comparators[0]
+                if isinstance(comparator, ast.Name) and comparator.id == '__name__':
+                    return True
+    
+    return False
 
 
 def _exec_worker(code: str, q: Queue) -> None:
@@ -200,6 +231,8 @@ def _exec_worker(code: str, q: Queue) -> None:
             'abs': abs,
             'round': round,
             'sorted': sorted,
+            'any': any,
+            'all': all,
             'property': property,  # For property decorators
             'staticmethod': staticmethod,  # For static methods
             'classmethod': classmethod,  # For class methods

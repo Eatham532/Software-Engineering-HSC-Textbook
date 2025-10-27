@@ -114,7 +114,7 @@ Automation fundamentally changes workplace safety dynamics. Rather than simply m
 
 ### Safety Assessment Framework
 
-```python-template
+```python-exec
 class WorkplaceSafetyAssessment:
     """
     Framework for systematically evaluating automation's impact on workplace safety.

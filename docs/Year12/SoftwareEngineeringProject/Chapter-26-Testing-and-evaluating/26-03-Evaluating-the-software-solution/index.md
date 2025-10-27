@@ -77,7 +77,7 @@ note bottom : Evaluation is an iterative process that informs\ncontinuous soluti
 
 ```
 
-```python-template
+```python
 class SolutionEvaluator:
     """
     Framework for systematically evaluating software solution effectiveness.
