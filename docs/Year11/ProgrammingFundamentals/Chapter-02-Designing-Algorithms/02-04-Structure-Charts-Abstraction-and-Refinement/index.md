@@ -224,74 +224,75 @@ Most real projects use **both approaches**:
 
 ### Basic Structure Chart Elements
 
-| Symbol | Meaning | Example |
-|--------|---------|---------|
-| Rectangle | Module/Function | `Calculate Grade` |
-| Arrow | Calls/Uses | Module A → Module B |
-| Circle on line | Data flow | `student_data` |
-| Diamond | Selection | Choose based on condition |
-| Curved arrow | Loop/Iteration | Repeat for each student |
+**Structure charts** use a simple text-based syntax to represent program modules and their relationships:
+
+**Syntax Format:**
+```
+module id "Module Name"
+  module child_id "Child Module Name"
+
+parent_id -> child_id [type] [label]
+```
+
+| Element | Example | Meaning |
+|---------|---------|---------|
+| Module | `module calc "Calculator"` | Define a function or component |
+| Calls | `main -> calc` | Parent calls/uses Child |
+| Data flow | `main -> calc data "numbers"` | Data passed between modules |
+| Control flow | `main -> calc control` | Control information passed |
+| Loop | `loop over child1 child2` | Repeat for multiple items |
+| Library | `library util "Utilities"` | Reusable library module |
+| Storage | `storage db "Database"` | Data storage element |
 
 /// details | Structure Chart Example: Grade Management System
     type: info
     open: false
 
-```kroki-plantuml
-@startuml
-package "Grade Management System" {
-  [Main Program] as main
-  
-  package "Data Input" {
-    [Get Student Info] as getStudent
-    [Get Assignment Scores] as getScores
-    [Validate Input] as validate
-  }
-  
-  package "Calculations" {
-    [Calculate Average] as calcAvg
-    [Determine Letter Grade] as calcGrade
-    [Calculate GPA] as calcGPA
-  }
-  
-  package "Output" {
-    [Display Results] as display
-    [Generate Report] as report
-    [Save to File] as save
-  }
-}
+```structure-chart
+module main "Main Program"
+  module getStudent "Get Student Info"
+  module getScores "Get Assignment Scores"
+  module calcAvg "Calculate Average"
+  module calcGrade "Determine Letter Grade"
+  module display "Display Results"
+  module validate "Validate Input"
+  module report "Generate Report"
+  module save "Save to File"
 
-main --> getStudent
-main --> getScores
-main --> calcAvg
-main --> calcGrade
-main --> display
+main -> getStudent
+main -> getScores
+main -> calcAvg
+main -> calcGrade
+main -> display
 
-getStudent --> validate
-getScores --> validate
-calcAvg --> calcGrade
-display --> report
-report --> save
+getStudent -> validate
+getScores -> validate
 
-note right of main : Controls overall flow
-note right of validate : Ensures data quality
-note right of calcGrade : Uses average to determine letter
-@enduml
-
+calcAvg -> calcGrade
+display -> report
+report -> save
 ```
 
 ///
 
 ### Data Flow in Structure Charts
 
-```
-Main Program
-├── Get Student Info → student_name, student_id
-├── Get Assignment Scores → scores_list
-├── Calculate Average(scores_list) → average_score
-├── Determine Letter Grade(average_score) → letter_grade
-└── Display Results(student_name, average_score, letter_grade)
+```structure-chart
+module main "Main Program"
+  module getStudent "Get Student Info"
+  module getScores "Get Assignment Scores"
+  module calcAvg "Calculate Average"
+  module calcGrade "Determine Letter Grade"
+  module display "Display Results"
 
+main -> getStudent data "student_name, student_id"
+main -> getScores data "scores_list"
+main -> calcAvg data "scores_list"
+calcAvg -> calcGrade data "average_score"
+main -> display data "student_name, average_score, letter_grade"
 ```
+
+Data flows from one module to another, transforming along the way.
 
 ## Stepwise Refinement
 
@@ -380,74 +381,54 @@ END
 
 ### Structure Chart for Refined Solution
 
-```kroki-plantuml
-@startuml
-package "Library Management System" {
-  [Main Controller] as main
-  
-  package "User Interface" {
-    [Display Menu] as menu
-    [Get User Input] as input
-    [Display Messages] as display
-  }
-  
-  package "Borrowing System" {
-    [Process Borrowing] as borrow
-    [Validate Card] as validateCard
-    [Check Book Availability] as checkBook
-    [Check Borrowing Limits] as checkLimits
-    [Create Borrowing Record] as createRecord
-  }
-  
-  package "Return System" {
-    [Process Return] as return
-    [Calculate Fines] as calcFines
-    [Update Records] as updateRec
-  }
-  
-  package "Database Operations" {
-    [Read Card Data] as readCard
-    [Read Book Data] as readBook
-    [Write Borrowing Data] as writeBorrow
-    [Write Return Data] as writeReturn
-  }
-  
-  package "Reporting" {
-    [Generate Reports] as reports
-    [Overdue Books Report] as overdue
-    [Popular Books Report] as popular
-  }
-}
+```structure-chart
+module main "Main Controller"
+  module menu "Display Menu"
+  module input "Get User Input"
+  module borrow "Process Borrowing"
+    module validateCard "Validate Card"
+      module readCard "Read Card Data"
+    module checkBook "Check Book Availability"
+      module readBook "Read Book Data"
+    module checkLimits "Check Borrowing Limits"
+    module createRecord "Create Borrowing Record"
+      module writeBorrow "Write Borrowing Data"
+    module display "Display Messages"
+  module return "Process Return"
+    module calcFines "Calculate Fines"
+    module updateRec "Update Records"
+      module writeReturn "Write Return Data"
+  module reports "Generate Reports"
+    module overdue "Overdue Books Report"
+    module popular "Popular Books Report"
 
-main --> menu
-main --> input
-main --> borrow
-main --> return
-main --> reports
+main -> menu
+main -> input
+main -> borrow
+main -> return
+main -> reports
 
-borrow --> validateCard
-borrow --> checkBook
-borrow --> checkLimits
-borrow --> createRecord
-borrow --> display
+borrow -> validateCard
+borrow -> checkBook
+borrow -> checkLimits
+borrow -> createRecord
+borrow -> display
 
-validateCard --> readCard
-checkBook --> readBook
-createRecord --> writeBorrow
+validateCard -> readCard
+checkBook -> readBook
+createRecord -> writeBorrow
 
-return --> calcFines
-return --> updateRec
-return --> display
+return -> calcFines
+return -> updateRec
+return -> display
 
-updateRec --> writeReturn
+updateRec -> writeReturn
 
-reports --> overdue
-reports --> popular
-overdue --> readBook
-overdue --> readCard
-popular --> readBook
-@enduml
-
+reports -> overdue
+reports -> popular
+overdue -> readBook
+overdue -> readCard
+popular -> readBook
 ```
 
 ## Benefits of Structured Design
@@ -504,187 +485,161 @@ Using the stepwise refinement process:
 
 **Step 1: High-level modules (complete this)**
 
-```kroki-plantuml
-@startuml
-package "Student Report System" {
-  [Main Program]
-  [Data Management]
-  [Grade Calculations]
-  [Report Generation]
-}
-@enduml
+```structure-chart
+module main "Main Program"
+  module dataMgmt "Data Management"
+  module gradeCalc "Grade Calculations"
+  module reportGen "Report Generation"
 
+main -> dataMgmt
+main -> gradeCalc
+main -> reportGen
 ```
 
 **Step 2: Refine each major module**
 
-```kroki-plantuml
-@startuml
-package "Student Report System" {
-  [Main Program] as main
-  
-  package "Data Management" {
-    [_______________] as read
-    [_______________] as validate
-    [_______________] as store
-  }
-  
-  package "Grade Calculations" {
-    [_______________] as average
-    [_______________] as letterGrade
-    [_______________] as gpa
-    [_______________] as classStats
-  }
-  
-  package "Report Generation" {
-    [_______________] as individual
-    [_______________] as classReport
-    [_______________] as summary
-    [_______________] as export
-  }
-}
+```structure-chart
+module main "Main Program"
+  module read "Read Student Files"
+    module validate "Validate Data"
+      module store "Store in Memory"
+  module calcAvg "Calculate Averages"
+    module assignGrade "Assign Letter Grades"
+      module calcGPA "Calculate GPA"
+  module individualRpt "Individual Reports"
+    module export "Export to File"
+  module classReport "Class Summary Report"
+    module classStats "Class Statistics"
+  module gradeDist "Grade Distribution"
 
-main --> read
-main --> average
-main --> individual
+main -> read
+main -> calcAvg
+main -> individualRpt
 
-read --> validate
-validate --> store
-average --> letterGrade
-letterGrade --> gpa
-individual --> export
-classReport --> classStats
-@enduml
+read -> validate
+validate -> store
 
+calcAvg -> assignGrade
+assignGrade -> calcGPA
+
+individualRpt -> export
+classReport -> classStats
+gradeDist -> classStats
 ```
 
 ### Solution
 
 **Step 2: Refined modules**
 
-```kroki-plantuml
-@startuml
-package "Student Report System" {
-  [Main Program] as main
-  
-  package "Data Management" {
-    [Read Student Files] as read
-    [Validate Data] as validate
-    [Store in Memory] as store
-  }
-  
-  package "Grade Calculations" {
-    [Calculate Averages] as average
-    [Assign Letter Grades] as letterGrade
-    [Calculate GPA] as gpa
-    [Class Statistics] as classStats
-  }
-  
-  package "Report Generation" {
-    [Individual Reports] as individual
-    [Class Summary Report] as classReport
-    [Grade Distribution] as summary
-    [Export to File] as export
-  }
-}
+```structure-chart
+module main "Main Program"
+  module read "Read Student Files"
+    module validate "Validate Data"
+      module store "Store in Memory"
+  module calcAvg "Calculate Averages"
+    module assignGrade "Assign Letter Grades"
+      module calcGPA "Calculate GPA"
+  module individualRpt "Individual Reports"
+    module export "Export to File"
+  module classReport "Class Summary Report"
+    module classStats "Class Statistics"
+  module gradeDist "Grade Distribution"
 
-main --> read
-main --> average
-main --> individual
+main -> read
+main -> calcAvg
+main -> individualRpt
 
-read --> validate
-validate --> store
-average --> letterGrade
-letterGrade --> gpa
-individual --> export
-classReport --> classStats
-summary --> classStats
-@enduml
+read -> validate
+validate -> store
 
+calcAvg -> assignGrade
+assignGrade -> calcGPA
+
+individualRpt -> export
+classReport -> classStats
+gradeDist -> classStats
 ```
 
 **Step 3: Add data flow**
 
-```
-Main Program
-├── Read Student Files → student_records_list
-├── Calculate Averages(student_records_list) → averages_list
-├── Assign Letter Grades(averages_list) → grades_list
-├── Calculate GPA(grades_list) → gpa_values
-├── Individual Reports(student_records, grades, gpa) → report_files
-└── Export to File(report_files) → saved_reports
+```structure-chart
+module main "Main Program"
+  module read "Read Student Files"
+  module calcAvg "Calculate Averages"
+    module assignGrade "Assign Letter Grades"
+      module calcGPA "Calculate GPA"
+  module individualRpt "Individual Reports"
+    module export "Export to File"
 
+main -> read data "student_records_list"
+main -> calcAvg data "student_records_list"
+calcAvg -> assignGrade data "averages_list"
+assignGrade -> calcGPA data "grades_list"
+main -> individualRpt data "student_records, grades, gpa"
+individualRpt -> export data "report_files"
 ```
 
 ## Common Structure Chart Patterns
 
 ### Sequential Processing
 
-```kroki-plantuml
-@startuml
-[Step 1] --> [Step 2]
-[Step 2] --> [Step 3]
-[Step 3] --> [Step 4]
-@enduml
+```structure-chart
+module step1 "Step 1"
+  module step2 "Step 2"
+    module step3 "Step 3"
+      module step4 "Step 4"
 
+step1 -> step2
+step2 -> step3
+step3 -> step4
 ```
 
 ### Data Transformation Pipeline
 
-```kroki-plantuml
-@startuml
-[Input Data] --> [Validate]
-[Validate] --> [Transform]
-[Transform] --> [Calculate]
-[Calculate] --> [Output]
-@enduml
+```structure-chart
+module input "Input Data"
+  module validate "Validate"
+    module transform "Transform"
+      module calculate "Calculate"
+        module output "Output"
 
+input -> validate
+validate -> transform
+transform -> calculate
+calculate -> output
 ```
 
 ### Service-Oriented Architecture
 
-```kroki-plantuml
-@startuml
-package "Core Services" {
-  [Authentication Service]
-  [Data Service]
-  [Calculation Service]
-  [Reporting Service]
-}
+```structure-chart
+module app "Main Application"
+  module auth "Authentication Service"
+  module data "Data Service"
+  module calc "Calculation Service"
+  module report "Reporting Service"
 
-[Main Application] --> [Authentication Service]
-[Main Application] --> [Data Service]
-[Main Application] --> [Calculation Service]
-[Main Application] --> [Reporting Service]
-@enduml
-
+app -> auth
+app -> data
+app -> calc
+app -> report
 ```
 
 ### Layered Architecture
 
-```kroki-plantuml
-@startuml
-package "Presentation Layer" {
-  [User Interface]
-  [Input Validation]
-}
+```structure-chart
+module ui "User Interface"
+  module coreAlg "Core Algorithms"
+    module dbOps "Database Operations"
 
-package "Business Logic Layer" {
-  [Core Algorithms]
-  [Business Rules]
-}
+module inputVal "Input Validation"
+  module bizRules "Business Rules"
+    module fileOps "File Operations"
 
-package "Data Access Layer" {
-  [Database Operations]
-  [File Operations]
-}
+ui -> coreAlg
+coreAlg -> dbOps
 
-[User Interface] --> [Core Algorithms]
-[Core Algorithms] --> [Database Operations]
-[Input Validation] --> [Business Rules]
-[Business Rules] --> [File Operations]
-@enduml
-
+inputVal -> bizRules
+bizRules -> fileOps
 ```
 
 ## Design Guidelines

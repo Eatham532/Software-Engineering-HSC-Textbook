@@ -697,10 +697,12 @@ class StructureChartPreprocessor(Preprocessor):
                 # Generate a unique ID for the diagram
                 diagram_id = hashlib.md5(chart_def.encode()).hexdigest()[:8]
                 
-                # Wrap in diagram container for modal support
-                new_lines.append(f'<div class="diagram-container" id="diagram-{diagram_id}">')
-                new_lines.append(svg)
-                new_lines.append(f'<button class="diagram-expand-btn" onclick="openDiagramModal(\'diagram-{diagram_id}\')">🔍 View Larger</button>')
+                # Wrap in diagram container for modal support (match kroki_wrapper format exactly)
+                new_lines.append(f'<div class="diagram-container" data-container-id="{diagram_id}">')
+                new_lines.append(f'<button class="diagram-expand-btn" onclick="openDiagramModal(\'{diagram_id}\')">🔍 View Larger</button>')
+                new_lines.append(f'<div id="{diagram_id}" class="diagram-content">')
+                new_lines.append(f'<p>{svg}</p>')
+                new_lines.append('</div>')
                 new_lines.append('</div>')
                 new_lines.append('')
                 
