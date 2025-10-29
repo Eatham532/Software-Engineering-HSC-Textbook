@@ -1,84 +1,179 @@
-# ============================================
-# ACTUAL NAVIGATION STRUCTURE
-# Based on your GitHub repository structure
-# ============================================
-
-# Site Information
 site_name: NSW HSC Software Engineering Textbook
-site_url: https://haleema-khatun.github.io/Software-Engineering-HSC-Textbook/
-site_author: Haleema Khatun
 site_description: Interactive textbook for NSW HSC Software Engineering 11-12 Syllabus
-
-# Repository
+docs_dir: docs
+repo_url: https://github.com/haleema-khatun/Software-Engineering-HSC-Textbook/
+site_url: https://haleema-khatun.github.io/Software-Engineering-HSC-Textbook/
 repo_name: haleema-khatun/Software-Engineering-HSC-Textbook
-repo_url: https://github.com/haleema-khatun/Software-Engineering-HSC-Textbook
 edit_uri: edit/main/docs/
 
-# Theme Configuration
+copyright: >
+  Copyright &copy; 2024 Haleema Khatun –
+  <a href="#__consent">Change cookie settings</a>
+
+# Exclude development artifacts from production build
+exclude_docs: |
+  **/ModulePlan.md
+  AI_README.md
+  syllabus.md
+
+plugins:
+  - search
+  - macros:
+      module_name: macros/glossary_macros
+  - include-markdown
+  - git-revision-date-localized
+  - kroki:
+      EnableMermaid: true
+      HttpMethod: POST
+      TagFormat: svg
+  - awesome-nav:
+      filename: ".nav.yml"
+  - meta-descriptions:
+      export_csv: false
+      quiet: false
+      enable_checks: false
+      min_length: 50
+      max_length: 160
+      trim: false
+      fallback_if_short: false
+
 theme:
   name: material
-  
+  language: en
+  icon:
+    repo: fontawesome/brands/git-alt
+  custom_dir: overrides
+
   palette:
-    - scheme: default
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
       primary: indigo
       accent: indigo
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
       accent: indigo
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-  
+
   features:
-    - navigation.instant
-    - navigation.instant.progress
-    - navigation.tracking
     - navigation.tabs
     - navigation.tabs.sticky
+    - navigation.top
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.prune
+    - navigation.tracking
     - navigation.sections
     - navigation.expand
     - navigation.path
     - navigation.indexes
-    - navigation.top
-    - navigation.footer          # ← ENABLES PREV/NEXT BUTTONS
+    - navigation.footer          # ← CRITICAL: ENABLES PREV/NEXT BUTTONS
+    - search.highlight
+    - search.suggest
+    - search.share
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.action.edit
+    - content.action.view
     - toc.follow
     - toc.integrate
-    - search.suggest
-    - search.highlight
-    - search.share
-    - content.code.copy
-    - content.code.annotate
-    - content.tabs.link
-    
+
   font:
     text: Roboto
     code: Roboto Mono
-  
-  icon:
-    logo: material/book-open-page-variant
-    repo: fontawesome/brands/github
 
-# Plugins
-plugins:
-  - search:
-      lang: en
-  - minify:
-      minify_html: true
-
-# Extensions
 markdown_extensions:
   - abbr
   - admonition
   - attr_list
   - def_list
   - footnotes
+  - extensions.glossary_extension
+  - extensions.kroki_wrapper
   - md_in_html
+  - smarty
+  - tables
+  - pymdownx.blocks.details
+  - pymdownx.blocks.admonition
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tasklist
+  - pymdownx.superfences:
+      custom_fences:
+        # Python
+        - name: python-exec
+          class: python-exec
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: python-template
+          class: python-template
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: python-error
+          class: python-error
+          format: !!python/name:extensions.code_fence_formatter.format_error
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        # Web Languages
+        - name: html-exec
+          class: html-exec
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: html-template
+          class: html-template
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: css-exec
+          class: css-exec
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: css-template
+          class: css-template
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: javascript-exec
+          class: javascript-exec
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: javascript-template
+          class: javascript-template
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: js-exec
+          class: js-exec
+          format: !!python/name:extensions.code_fence_formatter.format_exec
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: js-template
+          class: js-template
+          format: !!python/name:extensions.code_fence_formatter.format_template
+          validator: !!python/name:extensions.code_fence_formatter.fence_validator
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.escapeall
   - toc:
       permalink: true
       toc_depth: 3
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: "__span"
+      pygments_lang_class: true
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.betterem:
@@ -88,47 +183,94 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.keys
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.blocks.tab:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - pymdownx.tabbed:
       alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
 
-# Extra CSS and JavaScript
 extra_css:
+  - assets/diagram-modal.css
+  - assets/quiz.css
+  - assets/common.css
+  - assets/diagram-fix.css
+  - assets/cross-reference.css
+  - assets/site-banner.css
+  - assets/code-runner.css
+  - assets/code-editor.css
+  - assets/glossary.css
   - stylesheets/extra.css
 
 extra_javascript:
+  - assets/diagram-modal.js
+  - assets/quiz.js
+  - assets/ide-utils.js
+  - assets/code-blocks.js
+  - assets/glossary.js
   - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
-# Social Links
 extra:
+  generator: false
+  domain: auto
+  # Site-wide alert banner configuration
+  site_banner:
+    enabled: true
+    text: "This textbook is in <strong>beta</strong> – content is actively being refined."
+    link_text: "Report issues or suggestions"
+    link_url: "/issues/new/choose"
+    variant: "warning"
+    version: "1"
+  # Footer configuration
+  footer:
+    show_beta_badge: true
+  consent:
+    title: Cookie consent
+    actions:
+      - accept
+      - manage
+    cookies:
+      analytics: Google Analytics
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of the textbook. With your consent, you're helping us to
+      make software engineering education better for everyone.
+  analytics:
+    provider: google
+    property: G-58275RL1P9
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >- 
+            Thanks for your feedback! Help us improve this page by creating an
+            <a href="https://github.com/haleema-khatun/Software-Engineering-HSC-Textbook/issues/new/choose" target="_blank" rel="noopener">issue</a>
+            on github.
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/haleema-khatun/Software-Engineering-HSC-Textbook
 
-# Copyright
-copyright: Copyright &copy; 2024 - Licensed under MIT License
-
 # ============================================
 # NAVIGATION STRUCTURE
-# This matches the actual file structure
-# Based on NSW HSC Software Engineering Syllabus
+# Navigation is managed by awesome-nav plugin via .nav.yml
+# However, we're adding a manual nav here for prev/next buttons
+# The awesome-nav plugin will merge/override as needed
 # ============================================
 
 nav:
