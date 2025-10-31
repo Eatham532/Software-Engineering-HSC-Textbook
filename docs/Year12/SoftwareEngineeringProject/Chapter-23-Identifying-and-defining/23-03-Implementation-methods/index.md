@@ -329,45 +329,6 @@ print(f"Pilot Summary: {summary}")
 
 ///
 
-### WAgile approach
-
-WAgile is a hybrid methodology that combines waterfall stage-gates with agile iterations. It provides the structure and governance of waterfall with the flexibility and adaptability of agile methods.
-
-Key components of WAgile:
-
-- **Stage gates**: Major checkpoints requiring approval before proceeding
-
-- **Agile iterations**: Short development cycles within each stage
-
-- **Hybrid governance**: Traditional project oversight with agile team autonomy
-
-- **Flexible delivery**: Iterative development within structured phases
-
-```kroki-plantuml
-@startuml
-skinparam monochrome true
-skinparam shadowing false
-
-start
-:Requirements Stage;
-note right: Agile iterations\nfor requirements\nrefinement
-if (Gate 1 Approval?) then (Approved)
-:Design Stage;
-note right: Agile iterations\nfor design\nprototyping
-if (Gate 2 Approval?) then (Approved)
-:Development Stage;
-note right: Agile sprints\nfor feature\ndevelopment
-if (Gate 3 Approval?) then (Approved)
-:Testing Stage;
-note right: Agile iterations\nfor testing\nand fixes
-endif
-endif
-endif
-stop
-@enduml
-
-```
-
 ## Practice
 
 ### Exercise 1: Implementation method selection

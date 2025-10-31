@@ -87,16 +87,18 @@ class GlossaryConfig:
 class GlossaryTreeprocessor(Treeprocessor):
     """Treeprocessor that wraps glossary terms while skipping code/diagram blocks."""
 
-    _SKIP_TAGS = {"code", "pre", "kbd", "samp", "script", "style"}
+    _SKIP_TAGS = {"code", "pre", "kbd", "samp", "script", "style", "svg", "h1", "title"}
     _SKIP_CLASS_KEYS = {
         "glossary-term",
         "no-glossary",
-        "codehilite",
-        "highlight",
-        "mermaid",
-        "plantuml",
-        "kroki",
+        "diagram-content",
+        "diagram-container",
+        "tabbed-labels",
+        "md-nav__title",
+        "md-nav__link",
+        "md-nav__list"
     }
+    _SKIP_CLASS_PREFIXES = {"highlight", "language-", "codehilite"}
 
     def __init__(self, md, glossary_config: GlossaryConfig, config: Dict[str, Union[str, bool]]):
         super().__init__(md)
@@ -117,22 +119,51 @@ class GlossaryTreeprocessor(Treeprocessor):
             if meta_glossary and meta_glossary[0] == 'false':
                 return
 
-        self._process_element(root, parent=None)
+        self._process_element(root, parent=None, in_code_block=False)
 
-    def _process_element(self, element, parent):
-        if self._should_skip_element(element):
+    def _process_element(self, element, parent, in_code_block):
+        # Check if this element is a code block or we're already inside one
+        is_code_element = self._is_code_block(element)
+        in_code = in_code_block or is_code_element
+        
+        if self._should_skip_element(element, in_code):
             return
 
-        # Process element text
-        self._process_text_node(element, parent, is_text=True)
+        # Process element text only if not in code block
+        if not in_code:
+            self._process_text_node(element, parent, is_text=True)
 
         # Recursively process children
         for child in list(element):
-            self._process_element(child, parent=element)
-            # Process tail text after child
-            self._process_text_node(child, parent=element, is_text=False)
+            self._process_element(child, parent=element, in_code_block=in_code)
+            # Process tail text after child only if not in code block
+            if not in_code:
+                self._process_text_node(child, parent=element, is_text=False)
+    
+    def _is_code_block(self, element) -> bool:
+        """Check if element is a code block (pre, code, or has code-related attributes)."""
+        tag = element.tag.lower() if hasattr(element.tag, 'lower') else element.tag
+        
+        # Direct code/pre tags
+        if tag in {'code', 'pre', 'kbd', 'samp'}:
+            return True
+        
+        # Divs with code-related classes (fenced code blocks)
+        classes = element.get('class') or ''
+        if classes:
+            class_list = classes.split()
+            # Any class starting with 'highlight', 'language-', 'codehilite'
+            if any(cls.startswith(('highlight', 'language-', 'codehilite')) for cls in class_list):
+                return True
+        
+        return False
 
-    def _should_skip_element(self, element) -> bool:
+    def _should_skip_element(self, element, in_code_block) -> bool:
+        """Determine if element should be skipped for glossary processing."""
+        # Skip if we're in a code block
+        if in_code_block:
+            return True
+        
         tag = element.tag.lower() if hasattr(element.tag, 'lower') else element.tag
         if tag in self._SKIP_TAGS:
             return True
@@ -140,9 +171,11 @@ class GlossaryTreeprocessor(Treeprocessor):
         classes = element.get('class') or ''
         if classes:
             class_list = classes.split()
+            # Check exact matches
             if any(cls in self._SKIP_CLASS_KEYS for cls in class_list):
                 return True
-            if any(cls.startswith('language-') for cls in class_list):
+            # Check prefixes for code-related classes
+            if any(cls.startswith(prefix) for cls in class_list for prefix in self._SKIP_CLASS_PREFIXES):
                 return True
 
         if element.get('data-glossary-skip') == 'true':
