@@ -76,6 +76,8 @@
   }
 
   let hideTooltipTimeout = null;
+  let showTooltipTimeout = null;
+  const HOVER_DELAY = 500; // milliseconds to wait before showing tooltip
 
   function handleTermHover(e) {
     const term = e.target.closest('.glossary-term');
@@ -87,13 +89,29 @@
       hideTooltipTimeout = null;
     }
 
+    // Clear any previous show timeout
+    if (showTooltipTimeout) {
+      clearTimeout(showTooltipTimeout);
+    }
+
     currentTerm = term;
-    showTooltip(term);
+    
+    // Delay showing the tooltip
+    showTooltipTimeout = setTimeout(() => {
+      showTooltip(term);
+      showTooltipTimeout = null;
+    }, HOVER_DELAY);
   }
 
   function handleTermLeave(e) {
     const term = e.target.closest('.glossary-term');
     if (!term) return;
+
+    // Cancel any pending show timeout
+    if (showTooltipTimeout) {
+      clearTimeout(showTooltipTimeout);
+      showTooltipTimeout = null;
+    }
 
     // Delay hiding to allow moving to tooltip
     hideTooltipTimeout = setTimeout(() => {

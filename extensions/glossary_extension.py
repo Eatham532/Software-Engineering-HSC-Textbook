@@ -87,12 +87,16 @@ class GlossaryConfig:
 class GlossaryTreeprocessor(Treeprocessor):
     """Treeprocessor that wraps glossary terms while skipping code/diagram blocks."""
 
-    _SKIP_TAGS = {"code", "pre", "kbd", "samp", "script", "style", "svg"}
+    _SKIP_TAGS = {"code", "pre", "kbd", "samp", "script", "style", "svg", "h1", "title"}
     _SKIP_CLASS_KEYS = {
         "glossary-term",
         "no-glossary",
         "diagram-content",
         "diagram-container",
+        "tabbed-labels",
+        "md-nav__title",
+        "md-nav__link",
+        "md-nav__list"
     }
 
     def __init__(self, md, glossary_config: GlossaryConfig, config: Dict[str, Union[str, bool]]):
