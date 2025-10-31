@@ -285,17 +285,128 @@ jobs:
             commit_range="${previous_tag}..HEAD"
           fi
           
-          # Generate commit log (exclude version bump commits)
+          # Get all commits (exclude version bumps and skip deploy)
+          commits=$(git log ${commit_range} --pretty=format:"%s|||%h" --no-merges | grep -v "\[skip deploy\]" | grep -v "^chore: bump version to" || true)
+          
+          # Initialize category arrays
+          declare -a features=()
+          declare -a fixes=()
+          declare -a refactors=()
+          declare -a docs=()
+          declare -a styles=()
+          declare -a tests=()
+          declare -a chores=()
+          declare -a other=()
+          
+          # Categorize commits based on conventional commit format
+          while IFS='|||' read -r message hash; do
+            # Extract type from conventional commit format (type: message or type(scope): message)
+            if [[ "$message" =~ ^([a-z]+)(\([^)]+\))?: ]]; then
+              type="${BASH_REMATCH[1]}"
+              case "$type" in
+                feat|feature)
+                  features+=("- $message ($hash)")
+                  ;;
+                fix|bugfix)
+                  fixes+=("- $message ($hash)")
+                  ;;
+                refactor|refact)
+                  refactors+=("- $message ($hash)")
+                  ;;
+                docs|doc)
+                  docs+=("- $message ($hash)")
+                  ;;
+                style|styles)
+                  styles+=("- $message ($hash)")
+                  ;;
+                test|tests)
+                  tests+=("- $message ($hash)")
+                  ;;
+                chore|build|ci)
+                  chores+=("- $message ($hash)")
+                  ;;
+                *)
+                  other+=("- $message ($hash)")
+                  ;;
+              esac
+            else
+              # No conventional commit format - categorize as other
+              other+=("- $message ($hash)")
+            fi
+          done <<< "$commits"
+          
+          # Generate release notes with categories
           echo "## 📋 Changes" > release_notes.md
           echo "" >> release_notes.md
-          git log ${commit_range} --pretty=format:"- %s (%h)" --no-merges | grep -v "\[skip deploy\]" | grep -v "^- chore: bump version to" >> release_notes.md || true
-          echo "" >> release_notes.md
+          
+          # Add features
+          if [ ${#features[@]} -gt 0 ]; then
+            echo "### ✨ Features" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${features[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add fixes
+          if [ ${#fixes[@]} -gt 0 ]; then
+            echo "### 🐛 Bug Fixes" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${fixes[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add refactors
+          if [ ${#refactors[@]} -gt 0 ]; then
+            echo "### ♻️ Refactors" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${refactors[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add documentation
+          if [ ${#docs[@]} -gt 0 ]; then
+            echo "### 📚 Documentation" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${docs[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add styles
+          if [ ${#styles[@]} -gt 0 ]; then
+            echo "### 💄 Styles" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${styles[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add tests
+          if [ ${#tests[@]} -gt 0 ]; then
+            echo "### 🧪 Tests" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${tests[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add chores
+          if [ ${#chores[@]} -gt 0 ]; then
+            echo "### 🔧 Chores" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${chores[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
+          
+          # Add other/uncategorized
+          if [ ${#other[@]} -gt 0 ]; then
+            echo "### 📦 Other Changes" >> release_notes.md
+            echo "" >> release_notes.md
+            printf '%s\n' "${other[@]}" >> release_notes.md
+            echo "" >> release_notes.md
+          fi
           
           # Get contributors since last tag
           if [ -n "$previous_tag" ]; then
             contributors=$(git log ${commit_range} --format='%an' | grep -v "github-actions\[bot\]" | sort -u)
             if [ -n "$contributors" ]; then
-              echo "" >> release_notes.md
               echo "## 👥 Contributors" >> release_notes.md
               echo "" >> release_notes.md
               echo "$contributors" | while read contributor; do
