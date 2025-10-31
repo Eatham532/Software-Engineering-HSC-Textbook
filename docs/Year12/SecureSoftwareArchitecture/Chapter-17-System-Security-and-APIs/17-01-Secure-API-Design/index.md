@@ -49,7 +49,18 @@ Build security controls into the API from the initial design phase, not as an af
 ### Understanding Authentication vs Authorization
 
 **Authentication** answers "Who are you?" - verifying the identity of the API consumer.
+
 **Authorization** answers "What can you do?" - determining what resources and actions are permitted.
+
+**Why multiple authentication methods exist:**
+
+Different applications have different security needs. We'll explore three main authentication approaches, from simplest to most sophisticated:
+
+1. **API Keys**: Simple tokens for basic identification (good for server-to-server)
+2. **JWT (JSON Web Tokens)**: Stateless tokens carrying user information (good for modern web/mobile apps)
+3. **OAuth 2.0**: Delegated authorization for third-party access (good for "Login with..." features)
+
+Each method builds on concepts from the previous one, adding complexity to solve specific security challenges.
 
 ```kroki-plantuml
 @startuml API_Auth_Flow
@@ -78,7 +89,39 @@ Gateway -> Client: API Response
 
 ### 1. API Keys
 
-API keys are simple tokens that identify and authenticate API consumers. While easy to implement, they have significant limitations.
+API keys are simple tokens that identify and authenticate API consumers. They're the easiest authentication method to implement, which makes them popular for public APIs and developer tools.
+
+**How API keys work:**
+
+1. Application requests an API key from the service provider
+2. Service generates a unique token and associates it with the application
+3. Application includes this key in every API request (usually in headers or query parameters)
+4. Service validates the key and processes the request
+
+**API Key Limitations:**
+
+While simple to use, API keys have several important security limitations:
+
+- **No user context**: Keys identify the application, not individual users - everyone using your app shares the same key
+- **Long-lived credentials**: Keys often don't expire automatically, creating a larger window for compromise
+- **Hard to rotate**: Changing keys requires updating all deployed applications, causing downtime
+- **Limited permissions**: Most API key systems don't support fine-grained permissions or scopes
+- **Exposure risk**: Keys can be accidentally committed to code repositories or logged in plain text
+- **No built-in expiration**: Unlike tokens, keys typically don't expire unless manually revoked
+
+**When to use API keys:**
+
+- Server-to-server communication where the client is trusted
+- Public APIs with basic rate limiting needs
+- Simple authentication for internal tools
+- Scenarios where user-level authentication isn't required
+
+**When NOT to use API keys:**
+
+- Mobile or web applications where keys can be extracted from client code
+- Systems requiring user-specific permissions
+- High-security environments handling sensitive data
+- Applications needing temporary or time-limited access
 
 #### Basic API Key Implementation
 
@@ -324,7 +367,44 @@ class SecureAPIKeyValidator:
 
 ### 2. JSON Web Tokens (JWT)
 
-JWTs provide a stateless authentication mechanism that can carry user information and permissions within the token itself.
+JWTs solve many of the limitations of API keys by providing **stateless authentication** with **user-specific information** embedded in the token itself.
+
+**What makes JWT better than API keys:**
+
+- **User-specific**: Each token represents a specific user, not just an application
+- **Time-limited**: Tokens automatically expire, reducing risk if compromised
+- **Stateless**: Servers don't need to store session data - everything is in the token
+- **Permission-based**: Can include user roles and permissions within the token
+- **Tamper-proof**: Cryptographically signed to prevent modification
+
+**How JWTs work:**
+
+1. User logs in with credentials
+2. Server creates a JWT containing user ID, permissions, and expiration time
+3. Server signs the JWT with a secret key
+4. Client stores the JWT and includes it in subsequent API requests
+5. Server validates the signature and checks expiration before processing requests
+
+**JWT Structure:**
+
+A JWT has three parts separated by dots: `header.payload.signature`
+
+- **Header**: Algorithm and token type (`{"alg": "HS256", "typ": "JWT"}`)
+- **Payload**: User data and claims (`{"user_id": "123", "role": "admin", "exp": 1640000000}`)
+- **Signature**: Cryptographic signature to prevent tampering
+
+**When to use JWT:**
+
+- Single-page applications (SPAs) that need user authentication
+- Mobile apps requiring secure API access
+- Microservices that need to verify user identity
+- Systems where server-side session storage is impractical
+
+**When NOT to use JWT:**
+
+- When you need to revoke access immediately (tokens can't be invalidated until they expire)
+- For very long-lived credentials (use refresh tokens instead)
+- When the payload contains sensitive information (JWTs are encoded, not encrypted)
 
 #### JWT Implementation
 
@@ -492,9 +572,61 @@ if __name__ == "__main__":
 
 ```
 
-### 3. OAuth 2.0 Flow Implementation
+### 3. OAuth 2.0 - Delegated Authorization
 
-OAuth 2.0 is an authorization framework that enables applications to obtain limited access to user accounts.
+OAuth 2.0 solves a different problem than API keys or JWT: **How do I let a third-party application access my account without giving them my password?**
+
+**The problem OAuth solves:**
+
+Imagine you want to let a photo printing service access your Google Photos. You could give them your Google password, but that's dangerous:
+
+- They'd have access to everything (email, documents, calendar)
+- You'd have to change your password if you stop using the service
+- They could misuse your credentials
+- You can't limit what they access
+
+OAuth provides a solution: **delegated authorization with limited scope**.
+
+**How OAuth 2.0 works (simplified):**
+
+1. **Your app** wants to access a user's data on **their service** (e.g., Google)
+2. **Your app** redirects the user to **their service's** authorization page
+3. **User** approves your app's request (with specific permissions/scopes)
+4. **Their service** gives your app a temporary authorization code
+5. **Your app** exchanges the code for an access token
+6. **Your app** uses the access token to make API requests on the user's behalf
+
+**Key OAuth 2.0 concepts:**
+
+- **Scopes**: Limited permissions (e.g., "read emails" vs "full account access")
+- **Authorization code**: Temporary code exchanged for an access token
+- **Access token**: The credential used to make API requests
+- **Refresh token**: Long-lived token used to get new access tokens
+- **Resource owner**: The user who owns the data
+- **Client**: Your application requesting access
+- **Authorization server**: The service that authenticates the user and issues tokens
+
+**Real-world examples:**
+
+- "Login with Google" on websites
+- Mobile apps accessing your Facebook photos
+- Third-party email clients accessing Gmail
+- Fitness apps syncing with Apple Health
+
+**When to use OAuth 2.0:**
+
+- Building "Login with..." features
+- Third-party integrations with user accounts
+- Mobile/web apps that need limited access to user data
+- Any scenario where you need delegated authorization
+
+**When NOT to use OAuth 2.0:**
+
+- First-party authentication (your own users logging into your own app - use JWT)
+- Server-to-server communication (use API keys or mTLS)
+- Simple authentication without third-party access needs
+
+#### OAuth 2.0 Flow Implementation
 
 ```python
 import urllib.parse
@@ -664,6 +796,43 @@ if __name__ == "__main__":
     oauth_authentication_example()
 
 ```
+
+### Choosing the Right Authentication Method
+
+Now that we've covered all three authentication approaches, here's a practical guide for choosing which one to use:
+
+| Feature | API Keys | JWT | OAuth 2.0 |
+|---------|----------|-----|-----------|
+| **Complexity** | Simple | Moderate | Complex |
+| **User context** | ❌ Application-level only | ✅ User-specific | ✅ User-specific |
+| **Expiration** | Manual only | ✅ Automatic | ✅ Automatic |
+| **Permissions** | Basic | ✅ Fine-grained | ✅ Scoped |
+| **Stateless** | ✅ Yes | ✅ Yes | Partially |
+| **Third-party access** | ❌ No | ❌ No | ✅ Yes |
+| **Revocation** | Manual | Token blacklist | ✅ Built-in |
+| **Best for** | Server-to-server | Web/mobile apps | Third-party integrations |
+
+**Quick decision tree:**
+
+1. **Do you need third-party apps to access user data?**
+   - Yes → Use **OAuth 2.0**
+   - No → Continue to question 2
+
+2. **Do you need to know which specific user is making requests?**
+   - Yes → Use **JWT**
+   - No → Continue to question 3
+
+3. **Is this server-to-server communication you control?**
+   - Yes → Use **API Keys**
+   - No → Use **JWT** (safer default)
+
+**Common combinations:**
+
+Real-world applications often use multiple methods:
+
+- **API Keys + JWT**: API keys for your mobile app to access your backend, JWT for user authentication within the app
+- **OAuth 2.0 + JWT**: OAuth for third-party login, JWT for maintaining session after authentication
+- **All three**: Large platforms might use all methods for different purposes
 
 ## Rate Limiting and DoS Protection
 
