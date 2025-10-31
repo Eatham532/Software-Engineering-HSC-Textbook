@@ -809,7 +809,7 @@ Now that we've covered all three authentication approaches, here's a practical g
 | **Permissions** | Basic | ✅ Fine-grained | ✅ Scoped |
 | **Stateless** | ✅ Yes | ✅ Yes | Partially |
 | **Third-party access** | ❌ No | ❌ No | ✅ Yes |
-| **Revocation** | Manual | Token blacklist | ✅ Built-in |
+| **Revocation** | Manual | Manual (blacklist required) | ✅ Built-in |
 | **Best for** | Server-to-server | Web/mobile apps | Third-party integrations |
 
 **Quick decision tree:**

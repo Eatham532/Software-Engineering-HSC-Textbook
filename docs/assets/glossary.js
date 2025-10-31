@@ -1135,8 +1135,9 @@
       // Use CSS custom properties for smoother transitions
       const opacity = distance < maxDistance * 1.5 ? 1 : 0.4;
       
-      // Combine transform and opacity into single style update
-      el.style.cssText = `transform: scale(${scale}); opacity: ${opacity}; transition: transform 0.1s ease-out, opacity 0.1s ease-out;`;
+      // Update only the necessary style properties for better performance
+      el.style.transform = `scale(${scale})`;
+      el.style.opacity = opacity;
     });
   }
 

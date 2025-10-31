@@ -98,6 +98,7 @@ class GlossaryTreeprocessor(Treeprocessor):
         "md-nav__link",
         "md-nav__list"
     }
+    _SKIP_CLASS_PREFIXES = {"highlight", "language-", "codehilite"}
 
     def __init__(self, md, glossary_config: GlossaryConfig, config: Dict[str, Union[str, bool]]):
         super().__init__(md)
@@ -170,7 +171,11 @@ class GlossaryTreeprocessor(Treeprocessor):
         classes = element.get('class') or ''
         if classes:
             class_list = classes.split()
+            # Check exact matches
             if any(cls in self._SKIP_CLASS_KEYS for cls in class_list):
+                return True
+            # Check prefixes for code-related classes
+            if any(cls.startswith(prefix) for cls in class_list for prefix in self._SKIP_CLASS_PREFIXES):
                 return True
 
         if element.get('data-glossary-skip') == 'true':
