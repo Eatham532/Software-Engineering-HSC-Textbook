@@ -1778,3 +1778,163 @@ if __name__ == "__main__":
     test_planning_demo = demonstrate_evaluation_test_planning()
 
 ```
+
+---
+
+## Practice tasks
+
+### Task 1: Develop comprehensive evaluation criteria
+
+Create a complete set of evaluation criteria for a software project:
+
+1. **Identify project context**: Define the solution type and key stakeholders
+
+2. **Develop criteria categories**: Create functional, non-functional, stakeholder, technical, and business criteria
+
+3. **Define measurements**: Specify how each criterion will be measured and validated
+
+4. **Set targets**: Establish specific, measurable targets for each criterion
+
+5. **Weight criteria**: Assign relative importance weights based on project priorities
+
+**Expected outcome**: A structured evaluation framework with measurable criteria aligned to project objectives.
+
+### Task 2: Execute evaluation and synthesize evidence
+
+Using the `SolutionEvaluator` class, conduct a comprehensive solution evaluation:
+
+1. **Collect testing evidence**: Gather test results, coverage data, and performance metrics
+
+2. **Gather stakeholder feedback**: Collect user surveys, interviews, and usage analytics
+
+3. **Compare outputs**: Analyze expected vs actual results across test scenarios
+
+4. **Identify patterns**: Look for recurring issues and common themes in evidence
+
+5. **Generate report**: Create a comprehensive evaluation report with findings and recommendations
+
+**Expected outcome**: A complete evaluation report synthesizing multiple evidence sources into actionable insights.
+
+### Task 3: Design evaluation-focused test plans
+
+Create a test plan specifically designed to support solution evaluation:
+
+1. **Map to criteria**: Link test cases directly to evaluation criteria
+
+2. **Include stakeholder scenarios**: Design tests representing real-world usage patterns
+
+3. **Plan evidence collection**: Specify what evidence each test will produce
+
+4. **Define success metrics**: Establish clear criteria for test success/failure
+
+5. **Execute and analyze**: Run tests and extract evaluation insights from results
+
+**Expected outcome**: A test plan that produces systematic evidence for evaluation decision-making.
+
+/// details | Sample solution framework
+    type: info
+
+Here's a framework for completing the practice tasks:
+
+```python-template
+# Task completion template
+def complete_solution_evaluation(project_name, project_context):
+    """Template for comprehensive solution evaluation."""
+    
+    # Task 1: Evaluation Criteria Development
+    evaluator = SolutionEvaluator(project_name, project_context)
+    evaluator.define_evaluation_criteria(
+        functional_criteria=[...],  # Define your criteria
+        non_functional_criteria=[...],
+        stakeholder_criteria=[...],
+        technical_criteria=[...],
+        business_criteria=[...]
+    )
+    
+    # Task 2: Evidence Collection and Synthesis
+    evaluator.collect_evidence_from_testing(
+        test_plan_results={...},
+        test_coverage_data={...},
+        performance_metrics={...},
+        defect_tracking_data={...}
+    )
+    
+    evaluator.collect_stakeholder_feedback(
+        user_surveys=[...],
+        stakeholder_interviews=[...],
+        usage_analytics={...},
+        support_tickets=[...]
+    )
+    
+    # Task 3: Test Plan Development
+    planner = EvaluationTestPlanner(project_name, evaluation_objectives)
+    test_plan = planner.create_evaluation_test_plan(
+        functional_requirements=[...],
+        non_functional_requirements=[...],
+        stakeholder_scenarios=[...],
+        evaluation_criteria=[...]
+    )
+    
+    # Execute and generate reports
+    evaluation_report = evaluator.generate_evaluation_report()
+    testing_report = planner.generate_testing_evaluation_report()
+    
+    return {
+        'evaluator': evaluator,
+        'planner': planner,
+        'evaluation_report': evaluation_report,
+        'testing_report': testing_report
+    }
+
+```
+
+Use this template to ensure comprehensive coverage of all evaluation aspects.
+///
+
+---
+
+## Key takeaways
+
+This section explored comprehensive software solution evaluation through systematic criteria development, evidence synthesis, and testing-based assessment:
+
+**Evaluation Framework Development:**
+
+- **Multi-dimensional criteria**: Functional, non-functional, stakeholder, technical, and business perspectives
+
+- **Measurable standards**: Specific, quantifiable criteria that can be objectively assessed
+
+- **Weighted priorities**: Recognition that different criteria have different importance levels
+
+- **Evidence alignment**: Clear mapping between criteria and evidence collection methods
+
+**Evidence Collection and Synthesis:**
+
+- **Testing evidence**: Test execution results, coverage data, performance metrics, and defect tracking
+
+- **Stakeholder feedback**: Surveys, interviews, usage analytics, and support ticket analysis
+
+- **Output validation**: Systematic comparison of expected vs actual results to identify discrepancies
+
+- **Pattern recognition**: Identification of recurring issues and common themes across evidence sources
+
+**Evaluation-Focused Testing:**
+
+- **Requirement traceability**: Direct links between test cases and evaluation criteria
+
+- **Stakeholder scenarios**: Real-world usage patterns from different user perspectives
+
+- **Evidence production**: Tests designed specifically to generate evaluation evidence
+
+- **Systematic execution**: Structured approach to testing that supports evaluation decision-making
+
+**Reflection and Improvement:**
+
+- **Maintainability assessment**: Evaluation of long-term solution sustainability
+
+- **Deployment readiness**: Assessment of preparation for production release
+
+- **Lessons learned**: Documentation of insights and best practices from the project
+
+- **Future considerations**: Planning for ongoing evolution and improvement
+
+**Next Steps**: This completes Chapter 26 on Testing and Evaluating. The comprehensive evaluation approaches covered here provide the foundation for making informed decisions about solution refinement, deployment, and continuous improvement throughout the software development lifecycle.
