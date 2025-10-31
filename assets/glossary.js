@@ -76,6 +76,8 @@
   }
 
   let hideTooltipTimeout = null;
+  let showTooltipTimeout = null;
+  const HOVER_DELAY = 500; // milliseconds to wait before showing tooltip
 
   function handleTermHover(e) {
     const term = e.target.closest('.glossary-term');
@@ -87,13 +89,29 @@
       hideTooltipTimeout = null;
     }
 
+    // Clear any previous show timeout
+    if (showTooltipTimeout) {
+      clearTimeout(showTooltipTimeout);
+    }
+
     currentTerm = term;
-    showTooltip(term);
+    
+    // Delay showing the tooltip
+    showTooltipTimeout = setTimeout(() => {
+      showTooltip(term);
+      showTooltipTimeout = null;
+    }, HOVER_DELAY);
   }
 
   function handleTermLeave(e) {
     const term = e.target.closest('.glossary-term');
     if (!term) return;
+
+    // Cancel any pending show timeout
+    if (showTooltipTimeout) {
+      clearTimeout(showTooltipTimeout);
+      showTooltipTimeout = null;
+    }
 
     // Delay hiding to allow moving to tooltip
     hideTooltipTimeout = setTimeout(() => {
@@ -1044,44 +1062,58 @@
     const touch = e.touches[0];
     const touchX = touch.clientX;
 
-    // Apply wave effect
-    applyMobileWaveEffect(allDots, touchX);
+    // Use requestAnimationFrame to throttle updates
+    if (!container._animationFrame) {
+      container._animationFrame = requestAnimationFrame(() => {
+        // Apply wave effect
+        applyMobileWaveEffect(allDots, touchX);
 
-    // Interpolate position across full track width
-    const trackRect = track.getBoundingClientRect();
-    const trackStart = trackRect.left;
-    const trackWidth = trackRect.width;
-    const relativeX = Math.max(0, Math.min(trackWidth, touchX - trackStart)); // Clamp to track bounds
-    const progress = relativeX / trackWidth; // 0 to 1
-    const letterIndex = Math.floor(progress * allDots.length);
-    const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
+        // Interpolate position across full track width
+        const trackRect = track.getBoundingClientRect();
+        const trackStart = trackRect.left;
+        const trackWidth = trackRect.width;
+        const relativeX = Math.max(0, Math.min(trackWidth, touchX - trackStart)); // Clamp to track bounds
+        const progress = relativeX / trackWidth; // 0 to 1
+        const letterIndex = Math.floor(progress * allDots.length);
+        const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
 
-    const targetDot = allDots[clampedIndex];
-    if (targetDot) {
-      scrollToLetter(targetDot.letter);
-      showMobileHoverCircle(touch, targetDot.letter, container);
+        const targetDot = allDots[clampedIndex];
+        if (targetDot) {
+          scrollToLetter(targetDot.letter);
+          showMobileHoverCircle(touch, targetDot.letter, container);
+        }
+        
+        container._animationFrame = null;
+      });
     }
   }
 
   function handleMouseMove(e, track, allDots, hoverCircle, container) {
     const mouseX = e.clientX;
 
-    // Apply wave effect
-    applyMobileWaveEffect(allDots, mouseX);
+    // Use requestAnimationFrame to throttle updates
+    if (!container._animationFrame) {
+      container._animationFrame = requestAnimationFrame(() => {
+        // Apply wave effect
+        applyMobileWaveEffect(allDots, mouseX);
 
-    // Interpolate position across full track width
-    const trackRect = track.getBoundingClientRect();
-    const trackStart = trackRect.left;
-    const trackWidth = trackRect.width;
-    const relativeX = Math.max(0, Math.min(trackWidth, mouseX - trackStart)); // Clamp to track bounds
-    const progress = relativeX / trackWidth; // 0 to 1
-    const letterIndex = Math.floor(progress * allDots.length);
-    const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
+        // Interpolate position across full track width
+        const trackRect = track.getBoundingClientRect();
+        const trackStart = trackRect.left;
+        const trackWidth = trackRect.width;
+        const relativeX = Math.max(0, Math.min(trackWidth, mouseX - trackStart)); // Clamp to track bounds
+        const progress = relativeX / trackWidth; // 0 to 1
+        const letterIndex = Math.floor(progress * allDots.length);
+        const clampedIndex = Math.max(0, Math.min(allDots.length - 1, letterIndex));
 
-    const targetDot = allDots[clampedIndex];
-    if (targetDot) {
-      scrollToLetter(targetDot.letter);
-      showMobileHoverCircle(e, targetDot.letter, container);
+        const targetDot = allDots[clampedIndex];
+        if (targetDot) {
+          scrollToLetter(targetDot.letter);
+          showMobileHoverCircle(e, targetDot.letter, container);
+        }
+        
+        container._animationFrame = null;
+      });
     }
   }
 
@@ -1090,6 +1122,7 @@
     const minScale = 1.0;
     const maxDistance = 150;
 
+    // Batch DOM updates using transform for better performance
     dots.forEach(({ el }) => {
       const dotRect = el.getBoundingClientRect();
       const dotCenterX = dotRect.left + dotRect.width / 2;
@@ -1099,8 +1132,12 @@
         ? minScale + ((maxDistance - distance) / maxDistance) * (maxScale - minScale)
         : minScale;
 
+      // Use CSS custom properties for smoother transitions
+      const opacity = distance < maxDistance * 1.5 ? 1 : 0.4;
+      
+      // Update only the necessary style properties for better performance
       el.style.transform = `scale(${scale})`;
-      el.style.opacity = distance < maxDistance * 1.5 ? 1 : 0.4;
+      el.style.opacity = opacity;
     });
   }
 
