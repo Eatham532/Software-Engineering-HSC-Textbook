@@ -503,42 +503,6 @@ class SecureStudentRecordSystem:
 
 ```
 
-## Summary
-
-The **CIA Triad** forms the foundation of information security:
-
-**Confidentiality protection:**
-
-- **Encryption**: Protect data at rest and in transit
-
-- **Access controls**: Limit who can view information
-
-- **Secure communication**: Prevent eavesdropping
-
-- **Data classification**: Identify what needs protection
-
-**Integrity assurance:**
-
-- **Cryptographic hashing**: Detect unauthorized changes
-
-- **Digital signatures**: Verify data authenticity
-
-- **Input validation**: Prevent malicious data injection
-
-- **Version control**: Track legitimate changes
-
-**Availability maintenance:**
-
-- **Rate limiting**: Prevent resource exhaustion
-
-- **Circuit breakers**: Graceful failure handling
-
-- **Health monitoring**: Early problem detection
-
-- **Redundancy**: Backup systems and failover
-
-These principles work together to create comprehensive security. Now let's explore the AAA principles that implement these protections.
-
 ## The AAA Framework: How We Protect
 
 ### Authentication: Verifying User Identities
